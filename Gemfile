@@ -25,6 +25,14 @@ end
 
 gem 'jquery-rails'
 
+group :development do
+	gem 'thin'
+  gem 'pry'
+  gem 'mailcatcher'
+  gem 'debugger'
+  gem 'quiet_assets'
+end
+
 group :development, :test do
 	gem 'rspec'
 	gem 'rspec-rails'
