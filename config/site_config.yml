@@ -1,0 +1,3 @@
+defaults:
+  template_engine_username: 'admin'
+  template_engine_password: 'test123'

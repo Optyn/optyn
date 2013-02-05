@@ -9,7 +9,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-
+gem 'config_reader', '0.0.8' #ENV specific configuration
 
 # Gems used only for assets and not required
 # in production environments by default.
