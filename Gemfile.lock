@@ -1,3 +1,9 @@
+PATH
+  remote: vendor/engines/front_end_static_page
+  specs:
+    front_end_static_page (0.0.1)
+      rails (~> 3.2.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -180,6 +186,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
+  front_end_static_page!
   jquery-rails
   less-rails
   mailcatcher

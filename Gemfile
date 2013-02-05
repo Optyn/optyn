@@ -51,3 +51,5 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+gem 'front_end_static_page', :path => "vendor/engines/front_end_static_page"
