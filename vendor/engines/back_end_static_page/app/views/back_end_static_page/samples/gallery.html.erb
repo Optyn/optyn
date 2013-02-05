@@ -1,0 +1,148 @@
+		<div class="container-fluid">
+		<div class="row-fluid">
+				
+			<!-- start: Main Menu -->
+			<div id="sidebar-left" class="span1">
+				<div class="nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li><a href="index.html"><i class="fa-icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
+						<li><a href="infrastructure.html"><i class="fa-icon-hdd"></i><span class="hidden-tablet"> Infrastructure</span></a></li>
+						<li><a href="messages.html"><i class="fa-icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
+						<li><a href="tasks.html"><i class="fa-icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
+						<li><a href="ui.html"><i class="fa-icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
+						<li><a href="widgets.html"><i class="fa-icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
+						<li>
+							<a class="dropmenu" href="#"><i class="fa-icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span></a>
+							<ul>
+								<li><a class="submenu" href="submenu.html"><i class="fa-icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 1</span></a></li>
+								<li><a class="submenu" href="submenu.html"><i class="fa-icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 2</span></a></li>
+								<li><a class="submenu" href="submenu.html"><i class="fa-icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li>
+							</ul>	
+						</li>
+						<li><a href="form.html"><i class="fa-icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
+						<li><a href="chart.html"><i class="fa-icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
+						<li><a href="typography.html"><i class="fa-icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
+						<li><a href="gallery.html"><i class="fa-icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
+						<li><a href="table.html"><i class="fa-icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
+						<li><a href="calendar.html"><i class="fa-icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
+						<li><a href="file-manager.html"><i class="fa-icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
+						<li><a href="icon.html"><i class="fa-icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
+						<li><a href="login.html"><i class="fa-icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- end: Main Menu -->
+			
+			<noscript>
+				<div class="alert alert-block span11">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span11">
+			
+			
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon picture"></i><span class="break"></span> Gallery</h2>
+						<div class="box-icon">
+							<a href="#" id="toggle-fullscreen" class="hidden-phone hidden-tablet"><i class="halflings-icon fullscreen"></i></a>
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<div class="masonry-gallery">
+														<div id="image-1" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo1.jpg)" title="Sample Image 1" href="back_end_static_page/gallery/photo1.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo1.jpg", class: "grayscale", alt: "Sample Image 1" %>
+								</a>
+							</div>
+														<div id="image-2" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo2.jpg)" title="Sample Image 2" href="back_end_static_page/gallery/photo2.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo2.jpg", class: "grayscale", alt: "Sample Image 2" %>
+								</a>
+							</div>
+														<div id="image-3" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo3.jpg)" title="Sample Image 3" href="back_end_static_page/gallery/photo3.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo3.jpg", class: "grayscale", alt: "Sample Image 3" %>
+								</a>
+							</div>
+														<div id="image-4" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo4.jpg)" title="Sample Image 4" href="back_end_static_page/gallery/photo4.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo4.jpg", class: "grayscale", alt: "Sample Image 4" %>
+								</a>
+							</div>
+														<div id="image-5" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo5.jpg)" title="Sample Image 5" href="back_end_static_page/gallery/photo5.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo5.jpg", class: "grayscale", alt: "Sample Image 5" %>
+								</a>
+							</div>
+														<div id="image-6" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo6.jpg)" title="Sample Image 6" href="back_end_static_page/gallery/photo6.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo6.jpg", class: "grayscale", alt: "Sample Image 6" %>
+								</a>
+							</div>
+														<div id="image-7" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo7.jpg)" title="Sample Image 7" href="back_end_static_page/gallery/photo7.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo7.jpg", class: "grayscale", alt: "Sample Image 7" %>
+								</a>
+							</div>
+														<div id="image-8" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo8.jpg)" title="Sample Image 8" href="back_end_static_page/gallery/photo8.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo8.jpg", class: "grayscale", alt: "Sample Image 8" %>
+								</a>
+							</div>
+														<div id="image-9" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo9.jpg)" title="Sample Image 9" href="back_end_static_page/gallery/photo9.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo9.jpg", class: "grayscale", alt: "Sample Image 9" %>
+								</a>
+							</div>
+														<div id="image-10" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo10.jpg)" title="Sample Image 10" href="back_end_static_page/gallery/photo10.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo10.jpg", class: "grayscale", alt: "Sample Image 10" %>
+								</a>
+							</div>
+														<div id="image-11" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo11.jpg)" title="Sample Image 11" href="back_end_static_page/gallery/photo11.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo11.jpg", class: "grayscale", alt: "Sample Image 11" %>
+								</a>
+							</div>
+														<div id="image-12" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo12.jpg)" title="Sample Image 12" href="back_end_static_page/gallery/photo12.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo12.jpg", class: "grayscale", alt: "Sample Image 12" %>
+								</a>
+							</div>
+														<div id="image-13" class="masonry-thumb">
+								<a style="background:url(/assets/back_end_static_page/gallery/photo13.jpg)" title="Sample Image 13" href="back_end_static_page/gallery/photo13.jpg">
+									<%= image_tag "back_end_static_page/gallery/photo13.jpg", class: "grayscale", alt: "Sample Image 13" %>
+								</a>
+							</div>
+													</div>
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+    
+					<!-- end: Content -->
+			</div><!--/#content.span10-->
+				</div><!--/fluid-row-->
+				
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary">Save changes</a>
+			</div>
+		</div>
+		

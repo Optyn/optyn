@@ -56,6 +56,7 @@ Optyn::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  #TODO REMOVE ONCE THESE STATIC PAGES ARE NOT NEEDED
+  #TODO REMOVE THE BELOW ONCE THESE STATIC PAGES ARE NOT NEEDED
   mount FrontEndStaticPage::Engine, :at => "front-end-static-pages"
+  mount BackEndStaticPage::Engine, :at => "back-end-static-pages"
 end

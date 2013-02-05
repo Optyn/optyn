@@ -1,4 +1,10 @@
 PATH
+  remote: vendor/engines/back_end_static_page
+  specs:
+    back_end_static_page (0.0.1)
+      rails (~> 3.2.11)
+
+PATH
   remote: vendor/engines/front_end_static_page
   specs:
     front_end_static_page (0.0.1)
@@ -184,6 +190,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  back_end_static_page!
   coffee-rails (~> 3.2.1)
   debugger
   front_end_static_page!
