@@ -8,15 +8,19 @@
   <![endif]-->
 	
 	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<a href="#" class="scrolltop">
+		<span>up</span>
+	</a>
+	
+	<%= render partial: "layouts/header" %>
+
 	<div class="container">
-		<h1>
-			Optyn Coming Soon...
-		</h1>
 		<%= yield %>
 	</div>
 </body>
