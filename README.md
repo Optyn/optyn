@@ -11,4 +11,6 @@ Mounted an engine for viewing the static html pages and will be used while devel
 Bootstrap Template Back End Engine
 ==================================
 
-Mounted an engine for viewing the static html pages and will be used while developing the UI on the admin side. Please take care well big care with the custom.js file and integrate things as an when the assets are bulky and things get messy with fonts and svgs and all that jazz.
+Mounted an engine for viewing the static html pages and will be used while developing the UI on the admin side. 
+Please take care well, big care with the custom.js file and integrate things as an when. 
+The assets are bulky and things get messy with fonts and svgs and all that jazz.
