@@ -10,7 +10,7 @@ class PreLaunchRegistration < ActiveRecord::Base
   def persist
   	self.class.transaction do 
   		save
-  		#TODO ADD THE LOGIC TO SEND A THANK YOU EMAIL
+  		PreLaunchMailer.welcome(self).deliver
   	end
   end
 end
