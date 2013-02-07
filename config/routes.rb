@@ -1,4 +1,8 @@
 Optyn::Application.routes.draw do
+  root to: 'main#index'
+
+  resources :pre_launch_registrations, only: [:new, :create, :show] 
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -10,6 +10,7 @@ gem 'rails', '3.2.11'
 
 gem 'pg'
 gem 'config_reader', '0.0.8' #ENV specific configuration
+gem 'backbone-on-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
