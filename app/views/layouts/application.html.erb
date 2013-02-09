@@ -12,6 +12,9 @@
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<%#* Google Analytics %>
+	<%= analytics_init if Rails.env.production? %>
 </head>
 <body>
 	<a href="#" class="scrolltop">
