@@ -144,7 +144,7 @@ html .fc,
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
 	background: #9cf;
 	opacity: .2;
-	filter: alpha(opacity=20); /* for IE */
+	//filter: alpha(opacity=20); /* for IE */
 	}
 	
 
@@ -597,7 +597,7 @@ table.fc-border-separate {
 	height: 100%;
 	background: #fff;
 	opacity: .3;
-	filter: alpha(opacity=30);
+	//filter: alpha(opacity=30);
 	}
 	
 .fc .ui-draggable-dragging .fc-event-bg, /* TODO: something nicer like .fc-opacity */
