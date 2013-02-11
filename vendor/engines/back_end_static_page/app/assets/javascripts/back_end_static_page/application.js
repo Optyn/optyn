@@ -12,4 +12,33 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require back_end_static_page/retina.js
+//= require back_end_static_page/jquery.imagesloaded.js
+//= require back_end_static_page/modernizr.js
+//= require back_end_static_page/jquery.elfinder.min.js
+//= require back_end_static_page/fullcalendar.min.js
+//= require back_end_static_page/jquery.uniform.min.js
+//= require back_end_static_page/excanvas.js
+//= require back_end_static_page/application.js
+//= require back_end_static_page/jquery.cookie.js
+//= require back_end_static_page/counter.js
+//= require back_end_static_page/jquery.chosen.min.js
+//= require back_end_static_page/jquery.uploadify-3.1.min.js
+//= require back_end_static_page/jquery.noty.js
+//= require back_end_static_page/jquery-1.7.2.min.js
+//= require back_end_static_page/jquery.masonry.min.js
+//= require back_end_static_page/jquery.flot.pie.js
+//= require back_end_static_page/jquery.flot.js
+//= require back_end_static_page/jquery.flot.resize.min.js
+//= require back_end_static_page/jquery.cleditor.min.js
+//= require back_end_static_page/bootstrap.js
+//= require back_end_static_page/jquery-ui-1.8.21.custom.min.js
+//= require back_end_static_page/jquery.dataTables.min.js
+//= require back_end_static_page/jquery.sparkline.min.js
+//= require back_end_static_page/jquery.iphone.toggle.js
+//= require back_end_static_page/jquery.raty.min.js
+//= require back_end_static_page/jquery.knob.modified.js
+//= require back_end_static_page/custom.js
+//= require back_end_static_page/jquery.flot.stack.js
+//= require back_end_static_page/jquery.gritter.min.js
+

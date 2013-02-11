@@ -8,6 +8,27 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
+  *= require back_end_static_page/application.css
+  *= require back_end_static_page/bootstrap-responsive.css
+  *= require back_end_static_page/bootstrap.css
+  *= require back_end_static_page/chosen.css
+  *= require back_end_static_page/elfinder.min.css
+  *= require back_end_static_page/elfinder.theme.css
+  *= require back_end_static_page/font-awesome-ie7.css
+  *= require back_end_static_page/font-awesome.css
+  *= require back_end_static_page/fullcalendar.css
+  *= require back_end_static_page/glyphicons.css
+  *= require back_end_static_page/halflings.css
+  *= require back_end_static_page/ie.css
+  *= require back_end_static_page/ie9.css
+  *= require back_end_static_page/jquery-ui-1.8.21.custom.css
+  *= require back_end_static_page/jquery.cleditor.css
+  *= require back_end_static_page/jquery.gritter.css
+  *= require back_end_static_page/jquery.iphone.toggle.css
+  *= require back_end_static_page/jquery.noty.css
+  *= require back_end_static_page/noty_theme_default.css
+  *= require back_end_static_page/style-responsive.css
+  *= require back_end_static_page/style.css
+  *= require back_end_static_page/uniform.default.css
+  *= require back_end_static_page/uploadify.css
  */

@@ -8,6 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
- */
+*= require front_end_static_page/application.css
+*= require front_end_static_page/animate.css
+*= require front_end_static_page/blog.css
+*= require front_end_static_page/bootstrap.css
+*= require front_end_static_page/theme.css
+*= require front_end_static_page/external-pages.css
+*= require front_end_static_page/reset.css
+*= require front_end_static_page/signin.css
+*= require front_end_static_page/signup.css
+*/

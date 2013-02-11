@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require front_end_static_page/theme.js
+//= require front_end_static_page/application.js
+//= require front_end_static_page/bootstrap.min.js
+//= require front_end_static_page/bootstrap.js
