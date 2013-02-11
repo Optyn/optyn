@@ -32,6 +32,8 @@ group :development do
   gem 'mailcatcher'
   gem 'debugger'
   gem 'quiet_assets'
+  gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 group :development, :test do
