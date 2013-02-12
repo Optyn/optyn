@@ -66,3 +66,5 @@ module Optyn
     config.assets.version = '1.0'
   end
 end
+
+require "#{Rails.root}/config/initializers/remove_static_pages"
