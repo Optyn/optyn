@@ -4,7 +4,7 @@
 body {
 	position: relative;
 	padding-top: 69px;
-	background: #DDDCE2 url(/assets/front_end_static_page/content_bg.jpg) repeat left top;
+	background: #DDDCE2 url(/assets/content_bg.jpg) repeat left top;
 	-webkit-font-smoothing: antialiased;
 	font-size: 14px;
 	font-family: 'Lato', sans-serif !important;
@@ -141,7 +141,7 @@ input[type="color"]:focus,
     filter: none;
     padding: 7px 0 8px 0;
     /*background: none repeat scroll 0 0 #242b35;*/
-    background: url("/assets/front_end_static_page/nav_bg.jpg") 0 0 repeat;
+    background: url("/assets/nav_bg.jpg") 0 0 repeat;
 }
 .navbar .brand {
     font-size: 26px;
