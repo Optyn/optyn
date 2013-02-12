@@ -76,7 +76,7 @@ namespace :deploy do
 
   desc 'Stop unicorn'
   task :stop, :roles => :app, :except => { :no_release => true } do
-  	run "kill -9 `lsof -t -i:3000`"
+  	run "kill -9 `lsof -t -i:3000`" rescue nil
   end
 
   desc 'Restart unicorn'
