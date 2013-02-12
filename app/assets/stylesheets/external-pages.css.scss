@@ -194,7 +194,7 @@
 	margin-right: 20px;
 }
 #contact i.contact {
-	background: url('/assets/front_end_static_page/contact_icons.png') no-repeat 0 0;
+	background: url('/assets/contact_icons.png') no-repeat 0 0;
 	width: 34px;
 	height: 34px;
 	display: inline-block;
@@ -322,7 +322,7 @@
 	position: absolute;	
 }
 .features_page .feature2 .icon i {
-	background: url('/assets/front_end_static_page/features_icons.png') no-repeat;
+	background: url('/assets/features_icons.png') no-repeat;
 	display: block;
 	position: relative;
 }
@@ -490,14 +490,14 @@
 		width: 321px !important;
 	}
 	#pricing .cols4 .price_wrapper.regular .header {
-		background: url('/assets/front_end_static_page/chart1.png') 0 0 no-repeat;
+		background: url('/assets/chart1.png') 0 0 no-repeat;
 	}
 	#pricing .cols4 .price_wrapper.pro {
 		width: 331px !important;
 		top: 0px;
 	}
 	#pricing .cols4 .price_wrapper.pro .header {
-		background: url('/assets/front_end_static_page/chart2.png') 0 0 no-repeat;
+		background: url('/assets/chart2.png') 0 0 no-repeat;
 	}
 }
 @media (max-width: 979px) {
@@ -510,10 +510,10 @@
 		margin: 0 auto;
 	}
 	#pricing .cols4 .price_wrapper.regular .header {
-		background: url('/assets/front_end_static_page/chart1_small.png') 0 0 no-repeat;
+		background: url('/assets/chart1_small.png') 0 0 no-repeat;
 	}
 	#pricing .cols4 .price_wrapper.pro .header {
-		background: url('/assets/front_end_static_page/chart2_small.png') 0 0 no-repeat;
+		background: url('/assets/chart2_small.png') 0 0 no-repeat;
 	}
 }
 /* Large desktop */
