@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
 
   private
   def print_rails_env
-  	puts "--- Rails Env: #{Rails.env}"
+  	Rails.logger.info "--- Rails Env: #{Rails.env}"
   end
 end
