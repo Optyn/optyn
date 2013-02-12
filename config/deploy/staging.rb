@@ -1,2 +1,2 @@
-server "ec2-23-20-189-250.compute-1.amazonaws.com", :web, :app, :db, primary: true
+server "54.235.109.79", :web, :app, :db, primary: true
 set :branch, "development"
