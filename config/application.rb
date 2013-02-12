@@ -67,4 +67,5 @@ module Optyn
   end
 end
 
+#Don't include the assets from the static engine in the asset pipeline. They are only for reference.
 require "#{Rails.root}/config/initializers/remove_static_pages"
