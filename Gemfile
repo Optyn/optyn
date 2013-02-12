@@ -12,6 +12,7 @@ gem 'pg'
 gem 'config_reader', '0.0.8' #ENV specific configuration
 gem 'backbone-on-rails'
 gem 'google-analytics-rails'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,7 +28,6 @@ end
 gem 'jquery-rails'
 
 group :development do
-	gem 'thin'
   gem 'pry'
   gem 'mailcatcher'
   gem 'debugger'
@@ -46,9 +46,6 @@ end
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
