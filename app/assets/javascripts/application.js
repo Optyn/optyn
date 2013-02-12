@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+// Loads all Bootstrap javascripts
+//= require bootstrap
 //= require underscore
 //= require backbone
 //= require optyn
