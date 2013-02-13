@@ -47,9 +47,6 @@ namespace :deploy do
 
 	desc "Make sure local git is in sync with remote."
 	task :check_revision, roles: :web do
-		puts "%" * 100
-		puts rails_env
-		puts "&" * 100
 		branch_rev = `git rev-parse HEAD`
 		head_rev = `git rev-parse origin/#{branch || master}`
 
