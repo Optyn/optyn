@@ -90,7 +90,7 @@ namespace :deploy do
 
   desc "Migrating the database"
   task :migrate, :roles => :db do
-  	run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate"
+  	run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate --trace"
   end
 
   namespace :assets do
