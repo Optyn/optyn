@@ -47,6 +47,9 @@ namespace :deploy do
 
 	desc "Make sure local git is in sync with remote."
 	task :check_revision, roles: :web do
+		puts "%" * 100
+		puts rails_env
+		puts "&" * 100
 		branch_rev = `git rev-parse HEAD`
 		head_rev = `git rev-parse origin/#{branch || master}`
 
@@ -58,7 +61,9 @@ namespace :deploy do
 	end
 
 	task :setup_nginx_config, roles: :app do
-		sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+		unless "production" == rails_env
+			sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+		end
 	end
 
 	desc 'Copy database.yml from shared to current folder'
@@ -70,25 +75,30 @@ namespace :deploy do
 
 	desc 'Start unicorn'
 	task :start, :roles => :app, :except => { :no_release => true } do
-      puts "Starting Unicorn"
-      run "cd #{current_path}; bundle exec unicorn -E #{rails_env} -c config/unicorn.rb -D"
-  end
+		puts "Starting Unicorn"
+		run "cd #{current_path}; bundle exec unicorn -E #{rails_env} -c config/unicorn.rb -D"
+	end
 
-  desc 'Stop unicorn'
-  task :stop, :roles => :app, :except => { :no_release => true } do
-  	run "kill -9 `lsof -t -i:3000`" rescue nil
-  end
+	desc 'Stop unicorn'
+	task :stop, :roles => :app, :except => { :no_release => true } do
+		run "kill -9 `lsof -t -i:3000`" rescue nil
+	end
 
-  desc 'Restart unicorn'
-  task :restart, :roles => :app, :except => { :no_release => true } do
+	desc 'Restart unicorn'
+	task :restart, :roles => :app, :except => { :no_release => true } do
     #run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     stop
     start
   end
 
+  desc "Migrating the database"
+  task :migrate, :roles => :db do
+  	run "RAILE_ENV=#{rails_env} bundle exec rake db:migrate"
+  end
+
   namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} && bundle exec rake assets:precompile}
-    end
+  	task :precompile, :roles => :web, :except => { :no_release => true } do
+  		run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} && bundle exec rake assets:precompile}
+  	end
   end
 end
