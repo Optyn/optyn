@@ -93,12 +93,12 @@ namespace :deploy do
 
   desc "Migrating the database"
   task :migrate, :roles => :db do
-  	run "RAILE_ENV=#{rails_env} bundle exec rake db:migrate"
+  	run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate"
   end
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} && bundle exec rake assets:precompile}
+  		run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile}
   	end
   end
 end
