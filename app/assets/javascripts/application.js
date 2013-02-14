@@ -14,12 +14,5 @@
 //= require jquery_ujs
 // Loads all Bootstrap javascripts
 //= require bootstrap
-//= require underscore
-//= require backbone
-//= require optyn
-//= require_tree ../templates
-//= require_tree ./models
-//= require_tree ./collections
-//= require_tree ./views
-//= require_tree ./routers
+//= require self
 //= require_tree .

@@ -10,7 +10,6 @@ gem 'rails', '3.2.11'
 
 gem 'pg'
 gem 'config_reader', '0.0.8' #ENV specific configuration
-gem 'backbone-on-rails'
 gem 'google-analytics-rails'
 gem 'unicorn'
 
