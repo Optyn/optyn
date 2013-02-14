@@ -28,6 +28,7 @@ end
 gem 'jquery-rails'
 
 group :development do
+  gem 'sextant'
   gem 'pry'
   gem 'mailcatcher'
   gem 'debugger'
