@@ -221,6 +221,7 @@ DEPENDENCIES
   debugger
   front_end_static_page!
   google-analytics-rails
+  haml
   jquery-rails
   mailcatcher
   pg
