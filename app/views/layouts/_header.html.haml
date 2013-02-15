@@ -1,0 +1,10 @@
+/ begins navbar
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to("<strong>Optyn.com</strong>".html_safe, root_path, class: "brand scroller")
+  / ends navbar
