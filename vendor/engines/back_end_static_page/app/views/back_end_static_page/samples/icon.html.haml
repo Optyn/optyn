@@ -1,0 +1,2531 @@
+.container-fluid
+  .row-fluid
+    / start: Main Menu
+    #sidebar-left.span1
+      .nav-collapse.sidebar-nav
+        %ul.nav.nav-tabs.nav-stacked.main-menu
+          %li
+            %a{:href => "index.html"}
+              %i.fa-icon-bar-chart
+              %span.hidden-tablet Dashboard
+          %li
+            %a{:href => "infrastructure.html"}
+              %i.fa-icon-hdd
+              %span.hidden-tablet Infrastructure
+          %li
+            %a{:href => "messages.html"}
+              %i.fa-icon-envelope
+              %span.hidden-tablet Messages
+          %li
+            %a{:href => "tasks.html"}
+              %i.fa-icon-tasks
+              %span.hidden-tablet Tasks
+          %li
+            %a{:href => "ui.html"}
+              %i.fa-icon-eye-open
+              %span.hidden-tablet UI Features
+          %li
+            %a{:href => "widgets.html"}
+              %i.fa-icon-dashboard
+              %span.hidden-tablet Widgets
+          %li
+            %a.dropmenu{:href => "#"}
+              %i.fa-icon-folder-close-alt
+              %span.hidden-tablet Dropdown
+            %ul
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 1
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 2
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 3
+          %li
+            %a{:href => "form.html"}
+              %i.fa-icon-edit
+              %span.hidden-tablet Forms
+          %li
+            %a{:href => "chart.html"}
+              %i.fa-icon-list-alt
+              %span.hidden-tablet Charts
+          %li
+            %a{:href => "typography.html"}
+              %i.fa-icon-font
+              %span.hidden-tablet Typography
+          %li
+            %a{:href => "gallery.html"}
+              %i.fa-icon-picture
+              %span.hidden-tablet Gallery
+          %li
+            %a{:href => "table.html"}
+              %i.fa-icon-align-justify
+              %span.hidden-tablet Tables
+          %li
+            %a{:href => "calendar.html"}
+              %i.fa-icon-calendar
+              %span.hidden-tablet Calendar
+          %li
+            %a{:href => "file-manager.html"}
+              %i.fa-icon-folder-open
+              %span.hidden-tablet File Manager
+          %li
+            %a{:href => "icon.html"}
+              %i.fa-icon-star
+              %span.hidden-tablet Icons
+          %li
+            %a{:href => "login.html"}
+              %i.fa-icon-lock
+              %span.hidden-tablet Login Page
+    / end: Main Menu
+    %noscript
+      .alert.alert-block.span11
+        %h4.alert-heading Warning!
+        %p
+          You need to have
+          %a{:href => "http://en.wikipedia.org/wiki/JavaScript", :target => "_blank"} JavaScript
+          enabled to use this site.
+    / start: Content
+    #content.span11
+      .row-fluid
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.picture
+              = succeed "Glyphicons" do
+                %span.break
+              PRO - Halflings (SVG, PNG, Font)
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %section#icons1
+              .row-fluid.bs-icons
+                .span3
+                  %ul.the-icons
+                    %li
+                      %i.halflings-icon.glass
+                      halflings-icon glass
+                    %li
+                      %i.halflings-icon.music
+                      halflings-icon music
+                    %li
+                      %i.halflings-icon.search
+                      halflings-icon search
+                    %li
+                      %i.halflings-icon.envelope
+                      halflings-icon envelope
+                    %li
+                      %i.halflings-icon.heart
+                      halflings-icon heart
+                    %li
+                      %i.halflings-icon.star
+                      halflings-icon star
+                    %li
+                      %i.halflings-icon.star-empty
+                      halflings-icon star-empty
+                    %li
+                      %i.halflings-icon.user
+                      halflings-icon user
+                    %li
+                      %i.halflings-icon.film
+                      halflings-icon film
+                    %li
+                      %i.halflings-icon.th-large
+                      halflings-icon th-large
+                    %li
+                      %i.halflings-icon.th
+                      halflings-icon th
+                    %li
+                      %i.halflings-icon.th-list
+                      halflings-icon th-list
+                    %li
+                      %i.halflings-icon.ok
+                      halflings-icon ok
+                    %li
+                      %i.halflings-icon.remove
+                      halflings-icon remove
+                    %li
+                      %i.halflings-icon.zoom-in
+                      halflings-icon zoom-in
+                    %li
+                      %i.halflings-icon.zoom-out
+                      halflings-icon zoom-out
+                    %li
+                      %i.halflings-icon.off
+                      halflings-icon off
+                    %li
+                      %i.halflings-icon.signal
+                      halflings-icon signal
+                    %li
+                      %i.halflings-icon.cog
+                      halflings-icon cog
+                    %li
+                      %i.halflings-icon.trash
+                      halflings-icon trash
+                    %li
+                      %i.halflings-icon.home
+                      halflings-icon home
+                    %li
+                      %i.halflings-icon.file
+                      halflings-icon file
+                    %li
+                      %i.halflings-icon.time
+                      halflings-icon time
+                    %li
+                      %i.halflings-icon.road
+                      halflings-icon road
+                    %li
+                      %i.halflings-icon.download-alt
+                      halflings-icon download-alt
+                    %li
+                      %i.halflings-icon.download
+                      halflings-icon download
+                    %li
+                      %i.halflings-icon.upload
+                      halflings-icon upload
+                    %li
+                      %i.halflings-icon.inbox
+                      halflings-icon inbox
+                    %li
+                      %i.halflings-icon.play-circle
+                      halflings-icon play-circle
+                    %li
+                      %i.halflings-icon.repeat
+                      halflings-icon repeat
+                    %li
+                      %i.halflings-icon.refresh
+                      halflings-icon refresh
+                    %li
+                      %i.halflings-icon.list-alt
+                      halflings-icon list-alt
+                    %li
+                      %i.halflings-icon.lock
+                      halflings-icon lock
+                    %li
+                      %i.halflings-icon.flag
+                      halflings-icon flag
+                    %li
+                      %i.halflings-icon.headphones
+                      halflings-icon headphones
+                .span3
+                  %ul.the-icons
+                    %li
+                      %i.halflings-icon.volume-off
+                      halflings-icon volume-off
+                    %li
+                      %i.halflings-icon.volume-down
+                      halflings-icon volume-down
+                    %li
+                      %i.halflings-icon.volume-up
+                      halflings-icon volume-up
+                    %li
+                      %i.halflings-icon.qrcode
+                      halflings-icon qrcode
+                    %li
+                      %i.halflings-icon.barcode
+                      halflings-icon barcode
+                    %li
+                      %i.halflings-icon.tag
+                      halflings-icon tag
+                    %li
+                      %i.halflings-icon.tags
+                      halflings-icon tags
+                    %li
+                      %i.halflings-icon.book
+                      halflings-icon book
+                    %li
+                      %i.halflings-icon.bookmark
+                      halflings-icon bookmark
+                    %li
+                      %i.halflings-icon.print
+                      halflings-icon print
+                    %li
+                      %i.halflings-icon.camera
+                      halflings-icon camera
+                    %li
+                      %i.halflings-icon.font
+                      halflings-icon font
+                    %li
+                      %i.halflings-icon.bold
+                      halflings-icon bold
+                    %li
+                      %i.halflings-icon.italic
+                      halflings-icon italic
+                    %li
+                      %i.halflings-icon.text-height
+                      halflings-icon text-height
+                    %li
+                      %i.halflings-icon.text-width
+                      halflings-icon text-width
+                    %li
+                      %i.halflings-icon.align-left
+                      halflings-icon align-left
+                    %li
+                      %i.halflings-icon.align-center
+                      halflings-icon align-center
+                    %li
+                      %i.halflings-icon.align-right
+                      halflings-icon align-right
+                    %li
+                      %i.halflings-icon.align-justify
+                      halflings-icon align-justify
+                    %li
+                      %i.halflings-icon.list
+                      halflings-icon list
+                    %li
+                      %i.halflings-icon.indent-left
+                      halflings-icon indent-left
+                    %li
+                      %i.halflings-icon.indent-right
+                      halflings-icon indent-right
+                    %li
+                      %i.halflings-icon.facetime-video
+                      halflings-icon facetime-video
+                    %li
+                      %i.halflings-icon.picture
+                      halflings-icon picture
+                    %li
+                      %i.halflings-icon.pencil
+                      halflings-icon pencil
+                    %li
+                      %i.halflings-icon.map-marker
+                      halflings-icon map-marker
+                    %li
+                      %i.halflings-icon.adjust
+                      halflings-icon adjust
+                    %li
+                      %i.halflings-icon.tint
+                      halflings-icon tint
+                    %li
+                      %i.halflings-icon.edit
+                      halflings-icon edit
+                    %li
+                      %i.halflings-icon.share
+                      halflings-icon share
+                    %li
+                      %i.halflings-icon.check
+                      halflings-icon check
+                    %li
+                      %i.halflings-icon.move
+                      halflings-icon move
+                    %li
+                      %i.halflings-icon.step-backward
+                      halflings-icon step-backward
+                    %li
+                      %i.halflings-icon.fast-backward
+                      halflings-icon fast-backward
+                .span3
+                  %ul.the-icons
+                    %li
+                      %i.halflings-icon.backward
+                      halflings-icon backward
+                    %li
+                      %i.halflings-icon.play
+                      halflings-icon play
+                    %li
+                      %i.halflings-icon.pause
+                      halflings-icon pause
+                    %li
+                      %i.halflings-icon.stop
+                      halflings-icon stop
+                    %li
+                      %i.halflings-icon.forward
+                      halflings-icon forward
+                    %li
+                      %i.halflings-icon.fast-forward
+                      halflings-icon fast-forward
+                    %li
+                      %i.halflings-icon.step-forward
+                      halflings-icon step-forward
+                    %li
+                      %i.halflings-icon.eject
+                      halflings-icon eject
+                    %li
+                      %i.halflings-icon.chevron-left
+                      halflings-icon chevron-left
+                    %li
+                      %i.halflings-icon.chevron-right
+                      halflings-icon chevron-right
+                    %li
+                      %i.halflings-icon.plus-sign
+                      halflings-icon plus-sign
+                    %li
+                      %i.halflings-icon.minus-sign
+                      halflings-icon minus-sign
+                    %li
+                      %i.halflings-icon.remove-sign
+                      halflings-icon remove-sign
+                    %li
+                      %i.halflings-icon.ok-sign
+                      halflings-icon ok-sign
+                    %li
+                      %i.halflings-icon.question-sign
+                      halflings-icon question-sign
+                    %li
+                      %i.halflings-icon.info-sign
+                      halflings-icon info-sign
+                    %li
+                      %i.halflings-icon.screenshot
+                      halflings-icon screenshot
+                    %li
+                      %i.halflings-icon.remove-circle
+                      halflings-icon remove-circle
+                    %li
+                      %i.halflings-icon.ok-circle
+                      halflings-icon ok-circle
+                    %li
+                      %i.halflings-icon.ban-circle
+                      halflings-icon ban-circle
+                    %li
+                      %i.halflings-icon.arrow-left
+                      halflings-icon arrow-left
+                    %li
+                      %i.halflings-icon.arrow-right
+                      halflings-icon arrow-right
+                    %li
+                      %i.halflings-icon.arrow-up
+                      halflings-icon arrow-up
+                    %li
+                      %i.halflings-icon.arrow-down
+                      halflings-icon arrow-down
+                    %li
+                      %i.halflings-icon.share-alt
+                      halflings-icon share-alt
+                    %li
+                      %i.halflings-icon.resize-full
+                      halflings-icon resize-full
+                    %li
+                      %i.halflings-icon.resize-small
+                      halflings-icon resize-small
+                    %li
+                      %i.halflings-icon.plus
+                      halflings-icon plus
+                    %li
+                      %i.halflings-icon.minus
+                      halflings-icon minus
+                    %li
+                      %i.halflings-icon.asterisk
+                      halflings-icon asterisk
+                    %li
+                      %i.halflings-icon.exclamation-sign
+                      halflings-icon exclamation-sign
+                    %li
+                      %i.halflings-icon.gift
+                      halflings-icon gift
+                    %li
+                      %i.halflings-icon.leaf
+                      halflings-icon leaf
+                    %li
+                      %i.halflings-icon.fire
+                      halflings-icon fire
+                    %li
+                      %i.halflings-icon.eye-open
+                      halflings-icon eye-open
+                .span3
+                  %ul.the-icons
+                    %li
+                      %i.halflings-icon.eye-close
+                      halflings-icon eye-close
+                    %li
+                      %i.halflings-icon.warning-sign
+                      halflings-icon warning-sign
+                    %li
+                      %i.halflings-icon.plane
+                      halflings-icon plane
+                    %li
+                      %i.halflings-icon.calendar
+                      halflings-icon calendar
+                    %li
+                      %i.halflings-icon.random
+                      halflings-icon random
+                    %li
+                      %i.halflings-icon.comment
+                      halflings-icon comment
+                    %li
+                      %i.halflings-icon.magnet
+                      halflings-icon magnet
+                    %li
+                      %i.halflings-icon.chevron-up
+                      halflings-icon chevron-up
+                    %li
+                      %i.halflings-icon.chevron-down
+                      halflings-icon chevron-down
+                    %li
+                      %i.halflings-icon.retweet
+                      halflings-icon retweet
+                    %li
+                      %i.halflings-icon.shopping-cart
+                      halflings-icon shopping-cart
+                    %li
+                      %i.halflings-icon.folder-close
+                      halflings-icon folder-close
+                    %li
+                      %i.halflings-icon.folder-open
+                      halflings-icon folder-open
+                    %li
+                      %i.halflings-icon.resize-vertical
+                      halflings-icon resize-vertical
+                    %li
+                      %i.halflings-icon.resize-horizontal
+                      halflings-icon resize-horizontal
+                    %li
+                      %i.halflings-icon.hdd
+                      halflings-icon hdd
+                    %li
+                      %i.halflings-icon.bullhorn
+                      halflings-icon bullhorn
+                    %li
+                      %i.halflings-icon.bell
+                      halflings-icon bell
+                    %li
+                      %i.halflings-icon.certificate
+                      halflings-icon certificate
+                    %li
+                      %i.halflings-icon.thumbs-up
+                      halflings-icon thumbs-up
+                    %li
+                      %i.halflings-icon.thumbs-down
+                      halflings-icon thumbs-down
+                    %li
+                      %i.halflings-icon.hand-right
+                      halflings-icon hand-right
+                    %li
+                      %i.halflings-icon.hand-left
+                      halflings-icon hand-left
+                    %li
+                      %i.halflings-icon.hand-up
+                      halflings-icon hand-up
+                    %li
+                      %i.halflings-icon.hand-down
+                      halflings-icon hand-down
+                    %li
+                      %i.halflings-icon.circle-arrow-right
+                      halflings-icon circle-arrow-right
+                    %li
+                      %i.halflings-icon.circle-arrow-left
+                      halflings-icon circle-arrow-left
+                    %li
+                      %i.halflings-icon.circle-arrow-up
+                      halflings-icon circle-arrow-up
+                    %li
+                      %i.halflings-icon.circle-arrow-down
+                      halflings-icon circle-arrow-down
+                    %li
+                      %i.halflings-icon.globe
+                      halflings-icon globe
+                    %li
+                      %i.halflings-icon.wrench
+                      halflings-icon wrench
+                    %li
+                      %i.halflings-icon.tasks
+                      halflings-icon tasks
+                    %li
+                      %i.halflings-icon.filter
+                      halflings-icon filter
+                    %li
+                      %i.halflings-icon.briefcase
+                      halflings-icon briefcase
+                    %li
+                      %i.halflings-icon.fullscreen
+                      halflings-icon fullscreen
+        / /span
+      / /row
+      %hr/
+      .row-fluid
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.picture
+              = succeed "Glyphicons" do
+                %span.break
+              PRO (SVG, PNG, Font)
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content.glyphicons
+            %p
+              %i.glyphicons-icon.glass
+              glyphicons-icon glass
+            %p
+              %i.glyphicons-icon.leaf
+              glyphicons-icon leaf
+            %p
+              %i.glyphicons-icon.dog
+              glyphicons-icon dog
+            %p
+              %i.glyphicons-icon.user
+              glyphicons-icon user
+            %p
+              %i.glyphicons-icon.girl
+              glyphicons-icon girl
+            %p
+              %i.glyphicons-icon.car
+              glyphicons-icon car
+            %p
+              %i.glyphicons-icon.user_add
+              glyphicons-icon user_add
+            %p
+              %i.glyphicons-icon.user_remove
+              glyphicons-icon user_remove
+            %p
+              %i.glyphicons-icon.film
+              glyphicons-icon film
+            %p
+              %i.glyphicons-icon.magic
+              glyphicons-icon magic
+            %p
+              %i.glyphicons-icon.envelope
+              glyphicons-icon envelope
+            %p
+              %i.glyphicons-icon.camera
+              glyphicons-icon camera
+            %p
+              %i.glyphicons-icon.heart
+              glyphicons-icon heart
+            %p
+              %i.glyphicons-icon.beach_umbrella
+              glyphicons-icon beach_umbrella
+            %p
+              %i.glyphicons-icon.train
+              glyphicons-icon train
+            %p
+              %i.glyphicons-icon.print
+              glyphicons-icon print
+            %p
+              %i.glyphicons-icon.bin
+              glyphicons-icon bin
+            %p
+              %i.glyphicons-icon.music
+              glyphicons-icon music
+            %p
+              %i.glyphicons-icon.note
+              glyphicons-icon note
+            %p
+              %i.glyphicons-icon.heart_empty
+              glyphicons-icon heart_empty
+            %p
+              %i.glyphicons-icon.home
+              glyphicons-icon home
+            %p
+              %i.glyphicons-icon.snowflake
+              glyphicons-icon snowflake
+            %p
+              %i.glyphicons-icon.fire
+              glyphicons-icon fire
+            %p
+              %i.glyphicons-icon.magnet
+              glyphicons-icon magnet
+            %p
+              %i.glyphicons-icon.parents
+              glyphicons-icon parents
+            %p
+              %i.glyphicons-icon.binoculars
+              glyphicons-icon binoculars
+            %p
+              %i.glyphicons-icon.road
+              glyphicons-icon road
+            %p
+              %i.glyphicons-icon.search
+              glyphicons-icon search
+            %p
+              %i.glyphicons-icon.cars
+              glyphicons-icon cars
+            %p
+              %i.glyphicons-icon.notes_2
+              glyphicons-icon notes_2
+            %p
+              %i.glyphicons-icon.pencil
+              glyphicons-icon pencil
+            %p
+              %i.glyphicons-icon.bus
+              glyphicons-icon bus
+            %p
+              %i.glyphicons-icon.wifi_alt
+              glyphicons-icon wifi_alt
+            %p
+              %i.glyphicons-icon.luggage
+              glyphicons-icon luggage
+            %p
+              %i.glyphicons-icon.old_man
+              glyphicons-icon old_man
+            %p
+              %i.glyphicons-icon.woman
+              glyphicons-icon woman
+            %p
+              %i.glyphicons-icon.file
+              glyphicons-icon file
+            %p
+              %i.glyphicons-icon.coins
+              glyphicons-icon coins
+            %p
+              %i.glyphicons-icon.airplane
+              glyphicons-icon airplane
+            %p
+              %i.glyphicons-icon.notes
+              glyphicons-icon notes
+            %p
+              %i.glyphicons-icon.stats
+              glyphicons-icon stats
+            %p
+              %i.glyphicons-icon.charts
+              glyphicons-icon charts
+            %p
+              %i.glyphicons-icon.pie_chart
+              glyphicons-icon pie_chart
+            %p
+              %i.glyphicons-icon.group
+              glyphicons-icon group
+            %p
+              %i.glyphicons-icon.keys
+              glyphicons-icon keys
+            %p
+              %i.glyphicons-icon.calendar
+              glyphicons-icon calendar
+            %p
+              %i.glyphicons-icon.router
+              glyphicons-icon router
+            %p
+              %i.glyphicons-icon.camera_small
+              glyphicons-icon camera_small
+            %p
+              %i.glyphicons-icon.dislikes
+              glyphicons-icon dislikes
+            %p
+              %i.glyphicons-icon.star
+              glyphicons-icon star
+            %p
+              %i.glyphicons-icon.link
+              glyphicons-icon link
+            %p
+              %i.glyphicons-icon.eye_open
+              glyphicons-icon eye_open
+            %p
+              %i.glyphicons-icon.eye_close
+              glyphicons-icon eye_close
+            %p
+              %i.glyphicons-icon.alarm
+              glyphicons-icon alarm
+            %p
+              %i.glyphicons-icon.clock
+              glyphicons-icon clock
+            %p
+              %i.glyphicons-icon.stopwatch
+              glyphicons-icon stopwatch
+            %p
+              %i.glyphicons-icon.projector
+              glyphicons-icon projector
+            %p
+              %i.glyphicons-icon.history
+              glyphicons-icon history
+            %p
+              %i.glyphicons-icon.truck
+              glyphicons-icon truck
+            %p
+              %i.glyphicons-icon.cargo
+              glyphicons-icon cargo
+            %p
+              %i.glyphicons-icon.compass
+              glyphicons-icon compass
+            %p
+              %i.glyphicons-icon.keynote
+              glyphicons-icon keynote
+            %p
+              %i.glyphicons-icon.paperclip
+              glyphicons-icon paperclip
+            %p
+              %i.glyphicons-icon.power
+              glyphicons-icon power
+            %p
+              %i.glyphicons-icon.lightbulb
+              glyphicons-icon lightbulb
+            %p
+              %i.glyphicons-icon.tag
+              glyphicons-icon tag
+            %p
+              %i.glyphicons-icon.tags
+              glyphicons-icon tags
+            %p
+              %i.glyphicons-icon.cleaning
+              glyphicons-icon cleaning
+            %p
+              %i.glyphicons-icon.ruller
+              glyphicons-icon ruller
+            %p
+              %i.glyphicons-icon.gift
+              glyphicons-icon gift
+            %p
+              %i.glyphicons-icon.umbrella
+              glyphicons-icon umbrella
+            %p
+              %i.glyphicons-icon.book
+              glyphicons-icon book
+            %p
+              %i.glyphicons-icon.bookmark
+              glyphicons-icon bookmark
+            %p
+              %i.glyphicons-icon.wifi
+              glyphicons-icon wifi
+            %p
+              %i.glyphicons-icon.cup
+              glyphicons-icon cup
+            %p
+              %i.glyphicons-icon.stroller
+              glyphicons-icon stroller
+            %p
+              %i.glyphicons-icon.headphones
+              glyphicons-icon headphones
+            %p
+              %i.glyphicons-icon.headset
+              glyphicons-icon headset
+            %p
+              %i.glyphicons-icon.warning_sign
+              glyphicons-icon warning_sign
+            %p
+              %i.glyphicons-icon.signal
+              glyphicons-icon signal
+            %p
+              %i.glyphicons-icon.retweet
+              glyphicons-icon retweet
+            %p
+              %i.glyphicons-icon.refresh
+              glyphicons-icon refresh
+            %p
+              %i.glyphicons-icon.roundabout
+              glyphicons-icon roundabout
+            %p
+              %i.glyphicons-icon.random
+              glyphicons-icon random
+            %p
+              %i.glyphicons-icon.heat
+              glyphicons-icon heat
+            %p
+              %i.glyphicons-icon.repeat
+              glyphicons-icon repeat
+            %p
+              %i.glyphicons-icon.display
+              glyphicons-icon display
+            %p
+              %i.glyphicons-icon.log_book
+              glyphicons-icon log_book
+            %p
+              %i.glyphicons-icon.adress_book
+              glyphicons-icon adress_book
+            %p
+              %i.glyphicons-icon.building
+              glyphicons-icon building
+            %p
+              %i.glyphicons-icon.eyedropper
+              glyphicons-icon eyedropper
+            %p
+              %i.glyphicons-icon.adjust
+              glyphicons-icon adjust
+            %p
+              %i.glyphicons-icon.tint
+              glyphicons-icon tint
+            %p
+              %i.glyphicons-icon.crop
+              glyphicons-icon crop
+            %p
+              %i.glyphicons-icon.vector_path_square
+              glyphicons-icon vector_path_square
+            %p
+              %i.glyphicons-icon.vector_path_circle
+              glyphicons-icon vector_path_circle
+            %p
+              %i.glyphicons-icon.vector_path_polygon
+              glyphicons-icon vector_path_polygon
+            %p
+              %i.glyphicons-icon.vector_path_line
+              glyphicons-icon vector_path_line
+            %p
+              %i.glyphicons-icon.vector_path_curve
+              glyphicons-icon vector_path_curve
+            %p
+              %i.glyphicons-icon.vector_path_all
+              glyphicons-icon vector_path_all
+            %p
+              %i.glyphicons-icon.font
+              glyphicons-icon font
+            %p
+              %i.glyphicons-icon.italic
+              glyphicons-icon italic
+            %p
+              %i.glyphicons-icon.bold
+              glyphicons-icon bold
+            %p
+              %i.glyphicons-icon.text_underline
+              glyphicons-icon text_underline
+            %p
+              %i.glyphicons-icon.text_strike
+              glyphicons-icon text_strike
+            %p
+              %i.glyphicons-icon.text_height
+              glyphicons-icon text_height
+            %p
+              %i.glyphicons-icon.text_width
+              glyphicons-icon text_width
+            %p
+              %i.glyphicons-icon.text_resize
+              glyphicons-icon text_resize
+            %p
+              %i.glyphicons-icon.left_indent
+              glyphicons-icon left_indent
+            %p
+              %i.glyphicons-icon.right_indent
+              glyphicons-icon right_indent
+            %p
+              %i.glyphicons-icon.align_left
+              glyphicons-icon align_left
+            %p
+              %i.glyphicons-icon.align_center
+              glyphicons-icon align_center
+            %p
+              %i.glyphicons-icon.align_right
+              glyphicons-icon align_right
+            %p
+              %i.glyphicons-icon.justify
+              glyphicons-icon justify
+            %p
+              %i.glyphicons-icon.list
+              glyphicons-icon list
+            %p
+              %i.glyphicons-icon.text_smaller
+              glyphicons-icon text_smaller
+            %p
+              %i.glyphicons-icon.text_bigger
+              glyphicons-icon text_bigger
+            %p
+              %i.glyphicons-icon.embed
+              glyphicons-icon embed
+            %p
+              %i.glyphicons-icon.embed_close
+              glyphicons-icon embed_close
+            %p
+              %i.glyphicons-icon.table
+              glyphicons-icon table
+            %p
+              %i.glyphicons-icon.message_full
+              glyphicons-icon message_full
+            %p
+              %i.glyphicons-icon.message_empty
+              glyphicons-icon message_empty
+            %p
+              %i.glyphicons-icon.message_in
+              glyphicons-icon message_in
+            %p
+              %i.glyphicons-icon.message_out
+              glyphicons-icon message_out
+            %p
+              %i.glyphicons-icon.message_plus
+              glyphicons-icon message_plus
+            %p
+              %i.glyphicons-icon.message_minus
+              glyphicons-icon message_minus
+            %p
+              %i.glyphicons-icon.message_ban
+              glyphicons-icon message_ban
+            %p
+              %i.glyphicons-icon.message_flag
+              glyphicons-icon message_flag
+            %p
+              %i.glyphicons-icon.message_lock
+              glyphicons-icon message_lock
+            %p
+              %i.glyphicons-icon.message_new
+              glyphicons-icon message_new
+            %p
+              %i.glyphicons-icon.inbox
+              glyphicons-icon inbox
+            %p
+              %i.glyphicons-icon.inbox_plus
+              glyphicons-icon inbox_plus
+            %p
+              %i.glyphicons-icon.inbox_minus
+              glyphicons-icon inbox_minus
+            %p
+              %i.glyphicons-icon.inbox_lock
+              glyphicons-icon inbox_lock
+            %p
+              %i.glyphicons-icon.inbox_in
+              glyphicons-icon inbox_in
+            %p
+              %i.glyphicons-icon.inbox_out
+              glyphicons-icon inbox_out
+            %p
+              %i.glyphicons-icon.cogwheel
+              glyphicons-icon cogwheel
+            %p
+              %i.glyphicons-icon.cogwheels
+              glyphicons-icon cogwheels
+            %p
+              %i.glyphicons-icon.picture
+              glyphicons-icon picture
+            %p
+              %i.glyphicons-icon.adjust_alt
+              glyphicons-icon adjust_alt
+            %p
+              %i.glyphicons-icon.database_lock
+              glyphicons-icon database_lock
+            %p
+              %i.glyphicons-icon.database_plus
+              glyphicons-icon database_plus
+            %p
+              %i.glyphicons-icon.database_minus
+              glyphicons-icon database_minus
+            %p
+              %i.glyphicons-icon.database_ban
+              glyphicons-icon database_ban
+            %p
+              %i.glyphicons-icon.folder_open
+              glyphicons-icon folder_open
+            %p
+              %i.glyphicons-icon.folder_plus
+              glyphicons-icon folder_plus
+            %p
+              %i.glyphicons-icon.folder_minus
+              glyphicons-icon folder_minus
+            %p
+              %i.glyphicons-icon.folder_lock
+              glyphicons-icon folder_lock
+            %p
+              %i.glyphicons-icon.folder_flag
+              glyphicons-icon folder_flag
+            %p
+              %i.glyphicons-icon.folder_new
+              glyphicons-icon folder_new
+            %p
+              %i.glyphicons-icon.edit
+              glyphicons-icon edit
+            %p
+              %i.glyphicons-icon.new_window
+              glyphicons-icon new_window
+            %p
+              %i.glyphicons-icon.check
+              glyphicons-icon check
+            %p
+              %i.glyphicons-icon.unchecked
+              glyphicons-icon unchecked
+            %p
+              %i.glyphicons-icon.more_windows
+              glyphicons-icon more_windows
+            %p
+              %i.glyphicons-icon.show_big_thumbnails
+              glyphicons-icon show_big_thumbnails
+            %p
+              %i.glyphicons-icon.show_thumbnails
+              glyphicons-icon show_thumbnails
+            %p
+              %i.glyphicons-icon.show_thumbnails_with_lines
+              glyphicons-icon show_thumbnails_with_lines
+            %p
+              %i.glyphicons-icon.show_lines
+              glyphicons-icon show_lines
+            %p
+              %i.glyphicons-icon.playlist
+              glyphicons-icon playlist
+            %p
+              %i.glyphicons-icon.imac
+              glyphicons-icon imac
+            %p
+              %i.glyphicons-icon.macbook
+              glyphicons-icon macbook
+            %p
+              %i.glyphicons-icon.ipad
+              glyphicons-icon ipad
+            %p
+              %i.glyphicons-icon.iphone
+              glyphicons-icon iphone
+            %p
+              %i.glyphicons-icon.iphone_transfer
+              glyphicons-icon iphone_transfer
+            %p
+              %i.glyphicons-icon.iphone_exchange
+              glyphicons-icon iphone_exchange
+            %p
+              %i.glyphicons-icon.ipod
+              glyphicons-icon ipod
+            %p
+              %i.glyphicons-icon.ipod_shuffle
+              glyphicons-icon ipod_shuffle
+            %p
+              %i.glyphicons-icon.ear_plugs
+              glyphicons-icon ear_plugs
+            %p
+              %i.glyphicons-icon.phone
+              glyphicons-icon phone
+            %p
+              %i.glyphicons-icon.step_backward
+              glyphicons-icon step_backward
+            %p
+              %i.glyphicons-icon.fast_backward
+              glyphicons-icon fast_backward
+            %p
+              %i.glyphicons-icon.rewind
+              glyphicons-icon rewind
+            %p
+              %i.glyphicons-icon.play
+              glyphicons-icon play
+            %p
+              %i.glyphicons-icon.pause
+              glyphicons-icon pause
+            %p
+              %i.glyphicons-icon.stop
+              glyphicons-icon stop
+            %p
+              %i.glyphicons-icon.forward
+              glyphicons-icon forward
+            %p
+              %i.glyphicons-icon.fast_forward
+              glyphicons-icon fast_forward
+            %p
+              %i.glyphicons-icon.step_forward
+              glyphicons-icon step_forward
+            %p
+              %i.glyphicons-icon.eject
+              glyphicons-icon eject
+            %p
+              %i.glyphicons-icon.facetime_video
+              glyphicons-icon facetime_video
+            %p
+              %i.glyphicons-icon.download_alt
+              glyphicons-icon download_alt
+            %p
+              %i.glyphicons-icon.mute
+              glyphicons-icon mute
+            %p
+              %i.glyphicons-icon.volume_down
+              glyphicons-icon volume_down
+            %p
+              %i.glyphicons-icon.volume_up
+              glyphicons-icon volume_up
+            %p
+              %i.glyphicons-icon.screenshot
+              glyphicons-icon screenshot
+            %p
+              %i.glyphicons-icon.move
+              glyphicons-icon move
+            %p
+              %i.glyphicons-icon.more
+              glyphicons-icon more
+            %p
+              %i.glyphicons-icon.brightness_reduce
+              glyphicons-icon brightness_reduce
+            %p
+              %i.glyphicons-icon.brightness_increase
+              glyphicons-icon brightness_increase
+            %p
+              %i.glyphicons-icon.circle_plus
+              glyphicons-icon circle_plus
+            %p
+              %i.glyphicons-icon.circle_minus
+              glyphicons-icon circle_minus
+            %p
+              %i.glyphicons-icon.circle_remove
+              glyphicons-icon circle_remove
+            %p
+              %i.glyphicons-icon.circle_ok
+              glyphicons-icon circle_ok
+            %p
+              %i.glyphicons-icon.circle_question_mark
+              glyphicons-icon circle_question_mark
+            %p
+              %i.glyphicons-icon.circle_info
+              glyphicons-icon circle_info
+            %p
+              %i.glyphicons-icon.circle_exclamation_mark
+              glyphicons-icon circle_exclamation_mark
+            %p
+              %i.glyphicons-icon.remove
+              glyphicons-icon remove
+            %p
+              %i.glyphicons-icon.ok
+              glyphicons-icon ok
+            %p
+              %i.glyphicons-icon.ban
+              glyphicons-icon ban
+            %p
+              %i.glyphicons-icon.download
+              glyphicons-icon download
+            %p
+              %i.glyphicons-icon.upload
+              glyphicons-icon upload
+            %p
+              %i.glyphicons-icon.shopping_cart
+              glyphicons-icon shopping_cart
+            %p
+              %i.glyphicons-icon.lock
+              glyphicons-icon lock
+            %p
+              %i.glyphicons-icon.unlock
+              glyphicons-icon unlock
+            %p
+              %i.glyphicons-icon.electricity
+              glyphicons-icon electricity
+            %p
+              %i.glyphicons-icon.ok_2
+              glyphicons-icon ok_2
+            %p
+              %i.glyphicons-icon.remove_2
+              glyphicons-icon remove_2
+            %p
+              %i.glyphicons-icon.cart_out
+              glyphicons-icon cart_out
+            %p
+              %i.glyphicons-icon.cart_in
+              glyphicons-icon cart_in
+            %p
+              %i.glyphicons-icon.left_arrow
+              glyphicons-icon left_arrow
+            %p
+              %i.glyphicons-icon.right_arrow
+              glyphicons-icon right_arrow
+            %p
+              %i.glyphicons-icon.down_arrow
+              glyphicons-icon down_arrow
+            %p
+              %i.glyphicons-icon.up_arrow
+              glyphicons-icon up_arrow
+            %p
+              %i.glyphicons-icon.resize_small
+              glyphicons-icon resize_small
+            %p
+              %i.glyphicons-icon.resize_full
+              glyphicons-icon resize_full
+            %p
+              %i.glyphicons-icon.circle_arrow_left
+              glyphicons-icon circle_arrow_left
+            %p
+              %i.glyphicons-icon.circle_arrow_right
+              glyphicons-icon circle_arrow_right
+            %p
+              %i.glyphicons-icon.circle_arrow_top
+              glyphicons-icon circle_arrow_top
+            %p
+              %i.glyphicons-icon.circle_arrow_down
+              glyphicons-icon circle_arrow_down
+            %p
+              %i.glyphicons-icon.play_button
+              glyphicons-icon play_button
+            %p
+              %i.glyphicons-icon.unshare
+              glyphicons-icon unshare
+            %p
+              %i.glyphicons-icon.share
+              glyphicons-icon share
+            %p
+              %i.glyphicons-icon.chevron-right
+              glyphicons-icon chevron-right
+            %p
+              %i.glyphicons-icon.chevron-left
+              glyphicons-icon chevron-left
+            %p
+              %i.glyphicons-icon.bluetooth
+              glyphicons-icon bluetooth
+            %p
+              %i.glyphicons-icon.euro
+              glyphicons-icon euro
+            %p
+              %i.glyphicons-icon.usd
+              glyphicons-icon usd
+            %p
+              %i.glyphicons-icon.gbp
+              glyphicons-icon gbp
+            %p
+              %i.glyphicons-icon.retweet_2
+              glyphicons-icon retweet_2
+            %p
+              %i.glyphicons-icon.moon
+              glyphicons-icon moon
+            %p
+              %i.glyphicons-icon.sun
+              glyphicons-icon sun
+            %p
+              %i.glyphicons-icon.cloud
+              glyphicons-icon cloud
+            %p
+              %i.glyphicons-icon.direction
+              glyphicons-icon direction
+            %p
+              %i.glyphicons-icon.brush
+              glyphicons-icon brush
+            %p
+              %i.glyphicons-icon.pen
+              glyphicons-icon pen
+            %p
+              %i.glyphicons-icon.zoom_in
+              glyphicons-icon zoom_in
+            %p
+              %i.glyphicons-icon.zoom_out
+              glyphicons-icon zoom_out
+            %p
+              %i.glyphicons-icon.pin
+              glyphicons-icon pin
+            %p
+              %i.glyphicons-icon.albums
+              glyphicons-icon albums
+            %p
+              %i.glyphicons-icon.rotation_lock
+              glyphicons-icon rotation_lock
+            %p
+              %i.glyphicons-icon.flash
+              glyphicons-icon flash
+            %p
+              %i.glyphicons-icon.google_maps
+              glyphicons-icon google_maps
+            %p
+              %i.glyphicons-icon.anchor
+              glyphicons-icon anchor
+            %p
+              %i.glyphicons-icon.conversation
+              glyphicons-icon conversation
+            %p
+              %i.glyphicons-icon.chat
+              glyphicons-icon chat
+            %p
+              %i.glyphicons-icon.male
+              glyphicons-icon male
+            %p
+              %i.glyphicons-icon.female
+              glyphicons-icon female
+            %p
+              %i.glyphicons-icon.asterisk
+              glyphicons-icon asterisk
+            %p
+              %i.glyphicons-icon.divide
+              glyphicons-icon divide
+            %p
+              %i.glyphicons-icon.snorkel_diving
+              glyphicons-icon snorkel_diving
+            %p
+              %i.glyphicons-icon.scuba_diving
+              glyphicons-icon scuba_diving
+            %p
+              %i.glyphicons-icon.oxygen_bottle
+              glyphicons-icon oxygen_bottle
+            %p
+              %i.glyphicons-icon.fins
+              glyphicons-icon fins
+            %p
+              %i.glyphicons-icon.fishes
+              glyphicons-icon fishes
+            %p
+              %i.glyphicons-icon.boat
+              glyphicons-icon boat
+            %p
+              %i.glyphicons-icon.delete
+              glyphicons-icon delete
+            %p
+              %i.glyphicons-icon.sheriffs_star
+              glyphicons-icon sheriffs_star
+            %p
+              %i.glyphicons-icon.qrcode
+              glyphicons-icon qrcode
+            %p
+              %i.glyphicons-icon.barcode
+              glyphicons-icon barcode
+            %p
+              %i.glyphicons-icon.pool
+              glyphicons-icon pool
+            %p
+              %i.glyphicons-icon.buoy
+              glyphicons-icon buoy
+            %p
+              %i.glyphicons-icon.spade
+              glyphicons-icon spade
+            %p
+              %i.glyphicons-icon.bank
+              glyphicons-icon bank
+            %p
+              %i.glyphicons-icon.vcard
+              glyphicons-icon vcard
+            %p
+              %i.glyphicons-icon.electrical_plug
+              glyphicons-icon electrical_plug
+            %p
+              %i.glyphicons-icon.flag
+              glyphicons-icon flag
+            %p
+              %i.glyphicons-icon.credit_card
+              glyphicons-icon credit_card
+            %p
+              %i.glyphicons-icon.keyboard-wireless
+              glyphicons-icon keyboard-wireless
+            %p
+              %i.glyphicons-icon.keyboard-wired
+              glyphicons-icon keyboard-wired
+            %p
+              %i.glyphicons-icon.shield
+              glyphicons-icon shield
+            %p
+              %i.glyphicons-icon.ring
+              glyphicons-icon ring
+            %p
+              %i.glyphicons-icon.cake
+              glyphicons-icon cake
+            %p
+              %i.glyphicons-icon.drink
+              glyphicons-icon drink
+            %p
+              %i.glyphicons-icon.beer
+              glyphicons-icon beer
+            %p
+              %i.glyphicons-icon.fast_food
+              glyphicons-icon fast_food
+            %p
+              %i.glyphicons-icon.cutlery
+              glyphicons-icon cutlery
+            %p
+              %i.glyphicons-icon.pizza
+              glyphicons-icon pizza
+            %p
+              %i.glyphicons-icon.birthday_cake
+              glyphicons-icon birthday_cake
+            %p
+              %i.glyphicons-icon.tablet
+              glyphicons-icon tablet
+            %p
+              %i.glyphicons-icon.settings
+              glyphicons-icon settings
+            %p
+              %i.glyphicons-icon.bullets
+              glyphicons-icon bullets
+            %p
+              %i.glyphicons-icon.cardio
+              glyphicons-icon cardio
+            %p
+              %i.glyphicons-icon.t-shirt
+              glyphicons-icon t-shirt
+            %p
+              %i.glyphicons-icon.pants
+              glyphicons-icon pants
+            %p
+              %i.glyphicons-icon.sweater
+              glyphicons-icon sweater
+            %p
+              %i.glyphicons-icon.fabric
+              glyphicons-icon fabric
+            %p
+              %i.glyphicons-icon.leather
+              glyphicons-icon leather
+            %p
+              %i.glyphicons-icon.scissors
+              glyphicons-icon scissors
+            %p
+              %i.glyphicons-icon.bomb
+              glyphicons-icon bomb
+            %p
+              %i.glyphicons-icon.skull
+              glyphicons-icon skull
+            %p
+              %i.glyphicons-icon.celebration
+              glyphicons-icon celebration
+            %p
+              %i.glyphicons-icon.tea_kettle
+              glyphicons-icon tea_kettle
+            %p
+              %i.glyphicons-icon.french_press
+              glyphicons-icon french_press
+            %p
+              %i.glyphicons-icon.coffe_cup
+              glyphicons-icon coffe_cup
+            %p
+              %i.glyphicons-icon.pot
+              glyphicons-icon pot
+            %p
+              %i.glyphicons-icon.grater
+              glyphicons-icon grater
+            %p
+              %i.glyphicons-icon.kettle
+              glyphicons-icon kettle
+            %p
+              %i.glyphicons-icon.hospital
+              glyphicons-icon hospital
+            %p
+              %i.glyphicons-icon.hospital_h
+              glyphicons-icon hospital_h
+            %p
+              %i.glyphicons-icon.microphone
+              glyphicons-icon microphone
+            %p
+              %i.glyphicons-icon.webcam
+              glyphicons-icon webcam
+            %p
+              %i.glyphicons-icon.temple_christianity_church
+              glyphicons-icon temple_christianity_church
+            %p
+              %i.glyphicons-icon.temple_islam
+              glyphicons-icon temple_islam
+            %p
+              %i.glyphicons-icon.temple_hindu
+              glyphicons-icon temple_hindu
+            %p
+              %i.glyphicons-icon.temple_buddhist
+              glyphicons-icon temple_buddhist
+            %p
+              %i.glyphicons-icon.bicycle
+              glyphicons-icon bicycle
+            %p
+              %i.glyphicons-icon.life_preserver
+              glyphicons-icon life_preserver
+            %p
+              %i.glyphicons-icon.share_alt
+              glyphicons-icon share_alt
+            %p
+              %i.glyphicons-icon.comments
+              glyphicons-icon comments
+            %p
+              %i.glyphicons-icon.flower
+              glyphicons-icon flower
+            %p
+              %i.glyphicons-icon.baseball
+              glyphicons-icon baseball
+            %p
+              %i.glyphicons-icon.rugby
+              glyphicons-icon rugby
+            %p
+              %i.glyphicons-icon.ax
+              glyphicons-icon ax
+            %p
+              %i.glyphicons-icon.table_tennis
+              glyphicons-icon table_tennis
+            %p
+              %i.glyphicons-icon.bowling
+              glyphicons-icon bowling
+            %p
+              %i.glyphicons-icon.tree_conifer
+              glyphicons-icon tree_conifer
+            %p
+              %i.glyphicons-icon.tree_deciduous
+              glyphicons-icon tree_deciduous
+            %p
+              %i.glyphicons-icon.more_items
+              glyphicons-icon more_items
+            %p
+              %i.glyphicons-icon.sort
+              glyphicons-icon sort
+            %p
+              %i.glyphicons-icon.filter
+              glyphicons-icon filter
+            %p
+              %i.glyphicons-icon.gamepad
+              glyphicons-icon gamepad
+            %p
+              %i.glyphicons-icon.playing_dices
+              glyphicons-icon playing_dices
+            %p
+              %i.glyphicons-icon.calculator
+              glyphicons-icon calculator
+            %p
+              %i.glyphicons-icon.tie
+              glyphicons-icon tie
+            %p
+              %i.glyphicons-icon.wallet
+              glyphicons-icon wallet
+            %p
+              %i.glyphicons-icon.piano
+              glyphicons-icon piano
+            %p
+              %i.glyphicons-icon.sampler
+              glyphicons-icon sampler
+            %p
+              %i.glyphicons-icon.podium
+              glyphicons-icon podium
+            %p
+              %i.glyphicons-icon.soccer_ball
+              glyphicons-icon soccer_ball
+            %p
+              %i.glyphicons-icon.blog
+              glyphicons-icon blog
+            %p
+              %i.glyphicons-icon.dashboard
+              glyphicons-icon dashboard
+            %p
+              %i.glyphicons-icon.certificate
+              glyphicons-icon certificate
+            %p
+              %i.glyphicons-icon.bell
+              glyphicons-icon bell
+            %p
+              %i.glyphicons-icon.candle
+              glyphicons-icon candle
+            %p
+              %i.glyphicons-icon.pushpin
+              glyphicons-icon pushpin
+            %p
+              %i.glyphicons-icon.iphone_shake
+              glyphicons-icon iphone_shake
+            %p
+              %i.glyphicons-icon.pin_flag
+              glyphicons-icon pin_flag
+            %p
+              %i.glyphicons-icon.turtle
+              glyphicons-icon turtle
+            %p
+              %i.glyphicons-icon.rabbit
+              glyphicons-icon rabbit
+            %p
+              %i.glyphicons-icon.globe
+              glyphicons-icon globe
+            %p
+              %i.glyphicons-icon.briefcase
+              glyphicons-icon briefcase
+            %p
+              %i.glyphicons-icon.hdd
+              glyphicons-icon hdd
+            %p
+              %i.glyphicons-icon.thumbs_up
+              glyphicons-icon thumbs_up
+            %p
+              %i.glyphicons-icon.thumbs_down
+              glyphicons-icon thumbs_down
+            %p
+              %i.glyphicons-icon.hand_right
+              glyphicons-icon hand_right
+            %p
+              %i.glyphicons-icon.hand_left
+              glyphicons-icon hand_left
+            %p
+              %i.glyphicons-icon.hand_up
+              glyphicons-icon hand_up
+            %p
+              %i.glyphicons-icon.hand_down
+              glyphicons-icon hand_down
+            %p
+              %i.glyphicons-icon.fullscreen
+              glyphicons-icon fullscreen
+            %p
+              %i.glyphicons-icon.shopping_bag
+              glyphicons-icon shopping_bag
+            %p
+              %i.glyphicons-icon.book_open
+              glyphicons-icon book_open
+            %p
+              %i.glyphicons-icon.nameplate
+              glyphicons-icon nameplate
+            %p
+              %i.glyphicons-icon.nameplate_alt
+              glyphicons-icon nameplate_alt
+            %p
+              %i.glyphicons-icon.vases
+              glyphicons-icon vases
+            %p
+              %i.glyphicons-icon.bullhorn
+              glyphicons-icon bullhorn
+            %p
+              %i.glyphicons-icon.dumbbell
+              glyphicons-icon dumbbell
+            %p
+              %i.glyphicons-icon.suitcase
+              glyphicons-icon suitcase
+            %p
+              %i.glyphicons-icon.file_import
+              glyphicons-icon file_import
+            %p
+              %i.glyphicons-icon.file_export
+              glyphicons-icon file_export
+            %p
+              %i.glyphicons-icon.bug
+              glyphicons-icon bug
+            %p
+              %i.glyphicons-icon.crown
+              glyphicons-icon crown
+            %p
+              %i.glyphicons-icon.smoking
+              glyphicons-icon smoking
+            %p
+              %i.glyphicons-icon.cloud-upload
+              glyphicons-icon cloud-upload
+            %p
+              %i.glyphicons-icon.cloud-download
+              glyphicons-icon cloud-download
+            %p
+              %i.glyphicons-icon.restart
+              glyphicons-icon restart
+            %p
+              %i.glyphicons-icon.security_camera
+              glyphicons-icon security_camera
+            %p
+              %i.glyphicons-icon.expand
+              glyphicons-icon expand
+            %p
+              %i.glyphicons-icon.collapse
+              glyphicons-icon collapse
+            %p
+              %i.glyphicons-icon.collapse_top
+              glyphicons-icon collapse_top
+            %p
+              %i.glyphicons-icon.globe_af
+              glyphicons-icon globe_af
+            %p
+              %i.glyphicons-icon.global
+              glyphicons-icon global
+            %p
+              %i.glyphicons-icon.spray
+              glyphicons-icon spray
+            %p
+              %i.glyphicons-icon.nails
+              glyphicons-icon nails
+            %p
+              %i.glyphicons-icon.claw_hammer
+              glyphicons-icon claw_hammer
+            %p
+              %i.glyphicons-icon.classic_hammer
+              glyphicons-icon classic_hammer
+            %p
+              %i.glyphicons-icon.hand_saw
+              glyphicons-icon hand_saw
+            %p
+              %i.glyphicons-icon.riflescope
+              glyphicons-icon riflescope
+            %p
+              %i.glyphicons-icon.electrical_socket_eu
+              glyphicons-icon electrical_socket_eu
+            %p
+              %i.glyphicons-icon.electrical_socket_us
+              glyphicons-icon electrical_socket_us
+            %p
+              %i.glyphicons-icon.pinterest
+              glyphicons-icon pinterest
+            %p
+              %i.glyphicons-icon.dropbox
+              glyphicons-icon dropbox
+            %p
+              %i.glyphicons-icon.google_plus
+              glyphicons-icon google_plus
+            %p
+              %i.glyphicons-icon.jolicloud
+              glyphicons-icon jolicloud
+            %p
+              %i.glyphicons-icon.yahoo
+              glyphicons-icon yahoo
+            %p
+              %i.glyphicons-icon.blogger
+              glyphicons-icon blogger
+            %p
+              %i.glyphicons-icon.picasa
+              glyphicons-icon picasa
+            %p
+              %i.glyphicons-icon.amazon
+              glyphicons-icon amazon
+            %p
+              %i.glyphicons-icon.tumblr
+              glyphicons-icon tumblr
+            %p
+              %i.glyphicons-icon.wordpress
+              glyphicons-icon wordpress
+            %p
+              %i.glyphicons-icon.instapaper
+              glyphicons-icon instapaper
+            %p
+              %i.glyphicons-icon.evernote
+              glyphicons-icon evernote
+            %p
+              %i.glyphicons-icon.xing
+              glyphicons-icon xing
+            %p
+              %i.glyphicons-icon.zootool
+              glyphicons-icon zootool
+            %p
+              %i.glyphicons-icon.dribbble
+              glyphicons-icon dribbble
+            %p
+              %i.glyphicons-icon.deviantart
+              glyphicons-icon deviantart
+            %p
+              %i.glyphicons-icon.read_it_later
+              glyphicons-icon read_it_later
+            %p
+              %i.glyphicons-icon.linked_in
+              glyphicons-icon linked_in
+            %p
+              %i.glyphicons-icon.forrst
+              glyphicons-icon forrst
+            %p
+              %i.glyphicons-icon.pinboard
+              glyphicons-icon pinboard
+            %p
+              %i.glyphicons-icon.behance
+              glyphicons-icon behance
+            %p
+              %i.glyphicons-icon.github
+              glyphicons-icon github
+            %p
+              %i.glyphicons-icon.youtube
+              glyphicons-icon youtube
+            %p
+              %i.glyphicons-icon.skitch
+              glyphicons-icon skitch
+            %p
+              %i.glyphicons-icon.foursquare
+              glyphicons-icon foursquare
+            %p
+              %i.glyphicons-icon.quora
+              glyphicons-icon quora
+            %p
+              %i.glyphicons-icon.badoo
+              glyphicons-icon badoo
+            %p
+              %i.glyphicons-icon.spotify
+              glyphicons-icon spotify
+            %p
+              %i.glyphicons-icon.stumbleupon
+              glyphicons-icon stumbleupon
+            %p
+              %i.glyphicons-icon.readability
+              glyphicons-icon readability
+            %p
+              %i.glyphicons-icon.facebook
+              glyphicons-icon facebook
+            %p
+              %i.glyphicons-icon.twitter
+              glyphicons-icon twitter
+            %p
+              %i.glyphicons-icon.instagram
+              glyphicons-icon instagram
+            %p
+              %i.glyphicons-icon.posterous_spaces
+              glyphicons-icon posterous_spaces
+            %p
+              %i.glyphicons-icon.vimeo
+              glyphicons-icon vimeo
+            %p
+              %i.glyphicons-icon.flickr
+              glyphicons-icon flickr
+            %p
+              %i.glyphicons-icon.last_fm
+              glyphicons-icon last_fm
+            %p
+              %i.glyphicons-icon.rss
+              glyphicons-icon rss
+            %p
+              %i.glyphicons-icon.skype
+              glyphicons-icon skype
+            %p
+              %i.glyphicons-icon.e-mail
+              glyphicons-icon e-mail
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.picture
+              = succeed "Font" do
+                %span.break
+              Awesome (Font)
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %h3 Web Application Icons
+            .row-fluid.bs-icons
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-adjust
+                    fa-icon-adjust
+                  %li
+                    %i.fa-icon-asterisk
+                    fa-icon-asterisk
+                  %li
+                    %i.fa-icon-ban-circle
+                    fa-icon-ban-circle
+                  %li
+                    %i.fa-icon-bar-chart
+                    fa-icon-bar-chart
+                  %li
+                    %i.fa-icon-barcode
+                    fa-icon-barcode
+                  %li
+                    %i.fa-icon-beaker
+                    fa-icon-beaker
+                  %li
+                    %i.fa-icon-bell
+                    fa-icon-bell
+                  %li
+                    %i.fa-icon-bolt
+                    fa-icon-bolt
+                  %li
+                    %i.fa-icon-book
+                    fa-icon-book
+                  %li
+                    %i.fa-icon-bookmark
+                    fa-icon-bookmark
+                  %li
+                    %i.fa-icon-bookmark-empty
+                    fa-icon-bookmark-empty
+                  %li
+                    %i.fa-icon-briefcase
+                    fa-icon-briefcase
+                  %li
+                    %i.fa-icon-bullhorn
+                    fa-icon-bullhorn
+                  %li
+                    %i.fa-icon-calendar
+                    fa-icon-calendar
+                  %li
+                    %i.fa-icon-camera
+                    fa-icon-camera
+                  %li
+                    %i.fa-icon-camera-retro
+                    fa-icon-camera-retro
+                  %li
+                    %i.fa-icon-certificate
+                    fa-icon-certificate
+                  %li
+                    %i.fa-icon-check
+                    fa-icon-check
+                  %li
+                    %i.fa-icon-check-empty
+                    fa-icon-check-empty
+                  %li
+                    %i.fa-icon-cloud
+                    fa-icon-cloud
+                  %li
+                    %i.fa-icon-cog
+                    fa-icon-cog
+                  %li
+                    %i.fa-icon-cogs
+                    fa-icon-cogs
+                  %li
+                    %i.fa-icon-comment
+                    fa-icon-comment
+                  %li
+                    %i.fa-icon-comment-alt
+                    fa-icon-comment-alt
+                  %li
+                    %i.fa-icon-comments
+                    fa-icon-comments
+                  %li
+                    %i.fa-icon-comments-alt
+                    fa-icon-comments-alt
+                  %li
+                    %i.fa-icon-credit-card
+                    fa-icon-credit-card
+                  %li
+                    %i.fa-icon-dashboard
+                    fa-icon-dashboard
+                  %li
+                    %i.fa-icon-download
+                    fa-icon-download
+                  %li
+                    %i.fa-icon-download-alt
+                    fa-icon-download-alt
+                  %li
+                    %i.fa-icon-edit
+                    fa-icon-edit
+                  %li
+                    %i.fa-icon-envelope
+                    fa-icon-envelope
+                  %li
+                    %i.fa-icon-envelope-alt
+                    fa-icon-envelope-alt
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-exclamation-sign
+                    fa-icon-exclamation-sign
+                  %li
+                    %i.fa-icon-external-link
+                    fa-icon-external-link
+                  %li
+                    %i.fa-icon-eye-close
+                    fa-icon-eye-close
+                  %li
+                    %i.fa-icon-eye-open
+                    fa-icon-eye-open
+                  %li
+                    %i.fa-icon-facetime-video
+                    fa-icon-facetime-video
+                  %li
+                    %i.fa-icon-film
+                    fa-icon-film
+                  %li
+                    %i.fa-icon-filter
+                    fa-icon-filter
+                  %li
+                    %i.fa-icon-fire
+                    fa-icon-fire
+                  %li
+                    %i.fa-icon-flag
+                    fa-icon-flag
+                  %li
+                    %i.fa-icon-folder-close
+                    fa-icon-folder-close
+                  %li
+                    %i.fa-icon-folder-open
+                    fa-icon-folder-open
+                  %li
+                    %i.fa-icon-gift
+                    fa-icon-gift
+                  %li
+                    %i.fa-icon-glass
+                    fa-icon-glass
+                  %li
+                    %i.fa-icon-globe
+                    fa-icon-globe
+                  %li
+                    %i.fa-icon-group
+                    fa-icon-group
+                  %li
+                    %i.fa-icon-hdd
+                    fa-icon-hdd
+                  %li
+                    %i.fa-icon-headphones
+                    fa-icon-headphones
+                  %li
+                    %i.fa-icon-heart
+                    fa-icon-heart
+                  %li
+                    %i.fa-icon-heart-empty
+                    fa-icon-heart-empty
+                  %li
+                    %i.fa-icon-home
+                    fa-icon-home
+                  %li
+                    %i.fa-icon-inbox
+                    fa-icon-inbox
+                  %li
+                    %i.fa-icon-info-sign
+                    fa-icon-info-sign
+                  %li
+                    %i.fa-icon-key
+                    fa-icon-key
+                  %li
+                    %i.fa-icon-leaf
+                    fa-icon-leaf
+                  %li
+                    %i.fa-icon-legal
+                    fa-icon-legal
+                  %li
+                    %i.fa-icon-lemon
+                    fa-icon-lemon
+                  %li
+                    %i.fa-icon-lock
+                    fa-icon-lock
+                  %li
+                    %i.fa-icon-unlock
+                    fa-icon-unlock
+                  %li
+                    %i.fa-icon-magic
+                    fa-icon-magic
+                  %li
+                    %i.fa-icon-magnet
+                    fa-icon-magnet
+                  %li
+                    %i.fa-icon-map-marker
+                    fa-icon-map-marker
+                  %li
+                    %i.fa-icon-minus
+                    fa-icon-minus
+                  %li
+                    %i.fa-icon-minus-sign
+                    fa-icon-minus-sign
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-money
+                    fa-icon-money
+                  %li
+                    %i.fa-icon-move
+                    fa-icon-move
+                  %li
+                    %i.fa-icon-music
+                    fa-icon-music
+                  %li
+                    %i.fa-icon-off
+                    fa-icon-off
+                  %li
+                    %i.fa-icon-ok
+                    fa-icon-ok
+                  %li
+                    %i.fa-icon-ok-circle
+                    fa-icon-ok-circle
+                  %li
+                    %i.fa-icon-ok-sign
+                    fa-icon-ok-sign
+                  %li
+                    %i.fa-icon-pencil
+                    fa-icon-pencil
+                  %li
+                    %i.fa-icon-picture
+                    fa-icon-picture
+                  %li
+                    %i.fa-icon-plane
+                    fa-icon-plane
+                  %li
+                    %i.fa-icon-plus
+                    fa-icon-plus
+                  %li
+                    %i.fa-icon-plus-sign
+                    fa-icon-plus-sign
+                  %li
+                    %i.fa-icon-print
+                    fa-icon-print
+                  %li
+                    %i.fa-icon-pushpin
+                    fa-icon-pushpin
+                  %li
+                    %i.fa-icon-qrcode
+                    fa-icon-qrcode
+                  %li
+                    %i.fa-icon-question-sign
+                    fa-icon-question-sign
+                  %li
+                    %i.fa-icon-random
+                    fa-icon-random
+                  %li
+                    %i.fa-icon-refresh
+                    fa-icon-refresh
+                  %li
+                    %i.fa-icon-remove
+                    fa-icon-remove
+                  %li
+                    %i.fa-icon-remove-circle
+                    fa-icon-remove-circle
+                  %li
+                    %i.fa-icon-remove-sign
+                    fa-icon-remove-sign
+                  %li
+                    %i.fa-icon-reorder
+                    fa-icon-reorder
+                  %li
+                    %i.fa-icon-resize-horizontal
+                    fa-icon-resize-horizontal
+                  %li
+                    %i.fa-icon-resize-vertical
+                    fa-icon-resize-vertical
+                  %li
+                    %i.fa-icon-retweet
+                    fa-icon-retweet
+                  %li
+                    %i.fa-icon-road
+                    fa-icon-road
+                  %li
+                    %i.fa-icon-rss
+                    fa-icon-rss
+                  %li
+                    %i.fa-icon-screenshot
+                    fa-icon-screenshot
+                  %li
+                    %i.fa-icon-search
+                    fa-icon-search
+                  %li
+                    %i.fa-icon-share
+                    fa-icon-share
+                  %li
+                    %i.fa-icon-share-alt
+                    fa-icon-share-alt
+                  %li
+                    %i.fa-icon-shopping-cart
+                    fa-icon-shopping-cart
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-signal
+                    fa-icon-signal
+                  %li
+                    %i.fa-icon-signin
+                    fa-icon-signin
+                  %li
+                    %i.fa-icon-signout
+                    fa-icon-signout
+                  %li
+                    %i.fa-icon-sitemap
+                    fa-icon-sitemap
+                  %li
+                    %i.fa-icon-sort
+                    fa-icon-sort
+                  %li
+                    %i.fa-icon-sort-down
+                    fa-icon-sort-down
+                  %li
+                    %i.fa-icon-sort-up
+                    fa-icon-sort-up
+                  %li
+                    %i.fa-icon-star
+                    fa-icon-star
+                  %li
+                    %i.fa-icon-star-empty
+                    fa-icon-star-empty
+                  %li
+                    %i.fa-icon-star-half
+                    fa-icon-star-half
+                  %li
+                    %i.fa-icon-tag
+                    fa-icon-tag
+                  %li
+                    %i.fa-icon-tags
+                    fa-icon-tags
+                  %li
+                    %i.fa-icon-tasks
+                    fa-icon-tasks
+                  %li
+                    %i.fa-icon-thumbs-down
+                    fa-icon-thumbs-down
+                  %li
+                    %i.fa-icon-thumbs-up
+                    fa-icon-thumbs-up
+                  %li
+                    %i.fa-icon-time
+                    fa-icon-time
+                  %li
+                    %i.fa-icon-tint
+                    fa-icon-tint
+                  %li
+                    %i.fa-icon-trash
+                    fa-icon-trash
+                  %li
+                    %i.fa-icon-trophy
+                    fa-icon-trophy
+                  %li
+                    %i.fa-icon-truck
+                    fa-icon-truck
+                  %li
+                    %i.fa-icon-umbrella
+                    fa-icon-umbrella
+                  %li
+                    %i.fa-icon-upload
+                    fa-icon-upload
+                  %li
+                    %i.fa-icon-upload-alt
+                    fa-icon-upload-alt
+                  %li
+                    %i.fa-icon-user
+                    fa-icon-user
+                  %li
+                    %i.fa-icon-user-md
+                    fa-icon-user-md
+                  %li
+                    %i.fa-icon-volume-off
+                    fa-icon-volume-off
+                  %li
+                    %i.fa-icon-volume-down
+                    fa-icon-volume-down
+                  %li
+                    %i.fa-icon-volume-up
+                    fa-icon-volume-up
+                  %li
+                    %i.fa-icon-warning-sign
+                    fa-icon-warning-sign
+                  %li
+                    %i.fa-icon-wrench
+                    fa-icon-wrench
+                  %li
+                    %i.fa-icon-zoom-in
+                    fa-icon-zoom-in
+                  %li
+                    %i.fa-icon-zoom-out
+                    fa-icon-zoom-out
+            %h3 Text Editor Icons
+            .row-fluid.bs-icons
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-file
+                    fa-icon-file
+                  %li
+                    %i.fa-icon-cut
+                    fa-icon-cut
+                  %li
+                    %i.fa-icon-copy
+                    fa-icon-copy
+                  %li
+                    %i.fa-icon-paste
+                    fa-icon-paste
+                  %li
+                    %i.fa-icon-save
+                    fa-icon-save
+                  %li
+                    %i.fa-icon-undo
+                    fa-icon-undo
+                  %li
+                    %i.fa-icon-repeat
+                    fa-icon-repeat
+                  %li
+                    %i.fa-icon-paper-clip
+                    fa-icon-paper-clip
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-text-height
+                    fa-icon-text-height
+                  %li
+                    %i.fa-icon-text-width
+                    fa-icon-text-width
+                  %li
+                    %i.fa-icon-align-left
+                    fa-icon-align-left
+                  %li
+                    %i.fa-icon-align-center
+                    fa-icon-align-center
+                  %li
+                    %i.fa-icon-align-right
+                    fa-icon-align-right
+                  %li
+                    %i.fa-icon-align-justify
+                    fa-icon-align-justify
+                  %li
+                    %i.fa-icon-indent-left
+                    fa-icon-indent-left
+                  %li
+                    %i.fa-icon-indent-right
+                    fa-icon-indent-right
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-font
+                    fa-icon-font
+                  %li
+                    %i.fa-icon-bold
+                    fa-icon-bold
+                  %li
+                    %i.fa-icon-italic
+                    fa-icon-italic
+                  %li
+                    %i.fa-icon-strikethrough
+                    fa-icon-strikethrough
+                  %li
+                    %i.fa-icon-underline
+                    fa-icon-underline
+                  %li
+                    %i.fa-icon-link
+                    fa-icon-link
+                  %li
+                    %i.fa-icon-columns
+                    fa-icon-columns
+                  %li
+                    %i.fa-icon-table
+                    fa-icon-table
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-th-large
+                    fa-icon-th-large
+                  %li
+                    %i.fa-icon-th
+                    fa-icon-th
+                  %li
+                    %i.fa-icon-th-list
+                    fa-icon-th-list
+                  %li
+                    %i.fa-icon-list
+                    fa-icon-list
+                  %li
+                    %i.fa-icon-list-ol
+                    fa-icon-list-ol
+                  %li
+                    %i.fa-icon-list-ul
+                    fa-icon-list-ul
+                  %li
+                    %i.fa-icon-list-alt
+                    fa-icon-list-alt
+            %h3 Directional Icons
+            .row-fluid.bs-icons
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-arrow-down
+                    fa-icon-arrow-down
+                  %li
+                    %i.fa-icon-arrow-left
+                    fa-icon-arrow-left
+                  %li
+                    %i.fa-icon-arrow-right
+                    fa-icon-arrow-right
+                  %li
+                    %i.fa-icon-arrow-up
+                    fa-icon-arrow-up
+                  %li
+                    %i.fa-icon-chevron-down
+                    fa-icon-chevron-down
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-circle-arrow-down
+                    fa-icon-circle-arrow-down
+                  %li
+                    %i.fa-icon-circle-arrow-left
+                    fa-icon-circle-arrow-left
+                  %li
+                    %i.fa-icon-circle-arrow-right
+                    fa-icon-circle-arrow-right
+                  %li
+                    %i.fa-icon-circle-arrow-up
+                    fa-icon-circle-arrow-up
+                  %li
+                    %i.fa-icon-chevron-left
+                    fa-icon-chevron-left
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-caret-down
+                    fa-icon-caret-down
+                  %li
+                    %i.fa-icon-caret-left
+                    fa-icon-caret-left
+                  %li
+                    %i.fa-icon-caret-right
+                    fa-icon-caret-right
+                  %li
+                    %i.fa-icon-caret-up
+                    fa-icon-caret-up
+                  %li
+                    %i.fa-icon-chevron-right
+                    fa-icon-chevron-right
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-hand-down
+                    fa-icon-hand-down
+                  %li
+                    %i.fa-icon-hand-left
+                    fa-icon-hand-left
+                  %li
+                    %i.fa-icon-hand-right
+                    fa-icon-hand-right
+                  %li
+                    %i.fa-icon-hand-up
+                    fa-icon-hand-up
+                  %li
+                    %i.fa-icon-chevron-up
+                    fa-icon-chevron-up
+            %h3 Video Player Icons
+            .row-fluid.bs-icons
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-play-circle
+                    fa-icon-play-circle
+                  %li
+                    %i.fa-icon-play
+                    fa-icon-play
+                  %li
+                    %i.fa-icon-pause
+                    fa-icon-pause
+                  %li
+                    %i.fa-icon-stop
+                    fa-icon-stop
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-step-backward
+                    fa-icon-step-backward
+                  %li
+                    %i.fa-icon-fast-backward
+                    fa-icon-fast-backward
+                  %li
+                    %i.fa-icon-backward
+                    fa-icon-backward
+                  %li
+                    %i.fa-icon-forward
+                    fa-icon-forward
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-fast-forward
+                    fa-icon-fast-forward
+                  %li
+                    %i.fa-icon-step-forward
+                    fa-icon-step-forward
+                  %li
+                    %i.fa-icon-eject
+                    fa-icon-eject
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-fullscreen
+                    fa-icon-fullscreen
+                  %li
+                    %i.fa-icon-resize-full
+                    fa-icon-resize-full
+                  %li
+                    %i.fa-icon-resize-small
+                    fa-icon-resize-small
+            %h3 Social Icons
+            .row-fluid.bs-icons
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-phone
+                    fa-icon-phone
+                  %li
+                    %i.fa-icon-phone-sign
+                    fa-icon-phone-sign
+                  %li
+                    %i.fa-icon-facebook
+                    fa-icon-facebook
+                  %li
+                    %i.fa-icon-facebook-sign
+                    fa-icon-facebook-sign
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-twitter
+                    fa-icon-twitter
+                  %li
+                    %i.fa-icon-twitter-sign
+                    fa-icon-twitter-sign
+                  %li
+                    %i.fa-icon-github
+                    fa-icon-github
+                  %li
+                    %i.fa-icon-github-sign
+                    fa-icon-github-sign
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-linkedin
+                    fa-icon-linkedin
+                  %li
+                    %i.fa-icon-linkedin-sign
+                    fa-icon-linkedin-sign
+                  %li
+                    %i.fa-icon-pinterest
+                    fa-icon-pinterest
+                  %li
+                    %i.fa-icon-pinterest-sign
+                    fa-icon-pinterest-sign
+              .span3
+                %ul.the-icons
+                  %li
+                    %i.fa-icon-google-plus
+                    fa-icon-google-plus
+                  %li
+                    %i.fa-icon-google-plus-sign
+                    fa-icon-google-plus-sign
+                  %li
+                    %i.fa-icon-sign-blank
+                    fa-icon-sign-blank
+        / /span
+      / /row
+      / end: Content
+    / /#content.span10
+  / /fluid-row
+  #myModal.modal.hide.fade
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Settings
+    .modal-body
+      %p Here settings can be configured...
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+      %a.btn.btn-primary{:href => "#"} Save changes

@@ -1,0 +1,749 @@
+.container-fluid
+  .row-fluid
+    / start: Main Menu
+    #sidebar-left.span1
+      .nav-collapse.sidebar-nav
+        %ul.nav.nav-tabs.nav-stacked.main-menu
+          %li
+            %a{:href => "index.html"}
+              %i.fa-icon-bar-chart
+              %span.hidden-tablet Dashboard
+          %li
+            %a{:href => "infrastructure.html"}
+              %i.fa-icon-hdd
+              %span.hidden-tablet Infrastructure
+          %li
+            %a{:href => "messages.html"}
+              %i.fa-icon-envelope
+              %span.hidden-tablet Messages
+          %li
+            %a{:href => "tasks.html"}
+              %i.fa-icon-tasks
+              %span.hidden-tablet Tasks
+          %li
+            %a{:href => "ui.html"}
+              %i.fa-icon-eye-open
+              %span.hidden-tablet UI Features
+          %li
+            %a{:href => "widgets.html"}
+              %i.fa-icon-dashboard
+              %span.hidden-tablet Widgets
+          %li
+            %a.dropmenu{:href => "#"}
+              %i.fa-icon-folder-close-alt
+              %span.hidden-tablet Dropdown
+            %ul
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 1
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 2
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 3
+          %li
+            %a{:href => "form.html"}
+              %i.fa-icon-edit
+              %span.hidden-tablet Forms
+          %li
+            %a{:href => "chart.html"}
+              %i.fa-icon-list-alt
+              %span.hidden-tablet Charts
+          %li
+            %a{:href => "typography.html"}
+              %i.fa-icon-font
+              %span.hidden-tablet Typography
+          %li
+            %a{:href => "gallery.html"}
+              %i.fa-icon-picture
+              %span.hidden-tablet Gallery
+          %li
+            %a{:href => "table.html"}
+              %i.fa-icon-align-justify
+              %span.hidden-tablet Tables
+          %li
+            %a{:href => "calendar.html"}
+              %i.fa-icon-calendar
+              %span.hidden-tablet Calendar
+          %li
+            %a{:href => "file-manager.html"}
+              %i.fa-icon-folder-open
+              %span.hidden-tablet File Manager
+          %li
+            %a{:href => "icon.html"}
+              %i.fa-icon-star
+              %span.hidden-tablet Icons
+          %li
+            %a{:href => "login.html"}
+              %i.fa-icon-lock
+              %span.hidden-tablet Login Page
+    / end: Main Menu
+    %noscript
+      .alert.alert-block.span11
+        %h4.alert-heading Warning!
+        %p
+          You need to have
+          %a{:href => "http://en.wikipedia.org/wiki/JavaScript", :target => "_blank"} JavaScript
+          enabled to use this site.
+    / start: Content
+    #content.span11
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.tasks
+              = succeed "Sliders" do
+                %span.break
+          .box-content
+            %table.table.table-striped
+              %tr
+                %td basic
+                %td
+                  .sliderOverlay
+                    .slider.sliderSimple
+              %tr
+                %td Minimum
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin.sliderGreen
+                  .field_notice
+                    Min:
+                    %span.must.sliderMinLabel $180
+              %tr
+                %td Maximum
+                %td
+                  .sliderOverlay
+                    .slider.sliderMax.sliderYellow
+                  .field_notice
+                    Max:
+                    %span.must.sliderMaxLabel $280
+              %tr
+                %td Range
+                %td
+                  .sliderOverlay
+                    .slider.sliderRange.sliderBlue
+                  .field_notice
+                    Price Range:
+                    %span.must.sliderRangeLabel $192 - $470
+              %tr
+                %td Equalizer
+                %td
+                  #sliderVertical-1.sliderBlue.sliderVertical
+                  #sliderVertical-2.sliderBlue.sliderVertical
+                  #sliderVertical-3.sliderBlue.sliderVertical
+                  #sliderVertical-4.sliderBlue.sliderVertical
+                  #sliderVertical-5.sliderBlue.sliderVertical
+                  #sliderVertical-6.sliderBlue.sliderVertical
+                  #sliderVertical-7.sliderGreen.sliderVertical
+                  #sliderVertical-8.sliderGreen.sliderVertical
+                  #sliderVertical-9.sliderYellow.sliderVertical
+                  #sliderVertical-10.sliderYellow.sliderVertical
+                  #sliderVertical-11.sliderRed.sliderVertical
+                  #sliderVertical-12.sliderRed.sliderVertical
+              %tr
+                %td Blue
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-1.sliderBlue
+              %tr
+                %td Green
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-2.sliderGreen
+              %tr
+                %td Dark Pink
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-3.sliderPink
+              %tr
+                %td Red
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-4.sliderRed
+              %tr
+                %td Yellow
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-5.sliderYellow
+              %tr
+                %td Dark Green
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-6.sliderDarkGreen
+              %tr
+                %td Light Orange
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-7.sliderLightOrange
+              %tr
+                %td Orange
+                %td
+                  .sliderOverlay
+                    .slider.sliderMin-8.sliderOrange
+        / /span
+      / /row
+      %hr.hideInIE8/
+      .row-fluid.hideInIE8
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.tasks
+              = succeed "Circle" do
+                %span.break
+              Stats
+          .box-content
+            .circleStats
+              .span2
+                .circleStatsItem.red
+                  %i.fa-icon-thumbs-up
+                  %span.plus +
+                  %span.percent %
+                  %input.orangeCircle{:type => "text", :value => "58"}/
+              .span2
+                .circleStatsItem.blue
+                  %i.fa-icon-bullhorn
+                  %span.plus +
+                  %span.percent %
+                  %input.blueCircle{:type => "text", :value => "8"}/
+              .span2
+                .circleStatsItem.yellow
+                  %i.fa-icon-user
+                  %span.plus +
+                  %span.percent %
+                  %input.yellowCircle{:type => "text", :value => "12"}/
+              .span2
+                .circleStatsItem.pink
+                  %i.fa-icon-globe
+                  %span.plus +
+                  %span.percent %
+                  %input.pinkCircle{:type => "text", :value => "23"}/
+              .span2
+                .circleStatsItem.green
+                  %i.fa-icon-bar-chart
+                  %span.plus +
+                  %span.percent %
+                  %input.greenCircle{:type => "text", :value => "34"}/
+              .span2
+                .circleStatsItem.lightorange
+                  %i.fa-icon-shopping-cart
+                  %span.plus +
+                  %span.percent %
+                  %input.lightOrangeCircle{:type => "text", :value => "42"}/
+            .clearfix
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.hand-top
+              = succeed "Quick" do
+                %span.break
+              Buttons
+          .box-content
+            %a.quick-button.span2
+              %i.fa-icon-group
+            %p Users
+            %span.notification 1.367
+            %a.quick-button.span2
+              %i.fa-icon-comments-alt
+            %p Comments
+            %span.notification.green 167
+            %a.quick-button.span2
+              %i.fa-icon-shopping-cart
+            %p Orders
+            %a.quick-button.span2
+              %i.fa-icon-barcode
+            %p Products
+            %a.quick-button.span2
+              %i.fa-icon-envelope
+            %p Messages
+            %a.quick-button.span2
+              %i.fa-icon-calendar
+            %p Calendar
+            %span.notification.red 68
+            .clearfix
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.hand-top
+              = succeed "Small" do
+                %span.break
+              Quick Buttons
+          .box-content
+            %a.quick-button-small.span1
+              %i.fa-icon-group
+            %p Users
+            %span.notification 7
+            %a.quick-button-small.span1
+              %i.fa-icon-comments-alt
+            %p Comments
+            %span.notification.green 4
+            %a.quick-button-small.span1
+              %i.fa-icon-shopping-cart
+            %p Orders
+            %a.quick-button-small.span1
+              %i.fa-icon-barcode
+            %p Products
+            %a.quick-button-small.span1
+              %i.fa-icon-envelope
+            %p Messages
+            %a.quick-button-small.span1
+              %i.fa-icon-calendar
+            %p Calendar
+            %span.notification.red 8
+            %a.quick-button-small.span1
+              %i.fa-icon-beaker
+            %p Projects
+            %a.quick-button-small.span1
+              %i.fa-icon-thumbs-up
+            %p Likes
+            %span.notification.green + 11
+            %a.quick-button-small.span1
+              %i.fa-icon-heart-empty
+            %p Favorites
+            %a.quick-button-small.span1
+              %i.fa-icon-bullhorn
+            %p Notifications
+            %span.notification.yellow 7
+            %a.quick-button-small.span1
+              %i.fa-icon-cogs
+            %p Settings
+            %a.quick-button-small.span1
+              %i.fa-icon-dashboard
+            %p Dashboard
+            .clearfix
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.tasks
+              = succeed "Progress" do
+                %span.break
+              Bars
+          .box-content
+            %table.table.table-striped
+              %tr
+                %td Basic
+                %td
+                  .progressBarOverlay
+                    .progress.simpleProgress.progressBlue 80
+              %tr
+                %td Progress
+                %td
+                  .progressBarOverlay
+                    .progress.progressAnimate.progressBlue
+                  .field_notice
+                    Value:
+                    %span.must.progressAnimateValue 0%
+              %tr
+                %td Upload
+                %td
+                  .progressBarOverlay
+                    .progress.progressUploadAnimate.progressBlue
+                  .field_notice
+                    Uploading:
+                    %span.must.progressUploadAnimateValue 0 Mb
+                    \/ 4096 Gb
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.tasks
+              = succeed "Skill" do
+                %span.break
+              Bars
+          .box-content
+            %ul.skill-bar
+              %li
+                %h5 Web Design ( 40% )
+                .meter
+                  %span{:style => "width: 40%"}
+                / Edite width here
+              %li
+                %h5 Wordpress ( 80% )
+                .meter
+                  %span{:style => "width: 80%"}
+                / Edite width here
+              %li
+                %h5 Branding ( 100% )
+                .meter
+                  %span{:style => "width: 100%"}
+                / Edite width here
+              %li
+                %h5 SEO Optmization ( 60% )
+                .meter
+                  %span{:style => "width: 60%"}
+                / Edite width here
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.tasks
+              = succeed "Standard" do
+                %span.break
+              Progress Bars
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %h3 Basic
+            .progress
+              .bar{:style => "width: 70%;"}
+            %h3 Striped
+            .progress.progress-striped
+              .bar{:style => "width: 30%;"}
+            %h3 Animated
+            .progress.progress-striped.progress-success.active
+              .bar{:style => "width: 50%;"}
+            %h3 Additional Colors
+            .progress.progress-info.progress-striped{:style => "margin-bottom: 9px;"}
+              .bar{:style => "width: 20%"}
+            .progress.progress-success{:style => "margin-bottom: 9px;"}
+              .bar{:style => "width: 40%"}
+            .progress.progress-warning.progress-striped.active{:style => "margin-bottom: 9px;"}
+              .bar{:style => "width: 60%"}
+            .progress.progress-danger.progress-striped{:style => "margin-bottom: 9px;"}
+              .bar{:style => "width: 80%"}
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.bullhorn
+              = succeed "Alerts" do
+                %span.break
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content.alerts
+            .alert.alert-error
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %strong Oh snap!
+              Change a few things up and try submitting again.
+            .alert.alert-success
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %strong Well done!
+              You successfully read this important alert message.
+            .alert.alert-info
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %strong Heads up!
+              This alert needs your attention, but it's not super important.
+            .alert.alert-block
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %h4.alert-heading Warning!
+              %p Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.bell
+              = succeed "Growl" do
+                %span.break
+              Like Notifications
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            .alert.alert-block
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %h4.alert-heading Attention!
+              %p Click buttons below to see Pop Notifications.
+            %p.center
+              %button#add-regular.btn.btn-primary
+                %i.halflings-icon.bell.halflings-icon>
+                Regular
+              %button#add-sticky.btn.btn-primary
+                %i.halflings-icon.bell.halflings-icon>
+                Sticky
+              %button#add-without-image.btn.btn-primary
+                %i.halflings-icon.bell.halflings-icon>
+                w/o image
+              %button#add-gritter-light.btn.btn-primary
+                %i.halflings-icon.bell.halflings-icon>
+                White
+              %button#remove-all.btn.btn-primary
+                %i.halflings-icon.bell.halflings-icon>
+                Remove All
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.bell
+              = succeed "Bootstrap" do
+                %span.break
+              Notifications
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            .alert.alert-block
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %h4.alert-heading Attention!
+              %p Click buttons below to see Pop Notifications.
+            %p.center
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is a success notification\",\"layout\":\"topLeft\",\"type\":\"success\"}"}
+                %i.halflings-icon.bell.halflings-icon
+                Top Left
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an alert notification with fade effect\",\"layout\":\"topCenter\",\"type\":\"alert\",\"animateOpen\": {\"opacity\": \"show\"}}"}
+                %i.halflings-icon.bell.halflings-icon
+                Top Center (fade)
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an error notification\",\"layout\":\"topRight\",\"type\":\"error\"}"}
+                %i.halflings-icon.bell.halflings-icon
+                Top Right
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is a success information\",\"layout\":\"top\",\"type\":\"information\"}"}
+                %i.halflings-icon.bell.halflings-icon
+                Top Full Width
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an alert notification with fade effect\",\"layout\":\"center\",\"type\":\"alert\",\"animateOpen\": {\"opacity\": \"show\"}}"}
+                %i.halflings-icon.bell.halflings-icon
+                Center (fade)
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an error notification\",\"layout\":\"center\",\"type\":\"error\"}"}
+                %i.halflings-icon.bell.halflings-icon
+                Center
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an error notification\",\"layout\":\"bottomLeft\",\"type\":\"error\"}"}
+                %i.halflings-icon.bell.halflings-icon
+                Bottom Left
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an alert notification with fade effect\",\"layout\":\"bottomRight\",\"type\":\"alert\",\"animateOpen\": {\"opacity\": \"show\"}}"}
+                %i.halflings-icon.bell.halflings-icon
+                Bottom Right (fade)
+              %button.btn.btn-primary.noty{"data-noty-options" => "{\"text\":\"This is an alert\",\"layout\":\"bottom\",\"type\":\"alert\",\"closeButton\":\"true\"}"}
+                %i.halflings-icon.bell.halflings-icon
+                Bottom Full Width with Close Button
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span4
+          .box-header
+            %h2
+              %i.halflings-icon.plus
+              = succeed "Extended" do
+                %span.break
+              Elements
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %table.table.table-bordered.table-striped
+              %tr
+                %td Star Rating
+                %td
+                  %span.rating
+                    %span.star
+                    %span.star
+                    %span.star
+                    %span.star
+                    %span.star
+              %tr
+                %td Popover
+                %td
+                  %a.btn.btn-danger{"data-content" => "And here's some amazing content. It's very engaging. right?", "data-rel" => "popover", :href => "#", :title => "A Title"} Hover for popover
+              %tr
+                %td Dialog
+                %td
+                  %a.btn.btn-info.btn-setting{:href => "#"} Click for dialog
+              %tr
+                %td Tooltip
+                %td
+                  %a.btn.btn-warning{"data-rel" => "tooltip", :href => "#", :title => "Tooltip, you can change the position."} Hover for tooltip
+        / /span
+        .box.span2
+          .box-header
+            %h2
+              %i.halflings-icon.eye-open
+              = succeed "Labels" do
+                %span.break
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %table.table.table-bordered.table-striped
+              %tbody
+                %tr
+                  %td
+                    %span.label Default
+                %tr
+                  %td
+                    %span.label.label-success Success
+                %tr
+                  %td
+                    %span.label.label-warning Warning
+                %tr
+                  %td
+                    %span.label.label-important Important
+                %tr
+                  %td
+                    %span.label.label-info Info
+                %tr
+                  %td
+                    %span.label.label-inverse Inverse
+        / /span
+        .box.span6
+          .box-header
+            %h2
+              %i.halflings-icon.list
+              = succeed "Buttons" do
+                %span.break
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content.buttons
+            %p
+              %button.btn.btn-large Large button
+              %button.btn.btn-large.btn-primary Large button
+              %button.btn.btn-large.btn-danger Large button
+              %button.btn.btn-large.btn-warning Large button
+            %p
+              %button.btn.btn-large.btn-success Large button
+              %button.btn.btn-large.btn-info Large button
+              %button.btn.btn-large.btn-inverse Large button
+            %p
+            .btn-group
+              %button.btn.btn-large Large Dropdown
+              %button.btn.btn-large.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "#"}
+                    %i.halflings-icon.star
+                    Action
+                %li
+                  %a{:href => "#"}
+                    %i.halflings-icon.tag
+                    Another action
+                %li
+                  %a{:href => "#"}
+                    %i.halflings-icon.download-alt
+                    Something else here
+                %li.divider
+                %li
+                  %a{:href => "#"}
+                    %i.halflings-icon.tint
+                    Separated link
+            %hr/
+            %p.btn-group
+              %button.btn Left
+              %button.btn Middle
+              %button.btn Right
+            %p
+              %button.btn.btn-small
+                %i.halflings-icon.star
+                Icon button
+              %button.btn.btn-small.btn-primary Small button
+              %button.btn.btn-small.btn-danger Small button
+              %button.btn.btn-small.btn-warning Small button
+              %button.btn.btn-small.btn-success Small button
+            %p
+              %button.btn.btn-small.btn-info Small button
+              %button.btn.btn-small.btn-inverse Small button
+              %button.btn.btn-large.btn-primary.btn-round Round button
+              %button.btn.btn-large.btn-round
+                %i.halflings-icon.ok
+              %button.btn.btn-primary
+                %i.halflings-icon.edit.halflings-icon
+            %p
+              %button.btn.btn-mini Mini button
+              %button.btn.btn-mini.btn-primary Mini button
+              %button.btn.btn-mini.btn-danger Mini button
+              %button.btn.btn-mini.btn-warning Mini button
+              %button.btn.btn-mini.btn-info Mini button
+              %button.btn.btn-mini.btn-success Mini button
+              %button.btn.btn-mini.btn-inverse Mini button
+        / /span
+      / /row
+      %hr/
+      .row-fluid.sortable
+        .box.span12
+          .box-header
+            %h2
+              %i.halflings-icon.th
+              = succeed "Tabs" do
+                %span.break
+          .box-content
+            %ul#myTab.nav.tab-menu.nav-tabs
+              %li.active
+                %a{:href => "#info"} Info
+              %li
+                %a{:href => "#custom"} Custom
+              %li
+                %a{:href => "#messages"} Messages
+            #myTabContent.tab-content
+              #info.tab-pane.active
+                %p
+                  Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+              #custom.tab-pane
+                %p
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+              #messages.tab-pane
+                %p
+                  Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                %p
+                  Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
+        / /span
+      / /row
+      / end: Content
+    / /#content.span10
+  / /fluid-row
+  #myModal.modal.hide.fade
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Settings
+    .modal-body
+      %p Here settings can be configured...
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+      %a.btn.btn-primary{:href => "#"} Save changes

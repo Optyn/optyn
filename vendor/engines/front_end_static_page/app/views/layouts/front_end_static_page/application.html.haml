@@ -1,0 +1,107 @@
+!!!
+%html
+  %head
+    %title FrontEndStaticPage
+    = stylesheet_link_tag    "front_end_static_page/application", :media => "all"
+    = javascript_include_tag "front_end_static_page/application"
+    %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic", :rel => "stylesheet", :type => "text/css"}/
+    = csrf_meta_tags
+  %body
+    %a.scrolltop{:href => "#"}
+      %span up
+    / begins navbar
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand.scroller{"data-section" => "body", :href => "index.html"}
+            = image_tag("front_end_static_page/logo.png", alt: "Logo")
+          .nav-collapse.collapse
+            %ul.nav.pull-right
+              %li
+                %a.scroller{"data-section" => "#features", :href => "#"} Features
+              %li
+                %a.scroller{"data-section" => "#pricing", :href => "#"} Pricing
+              %li
+                %a.scroller{"data-section" => "#footer", :href => "#"} Contact us
+              %li
+                %a{:href => "blog.html"} Blog
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  External Pages
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "features.html"} Features
+                  %li
+                    %a{:href => "pricing.html"} Pricing
+                  %li
+                    %a{:href => "portfolio.html"} Portfolio
+                  %li
+                    %a{:href => "coming-soon.html"} Coming Soon
+                  %li
+                    %a{:href => "aboutus.html"} About us
+                  %li
+                    %a{:href => "contact.html"} Contact us
+                  %li
+                    %a{:href => "faq.html"} FAQ
+              %li
+                %a.btn-header{:href => "signup.html"} Sign up
+              %li
+                %a.btn-header{:href => "signin.html"} Sign in
+    / ends navbar
+    = yield
+    / starts footer
+    #footer
+      .container
+        .row
+          .span8
+            %h3 From the Blog
+            .blog_post
+              .row
+                .span2
+                  %a{:href => "blog.html"}
+                    = image_tag("front_end_static_page/pic_blog.png", alt: "post image", class: "img-circle")
+                .span4
+                  %a.title{:href => "blog.html"}
+                    Lorem Ipsum is simply dummy
+                  .intro
+                    There are many variations of passages of Lorem alteration in some form by injected look even slightly believable.
+                  .date
+                    Oct 22. 2012
+          .span4.contact_us
+            %h3 Contact Us
+            %form.form-horizontal
+              .field
+                .label_field
+                  %label{:for => "inputName"} Name
+                %input#inputName{:type => "text"}/
+              .field
+                .label_field
+                  %label{:for => "inputEmail"} Email
+                %input#inputEmail{:type => "text"}/
+              .field
+                .label_field
+                  %label{:for => "inputCity"} City
+                %input#inputCity{:type => "text"}/
+              .field
+                .label_field
+                  %label{:for => "inputComment"} Comments
+                %textarea{:name => "comments"}
+              %button.btn{:type => "submit"} Send
+        %hr/
+        .row.copyright
+          .span5
+            %h3 Social
+            %a.social.fb{:href => "#"}
+              %i.i_facebook
+            %a.social.tw{:href => "#"}
+              %i.i_twitter
+            %a.social.yt{:href => "#"}
+              %i.i_youtube
+          .span2.offset5.copy
+            %p 2012 - Measure Template
+    / ends footer

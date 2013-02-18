@@ -1,0 +1,475 @@
+.container-fluid
+  .row-fluid
+    / start: Main Menu
+    #sidebar-left.span1
+      .nav-collapse.sidebar-nav
+        %ul.nav.nav-tabs.nav-stacked.main-menu
+          %li
+            %a{:href => "index.html"}
+              %i.fa-icon-bar-chart
+              %span.hidden-tablet Dashboard
+          %li
+            %a{:href => "infrastructure.html"}
+              %i.fa-icon-hdd
+              %span.hidden-tablet Infrastructure
+          %li
+            %a{:href => "messages.html"}
+              %i.fa-icon-envelope
+              %span.hidden-tablet Messages
+          %li
+            %a{:href => "tasks.html"}
+              %i.fa-icon-tasks
+              %span.hidden-tablet Tasks
+          %li
+            %a{:href => "ui.html"}
+              %i.fa-icon-eye-open
+              %span.hidden-tablet UI Features
+          %li
+            %a{:href => "widgets.html"}
+              %i.fa-icon-dashboard
+              %span.hidden-tablet Widgets
+          %li
+            %a.dropmenu{:href => "#"}
+              %i.fa-icon-folder-close-alt
+              %span.hidden-tablet Dropdown
+            %ul
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 1
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 2
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 3
+          %li
+            %a{:href => "form.html"}
+              %i.fa-icon-edit
+              %span.hidden-tablet Forms
+          %li
+            %a{:href => "chart.html"}
+              %i.fa-icon-list-alt
+              %span.hidden-tablet Charts
+          %li
+            %a{:href => "typography.html"}
+              %i.fa-icon-font
+              %span.hidden-tablet Typography
+          %li
+            %a{:href => "gallery.html"}
+              %i.fa-icon-picture
+              %span.hidden-tablet Gallery
+          %li
+            %a{:href => "table.html"}
+              %i.fa-icon-align-justify
+              %span.hidden-tablet Tables
+          %li
+            %a{:href => "calendar.html"}
+              %i.fa-icon-calendar
+              %span.hidden-tablet Calendar
+          %li
+            %a{:href => "file-manager.html"}
+              %i.fa-icon-folder-open
+              %span.hidden-tablet File Manager
+          %li
+            %a{:href => "icon.html"}
+              %i.fa-icon-star
+              %span.hidden-tablet Icons
+          %li
+            %a{:href => "login.html"}
+              %i.fa-icon-lock
+              %span.hidden-tablet Login Page
+    / end: Main Menu
+    %noscript
+      .alert.alert-block.span11
+        %h4.alert-heading Warning!
+        %p
+          You need to have
+          %a{:href => "http://en.wikipedia.org/wiki/JavaScript", :target => "_blank"} JavaScript
+          enabled to use this site.
+    / start: Content
+    #content.span11
+      .row-fluid
+        .box.span4{:ondesktop => "span4", :ontablet => "span6"}
+          .box-header
+            %h2
+              %i.halflings-icon.list
+              = succeed "Weekly" do
+                %span.break
+              Stat
+            .box-icon
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %ul.dashboard-list
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-arrow-up.green
+                  %span.green 92
+                  New Comments
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-arrow-down.red
+                  %span.red 15
+                  New Registrations
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-minus.blue
+                  %span.blue 36
+                  New Articles
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-comment.yellow
+                  %span.yellow 45
+                  User reviews
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-arrow-up.green
+                  %span.green 112
+                  New Comments
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-arrow-down.red
+                  %span.red 31
+                  New Registrations
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-minus.blue
+                  %span.blue 93
+                  New Articles
+              %li
+                %a{:href => "#"}
+                  %i.fa-icon-comment.yellow
+                  %span.yellow 254
+                  User reviews
+        / /span
+        .box.span4{:ondesktop => "span4", :ontablet => "span6"}
+          .box-header
+            %h2
+              %i.halflings-icon.user
+              = succeed "Last" do
+                %span.break
+              Users
+            .box-icon
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %ul.dashboard-list
+              %li
+                %a{:href => "#"}
+                  = image_tag "back_end_static_page/avatar.jpg", class: "avatar", alt:  "Lucas"
+                %strong Name:
+                %a{:href => "#"} Łukasz Holeczek
+                %br/
+                %strong Since:
+                Jul 25, 2012 11:09
+                %br/
+                %strong Status:
+                %span.label.label-success Approved
+              %li
+                %a{:href => "#"}
+                  = image_tag "back_end_static_page/avatar9.jpg", class: "avatar", alt:  "Bill"
+                %strong Name:
+                %a{:href => "#"} Bill Cole
+                %br/
+                %strong Since:
+                Jul 25, 2012 11:09
+                %br/
+                %strong Status:
+                %span.label.label-warning Pending
+              %li
+                %a{:href => "#"}
+                  = image_tag "back_end_static_page/avatar5.jpg", class: "avatar", alt:  "Jane"
+                %strong Name:
+                %a{:href => "#"} Jane Sanchez
+                %br/
+                %strong Since:
+                Jul 25, 2012 11:09
+                %br/
+                %strong Status:
+                %span.label.label-important Banned
+              %li
+                %a{:href => "#"}
+                  = image_tag "back_end_static_page/avatar6.jpg", class: "avatar", alt:  "Kate"
+                %strong Name:
+                %a{:href => "#"} Kate Presley
+                %br/
+                %strong Since:
+                Jul 25, 2012 11:09
+                %br/
+                %strong Status:
+                %span.label.label-info Updates
+        / /span
+        .box.span4.noMargin{:ondesktop => "span4", :ontablet => "span12"}
+          .box-header
+            %h2
+              %i.halflings-icon.check
+              = succeed "To" do
+                %span.break
+              Do List
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            .todo
+              %ul.todo-list
+                %li
+                  Windows Phone 8 App
+                  %span.label.label-important today
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  New frontend layout
+                  %span.label.label-important today
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  Hire developers
+                  %span.label.label-warning tommorow
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  Windows Phone 8 App
+                  %span.label.label-warning tommorow
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  New frontend layout
+                  %span.label.label-success this week
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  Hire developers
+                  %span.label.label-success this week
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  New frontend layout
+                  %span.label.label-info this month
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+                %li
+                  Hire developers
+                  %span.label.label-info this month
+                  %span.todo-actions
+                    %a{:href => "#"}
+                      %i.halflings-icon.ok
+                    %a.todo-remove{:href => "#"}
+                      %i.halflings-icon.remove
+      %hr/
+      .row-fluid
+        .box.span4{:ondesktop => "span4", :ontablet => "span12"}
+          .box-header
+            %h2
+              %i.halflings-icon.calendar
+              = succeed "Calendar" do
+                %span.break
+          .box-content
+            #main_calendar_phone
+            .clearfix
+        / /span
+        .box.span4.noMargin{:ondesktop => "span4", :ontablet => "span6"}
+          .box-header
+            %h2
+              %i.halflings-icon.list
+              = succeed "Support" do
+                %span.break
+              tickets
+            .box-icon
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %ul.tickets
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title Server unavaible
+                    %span.number [ #199278 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar6.jpg", alt:  "Avatar"
+                    %span.name Ashley Tan
+                    %span.priority.blue [ Low priority ]
+                    %span.status
+                      Status:
+                      %span.green [ Complete ]
+                    %span.date Jul 25, 2012 11:09
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title Mobile App Problem
+                    %span.number [ #199277 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar7.jpg", alt:  "Avatar"
+                    %span.name Ann Kovalsky
+                    %span.priority.yellow [ Normal priority ]
+                    %span.status
+                      Status:
+                      %span.yellow [ Pending ]
+                    %span.date Jul 25, 2012 11:09
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title PayPal issue
+                    %span.number [ #199276 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar8.jpg", alt:  "Avatar"
+                    %span.name Chris Dan
+                    %span.priority.red [ High priority ]
+                    %span.status
+                      Status:
+                      %span.blue [ In progress ]
+                    %span.date Jul 25, 2012 11:09
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title IE7 problem
+                    %span.number [ #199275 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar9.jpg", alt:  "Avatar"
+                    %span.name John Grand
+                    %span.priority.blue [ Low priority ]
+                    %span.status
+                      Status:
+                      %span.red [ Rejected ]
+                    %span.date Jul 25, 2012 11:09
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title Server unavaible
+                    %span.number [ #199274 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar2.jpg", alt:  "Avatar"
+                    %span.name Agnes Young
+                    %span.priority.blue [ Low priority ]
+                    %span.status
+                      Status:
+                      %span.green [ Complete ]
+                    %span.date Jul 25, 2012 11:09
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title Mobile App Problem
+                    %span.number [ #199273 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar3.jpg", alt:  "Avatar"
+                    %span.name Melanie Brown
+                    %span.priority.yellow [ Normal priority ]
+                    %span.status
+                      Status:
+                      %span.yellow [ Pending ]
+                    %span.date Jul 25, 2012 11:09
+              %li.ticket
+                %a{:href => "#"}
+                  %span.header
+                    %span.title PayPal issue
+                    %span.number [ #199272 ]
+                  %span.content
+                    %span.avatar
+                      = image_tag "back_end_static_page/avatar4.jpg", alt:  "Avatar"
+                    %span.name Patricia Doyle
+                    %span.priority.red [ High priority ]
+                    %span.status
+                      Status:
+                      %span.blue [ In progress ]
+                    %span.date Jul 25, 2012 11:09
+        / /span
+        .box.span4{:ondesktop => "span4", :ontablet => "span6"}
+          .box-header
+            %h2
+              %i.halflings-icon.comment
+              = succeed "Chats" do
+                %span.break
+            .box-icon
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            %ul.chat
+              %li.left
+                = image_tag "back_end_static_page/avatar.jpg", alt:  "Lucas", class: "avatar"
+                %span.message
+                  %span.arrow
+                  %span.from Łukasz Holeczek
+                  %span.time Jul 25, 2012 11:09
+                  %span.text
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+              %li.right
+                = image_tag "back_end_static_page/avatar.jpg", alt:  "Lucas", class: "avatar"
+                %span.message
+                  %span.arrow
+                  %span.from Łukasz Holeczek
+                  %span.time Jul 25, 2012 11:08
+                  %span.text
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+              %li.left
+                = image_tag "back_end_static_page/avatar.jpg", alt:  "Lucas", class: "avatar"
+                %span.message
+                  %span.arrow
+                  %span.from Łukasz Holeczek
+                  %span.time Jul 25, 2012 11:07
+                  %span.text
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+              %li.right
+                = image_tag "back_end_static_page/avatar.jpg", alt:  "Lucas", class: "avatar"
+                %span.message
+                  %span.arrow
+                  %span.from Łukasz Holeczek
+                  %span.time Jul 25, 2012 11:06
+                  %span.text
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            .chat-form
+              %textarea
+              %button.btn.btn-info Send message
+        / /span
+      / end: Content
+    / /#content.span10
+  / /fluid-row
+  #myModal.modal.hide.fade
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Settings
+    .modal-body
+      %p Here settings can be configured...
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+      %a.btn.btn-primary{:href => "#"} Save changes

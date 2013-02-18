@@ -1,0 +1,164 @@
+.container-fluid
+  .row-fluid
+    / start: Main Menu
+    #sidebar-left.span1
+      .nav-collapse.sidebar-nav
+        %ul.nav.nav-tabs.nav-stacked.main-menu
+          %li
+            %a{:href => "index.html"}
+              %i.fa-icon-bar-chart
+              %span.hidden-tablet Dashboard
+          %li
+            %a{:href => "infrastructure.html"}
+              %i.fa-icon-hdd
+              %span.hidden-tablet Infrastructure
+          %li
+            %a{:href => "messages.html"}
+              %i.fa-icon-envelope
+              %span.hidden-tablet Messages
+          %li
+            %a{:href => "tasks.html"}
+              %i.fa-icon-tasks
+              %span.hidden-tablet Tasks
+          %li
+            %a{:href => "ui.html"}
+              %i.fa-icon-eye-open
+              %span.hidden-tablet UI Features
+          %li
+            %a{:href => "widgets.html"}
+              %i.fa-icon-dashboard
+              %span.hidden-tablet Widgets
+          %li
+            %a.dropmenu{:href => "#"}
+              %i.fa-icon-folder-close-alt
+              %span.hidden-tablet Dropdown
+            %ul
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 1
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 2
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 3
+          %li
+            %a{:href => "form.html"}
+              %i.fa-icon-edit
+              %span.hidden-tablet Forms
+          %li
+            %a{:href => "chart.html"}
+              %i.fa-icon-list-alt
+              %span.hidden-tablet Charts
+          %li
+            %a{:href => "typography.html"}
+              %i.fa-icon-font
+              %span.hidden-tablet Typography
+          %li
+            %a{:href => "gallery.html"}
+              %i.fa-icon-picture
+              %span.hidden-tablet Gallery
+          %li
+            %a{:href => "table.html"}
+              %i.fa-icon-align-justify
+              %span.hidden-tablet Tables
+          %li
+            %a{:href => "calendar.html"}
+              %i.fa-icon-calendar
+              %span.hidden-tablet Calendar
+          %li
+            %a{:href => "file-manager.html"}
+              %i.fa-icon-folder-open
+              %span.hidden-tablet File Manager
+          %li
+            %a{:href => "icon.html"}
+              %i.fa-icon-star
+              %span.hidden-tablet Icons
+          %li
+            %a{:href => "login.html"}
+              %i.fa-icon-lock
+              %span.hidden-tablet Login Page
+    / end: Main Menu
+    %noscript
+      .alert.alert-block.span11
+        %h4.alert-heading Warning!
+        %p
+          You need to have
+          %a{:href => "http://en.wikipedia.org/wiki/JavaScript", :target => "_blank"} JavaScript
+          enabled to use this site.
+    / start: Content
+    #content.span11
+      .row-fluid.sortable
+        .box.span12
+          .box-header{"data-original-title" => ""}
+            %h2
+              %i.halflings-icon.picture
+              %span.break
+              Gallery
+            .box-icon
+              %a#toggle-fullscreen.hidden-phone.hidden-tablet{:href => "#"}
+                %i.halflings-icon.fullscreen
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            .masonry-gallery
+              #image-1.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo1.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo1.jpg)", :title => "Sample Image 1"}
+                  = image_tag "back_end_static_page/gallery/photo1.jpg", class: "grayscale", alt: "Sample Image 1"
+              #image-2.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo2.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo2.jpg)", :title => "Sample Image 2"}
+                  = image_tag "back_end_static_page/gallery/photo2.jpg", class: "grayscale", alt: "Sample Image 2"
+              #image-3.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo3.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo3.jpg)", :title => "Sample Image 3"}
+                  = image_tag "back_end_static_page/gallery/photo3.jpg", class: "grayscale", alt: "Sample Image 3"
+              #image-4.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo4.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo4.jpg)", :title => "Sample Image 4"}
+                  = image_tag "back_end_static_page/gallery/photo4.jpg", class: "grayscale", alt: "Sample Image 4"
+              #image-5.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo5.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo5.jpg)", :title => "Sample Image 5"}
+                  = image_tag "back_end_static_page/gallery/photo5.jpg", class: "grayscale", alt: "Sample Image 5"
+              #image-6.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo6.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo6.jpg)", :title => "Sample Image 6"}
+                  = image_tag "back_end_static_page/gallery/photo6.jpg", class: "grayscale", alt: "Sample Image 6"
+              #image-7.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo7.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo7.jpg)", :title => "Sample Image 7"}
+                  = image_tag "back_end_static_page/gallery/photo7.jpg", class: "grayscale", alt: "Sample Image 7"
+              #image-8.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo8.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo8.jpg)", :title => "Sample Image 8"}
+                  = image_tag "back_end_static_page/gallery/photo8.jpg", class: "grayscale", alt: "Sample Image 8"
+              #image-9.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo9.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo9.jpg)", :title => "Sample Image 9"}
+                  = image_tag "back_end_static_page/gallery/photo9.jpg", class: "grayscale", alt: "Sample Image 9"
+              #image-10.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo10.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo10.jpg)", :title => "Sample Image 10"}
+                  = image_tag "back_end_static_page/gallery/photo10.jpg", class: "grayscale", alt: "Sample Image 10"
+              #image-11.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo11.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo11.jpg)", :title => "Sample Image 11"}
+                  = image_tag "back_end_static_page/gallery/photo11.jpg", class: "grayscale", alt: "Sample Image 11"
+              #image-12.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo12.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo12.jpg)", :title => "Sample Image 12"}
+                  = image_tag "back_end_static_page/gallery/photo12.jpg", class: "grayscale", alt: "Sample Image 12"
+              #image-13.masonry-thumb
+                %a{:href => "back_end_static_page/gallery/photo13.jpg", :style => "background:url(/assets/back_end_static_page/gallery/photo13.jpg)", :title => "Sample Image 13"}
+                  = image_tag "back_end_static_page/gallery/photo13.jpg", class: "grayscale", alt: "Sample Image 13"
+        / /span
+      / /row
+      / end: Content
+    / /#content.span10
+  / /fluid-row
+  #myModal.modal.hide.fade
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Settings
+    .modal-body
+      %p Here settings can be configured...
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+      %a.btn.btn-primary{:href => "#"} Save changes
