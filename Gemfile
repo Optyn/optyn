@@ -13,6 +13,11 @@ gem 'config_reader', '0.0.8' #ENV specific configuration
 gem 'google-analytics-rails'
 gem 'unicorn'
 gem 'haml'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem "omniauth-google-oauth2"
 
 # Gems used only for assets and not required
 # in production environments by default.

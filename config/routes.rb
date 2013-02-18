@@ -1,6 +1,34 @@
 Optyn::Application.routes.draw do
+
   root to: 'main#index'
   
+  devise_for :users, :path_names  => { :sign_out => 'logout',
+                                        :sign_in  => 'login',
+                                        :sign_up  => 'register' 
+                                      }
+
+  devise_scope :user do
+    # Sessions
+    post '/login'         => 'devise/sessions#create',       :as => :user_session
+    get  '/login'         => 'devise/sessions#new',          :as => :new_user_session
+    get  '/logout'        => 'devise/sessions#destroy',      :as => :destroy_user_session
+
+    # Passwords
+    post '/password'      => 'devise/passwords#create',     :as => :user_password
+    put  '/password'      => 'devise/passwords#update'
+    get  '/password/new'  => 'devise/passwords#new',        :as => :new_user_password
+    get  '/password/edit' => 'devise/passwords#edit',       :as => :edit_user_password
+
+    # Registrations
+    post   '/register'    => 'devise/registrations#create', :as => :user_registration
+    get    '/register'    => 'devise/registrations#new',    :as => :new_user_registration
+    get    '/account'     => 'devise/registrations#edit',   :as => :edit_user_registration
+    put    '/account'     => 'devise/registrations#update'
+    delete '/account'     => 'devise/registrations#destroy'
+  end
+
+  match 'auth/twitter/callback', to: 'omniauth_clients#create'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
