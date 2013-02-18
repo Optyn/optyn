@@ -27,7 +27,7 @@ Optyn::Application.routes.draw do
     delete '/account'     => 'devise/registrations#destroy'
   end
 
-  match 'auth/twitter/callback', to: 'omniauth_clients#create'
+  match 'auth/:provider/callback', to: 'omniauth_clients#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
