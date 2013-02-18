@@ -1,0 +1,118 @@
+#blog_wrapper.blog_post
+  .container
+    .row
+      .span8
+        %h1.header
+          Maecenas Euismod Elit
+        = image_tag "front_end_static_page/blog_post.jpg", class: "post_pic", alt: "post pic"
+        .post_content
+          %p
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+          %p All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+          %p At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+          %p Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+          .author Alejandra Galvan
+          .date Oct 12, 2012
+        .comments
+          %h4 Comments
+          .comment
+            .row
+              .span1
+                = image_tag "front_end_static_page/pic1.jpg", class: "img-circle author_pic"
+              .span6
+                .name
+                  Alejandra Galvan
+                  %a.reply{:href => "#"} Reply
+                .date
+                  Oct 12, 2012
+                .response
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+          .comment
+            .row
+              .span1
+                = image_tag "front_end_static_page/pic1.jpg", class: "img-circle author_pic"
+              .span6
+                .name
+                  Alejandra Galvan
+                  %a.reply{:href => "#"} Reply
+                .date
+                  Oct 12, 2012
+                .response
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+          .comment.reply_to
+            .row
+              .span1.offset1
+                = image_tag "front_end_static_page/pic1.jpg", class: "img-circle author_pic"
+              .span5
+                .name
+                  Alejandra Galvan
+                  %a.reply{:href => "#"} Reply
+                .date
+                  Oct 12, 2012
+                .response
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+          .comment
+            .row
+              .span1
+                = image_tag "front_end_static_page/pic1.jpg", class: "img-circle author_pic"
+              .span6
+                .name
+                  Alejandra Galvan
+                  %a.reply{:href => "#"} Reply
+                .date
+                  Oct 12, 2012
+                .response
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+        .new_comment
+          %h4 Add Comment
+          %form
+            .row
+              .span3
+                %input{:name => "name", :placeholder => "Name", :type => "text"}/
+              .span3
+                %input{:name => "email", :placeholder => "Email", :type => "text"}/
+            .row
+              .span6
+                %textarea{:placeholder => "Comments", :rows => "7"}
+            .row
+              .span6
+                %a.btn{:href => "#"} Add comment
+      .span3.sidebar.offset1
+        %input.input-large.search-query{:placeholder => "Search", :type => "text"}/
+        %h4.sidebar_header
+          Menu
+        %ul.sidebar_menu
+          %li
+            %a{:href => "#"} Suspendisse Semper Ipsum
+          %li
+            %a{:href => "#"} Maecenas Euismod Elit
+          %li
+            %a{:href => "#"} Suspendisse Semper Ipsum
+          %li
+            %a{:href => "#"} Maecenas Euismod Elit
+          %li
+            %a{:href => "#"} Suspendisse Semper Ipsum
+        %h4.sidebar_header
+          Recent posts
+        %ul.recent_posts
+          %li
+            .row
+              .span1
+                %a{:href => "#"}
+                  = image_tag "front_end_static_page/pic_blog.png", class: "thumb"
+              .span2
+                %a.link{:href => "#"} Suspendisse Semper Ipsum
+          %li
+            .row
+              .span1
+                %a{:href => "#"}
+                  = image_tag "front_end_static_page/pic_blog.png", class: "thumb"
+              .span2
+                %a.link{:href => "#"} Maecenas Euismod Elit
+          %li
+            .row
+              .span1
+                %a{:href => "#"}
+                  = image_tag "front_end_static_page/pic_blog.png", class: "thumb"
+              .span2
+                %a.link{:href => "#"} Suspendisse Semper Ipsum

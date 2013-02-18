@@ -1,0 +1,178 @@
+#hero
+  .container
+    / starts carousel
+    .row.animated.fadeInDown
+      .span12
+        #myCarousel.carousel.slide
+          / carousel items
+          .carousel-inner
+            / slide
+            .active.item.slide1
+              .row
+                .span6
+                  = image_tag("front_end_static_page/slide1.png", alt: "slide1")
+                .span4
+                  %h1
+                    Responsive and Clean Wrapbootstrap Theme
+                  %p
+                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look.
+                  %a.btn.btn-success.btn-large{:href => "https://wrapbootstrap.com/theme/measure-responsive-business-theme-WB0D95984"}
+                    Get Measure Now!
+            / slide
+            .item.slide2
+              .row
+                .span4.animated.fadeInUpBig
+                  %h1 Fully responsive blog template
+                  %p
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi ut aliquip ex ea commodo consequat.
+                  %a.btn.btn-success.btn-large{:href => "blog.html"}
+                    Watch it now!
+                .span6.animated.fadeInDownBig
+                  = image_tag("front_end_static_page/slide2.png", alt: "slide2")
+            / slide
+            .item.slide3.animated.fadeInUpBig
+              = image_tag("front_end_static_page/slide3.png", alt: "slide3")
+          / Carousel nav
+          %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} &lsaquo;
+          %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} &rsaquo;
+#intro
+  .container
+    %h1
+      Measure is a beautiful Wrapbootstrap theme for
+      businesses and creative professionals.
+/ features
+#features
+  .container
+    / header
+    %h2.section_header
+    %hr.left.visible-desktop/
+    %span Features
+    %hr.right.visible-desktop/
+    / feature list
+    .row
+      .span4.feature
+        = image_tag("front_end_static_page/feature1.jpg", alt: "feature1", class: "thumb")
+        %h3
+          %i.i_cloud
+          Responsive clean theme
+        %p.description
+          There are many variations of passages of Lorem Ipsum available, but the
+          majority have suffered alteration in some form, by injected humour, or randomised
+          words which don't look even slightly believable.
+        %a.btn.btn-default{:href => "#"} more
+      .span4.feature
+        = image_tag("front_end_static_page/feature2.jpg", alt: "feature2", class: "thumb")
+        %h3
+          %i.i_chart
+          Responsive clean theme
+        %p.description
+          There are many variations of passages of Lorem Ipsum available, but the
+          majority have suffered alteration in some form, by injected humour, or randomised
+          words which don't look even slightly believable.
+        %a.btn.btn-default{:href => "#"} more
+      .span4.feature
+        = image_tag("front_end_static_page/feature3.jpg", alt: "feature3", class: "thumb")
+        %h3
+          %i.i_movil
+          Responsive clean theme
+        %p.description
+          There are many variations of passages of Lorem Ipsum available, but the
+          majority have suffered alteration in some form, by injected humour, or randomised
+          words which don't look even slightly believable.
+        %a.btn.btn-default{:href => "#"} more
+/ starts pricing
+#pricing
+  .container
+    / header
+    %h2.section_header
+    %hr.left.visible-desktop/
+    %span
+      Pricing
+      %small
+        See all plan details here
+    %hr.right.visible-desktop/
+    / pricing charts
+    .row
+      .span4
+        .price_wrapper.lite.regular
+          .header
+            %span Lite
+            .price
+              %span $ 35
+              Per Month
+          .section
+            %h3
+              Passages of Lorem randomised
+              words which look slightly.
+            %ul.perks
+              %li
+                %i.i_shuffle
+                Cross-browser
+              %li
+                %i.i_loading
+                Fast-loading
+            %a.btn{:href => "#"} Order now
+      .span4
+        .price_wrapper.pro
+          .header
+            %span Pro
+            .price
+              %span $ 99
+              Per Month
+          .section
+            %h3
+              Passages of Lorem randomised
+              words which look slightly.
+            %ul.perks
+              %li
+                %i.i_shuffle
+                Cross-browser
+              %li
+                %i.i_loading
+                Fast-loading
+              %li
+                %i.i_bookmark
+                Bookmarkable URLs
+              %li
+                %i.i_bars
+                W3C Standards
+            %a.btn{:href => "#"} Order now
+      .span4
+        .price_wrapper.standard.regular
+          .header
+            %span Standard
+            .price
+              %span $ 65
+              Per Month
+          .section
+            %h3
+              Passages of Lorem randomised
+              words which look slightly.
+            %ul.perks
+              %li
+                %i.i_shuffle
+                Cross-browser
+              %li
+                %i.i_loading
+                Fast-loading
+              %li
+                %i.i_bookmark
+                Bookmarkable URLs
+            %a.btn{:href => "#"} Order now
+/ starts testimonial
+#testimonials
+  .container
+    .controls
+      %hr/
+    .phrases_wrapper
+      .phrase
+        .row
+          .span7
+            %p.testimony
+              There are many variations of passages words which don't look even slightly passage of anything embarrassing hidden in the middle.
+              %span "
+          .span3.offset1
+            .pic
+              = image_tag("front_end_static_page/pic1.jpg", alt: "author", class: "img-circle")
+              %span.name Alejandra Galvan Castillo
+              %span.position Bootstrap wizard

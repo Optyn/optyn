@@ -1,0 +1,16 @@
+#box_sign
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div
+          .head
+            %h4 Create your account
+          .form
+            %form
+              %input{:placeholder => "Email", :type => "text"}/
+              %input{:placeholder => "Password", :type => "password"}/
+              %input{:placeholder => "Confirm Password", :type => "password"}/
+              %input.btn{:type => "submit", :value => "Sign up"}/
+      %p.already
+        Already have an account?
+        %a{:href => "signin.html"} Sign in
