@@ -1,0 +1,207 @@
+/ start: Header
+.navbar
+  .navbar-inner
+    .container-fluid
+      %a.btn.btn-navbar{"data-target" => ".top-nav.nav-collapse,.sidebar-nav.nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "index.html"}
+        %span Acme, Inc
+      / start: Header Menu
+      .nav-no-collapse.header-nav
+        %ul.nav.pull-right
+          %li.dropdown.hidden-phone
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.halflings-icon.white.warning-sign
+            %ul.dropdown-menu.notifications
+              %li
+                %span.dropdown-menu-title You have 11 notifications
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.user
+                  %span.message New user registration
+                  %span.time 1 min
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.comment
+                  %span.message New comment
+                  %span.time 7 min
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.comment
+                  %span.message New comment
+                  %span.time 8 min
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.comment
+                  %span.message New comment
+                  %span.time 16 min
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.user
+                  %span.message New user registration
+                  %span.time 36 min
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.cart
+                  %span.message 2 items sold
+                  %span.time 1 hour
+              %li.warning
+                %a{:href => "#"}
+                  \-
+                  %i.halflings-icon.white.user
+                  %span.message User deleted account
+                  %span.time 2 hour
+              %li.warning
+                %a{:href => "#"}
+                  \-
+                  %i.halflings-icon.white.shopping-cart
+                  %span.message Transaction was canceled
+                  %span.time 6 hour
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.comment
+                  %span.message New comment
+                  %span.time yesterday
+              %li
+                %a{:href => "#"}
+                  +
+                  %i.halflings-icon.white.user
+                  %span.message New user registration
+                  %span.time yesterday
+              %li
+                %a.dropdown-menu-sub-footer View all notifications
+          / start: Notifications Dropdown
+          %li.dropdown.hidden-phone
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.halflings-icon.white.tasks
+            %ul.dropdown-menu.tasks
+              %li
+                %span.dropdown-menu-title You have 17 tasks in progress
+              %li
+                %a{:href => "#"}
+                  %span.header
+                    %span.title iOS Development
+                    %span.percent
+                .taskProgress.progressSlim.progressBlue 80
+              %li
+                %a{:href => "#"}
+                  %span.header
+                    %span.title Android Development
+                    %span.percent
+                .taskProgress.progressSlim.progressBlue 47
+              %li
+                %a{:href => "#"}
+                  %span.header
+                    %span.title Django Project For Google
+                    %span.percent
+                .taskProgress.progressSlim.progressBlue 32
+              %li
+                %a{:href => "#"}
+                  %span.header
+                    %span.title SEO for new sites
+                    %span.percent
+                .taskProgress.progressSlim.progressBlue 63
+              %li
+                %a{:href => "#"}
+                  %span.header
+                    %span.title New blog posts
+                    %span.percent
+                .taskProgress.progressSlim.progressBlue 80
+              %li
+                %a.dropdown-menu-sub-footer View all tasks
+          / end: Notifications Dropdown
+          / start: Message Dropdown
+          %li.dropdown.hidden-phone
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.halflings-icon.white.envelope
+            %ul.dropdown-menu.messages
+              %li
+                %span.dropdown-menu-title You have 9 messages
+              %li
+                %a{:href => "#"}
+                  %span.avatar
+                    = image_tag "back_end_static_page/avatar.jpg", alt: "Avatar"
+                  %span.header
+                    %span.from
+                      Łukasz Holeczek
+                    %span.time
+                      6 min
+                  %span.message
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+              %li
+                %a{:href => "#"}
+                  %span.avatar
+                    = image_tag "back_end_static_page/avatar2.jpg", alt: "Avatar"
+                  %span.header
+                    %span.from
+                      Megan Abott
+                    %span.time
+                      56 min
+                  %span.message
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+              %li
+                %a{:href => "#"}
+                  %span.avatar
+                    = image_tag "back_end_static_page/avatar3.jpg", alt: "Avatar"
+                  %span.header
+                    %span.from
+                      Kate Ross
+                    %span.time
+                      3 hours
+                  %span.message
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+              %li
+                %a{:href => "#"}
+                  %span.avatar
+                    = image_tag "back_end_static_page/avatar4.jpg", alt: "Avatar"
+                  %span.header
+                    %span.from
+                      Julie Blank
+                    %span.time
+                      yesterday
+                  %span.message
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+              %li
+                %a{:href => "#"}
+                  %span.avatar
+                    = image_tag "back_end_static_page/avatar5.jpg", alt: "Avatar"
+                  %span.header
+                    %span.from
+                      Jane Sanders
+                    %span.time
+                      Jul 25, 2012
+                  %span.message
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+              %li
+                %a.dropdown-menu-sub-footer View all messages
+          / end: Message Dropdown
+          %li
+            %a.btn{:href => "#"}
+              %i.halflings-icon.white.wrench
+          / start: User Dropdown
+          %li.dropdown
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.halflings-icon.white.user
+              Łukasz Holeczek
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"}
+                  %i.halflings-icon.white.user
+                  Profile
+              %li
+                %a{:href => "login.html"}
+                  %i.halflings-icon.white.off
+                  Logout
+          / end: User Dropdown
+      / end: Header Menu
+/ start: Header

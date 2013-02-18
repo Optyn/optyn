@@ -1,0 +1,128 @@
+.container-fluid
+  .row-fluid
+    / start: Main Menu
+    #sidebar-left.span1
+      .nav-collapse.sidebar-nav
+        %ul.nav.nav-tabs.nav-stacked.main-menu
+          %li
+            %a{:href => "index.html"}
+              %i.fa-icon-bar-chart
+              %span.hidden-tablet Dashboard
+          %li
+            %a{:href => "infrastructure.html"}
+              %i.fa-icon-hdd
+              %span.hidden-tablet Infrastructure
+          %li
+            %a{:href => "messages.html"}
+              %i.fa-icon-envelope
+              %span.hidden-tablet Messages
+          %li
+            %a{:href => "tasks.html"}
+              %i.fa-icon-tasks
+              %span.hidden-tablet Tasks
+          %li
+            %a{:href => "ui.html"}
+              %i.fa-icon-eye-open
+              %span.hidden-tablet UI Features
+          %li
+            %a{:href => "widgets.html"}
+              %i.fa-icon-dashboard
+              %span.hidden-tablet Widgets
+          %li
+            %a.dropmenu{:href => "#"}
+              %i.fa-icon-folder-close-alt
+              %span.hidden-tablet Dropdown
+            %ul
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 1
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 2
+              %li
+                %a.submenu{:href => "submenu.html"}
+                  %i.fa-icon-file-alt
+                  %span.hidden-tablet Sub Menu 3
+          %li
+            %a{:href => "form.html"}
+              %i.fa-icon-edit
+              %span.hidden-tablet Forms
+          %li
+            %a{:href => "chart.html"}
+              %i.fa-icon-list-alt
+              %span.hidden-tablet Charts
+          %li
+            %a{:href => "typography.html"}
+              %i.fa-icon-font
+              %span.hidden-tablet Typography
+          %li
+            %a{:href => "gallery.html"}
+              %i.fa-icon-picture
+              %span.hidden-tablet Gallery
+          %li
+            %a{:href => "table.html"}
+              %i.fa-icon-align-justify
+              %span.hidden-tablet Tables
+          %li
+            %a{:href => "calendar.html"}
+              %i.fa-icon-calendar
+              %span.hidden-tablet Calendar
+          %li
+            %a{:href => "file-manager.html"}
+              %i.fa-icon-folder-open
+              %span.hidden-tablet File Manager
+          %li
+            %a{:href => "icon.html"}
+              %i.fa-icon-star
+              %span.hidden-tablet Icons
+          %li
+            %a{:href => "login.html"}
+              %i.fa-icon-lock
+              %span.hidden-tablet Login Page
+    / end: Main Menu
+    %noscript
+      .alert.alert-block.span11
+        %h4.alert-heading Warning!
+        %p
+          You need to have
+          %a{:href => "http://en.wikipedia.org/wiki/JavaScript", :target => "_blank"} JavaScript
+          enabled to use this site.
+    / start: Content
+    #content.span11
+      .row-fluid.sortable
+        .box.span12
+          .box-header.well{"data-original-title" => ""}
+            %h2
+              %i.halflings-icon.picture
+              = succeed "File" do
+                %span.break
+              Manager
+            .box-icon
+              %a.btn-setting{:href => "#"}
+                %i.halflings-icon.wrench
+              %a.btn-minimize{:href => "#"}
+                %i.halflings-icon.chevron-up
+              %a.btn-close{:href => "#"}
+                %i.halflings-icon.remove
+          .box-content
+            .alert.alert-info
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              %i.halflings-icon.info-sign
+              As its a demo, you currently have read-only permission, in your server you may do everything like, upload or delete. It will work on a server only.
+            .file-manager
+        / /span
+      / /row
+      / end: Content
+    / /#content.span10
+  / /fluid-row
+  #myModal.modal.hide.fade
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Settings
+    .modal-body
+      %p Here settings can be configured...
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+      %a.btn.btn-primary{:href => "#"} Save changes
