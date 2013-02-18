@@ -6,8 +6,8 @@ defaults:
   #Add the google client key and google client secret
 
 development:
-  twitter_consumer_key: 'DvKPMhMiYc9NxZqrGqbhig'
-  twitter_consumer_secret: '43TvbVUQBfhUtZt6M36nc8HbLsxqbi013SRnZM2HA4'
+  twitter_consumer_key: pjUQYrlYCkPhCVgcCCLMIQ
+  twitter_consumer_secret: WOdUR2aeqS5fUuQ0yG1wzu8jkg7EtwkamZMvNJg
   facebook_app_key: '640917622601161'
   facebook_app_secret: 'b62d17627f5e3be802e007792d7fafef'
   google_client_id: '951432870594.apps.googleusercontent.com'

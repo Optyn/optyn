@@ -3,11 +3,12 @@ Optyn::Application.routes.draw do
   root to: 'main#index'
   
   devise_for :users, :path_names  => { :sign_out => 'logout',
-                                        :sign_in  => 'login',
-                                        :sign_up  => 'register' 
-                                      }
+    :sign_in  => 'login',
+    :sign_up  => 'register' 
+  }
+                      # controllers: {omniauth_callbacks: "omniauth_clients"}                
 
-  devise_scope :user do
+                      devise_scope :user do
     # Sessions
     post '/login'         => 'devise/sessions#create',       :as => :user_session
     get  '/login'         => 'devise/sessions#new',          :as => :new_user_session
@@ -27,7 +28,8 @@ Optyn::Application.routes.draw do
     delete '/account'     => 'devise/registrations#destroy'
   end
 
-  match 'auth/:provider/callback', to: 'omniauth_clients#create'
+  match '/auth/:provider/callback', to: 'omniauth_clients#create'
+  match '/auth/failure' => 'omniauth_clients#failure'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -86,7 +88,43 @@ Optyn::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  #TODO REMOVE THE BELOW ONCE THESE STATIC PAGES ARE NOT NEEDED
-  mount FrontEndStaticPage::Engine, :at => "front-end-static-pages"
-  mount BackEndStaticPage::Engine, :at => "back-end-static-pages"
+  namespace "front_end_static_page" do |front|
+    resources :samples do
+      collection do
+        get 'aboutus'
+        get 'blog'
+        get 'blog_post'
+        get 'coming_soon'
+        get 'faq'
+        get 'features'
+        get 'portfolio'
+        get 'pricing'
+        get 'reset'
+        get 'signin'
+        get 'signup'
+      end
+    end
+  end
+
+  namespace "back_end_static_page" do |back|
+    resources :samples do
+      collection do
+        get "calendar"
+        get "chart"
+        get "file_manager"
+        get "form"
+        get "gallery"
+        get "icon"
+        get "infrastructure"
+        get "login"
+        get "messages"
+        get "submenu"
+        get "table"
+        get "tasks"
+        get "typography"
+        get "ui"
+        get "widgets"
+      end
+    end
+  end
 end
