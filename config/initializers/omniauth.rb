@@ -7,7 +7,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, SiteConfig.google_client_id, SiteConfig.google_client_secret
 
   #401 unauthorised error
-  # OmniAuth.config.on_failure = Proc.new { |env|
-  #     OmniAuth::FailureEndpoint.new(env).redirect_to_failure
-  # }
+  OmniAuth.config.on_failure = Proc.new { |env|
+      OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+  }
 end
