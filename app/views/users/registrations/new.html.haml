@@ -5,16 +5,9 @@
         %div  
           .head
             %h4 Create your account
-          .social
-            = link_to("<span class='face_icon'>#{image_tag("twitter_icon.png")}</span>".html_safe, "/auth/twitter", class: "face_login")
-            = link_to("<span class='face_icon'>#{image_tag("facebook_icon.png")}</span>".html_safe, "/auth/facebook", class: "face_login")
-            = link_to("<span class='face_icon'>#{image_tag("google_icon.png")}</span>".html_safe, "/auth/google_oauth2", class: "face_login")
+            
+          = render partial: "users/shared/social_login_buttons"
 
-            .division
-              %hr{class: "left"}
-              %span
-                or
-              %hr{class: "right"}
           .form  
             = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
               = devise_error_messages!

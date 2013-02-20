@@ -5,17 +5,8 @@
         %div
           .head
             %h4 Log in to your account
-
-          .social
-            = link_to("<span class='face_icon'>#{image_tag("twitter_icon.png")}</span>".html_safe, "/auth/twitter", class: "face_login")
-            = link_to("<span class='face_icon'>#{image_tag("facebook_icon.png")}</span>".html_safe, "/auth/facebook", class: "face_login")
-            = link_to("<span class='face_icon'>#{image_tag("google_icon.png")}</span>".html_safe, "/auth/google_oauth2", class: "face_login")  
-
-          .division
-            %hr{class: "left"}
-            %span
-              or
-            %hr{class: "right"}
+          
+          = render partial: "users/shared/social_login_buttons"   
 
         .form
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
