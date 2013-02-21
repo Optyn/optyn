@@ -1,6 +1,9 @@
 defaults:
   template_engine_username: 'admin'
   template_engine_password: 'test123'
+  resque_auth_password: '9p5yn123'
+  app_host: 'optyn.com'
+
   #Add the twitter consumer key and twitter consumer secret
   #Add the facebook app key and facebook app secret
   #Add the google client key and google client secret
@@ -12,3 +15,4 @@ development:
   facebook_app_secret: 'f2dd8beb43c9c952d5b45a31534e56ba'
   google_client_id: '951432870594.apps.googleusercontent.com'
   google_client_secret: 'sR-X_aq5jf3QGNvBkZlPIADz'
+  app_host: "localhost:3000"

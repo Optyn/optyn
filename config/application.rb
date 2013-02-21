@@ -72,3 +72,4 @@ module Optyn
   end
 
 end
+require 'devise'

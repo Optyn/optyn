@@ -31,6 +31,9 @@ Optyn::Application.routes.draw do
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
 
+  #Mount resque :)
+  mount Resque::Server, :at => "/resque"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

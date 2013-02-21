@@ -14,12 +14,12 @@ gem 'google-analytics-rails'
 gem 'unicorn'
 gem 'haml'
 gem 'devise'
-# gem 'devise-async'
+gem 'devise-async'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-# gem 'resque'
+gem 'resque', :require => 'resque/server'
 
 # Gems used only for assets and not required
 # in production environments by default.
