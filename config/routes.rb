@@ -3,6 +3,8 @@ Optyn::Application.routes.draw do
   devise_for :merchants
 
   root to: 'main#index'
+  # Static Pages created by Alen
+  match 'comingsoon' => 'main#comingsoon'
   
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',
