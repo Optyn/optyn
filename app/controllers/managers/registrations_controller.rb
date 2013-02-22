@@ -21,7 +21,7 @@ class Managers::RegistrationsController < Devise::RegistrationsController
         render 'new'
       end
     else
-      @manager.valid?
+      #@manager.valid?
       render 'new'
     end
   end
