@@ -9,6 +9,6 @@
 
       = link_to("<strong>optyn</strong>".html_safe, root_path, class: "brand scroller")
       = link_to("<strong> Merchant Login</strong>".html_safe, new_merchant_session_path, class: "pull-right") if !user_present?
-      = link_to("<strong>Consumer Login  |</strong>".html_safe, new_user_session_path, class: "pull-right") if !user_present?
+      = link_to("<strong>Consumer Login</strong>".html_safe, new_user_session_path, class: "pull-right") if !user_present?
       = link_to("<strong> Logout</strong>".html_safe, destroy_user_session_path, class: "pull-right") if user_present?
   / ends navbar
