@@ -11,18 +11,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219094424) do
+ActiveRecord::Schema.define(:version => 20130221125702) do
 
-  create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "addresses", :force => true do |t|
+    t.string   "street_address1"
+    t.string   "street_address2"
+    t.string   "state"
+    t.string   "city"
+    t.integer  "merchant_id"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "authentications", ["uid", "provider"], :name => "index_authentications_on_uid_and_provider", :unique => true
-  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+  create_table "authentications", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "account_type"
+    t.integer  "account_id"
+  end
+
+  create_table "merchants", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "shop_name"
+  end
+
+  add_index "merchants", ["email"], :name => "index_merchants_on_email", :unique => true
+  add_index "merchants", ["reset_password_token"], :name => "index_merchants_on_reset_password_token", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"

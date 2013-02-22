@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :authentications, dependent: :destroy
+	has_many :authentications,:as=>:account, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   def self.from_omniauth(auth)
-  	Authentication.fetch_authentication(auth.provider, auth.uid).user rescue create_from_omniauth(auth)
+  	Authentication.fetch_authentication(auth.provider, auth.uid,"User").account rescue create_from_omniauth(auth)
   end
   
   def self.create_from_omniauth(auth)
@@ -24,9 +24,9 @@ class User < ActiveRecord::Base
 
   		provider = auth.provider
   		uid      = auth.uid
-  		authentication = Authentication.fetch_authentication(provider, uid)
+  		authentication = Authentication.fetch_authentication(provider, uid,"User")
   		if authentication.blank?
-  			authentication = user.authentications.create(uid: auth['uid'], provider: auth['provider'])
+  			authentication = user.authentications.new(uid: auth['uid'], provider: auth['provider'])
   		end
   	end
 

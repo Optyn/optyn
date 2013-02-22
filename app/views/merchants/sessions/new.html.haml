@@ -6,9 +6,9 @@
           .head
             %h4 Log in to your account
           
-          = render partial: "users/shared/social_login_buttons"  
-          = session[:merchant]=nil
-          = session[:user]=true
+          = render partial: "merchants/shared/social_login_buttons"  
+          = session[:merchant]=true
+          = session[:user]=nil 
 
         .form
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|

@@ -1,5 +1,7 @@
 Optyn::Application.routes.draw do
 
+  devise_for :merchants
+
   root to: 'main#index'
   
   devise_for :users, :path_names  => { :sign_out => 'logout',
@@ -8,7 +10,7 @@ Optyn::Application.routes.draw do
   }
                       # controllers: {omniauth_callbacks: "omniauth_clients"}                
 
-                      devise_scope :user do
+  devise_scope :user do
     # Sessions
     post '/login'         => 'devise/sessions#create',       :as => :user_session
     get  '/login'         => 'devise/sessions#new',          :as => :new_user_session
