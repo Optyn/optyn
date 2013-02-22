@@ -22,7 +22,6 @@
             
           %li
             = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_present?
-          %li
-            = link_to("Logout", destroy_merchant_session_path, class: "btn-header") if user_present?  
+     
 
 / ends navbar

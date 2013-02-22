@@ -1,8 +1,7 @@
 Optyn::Application.routes.draw do
 
-  devise_for :merchants
-
   root to: 'main#index'
+
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
   
@@ -31,7 +30,7 @@ Optyn::Application.routes.draw do
     put    '/account'     => 'devise/registrations#update'
     delete '/account'     => 'devise/registrations#destroy'
   end
-
+  devise_for :merchants
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
 
