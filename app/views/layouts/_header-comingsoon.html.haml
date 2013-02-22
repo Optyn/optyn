@@ -16,12 +16,16 @@
             %a.btn-header{:href => "contact"} Contact
           %li
             =link_to("Consumer Login", new_user_session_path, class: "btn-header") if !user_present?
-            
+
           %li
-            = link_to("Merchant Login", new_merchant_session_path, class: "btn-header") if !user_present?
-            
+            = link_to("Merchant Login", new_manager_session_path, class: "btn-header") if !user_present?
           %li
-            = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_present?
-     
+            = link_to("Add Manager", "#", class: "btn-header") if manager_signed_in?
+          
+          %li
+            = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_signed_in?
+          %li
+            = link_to("Logout", destroy_user_session_path, class: "btn-header") if manager_signed_in?
+      
 
 / ends navbar

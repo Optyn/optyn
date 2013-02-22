@@ -1,5 +1,7 @@
 Optyn::Application.routes.draw do
 
+  devise_for :managers,:controllers=> {:registrations=>'managers/registrations',:sessions=>'managers/sessions',:passwords=>'managers/passwords'}
+
   root to: 'main#index'
 
   # Static Pages created by Alen
@@ -8,29 +10,29 @@ Optyn::Application.routes.draw do
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',
     :sign_up  => 'register' 
-  }
+  },:controllers=> {:registrations=>'users/registrations',:sessions=>'users/sessions',:passwords=>'users/passwords'}
                       # controllers: {omniauth_callbacks: "omniauth_clients"}                
 
   devise_scope :user do
     # Sessions
-    post '/login'         => 'devise/sessions#create',       :as => :user_session
-    get  '/login'         => 'devise/sessions#new',          :as => :new_user_session
+    post '/login'         => 'users/sessions#create',       :as => :user_session
+    get  '/login'         => 'users/sessions#new',          :as => :new_user_session
     get  '/logout'        => 'devise/sessions#destroy',      :as => :destroy_user_session
 
     # Passwords
-    post '/password'      => 'devise/passwords#create',     :as => :user_password
-    put  '/password'      => 'devise/passwords#update'
-    get  '/password/new'  => 'devise/passwords#new',        :as => :new_user_password
-    get  '/password/edit' => 'devise/passwords#edit',       :as => :edit_user_password
+    post '/password'      => 'users/passwords#create',     :as => :user_password
+    put  '/password'      => 'users/passwords#update'
+    get  '/password/new'  => 'users/passwords#new',        :as => :new_user_password
+    get  '/password/edit' => 'users/passwords#edit',       :as => :edit_user_password
 
     # Registrations
-    post   '/register'    => 'devise/registrations#create', :as => :user_registration
-    get    '/register'    => 'devise/registrations#new',    :as => :new_user_registration
-    get    '/account'     => 'devise/registrations#edit',   :as => :edit_user_registration
-    put    '/account'     => 'devise/registrations#update'
-    delete '/account'     => 'devise/registrations#destroy'
+    post   '/register'    => 'users/registrations#create', :as => :user_registration
+    get    '/register'    => 'users/registrations#new',    :as => :new_user_registration
+    get    '/account'     => 'users/registrations#edit',   :as => :edit_user_registration
+    put    '/account'     => 'users/registrations#update'
+    delete '/account'     => 'users/registrations#destroy'
   end
-  devise_for :merchants
+  
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
 

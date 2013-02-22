@@ -1,6 +1,6 @@
 class Authentication < ActiveRecord::Base
 	belongs_to :user
-  ACCOUNT_TYPES = ['User','Merchant']
+  ACCOUNT_TYPES = ['User','Manager']
   belongs_to :account, :polymorphic => true
 
 	attr_accessible :provider, :uid, :account_id ,:account_type
