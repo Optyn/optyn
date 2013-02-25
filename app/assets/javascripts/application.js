@@ -13,5 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require_directory ./stripe
+//= require sign_up
 //= require_self
 //= require_tree .
+
+

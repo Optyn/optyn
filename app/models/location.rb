@@ -4,9 +4,9 @@ class Location < ActiveRecord::Base
   belongs_to :shop
 
   validates :city,:presence=>true
-  validates :shop_id,:presence=>true
+  
   validates :state,:presence=>true
-  validates :longitude,:presence=>true
-  validates :latitude,:presence=>true
+  #validates :longitude,:presence=>true
+  #validates :latitude,:presence=>true
 
 end

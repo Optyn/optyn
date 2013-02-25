@@ -5,24 +5,28 @@ class Managers::RegistrationsController < Devise::RegistrationsController
     session[:manager]=true
     session[:user]=nil
     @shop=Shop.new
-    @manager=@shop.managers.build
+    @shop.managers.build
+    @shop.locations.build
   end
 
   def create 
-    if !Shop.shop_already_exists?(params[:shop_name][:name])
-      @shop=Shop.create_shop(params[:shop_name])
-      @manager=@shop.managers.new(params[:shop_name][:managers_attributes]['0'].merge({:owner=>true}))
-      if @manager.valid? 
-        @manager.save
-        sign_in(@manager)
-        redirect_to root_path
-      else
-        @shop.destroy
-        render 'new'
-      end
+    @shop=Shop.new(get_params(params))
+    if !@shop.shop_already_exists? && @shop.valid? && @shop.save
+      @shop.update_manager
+      sign_in(@shop.managers.first)
+      redirect_to root_path
     else
-      #@manager.valid?
+      @shop.locations.build if @shop.stype=="online"
+      @shop.errors[:base] << "Business with entered details exists already" if @shop.shop_already_exists?
       render 'new'
+    end
+  end
+
+  def get_params(params)
+    if params[:shop_name][:stype]=='online'
+      params[:shop_name].select {|k,v| k != "locations_attributes"}
+    else
+      params[:shop_name]
     end
   end
 

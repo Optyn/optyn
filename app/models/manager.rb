@@ -1,18 +1,18 @@
 class Manager < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
+  # :token_authenticatable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :async, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable,:confirmable
   
   has_many :authentications,:as=>:account, dependent: :destroy
   has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
   
-  validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
+  #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
   
-  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner
+  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at
   
   def self.from_omniauth(auth)
     Authentication.fetch_authentication(auth.provider, auth.uid,"Manager").account rescue create_from_omniauth(auth)

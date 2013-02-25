@@ -1,20 +1,28 @@
 class Shop < ActiveRecord::Base
   SHOP_TYPES=['local','online']
-  attr_accessible :name,:stype,:managers_attributes
+  attr_accessible :name,:stype,:managers_attributes,:locations_attributes
 
   validates :name,:presence=>true
   validates :stype, :presence => true, :inclusion => { :in => SHOP_TYPES , :message => "is Invalid" }
 
   has_many :managers
-  accepts_nested_attributes_for :managers
-
   has_many :locations
+  accepts_nested_attributes_for :managers
+  accepts_nested_attributes_for :locations 
 
-  def self.shop_already_exists?(shop_name)
-    Shop.where("name LIKE ?",shop_name).count != 0
+
+
+  def shop_already_exists?
+    Shop.where("name LIKE ?",self.name).count != 0
   end
   
   def self.create_shop(params)
     Shop.create(:name=>params[:name],:stype=>params[:stype])
   end
+
+  def update_manager
+    self.managers.first.update_attributes(:owner=>true)
+  end
+
+
 end

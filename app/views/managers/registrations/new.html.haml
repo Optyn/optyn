@@ -10,23 +10,40 @@
 
           .form  
             = form_for(@shop, :as => 'shop_name', :url => manager_registration_path(resource)) do |f|
+              .errors
+                - if @shop.errors.any?
+                  %ul
+                  - @shop.errors.full_messages.each do |error|
+                    %li
+                      = error
 
-              = devise_error_messages!
+              
+              %br 
 
               %br
               %label.pull-left Enter Business Details :
               %br
                
               = f.text_field :name,:placeholder => "Business Name"
+
               %label.pull-left Business Type:
-              = f.radio_button :stype,'online',:checked=>true
+              = f.radio_button :stype,'online'
               = "Online"
-              = f.radio_button :stype,'local'
+              = f.radio_button :stype,'local',:checked=>true
               = "Local"
 
-              %br
-              %br
-              %br
+              %hr
+              
+              - if @shop.locations.any?
+                .address 
+                  %label.pull-left Enter Location Details :
+                  = f.fields_for :locations do |address|
+                    = address.text_field :street_address1, :placeholder => "Street Address 1"
+                    = address.text_field :street_address2, :placeholder => "Street Address 2"
+                    = address.text_field :city, :placeholder => "City"
+                    = address.text_field :state, :placeholder => "State"
+
+              
               %label.pull-left Personal Information :
               = f.fields_for :managers do |builder|
                 = builder.text_field :name, :autofocus => true, :placeholder => "Name"
@@ -37,10 +54,11 @@
                 = builder.password_field :password_confirmation, :placeholder => "Confirm Password"
               
               %br  
+
               %div 
                 %em ** All the fields above are required 
               
-              = f.submit "Sign up", :class => "btn"
+              = f.submit "Sign up", :class => "btn signup"
       %p{:class => "already"}
         = link_to "Sign in", new_session_path(resource_name)
         %strong OR

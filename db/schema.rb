@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222104317) do
+ActiveRecord::Schema.define(:version => 20130225070620) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20130222104317) do
     t.string   "street_address2"
     t.string   "state"
     t.string   "city"
-    t.integer  "merchant_id"
+    t.integer  "shop_id"
     t.float    "longitude"
     t.float    "latitude"
     t.datetime "created_at",      :null => false
@@ -51,8 +51,13 @@ ActiveRecord::Schema.define(:version => 20130222104317) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "managers", ["confirmation_token"], :name => "index_managers_on_confirmation_token", :unique => true
   add_index "managers", ["email"], :name => "index_managers_on_email", :unique => true
   add_index "managers", ["reset_password_token"], :name => "index_managers_on_reset_password_token", :unique => true
 
