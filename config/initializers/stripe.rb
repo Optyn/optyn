@@ -1,0 +1,2 @@
+Stripe.api_key=SiteConfig.stripe_api_key
+STRIPE_PUBLIC_KEY=SiteConfig.stripe_public_key

@@ -18,5 +18,7 @@ development:
   linkedin_api_key: 'f5thzgptqhu8'
   linkedin_secret_key: '6ZZACokbw3IJfwRN'
   app_host: "localhost:3000"
+  stripe_api_key: "sk_test_LvqRzhN1kzeKaqQRPsQ9Vug0"
+  stripe_public_key: "pk_test_JpL5IkK8MiKjycqdYsfAQO1c"
 
   
