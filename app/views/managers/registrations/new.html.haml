@@ -35,23 +35,9 @@
               %hr
               
               - if @shop.locations.any?
-                .address 
-                  %label.pull-left Enter Location Details :
-                  = f.fields_for :locations do |address|
-                    = address.text_field :street_address1, :placeholder => "Street Address 1"
-                    = address.text_field :street_address2, :placeholder => "Street Address 2"
-                    = address.text_field :city, :placeholder => "City"
-                    = address.text_field :state, :placeholder => "State"
-
-              
-              %label.pull-left Personal Information :
-              = f.fields_for :managers do |builder|
-                = builder.text_field :name, :autofocus => true, :placeholder => "Name"
-                = builder.text_field :email, :placeholder => "Email"
-
-                = builder.password_field :password, :placeholder => "Password"
-              
-                = builder.password_field :password_confirmation, :placeholder => "Confirm Password"
+                = render partial: "location_form",:locals=>{:f=>f}
+                
+              = render partial: "personal_info_form",:locals=>{:f=>f}  
               
               %br  
 

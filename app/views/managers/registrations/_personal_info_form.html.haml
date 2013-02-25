@@ -1,0 +1,8 @@
+%label.pull-left Personal Information :
+= f.fields_for :managers do |builder|
+  = builder.text_field :name, :autofocus => true, :placeholder => "Name"
+  = builder.text_field :email, :placeholder => "Email"
+
+  = builder.password_field :password, :placeholder => "Password"
+
+  = builder.password_field :password_confirmation, :placeholder => "Confirm Password"
