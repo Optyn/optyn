@@ -21,7 +21,10 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'resque', :require => 'resque/server'
+
+# gems for stripe payment
 gem 'stripe'
+gem 'stripe_event'
 
 # Gems used only for assets and not required
 # in production environments by default.

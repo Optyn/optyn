@@ -39,6 +39,8 @@ Optyn::Application.routes.draw do
   #Mount resque :)
   mount Resque::Server, :at => "/resque"
 
+  #Mount stripe events
+  mount StripeEvent::Engine => '/my-chosen-path'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

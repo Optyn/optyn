@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new
+    super
     session[:manager]=nil
     session[:user]=true
   end
