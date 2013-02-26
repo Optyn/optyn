@@ -8,7 +8,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', :group => :production
 gem 'config_reader', '0.0.8' #ENV specific configuration
 gem 'google-analytics-rails'
 gem 'unicorn'
@@ -25,6 +25,7 @@ gem 'resque', :require => 'resque/server'
 # gems for stripe payment
 gem 'stripe'
 gem 'stripe_event'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -48,6 +49,7 @@ group :development do
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'mysql2'
 end
 
 group :development, :test do

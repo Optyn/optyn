@@ -38,15 +38,17 @@ Optyn::Application.routes.draw do
 mount Resque::Server, :at => "/resque"
 
   #Mount stripe events
+
   mount StripeEvent::Engine => '/my-chosen-path'
 
   namespace "merchants" do |merchant|
     devise_for :managers,:controllers=> {
-                                          :registrations => 'managers/registrations', 
-                                          :sessions => 'managers/sessions',
-                                          :passwords => 'managers/passwords'
+                                          :registrations => 'merchants/managers/registrations', 
+                                          :sessions => 'merchants/managers/sessions',
+                                          :passwords => 'merchants/managers/passwords'
                                         }
   end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

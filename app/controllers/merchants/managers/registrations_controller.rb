@@ -1,4 +1,4 @@
-class Managers::RegistrationsController < Devise::RegistrationsController
+class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
   before_filter :require_manager
   
   def new
@@ -10,8 +10,9 @@ class Managers::RegistrationsController < Devise::RegistrationsController
   end
 
   def create 
-    @shop=Shop.new(get_params(params))
-    if !@shop.shop_already_exists? && @shop.valid? && @shop.save
+    @shop = Shop.new(filter_shop_params)
+    
+    if !@shop.shop_already_exists? && @shop.save
       @shop.update_manager
       sign_in(@shop.managers.first)
       redirect_to root_path
@@ -20,14 +21,16 @@ class Managers::RegistrationsController < Devise::RegistrationsController
       @shop.errors[:base] << "Business with entered details exists already" if @shop.shop_already_exists?
       render 'new'
     end
+
   end
 
-  def get_params(params)
-    if params[:shop_name][:stype]=='online'
-      params[:shop_name].select {|k,v| k != "locations_attributes"}
-    else
-      params[:shop_name]
-    end
+  private
+  def filter_shop_params()
+    if 'online' == params[:shop_name][:stype]
+     return params[:shop_name].except(:locations_attributes) 
+    end 
+
+    params[:shop_name]   
   end
 
 end

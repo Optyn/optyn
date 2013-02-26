@@ -6,7 +6,7 @@
           .head
             %h4 Create your account
             
-          = render partial: "managers/shared/social_login_buttons"
+          = render partial: "merchants/managers/shared/social_login_buttons"
 
           .form  
             = form_for(@shop, :as => 'shop_name', :url => merchants_manager_registration_path(resource)) do |f|
@@ -16,10 +16,8 @@
                   - @shop.errors.full_messages.each do |error|
                     %li
                       = error
-
-              
+          
               %br 
-
               %br
               %label.pull-left Enter Business Details :
               %br

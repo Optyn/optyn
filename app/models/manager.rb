@@ -2,6 +2,7 @@ class Manager < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable,
   # :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :async, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,:confirmable
   

@@ -15,10 +15,6 @@ class Shop < ActiveRecord::Base
   def shop_already_exists?
     Shop.where("name LIKE ?",self.name).count != 0
   end
-  
-  def self.create_shop(params)
-    Shop.create(:name=>params[:name],:stype=>params[:stype])
-  end
 
   def update_manager
     self.managers.first.update_attributes(:owner=>true)
