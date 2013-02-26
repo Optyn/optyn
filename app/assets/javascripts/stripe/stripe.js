@@ -1,5 +1,4 @@
 function stripeResponseHandler(status, response) {
-
     if (response.error) {
         $(".payment-errors").text(response.error.message);
     } 
@@ -14,6 +13,7 @@ function stripeResponseHandler(status, response) {
 $(document).ready(function() {
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
   $("#stripe-form").submit(function(event) {
+
     $('.submit').attr("disabled", "disabled");
 
     Stripe.createToken({

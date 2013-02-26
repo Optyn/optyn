@@ -1,0 +1,22 @@
+.address 
+  .head.pull-left.lead 
+    = "Enter Location Details"
+  .form 
+    .errors
+      - if @location.errors.any?
+        %ul
+          - @location.errors.full_messages.each do |error|
+            %li
+              = error   
+    = form_for @location do |f|
+      %label.pull-left Street Address 1
+      = f.text_field :street_address1
+      %label.pull-left Street Address 2
+      = f.text_field :street_address2
+      %label.pull-left City
+      = f.text_field :city
+      %label.pull-left Zip Code
+      = f.text_field :zip      
+      %label.pull-left State
+      = f.text_field :state
+      = f.submit @location.new_record? ? "Add location" : "Update location"

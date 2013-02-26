@@ -5,8 +5,9 @@ class Shop < ActiveRecord::Base
   validates :name,:presence=>true
   validates :stype, :presence => true, :inclusion => { :in => SHOP_TYPES , :message => "is Invalid" }
 
-  has_many :managers
-  has_many :locations
+  has_one :subscription
+  has_many :managers,dependent: :destroy
+  has_many :locations,dependent: :destroy
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations 
 

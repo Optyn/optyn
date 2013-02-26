@@ -4,6 +4,9 @@ Optyn::Application.routes.draw do
 
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
+
+  get '/upgrade' => 'subscriptions#upgrade'
+  post '/subscribe' => 'subscriptions#subscribe'
   
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',
@@ -33,13 +36,14 @@ Optyn::Application.routes.draw do
   
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
+  match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
+
+  resources :locations
 
   #Mount resque :)
-mount Resque::Server, :at => "/resque"
+  mount Resque::Server, :at => "/resque"
 
-  #Mount stripe events
-
-  mount StripeEvent::Engine => '/my-chosen-path'
+  
 
   namespace "merchants" do |merchant|
     devise_for :managers,:controllers=> {

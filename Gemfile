@@ -24,7 +24,7 @@ gem 'resque', :require => 'resque/server'
 
 # gems for stripe payment
 gem 'stripe'
-gem 'stripe_event'
+
 
 
 # Gems used only for assets and not required

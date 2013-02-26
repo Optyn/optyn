@@ -1,0 +1,29 @@
+#box_sign
+  .container
+    .span12.box_wrapper
+      %table.table
+        %tr 
+          %th #
+          %th Street Address 1
+          %th Street Address 2
+          %th City
+          %th State
+          %th Manage
+
+        - @locations.each_with_index do |location,index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = location.street_address1
+            %td
+              = location.street_address2
+            %td
+              = location.city
+            %td
+              = location.state
+            %td
+              = link_to "Edit",edit_location_path(location)    
+              = "|"
+              = link_to "Remove",location_path(location),:confirm => 'Are you sure?', :method => :delete
+

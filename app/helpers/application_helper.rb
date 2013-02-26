@@ -5,7 +5,8 @@ module ApplicationHelper
   end
 
   def has_locations?
-    !(current_merchants_manager && current_merchants_manager.shop.locations.any?)
+    manager = current_merchants_manager
+    manager && manager.shop.stype=="local" && !manager.shop.locations.any?
   end
 
 end
