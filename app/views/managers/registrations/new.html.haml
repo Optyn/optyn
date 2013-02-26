@@ -9,7 +9,7 @@
           = render partial: "managers/shared/social_login_buttons"
 
           .form  
-            = form_for(@shop, :as => 'shop_name', :url => manager_registration_path(resource)) do |f|
+            = form_for(@shop, :as => 'shop_name', :url => merchants_manager_registration_path(resource)) do |f|
               .errors
                 - if @shop.errors.any?
                   %ul

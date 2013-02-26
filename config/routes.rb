@@ -1,7 +1,5 @@
 Optyn::Application.routes.draw do
 
-  devise_for :managers,:controllers=> {:registrations=>'managers/registrations',:sessions=>'managers/sessions',:passwords=>'managers/passwords'}
-
   root to: 'main#index'
 
   # Static Pages created by Alen
@@ -10,10 +8,10 @@ Optyn::Application.routes.draw do
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',
     :sign_up  => 'register' 
-  },:controllers=> {:registrations=>'users/registrations',:sessions=>'users/sessions',:passwords=>'users/passwords'}
+    },:controllers=> {:registrations=>'users/registrations',:sessions=>'users/sessions',:passwords=>'users/passwords'}
                       # controllers: {omniauth_callbacks: "omniauth_clients"}                
 
-  devise_scope :user do
+                      devise_scope :user do
     # Sessions
     post '/login'         => 'users/sessions#create',       :as => :user_session
     get  '/login'         => 'users/sessions#new',          :as => :new_user_session
@@ -37,10 +35,19 @@ Optyn::Application.routes.draw do
   match '/auth/failure' => 'omniauth_clients#failure'
 
   #Mount resque :)
-  mount Resque::Server, :at => "/resque"
+mount Resque::Server, :at => "/resque"
 
   #Mount stripe events
   mount StripeEvent::Engine => '/my-chosen-path'
+
+  namespace "merchants" do |merchant|
+    devise_for :managers,:controllers=> {
+                                          :registrations => 'managers/registrations', 
+                                          :sessions => 'managers/sessions',
+                                          :passwords => 'managers/passwords'
+                                        }
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
