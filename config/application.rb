@@ -73,3 +73,4 @@ module Optyn
 
 end
 require 'devise'
+require "#{Rails.root}/config/initializers/remove_static_pages"
