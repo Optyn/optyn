@@ -5,6 +5,9 @@ Optyn::Application.routes.draw do
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
 
+  # Blog Redirect
+  match "/blog" => redirect("http://blog.optyn.com")
+
   get '/upgrade' => 'subscriptions#upgrade'
   post '/subscribe' => 'subscriptions#subscribe'
   
