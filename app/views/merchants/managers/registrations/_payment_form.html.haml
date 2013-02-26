@@ -3,7 +3,7 @@
 
 .payment-errors
 
-=form_for @payment ,:id =>"stripe-form"
+=form_tag url @payment ,:id =>"stripe-form"
   = text_field_tag :credit_card, :placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number',:size=>20
   = text_field_tag :cvc, :placeholder => "CVC",:class=>'credit-security',:size=>4
   = select_month(Date.today, :class => "card-expiry-month")

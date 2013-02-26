@@ -1,24 +1,10 @@
 class OmniauthClientsController < ApplicationController
+
 	def create
 		# raise env['omniauth.auth'].to_yaml
 		omniauth = env['omniauth.auth']
-		user =User.from_omniauth(omniauth) if session[:user].present?
-		manager= Manager.from_omniauth(omniauth) if session[:manager].present?
-		if (user && user.persisted?) || (manager || manager.persisted?)
-			flash.notice = "Signed in!"
-			if session[:user].present?
-				sign_in_and_redirect user
-			else
-				
-				sign_in_and_redirect manager
-			end
-		else
-			session["devise.user_attributes"] = user.attributes if user
-			session["devise.manager_attributes"] = manager.attributes if manager
-			redirect_to new_user_registration_path if user
-			redirect_to new_merchants_manager_registration_path if manager
-
-		end
+		session[:user].present? ? create_user(omniauth) : create_manager(omniauth)
+		
 	end
 
 	def failure
@@ -28,4 +14,33 @@ class OmniauthClientsController < ApplicationController
 			redirect_to new_user_session_path, :flash => { :error => "Operation Cancelled" }
 		end
 	end
+
+	private
+
+	def create_manager(omniauth)
+		manager= Manager.from_omniauth(omniauth)
+
+		if manager || manager.persisted?
+			flash.notice = "Signed in!"
+			sign_in_and_redirect manager
+		else
+			session["devise.manager_attributes"] = manager.attributes
+			redirect_to new_merchants_manager_registration_path
+		end
+
+	end
+
+	def create_user(omniauth)
+		user =User.from_omniauth(omniauth)
+
+		if user && user.persisted?
+			flash.notice = "Signed in!"
+			sign_in_and_redirect user
+		else
+			session["devise.user_attributes"] = user.attributes
+			redirect_to new_user_registration_path
+		end
+
+	end
+
 end

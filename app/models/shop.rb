@@ -20,5 +20,9 @@ class Shop < ActiveRecord::Base
     self.managers.first.update_attributes(:owner=>true)
   end
 
+  def get_shop_owner
+    self.managers.where(:owner=>true).first
+  end
+
 
 end
