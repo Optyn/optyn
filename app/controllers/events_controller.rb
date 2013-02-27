@@ -12,6 +12,12 @@ class EventsController < ApplicationController
       StripeEventHandlers.handle_customer_subscription_created(params)
     when 'customer.subscription.deleted'
       StripeEventHandlers.handle_customer_subscription_deleted(params)
+    when 'plan.created'
+      StripeEventHandlers.handle_plan_created(params)
+    when 'plan.updated'
+      StripeEventHandlers.handle_plan_updated(params)
+    when 'plan.deleted'
+      StripeEventHandlers.handle_plan_deleted(params)
     else
 
     end

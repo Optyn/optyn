@@ -1,4 +1,5 @@
 class Shop < ActiveRecord::Base
+  
   SHOP_TYPES=['local','online']
   attr_accessible :name,:stype,:managers_attributes,:locations_attributes
 
@@ -8,9 +9,9 @@ class Shop < ActiveRecord::Base
   has_one :subscription
   has_many :managers,dependent: :destroy
   has_many :locations,dependent: :destroy
+
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations 
-
 
 
   def shop_already_exists?
@@ -25,5 +26,8 @@ class Shop < ActiveRecord::Base
     self.managers.where(:owner=>true).first
   end
 
+  def is_subscription_active?
+    self.stype == 'local' && self.subscription && self.subscription.active?
+  end
 
 end

@@ -13,7 +13,7 @@ class SubscriptionsController < ApplicationController
       @subscription.stripe_customer_token=customer.id
       @subscription.save
     rescue Exception => e
-      @subscription.errors.add :base, "There was a problem with your credit card."
+      self.stripe_error = e.to_s
       render 'upgrade'
     end
 

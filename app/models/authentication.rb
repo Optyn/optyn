@@ -1,6 +1,8 @@
 class Authentication < ActiveRecord::Base
+
+	ACCOUNT_TYPES = ['User','Manager']
+	
 	belongs_to :user
-  ACCOUNT_TYPES = ['User','Manager']
   belongs_to :account, :polymorphic => true
 
 	attr_accessible :provider, :uid, :account_id ,:account_type
@@ -13,4 +15,5 @@ class Authentication < ActiveRecord::Base
 	def self.fetch_authentication(provider, uid,account_type=nil)
 		by_provider_and_uid(provider, uid,account_type).first
 	end
+
 end
