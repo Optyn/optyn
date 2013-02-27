@@ -1,20 +1,21 @@
 function stripeResponseHandler(status, response) {
-    if (response.error) {
-        $(".payment-errors").text(response.error.message);
-    } 
-    else {
-        var form$ = $("#stripe-form");
-        var token = response['id'];
-        form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-        form$.get(0).submit();
-    }
+  if (response.error) {
+      $(".payment-errors").text(response.error.message);
+  } 
+  else {
+      var form$ = $("#stripe-form");
+      var token = response['id'];
+      form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+      form$.get(0).submit();
+  }
 }
 
 $(document).ready(function() {
-  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
-  $("#stripe-form").submit(function(event) {
 
-    $('.submit').attr("disabled", "disabled");
+  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+
+  $("#stripe-form").submit(function(event) {
+    $('.signup-button').attr("disabled", "disabled");
 
     Stripe.createToken({
         number: $('.credit-number').val(),
@@ -23,7 +24,7 @@ $(document).ready(function() {
         exp_year: $('.card-expiry-year').val()
     }, stripeResponseHandler);
 
-    // prevent the form from submitting with the default action
     return false;
   });
+
 });

@@ -15,6 +15,7 @@ class SubscriptionsController < ApplicationController
       @subscription.stripe_customer_token=customer.id
 
       if @subscription.save
+        MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email)).deliver
         flash[:notice]="Payment done successfully"
         redirect_to root_path
       else
