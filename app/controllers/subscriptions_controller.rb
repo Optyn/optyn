@@ -8,11 +8,10 @@ class SubscriptionsController < ApplicationController
 
   def subscribe
     begin
+      @subscription=Subscription.new(params[:subscription])
       customer = Subscription.create_stripe_customer(params)
-      subscription_params={:stripe_customer_token=>customer.id,:shop_id=>current_merchants_manager.shop.id}
-      @subscription=Subscription.new(params[:subscription].merge(subscription_params))
+      @subscription.stripe_customer_token=customer.id
       @subscription.save
-
     rescue Exception => e
       @subscription.errors.add :base, "There was a problem with your credit card."
       render 'upgrade'

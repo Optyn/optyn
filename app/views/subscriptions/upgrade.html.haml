@@ -17,6 +17,7 @@
               = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
               = f.hidden_field :plan_id, :value => @plan.id
               = f.hidden_field :email, :value => current_merchants_manager.email
+              = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
 
               = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left'
 
