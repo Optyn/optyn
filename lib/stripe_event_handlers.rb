@@ -28,4 +28,33 @@ module StripeEventHandlers
     
   end
 
+  def self.handle_plan_deleted(params)
+    @plan=Plan.find_by_plan_id(params['data']['object']['id'])
+    @plan.destroy
+  end
+  
+  def self.handle_plan_created(params)
+    begin
+      @plan = Stripe::Plan.retrieve(params['data']['object']['id'])
+      Plan.create(:plan_id => @plan.id,
+            :name => @plan.name,
+            :interval => @plan.interval,
+            :amount => @plan.amount,
+            :currency=>@plan.currency)   
+
+    rescue => e
+  
+    end
+  end
+
+  def self.handle_plan_updated(params)
+    @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
+    @plan=Plan.find_by_plan_id(params['data']['object']['id'])
+    @plan.update_attributes(:plan_id => @stripe_plan.id,
+            :name => @stripe_plan.name,
+            :interval => @stripe_plan.interval,
+            :amount => @stripe_plan.amount,
+            :currency=>@stripe_plan.currency) 
+  end
+
 end

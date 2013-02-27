@@ -2,7 +2,7 @@
 %center.notice.lead
   = 'Please add locations for your Business' if has_locations?
 .pull-right
-  = link_to "Account Page |", upgrade_path
+  = link_to "Account Page |", upgrade_path if !is_shop_local_and_active?
   = link_to "Add location", new_location_path
 
 #comingsoon.comingsoon_page

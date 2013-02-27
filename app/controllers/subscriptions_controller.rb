@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_filter :require_manager
+  before_filter :require_shop_local_and_inactive
   
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
@@ -13,7 +14,7 @@ class SubscriptionsController < ApplicationController
       @subscription.stripe_customer_token=customer.id
       @subscription.save
     rescue Exception => e
-      @subscription.errors.add :base, "There was a problem with your credit card."
+      self.stripe_error = e.to_s
       render 'upgrade'
     end
 

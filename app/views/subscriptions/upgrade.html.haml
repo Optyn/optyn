@@ -6,7 +6,8 @@
         %div 
           .head Enter Payment Information 
           .payment-errors
-            - if @subscription.errors.any?
+            - if @subscription.errors.any? || @subscription.stripe_error
+              =@subscription.stripe_error
               %ul
                 - @subscription.errors.full_messages.each do |error|
                   %li
@@ -14,10 +15,12 @@
 
           .form
             = form_for @subscription, :url => subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
-              = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
+
               = f.hidden_field :plan_id, :value => @plan.id
               = f.hidden_field :email, :value => current_merchants_manager.email
               = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
+
+              = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
 
               = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left'
 
