@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_filter :require_manager
+  before_filter :require_shop_local_and_inactive
   
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
