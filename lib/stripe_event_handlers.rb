@@ -4,6 +4,7 @@ module StripeEventHandlers
     begin
       @subscription=Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
       @subscription.update_attributes(:active => true)
+      MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email))
     rescue => e
       # Something else happened, completely unrelated to Stripe
     end
