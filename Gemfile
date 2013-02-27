@@ -8,7 +8,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', :group => :production
 gem 'config_reader', '0.0.8' #ENV specific configuration
 gem 'google-analytics-rails'
 gem 'unicorn'
@@ -48,6 +48,7 @@ group :development do
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'mysql2'
 end
 
 group :development, :test do

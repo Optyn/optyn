@@ -20,12 +20,14 @@ class OmniauthClientsController < ApplicationController
 	def create_manager(omniauth)
 		manager= Manager.from_omniauth(omniauth)
 		
-		if manager.persisted?
+		if manager.new_record?
+			@shop=Shop.new
+			@shop.managers.build(:name => manager.name, :email => manager.email)
+			@omniauth=omniauth
+			render :template => "merchants/managers/registrations/new"
+		else
 			flash.notice = "Signed in!"
 			sign_in_and_redirect manager
-		else
-			session["devise.manager_attributes"] = manager.attributes
-			redirect_to new_merchants_manager_registration_path
 		end
 
 	end

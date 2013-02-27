@@ -15,26 +15,28 @@ class Manager < ActiveRecord::Base
   
   attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at
   
+
   def self.from_omniauth(auth)
     Authentication.fetch_authentication(auth.provider, auth.uid,"Manager").account rescue create_from_omniauth(auth)
   end
   
   def self.create_from_omniauth(auth)
-    manager = nil
-    Manager.transaction do
-      email = auth.info.email.to_s
 
-      manager = Manager.find_by_email(email) || Manager.new(name: auth.info.name, email: email)
-      manager.save(validate: false)
+    email = auth.info.email.to_s
+    manager = Manager.find_by_email(email) 
 
-      provider = auth.provider
-      uid      = auth.uid
-      authentication = Authentication.fetch_authentication(provider, uid,"Manager")
-      if authentication.blank?
-        authentication = manager.authentications.create(uid: auth['uid'], provider: auth['provider'])
-      end
+    if !manager
+      manager = Manager.new(name: auth.info.name, email: email) 
+      manager
+    else
+      authentication = manager.authentications.create(uid: auth['uid'], provider: auth['provider'])
+      manager
     end
-    manager
+    
+  end
+
+  def create_authentication(uid,provider)
+    self.authentications.create(uid: uid, provider: provider)
   end
 
   def password_required?

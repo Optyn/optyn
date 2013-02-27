@@ -9,4 +9,5 @@ module ApplicationHelper
     manager && manager.shop.stype=="local" && !manager.shop.locations.any?
   end
 
+
 end

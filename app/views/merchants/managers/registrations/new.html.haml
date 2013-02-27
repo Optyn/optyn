@@ -6,11 +6,13 @@
           .head
             %h4 Create your account
             
-          = render partial: "merchants/managers/shared/social_login_buttons"
+          = render partial: "merchants/managers/shared/social_login_buttons" if !@omniauth.present?
 
           .form  
-            = form_for(@shop, :as => 'shop_name', :url => merchants_manager_registration_path(resource)) do |f|
+            = form_for(@shop, :as => 'shop_name', :url => merchants_manager_registration_path(@shop)) do |f|
               .errors
+                - if @omniauth.present?
+                  = "You are just one step from creating your account, just provide following details"
                 - if @shop.errors.any?
                   %ul
                   - @shop.errors.full_messages.each do |error|
@@ -22,7 +24,7 @@
               %label.pull-left Enter Business Details :
               %br
                
-              = f.text_field :name,:placeholder => "Business Name"
+              = f.text_field :name,:autofocus => true,:placeholder => "Business Name"
 
               %label.pull-left Business Type:
               = f.radio_button :stype,'online'
@@ -32,7 +34,7 @@
 
               %hr
                 
-              = render partial: "personal_info_form",:locals=>{:f=>f}  
+              = render partial: "merchants/managers/registrations/personal_info_form",:locals=>{:f => f}  
               
               %br  
 
@@ -41,6 +43,7 @@
               
               = f.submit "Sign up", :class => "btn signup"
       %p{:class => "already"}
-        = link_to "Sign in", new_session_path(resource_name)
+        = link_to "Sign in", new_session_path(:merchants_manager)
+
         %strong OR
-        = link_to "Forgot your password?", new_password_path(resource_name)
+        = link_to "Forgot your password?", new_password_path(:merchants_manager)
