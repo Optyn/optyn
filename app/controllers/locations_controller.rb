@@ -29,6 +29,7 @@ class LocationsController < ApplicationController
   def update 
     @location=@shop.locations.find(params[:id])
     if @location.update_attributes(params[:location])
+      flash[:notice]="Location updated successfully"
       redirect_to locations_path
     else
       render 'edit'
@@ -38,6 +39,7 @@ class LocationsController < ApplicationController
   def destroy
     @location=@shop.locations.find(params[:id])
     @location.destroy
+    flash[:notice]="Location removed successfully"
     redirect_to root_path
   end
 

@@ -14,5 +14,9 @@
     %a.scrolltop{:href => "#"}
       %span up
     = render partial: "layouts/header_comingsoon"
+
+    %center.lead
+      = flash[:notice] if flash[:notice].present?
+
     #container.container
       = yield

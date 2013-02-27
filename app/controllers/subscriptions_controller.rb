@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  
   before_filter :require_manager
   before_filter :require_shop_local_and_inactive
   
@@ -12,6 +13,7 @@ class SubscriptionsController < ApplicationController
       @subscription=Subscription.new(params[:subscription])
       customer = Subscription.create_stripe_customer(params)
       @subscription.stripe_customer_token=customer.id
+
       if @subscription.save
         MerchantMailer.payment_notification(@subscription.managers.first)
         flash[:notice]="Payment done successfully"
@@ -19,6 +21,7 @@ class SubscriptionsController < ApplicationController
       else
         render 'upgrade'
       end
+
     rescue Exception => e
       @subscription.stripe_error = e.to_s
       render 'upgrade'
