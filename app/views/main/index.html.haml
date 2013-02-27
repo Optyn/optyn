@@ -2,8 +2,8 @@
 %center.notice.lead
   = 'Please add locations for your Business' if has_locations?
 .pull-right
-  = link_to "Account Page |", upgrade_path if !is_shop_local_and_active?
-  = link_to "Add location", new_location_path
+  = link_to "Account Page |", upgrade_path if merchants_manager_signed_in? && !is_shop_local_and_active?
+  = link_to "Add location", new_location_path if merchants_manager_signed_in?
 
 #comingsoon.comingsoon_page
   .container

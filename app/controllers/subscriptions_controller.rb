@@ -12,14 +12,18 @@ class SubscriptionsController < ApplicationController
       @subscription=Subscription.new(params[:subscription])
       customer = Subscription.create_stripe_customer(params)
       @subscription.stripe_customer_token=customer.id
-      @subscription.save
+      if @subscription.save
+        MerchantMailer.payment_notification(@subscription.managers.first)
+        flash[:notice]="Payment done successfully"
+        redirect_to root_path
+      else
+        render 'upgrade'
+      end
     rescue Exception => e
-      self.stripe_error = e.to_s
+      @subscription.stripe_error = e.to_s
       render 'upgrade'
     end
 
-    flash[:notice]="Payment done successfully"
-    redirect_to root_path
   end
 
 end

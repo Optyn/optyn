@@ -52,7 +52,8 @@ Optyn::Application.routes.draw do
     devise_for :managers,:controllers=> {
                                           :registrations => 'merchants/managers/registrations', 
                                           :sessions => 'merchants/managers/sessions',
-                                          :passwords => 'merchants/managers/passwords'
+                                          :passwords => 'merchants/managers/passwords',
+                                          :confirmations => 'merchants/managers/confirmations'
                                         }
   end
 

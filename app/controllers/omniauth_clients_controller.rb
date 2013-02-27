@@ -19,8 +19,8 @@ class OmniauthClientsController < ApplicationController
 
 	def create_manager(omniauth)
 		manager= Manager.from_omniauth(omniauth)
-
-		if manager || manager.persisted?
+		
+		if manager.persisted?
 			flash.notice = "Signed in!"
 			sign_in_and_redirect manager
 		else
@@ -33,7 +33,7 @@ class OmniauthClientsController < ApplicationController
 	def create_user(omniauth)
 		user =User.from_omniauth(omniauth)
 
-		if user && user.persisted?
+		if user.persisted?
 			flash.notice = "Signed in!"
 			sign_in_and_redirect user
 		else
