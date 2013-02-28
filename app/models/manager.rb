@@ -11,6 +11,7 @@ class Manager < ActiveRecord::Base
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
   
+  validates :name, :presence => true
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
   
   attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at

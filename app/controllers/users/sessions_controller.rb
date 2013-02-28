@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  before_filter :require_consumer
+  before_filter :require_no_consumer
 
   def create
     super

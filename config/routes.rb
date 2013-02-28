@@ -8,6 +8,8 @@ Optyn::Application.routes.draw do
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
 
+  get "/new_zip_code" => "users/consumers#new_zip_code"
+  put "/add_zip_code" => "users/consumers#add_zip_code"
   get '/upgrade' => 'subscriptions#upgrade'
   post '/subscribe' => 'subscriptions#subscribe'
   
@@ -36,6 +38,8 @@ Optyn::Application.routes.draw do
     put    '/account'     => 'users/registrations#update'
     delete '/account'     => 'users/registrations#destroy'
   end
+
+
   
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
@@ -49,12 +53,19 @@ Optyn::Application.routes.draw do
   
 
   namespace "merchants" do |merchant|
+
+    get "show_managers" => "merchant_managers#show_managers"
+
     devise_for :managers,:controllers=> {
                                           :registrations => 'merchants/managers/registrations', 
                                           :sessions => 'merchants/managers/sessions',
                                           :passwords => 'merchants/managers/passwords',
                                           :confirmations => 'merchants/managers/confirmations'
-                                        }
+                                        } do 
+                                          get '/add_manager' => 'managers/registrations#add_manager'
+                                          post '/create_new_manager' => 'managers/registrations#create_new_manager'
+    end
+
   end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130226112145) do
+ActiveRecord::Schema.define(:version => 20130228085122) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(:version => 20130226112145) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "office_zip_code"
+    t.string   "home_zip_code"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

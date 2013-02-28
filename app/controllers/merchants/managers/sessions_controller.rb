@@ -1,5 +1,5 @@
 class Merchants::Managers::SessionsController < Devise::SessionsController
-  before_filter :require_manager
+  before_filter :require_no_manager
   
   def new
     super

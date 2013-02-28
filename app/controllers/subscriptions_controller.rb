@@ -5,6 +5,7 @@ class SubscriptionsController < ApplicationController
   
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
+    #@stripe_plan_ids = Plan.all.collect(&:plan_id)
     @subscription=@plan.subscriptions.build
   end
 

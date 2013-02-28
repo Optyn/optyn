@@ -10,11 +10,15 @@
 
           .form  
             = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-              = devise_error_messages!
+              =# devise_error_messages!
 
               = f.text_field :name, :autofocus => true, :placeholder => "Name"
 
               = f.text_field :email, :placeholder => "Email"
+
+              = f.text_field :home_zip_code, :placeholder => "Zip Code (Home)"
+
+              = f.text_field :office_zip_code, :placeholder => "Zip Code (Office)"
 
               = f.password_field :password, :placeholder => "Password"
               

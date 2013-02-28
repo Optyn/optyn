@@ -1,0 +1,21 @@
+#box_sign
+  .container
+    .span12.box_wrapper
+      %table.table
+        %tr 
+          %th #
+          %th Name
+          %th Email 
+
+          
+
+        - @managers.each_with_index do |manager,index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = manager.name
+            %td
+              = manager.email
+
+

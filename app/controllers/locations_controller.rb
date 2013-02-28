@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
+  before_filter :require_manager
   before_filter :load_shop
-  before_filter :require_manager 
+ 
 
   def index
     @locations=@shop.locations

@@ -22,7 +22,7 @@
           %li
             = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header") if !user_present?
           %li
-            = link_to("Add Manager", "#", class: "btn-header") if merchants_manager_signed_in?
+            = link_to("Add Manager", merchants_add_manager_path, class: "btn-header") if merchants_manager_signed_in?
           
           %li
             = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_signed_in?

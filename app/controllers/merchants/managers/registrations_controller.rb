@@ -1,5 +1,5 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
-  before_filter :require_manager
+  before_filter :require_no_manager
   
   def new
     session[:manager]=true
@@ -24,5 +24,23 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     end
 
   end
+
+  def add_manager
+    @shop=current_merchants_manager.shop
+    @manager=current_merchants_manager.children.build
+  end
+
+  def create_new_manager
+    @manager = Manager.new(params[:manager])
+
+    if @manager.save
+      flash[:notice] = "New manager added successfully"
+      redirect_to root_path
+    else
+      @shop=current_merchants_manager.shop
+      render 'add_manager'
+    end
+  end
+
 
 end

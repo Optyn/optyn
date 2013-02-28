@@ -21,6 +21,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'resque', :require => 'resque/server'
+gem 'client_side_validations'
 
 # gems for stripe payment
 gem 'stripe'
