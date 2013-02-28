@@ -12,7 +12,7 @@ class Subscription < ActiveRecord::Base
   validates :shop_id, presence: true
 
   def self.create_stripe_customer(params)
-    Stripe::Customer.create(description: params['subscription']['email'], card: params['stripeToken'],:plan=>params['stripe_plan_id'])
+    Stripe::Customer.create(email: params['subscription']['email'], card: params['stripeToken'],:plan=>params['stripe_plan_id'])
   end
   
 end

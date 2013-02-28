@@ -4,9 +4,8 @@
   = 'Please add locations for your Business' if has_locations?
 .pull-right
   = link_to "Account Page", upgrade_path if merchants_manager_signed_in? && !is_shop_local_and_active?
-
   = "|"
-  = link_to "Add location", new_location_path if merchants_manager_signed_in? && current_merchants_manager.shop.stype == "local"
+  = link_to "Add location", new_location_path if merchants_manager_signed_in? && is_shop_local?(current_merchants_manager.shop)
 
 #comingsoon.comingsoon_page
   .container
@@ -21,6 +20,7 @@
             merchants.
         .span5.right
           %iframe{:allowFullScreen => "", :frameborder => "0", :height => "225", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/58841871", :webkitAllowFullScreen => "", :width => "400"}
+          
   .subscribe
     .row
       .span12

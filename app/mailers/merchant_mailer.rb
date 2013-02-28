@@ -3,6 +3,6 @@ class MerchantMailer < ActionMailer::Base
 
   def payment_notification(manager)
     @manager = manager
-    mail(:to => @manager.email, :subject => "Payment Successful!")
+    mail(:to => @manager.email, :subject => "Payment Successfull!")
   end
 end

@@ -9,5 +9,13 @@ module ApplicationHelper
     manager && manager.shop.stype=="local" && !manager.shop.locations.any?
   end
 
+  def is_shop_online?(shop)
+    shop.is_online?
+  end
+
+  def is_shop_local?(shop)
+    shop.is_local?
+  end
+
 
 end

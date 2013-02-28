@@ -6,9 +6,9 @@ class Shop < ActiveRecord::Base
   validates :name,:presence=>true
   validates :stype, :presence => true, :inclusion => { :in => SHOP_TYPES , :message => "is Invalid" }
 
-  has_one :subscription
-  has_many :managers,dependent: :destroy
-  has_many :locations,dependent: :destroy
+  has_one :subscription, dependent: :destroy
+  has_many :managers, dependent: :destroy
+  has_many :locations, dependent: :destroy
 
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations 
@@ -27,7 +27,15 @@ class Shop < ActiveRecord::Base
   end
 
   def is_subscription_active?
-    self.stype == 'local' && self.subscription && self.subscription.active?
+    is_online? || (is_local? && self.subscription && self.subscription.active?)
+  end
+
+  def is_local?
+    self.stype == 'local'
+  end
+
+  def is_online?
+    self.stype == 'online'
   end
 
 end
