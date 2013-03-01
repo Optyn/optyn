@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require front_end_static_page/theme.js
-//= require front_end_static_page/application.js
-//= require front_end_static_page/bootstrap.min.js
-//= require front_end_static_page/bootstrap.js
+//= require /front_end_static_page/theme.js
+//= require /front_end_static_page/application.js
+//= require /front_end_static_page/bootstrap.min.js
+//= require /front_end_static_page/bootstrap.js

@@ -12,8 +12,11 @@
     %link{:href => "/front_end_static_page/signin.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "/front_end_static_page/signup.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
 
+    %script{:src => "/assets/jquery.js", :type => "text/javascript"}
+    %script{:src => "/assets/jquery_ujs.js", :type => "text/javascript"}
+    %script{:src => "/front_end_static_page/bootstrap.js", :type => "text/javascript"}
+    %script{:src => "/front_end_static_page/theme.js", :type => "text/javascript"}
 
-    = javascript_include_tag "front_end_static_page/application"
     %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic", :rel => "stylesheet", :type => "text/css"}/
     = csrf_meta_tags
   %body
