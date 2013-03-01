@@ -1,0 +1,141 @@
+#csmain {
+  background: #f3f3f3;
+  width: 100%;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+#csmain .csrow {
+  margin-left: 0px;
+}
+#csmain .slogan {
+  float: left;
+  margin-top: 50px;
+  margin-left: 30px;
+}
+#csmain .slogan h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: #333333;
+  font-family: inherit;
+}
+
+#csmain .slogan h2 {
+  font-weight: normal;
+  font-size: 42px;
+  color: #333333;
+}
+
+#csmain .csvideo {
+  float: right;
+  margin-right: 30px;
+}
+
+#csform {
+  background: #1e2d40;
+  width: 100%;
+  height: 110px;
+}
+
+#csftr {
+  background: #1eb0e9;
+  width: 100%;
+  height: 200px;
+}
+/* Coming Soon
+-------------------------------------------------- */
+#comingsoon {
+  background: #1e2d40;
+  width: 100%;
+  height: 110px;
+}
+#comingsoon .countdown {
+  padding-bottom: 120px;
+  border-bottom: 1px solid #C0C2C5;
+  box-shadow: 0px 2px 1px 0px #fff;
+}
+#comingsoon .countdown .left h1 {
+  margin-top: 0px;
+}
+#comingsoon .countdown .left p {
+  margin-top: 20px;
+  line-height: 25px;
+  color: #555;
+  font-size: 17px;
+}
+#comingsoon .countdown .figure {
+  float: left;
+  margin-right: 15px;
+}
+#comingsoon .countdown .figure .square {
+  width: 88px;
+  height: 88px;
+  border-radius: 6px;
+  border: 1px solid #93C762;
+  position: relative;
+  box-shadow: 0px 0px 6px -1px #93C762;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #fff 47%, #f4f4f4 48%, #f4f4f4 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#fff), color-stop(48%,#f4f4f4), color-stop(100%,#f4f4f4)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#fff 47%,#f4f4f4 48%,#f4f4f4 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffffff 0%,#fff 47%,#f4f4f4 48%,#f4f4f4 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffffff 0%,#fff 47%,#f4f4f4 48%,#f4f4f4 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ffffff 0%,#fff 47%,#f4f4f4 48%,#f4f4f4 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
+}
+#comingsoon .countdown .figure .square span {
+  color: #394350;
+  font-size: 40px;
+  font-weight: bold;
+  position: absolute;
+  top: 33px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+#comingsoon .countdown .figure label {
+  color: #7A7D80;
+  font-weight: bold;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: center;
+}
+#comingsoon .subscribe {
+  margin-bottom: 80px;
+}
+#comingsoon .subscribe form {
+  text-align: center;
+  margin-top: 40px;
+}
+#comingsoon .subscribe form button {
+  position: relative;
+  top: -5px;
+  margin-left: 10px;
+  font-weight: bold;
+  background: url('sign_up_bg.png') repeat-x;
+  color: #fff;
+  padding: 8px 20px;
+  border: none;
+  font-size: 16px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+}
+#comingsoon .subscribe .follow {
+  text-align: center;
+  margin-top: 40px;
+}
+#comingsoon .subscribe .follow strong {
+  font-size: 21px;
+  margin-right: 18px;
+}
+#comingsoon .subscribe .follow a,
+#comingsoon .subscribe .follow a:hover {
+  text-decoration: none;
+}
+#comingsoon .subscribe .follow a:hover {
+  opacity: 0.8;
+}
+#comingsoon .subscribe .follow i {
+  position: relative;
+  top: 7px;
+  margin: 0px 2px;
+}
+

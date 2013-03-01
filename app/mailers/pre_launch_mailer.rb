@@ -1,5 +1,5 @@
 class PreLaunchMailer < ActionMailer::Base
-  default from: "Services <services@optyn.com>"
+  default from: "Optyn.com <services@optyn.com>"
 
   def welcome(registration)
   	@registration = registration
