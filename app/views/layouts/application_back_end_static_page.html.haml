@@ -3,7 +3,30 @@
   %head
     %title BackEndStaticPage
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    = stylesheet_link_tag    "back_end_static_page/application", :media => "all"
+    
+    %link{:href => "/back_end_static_page/bootstrap.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/bootstrap-responsive.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/chosen.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/elfinder.min.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/elfinder.theme.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/font-awesome-ie7.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/font-awesome.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/fullcalendar.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/glyphicons.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/halflings.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/ie.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/ie9.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/jquery-ui-1.8.21.custom.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/jquery.cleditor.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/jquery.gritter.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/jquery.iphone.toggle.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/jquery.noty.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/noty_theme_default.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/style-responsive.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/style.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/uniform.default.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/back_end_static_page/uploadify.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext", :rel => "stylesheet", :type => "text/css"}
       = csrf_meta_tags
       / The HTML5 shim, for IE6-8 support of HTML5 elements
@@ -21,32 +44,34 @@
     = yield
     = render :partial => "layouts/footer_back_end_static_page"
     / start: JavaScript
-    = javascript_include_tag "back_end_static_page/jquery-1.7.2.min.js"
-    = javascript_include_tag "back_end_static_page/jquery-ui-1.8.21.custom.min.js"
-    = javascript_include_tag "back_end_static_page/modernizr.js"
-    = javascript_include_tag "back_end_static_page/bootstrap.js"
-    = javascript_include_tag "back_end_static_page/jquery.cookie.js"
-    = javascript_include_tag "back_end_static_page/fullcalendar.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.dataTables.min.js"
-    = javascript_include_tag "back_end_static_page/excanvas.js"
-    = javascript_include_tag "back_end_static_page/jquery.flot.js"
-    = javascript_include_tag "back_end_static_page/jquery.flot.pie.js"
-    = javascript_include_tag "back_end_static_page/jquery.flot.stack.js"
-    = javascript_include_tag "back_end_static_page/jquery.flot.resize.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.chosen.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.uniform.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.cleditor.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.noty.js"
-    = javascript_include_tag "back_end_static_page/jquery.elfinder.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.raty.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.iphone.toggle.js"
-    = javascript_include_tag "back_end_static_page/jquery.uploadify-3.1.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.gritter.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.imagesloaded.js"
-    = javascript_include_tag "back_end_static_page/jquery.masonry.min.js"
-    = javascript_include_tag "back_end_static_page/jquery.knob.modified.js"
-    = javascript_include_tag "back_end_static_page/jquery.sparkline.min.js"
-    = javascript_include_tag "back_end_static_page/counter.js"
-    = javascript_include_tag "back_end_static_page/retina.js"
-    = javascript_include_tag "back_end_static_page/custom.js"
+    %script{:src => "/assets/jquery.js", :type => "text/javascript"}
+    %script{:src => "/assets/jquery_ujs.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery-1.7.2.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery-ui-1.8.21.custom.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/modernizr.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/bootstrap.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.cookie.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/fullcalendar.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.dataTables.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/excanvas.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.flot.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.flot.pie.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.flot.stack.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.flot.resize.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.chosen.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.uniform.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.cleditor.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.noty.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.elfinder.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.raty.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.iphone.toggle.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.uploadify-3.1.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.gritter.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.imagesloaded.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.masonry.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.knob.modified.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/jquery.sparkline.min.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/counter.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/retina.js", :type => "text/javascript"}
+    %script{:src => "/back_end_static_page/custom.js", :type => "text/javascript"}
     / end: JavaScript

@@ -534,7 +534,7 @@ html .halflings {
   background-image: url(/assets/back_end_static_page/glyphicons_halflings.png);
 }
 .halflings-icon.white {
-  background-image: url(glyphicons_halflings-white.svg);
+  background-image: url(/assets/back_end_static_page/glyphicons_halflings-white.svg);
 }
 .no-inlinesvg .halflings-icon.white {
   background-image: url(/assets/back_end_static_page/glyphicons_halflings-white.png);
