@@ -2,12 +2,6 @@
   .head.pull-left.lead 
     = "Enter Location Details"
   .form 
-    .errors
-      - if @location.errors.any?
-        %ul
-          - @location.errors.full_messages.each do |error|
-            %li
-              = error   
     = form_for @location do |f|
       %label.pull-left Street Address 1
       = f.text_field :street_address1

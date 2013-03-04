@@ -1,13 +1,32 @@
 class SubscriptionsController < ApplicationController
   
   before_filter :require_manager
-  before_filter :require_shop_local_and_inactive
+  before_filter :require_shop_local_and_inactive, :only => ['upgrade','subscribe']
   
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
-    #@stripe_plan_ids = Plan.all.collect(&:plan_id)
     @subscription=@plan.subscriptions.build
   end
+
+  def edit_billing_info
+    @plan=current_merchants_manager.shop.subscription.plan
+    @subscription = current_merchants_manager.shop.subscription
+  end
+
+  def update_billing_info
+    @subscription = current_merchants_manager.shop.subscription
+    binding.pry
+    begin
+      @stripe_customer= Stripe::Customer.retrieve(@subscription.stripe_customer_token)
+      @stripe_customer.card = params['stripeToken']
+      @stripe_customer.save
+      redirect_to root_path
+    rescue => e
+      @subscription.stripe_error = e.to_s
+      render 'edit_billing_info'
+    end
+  end
+
 
   def subscribe
     begin

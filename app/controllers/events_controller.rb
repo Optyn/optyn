@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   protect_from_forgery :except => [ :stripe_events ]
+  
   require 'stripe_event_handlers'
 
   def stripe_events

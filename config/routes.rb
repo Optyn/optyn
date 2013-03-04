@@ -10,8 +10,11 @@ Optyn::Application.routes.draw do
 
   get "/new_zip_code" => "users/consumers#new_zip_code"
   put "/add_zip_code" => "users/consumers#add_zip_code"
+
   get '/upgrade' => 'subscriptions#upgrade'
   post '/subscribe' => 'subscriptions#subscribe'
+  get '/edit_billing_info' => 'subscriptions#edit_billing_info'
+  put '/update_billing_info' => 'subscriptions#update_billing_info'
   
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',

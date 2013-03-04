@@ -14,5 +14,5 @@ class Subscription < ActiveRecord::Base
   def self.create_stripe_customer(params)
     Stripe::Customer.create(email: params['subscription']['email'], card: params['stripeToken'],:plan=>params['stripe_plan_id'])
   end
-  
+
 end
