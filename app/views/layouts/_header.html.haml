@@ -6,9 +6,28 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
+      %a.brand{:href => "index.html"}
+        %img{:alt => "logo", :src => "/assets/logo.png"}/
+      .nav-collapse.collapse
+        %ul.nav.pull-right
+          %li
+            =link_to("Home", root_path, class: "btn-header")
+          %li
+            %a.btn-header{:href => "blog", :target => "_blank"} Blog
+          %li
+            %a.btn-header{:href => "contact"} Contact
+          %li
+            =link_to("Consumer Login", new_user_session_path, class: "btn-header") if !user_present?
 
-      = link_to("<strong>optyn</strong>".html_safe, root_path, class: "brand scroller")
-      = link_to("<strong> Merchant Login</strong>".html_safe, new_merchant_session_path, class: "pull-right") if !user_present?
-      = link_to("<strong>Consumer Login</strong>".html_safe, new_user_session_path, class: "pull-right") if !user_present?
-      = link_to("<strong> Logout</strong>".html_safe, destroy_user_session_path, class: "pull-right") if merchant_signed_in?
-  / ends navbar
+          %li
+            = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header") if !user_present?
+          %li
+            = link_to("Add Manager", merchants_add_manager_path, class: "btn-header") if merchants_manager_signed_in?
+          
+          %li
+            = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_signed_in?
+          %li
+            = link_to("Logout", destroy_user_session_path, class: "btn-header") if merchants_manager_signed_in?
+      
+
+/ ends navbar

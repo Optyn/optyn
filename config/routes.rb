@@ -6,6 +6,14 @@ Optyn::Application.routes.draw do
 
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
+  match 'about' => 'main#about'
+  match 'faq' => 'main#faq'
+  match 'pricing' => 'main#pricing'
+  match 'merchantfeatures' => 'main#merchantfeatures'
+  match 'consumerfeatures' => 'main#consumerfeatures'
+  match 'contact' => 'main#contact'
+  match 'terms' => 'main#terms'
+  match 'privacy' => 'main#privacy'
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")

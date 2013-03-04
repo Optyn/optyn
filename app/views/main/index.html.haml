@@ -9,29 +9,38 @@
     = "|"
     = link_to "Add location", new_location_path if is_shop_local?(current_merchants_manager.shop)
 
-#comingsoon.comingsoon_page
+/ features
+#features.features_page
   .container
-    .countdown
+    .features1
+      / header
       .row
-        .span6.offset1.left
-          %h1 We are launching very soon...
-          %p
-            We are working on something big...
-            %br/
-            Something that will make marketing easier for consumers and
-            merchants.
-        .span5.right
-          %iframe{:allowFullScreen => "", :frameborder => "0", :height => "225", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/58841871", :webkitAllowFullScreen => "", :width => "400"}
-
-  .subscribe
-    .row
-      .span12
-        %form
-          %input.span4{:placeholder => "Email address", :type => "text"}/
-          %button.btn{:type => "submit"} Subscribe
-        .follow
-          %strong Follow us
-          %a{:href => "http://www.twitter.com/optyn", :target => "_blank"}
-            %i.social.tw
-          %a{:href => "http://www.facebook.com/optyn", :target => "_blank"}
-            %i.social.fb
+        .span12
+          %h3.intro
+            All of your Marketing Messages in one Place
+      / feature list
+      .row
+        .span4.feature
+          %h3
+            %i.i_cloud
+            Responsive clean theme
+          %p.description
+            There are many variations of passages of Lorem Ipsum available, but the
+            majority have suffered alteration in some form, by injected humour, or randomised
+            words which don't look even slightly believable.
+        .span4.feature
+          %h3
+            %i.i_chart
+            Responsive clean theme
+          %p.description
+            There are many variations of passages of Lorem Ipsum available, but the
+            majority have suffered alteration in some form, by injected humour, or randomised
+            words which don't look even slightly believable.
+        .span4.feature
+          %h3
+            %i.i_movil
+            Responsive clean theme
+          %p.description
+            There are many variations of passages of Lorem Ipsum available, but the
+            majority have suffered alteration in some form, by injected humour, or randomised
+            words which don't look even slightly believable.
