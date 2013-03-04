@@ -1,4 +1,4 @@
-class AddZipsColumnToUsers < ActiveRecord::Migration
+class AddZipsInformationToUsers < ActiveRecord::Migration
   
   def up
     add_column :users, :office_zip_code, :string
