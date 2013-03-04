@@ -7,12 +7,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path if merchants_manager_signed_in?
   end
 
-  def require_consumer
-    redirect_to root_path if !user_signed_in?
-  end
-
   def require_consumer_zip_code
-    redirect_to new_zip_code_path if user_signed_in? && !current_user.zip_code_present?
+    redirect_to new_user_zip_path if current_user && !current_user.zip_code_present?
   end
 
   def require_no_manager

@@ -1,5 +1,7 @@
 Optyn::Application.routes.draw do
 
+  use_doorkeeper
+
   root to: 'main#index'
 
   # Static Pages created by Alen
@@ -7,9 +9,6 @@ Optyn::Application.routes.draw do
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
-
-  get "/new_zip_code" => "users/consumers#new_zip_code"
-  put "/add_zip_code" => "users/consumers#add_zip_code"
 
   get '/upgrade' => 'subscriptions#upgrade'
   post '/subscribe' => 'subscriptions#subscribe'
@@ -40,10 +39,10 @@ Optyn::Application.routes.draw do
     get    '/account'     => 'users/registrations#edit',   :as => :edit_user_registration
     put    '/account'     => 'users/registrations#update'
     delete '/account'     => 'users/registrations#destroy'
+    get    '/zips/new'    => 'users/zips#new',             :as => :new_user_zip
+    post   '/zips'        => 'users/zips#create',           :as => :user_zips  
   end
 
-
-  
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
@@ -51,22 +50,22 @@ Optyn::Application.routes.draw do
   resources :locations
 
   #Mount resque :)
-  mount Resque::Server, :at => "/resque"
+mount Resque::Server, :at => "/resque"
 
-  
 
-  namespace "merchants" do |merchant|
 
-    get "show_managers" => "merchant_managers#show_managers"
+namespace "merchants" do |merchant|
 
-    devise_for :managers,:controllers=> {
-                                          :registrations => 'merchants/managers/registrations', 
-                                          :sessions => 'merchants/managers/sessions',
-                                          :passwords => 'merchants/managers/passwords',
-                                          :confirmations => 'merchants/managers/confirmations'
-                                        } do 
-                                          get '/add_manager' => 'managers/registrations#add_manager'
-                                          post '/create_new_manager' => 'managers/registrations#create_new_manager'
+  get "show_managers" => "merchant_managers#show_managers"
+
+  devise_for :managers,:controllers=> {
+    :registrations => 'merchants/managers/registrations', 
+    :sessions => 'merchants/managers/sessions',
+    :passwords => 'merchants/managers/passwords',
+    :confirmations => 'merchants/managers/confirmations'
+    } do 
+      get '/add_manager' => 'managers/registrations#add_manager'
+      post '/create_new_manager' => 'managers/registrations#create_new_manager'
     end
 
   end
