@@ -22,7 +22,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'resque', :require => 'resque/server'
 gem 'client_side_validations'
-gem 'dynamic_form'
+gem 'doorkeeper', '~> 0.6.7'
 
 # gems for stripe payment
 gem 'stripe'
