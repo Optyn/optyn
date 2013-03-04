@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_consumer_zip_code
-    redirect_to new_user_zip_path if current_user && !current_user.zip_code_present?
+    redirect_to new_user_zip_path if current_user && !current_user.zip_prompted?
   end
 
   def require_no_manager

@@ -43,8 +43,8 @@ class User < ActiveRecord::Base
     user
   end
 
-  def zip_code_present?
-    home_zip_code.present? || office_zip_code.present? 
+  def zip_prompted?
+    zip_prompted
   end
 
   def password_required?
