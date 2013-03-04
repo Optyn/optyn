@@ -11,11 +11,11 @@
       .nav-collapse.collapse
         %ul.nav.pull-right
           %li
-            =link_to("Home", root_path, class: "btn-header")
+            %a{:href => root_path} Home
           %li
-            %a.btn-header{:href => "blog", :target => "_blank"} Blog
+            %a{:href => "consumerfeatures"} Features
           %li
-            %a.btn-header{:href => "contact"} Contact
+            %a{:href => "pricing"} Pricing
           %li
             =link_to("Consumer Login", new_user_session_path, class: "btn-header") if !user_present?
 
@@ -28,6 +28,8 @@
             = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_signed_in?
           %li
             = link_to("Logout", destroy_user_session_path, class: "btn-header") if merchants_manager_signed_in?
+          %li
+            = link_to("Get Started", destroy_user_session_path, class: "btn-header") if user_signed_out?
       
 
 / ends navbar
