@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
 
   def update_billing_info
     @subscription = current_merchants_manager.shop.subscription
-    binding.pry
+    
     begin
       @stripe_customer= Stripe::Customer.retrieve(@subscription.stripe_customer_token)
       @stripe_customer.card = params['stripeToken']
