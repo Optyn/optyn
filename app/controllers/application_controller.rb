@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     current_merchants_manager.shop.is_subscription_active? if merchants_manager_signed_in?
   end
 
+  def is_shop_local?(shop)
+    
+  end
+
   def require_shop_local_and_inactive
     redirect_to root_path if is_shop_local_and_active?
   end

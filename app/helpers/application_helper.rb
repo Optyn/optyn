@@ -17,8 +17,4 @@ module ApplicationHelper
   def is_shop_local?(shop)
     shop.is_local?
   end
-  
-  def user_signed_out?
-    user_present? == false
-  end
 end

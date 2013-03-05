@@ -16,16 +16,24 @@
             %a{:href => "consumerfeatures"} Features
           %li
             %a{:href => "pricing"} Pricing
-          %li
-            =link_to("Consumer Login", new_user_session_path, class: "btn-header") if !user_present?
-          %li
-            = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header") if !user_present?
-          %li
-            = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_signed_in?
-          %li
-            = link_to("Logout", destroy_user_session_path, class: "btn-header") if merchants_manager_signed_in?
-          %li
-            = link_to("Get Started", destroy_user_session_path, class: "btn-header") if user_signed_out?
-      
+          
+          - unless someone_logged_in?  
+            %li
+              =link_to("Consumer Login", new_user_session_path, class: "btn-header")
 
+          - unless someone_logged_in?
+            %li
+              = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header")
+
+          - if user_signed_in?
+            %li
+              = link_to("Logout", destroy_user_session_path, class: "btn-header")
+
+          - if merchants_manager_signed_in?    
+            %li
+              = link_to("Logout",  destroy_merchants_manager_session_path, class: "btn-header", :method => :delete)
+
+          - unless someone_logged_in?     
+            %li
+              = link_to("Get Started", new_user_session_path, class: "btn-header") 
 / ends navbar
