@@ -1,0 +1,25 @@
+.row
+  .span16
+    %header
+      %h1
+        Application for: 
+        = @shop.name
+  
+  .span10
+    %h4 Callback url:
+    %p
+      %code{:id => 'callback_url'}
+        = @application.redirect_uri
+
+    %h4 Application Id:
+    %p
+      %code{:id => 'application_id'}
+        = @application.uid
+
+    %h4 Secret:
+    %p
+      %code{:id => 'secret'}
+        = @application.secret
+
+    .actions
+      = link_to "Edit", edit_merchants_app_path, :class => "btn"

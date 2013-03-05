@@ -13,6 +13,7 @@ gem 'config_reader', '0.0.8' #ENV specific configuration
 gem 'google-analytics-rails'
 gem 'unicorn'
 gem 'haml'
+gem 'haml-rails'
 gem 'devise'
 gem 'devise-async'
 gem 'omniauth'

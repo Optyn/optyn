@@ -1,0 +1,13 @@
+%fieldset 
+  .clearfix
+    = label_tag(:business_name, 'Business Name:')
+    .input
+      = text_field_tag(:business_name, current_merchants_manager.business_name, :readonly => :readonly)
+        
+  .clearfix
+    = label_tag(:redirect_uri, 'Redirect Uri:')
+
+    .input
+      = text_field_tag(:redirect_uri, (@shop.oauth_application.redirect_uri rescue nil))
+
+    = hidden_field_tag :reset, false  

@@ -84,6 +84,11 @@ GEM
     fssm (0.2.10)
     google-analytics-rails (0.0.3)
     haml (3.1.8)
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
@@ -274,6 +279,7 @@ DEPENDENCIES
   doorkeeper (~> 0.6.7)
   google-analytics-rails
   haml
+  haml-rails
   jquery-rails
   mailcatcher
   omniauth

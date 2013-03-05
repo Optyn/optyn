@@ -76,6 +76,7 @@ namespace "merchants" do |merchant|
       post '/create_new_manager' => 'managers/registrations#create_new_manager'
     end
 
+    resource :app 
   end
 
 

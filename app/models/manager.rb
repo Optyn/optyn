@@ -60,4 +60,11 @@ class Manager < ActiveRecord::Base
     self.parent
   end
 
+  def business_name
+    shop.name
+  end
+
+  def first_shop
+    shop.first_location
+  end
 end

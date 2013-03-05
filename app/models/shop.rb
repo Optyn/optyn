@@ -1,4 +1,5 @@
 class Shop < ActiveRecord::Base
+
   
   SHOP_TYPES=['local','online']
   attr_accessible :name,:stype,:managers_attributes,:locations_attributes
@@ -9,6 +10,7 @@ class Shop < ActiveRecord::Base
   has_one :subscription, dependent: :destroy
   has_many :managers, dependent: :destroy
   has_many :locations, dependent: :destroy
+  has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
 
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations 
@@ -23,7 +25,7 @@ class Shop < ActiveRecord::Base
   end
 
   def get_shop_owner
-    self.managers.where(:owner=>true).first
+    self.managers.where(:owner => true).first
   end
 
   def is_subscription_active?
@@ -38,4 +40,36 @@ class Shop < ActiveRecord::Base
     self.stype == 'online'
   end
 
+  def first_location_zip
+    first_location.zip rescue ""
+  end
+
+  def generate_oauth_token(redirect_uri, force=false)
+    app = nil
+    if force 
+      oauth_application.destroy
+      reload
+    end
+    
+    app = self.oauth_application
+    if app.present?
+      app.redirect_uri = redirect_uri
+      debugger
+      app.save
+    else
+      generate_application(redirect_uri)
+    end
+  end
+
+  private
+  def generate_application(redirect_uri)
+    app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip, 
+      :redirect_uri => redirect_uri)
+    app.owner = self
+    app.save
+  end
+
+  def first_location
+    locations.first rescue ""
+  end
 end

@@ -1,0 +1,19 @@
+.row
+  
+  .span16
+    %header
+      %h2 Let your users login/signup through your website
+
+  .span12
+    = form_for @application, :as => :oauth_application, :url => merchants_app_path, :method => :put, :html => {:id => "app_form"} do
+      
+      = render :partial => "merchants/apps/form"
+
+      .clearfix
+
+      .actions
+        = submit_tag "Submit", :name => "commit", :class => "btn primary"
+
+        = submit_tag "Submit & Reset Token", :class => "btn primary", :id => "reset_button"
+
+        = link_to "Cancel", merchants_app_path, :class => "btn"

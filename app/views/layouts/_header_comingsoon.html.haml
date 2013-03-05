@@ -16,14 +16,22 @@
             %a.btn-header{:href => "blog", :target => "_blank"} Blog
           %li
             %a.btn-header{:href => "contact"} Contact
-          %li
-            =link_to("Consumer Login", new_user_session_path, class: "btn-header") if !user_present?
 
-          %li
-            = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header") if !user_present?
-          %li
-            = link_to("Add Manager", merchants_add_manager_path, class: "btn-header") if merchants_manager_signed_in?
-          
+          - unless someone_logged_in?  
+            %li
+              = link_to("Consumer Login", new_user_session_path, class: "btn-header") 
+
+          - unless someone_logged_in?    
+            %li
+              = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header") if !user_present?
+
+          - if merchants_manager_signed_in?
+            %li
+              = link_to("Add Manager", merchants_add_manager_path, class: "btn-header")
+
+            %li
+              = link_to("Optyn Button", merchants_add_manager_path, class: "btn-header")      
+
           %li
             = link_to("Logout", destroy_user_session_path, class: "btn-header") if user_signed_in?
           %li
