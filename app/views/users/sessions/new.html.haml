@@ -5,8 +5,8 @@
         %div
           .head
             %h4 Log in to your account
-          
-          = render partial: "users/shared/social_login_buttons"  
+
+          = render partial: "users/shared/social_login_buttons"
 
         .form
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
@@ -21,8 +21,8 @@
                 =label_tag "remember_me"
               .right
                 = link_to "Forgot your password?", new_password_path(resource_name)
-            = f.submit "Sign in", class: "btn"        
+            = f.submit "Sign in", class: "btn"
 
       %p{class: "already"}
         Don't have an account?
-        = link_to "Sign Up", new_user_registration_path    
+        = link_to "Sign Up", new_user_registration_path

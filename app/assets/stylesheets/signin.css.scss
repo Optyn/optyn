@@ -50,8 +50,8 @@
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6887c4), color-stop(100%,#4566a9));
 	background: -webkit-linear-gradient(top, #6887c4 0%,#4566a9 100%);
 	background: -o-linear-gradient(top, #6887c4 0%,#4566a9 100%);
-	background: -ms-linear-gradient(top, #6887c4 0%,#4566a9 100%); 
-	background: linear-gradient(to bottom, #6887c4 0%,#4566a9 100%); 
+	background: -ms-linear-gradient(top, #6887c4 0%,#4566a9 100%);
+	background: linear-gradient(to bottom, #6887c4 0%,#4566a9 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6887c4', endColorstr='#4566a9',GradientType=0 );
 	border: 1px solid #3B4868;
     border-radius: 3px 3px 3px 3px;
@@ -68,8 +68,8 @@
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6887c4), color-stop(100%,#5773AC));
 	background: -webkit-linear-gradient(top, #6887c4 0%,#5773AC 100%);
 	background: -o-linear-gradient(top, #6887c4 0%,#5773AC 100%);
-	background: -ms-linear-gradient(top, #6887c4 0%,#5773AC 100%); 
-	background: linear-gradient(to bottom, #6887c4 0%,#5773AC 100%); 
+	background: -ms-linear-gradient(top, #6887c4 0%,#5773AC 100%);
+	background: linear-gradient(to bottom, #6887c4 0%,#5773AC 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6887c4', endColorstr='#5773AC',GradientType=0 );
 }
 #box_login .box .social a.face_login span.face_icon{
@@ -124,7 +124,7 @@
 	text-align: center;
 	width: 83%;
 }
-#box_login .box .form input[type="text"], 
+#box_login .box .form input[type="text"],
 #box_login .box .form input[type="password"] {
 	border-color: #DBDBDB #EAEAEA #EAEAEA #DBDBDB;
     border-left: 1px solid #DBDBDB;
@@ -174,10 +174,10 @@
     margin: 3px 0 0;
 	font-style: 14px;
 	font-weight: bold;
-	
+
 }
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { 
+@media (min-width: 768px) and (max-width: 979px) {
 	#box_login .box{
 	  width: 54%;
 	}
@@ -244,13 +244,13 @@
 }
 
 @media (min-width: 980px) {
-	#box_login .box{	  
+	#box_login .box{
 		width: 41%;
 	}
 }
 @media (max-width: 480px) {
 	#box_login .box{
-		width: 100%;  
+		width: 100%;
 	}
 	#box_login .box .social{
 		margin: 0 auto;
@@ -262,8 +262,8 @@
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6887c4), color-stop(100%,#4566a9));
 		background: -webkit-linear-gradient(top, #6887c4 0%,#4566a9 100%);
 		background: -o-linear-gradient(top, #6887c4 0%,#4566a9 100%);
-		background: -ms-linear-gradient(top, #6887c4 0%,#4566a9 100%); 
-		background: linear-gradient(to bottom, #6887c4 0%,#4566a9 100%); 
+		background: -ms-linear-gradient(top, #6887c4 0%,#4566a9 100%);
+		background: linear-gradient(to bottom, #6887c4 0%,#4566a9 100%);
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6887c4', endColorstr='#4566a9',GradientType=0 );
 		border: 1px solid #3B4868;
 	    border-radius: 3px 3px 3px 3px;
@@ -274,6 +274,19 @@
 	    padding: 0;
 	    text-decoration: none !important;
 	}
+    #box_login .box .social a.circle {
+    text-align: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    margin-right:34px;
+    display: inline-block;
+    -webkit-transition: border-color ease-in .1s;
+    -moz-transition: border-color ease-in .1s;
+    -o-transition: border-color ease-in .1s;
+    transition: border-color ease-in .1s;
+    }
+
 	#box_login .box .social a.face_login span.face_icon{
 		background-color: #39599F;
 	    border-radius: 3px 0 0 3px;
@@ -309,6 +322,47 @@
 	}
 }
 
+#box_login .box .social{
+  float: none;
+  text-align: center;
+}
+#box_login .box .social a.circle{
+  text-align: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  margin-right:34px;
+  display: inline-block;
+  -webkit-transition: border-color ease-in .1s;
+  -moz-transition: border-color ease-in .1s;
+  -o-transition: border-color ease-in .1s;
+  transition: border-color ease-in .1s;
+}
+#box_login .box .social a.circle img{
+  display: inline-block;
+  margin-top: 15px;
+}
+#box_login .box .social a.facebook{
+  background: #233678;
+  border:2px solid #233678;
+}
+#box_login .box .social a.twitter{
+  background: #54AEE1;
+  border:2px solid #54AEE1;
+}
+#box_login .box .social a.gplus{
+  background: #292929;
+  border:2px solid #292929;
+  margin: 0;
+}
+#box_login .box .social a.linkedin{
+  background: #0794bd;
+  border:2px solid #0794bd;
+  margin: 0;
+}
+#box_login .box .social a.circle:hover{
+  border-color: rgba(0,0,0,0.7);
+}
 
 
 
