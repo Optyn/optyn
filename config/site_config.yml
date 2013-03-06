@@ -7,7 +7,7 @@ defaults:
   #Add the twitter consumer key and twitter consumer secret
   #Add the facebook app key and facebook app secret
   #Add the google client key and google client secret
-
+  #Add the linkedin app id and linkedin client secret   
   #Add the app_base_url
 
 development:  
