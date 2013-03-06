@@ -16,7 +16,7 @@ set :use_sudo, false
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "gaurav_personal_rsa")]
+ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
 
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 set :rvm_ruby_string, "ruby-1.9.3-p385@optyn"
