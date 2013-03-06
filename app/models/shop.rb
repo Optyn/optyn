@@ -84,6 +84,8 @@ class Shop < ActiveRecord::Base
       details[:location] = useful_location.as_json(except: [:id, :created_at, :updated_at, :longitude, :latitude]) 
     end
 
+    details[:button_url] = SiteConfig.app_base_url + "/assets/logo.png"
+
     details
   end
 
