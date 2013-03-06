@@ -1,6 +1,6 @@
 class Shop < ActiveRecord::Base
 
-  
+
   SHOP_TYPES=['local','online']
   attr_accessible :name,:stype,:managers_attributes,:locations_attributes
 
@@ -11,9 +11,22 @@ class Shop < ActiveRecord::Base
   has_many :managers, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
+  has_many :connections, class_name: "Connection", dependent: :destroy
+  has_many :users, through: :connections  
+
 
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations 
+
+  scope :includes_app, includes(:oauth_application)
+
+  scope :inlcudes_locations, includes(:locations)
+  
+  scope :for_app_id, ->(app_id){inlcudes_locations.includes_app.where(["oauth_applications.uid = :app_id", {app_id: app_id}])}
+
+  def self.by_app_id(app_id)
+    for_app_id(app_id).first  
+  end
 
 
   def shop_already_exists?
@@ -54,11 +67,24 @@ class Shop < ActiveRecord::Base
     app = self.oauth_application
     if app.present?
       app.redirect_uri = redirect_uri
-      debugger
       app.save
     else
       generate_application(redirect_uri)
     end
+  end
+
+  def api_welcome_details
+    details  = as_json(only: "name")
+    details[:user_count] = users.count
+
+    details[:location] = {}
+
+    useful_location = first_location
+    if useful_location.present?
+      details[:location] = useful_location.as_json(except: [:id, :created_at, :updated_at, :longitude, :latitude]) 
+    end
+
+    details
   end
 
   private
@@ -70,6 +96,6 @@ class Shop < ActiveRecord::Base
   end
 
   def first_location
-    locations.first rescue ""
+    locations.first rescue nil
   end
 end

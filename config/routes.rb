@@ -60,7 +60,12 @@ Optyn::Application.routes.draw do
   #Mount resque :)
 mount Resque::Server, :at => "/resque"
 
-
+namespace :api, defaults: {format: 'json'} do
+  scope module: :v1 do
+    get 'shop/details', to: 'shops#details'
+    match 'user', to: 'users#show'
+  end
+end
 
 namespace "merchants" do |merchant|
 

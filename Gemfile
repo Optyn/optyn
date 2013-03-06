@@ -24,6 +24,7 @@ gem 'omniauth-linkedin'
 gem 'resque', :require => 'resque/server'
 gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.6.7'
+gem 'oauth2'
 
 # gems for stripe payment
 gem 'stripe'
@@ -39,6 +40,7 @@ group :assets do
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass'
+  gem 'awesome_print'
 end
 
 gem 'jquery-rails'
@@ -51,6 +53,7 @@ group :development do
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'rails-erd'
 end
 
 group :development, :test do

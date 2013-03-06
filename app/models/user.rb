@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :authentications,:as => :account, dependent: :destroy
+  has_many :connections, class_name: "Connection", dependent: :destroy
+  has_many :shops, through: :connections
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -67,6 +69,12 @@ class User < ActiveRecord::Base
     else
       zip_prompted = true
       save(:validate => false)
+    end
+  end
+
+  def make_connection_if!(shop)
+    unless connections.for_shop(shop.id).present?
+      connections.create!(user_id: self.id, shop_id: shop.id)
     end
   end
 
