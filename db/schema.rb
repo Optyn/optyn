@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130306055220) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
+    t.text     "embed_code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "stype"

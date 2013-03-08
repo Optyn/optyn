@@ -1,5 +1,6 @@
-class Shop < ActiveRecord::Base
+require 'embed_code_generator'
 
+class Shop < ActiveRecord::Base
 
   SHOP_TYPES=['local','online']
   attr_accessible :name,:stype,:managers_attributes,:locations_attributes
@@ -86,15 +87,40 @@ class Shop < ActiveRecord::Base
 
     details[:button_url] = SiteConfig.app_base_url + "/assets/logo.png"
 
+    # put the oauth details
+    details[:redirect_uri] = redirect_uri
+    details[:app_id] = app_id
+    details[:secret] = secret
+    details[:welcome_message] = SiteConfig.api_welcome_message
+
     details
+  end
+
+  def app_id
+    self.oauth_application.uid
+  end
+
+  def secret
+    self.oauth_application.secret
+  end
+
+  def redirect_uri
+    self.oauth_application.redirect_uri
   end
 
   private
   def generate_application(redirect_uri)
-    app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip, 
-      :redirect_uri => redirect_uri)
-    app.owner = self
-    app.save
+    Shop.transaction do
+      app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip, 
+        :redirect_uri => redirect_uri)
+      app.owner = self
+      app.save
+
+      self.oauth_application = app
+
+      self.embed_code = EmbedCodeGenerator.generate_embed_code(self)
+      save!
+    end
   end
 
   def first_location

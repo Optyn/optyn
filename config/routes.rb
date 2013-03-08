@@ -1,6 +1,8 @@
 Optyn::Application.routes.draw do
 
-  use_doorkeeper
+  use_doorkeeper do
+    controllers :authorizations => 'oauth_dialogs'
+  end
 
   root to: 'main#index'
 
@@ -27,10 +29,9 @@ Optyn::Application.routes.draw do
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',
     :sign_up  => 'register' 
-    },:controllers=> {:registrations=>'users/registrations',:sessions=>'users/sessions',:passwords=>'users/passwords'}
-                      # controllers: {omniauth_callbacks: "omniauth_clients"}                
+    },:controllers => {:registrations => 'users/registrations',:sessions => 'users/sessions', :passwords => 'users/passwords'}
 
-                      devise_scope :user do
+    devise_scope :user do
     # Sessions
     post '/login'         => 'users/sessions#create',       :as => :user_session
     get  '/login'         => 'users/sessions#new',          :as => :new_user_session
@@ -61,10 +62,11 @@ Optyn::Application.routes.draw do
   #Mount resque :)
 mount Resque::Server, :at => "/resque"
 
-namespace :api, defaults: {format: 'json'} do
+namespace :api do
   scope module: :v1 do
-    get 'shop/details', to: 'shops#details'
-    match 'user', to: 'users#show'
+    get 'shop/:app_id/details', to: 'shops#details',  as: :shop_details 
+    get 'shop/button_framework.js', to: 'shops#button_framework'
+    match 'user', to: 'users#show', as: :user_profile
   end
 end
 

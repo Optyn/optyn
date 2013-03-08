@@ -19,10 +19,8 @@ Doorkeeper.configure do
   #   Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
   # end
 
-  resource_owner_from_credentials do |routes|
-    request.params[:user] = {:email => request.params[:username], :password => request.params[:password]}
-    request.env["devise.allow_params_authentication"] = true
-    request.env["warden"].authenticate!(:scope => :user)
+  resource_owner_from_credentials do
+    warden.authenticate!(:scope => :user)
   end
 
   # Authorization Code expiration time (default 10 minutes).
