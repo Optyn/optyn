@@ -84,7 +84,6 @@ module Api
                       					validateToken(acToken);
                   						}
               							} catch(e) {
-              								console.log(e);
               							}
           							}, 500);
       								}
@@ -106,7 +105,6 @@ module Api
                 					url: '#{SiteConfig.app_base_url}#{api_user_profile_path}?access_token=' + acToken,
                 					data: null,
                 					success: function(resp) {
-                						console.log(resp);
                     				user    =   resp;
                     				jQuery('#optyn-first-container').text('Welcome ' + user.name + "!");
                 					},
@@ -126,14 +124,6 @@ module Api
             						else{
                 					return results[1];
             						}
-        							}
-
-        							function startLogoutPolling() {
-            						jQuery('#loginText').show();
-            						jQuery('#logoutText').hide();
-            						loggedIn = false;
-            						jQuery('#uName').text('Welcome ');
-            						jQuery('#imgHolder').attr('src', 'none.jpg');
         							}
 										)
 					format.any {response.headers['Content-Type'] = "application/javascript";render text: script}

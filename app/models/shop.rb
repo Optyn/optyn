@@ -88,9 +88,6 @@ class Shop < ActiveRecord::Base
     details[:button_url] = SiteConfig.app_base_url + "/assets/logo.png"
 
     # put the oauth details
-    details[:redirect_uri] = redirect_uri
-    details[:app_id] = app_id
-    details[:secret] = secret
     details[:welcome_message] = SiteConfig.api_welcome_message
 
     details
