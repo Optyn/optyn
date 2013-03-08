@@ -1,7 +1,7 @@
 Optyn::Application.routes.draw do
 
   use_doorkeeper do
-    controllers :authorizations => 'oauth_dialogs'
+    controllers :authorizations => 'oauth_authorizations'
   end
 
   root to: 'main#index'
