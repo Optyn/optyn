@@ -1,17 +1,18 @@
-class CreateAddresses < ActiveRecord::Migration
+class CreateLocations < ActiveRecord::Migration
   def up
-    create_table :addresses do |t|
+    create_table :locations do |t|
       t.string :street_address1
       t.string :street_address2
-      t.string :state
       t.string :city
-      t.integer :merchant_id
+      t.references :state
+      t.references :shop
+      t.string :zip
       t.float :longitude
       t.float :latitude
       t.timestamps
     end
   end
   def down 
-    drop_table :addresses
+    drop_table :locations
   end
 end

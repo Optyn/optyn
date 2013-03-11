@@ -35,14 +35,14 @@ ActiveRecord::Schema.define(:version => 20130306055220) do
   create_table "locations", :force => true do |t|
     t.string   "street_address1"
     t.string   "street_address2"
-    t.string   "state"
     t.string   "city"
+    t.integer  "state_id"
     t.integer  "shop_id"
+    t.string   "zip"
     t.float    "longitude"
     t.float    "latitude"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "zip"
   end
 
   create_table "managers", :force => true do |t|
@@ -130,6 +130,13 @@ ActiveRecord::Schema.define(:version => 20130306055220) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "stype"
+  end
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
