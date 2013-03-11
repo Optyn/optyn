@@ -1,4 +1,4 @@
-class AddColumnsToSubscriptions < ActiveRecord::Migration
+class AddShopIdAndActiveFlagToSubscriptions < ActiveRecord::Migration
   def up
     add_column :subscriptions, :shop_id, :integer
     add_column :subscriptions, :active, :boolean

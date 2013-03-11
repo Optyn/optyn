@@ -1,4 +1,4 @@
-class AddColumnToSubscriptions < ActiveRecord::Migration
+class AddStripeCustomerTokenToSubscriptions < ActiveRecord::Migration
   def up
     add_column :subscriptions, :stripe_customer_token, :string
   end
