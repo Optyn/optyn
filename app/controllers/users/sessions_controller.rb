@@ -1,13 +1,8 @@
 class Users::SessionsController < Devise::SessionsController
-  before_filter :require_no_consumer
-
-  def create
-    super
-  end
-  
-  def new
-    super
-    session[:manager]=nil
-    session[:user]=true
-  end
+	def create
+		self.resource = warden.authenticate!(auth_options)
+    set_flash_message(:notice, :signed_in) if is_navigational_format?
+    sign_in(resource_name, resource)
+    after_sign_in_path_for(resource)
+	end
 end
