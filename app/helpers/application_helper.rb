@@ -1,5 +1,5 @@
 module ApplicationHelper
-  
+
   def user_present?
     user_signed_in? || merchants_manager_signed_in?
   end
@@ -16,5 +16,40 @@ module ApplicationHelper
 
   def is_shop_local?(shop)
     shop.is_local?
+  end
+
+  def display_flash_message
+    if (flash_type = fetch_falsh_type)
+      content_tag :center, class: "lead #{bootstrap_class_for(flash_type)}" do
+        flash[flash_type]
+      end
+    end
+  end
+
+  def fetch_falsh_type
+    if flash[:notice].present?
+      :notice
+    elsif flash[:error].present?
+      :error
+    elsif flash[:alert].present?
+      :alert
+    elsif flash[:success].present?
+      :success
+    end
+  end
+
+  def bootstrap_class_for(flash_type)
+    case flash_type
+    when :success
+      "alert-success"
+    when :error
+      "alert-error"
+    when :alert
+      "alert-error"
+    when :notice
+      "alert-success"
+    else
+      'alert'
+    end
   end
 end

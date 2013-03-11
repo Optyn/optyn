@@ -15,8 +15,7 @@
       %span up
     = render partial: "layouts/header"
 
-    %center.lead
-      = flash[:notice] if flash[:notice].present?
+    = display_flash_message
 
     #container.container
       = yield
