@@ -11,6 +11,18 @@ defaults:
   #Add the app_base_url
   #Add the welcome message for the optyn button
 
+staging:
+  twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
+  twitter_consumer_secret: 'bTGpU2SLyqai4yGbMzqfrTP20zxbNYySroKd9HIxeM'
+  facebook_app_key: '624632634229184'
+  facebook_app_secret: 'f1675b7e3b2027d69b14e8421e80ebaa'
+  google_client_id: '951432870594-kfenjdp27bk83bb5r9vm55rielr30i4h.apps.googleusercontent.com'
+  google_client_secret: 'Nb-tX1RofqWfyiSsh3GNt8Wn'
+  linkedin_api_key: 'j90jf1gvh8t7'
+  linkedin_secret_key: 'fHPWIwhGCnVr2Iue'
+  app_host: "development.optyn.com"
+  app_base_url: 'http://development.optyn.com'
+
 development:  
   twitter_consumer_key: 'Acwx2jBkCCbFZHkW8wEubQ'
   twitter_consumer_secret: 'zGevh2gWCvuW2h2BXPe84arg5sm7A4bEWmxvHddno'
