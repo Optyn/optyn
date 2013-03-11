@@ -1,3 +1,3 @@
 class State < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :abbreviation
 end
