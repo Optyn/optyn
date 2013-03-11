@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation,
   :remember_me,:office_zip_code, :home_zip_code
 
+  after_create :update_zip_prompted
 
   def self.from_omniauth(auth)
   	Authentication.fetch_authentication(auth.provider, auth.uid,"User").account rescue create_from_omniauth(auth)
@@ -59,6 +60,13 @@ class User < ActiveRecord::Base
   	else
   		super
   	end
+  end
+
+  def update_zip_prompted(force=false)
+    if home_zip_code.present? || office_zip_code.present? || force
+      self.zip_prompted = true
+      save!(validate: false)
+    end
   end
 
   def create_or_update_zips(attrs={})

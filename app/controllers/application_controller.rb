@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :is_shop_local_and_active?
 
   private
-  def require_consumer_zip_code
-    redirect_to new_user_zip_path if current_user && !current_user.zip_prompted?
-  end
-
   def require_no_consumer
     redirect_to root_path if merchants_manager_signed_in?
   end
