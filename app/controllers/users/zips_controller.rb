@@ -9,7 +9,7 @@ class Users::ZipsController < ApplicationController
     @user = current_user
     @user.attributes = params[:user]
     if @user.create_or_update_zips(params[:user])
-      redirect_to root_path
+      redirect_to connections_path
     else
       render 'new'
     end
