@@ -1,5 +1,7 @@
 Optyn::Application.routes.draw do
 
+  get "connections/index"
+
   root to: 'main#index'
 
   # Static Pages created by Alen
@@ -53,6 +55,8 @@ Optyn::Application.routes.draw do
   match '/auth/failure' => 'omniauth_clients#failure'
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
+  resources :connections
+
   resources :locations
 
   #Mount resque :)
@@ -81,6 +85,7 @@ namespace "merchants" do |merchant|
     end
 
     resource :app 
+    resources :connections
 end
 
 use_doorkeeper do
