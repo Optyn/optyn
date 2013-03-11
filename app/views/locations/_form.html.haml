@@ -9,8 +9,10 @@
       = f.text_field :street_address2
       %label.pull-left City
       = f.text_field :city
+      %label.pull-left State
+      = f.collection_select :state_id, @states, :id, :name, include_blank: "-- Select State --"
+
       %label.pull-left Zip Code
       = f.text_field :zip      
-      %label.pull-left State
-      = f.text_field :state
-      = f.submit @location.new_record? ? "Add location" : "Update location"
+
+      = f.submit @location.new_record? ? "Add location" : "Update location", class: "btn"

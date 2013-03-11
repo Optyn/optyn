@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   before_filter :require_manager
   before_filter :load_shop
+  before_filter :load_states, :only => [:new, :create, :edit, :update]
  
   def index
     @locations=@shop.locations
@@ -47,6 +48,10 @@ class LocationsController < ApplicationController
   protected
     def load_shop
       @shop=current_merchants_manager.shop
+    end
+
+    def load_states
+      @states = State.all
     end
 
 end
