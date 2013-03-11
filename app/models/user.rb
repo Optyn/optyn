@@ -10,11 +10,6 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
 
   validates :name ,:presence => true
-  validates_presence_of :home_zip_code,:message=>"Please enter atleast one zip code", :if => lambda{ |user| user.office_zip_code.blank? }
-  validates_presence_of :office_zip_code, :presence => true, :if => lambda{ |user| user.home_zip_code.blank? && !user.errors.has_key?(:home_zip_code) }
-  validates :office_zip_code, :length => { :minimum => 5,:maximum => 5,:message=>"invalid" }, :format => { :with => /^\d+$/ , } , :if => lambda{|user| !user.office_zip_code.blank? }
-  validates :home_zip_code, :length => { :minimum => 5,:maximum  => 5,:message=>"invalid" }, :format => { :with => /^\d+$/} , :if => lambda{|user| !user.home_zip_code.blank? }
-
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
