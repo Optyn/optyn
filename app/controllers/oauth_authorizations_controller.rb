@@ -6,9 +6,11 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
 	end
 
 	def create
+		super
 	end
 
 	def show
+		super
 		if params[:callback].present?
 			render text: "#{params[:callback]}()"
 		end
