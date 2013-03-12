@@ -1,5 +1,5 @@
 class Merchants::Managers::SessionsController < Devise::SessionsController
-  before_filter :require_no_manager, except: [:destroy]
+  before_filter :require_customer_logged_out
 
   include MerchantSessionsRedirector
 

@@ -1,7 +1,7 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
   include MerchantSessionsRedirector
 
-  before_filter :require_no_manager
+  before_filter :require_customer_logged_out
   
   def new
     session[:manager]=true

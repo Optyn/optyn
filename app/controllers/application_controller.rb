@@ -8,8 +8,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path if merchants_manager_signed_in?
   end
 
-  def require_no_manager
-    redirect_to root_path if user_signed_in?
+  def require_customer_logged_out
+    if user_signed_in?
+      flash[:alert] = "You are already logged in"
+      redirect_to root_path 
+    end
   end
 
   def require_manager

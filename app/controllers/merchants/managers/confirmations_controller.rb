@@ -1,4 +1,4 @@
 class Merchants::Managers::ConfirmationsController < Devise::ConfirmationsController
-  before_filter :require_no_manager
+  before_filter :require_customer_logged_out
 
 end
