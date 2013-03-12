@@ -4,8 +4,11 @@ class ApplicationController < ActionController::Base
   helper_method :is_shop_local_and_active?
 
   private
-  def require_no_consumer
-    redirect_to root_path if merchants_manager_signed_in?
+  def require_manager_logged_out
+    if merchants_manager_signed_in?
+      flash[:alert] = "You are already logged in"
+      redirect_to root_path 
+    end
   end
 
   def require_customer_logged_out
