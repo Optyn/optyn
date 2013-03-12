@@ -35,12 +35,15 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    flash[:notice] = "Signed in successfully"
-    if current_user.zip_prompted?
-      redirect_to connections_path
-    else
-      redirect_to new_user_zip_path
+    if session[:user_return_to].present?
+      return session[:user_return_to]
     end
     
+    flash[:notice] = "Signed in successfully"
+    if current_user.zip_prompted?
+      connections_path
+    else
+      new_user_zip_path
+    end
   end
 end
