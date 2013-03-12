@@ -1,4 +1,4 @@
-class LocationsController < ApplicationController
+class Merchants::LocationsController < ApplicationController
   before_filter :require_manager
   before_filter :load_shop
   before_filter :load_states, :only => [:new, :create, :edit, :update]
@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
 
     if @location.save
       flash[:notice]="Location added successfully"
-      redirect_to locations_path
+      redirect_to merchants_locations_path
     else
       render 'new'
     end
@@ -31,7 +31,7 @@ class LocationsController < ApplicationController
     @location=@shop.locations.find(params[:id])
     if @location.update_attributes(params[:location])
       flash[:notice]="Location updated successfully"
-      redirect_to locations_path
+      redirect_to merchants_locations_path
     else
       render 'edit'
     end

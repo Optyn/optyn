@@ -57,8 +57,6 @@ Optyn::Application.routes.draw do
 
   resources :connections
 
-  resources :locations
-
   #Mount resque :)
 mount Resque::Server, :at => "/resque"
 
@@ -84,8 +82,9 @@ namespace "merchants" do |merchant|
       post '/create_new_manager' => 'managers/registrations#create_new_manager'
     end
 
-    resource :app 
-    resources :connections
+  resource :app 
+  resources :connections
+  resources :locations  
 end
 
 use_doorkeeper do

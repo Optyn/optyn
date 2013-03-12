@@ -3,7 +3,7 @@
     %h2 Your Locations
     .span12.box_wrapper
       %div
-        %a.btn{:href => new_location_path}
+        %a.btn{:href => new_merchants_location_path}
           %i.icon-white.icon-heart
           Add New Location
       %table.table
@@ -28,7 +28,7 @@
             %td
               = location.state_name
             %td
-              = link_to "Edit",edit_location_path(location)    
+              = link_to "Edit", edit_merchants_location_path(location)    
               = "|"
-              = link_to "Remove",location_path(location),:confirm => 'Are you sure?', :method => :delete
+              = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure?', :method => :delete
 
