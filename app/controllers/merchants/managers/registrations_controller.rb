@@ -4,8 +4,8 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
   before_filter :require_customer_logged_out
   
   def new
-    session[:manager]=true
-    session[:user]=nil
+    session[:omniauth_manager]=true
+    session[:omniauth_user]=nil
     @shop=Shop.new
     @shop.managers.build
   end
