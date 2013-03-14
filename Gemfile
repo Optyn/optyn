@@ -26,6 +26,7 @@ gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.6.7'
 gem 'oauth2'
 gem 'carrierwave'
+gem "fog"
 
 # gems for stripe payment
 gem 'stripe'

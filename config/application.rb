@@ -74,4 +74,5 @@ module Optyn
 
 end
 require 'devise'
+require File.expand_path('../initializers/site_config', __FILE__)
 

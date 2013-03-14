@@ -11,6 +11,7 @@ defaults:
   #Add the linkedin app id and linkedin client secret   
   #Add the app_base_url
   #Add the welcome message for the optyn button
+  #Add Bucket name for s3
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
@@ -23,6 +24,7 @@ staging:
   linkedin_secret_key: 'fHPWIwhGCnVr2Iue'
   app_host: "development.optyn.com"
   app_base_url: 'http://development.optyn.com'
+  bucket: 'optynstaging'
 
 development:  
   twitter_consumer_key: 'Acwx2jBkCCbFZHkW8wEubQ'
@@ -37,5 +39,4 @@ development:
   stripe_api_key: "sk_test_LvqRzhN1kzeKaqQRPsQ9Vug0"
   stripe_public_key: "pk_test_JpL5IkK8MiKjycqdYsfAQO1c"
   app_base_url: 'http://localhost:3000'
-  
-  
+  bucket: 'optyndevelopment'
