@@ -84,7 +84,8 @@ namespace "merchants" do |merchant|
 
   resource :app 
   resources :connections
-  resources :locations  
+  resources :locations 
+  resources :shops 
 end
 
 use_doorkeeper do

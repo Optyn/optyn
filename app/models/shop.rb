@@ -3,7 +3,8 @@ require 'embed_code_generator'
 class Shop < ActiveRecord::Base
 
   SHOP_TYPES=['local','online']
-  attr_accessible :name,:stype,:managers_attributes,:locations_attributes
+  attr_accessible :name,:stype,:managers_attributes,:locations_attributes,:description, :logo_img
+  mount_uploader :logo_img, ImageUploader
 
   validates :name,:presence=>true
   validates :stype, :presence => true, :inclusion => { :in => SHOP_TYPES , :message => "is Invalid" }
