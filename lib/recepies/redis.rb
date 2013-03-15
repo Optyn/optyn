@@ -6,8 +6,8 @@ Capistrano::Configuration.instance(true).load do
       ["cd /tmp",
        "wget http://download.redis.io/redis-stable.tar.gz",
        "tar xvzf redis-stable.tar.gz", 
-       "cd redis-stable", 
-       "make", 
+       "cd redis-stable",
+       "sudo make", 
        "sudo cp /tmp/redis-stable/src/redis-benchmark /usr/local/bin/",
        "sudo cp /tmp/redis-stable/src/redis-cli /usr/local/bin/",
        "sudo cp /tmp/redis-stable/src/redis-server /usr/local/bin/",
@@ -23,7 +23,7 @@ Capistrano::Configuration.instance(true).load do
 
     desc "Stop the Redis server"
     task :stop do
-      run 'echo "SHUTDOWN" | nc localhost 6379'
+      run 'echo "SHUTDOWN" | nc localhost 6379' rescue nil
     end
 
   end
