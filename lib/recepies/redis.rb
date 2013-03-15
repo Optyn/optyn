@@ -23,7 +23,7 @@ Capistrano::Configuration.instance(true).load do
 
     desc "Stop the Redis server"
     task :stop do
-      run 'echo "SHUTDOWN" | nc localhost 6379' rescue nil
+      run 'echo "SHUTDOWN" | nc localhost 6379'
     end
 
   end
