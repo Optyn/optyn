@@ -1,6 +1,9 @@
+%label.pull-left Name
+= f.text_field :name
 %label.pull-left Description
 = f.text_field :description
 %label.pull-left Logo
 = f.file_field :logo_img
-
+%label.pull-left Business Category
+= f.select :business_category, Shop::INDUSTRIES, {:prompt=>"Select relevant industry*"}
 = f.submit "update" , class: "btn"

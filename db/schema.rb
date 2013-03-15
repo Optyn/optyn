@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314052309) do
+ActiveRecord::Schema.define(:version => 20130315074748) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -127,11 +127,12 @@ ActiveRecord::Schema.define(:version => 20130314052309) do
   create_table "shops", :force => true do |t|
     t.string   "name"
     t.text     "embed_code"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "stype"
     t.string   "description"
     t.string   "logo_img"
+    t.string   "business_category"
   end
 
   create_table "states", :force => true do |t|

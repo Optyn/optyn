@@ -3,7 +3,7 @@ require 'embed_code_generator'
 class Shop < ActiveRecord::Base
 
   SHOP_TYPES=['local','online']
-  attr_accessible :name,:stype,:managers_attributes,:locations_attributes,:description, :logo_img
+  attr_accessible :name,:stype,:managers_attributes,:locations_attributes,:description, :logo_img, :business_category
   mount_uploader :logo_img, ImageUploader
 
   validates :name,:presence=>true
@@ -25,6 +25,12 @@ class Shop < ActiveRecord::Base
   scope :inlcudes_locations, includes(:locations)
   
   scope :for_app_id, ->(app_id){inlcudes_locations.includes_app.where(["oauth_applications.uid = :app_id", {app_id: app_id}])}
+
+  INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
+
+  def display_industry
+    business_category.humanize 
+  end
 
   def self.by_app_id(app_id)
     for_app_id(app_id).first  

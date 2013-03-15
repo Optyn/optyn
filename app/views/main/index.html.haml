@@ -2,6 +2,8 @@
   = 'Please add locations for your Business' if has_locations?
 .pull-right
   - if merchants_manager_signed_in?
+    = link_to "Edit personal information", edit_merchants_manager_registration_path if merchants_manager_signed_in?
+    = "|"
     = link_to "Account Page", upgrade_path if !is_shop_local_and_active?
     = "|"
     = link_to "Edit billing information", edit_billing_info_path if is_shop_local?(current_merchants_manager.shop)
