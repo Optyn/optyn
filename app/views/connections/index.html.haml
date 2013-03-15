@@ -1,1 +1,25 @@
-%h1 Connections coming soon...
+#features.features_page
+  .container
+    .features1
+      / header
+      .row
+        .span12
+          %h4
+            Connections coming soon...
+      / feature list
+      .row
+        .span3
+          %ul.nav.nav-list
+            %li.nav-header Your Menu
+            %li.active
+              %a{:href => "#"} Dashboard
+            %li
+              %a{:href => "#"} My Account
+            %li
+              %a{:href => "connections"} Connections
+            %li
+              %a{:href => destroy_user_session_path} Logout
+        .span6
+          %p
+            Coming Soon
+
