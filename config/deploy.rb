@@ -39,8 +39,7 @@ after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
-after "deploy:stop", "redis:stop"
-after "deploy:stop", "redis:start"
+
 
 namespace :deploy do
 	desc "reload the database with seed data"
