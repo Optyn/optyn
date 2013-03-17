@@ -102,8 +102,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		# run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
-  		run "echo 'Skipping precomile....'"
+  		run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 end
