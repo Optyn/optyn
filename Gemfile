@@ -56,6 +56,7 @@ group :development do
   gem 'capistrano'
   gem 'rvm-capistrano'
   gem 'rails-erd'
+  gem "capistrano-resque", "~> 0.1.0"
 end
 
 group :development, :test do
