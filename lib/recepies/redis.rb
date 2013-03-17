@@ -18,11 +18,17 @@ Capistrano::Configuration.instance(true).load do
 
      desc "Start the Redis server"
      task :start, :roles => :app do
+      puts "*" * 100
+      puts "Starting the redis server"
+      puts "-" * 100
       run "redis-server /etc/redis.conf"
     end
 
     desc "Stop the Redis server"
     task :stop, :roles => :app do
+      puts "*" * 100
+      puts "Stopping the redis server"
+      puts "-" * 100
       run 'echo "SHUTDOWN" | nc localhost 6379'
     end
 
