@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
-require "#{File.dirname(__FILE__)}/../lib/recepies/redis"
+require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 set :default_stage, "production"
 set :application, "optyn"
