@@ -228,6 +228,8 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.20.0)
       rufus-scheduler
+    resque_mailer (2.2.3)
+      actionmailer (~> 3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.13.0)
@@ -333,6 +335,8 @@ DEPENDENCIES
   rails (= 3.2.11)
   rails-erd
   resque
+  resque-scheduler
+  resque_mailer
   rspec
   rspec-rails
   rvm-capistrano
