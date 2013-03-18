@@ -1,18 +1,16 @@
-class Merchants::LocationsController < ApplicationController
-  before_filter :require_manager
-  before_filter :load_shop
+class Merchants::LocationsController < Merchants::BaseController
   before_filter :load_states, :only => [:new, :create, :edit, :update]
- 
+
   def index
-    @locations=@shop.locations
+    @locations= current_shop.locations
   end
 
   def new
-    @location=@shop.locations.build
+    @location = current_shop.locations.build
   end
 
   def create
-    @location=@shop.locations.new(params[:location])
+    @location = current_shop.locations.new(params[:location])
 
     if @location.save
       flash[:notice]="Location added successfully"
@@ -24,11 +22,11 @@ class Merchants::LocationsController < ApplicationController
   end
   
   def edit 
-    @location=@shop.locations.find(params[:id])
+    @location = current_shop.locations.find(params[:id])
   end
 
   def update 
-    @location=@shop.locations.find(params[:id])
+    @location = current_shop.locations.find(params[:id])
     if @location.update_attributes(params[:location])
       flash[:notice]="Location updated successfully"
       redirect_to merchants_locations_path
@@ -38,7 +36,7 @@ class Merchants::LocationsController < ApplicationController
   end
 
   def destroy
-    @location=@shop.locations.find(params[:id])
+    @location = current_shop.locations.find(params[:id])
     @location.destroy
     flash[:notice]="Location removed successfully"
     redirect_to root_path
@@ -46,12 +44,7 @@ class Merchants::LocationsController < ApplicationController
 
 
   protected
-    def load_shop
-      @shop=current_merchants_manager.shop
-    end
-
-    def load_states
-      @states = State.all
-    end
-
+  def load_states
+    @states = State.all
+  end
 end

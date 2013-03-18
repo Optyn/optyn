@@ -3,7 +3,7 @@
     %header
       %h1
         Application for: 
-        = @shop.name
+        = current_shop.name
   
   .span10
     %h4 Callback url:
@@ -24,7 +24,7 @@
     %h4 Button Script:
     %p
       %code{:id => 'embed_code'}
-        = @shop.embed_code    
+        = current_shop.embed_code    
 
     .actions
       = link_to "Edit", edit_merchants_app_path, :class => "btn"

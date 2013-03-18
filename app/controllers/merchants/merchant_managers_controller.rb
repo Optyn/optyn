@@ -1,8 +1,5 @@
-class Merchants::MerchantManagersController < ApplicationController
-  before_filter :require_manager
-
+class Merchants::MerchantManagersController < Merchants::BaseController
   def show_managers
-    @managers=current_merchants_manager.shop.managers
+    @managers = current_merchants_manager.shop.managers
   end
-
 end

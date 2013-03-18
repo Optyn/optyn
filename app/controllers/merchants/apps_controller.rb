@@ -1,5 +1,4 @@
-class Merchants::AppsController < ApplicationController
-	before_filter :authenticate_merchants_manager!
+class Merchants::AppsController < Merchants::BaseController
 	before_filter :redirect_to_edit, :only => [:new, :create]
 	before_filter :redirect_to_new, :except => [:new, :create]
 
@@ -28,10 +27,6 @@ class Merchants::AppsController < ApplicationController
 	end
 
 	private
-	def current_shop
-		@shop ||= current_merchants_manager.shop
-	end
-
 	def redirect_to_edit
 		if current_shop.oauth_application.present?
 			redirect_to edit_merchants_app_path

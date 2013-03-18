@@ -8,6 +8,6 @@
     = label_tag(:redirect_uri, 'Redirect Uri:')
 
     .input
-      = text_field_tag(:redirect_uri, (@shop.oauth_application.redirect_uri rescue nil))
+      = text_field_tag(:redirect_uri, (current_shop.oauth_application.redirect_uri rescue nil))
 
     = hidden_field_tag :reset, false  
