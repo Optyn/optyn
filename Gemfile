@@ -29,6 +29,7 @@ gem 'doorkeeper', '~> 0.6.7'
 gem 'oauth2'
 gem 'carrierwave'
 gem "fog"
+gem 'localtunnel'
 
 # gems for stripe payment
 gem 'stripe'
