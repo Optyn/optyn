@@ -1,7 +1,8 @@
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
-require "#{File.dirname(__FILE__)}/../lib/recepies/redis"
+require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
+require "capistrano-resque"
 
 set :default_stage, "production"
 set :application, "optyn"
@@ -24,6 +25,9 @@ set :rvm_ruby_string, "ruby-1.9.3-p385@optyn"
 set :rvm_type, :user
 set :deploy_via, :remote_cache
 
+#set the reque workers add other queues here...
+set :workers, { "devise_queue" => 1 }
+
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 # if you want to clean up old releases on each deploy uncomment this:
@@ -39,8 +43,8 @@ after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
-after "deploy:stop", "redis:stop"
-after "deploy:stop", "redis:start"
+after "deploy:restart", "resque:start"
+
 
 namespace :deploy do
 	desc "reload the database with seed data"

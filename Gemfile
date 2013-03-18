@@ -22,6 +22,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'resque', :require => 'resque/server'
+gem 'resque-scheduler', :require => 'resque_scheduler'
+gem 'resque_mailer'
 gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.6.7'
 gem 'oauth2'
@@ -56,6 +58,7 @@ group :development do
   gem 'capistrano'
   gem 'rvm-capistrano'
   gem 'rails-erd'
+  gem "capistrano-resque", "~> 0.1.0"
 end
 
 group :development, :test do
