@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :is_shop_local_and_active?
-
   private
   def require_manager_logged_out
     if merchants_manager_signed_in?
@@ -27,7 +26,6 @@ class ApplicationController < ActionController::Base
   end
 
   def is_shop_local?(shop)
-
   end
 
   def require_shop_local_and_inactive

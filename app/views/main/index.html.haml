@@ -4,10 +4,12 @@
   - if merchants_manager_signed_in?
     = link_to "Edit personal information", edit_merchants_manager_registration_path if merchants_manager_signed_in?
     = "|"
-    = link_to "Account Page", upgrade_path if !is_shop_local_and_active?
-    = "|"
-    = link_to "Edit billing information", edit_billing_info_path if is_shop_local?(current_merchants_manager.shop)
-    = "|"
+    - if !is_shop_local_and_active?
+      = link_to "Account Page", upgrade_path 
+      = "|"
+    - if is_shop_local_and_active?
+      = link_to "Edit billing information", edit_billing_info_path 
+      = "|"
     = link_to "Add location", new_merchants_location_path if is_shop_local?(current_merchants_manager.shop)
     = "|"
     = link_to "Add Manager", merchants_add_manager_path if merchants_manager_signed_in?

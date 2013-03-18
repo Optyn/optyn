@@ -3,15 +3,17 @@
     %li.nav-header Your Menu
     %li.active
       = link_to "Edit personal information", edit_merchants_manager_registration_path if merchants_manager_signed_in?
+    %li  
+      = link_to "Account Page", upgrade_path if !is_shop_local_and_active?
     %li
-      = link_to "Edit billing information", edit_billing_info_path if is_shop_local?(current_merchants_manager.shop)
+      = link_to "Edit billing information", edit_billing_info_path if is_shop_local_and_active?
     %li
-      = link_to "Add location", new_merchants_location_path if is_shop_local?(current_merchants_manager.shop)
+      = link_to "Add location", new_merchants_location_path if is_shop_local?(current_shop)
     %li
-      = link_to "Add Manager", merchants_add_manager_path if merchants_manager_signed_in?
+      = link_to "Add Manager", merchants_add_manager_path if manager_signed_in?
     %li
-      = link_to "Your Locations", merchants_locations_path if is_shop_local?(current_merchants_manager.shop)
+      = link_to "Your Locations", merchants_locations_path if is_shop_local?(current_shop)
     %li
       = link_to "Your Shop", edit_merchants_shop_path()
     %li
-      = link_to "Your API Button", edit_merchants_app_path if is_shop_local?(current_merchants_manager.shop)
+      = link_to "Your API Button", edit_merchants_app_path if is_shop_local?(current_shop)
