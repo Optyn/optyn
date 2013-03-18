@@ -43,7 +43,7 @@ before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
-after "deploy:restart", "resque:start"
+after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:web:enable"
 after "deploy", "deploy:cleanup"
 
