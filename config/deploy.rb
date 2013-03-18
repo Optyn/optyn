@@ -28,7 +28,6 @@ set :deploy_via, :remote_cache
 #set the reque workers add other queues here...
 set :workers, { "devise_queue" => 1 }
 
-after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -39,11 +38,14 @@ after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 # If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
+after "deploy:update_code", "deploy:web:disable"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:restart", "resque:start"
+after "deploy:restart", "deploy:web:enable"
+after "deploy", "deploy:cleanup"
 
 
 namespace :deploy do
@@ -104,5 +106,26 @@ namespace :deploy do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
   		run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
+  end
+
+  #show hide maintenance page
+  namespace :web do
+    task :disable, :roles => :web, :except => { :no_release => true } do
+      require 'erb'
+      on_rollback { run "rm #{shared_path}/system/maintenance.html" }
+
+      reason = ENV['REASON']
+      deadline = ENV['UNTIL']
+
+      template = File.read(File.join(File.dirname(__FILE__), "deploy",
+          "maintenance.html.erb"))
+      result = ERB.new(template).result(binding)
+
+      put result, "#{shared_path}/system/maintenance.html", :mode => 0644
+    end
+
+    task :enable, :roles => :web, :except => { :no_release => true } do
+      run "rm #{shared_path}/system/maintenance.html"
+    end
   end
 end
