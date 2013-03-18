@@ -1,14 +1,14 @@
-class Merchants::ShopsController < ApplicationController
+class Merchants::ShopsController < BaseController
 
 	def index
 	end
 
 	def edit
-		@shop = Shop.find(params[:id])
+		@shop = current_shop
 	end
 
 	def update
-		@shop = Shop.find(params[:id])
+		@shop = current_shop
 		if @shop.update_attributes(params[:shop])
 			flash[:notice] = "Shop details updated successfully"
       redirect_to root_path
