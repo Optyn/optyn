@@ -1,4 +1,4 @@
-class SubscriptionsController < ApplicationController
+class Merchants::SubscriptionsController < Merchants::BaseController
   
   before_filter :require_manager
   before_filter :require_shop_local_and_inactive, :only => ['upgrade','subscribe']
