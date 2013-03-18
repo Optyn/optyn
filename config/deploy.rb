@@ -4,7 +4,7 @@ require 'rvm/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 require "capistrano-resque"
 
-set :default_stage, "production"
+set :default_stage, "staging"
 set :application, "optyn"
 set :user, "deploy"
 set :deploy_to, "/srv/apps/#{application}"
