@@ -38,11 +38,11 @@ set :workers, { "devise_queue" => 1 }
 
 # If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
-after "deploy:update_code", "deploy:web:disable"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
+after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:start"
 after "deploy:restart", "deploy:web:enable"
 after "deploy", "deploy:cleanup"
