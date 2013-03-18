@@ -1,6 +1,8 @@
 require 'resque/tasks'
 require 'resque_scheduler/tasks'
 
+Resque.logger = Logger.new("#{File.dirname(__FILE__)}/../log/resque.log")
+
 def run_worker(queue, count = 1)
   puts "Starting #{count} worker(s) with QUEUE: #{queue}"
   ops = {:pgroup => true, :err => [(Rails.root + "./log/workers_error.log").to_s, "a"], 
