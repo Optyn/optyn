@@ -14,7 +14,7 @@
                     = error  
 
           .form
-            = form_for @subscription, :url => update_billing_info_path ,:html=>{:id =>"stripe-form"} do |f|
+            = form_for @subscription, :url => edit_merchants_subscription_path ,:html=>{:id =>"stripe-form"} do |f|
 
               = f.hidden_field :plan_id, :value => @plan.id
               = f.hidden_field :email, :value => current_merchants_manager.email
