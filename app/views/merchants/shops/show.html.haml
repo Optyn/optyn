@@ -1,0 +1,27 @@
+#box_sign
+  .container
+    %h2 Your Shops
+
+    = render partial: "merchants/shared/menu"
+    
+    .span8.box_wrapper
+      %div
+      %table.table
+        %tr 
+          %th Name
+          %th Description
+          %th Logo
+          %th Business Category
+          %th Manage
+
+          %tr
+            %td
+              = @shop.name
+            %td
+              = @shop.description
+            %td
+              = image_tag @shop.logo_img.url
+            %td
+              = @shop.business_category
+            %td
+              = link_to "Edit", edit_merchants_shop_path
