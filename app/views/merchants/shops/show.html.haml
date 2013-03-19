@@ -20,7 +20,7 @@
             %td
               = @shop.description
             %td
-              = image_tag @shop.logo_img.url
+              = image_tag @shop.logo_img.url if @shop.logo_img.present?
             %td
               = @shop.business_category
             %td
