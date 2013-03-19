@@ -92,6 +92,7 @@ namespace "merchants" do |merchant|
   get '/edit_billing_info' => 'subscriptions#edit_billing_info'
   put '/update_billing_info' => 'subscriptions#update_billing_info'
   
+  resource :survey, except: :destroy 
 end
 
 use_doorkeeper do
