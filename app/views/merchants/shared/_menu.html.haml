@@ -14,6 +14,6 @@
     %li
       = link_to "Your Locations", merchants_locations_path if is_shop_local?(current_shop)
     %li
-      = link_to "Your Shop", edit_merchants_shop_path()
+      = link_to "Your Shop", merchants_shop_path()
     %li
       = link_to "Your API Button", edit_merchants_app_path if is_shop_local?(current_shop)
