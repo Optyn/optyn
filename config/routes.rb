@@ -78,8 +78,8 @@ namespace "merchants" do |merchant|
     :passwords => 'merchants/managers/passwords',
     :confirmations => 'merchants/managers/confirmations'
     } do 
-      get '/add_manager' => 'managers/registrations#add_manager'
-      post '/create_new_manager' => 'managers/registrations#create_new_manager'
+      get '/add_manager' => 'merchant_managers#add_manager'
+      post '/create_new_manager' => 'merchant_managers#create_new_manager'
     end
 
   resource :app 

@@ -1,5 +1,7 @@
 class Merchants::ShopsController < Merchants::BaseController
 
+	skip_before_filter :active_subscription?, :only => [:show]
+
 	def index
 	end
 

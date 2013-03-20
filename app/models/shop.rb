@@ -36,7 +36,6 @@ class Shop < ActiveRecord::Base
     for_app_id(app_id).first  
   end
 
-
   def shop_already_exists?
     Shop.where("name LIKE ?",self.name).count != 0
   end

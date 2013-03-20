@@ -1,5 +1,6 @@
 class Merchants::LocationsController < Merchants::BaseController
   before_filter :load_states, :only => [:new, :create, :edit, :update]
+  skip_before_filter :active_subscription?, :only => [:index]
 
   def index
     @locations= current_shop.locations
