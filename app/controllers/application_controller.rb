@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :is_shop_local_and_active?
+
   private
+
   def require_manager_logged_out
     if merchants_manager_signed_in?
       flash[:alert] = "You are already logged in"
@@ -24,7 +26,8 @@ class ApplicationController < ActionController::Base
   def is_shop_local_and_active?
     current_merchants_manager.shop.is_subscription_active? if merchants_manager_signed_in?
   end
-
+  
+  
   def is_shop_local?(shop)
   end
 

@@ -1,8 +1,9 @@
 class Merchants::SubscriptionsController < Merchants::BaseController
   
   before_filter :require_manager
-  before_filter :require_shop_local_and_inactive, :only => ['upgrade','subscribe']
-  
+  before_filter :require_shop_local_and_inactive, :only => [:upgrade, :subscribe]
+  skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
+
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
     @subscription=@plan.subscriptions.build
@@ -27,7 +28,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     end
   end
 
-
   def subscribe
     begin
       @subscription=Subscription.new(params[:subscription])
@@ -48,5 +48,4 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     end
 
   end
-
 end

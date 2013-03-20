@@ -4,7 +4,7 @@
       .span12.box
         %div  
           .head
-            %h4 Add new manager to your business
+            %h4 Add new manager to your business 
           .form
             = form_for @manager ,:url => merchants_create_new_manager_path do |f|
               = f.hidden_field :parent_id, :value => @manager.parent_id
