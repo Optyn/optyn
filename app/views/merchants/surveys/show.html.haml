@@ -2,7 +2,7 @@
   = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
 
   %h1
-    Survey
+    Customer segmentation questionaire
 
   %div
     = label_tag :title, "Title:", class: 'pull-left'
@@ -16,7 +16,7 @@
       = @survey.ready_text
   
   .clearfix
-  %h3 Questions
+  %h3 Questions List
 
   .actions
     = link_to "Edit", edit_merchants_survey_path, class: "btn btn-primary"
