@@ -89,17 +89,17 @@ namespace "merchants" do |merchant|
   resource :shop 
   resource :subscription
   get '/upgrade' => 'subscriptions#upgrade'
-  post '/subscribe' => 'subscriptions#subscribe'
+  post '/subscribe' => 'subscriptions#subscribe', as: :subscribe
   get '/edit_billing_info' => 'subscriptions#edit_billing_info'
   put '/update_billing_info' => 'subscriptions#update_billing_info'
   
-  resource :survey, only: [:show, :edit, :update] do
+  resource :survey, only: [:show, :edit, :update], path: :segment do
     member do
       get 'questions'
       get 'preview'
       get 'launch'
     end
-    resources :survey_questions, only: [:new, :edit, :create, :update, :destroy]
+    resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
   end
 
 end
