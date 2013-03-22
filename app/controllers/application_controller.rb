@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
     current_merchants_manager.shop.is_subscription_active? if merchants_manager_signed_in?
   end
   
-  
   def is_shop_local?(shop)
   end
 

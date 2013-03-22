@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_directory ./stripe
+//= require chosen-jquery
 //= require_self
-//= require_tree .
-
-
+//= require_tree

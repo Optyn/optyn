@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_many :authentications,:as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
+  has_many :interests, :as => :holder
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

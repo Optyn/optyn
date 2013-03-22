@@ -9,7 +9,7 @@ class Merchants::BaseController < ApplicationController
 
 	private
 	def active_subscription?
-    unless current_merchants_manager.shop.is_subscription_active?
+    unless current_manager.shop.is_subscription_active?
     	flash[:alert] = "Please update your payment details"
     	redirect_to merchants_upgrade_path
     end

@@ -1,5 +1,11 @@
 Optyn::Application.routes.draw do
 
+  resources :interests
+
+
+  resources :businesses
+
+
   get "connections/index"
 
   root to: 'main#index'
@@ -18,11 +24,6 @@ Optyn::Application.routes.draw do
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
-
-  #get '/upgrade' => 'subscriptions#upgrade'
-  #post '/subscribe' => 'subscriptions#subscribe'
-  #get '/edit_billing_info' => 'subscriptions#edit_billing_info'
-  #put '/update_billing_info' => 'subscriptions#update_billing_info'
   
   devise_for :users, :path_names  => { :sign_out => 'logout',
     :sign_in  => 'login',

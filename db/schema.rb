@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318095042) do
+ActiveRecord::Schema.define(:version => 20130322070130) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(:version => 20130318095042) do
     t.datetime "updated_at",   :null => false
     t.string   "account_type"
     t.integer  "account_id"
+  end
+
+  create_table "businesses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "connections", :force => true do |t|
@@ -31,6 +37,14 @@ ActiveRecord::Schema.define(:version => 20130318095042) do
   end
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
+
+  create_table "interests", :force => true do |t|
+    t.integer  "holder_id"
+    t.string   "holder_type"
+    t.integer  "business_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "street_address1"
@@ -127,12 +141,11 @@ ActiveRecord::Schema.define(:version => 20130318095042) do
   create_table "shops", :force => true do |t|
     t.string   "name"
     t.text     "embed_code"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "stype"
     t.string   "description"
     t.string   "logo_img"
-    t.string   "business_category"
   end
 
   create_table "states", :force => true do |t|

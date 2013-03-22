@@ -22,6 +22,8 @@
             %td
               = image_tag @shop.logo_img.url if @shop.logo_img.present?
             %td
-              = @shop.business_category
+              - @shop.businesses.collect(&:name).each do |name|
+                = name
+                %br
             %td
               = link_to "Edit", edit_merchants_shop_path

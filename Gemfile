@@ -30,6 +30,7 @@ gem 'oauth2'
 gem 'carrierwave'
 gem "fog"
 gem 'localtunnel'
+gem 'chosen-rails'
 
 # gems for stripe payment
 gem 'stripe'
