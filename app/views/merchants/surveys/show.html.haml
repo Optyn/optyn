@@ -1,0 +1,54 @@
+%div
+  = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
+
+  %h1
+    Survey
+
+  %div
+    = label_tag :title, "Title:", class: 'pull-left'
+    .span6
+      = @survey.title
+
+  .clearfix    
+  %div
+    = label_tag :ready, "Launched?", class: 'pull-left'
+    .span6
+      = @survey.ready_text
+  
+  .clearfix
+  %h3 Questions
+
+  .actions
+    = link_to "Edit", edit_merchants_survey_path, class: "btn btn-primary"
+    = link_to "Preview", preview_merchants_survey_path, class: "btn btn-info"
+    = render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
+
+  .clearfix
+  %br  
+  #questions_list
+    %table{class: 'table table-bordered table-striped'}
+      %thead
+        %tr
+          %th Element Type
+          %th Question
+          %th Position
+          %th Values
+
+      %tbody
+        - if @survey.survey_questions.present?
+          - @survey.survey_questions.each do |question|
+            %tr
+              %td= question.element_type.titleize
+              %td= question.label
+              %td= question.position
+              %td= question.values.join("<br />").html_safe
+        - else
+          %tr
+            %td{colspan: "4"} No Questions for this survey      
+
+  - if @survey.survey_questions.size > 10
+    .clearfix
+    .actions
+      = link_to "Edit", edit_merchants_survey_path, class: "btn btn-primary"
+      = link_to "Preview", preview_merchants_survey_path, class: "btn btn-info"
+      = render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}

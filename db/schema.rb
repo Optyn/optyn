@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314052309) do
+ActiveRecord::Schema.define(:version => 20130318095042) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -151,6 +151,42 @@ ActiveRecord::Schema.define(:version => 20130314052309) do
     t.integer  "shop_id"
     t.boolean  "active"
   end
+
+  create_table "survey_answers", :force => true do |t|
+    t.integer  "survey_question_id"
+    t.text     "value"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "survey_answers", ["created_at"], :name => "index_survey_answers_on_created_at"
+  add_index "survey_answers", ["survey_question_id"], :name => "index_survey_answers_on_survey_question_id"
+
+  create_table "survey_questions", :force => true do |t|
+    t.integer  "survey_id"
+    t.string   "element_type"
+    t.text     "label"
+    t.text     "values"
+    t.string   "default_text"
+    t.boolean  "show_label",   :default => true
+    t.boolean  "required",     :default => true
+    t.integer  "position"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "survey_questions", ["survey_id"], :name => "index_survey_questions_on_survey_id"
+
+  create_table "surveys", :force => true do |t|
+    t.string   "title"
+    t.boolean  "ready"
+    t.integer  "shop_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "surveys", ["shop_id"], :name => "index_surveys_on_shop_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

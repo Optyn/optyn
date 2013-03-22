@@ -5,7 +5,7 @@ class Merchants::BaseController < ApplicationController
 	before_filter :authenticate_merchants_manager!
 	before_filter :active_subscription?
 
-	helper_method :current_shop, :manager_signed_in?, :current_manager
+	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
 	private
 	def active_subscription?
@@ -17,5 +17,9 @@ class Merchants::BaseController < ApplicationController
 
 	def current_shop 
 		@_shop ||= current_merchants_manager.shop if merchants_manager_signed_in?
+	end
+
+	def current_survey
+		@_survey = (current_shop.survey || current_shop.send(:create_dummy_survey))
 	end
 end

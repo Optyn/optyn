@@ -1,0 +1,7 @@
+%div
+  = form_for :survey_question, :url => merchants_survey_survey_question_path(params[:id]), :method => :put, :html => {:id => "survey_question_form"} do |f|
+    
+    %fieldset
+      = render :partial => "merchants/survey_questions/form", locals: {f: f}
+
+    .clearfix

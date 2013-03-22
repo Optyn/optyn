@@ -15,6 +15,7 @@ class Shop < ActiveRecord::Base
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :users, through: :connections  
+  has_one :survey, dependent: :destroy
 
 
   accepts_nested_attributes_for :managers
@@ -27,6 +28,7 @@ class Shop < ActiveRecord::Base
   scope :for_app_id, ->(app_id){inlcudes_locations.includes_app.where(["oauth_applications.uid = :app_id", {app_id: app_id}])}
 
   INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
+  after_save :create_dummy_survey
 
   def display_industry
     business_category.humanize 
@@ -112,6 +114,18 @@ class Shop < ActiveRecord::Base
   end
 
   private
+  def create_dummy_survey
+    reload
+    unless survey.present?
+      dummy_survey = Survey.new
+      dummy_survey.shop_id = self.id
+      dummy_survey.save(validate: false)
+      dummy_survey
+    else
+      survey
+    end
+  end
+
   def generate_application(redirect_uri)
     Shop.transaction do
       app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip, 

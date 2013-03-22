@@ -1,0 +1,29 @@
+.control-group
+  = f.label :title, class: 'control-label'
+  .controls
+    = f.text_field :title
+
+= f.hidden_field :ready
+= hidden_field_tag :choice, 'draft'
+
+.control-group
+  .controls
+    %fieldset
+      %legend
+        Questions List
+        #questions_list
+          Please Wait...
+
+          = hidden_field_tag "new_merchants_survey_survey_question_path", new_merchants_survey_survey_question_path
+          = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
+
+        %div
+          .pull-right
+            =button_tag "Add Question", type: :button, id: 'add_question_button', class: 'btn'
+
+    = submit_tag "Save as Draft", name: 'draft', class: "btn btn-info submit_survey", title: 'Saves this survey as draft mode'
+    = submit_tag "Save and Preview", name: 'preview',class: "btn btn-primary submit_survey", title: 'Maintains the state of this survey only updating it'
+    = submit_tag "Launch", name: 'launch', class: "btn btn-success submit_survey", title: 'Launch this survey'
+
+= render partial: "merchants/surveys/new_question_modal"
+= render partial: "merchants/surveys/edit_question_modal"
