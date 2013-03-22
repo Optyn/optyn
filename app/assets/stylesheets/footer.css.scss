@@ -1,0 +1,88 @@
+/* footer section */
+#footer {
+  background: url("/assets/nav_bg.jpg") 0 0 repeat;
+  min-height: 300px;
+  margin-top: 100px;
+  color: #fff;
+  padding-top: 35px;
+}
+#footer h3 {
+  margin-bottom: 25px;
+}
+#footer .blog_post {
+  /*width: 80%;*/
+}
+#footer .blog_post .img-circle {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  border: 0px;
+}
+#footer .blog_post .title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+}
+#footer .blog_post .intro {
+  margin: 10px 0px;
+  font-size: 15px;
+}
+#footer .blog_post .date {
+  font-size: 13px;
+  color: #B7B9BD;
+}
+#footer .contact_us .field {
+  margin-bottom: 15px;
+}
+#footer .contact_us .field .label_field {
+  float: left;
+  width: 80px;
+}
+#footer .contact_us .field input[type="text"],
+#footer .contact_us .field textarea {
+  background-color: #1a1f26;
+  border: 1px solid #2f3743;
+  border-radius: 5px;
+  color: #fff;
+}
+#footer .contact_us .field textarea {
+  height: 65px;
+}
+#footer .contact_us .field select {
+  width: 205px;
+}
+#footer .contact_us button[type="submit"] {
+  margin-left: 220px;
+}
+#footer hr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid #363B43;
+  margin: 8px 0px 0px 0px;
+}
+#footer .copyright h3 {
+  float: left;
+}
+#footer .copyright .social {
+  margin-top: 8px;
+  float: left;
+  margin-left: 20px;
+  border-radius: 22px;
+}
+#footer .copyright .social:hover {
+  background-color: #1A1E25;
+}
+#footer .copyright .social.fb {
+  padding: 9px 15px 3px 15px;
+}
+#footer .copyright .social.tw {
+  margin-top: 10px;
+  padding: 11px 8px 5px 8px;
+}
+#footer .copyright .social.yt {
+  padding: 8px 8px 5px 8px;
+  margin-top: 10px;
+}
+#footer .copyright .copy p {
+  margin-top: 20px;
+}
