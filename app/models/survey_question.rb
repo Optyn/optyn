@@ -10,7 +10,6 @@ class SurveyQuestion < ActiveRecord::Base
   validates :label, presence: true
   validates :element_type, presence: true
 
-
   ELEMENT_TYPES = ["radio", "select", "checkbox", "text", "textarea"]
 
   # after_save :sanitize_value, :clear_default_values, :clear_values_for_text

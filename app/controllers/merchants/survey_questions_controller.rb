@@ -1,4 +1,6 @@
 class Merchants::SurveyQuestionsController < Merchants::BaseController
+  include Merchants::SurveyChecker
+
   layout false
 
   before_filter :check_for_survey
@@ -36,10 +38,5 @@ class Merchants::SurveyQuestionsController < Merchants::BaseController
     @survey_question = SurveyQuestion.find(params[:id])
     @survey_question.destroy
     head :ok
-  end
-
-  private
-  def check_for_survey
-    redirect_to merchants_survey_path unless current_survey.present?
   end
 end
