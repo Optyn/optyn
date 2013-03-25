@@ -85,6 +85,7 @@ Business.create(:name => "Technology")
 Business.create(:name => "Travel & Tourism")
 Business.create(:name => "Transportation")
 
+#Add some dummy data in the development mode.
 if Rails.env.development?
   user_names = ["Cyclotrimethy Lenetrinitramine",
                 "Magnetohy Drodynamically",
@@ -108,7 +109,9 @@ if Rails.env.development?
                 "Overindiv Idualization",
                 "Overintel Lectualization",
                 "Deoxyribonu Cleoprotein",
-                "Disestablish Mentarianism"]
+                "Disestablish Mentarianism",
+                "Gaurav Gaglani",
+                "Jinesh Parekh"]
 
   user_names.each do |name|
     User.create(:email => "#{name.downcase.gsub(/\s/, "")}@gmail.com", :name => name, :password => "test1234", :password_confirmation => "test1234")
@@ -224,7 +227,10 @@ if Rails.env.development?
 
   users = users.slice(0, 19)
 
+  puts "User Size: #{users.size}"
+
   users.each_with_index do |user, index|
+    puts "Answer Questions for User: #{index} - #{user.name}"
     connected_shops = user.shops
     surveys = connected_shops.collect(&:survey)
     surveys.each do |survey|
