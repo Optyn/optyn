@@ -1,24 +1,6 @@
 %center.notice.lead
   = 'Please add locations for your Business' if has_locations?
-.pull-right
-  - if merchants_manager_signed_in?
-    = link_to "Edit personal information", edit_merchants_manager_registration_path if merchants_manager_signed_in?
-    = "|"
-    - if !is_shop_local_and_active?
-      = link_to "Account Page", merchants_upgrade_path 
-      = "|"
-    - if is_shop_local_and_active?
-      = link_to "Edit billing information", merchants_edit_billing_info_path 
-      = "|"
-    = link_to "Add location", new_merchants_location_path if is_shop_local?(current_merchants_manager.shop)
-    = "|"
-    = link_to "Add Manager", merchants_add_manager_path if merchants_manager_signed_in?
-    = "|"
-    = link_to "Your Locations", merchants_locations_path if is_shop_local?(current_merchants_manager.shop)
-    = "|"
-    = link_to "Your Shop", edit_merchants_shop_path if merchants_manager_signed_in?
-    = "|"
-    = link_to "Your API Button", edit_merchants_app_path if is_shop_local?(current_merchants_manager.shop)
+= render partial: "shared/menu"
 
 / features
 #features.features_page

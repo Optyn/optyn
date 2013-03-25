@@ -1,0 +1,25 @@
+= render partial: "shared/menu"
+
+#box_sign
+  .container
+    %h2 Your Surveys
+
+    .span8.box_wrapper
+      %table.table
+        %tr
+          %th Merchant
+          %th Description
+          %th Survey
+          %th Actions
+
+        - @surveys.each_with_index do |survey, index|
+          %tr
+            %td
+              = survey.shop_name
+            %td
+              = survey.shop_description
+            %td
+              = survey.title
+            %td
+              = link_to "Provide a quick feedback", segment_path(survey), class: 'btn btn-info'
+

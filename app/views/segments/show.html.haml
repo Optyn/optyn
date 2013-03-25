@@ -1,0 +1,5 @@
+= form_tag(save_answers_segment_path(@survey)) do
+  = render partial: "shared/surveys/markup", locals: {preview: false}
+
+  = submit_tag "Submit", class: "btn btn-primary"
+  = link_to "Cancel", segments_path, class: "btn"

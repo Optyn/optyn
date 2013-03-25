@@ -26,7 +26,7 @@ module Surveys
         end
 
         def element_name(options)
-          "#{parent_class}[#{child_attributes}][#{options[:id].split("_").last}][answer][]"
+          "#{parent_class}[#{child_attributes}][#{options[:id].split("_").last}][value][]"
         end
 
         def parent_class=(value)
@@ -72,9 +72,8 @@ module Surveys
         type='#{options[:type]}'
         id='#{options[:id]}'
         name='#{element_name(options)}'
-        class='#{options[:class]}
+        class='#{options[:class]}'
           value='#{options[:value]}'
-          #{default_text_attr(options)}
           />
           &nbsp;#{options[:value] if options[:type] != 'input'}
           #{wrapper_close})

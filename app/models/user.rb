@@ -82,6 +82,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def unanswered_surveys
+    connection_shop_ids = connections.active.collect(&:shop_id)
+    survey_shop_ids = SurveyAnswer.uniq_shop_ids(self.id)
+    Survey.for_shop_ids(connection_shop_ids - survey_shop_ids).includes_shop
+  end
+
   private
   def assign_office_zip_code(attrs)
     assign_zip_code(:office_zip_code, attrs)

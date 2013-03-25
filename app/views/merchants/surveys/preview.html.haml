@@ -1,22 +1,6 @@
-%div
-  %div
-    %h1= "#{@survey.title} (Customer segmentation questionaire preview)"
+= render partial: "shared/surveys/markup", locals: {preview: true}
 
-  %div
-    - @survey_questions.each do |question|
-      - if question.show_label
-        %div
-          %span
-            = question.label.html_safe
-
-      .clearfix
-
-      %div
-        = question.markup.html_safe
-
-      .clearfix
-
-  .actions
-    = link_to "Show", merchants_survey_path, class: 'btn btn-info'
-    = link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
-    = render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
+.actions
+  = link_to "Show", merchants_survey_path, class: 'btn btn-info'
+  = link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
+  = render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
