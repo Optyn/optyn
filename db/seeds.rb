@@ -242,7 +242,7 @@ if Rails.env.development?
       survey_questions = survey.survey_questions
 
       survey_questions.each do |question|
-        SurveyAnswer.create(:user_id => user.id, :survey_question_id => question.id, :value => "This is a test")
+        SurveyAnswer.create(:user_id => user.id, :survey_question_id => question.id, :value => ["This is a test"])
       end
     end
   end
