@@ -1,11 +1,5 @@
 Optyn::Application.routes.draw do
 
-  resources :interests
-
-
-  resources :businesses
-
-
   get "connections/index"
 
   root to: 'main#index'
