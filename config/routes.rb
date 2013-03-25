@@ -44,6 +44,8 @@ Optyn::Application.routes.draw do
     delete '/account'     => 'users/registrations#destroy'
     get    '/zips/new'    => 'users/zips#new',             :as => :new_user_zip
     post   '/zips'        => 'users/zips#create',           :as => :user_zips  
+    get '/profile' => 'users/registrations#profile'
+    put '/profile' => 'users/registrations#update_profile'
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'

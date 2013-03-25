@@ -14,9 +14,11 @@
             %li.active
               %a{:href => "#"} Dashboard
             %li
-              %a{:href => "#"} My Account
+              %a{:href => edit_user_registration_path, :method => :put} My Account
             %li
               %a{:href => "connections"} Connections
+            %li
+              %a{:href => profile_path} My Profile
             %li
               %a{:href => destroy_user_session_path} Logout
         .span6

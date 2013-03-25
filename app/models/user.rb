@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-  :remember_me,:office_zip_code, :home_zip_code
+  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date
 
   after_create :update_zip_prompted
 
