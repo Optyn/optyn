@@ -1,0 +1,19 @@
+%div
+  %div
+    %h1= "#{@survey.title} #{"(Customer segmentation questionaire preview)" if preview}"
+
+  %div
+    - @survey_questions.each do |question|
+      - if question.show_label
+        %div
+          %span
+            = question.label.html_safe
+
+      .clearfix
+
+      %div
+        = question.markup.html_safe
+
+      .clearfix
+
+      = hidden_field_tag "survey[survey_answers_attributes][#{question.id}][survey_question_id]", question.id

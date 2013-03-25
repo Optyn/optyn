@@ -30,4 +30,11 @@ class SurveyQuestion < ActiveRecord::Base
   def text?
     ["textarea", "text"].include?(element_type)
   end
+
+  def poll_answer_element_attributes=(question_element_attributes)
+    question_element_attributes.each do |attrs|
+      question_elem = poll_question_elements.detect{|question_elem| question_elem.id == attrs['poll_question_element_id'].to_i}
+      poll_answer_elements.build(attrs)
+    end
+  end
 end

@@ -51,7 +51,11 @@ Optyn::Application.routes.draw do
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
   resources :connections
-  resources :segments
+  resources :segments do
+    member do
+      post :save_answers
+    end
+  end
   resources :interests  #Why is this entry in routes? By some scaffold? Please make sure its deleted if not used.
   resources :businesses #Please see the above comment. Same applies here...
 
