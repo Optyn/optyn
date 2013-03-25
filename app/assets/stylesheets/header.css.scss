@@ -108,3 +108,34 @@
     color: #ccc;
   }
 }
+/* HEADER 1 */
+#header1 {
+  display: block;
+  height: auto;
+  background: #304d58;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+#header1 h3 {
+  color: #fff;
+  font-size: 48px;
+  font-weight: normal;
+}
+/* TITLE HEADER */
+#title_header {
+  display: block;
+  height: auto;
+  background: #fff;
+  padding-left: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: left;
+
+}
+#title_header h3 {
+  color: #304d58;
+  font-size:  36px;
+  font-weight: normal;
+}

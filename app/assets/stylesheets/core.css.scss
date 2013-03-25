@@ -4,11 +4,11 @@ html {
 body {
   position: relative;
   padding-top: 69px;
-  background: #f7f7f7;
+  background: #000;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
   font-family: 'Lato', sans-serif !important;
-  color: #333;
+  color: #333333;
 }
 .scrolltop {
   background-color: #F1F1F1;
@@ -31,4 +31,9 @@ body {
   position: relative;
   top: 7px;
   left: 10px;
+}
+#content {}
+#content .container {
+  background-color: #00000;
+
 }
