@@ -102,7 +102,10 @@ namespace "merchants" do |merchant|
       get 'preview'
       get 'launch'
     end
+
     resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
+
+    resources :survey_answers, path: "answers"
   end
 
 end

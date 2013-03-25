@@ -1,0 +1,25 @@
+.container
+  %h2 Your Segmentation Responses
+
+- if @users_map.present?
+  - @users_map.each_pair do |user_id, answers|
+    %ul
+      %li
+        .name
+          User:
+          = answers.first.user.name
+          at:
+          = answers.last.created_at #Need to verify with the best way to show the time format and zone
+
+          - answers.each do |answer|
+            .question
+              Q:
+              = answer.question
+            .answer
+              A:
+              = answer.value.join("\n")
+
+- else
+  %ul
+    %li
+      No Responses Available
