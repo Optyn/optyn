@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
   has_many :interests, :as => :holder
-
+  has_many :businesses, :through => :interests
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date
+  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids
 
   after_create :update_zip_prompted
 

@@ -5,6 +5,5 @@
 %label.pull-left Logo
 = f.file_field :logo_img
 %label.pull-left Business Category
-=# f.select :business_category, Shop::INDUSTRIES, {:prompt=>"Select relevant industry*"}
 = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}
 = f.submit "update" , class: "btn"
