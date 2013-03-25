@@ -31,7 +31,7 @@ class SurveyAnswer < ActiveRecord::Base
   end
 
   def self.answers_arranged_by_users(survey_id)
-    answers = for_survey(survey_id).include_user.created_backwords
+    answers = for_survey(survey_id).includes_user.created_backwords
 
     user_ids = answers.collect(&:user_id)
     users_hash = ActiveSupport::OrderedHash.new
