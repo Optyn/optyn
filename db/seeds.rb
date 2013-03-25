@@ -217,7 +217,12 @@ if Rails.env.development?
     survey = shop.survey
 
     SurveyQuestion::ELEMENT_TYPES.each_with_index do |element_type, index_element_type|
-      survey.survey_questions.create(:element_type => element_type, :label => questions[rand(questions.length)], :position => (index_element_type + 1))
+      survey_question = survey.survey_questions.create(:element_type => element_type, :label => questions[rand(questions.length)], :position => (index_element_type + 1))
+      unless element_type.include?("text")
+        survey_question.values = ["Option 1", "Option 2", "Option 3"]
+        survey_question.save
+      end
+
     end
 
     shops.each do |shop|
