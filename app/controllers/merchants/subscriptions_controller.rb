@@ -29,7 +29,8 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def subscribe
-    begin
+    begin 
+      @plan=Plan.find_by_plan_id("starter")
       @subscription=Subscription.new(params[:subscription])
       customer = Subscription.create_stripe_customer(params)
       @subscription.stripe_customer_token=customer.id
@@ -43,7 +44,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       end
 
     rescue Exception => e
-      @subscription.stripe_error = e.to_s
+      @subscription.stripe_error = e.code.humanize
       render 'upgrade'
     end
 
