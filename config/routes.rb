@@ -1,11 +1,5 @@
 Optyn::Application.routes.draw do
 
-  resources :interests
-
-
-  resources :businesses
-
-
   get "connections/index"
 
   root to: 'main#index'
@@ -57,6 +51,9 @@ Optyn::Application.routes.draw do
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
   resources :connections
+  resources :segments
+  resources :interests  #Why is this entry in routes? By some scaffold? Please make sure its deleted if not used.
+  resources :businesses #Please see the above comment. Same applies here...
 
   #Mount resque :)
 mount Resque::Server, :at => "/resque"
