@@ -4,14 +4,15 @@
   .container
     %h2 Your Surveys
 
-    .span8.box_wrapper
-      %table.table
-        %tr
-          %th Merchant
-          %th Description
-          %th Survey
-          %th Actions
 
+    %table.table
+      %tr
+        %th Merchant
+        %th Description
+        %th Survey
+        %th Actions
+
+      - if @surveys.present?
         - @surveys.each_with_index do |survey, index|
           %tr
             %td
@@ -22,4 +23,8 @@
               = survey.title
             %td
               = link_to "Provide a quick feedback", segment_path(survey), class: 'btn btn-info'
+      - else
+        %tr
+          %td{colspan: 4}
+            No surveys available right now
 
