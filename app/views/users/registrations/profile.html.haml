@@ -1,0 +1,21 @@
+= form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
+  = devise_error_messages!
+  %div
+    = f.label :Name
+    = f.text_field :name, :autofocus => true
+  %br/
+  %div
+    = f.label :Gender
+    = f.radio_button :gender,'m'
+    = "Male"
+    = f.radio_button :gender,'f',:checked=>true
+    = "Female"
+  %br/
+  %div
+    = f.label :Date_Of_Birth
+    = f.text_field :birth_date , :id=>"datepicker"
+  %br/
+  %div
+    = f.submit "Update"
+  %br/
+  = link_to "Back", :back
