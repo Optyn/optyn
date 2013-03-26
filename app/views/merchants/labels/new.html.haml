@@ -1,0 +1,10 @@
+%h1
+  New Label for
+  = current_shop.name
+
+= form_for :label, url: merchants_labels_path, :method => :post do |f|
+  = render partial: 'form', locals: {f: f}
+
+  .actions
+    = f.submit 'Create', class: 'btn btn-primary'
+    = link_to 'Back', merchants_labels_path, class: 'btn'
