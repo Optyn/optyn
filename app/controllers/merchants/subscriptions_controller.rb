@@ -6,7 +6,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
-    @subscription=@plan.subscriptions.build
+    @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
   end
 
   def edit_billing_info

@@ -19,6 +19,7 @@
               %br/
               = f.label :Date_Of_Birth
               = f.text_field :birth_date , :class=>"datepicker"
+              	
               %br/
               = f.label :Interest
               = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}

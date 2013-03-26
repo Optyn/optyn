@@ -3,7 +3,7 @@ class Merchants::BaseController < ApplicationController
 	alias_method :current_manager, :current_merchants_manager
 
 	before_filter :authenticate_merchants_manager!
-	#before_filter :active_subscription?
+	before_filter :active_subscription?
 
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
