@@ -22,6 +22,7 @@ class Merchants::SurveyQuestionsController < Merchants::BaseController
   def edit
     @survey_question = SurveyQuestion.find(params[:id])
     @survey_question.values = [""] if @survey_question.values.blank?
+    flash.now[:alert] = "Please avoid any major changes on published surveys. Already answered questions will still show stale data."
   end
 
   def update

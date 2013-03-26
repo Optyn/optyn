@@ -1,3 +1,8 @@
+- if fetch_falsh_type
+  .alert
+    %button{:type => "button", :class => "close", :'data-dismiss' => "alert"}x
+    = flash[:alert]
+
 %div
   = form_for :survey_question, :url => merchants_survey_survey_question_path(params[:id]), :method => :put, :html => {:id => "survey_question_form"} do |f|
     
