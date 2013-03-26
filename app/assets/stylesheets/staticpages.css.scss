@@ -1,3 +1,19 @@
+/* Basic Content Pages like Terms, Privacy, etc. for more use blog.css */
+#content {
+  margin: 50px 0px 100px 0px;
+}
+
+#content .content_page {
+  background-color: #fff;
+  border-radius: 6px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#content .content_page .content {
+  margin-top: 10px;
+  padding: 20px;
+}
+
 /* About Us
 -------------------------------------------------- */
 .about_page .container {
