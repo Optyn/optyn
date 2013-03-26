@@ -4,7 +4,8 @@ class Merchants::SurveyAnswersController < Merchants::BaseController
   before_filter :check_for_survey, only: [:index]
 
   def index
-    @users_map = SurveyAnswer.answers_arranged_by_users(current_survey.id)
+    @paginated_users = SurveyAnswer.paginated_users(current_survey.id, params[:page])
+    @users_map = SurveyAnswer.answers_arranged_by_users(current_survey.id, @paginated_users.collect(&:user_id))
     populate_labels
   end
 

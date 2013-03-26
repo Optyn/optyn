@@ -31,6 +31,7 @@ gem 'carrierwave'
 gem "fog"
 gem 'localtunnel'
 gem 'chosen-rails'
+gem 'kaminari'
 
 # gems for stripe payment
 gem 'stripe'

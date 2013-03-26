@@ -28,6 +28,8 @@
           { id:"labels_#{user_id}", multiple: 'multiple', class: 'chzn-select span6', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
         = hidden_field_tag "user_id", user_id, class: 'user_id'
 
+  = paginate @paginated_users
+
 - else
   %ul
     %li
