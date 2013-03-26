@@ -111,6 +111,8 @@ namespace "merchants" do |merchant|
     end
   end
 
+  resources :labels, except: [:show]
+
 end
 
 use_doorkeeper do
