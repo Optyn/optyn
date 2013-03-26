@@ -18,6 +18,7 @@ class Shop < ActiveRecord::Base
   has_one :survey, dependent: :destroy
   has_many :businesses, :through => :interests 
   has_many :interests, :as => :holder
+  has_many :labels, dependent: :destroy
 
 
   accepts_nested_attributes_for :managers

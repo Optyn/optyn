@@ -1,9 +1,13 @@
 .container
   %h2 Your Segmentation Responses
 
+= hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_survey_survey_answers_path
+= hidden_field_tag "update_labels_merchants_survey_survey_answers_path", update_labels_merchants_survey_survey_answers_path
+
 - if @users_map.present?
   - @users_map.each_pair do |user_id, answers|
     %ul
+      - user = answers.collect(&:user).first()
       %li
         .name
           User:
@@ -18,6 +22,11 @@
             .answer
               A:
               = answer.value.join("\n")
+
+      .labels
+        = select_tag :label, options_from_collection_for_select(@names, :id, :name, user.user_labels.collect(&:label_id)),
+          { id:"labels_#{user_id}", multiple: 'multiple', class: 'chzn-select span6', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
+        = hidden_field_tag "user_id", user_id, class: 'user_id'
 
 - else
   %ul

@@ -103,7 +103,12 @@ namespace "merchants" do |merchant|
 
     resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
 
-    resources :survey_answers, path: "answers"
+    resources :survey_answers, path: "answers" do
+      collection do
+        post 'create_label'
+        post 'update_labels'
+      end
+    end
   end
 
 end

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :shops, through: :connections
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
+  has_many :user_labels, dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -86,6 +88,20 @@ class User < ActiveRecord::Base
     connection_shop_ids = connections.active.collect(&:shop_id)
     survey_shop_ids = SurveyAnswer.uniq_shop_ids(self.id)
     Survey.for_shop_ids(connection_shop_ids - survey_shop_ids).includes_shop
+  end
+
+  def adjust_labels(label_ids)
+    existing_label_ids = self.user_labels.collect(&:label_id)
+
+    destruction_values = existing_label_ids - label_ids
+    new_values = label_ids - existing_label_ids
+
+    UserLabel.transaction do
+      self.user_labels.find_all_by_label_id(destruction_values).each{|user_label| user_label.destroy}
+      new_values.each do |label_id|
+        self.user_labels.create(label_id: label_id)
+      end
+    end
   end
 
   private
