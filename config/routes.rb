@@ -58,8 +58,6 @@ Optyn::Application.routes.draw do
       post :save_answers
     end
   end
-  resources :interests  #Why is this entry in routes? By some scaffold? Please make sure its deleted if not used.
-  resources :businesses #Please see the above comment. Same applies here...
 
   #Mount resque :)
 mount Resque::Server, :at => "/resque"
