@@ -6,7 +6,7 @@ class SurveyAnswer < ActiveRecord::Base
   serialize :value, Array
 
   PAGE = 1
-  PER_PAGE = 30
+  PER_PAGE = 50
 
   scope :includes_surveys, includes(survey_question: :survey)
 
