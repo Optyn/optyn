@@ -3,6 +3,7 @@ module ApplicationHelper
   def user_present?
     user_signed_in? || merchants_manager_signed_in?
   end
+
   alias_method :someone_logged_in?, :user_present?
 
   def has_locations?
@@ -20,8 +21,13 @@ module ApplicationHelper
 
   def display_flash_message
     if (flash_type = fetch_falsh_type)
-      content_tag :center, class: "lead #{bootstrap_class_for(flash_type)}" do
-        flash[flash_type]
+      content_tag :div, class: "alert #{bootstrap_class_for(flash_type)}" do
+        content = ""
+        content << content_tag(:button, {:type => "button", :class => "close", :'data-dismiss' => "alert"}) do
+          "x"
+        end
+        content << flash[flash_type]
+        content.html_safe
       end
     end
   end
@@ -40,16 +46,16 @@ module ApplicationHelper
 
   def bootstrap_class_for(flash_type)
     case flash_type
-    when :success
-      "alert-success"
-    when :error
-      "alert-error"
-    when :alert
-      "alert-error"
-    when :notice
-      "alert-success"
-    else
-      'alert'
+      when :success
+        "alert-success"
+      when :error
+        "alert-error"
+      when :alert
+        "alert-error"
+      when :notice
+        "alert-success"
+      else
+        'alert'
     end
   end
 end
