@@ -1,0 +1,72 @@
+
+/* home features section */
+#home_features {
+  padding-top: 40px;
+}
+#home_features ul {
+  list-style-type:none;
+  padding:0px;
+  margin:0px;
+}
+#home_features li {
+  background-image: url('/assets/checkmark.png');
+  background-repeat: no-repeat;
+  background-position: 0px 5px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+#home_features .container { }
+#home_features .feature img.thumb {
+  border: 3px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 1px #bcbcbc;
+  display: block;
+  margin: 0 auto;
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+}
+#home_features img.mainimg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#home_features .feature img.thumb:hover {
+  box-shadow: 0px 0px 7px 1px #8cbe5b;
+}
+#home_features .feature h3 {
+  font-size: 22px;
+  font-weight: bolder;
+  color: #252b34;
+  margin-top: 25px;
+  /*text-align: center;*/
+  padding-left: 35px;
+}
+#home_features .feature h3 i {
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+#home_features .feature p.description {
+  color: #44474D;
+  width: 85%;
+  padding-left: 35px;
+}
+#home_features .feature .btn {
+  margin-top: 15px;
+  margin-left: 35px;
+}
+#home_features .feature .btn .getstarted {
+  background: #1791c0;
+  height: 42px;
+  width: 145px;
+}
+#home_features .feature .btn .learnmore {
+  height: 42px;
+  width: 145px;
+  background-color: hsl(201, 100%, 30%) !important;
+  height: 42px;
+  width:  145px;
+}

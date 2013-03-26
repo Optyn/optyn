@@ -1,5 +1,11 @@
 @import "bootstrap";
-body { padding-top: 60px; }
+body {
+  padding-top: 60px;
+  background-color: #f7f7f7;
+}
+#container {
+  background-color: #f7f7f7;
+}
 @import "bootstrap-responsive";
 
 // Set the correct sprite paths

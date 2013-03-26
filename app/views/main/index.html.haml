@@ -3,81 +3,71 @@
 = render partial: "shared/menu"
 
 / features
-#features.features_page
+#home_features
   .container
     .features1
-      / header
-      .row
-        .span12
-          %h3.intro
-            All of your Marketing Messages in one Place
+      / header  commenting it out for now. it's located in main /layout/header.haml file
+      / .row
+      / .span12
+      / %h3.intro
+      / All of your Marketing Messages in one Place
       / feature list
       .row
         .span4.feature
+          %img{:src => '/assets/consumer-main.png', :class => "mainimg"}
           %h3
             For Consumers
           %p.description
-            %i.i_cloud
-            All of your Marketing messages in one place
-            %br
-            %br
-            %i.i_cloud
-            Share only the information you want.
-            %br
-            %br
-            %i.i_cloud
-            One way to opt in anywhere any business.
-            %br
-            %br
-            %i.i_cloud
-            Explore New Places, Websites, Products, and More
-          %p.align-right
-            %a.btn.btn{:href => "consumerfeatures"}
+            %ul
+              %li
+                All of your Marketing messages in one Place
+              %li
+                Share only the information you want.
+              %li
+                One way to opt in anywhere any business.
+              %li
+                Explore New Places, websites, Products, and More.
+          %p
+            %a.btn.learnmore{:href => "consumerfeatures"}
               %i.icon-black.icon-bullhorn
-              Learn More
-            %a.btn.btn-success{:href => new_user_registration_path}
-              %i.icon-white.icon-heart
-              Get Started
+              learn more
+            %a.btn.getstarted{:href => new_user_registration_path}
+              %i.icon-black.icon-heart
+              get started!
         .span4.feature
+          %img{:src => '/assets/merchant-main.png', :class => "mainimg"}
           %h3
             For Businesses
           %p.description
-            %i.i_cloud
-            The Easiest way to capture customers, online and in-store.
-            %br
-            %br
-            %i.i_cloud
-            Truly Automated E-Mail Marketing. Yes. Truly!
-            %br
-            %br
-            %i.i_cloud
-            The most powerful remonetization engine your business has ever seen.
-            %br
-            %br
-            %i.i_cloud
-            Perfect for Local Businesses and Online Businesses of Any Size.
-          %p.align-right
+            %ul
+              %li
+                The Easiest Way to Capture customers, online and in-store.
+              %li
+                Truly Automated E-Mail Marketing. Yes. Truly!
+              %li
+                The most powerful monetization enginge for your Business.
+              %li
+                Perfect for Local and Online Businesses of ANY size.
+          %p
             %a.btn.btn{:href => "merchantfeatures"}
               %i.icon-black.icon-bullhorn
-              Learn More
+              learn more
             %a.btn.btn-success{:href => new_merchants_manager_registration_path}
               %i.icon-white.icon-heart
-              Get Started
+              get started
         .span4.feature
+          %img{:src => '/assets/partner-main.png', :class => "mainimg"}
           %h3
             For Partners & Developers
           %p.description
-            %i.i_cloud
-            Increase Conversion by 30%+ by giving your customers a choice.
-            %br
-            %br
-            %i.i_cloud
-            Perfect for Fortune 500 Brands, Mobile Developers, Online Businesses.
-            %br
-            %br
-            %i.i_cloud
-            Take advantage of our easy integration tools to provide a great product to your clients or consumers.
+            %ul
+              %li
+                Increase Conversion by 30%+ by giving your customers a choice.
+              %li
+                Perfect for Fortune 500 Brands, Mobile Developers, & Online Businesses.
+              %li
+                Take advantage of our easy integration tools to provide a great product to your clients or consumers.
           %p.align-right
             %a.btn.btn{:href => "contact"}
               %i.icon-black.icon-bullhorn
-              Learn More
+              learn more

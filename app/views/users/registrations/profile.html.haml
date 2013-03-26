@@ -1,19 +1,27 @@
-= form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
-	= devise_error_messages!
-	= f.label :Name
-	= f.text_field :name, :autofocus => true
-	%br/
-	= f.label :Gender
-	= f.radio_button :gender,'m'
-	= "Male"
-	= f.radio_button :gender,'f',:checked=>true
-	= "Female"
-	%br/
-	= f.label :Date_Of_Birth
-	= f.text_field :birth_date , :id=>"datepicker"
-	%br/
-	= f.label :Interest
-	= f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}
-	%br/	
-	= f.submit "Update"
-= link_to "Back", :back
+#box_sign
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div
+          .head
+            %h4 Change Your Profile
+          .form
+            = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
+              = devise_error_messages!
+              = f.label :Name
+              = f.text_field :name, :autofocus => true
+              %br/
+              = f.label :Gender
+              = f.radio_button :gender,'m'
+              = "Male"
+              = f.radio_button :gender,'f',:checked=>true
+              = "Female"
+              %br/
+              = f.label :Date_Of_Birth
+              = f.text_field :birth_date , :id=>"datepicker"
+              %br/
+              = f.label :Interest
+              = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}
+              %br/
+              = f.submit "Update"
+            = link_to "Back", :back
