@@ -34,7 +34,9 @@
   transition: all .2s linear;
 }
 .navbar .nav > li > a:hover {
-  color: #000;
+  color: #FFF;
+  background-color: #304d58;
+  border-radius: 4px;
 }
 .navbar .nav > li.active > a,
 .navbar .nav > li.active:hover > a,
