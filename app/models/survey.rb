@@ -34,4 +34,9 @@ class Survey < ActiveRecord::Base
   def shop_description
     shop.description.blank? ? "Not Available" : shop.description
   end
+
+  def add_canned_questions
+    self.survey_questions.build(:element_type => 'radio', :label => "Have you purchased anything from #{shop_name}?", :position => 1, :values => ['Yes', 'No'])
+    self.survey_questions.build(:element_type => 'radio', :label => "How often do you visit #{shop_name}?", :position => 2, :values => ['Daily', 'Weekly', 'Monthly', 'Yearly', 'Never'])
+  end
 end

@@ -122,6 +122,7 @@ class Shop < ActiveRecord::Base
     unless survey.present?
       dummy_survey = Survey.new
       dummy_survey.shop_id = self.id
+      dummy_survey.add_canned_questions
       dummy_survey.save(validate: false)
       dummy_survey
     else
