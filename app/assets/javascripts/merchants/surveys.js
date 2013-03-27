@@ -88,12 +88,13 @@ function MerchantSurvey() {
                     if (elementVal && (elementVal.match('text') || elementVal.match('textarea'))) {
                         $('#edit_survey_questions_content  .values-container').hide();
                     }
-                },
+                    elementTypePreviousValue = $('#survey_question_element_type').val();
+                }
             });
 
             $('#edit_survey_questions_content .modal-footer').show();
 
-            elementTypePreviousValue = $('#survey_question_element_type').val();
+
 
         });
     };
