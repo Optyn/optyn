@@ -1,7 +1,8 @@
 #box_sign
   .container
-    %h2 Your Account
-    = render partial: "merchants/shared/menu"
+    %span4
+      %h2 Your Account
+      = render partial: "merchants/shared/menu"
 
     %div.span8.box_wrapper
       = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
