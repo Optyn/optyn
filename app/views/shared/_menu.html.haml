@@ -18,4 +18,6 @@
     = "|"
     = link_to "Your API Button", edit_merchants_app_path if is_shop_local?(current_merchants_manager.shop)
     |
-    = link_to "Customer Segmentation", merchants_survey_path
+    = link_to "Customer Segmentation", merchants_survey_path if merchants_manager_signed_in?
+    |
+    = link_to "Customer Answers", merchants_survey_survey_answers_path if merchants_manager_signed_in?
