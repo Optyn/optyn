@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326075614) do
+ActiveRecord::Schema.define(:version => 20130325114428) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -96,11 +96,6 @@ ActiveRecord::Schema.define(:version => 20130326075614) do
   add_index "managers", ["email"], :name => "index_managers_on_email", :unique => true
   add_index "managers", ["reset_password_token"], :name => "index_managers_on_reset_password_token", :unique => true
 
-  create_table "merchants_labels", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "oauth_access_grants", :force => true do |t|
     t.integer  "resource_owner_id", :null => false
     t.integer  "application_id",    :null => false
@@ -156,11 +151,12 @@ ActiveRecord::Schema.define(:version => 20130326075614) do
   create_table "shops", :force => true do |t|
     t.string   "name"
     t.text     "embed_code"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "stype"
     t.string   "description"
     t.string   "logo_img"
+    t.string   "business_category"
   end
 
   create_table "states", :force => true do |t|
