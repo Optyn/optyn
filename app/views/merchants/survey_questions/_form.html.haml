@@ -12,14 +12,15 @@
     = f.label :label, "Question".html_safe, class: 'control-label'
     .controls
       = f.text_field :label
-      %span.help-block How are you?
+      %span.help-block
+        %em example: How are you?
 
   .control-group.values-container
-    .values
-      = f.label :values, "Answer Choices"
+    .controls.values
+      = f.label :values, "Answer Options"
       - @survey_question.values.each do |value|
         = fields_for :values, value do |field|
-          .controls.value-container
+          .value-container
             = f.text_field "", value: value, name: "survey_question[values][]"      
             %span.remove-value.close
               x
