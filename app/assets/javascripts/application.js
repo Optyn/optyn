@@ -15,5 +15,6 @@
 //= require bootstrap
 //= require_directory ./stripe
 //= require chosen-jquery
+//= require bootstrap-datepicker
 //= require_self
 //= require_tree
