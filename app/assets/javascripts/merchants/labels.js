@@ -20,7 +20,7 @@ function Label() {
     this.hookAddNewLabel = function () {
         $('body').on('keydown', '.search-field input', function (e) {
             var $input = $(this);
-            var code = e.which;
+            var code = e.keycode || e.which;
             if (code == 13) {
                 var inputVal = $input.val();
                 if (inputVal.length) {
