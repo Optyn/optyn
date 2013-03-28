@@ -1,11 +1,17 @@
 #box_sign
   .container
-    .span12.box_wrapper
+    = render partial: "merchants/shared/menu"
+    .span8.box_wrapper
+      %div
+        %a.btn{:href => merchants_add_manager_path}
+          %i.icon-white.icon-heart
+          Add Manager
       %table.table
         %tr 
           %th #
           %th Name
-          %th Email 
+          %th Email
+          %th Created at
 
           
 
@@ -17,5 +23,8 @@
               = manager.name
             %td
               = manager.email
+            %td
+              = format_managers_created_at(manager.created_at)
+
 
 

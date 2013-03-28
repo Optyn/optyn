@@ -2,12 +2,18 @@ class Merchants::BaseController < ApplicationController
 	alias_method :manager_signed_in?, :merchants_manager_signed_in?
 	alias_method :current_manager, :current_merchants_manager
 
-	before_filter :authenticate_merchants_manager!
+	before_filter :authenticate_merchants_manager!, :set_time_zone
 	#before_filter :active_subscription?
 
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
 	private
+  def set_time_zone
+    if current_shop.time_zone.present?
+      Time.zone = current_shop.time_zone
+    end
+  end
+
 	def active_subscription?
     unless current_manager.shop.is_subscription_active?
     	flash[:alert] = "Please update your payment details"
