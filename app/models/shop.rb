@@ -2,24 +2,25 @@ require 'embed_code_generator'
 
 class Shop < ActiveRecord::Base
 
-  SHOP_TYPES=['local','online']
-  attr_accessible :name,:stype,:managers_attributes,:locations_attributes,:description, :logo_img, :business_ids
-  mount_uploader :logo_img, ImageUploader
-
-  validates :name,:presence=>true
-  validates :stype, :presence => true, :inclusion => { :in => SHOP_TYPES , :message => "is Invalid" }
-
   has_one :subscription, dependent: :destroy
   has_many :managers, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
-  has_many :users, through: :connections  
+  has_many :users, through: :connections
   has_one :survey, dependent: :destroy
-  has_many :businesses, :through => :interests 
+  has_many :businesses, :through => :interests
   has_many :interests, :as => :holder
   has_many :labels, dependent: :destroy
 
+  SHOP_TYPES=['local','online']
+  attr_accessible :name,:stype,:managers_attributes,:locations_attributes,:description, :logo_img, :business_ids, :website, :identifier, :time_zone
+  mount_uploader :logo_img, ImageUploader
+
+  validates :name,:presence=>true
+  validates :stype, :presence => true, :inclusion => { :in => SHOP_TYPES , :message => "is Invalid" }
+  validates :identifier, uniqueness: true, presence: true, unless: :new_record?
+  validates :time_zone, presence: true, unless: :new_record?
 
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations 
@@ -30,12 +31,10 @@ class Shop < ActiveRecord::Base
   
   scope :for_app_id, ->(app_id){inlcudes_locations.includes_app.where(["oauth_applications.uid = :app_id", {app_id: app_id}])}
 
-  after_save :create_dummy_survey
-  #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
+  scope :fetch_same_identifier, ->(shop_id, q){where(["shops.id <> :shop_id AND shops.identifier LIKE :q", {shop_id: shop_id, q: q}])}
 
-  def display_industry
-    business_category.humanize 
-  end
+  after_create :create_dummy_survey
+  #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
   def self.by_app_id(app_id)
     for_app_id(app_id).first  
@@ -118,7 +117,6 @@ class Shop < ActiveRecord::Base
 
   private
   def create_dummy_survey
-    reload
     unless survey.present?
       dummy_survey = Survey.new
       dummy_survey.shop_id = self.id

@@ -87,7 +87,13 @@ namespace "merchants" do |merchant|
   resource :app 
   resources :connections
   resources :locations 
-  resource :shop 
+
+  resource :shop do
+    member do
+      get :check_identifier
+    end
+  end
+
   resource :subscription
   get '/upgrade' => 'subscriptions#upgrade'
   post '/subscribe' => 'subscriptions#subscribe', as: :subscribe

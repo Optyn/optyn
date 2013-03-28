@@ -1,6 +1,7 @@
 class Merchants::ShopsController < Merchants::BaseController
 
 	skip_before_filter :active_subscription?, :only => [:show]
+  before_filter :check_for_blank_q, only: [:check_identifier]
 
 	def index
 	end
@@ -22,5 +23,19 @@ class Merchants::ShopsController < Merchants::BaseController
 	
 	def show
 		@shop = current_shop
-	end
+  end
+
+  def check_identifier
+    shop = Shop.fetch_same_identifier(current_shop.id, params[:q])
+
+    head((shop.present?  ? :unprocessable_entity : :ok))
+  end
+
+  private
+  def check_for_blank_q
+    if params[:q].blank?
+      head :unprocessable_entity
+      false
+    end
+  end
 end

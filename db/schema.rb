@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325114428) do
+ActiveRecord::Schema.define(:version => 20130328072943) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -157,7 +157,12 @@ ActiveRecord::Schema.define(:version => 20130325114428) do
     t.string   "description"
     t.string   "logo_img"
     t.string   "business_category"
+    t.string   "website"
+    t.string   "identifier"
+    t.string   "time_zone"
   end
+
+  add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
 
   create_table "states", :force => true do |t|
     t.string   "name"
