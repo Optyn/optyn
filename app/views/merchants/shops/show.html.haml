@@ -1,29 +1,44 @@
-#box_sign
-  .container
-    %h2 Your Shops
+.page-header
+  %h1 Your Shop
 
-    = render partial: "merchants/shared/menu"
-    
-    .span8.box_wrapper
-      %div
-      %table.table
-        %tr 
-          %th Name
-          %th Description
-          %th Logo
-          %th Business Category
-          %th Manage
+%p
+  %strong Name
+  %br
+  = @shop.name
+%p
+  %strong Description
+  %br
+  = show_description(@shop)
 
-          %tr
-            %td
-              = @shop.name
-            %td
-              = @shop.description
-            %td
-              = image_tag @shop.logo_img.url if @shop.logo_img.present?
-            %td
-              - @shop.businesses.collect(&:name).each do |name|
-                = name
-                %br
-            %td
-              = link_to "Edit", edit_merchants_shop_path
+%p
+  %strong Business Type
+  %br
+  = @shop.stype.humanize
+
+%p
+  %strong Website
+  %br
+  = show_website(@shop)
+
+%p
+  %strong Identifier
+  %br
+  = show_identifier(@shop)
+
+%p
+  %strong Timezone
+  %br
+  = @shop.time_zone
+
+%p
+  %strong Logo
+  %br
+  = show_logo(@shop)
+
+%p
+  %strong Business Categories
+  %br
+    = show_business_category_names(@shop)
+
+.form-actions
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'

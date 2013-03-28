@@ -115,6 +115,10 @@ class Shop < ActiveRecord::Base
     self.oauth_application.redirect_uri
   end
 
+  def business_category_names
+    businesses.collect(&:name)
+  end
+
   private
   def create_dummy_survey
     unless survey.present?
