@@ -18,11 +18,10 @@ function Label() {
     };
 
     this.hookAddNewLabel = function () {
-        $('input.default').bind('keypress', function (e) {
+        $('body').on('keydown', '.search-field input', function (e) {
             var $input = $(this);
-            var code = e.keyCode || e.which;
+            var code = e.which;
             if (code == 13) {
-                console.log("Enter captured");
                 var inputVal = $input.val();
                 if (inputVal.length) {
                     var $currentLabel = $input.parents('.labels').first();
@@ -43,10 +42,6 @@ function Label() {
                         }
                     });
                 }
-//                else{
-//                    console.log("Input Val: ", inputVal);
-//                    console.log("Captured entered but request made");
-//                }
             }
         });
     };
