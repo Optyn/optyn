@@ -1,7 +1,123 @@
 
 /* home features section */
 #home_features {
-  padding-top: 40px;
+  padding-top: 20px;
+  padding-bottom:15px;
+}
+#home_features .consumer {
+  background-color: #FFF;
+  border-radius: 6px;
+  height: auto;
+}
+
+#home_features .consumer .main_title {
+  padding-left: 20px;
+}
+#home_features .consumer .main_title h3 {
+  font-size: 32px;
+  color: #1791c0;
+}
+#home_features .consumer .ftr {
+  height: auto;
+  padding-left: 20px;
+  padding-top: 10px;
+  overflow: hidden;
+}
+#home_features .consumer .ftr .ftrimg {
+  height: 80px;
+  width: 60px;
+  float: left;
+}
+#home_features .consumer .ftr .ftrtxt {
+  padding-left: 14px;
+  padding-right: 10px;
+  vertical-align: middle;
+  height: 80px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+#home_features .consumer .start {
+  height: auto;
+  text-align: center;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+#home_features .consumer .start .homestart {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 36px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 32px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+}
+#home_features .consumer .start .homestart:hover{
+  background: #304d58;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#home_features .biz {
+  background-color: #FFF;
+  border-radius: 6px;
+  height: auto;
+}
+#home_features .biz .main_title {
+  padding-left: 20px;
+}
+#home_features .biz .main_title h3 {
+  color: #78CD51;
+  font-size: 32px;
+}
+#home_features .biz .ftr {
+  height: auto;
+  padding-left: 20px;
+  padding-top: 10px;
+  overflow: hidden;
+}
+#home_features .biz .ftr .ftrimg {
+  height: 80px;
+  width: 60px;
+  float: left;
+}
+#home_features .biz .ftr .ftrtxt {
+  padding-left: 14px;
+  padding-right: 10px;
+  vertical-align: middle;
+  height: 80px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+#home_features .biz .start {
+  height: auto;
+  text-align: center;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+#home_features .biz .start .homestart {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 36px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 32px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+}
+#home_features .biz .start .homestart:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
 }
 #home_features ul {
   list-style-type:none;

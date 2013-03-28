@@ -2,72 +2,46 @@
   = 'Please add locations for your Business' if has_locations?
 = render partial: "shared/menu"
 
-/ features
 #home_features
   .container
     .features1
-      / header  commenting it out for now. it's located in main /layout/header.haml file
-      / .row
-      / .span12
-      / %h3.intro
-      / All of your Marketing Messages in one Place
-      / feature list
       .row
-        .span4.feature
-          %img{:src => '/assets/consumer-main.png', :class => "mainimg"}
-          %h3
-            For Consumers
-          %p.description
-            %ul
-              %li
-                All of your Marketing messages in one Place
-              %li
-                Share only the information you want.
-              %li
-                One way to opt in anywhere any business.
-              %li
-                Explore New Places, websites, Products, and More.
-          %p
-            %a.btn.learnmore{:href => "consumerfeatures"}
-              %i.icon-black.icon-bullhorn
-              learn more
-            %a.btn.getstarted{:href => new_user_registration_path}
-              %i.icon-black.icon-heart
-              get started!
-        .span4.feature
-          %img{:src => '/assets/merchant-main.png', :class => "mainimg"}
-          %h3
-            For Businesses
-          %p.description
-            %ul
-              %li
-                The Easiest Way to Capture customers, online and in-store.
-              %li
-                Truly Automated E-Mail Marketing. Yes. Truly!
-              %li
-                The most powerful monetization enginge for your Business.
-              %li
-                Perfect for Local and Online Businesses of ANY size.
-          %p
-            %a.btn.btn{:href => "merchantfeatures"}
-              %i.icon-black.icon-bullhorn
-              learn more
-            %a.btn.btn-success{:href => new_merchants_manager_registration_path}
-              %i.icon-white.icon-heart
-              get started
-        .span4.feature
-          %img{:src => '/assets/partner-main.png', :class => "mainimg"}
-          %h3
-            For Partners & Developers
-          %p.description
-            %ul
-              %li
-                Increase Conversion by 30%+ by giving your customers a choice.
-              %li
-                Perfect for Fortune 500 Brands, Mobile Developers, & Online Businesses.
-              %li
-                Take advantage of our easy integration tools to provide a great product to your clients or consumers.
-          %p.align-right
-            %a.btn.btn{:href => "contact"}
-              %i.icon-black.icon-bullhorn
-              learn more
+        .span6.consumer
+          .main_title
+            %h3
+              For Consumers
+          .ftr
+            .ftrimg
+              %img{:src => '/assets/c1.png'}
+            .ftrtxt
+              A New and EASY way to opt into any business, any website, anywhere...yep!
+            .ftrimg
+              %img{:src => '/assets/c2.png'}
+            .ftrtxt
+              a NEW and EASY way to opt into any business, any website, anywhere....yep.
+            .ftrimg
+              %img{:src => '/assets/c3.png'}
+            .ftrtxt
+              You are in Control. Control which information you share with each business,
+              and how you should be contacted. Never worry about being spammed again.
+          .start{:align => "center"}
+            %a.btn.homestart{:href => new_user_registration_path} Get Started
+        .span6.biz
+          .main_title
+            %h3
+              For Businesses
+          .ftr
+            .ftrimg
+              %img{:src => '/assets/b1.png'}
+            .ftrtxt
+              The EASIEST way to capture customers, online and in-store.
+            .ftrimg
+              %img{:src => '/assets/b2.png'}
+            .ftrtxt
+              The FIRST truly Automated E-Mail Marketing Platform. Yes, we dare you.
+            .ftrimg
+              %img{:src => '/assets/b3.png'}
+            .ftrtxt
+              The most POWERFUL monetization platform for your business. Big Word.
+          .start{:align => "center"}
+            %a.btn.homestart{:href => new_merchants_manager_registration_path} Get Started!
