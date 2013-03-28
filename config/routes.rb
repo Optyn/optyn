@@ -72,7 +72,7 @@ end
 
 namespace "merchants" do |merchant|
 
-  get "show_managers" => "merchant_managers#show_managers"
+  get "show_managers" => "merchant_managers#show_managers", as: :managers_list
 
   devise_for :managers,:controllers=> {
     :registrations => 'merchants/managers/registrations', 
