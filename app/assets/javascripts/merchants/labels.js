@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function Label() {
     this.initialize = function () {
-        if ($('.chzn-select').length) {
+        if ($('#survey_answer_list .chzn-select').length) {
             this.hookChosen();
             this.hookAddNewLabel();
             this.hookChangeChosen();
