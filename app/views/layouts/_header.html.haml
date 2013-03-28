@@ -32,6 +32,18 @@
           - if merchants_manager_signed_in?    
             %li
               = link_to("Logout",  destroy_merchants_manager_session_path, class: "btn-header", :method => :delete)
+          - if user_signed_in?
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Dropdown
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "#"}My Dashboard
+                %li
+                  %a{:href => "#"}My Connections
+                %li
+                  = link_to("User Log Out", new_user_session_path)
 #header1
   .container
     .row
