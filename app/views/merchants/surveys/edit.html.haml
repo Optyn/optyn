@@ -4,3 +4,6 @@
     .form
       = form_for current_survey, as: :survey, url: merchants_survey_path, method: :put, :html => {class: 'form-horizontal'} do |f|
         = render :partial => 'form', :locals => {f: f}
+
+    = render partial: "merchants/surveys/new_question_modal"
+    = render partial: "merchants/surveys/edit_question_modal"
