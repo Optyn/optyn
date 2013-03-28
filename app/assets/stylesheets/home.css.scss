@@ -2,7 +2,7 @@
 /* home features section */
 #home_features {
   padding-top: 20px;
-  padding-bottom:15px;
+  padding-bottom: 20px;
 }
 #home_features .consumer {
   background-color: #FFF;
@@ -24,16 +24,15 @@
   overflow: hidden;
 }
 #home_features .consumer .ftr .ftrimg {
-  height: 80px;
+  height: auto;
   width: 60px;
   float: left;
 }
 #home_features .consumer .ftr .ftrtxt {
   padding-left: 14px;
-  padding-right: 10px;
+  padding-right: 14px;
   vertical-align: middle;
   height: 80px;
-  vertical-align: middle;
   font-size: 16px;
 }
 #home_features .consumer .start {
@@ -81,7 +80,7 @@
   overflow: hidden;
 }
 #home_features .biz .ftr .ftrimg {
-  height: 80px;
+  height: auto;
   width: 60px;
   float: left;
 }
