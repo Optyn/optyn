@@ -6,7 +6,7 @@
 
 - if @users_map.present?
   - @users_map.each_pair do |user_id, answers|
-    %ul
+    %ul#survey_answer_list
       - user = answers.collect(&:user).first()
       %li
         .name
