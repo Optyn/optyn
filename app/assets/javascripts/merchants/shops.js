@@ -28,24 +28,26 @@ function Shop() {
     };
 
     this.checkIdentifier = function ($input) {
-        $.ajax({
-            url: $('#check_identifier_merchants_shop_path').val(),
-            type: 'GET',
-            data: {q: $input.val()},
-            beforeSend: function () {
-                $('#loading').show();
-                $('#loading').removeClass('success');
-                $('#loading').removeClass('error');
-                $('#loading .text').text('Loading...');
-            },
-            success: function (data) {
-                $('#loading').addClass('success');
-                $('#loading .text').text('Available');
-            },
-            error: function () {
-                $('#loading').addClass('error');
-                $('#loading .text').text('Unavailable');
-            }
-        });
+        if ($('#update_shop_wrapper').length) {
+            $.ajax({
+                url: $('#check_identifier_merchants_shop_path').val(),
+                type: 'GET',
+                data: {q: $input.val()},
+                beforeSend: function () {
+                    $('#loading').show();
+                    $('#loading').removeClass('success');
+                    $('#loading').removeClass('error');
+                    $('#loading .text').text('Loading...');
+                },
+                success: function (data) {
+                    $('#loading').addClass('success');
+                    $('#loading .text').text('Available');
+                },
+                error: function () {
+                    $('#loading').addClass('error');
+                    $('#loading .text').text('Unavailable');
+                }
+            });
+        }
     }
 }
