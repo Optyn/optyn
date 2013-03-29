@@ -19,6 +19,9 @@ Optyn::Application.routes.draw do
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
 
+  # Zendesk Support Desk Redirect
+  match "/support" => redirect("http://support.optyn.com")
+
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
                                      :sign_up => 'register'
