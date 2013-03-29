@@ -1,6 +1,4 @@
-class SegmentsController < ApplicationController
-  before_filter(:authenticate_user!)
-
+class SegmentsController < BaseController
   def index
     @surveys = current_user.unanswered_surveys
   end

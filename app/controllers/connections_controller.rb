@@ -1,2 +1,2 @@
-class ConnectionsController < ApplicationController
+class ConnectionsController < BaseController
 end

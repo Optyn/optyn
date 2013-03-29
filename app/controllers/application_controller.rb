@@ -36,6 +36,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path if !merchants_manager_signed_in?
   end
 
+  def require_user
+    redirect_to root_path unless user_signed_in?
+  end
+
   def is_shop_local_and_active?
     current_merchants_manager.shop.is_subscription_active? if merchants_manager_signed_in?
   end
