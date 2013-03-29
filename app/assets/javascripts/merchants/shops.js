@@ -6,7 +6,6 @@ $(document).ready(function () {
 
 function Shop() {
     this.initialize = function () {
-        console.log("In initialize")
         if ($('#update_shop_wrapper').length) {
             this.hookChosen();
             this.hookIdentifierKeyup();
