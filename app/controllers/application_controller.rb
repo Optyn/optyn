@@ -3,19 +3,32 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_shop_local_and_active?
 
+  alias_method :manager_signed_in?, :merchants_manager_signed_in?
+  alias_method :current_manager, :current_merchants_manager
+
   private
 
   def require_manager_logged_out
-    if merchants_manager_signed_in?
+    if manager_signed_in?
       flash[:alert] = "You are already logged in"
-      redirect_to root_path 
+      redirect_to merchants_root_path
     end
   end
 
   def require_customer_logged_out
     if user_signed_in?
       flash[:alert] = "You are already logged in"
-      redirect_to root_path 
+      redirect_to customers_root_path
+    end
+  end
+
+  def require_not_logged_in
+    if manager_signed_in?
+      return redirect_to(merchants_root_path) && false
+    end
+
+    if user_signed_in?
+      return redirect_to(customers_root_path) && false
     end
   end
 

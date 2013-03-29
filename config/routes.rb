@@ -1,8 +1,8 @@
 Optyn::Application.routes.draw do
 
-  get "connections/index"
-
   root to: 'main#index'
+  match 'connections' => 'connections#index', as: :customers_root
+  match 'merchants' => 'merchants/connections#index', as: :merchants_root
 
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'

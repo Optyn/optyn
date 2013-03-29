@@ -1,6 +1,4 @@
 class Merchants::BaseController < ApplicationController
-	alias_method :manager_signed_in?, :merchants_manager_signed_in?
-	alias_method :current_manager, :current_merchants_manager
 
 	before_filter :authenticate_merchants_manager!, :set_time_zone
 	#before_filter :active_subscription?
