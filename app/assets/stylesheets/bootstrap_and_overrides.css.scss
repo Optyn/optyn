@@ -5,11 +5,42 @@ body {
 }
 #container {
   background-color: #f7f7f7;
-
+}
 .alert {
   margin-left: 15px;
   height: 40px;
 }
+.dropdown {
+  margin: 0px;
+}
+.dropdown-menu {
+  margin-top: 0px;
+  background-color: #263d45;
+  border-radius: 4px;
+}
+.dropdown .open .dropdown-menu:before {
+  display: none;
+}
+.dropdown .open .dropdown-menu:after {
+  display: none;
+}
+.dropdown-menu hr {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border-top: 1px #7d8b8f;
+  border-top-style: solid;
+  border-bottom: 0px;
+}
+.dropdown-menu ul {
+  color: #7d8b8f;
+}
+.dropdown-menu li a {
+  color: #7d8b8f;
+}
+.dropdown-menu li a:active{
+  color: #86c440;
 }
 @import "bootstrap-responsive";
 
