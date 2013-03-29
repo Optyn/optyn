@@ -18,32 +18,32 @@ Optyn::Application.routes.draw do
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
-  
-  devise_for :users, :path_names  => { :sign_out => 'logout',
-    :sign_in  => 'login',
-    :sign_up  => 'register' 
-    },:controllers => {:registrations => 'users/registrations',:sessions => 'users/sessions', :passwords => 'users/passwords'}
 
-    devise_scope :user do
+  devise_for :users, :path_names => {:sign_out => 'logout',
+                                     :sign_in => 'login',
+                                     :sign_up => 'register'
+  }, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :passwords => 'users/passwords'}
+
+  devise_scope :user do
     # Sessions
-    post '/login'         => 'users/sessions#create',       :as => :user_session
-    get  '/login'         => 'users/sessions#new',          :as => :new_user_session
-    get  '/logout'        => 'devise/sessions#destroy',      :as => :destroy_user_session
+    post '/login' => 'users/sessions#create', :as => :user_session
+    get '/login' => 'users/sessions#new', :as => :new_user_session
+    get '/logout' => 'devise/sessions#destroy', :as => :destroy_user_session
 
     # Passwords
-    post '/password'      => 'users/passwords#create',     :as => :user_password
-    put  '/password'      => 'users/passwords#update'
-    get  '/password/new'  => 'users/passwords#new',        :as => :new_user_password
-    get  '/password/edit' => 'users/passwords#edit',       :as => :edit_user_password
+    post '/password' => 'users/passwords#create', :as => :user_password
+    put '/password' => 'users/passwords#update'
+    get '/password/new' => 'users/passwords#new', :as => :new_user_password
+    get '/password/edit' => 'users/passwords#edit', :as => :edit_user_password
 
     # Registrations
-    post   '/register'    => 'users/registrations#create', :as => :user_registration
-    get    '/register'    => 'users/registrations#new',    :as => :new_user_registration
-    get    '/account'     => 'users/registrations#edit',   :as => :edit_user_registration
-    put    '/account'     => 'users/registrations#update'
-    delete '/account'     => 'users/registrations#destroy'
-    get    '/zips/new'    => 'users/zips#new',             :as => :new_user_zip
-    post   '/zips'        => 'users/zips#create',           :as => :user_zips  
+    post '/register' => 'users/registrations#create', :as => :user_registration
+    get '/register' => 'users/registrations#new', :as => :new_user_registration
+    get '/account' => 'users/registrations#edit', :as => :edit_user_registration
+    put '/account' => 'users/registrations#update'
+    delete '/account' => 'users/registrations#destroy'
+    get '/zips/new' => 'users/zips#new', :as => :new_user_zip
+    post '/zips' => 'users/zips#create', :as => :user_zips
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
   end
@@ -60,70 +60,72 @@ Optyn::Application.routes.draw do
   end
 
   #Mount resque :)
-mount Resque::Server, :at => "/resque"
+  mount Resque::Server, :at => "/resque"
 
-namespace :api do
-  scope module: :v1 do
-    get 'shop/:app_id/details', to: 'shops#details',  as: :shop_details 
-    get 'shop/button_framework.js', to: 'shops#button_framework'
-    match 'user', to: 'users#show', as: :user_profile
+  namespace :api do
+    scope module: :v1 do
+      get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
+      get 'shop/button_framework.js', to: 'shops#button_framework'
+      match 'user', to: 'users#show', as: :user_profile
+    end
   end
-end
 
-namespace "merchants" do |merchant|
+  namespace "merchants" do |merchant|
 
-  get "show_managers" => "merchant_managers#show_managers", as: :managers_list
+    get "show_managers" => "merchant_managers#show_managers", as: :managers_list
 
-  devise_for :managers,:controllers=> {
-    :registrations => 'merchants/managers/registrations', 
-    :sessions => 'merchants/managers/sessions',
-    :passwords => 'merchants/managers/passwords',
-    :confirmations => 'merchants/managers/confirmations'
-    } do 
+    devise_for :managers, :controllers => {
+        :registrations => 'merchants/managers/registrations',
+        :sessions => 'merchants/managers/sessions',
+        :passwords => 'merchants/managers/passwords',
+        :confirmations => 'merchants/managers/confirmations'
+    }
+
+    devise_scope :managers do
       get '/add_manager' => 'merchant_managers#add_manager'
       post '/create_new_manager' => 'merchant_managers#create_new_manager'
     end
 
-  resource :app 
-  resources :connections
-  resources :locations 
+    resource :app
+    resources :connections
+    resources :locations
 
-  resource :shop do
-    member do
-      get :check_identifier
-    end
-  end
-
-  resource :subscription
-  get '/upgrade' => 'subscriptions#upgrade'
-  post '/subscribe' => 'subscriptions#subscribe', as: :subscribe
-  get '/edit_billing_info' => 'subscriptions#edit_billing_info'
-  put '/update_billing_info' => 'subscriptions#update_billing_info'
-  
-  resource :survey, only: [:show, :edit, :update], path: :segment do
-    member do
-      get 'questions'
-      get 'preview'
-      get 'launch'
-    end
-
-    resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
-
-    resources :survey_answers, path: "answers" do
-      collection do
-        post 'create_label'
-        post 'update_labels'
+    resource :shop do
+      member do
+        get :check_identifier
       end
     end
+
+    resource :subscription
+    get '/upgrade' => 'subscriptions#upgrade'
+    post '/subscribe' => 'subscriptions#subscribe', as: :subscribe
+    get '/edit_billing_info' => 'subscriptions#edit_billing_info'
+    put '/update_billing_info' => 'subscriptions#update_billing_info'
+
+    resource :survey, only: [:show, :edit, :update], path: :segment do
+      member do
+        get 'questions'
+        get 'preview'
+        get 'launch'
+      end
+
+      resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
+
+      resources :survey_answers, path: "answers" do
+        collection do
+          post 'create_label'
+          post 'update_labels'
+        end
+      end
+    end
+
+    resources :labels, except: [:show]
+
   end
 
-  resources :labels, except: [:show]
-
-end
-
-use_doorkeeper do
+  use_doorkeeper do
     controllers :authorizations => 'oauth_authorizations'
-end
+  end
 
 
   #Link to the customer facing side static pages converted to layout with HAML
