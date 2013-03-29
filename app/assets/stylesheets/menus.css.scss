@@ -1,0 +1,57 @@
+span3 .menuleft {
+  margin-left: 0px;
+}
+.merchant-menu {
+  background-color: #263d45;
+  border-radius: 4px;
+  padding: 10px;
+  color: #7d8b8f;
+  height: auto;
+  margin: 0px;
+}
+.merchant-menu .menu-header {
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.merchant-menu > hr {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border-top: 1px #7d8b8f;
+  border-top-style: solid;
+  border-bottom: 0px;
+}
+.merchant-menu > ul {
+  margin: 0px;
+}
+.merchant-menu > li {
+  margin-top: 10px;
+  margin-left: 10px;
+  border-bottom: 1px #354b52;
+  font-size: 16px;
+  line-height: 20px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.merchant-menu > li > img {
+  float: left;
+  padding-right: 10px;
+}
+.merchant-menu > li > a {
+  color: #7d8b8f;
+  text-decoration: none;
+}
+.merchant-menu > li > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+.merchant-menu > li > a:active {
+  color: #9ae544;
+  text-decoration: none;
+}
+.merchant-menu > li > a:active {
+  color: #9ae544;
+  text-decoration: none;
+}
