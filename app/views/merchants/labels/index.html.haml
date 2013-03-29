@@ -3,13 +3,14 @@
   = current_shop.name
 
 .span8
-  %table.table
-    %tr
-      %th Name
-      %th Classified users count
-      %th
-      %th
-
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Classified users count
+        %th Label
+        %th Label
+    %tbody
     - @labels.each do |label|
       %tr
         %td= label.name
