@@ -72,8 +72,6 @@ Optyn::Application.routes.draw do
 
   namespace "merchants" do |merchant|
 
-    get "show_managers" => "merchant_managers#show_managers", as: :managers_list
-
     devise_for :managers, :controllers => {
         :registrations => 'merchants/managers/registrations',
         :sessions => 'merchants/managers/sessions',
@@ -82,6 +80,7 @@ Optyn::Application.routes.draw do
     }
 
     devise_scope :managers do
+      get "show_managers" => "merchant_managers#show_managers", as: :managers_list
       get '/add_manager' => 'merchant_managers#add_manager'
       post '/create_new_manager' => 'merchant_managers#create_new_manager'
     end
