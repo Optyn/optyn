@@ -26,8 +26,27 @@
               = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header")
 
           - if merchants_manager_signed_in?    
-            %li
-              = link_to("Logout",  destroy_merchants_manager_session_path, class: "btn-header", :method => :delete)
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %img{:src => "/assets/avatar.png", :alt => "User Avatar"}
+              %ul.dropdown-menu
+                %li
+                  %a.active{:href => "#"} My Dashboard
+                %li
+                  %a{:href => "connections"} My Connections
+                %li
+                  %a{:href => "#"} My Messages
+                %li
+                  %a{:href => "segments"} My Surveys
+                %li
+                  %a{:href => edit_user_registration_path, :method => :put} My Account
+                %li
+                  %a{:href => profile_path} My Profile
+                %li
+                  %a{:href => "#"} My Settings
+                %hr
+                %li
+                  = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
           - if user_signed_in?
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
