@@ -1,5 +1,7 @@
 class Merchants::BaseController < ApplicationController
 
+  layout 'merchants'
+
 	before_filter :authenticate_merchants_manager!, :set_time_zone
 	#before_filter :active_subscription?
 

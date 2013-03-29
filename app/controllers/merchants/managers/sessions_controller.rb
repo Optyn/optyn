@@ -1,4 +1,6 @@
 class Merchants::Managers::SessionsController < Devise::SessionsController
+  layout 'merchants'
+
   before_filter :require_customer_logged_out
 
   include MerchantSessionsRedirector

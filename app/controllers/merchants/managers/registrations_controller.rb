@@ -1,4 +1,6 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
+  layout 'merchants'
+
   include MerchantSessionsRedirector
 
   before_filter :require_customer_logged_out
