@@ -6,7 +6,7 @@
 = f.text_field :city
 %label.pull-left State
 = f.collection_select :state_id, @states, :id, :name, include_blank: "-- Select State --"
-
+%br
 %label.pull-left Zip Code
 = f.text_field :zip      
 

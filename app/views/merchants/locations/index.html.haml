@@ -4,20 +4,28 @@
 
     = render partial: "merchants/shared/menu"
     
-    .span8.box_wrapper
-      %div
+    .span8
+      %div.align-right
         %a.btn{:href => new_merchants_location_path}
-          %i.icon-white.icon-heart
+          %i.icon-black.icon-map-marker
           Add New Location
-      %table.table
-        %tr 
-          %th #
-          %th Street Address 1
-          %th Street Address 2
-          %th City
-          %th State
-          %th Manage
-
+      %br
+      %table.table.table-striped
+        %thead
+          %tr
+            %th #
+            %th Street Address 1
+            %th Street Address 2
+            %th City
+            %th State
+            %th Manage
+        %tbody
+          %tr
+            %td 1
+            %td 5868 N Lincoln Ave
+            %td Suite 1
+            %td Chicago
+            %td IL
         - @locations.each_with_index do |location,index|
           %tr
             %td

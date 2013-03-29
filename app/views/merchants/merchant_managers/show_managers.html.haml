@@ -1,12 +1,14 @@
 #box_sign
   .container
+    %h2 Your Managers
     = render partial: "merchants/shared/menu"
-    .span8.box_wrapper
+    .span8
       %div
         %a.btn{:href => merchants_add_manager_path}
-          %i.icon-white.icon-heart
+          %i.icon-black.icon-user
           Add Manager
-      %table.table
+      %br
+      %table.table.table-striped
         %tr 
           %th #
           %th Name

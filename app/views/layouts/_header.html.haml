@@ -31,6 +31,7 @@
                 %img{:src => "/assets/avatar.png", :alt => "User Avatar"}
               %ul.dropdown-menu
                 %li
+                  %img{:src => "/assets/drop_icon_dashboard.png", :float => "left"}
                   %a.active{:href => "#"} My Dashboard
                 %li
                   %a{:href => "connections"} My Connections
@@ -46,6 +47,7 @@
                   %a{:href => "#"} My Settings
                 %hr
                 %li
+                  %img{:src => "/assets/drop_icon_logout.png", :float => "left"}
                   = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
           - if user_signed_in?
             %li.dropdown
