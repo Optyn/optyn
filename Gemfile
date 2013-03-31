@@ -32,7 +32,7 @@ gem "fog"
 gem 'localtunnel'
 gem 'chosen-rails'
 gem 'kaminari'
-
+gem 'newrelic_rpm'
 # gems for stripe payment
 gem 'stripe'
 
