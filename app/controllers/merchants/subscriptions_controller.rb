@@ -29,6 +29,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def subscribe
+    binding.pry
     begin 
       @plan=Plan.find_by_plan_id("starter")
       @subscription=Subscription.new(params[:subscription])
@@ -44,11 +45,10 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       end
 
     rescue Exception => e
-      if e.code.present?
+      if e.respond_to?(:code)
         @subscription.stripe_error = e.code.humanize
       else
         @subscription.stripe_error = e.to_s
-      end
       render 'upgrade'
     end
 
