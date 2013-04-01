@@ -48,6 +48,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
         @subscription.stripe_error = e.code.humanize
       else
         @subscription.stripe_error = e.to_s
+      end
       render 'upgrade'
     end
 
