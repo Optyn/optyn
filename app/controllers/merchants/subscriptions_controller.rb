@@ -5,6 +5,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
   def upgrade
+    binding.pry
     @plan=Plan.find_by_plan_id("starter")
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
   end
