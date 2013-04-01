@@ -1,0 +1,8 @@
+= render partial: 'merchants/shared/messages/commons_header', locals: {f: f}
+
+.control-group
+  = f.label :content, "Details", class: 'control-label'
+  .controls
+    = f.text_area :content, class: 'input-xxlarge details', rows: 8, cols: 10
+
+= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

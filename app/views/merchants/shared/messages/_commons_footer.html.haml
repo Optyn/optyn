@@ -1,0 +1,12 @@
+.control-group
+  = f.label :send_on, "Send on", class: 'control-label'
+  .controls
+    #message_send_on_wrapper.input-append
+      = f.text_field :send_on, value: formatted_message_form_send_on(@message), 'data-format' => "MM/dd/yyyy HH:mm PP"
+      %span.add-on
+        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+
+.control-group
+  = f.label :send_immediately, "Send Immediately", class: 'control-label'
+  .controls
+    = f.check_box :send_immediately

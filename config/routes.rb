@@ -123,6 +123,12 @@ Optyn::Application.routes.draw do
 
     resources :labels, except: [:show]
 
+    get "new/:message_type" => 'messages#new', as: 'new_campaign'
+    resources :messages do
+      collection do
+        get :types
+      end
+    end
   end
 
   use_doorkeeper do

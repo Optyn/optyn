@@ -1,0 +1,4 @@
+%fieldset
+  = hidden_field_tag :message_type, @message_type
+
+  = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}

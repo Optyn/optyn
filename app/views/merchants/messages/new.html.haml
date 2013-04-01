@@ -1,0 +1,5 @@
+.row
+  %h1 New Campaign
+  #message_fields_wrapper
+    = form_for :message, url: merchants_messages_path, method: :post, :html => {class: 'form-horizontal'} do |f|
+      = render :partial => 'form', :locals => {f: f}
