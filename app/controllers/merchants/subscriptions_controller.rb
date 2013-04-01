@@ -29,7 +29,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def subscribe
-    binding.pry
     begin 
       @plan=Plan.find_by_plan_id("starter")
       @subscription=Subscription.new(params[:subscription])
