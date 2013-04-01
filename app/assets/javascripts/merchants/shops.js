@@ -7,9 +7,17 @@ $(document).ready(function () {
 function Shop() {
     this.initialize = function () {
         if ($('#update_shop_wrapper').length) {
+            this.setTimeZone();
             this.hookChosen();
             this.hookIdentifierKeyup();
         }
+    };
+
+    this.setTimeZone = function(){
+        var tz = jstz.determine();
+        var tz1 = tz.name();
+        var timezone = tz1.split('/').pop();
+        $("#shop_time_zone").val(timezone);
     };
 
     this.hookChosen = function () {

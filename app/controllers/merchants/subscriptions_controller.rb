@@ -44,7 +44,11 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       end
 
     rescue Exception => e
-      @subscription.stripe_error = e.code.humanize
+      if e.respond_to?(:code)
+        @subscription.stripe_error = e.code.humanize
+      else
+        @subscription.stripe_error = e.to_s
+      end
       render 'upgrade'
     end
 
