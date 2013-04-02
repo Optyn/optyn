@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   alias_method :current_manager, :current_merchants_manager
 
   private
-
   def require_manager_logged_out
     if manager_signed_in?
       flash[:alert] = "You are already logged in"
