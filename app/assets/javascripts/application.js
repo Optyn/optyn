@@ -16,7 +16,6 @@
 //= require merchants/wysihtml5-0.3.0_rc2
 //= require_directory ./stripe
 //= require chosen-jquery
-//= require bootstrap-datepicker
 //= require bootstrap-datetimepicker
 //= require_self
 //= require_tree
