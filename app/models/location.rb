@@ -1,6 +1,8 @@
 class Location < ActiveRecord::Base
   
   attr_accessible :city,:zip, :shop_id, :state_id, :street_address1, :street_address2,:longitude,:latitude
+  geocoded_by :address
+  after_validation :geocode
 
   belongs_to :shop
   belongs_to :state
@@ -18,4 +20,7 @@ class Location < ActiveRecord::Base
     state.name
   end
 
+  def address
+    [street_address1, city, state_name].compact.join(', ')
+  end
 end

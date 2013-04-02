@@ -33,6 +33,7 @@ gem 'localtunnel'
 gem 'chosen-rails'
 gem 'kaminari'
 gem 'newrelic_rpm'
+gem 'geocoder'
 # gems for stripe payment
 gem 'stripe'
 

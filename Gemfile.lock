@@ -106,6 +106,7 @@ GEM
       ruby-hmac
     formatador (0.2.4)
     fssm (0.2.10)
+    geocoder (1.1.6)
     google-analytics-rails (0.0.4)
     haml (4.0.1)
       tilt
@@ -333,6 +334,7 @@ DEPENDENCIES
   devise-async
   doorkeeper (~> 0.6.7)
   fog
+  geocoder
   google-analytics-rails
   haml
   haml-rails
