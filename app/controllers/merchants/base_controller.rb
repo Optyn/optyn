@@ -3,7 +3,7 @@ class Merchants::BaseController < ApplicationController
   layout 'merchants'
 
 	before_filter :authenticate_merchants_manager!, :set_time_zone
-	#before_filter :active_subscription?
+	before_filter :active_subscription?
 
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
@@ -17,6 +17,7 @@ class Merchants::BaseController < ApplicationController
 	def active_subscription?
     unless current_manager.shop.is_subscription_active?
     	flash[:alert] = "Please update your payment details"
+    	session[:return_to] = request.path
     	redirect_to merchants_upgrade_path
     end
   end
