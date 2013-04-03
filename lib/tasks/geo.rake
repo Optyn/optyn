@@ -3,7 +3,6 @@ namespace :geo do
   task :fetch_location => :environment do |t|  
     Location.all.each do |loc|
       TrackLatLng.fetch_lat_lng(loc.id)
-      puts loc.id
     end
   end
 end

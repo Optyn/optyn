@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, :at => "1:30am", :roles => [:app] do
+every :day, :at => "1:30am" do
   rake "geo:fetch_location"
 end

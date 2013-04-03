@@ -4,10 +4,17 @@ class Merchants::BaseController < ApplicationController
 
 	before_filter :authenticate_merchants_manager!, :set_time_zone
 	before_filter :active_subscription?
-
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
 	private
+  
+  def is_current_manager_owner?
+    unless current_manager.owner?
+      redirect_to merchants_locations_path
+      flash[:alert] ="Sorry,only Admin Manager can update location"
+    end
+  end
+
   def set_time_zone
     if current_shop.time_zone.present?
       Time.zone = current_shop.time_zone
