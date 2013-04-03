@@ -34,6 +34,7 @@ gem 'chosen-rails'
 gem 'kaminari'
 gem 'newrelic_rpm'
 gem 'geocoder'
+gem 'whenever'
 # gems for stripe payment
 gem 'stripe'
 

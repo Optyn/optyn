@@ -3,7 +3,9 @@ require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 require "capistrano-resque"
+require "whenever/capistrano"
 
+set :whenever_environment, defer { default_stage }
 set :default_stage, "staging"
 set :application, "optyn"
 set :user, "deploy"
