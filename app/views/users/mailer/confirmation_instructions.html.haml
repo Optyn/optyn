@@ -24,7 +24,7 @@
             %table{:style => "padding:15px; max-width:600px; margin:0 auto; display:block;"}
               %tr
                 %td
-                  %h3 Welcome to Optyn #{resource@name}!
+                  %h3 Welcome to Optyn #{@resource.name} !
                   %p We are so excited to have you and we want to make sure you have the full Optyn Experience.
                   We work hard, day in and out, to create a wonderful experience for a product that makes your life easier.
                   %p{:style => "padding:10px;background-color:#ecf8ff;margin-bottom:10px;"}= link_to 'Click here to Confirm Your Account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
