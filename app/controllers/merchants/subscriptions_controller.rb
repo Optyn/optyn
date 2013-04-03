@@ -3,7 +3,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   before_filter :require_manager
   before_filter :require_shop_local_and_inactive, :only => [:upgrade, :subscribe]
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
-
   def upgrade
     @plan=Plan.find_by_plan_id("starter")
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
@@ -38,7 +37,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       if @subscription.save
         MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email)).deliver
         flash[:notice]="Payment done successfully"
-        redirect_to root_path
+        redirect_to (session[:return_to] || root_path)
       else
         render 'upgrade'
       end
