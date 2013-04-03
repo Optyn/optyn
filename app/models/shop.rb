@@ -119,6 +119,10 @@ class Shop < ActiveRecord::Base
     businesses.collect(&:name)
   end
 
+  def inactive_label
+    labels.inactive(self).first
+  end
+
   private
   def create_dummy_survey
     unless survey.present?

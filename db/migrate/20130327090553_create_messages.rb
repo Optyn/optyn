@@ -5,6 +5,7 @@ class CreateMessages < ActiveRecord::Migration
       t.references :manager
       t.string :from
       t.string :name    #campaign name
+      t.string :second_name #attr_name that maps to type of campaign like: Coupon Name, Name of Special, Sale Name, Announcement Name, Product Name, Event Name and Survey Name
       t.string :subject #Subject line of the marketing message
       t.text :content #details
       t.string :state

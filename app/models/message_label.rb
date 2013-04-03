@@ -1,3 +1,3 @@
 class MessageLabel < ActiveRecord::Base
-  # attr_accessible :title, :body
+   attr_accessible :label_id, :message_id
 end
