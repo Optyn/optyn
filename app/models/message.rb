@@ -77,6 +77,19 @@ class Message < ActiveRecord::Base
     labels.collect(&:name)
   end
 
+  def connections_count
+    ids = self.label_ids
+
+    if 1 == ids.size
+      label = Label.find(ids.first)
+
+      if label.inactive?
+        return shop.users.count
+      end
+    end
+
+    fetch_labeled_users(ids)
+  end
 
   private
   def build_new_message_labels(identifiers)
@@ -120,17 +133,23 @@ class Message < ActiveRecord::Base
 
   def canned_subject
     if self.instance_of?(GeneralMessage)
-      "General Announcement"
+      "#{shop.name}, wants to make sure you hear the latest.."
     elsif self.instance_of?(CouponMessage)
-      "Coupon Message"
+      "(Customer Name), Here's a Coupon for #{shop.name}!"
     elsif self.instance_of?(EventMessage)
-      "Event Message"
+      "#{shop.name} invites you to an event!"
     elsif self.instance_of?(ProductMessage)
-      "Product Announcement"
+      "#{shop.name} is introducing a New Product you'll want to have"
+    elsif self.instance_of?(SaleMessage)
+      "#{shop.name} is having a sale! Don't miss out."
     elsif self.instance_of?(SpecialMessage)
-      "Special Announcement"
+      "A special offer just for you (Customer Name), Courtesy of #{shop.name}."
     elsif self.instance_of?(SurveyMessage)
-      "Survey Message"
+      "#{shop.name} would like your feedback!"
     end
+  end
+
+  def fetch_labeled_users(ids)
+    UserLabel.fetch_user_count(ids)
   end
 end

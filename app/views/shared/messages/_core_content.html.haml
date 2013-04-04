@@ -13,6 +13,12 @@
             %tr
               %td
                 .message-content
-                  = simple_format(@message.content)
+                  %p
+                    %strong
+                      Hello
+                      == #{customer_name},
+
+                  %p
+                    = simple_format(@message.content)
 
   = render partial: "shared/mailers/footer"

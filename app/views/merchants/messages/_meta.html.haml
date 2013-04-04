@@ -22,4 +22,4 @@
         %strong E-mail will be sent to:
       %div
         = message_receiver_labels(@message.label_names)
-        =# @message.connection_count
+        == (#{@message.connections_count} total)

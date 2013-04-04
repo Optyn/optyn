@@ -27,6 +27,10 @@ module Merchants::MessagesHelper
   end
 
   def message_receiver_labels(label_names)
+    if 1 == label_names.size
+      return "All Connections" if Label::SELECT_ALL_NAME == label_names.first
+    end
+
     label_names.join(", ")
   end
 end
