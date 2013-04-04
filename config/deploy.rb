@@ -3,10 +3,12 @@ require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 require "capistrano-resque"
-require "whenever/capistrano"
+
 
 set :default_stage, "staging"
+set :whenever_command, "bundle exec whenever"
 set :whenever_environment, defer { default_stage }
+require "whenever/capistrano"
 set :application, "optyn"
 set :user, "deploy"
 set :deploy_to, "/srv/apps/#{application}"
@@ -48,12 +50,12 @@ after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:web:enable"
 after "deploy", "deploy:cleanup"
-after "deploy:symlink", "deploy:update_crontab"
+after "deploy:create_symlink", "whenever:update_crontab"
 
-namespace :deploy do
+namespace :whenever do
   desc "Update the crontab file"
   task :update_crontab do
-    run "cd #{release_path} && whenever --update-crontab #{application}"
+    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
   end
 end
 
