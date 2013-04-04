@@ -27,16 +27,16 @@ class Message < ActiveRecord::Base
       transition :draft => same
     end
 
-    #event :launch do
-    #  transition :draft => :ready
-    #end
+    event :launch do
+      transition :draft => :queued
+    end
 
     #event :start_transit do
-    #  transition :ready => :transit
+    #  transition :queued => :transit
     #end
     #
     #event :deliver do
-    #  transition [:ready, :transit] => :sent
+    #  transition [:queued, :transit] => :sent
     #end
 
     before_transition :draft => same do |message|

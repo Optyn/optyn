@@ -131,7 +131,7 @@ Optyn::Application.routes.draw do
 
       member do
         get :preview
-        #get :launch
+        get :launch
       end
     end
   end
