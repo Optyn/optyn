@@ -74,7 +74,7 @@ class Message < ActiveRecord::Base
   end
 
   def label_names
-    labels.message_labels(self).collect(&:name)
+    labels.collect(&:name)
   end
 
 

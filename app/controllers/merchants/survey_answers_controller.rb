@@ -27,6 +27,6 @@ class Merchants::SurveyAnswersController < Merchants::BaseController
 
   private
   def populate_labels
-    @names = current_shop.labels
+    @names = current_shop.labels.active
   end
 end

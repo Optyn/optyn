@@ -5,21 +5,10 @@ class Label < ActiveRecord::Base
 
   attr_accessible :shop_id, :name
 
-  default_scope where(active: true)
+  scope :active, where(active: true)
+  scope :inactive, where(active: false)
 
   SELECT_ALL_NAME = 'Select All'
-
-  def self.active_and_inactive(shop)
-    with_exclusive_scope { shop.labels.all }
-  end
-
-  def self.inactive(shop)
-    with_exclusive_scope { shop.labels.where(active: false) }
-  end
-
-  def self.message_labels(message)
-    with_exclusive_scope{message.labels.all}
-  end
 
   def users_count
     user_labels.count

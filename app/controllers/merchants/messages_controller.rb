@@ -57,7 +57,7 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def populate_labels
-    @labels = current_shop.labels.active_and_inactive(current_shop)
+    @labels = current_shop.labels
   end
 
   def message_redirection
