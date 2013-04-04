@@ -128,6 +128,11 @@ Optyn::Application.routes.draw do
       collection do
         get :types
       end
+
+      member do
+        get :preview
+        #get :launch
+      end
     end
   end
 

@@ -1,0 +1,12 @@
+#message_details
+  .row
+    %h1{class: 'text-center'}
+      Email Preview
+      =# link_to "Send it", launch_merchants_message_path(@message), class: "btn btn-success"
+
+    %hr/
+
+  .row
+    = render partial: "merchants/messages/meta"
+
+    = render partial: "shared/messages/core_content"

@@ -5,8 +5,6 @@ class Message < ActiveRecord::Base
 
   attr_accessible :label_ids, :name, :second_name, :send_immediately
 
-  accepts_nested_attributes_for :message_labels
-
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
   COUPON_FIELD_TEMPLATE_TYPE = "coupon_message"
@@ -25,14 +23,14 @@ class Message < ActiveRecord::Base
       transition :draft => same
     end
 
-    #event :preview do
-    #  transition :draft => same
-    #end
-    #
+    event :preview do
+      transition :draft => same
+    end
+
     #event :launch do
     #  transition :draft => :ready
     #end
-    #
+
     #event :start_transit do
     #  transition :ready => :transit
     #end
@@ -40,6 +38,11 @@ class Message < ActiveRecord::Base
     #event :deliver do
     #  transition [:ready, :transit] => :sent
     #end
+
+    before_transition :draft => same do |message|
+      message.subject = message.send(:canned_subject)
+      message.from = message.send(:canned_from)
+    end
 
     state :draft do
       def save
@@ -66,9 +69,12 @@ class Message < ActiveRecord::Base
     if new_record?
       build_new_message_labels(identifiers)
     else
-      binding.pry
       manipulate_existing_message_labels(identifiers)
     end
+  end
+
+  def label_names
+    labels.message_labels(self).collect(&:name)
   end
 
 
@@ -106,5 +112,25 @@ class Message < ActiveRecord::Base
 
   def shop
     manager.shop
+  end
+
+  def canned_from
+    manager.email_like_from
+  end
+
+  def canned_subject
+    if self.instance_of?(GeneralMessage)
+      "General Announcement"
+    elsif self.instance_of?(CouponMessage)
+      "Coupon Message"
+    elsif self.instance_of?(EventMessage)
+      "Event Message"
+    elsif self.instance_of?(ProductMessage)
+      "Product Announcement"
+    elsif self.instance_of?(SpecialMessage)
+      "Special Announcement"
+    elsif self.instance_of?(SurveyMessage)
+      "Survey Message"
+    end
   end
 end

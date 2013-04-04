@@ -61,6 +61,12 @@ $fontAwesomeWoffPath: image-path("fontawesome-webfont.woff");
 $fontAwesomeTtfPath: image-path("fontawesome-webfont.ttf");
 $fontAwesomeSvgPath: image-path("fontawesome-webfont.svg");
 
+.text-left {text-align: left;}
+
+.text-right {text-align: right;}
+
+.text-center {text-align: center;}
+
 // Font Awesome
 //@import "bootstrap/fontawesome";
 

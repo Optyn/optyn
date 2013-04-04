@@ -1,0 +1,10 @@
+/**
+ * Email preview styles
+ */
+#message_preview_container{height:100%; background-color:#ffffff; font-family:Helvetica, sans-serif; padding:20px;}
+
+#message_preview_container .outer-table{width:100%;}
+
+#message_preview_container .outer-table .outer-cell{background-color:#FFF; display:block!important; max-width:600px; margin:0 auto; clear:both;}
+
+#message_preview_container .outer-table .outer-cell .inner-table{padding:15px; max-width:600px; margin:0 auto; display:block;}

@@ -42,6 +42,15 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def preview
+    @message = Message.find(params[:id])
+  end
+
+  def launch
+    @message = Message.find(params[:id])
+    @message.launch
+  end
+
   private
   def populate_message_type
     @message_type = Message.fetch_template_name(params[:message_type])
@@ -54,7 +63,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def message_redirection
     choice = params[:choice]
     if "preview" == choice
-      #TODO TO BE IMPLEMENTED TO BE REDIRECTED TO THE SHOW PAGE.
+      redirect_to preview_merchants_message_path(@message)
     elsif "launch" == choice
       #TODO TO BE IMPLEMENTED TO BE REDIRECTED TO THE SENT PAGE.
     else

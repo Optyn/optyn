@@ -4,7 +4,7 @@ class Manager < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :async, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable,:confirmable
+  :recoverable, :rememberable, :trackable, :validatable#,:confirmable
   
   has_many :authentications,:as=>:account, dependent: :destroy
   has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
@@ -66,5 +66,9 @@ class Manager < ActiveRecord::Base
 
   def first_shop
     shop.first_location
+  end
+
+  def email_like_from
+    %Q("#{name} <#{email}>")
   end
 end

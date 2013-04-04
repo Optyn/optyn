@@ -8,21 +8,25 @@ module Merchants::MessagesHelper
   def message_form_title(message_type)
     case message_type
       when Message::DEFAULT_FIELD_TEMPLATE_TYPE
-        return "New General Announcement Campaign"
+        "#{action_name.humanize} General Announcement Campaign"
       when Message::COUPON_FIELD_TEMPLATE_TYPE
-        return "New Coupon Campaign"
+        "#{action_name.humanize} Coupon Campaign"
       when Message::EVENT_FIELD_TEMPLATE_TYPE
-        return "New Event Announcement Campaign"
+        "#{action_name.humanize} Event Announcement Campaign"
       when Message::PRODUCT_FIELD_TEMPLATE_TYPE
-        return "New Product Announcement Campaign"
+        "#{action_name.humanize} Product Announcement Campaign"
       when Message::SALE_FIELD_TEMPLATE_TYPE
-        return "New Sale Announcement Campaign"
+        "#{action_name.humanize} Sale Announcement Campaign"
       when Message::SPECIAL_FIELD_TEMPLATE_TYPE
-        return "New Special Announcement Campaign"
+        "#{action_name.humanize} Special Announcement Campaign"
       when Message::SURVEY_FIELD_TEMPLATE_TYPE
-        return "New Survey Campaign"
+        "#{action_name.humanize} Survey Campaign"
       else
-        return "New Campaign"
+        "#{action_name.humanize} Campaign"
     end
+  end
+
+  def message_receiver_labels(label_names)
+    label_names.join(", ")
   end
 end

@@ -17,6 +17,10 @@ class Label < ActiveRecord::Base
     with_exclusive_scope { shop.labels.where(active: false) }
   end
 
+  def self.message_labels(message)
+    with_exclusive_scope{message.labels.all}
+  end
+
   def users_count
     user_labels.count
   end
@@ -24,6 +28,7 @@ class Label < ActiveRecord::Base
   def inactive?
     !active
   end
+
   def select_all?
     inactive? && SELECT_ALL_NAME == name
   end

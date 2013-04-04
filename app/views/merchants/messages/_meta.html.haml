@@ -1,0 +1,25 @@
+.span4
+  %h4
+    Campaign Message Details
+    = link_to "Make Changes", edit_merchants_message_path(@message), class: "btn btn-primary"
+  %hr/
+
+  %ul
+    %li.message-subject
+      %div
+        %strong Subject:
+      %div
+        = @message.subject
+
+    %li.message-send-timestamp
+      %div
+        %strong To be sent on:
+      %div
+        8:30am tomorrow morning(Central Time)
+
+    %li.message-receivers
+      %div
+        %strong E-mail will be sent to:
+      %div
+        = message_receiver_labels(@message.label_names)
+        =# @message.connection_count
