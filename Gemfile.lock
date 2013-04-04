@@ -52,6 +52,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
+    chronic (0.9.1)
     chunky_png (1.2.8)
     client_side_validations (3.2.5)
     coderay (1.0.9)
@@ -315,6 +316,9 @@ GEM
       rack (>= 1.0.0)
     warden (1.2.1)
       rack (>= 1.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -367,3 +371,4 @@ DEPENDENCIES
   stripe
   uglifier (>= 1.0.3)
   unicorn
+  whenever

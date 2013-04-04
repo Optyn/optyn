@@ -1,7 +1,7 @@
 class Merchants::LocationsController < Merchants::BaseController
   before_filter :load_states, :only => [:new, :create, :edit, :update]
   skip_before_filter :active_subscription?, :only => [:index]
-
+  before_filter :is_current_manager_owner?, :only =>[:new]
   def index
     @locations= current_shop.locations
   end
@@ -14,7 +14,7 @@ class Merchants::LocationsController < Merchants::BaseController
     @location = current_shop.locations.new(params[:location])
 
     if @location.save
-      Resque.enqueue(GeoLatLng, @location.id)
+      Resque.enqueue(GeoFinder, @location.id)
       flash[:notice]="Location added successfully"
       redirect_to merchants_locations_path
     else
