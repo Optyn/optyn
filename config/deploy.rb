@@ -50,15 +50,18 @@ after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:web:enable"
 after "deploy", "deploy:cleanup"
-after "deploy:create_symlink", "whenever:update_crontab"
+#after "deploy:create_symlink", "whenever"
 
-namespace :whenever do
-  desc "Update the crontab file"
+
+namespace "whenever" do
+  task :clear_crontab do
+    run "cd #{fetch(:previous_release) || fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} #{application}"
+  end
+
   task :update_crontab do
-    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
+    run "cd #{release_path} &&  bundle exec whenever --update-crontab --set environment=#{rails_env} #{application}"
   end
 end
-
 
 namespace :deploy do
 	desc "reload the database with seed data"
@@ -116,7 +119,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 

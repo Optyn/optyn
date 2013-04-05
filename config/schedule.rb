@@ -5,7 +5,8 @@
 
 # Example:
 #
-# set :output, "/path/to/my/cron_log.log"
+#set :environment, "development"
+set :output, "#{path}/log/cron.log"
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -18,6 +19,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, :at => "1:30am" do
+rvm_trust_rvmrcs_flag=1
+every 1.minutes do
   rake "geo:fetch_location"
 end
