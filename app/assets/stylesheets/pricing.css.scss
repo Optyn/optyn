@@ -104,6 +104,55 @@
 	width: 400px;
 	float: right;
 }
+#pricing .bottom {
+	margin: 0px;
+	background-color: #fff;
+	border-radius: 6px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	text-align: center;
+	font-size: 32px;
+}
+#pricing .bottom .enterprisebtn {
+	background: #e7eaeb;
+	border-radius: 4px;
+	display: inline-block;
+	height: 40px;
+	line-height: 36px;
+	top: 4px;
+	color: #1791c0;
+	font-size: 16px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+	font-weight: bold;
+}
+#pricing .bottom .enterprisebtn:hover {
+	background: #d1d2d3;
+	color: #1791c0;
+	text-decoration: none;
+	text-shadow: none;
+	font-weight: bold;
+}
+#pricing .bottom .left {
+	float: left;
+	background-color: #fff;
+	border-radius: 6px;
+
+}
+#pricing .bottom .right {
+	float: right;
+	background-color: #fff;
+	border-radius: 6px;
+}
+#pricingpopup {
+
+}
+#pricingpopup .modal {
+	height: 500px;
+	width: 800px;
+}
+#pricingpopup
 #pricing .section_header {
 	margin-bottom: 70px;
 }
