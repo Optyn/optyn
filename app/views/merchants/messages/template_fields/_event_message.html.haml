@@ -1,0 +1,18 @@
+= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign', second_name_label_text: 'Event Name'}
+
+= render partial: 'merchants/shared/messages/content', locals: {f: f}
+
+.control-group
+  = f.label :beginning, "Event Date and Time", class: "control-label"
+  .controls
+    .input-append.date-time-picker
+      = f.text_field :beginning, value: formatted_message_form_datetime(@message, :beginning), class: "input-large", 'data-format' => "yyyy-MM-dd HH:mm PP"
+      %span.add-on
+        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+
+.control-group
+  = f.label :rsvp, "RSVP Print", class: "control-label"
+  .controls
+
+
+= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

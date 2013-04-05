@@ -15,6 +15,8 @@ class Merchants::MessagesController < Merchants::BaseController
       klass = params[:message_type].classify.constantize
       @message = klass.new(params[:message])
       @message.manager_id = current_manager.id
+      populate_datetimes
+
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
@@ -25,14 +27,17 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def edit
     @message = Message.find(params[:id])
+    @message_type = @message.type.underscore
   end
 
   def update
+
     Message.transaction do
       klass = params[:message_type].classify.constantize
       @message = klass.find(params[:id])
       @message.manager_id = current_manager.id
       @message.attributes = params[:message]
+      populate_datetimes
 
       if @message.send(params[:choice].to_sym)
         message_redirection
@@ -69,5 +74,10 @@ class Merchants::MessagesController < Merchants::BaseController
     else
       redirect_to edit_merchants_message_path(@message.id)
     end
+  end
+
+  def populate_datetimes
+    @message.beginning = Time.parse(params[:message][:beginning]) if params[:message][:beginning].present?
+    @message.ending = Time.parse(params[:message][:ending]) if params[:message][:ending].present?
   end
 end

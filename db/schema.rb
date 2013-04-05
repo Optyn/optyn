@@ -149,8 +149,8 @@ ActiveRecord::Schema.define(:version => 20130403065521) do
     t.boolean  "send_immediately", :default => false
     t.boolean  "parent_id"
     t.text     "fine_print"
-    t.datetime "beginning_date"
-    t.datetime "ending_date"
+    t.datetime "beginning"
+    t.datetime "ending"
     t.string   "coupon_code"
     t.string   "type_of_discount"
     t.string   "discount_amount"

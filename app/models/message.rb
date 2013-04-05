@@ -157,4 +157,20 @@ class Message < ActiveRecord::Base
   def fetch_labeled_users(ids)
     UserLabel.fetch_user_count(ids)
   end
+
+  def validate_beginning
+    validate_date_time('beginning', "date and time")
+  end
+
+  def validate_ending
+    validate_date_time('ending', "date and time")
+  end
+
+  def validate_date_time(attr_name, attr_name_message)
+    begin
+      Date.parse(self.send(attr_name.to_sym))
+    rescue
+      errors.add(:base, "#{attr_name_message} is an invalid date")
+    end
+  end
 end

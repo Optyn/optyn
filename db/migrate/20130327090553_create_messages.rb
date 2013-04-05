@@ -15,8 +15,8 @@ class CreateMessages < ActiveRecord::Migration
 
       #template attributes
       t.text :fine_print #Coupon, Special
-      t.datetime :beginning_date #Special, SpecialAnnouncement
-      t.datetime :ending_date #Special, SpecialAnnouncement
+      t.datetime :beginning #Special, SpecialAnnouncement
+      t.datetime :ending #Special, SpecialAnnouncement
       #image??
 
       #Cupon

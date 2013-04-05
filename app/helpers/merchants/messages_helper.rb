@@ -1,8 +1,8 @@
 module Merchants::MessagesHelper
-  def formatted_message_form_send_on(message)
-    if message.send_on.present?
-      message.send_on.strftime('%m/%d/%Y %I:%M %p')
-    end
+  def formatted_message_form_datetime(message, message_attr)
+    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p')
+  rescue
+    ""
   end
 
   def message_form_title(message_type)
