@@ -44,6 +44,11 @@ class Message < ActiveRecord::Base
       message.from = message.send(:canned_from)
     end
 
+    before_transition :draft => :queued do |message|
+      message.valid?
+    end
+
+
     state :draft do
       def save
         super(validate: false)
