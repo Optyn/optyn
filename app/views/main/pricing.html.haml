@@ -1,121 +1,115 @@
-/ starts pricing
+#header1
+  .container
+    .row
+      %h3.intro
+        Optyn is always FREE to get Started and Priced to GROW
 #pricing.pricing_page
   .container
-    / header
-    %h2.section_header
-    %hr.left.visible-desktop/
-    %span
-      Pricing for SMBs
-    %hr.right.visible-desktop/
-    / pricing charts 4 columns
-    .row.cols4
-      .span3
-        .price_wrapper.lite.regular
-          .header
-            %span Starter
-            .price
-              %span $ 5
-              Per Month
-          .section
-            %h3 up to 500 Customers
-            %ul.perks
-              %li
-                %i.i_shuffle
-                Easy Customer Capture
-              %li
-                %i.i_loading
-                Automated E-Mails
-              %li
-                %i.i_bookmark
-                Engagement Engine
-              %li
-                %i.i_bars
-                Awesome Insights
-            %a.btn{:href => "#"} Get Started
-      .span3
-        .price_wrapper.standard.regular
-          .header
-            %span Standard
-            .price
-              %span $ 10
-              Per Month
-          .section
-            %h3 up to 1,000 Customers
-            %ul.perks
-              %li
-                %i.i_shuffle
-                Easy Customer Capture
-              %li
-                %i.i_loading
-                Automated E-Mails
-              %li
-                %i.i_bookmark
-                Engagement Engine
-              %li
-                %i.i_bars
-                Awesome Insights
-            %a.btn{:href => "#"} Get Started
-      .span3
-        .price_wrapper.pro
-          .header
-            %span Pro
-            .price
-              %span $ 25
-              Per Month
-          .section
-            %h3 up to 2,500 Customers
-            %ul.perks
-              %li
-                %i.i_shuffle
-                Easy Customer Capture
-              %li
-                %i.i_loading
-                Automated E-Mails
-              %li
-                %i.i_bookmark
-                Engagement Engine
-              %li
-                %i.i_bars
-                Awesome Insights
-            %a.btn{:href => "#"} Get Started
-      .span3
-        .price_wrapper.ultra.regular
-          .header
-            %span Genius
-            .price
-              %span $ 50
-              Per Month
-          .section
-            %h3 up to 5,000 Customers
-            %ul.perks
-              %li
-                %i.i_shuffle
-                Easy Customer Capture
-              %li
-                %i.i_loading
-                Automated E-Mails
-              %li
-                %i.i_bookmark
-                Engagement Engine
-              %li
-                %i.i_bars
-                Awesome Insights
-            %a.btn{:href => "#"} Get Started
-#features.features_page
-  .container
-    .features1
-      %h2.section_header
-      %hr.left.visible-desktop/
-      %span Need more?
-      %hr.right.visible-desktop/
-      .row
-        .span12
-          %h3.intro
-            We got your back Jack. Whatever you need, we got you covered. Whether you need a plan for 10,000 or
-            10 Million customers, we've got you. Just
-            = succeed "." do
-              %a{:href => "contact.html"} contact our Enterprise Team
-            %br/
-            %br/
-            %a.btn.btn-success.btn-large{:href => "contact.html"}
-              Contact our Enterprise Sales Team.
+    .row
+      .span3.starter
+        .header
+          %img{:src => '/assets/starter_flag.png', :alt => "Starter Plan"}
+          Starter Plan
+        .cust_count
+          %img{:src => '/assets/cust_count.png', :alt => "Customer Count"}
+          %strong
+            up to 50 Customers
+        %hr
+        .details
+          .hdr
+            All Features Included
+          %ul
+            %li
+              Easy Customer Capture
+            %li
+              Automated Marketing
+            %li
+              Engagement Engine
+            %li 
+              plus 30 more features 
+              %a{"data-toggle" => "modal", :href => "#pricingpopup", :role => "button"}
+                view them
+        %hr
+        .getstarted{:style => "center"}
+          %h3
+            FREE for Life
+          %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+          %br
+          %strong 
+            No Credit Card Required
+      .span9.allplans
+        .title
+          %h3
+            Everyone starts off with a FREE Account. Here's what it costs you to grow:
+        %hr
+        .howmany
+          .count
+            How many customers?
+            %input{:placeholder => "", :type => "text"}/
+          .countslider
+            .sliderOverlay
+              .slider
+        %table.table.table-striped
+          %thead
+            %tr
+              %td FREE            
+              %td up to 100 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td 
+          %tbody
+            %tr
+              %td $5/month            
+              %td 250 - 500 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td
+                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $10/month            
+              %td 500 - 1,000 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td 
+                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $20/month            
+              %td 1,000 - 2,500 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td
+                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $30/month            
+              %td 2,500 - 5,000 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td 
+                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $50/month            
+              %td 5,000 - 10,000 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td
+                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $99/month            
+              %td 10,000 - 25,000 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td 
+                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+    .row{:style => "padding-top: 40px; height: 40px; background-color: #FFF;"}
+      .span12
+        .row
+          .span6
+            text
+          .span6
+            button
+
+/ Button to trigger modal
+%a.btn{"data-toggle" => "modal", :href => "#pricingpopup", :role => "button"} Popup Preview
+/ Modal
+#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Modal header
+  .modal-body
+    %p One fine body…
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+    %button.btn.btn-primary Save changes
