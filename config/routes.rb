@@ -124,6 +124,7 @@ Optyn::Application.routes.draw do
     resources :labels, except: [:show]
 
     get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
+    get "messages/" => "messages#types", as: 'campaign_types'
     resources :messages do
       collection do
         get :types
