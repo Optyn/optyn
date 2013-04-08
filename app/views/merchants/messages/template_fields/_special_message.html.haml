@@ -4,9 +4,6 @@
 
 = render partial: 'merchants/shared/messages/date', locals: {f: f, beginning_label: "Date and Time"}
 
-.control-group
-  = f.label :fine_print, "Fine Print", class: "control-label"
-  .controls
-    = f.text_area :fine_print, class: 'input-xxlarge details', rows: 3, cols: 10
+= render partial: 'merchants/shared/messages/fine_print', locals: {f: f, fine_print_verbiage: ''}
 
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

@@ -1,0 +1,6 @@
+.control-group
+  = f.label :fine_print, "Fine Print", class: "control-label"
+  .controls
+    = f.text_area :fine_print, class: 'input-xxlarge details', rows: 3, cols: 10
+    %span.inline-help
+      = fine_print_verbiage
