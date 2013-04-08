@@ -10,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   def profile
   	@user = current_user
+    @permission = @user.permission || @user.build_permission
   end
   
   def update_profile

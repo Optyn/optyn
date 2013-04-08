@@ -1,0 +1,6 @@
+%div.modal.hide.fade{:id => "infoDialog_#{user.id}", :style=> "height:200px"}
+	%div.modal-header{"button type"=>"button", "class"=>"close", "data-dismiss"=>"modal", "aria-hidden"=>"true"}x  
+	%div.modal-body
+		%h3
+			= display_permission(user)
+  
