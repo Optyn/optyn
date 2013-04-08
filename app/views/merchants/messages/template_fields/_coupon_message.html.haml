@@ -1,0 +1,25 @@
+= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign', second_name_label_text: 'Coupon Name'}
+
+= render partial: 'merchants/shared/messages/content', locals: {f: f}
+
+.control-group
+  = f.label :type_of_discount, class: "control-label"
+  .controls.checkbox
+    = f.radio_button :type_of_discount, :dollar_off
+    = '$off'
+    = 'or'
+    = f.radio_button :type_of_discount, :percentage_off
+    = '%off'
+
+.control-group
+  = f.label :discount_amount, "How much?", class: 'control-label'
+  .controls
+    = f.number_field :discount_amount
+    %span.help-inline
+      The amount of the coupon, in percentage or dollar amount value.
+
+= render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
+fine_print_verbiage: 'You can use this to say things like 1 per customer or One Per order. The less limitations the better.'}
+
+
+= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
