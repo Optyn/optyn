@@ -2,17 +2,11 @@
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-.control-group
-  = f.label :beginning, "Event Date and Time", class: "control-label"
-  .controls
-    .input-append.date-time-picker
-      = f.text_field :beginning, value: formatted_message_form_datetime(@message, :beginning), class: "input-large", 'data-format' => "yyyy-MM-dd HH:mm PP"
-      %span.add-on
-        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+= render partial: 'merchants/shared/messages/date', locals: {f: f, beginning_label: "Event Date and Time"}
 
 .control-group
   = f.label :rsvp, "RSVP Print", class: "control-label"
   .controls
-
+    = f.text_area :content, class: 'input-xxlarge details', rows: 3, cols: 10
 
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
