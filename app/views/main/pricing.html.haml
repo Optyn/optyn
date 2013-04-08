@@ -93,23 +93,43 @@
               %td Unlimited E-Mails + All Features Included
               %td 
                 %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
-    .row{:style => "padding-top: 40px; height: 40px; background-color: #FFF;"}
-      .span12
-        .row
-          .span6
-            text
-          .span6
-            button
+    .row  
+      .span12.bottom
+        Have millions or billions of customers? We CAN help.
+        %a.btn.enterprisebtn{:href => "#"} Contact Our Enterprise Team
 
-/ Button to trigger modal
-%a.btn{"data-toggle" => "modal", :href => "#pricingpopup", :role => "button"} Popup Preview
-/ Modal
-#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+/ Features Popup Window
+#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :width => "600px", :height => "400px"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Modal header
+    %h3#myModalLabel Every customer gets ALL of these COOL features:
   .modal-body
-    %p One fine body…
+    .row
+      .span6
+        %ul
+          %li 
+            Feature 1
+          %li 
+            Feature 2
+          %li 
+            Feature 3
+      .span6
+        %ul
+          %li 
+            one
+          %li 
+            one
+          %li 
+            one
   .modal-footer
-    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-    %button.btn.btn-primary Save changes
+    %h3
+      What are you waiting for?
+    %a.btn.popupstarted{:href => ""} Get Started
+
+
+
+
+
+
+
+
