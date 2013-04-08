@@ -20,6 +20,6 @@ set :output, "#{path}/log/cron.log"
 
 # Learn more: http://github.com/javan/whenever
 rvm_trust_rvmrcs_flag=1
-every 1.minutes do
+every 30.minutes do
   rake "geo:fetch_location"
 end

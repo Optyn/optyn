@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
+  has_one :permission
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -16,8 +17,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids
+  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permission_attributes
 
+  accepts_nested_attributes_for :permission
   after_create :update_zip_prompted
 
   def self.from_omniauth(auth)
