@@ -14,6 +14,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_to_account
+		if !current_user.blank? && !current_user.email.present?
+			redirect_to edit_user_registration_path
+		end
+  end
+
+  
+
   def require_customer_logged_out
     if user_signed_in?
       flash[:alert] = "You are already logged in"

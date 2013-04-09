@@ -1,6 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :require_manager_logged_out
-  before_filter :require_user, only: [:profile, :update_profile]
+  before_filter :redirect_to_account, only: [:profile, :update_profile]
+  
+
 
   def new
   	session[:omniauth_manager] =nil
