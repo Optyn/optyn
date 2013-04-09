@@ -26,6 +26,43 @@ module Merchants::MessagesHelper
     end
   end
 
+  def message_greeting(message, preview = false, customer_name = nil)
+    greeting_prefix = case
+                        when message.instance_of?(CouponMessage)
+                          "Great News"
+                        when message.instance_of?(SpecialMessage)
+                          "Special News"
+                        when message.instance_of?(SaleMessage)
+                          "Sale News"
+                        when message.instance_of?(GeneralMessage)
+                          "Hello"
+                        when message.instance_of?(ProductMessage)
+                          "Product News"
+                        when message.instance_of?(EventMessage)
+                          "Event News"
+                        when message.instance_of?(SurveyMessage)
+                          "Your feedback is valuable"
+                        else
+                          "Hello"
+                      end
+    greeting_suffix = message.in_preview_mode?(preview) ? "{{Customer Name}}" : customer_name
+
+    "#{greeting_prefix} #{greeting_suffix},"
+  end
+
+  def message_rendering_partial(message)
+    message.type.underscore
+  end
+
+  def message_discount_type_text(message)
+    amount = message.sanitized_discount_amount
+    message.percentage_off? ? pluralize(amount, "percent") : pluralize(amount, "dollar")
+  end
+
+  def message_content(message)
+    simple_format(message.content.blank? ? "-" : message.content)
+  end
+
   def message_receiver_labels(label_names)
     if 1 == label_names.size
       return "All Connections" if Label::SELECT_ALL_NAME == label_names.first

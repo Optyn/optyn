@@ -96,6 +96,23 @@ class Message < ActiveRecord::Base
     fetch_labeled_users(ids)
   end
 
+  def in_preview_mode?(preview=true)
+    preview || draft?
+  end
+
+  def shop_name
+    shop.name
+  end
+
+  def sanitized_discount_amount
+    discount_amount.gsub(/[^A-Za-z0-9]/, "")
+  end
+
+  def percentage_off?
+    discount_type = type_of_discount.to_s.to_sym
+    :dollar_off == discount_type
+  end
+
   private
   def build_new_message_labels(identifiers)
     identifiers.each do |identifier|
@@ -124,7 +141,7 @@ class Message < ActiveRecord::Base
     end
 
     existing_labels.each(&:destroy)
-    reload
+    #reload
   end
 
 
@@ -140,7 +157,7 @@ class Message < ActiveRecord::Base
     if self.instance_of?(GeneralMessage)
       "#{shop.name}, wants to make sure you hear the latest.."
     elsif self.instance_of?(CouponMessage)
-      "(Customer Name), Here's a Coupon for #{shop.name}!"
+      "{{Customer Name}}, Here's a Coupon for #{shop.name}!"
     elsif self.instance_of?(EventMessage)
       "#{shop.name} invites you to an event!"
     elsif self.instance_of?(ProductMessage)
@@ -148,7 +165,7 @@ class Message < ActiveRecord::Base
     elsif self.instance_of?(SaleMessage)
       "#{shop.name} is having a sale! Don't miss out."
     elsif self.instance_of?(SpecialMessage)
-      "A special offer just for you (Customer Name), Courtesy of #{shop.name}."
+      "A special offer just for you {{Customer Name}}, Courtesy of #{shop.name}."
     elsif self.instance_of?(SurveyMessage)
       "#{shop.name} would like your feedback!"
     end

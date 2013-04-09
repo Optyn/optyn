@@ -36,9 +36,11 @@ class Merchants::MessagesController < Merchants::BaseController
       klass = params[:message_type].classify.constantize
       @message = klass.find(params[:id])
       @message.manager_id = current_manager.id
-      @message.attributes = params[:message]
-      populate_datetimes
 
+      @message.attributes = params[:message].except(:label_ids)
+      @message.label_ids = params[:message][:label_ids]
+
+      populate_datetimes
       if @message.send(params[:choice].to_sym)
         message_redirection
       else

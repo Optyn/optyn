@@ -1,0 +1,9 @@
+.row
+  %p
+    == #{@message.shop_name} is elated to invite you to #{@message.second_name}. Here are the details:
+    = render partial: "shared/messages/content"
+
+  %p
+    %strong
+      Please remember the sale ends on:
+      = formatted_message_form_datetime(@message, 'ending')

@@ -1,0 +1,10 @@
+.row
+  %p
+    == #{@message.shop_name} would like to invite you to #{@message.second_name}. Here are the details:
+
+  = render partial: "shared/messages/content"
+
+  - if @message.special_try
+    %p
+      %strong
+        == P.S. You are one of the special people who have been invited by #{@message.shop_name}
