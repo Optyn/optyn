@@ -13,11 +13,15 @@ class Message < ActiveRecord::Base
   SALE_FIELD_TEMPLATE_TYPE = "sale_message"
   SPECIAL_FIELD_TEMPLATE_TYPE = "special_message"
   SURVEY_FIELD_TEMPLATE_TYPE = "survey_message"
+  PER_PAGE = 50
+  PAGE = 1
 
   before_create :assign_uuid
 
   validates :name, presence: true
   validates :second_name, presence: true
+
+  scope :for_state_and_sender, ->(state_name, manager_identifier) { with_state(state_name).where(manager_id: manager_identifier) }
 
   state_machine :state, :initial => :draft do
 
@@ -52,7 +56,7 @@ class Message < ActiveRecord::Base
 
 
     state :draft do
-      def save
+      def save(options={})
         super(validate: false)
       end
     end
@@ -60,6 +64,14 @@ class Message < ActiveRecord::Base
 
   def self.fetch_template_name(params_type)
     FIELD_TEMPLATE_TYPES.include?(params_type.to_s) ? params_type : DEFAULT_FIELD_TEMPLATE_TYPE
+  end
+
+  def self.paginated_drafts(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:draft, manager.id).page(page_number).per(per_page)
+  end
+
+  def self.drafts_count(manager)
+    for_state_and_sender(:draft, manager.id).count
   end
 
   def label_ids(labels=[])

@@ -58,4 +58,11 @@ module ApplicationHelper
         'alert'
     end
   end
+
+  def human_paginated_range(collection)
+    endnumber = ((collection.offset_value + collection.limit_value) > collection.total_count) ? collection.total_count : (collection.offset_value + collection.limit_value)
+    return "" if collection.blank? || collection.total_count <= collection.limit_value
+    "Showing #{collection.offset_value + 1}-#{endnumber} of #{collection.total_count}"
+  end
+
 end

@@ -59,6 +59,11 @@ class Merchants::MessagesController < Merchants::BaseController
     message_redirection
   end
 
+  def drafts
+    @messages = Message.paginated_drafts(current_manager, params[:page])
+    @drafts_count = Message.drafts_count(current_manager)
+  end
+
   private
   def populate_message_type
     @message_type = Message.fetch_template_name(params[:message_type])

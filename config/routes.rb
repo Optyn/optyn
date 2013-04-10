@@ -128,6 +128,7 @@ Optyn::Application.routes.draw do
     resources :messages do
       collection do
         get :types
+        get :drafts
       end
 
       member do
