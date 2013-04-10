@@ -1,7 +1,10 @@
 .row
   %h1
     = message_form_title(@message_type)
-  #message_fields_wrapper
+
+  = render partial: "merchants/messages/message_menu"
+
+  .span8#message_fields_wrapper
     = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|
       = render :partial => 'form', :locals => {f: f}
 

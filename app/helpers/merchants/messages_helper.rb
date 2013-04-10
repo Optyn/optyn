@@ -70,4 +70,16 @@ module Merchants::MessagesHelper
 
     label_names.join(", ")
   end
+
+  def messages_menu_links(user, path, link_name, count, force_visible=false, highlight_actions=[])
+    #if force_visible || user.message_authoring_or_admin_rights?
+      link_to("#{link_name}#{" (#{count})" if (count.to_i > 0 rescue false)}", path, :class => message_menu_highlight_class(highlight_actions, link_name))
+    #end
+  end
+
+  def message_menu_highlight_class(highlight_actions, link_name="")
+    highlight_class = "menu-header"
+
+    return highlight_class if highlight_actions.include?(action_name)
+  end
 end

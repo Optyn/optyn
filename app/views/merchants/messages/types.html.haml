@@ -9,24 +9,26 @@
     %p What kind of email do you want to create.
 
   .row
-    #types
+    = render partial: "merchants/messages/message_menu"
+
+    .span8#types
       .well
         .row
-          .span4
-            = link_to "Let's Create a coupon",  merchants_new_campaign_path(message_type: 'coupon_message'), {class: 'btn btn-large btn-block'}
-
-          .span4
-            = link_to "Let's Announce a special",  merchants_new_campaign_path(message_type: 'special_message'), {class: 'btn btn-large btn-block'}
+          .span3
+            = link_to "Create a coupon",  merchants_new_campaign_path(message_type: 'coupon_message'), {class: 'btn btn-large btn-block'}
 
           .span3
-            = link_to "Let's Announce a sale",  merchants_new_campaign_path(message_type: 'sale_message'), {class: 'btn btn-large btn-block'}
+            = link_to "Announce a special",  merchants_new_campaign_path(message_type: 'special_message'), {class: 'btn btn-large btn-block'}
+
+          .span3
+            = link_to "Announce a sale",  merchants_new_campaign_path(message_type: 'sale_message'), {class: 'btn btn-large btn-block'}
 
       .well
         .row
-          .span4
+          .span3
             = link_to "General Announcement",  merchants_new_campaign_path(message_type: 'general_message'), {class: 'btn btn-large btn-block'}
 
-          .span4
+          .span3
             = link_to "Product Announcement",  merchants_new_campaign_path(message_type: 'product_message'), {class: 'btn btn-large btn-block'}
 
           .span3
@@ -34,5 +36,5 @@
 
       .well
         .row
-          .span12
+          .span7
             = link_to "Survey",  merchants_new_campaign_path(message_type: 'survey_message'), {class: 'btn btn-large btn-block'}
