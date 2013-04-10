@@ -20,12 +20,13 @@
               = f.label :Date_Of_Birth
               = f.text_field :birth_date , :class=>"datepicker"
               %br/
-              = f.fields_for(:permission) do |fo|
-                = fo.label :Manage_Permissions
-                = fo.check_box :vis_name
-                = "Make name visible"
-                = fo.check_box :vis_email
-                = "Make email visible"              	
+              ="Make Visible"
+              %br/
+              = f.fields_for :permissions_users do |p|
+                = p.check_box :action
+                = p.hidden_field :permission_id
+                = p.object.permission.name
+                
               %br/
               = f.label :Interest
               = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}

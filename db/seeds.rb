@@ -85,6 +85,10 @@ Business.create(:name => "Technology")
 Business.create(:name => "Travel & Tourism")
 Business.create(:name => "Transportation")
 
+#Add permissions
+Permission.create!(:name => "name")
+Permission.create!(:name => "email")
+
 #Add some dummy data in the development mode.
 if Rails.env.development?
   user_names = ["Cyclotrimethy Lenetrinitramine",
