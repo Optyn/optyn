@@ -26,9 +26,8 @@
             %li
               Engagement Engine
             %li 
-              plus 30 more features 
               %a{"data-toggle" => "modal", :href => "#pricingpopup", :role => "button"}
-                view them
+                plus 30 more features
         %hr
         .getstarted{:style => "center"}
           %h3
@@ -99,13 +98,13 @@
         %a.btn.enterprisebtn{:href => "#"} Contact Our Enterprise Team
 
 / Features Popup Window
-#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :width => "600px", :height => "400px"}
+#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :width => "800px", :height => "400px"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Every customer gets ALL of these COOL features:
+    %h3 Every customer gets ALL of these COOL features:
   .modal-body
     .row
-      .span6
+      .span4.left
         %ul
           %li 
             Feature 1
@@ -113,7 +112,7 @@
             Feature 2
           %li 
             Feature 3
-      .span6
+      .span4.right
         %ul
           %li 
             one
@@ -122,9 +121,8 @@
           %li 
             one
   .modal-footer
-    %h3
-      What are you waiting for?
-    %a.btn.popupstarted{:href => ""} Get Started
+    What are you waiting for?
+    %a.btn.startbtn{:href => ""} Get Started
 
 
 

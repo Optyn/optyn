@@ -1,3 +1,61 @@
+/* Popup */
+body .modal {
+	width: 800px;
+	left: 40%;
+	border-radius: 6px;
+}
+body .modal-header {
+	height: 50px;
+
+}
+body .modal-header h3 {
+	color: #304d58;
+	font-size: 32px;
+	padding-top: 10px;
+}
+body .modal-body ul {
+	padding-top: 10px;
+	padding-left: 20px;
+}
+body .modal-body li {
+	list-style-image: url('/assets/bluechkmark.png');
+	height: 14px;
+	padding-left: 0px;
+	padding-top: 10px;
+}
+body .modal-body .left {
+	float: left;
+}
+body .modal-body .right {
+	float: right;
+}
+body .modal-footer {
+	height: 70px;
+	font-size: 36px;
+	line-height: 60px;
+	text-align: center;
+	vertical-align: middle;
+}
+body .modal-footer .startbtn {
+  	background: #1791c0;
+	border-radius: 4px;
+	display: inline-block;
+	height: 40px;
+	line-height: 36px;
+	top: 4px;
+	color: #ffffff;
+	font-size: 32px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+}
+body .modal-footer .startbtn:hover{
+	background: #147ea7;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+}
+/* Pricing starts here */
 #pricing { 
 	padding-top: 40px;
 	padding-bottom: 40px;
@@ -148,11 +206,64 @@
 #pricingpopup {
 
 }
+/* Popup */
 #pricingpopup .modal {
-	height: 500px;
 	width: 800px;
+	left: 40%;
+	border-radius: 6px;
 }
-#pricingpopup
+#pricingpopup .modal-header {
+	height: 50px;
+
+}
+#pricingpopup .modal-header h3 {
+	color: #304d58;
+	font-size: 32px;
+	padding-top: 10px;
+}
+#pricingpopup .modal-body ul {
+	padding-top: 10px;
+	padding-left: 20px;
+}
+#pricingpopup .modal-body li {
+	list-style-image: url('/assets/bluechkmark.png');
+	height: 14px;
+	padding-left: 0px;
+	padding-top: 10px;
+}
+#pricingpopup .modal-body .left {
+	float: left;
+}
+#pricingpopup .modal-body .right {
+	float: right;
+}
+#pricingpopup .modal-footer {
+	height: 70px;
+	font-size: 36px;
+	line-height: 60px;
+	text-align: center;
+	vertical-align: middle;
+}
+#pricingpopup .modal-footer .startbtn {
+  	background: #1791c0;
+	border-radius: 4px;
+	display: inline-block;
+	height: 40px;
+	line-height: 36px;
+	top: 4px;
+	color: #ffffff;
+	font-size: 32px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+}
+#pricingpopup .modal-footer .startbtn:hover{
+	background: #147ea7;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+}
+/* Old Stuff */
 #pricing .section_header {
 	margin-bottom: 70px;
 }
