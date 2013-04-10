@@ -5,8 +5,9 @@ class User < ActiveRecord::Base
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
-  has_one :permission
-
+  has_many :permissions_users
+  has_many :permissions , :through => :permissions_users 
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -17,9 +18,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permission_attributes
+  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes
 
-  accepts_nested_attributes_for :permission
+  accepts_nested_attributes_for :permissions_users
+
+  #accepts_nested_attributes_for :permission
   after_create :update_zip_prompted
 
   def self.from_omniauth(auth)
@@ -104,6 +107,17 @@ class User < ActiveRecord::Base
         self.user_labels.create(label_id: label_id)
       end
     end
+  end
+
+  def build_permission_users
+    Permission.scoped.map do |permission|
+       permissions_users.new(:permission_id => permission.id) 
+    end  
+  end
+
+  def find_user_permission
+    permission_user=self.permissions_users.where(:action=>true)
+    permission_user.any? ? self.permissions.find(:all,:conditions=>{:id=> permission_user.collect(&:permission_id)}).collect(&:name) : "none"
   end
 
   private

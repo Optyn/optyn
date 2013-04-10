@@ -1,27 +1,16 @@
 module ConnectionsHelper
 	def user_permission(user)
-		if user.permission.present?
-		  if user.permission.vis_name? && user.permission.vis_email?
-		   "Full"
-		  elsif user.permission.vis_name?
-		    "Name"
-		  elsif user.permission.vis_email?
-		    "Email"
-		  else
-		   "None"
-		 end
-		end
-	end
-
-	def display_permission(user)
-		if user.permission.present?
-			if user.permission.vis_name? && user.permission.vis_email?
-				"Name - #{user.name} & Email -  #{user.email}"
-			elsif user.permission.vis_name?
-			  "Name -  #{user.name }"
-			else 
-				"Email - #{user.email}"
+		if user.permissions_users.present?
+			permission_user=user.permissions_users.where(:action=>true)
+			if permission_user.size == Permission.all.size
+				"Full"
+			else
+			 user.find_user_permission.join(" ")
 			end
+		else
+			"None"
 		end
 	end
 end
+
+
