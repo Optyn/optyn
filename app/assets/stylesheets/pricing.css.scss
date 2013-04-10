@@ -163,6 +163,9 @@ body .modal-footer .startbtn:hover{
 	width: 500px;
 	float: right;
 }
+#pricing .allplans table tr td {
+	line-height: 34px;
+}
 #pricing .allplans .upgrade {
   background: #78CD51;
   border-radius: 4px;
@@ -183,7 +186,6 @@ body .modal-footer .startbtn:hover{
   text-shadow: none;
 }
 #pricing .bottom {
-	margin: 0px;
 	background-color: #fff;
 	border-radius: 6px;
 	padding-top: 25px;
