@@ -37,6 +37,10 @@ class Message < ActiveRecord::Base
       transition :draft => :queued
     end
 
+    event :move_to_trash do
+      transition :draft => :trash
+    end
+
     #event :start_transit do
     #  transition :queued => :transit
     #end
