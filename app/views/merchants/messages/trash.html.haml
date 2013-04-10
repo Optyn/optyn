@@ -16,16 +16,21 @@
           %th Option(s)
 
       %tbody
-        - @messages.each do |message|
+        - unless @messages.blank?
+          - @messages.each do |message|
+            %tr
+              %td
+                = message.name
+              %td
+                = message.second_name
+              %td
+                = formatted_message_form_datetime(message, 'updated_at')
+              %td
+                = link_to 'Move to Draft', move_to_draft_merchants_message_path(message.uuid), class: 'btn btn-primary', method: :put, confirm: 'Are you sure you want to move you message to drafts?'
+                = link_to 'Delete', discard_merchants_message_path(message.uuid), method: :delete, confirm: 'Are you sure you want to discard this message?',  class: 'btn btn-danger' #TODO TO BE IMPLEMENTED
+        - else
           %tr
-            %td
-              = message.name
-            %td
-              = message.second_name
-            %td
-              = formatted_message_form_datetime(message, 'updated_at')
-            %td
-              = link_to 'Move to Draft', move_to_draft_merchants_message_path(message.uuid), class: 'btn btn-primary', method: :put, confirm: 'Are you sure you want to move you message to drafts?'
-              = link_to 'Delete', discard_merchants_message_path(message.uuid), method: :delete, confirm: 'Are you sure you want to discard this message?',  class: 'btn btn-danger' #TODO TO BE IMPLEMENTED
+            %td{colspan: '4'}
+              .text-center No Trash messages right now
 
     = render partial: 'merchants/messages/pager'
