@@ -186,10 +186,12 @@ class Message < ActiveRecord::Base
   end
 
   def validate_date_time(attr_name, attr_name_message)
-    begin
-      Date.parse(self.send(attr_name.to_sym))
-    rescue
-      errors.add(:base, "#{attr_name_message} is an invalid date")
+    unless self.send(attr_name.to_sym).blank?
+      begin
+        Date.parse(self.send(attr_name.to_sym))
+      rescue
+        errors.add(:base, "#{attr_name_message} is an invalid date")
+      end
     end
   end
 
