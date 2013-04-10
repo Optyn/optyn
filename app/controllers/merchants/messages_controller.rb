@@ -64,7 +64,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @drafts_count = Message.drafts_count(current_manager)
   end
 
-  def trash
+  def move_to_trash
     @message = Message.find_by_uuid(params[:id])
     @message.move_to_trash
     redirect_to drafts_merchants_messages_path

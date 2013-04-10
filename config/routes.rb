@@ -134,7 +134,7 @@ Optyn::Application.routes.draw do
       member do
         get :preview
         get :launch
-        delete :trash
+        delete :move_to_trash
       end
     end
   end
