@@ -130,6 +130,8 @@ Optyn::Application.routes.draw do
         get :types
         get :drafts
         get :trash
+        get :sent
+        get :queued
       end
 
       member do

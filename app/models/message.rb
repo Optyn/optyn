@@ -49,13 +49,13 @@ class Message < ActiveRecord::Base
       transition :trash => :delete
     end
 
-    #event :start_transit do
-    #  transition :queued => :transit
-    #end
-    #
-    #event :deliver do
-    #  transition [:queued, :transit] => :sent
-    #end
+    event :start_transit do
+      transition :queued => :transit
+    end
+
+    event :deliver do
+      transition [:queued, :transit] => :sent
+    end
 
     before_transition :draft => same do |message|
       message.subject = message.send(:canned_subject)
@@ -92,6 +92,22 @@ class Message < ActiveRecord::Base
 
   def self.trash_count(manager)
     for_state_and_sender(:trash, manager.id).count
+  end
+
+  def self.paginated_sent(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:sent, manager.id).page(page_number).per(per_page)
+  end
+
+  def self.sent_count(manager)
+    for_state_and_sender(:sent, manager.id).count
+  end
+
+  def self.paginated_queued(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:queued, manager.id).page(page_number).per(per_page)
+  end
+
+  def self.queued_count(manager)
+    for_state_and_sender(:queued, manager.id).count
   end
 
   def label_ids(labels=[])

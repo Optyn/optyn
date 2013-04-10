@@ -87,6 +87,16 @@ class Merchants::MessagesController < Merchants::BaseController
     redirect_to drafts_merchants_messages_path
   end
 
+  def sent
+    @messages = Message.paginated_sent(current_manager, params[:page])
+    @sent_count = Message.sent_count(current_manager)
+  end
+
+  def queued
+    @messages = Message.paginated_queued(current_manager, params[:page])
+    @queued_count = Message.queued_count(current_manager)
+  end
+
   private
   def populate_message_type
     @message_type = Message.fetch_template_name(params[:message_type])
