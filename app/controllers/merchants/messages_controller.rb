@@ -26,7 +26,7 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def edit
-    @message = Message.find(params[:id])
+    @message = Message.find_by_uuid(params[:id])
     @message_type = @message.type.underscore
   end
 
@@ -34,7 +34,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.find(params[:id])
+      @message = klass.find_by_uuid(params[:id])
       @message.manager_id = current_manager.id
 
       @message.attributes = params[:message].except(:label_ids)
@@ -50,11 +50,11 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def preview
-    @message = Message.find(params[:id])
+    @message = Message.find_by_uuid(params[:id])
   end
 
   def launch
-    @message = Message.find(params[:id])
+    @message = Message.find_by_uuid(params[:id])
     @message.launch
   end
 
@@ -70,11 +70,11 @@ class Merchants::MessagesController < Merchants::BaseController
   def message_redirection
     choice = params[:choice]
     if "preview" == choice
-      redirect_to preview_merchants_message_path(@message)
+      redirect_to preview_merchants_message_path(@message.uuid)
     elsif "launch" == choice
       #TODO TO BE IMPLEMENTED TO BE REDIRECTED TO THE SENT PAGE.
     else
-      redirect_to edit_merchants_message_path(@message.id)
+      redirect_to edit_merchants_message_path(@message.uuid)
     end
   end
 

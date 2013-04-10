@@ -11,7 +11,8 @@ class CreateMessages < ActiveRecord::Migration
       t.string :state
       t.datetime :send_on
       t.boolean :send_immediately, :default => false
-      t.boolean :parent_id
+      t.integer :parent_id
+      t.string :uuid
 
       #template attributes
       t.text :fine_print #Coupon, Special
@@ -38,5 +39,6 @@ class CreateMessages < ActiveRecord::Migration
     end
 
     add_index :messages, [:manager_id, :state, :created_at], :name => "messages_list_index"
+    add_index :messages, [:type, :uuid]
   end
 end

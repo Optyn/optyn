@@ -14,6 +14,8 @@ class Message < ActiveRecord::Base
   SPECIAL_FIELD_TEMPLATE_TYPE = "special_message"
   SURVEY_FIELD_TEMPLATE_TYPE = "survey_message"
 
+  before_create :assign_uuid
+
   validates :name, presence: true
   validates :second_name, presence: true
 
@@ -189,5 +191,9 @@ class Message < ActiveRecord::Base
     rescue
       errors.add(:base, "#{attr_name_message} is an invalid date")
     end
+  end
+
+  def assign_uuid
+    self.uuid = UUIDTools::UUID.random_create.to_s.gsub(/[-]/, "")
   end
 end

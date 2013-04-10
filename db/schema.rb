@@ -147,7 +147,8 @@ ActiveRecord::Schema.define(:version => 20130404085359) do
     t.string   "state"
     t.datetime "send_on"
     t.boolean  "send_immediately", :default => false
-    t.boolean  "parent_id"
+    t.integer  "parent_id"
+    t.string   "uuid"
     t.text     "fine_print"
     t.datetime "beginning"
     t.datetime "ending"
@@ -162,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20130404085359) do
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
+  add_index "messages", ["uuid"], :name => "index_messages_on_uuid"
 
   create_table "oauth_access_grants", :force => true do |t|
     t.integer  "resource_owner_id", :null => false
