@@ -70,6 +70,23 @@ class Merchants::MessagesController < Merchants::BaseController
     redirect_to drafts_merchants_messages_path
   end
 
+  def trash
+    @messages = Message.paginated_trash(current_manager, params[:page])
+    @trash_count = Message.trash_count(current_manager)
+  end
+
+  def move_to_draft
+    @message = Message.find_by_uuid(params[:id])
+    @message.move_to_draft
+    redirect_to drafts_merchants_messages_path
+  end
+
+  def discard
+    @message = Message.find_by_uuid(params[:id])
+    @message.discard
+    redirect_to drafts_merchants_messages_path
+  end
+
   private
   def populate_message_type
     @message_type = Message.fetch_template_name(params[:message_type])

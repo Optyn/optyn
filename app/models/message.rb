@@ -41,6 +41,14 @@ class Message < ActiveRecord::Base
       transition :draft => :trash
     end
 
+    event :move_to_draft do
+      transition :trash => :draft
+    end
+
+    event :discard do
+      transition :trash => :delete
+    end
+
     #event :start_transit do
     #  transition :queued => :transit
     #end
@@ -76,6 +84,14 @@ class Message < ActiveRecord::Base
 
   def self.drafts_count(manager)
     for_state_and_sender(:draft, manager.id).count
+  end
+
+  def self.paginated_trash(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:trash, manager.id).page(page_number).per(per_page)
+  end
+
+  def self.trash_count(manager)
+    for_state_and_sender(:trash, manager.id).count
   end
 
   def label_ids(labels=[])

@@ -129,12 +129,15 @@ Optyn::Application.routes.draw do
       collection do
         get :types
         get :drafts
+        get :trash
       end
 
       member do
         get :preview
         get :launch
         delete :move_to_trash
+        put :move_to_draft
+        delete :discard
       end
     end
   end
