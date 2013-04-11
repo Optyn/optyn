@@ -25,10 +25,11 @@
               Automated Marketing
             %li
               Engagement Engine
+            %li
+              Unlimited E-Mails
             %li 
-              plus 30 more features 
               %a{"data-toggle" => "modal", :href => "#pricingpopup", :role => "button"}
-                view them
+                plus 30 more features
         %hr
         .getstarted{:style => "center"}
           %h3
@@ -48,11 +49,13 @@
             %input{:placeholder => "", :type => "text"}/
           .countslider
             .sliderOverlay
-              .slider
+              .slider.sliderMin-2.sliderGreen
         %table.table.table-striped
           %thead
             %tr
-              %td FREE            
+              %td 
+                %strong
+                  FREE 4EVER            
               %td up to 100 Connections
               %td Unlimited E-Mails + All Features Included
               %td 
@@ -62,50 +65,50 @@
               %td 250 - 500 Connections
               %td Unlimited E-Mails + All Features Included
               %td
-                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
               %td $10/month            
               %td 500 - 1,000 Connections
               %td Unlimited E-Mails + All Features Included
               %td 
-                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
               %td $20/month            
               %td 1,000 - 2,500 Connections
               %td Unlimited E-Mails + All Features Included
               %td
-                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
               %td $30/month            
               %td 2,500 - 5,000 Connections
               %td Unlimited E-Mails + All Features Included
               %td 
-                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
               %td $50/month            
               %td 5,000 - 10,000 Connections
               %td Unlimited E-Mails + All Features Included
               %td
-                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
               %td $99/month            
               %td 10,000 - 25,000 Connections
               %td Unlimited E-Mails + All Features Included
               %td 
-                %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
     .row  
       .span12.bottom
         Have millions or billions of customers? We CAN help.
         %a.btn.enterprisebtn{:href => "#"} Contact Our Enterprise Team
 
 / Features Popup Window
-#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :width => "600px", :height => "400px"}
+#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :width => "800px", :height => "400px"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Every customer gets ALL of these COOL features:
+    %h3 Every customer gets ALL of these COOL features:
   .modal-body
     .row
-      .span6
+      .span4.left
         %ul
           %li 
             Feature 1
@@ -113,7 +116,7 @@
             Feature 2
           %li 
             Feature 3
-      .span6
+      .span4.right
         %ul
           %li 
             one
@@ -122,9 +125,8 @@
           %li 
             one
   .modal-footer
-    %h3
-      What are you waiting for?
-    %a.btn.popupstarted{:href => ""} Get Started
+    What are you waiting for?
+    %a.btn.startbtn{:href => ""} Get Started
 
 
 

@@ -1,0 +1,26 @@
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    %img{:src => "/assets/avatar.png", :alt => "User Avatar"}
+  %ul.dropdown-menu
+    %li
+      %img{:src => "/assets/dropdown_dashicon.png", :float => "left"}
+      %a.active{:href => "#"} My Dashboard
+    %li
+      %img{:src => "/assets/dropdown_manager.png", :float => "left"}
+      %a{:href => "connections"} My Connections
+    %li
+      %img{:src => "/assets/dropdown_segments.png", :float => "left"}
+      %a{:href => "#"} My Messages
+    %li
+      %img{:src => "/assets/dropdown_surveys.png", :float => "left"}
+      %a{:href => "segments"} My Surveys
+    %li
+      %img{:src => "/assets/dropdown_settings.png", :float => "left"}
+      %a{:href => edit_user_registration_path, :method => :put} My Account
+    %li
+      %img{:src => "/assets/dropdown_profile.png", :float => "left"}
+      %a{:href => profile_path} My Profile
+    %hr
+    %li
+      %img{:src => "/assets/dropdown_logout.png", :float => "left"}
+      = link_to("Logout", destroy_user_session_path)

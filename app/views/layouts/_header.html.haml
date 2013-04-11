@@ -1,4 +1,4 @@
-/ begins navbar
+/ begin navbar
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
@@ -26,70 +26,7 @@
               = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header")
 
           - if merchants_manager_signed_in?    
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                %img{:src => "/assets/avatar.png", :alt => "User Avatar"}
-              %ul.dropdown-menu
-                %li
-                  %img{:src => "/assets/drop_icon_dashboard.png", :float => "left"}
-                  %a.active{:href => "#"} My Dashboard
-                %li
-                  %img{:src => "/assets/drop_icon_dashboard.png", :float => "left"}
-                  %a{:href => "connections"} My Connections
-                %li
-                  %img{:src => "/assets/drop_icon_dashboard.png", :float => "left"}
-                  %a{:href => "#"} My Messages
-                %li
-                  %img{:src => "/assets/drop_icon_dashboard.png", :float => "left"}
-                  %a{:href => "segments"} My Surveys
-                %li
-                  %img{:src => "/assets/drop_icon_settings", :float => "left"}
-                  %a{:href => edit_user_registration_path, :method => :put} My Account
-                %li
-                  %img{:src => "/assets/drop_icon_settings", :float => "left"}
-                  %a{:href => profile_path} My Profile
-                %li
-                  %img{:src => "/assets/drop_icon_settings.png", :float => "left"}
-                  %a{:href => "#"} My Settings
-                %hr
-                %li
-                  %img{:src => "/assets/drop_icon_logout.png", :float => "left"}
-                  = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+            = render partial: "layouts/merchant_dropdown"
           - if user_signed_in?
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                %img{:src => "/assets/avatar.png", :alt => "User Avatar"}
-              %ul.dropdown-menu
-                %li
-                  %img{:src => "/assets/drop_icon_dashboard.png", :float => "left"}
-                  %a.active{:href => "#"} My Dashboard
-                %li
-                  %img{:src => "/assets/drop_icon_connections.png", :float => "left"}
-                  %a{:href => "connections"} My Connections
-                %li
-                  %img{:src => "/assets/drop_icon_messages.png", :float => "left"}
-                  %a{:href => "#"} My Messages
-                %li
-                  %img{:src => "/assets/drop_icon_surveys.png", :float => "left"}
-                  %a{:href => "segments"} My Surveys
-                %li
-                  %img{:src => "/assets/drop_icon_my_account.png", :float => "left"}
-                  %a{:href => edit_user_registration_path, :method => :put} My Account
-                %li
-                  %img{:src => "/assets/drop_icon_profile.png", :float => "left"}
-                  %a{:href => profile_path} My Profile
-                %li
-                  %img{:src => "/assets/drop_icon_settings.png", :float => "left"}
-                  %a{:href => "#"} My Settings
-                %hr
-                %li
-                  %img{:src => "/assets/drop_icon_logout.png", :float => "left"}
-                  = link_to("Logout", destroy_user_session_path)
-#header1
-  .container
-    .row
-      .span12
-        %h3.intro
-          Bridging the Gap between Consumers and Businesses
-
+            = render partial: "layouts/consumer_dropdown"
 / ends navbar
