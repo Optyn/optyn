@@ -9,6 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:omniauth_user] =true
     super
   end
+
   
   def profile
   	@user = current_user

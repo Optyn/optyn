@@ -15,6 +15,7 @@ Optyn::Application.routes.draw do
   match 'terms' => 'main#terms'
   match 'privacy' => 'main#privacy'
   match 'danacafe' => 'main#danacafe'
+  match 'thankyou' => 'main#thankyou'
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
