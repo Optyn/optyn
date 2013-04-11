@@ -55,7 +55,11 @@ Optyn::Application.routes.draw do
   match '/auth/failure' => 'omniauth_clients#failure'
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
-  resources :connections
+  resources :connections do
+    collection do
+      post 'add_connection'
+    end    
+  end
   resources :segments do
     member do
       post :save_answers

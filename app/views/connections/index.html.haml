@@ -23,7 +23,32 @@
               %a{:href => profile_path} My Profile
             %li
               %a{:href => destroy_user_session_path} Logout
-        .span6
-          %p
-            Coming Soon
+        .span8
+          %table.table.table-striped
+            %thead
+              %tr
+                %th{} #
+                %th{:width => "25%"} Shop 
+                %th{:width => "25%"} Business Category
+                %th{:width => "30%"} Location
+                %th{:width => "20%"} Connect
+                
+            %tbody
+            - Shop.all.each_with_index do |shop, i|
+              %tr
+                %td 
+                  = i+1
+                %td 
+                  -# link_to shop.name, connection_path(shop.id)
+                  %a{:href => "#shopDialog_#{shop.id}","data-toggle"=>"modal", "id"=>"#{shop.id}","class"=>"open-shopDialog"} #{shop.name}
+                  = render partial: 'shop_dialog', locals:{:shop=>shop}
 
+                %td 
+                  = shop.business_category_names.join(", ")
+                %td 
+                  = shop.locations.collect(&:city).join(',')
+                %td
+                  %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", ":data-status" => get_connection_status(shop,current_user),"data-shop"=>shop.id,:style => "width:75px"} 
+                    = get_connection_status(shop,current_user)
+
+          
