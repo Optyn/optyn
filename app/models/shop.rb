@@ -69,6 +69,10 @@ class Shop < ActiveRecord::Base
   end
 
   def generate_oauth_token(redirect_uri, force=false)
+    unless redirect_uri.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+      return false
+    end
+
     app = nil
     if force
       oauth_application.destroy
@@ -124,9 +128,9 @@ class Shop < ActiveRecord::Base
   end
 
   def get_connection_for_user(user)
-    self.connections.where(:user_id=>user.id)
+    self.connections.where(:user_id => user.id)
   end
-  
+
   private
   def create_dummy_survey
     unless survey.present?
@@ -156,13 +160,11 @@ class Shop < ActiveRecord::Base
       self.oauth_application = app
 
       self.embed_code = EmbedCodeGenerator.generate_embed_code(self)
-      save!
+      save(validate: false)
     end
   end
 
   def first_location
     locations.first rescue nil
   end
-
- 
 end

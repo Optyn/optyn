@@ -9,8 +9,12 @@ class Merchants::AppsController < Merchants::BaseController
 	end
 
 	def create
-		current_shop.generate_oauth_token(params[:redirect_uri])
-		redirect_to merchants_app_path
+		if current_shop.generate_oauth_token(params[:redirect_uri])
+      return redirect_to merchants_app_path
+    end
+
+    flash[:error] = "Please enter the appropriate redirection url"
+    render 'new'
 	end
 
 	def show
@@ -22,8 +26,11 @@ class Merchants::AppsController < Merchants::BaseController
 	end
 
 	def update
-		current_shop.generate_oauth_token(params[:redirect_uri], "true" == params[:reset])
-		redirect_to merchants_app_path
+		if current_shop.generate_oauth_token(params[:redirect_uri], "true" == params[:reset])
+      return redirect_to merchants_app_path
+    end
+    flash[:error] = "Please enter the appropriate redirection url"
+    render 'new'
 	end
 
 	private
