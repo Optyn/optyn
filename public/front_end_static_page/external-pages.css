@@ -239,7 +239,11 @@
 /* FAQ
 -------------------------------------------------- */
 #faq {
-	margin-bottom: 150px;
+	margin-bottom: 40px;
+	margin-top: 40px;
+	background-color: #ffffff;
+	border-radius: 6px;
+
 }
 #faq .section_header {
 	margin-top: 55px;
