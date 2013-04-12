@@ -159,3 +159,6 @@ users.each_with_index do |user, index|
     end
   end
 end
+
+messagecenter = "#{File.dirname(__FILE__)}/messagecenter.rb"
+eval(IO.read(messagecenter), binding, messagecenter)
