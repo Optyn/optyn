@@ -26,6 +26,27 @@ module Merchants::MessagesHelper
     end
   end
 
+  def message_type_title(message)
+    case message.type.underscore
+      when Message::DEFAULT_FIELD_TEMPLATE_TYPE
+        "General Announcement"
+      when Message::COUPON_FIELD_TEMPLATE_TYPE
+        "Coupon"
+      when Message::EVENT_FIELD_TEMPLATE_TYPE
+        "Event Announcement"
+      when Message::PRODUCT_FIELD_TEMPLATE_TYPE
+        "Product Announcement"
+      when Message::SALE_FIELD_TEMPLATE_TYPE
+        "Sale Announcement"
+      when Message::SPECIAL_FIELD_TEMPLATE_TYPE
+        "Special Announcement"
+      when Message::SURVEY_FIELD_TEMPLATE_TYPE
+        "Survey"
+      else
+        "N/A"
+    end
+  end
+
   def message_greeting(message, preview = false, customer_name = nil)
     greeting_prefix = case
                         when message.instance_of?(CouponMessage)

@@ -20,6 +20,7 @@
       %thead
         %tr
           %th= check_box_tag :select, '', false, class: 'select-all'
+          %th Campaign Name
           %th Name
           %th= second_name_label_text(nil)
           %th Last Updated
@@ -28,6 +29,8 @@
         - unless @messages.blank?
           - @messages.each do |message|
             %tr
+              %td
+                = message_type_title(message)
               %td
                 = check_box_tag :uuid, message.uuid, false, class: 'real'
               %td
