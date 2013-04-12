@@ -132,14 +132,14 @@ Optyn::Application.routes.draw do
         get :trash
         get :sent
         get :queued
+        put :move_to_trash
+        put :move_to_draft
+        put :discard
       end
 
       member do
         get :preview
         get :launch
-        delete :move_to_trash
-        put :move_to_draft
-        delete :discard
       end
     end
   end

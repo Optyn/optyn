@@ -1,34 +1,39 @@
 .row
   %h2 Messagecenter
 
+  #messages_collection_container.row.text-center
+    = render partial: "merchants/messages/collection_form"
+
+    .actions
+      = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
+      = hidden_field_tag 'move_to_trash_link', move_to_trash_merchants_messages_path
+
   = render partial: "merchants/messages/message_menu"
 
   .span9
 
     = render partial: 'merchants/messages/pager'
 
-    %table.table.table-striped.table-condensed
+    %table.table.table-striped.table-condensed.message-list
       %thead
         %tr
+          %th= check_box_tag :select, '', false, class: 'select-all'
           %th Name
           %th= second_name_label_text(nil)
           %th Last Updated
-          %th Option(s)
 
       %tbody
         - unless @messages.blank?
           - @messages.each do |message|
             %tr
               %td
+                = check_box_tag :uuid, message.uuid, false, class: 'real'
+              %td
                 = message.name
               %td
                 = message.second_name
               %td
                 = formatted_message_form_datetime(message, 'updated_at')
-              %td
-                =# link_to 'Detail', merchants_message_path(message.uuid), class: 'btn btn-info' #TODO TO BE IMPLEMENTED
-                = link_to 'Edit', edit_merchants_message_path(message.uuid), class: 'btn btn-primary'
-                = link_to 'Delete', move_to_trash_merchants_message_path(message.uuid), method: :delete, confirm: 'Are you sure you want to trash this message?',  class: 'btn btn-danger' #TODO TO BE IMPLEMENTED
         - else
           %tr
             %td{colspan: '4'}

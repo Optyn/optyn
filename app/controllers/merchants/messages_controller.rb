@@ -59,32 +59,14 @@ class Merchants::MessagesController < Merchants::BaseController
     message_redirection
   end
 
-  def drafts
-    @messages = Message.paginated_drafts(current_manager, params[:page])
-    @drafts_count = Message.drafts_count(current_manager)
-  end
-
-  def move_to_trash
-    @message = Message.find_by_uuid(params[:id])
-    @message.move_to_trash
-    redirect_to drafts_merchants_messages_path
-  end
-
   def trash
     @messages = Message.paginated_trash(current_manager, params[:page])
     @trash_count = Message.trash_count(current_manager)
   end
 
-  def move_to_draft
-    @message = Message.find_by_uuid(params[:id])
-    @message.move_to_draft
-    redirect_to drafts_merchants_messages_path
-  end
-
-  def discard
-    @message = Message.find_by_uuid(params[:id])
-    @message.discard
-    redirect_to drafts_merchants_messages_path
+  def drafts
+    @messages = Message.paginated_drafts(current_manager, params[:page])
+    @drafts_count = Message.drafts_count(current_manager)
   end
 
   def sent
@@ -95,6 +77,21 @@ class Merchants::MessagesController < Merchants::BaseController
   def queued
     @messages = Message.paginated_queued(current_manager, params[:page])
     @queued_count = Message.queued_count(current_manager)
+  end
+
+  def move_to_trash
+    Message.move_to_trash(uuids_from_message_ids)
+    redirect_to drafts_merchants_messages_path
+  end
+
+  def move_to_draft
+    Message.move_to_draft(uuids_from_message_ids)
+    redirect_to drafts_merchants_messages_path
+  end
+
+  def discard
+    Message.discard(uuids_from_message_ids)
+    redirect_to drafts_merchants_messages_path
   end
 
   private
@@ -120,5 +117,9 @@ class Merchants::MessagesController < Merchants::BaseController
   def populate_datetimes
     @message.beginning = Time.parse(params[:message][:beginning]) if params[:message][:beginning].present?
     @message.ending = Time.parse(params[:message][:ending]) if params[:message][:ending].present?
+  end
+
+  def uuids_from_message_ids
+    params[:message_ids].split(",")
   end
 end

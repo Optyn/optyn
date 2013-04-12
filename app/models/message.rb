@@ -23,6 +23,8 @@ class Message < ActiveRecord::Base
 
   scope :for_state_and_sender, ->(state_name, manager_identifier) { with_state(state_name).where(manager_id: manager_identifier) }
 
+  scope :for_uuids, ->(uuids){where(uuid: uuids)}
+
   state_machine :state, :initial => :draft do
 
     event :save_draft do
@@ -38,11 +40,11 @@ class Message < ActiveRecord::Base
     end
 
     event :move_to_trash do
-      transition :draft => :trash
+      transition [:draft, :queued, :sent] => :trash
     end
 
     event :move_to_draft do
-      transition :trash => :draft
+      transition [:queued, :trash] => :draft
     end
 
     event :discard do
@@ -110,6 +112,18 @@ class Message < ActiveRecord::Base
     for_state_and_sender(:queued, manager.id).count
   end
 
+  def self.move_to_trash(uuids)
+    trigger_event(uuids, 'move_to_trash')
+  end
+
+  def self.move_to_draft(uuids)
+    trigger_event(uuids, 'move_to_draft')
+  end
+
+  def self.discard(uuids)
+    trigger_event(uuids, 'discard')
+  end
+
   def label_ids(labels=[])
     label_identifiers = message_labels.pluck(:label_id)
     if label_identifiers.blank?
@@ -164,6 +178,15 @@ class Message < ActiveRecord::Base
   end
 
   private
+  def self.trigger_event(uuids, event)
+    messages = for_uuids(uuids)
+    Message.transaction do
+      messages.each do |message|
+        message.send(event.to_s.to_sym)
+      end
+    end
+  end
+
   def build_new_message_labels(identifiers)
     identifiers.each do |identifier|
       message_labels.build(label_id: identifier)

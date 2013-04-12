@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(:version => 20130408122218) do
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
-  add_index "messages", ["uuid"], :name => "index_messages_on_uuid"
+  add_index "messages", ["type", "uuid"], :name => "index_messages_on_type_and_uuid"
 
   create_table "oauth_access_grants", :force => true do |t|
     t.integer  "resource_owner_id", :null => false
