@@ -13,6 +13,9 @@ body .modal-header h3 {
 	font-size: 32px;
 	padding-top: 10px;
 }
+body .modal-body {
+	height: 200px;
+}
 body .modal-body ul {
 	padding-top: 10px;
 	padding-left: 20px;
@@ -192,6 +195,7 @@ body .modal-footer .startbtn:hover{
 	padding-bottom: 25px;
 	text-align: center;
 	font-size: 32px;
+	margin-top: 20px;
 }
 #pricing .bottom .enterprisebtn {
 	background: #e7eaeb;
