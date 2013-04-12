@@ -25,6 +25,7 @@ body .modal-body li {
 	height: 14px;
 	padding-left: 0px;
 	padding-top: 10px;
+	margin-top: 10px;
 }
 body .modal-body .left {
 	float: left;
@@ -247,6 +248,9 @@ body .modal-footer .startbtn:hover{
 	font-size: 32px;
 	padding-top: 10px;
 }
+#pricingpopup .modal-body {
+	height: 200px;
+}
 #pricingpopup .modal-body ul {
 	padding-top: 10px;
 	padding-left: 20px;
@@ -256,6 +260,7 @@ body .modal-footer .startbtn:hover{
 	height: 14px;
 	padding-left: 0px;
 	padding-top: 10px;
+	margin-top: 10px;
 }
 #pricingpopup .modal-body .left {
 	float: left;

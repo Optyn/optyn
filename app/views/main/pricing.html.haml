@@ -102,7 +102,7 @@
         %a.btn.enterprisebtn{:href => "contact"} Contact Our Enterprise Team
 
 / Features Popup Window
-#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :width => "800px", :height => "400px"}
+#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "PricingPopup", :role => "dialog", :tabindex => "-1", :width => "800px", :height => "400px"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3 Every customer gets ALL of these COOL features:
@@ -134,7 +134,7 @@
             Significantly reduced risk of your customers unsubscribing from your emails.
   .modal-footer
     What are you waiting for?
-    %a.btn.startbtn{:href => ""} Get Started
+    %a.btn.startbtn{:href => new_merchants_manager_registration_path} Get Started
 
 
 
