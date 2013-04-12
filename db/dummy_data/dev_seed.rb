@@ -107,7 +107,7 @@ shop_names = ["Joleen Flick",
               "Hilde Overstreet"]
 
 manager_names.each_with_index do |name, index|
-  shop = Shop.create!(:name => shop_names[index], :stype => "local", :identifier => shop_names[index].dewncase.gsub(/\s/, ''), :time_zone => 'Eastern Time (US & Canada)')
+  shop = Shop.create!(:name => shop_names[index], :stype => "local", :identifier => shop_names[index].downcase.gsub(/\s/, ''), :time_zone => 'Eastern Time (US & Canada)')
   manager  = shop.managers.create(:name => name, :email => "#{name.downcase.gsub(/\s/, "")}@idyllic-software.com", :password => "test1234", :password_confirmation => "test1234")
   manager.confirm!
   manager.save!
