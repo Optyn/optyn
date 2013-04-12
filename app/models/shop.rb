@@ -123,6 +123,10 @@ class Shop < ActiveRecord::Base
     labels.inactive(self).first
   end
 
+  def get_connection_for_user(user)
+    self.connections.where(:user_id=>user.id)
+  end
+  
   private
   def create_dummy_survey
     unless survey.present?
@@ -159,4 +163,6 @@ class Shop < ActiveRecord::Base
   def first_location
     locations.first rescue nil
   end
+
+ 
 end

@@ -18,9 +18,8 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     if !@shop.shop_already_exists? && @shop.save
       @shop.update_manager
       @shop.managers.first.create_authentication(params[:auth_id], params[:auth_provider]) if params[:auth_id].present?
-      sign_in(@shop.managers.first)
-      flash[:notice] = "Merchant account created successfully"
-      redirect_to after_sign_in_path_for(nil)
+      flash[:notice] = "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
+      redirect_to thankyou_path
     else
       @omniauth={:uid => params[:auth_id],:provider => params[:auth_provider]} if params[:auth_id].present?
       @shop.errors[:base] << "Business with entered details exists already" if @shop.shop_already_exists?
@@ -28,5 +27,6 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     end
 
   end
+
 
 end

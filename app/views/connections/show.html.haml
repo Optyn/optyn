@@ -1,0 +1,16 @@
+/ #features.features_page
+/ 	.container
+/ 		.features1
+/ 			.row
+/ 				.span8
+/ 					= "Name: " + @shop.name
+/ 					%br/
+/ 					= "Description: " + @shop.description .to_s if @shop.description.present?
+/ 					%br/
+/ 					= "Type: " + business_type(@shop)
+/ 					%br/
+/ 					= "Webiste-Url:" + @shop.website.to_s if @shop.website.present?
+/ 					%br/
+/ 					= "Categories: " + @shop.business_category_names.join(", ") if @shop.business_category_names.present?
+/ 					%br/
+/ 					= "Locations: " + @shop.locations.collect(&:city).join(',') if @shop.locations.present?
