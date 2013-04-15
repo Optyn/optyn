@@ -20,7 +20,10 @@ body {
 }
 /* DROPDOWN MENU for NAVBAR */
 .dropdown {
-  margin: 0px;
+  margin-top: -5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
 }
 .dropdown-menu {
   margin-top: 0px;
@@ -45,11 +48,15 @@ body {
 .dropdown-menu ul {
   color: #7d8b8f;
 }
-.dropdown-menu li img {
-  float: left;
+.dropdown-menu li {
+
 }
 .dropdown-menu li a {
   color: #7d8b8f;
+}
+.dropdown-menu li a img {
+  float: left;
+  padding-right: 10px;
 }
 .dropdown-menu li a:active{
   color: #86c440;

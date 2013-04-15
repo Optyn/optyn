@@ -72,8 +72,13 @@
 .navbar .nav li.dropdown.open > .dropdown-toggle,
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-  background: none;
+  background-color: #263d45;
   color: #fff;
+  border-radius: 4px;
+}
+.navbar .nav > li > .dropdown-menu::after, 
+.navbar .nav > li > .dropdown-menu::before {
+  display:none;
 }
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:focus,
@@ -134,7 +139,6 @@
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
-
 }
 #title_header h3 {
   color: #304d58;
