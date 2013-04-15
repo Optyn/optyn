@@ -10,16 +10,15 @@
         %img{:alt => "logo", :src => "/assets/logo.png"}/
       .nav-collapse.collapse
         %ul.nav.pull-right
-          %li
-            %a{:href => root_path} Home
-          %li
-            %a{:href => "consumerfeatures"} Consumers
-          %li
-            %a{:href => "merchantfeatures"} Merchants
-          %li
-            %a{:href => "pricing"} Pricing
-          
-          - unless someone_logged_in?  
+          - unless someone_logged_in? 
+            %li
+              %a{:href => root_path} Home
+            %li
+              %a{:href => "consumerfeatures"} Consumers
+            %li
+              %a{:href => "merchantfeatures"} Merchants
+            %li
+              %a{:href => "pricing"} Pricing
             %li
               =link_to("Consumer Login", new_user_session_path, class: "btn-header")
 
