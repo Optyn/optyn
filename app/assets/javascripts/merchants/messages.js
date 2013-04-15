@@ -15,6 +15,7 @@ function MerchantMessage() {
             this.hookCollectionSubmission();
             this.hookCheckUncheckAll();
             this.hookAllAutoCheckUncheckSelectAll();
+            this.hookCellClick();
         }
     };
 
@@ -73,5 +74,12 @@ function MerchantMessage() {
             var $selectAll = $('.message-list .select-all');
             $selectAll.prop('checked', false);
         })
+    };
+
+    this.hookCellClick = function(){
+        $('.message-list tr td.show-link').click(function(){
+           var link = $(this).parents('tr').find('td.show-link-address').text();
+            window.location = link;
+        });
     };
 }

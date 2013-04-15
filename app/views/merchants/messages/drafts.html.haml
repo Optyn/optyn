@@ -29,14 +29,16 @@
             %tr
               %td
                 = check_box_tag :uuid, message.uuid, false, class: 'real'
-              %td
+              %td.show-link
                 = message_type_title(message)
-              %td
+              %td.show-link
                 = message.name
-              %td
+              %td.show-link
                 = message.second_name
-              %td
+              %td.show-link
                 = formatted_message_form_datetime(message, 'updated_at')
+              %td.show-link-address.display-none
+                = edit_merchants_message_path(message.uuid)
         - else
           %tr
             %td{colspan: '4'}

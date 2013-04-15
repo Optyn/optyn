@@ -8,3 +8,8 @@
 #message_preview_container .outer-table .outer-cell{background-color:#FFF; display:block!important; max-width:600px; margin:0 auto; clear:both;}
 
 #message_preview_container .outer-table .outer-cell .inner-table{padding:15px; max-width:600px; margin:0 auto; display:block;}
+
+/**
+ * Message list styles
+ */
+.message-list tr td.show-link{cursor: pointer;}
