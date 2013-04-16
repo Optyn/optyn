@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-#	before_filter :require_manager_logged_out
+	before_filter :require_manager_logged_out
 
 	def new
 		session[:omniauth_manager] = nil
