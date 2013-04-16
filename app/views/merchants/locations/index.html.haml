@@ -1,11 +1,14 @@
-#box_sign
+#title_header
+  %h3
+    Dana Cafe Locations
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
   .container
-    %h2 Your Locations
-
     = render partial: "merchants/shared/menu"
-    
     .span8
-      %div.align-right
+      %div
         %a.btn{:href => new_merchants_location_path}
           %i.icon-black.icon-map-marker
           Add New Location

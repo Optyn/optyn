@@ -1,9 +1,16 @@
-#box_sign
+#title_header
+  %h3
+    Your Connections
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
   .container
-    %h2 Your Account
     = render partial: "merchants/shared/menu"
-
     .span8
+      %div
+        Here's a list of all your connections. Click on 'More Info' to learn more about each customer.
+        %br
       %table.table.table-striped
         %thead
           %tr
