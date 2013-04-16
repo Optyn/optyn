@@ -1,44 +1,51 @@
-.page-header
-  %h1 Your Shop
+#title_header
+  %h3
+    Your Shop Details
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8
+      %p
+        %strong Name
+        %br
+        = @shop.name
+      %p
+        %strong Description
+        %br
+        = show_description(@shop)
 
-%p
-  %strong Name
-  %br
-  = @shop.name
-%p
-  %strong Description
-  %br
-  = show_description(@shop)
+      %p
+        %strong Business Type
+        %br
+        = @shop.stype.humanize
 
-%p
-  %strong Business Type
-  %br
-  = @shop.stype.humanize
+      %p
+        %strong Website
+        %br
+        = show_website(@shop)
 
-%p
-  %strong Website
-  %br
-  = show_website(@shop)
+      %p
+        %strong Identifier
+        %br
+        = show_identifier(@shop)
 
-%p
-  %strong Identifier
-  %br
-  = show_identifier(@shop)
+      %p
+        %strong Timezone
+        %br
+        = @shop.time_zone
 
-%p
-  %strong Timezone
-  %br
-  = @shop.time_zone
+      %p
+        %strong Logo
+        %br
+        = show_logo(@shop)
 
-%p
-  %strong Logo
-  %br
-  = show_logo(@shop)
+      %p
+        %strong Business Categories
+        %br
+          = show_business_category_names(@shop)
 
-%p
-  %strong Business Categories
-  %br
-    = show_business_category_names(@shop)
-
-.form-actions
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
+      .form-actions
+        = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
