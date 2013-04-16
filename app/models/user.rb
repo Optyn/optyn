@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
 
   def make_connection_if!(shop)
     unless connections.for_shop(shop.id).present?
-      connections.create!(user_id: self.id, shop_id: shop.id)
+      connections.create!(user_id: self.id, shop_id: shop.id, connected_via: 'Optyn Button')
     end
   end
 
