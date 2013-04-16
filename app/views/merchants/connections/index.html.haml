@@ -13,40 +13,12 @@
             %th Permission
             %th Details
         %tbody
+        - current_shop.users.each_with_index do |user, index|
           %tr
-            %td 3
-            %td Alen Malkoc
-            %td Website
-            %td Full
+            %td= index + 1
             %td
-              %a{:href => "#"} More Info
-          %tr
-            %td 3
-            %td Alen Malkoc
-            %td Website
-            %td Full
-            %td
-              %a{:href => "#"} More Info
-          %tr
-            %td 3
-            %td Alen Malkoc
-            %td Website
-            %td Full
-            %td
-              %a{:href => "#"} More Info
-          %tr
-            %td 3
-            %td Alen Malkoc
-            %td Website
-            %td Full
-            %td
-              %a{:href => "#"} More Info
-        - User.all.each do |user|
-          %tr
-            %td #
-            %td 
               = user.name
-            %td Website      
+            %td Website
             %td
               = user_permission(user)
             %td

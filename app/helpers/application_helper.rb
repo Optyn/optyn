@@ -58,4 +58,17 @@ module ApplicationHelper
         'alert'
     end
   end
+
+  def user_permission(user)
+    if user.visible_permissions_users.present?
+      permissions_users = user.visible_permissions_users
+      if permissions_users.size == Permission.all.size
+        "Full"
+      else
+        user.permission_names.join(", ")
+      end
+    else
+      "None"
+    end
+  end
 end

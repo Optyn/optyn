@@ -2,7 +2,7 @@ class Connection < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :shop
 
-	attr_accessible :user_id, :shop_id, :active
+	attr_accessible :user_id, :shop_id, :active, :connected_via
 
   scope :active, where(active: true)
 

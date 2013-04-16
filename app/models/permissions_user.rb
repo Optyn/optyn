@@ -3,4 +3,6 @@ class PermissionsUser < ActiveRecord::Base
   belongs_to :permission
 
   attr_accessible :action, :permission_id
+
+  scope :visible, where(action: true)
 end

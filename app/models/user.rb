@@ -115,9 +115,12 @@ class User < ActiveRecord::Base
     end  
   end
 
-  def find_user_permission
-    permission_user=self.permissions_users.where(:action=>true)
-    permission_user.any? ? self.permissions.find(:all,:conditions=>{:id=> permission_user.collect(&:permission_id)}).collect(&:name) : "none"
+  def visible_permissions_users
+    permissions_users.visible
+  end
+
+  def permission_names
+    permissions_users.visible.includes(:permission).collect(&:permission).collect(&:name)
   end
 
   private
