@@ -57,3 +57,42 @@
 #messages table {
 
 }
+/* Public Merchant Page - i.e. /danacafe" */
+#merchant_page {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#merchant_page .titlebar {
+  height: auto;
+  padding-top: 40px;
+}
+#merchant_page .titlebar .logo {
+  height: 60px;
+}
+#merchant_page .titlebar .title {
+  vertical-align: middle;
+  color: #304d58;
+  font-size: 22px;
+  padding-top: 15px;
+}
+#merchant_page .titlebar .optyn {
+  
+}
+#merchant_page .titlebar .optyn img {
+  float: right;
+}
+#merchant_page .mainbody {
+  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+
+
+
+
