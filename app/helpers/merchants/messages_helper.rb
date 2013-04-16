@@ -124,4 +124,16 @@ module Merchants::MessagesHelper
 
     return highlight_class if highlight_actions.include?(action_name)
   end
+
+  def message_detail_date(message)
+    send_on = message.send_on
+    time_format = '%b %d'
+    if send_on.try(:year) == Time.now.year
+      time_format << ", %Y"
+    end
+
+    send_on.strftime(time_format)
+  rescue
+    ""
+  end
 end
