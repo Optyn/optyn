@@ -10,7 +10,7 @@
           %li
             %a{:href => "blog"} Our Blog
           %li
-            %a{:href => "contact"} Contact Us
+            %a{:href => "contact"} Partner With Us
           %li
             %a{:href => "terms"} Terms of Use
           %li
@@ -21,13 +21,13 @@
           %li
             %a{:href => "consumerfeatures"} Features
           %li
-            %a{:href => "why"} Why Use Optyn
-          %li
             %a{:href => "faq"} FAQs
           %li
-            %a{:href => "support"} Support
+            %a{:href => "support"} Customer Support
           %li
-            %a{:href => "login"} Get Started
+            %a{:href => new_user_session_path} Consumer Login
+          %li
+            %a{:href => new_user_registration_path} Get Started
       .span4
         %h3 For Merchants
         %ul
@@ -40,7 +40,9 @@
           %li
             %a{:href => "support"} Support
           %li
-            %a{:href => "login"} Get Started
+            %a{:href => new_merchants_manager_session_path} Merchant Login
+          %li
+            %a{:href => new_merchants_manager_registration_path} Get Started
     %hr/
     .row.copyright
       .span4

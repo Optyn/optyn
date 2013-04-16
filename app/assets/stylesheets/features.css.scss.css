@@ -1,46 +1,212 @@
 #consumer_features {
-	
-}
-#consumer_features hr {
-	padding-top: 2px !important;
-	padding-bottom: 2px !important;
+
 }
 #consumer_features .main {
-
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
-#consumer_features .main img {
+#consumer_features .main .image {
 	float: left;
+	width: 100px;
+	height: 100px;
+	margin-top: 30px;
 }
-#consumer_features .main h3 {
-	font-size: 20px;
-	line-height: 22px
+#consumer_features .main .copy {
+	padding-left: 10px;
 }
-#consumer_features .main .left {
-	float: left;
+#consumer_features .main .copy h3 {
+	color: #86c440;
+	font-weight: bold;
 }
-#consumer_features .main .right {
-	float: right;
-}
-
 #consumer_features .features {
-	height: auto;
-	padding-top: 10px;
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-right: 10px;
 	padding-bottom: 10px;
+}
+#consumer_features .features .feature {
+	width: 350px;
+	padding-left: 15px;
+}
+#consumer_features .features .feature .image {
+	float: left;
+	width: 60px;
+	height: 120px;
+	margin-top: 20px;
+}
+#consumer_features .features .feature .copy {
+	padding-left: 20px;
+	padding-top: 5px;
+}
+#consumer_features .features .feature .copy h3 {
+	color: #304d58;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 22px;
+}
+#consumer_features .bottom {
+	padding-top: 25px;
+}
+#consumer_features .bottom .creditcard {
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#consumer_features .bottom .creditcard .featurestart {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  margin-left: 15px;
+}
+#consumer_features .bottom .creditcard .featurestart:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#consumer_features .bottom .pricing{
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#consumer_features .bottom .pricing .viewpricing {
+  	background: #1791c0;
+	border-radius: 4px;
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	top: 4px;
+	color: #ffffff;
+	font-size: 18px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+	margin-left: 15px;
+}
+#consumer_features .bottom .pricing .viewpricing:hover{
+	background: #147ea7;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
 }
 #merchant_features {
 
 }
 #merchant_features .main {
-
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
-#merchant_features .main .left {
-
+#merchant_features .main .image {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin-top: 30px;
 }
-#merchant_features .main .right {
-
+#merchant_features .main .copy {
+	padding-left: 10px;
+}
+#merchant_features .main .copy h3 {
+	color: #86c440;
+	font-weight: bold;
 }
 #merchant_features .features {
-
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+#merchant_features .features .feature {
+	width: 350px;
+	padding-left: 15px;
+}
+#merchant_features .features .feature .image {
+	float: left;
+	width: 60px;
+	height: 120px;
+	margin-top: 20px;
+}
+#merchant_features .features .feature .copy {
+	padding-left: 20px;
+	padding-top: 5px;
+}
+#merchant_features .features .feature .copy h3 {
+	color: #304d58;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 22px;
+}
+#merchant_features .bottom {
+	padding-top: 25px;
+}
+#merchant_features .bottom .creditcard {
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#merchant_features .bottom .creditcard .featurestart {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  margin-left: 15px;
+}
+#merchant_features .bottom .creditcard .featurestart:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#merchant_features .bottom .pricing{
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#merchant_features .bottom .pricing .viewpricing {
+  	background: #1791c0;
+	border-radius: 4px;
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	top: 4px;
+	color: #ffffff;
+	font-size: 18px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+	margin-left: 15px;
+}
+#merchant_features .bottom .pricing .viewpricing:hover{
+	background: #147ea7;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
 }
 
 /* Features
