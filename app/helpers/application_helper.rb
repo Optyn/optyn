@@ -59,10 +59,22 @@ module ApplicationHelper
     end
   end
 
+  def user_permission(user)
+    if user.visible_permissions_users.present?
+      permissions_users = user.visible_permissions_users
+      if permissions_users.size == Permission.all.size
+        "Full"
+      else
+        user.permission_names.join(", ")
+      end
+    else
+      "None"
+    end
+  end
+
   def human_paginated_range(collection)
     endnumber = ((collection.offset_value + collection.limit_value) > collection.total_count) ? collection.total_count : (collection.offset_value + collection.limit_value)
     return "" if collection.blank? || collection.total_count <= collection.limit_value
     "Showing #{collection.offset_value + 1}-#{endnumber} of #{collection.total_count}"
   end
-
 end

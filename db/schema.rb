@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408122218) do
+ActiveRecord::Schema.define(:version => 20130416081417) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -31,9 +31,10 @@ ActiveRecord::Schema.define(:version => 20130408122218) do
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
     t.integer  "shop_id"
-    t.boolean  "active",     :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.boolean  "active",        :default => true
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "connected_via"
   end
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
