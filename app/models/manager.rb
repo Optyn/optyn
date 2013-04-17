@@ -5,42 +5,38 @@ class Manager < ActiveRecord::Base
 
   devise :database_authenticatable, :async, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,:confirmable
-  
+
   has_many :authentications,:as=>:account, dependent: :destroy
   has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
-  
+
   validates :name, :presence => true
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
-  
+
   attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at
-  
+  attr_accessor :skip_password
 
-  def self.from_omniauth(auth)
-    Authentication.fetch_authentication(auth.provider, auth.uid,"Manager").account rescue create_from_omniauth(auth)
-  end
-  
   def self.create_from_omniauth(auth)
-
     email = auth.info.email.to_s
-    manager = Manager.find_by_email(email) 
+    manager = Manager.find_by_email(email)
 
     if !manager
-      manager = Manager.new(name: auth.info.name, email: email) 
+      manager = Manager.new(name: auth.info.name, email: email)
       manager
     else
       authentication = manager.authentications.create(uid: auth['uid'], provider: auth['provider'])
       manager
     end
-    
   end
 
-  def create_authentication(uid,provider)
+  def create_authentication(uid, provider)
     self.authentications.create(uid: uid, provider: provider)
   end
 
   def password_required?
+    return false if skip_password.present? && skip_password
+
     super && authentications.blank?
   end
 

@@ -12,7 +12,7 @@ class Authentication < ActiveRecord::Base
   
 	scope :by_provider_and_uid, ->(provider, uid,account_type=nil) {where(provider: provider, uid: uid,account_type: account_type)}
 
-	def self.fetch_authentication(provider, uid,account_type=nil)
+	def self.fetch_authentication(provider, uid, account_type=nil)
 		by_provider_and_uid(provider, uid,account_type).first
 	end
 
