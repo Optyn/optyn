@@ -3,7 +3,7 @@ class Merchants::LocationsController < Merchants::BaseController
   skip_before_filter :active_subscription?, :only => [:index]
   before_filter :is_current_manager_owner?, :only =>[:new]
   def index
-    @locations= current_shop.locations
+    @locations = current_shop.locations
   end
 
   def new
