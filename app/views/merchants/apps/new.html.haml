@@ -1,17 +1,20 @@
-.row
-  
-  .span16
-    %header
-      %h2 Let your users login/signup through your website
+#title_header
+  %h3
+    Setup Your Optyn Button
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8
+      = form_for @application, :as => :oauth_application, :url => merchants_app_path, :method => :post, :html => {:id => 'app_form'} do
+        
+        = render :partial => "merchants/apps/form"
 
-  .span12
-    = form_for @application, :as => :oauth_application, :url => merchants_app_path, :method => :post, :html => {:id => 'app_form'} do
-      
-      = render :partial => "merchants/apps/form"
+        .clearfix
 
-      .clearfix
+        .actions
+          = submit_tag "Submit", :name => "commit", :class => "btn-primary"
 
-      .actions
-        = submit_tag "Submit", :name => "commit", :class => "btn-primary"
-
-        = link_to "Cancel", merchants_app_path, :class => "btn"
+          = link_to "Cancel", merchants_app_path, :class => "btn"
