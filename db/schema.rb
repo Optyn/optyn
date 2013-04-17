@@ -50,13 +50,12 @@ ActiveRecord::Schema.define(:version => 20130416081417) do
   create_table "labels", :force => true do |t|
     t.integer  "shop_id"
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "active",     :default => true
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "labels", ["shop_id", "active"], :name => "index_labels_on_shop_id_and_active"
   add_index "labels", ["shop_id", "name"], :name => "index_labels_on_shop_id_and_name", :unique => true
+  add_index "labels", ["shop_id"], :name => "index_labels_on_shop_id"
 
   create_table "locations", :force => true do |t|
     t.string   "street_address1"
@@ -97,74 +96,6 @@ ActiveRecord::Schema.define(:version => 20130416081417) do
   add_index "managers", ["confirmation_token"], :name => "index_managers_on_confirmation_token", :unique => true
   add_index "managers", ["email"], :name => "index_managers_on_email", :unique => true
   add_index "managers", ["reset_password_token"], :name => "index_managers_on_reset_password_token", :unique => true
-
-  create_table "message_attachments", :force => true do |t|
-    t.integer  "message_id"
-    t.string   "attachment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "message_attachments", ["message_id"], :name => "index_message_attachments_on_message_id"
-
-  create_table "message_folders", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "message_labels", :force => true do |t|
-    t.integer  "label_id"
-    t.integer  "message_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "message_users", :force => true do |t|
-    t.integer  "message_id"
-    t.integer  "user_id"
-    t.integer  "message_folder_id"
-    t.boolean  "is_read",            :default => false
-    t.boolean  "email_read",         :default => false
-    t.boolean  "is_forwarded",       :default => false
-    t.datetime "received_at"
-    t.boolean  "added_individually", :default => false
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-  end
-
-  add_index "message_users", ["message_id", "added_individually"], :name => "index_message_users_on_message_id_and_added_individually"
-  add_index "message_users", ["message_id", "user_id"], :name => "index_message_users_on_message_id_and_user_id"
-  add_index "message_users", ["user_id", "message_folder_id"], :name => "index_message_users_on_user_id_and_message_folder_id"
-
-  create_table "messages", :force => true do |t|
-    t.string   "type"
-    t.integer  "manager_id"
-    t.string   "from"
-    t.string   "name"
-    t.string   "second_name"
-    t.string   "subject"
-    t.text     "content"
-    t.string   "state"
-    t.datetime "send_on"
-    t.boolean  "send_immediately", :default => false
-    t.integer  "parent_id"
-    t.string   "uuid"
-    t.text     "fine_print"
-    t.datetime "beginning"
-    t.datetime "ending"
-    t.string   "coupon_code"
-    t.string   "type_of_discount"
-    t.string   "discount_amount"
-    t.boolean  "call_to_action"
-    t.boolean  "special_try"
-    t.text     "rsvp"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-  end
-
-  add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
-  add_index "messages", ["type", "uuid"], :name => "index_messages_on_type_and_uuid"
 
   create_table "oauth_access_grants", :force => true do |t|
     t.integer  "resource_owner_id", :null => false

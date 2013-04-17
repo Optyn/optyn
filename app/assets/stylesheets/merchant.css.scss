@@ -72,7 +72,7 @@
 #merchant_page .titlebar .title {
   vertical-align: middle;
   color: #304d58;
-  font-size: 22px;
+  font-size: 28px;
   padding-top: 15px;
 }
 #merchant_page .titlebar .optyn {
@@ -89,10 +89,62 @@
   border-radius: 6px;
   padding-top: 30px;
   padding-bottom: 30px;
+  margin-left: 0px;
 }
+#merchant_page .mainbody .title {
 
+}
+#merchant_page .mainbody .title h3 {
+  padding-top: 0px;
+  color: #304d58;
+  margin-top: 0px;
+  font-size: 20px;
+  line-height: 20px;
+}
+#merchant_page .mainbody .details {
+  width: 330px;
+  border-right: 1px solid #ececec;
+}
+#merchant_page .mainbody .details-list {
 
+}
+#merchant_page .mainbody .details-list .item {
+  padding-bottom: 15px;
+}
+#merchant_page .mainbody .details-list .item-icons {
+  padding-bottom: 10px;
+}
+#merchant_page .mainbody .marketing {
+  width: 330px;
+}
+#merchant_page .mainbody .marketing .title {
 
-
-
+}
+#merchant_page .mainbody .marketing .title h3 {
+  padding-top: 0px;
+  color: #304d58;
+  margin-top: 0px;
+  font-size: 20px;
+  line-height: 20px;
+}
+#merchant_page .mainbody .marketing .details {
+  font-size: 16px;
+  color: #304d58;
+  border-right: none;
+}
+#merchant_page .mainbody .marketing .details ul {
+}
+#merchant_page .mainbody .marketing .details li {
+  padding-top: 11px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #ececec;
+  padding-left: 20px;
+}
+#merchant_page .mainbody .marketing .details li img {
+  float: right;
+  padding-right: 10px;
+}
+#merchant_page .mainbody .marketing .details li:hover {
+  background-color: #e7eff1;
+}
 
