@@ -40,8 +40,8 @@ class Merchants::LocationsController < Merchants::BaseController
   def destroy
     @location = current_shop.locations.find(params[:id])
     @location.destroy
-    flash[:notice]="Location removed successfully"
-    redirect_to root_path
+    flash[:notice] = "Location removed successfully"
+    redirect_to merchants_locations_path
   end
 
 
