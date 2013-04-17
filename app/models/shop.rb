@@ -69,10 +69,6 @@ class Shop < ActiveRecord::Base
   end
 
   def generate_oauth_token(redirect_uri, force=false)
-    unless redirect_uri.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
-      return false
-    end
-
     app = nil
     if force
       oauth_application.destroy
@@ -82,7 +78,7 @@ class Shop < ActiveRecord::Base
     app = self.oauth_application
     if app.present?
       app.redirect_uri = redirect_uri
-      app.save
+      app.save!
     else
       generate_application(redirect_uri)
     end

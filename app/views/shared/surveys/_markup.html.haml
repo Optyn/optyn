@@ -1,7 +1,5 @@
 %div
-  %div
-    %h1= "#{@survey.title} #{"(Customer segmentation questionaire preview)" if preview}"
-
+  %h5 This is a preview of your Survey that customers can fill out. You can send this to them via the Survey Email.
   %div
     - @survey_questions.each do |question|
       - if question.show_label

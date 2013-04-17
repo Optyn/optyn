@@ -1,33 +1,52 @@
-/ Dana Cafe Example - Optyn
-#features.features_page
+#merchant_page
   .container
-    .row
-      .span6
-        %img{:alt => "Dana Cafe", :src => "/assets/dana-cafe.jpg"}/
-      .span6
+    .row.titlebar
+      .span2.logo
+        %img{:alt => "Dana Cafe", :src => "/assets/danalogo.png"}
+      .span6.title
+        %strong
+          Dana Cafe, 
+        Chicago, IL
+      .span4.optyn
+        %img{:alt => "Dana Cafe", :src => "/assets/optynbtn.png"}
+    .row.mainbody
+      .span4.image
+        %img{:alt => "Dana Cafe", :src => "/assets/danaplace.png"}
+      .span4.details
         %div
           %h3
-            Dana Cafe's Optyn Page
+            Dana Cafe Details
         %div
           %p
-            5868 N Lincoln Ave
+            Category: Restaurants | Cafe
             %br
-            Chicago, IL 60659
+            Location:
             %br
-            ph. 773-828-9462
+            5868 N Lincoln Ave, Chicago, IL 60659
             %br
+            Website: http://www.dana-cafe.com
+            %br
+            Social Profiles:
+            %br
+            Type of E-Mails: All Kinds
+            %br
+            Frequency: 1.2 emails/week
+            %br
+      .span4.marketing
         %div
-          %p
-            %img{:alt => "Alternate Button", :src => "/assets/optyn-button2.png"}
-          %p
-            %h4
-            48 People are subscribed
-            %br
-          %p
-            %h4
-            12 Recent Messages
-#optyn-container
-  %h4 Welcome to Optyn
-  %script{:src => "http://localhost:3000/api/shop/button_framework.js?app_id=35f0f125411cc764821f87fcb144aadbce138589b0f8d0a6dc5595418a628ffc"}/
-%iframe#optyn-iframe{:name => "optyn-iframe", :style => "display:none"}
-
+          %h3
+            Marketing Details
+        %div
+          %ul
+            %li
+              Marketing Details
+            %li  
+              Available Coupons
+            %li
+              Recent Message
+            %li
+              Active Survey
+            %li
+              Active Contest
+            %li
+              Total Promotions
