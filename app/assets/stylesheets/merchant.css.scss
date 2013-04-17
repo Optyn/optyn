@@ -1,3 +1,4 @@
+/* All Merchant Account Pages CSS is here */
 #merchants {
   padding-top: 30px;
 }
@@ -13,16 +14,86 @@
 #connections table {
 
 }
+/* Merchant Dashboard Page */
 #dashboard {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   margin: 0px;
 }
-#dashboard table {
-
+#dashboard .header {
+  height: 50px;
 }
+#dashboard .header .maintitle {
+  margin: 0px;
+}
+#dashboard .header .maintitle h3 {
+  margin: 0px;
+  padding-top: 0px;
+  color: #263d45;
+  font-size: 25px;
+  line-height: 27px;
+}
+#dashboard .header .new {
+  float: right;
+}
+#dashboard .header .new .newcampaign {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 36px;
+  line-height: 32px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  font-weight: bold;
+  border: 1px #304d58;
+  float: right;
+}
+#dashboard .header .new .newcampaign img {
+  padding-right: 10px;
+}
+#dashboard .header .newcampaign:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#dashboard .latest {
+  border-radius: 4px;
+  background-color: #7d8f96;
+  height: 50px;
+  margin-top: 10px;
+}
+#dashboard .latest .title {
+  font-size: 18px;
+  color: #fff;
+  line-height: 26px;
+  float: left;
+  padding-left: 20px;
+  vertical-align: middle;
+  padding-top: 10px;
+  font-weight: bold;
+}
+#dashboard .latest .sortby {
+  float: right;
+  color: #fff;
+  vertical-align: middle;
+  padding-top: 12px;
+  padding-right: 20px;
+}
+#dashboard latest .sortby select {
+  border: 0px !important;
+  width: 150px !important;
+}
+#dashboard table a {
+  color: #1791c0 !important;
+}
+#dashboard table a:hover {
+  color: #263d45 !important;
+}
+/* Merchant Settings Page */
 #settings {
   padding-top: 20px;
   padding-bottom: 20px;

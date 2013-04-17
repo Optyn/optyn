@@ -2,7 +2,7 @@ Optyn::Application.routes.draw do
 
   root to: 'main#index'
   match 'connections' => 'connections#index', as: :customers_root
-  match 'merchants' => 'merchants/connections#index', as: :merchants_root
+  match 'merchants' => 'merchants/dashboard#index', as: :merchants_root
 
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
@@ -95,6 +95,7 @@ Optyn::Application.routes.draw do
     resource :app
     resources :connections
     resources :locations
+    resources :dashboard
 
     resource :shop do
       member do
