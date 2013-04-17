@@ -18,11 +18,12 @@ class OmniauthClientsController < ApplicationController
 	private
 
 	def create_manager(omniauth)
-		manager= Manager.from_omniauth(omniauth)
+		manager = Manager.create_from_omniauth(omniauth)
+
 		if manager.new_record?
-			@shop=Shop.new
+			@shop = Shop.new
 			@shop.managers.build(:name => manager.name, :email => manager.email)
-			@omniauth=omniauth
+			@omniauth = omniauth
 			render :template => "merchants/managers/registrations/new"
 		else
 			flash.notice = "Signed in!"
@@ -32,7 +33,7 @@ class OmniauthClientsController < ApplicationController
 	end
 
 	def create_user(omniauth)
-		user =User.from_omniauth(omniauth)
+		user = User.from_omniauth(omniauth)
 		if user.persisted?
 			flash.notice = "Signed in!"
 			sign_in_and_redirect user
