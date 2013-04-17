@@ -15,7 +15,7 @@ class Merchants::LocationsController < Merchants::BaseController
 
     if @location.save
       Resque.enqueue(GeoFinder, @location.id)
-      flash[:notice]="Location added successfully"
+      flash[:notice] = "Location added successfully"
       redirect_to merchants_locations_path
     else
       render 'new'
@@ -30,7 +30,7 @@ class Merchants::LocationsController < Merchants::BaseController
   def update 
     @location = current_shop.locations.find(params[:id])
     if @location.update_attributes(params[:location])
-      flash[:notice]="Location updated successfully"
+      flash[:notice] = "Location updated successfully"
       redirect_to merchants_locations_path
     else
       render 'edit'
