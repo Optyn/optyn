@@ -19,9 +19,6 @@
         = link_to "Edit billing information", merchants_edit_billing_info_path() 
     %li
       %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      = link_to "Add location", new_merchants_location_path if is_shop_local?(current_shop)
-    %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
       = link_to "Managers List", merchants_managers_list_path if manager_signed_in?
     %li
       %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
