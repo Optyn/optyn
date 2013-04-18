@@ -111,7 +111,7 @@ class Merchants::MessagesController < Merchants::BaseController
     if "preview" == choice
       redirect_to preview_merchants_message_path(@message.uuid)
     elsif "launch" == choice
-      #TODO TO BE IMPLEMENTED TO BE REDIRECTED TO THE SENT PAGE.
+      redirect_to queued_merchants_messages_path()
     else
       redirect_to edit_merchants_message_path(@message.uuid)
     end
