@@ -62,11 +62,11 @@ class ApplicationController < ActionController::Base
     if session[:user_return_to].present?
       return session[:user_return_to]
     end
-   
-
 
     flash[:notice] = "Signed in successfully"
-    if current_user.zip_prompted?
+    if current_admin
+      '/admin'
+    elsif current_user.zip_prompted?
       connections_path
     else
       new_user_zip_path

@@ -1,5 +1,9 @@
 Optyn::Application.routes.draw do
 
+  #Admin
+  devise_for :admins , :controllers => {:sessions => 'admin/sessions'}
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   root to: 'main#index'
   match 'connections' => 'connections#index', as: :customers_root
   match 'merchants' => 'merchants/connections#index', as: :merchants_root
