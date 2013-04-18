@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to (:back), :alert => exception.message
+  end
+
   helper_method :is_shop_local_and_active?
 
   alias_method :manager_signed_in?, :merchants_manager_signed_in?

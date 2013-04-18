@@ -11,8 +11,6 @@ RailsAdmin.config do |config|
   # or for a more dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
-  config.authorize_with :cancan
-
   # RailsAdmin may need a way to know who the current user is]
   config.current_user_method { current_admin } # auto-generated
 
@@ -33,7 +31,6 @@ RailsAdmin.config do |config|
 
   # Include specific models (exclude the others):
   config.included_models = ['Admin', 'Shop', 'Connection', 'Manager', 'User']
-
   # Label methods for model instances:
   # config.label_methods << :description # Default is [:name, :title]
 
