@@ -25,6 +25,8 @@ class Message < ActiveRecord::Base
 
   scope :for_uuids, ->(uuids) { where(uuid: uuids) }
 
+  scope :latest, order("messages.updated_at DESC")
+
   state_machine :state, :initial => :draft do
 
     event :save_draft do
@@ -85,7 +87,19 @@ class Message < ActiveRecord::Base
   end
 
   def self.paginated_drafts(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:draft, manager.id).page(page_number).per(per_page)
+    for_state_and_sender(:draft, manager.id).latest.page(page_number).per(per_page)
+  end
+
+  def self.paginated_trash(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:trash, manager.id).latest.page(page_number).per(per_page)
+  end
+
+  def self.paginated_sent(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:sent, manager.id).latest.page(page_number).per(per_page)
+  end
+
+  def self.paginated_queued(manager, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_sender(:queued, manager.id).latest.page(page_number).per(per_page)
   end
 
   def self.cached_drafts_count(manager, force=false)
@@ -93,18 +107,6 @@ class Message < ActiveRecord::Base
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.message_folder) do
       for_state_and_sender(:draft, manager.id).count
     end
-  end
-
-  def self.paginated_trash(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:trash, manager.id).page(page_number).per(per_page)
-  end
-
-  def self.paginated_sent(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:sent, manager.id).page(page_number).per(per_page)
-  end
-
-  def self.paginated_queued(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:queued, manager.id).page(page_number).per(per_page)
   end
 
   def self.cached_queued_count(manager, force=false)
