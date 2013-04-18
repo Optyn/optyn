@@ -68,12 +68,8 @@ class Message < ActiveRecord::Base
 
     before_transition :draft => :queued do |message|
       message.valid?
+      message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST")
     end
-
-    before_transition :draft => :queued do |message|
-      message.send_on = Time.parse(Date.today.to_s + " 7:30 AM CST")
-    end
-
 
     state :draft do
       def save(options={})
