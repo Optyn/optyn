@@ -58,6 +58,7 @@ Optyn::Application.routes.draw do
   resources :connections do
     collection do
       post 'add_connection'
+      get 'make'
     end    
   end
   resources :segments do
