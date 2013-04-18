@@ -23,7 +23,7 @@
           %th Campaign Name
           %th Name
           %th= second_name_label_text(nil)
-          %th Last Updated
+          %th Scheduled
 
       %tbody
         - unless @messages.blank?
@@ -38,7 +38,7 @@
               %td.show-link
                 = message.second_name
               %td.show-link
-                = formatted_message_form_datetime(message, 'updated_at')
+                = formatted_message_form_datetime(message, 'send_on')
               %td.show-link-address.display-none
                 = merchants_message_path(message.uuid)
         - else
