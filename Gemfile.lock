@@ -232,8 +232,24 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.3)
+    redis-actionpack (3.2.3)
+      actionpack (~> 3.2.3)
+      redis-rack (~> 1.4.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (3.2.3)
+      activesupport (~> 3.2.3)
+      redis-store (~> 1.1.0)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
+    redis-rack (1.4.2)
+      rack (~> 1.4.1)
+      redis-store (~> 1.1.0)
+    redis-rails (3.2.3)
+      redis-actionpack (~> 3.2.3)
+      redis-activesupport (~> 3.2.3)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.3)
+      redis (>= 2.2.0)
     resque (1.24.1)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
@@ -360,6 +376,9 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.11)
   rails-erd
+  redis
+  redis-rails
+  redis-store
   resque
   resque-scheduler
   resque_mailer

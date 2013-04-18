@@ -128,7 +128,8 @@ module Merchants::MessagesHelper
   def message_detail_date(message)
     send_on = message.send_on
     time_format = '%b %d'
-    if send_on.try(:year) == Time.now.year
+
+    unless send_on.try(:year) == Time.now.year
       time_format << ", %Y"
     end
 

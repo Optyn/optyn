@@ -1,5 +1,8 @@
 class Merchants::MessagesController < Merchants::BaseController
+  include Merchants::MessageCounter
+
   before_filter :populate_message_type, :populate_labels, only: [:new, :create, :edit, :update]
+  before_filter :register_close_message_action, only: [:queued, :drafts, :sent, :trash]
 
   def types
     #Do Nothing
@@ -65,22 +68,18 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def trash
     @messages = Message.paginated_trash(current_manager, params[:page])
-    @trash_count = Message.trash_count(current_manager)
   end
 
   def drafts
     @messages = Message.paginated_drafts(current_manager, params[:page])
-    @drafts_count = Message.drafts_count(current_manager)
   end
 
   def sent
     @messages = Message.paginated_sent(current_manager, params[:page])
-    @sent_count = Message.sent_count(current_manager)
   end
 
   def queued
     @messages = Message.paginated_queued(current_manager, params[:page])
-    @queued_count = Message.queued_count(current_manager)
   end
 
   def move_to_trash
@@ -125,5 +124,17 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def uuids_from_message_ids
     params[:message_ids].split(",")
+  end
+
+  def register_close_message_action
+    session[:registered_action] = action_name
+  end
+
+  def registered_action
+    session[:registered_action] || "inbox"
+  end
+
+  def registered_action_location
+    eval("#{registered_action}_messages_path(:page => #{@page || 1})")
   end
 end

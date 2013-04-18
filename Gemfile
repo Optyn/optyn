@@ -42,6 +42,9 @@ gem 'stripe'
 #gems for messagecenter
 gem "state_machine", "~> 1.2.0"
 gem "uuidtools"
+gem 'redis'
+gem 'redis-store'
+gem 'redis-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
