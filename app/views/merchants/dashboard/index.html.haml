@@ -1,0 +1,55 @@
+/Flash Notice
+= display_flash_message
+/Main Body
+#dashboard
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8
+      .header
+        .span3.maintitle
+          %h3
+            = current_shop.name
+            Dashboard
+          Hi Alen. Here's what's going on today!
+        .span4.new
+          %a.btn.newcampaign{:href =>"#"}
+            %img{:src => "/assets/menu_icon_campaigns_white.png"}
+            Create New Campaign
+      .latest
+        .title
+          Your Latest Activity
+        .sortby
+          Sort By
+          \&nbsp;
+          %select
+            %option All Recent Activity
+            %option New Sign Ups
+            %option Revoked Permissions
+            %option E-Mail Replies
+            %option Coupon Redemptions
+            %option Survey Actions
+      %table.table.table-striped
+        %thead
+          %tr
+            %th When
+            %th User
+            %th Action
+            %th Type
+            %th More Details
+        %tbody
+        - current_shop.users.each_with_index do |user, index|
+          %tr
+            %td
+              = index + 1 
+              minutes ago
+            %td
+              = user.name
+            %td Website
+            %td
+              = user_permission(user)
+            %td
+              - if user.permissions_users.present?
+                %a{:href => "#infoDialog_#{user.id}","data-toggle"=>"modal", "id"=>"#{user.id}","class"=>"open-infoDialog"} More Info
+                = render partial: 'more_info_prompt', locals:{:user=>user}
+              - else
+                %a{:href => "#",:style => "color:#7D8B8F"} Details

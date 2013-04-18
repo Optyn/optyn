@@ -4,7 +4,10 @@
     %hr
     %li
       %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      %a.active{:href => "#"} My Dashboard
+      %a.active{:href => "dashboard"} My Dashboard
+    %li
+      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Connections"}
+      %a{:href => "connections", :alt => "My Connections"} My Campaigns
     %li
       %img{:src => "/assets/menu_icon_settings.png", :alt => "Dashboard"}
       = link_to "Edit personal information", edit_merchants_manager_registration_path if merchants_manager_signed_in?
@@ -17,9 +20,6 @@
       %li
         %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
         = link_to "Edit billing information", merchants_edit_billing_info_path() 
-    %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      = link_to "Add location", new_merchants_location_path if is_shop_local?(current_shop)
     %li
       %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
       = link_to "Managers List", merchants_managers_list_path if manager_signed_in?
