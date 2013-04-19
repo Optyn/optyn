@@ -33,11 +33,19 @@ class Shop < ActiveRecord::Base
 
   scope :fetch_same_identifier, ->(shop_id, q) { where(["shops.id <> :shop_id AND shops.identifier LIKE :q", {shop_id: shop_id, q: q}]) }
 
+  scope :disconnected, ->(connected_ids){where(["shops.id NOT IN (:exisiting_ids)", exisiting_ids: connected_ids])}
+
   after_create :create_dummy_survey, :create_select_all_label
+
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
   def self.by_app_id(app_id)
     for_app_id(app_id).first
+  end
+
+  def self.disconnected_connections(connected_ids)
+    return all if connected_ids.blank?
+    disconnected(connected_ids) 
   end
 
   def shop_already_exists?
