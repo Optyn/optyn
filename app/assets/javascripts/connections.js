@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$('.alert.alert-success.flash_message_connected').hide();
+	$('.alert.alert-error.flash_message_disconnected').hide();
 	$("a.optyn_btn").click(function(event){
 		var shopId = $(this).data("shop");
 		var shopName = $(this).data("shop_name")
@@ -18,12 +20,14 @@ $(document).ready(function(){
 		    		$('#all_connections_table tbody:last').append($(self).parent().parent());
 		      	$(self).parent().parent().remove();
 		      	$(".flash_message_disconnected").text("You unfollowed " + shopName);
+		      	$('.alert.alert-error.flash_message_disconnected').show();
 		    	}
 		    else 
 		    	if(data.followed == true)
 		    		{$('#my_connections_table tbody:last').append($(self).parent().parent());
 		    	  $(self).parent().parent().remove();
 		    		$(".flash_message_connected").text("You are now connected to " + shopName);}
+		    		$('.alert.alert-success.flash_message_connected').show();
 		 	}
 		});	
 		event.preventDefault();
