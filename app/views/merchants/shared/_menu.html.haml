@@ -64,6 +64,5 @@
         %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Settings"}
         My Settings
     %li
-      %a{:href => destroy_merchants_manager_session_path, :method => :delete}
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
-        Logout
+      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
+      = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)

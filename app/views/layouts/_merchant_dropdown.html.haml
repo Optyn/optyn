@@ -36,6 +36,4 @@
         My Settings
     %hr
     %li
-      %a{:href => destroy_merchants_manager_session_path, :method => :delete}
-        %img{:src => "/assets/dropdown_logout.png", :float => "left"}
-        Logout
+      = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)
