@@ -45,6 +45,7 @@ gem "uuidtools"
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
+gem 'aws-ses'
 
 # Gems used only for assets and not required
 # in production environments by default.

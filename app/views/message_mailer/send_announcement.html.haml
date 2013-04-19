@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica;sans-serif;"}
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:15px; max-width:600px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  = render partial: "shared/messages/greeting", locals: {preview: false, customer_name: @message_user.name}
+
+                  %p.core-content
+                    = render partial: "shared/messages/#{message_rendering_partial(@message)}"
+
+    = render partial: "shared/mailers/footer"

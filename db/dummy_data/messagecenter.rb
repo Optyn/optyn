@@ -94,11 +94,11 @@ Manager.all.each do |manager|
 end
 
 coupon_messages = [
-    {name: "QCon New York", second_name: "QCon New York Update", type_of_discount: "percentage_off", discount_amount: '10', coupon_code: '1234asdf', fine_print: %Q(#{"This is the fine print" * 100})},
-    {name: "Google Promises", second_name: "Google Promises Not to Sue for Using Their Pledged Patents", type_of_discount: "dollar_off", discount_amount: '10', fine_print: %Q(#{"This is the fine print" * 100})},
-    {name: "GCC 4.8 Completes", second_name: "GCC 4.8 Completes Move to C++", type_of_discount: "percentage_off", discount_amount: '20', coupon_code: '1234asdf', fine_print: %Q(#{"This is the fine print" * 100})},
-    {name: "EclipseCon 2013", second_name: "EclipseCon 2013 Roundup", type_of_discount: "dollar_off", discount_amount: '30', coupon_code: 'asdf', fine_print: %Q(#{"This is the fine print" * 100})},
-    {name: "Release Cadence", second_name: "Release Cadence Report - Survey Launched", type_of_discount: "percentage_off", discount_amount: '10', fine_print: %Q(#{"This is the fine print" * 100})},
+    {name: "QCon New York", content: %Q(#{"This is the first paragraph"  * 100}\n\n#{"This is the second paragraph" * 100}), second_name: "QCon New York Update", type_of_discount: "percentage_off", discount_amount: '10', coupon_code: '1234asdf', fine_print: %Q(#{"This is the fine print" * 100})},
+    {name: "Google Promises", content: %Q(#{"This is the first paragraph"  * 100}\n\n#{"This is the second paragraph" * 100}), second_name: "Google Promises Not to Sue for Using Their Pledged Patents", type_of_discount: "dollar_off", discount_amount: '10', fine_print: %Q(#{"This is the fine print" * 100})},
+    {name: "GCC 4.8 Completes", content: %Q(#{"This is the first paragraph"  * 100}\n\n#{"This is the second paragraph" * 100}), second_name: "GCC 4.8 Completes Move to C++", type_of_discount: "percentage_off", discount_amount: '20', coupon_code: '1234asdf', fine_print: %Q(#{"This is the fine print" * 100})},
+    {name: "EclipseCon 2013", content: %Q(#{"This is the first paragraph"  * 100}\n\n#{"This is the second paragraph" * 100}), second_name: "EclipseCon 2013 Roundup", type_of_discount: "dollar_off", discount_amount: '30', coupon_code: 'asdf', fine_print: %Q(#{"This is the fine print" * 100})},
+    {name: "Release Cadence", content: %Q(#{"This is the first paragraph"  * 100}\n\n#{"This is the second paragraph" * 100}), second_name: "Release Cadence Report - Survey Launched", type_of_discount: "percentage_off", discount_amount: '10', fine_print: %Q(#{"This is the fine print" * 100})},
 ]
 
 Manager.all.each do |manager|

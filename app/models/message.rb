@@ -1,3 +1,5 @@
+require 'messagecenter/process_manager'
+
 class Message < ActiveRecord::Base
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
@@ -15,6 +17,8 @@ class Message < ActiveRecord::Base
   SURVEY_FIELD_TEMPLATE_TYPE = "survey_message"
   PER_PAGE = 50
   PAGE = 1
+  MESSAGE_BATCH_SEND_NAME = "message_batch_send.pid"
+  FORWARD_MESSAGE_BATCH_SEND_NAME = "forward_message_batch_send.pid"
 
   before_create :assign_uuid
 
@@ -26,6 +30,8 @@ class Message < ActiveRecord::Base
   scope :for_uuids, ->(uuids) { where(uuid: uuids) }
 
   scope :latest, order("messages.updated_at DESC")
+
+  scope :ready_messages, ->(){where(["messages.send_on < :less_than_a_minute", {less_than_a_minute: 1.minute.since}])}
 
   state_machine :state, :initial => :draft do
 
@@ -124,6 +130,11 @@ class Message < ActiveRecord::Base
     trigger_event(uuids, 'discard')
   end
 
+  def self.batch_send
+    messages = with_state([:queued]).ready_messages
+    execute_send(messages)
+  end
+
   def label_ids(labels=[])
     label_identifiers = message_labels.pluck(:label_id)
     if label_identifiers.blank?
@@ -177,6 +188,22 @@ class Message < ActiveRecord::Base
     :dollar_off == discount_type
   end
 
+  def dispatch(creation_errors=[], process_manager=nil)
+    receiver_ids = fetch_receiver_ids
+    message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
+
+    if message_user_creations.blank?
+      self.deliver
+      ""
+    else
+      message_user_creations
+    end
+  end
+
+  def personalized_subject(message_user)
+    self.subject.gsub("{{Customer Name}}", message_user.name)
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
@@ -185,6 +212,53 @@ class Message < ActiveRecord::Base
         message.send(event.to_s.to_sym)
       end
     end
+  end
+
+  def self.execute_send(messages)
+    process_manager = Messagecenter::ProcessManager.new(
+        :current_pid_file_name => MESSAGE_BATCH_SEND_NAME,
+        :relevant_pid_names => [FORWARD_MESSAGE_BATCH_SEND_NAME],
+        :content => lock_file_content(messages)
+    )
+    unless messages.blank?
+      if process_manager.no_lock_file?
+        process_manager.create_pid_file
+        creation_errors = []
+        processing_errors = []
+
+        #Iterating through the messages and creating message and attachments for individual receivers
+        messages.each do |message|
+          dispatched_message = message.dispatch(creation_errors, process_manager)
+
+          unless dispatched_message.blank?
+            raise dispatched_message.inspect
+            processing_errors << dispatched_message
+            break
+          end
+        end
+
+        unless processing_errors.blank?
+          puts "Processing Errors:"
+          puts(processing_errors.inspect)
+          MessageNotifier.deliver_error_notifications(processing_errors.inspect)
+        end
+        MessageNotifier.deliver_error_notifications(creation_errors.join("\n")) unless creation_errors.blank?
+        process_manager.delete_pid_file
+      else
+        puts "In the else condition"
+        error_message = process_manager.relevant_existing_process_info
+        puts(error_message) unless error_message.blank?
+      end
+    end
+  end
+
+  def self.lock_file_content(messages)
+    %Q{
+        ACTION:'message.batch_send'
+        PID:#{Process.pid}
+        MESSAGE:'sending messages with ids #{messages.collect(&:id).join(', ')}'
+        TIME:#{Time.now}
+    }
   end
 
   def build_new_message_labels(identifiers)
@@ -259,14 +333,22 @@ class Message < ActiveRecord::Base
   def validate_date_time(attr_name, attr_name_message)
     unless self.send(attr_name.to_sym).blank?
       begin
-        Date.parse(self.send(attr_name.to_sym))
+        Date.parse(self.send(attr_name.to_sym).to_s)
       rescue
-        errors.add(:base, "#{attr_name_message} is an invalid date")
+        errors.add(:base, "#{attr_name} is invalid")
       end
     end
   end
 
   def assign_uuid
     self.uuid = UUIDTools::UUID.random_create.to_s.gsub(/[-]/, "")
+  end
+
+  def fetch_receiver_ids
+    labels_for_message = labels
+
+    return shop.users.collect(&:id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
+
+    labels.collect(&:user_labels).collect(&:user_id)
   end
 end

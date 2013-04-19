@@ -89,6 +89,10 @@ Business.create(:name => "Transportation")
 Permission.create!(:name => "name")
 Permission.create!(:name => "email")
 
+#Add Message Folder inbox, deleted etc.
+MessageFolder.create(:name => "Inbox")
+MessageFolder.create(:name => "Deleted")
+
 #Add some dummy data in the development mode.
 if Rails.env.development?
   dev_data = "#{File.dirname(__FILE__)}/dummy_data/dev_seed.rb"
