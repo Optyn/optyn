@@ -349,6 +349,6 @@ class Message < ActiveRecord::Base
 
     return shop.users.collect(&:id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
 
-    labels.collect(&:user_labels).collect(&:user_id)
+    labels.collect(&:user_labels).flatten.collect(&:user_id)
   end
 end
