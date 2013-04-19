@@ -31,7 +31,7 @@ class ConnectionsController < BaseController
 				end
 			end			
 		rescue		
-			render :json =>{:success=>false,:error_message=>"Something went wrong"}
+			render :json =>{:success=>false,:error_message=>"Oops, Something went wrong."}
 		end	
 	end
 end
