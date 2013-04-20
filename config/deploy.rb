@@ -32,6 +32,9 @@ set :deploy_via, :remote_cache
 #set the reque workers add other queues here...
 set :workers, { "devise_queue" => 1 }
 
+#set the lock file while deploying so that messagecenter tasks and deployments don't run parallel
+set :lock_file_path, "#{shared_path}/pids"
+set :lock_file_name, 'deployment.pid'
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -44,11 +47,13 @@ set :workers, { "devise_queue" => 1 }
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
+before 'deploy:update_code', 'messenger:lock'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:web:enable"
+after "deploy:restart", "messenger:unlock"
 after "deploy", "deploy:cleanup"
 #after "deploy:create_symlink", "whenever"
 
@@ -141,6 +146,24 @@ namespace :deploy do
 
     task :enable, :roles => :web, :except => { :no_release => true } do
       run "rm #{shared_path}/system/maintenance.html"
+    end
+  end
+
+  namespace :messenger do
+    #task create a lock file.
+    task :lock, :roles => :messenger, :only => {:primary => true} do
+      msg = %Q{
+      ACTION:deployment
+      PID:#{Process.pid}
+      MESSAGE:'Running Deployment'
+      TIME:#{Time.now}
+      }
+      put msg, "#{lock_file_path}/#{lock_file_name}", :mode => 0644
+    end
+
+    #task delete lock file.
+    task :unlock, :roles => :messenger, :only => {:primary => true} do
+      run "rm #{shared_path}/pids/#{lock_file_name}"
     end
   end
 end
