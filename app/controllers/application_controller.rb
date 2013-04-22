@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to (:back), :alert => exception.message
+  end
+
   helper_method :is_shop_local_and_active?
 
   alias_method :manager_signed_in?, :merchants_manager_signed_in?
@@ -62,11 +66,11 @@ class ApplicationController < ActionController::Base
     if session[:user_return_to].present?
       return session[:user_return_to]
     end
-   
-
 
     flash[:notice] = "Signed in successfully"
-    if current_user.zip_prompted?
+    if current_admin
+      '/admin'
+    elsif current_user.zip_prompted?
       connections_path
     else
       new_user_zip_path

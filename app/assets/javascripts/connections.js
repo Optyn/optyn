@@ -19,14 +19,14 @@ $(document).ready(function(){
 		    	{
 		    		$('#all_connections_table tbody:last').append($(self).parent().parent());
 		      	$(self).parent().parent().remove();
-		      	$(".flash_message_disconnected").text("You unfollowed " + shopName);
+		      	$(".flash_message_disconnected").text("You unfollowed " + shopName + ". You can always re-activate the connection.");
 		      	$('.alert.alert-error.flash_message_disconnected').show();
 		    	}
 		    else 
 		    	if(data.followed == true)
 		    		{$('#my_connections_table tbody:last').append($(self).parent().parent());
 		    	  $(self).parent().parent().remove();
-		    		$(".flash_message_connected").text("You are now connected to " + shopName);}
+		    		$(".flash_message_connected").text("Wohoo. You are now connected to " + shopName);}
 		    		$('.alert.alert-success.flash_message_connected').show();
 		 	}
 		});	
