@@ -6,5 +6,7 @@ class CreateMessageEmailAuditors < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :message_email_auditors, :message_user_id
   end
 end
