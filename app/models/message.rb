@@ -348,8 +348,9 @@ class Message < ActiveRecord::Base
   def fetch_receiver_ids
     labels_for_message = labels
 
-    return shop.users.collect(&:id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
+    return shop.connections.active.collect(&:user_id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
 
-    labels.collect(&:user_labels).flatten.collect(&:user_id)
+    label_user_ids = labels.collect(&:user_labels).flatten.collect(&:user_id)
+    Connection.for_users(label_user_ids).active.collect(&:user_id)
   end
 end

@@ -12,6 +12,8 @@ class Connection < ActiveRecord::Base
 
   scope :ordered_by_shop_name, order("shops.name ASC")
 
+  scope :for_users, ->(user_identifiers){where(user_id: user_identifiers)}
+
   def toggle_connection
   	if self.active
   		self.active = false
