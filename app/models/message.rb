@@ -31,7 +31,7 @@ class Message < ActiveRecord::Base
 
   scope :latest, order("messages.updated_at DESC")
 
-  scope :ready_messages, ->(){where(["messages.send_on < :less_than_a_minute", {less_than_a_minute: 1.minute.since}])}
+  scope :ready_messages, ->() { where(["messages.send_on < :less_than_a_minute", {less_than_a_minute: 1.minute.since}]) }
 
   state_machine :state, :initial => :draft do
 
@@ -238,16 +238,17 @@ class Message < ActiveRecord::Base
         end
 
         unless processing_errors.blank?
-          puts "Processing Errors:"
-          puts(processing_errors.inspect)
-          MessageNotifier.deliver_error_notifications(processing_errors.inspect)
+          MessageMailer.error_notification(processing_errors.inspect).deliver
         end
-        MessageNotifier.deliver_error_notifications(creation_errors.join("\n")) unless creation_errors.blank?
+
+        unless creation_errors.blank?
+          MessageMailer.error_notification(creation_errors.join("\n")).deliver
+        end
+
         process_manager.delete_pid_file
       else
-        puts "In the else condition"
         error_message = process_manager.relevant_existing_process_info
-        puts(error_message) unless error_message.blank?
+        MessageMailer.error_notification(error_message).deliver
       end
     end
   end
