@@ -35,13 +35,12 @@ span3 .menuleft {
   padding-bottom: 2px;
   padding-top: 2px;
 }
-.merchant-menu > li > img {
-  float: left;
-  padding-right: 10px;
-}
 .merchant-menu > li > a {
   color: #7d8b8f;
   text-decoration: none;
+}
+.merchant-menu > li > a > img {
+  padding-right: 10px;
 }
 .merchant-menu > li > a:hover {
   color: #ffffff;

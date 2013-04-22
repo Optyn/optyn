@@ -3,50 +3,66 @@
     %li.menu-header Hello Alen!
     %hr
     %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      %a.active{:href => "#"} My Dashboard
+      %a.active{:href => "merchants/dashboard"} 
+        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
+        My Dashboard
     %li
-      %img{:src => "/assets/menu_icon_settings.png", :alt => "Dashboard"}
-      = link_to "Edit personal information", edit_merchants_manager_registration_path if merchants_manager_signed_in?
+      %a{:href => "connections"}
+        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Connections"}
+        My Campaigns
+    - if merchants_manager_signed_in?
+      %li
+        %a{:href => edit_merchants_manager_registration_path}
+          %img{:src => "/assets/menu_icon_settings.png", :alt => "Edit Personal Info"}
+          Edit Personal Information
     - if !is_shop_local_and_active?
       %li
-        %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Dashboard"}
-        = link_to "Account Page", merchants_upgrade_path 
-      
+        %a{:href => merchants_upgrade_path}
+          %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Upgrade"}
+          Account Page 
     - if is_shop_local_and_active?      
       %li
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-        = link_to "Edit billing information", merchants_edit_billing_info_path() 
+        %a{:href => merchants_edit_billing_info_path}
+          %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Billing"}
+          Edit billing information
+    - if manager_signed_in?
+      %li
+        %a{:href => merchants_managers_list_path}
+          %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Managers"}
+          Managers List
+    - if is_shop_local?(current_shop)
+      %li
+        %a{:href => merchants_locations_path}
+          %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Your Locations"}
+          Your Locations
     %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      = link_to "Add location", new_merchants_location_path if is_shop_local?(current_shop)
+      %a{:href => merchants_shop_path}
+        %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Your Shop"}
+        Your Shop
     %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      = link_to "Managers List", merchants_managers_list_path if manager_signed_in?
+      %a{:href => edit_merchants_app_path}
+        %img{:src => "/assets/menu_icon_connections.png", :alt => "Your API Button"}
+        Your API Button
     %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      = link_to "Your Locations", merchants_locations_path if is_shop_local?(current_shop)
+      %a{:href => merchants_survey_path}
+        %img{:src => "/assets/menu_icon_campaigns.png", :alt => "Surveys"}
+        Customer Segmentation
     %li
-      %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Dashboard"}
-      = link_to "Your Shop", merchants_shop_path()
+      %a{:href => merchants_survey_survey_answers_path}
+        %img{:src => "/assets/menu_icon_messages.png", :alt => "Segmentation"}
+        Customer Answers
     %li
-      %img{:src => "/assets/menu_icon_connections.png", :alt => "Dashboard"}
-      = link_to "Your API Button", edit_merchants_app_path if is_shop_local?(current_shop)
+      %a{:href => "#", :alt => "My Campaigns"} 
+        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Campaigns"}
+        My Campaigns
     %li
-      %img{:src => "/assets/menu_icon_campaigns.png", :alt => "Dashboard"}
-      = link_to "Customer Segmentation", merchants_survey_path
+      %a{:href => "#", :alt => "My Messages"}
+        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Messages"}
+        My Messages
     %li
-      %img{:src => "/assets/menu_icon_messages.png", :alt => "Dashboard"}
-      = link_to "Customer Answers", merchants_survey_survey_answers_path
+      %a{:href => "#", :alt => "My Settings"}
+        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Settings"}
+        My Settings
     %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      %a{:href => "#", :alt => "My Campaigns"} My Campaigns
-    %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      %a{:href => "#", :alt => "My Messages"} My Messages
-    %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
-      %a{:href => "#", :alt => "My Settings"} My Settings
-    %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
+      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)

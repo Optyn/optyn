@@ -6,15 +6,18 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
   before_filter :require_customer_logged_out
   
   def new
-    session[:omniauth_manager]=true
-    session[:omniauth_user]=nil
-    @shop=Shop.new
+    session[:omniauth_manager] = true
+    session[:omniauth_user] = nil
+    @shop = Shop.new
     @shop.managers.build
   end
 
   def create 
     @shop = Shop.new(params[:shop_name])
-    
+
+    @manager = @shop.managers.first
+    @manager.skip_password = true if params[:auth_id].present? && params[:auth_provider].present?
+
     if !@shop.shop_already_exists? && @shop.save
       @shop.update_manager
       @shop.managers.first.create_authentication(params[:auth_id], params[:auth_provider]) if params[:auth_id].present?

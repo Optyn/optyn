@@ -3,7 +3,7 @@ class Merchants::LocationsController < Merchants::BaseController
   skip_before_filter :active_subscription?, :only => [:index]
   before_filter :is_current_manager_owner?, :only =>[:new]
   def index
-    @locations= current_shop.locations
+    @locations = current_shop.locations
   end
 
   def new
@@ -15,7 +15,7 @@ class Merchants::LocationsController < Merchants::BaseController
 
     if @location.save
       Resque.enqueue(GeoFinder, @location.id)
-      flash[:notice]="Location added successfully"
+      flash[:notice] = "Location added successfully"
       redirect_to merchants_locations_path
     else
       render 'new'
@@ -30,7 +30,7 @@ class Merchants::LocationsController < Merchants::BaseController
   def update 
     @location = current_shop.locations.find(params[:id])
     if @location.update_attributes(params[:location])
-      flash[:notice]="Location updated successfully"
+      flash[:notice] = "Location updated successfully"
       redirect_to merchants_locations_path
     else
       render 'edit'
@@ -40,8 +40,8 @@ class Merchants::LocationsController < Merchants::BaseController
   def destroy
     @location = current_shop.locations.find(params[:id])
     @location.destroy
-    flash[:notice]="Location removed successfully"
-    redirect_to root_path
+    flash[:notice] = "Location removed successfully"
+    redirect_to merchants_locations_path
   end
 
 

@@ -4,16 +4,18 @@ class Merchants::AppsController < Merchants::BaseController
 
 	helper_method :current_shop
 
+  REDIRECTION_URI_FLASH = "You have an incorrect redirection url. Are you possibly missing the protocol http:// or https://?"
+
 	def new
 		@application = current_shop.oauth_application
 	end
 
 	def create
-		if current_shop.generate_oauth_token(params[:redirect_uri])
+		 current_shop.generate_oauth_token(params[:redirect_uri])
       return redirect_to merchants_app_path
-    end
 
-    flash[:error] = "Please enter the appropriate redirection url"
+  rescue
+    flash[:error] = REDIRECTION_URI_FLASH
     render 'new'
 	end
 
@@ -21,16 +23,16 @@ class Merchants::AppsController < Merchants::BaseController
 		@application = current_shop.oauth_application
 	end
 
-	def edit 
+	def edit
 		@application = current_shop.oauth_application
 	end
 
 	def update
-		if current_shop.generate_oauth_token(params[:redirect_uri], "true" == params[:reset])
-      return redirect_to merchants_app_path
-    end
-    flash[:error] = "Please enter the appropriate redirection url"
-    render 'new'
+	  current_shop.generate_oauth_token(params[:redirect_uri], "true" == params[:reset])
+    return redirect_to merchants_app_path
+  rescue
+    flash[:error] = REDIRECTION_URI_FLASH
+    render 'edit'
 	end
 
 	private

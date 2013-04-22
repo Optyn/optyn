@@ -33,11 +33,18 @@ class Shop < ActiveRecord::Base
 
   scope :fetch_same_identifier, ->(shop_id, q) { where(["shops.id <> :shop_id AND shops.identifier LIKE :q", {shop_id: shop_id, q: q}]) }
 
+  scope :disconnected, ->(connected_ids){where(["shops.id NOT IN (:exisiting_ids)", exisiting_ids: connected_ids])}
+
   after_create :create_dummy_survey
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
   def self.by_app_id(app_id)
     for_app_id(app_id).first
+  end
+
+  def self.disconnected_connections(connected_ids)
+    return all if connected_ids.blank?
+    disconnected(connected_ids) 
   end
 
   def shop_already_exists?
@@ -69,10 +76,6 @@ class Shop < ActiveRecord::Base
   end
 
   def generate_oauth_token(redirect_uri, force=false)
-    unless redirect_uri.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
-      return false
-    end
-
     app = nil
     if force
       oauth_application.destroy
@@ -82,7 +85,7 @@ class Shop < ActiveRecord::Base
     app = self.oauth_application
     if app.present?
       app.redirect_uri = redirect_uri
-      app.save
+      app.save!
     else
       generate_application(redirect_uri)
     end
