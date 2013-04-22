@@ -7,6 +7,6 @@ class SesEmailSender
     message = message_user.message
 
     MessageMailer.send_announcement(message, message_user).deliver
-    message_email_auditor.destroy
+    message_email_auditor.update_attribute(:delivered, true)
   end
 end
