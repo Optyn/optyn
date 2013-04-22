@@ -18,7 +18,8 @@ Optyn::Application.routes.draw do
   match 'contact' => 'main#contact', :as => :contact
   match 'terms' => 'main#terms', :as => :terms
   match 'privacy' => 'main#privacy', :as => :privacy
-  match 'danacafe' => 'main#danacafe' 
+  match 'danacafe' => 'main#danacafe'
+  match 'old_index' =>'main#old_index' 
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
