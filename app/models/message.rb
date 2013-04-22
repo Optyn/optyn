@@ -77,6 +77,10 @@ class Message < ActiveRecord::Base
       message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST")
     end
 
+    after_transition any => :draft, :do => :replenish_draft_count
+
+    after_transition any => :queued, :do => :replenish_draft_and_queued_count
+
     state :draft do
       def save(options={})
         super(validate: false)
@@ -352,5 +356,16 @@ class Message < ActiveRecord::Base
 
     label_user_ids = labels.collect(&:user_labels).flatten.collect(&:user_id)
     Connection.for_users(label_user_ids).active.collect(&:user_id)
+  end
+
+  def replenish_draft_count
+    messager_owner = self.manager
+    Message.cached_drafts_count(messager_owner, true)
+  end
+
+  def replenish_draft_and_queued_count
+    message_owner = self.manager
+    Message.cached_drafts_count(message_owner, true)
+    Message.cached_queued_count(message_owner, true)
   end
 end
