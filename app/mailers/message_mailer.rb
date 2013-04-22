@@ -1,5 +1,5 @@
 class MessageMailer < ActionMailer::Base
-  default from: '"Gaurav Gaglani" <ggaglani@idyllic-software.com>'
+  default from: '"Services" <services@optyn.com>'
   helper "merchants/messages"
 
   def send_announcement(message, message_user)
