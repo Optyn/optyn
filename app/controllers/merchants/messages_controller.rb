@@ -2,7 +2,12 @@ class Merchants::MessagesController < Merchants::BaseController
   include Merchants::MessageCounter
 
   before_filter :populate_message_type, :populate_labels, only: [:new, :create, :edit, :update]
-  before_filter :register_close_message_action, only: [:queued, :drafts, :sent, :trash]
+  before_filter :register_close_message_action, :get_pagination_data, only: [:queued, :drafts, :sent, :trash]
+  before_filter :show_my_messages_only, only: [:show]
+  before_filter :message_editable?, only: [:edit, :update]
+  before_filter :message_showable?, only: [:show]
+
+  helper_method :registered_action, :registered_action_location
 
   def types
     #Do Nothing
@@ -135,6 +140,36 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def registered_action_location
-    eval("#{registered_action}_messages_path(:page => #{@page || 1})")
+    eval("#{registered_action}_merchants_messages_path(:page => #{@page || 1})")
+  end
+
+  def show_my_messages_only
+    @message = Message.find_by_uuid(params[:id])
+    @message_manager = @message.manager(current_user)
+    if @message_manager != current_manager
+      redirect_to(inbox_messages_path)
+      return false
+    end
+    true
+  end
+
+  def message_editable?
+    @message = Message.find_by_uuid(params[:id])
+
+    if !current_manager == @message.manager || !@message.editable_state?
+      redirect_to merchants_message_path(@message.uuid)
+    end
+  end
+
+  def message_showable?
+    @message = Message.find_by_uuid(params[:id])
+    unless @message.showable?
+      redirect_to edit_merchants_message_path(params[:id])
+    end
+  end
+
+  def get_pagination_data
+    @page = [1, params[:page].to_i].max
+    @per_page = session[:per_page]
   end
 end

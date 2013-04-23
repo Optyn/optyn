@@ -139,6 +139,18 @@ class Message < ActiveRecord::Base
     execute_send(messages)
   end
 
+  def editable_state?
+    draft? ||  queued_editable?
+  end
+
+  def queued_editable?
+    queued? && send_on > 1.hour.since
+  end
+
+  def showable?
+    !draft?
+  end
+
   def label_ids(labels=[])
     label_identifiers = message_labels.pluck(:label_id)
     if label_identifiers.blank?
