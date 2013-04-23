@@ -11,9 +11,6 @@
       %div
         Here's a list of all your connections. Click on 'More Info' to learn more about each customer.
         %br
-        Download:
-        =# link_to "CSV", merchants_connections_path(format: "csv")
-        %br
       %table.table.table-striped
         %thead
           %tr
@@ -23,7 +20,7 @@
             %th Permission
             %th Details
         %tbody
-        - @connected_user.each_with_index do |user, index|
+        - current_shop.users.each_with_index do |user, index|
           %tr
             %td= index + 1
             %td
