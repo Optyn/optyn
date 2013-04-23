@@ -216,6 +216,7 @@ class Message < ActiveRecord::Base
 
     if message_user_creations.blank?
       self.deliver
+      replenish_draft_and_queued_count
       ""
     else
       message_user_creations
