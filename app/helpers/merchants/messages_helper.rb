@@ -67,7 +67,7 @@ module Merchants::MessagesHelper
                           "Hello"
                       end
 
-    greeting_suffix = message.in_preview_mode?(preview) || ('inbox' != registered_action) ? "{{Customer Name}}" : customer_name
+    greeting_suffix = message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : customer_name
 
     "#{greeting_prefix} #{greeting_suffix},"
   end
