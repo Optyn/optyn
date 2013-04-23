@@ -66,7 +66,8 @@ module Merchants::MessagesHelper
                         else
                           "Hello"
                       end
-    greeting_suffix = message.in_preview_mode?(preview) ? "{{Customer Name}}" : customer_name
+
+    greeting_suffix = message.in_preview_mode?(preview) || ('inbox' != registered_action) ? "{{Customer Name}}" : customer_name
 
     "#{greeting_prefix} #{greeting_suffix},"
   end
@@ -121,8 +122,11 @@ module Merchants::MessagesHelper
 
   def message_menu_highlight_class(highlight_actions, link_name="")
     highlight_class = "menu-header"
+    if highlight_actions.include?(action_name)
+      return highlight_class
+    end
 
-    return highlight_class if highlight_actions.include?(action_name)
+    return highlight_class if !["new", "edit", "create", "update", "types"].include?(action_name) && registered_action == link_name.to_s.gsub("&nbsp;", "").strip.downcase
   end
 
   def message_detail_date(message)
