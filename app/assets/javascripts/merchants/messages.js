@@ -11,7 +11,7 @@ function MerchantMessage() {
             this.hookDateTimePicker();
         }
 
-        if ($('#messages_collection_container')) {
+        if ($('#messages_collection_container').length) {
             this.hookCollectionSubmission();
             this.hookCheckUncheckAll();
             this.hookAllAutoCheckUncheckSelectAll();
@@ -43,12 +43,13 @@ function MerchantMessage() {
     };
 
     this.hookCollectionSubmission = function () {
-        $('#messages_collection_container .collection-action').click(function () {
+        $('.collection-action').click(function () {
             var checkboxValues = new Array();
 
             $('.message-list').find('input.real:checked').each(function () {
                 checkboxValues.push($(this).val());
             });
+
 
             if (checkboxValues.length > 0) {
                 $('#messages_collection_form').prop('action', $('#' + $(this).prop('name') + '_link').val());
@@ -59,26 +60,31 @@ function MerchantMessage() {
         });
     };
 
-    this.hookCheckUncheckAll = function(){
-        $('.message-list .select-all').click(function(){
-            if($(this).is(':checked')){
-                $('.message-list .real').prop('checked', true);
-            }else{
-                $('.message-list .real').prop('checked', false);
-            }
+    this.hookCheckUncheckAll = function () {
+        $('.message-list .select-all').click(function () {
+            var $cbs = $('.message-list .real');
+            $cbs.each(function (index, element) {
+                if (!$(element).prop('disabled')) {
+                    if (!$(element).is(':checked')) {
+                        $(element).prop('checked', true);
+                    } else {
+                        $(element).prop('checked', false);
+                    }
+                }
+            });
         });
     };
 
-    this.hookAllAutoCheckUncheckSelectAll = function(){
-        $('.message-list .real').click(function(){
+    this.hookAllAutoCheckUncheckSelectAll = function () {
+        $('.message-list .real').click(function () {
             var $selectAll = $('.message-list .select-all');
             $selectAll.prop('checked', false);
         })
     };
 
-    this.hookCellClick = function(){
-        $('.message-list tr td.show-link').click(function(){
-           var link = $(this).parents('tr').find('td.show-link-address').text();
+    this.hookCellClick = function () {
+        $('.message-list tr td.show-link').click(function () {
+            var link = $(this).parents('tr').find('td.show-link-address').text();
             window.location = link;
         });
     };

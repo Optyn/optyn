@@ -1,8 +1,17 @@
+#messages_collection_container.row.text-center
+  = render partial: "merchants/messages/collection_form"
+
+.display-none
+  .message-list
+    = check_box_tag(:message_id, @message.uuid, true, class: 'real')
+
 .row
   %h2 &nbsp;
   = render partial: "merchants/messages/message_menu"
 
   .span7
+    = render partial: 'shared/messages/show_actions'
+
     %h4
       = @message.subject
     %hr/
