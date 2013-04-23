@@ -77,6 +77,12 @@ class Message < ActiveRecord::Base
       message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST")
     end
 
+    before_transition any => :queued do |message|
+      message.subject = message.send(:canned_subject)
+      message.from = message.send(:canned_from)
+    end
+
+
     after_transition any => :draft, :do => :replenish_draft_count
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
