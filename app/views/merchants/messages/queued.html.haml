@@ -30,7 +30,7 @@
           - @messages.each do |message|
             %tr
               %td
-                = check_box_tag :uuid, message.uuid, false, class: 'real'
+                = check_box_tag :uuid, message.uuid, false, {class: 'real'}.merge(message_queued_disabled(message))
               %td.show-link
                 = message_type_title(message)
               %td.show-link

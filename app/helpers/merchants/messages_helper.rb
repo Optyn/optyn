@@ -141,4 +141,8 @@ module Merchants::MessagesHelper
   rescue
     ""
   end
+
+  def message_queued_disabled(message)
+    message.queued_editable? ? {} : {disabled: 'disabled'}
+  end
 end
