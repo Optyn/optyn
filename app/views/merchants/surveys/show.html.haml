@@ -1,14 +1,15 @@
-#box_sign
+#title_header
+  %h3
+    Customer Surveys + Segmentation
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
   .container
-    %span4
-      %h2 Your Account
-      = render partial: "merchants/shared/menu"
+    = render partial: "merchants/shared/menu"
 
-    %div.span8
+    .span8
       = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
-
-      %h1
-        Customer segmentation questionaire
 
       %div
         = label_tag :title, "Title:", class: 'pull-left'

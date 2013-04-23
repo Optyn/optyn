@@ -49,11 +49,11 @@ function Shop() {
                 },
                 success: function (data) {
                     $('#loading').addClass('success');
-                    $('#loading .text').text('Available');
+                    $('#loading .text').text('Your ID is Available');
                 },
                 error: function () {
                     $('#loading').addClass('error');
-                    $('#loading .text').text('Unavailable');
+                    $('#loading .text').text('Your ID is Unavailable. Please choose another.');
                 }
             });
         }

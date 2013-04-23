@@ -5,7 +5,7 @@ class ConnectionsController < BaseController
 	end
 
 	def make
-		@shops = Shop.disconnected(current_user.active_shop_ids) 
+    @shops = Shop.disconnected(current_user.active_shop_ids)
 	end
 
 	def add_connection
@@ -24,8 +24,8 @@ class ConnectionsController < BaseController
 					@connection = current_user.connections.new(:shop_id=>@shop.id)
 					if @connection.save
 						followed=@connection.active
-						render :json =>{:success=>true,:success_text=>"Following",:followed=>followed}
-					else
+            render :json =>{:success=>true,:success_text=>"Following",:followed=>followed}
+          else
 						render :json =>{:success=>false,:success_text=>"Opt In",:error_message=>"Connection failed"}
 					end	
 				end

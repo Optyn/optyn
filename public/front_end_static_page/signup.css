@@ -60,14 +60,6 @@
     margin-bottom: 16px;
     width: 95%;
 }
-#box_sign .box .form input[type="submit"]{
-	border-color: #CCCCCC;
-    border-radius: 7px 7px 7px 7px;
-    color: #394350;
-    font-size: 16px;
-    font-weight: 900;
-    margin-top: 34px;
-}
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
