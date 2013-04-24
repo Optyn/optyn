@@ -6,6 +6,8 @@ class Message < ActiveRecord::Base
   has_many :labels, through: :message_labels
   has_many :message_users, dependent: :destroy
 
+  attr_accessor :unread
+
   attr_accessible :label_ids, :name, :second_name, :send_immediately
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]

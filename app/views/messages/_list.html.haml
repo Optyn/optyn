@@ -9,7 +9,7 @@
   %tbody
   - if messages.present?
     - messages.each do |message|
-      %tr
+      %tr{class: mark_message_unread_if(message)}
         %td= check_box_tag(:uuid, message.uuid, false, class: 'real')
 
         %td= message_shop_logo(message)

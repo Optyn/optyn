@@ -149,4 +149,8 @@ module Merchants::MessagesHelper
     image_name = message.shop.logo_img? ? message.shop.logo_img.url : 'message_no_shop_logo.gif'
     image_tag(image_name, alt: message.shop_name, class: 'message-shop-logo')
   end
+
+  def mark_message_unread_if(message)
+    message.unread ? 'message-unread' : ''
+  end
 end

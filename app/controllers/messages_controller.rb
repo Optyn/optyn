@@ -9,6 +9,7 @@ class MessagesController < BaseController
 
   def inbox
     @inbox_message_users = MessageUser.inbox_messages(current_user, @page)
+    set_unread_messages(@inbox_message_users)
     @inbox_messages = @inbox_message_users.collect(&:message).sort { |message1, message2| message1.send_on == message2.send_on ? message1.id <=> message2.id : message2.send_on <=> message1.send_on }
   end
 
@@ -73,5 +74,13 @@ class MessagesController < BaseController
 
   def registered_action_location
     eval("#{registered_action}_messages_path(:page => #{@page || 1})")
+  end
+
+  def set_unread_messages(message_users)
+    message_users.each do |message_user|
+      unless message_user.is_read
+        message_user.message.unread = true
+      end
+    end
   end
 end
