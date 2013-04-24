@@ -11,6 +11,8 @@
     .span8
       = render partial: "messages/message_menu"
 
+      = render partial: 'shared/messages/pager', locals: {collection: @inbox_message_users}
+
       #messages_collection_container.row.text-center
         = render partial: "shared/messages/collection_form"
 
@@ -21,3 +23,5 @@
           = hidden_field_tag 'move_to_trash_link', move_to_trash_messages_path
 
       = render partial: "messages/list", locals: {messages: @inbox_messages}
+
+      = render partial: 'shared/messages/pager', locals: {collection: @inbox_message_users}

@@ -15,7 +15,7 @@
 
   .span9
 
-    = render partial: 'merchants/messages/pager'
+    = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
     %table.table.table-striped.table-condensed.message-list
       %thead
@@ -47,4 +47,4 @@
             %td{colspan: '4'}
               .text-center No Trash messages right now
 
-    = render partial: 'merchants/messages/pager'
+    = render partial: 'shared/messages/pager', locals: {collection: @messages}
