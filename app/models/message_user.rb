@@ -7,6 +7,8 @@ class MessageUser < ActiveRecord::Base
   belongs_to :receiver, class_name: "User", foreign_key: :user_id
   belongs_to :message_folder
 
+  before_create :assign_uuid
+
   attr_accessible :message_id, :user_id, :message_folder_id, :is_read, :email_read, :is_forwarded, :received_at, :added_individually
 
   scope :receivers_folder, ->(folder_id, user_id) { where(receivers_folder_conditions_hash(folder_id, user_id)) }
@@ -17,7 +19,7 @@ class MessageUser < ActiveRecord::Base
 
   scope :for_message_ids, ->(message_ids) { where(message_id: message_ids) }
 
-  scope :for_user_ids, ->(user_ids){ where(user_id: user_ids) }
+  scope :for_user_ids, ->(user_ids) { where(user_id: user_ids) }
 
   def self.inbox_messages(user, page_number=1, per_page=Message::PER_PAGE)
     receivers_folder(MessageFolder.inbox_id, user.id).created_at_descending.include_message.page(page_number).per(per_page)
@@ -72,6 +74,14 @@ class MessageUser < ActiveRecord::Base
     update_all({message_folder_id: MessageFolder.discarded_id}, {message_id: message_ids, user_id: user_ids})
   end
 
+  def self.log_email_read(token)
+    identifier = Base64.urlsafe_decode64(token)
+    message_user_entry = MessageUser.find_by_uuid(identifier)
+    if message_user_entry.present?
+      message_user_entry.update_attribute(:is_read, true)
+    end
+  end
+
   def self.create_message_receiver_entries(message_instance, receiver_ids, creation_errors, process_manager)
     error_message = ""
     deployment_counter = 0
@@ -121,6 +131,10 @@ class MessageUser < ActiveRecord::Base
     user.name
   end
 
+  def encode64_uuid
+    Base64.urlsafe_encode64(self.uuid)
+  end
+
   private
   def self.find_or_generate!(receiver_identifier, message_identifier)
     message_receiver = nil
@@ -143,5 +157,9 @@ class MessageUser < ActiveRecord::Base
 
   def self.unread_conditions_hash
     {:is_read => false}
+  end
+
+  def assign_uuid
+    self.uuid = UUIDTools::UUID.random_create.to_s.gsub(/[-]/, "")
   end
 end

@@ -9,6 +9,7 @@ class CreateMessageUsers < ActiveRecord::Migration
       t.boolean  :is_forwarded,        :default => false
       t.datetime :received_at
       t.boolean  :added_individually,  :default => false
+      t.string :uuid
 
       t.timestamps
     end
@@ -16,5 +17,6 @@ class CreateMessageUsers < ActiveRecord::Migration
     add_index :message_users, [:message_id, :added_individually]
     add_index :message_users, [:message_id, :user_id]
     add_index :message_users, [:user_id, :message_folder_id]
+    add_index :message_users, :uuid, unique: true
   end
 end

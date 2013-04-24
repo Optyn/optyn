@@ -108,7 +108,7 @@ shop_names = ["Dana Cafe",
 
 manager_names.each_with_index do |name, index|
   shop = Shop.create!(:name => shop_names[index], :stype => "local", :identifier => shop_names[index].downcase.gsub(/\s/, ''), :time_zone => 'Eastern Time (US & Canada)')
-  manager  = shop.managers.create(:name => name, :email => "#{name.downcase.gsub(/\s/, "")}@idyllic-software.com", :password => "test1234", :password_confirmation => "test1234")
+  manager = shop.managers.create(:name => name, :email => "#{name.downcase.gsub(/\s/, "")}@idyllic-software.com", :password => "test1234", :password_confirmation => "test1234")
   manager.confirm!
   manager.save!
 end
@@ -160,5 +160,7 @@ users.each_with_index do |user, index|
   end
 end
 
-messagecenter = "#{File.dirname(__FILE__)}/messagecenter.rb"
-eval(IO.read(messagecenter), binding, messagecenter)
+20.times do
+  messagecenter = "#{File.dirname(__FILE__)}/messagecenter.rb"
+  eval(IO.read(messagecenter), binding, messagecenter)
+end

@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "message_email_auditors", ["message_user_id"], :name => "index_message_email_auditors_on_message_user_id"
+
   create_table "message_folders", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -155,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
     t.boolean  "is_forwarded",       :default => false
     t.datetime "received_at"
     t.boolean  "added_individually", :default => false
+    t.string   "uuid"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -162,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
   add_index "message_users", ["message_id", "added_individually"], :name => "index_message_users_on_message_id_and_added_individually"
   add_index "message_users", ["message_id", "user_id"], :name => "index_message_users_on_message_id_and_user_id"
   add_index "message_users", ["user_id", "message_folder_id"], :name => "index_message_users_on_user_id_and_message_folder_id"
+  add_index "message_users", ["uuid"], :name => "index_message_users_on_uuid", :unique => true
 
   create_table "messages", :force => true do |t|
     t.string   "type"
