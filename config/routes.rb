@@ -66,9 +66,22 @@ Optyn::Application.routes.draw do
       get 'make'
     end    
   end
+
   resources :segments do
     member do
       post :save_answers
+    end
+  end
+
+  resources :messages do
+    collection do
+      get :inbox
+      get :saved
+      get :trash
+      put :move_to_trash
+      put :move_to_saved
+      put :move_to_inbox
+      put :discard
     end
   end
 

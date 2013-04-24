@@ -1,0 +1,27 @@
+%table.table.table-condensed.message-list.message-inbox-list
+  %thead
+    %tr
+      %th= check_box_tag :select, '', false, class: 'select-all'
+      %th.text-center{colspan: 2} Merchant
+      %th Subject
+      %th Date
+
+  %tbody
+  - if messages.present?
+    - messages.each do |message|
+      %tr
+        %td= check_box_tag(:uuid, message.uuid, false, class: 'real')
+
+        %td= message_shop_logo(message)
+
+        %td= message.shop_name
+
+        %td.show-link= message.personalized_subject(current_user)
+
+        %td.show-link= message_detail_date(message)
+
+        %td.show-link-address.display-none
+          = message_path(message.uuid)
+  - else
+    %tr
+      %td{colspan: '4'} No messages available

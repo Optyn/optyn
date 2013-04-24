@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
   has_many :labels, through: :message_labels
+  has_many :message_users, dependent: :destroy
 
   attr_accessible :label_ids, :name, :second_name, :send_immediately
 
@@ -32,6 +33,8 @@ class Message < ActiveRecord::Base
   scope :latest, order("messages.updated_at DESC")
 
   scope :ready_messages, ->() { where(["messages.send_on < :less_than_a_minute", {less_than_a_minute: 1.minute.since}]) }
+
+  scope :includes_message_users, includes(:message_users)
 
   state_machine :state, :initial => :draft do
 
@@ -157,6 +160,14 @@ class Message < ActiveRecord::Base
     !draft?
   end
 
+  def shop
+    manager.shop
+  end
+
+  def message_user(user)
+    message_users.find_by_user_id(user.id)
+  end
+
   def label_ids(labels=[])
     label_identifiers = message_labels.pluck(:label_id)
     if label_identifiers.blank?
@@ -224,7 +235,7 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    self.subject.gsub("{{Customer Name}}", message_user.name)
+    self.subject.gsub("{{Customer Name}}", message_user.name) rescue "N/A"
   end
 
   private
@@ -315,10 +326,6 @@ class Message < ActiveRecord::Base
     #reload
   end
 
-
-  def shop
-    manager.shop
-  end
 
   def canned_from
     manager.email_like_from

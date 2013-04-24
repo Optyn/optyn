@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   alias_method :manager_signed_in?, :merchants_manager_signed_in?
   alias_method :current_manager, :current_merchants_manager
 
+  helper_method :manager_signed_in?, :current_manager
+
   private
   def require_manager_logged_out
     if manager_signed_in?

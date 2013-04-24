@@ -120,8 +120,7 @@ module Merchants::MessagesHelper
     #end
   end
 
-  def message_menu_highlight_class(highlight_actions, link_name="")
-    highlight_class = "menu-header"
+  def message_menu_highlight_class(highlight_actions, link_name="", highlight_class="menu-header")
     if highlight_actions.include?(action_name)
       return highlight_class
     end
@@ -144,5 +143,10 @@ module Merchants::MessagesHelper
 
   def message_queued_disabled(message)
     message.queued_editable? ? {} : {disabled: 'disabled'}
+  end
+
+  def message_shop_logo(message)
+    image_name = message.shop.logo_img? ? message.shop.logo_img.url : 'message_no_shop_logo.gif'
+    image_tag(image_name, alt: message.shop_name, class: 'message-shop-logo')
   end
 end

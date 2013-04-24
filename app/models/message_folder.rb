@@ -8,7 +8,7 @@ class MessageFolder < ActiveRecord::Base
   class << self
     class_eval do
       if MessageFolder.table_exists?
-        common_folders = MessageFolder.all(:conditions => {:name => ["Inbox", "Saved", "Deleted"]})
+        common_folders = MessageFolder.all(:conditions => {:name => ["Inbox", "Saved", "Deleted", "Discarded"]})
         common_folders.each do |folder|
           define_method(folder.name.underscore.to_sym) do
             eval("@@#{folder.name.upcase} ||= folder")

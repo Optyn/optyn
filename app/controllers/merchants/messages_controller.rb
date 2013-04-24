@@ -1,13 +1,13 @@
 class Merchants::MessagesController < Merchants::BaseController
-  include Merchants::MessageCounter
+  include Messagecenter::CommonsHelper
 
   before_filter :populate_message_type, :populate_labels, only: [:new, :create, :edit, :update]
-  before_filter :register_close_message_action, :get_pagination_data, only: [:queued, :drafts, :sent, :trash]
   before_filter :show_my_messages_only, only: [:show]
   before_filter :message_editable?, only: [:edit, :update]
   before_filter :message_showable?, only: [:show]
+  before_filter :populate_manager_folder_count
 
-  helper_method :registered_action, :registered_action_location
+  helper_method :registered_action_location
 
   def types
     #Do Nothing
@@ -127,22 +127,6 @@ class Merchants::MessagesController < Merchants::BaseController
     @message.ending = Time.parse(params[:message][:ending]) if params[:message][:ending].present?
   end
 
-  def uuids_from_message_ids
-    params[:message_ids].split(",")
-  end
-
-  def register_close_message_action
-    session[:registered_action] = action_name
-  end
-
-  def registered_action
-    session[:registered_action] || "inbox"
-  end
-
-  def registered_action_location
-    eval("#{registered_action}_merchants_messages_path(:page => #{@page || 1})")
-  end
-
   def show_my_messages_only
     @message = Message.find_by_uuid(params[:id])
     @message_manager = @message.manager(current_user)
@@ -168,8 +152,12 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
-  def get_pagination_data
-    @page = [1, params[:page].to_i].max
-    @per_page = session[:per_page]
+  def populate_manager_folder_count
+    @drafts_count = Message.cached_drafts_count(current_manager)
+    @queued_count = Message.cached_queued_count(current_manager)
+  end
+
+  def registered_action_location
+    eval("#{registered_action}_merchants_messages_path(:page => #{@page || 1})")
   end
 end

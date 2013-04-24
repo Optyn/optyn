@@ -15,6 +15,9 @@ function MerchantMessage() {
             this.hookCollectionSubmission();
             this.hookCheckUncheckAll();
             this.hookAllAutoCheckUncheckSelectAll();
+        }
+
+        if ($('.message-list').length){
             this.hookCellClick();
         }
     };
