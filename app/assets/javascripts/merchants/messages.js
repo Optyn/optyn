@@ -65,10 +65,11 @@ function MerchantMessage() {
 
     this.hookCheckUncheckAll = function () {
         $('.message-list .select-all').click(function () {
+            var isSelectAllChecked = $(this).is(':checked');
             var $cbs = $('.message-list .real');
             $cbs.each(function (index, element) {
                 if (!$(element).prop('disabled')) {
-                    if (!$(element).is(':checked')) {
+                    if (isSelectAllChecked) {
                         $(element).prop('checked', true);
                     } else {
                         $(element).prop('checked', false);
