@@ -20,11 +20,11 @@
             %li
               %a{:href => "pricing"} Pricing
             %li
-              =link_to("Consumer Login", new_user_session_path, class: "btn-header")
+              =link_to("Consumer Login", new_user_session_path, class: "loginBtn")
 
           - unless someone_logged_in?
             %li
-              = link_to("Merchant Login", new_merchants_manager_session_path, class: "btn-header")
+              = link_to("Merchant Login", new_merchants_manager_session_path, class: "loginBtn")
 
           - if merchants_manager_signed_in?    
             = render partial: "layouts/merchant_dropdown"

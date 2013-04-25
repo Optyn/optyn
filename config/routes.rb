@@ -15,6 +15,7 @@ Optyn::Application.routes.draw do
   match 'terms' => 'main#terms'
   match 'privacy' => 'main#privacy'
   match 'danacafe' => 'main#danacafe'
+  match 'thankyou' => 'main#thankyou'
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com")
@@ -25,9 +26,12 @@ Optyn::Application.routes.draw do
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
                                      :sign_up => 'register'
-  }, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :passwords => 'users/passwords'}
+  }, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :passwords => 'users/passwords'} do
+     get  "/users/sessions/cross_domain_app_login" => "sessions#cross_domain_app_login", :as => :cross_domain_app_login
+  end
 
   devise_scope :user do
+      use_doorkeeper
     # Sessions
     post '/login' => 'users/sessions#create', :as => :user_session
     get '/login' => 'users/sessions#new', :as => :new_user_session
@@ -49,6 +53,11 @@ Optyn::Application.routes.draw do
     post '/zips' => 'users/zips#create', :as => :user_zips
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
+
+    get '/cross_domain_login' => 'users/cross_domian_authentication#login', :as => :cross_domain_login
+    get '/shop_profile' => 'users/cross_domian_authentication#shop_profile', :as => :shop_profile
+
+    
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
@@ -129,9 +138,10 @@ Optyn::Application.routes.draw do
 
   end
 
-  use_doorkeeper do
-    controllers :authorizations => 'oauth_authorizations'
-  end
+  use_doorkeeper
+#  do
+#    controllers :authorizations => 'oauth_authorizations'
+#  end
 
 
   #Link to the customer facing side static pages converted to layout with HAML

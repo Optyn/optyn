@@ -1,0 +1,11 @@
+%html
+  %head
+    %title Login into Easy
+    = stylesheet_link_tag   "application", :media => "all"
+  %body{:id => "crossDomain", :style => "padding-top: 0px;"}
+    .navbar-inner
+      .container
+        %p.authenticationMsg Oh No, You aren't Logged in!
+        %a.brand{:href => "/"}
+          %img{:alt => "logo", :src => "/assets/logo.png"}
+    = yield

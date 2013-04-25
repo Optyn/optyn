@@ -66,10 +66,14 @@ class ApplicationController < ActionController::Base
 
 
     flash[:notice] = "Signed in successfully"
-    if current_user.zip_prompted?
-      connections_path
+    if params[:cross_domian_login].blank?
+      if current_user.zip_prompted?
+        connections_path
+      else
+        new_user_zip_path
+      end
     else
-      new_user_zip_path
+      shop_profile_path
     end
   end
 end
