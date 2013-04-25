@@ -11,8 +11,8 @@
       .action-buttons
         = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
         %a.btn{:href => "#"} Your Pricing Plan
-        %a.btn{:href => "#"} Edit Personal Info
-        %a.btn{:href => "#"} View Managers
+        %a.btn{:href => edit_merchants_manager_registration_path} Edit Personal Info
+        %a.btn{:href => merchants_managers_list_path} View Managers
       %p
         %strong Name
         %br
