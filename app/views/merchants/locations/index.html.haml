@@ -23,26 +23,24 @@
             %th State
             %th Manage
         %tbody
+        - unless @locations.blank?
+          - @locations.each_with_index do |location, index|
+            %tr
+              %td
+                = index + 1
+              %td
+                = location.street_address1
+              %td
+                = location.street_address2
+              %td
+                = location.city
+              %td
+                = location.state_name
+              %td
+                = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary'
+                = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger'
+        - else
           %tr
-            %td 1
-            %td 5868 N Lincoln Ave
-            %td Suite 1
-            %td Chicago
-            %td IL
-        - @locations.each_with_index do |location,index|
-          %tr
-            %td
-              = index + 1
-            %td
-              = location.street_address1
-            %td
-              = location.street_address2
-            %td
-              = location.city
-            %td
-              = location.state_name
-            %td
-              = link_to "Edit", edit_merchants_location_path(location)    
-              = "|"
-              = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure?', :method => :delete
+            %td{colspan: 6}
+              No locations added so far
 

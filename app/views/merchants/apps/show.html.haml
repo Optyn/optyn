@@ -1,30 +1,87 @@
-.row
-  .span16
-    %header
-      %h1
-        Application for: 
-        = current_shop.name
-  
-  .span10
-    %h4 Callback url:
-    %p
-      %code{:id => 'callback_url'}
-        = @application.redirect_uri
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8.preview
+      .header
+        %h3
+          Your Optyn button for your 
+          = current_shop.name
+          Website
+        %h6
+          Use this cool tool to generate the Javascript so that you can just plug and play your Optyn button and start getting your customers to optin and grow your Customer Base.
+      .main
+        .span3.customize
+          .header
+            Customize Your Optyn Button
+            %hr
+          .custom
+            .option
+              %input{:type => "radio"}
+                Small Button
+              %input{:type => "radio", :checked => ""}
+                Large Button
+            .option
+              %label.checkbox
+                %input{:type => "checkbox"}
+                  Show Checkmark Icon
+            .option
+              %label.checkbox
+                %input{:type => "checkbox"}
+                  Show Optyn Text
+                %textarea{:rows => "3", :placeholder => "Optyn is awesome."}
+            .option
+              %label.checkbox
+                %input{:type => "checkbox"}
+                  Or Use Custom Optyn Text
+                %textarea{:rows => "3", :placeholder => "Optyn is awesome."}    
+          .refresh
+            %a.btn.refreshbtn{:href => "#"} Refresh Preview
+        .span3.btn-preview
+          .header
+            Optyn Button Preview
+            %hr
+          .optyn-preview
+            %img{:alt => "Dana Cafe", :src => "/assets/optynbtn.png"}
+          .codesnippet
+            %textarea{:id => 'embed_code', :rows => "5", :class => "disabledinput"}
+              = current_shop.embed_code    
+          .btns
+            %a.btn.refreshbtn{:href => "#"} Refresh Preview
+            %a.btn.copybtn{:href => "#"} Copy to Clipboard
+          .need-help
+            Need Help Installing this? Click Here and we will do it for you.
+      .advanced 
+        .title
+          %h3
+            More Advanced Features?
+          .actions
+            = link_to "Edit", edit_merchants_app_path, :class => "btn"
+          %p
+            If you need more advanced stuff, here it is:  
+        %hr
+        .main
+          %h4 Callback url:
+          %p
+            %code{:id => 'callback_url'}
+              = @application.redirect_uri
 
-    %h4 Application Id:
-    %p
-      %code{:id => 'application_id'}
-        = @application.uid
+          %h4 Application Id:
+          %p
+            %code{:id => 'application_id'}
+              = @application.uid
 
-    %h4 Secret:
-    %p
-      %code{:id => 'secret'}
-        = @application.secret
+          %h4 Secret:
+          %p
+            %code{:id => 'secret'}
+              = @application.secret
 
-    %h4 Button Script:
-    %p
-      %code{:id => 'embed_code'}
-        = current_shop.embed_code    
+          %h4 Button Script:
+          %p
+            %code{:id => 'embed_code'}
+              = current_shop.embed_code    
 
-    .actions
-      = link_to "Edit", edit_merchants_app_path, :class => "btn"
+          .actions
+            = link_to "Edit", edit_merchants_app_path, :class => "btn"

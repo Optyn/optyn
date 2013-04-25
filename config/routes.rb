@@ -1,27 +1,32 @@
 Optyn::Application.routes.draw do
 
+  #Admin
+  devise_for :admins , :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   root to: 'main#index'
   match 'connections' => 'connections#index', as: :customers_root
-  match 'merchants' => 'merchants/connections#index', as: :merchants_root
+  match 'merchants' => 'merchants/dashboard#index', as: :merchants_root
 
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
-  match 'about' => 'main#about'
-  match 'faq' => 'main#faq'
-  match 'pricing' => 'main#pricing'
-  match 'merchantfeatures' => 'main#merchantfeatures'
-  match 'consumerfeatures' => 'main#consumerfeatures'
-  match 'contact' => 'main#contact'
-  match 'terms' => 'main#terms'
-  match 'privacy' => 'main#privacy'
+  match 'about' => 'main#about', :as => :about
+  match 'faq' => 'main#faq', :as => :faq
+  match 'pricing' => 'main#pricing', :as => :pricing
+  match 'merchantfeatures' => 'main#merchantfeatures', :as => :merchant_features
+  match 'consumerfeatures' => 'main#consumerfeatures', :as => :consumer_features
+  match 'contact' => 'main#contact', :as => :contact
+  match 'terms' => 'main#terms', :as => :terms
+  match 'privacy' => 'main#privacy', :as => :privacy
   match 'danacafe' => 'main#danacafe'
   match 'thankyou' => 'main#thankyou'
+  match 'old_index' =>'main#old_index' 
 
   # Blog Redirect
-  match "/blog" => redirect("http://blog.optyn.com")
+  match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
 
   # Zendesk Support Desk Redirect
-  match "/support" => redirect("http://support.optyn.com")
+  match "/support" => redirect("http://support.optyn.com"), :as => :support
 
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
@@ -67,6 +72,7 @@ Optyn::Application.routes.draw do
   resources :connections do
     collection do
       post 'add_connection'
+      get 'make'
     end    
   end
   resources :segments do
@@ -104,6 +110,7 @@ Optyn::Application.routes.draw do
     resource :app
     resources :connections
     resources :locations
+    resources :dashboard
 
     resource :shop do
       member do

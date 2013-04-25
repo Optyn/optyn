@@ -7,6 +7,11 @@ module ConnectionsHelper
 			"Opt in"
 		end
 	end
+
+	def connections_tab_class(highlight_action_name)
+		highlight_action_name == action_name ? "active" : ""
+	end
+
 end
 
 

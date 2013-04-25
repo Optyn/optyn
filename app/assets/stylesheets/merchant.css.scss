@@ -1,7 +1,10 @@
+/* All Merchant Account Pages CSS is here */
 #merchants {
   padding-top: 30px;
 }
-
+#merchants .action-buttons{
+  padding-bottom: 20px;
+}
 /* To be Used Later */
 #connections {
   padding-top: 20px;
@@ -13,16 +16,228 @@
 #connections table {
 
 }
-#dashboard {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 0px;
-}
-#dashboard table {
+/* Merchant Edit Pages */
+#edit {
 
 }
+#edit .box_wrapper{
+  margin-left: 0;
+}
+#edit .edit_wrapper p.already{
+  text-align: center;
+  font-style: 15px;
+  color: #454B52;
+}
+#edit .edit_wrapper p.already a{
+  color: #454B52;
+  margin-left: 3px;
+  text-decoration: underline;
+}
+#edit .edit_wrapper .box{
+  background-color: white;
+  border: 1px solid #CCC;
+  border-radius: 4px 4px 4px 4px;
+  float: none;
+  padding-bottom: 26px;
+  margin: 50px auto 0;
+  width: 80%;
+  margin-bottom: 25px;
+  box-shadow: 0px 0px 10px 0px #DDD;
+}
+#edit .box .head{
+  background-color: #F4F4F4;
+    border-bottom: 1px solid #D6D6D6;
+    border-radius: 4px 4px 1px 0;
+    display: inline-block;
+    margin-bottom: 37px;
+    padding: 25px 0 25px;
+    text-align: center;
+    width: 100%;
+}
+#edit .box .head h4{
+  font-weight: normal;
+  color: #373D44;
+  font-size: 21px;
+  margin: 0px;
+}
+#edit form{
+  margin: 0px;
+}
+#edit .box .form{
+  margin: 0 auto;
+  text-align: center;
+  width: 90%;
+}
+#edit .box .form input[type="text"], 
+#edit .box .form input[type="password"]
+{
+  border-color: #DBDBDB #EAEAEA #EAEAEA #DBDBDB;
+    border-left: 1px solid #DBDBDB;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 16px;
+    height: 30px;
+    margin-bottom: 16px;
+    width: 95%;
+}
+/* Update Shop Wrapper */
+#update_shop_wrapper {
+
+}
+#update_shop_wrapper .control-group {
+  padding-bottom: 20px;
+  height: 60px;
+}
+#update_shop_wrapper .control-group .clabel {
+  width: 20%;
+  float: left;
+  height: 50px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+#update_shop_wrapper .control-group .clabel label {
+  padding-top: 10px;
+}
+#update_shop_wrapper .control-group .input-append .add-on,
+#update_shop_wrapper .control-group .input-prepend .add-on {
+  height: 30px;
+  font-size: 12px;
+  line-height: 30px;
+}
+#update_shop_wrapper .control-group .input-append input[type="text"],
+#update_shop_wrapper .control-group .input-prepend input[type="text"] {
+  width: 80%;
+}
+#update_shop_wrapper .control-group .controls {
+  width: 80%;
+  float: right;
+  height: 50px;
+}
+#update_shop_wrapper .control-group .controls .help-block {
+  float: right;
+}
+#update_shop_wrapper .action-buttons {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+  #edit .box{
+    width: 54%;
+  }
+}
+@media (max-width: 979px) {
+  #edit .box{
+    width: 48%;
+  }
+}
+@media (min-width: 980px) {
+  #edit .box{   
+    width: 37%;
+  }
+}
+@media (max-width: 480px) {
+  #edit .box{
+    width: 100%;  
+  }
+}
+/* Large desktop */
+@media (min-width: 1200px) {
+  #edit .box{
+    width: 32.5%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Merchant Dashboard Page */
+#dashboard {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0px;
+}
+#dashboard .header {
+  height: 50px;
+}
+#dashboard .header .maintitle {
+  margin: 0px;
+}
+#dashboard .header .maintitle h3 {
+  margin: 0px;
+  padding-top: 0px;
+  color: #263d45;
+  font-size: 25px;
+  line-height: 27px;
+}
+#dashboard .header .new {
+  float: right;
+}
+#dashboard .header .new .newcampaign {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 36px;
+  line-height: 32px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  font-weight: bold;
+  border: 1px #304d58;
+  float: right;
+}
+#dashboard .header .new .newcampaign img {
+  padding-right: 10px;
+}
+#dashboard .header .newcampaign:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#dashboard .latest {
+  border-radius: 4px;
+  background-color: #7d8f96;
+  height: 50px;
+  margin-top: 10px;
+}
+#dashboard .latest .title {
+  font-size: 18px;
+  color: #fff;
+  line-height: 26px;
+  float: left;
+  padding-left: 20px;
+  vertical-align: middle;
+  padding-top: 10px;
+  font-weight: bold;
+}
+#dashboard .latest .sortby {
+  float: right;
+  color: #fff;
+  vertical-align: middle;
+  padding-top: 12px;
+  padding-right: 20px;
+}
+#dashboard latest .sortby select {
+  border: 0px !important;
+  width: 150px !important;
+}
+#dashboard table a {
+  color: #1791c0 !important;
+}
+#dashboard table a:hover {
+  color: #263d45 !important;
+}
+/* Merchant Settings Page */
 #settings {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -57,6 +272,163 @@
 #messages table {
 
 }
+/* Optyn Button Preview Page */
+#merchants .preview {
+  padding-left: 20px;
+}
+#merchants .preview .header {
+
+}
+#merchants .preview .header h3 {
+  color: #304d58;
+  padding-top: 0px;
+  font-size: 24px;
+  line-height: 24px;
+  margin-top: 0px;
+}
+#merchants .preview .header h6 {
+  color: #304d58;
+  padding-top: 5px;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 0px;
+  font-style: normal;
+}
+#merchants .preview .main {
+  background-color: #FFF;
+  border-radius: 6px;
+  height: 400px;
+  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#merchants .preview .main .header {
+  color: #1791c0;
+  font-weight: bold;
+  font-size: 18px;
+}
+#merchants .preview .main .header hr {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+#merchants .preview .main .customize {
+  width: 320px;
+}
+#merchants .preview .main .customize .custom {
+
+}
+#merchants .preview .main .customize .custom .option {
+  padding-top: 10px;
+  padding-right: 10px;
+}
+#merchants .preview .main .customize .custom .option textarea {
+  width: 95%;
+}
+#merchants .preview .main .customize .refresh {
+  float: right;
+}
+#merchants .preview .main .customize .refresh .refreshbtn {
+  background: #e7eaeb;
+  border-radius: 4px;
+  display: inline-block;
+  height: 20px;
+  line-height: 18px;
+  top: 4px;
+  color: #1791c0;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#merchants .preview .main .customize .refresh .refreshbtn:hover{
+  background: #d6d6d6;
+  text-decoration: none;
+  text-shadow: none;
+}
+#merchants .preview .main .btn-preview {
+  border-left: 1px solid #ececec;
+  width: 320px;
+  padding-left: 30px;
+}
+#merchants .preview .main .btn-preview .optyn-preview {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+#merchants .preview .main .btn-preview .codesnippet {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#merchants .preview .main .btn-preview .codesnippet textarea {
+  width: 95%;
+}
+#merchants .preview .main .btn-preview .btns {
+  float: right;
+}
+#merchants .preview .main .btn-preview .btns .refreshbtn {
+  background: #e7eaeb;
+  border-radius: 4px;
+  display: inline-block;
+  height: 20px;
+  line-height: 18px;
+  top: 4px;
+  color: #1791c0;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#merchants .preview .main .btn-preview .btns .refreshbtn:hover {
+  background: #d6d6d6;
+  text-decoration: none;
+  text-shadow: none;
+}
+#merchants .preview .main .btn-preview .btns .copybtn {
+  background: #86c440;
+  border-radius: 4px;
+  display: inline-block;
+  height: 20px;
+  line-height: 18px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 10px;
+}
+#merchants .preview .main .btn-preview .btns .copybtn:hover {
+  background: #64b905;
+  text-decoration: none;
+  text-shadow: none;
+}
+#merchants .preview .main .btn-preview .need-help {
+  text-align: right;
+  font-size: 10px;
+  margin-top: 60px;
+}
+#merchants .preview .advanced {
+  padding-top: 20px;
+}
+#merchants .preview .advanced .title {
+
+}
+#merchants .preview .advanced .title h3 {
+
+}
+#merchants .preview .advanced .actions {
+  float: right
+}
 /* Public Merchant Page - i.e. /danacafe" */
 #merchant_page {
   padding-top: 30px;
@@ -72,11 +444,14 @@
 #merchant_page .titlebar .title {
   vertical-align: middle;
   color: #304d58;
-  font-size: 22px;
+  font-size: 28px;
   padding-top: 15px;
 }
 #merchant_page .titlebar .optyn {
-  
+  vertical-align: middle;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 36px;  
 }
 #merchant_page .titlebar .optyn img {
   float: right;
@@ -89,10 +464,62 @@
   border-radius: 6px;
   padding-top: 30px;
   padding-bottom: 30px;
+  margin-left: 0px;
 }
+#merchant_page .mainbody .title {
 
+}
+#merchant_page .mainbody .title h3 {
+  padding-top: 0px;
+  color: #304d58;
+  margin-top: 0px;
+  font-size: 20px;
+  line-height: 20px;
+}
+#merchant_page .mainbody .details {
+  width: 330px;
+  border-right: 1px solid #ececec;
+}
+#merchant_page .mainbody .details-list {
 
+}
+#merchant_page .mainbody .details-list .item {
+  padding-bottom: 15px;
+}
+#merchant_page .mainbody .details-list .item-icons {
+  padding-bottom: 10px;
+}
+#merchant_page .mainbody .marketing {
+  width: 330px;
+}
+#merchant_page .mainbody .marketing .title {
 
-
-
+}
+#merchant_page .mainbody .marketing .title h3 {
+  padding-top: 0px;
+  color: #304d58;
+  margin-top: 0px;
+  font-size: 20px;
+  line-height: 20px;
+}
+#merchant_page .mainbody .marketing .details {
+  font-size: 16px;
+  color: #304d58;
+  border-right: none;
+}
+#merchant_page .mainbody .marketing .details ul {
+}
+#merchant_page .mainbody .marketing .details li {
+  padding-top: 11px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #ececec;
+  padding-left: 20px;
+}
+#merchant_page .mainbody .marketing .details li img {
+  float: right;
+  padding-right: 10px;
+}
+#merchant_page .mainbody .marketing .details li:hover {
+  background-color: #e7eff1;
+}
 

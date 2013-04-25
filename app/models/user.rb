@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
   #accepts_nested_attributes_for :permission
   after_create :update_zip_prompted
 
+  PER_PAGE = 30
+
   def self.from_omniauth(auth)
   	Authentication.fetch_authentication(auth.provider, auth.uid,"User").account rescue create_from_omniauth(auth)
   end
@@ -47,6 +49,14 @@ class User < ActiveRecord::Base
     end
 
     user
+  end
+
+  def active_connections(page_number=1, per_page=PER_PAGE)
+    connections.active.includes_business_and_locations.ordered_by_shop_name.page(page_number).per(per_page)
+  end
+
+  def active_shop_ids
+    connections.active.collect(&:shop_id)
   end
 
   def zip_prompted?
@@ -111,7 +121,7 @@ class User < ActiveRecord::Base
 
   def build_permission_users
     Permission.scoped.map do |permission|
-       permissions_users.new(:permission_id => permission.id) 
+      permissions_users.new(:permission_id => permission.id) 
     end  
   end
 

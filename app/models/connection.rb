@@ -8,6 +8,10 @@ class Connection < ActiveRecord::Base
 
 	scope :for_shop, ->(shop_identifier){where(shop_id: shop_identifier)}
 
+  scope :includes_business_and_locations, includes(shop: [:locations, :businesses])
+
+  scope :ordered_by_shop_name, order("shops.name ASC")
+
   def toggle_connection
   	if self.active
   		self.active = false

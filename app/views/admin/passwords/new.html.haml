@@ -1,0 +1,19 @@
+#box_login
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div
+          .head
+            %h4 Forgot your password?
+        
+        .form
+          = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|  
+
+            = devise_error_messages!  
+
+            = f.email_field :email, placeholder: "Email", autofocus: true
+
+            = f.submit "Send me reset password instructions", class: "btn"
+
+      %p{class: "already"}
+        = link_to "Sign in", new_admin_session_path 

@@ -1,11 +1,11 @@
-#box_sign
+#edit
   .container
-    .span12.box_wrapper
+    .span12.edit_wrapper
       .span12.box
         %div  
           .address 
             .head.pull-left.lead 
-              = "Enter Shop Details"
+              = "Edit Shop Details"
             .form 
               = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form'} do |f|
                 = render :partial => 'form', :locals => {f: f}

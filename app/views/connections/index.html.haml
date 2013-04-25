@@ -1,49 +1,37 @@
 #features.features_page
   .container
     .features1
-      / header
       .row
-        .span12
-          %h4
-            Connections coming soon...
-      / feature list
-      .row
-        .span3
-          %ul.nav.nav-tabs.nav-stacked
-            %li.nav-header Your Menu
-            %li.active
-              %a{:href => "#"} Dashboard
-            %li
-              %a{:href => edit_user_registration_path, :method => :put} My Account
-            %li
-              %a{:href => "segments"} My Surveys
-            %li
-              %a{:href => add_connection_connections_path} Connections
-            %li
-              %a{:href => profile_path} My Profile
-            %li
-              %a{:href => destroy_user_session_path} Logout
-        .span8
-          %table.table.table-striped
-            %thead
-              %tr
-                %th{} #
-                %th{:width => "25%"} Shop 
-                %th{:width => "25%"} Business Category
-                %th{:width => "30%"} Location
-                %th{:width => "20%"} Connect
-                
-            %tbody
-            - @connection.each_with_index do |connection,i|
-              %tr
-                %td 
-                  = i+1
-                %td 
-                  = connection.shop.name
-                %td 
-                  = connection.shop.business_category_names.join(", ")
-                %td
-                  = connection.shop.locations.collect(&:city).join(',')
-                %td
-                  %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", ":data-status" => connection.connection_status,"data-shop"=>connection.shop.id,:style => "width:75px"} 
-                    = connection.connection_status
+        = render partial: "shared/menu"
+        .span8   
+          %div.tab-content
+
+            = render partial: "connections/tab"
+
+            %table.table.table-striped#my_connections_table
+              %thead
+                %tr
+                  %th.alert.alert-error.flash_message_disconnected{:colspan => 5}
+                %tr
+                  %th{} #
+                  %th{:width => "25%"} Shop 
+                  %th{:width => "25%"} Business Category
+                  %th{:width => "30%"} Location
+                  %th{:width => "20%"} Connect
+                  
+              %tbody
+              - @connections.each_with_index do |connection,i|
+                %tr
+                  %td 
+                    = i+1
+                  %td 
+                    %a{:href => "#shopDialog_#{connection.shop.id}","data-toggle"=>"modal", "id"=>"#{connection.shop.id}","class"=>"open-shopDialog"} #{connection.shop.name}
+                    = render partial: 'shop_dialog', locals:{:shop=>connection.shop}
+                  %td 
+                    = connection.shop.business_category_names.join(", ")
+                  %td
+                    = connection.shop.locations.collect(&:city).join(',')
+                  %td
+                    %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => connection.connection_status,"data-shop"=>connection.shop.id,"data-shop_name"=>connection.shop.name,:style => "width:75px"} 
+                      = connection.connection_status
+              =# paginate @connections        

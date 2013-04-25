@@ -1,0 +1,59 @@
+
+// Old Menu
+//%center.notice.lead
+//  = 'Please add locations for your Business' if has_locations?
+//= render partial: "shared/menu"
+/ Header
+#header1
+  .container
+    .row
+      .span12
+        %h3.intro
+          Bridging the Gap between Consumers and Businesses
+/Flash Notice
+= display_flash_message
+/Content          
+#container.container
+  #home_features
+    .container
+      .features1
+        .row
+          .span6.consumer
+            .main_title
+              %h3
+                For Consumers
+            .ftr
+              .ftrimg
+                %img{:src => '/assets/c1.png', :alt => "Easy way to Opt In"}
+              .ftrtxt
+                A NEW and EASY way to opt into any business, any website, anywhere...yep!
+              .ftrimg
+                %img{:src => '/assets/c2.png', :alt => "Control the Information you share"}
+              .ftrtxt
+                Control which information you share with each business,
+                and how you should be contacted. Never worry about being spammed again.
+              .ftrimg
+                %img{:src => '/assets/c3.png'}
+              .ftrtxt
+                Easily explore new places and website and more. With Optyn, it's easy.
+            .start{:align => "center"}
+              %a.btn.homestart{:href => new_user_registration_path} Get Started
+          .span6.biz
+            .main_title
+              %h3
+                For Businesses
+            .ftr
+              .ftrimg
+                %img{:src => '/assets/b1.png'}
+              .ftrtxt
+                The EASIEST way to capture customers, online and in-store.
+              .ftrimg
+                %img{:src => '/assets/b2.png'}
+              .ftrtxt
+                The FIRST truly Automated E-Mail Marketing Platform. Yes, we dare you.
+              .ftrimg
+                %img{:src => '/assets/b3.png'}
+              .ftrtxt
+                The most POWERFUL monetization platform for your business. Big Word.
+            .start{:align => "center"}
+              %a.btn.homestart{:href => new_merchants_manager_registration_path} Get Started
