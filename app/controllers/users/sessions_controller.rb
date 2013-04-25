@@ -6,4 +6,6 @@ class Users::SessionsController < Devise::SessionsController
     session[:omniauth_user] = true
     super
 	end
+  
+
 end
