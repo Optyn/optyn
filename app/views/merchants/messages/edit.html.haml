@@ -1,14 +1,20 @@
-.row
-  %h1
-    = message_form_title(@message_type)
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
 
-  = render partial: "merchants/messages/message_menu"
+    .span8#message_fields_wrapper
+      = render partial: "merchants/messages/message_menu"
 
-  .span8#message_fields_wrapper
-    = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|
-      = render :partial => 'form', :locals => {f: f}
+      = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|
+        = render :partial => 'form', :locals => {f: f}
 
-      .actions
-        = submit_tag("Save as Draft", name: "save_draft", class: 'btn btn-info')
-        = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary')
-        = submit_tag("Launch", name: "launch", class: 'btn btn-success')
+        .actions
+          = submit_tag("Save as Draft", name: "save_draft", class: 'btn btn-info')
+          = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary')
+          = submit_tag("Launch", name: "launch", class: 'btn btn-success')

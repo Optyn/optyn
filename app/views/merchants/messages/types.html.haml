@@ -1,37 +1,36 @@
-#box_sign
-  .row
-    %h1
-      Create a new campaign
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
 
-    %p
-      Let's create a new campaign for your homies. They will get excited to hear from you.
+    .span8#message_fields_wrapper
+      = render partial: "merchants/messages/message_menu"
 
-    %p What kind of email do you want to create.
-
-  .row
-    = render partial: "merchants/messages/message_menu"
-
-    .span8#types
       .well
         .row
-          .span3
+          .span2
             = link_to "Create a coupon",  merchants_new_campaign_path(message_type: 'coupon_message'), {class: 'btn btn-large btn-block'}
 
           .span3
             = link_to "Announce a special",  merchants_new_campaign_path(message_type: 'special_message'), {class: 'btn btn-large btn-block'}
 
-          .span3
+          .span2
             = link_to "Announce a sale",  merchants_new_campaign_path(message_type: 'sale_message'), {class: 'btn btn-large btn-block'}
 
       .well
         .row
-          .span3
+          .span2
             = link_to "General Announcement",  merchants_new_campaign_path(message_type: 'general_message'), {class: 'btn btn-large btn-block'}
 
           .span3
             = link_to "Product Announcement",  merchants_new_campaign_path(message_type: 'product_message'), {class: 'btn btn-large btn-block'}
 
-          .span3
+          .span2
             = link_to "New Event",  merchants_new_campaign_path(message_type: 'event_message'), {class: 'btn btn-large btn-block'}
 
       .well

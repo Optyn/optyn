@@ -75,7 +75,8 @@ Optyn::Application.routes.draw do
     end
   end
 
-  resources :messages do
+  match '/messages', to: 'messages#inbox'
+  resources :messages, except: [:index, :new, :create, :edit, :update, :destroy]  do
     collection do
       get :inbox
       get :saved

@@ -1,49 +1,58 @@
-.row
-  %h2 Messagecenter
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
 
-  #messages_collection_container.row.text-center
-    = render partial: "shared/messages/collection_form"
+    .span8#message_fields_wrapper
+      = render partial: "merchants/messages/message_menu"
 
-    .actions
-      = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
-      = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
-      = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
-      = hidden_field_tag 'move_to_trash_link', move_to_trash_merchants_messages_path
+      #messages_collection_container.row.text-center
+        = render partial: "shared/messages/collection_form"
 
-  = render partial: "merchants/messages/message_menu"
+        .actions
+          = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
+          = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
+          = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
+          = hidden_field_tag 'move_to_trash_link', move_to_trash_merchants_messages_path
 
-  .span9
 
-    = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-    %table.table.table-striped.table-condensed.message-list
-      %thead
-        %tr
-          %th= check_box_tag :select, '', false, class: 'select-all'
-          %th Campaign Name
-          %th Name
-          %th= second_name_label_text(nil)
-          %th Scheduled
 
-      %tbody
-        - unless @messages.blank?
-          - @messages.each do |message|
-            %tr
-              %td
-                = check_box_tag :uuid, message.uuid, false, {class: 'real'}.merge(message_queued_disabled(message))
-              %td.show-link
-                = message_type_title(message)
-              %td.show-link
-                = message.name
-              %td.show-link
-                = message.second_name
-              %td.show-link
-                = formatted_message_form_datetime(message, 'send_on')
-              %td.show-link-address.display-none
-                = merchants_message_path(message.uuid)
-        - else
+      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+
+      %table.table.table-striped.table-condensed.message-list
+        %thead
           %tr
-            %td{colspan: '4'}
-              .text-center No Queued messages right now
+            %th= check_box_tag :select, '', false, class: 'select-all'
+            %th Campaign Name
+            %th Name
+            %th= second_name_label_text(nil)
+            %th Scheduled
 
-    = render partial: 'shared/messages/pager', locals: {collection: @messages}
+        %tbody
+          - unless @messages.blank?
+            - @messages.each do |message|
+              %tr
+                %td
+                  = check_box_tag :uuid, message.uuid, false, {class: 'real'}.merge(message_queued_disabled(message))
+                %td.show-link
+                  = message_type_title(message)
+                %td.show-link
+                  = message.name
+                %td.show-link
+                  = message.second_name
+                %td.show-link
+                  = formatted_message_form_datetime(message, 'send_on')
+                %td.show-link-address.display-none
+                  = merchants_message_path(message.uuid)
+          - else
+            %tr
+              %td{colspan: '4'}
+                .text-center No Queued messages right now
+
+      = render partial: 'shared/messages/pager', locals: {collection: @messages}

@@ -1,17 +1,29 @@
-#message_details
-  .row
-    %h1{class: 'text-center'}
-      Email Preview
-      = link_to "Send it", launch_merchants_message_path(@message.uuid), class: "btn btn-success"
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
 
-    %hr/
+    .span8#message_fields_wrapper
+      = render partial: "merchants/messages/message_menu"
+      #message_details
+        .row
+          %h1{class: 'text-center'}
+            Email Preview
+            = link_to "Send it", launch_merchants_message_path(@message.uuid), class: "btn btn-success"
 
-  .row
-    .span4
-      = render partial: "merchants/messages/preview_meta"
+          %hr/
 
-    = content_for :header do
-      Preview
+        .row
+          .span3
+            = render partial: "merchants/messages/preview_meta"
 
-    .span7
-      = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
+          = content_for :header do
+            Preview
+
+          .span5
+            = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}

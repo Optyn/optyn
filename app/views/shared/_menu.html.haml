@@ -12,4 +12,6 @@
     %li
       %a{:href => profile_path} My Profile
     %li
+      = link_to "My Messages", inbox_messages_path
+    %li
       %a{:href => destroy_user_session_path} Logout
