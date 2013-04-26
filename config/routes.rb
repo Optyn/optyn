@@ -11,7 +11,7 @@ Optyn::Application.routes.draw do
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
   match 'about' => 'main#about', :as => :about
-  match 'faq' => 'main#faq', :as => :faq
+  match 'faq' => 'main#faq', :as => :faq  
   match 'pricing' => 'main#pricing', :as => :pricing
   match 'merchantfeatures' => 'main#merchantfeatures', :as => :merchant_features
   match 'consumerfeatures' => 'main#consumerfeatures', :as => :consumer_features
@@ -19,6 +19,7 @@ Optyn::Application.routes.draw do
   match 'terms' => 'main#terms', :as => :terms
   match 'privacy' => 'main#privacy', :as => :privacy
   match 'danacafe' => 'main#danacafe'
+  match 'thankyou' => 'main#thankyou'
   match 'old_index' =>'main#old_index' 
 
   # Blog Redirect
@@ -32,7 +33,9 @@ Optyn::Application.routes.draw do
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
                                      :sign_up => 'register'
-  }, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :passwords => 'users/passwords'}
+  }, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :passwords => 'users/passwords'} do
+     get  "/users/sessions/cross_domain_app_login" => "sessions#cross_domain_app_login", :as => :cross_domain_app_login
+  end
 
   devise_scope :user do
     # Sessions
@@ -56,6 +59,7 @@ Optyn::Application.routes.draw do
     post '/zips' => 'users/zips#create', :as => :user_zips
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
+
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
@@ -96,6 +100,9 @@ Optyn::Application.routes.draw do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_framework.js', to: 'shops#button_framework'
       match 'user', to: 'users#show', as: :user_profile
+      get '/login', to: 'oauth#login', as: :login
+      get '/connection', to: 'oauth#connection', as: :connection
+      put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
     end
   end
 
@@ -115,9 +122,11 @@ Optyn::Application.routes.draw do
     end
 
     resource :app
-    resources :connections
+    resources :connections 
     resources :locations
-    resources :dashboard
+    resources :dashboard do
+      collection { post :import }
+    end
 
     resource :shop do
       member do
@@ -171,7 +180,7 @@ Optyn::Application.routes.draw do
     end
   end
 
-  use_doorkeeper do
+  use_doorkeeper  do
     controllers :authorizations => 'oauth_authorizations'
   end
 

@@ -66,6 +66,7 @@ module Api
 							        var TYPE        =   'token';
 							        //+ 'scope=' + SCOPE
 							        var _url        =   OAUTHURL  + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
+                      //alert(_url);
 							        var win = null;
 
 											function login() {
