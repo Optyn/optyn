@@ -36,7 +36,6 @@ Optyn::Application.routes.draw do
   end
 
   devise_scope :user do
-      use_doorkeeper
     # Sessions
     post '/login' => 'users/sessions#create', :as => :user_session
     get '/login' => 'users/sessions#new', :as => :new_user_session
@@ -60,7 +59,7 @@ Optyn::Application.routes.draw do
     put '/profile' => 'users/registrations#update_profile'
 
     get '/cross_domain_login' => 'users/cross_domian_authentication#login', :as => :cross_domain_login
-    get '/shop_profile' => 'users/cross_domian_authentication#shop_profile', :as => :shop_profile
+    #get '/shop_profile' => 'users/cross_domian_authentication#intermediate', :as => :shop_profile
 
     
   end
@@ -145,10 +144,9 @@ Optyn::Application.routes.draw do
 
   end
 
-  use_doorkeeper
-#  do
-#    controllers :authorizations => 'oauth_authorizations'
-#  end
+  use_doorkeeper  do
+    controllers :authorizations => 'oauth_authorizations'
+  end
 
 
   #Link to the customer facing side static pages converted to layout with HAML
