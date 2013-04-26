@@ -29,19 +29,25 @@ class User < ActiveRecord::Base
   PER_PAGE = 30
 
   def self.import(file,shop)
-    invalid = []
-    CSV.foreach(file.path, headers: true) do |row|
-        password_length = 8
-        user_password = Devise.friendly_token.first(password_length)
-        new_user = User.new row.to_hash.merge({password: user_password,  password_confirmation: user_password })
-        if new_user.save
-          new_connection = new_user.connections.create(shop_id: shop.id ) if new_user.present?
-          MerchantMailer.user_account_created_notifier(new_user,user_password).deliver if new_connection.present?
-        # else
-        #   new_user.errors.has_key?()
-        #   flash[:error] = new_user.errors.full_messages
-        end
+    invalid_records = []
+    index = 0
+    CSV.foreach(file, headers: true) do |row|
+      password_length = 8
+      user_password = Devise.friendly_token.first(password_length)
+      new_user = User.new row.to_hash.merge({password: user_password,  password_confirmation: user_password })
+      if new_user.save
+        new_connection = new_user.connections.create(shop_id: shop.id ) if new_user.present?
+        new_user.permissions_users.create(action: "true", permission_id: "1") if new_user.present?        
+        new_user.permissions_users.create(action: "true", permission_id: "2") if new_user.present?        
+        MerchantMailer.user_account_created_notifier(new_user,user_password).deliver if new_connection.present?
+      else
+         invalid_records <<{:index=>index,:csv_row=>row.to_hash,:error=>new_user.errors.full_messages.join(",")}
+      end
+
+      index = index+1    
     end
+    # Return an array of invalid records and total no of record
+    [invalid_records,index]
   end
 
   def self.from_omniauth(auth)

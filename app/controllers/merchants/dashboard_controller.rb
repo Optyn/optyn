@@ -4,7 +4,7 @@ class Merchants::DashboardController < Merchants::BaseController
   end
 
   def import
-  	User.import(params[:file], current_shop)
+  	Resque.enqueue(ImportUser, params["file"].tempfile.to_path.to_s, current_shop.id)
   	redirect_to merchants_dashboard_index_path, notice: "Customers imported."
 	end
 end
