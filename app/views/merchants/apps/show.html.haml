@@ -1,4 +1,3 @@
-/Flash Notice
 = display_flash_message
 /Main Body
 #merchants
@@ -79,9 +78,18 @@
               = @application.secret
 
           %h4 Button Script:
-          %p
+          %p#description
             %code{:id => 'embed_code'}
               = current_shop.embed_code    
 
           .actions
+            = link_to "Copy", "", :class => "btn", :id => "copy-description"
             = link_to "Edit", edit_merchants_app_path, :class => "btn"
+
+:javascript
+   $('a#copy-description').zclip({
+   path:'/ZeroClipboard.swf',
+   copy:$('p#description').text()
+   });
+
+
