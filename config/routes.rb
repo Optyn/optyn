@@ -11,7 +11,7 @@ Optyn::Application.routes.draw do
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
   match 'about' => 'main#about', :as => :about
-  match 'faq' => 'main#faq', :as => :faq
+  match 'faq' => 'main#faq', :as => :faq  
   match 'pricing' => 'main#pricing', :as => :pricing
   match 'merchantfeatures' => 'main#merchantfeatures', :as => :merchant_features
   match 'consumerfeatures' => 'main#consumerfeatures', :as => :consumer_features
@@ -107,9 +107,11 @@ Optyn::Application.routes.draw do
     end
 
     resource :app
-    resources :connections
+    resources :connections 
     resources :locations
-    resources :dashboard
+    resources :dashboard do
+      collection { post :import }
+    end
 
     resource :shop do
       member do
