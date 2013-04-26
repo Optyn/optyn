@@ -19,12 +19,11 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_account
-		if !current_user.blank? && !current_user.email.present?
-			redirect_to edit_user_registration_path
-		end
+    if !current_user.blank? && !current_user.email.present?
+      redirect_to edit_user_registration_path
+    end
   end
 
-  
 
   def require_customer_logged_out
     if user_signed_in?
@@ -54,7 +53,7 @@ class ApplicationController < ActionController::Base
   def is_shop_local_and_active?
     current_merchants_manager.shop.is_subscription_active? if merchants_manager_signed_in?
   end
-  
+
   def is_shop_local?(shop)
   end
 
@@ -78,9 +77,9 @@ class ApplicationController < ActionController::Base
         '/admin'
       elsif current_user.zip_prompted?
         connections_path
-      else
-        shop_profile_path
       end
+    else
+      shop_profile_path
     end
   end
 end

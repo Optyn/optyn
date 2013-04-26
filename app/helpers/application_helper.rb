@@ -71,4 +71,9 @@ module ApplicationHelper
       "None"
     end
   end
+
+  def shop_logo(shop)
+    image_name = shop.logo_img? ? shop.logo_img.url : 'no_shop_logo.gif'
+    image_tag(image_name, alt: shop.name, class: 'shop-logo')
+  end
 end

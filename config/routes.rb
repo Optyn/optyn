@@ -58,10 +58,6 @@ Optyn::Application.routes.draw do
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
 
-    get '/cross_domain_login' => 'users/cross_domian_authentication#login', :as => :cross_domain_login
-    #get '/shop_profile' => 'users/cross_domian_authentication#intermediate', :as => :shop_profile
-
-    
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
@@ -88,6 +84,9 @@ Optyn::Application.routes.draw do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_framework.js', to: 'shops#button_framework'
       match 'user', to: 'users#show', as: :user_profile
+      get '/login', to: 'oauth#login', as: :login
+      get '/connection', to: 'oauth#connection', as: :connection
+      put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
     end
   end
 

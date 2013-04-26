@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_profile
   	@user = current_user
     if @user.update_attributes(params[:user])
-      flash[:notice]="Profile updated successfully"
+      flash[:notice] = "Profile updated successfully"
       redirect_to connections_path
     else
       render 'edit'
