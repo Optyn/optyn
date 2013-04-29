@@ -1,0 +1,57 @@
+#box_login
+  .container
+    .popupHeader
+      You are one step away from becoming connected to Dana Cafe. But first you have to login into your
+      Optyn.com account or sign up for one. It's very quick, easy, and of course, always free.
+    .formContainer.clearfix
+      .formBox
+        %strong#quickLogin Quick Login
+        = form_for @user_login, as: :user, url: user_session_path, :html => {method: :post, class: 'new_user', id: 'new_user'} do |f|
+          = hidden_field_tag :cross_domain_login, value: "1"
+
+          = f.email_field :email, placeholder: "Email", autofocus: true, size: 30
+
+          = f.password_field :password, placeholder: "Password", size: 30
+
+          %p.social
+            via social
+            %a#fc{:href => "/auth/facebook"} Facebook
+            %a#tw{:href => "/auth/twitter"} Twitter
+            %a#gPlus{:href => "/auth/google_oauth2"} Google Plus
+
+          .remember
+            .left
+              = f.check_box :remember_me, id: 'remember_me'
+              = label_tag "remember_me"
+            .right
+              = link_to "Forgot your password?", new_password_path(@user)
+
+          = submit_tag "Login", name: 'login'
+
+
+      .formBox
+        %strong#quickSignUp Quick Sign Up
+        = form_for @user, as: :user, url: user_registration_path, :html => {method: :post, class: 'new_user', id: 'new_user'} do |f|
+
+          = hidden_field_tag :cross_domain_login, value: "1"
+
+          = f.text_field :name, placeholder: "Name", size: 30
+
+          = f.email_field :email, placeholder: "Email", size: 30
+
+          = f.password_field :password, placeholder: "Password", size: 30
+
+          = f.password_field :password_confirmation, placeholder: "Confirm Password", size: 30
+
+          %p.social
+            via social
+            %a#fc{:href => "/auth/facebook"} Facebook
+            %a#tw{:href => "/auth/twitter"} Twitter
+            %a#gPlus{:href => "/auth/google_oauth2"} Google Plus
+
+          .actions.clearfix
+            = submit_tag "Sign up", name: 'commit'
+
+            %p
+              I hereby agree agree to Optym
+              %a{:href => "#"} Terms of Use

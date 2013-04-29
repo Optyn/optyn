@@ -24,6 +24,7 @@
 }
 .navbar .nav > li > a {
   color: #ffffff;
+  border-radius: 4px;
   font-size: 15px;
   font-weight: bold;
   text-shadow: none;
@@ -37,6 +38,17 @@
   color: #FFF;
   background-color: #304d58;
   border-radius: 4px;
+}
+.navbar .nav .loginBtn {
+  height: auto;
+  line-height: 40px;
+  padding: 0 15px;
+  position: static;
+  background-color: white;
+  border-radius: 4px;
+  color: #1791c0;
+  display: block;
+  margin-left: 8px;
 }
 .navbar .nav > li.active > a,
 .navbar .nav > li.active:hover > a,

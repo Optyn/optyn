@@ -1,0 +1,57 @@
+#box_login
+  .container
+    .popupHeader
+      == You are one step away from becoming connected to #{@shop.name}. Choose the options below and you will receive emails from #{@shop.name} on your terms.
+
+
+    .span3
+      #shop_logo
+        = shop_logo(@shop)
+      %hr
+      #shop_details
+        #shop_name
+          = @shop.name
+        - if @shop.first_location.present?
+          #shop_street_address
+            = @shop.first_location_street_address
+          #shop_address_details
+            == #{@shop.first_location_city}, #{@shop.first_location_state_name} #{@shop.first_location_zip}
+
+        #shop_profile_button
+          = link_to "View Profile", "javscript:void(0)", onclick: "Coming Soon"
+
+    .span5
+      = form_for @current_user, as: :user, url: api_update_permissions_path, html: {method: :put, id: 'oauth_user_permissions'} do |f|
+        = f.fields_for :permissions_users do |p|
+          .control-group
+            .controls
+              %label.checkbox
+                = p.check_box :action
+                =  "Show #{p.object.permission.name.titleize}"
+                = p.hidden_field :permission_id
+
+
+        = image_submit_tag 'logo.png'
+
+        = hidden_field_tag :redirect_uri, params[:redirect_uri]
+        = hidden_field_tag :access_token, params[:access_token]
+
+:javascript
+  $(document).ready(function(){
+    $('#oauth_user_permissions').submit(function(e){
+      e.preventDefault();
+      var redirect_uri = $('#redirect_uri').val();
+      var $form = $(this);
+      $.ajax({
+        type: 'POST',
+        url: $form.prop('action'),
+        data: $form.serialize(),
+        success: function(data) {
+          window.location = redirect_uri;
+        },
+        error: function(){
+          alert("Couldn't opt you in. Please close this window and try again.");
+        }
+      });
+    })
+  });

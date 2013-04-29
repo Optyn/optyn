@@ -11,7 +11,7 @@ Optyn::Application.routes.draw do
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
   match 'about' => 'main#about', :as => :about
-  match 'faq' => 'main#faq', :as => :faq
+  match 'faq' => 'main#faq', :as => :faq  
   match 'pricing' => 'main#pricing', :as => :pricing
   match 'merchantfeatures' => 'main#merchantfeatures', :as => :merchant_features
   match 'consumerfeatures' => 'main#consumerfeatures', :as => :consumer_features
@@ -36,7 +36,6 @@ Optyn::Application.routes.draw do
   end
 
   devise_scope :user do
-      use_doorkeeper
     # Sessions
     post '/login' => 'users/sessions#create', :as => :user_session
     get '/login' => 'users/sessions#new', :as => :new_user_session
@@ -59,10 +58,6 @@ Optyn::Application.routes.draw do
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
 
-    get '/cross_domain_login' => 'users/cross_domian_authentication#login', :as => :cross_domain_login
-    get '/shop_profile' => 'users/cross_domian_authentication#shop_profile', :as => :shop_profile
-
-    
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
@@ -89,6 +84,9 @@ Optyn::Application.routes.draw do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_framework.js', to: 'shops#button_framework'
       match 'user', to: 'users#show', as: :user_profile
+      get '/login', to: 'oauth#login', as: :login
+      get '/connection', to: 'oauth#connection', as: :connection
+      put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
     end
   end
 
@@ -108,9 +106,11 @@ Optyn::Application.routes.draw do
     end
 
     resource :app
-    resources :connections
+    resources :connections 
     resources :locations
-    resources :dashboard
+    resources :dashboard do
+      collection { post :import }
+    end
 
     resource :shop do
       member do
@@ -145,10 +145,9 @@ Optyn::Application.routes.draw do
 
   end
 
-  use_doorkeeper
-#  do
-#    controllers :authorizations => 'oauth_authorizations'
-#  end
+  use_doorkeeper  do
+    controllers :authorizations => 'oauth_authorizations'
+  end
 
 
   #Link to the customer facing side static pages converted to layout with HAML
