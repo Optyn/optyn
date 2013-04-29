@@ -3,7 +3,7 @@ module Api
     class OauthController < BaseController
       layout "cross_domain"
 
-      doorkeeper_for :connection, :update_permissions
+      doorkeeper_for :all, except: [:login]
 
       def login
         session[:omniauth_manager] = nil

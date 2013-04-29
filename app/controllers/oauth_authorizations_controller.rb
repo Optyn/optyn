@@ -3,9 +3,9 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
 
 	def new
     if pre_auth.authorizable?
-      if (access_token = Doorkeeper::AccessToken.matching_token_for(pre_auth.client, current_resource_owner.id, pre_auth.scopes) || skip_authorization?) #Doorkeeper::AccessToken.matching_token_for(pre_auth.client, current_resource_owner.id, pre_auth.scopes) || skip_authorization?
+      if Doorkeeper::AccessToken.matching_token_for(pre_auth.client, current_resource_owner.id, pre_auth.scopes) || skip_authorization?
         auth = authorization.authorize
-        redirect_to api_connection_path(redirect_uri: auth.redirect_uri, access_token: access_token.token) #redirect_to auth.redirect_uri
+        redirect_to api_connection_path(redirect_uri: auth.redirect_uri, access_token: auth.auth.token.token) #redirect_to auth.redirect_uri
       else
         render :new
       end

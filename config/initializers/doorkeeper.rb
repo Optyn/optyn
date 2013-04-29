@@ -9,7 +9,7 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
-    current_user || (session[:user_return_to] = request.url and redirect_to(api_login_path)) #redirect_to(cross_domain_login_path) #redirect_to(cross_domain_login_path) #warden.authenticate!(:scope => :user)
+    current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path)) #warden.authenticate!(:scope => :user)
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
