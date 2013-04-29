@@ -6,43 +6,52 @@
     .formContainer.clearfix
       .formBox
         %strong#quickLogin Quick Login
-        %form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/login", :method => "post"}
-          %input{:name => "utf8", :type => "hidden", :value => "✓"}
-          %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
-          %input{:name => "commit", :type => "hidden", :value => "Sign in"}
-          %input{:name => "cross_domian_login", :type => "hidden", :value => "1"}
-          %input#user_email{:name => "user[email]", :placeholder => "Email", :size => "30", :type => "text", :value => ""}
-          %input#user_password{:name => "user[password]", :placeholder => "Password", :size => "30", :type => "password"}/
-          %p.social
-            via social
-            %a#fc{:href => "/auth/facebook"} Facebook
-            %a#tw{:href => "/auth/twitter"} Twitter
-            %a#gPlus{:href => "#"} Google Plus
-          %input{:type => "submit", :value => "Login"}/
-          .remember
-            .left
-              %input{:name => "user[remember_me]", :type => "hidden", :value => "0"}/
-              %input#remember_me{:name => "user[remember_me]", :type => "checkbox", :value => "1"}/
-              %label{:for => "remember_me"} Remember me
-            .right
-              %a{:href => "/password/new"} Forgot your password?
-      .formBox
-        %strong#quickSignUp Quick Sign Up
-        %form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/register", :method => "post"}
-          %div{:style => "margin:0;padding:0;display:inline"}
-            %input{:name => "utf8", :type => "hidden", :value => "✓"}/
-            %input{:name => "authenticity_token", :type => "hidden", :value => "R6EJOviOU1/XjUdt8wM2AgN312llcQmHrOOd5FYGz10="}/
-          %input#user_name{:autofocus => "autofocus", :name => "user[name]", :placeholder => "Name", :size => "30", :type => "text"}/
-          %input#user_email{:name => "user[email]", :placeholder => "Email", :size => "30", :type => "text", :value => ""}/
-          %input#user_password{:name => "user[password]", :placeholder => "Password", :size => "30", :type => "password"}/
-          %input#user_password_confirmation{:name => "user[password_confirmation]", :placeholder => "Confirm Password", :size => "30", :type => "password"}/
+        = form_for @user_login, as: :user, url: user_session_path, :html => {method: :post, class: 'new_user', id: 'new_user'} do |f|
+          = hidden_field_tag :cross_domain_login, value: "1"
+
+          = f.email_field :email, placeholder: "Email", autofocus: true, size: 30
+
+          = f.password_field :password, placeholder: "Password", size: 30
+
           %p.social
             via social
             %a#fc{:href => "/auth/facebook"} Facebook
             %a#tw{:href => "/auth/twitter"} Twitter
             %a#gPlus{:href => "/auth/google_oauth2"} Google Plus
+
+          .remember
+            .left
+              = f.check_box :remember_me, id: 'remember_me'
+              = label_tag "remember_me"
+            .right
+              = link_to "Forgot your password?", new_password_path(@user)
+
+          = submit_tag "Login", name: 'login'
+
+
+      .formBox
+        %strong#quickSignUp Quick Sign Up
+        = form_for @user, as: :user, url: user_registration_path, :html => {method: :post, class: 'new_user', id: 'new_user'} do |f|
+
+          = hidden_field_tag :cross_domain_login, value: "1"
+
+          = f.text_field :name, placeholder: "Name", size: 30
+
+          = f.email_field :email, placeholder: "Email", size: 30
+
+          = f.password_field :password, placeholder: "Password", size: 30
+
+          = f.password_field :password_confirmation, placeholder: "Confirm Password", size: 30
+
+          %p.social
+            via social
+            %a#fc{:href => "/auth/facebook"} Facebook
+            %a#tw{:href => "/auth/twitter"} Twitter
+            %a#gPlus{:href => "/auth/google_oauth2"} Google Plus
+
           .actions.clearfix
-            %input{:name => "commit", :type => "submit", :value => "Sign up"}/
+            = submit_tag "Sign up", name: 'commit'
+
             %p
               I hereby agree agree to Optym
               %a{:href => "#"} Terms of Use

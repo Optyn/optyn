@@ -8,6 +8,8 @@ module Api
       def login
         session[:omniauth_manager] = nil
         session[:omniauth_user] = true
+        @user_login = User.new
+        @user = User.new
       end
 
       def connection
