@@ -62,16 +62,18 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    binding.pry
     if session[:user_return_to].present?
       return session[:user_return_to]
     end
 
     flash[:notice] = "Signed in successfully"
-    if current_user.zip_prompted?
-      connections_path
+    if !current_admin && user_signed_in? && current_user.zip_prompted?
+      return connections_path
     else
-      new_user_zip_path
+      return new_user_zip_path
     end
+
     if current_admin
       '/admin'
     elsif current_user.zip_prompted?
