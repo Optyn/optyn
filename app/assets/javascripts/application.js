@@ -16,5 +16,9 @@
 //= require_directory ./stripe
 //= require chosen-jquery
 //= require bootstrap-datepicker
+//= require jquery.zclip.min.js
+//= require shCore.js
+//= require shLegacy.js
+//= require shBrushXml.js
 //= require_self
 //= require_tree
