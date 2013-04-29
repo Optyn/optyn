@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_account
     if !current_user.blank? && !current_user.email.present?
+      flash[:notice] = "Please enter your email to proceed with Optyn."
       redirect_to edit_user_registration_path
     end
   end
-
 
   def require_customer_logged_out
     if user_signed_in?
