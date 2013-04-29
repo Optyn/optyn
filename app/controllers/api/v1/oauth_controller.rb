@@ -14,8 +14,7 @@ module Api
 
       def connection
         @shop = doorkeeper_token.application.owner
-        @current_user = User.find(doorkeeper_token.resource_owner_id)
-        @permissions_user = @current_user.permissions_users.present? ? @current_user.permissions_users : @current_user.build_permission_users
+        @permissions_user = current_user.permissions_users.present? ? current_user.permissions_users : current_user.build_permission_users
       end
 
       def update_permissions

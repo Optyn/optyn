@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
-  has_many :permissions_users
+  has_many :permissions_users, dependent: :destroy
   has_many :permissions , :through => :permissions_users 
   
   # Include default devise modules. Others available are:
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :permissions_users
 
   #accepts_nested_attributes_for :permission
-  after_create :update_zip_prompted
+  after_create :update_zip_prompted, :create_permission_users
 
   PER_PAGE = 30
 
@@ -102,6 +102,12 @@ class User < ActiveRecord::Base
     if home_zip_code.present? || office_zip_code.present? || force
       self.zip_prompted = true
       save!(validate: false)
+    end
+  end
+
+  def create_permission_users
+    Permission.all.each do |permission|
+      PermissionsUser.create(user_id: self.id, permission_id: permission.id, action: true)
     end
   end
 
