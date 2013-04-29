@@ -20,17 +20,18 @@
             %th Permission
             %th Details
         %tbody
-        - current_shop.users.each_with_index do |user, index|
+        - @connections.each_with_index do |connection, index|
           %tr
             %td= index + 1
             %td
-              = user.name
-            %td Website
+              = connection.user.name
             %td
-              = user_permission(user)
+              = connection.connected_via
             %td
-              - if user.permissions_users.present?
-                %a{:href => "#infoDialog_#{user.id}","data-toggle"=>"modal", "id"=>"#{user.id}","class"=>"open-infoDialog"} More Info
-                = render partial: 'more_info_prompt', locals:{:user=>user}
+              = user_permission(connection.user)
+            %td
+              - if connection.user.permissions_users.present?
+                %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
+                = render partial: 'more_info_prompt', locals:{user: connection.user}
               - else
                 %a{:href => "#",:style => "color:#7D8B8F"} More Info

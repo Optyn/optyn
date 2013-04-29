@@ -60,9 +60,10 @@ module ApplicationHelper
   end
 
   def user_permission(user)
-    if user.visible_permissions_users.present?
-      permissions_users = user.visible_permissions_users
-      if permissions_users.size == Permission.all.size
+    visible_permissions_users = user.permissions_users.select(&:action)
+    if visible_permissions_users.present?
+
+      if visible_permissions_users.size == Permission.cached_count
         "Full"
       else
         user.permission_names.join(", ")

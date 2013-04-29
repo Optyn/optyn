@@ -155,11 +155,11 @@ class User < ActiveRecord::Base
   end
 
   def visible_permissions_users
-    permissions_users.visible
+    permissions_users.select(&:action)
   end
 
   def permission_names
-    permissions_users.visible.includes(:permission).collect(&:permission).collect(&:name)
+    permissions_users.select(&:action).collect(&:permission).collect(&:name)
   end
 
   private
