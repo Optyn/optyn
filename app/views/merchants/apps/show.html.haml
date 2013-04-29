@@ -76,20 +76,24 @@
           %p
             %code{:id => 'secret'}
               = @application.secret
-
           %h4 Button Script:
-          %p#description
+          %pre#description
             %code{:id => 'embed_code'}
               = current_shop.embed_code    
 
+
           .actions
-            = link_to "Copy", "", :class => "btn", :id => "copy-description"
+            = link_to "copy", "", :class => "btn", :id => "copy-description"
             = link_to "Edit", edit_merchants_app_path, :class => "btn"
 
 :javascript
+  $(document).ready(function(){
+   
    $('a#copy-description').zclip({
    path:'/ZeroClipboard.swf',
-   copy:$('p#description').text()
+   copy:$('pre#description').text()
+   });
+   SyntaxHighlighter.all();
    });
 
 
