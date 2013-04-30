@@ -29,9 +29,11 @@
             %option Coupon Redemptions
             %option Survey Actions
       %br
-        = form_tag import_merchants_dashboard_index_path, multipart: true do 
-          = file_field_tag :file
-          = submit_tag "Import"
+        Import Customers:
+        = form_for current_merchants_manager,:url =>import_merchants_dashboard_index_path, :method => "post",multipart: true do |f|
+          = f.fields_for :import_users do |import_form|
+            = import_form.file_field :csv_file
+          = f.submit "Import"
 
       %table.table.table-striped
         %thead
