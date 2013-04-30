@@ -4,17 +4,19 @@ class Manager < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :async, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable,:confirmable
+    :recoverable, :rememberable, :trackable, :validatable,:confirmable
 
   has_many :authentications,:as=>:account, dependent: :destroy
   has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
 
+  mount_uploader :picture, ImageUploader
+
   validates :name, :presence => true
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
 
-  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at
+  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at, :picture, :oauth_image
   attr_accessor :skip_password
 
   def self.create_from_omniauth(auth)
@@ -22,7 +24,7 @@ class Manager < ActiveRecord::Base
     manager = Manager.find_by_email(email)
 
     if !manager
-      manager = Manager.new(name: auth.info.name, email: email)
+      manager = Manager.new(name: auth.info.name, email: email, oauth_image: auth.info.image)
       manager
     else
       authentication = manager.authentications.create(uid: auth['uid'], provider: auth['provider'])
@@ -41,6 +43,7 @@ class Manager < ActiveRecord::Base
   end
 
   def update_with_password(params, *options)
+    
     if encrypted_password.blank?
       update_attributes(params, *options)
     else
@@ -63,4 +66,13 @@ class Manager < ActiveRecord::Base
   def first_shop
     shop.first_location
   end
+
+  def image_url
+    if !picture.blank?
+      picture
+    else
+      oauth_image
+    end
+  end
+
 end

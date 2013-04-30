@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
   has_many :permissions_users, dependent: :destroy
-  has_many :permissions , :through => :permissions_users 
+  has_many :permissions , :through => :permissions_users
+  
+  mount_uploader :picture, ImageUploader
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes
+  :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture, :oauth_image
 
   accepts_nested_attributes_for :permissions_users
 
@@ -59,8 +61,7 @@ class User < ActiveRecord::Base
     user = nil
     User.transaction do
       email = auth.info.email.to_s
-
-      user = User.find_by_email(email) || User.new(name: auth.info.name, email: email)
+      user = User.find_by_email(email) || User.new(name: auth.info.name, email: email, oauth_image: auth.info.image)
       user.save(validate: false)
 
       provider = auth.provider
@@ -160,6 +161,14 @@ class User < ActiveRecord::Base
 
   def permission_names
     permissions_users.visible.includes(:permission).collect(&:permission).collect(&:name)
+  end
+
+  def image_url
+    if !picture.blank?
+      picture
+    else
+      oauth_image
+    end
   end
 
   private
