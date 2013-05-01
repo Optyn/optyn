@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429064739) do
+ActiveRecord::Schema.define(:version => 20130430065319) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(:version => 20130429064739) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "picture"
+    t.string   "oauth_image"
   end
 
   add_index "managers", ["confirmation_token"], :name => "index_managers_on_confirmation_token", :unique => true
@@ -299,6 +301,8 @@ ActiveRecord::Schema.define(:version => 20130429064739) do
     t.boolean  "zip_prompted"
     t.string   "gender",                 :limit => 1
     t.date     "birth_date"
+    t.string   "picture"
+    t.string   "oauth_image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
