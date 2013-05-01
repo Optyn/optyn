@@ -6,9 +6,11 @@ class MerchantMailer < ActionMailer::Base
     mail(:to => @manager.email, :subject => "Payment Successfull!")
   end
 
-  def user_account_created_notifier(user, user_password)
-  	@user = user
-  	@user_password = user_password
-  	mail(to: @user.email,  subject: "Optyn Account created")  	
+  def user_contacts_imported_notifier(manager,filepath,counter,valid_counters)
+  	@manager = manager
+    @counter = counter
+    @valid_counters =  valid_counters
+    attachments['invalid_records.csv'] = File.read(filepath)
+  	mail(to: @manager.email,  subject: "Customer conctacts imported")  	
   end
 end
