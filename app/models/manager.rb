@@ -8,9 +8,9 @@ class Manager < ActiveRecord::Base
 
   has_many :authentications,:as=>:account, dependent: :destroy
   has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
-  has_many :import_users
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
+  has_many :file_imports
 
   mount_uploader :picture, ImageUploader
 
@@ -19,7 +19,7 @@ class Manager < ActiveRecord::Base
 
   attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at, :picture, :oauth_image
   attr_accessor :skip_password
-  accepts_nested_attributes_for :import_users
+  accepts_nested_attributes_for :file_imports
 
   def self.create_from_omniauth(auth)
     email = auth.info.email.to_s

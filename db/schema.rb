@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20130429064739) do
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
 
-  create_table "import_users", :force => true do |t|
+  create_table "file_imports", :force => true do |t|
     t.string   "csv_file"
     t.integer  "manager_id"
     t.datetime "created_at", :null => false
