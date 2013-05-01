@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418004740) do
+ActiveRecord::Schema.define(:version => 20130429064739) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(:version => 20130418004740) do
   end
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
+
+  create_table "import_users", :force => true do |t|
+    t.string   "csv_file"
+    t.integer  "manager_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "interests", :force => true do |t|
     t.integer  "holder_id"
