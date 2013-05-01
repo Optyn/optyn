@@ -7,7 +7,8 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
         auth = authorization.authorize
         redirect_to api_connection_path(redirect_uri: auth.redirect_uri, access_token: auth.auth.token.token) #redirect_to auth.redirect_uri
       else
-        render :new
+        auth = authorization.authorize
+        redirect_to api_connection_path(redirect_uri: auth.redirect_uri, access_token: auth.auth.token.token) #render :new
       end
     else
       render :error
