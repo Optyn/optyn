@@ -47,7 +47,16 @@
         url: $form.prop('action'),
         data: $form.serialize(),
         success: function(data) {
-          window.location = redirect_uri;
+          try{
+            if(data.message.length){
+              $('#box_login').html(data.message);
+              setTimeout(function(){
+                window.location = redirect_uri;
+              }, 3000)
+            }
+          }catch(e){
+            window.location = redirect_uri;
+          }
         },
         error: function(){
           alert("Couldn't opt you in. Please close this window and try again.");

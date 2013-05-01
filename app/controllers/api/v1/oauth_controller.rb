@@ -7,6 +7,8 @@ module Api
 
       doorkeeper_for :connection, :update_permissions
 
+      before_filter :map_current_user_to_store, only: [:update_permissions]
+
       def login
         session[:omniauth_manager] = nil
         session[:omniauth_user] = true
@@ -20,9 +22,20 @@ module Api
       end
 
       def update_permissions
-        current_user.update_attributes(params[:user])
+        current_user.attributes = params[:user]
+        @shop = doorkeeper_token.application.owner
+        user_changed = current_user.changed? || @connection
 
-        head :ok
+        if current_user.update_attributes(params[:user])
+          if user_changed
+
+            render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
+          else
+            head :ok
+          end
+        else
+          head :unprocessable_entity
+        end
       end
     end
   end
