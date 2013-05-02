@@ -1,0 +1,3 @@
+= form_for @application, :as => :oauth_application, :url => merchants_app_path, :method => :put, :html => {:id => "app_form"} do |f|
+
+  = render :partial => "merchants/apps/form", locals: {f: f}

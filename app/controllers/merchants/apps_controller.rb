@@ -1,50 +1,45 @@
 class Merchants::AppsController < Merchants::BaseController
-	before_filter :redirect_to_edit, :only => [:new, :create]
-	before_filter :redirect_to_new, :except => [:new, :create]
-
-	helper_method :current_shop
+  helper_method :current_shop
 
   REDIRECTION_URI_FLASH = "You have an incorrect redirection url. Are you possibly missing the protocol http:// or https://?"
 
-	def new
-		@application = current_shop.oauth_application
-	end
+  def create
+    current_shop.generate_oauth_token(params[:oauth_application])
+    @application = current_shop.oauth_application
 
-	def create
-		 current_shop.generate_oauth_token(params[:redirect_uri])
-      return redirect_to merchants_app_path
-
+    render json: {preview_content: render_to_string(partial: "merchants/apps/preview"),
+                  form_content: render_to_string(partial: 'merchants/apps/edit'),
+                  advanced_content: render_to_string(partial: 'merchants/apps/advanced')
+    }
   rescue
-    flash[:error] = REDIRECTION_URI_FLASH
-    render 'new'
-	end
+    render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
+  end
 
-	def show
-		@application = current_shop.oauth_application
-	end
+  def show
+    @application = current_shop.oauth_application.blank? ? current_shop.build_oauth_application : current_shop.oauth_application
+  end
 
-	def edit
-		@application = current_shop.oauth_application
-	end
-
-	def update
-	  current_shop.generate_oauth_token(params[:redirect_uri], "true" == params[:reset])
-    return redirect_to merchants_app_path
+  def update
+    current_shop.generate_oauth_token(params[:oauth_application], "true" == params[:reset])
+    @application = current_shop.oauth_application
+    render json: {preview_content: render_to_string(partial: "merchants/apps/preview"),
+                  form_content: render_to_string(partial: 'merchants/apps/edit'),
+                  advanced_content: render_to_string(partial: 'merchants/apps/advanced')
+                 }
   rescue
-    flash[:error] = REDIRECTION_URI_FLASH
-    render 'edit'
-	end
+    render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
+  end
 
-	private
-	def redirect_to_edit
-		if current_shop.oauth_application.present?
-			redirect_to edit_merchants_app_path
-		end
-	end
+  private
+  def redirect_to_edit
+    if current_shop.oauth_application.present?
+      redirect_to edit_merchants_app_path
+    end
+  end
 
-	def redirect_to_new
-		unless current_shop.oauth_application.present?
-			redirect_to new_merchants_app_path
-		end
-	end
+  def redirect_to_new
+    unless current_shop.oauth_application.present?
+      redirect_to new_merchants_app_path
+    end
+  end
 end

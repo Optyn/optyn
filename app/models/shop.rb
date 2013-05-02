@@ -87,7 +87,7 @@ class Shop < ActiveRecord::Base
     first_location.zip rescue ""
   end
 
-  def generate_oauth_token(redirect_uri, force=false)
+  def generate_oauth_token(options, force=false)
     app = nil
     if force
       oauth_application.destroy
@@ -96,10 +96,10 @@ class Shop < ActiveRecord::Base
 
     app = self.oauth_application
     if app.present?
-      app.redirect_uri = redirect_uri
+      set_app_attrs(app, options)
       app.save!
     else
-      generate_application(redirect_uri)
+      generate_application(options)
     end
   end
 
@@ -159,17 +159,23 @@ class Shop < ActiveRecord::Base
     end
   end
 
-  def generate_application(redirect_uri)
+  def generate_application(options)
     Shop.transaction do
-      app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip,
-                                        :redirect_uri => redirect_uri)
-      app.owner = self
+      app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip)
+      set_app_attrs(app, options)
       app.save
 
       self.oauth_application = app
-
-      self.embed_code = EmbedCodeGenerator.generate_embed_code(self)
-      save(validate: false)
     end
+  end
+
+  def set_app_attrs(app, options)
+    app.redirect_uri = options[:redirect_uri]
+    app.owner = self
+    app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
+    app.button_size = options[:button_size]
+    app.checkmark_icon = options[:checkmark_icon]
+    app.show_default_optyn_text = options[:show_default_optyn_text]
+    app.custom_text = options[:custom_text]
   end
 end

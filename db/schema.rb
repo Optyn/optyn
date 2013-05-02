@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430065319) do
+
+ActiveRecord::Schema.define(:version => 20130501142711) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -154,14 +155,20 @@ ActiveRecord::Schema.define(:version => 20130430065319) do
   add_index "oauth_access_tokens", ["token"], :name => "index_oauth_access_tokens_on_token", :unique => true
 
   create_table "oauth_applications", :force => true do |t|
-    t.string   "name",         :null => false
-    t.string   "uid",          :null => false
-    t.string   "secret",       :null => false
-    t.string   "redirect_uri", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "name",                                      :null => false
+    t.string   "uid",                                       :null => false
+    t.string   "secret",                                    :null => false
+    t.string   "redirect_uri",                              :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "owner_id"
     t.string   "owner_type"
+    t.boolean  "show_custom_optyn_text"
+    t.text     "embed_code"
+    t.integer  "button_size",             :default => 1
+    t.boolean  "checkmark_icon",          :default => true
+    t.boolean  "show_default_optyn_text", :default => true
+    t.text     "custom_text"
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
@@ -208,7 +215,6 @@ ActiveRecord::Schema.define(:version => 20130430065319) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.text     "embed_code"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "stype"
