@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20130501142711) do
 
   create_table "admins", :force => true do |t|
@@ -163,7 +162,6 @@ ActiveRecord::Schema.define(:version => 20130501142711) do
     t.datetime "updated_at",                                :null => false
     t.integer  "owner_id"
     t.string   "owner_type"
-    t.boolean  "show_custom_optyn_text"
     t.text     "embed_code"
     t.integer  "button_size",             :default => 1
     t.boolean  "checkmark_icon",          :default => true
