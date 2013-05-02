@@ -4,9 +4,4 @@ class BaseController < ApplicationController
   before_filter :redirect_to_account
   
   private
-  def redirect_to_account
-		if !current_user.blank? && !current_user.email.present?
-			redirect_to edit_user_registration_path
-		end
-  end
 end

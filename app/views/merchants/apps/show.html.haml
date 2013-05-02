@@ -1,10 +1,9 @@
-/Flash Notice
 = display_flash_message
 /Main Body
 #merchants
   .container
     = render partial: "merchants/shared/menu"
-    .span8.preview
+    .span8.preview.app-container
       .header
         %h3
           Your Optyn button for your 
@@ -18,70 +17,12 @@
             Customize Your Optyn Button
             %hr
           .custom
-            .option
-              %input{:type => "radio"}
-                Small Button
-              %input{:type => "radio", :checked => ""}
-                Large Button
-            .option
-              %label.checkbox
-                %input{:type => "checkbox"}
-                  Show Checkmark Icon
-            .option
-              %label.checkbox
-                %input{:type => "checkbox"}
-                  Show Optyn Text
-                %textarea{:rows => "3", :placeholder => "Optyn is awesome."}
-            .option
-              %label.checkbox
-                %input{:type => "checkbox"}
-                  Or Use Custom Optyn Text
-                %textarea{:rows => "3", :placeholder => "Optyn is awesome."}    
-          .refresh
-            %a.btn.refreshbtn{:href => "#"} Refresh Preview
-        .span3.btn-preview
-          .header
-            Optyn Button Preview
-            %hr
-          .optyn-preview
-            %img{:alt => "Dana Cafe", :src => "/assets/optynbtn.png"}
-          .codesnippet
-            %textarea{:id => 'embed_code', :rows => "5", :class => "disabledinput"}
-              = current_shop.embed_code    
-          .btns
-            %a.btn.refreshbtn{:href => "#"} Refresh Preview
-            %a.btn.copybtn{:href => "#"} Copy to Clipboard
-          .need-help
-            Need Help Installing this? Click Here and we will do it for you.
-      .advanced 
-        .title
-          %h3
-            More Advanced Features?
-          .actions
-            = link_to "Edit", edit_merchants_app_path, :class => "btn"
-          %p
-            If you need more advanced stuff, here it is:  
-        %hr
-        .main
-          %h4 Callback url:
-          %p
-            %code{:id => 'callback_url'}
-              = @application.redirect_uri
+            .form-wrapper
+              - if  @application.blank? || @application.new_record?
+                = render partial: 'new'
+              - else
+                = render partial: 'edit'
 
-          %h4 Application Id:
-          %p
-            %code{:id => 'application_id'}
-              = @application.uid
+        = render partial: "preview"
 
-          %h4 Secret:
-          %p
-            %code{:id => 'secret'}
-              = @application.secret
-
-          %h4 Button Script:
-          %p
-            %code{:id => 'embed_code'}
-              = current_shop.embed_code    
-
-          .actions
-            = link_to "Edit", edit_merchants_app_path, :class => "btn"
+      = render partial: 'advanced'

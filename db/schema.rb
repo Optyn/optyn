@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418143022) do
+ActiveRecord::Schema.define(:version => 20130501142711) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
   end
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
+
+  create_table "file_imports", :force => true do |t|
+    t.string   "csv_file"
+    t.integer  "manager_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "interests", :force => true do |t|
     t.integer  "holder_id"
@@ -111,6 +118,8 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "picture"
+    t.string   "oauth_image"
   end
 
   add_index "managers", ["confirmation_token"], :name => "index_managers_on_confirmation_token", :unique => true
@@ -225,14 +234,20 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
   add_index "oauth_access_tokens", ["token"], :name => "index_oauth_access_tokens_on_token", :unique => true
 
   create_table "oauth_applications", :force => true do |t|
-    t.string   "name",         :null => false
-    t.string   "uid",          :null => false
-    t.string   "secret",       :null => false
-    t.string   "redirect_uri", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "name",                                      :null => false
+    t.string   "uid",                                       :null => false
+    t.string   "secret",                                    :null => false
+    t.string   "redirect_uri",                              :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "owner_id"
     t.string   "owner_type"
+    t.boolean  "show_custom_optyn_text"
+    t.text     "embed_code"
+    t.integer  "button_size",             :default => 1
+    t.boolean  "checkmark_icon",          :default => true
+    t.boolean  "show_default_optyn_text", :default => true
+    t.text     "custom_text"
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
@@ -279,7 +294,6 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.text     "embed_code"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "stype"
@@ -372,6 +386,8 @@ ActiveRecord::Schema.define(:version => 20130418143022) do
     t.boolean  "zip_prompted"
     t.string   "gender",                 :limit => 1
     t.date     "birth_date"
+    t.string   "picture"
+    t.string   "oauth_image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

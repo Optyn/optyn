@@ -12,6 +12,8 @@ class Connection < ActiveRecord::Base
 
   scope :ordered_by_shop_name, order("shops.name ASC")
 
+  scope :includes_user_and_permissions, includes(user: {permissions_users: :permission})
+
   scope :for_users, ->(user_identifiers){where(user_id: user_identifiers)}
 
   def toggle_connection
@@ -25,5 +27,9 @@ class Connection < ActiveRecord::Base
 
   def connection_status
   	self.active ? "Following" : "Opt in"
+  end
+
+  def self.shops_connections(shop_id)
+    for_shop(shop_id).includes_user_and_permissions
   end
 end

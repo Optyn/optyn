@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def display_flash_message
-    if (flash_type = fetch_falsh_type)
+    if (flash_type = fetch_flash_type)
       content_tag :div, class: "alert #{bootstrap_class_for(flash_type)}" do
         content = ""
         content << content_tag(:button, {:type => "button", :class => "close", :'data-dismiss' => "alert"}) do
@@ -32,7 +32,7 @@ module ApplicationHelper
     end
   end
 
-  def fetch_falsh_type
+  def fetch_flash_type
     if flash[:notice].present?
       :notice
     elsif flash[:error].present?
@@ -60,9 +60,10 @@ module ApplicationHelper
   end
 
   def user_permission(user)
-    if user.visible_permissions_users.present?
-      permissions_users = user.visible_permissions_users
-      if permissions_users.size == Permission.all.size
+    visible_permissions_users = user.permissions_users.select(&:action)
+    if visible_permissions_users.present?
+
+      if visible_permissions_users.size == Permission.cached_count
         "Full"
       else
         user.permission_names.join(", ")

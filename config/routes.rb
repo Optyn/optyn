@@ -124,9 +124,8 @@ Optyn::Application.routes.draw do
     resource :app
     resources :connections 
     resources :locations
-    resources :dashboard do
-      collection { post :import }
-    end
+    resources :dashboard
+    resources :file_imports
 
     resource :shop do
       member do

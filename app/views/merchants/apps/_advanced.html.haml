@@ -1,0 +1,20 @@
+.advanced
+  .title
+    %h3
+      Like to implement things yourself
+  %hr
+  .main
+    %h4 Callback url:
+    %p
+      %code{:id => 'callback_url'}
+        = @application.redirect_uri
+
+    %h4 Application Id:
+    %p
+      %code{:id => 'application_id'}
+        = @application.uid
+
+    %h4 Secret:
+    %p
+      %code{:id => 'secret'}
+        = @application.secret

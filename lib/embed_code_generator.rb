@@ -1,5 +1,5 @@
 class EmbedCodeGenerator
-	def self.generate_embed_code(shop)
+	def self.generate_embed_code(app)
 		%Q(
 				<div id="optyn-container">
 					<h4>Welcome to Optyn</h4>
@@ -17,7 +17,7 @@ class EmbedCodeGenerator
 
 					}
 					</script>
-					<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{shop.app_id}"></script>
+					<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{app.uid}"></script>
 				</div>
 				<iframe name='optyn-iframe' id="optyn-iframe" style='display:none'></iframe>
 			)

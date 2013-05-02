@@ -1,5 +1,5 @@
 class Permission < ActiveRecord::Base
-	has_many :permissions_users
+	has_many :permissions_users, dependent: :destroy
   has_many :users, :through => :permissions_users
   attr_accessible :name
 
@@ -15,4 +15,8 @@ class Permission < ActiveRecord::Base
   #def self.email_id()
   	#for_name(EMAIL).first.id	
   #end
+
+  def self.cached_count
+    @@PERMISSIONS ||= Permission.count
+  end
 end

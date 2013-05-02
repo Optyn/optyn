@@ -7,9 +7,9 @@
         %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
         My Dashboard
     %li
-      %a{:href => "connections"}
+      %a{:href => merchants_file_imports_path}
         %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Connections"}
-        My Campaigns
+        Import Users
     - if merchants_manager_signed_in?
       %li
         %a{:href => edit_merchants_manager_registration_path}

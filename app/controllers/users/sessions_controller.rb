@@ -6,6 +6,11 @@ class Users::SessionsController < Devise::SessionsController
     session[:omniauth_user] = true
     super
 	end
-  
+
+
+  def create
+    super
+    @user_login = User.new(params[:user])
+  end
 
 end

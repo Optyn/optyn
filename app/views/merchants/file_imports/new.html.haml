@@ -1,0 +1,5 @@
+Import Customers:
+  = form_for current_merchants_manager,:url => import_merchants_dashboard_index_path, :method => "post",multipart: true do |f|
+    = f.fields_for :file_imports do |import_form|
+      = import_form.file_field :csv_file
+    = f.submit "Import"
