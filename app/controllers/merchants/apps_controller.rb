@@ -29,17 +29,4 @@ class Merchants::AppsController < Merchants::BaseController
   rescue
     render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
   end
-
-  private
-  def redirect_to_edit
-    if current_shop.oauth_application.present?
-      redirect_to edit_merchants_app_path
-    end
-  end
-
-  def redirect_to_new
-    unless current_shop.oauth_application.present?
-      redirect_to new_merchants_app_path
-    end
-  end
 end
