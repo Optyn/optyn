@@ -18,7 +18,7 @@
             %hr
           .custom
             .form-wrapper
-              - if  @oauth_application.blank? || @oauth_application.new_record?
+              - if  @application.blank? || @application.new_record?
                 = render partial: 'new'
               - else
                 = render partial: 'edit'

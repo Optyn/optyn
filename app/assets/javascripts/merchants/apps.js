@@ -62,6 +62,10 @@ function Apps() {
             url: $('#app_form').prop('action'),
             type: 'POST',
             data: $('#app_form').serialize(),
+            beforeSend: function(){
+                $('.app-container #loading').show();
+                $('.app-container .refresh').hide();
+            },
             success: function (data) {
                 $('.app-container .btn-preview').replaceWith(data.preview_content);
                 $('.app-container .form-wrapper').replaceWith(data.form_content);
@@ -82,6 +86,8 @@ function Apps() {
             },
             error: function (data) {
                 alert($.parseJSON(data.responseText).error_message);
+                $('.app-container #loading').hide();
+                $('.app-container .refresh').show();
             }
         });
     };
