@@ -98,6 +98,8 @@ class Shop < ActiveRecord::Base
     if app.present?
       set_app_attrs(app, options)
       app.save!
+      assign_embed_code(app)
+      app.save!
     else
       generate_application(options)
     end
@@ -114,10 +116,10 @@ class Shop < ActiveRecord::Base
       details[:location] = useful_location.as_json(except: [:id, :created_at, :updated_at, :longitude, :latitude])
     end
 
-    details[:button_url] = SiteConfig.app_base_url + "/assets/logo.png"
+    details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.button_size == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
 
     # put the oauth details
-    details[:welcome_message] = SiteConfig.api_welcome_message
+    details[:welcome_message] = oauth_application.show_default_optyn_text ? SiteConfig.api_welcome_message : oauth_application.custom_text
 
     details
   end
@@ -165,6 +167,9 @@ class Shop < ActiveRecord::Base
       set_app_attrs(app, options)
       app.save
 
+      assign_embed_code(app)
+      app.save
+
       self.oauth_application = app
     end
   end
@@ -172,10 +177,13 @@ class Shop < ActiveRecord::Base
   def set_app_attrs(app, options)
     app.redirect_uri = options[:redirect_uri]
     app.owner = self
-    app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
     app.button_size = options[:button_size]
     app.checkmark_icon = options[:checkmark_icon]
     app.show_default_optyn_text = options[:show_default_optyn_text]
     app.custom_text = options[:custom_text]
+  end
+
+  def assign_embed_code(app)
+    app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
   end
 end
