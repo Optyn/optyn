@@ -47,14 +47,39 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   	-moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
   	box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
 }
-#choose_message .row .btn:hover {
-	background-color: #1791c0l
+#choose_message .row .type:hover {
+	background-color: #1791c0;
+	color:white;
 }
 #choose_message .row .type h3 {
 	color: #263d45;
 	font-size: 16px;
 	font-weight: bold;
 }
+
 #choose_message .row .type img {
 
+}
+/* Header Text for compose */
+.headertext {
+
+}
+.headertext h3 {
+	font-weight: bold;
+	margin: 0px;
+	padding-bottom: 10px;
+	font-size: 26px;
+	line-height: 28px;
+}
+.headertext h5 {
+	margin: 0px;
+	font-size: 16px;
+	line-height: 16px;
+	padding-bottom: 10px;
+}
+.headertext h6 {
+	color: #1791c0;
+	font-size: 14px;
+	line-height: 14px;
+	padding-bottom: 10px;
 }
