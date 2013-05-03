@@ -44,8 +44,8 @@ class Shop < ActiveRecord::Base
   end
 
   def self.disconnected_connections(connected_ids)
-    return all if connected_ids.blank?
-    disconnected(connected_ids) 
+    return order(:name) if connected_ids.blank?
+    disconnected(connected_ids).order(:name)
   end
 
   def shop_already_exists?

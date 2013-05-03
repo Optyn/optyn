@@ -242,7 +242,6 @@ ActiveRecord::Schema.define(:version => 20130501142711) do
     t.datetime "updated_at",                                :null => false
     t.integer  "owner_id"
     t.string   "owner_type"
-    t.boolean  "show_custom_optyn_text"
     t.text     "embed_code"
     t.integer  "button_size",             :default => 1
     t.boolean  "checkmark_icon",          :default => true
