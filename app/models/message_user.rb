@@ -78,7 +78,7 @@ class MessageUser < ActiveRecord::Base
     identifier = Base64.urlsafe_decode64(token)
     message_user_entry = MessageUser.find_by_uuid(identifier)
     if message_user_entry.present?
-      message_user_entry.update_attribute(:is_read, true)
+      message_user_entry.update_attribute(:email_read, true)
     end
   end
 
