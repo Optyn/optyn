@@ -15,7 +15,7 @@
 //= require bootstrap
 //= require_directory ./stripe
 //= require chosen-jquery
-//= require bootstrap-datepicker
+//= require bootstrap-datetimepicker
 //= require jquery.zclip.min.js
 //= require shCore.js
 //= require shLegacy.js
