@@ -1,0 +1,23 @@
+.modal-header
+  %button{:class => "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"}x
+  %h3 Edit message subject and send
+.modal-body
+  = form_for :message, url: update_meta_merchants_message_path(message.uuid), :method => :put, :html => {id: "message_meta_data", class: 'form-horizontal'} do |f|
+    = hidden_field_tag :message_type, message.type.underscore
+
+    .control-group
+      = f.label :subject, class: "control-label"
+      .controls
+        = f.text_field :subject, class: "input-large"
+
+    .control-group
+      = f.label :send_on, "Send Date Time", class: "control-label"
+      .controls
+        .input-append.date-time-picker
+          = f.text_field :send_on, value: message_send_on_date(message), class: "input-large", 'data-format' => "yyyy-MM-dd HH:mm PP"
+          %span.add-on
+            %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+
+.modal-footer
+  = link_to "Close", "#", class: 'btn', 'data-dismiss' => "modal"
+  = link_to "Save changes", "#", class: "btn btn-primary"

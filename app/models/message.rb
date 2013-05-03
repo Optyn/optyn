@@ -27,6 +27,8 @@ class Message < ActiveRecord::Base
 
   validates :name, presence: true
   validates :second_name, presence: true
+  validates :subject, presence: true
+  validate :send_on_greater_by_hour
 
   scope :for_state_and_sender, ->(state_name, manager_identifier) { with_state(state_name).where(manager_id: manager_identifier) }
 
@@ -73,17 +75,17 @@ class Message < ActiveRecord::Base
     end
 
     before_transition :draft => same do |message|
-      message.subject = message.send(:canned_subject)
+      message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
     end
 
     before_transition :draft => :queued do |message|
       message.valid?
-      message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST")
+      message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
     end
 
     before_transition any => :queued do |message|
-      message.subject = message.send(:canned_subject)
+      message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
     end
 
@@ -395,5 +397,9 @@ class Message < ActiveRecord::Base
     message_owner = self.manager
     Message.cached_drafts_count(message_owner, true)
     Message.cached_queued_count(message_owner, true)
+  end
+
+  def send_on_greater_by_hour
+    self.errors.add(:send_on, "Message send time should be greater than an hour from now") unless self.send_on > 1.hour.since
   end
 end

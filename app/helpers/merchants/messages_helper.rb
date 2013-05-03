@@ -1,4 +1,9 @@
 module Merchants::MessagesHelper
+  def message_send_on_date(message)
+     message.send_on = 1.hour.since if message.send_on.blank?
+     formatted_message_form_datetime(message, 'send_on')
+  end
+
   def formatted_message_form_datetime(message, message_attr)
     message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p')
   rescue
@@ -116,7 +121,7 @@ module Merchants::MessagesHelper
 
   def messages_menu_links(user, path, link_name, count, force_visible=false, highlight_actions=[])
     #if force_visible || user.message_authoring_or_admin_rights?
-      link_to("#{link_name}#{" (#{count})" if (count.to_i > 0 rescue false)}", path, :class => message_menu_highlight_class(highlight_actions, link_name))
+    link_to("#{link_name}#{" (#{count})" if (count.to_i > 0 rescue false)}", path, :class => message_menu_highlight_class(highlight_actions, link_name))
     #end
   end
 

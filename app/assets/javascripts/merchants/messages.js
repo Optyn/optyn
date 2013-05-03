@@ -4,7 +4,10 @@ $(document).ready(function () {
 });
 
 function MerchantMessage() {
+    var current = this;
+
     this.initialize = function () {
+
         if ($('#message_fields_wrapper').length) {
             this.hookChosen();
             this.hookActionEvent();
@@ -17,8 +20,12 @@ function MerchantMessage() {
             this.hookAllAutoCheckUncheckSelectAll();
         }
 
-        if ($('.message-list').length){
+        if ($('.message-list').length) {
             this.hookCellClick();
+        }
+
+        if ($('#message_meta_modal')) {
+            this.hookMetadataSubmit();
         }
     };
 
@@ -90,6 +97,35 @@ function MerchantMessage() {
         $('.message-list tr td.show-link').click(function () {
             var link = $(this).parents('tr').find('td.show-link-address').text();
             window.location = link;
+        });
+    };
+
+    this.hookMetadataSubmit = function () {
+        $('body').on('click', '#message_meta_modal .btn-primary', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $('#message_meta_modal form').prop('action'),
+                type: 'POST',
+                data: $('#message_meta_modal').find('form').serialize(),
+                success: function (data) {
+                    $('#message_meta_modal').modal('hide');
+                    setTimeout(function () {
+                        $('#message_meta_data').replaceWith(data.message);
+                        current.hookDateTimePicker();
+                    }, 1000);
+
+                },
+                error: function (data) {
+                    var $modal = $('#message_meta_modal');
+                    $modal.modal('hide');
+                    $modal.html($.parseJSON(data.responseText).message);
+                    setTimeout(function () {
+                        current.hookDateTimePicker();
+                        $('#message_meta_modal').modal('show');
+                        moveDatetimepickerErrorMessage();
+                    }, 500);
+                }
+            });
         });
     };
 }

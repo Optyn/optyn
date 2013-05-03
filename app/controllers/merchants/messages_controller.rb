@@ -57,6 +57,19 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def update_meta
+    klass = params[:message_type].classify.constantize
+    @message = klass.find_by_uuid(params[:id])
+    @message.subject = params[:message][:subject]
+    @message.send_on = params[:message][:send_on]
+    @message.save!
+
+    render json: {message: render_to_string(partial: "merchants/messages/preview_meta")}
+
+  rescue => e
+    render json: {message: render_to_string(partial: "merchants/messages/meta_form", locals: {message: @message})}, status: :unprocessable_entity
+  end
+
   def preview
     @message = Message.find_by_uuid(params[:id])
   end

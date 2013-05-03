@@ -177,6 +177,7 @@ Optyn::Application.routes.draw do
       member do
         get :preview
         get :launch
+        put :update_meta
       end
     end
   end

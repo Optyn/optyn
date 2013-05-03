@@ -91,6 +91,10 @@ $fontAwesomeSvgPath: image-path("fontawesome-webfont.svg");
 
 .display-none{display: none;}
 
+.field-with-errors .error{color: #b94a48}
+
+.field-with-errors label{color: #b94a48}
+
 // Font Awesome
 //@import "bootstrap/fontawesome";
 
