@@ -1,6 +1,6 @@
 #title_header
   %h3
-    Messagecenter
+    Message Center
 /Flash Notice
 = display_flash_message
 /Main Body
@@ -11,29 +11,39 @@
     .span8#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
 
-      .well
+      #choose_message
         .row
-          .span2
-            = link_to "Create a coupon",  merchants_new_campaign_path(message_type: 'coupon_message'), {class: 'btn btn-large btn-block'}
-
-          .span3
-            = link_to "Announce a special",  merchants_new_campaign_path(message_type: 'special_message'), {class: 'btn btn-large btn-block'}
-
-          .span2
-            = link_to "Announce a sale",  merchants_new_campaign_path(message_type: 'sale_message'), {class: 'btn btn-large btn-block'}
-
-      .well
+          %a{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
+            .span2.type
+              %img{:src => "/assets/mc_coupon_icon.png"}
+              %h3 Let's Create a Coupon
+          %a{:href => merchants_new_campaign_path(message_type: 'special_message')}
+            .span2.type
+              %img{:src => "/assets/mc_special_icon.png"}
+              %h3 Let's Announce a Special
+          %a{:href => merchants_new_campaign_path(message_type: 'sale_message')}
+            .span2.type
+              %img{:src => "/assets/mc_sale_icon.png"}
+              %h3 Let' Announce a Sale
         .row
-          .span2
-            = link_to "General Announcement",  merchants_new_campaign_path(message_type: 'general_message'), {class: 'btn btn-large btn-block'}
-
-          .span3
-            = link_to "Product Announcement",  merchants_new_campaign_path(message_type: 'product_message'), {class: 'btn btn-large btn-block'}
-
-          .span2
-            = link_to "New Event",  merchants_new_campaign_path(message_type: 'event_message'), {class: 'btn btn-large btn-block'}
-
-      .well
+          %a{:href => merchants_new_campaign_path(message_type: 'general_message')}
+            .span2.type
+              %img{:src => "/assets/mc_general_icon.png"}
+              %h3 General Announcement
+          %a{:href => merchants_new_campaign_path(message_type: 'product_message')}
+            .span2.type
+              %img{:src => "/assets/mc_product_icon.png"}
+              %h3 New Product Announcement
+          %a{:href => merchants_new_campaign_path(message_type: 'event_message')}
+            .span2.type
+              %img{:src => "/assets/mc_event_icon.png"}
+              %h3 New Event
         .row
-          .span7
-            = link_to "Survey",  merchants_new_campaign_path(message_type: 'survey_message'), {class: 'btn btn-large btn-block'}
+          %a{:href => merchants_new_campaign_path(message_type: 'survey_message')}
+            .span2.type
+              %img{:src => "/assets/mc_survey_icon.png"}
+              %h3 Let's send out a Survey
+          %a{:href => "#"}
+            .span2.type
+              %img{:src => "/assets/mc_survey_icon.png"}
+              %h3 Let's create a Custom E-mail
