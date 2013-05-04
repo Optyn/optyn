@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501142711) do
+ActiveRecord::Schema.define(:version => 20130505063756) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(:version => 20130501142711) do
   create_table "authentications", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "account_type"
     t.integer  "account_id"
+    t.string   "image_url",    :limit => 1000
   end
 
   create_table "businesses", :force => true do |t|
@@ -119,7 +120,6 @@ ActiveRecord::Schema.define(:version => 20130501142711) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "picture"
-    t.string   "oauth_image"
   end
 
   add_index "managers", ["confirmation_token"], :name => "index_managers_on_confirmation_token", :unique => true
@@ -386,7 +386,6 @@ ActiveRecord::Schema.define(:version => 20130501142711) do
     t.string   "gender",                 :limit => 1
     t.date     "birth_date"
     t.string   "picture"
-    t.string   "oauth_image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

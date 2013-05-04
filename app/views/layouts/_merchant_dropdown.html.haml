@@ -4,7 +4,7 @@
     Dashboard
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-    %img{:src => current_merchants_manager.image_url, :alt => "User Avatar", :class => "profile_image"}
+    %img{:src => current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
   %ul.dropdown-menu
     %li
       %a.active{:href => "merchants/dashboard"}

@@ -18,7 +18,7 @@ class OmniauthClientsController < ApplicationController
 	private
 
 	def create_manager(omniauth)
-		manager = Manager.create_from_omniauth(omniauth)
+		manager, authentication = Manager.create_from_omniauth(omniauth)
 
 		if manager.new_record?
 			@shop = Shop.new
@@ -28,15 +28,17 @@ class OmniauthClientsController < ApplicationController
 		else
 			flash.notice = "Signed in!"
 			sign_in_and_redirect manager
+      session[:omniauth_manager_authentication_id] = authentication.id
 		end
 
 	end
 
 	def create_user(omniauth)
-		user = User.from_omniauth(omniauth)
+		user, authentication = User.from_omniauth(omniauth)
 		if user.persisted?
 			flash.notice = "Signed in!"
 			sign_in_and_redirect user
+      session[:omniauth_user_authentication_id] = authentication.id
 		else
 			session["devise.user_attributes"] = user.attributes
 			redirect_to new_user_registration_path

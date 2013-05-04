@@ -5,7 +5,7 @@ class Authentication < ActiveRecord::Base
 	belongs_to :user
   belongs_to :account, :polymorphic => true
 
-	attr_accessible :provider, :uid, :account_id ,:account_type
+	attr_accessible :provider, :uid, :account_id, :account_type, :image_url
 
 	validates :provider, presence: true
 	validates :uid, presence: true, :uniqueness => { :scope => :account_type }

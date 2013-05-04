@@ -17,20 +17,26 @@ class Manager < ActiveRecord::Base
   validates :name, :presence => true
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
 
-  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at, :picture, :oauth_image
+  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at, :picture
   attr_accessor :skip_password
   accepts_nested_attributes_for :file_imports
 
   def self.create_from_omniauth(auth)
-    email = auth.info.email.to_s
-    manager = Manager.find_by_email(email)
+    authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "Manager")
+    manager = authentication.account rescue Manager.find_by_email(auth.info.email)
 
-    if !manager
-      manager = Manager.new(name: auth.info.name, email: email, oauth_image: auth.info.image)
+    unless manager.present?
+      manager = Manager.new(name: auth.info.name, email: auth.info.email)
       manager
     else
-      authentication = manager.authentications.create(uid: auth['uid'], provider: auth['provider'])
-      manager
+
+      if authentication.blank?
+        authentication = manager.authentications.create(uid: auth['uid'], provider: auth['provider'])
+      end
+      authentication.image_url = auth.info.image
+      authentication.save
+
+      [manager, authentication]
     end
   end
 
@@ -69,11 +75,12 @@ class Manager < ActiveRecord::Base
     shop.first_location
   end
 
-  def image_url
+  def image_url(omniauth_provider_id=nil)
     if !picture.blank?
       picture
-    elsif !oauth_image.blank?
-      oauth_image
+    elsif (authentication = authentications.find_by_id(omniauth_provider_id)).present?
+      url = authentication.image_url
+      url.blank? ? "/assets/avatar.png" : url
     else
       "/assets/avatar.png"
     end

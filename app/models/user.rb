@@ -1,27 +1,27 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
-	has_many :authentications,:as => :account, dependent: :destroy
+  has_many :authentications, :as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
   has_many :permissions_users, dependent: :destroy
-  has_many :permissions , :through => :permissions_users
-  
+  has_many :permissions, :through => :permissions_users
+
   mount_uploader :picture, ImageUploader
-  
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :async, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name ,:presence => true
+  validates :name, :presence => true
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-    :remember_me,:office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture, :oauth_image
+                  :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture
 
   accepts_nested_attributes_for :permissions_users
 
@@ -30,55 +30,66 @@ class User < ActiveRecord::Base
 
   PER_PAGE = 30
 
-  def self.import(file,shop,manager)
+  def self.import(file, shop, manager)
     invalid_records = []
-    index,valid_index = 0
+    index, valid_index = 0
     CSV.foreach(file, headers: true) do |row|
       user_password = Devise.friendly_token.first(8)
-      new_user = User.new row.to_hash.merge({password: user_password,  password_confirmation: user_password })
+      new_user = User.new row.to_hash.merge({password: user_password, password_confirmation: user_password})
       if new_user.save
-        new_connection = new_user.connections.create(shop_id: shop.id ) if new_user.present?
-        new_user.permissions_users.create(action: "true", permission_id: "1") if new_user.present?        
+        new_connection = new_user.connections.create(shop_id: shop.id) if new_user.present?
+        new_user.permissions_users.create(action: "true", permission_id: "1") if new_user.present?
         new_user.permissions_users.create(action: "true", permission_id: "2") if new_user.present?
-        valid_index = valid_index + 1   
+        valid_index = valid_index + 1
       else
-        invalid_records <<{:index=>index,:csv_row=>row.to_hash,:error=>new_user.errors.full_messages.join(",")}
-      end   
+        invalid_records <<{:index => index, :csv_row => row.to_hash, :error => new_user.errors.full_messages.join(",")}
+      end
       index = index + 1
     end
     # Return an array of invalid records and total no of record
-    [invalid_records,index,valid_index]
+    [invalid_records, index, valid_index]
     filepath = "/tmp/record_#{Time.now}.csv"
-    csv_string = CSV.open(filepath, 'w', ) do |csv|
+    csv_string = CSV.open(filepath, 'w',) do |csv|
       cols = ["name", "email", "gender", "errors"]
       csv << cols
       invalid_records.each do |record|
         csv << [record.csv_row.name, record.csv_row.email, record.csv_row.gender, record.error]
       end
     end
-    MerchantMailer.user_contacts_imported_notifier(manager,filepath,index,valid_index).deliver
+    MerchantMailer.user_contacts_imported_notifier(manager, filepath, index, valid_index).deliver
   end
 
   def self.from_omniauth(auth)
-  	Authentication.fetch_authentication(auth.provider, auth.uid,"User").account rescue create_from_omniauth(auth)
+    authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "User")
+    authentication.image_url = auth.info.image
+    authentication.save
+    user = authentication.account
+    [user, authentication]
+  rescue
+    create_from_omniauth(auth)
   end
-  
+
   def self.create_from_omniauth(auth)
     user = nil
+    authentication = nil
+
     User.transaction do
       email = auth.info.email.to_s
-      user = User.find_by_email(email) || User.new(name: auth.info.name, email: email, oauth_image: auth.info.image)
+      user = User.find_by_email(email) || User.new(name: auth.info.name, email: email)
       user.save(validate: false)
 
       provider = auth.provider
-      uid      = auth.uid
-      authentication = Authentication.fetch_authentication(provider, uid,"User")
+      uid = auth.uid
+
+      authentication = Authentication.fetch_authentication(provider, uid, "User")
+
       if authentication.blank?
-        authentication = user.authentications.new(uid: auth['uid'], provider: auth['provider'])
+        authentication = user.authentications.new(uid: auth['uid'], provider: auth['provider'], image_url: auth.info.image)
+        authentication.save
       end
     end
 
-    user
+    [user, authentication]
   end
 
   def active_connections(page_number=1, per_page=PER_PAGE)
@@ -94,15 +105,15 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-  	super && authentications.blank?
+    super && authentications.blank?
   end
 
   def update_with_password(params, *options)
-  	if encrypted_password.blank?
-  		update_attributes(params, *options)
-  	else
-  		super
-  	end
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
+    end
   end
 
   def update_zip_prompted(force=false)
@@ -148,7 +159,7 @@ class User < ActiveRecord::Base
     new_values = label_ids - existing_label_ids
 
     UserLabel.transaction do
-      self.user_labels.find_all_by_label_id(destruction_values).each{|user_label| user_label.destroy}
+      self.user_labels.find_all_by_label_id(destruction_values).each { |user_label| user_label.destroy }
       new_values.each do |label_id|
         self.user_labels.create(label_id: label_id)
       end
@@ -157,8 +168,8 @@ class User < ActiveRecord::Base
 
   def build_permission_users
     Permission.scoped.map do |permission|
-      permissions_users.new(:permission_id => permission.id) 
-    end  
+      permissions_users.new(:permission_id => permission.id)
+    end
   end
 
   def visible_permissions_users
@@ -169,13 +180,14 @@ class User < ActiveRecord::Base
     permissions_users.select(&:action).collect(&:permission).collect(&:name)
   end
 
-  def image_url
+  def image_url(omniauth_provider_id=nil)
     if !picture.blank?
       picture
-    elsif !oauth_image.blank?
-      oauth_image
+    elsif (authentication = authentications.find_by_id(omniauth_provider_id)).present?
+      url = authentication.image_url
+      url.blank? ? "/assets/avatar.png" : url
     else
-       "/assets/avatar.png"
+      "/assets/avatar.png"
     end
   end
 
@@ -185,14 +197,14 @@ class User < ActiveRecord::Base
   end
 
   def assign_home_zip_code(attrs)
-    assign_zip_code(:home_zip_code, attrs)    
+    assign_zip_code(:home_zip_code, attrs)
   end
 
   def assign_zip_code(attr, attrs)
-    if attrs[attr].present? 
+    if attrs[attr].present?
       code = attrs[attr].strip
       if code.length == 5
-        self.send((attr.to_s + "=").to_sym, code)   
+        self.send((attr.to_s + "=").to_sym, code)
       else
         self.errors.add(attr, "invalid")
       end
