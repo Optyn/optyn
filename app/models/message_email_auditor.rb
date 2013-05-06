@@ -5,6 +5,8 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   after_create :enqueue_message
 
+  scope :undelivered, where(delivered: false)
+
   private
   def enqueue_message
     Resque.enqueue(SesEmailSender, self.id)

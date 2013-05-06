@@ -1,0 +1,11 @@
+= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
+
+.control-group
+  = f.label :survey_id, "Embed Survey", class: 'control-label'
+  .controls
+    = f.hidden_field :survey_id, value: current_shop.survey.id
+    = current_shop.survey.title
+
+= render partial: 'merchants/shared/messages/fine_print', locals: {f: f, fine_print_verbiage: ''}
+
+= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

@@ -5,6 +5,7 @@ class Message < ActiveRecord::Base
   has_many :message_labels, dependent: :destroy
   has_many :labels, through: :message_labels
   has_many :message_users, dependent: :destroy
+  belongs_to :survey
 
   attr_accessor :unread
 
@@ -47,7 +48,7 @@ class Message < ActiveRecord::Base
     end
 
     event :preview do
-      transition :draft => same
+      transition :draft => same, :queued => same
     end
 
     event :launch do
@@ -80,8 +81,13 @@ class Message < ActiveRecord::Base
     end
 
     before_transition :draft => :queued do |message|
-      message.valid?
+      binding.pry
+
+      message.subject = message.send(:canned_subject) if message.subject.blank?
+      message.from = message.send(:canned_from)
+
       message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
+      message.valid?
     end
 
     before_transition any => :queued do |message|
@@ -230,7 +236,8 @@ class Message < ActiveRecord::Base
     message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
 
     if message_user_creations.blank?
-      self.deliver
+      self.state = 'sent'
+      self.save(validate: false)
       replenish_draft_and_queued_count
       ""
     else

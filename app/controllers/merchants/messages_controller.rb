@@ -28,6 +28,9 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        puts "-" * 100
+        puts @message.errors.full_messages.inspect
+        puts "*" * 100
         render "new"
       end
     end
@@ -52,6 +55,9 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        puts "-" * 100
+        puts @message.errors.full_messages.inspect
+        puts "*" * 100
         render "edit"
       end
     end

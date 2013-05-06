@@ -1,6 +1,7 @@
 class MessageMailer < ActionMailer::Base
   default from: '"Email" <email@optyn.com>'
   helper "merchants/messages"
+  helper "message_mailer_forgery"
 
   def send_announcement(message, message_user)
     @message = message
