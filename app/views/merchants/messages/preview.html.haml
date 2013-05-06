@@ -1,12 +1,13 @@
 #title_header
   %h3
-    Messagecenter
+    Message Center - Message Preview
 /Flash Notice
 = display_flash_message
 /Main Body
 #merchants
   .container
-    = render partial: "merchants/shared/menu"
+    .span3
+      = render partial: "merchants/messages/preview_meta"
 
     .span8#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
@@ -20,11 +21,9 @@
           %hr/
 
         .row
-          .span3
-            = render partial: "merchants/messages/preview_meta"
 
           = content_for :header do
             Preview
 
-          .span5
+          .span8
             = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
