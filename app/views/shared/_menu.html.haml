@@ -1,6 +1,8 @@
 .span3.menuleft
   %ul.merchant-menu
-    %li.menu-header Hello!
+    %li.menu-header 
+      Hello
+      = current_user.name
     %hr
     %li
       %a{:href => "dashboard"} 
