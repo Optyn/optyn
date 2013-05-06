@@ -1,6 +1,6 @@
 .span3.menuleft
   %ul.merchant-menu
-    %li.menu-header Hello Alen!
+    %li.menu-header Hello!
     %hr
     %li
       %a.active{:href => merchants_root_path} 
@@ -10,35 +10,10 @@
       %a{:href => merchants_file_imports_path}
         %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Connections"}
         Import Users
-    - if merchants_manager_signed_in?
-      %li
-        %a{:href => edit_merchants_manager_registration_path}
-          %img{:src => "/assets/menu_icon_settings.png", :alt => "Edit Personal Info"}
-          Edit Personal Information
-    - if !is_shop_local_and_active?
-      %li
-        %a{:href => merchants_upgrade_path}
-          %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Upgrade"}
-          Account Page 
-    - if is_shop_local_and_active?      
-      %li
-        %a{:href => merchants_edit_billing_info_path}
-          %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Billing"}
-          Edit billing information
-    - if manager_signed_in?
-      %li
-        %a{:href => merchants_managers_list_path}
-          %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Managers"}
-          Managers List
-    - if is_shop_local?(current_shop)
-      %li
-        %a{:href => merchants_locations_path}
-          %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Your Locations"}
-          Your Locations
     %li
       %a{:href => merchants_shop_path}
         %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Your Shop"}
-        Your Shop
+        Manage Your Shop
     %li
       %a{:href => merchants_app_path}
         %img{:src => "/assets/menu_icon_connections.png", :alt => "Your API Button"}
@@ -46,23 +21,15 @@
     %li
       %a{:href => merchants_survey_path}
         %img{:src => "/assets/menu_icon_campaigns.png", :alt => "Surveys"}
-        Customer Segmentation
+        Customer Surveys
     %li
       %a{:href => merchants_survey_survey_answers_path}
         %img{:src => "/assets/menu_icon_messages.png", :alt => "Segmentation"}
-        Customer Answers
-    %li
-      %a{:href => "#", :alt => "My Campaigns"} 
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Campaigns"}
-        My Campaigns
+        Customer Segmentation
     %li
       %a{:href => merchants_messages_path, :alt => "My Messages"}
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Messages"}
-        My Messages
-    %li
-      %a{:href => "#", :alt => "My Settings"}
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Settings"}
-        My Settings
+        %img{:src => "/assets/menu_icon_messages.png", :alt => "Messages"}
+        Message Center
     %li
       %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
