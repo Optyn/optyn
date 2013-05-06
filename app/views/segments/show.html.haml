@@ -1,4 +1,4 @@
-= form_tag("#{SiteConfig.app_base_url}#{save_answers_segment_path(Surveys::Encryptor.encrypt(@user.email, @survey.id))}", :target => @target_blank ? "_blank" : "_self") do
+= form_tag("#{SiteConfig.app_base_url}#{save_answers_segment_path(Surveys::Encryptor.encrypt(@user.email, @survey.id), email_survey: @email_survey)}", :target => @target_blank ? "_blank" : "_self") do
   = render partial: "shared/surveys/markup", locals: {preview: false}
 
   = submit_tag "Submit Feeback", class: "btn btn-primary"
