@@ -150,7 +150,9 @@ input[type="color"]:focus,
 	text-shadow: white 2px 2px 1px;
 }
 /* features section */
-#features { }
+#features { 
+	padding-top: 40px;	
+}
 #features .container { }
 #features .feature img.thumb {
 	border: 3px solid #fff;
