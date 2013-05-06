@@ -15,7 +15,7 @@
         .row
           %h1{class: 'text-center'}
             Email Preview
-            = link_to "Edit", edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
+            = link_to "Edit Campaign", edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
             = link_to "Send it", launch_merchants_message_path(@message.uuid), class: "btn btn-success"
 
           %hr/
