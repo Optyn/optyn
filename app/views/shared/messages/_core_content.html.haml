@@ -13,6 +13,6 @@
                   = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
 
                   %p.core-content
-                    = render partial: "shared/messages/#{message_rendering_partial(@message)}"
+                    = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
 
   = render partial: "shared/mailers/footer"

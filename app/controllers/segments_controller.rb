@@ -1,21 +1,41 @@
 class SegmentsController < BaseController
+  skip_before_filter :authenticate_user!, :redirect_to_account, only: [:show, :save_answers]
+  before_filter :fetch_survey_and_user_from_params, :ensure_survey_answered_once, only: [:show, :save_answers]
+
   def index
     @surveys = current_user.unanswered_surveys
   end
 
   def show
-   @survey = Survey.find(params[:id])
-   @survey_questions = @survey.survey_questions
+    @survey_questions = @survey.survey_questions
   end
 
   def save_answers
-    @survey = Survey.find(params[:id])
     dummy_survey = Survey.new(@survey.attributes.except('id', 'created_at', 'updated_at'))
     answer_elements = params[:survey][:survey_answers_attributes].sort.collect(&:last)
     dummy_survey.survey_answers_attributes = answer_elements
     answers = dummy_survey.survey_answers
 
-    SurveyAnswer.persist(current_user, answers)
+    SurveyAnswer.persist(@user, answers)
     redirect_to segments_path
+  end
+
+  private
+  def fetch_survey_and_user_from_params
+    token = params[:id]
+    plain_text = Surveys::Encryptor.decrypt(token)
+    email, survey_id = plain_text.split("--")
+    @user = User.find_by_email(email)
+    @survey = Survey.find(survey_id)
+  end
+
+  def ensure_survey_answered_once
+    if @survey.survey_answers.for_user(@user.id).present?
+      if params[:email_survey].present?
+        render "thankyou", layout: "email_feedback"
+      else
+        redirect_to(segments_path, notice: 'Looks like you are trying to take already attempted survey. To save your time we would request to take unattempted ones')
+      end
+    end
   end
 end

@@ -1,7 +1,7 @@
 #box_login
   .container
     .popupHeader
-      You are one step away from becoming connected to Dana Cafe. But first you have to login into your
+      You are one step away from becoming connected to #{@shop.name}. But first you have to login into your
       Optyn.com account or sign up for one. It's very quick, easy, and of course, always free.
     .formContainer.clearfix
       .formBox
@@ -53,5 +53,5 @@
             = submit_tag "Sign up", name: 'commit'
 
             %p
-              I hereby agree agree to Optym
+              I hereby agree to Optyn's
               %a{:href => "#"} Terms of Use

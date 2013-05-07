@@ -1,17 +1,33 @@
-.span3
-  %ul.nav.nav-tabs.nav-stacked
-    %li.nav-header Your Menu
-    %li.active
-      %a{:href => "#"} Dashboard
+.span3.menuleft
+  %ul.merchant-menu
+    %li.menu-header 
+      Hello
+      = current_user.name
+    %hr
     %li
-      %a{:href => edit_user_registration_path, :method => :put} My Account
+      %a{:href => "dashboard"} 
+        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
+        My Dashboard
     %li
-      %a{:href => "segments"} My Surveys
+      %a{:href => inbox_messages_path, :alt => "My Messages"}
+        %img{:src => "/assets/menu_icon_messages.png", :alt => "Messages"}
+        My Messages
     %li
-      %a{:href => connections_path} Connections
+      %a{:href => connections_path}
+        %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Your Shop"}
+        My Connections
     %li
-      %a{:href => profile_path} My Profile
+      %a{:href => edit_user_registration_path, :method => :put }
+        %img{:src => "/assets/menu_icon_connections.png", :alt => "Connections"}
+        My Account
     %li
-      = link_to "My Messages", inbox_messages_path
+      %a{:href => merchants_survey_path}
+        %img{:src => "/assets/menu_icon_campaigns.png", :alt => "Surveys"}
+        = link_to("My Surveys", segments_path)
     %li
+      %a{:href => profile_path}
+        %img{:src => "/assets/menu_icon_connections.png", :alt => "Your API Button"}
+        My Profile
+    %li
+      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
       %a{:href => destroy_user_session_path} Logout

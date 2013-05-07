@@ -97,9 +97,10 @@ class MessageUser < ActiveRecord::Base
           message_receiver.update_attributes!(:message_id => message_instance_id,
                                               :message_folder_id => inbox_folder_id, :user_id => receiver_identifier,
                                               :received_at => Time.now)
-
-          MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
         end
+
+        MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
+
       rescue Messagecenter::Exceptions::MessageUserCreationException => invalid
         puts "Adding to creation errors:"
         puts invalid.message
