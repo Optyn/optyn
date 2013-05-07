@@ -17,7 +17,11 @@ class SegmentsController < BaseController
     answers = dummy_survey.survey_answers
 
     SurveyAnswer.persist(@user, answers)
-    redirect_to segments_path
+    if current_user.present?
+      redirect_to segments_path
+    else
+      render "thankyou", layout: "email_feedback"
+    end
   end
 
   private
