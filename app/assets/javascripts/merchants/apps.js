@@ -83,6 +83,8 @@ function Apps() {
                     }
                 });
 
+                $('.app-container #loading').hide();
+                $('.app-container .refresh').show();
             },
             error: function (data) {
                 alert($.parseJSON(data.responseText).error_message);

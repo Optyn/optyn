@@ -25,7 +25,7 @@ class Merchants::AppsController < Merchants::BaseController
     render json: {preview_content: render_to_string(partial: "merchants/apps/preview"),
                   form_content: render_to_string(partial: 'merchants/apps/edit'),
                   advanced_content: render_to_string(partial: 'merchants/apps/advanced')
-                 }
+    }
   rescue
     render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
   end
