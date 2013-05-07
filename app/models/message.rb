@@ -81,8 +81,6 @@ class Message < ActiveRecord::Base
     end
 
     before_transition :draft => :queued do |message|
-      binding.pry
-
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
 
