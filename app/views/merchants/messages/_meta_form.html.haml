@@ -1,6 +1,6 @@
 .modal-header
   %button{:class => "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"}x
-  %h3 Edit message subject and send
+  %h3 Edit the Subject and Send time of your Message
 .modal-body
   = form_for :message, url: update_meta_merchants_message_path(message.uuid), :method => :put, :html => {id: "message_meta_data", class: 'form-horizontal'} do |f|
     = hidden_field_tag :message_type, message.type.underscore
