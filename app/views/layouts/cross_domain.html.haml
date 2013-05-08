@@ -10,12 +10,12 @@
     = javascript_include_tag "https://js.stripe.com/v1/","application"
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-  %body{id: "crossDomain"}
+  %body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
           %a.brand{:href => root_path}
-            %img{:alt => "logo", :src => "/assets/logo.png"}/
+            %img{:alt => "logo", :src => "/assets/logo.png", :width => "70px"}
           %ul.nav.pull-right
             - if user_signed_in?
               %li.dropdown
@@ -23,7 +23,8 @@
                   %img{:src => "/assets/avatar.png", :alt => "User Avatar"}
             - else
               %li.authenticationMsg
-                On No, You aren't Logged in.
+                %span{:style => "color: #fff; font-size: 16px; vertical-align: middle; font-weight: bold;"}
+                  Oh No, You aren't Logged in.
 
     = display_flash_message
 
