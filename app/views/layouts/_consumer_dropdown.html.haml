@@ -3,29 +3,25 @@
     %img{:src => current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
   %ul.dropdown-menu
     %li
-      %a.active{:href => "#"}
+      %a.active{:href => "dashboard"}
         %img{:src => "/assets/dropdown_dashicon.png", :float => "left"}
         My Dashboard
+    %li
+      %a{:href => inbox_messages_path}
+        %img{:src => "/assets/dropdown_segments.png", :float => "left"}
+        My Messages
     %li
       %a{:href => "connections"}
         %img{:src => "/assets/dropdown_manager.png", :float => "left"}
         My Connections
     %li
-      %a{:href => "#"}
-        %img{:src => "/assets/dropdown_segments.png", :float => "left"}
-        My Messages
-    %li
       %a{:href => "segments"}
         %img{:src => "/assets/dropdown_surveys.png", :float => "left"}
         My Surveys
     %li
-      %a{:href => edit_user_registration_path, :method => :put}
-        %img{:src => "/assets/dropdown_settings.png", :float => "left"}
-        My Account
-    %li
       %a{:href => profile_path}
         %img{:src => "/assets/dropdown_profile.png", :float => "left"}
-        My Profile
+        My Account
     %hr
     %li
       = link_to("Logout", destroy_user_session_path)

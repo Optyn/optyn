@@ -5,6 +5,8 @@
         %div
           .head
             %h4 Change Your Profile
+            %hr
+            %a.btn{:href => edit_user_registration_path} Change Account Details
           .form.profile-container
             = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
               = devise_error_messages!
