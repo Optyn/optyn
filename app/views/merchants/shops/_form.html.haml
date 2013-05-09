@@ -14,7 +14,9 @@
   .control-group
     .clabel
       = f.label :website
-    .controls
+    .controls.input-prepend
+      %span.add-on
+        %i.icon-globe
       = f.url_field :website
       .help-block
         %em Example: http://www.example.com

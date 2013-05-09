@@ -1,7 +1,7 @@
 = display_flash_message
 #merchants
   .container
-    = render partial: "merchants/shared/menu"
+    = render partial: "shared/menu"
     .span8.edit_page
       .header
         %h3
@@ -32,37 +32,9 @@
               %i (we need your current password to confirm your changes)
               %br/
               = f.password_field :current_password
-          %div= f.submit "Update"
+          %div{:style => "padding-top: 20px;"}
+          = f.submit "Update", class: 'btn btn-primary'
+          = link_to "Back", :back, class: 'btn'
         -#%h3 Cancel my account
         -#%p
           -#Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}.
-        = link_to "Back", :back
-
-= display_flash_message
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
-    .span8.preview.app-container
-      .header
-        %h3
-          Your Optyn button for your 
-          = current_shop.name
-          Website
-        %h6
-          Use this cool tool to generate the Javascript so that you can just plug and play your Optyn button and start getting your customers to optin and grow your Customer Base.
-      .main
-        .span3.customize
-          .header
-            Customize Your Optyn Button
-            %hr
-          .custom
-            .form-wrapper
-              - if  @application.blank? || @application.new_record?
-                = render partial: 'new'
-              - else
-                = render partial: 'edit'
-
-        = render partial: "preview"
-
-      = render partial: 'advanced'

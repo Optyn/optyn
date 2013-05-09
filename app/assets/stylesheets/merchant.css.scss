@@ -20,18 +20,19 @@
 /* New Edit CSS */
 .edit_page {
   background-color: #FFF;
-  border-radius: 6px;
-  height: 500px;
+  border-radius: 4px;
+  height: auto;
   -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
   -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
   box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
 }
-.edit_page .header {
-
+.edit_page h3 {
+  margin: 0px;
+  padding-bottom: 20px;
+  line-height: 24px;
+  font-size: 24px;
 }
 .edit_page .form {
 

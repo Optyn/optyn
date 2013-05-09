@@ -1,40 +1,41 @@
-#box_sign
+#consumer
   .container
-    .span12.box_wrapper
-      .span12.box
-        %div
-          .head
-            %h4 Change Your Profile
-            %hr
-            %a.btn{:href => edit_user_registration_path} Change Account Details
-          .form.profile-container
-            = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
-              = devise_error_messages!
-              = f.label :Name
-              = f.text_field :name, :autofocus => true
-              %br/
-              = f.label :Gender
-              = f.radio_button :gender,'m'
-              = "Male"
-              = f.radio_button :gender,'f',:checked=>true
-              = "Female"
-              %br/
-              = f.label :Date_Of_Birth
-              = f.text_field :birth_date , :class=>"datepicker"
-              %br/
-              = f.label :picture
-              = f.file_field :picture 
-              %br/
-              ="Make Visible"
-              %br/
-              = f.fields_for :permissions_users do |p|
-                = p.check_box :action
-                = p.hidden_field :permission_id
-                = p.object.permission.name
-                
-              %br/
-              = f.label :Interest
-              = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}
-              %br/
-              = f.submit "Update"
-            = link_to "Back", :back
+    = render partial: "shared/menu"
+    .span8.edit_page
+      %div
+        %h3
+          Change Your Profile
+          %a.btn{:href => edit_user_registration_path, :style => "float: right"} Change Account Details
+        %hr
+        .form
+          = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
+            = devise_error_messages!
+            = f.label :Name
+            = f.text_field :name, :autofocus => true
+            %br/
+            = f.label :Gender
+            = f.radio_button :gender,'m'
+            = "Male"
+            = f.radio_button :gender,'f',:checked=>true
+            = "Female"
+            %br/
+            %br/
+            = f.label :Date_Of_Birth
+            = f.text_field :birth_date , :class=>"datepicker"
+            %br/
+            = f.label :picture
+            = f.file_field :picture 
+            %br/
+            ="What information should we share with you connections?"
+            %br/
+            = f.fields_for :permissions_users do |p|
+              = p.check_box :action
+              = p.hidden_field :permission_id
+              = p.object.permission.name
+            %br/
+            = f.label :Interest
+            = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}
+            %br/
+            %div{:style => "padding-top: 20px;"}
+              = f.submit "Update", class: 'btn btn-primary'
+              = link_to "Back", :back, class: 'btn'
