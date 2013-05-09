@@ -1,26 +1,25 @@
-#box_login
+#connection_auth
   .container
     .popupHeader
       == You are one step away from becoming connected to #{@shop.name}. Choose the options below and you will receive emails from #{@shop.name} on your terms.
-
-
-    .span3
-      #shop_logo
+    .merchant_auth_profile
+      .logo
         = shop_logo(@shop)
       %hr
-      #shop_details
-        #shop_name
+      .shop_details
+        .shop_name
           = @shop.name
         - if @shop.first_location.present?
-          #shop_street_address
+          .shop_street_address
             = @shop.first_location_street_address
-          #shop_address_details
+          .shop_address_details
             == #{@shop.first_location_city}, #{@shop.first_location_state_name} #{@shop.first_location_zip}
 
-        #shop_profile_button
-          = link_to "View Profile", "javscript:void(0)", onclick: "Coming Soon"
+        = link_to "View Profile", "javscript:void(0)", onclick: "Coming Soon", class: 'shop_profile_button'
 
-    .span5
+    .optyn_info
+      .header
+        How would you like to connect to #{@shop.name} and what information would you like to share?
       = form_for @current_user, as: :user, url: api_update_permissions_path, html: {method: :put, id: 'oauth_user_permissions'} do |f|
         = f.fields_for :permissions_users do |p|
           .control-group
@@ -29,10 +28,12 @@
                 = p.check_box :action
                 =  "Show #{p.object.permission.name.titleize}"
                 = p.hidden_field :permission_id
+        .p
+          *If you don't share your e-mail, #{@shop.name} can still contact you. :)
 
-
-        = image_submit_tag 'logo.png'
-
+        = image_submit_tag 'sm_optyn_logo_btn.png', class: 'optynbtn'
+        .p
+          You can always change these settings in your account with each connection!
         = hidden_field_tag :redirect_uri, params[:redirect_uri]
         = hidden_field_tag :access_token, params[:access_token]
 

@@ -1,12 +1,157 @@
 #login_auth {
 	padding-top: 10px;
-    border: 1px solid red;
-}
-
-#quick_login {
 
 }
+#login_auth h3 {
+	font-size: 18px;
+	color: #304d58;
+	margin: 0px;
+	padding-bottom: 10px;
+}
+#login_auth .container .popupHeader {
+	padding-bottom: 10px;
+}
+.quick_login {
+	width: 255px;
+	float: left;
+	background-color: white;
+	-webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+    -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+    box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+    padding-left: 15px;
+}
+.quick_login .loginbtn {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 28px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.quick_login .loginbtn:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+.quick_signup {
+	width: 255px;
+	float: right;
+	background-color: white;
+	-webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+    -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+    box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+    padding-left: 15px;
+}
+.quick_signup .signupbtn {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 28px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.quick_signup .signupbtn:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#login_auth .social {
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#login_auth .remember {
 
-#quick_signup {
-
+}
+#connection_auth {
+	padding-top: 10px;
+}
+#connection_auth .container .popupHeader {
+	padding-bottom: 20px;
+}
+#connection_auth .merchant_auth_profile {
+	width: 180px;
+	text-align: center;
+	float: left;
+	background-color: white;
+	-webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+    -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+    box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+}
+#connection_auth .merchant_auth_profile .shop_details {
+	padding-left: 10px;
+	padding-bottom: 20px;
+}
+#connection_auth .merchant_auth_profile .shop_details .shop_name {
+	padding-bottom: 20px;
+}
+#connection_auth .merchant_auth_profile .shop_details .shop_profile_button {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: middle;
+}
+#connection_auth .merchant_auth_profile .shop_details .shop_profile_button:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#connection_auth .optyn_info {
+	margin-left: 200px;
+}
+#connection_auth .optyn_info .header {
+	font-weight: bold;
+	font-size: 14px;
+	padding-bottom: 10px;
+}
+#connection_auth .optyn_info .optynbtn {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  top: 4px;
+  color: #ffffff;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+#connection_auth .optyn_info .optynbtn:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
 }

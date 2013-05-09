@@ -82,7 +82,7 @@ module Api
 							        var win = null;
 
 											function login() {
-          							win         =   window.open(_url, "Login - Optyn", 'scrollbars=1, width=700, height=500'); 
+          							win         =   window.open(_url, "Login - Optyn", 'scrollbars=1, width=600, height=520'); 
 
           							var pollTimer   =   window.setInterval(function() { 
               							try {
