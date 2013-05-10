@@ -6,6 +6,7 @@ class MessageUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :receiver, class_name: "User", foreign_key: :user_id
   belongs_to :message_folder
+  has_one :message_email_auditor, dependent: :destroy
 
   before_create :assign_uuid
 

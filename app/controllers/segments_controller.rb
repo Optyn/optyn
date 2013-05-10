@@ -17,6 +17,7 @@ class SegmentsController < BaseController
     answers = dummy_survey.survey_answers
 
     SurveyAnswer.persist(@user, answers)
+    Message.create_response_message(current_user.id, params[:message_id])
     if current_user.present?
       redirect_to segments_path
     else
