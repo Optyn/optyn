@@ -24,6 +24,7 @@
             = f.text_field :birth_date , :class=>"datepicker"
             %br/
             = f.label :picture
+            %img{:src => current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
             = f.file_field :picture 
             %br/
             ="What information should we share with you connections?"
