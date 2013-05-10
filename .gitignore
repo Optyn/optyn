@@ -20,3 +20,4 @@ public/assets
 .idea/
 .DS_Store
 public/uploads/*
+dump.rdb
