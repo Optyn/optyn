@@ -17,7 +17,10 @@
       %strong To be sent on:
       %br
       %em
-        = message_send_on_date(@message)
+        - unless @message.is_child?
+          = message_send_on_date(@message)
+        - else
+          Message will be sent on the survey submission by the customer
   .preview-item
     .preview-img
       %img{:src => "/assets/preview_subject_icon.png"}
@@ -25,8 +28,12 @@
       %strong E-mail will be sent to:
       %br
       %em
-        = message_receiver_labels(@message.label_names)
-        == (#{@message.connections_count} total)
+        - unless @message.is_child?
+          = message_receiver_labels(@message.label_names)
+          == (#{@message.connections_count} total)
+        - else
+          Survey customer
+
   .make-changes-button
     = link_to "Make Changes", '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
 

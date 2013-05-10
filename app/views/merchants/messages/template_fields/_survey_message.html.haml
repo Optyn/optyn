@@ -6,6 +6,11 @@
     = f.hidden_field :survey_id, value: current_shop.survey.id
     = current_shop.survey.title
 
+= hidden_field_tag :edit_child_location, ""
+
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f, fine_print_verbiage: ''}
+
+#response_message_section
+  = render partial: 'merchants/shared/messages/response_email_fields', locals: {parent_message: @message}
 
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

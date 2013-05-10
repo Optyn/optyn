@@ -17,6 +17,8 @@
             Email Preview
             = link_to "Edit Campaign", edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
             = link_to "Send it", launch_merchants_message_path(@message.uuid), class: "btn btn-success"
+            - if @message.is_child?
+              = link_to "Parent Message", edit_merchants_message_path(@message.parent.uuid), class: "btn btn-warning"
 
           %hr/
 

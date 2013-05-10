@@ -27,6 +27,12 @@ function MerchantMessage() {
         if ($('#message_meta_modal')) {
             this.hookMetadataSubmit();
         }
+
+        if ($('#response_message_section').length) {
+            this.hookCreateResponseMessage();
+            this.hookDiscardChildMessage();
+            this.hookEditChildMessage();
+        }
     };
 
     this.hookChosen = function () {
@@ -126,6 +132,79 @@ function MerchantMessage() {
                     }, 500);
                 }
             });
+        });
+    };
+
+    this.hookCreateResponseMessage = function () {
+        $('body').on('click', '#response_message_modal .btn-primary', function (e) {
+            e.preventDefault();
+            var serializedData = null;
+            var actionVal = $('#response_message_modal #response_message_action').val();
+
+            if (actionVal.match(/\/na\//)) {
+                serializedData = $('#message_fields_wrapper form').serializeArray();
+            } else {
+                serializedData = $('#response_message_modal :input , #response_message_modal select').serializeArray()
+            }
+
+            serializedData = serializedData.concat([
+                {name: '_method', value: 'put'}
+            ]);
+
+            $.ajax({
+                url: actionVal,
+                type: 'POST',
+                data: serializedData,
+                beforeSend: function () {
+                    var $footer = $('#response_message_modal .modal-footer');
+                    $footer.find('.actions').hide();
+                    $footer.find('.loading').show();
+                },
+                success: function (data) {
+                    $('#response_message_modal').modal('hide');
+                    setTimeout(function () {
+                        $('#message_fields_wrapper').html(data.response_message);
+                        current.hookChosen();
+                    }, 500);
+                },
+                error: function (data) {
+                    alert('An error occoured while creating the response message. Please refresh your page and try again.');
+                }
+            });
+        });
+    };
+
+    this.hookDiscardChildMessage = function () {
+        $('body').on('click', '#discard_child_message_link', function (e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to discard this message and create a new one? This message will be permanently lost!')) {
+                $.ajax({
+                    url: $(this).prop('href'),
+                    type: 'POST',
+                    data: [
+                        {name: '_method', value: 'delete'}
+                    ],
+                    beforeSend: function () {  s
+                        $('#response_message_section .adjust-child-message-link').hide();
+                        $('#response_message_section .adjust-child-message-loading').show();
+                    },
+                    success: function (data) {
+                        $('#response_message_section').html(data.response_email_fields);
+                    },
+                    error: function () {
+                        alert('Could not discard the child message. Please refresh your page and try again.');
+                    }
+                });
+            }
+        });
+
+    };
+
+    this.hookEditChildMessage = function () {
+        $('body').on('click', '#edit_child_message_link', function (e) {
+            e.preventDefault();
+            $('#edit_child_location').val($(this).prop('href'));
+            $('#message_fields_wrapper form').submit();
         });
     };
 }

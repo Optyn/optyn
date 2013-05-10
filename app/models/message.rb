@@ -7,6 +7,9 @@ class Message < ActiveRecord::Base
   has_many :message_users, dependent: :destroy
   belongs_to :survey
 
+  has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
+  belongs_to :parent, class_name: "Message", foreign_key: :parent_id
+
   attr_accessor :unread
 
   attr_accessible :label_ids, :name, :second_name, :send_immediately
@@ -26,12 +29,17 @@ class Message < ActiveRecord::Base
 
   before_create :assign_uuid
 
+  after_create :assign_parent_state_if
+
   validates :name, presence: true
   validates :second_name, presence: true
   validates :subject, presence: true
   validate :send_on_greater_by_hour
+  validate :validate_child_message
 
-  scope :for_state_and_sender, ->(state_name, manager_identifier) { with_state(state_name).where(manager_id: manager_identifier) }
+  scope :only_parents, where(parent_id: nil)
+
+  scope :for_state_and_sender, ->(state_name, manager_identifier) { only_parents.with_state(state_name).where(manager_id: manager_identifier) }
 
   scope :for_uuids, ->(uuids) { where(uuid: uuids) }
 
@@ -41,9 +49,15 @@ class Message < ActiveRecord::Base
 
   scope :includes_message_users, includes(:message_users)
 
+  scope :active_state, where("messages.state NOT IN ('delete', 'trash')")
+
   state_machine :state, :initial => :draft do
 
     event :save_draft do
+      transition :draft => same
+    end
+
+    event :save_and_navigate_parent do
       transition :draft => same
     end
 
@@ -52,7 +66,7 @@ class Message < ActiveRecord::Base
     end
 
     event :launch do
-      transition :draft => :queued
+      transition [:draft, :queued] => :queued
     end
 
     event :move_to_trash do
@@ -64,7 +78,7 @@ class Message < ActiveRecord::Base
     end
 
     event :discard do
-      transition :trash => :delete
+      transition [:trash, :draft] => :delete
     end
 
     event :start_transit do
@@ -83,8 +97,11 @@ class Message < ActiveRecord::Base
     before_transition :draft => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
-
-      message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
+      unless message.is_child?
+        message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
+      else
+        message.send_on = nil
+      end
       message.valid?
     end
 
@@ -98,7 +115,13 @@ class Message < ActiveRecord::Base
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
 
-    state :draft do
+    after_transition any => :delete, :do => :replenish_draft_and_queued_count
+
+    after_transition any => :trash, :do => :replenish_draft_and_queued_count
+
+    after_transition any => any, :do => :transfer_child_state
+
+    state :draft, :trash, :delete do
       def save(options={})
         super(validate: false)
       end
@@ -107,6 +130,14 @@ class Message < ActiveRecord::Base
 
   def self.fetch_template_name(params_type)
     FIELD_TEMPLATE_TYPES.include?(params_type.to_s) ? params_type : DEFAULT_FIELD_TEMPLATE_TYPE
+  end
+
+  def self.fetch_human_non_survey_template_names
+    (FIELD_TEMPLATE_TYPES - [SURVEY_FIELD_TEMPLATE_TYPE]).collect { |message| message.gsub('_message', '').titleize }
+  end
+
+  def self.type_from_human(type_name)
+    type_name.downcase.parameterize.underscore.<<("_message")
   end
 
   def self.paginated_drafts(manager, page_number=PAGE, per_page=PER_PAGE)
@@ -152,12 +183,13 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    messages = with_state([:queued]).ready_messages
+    messages = with_state([:queued]).only_parents.ready_messages
     execute_send(messages)
   end
 
   def editable_state?
-    draft? ||  queued_editable?
+    return true if is_child?
+    draft? || queued_editable?
   end
 
   def queued_editable?
@@ -245,6 +277,26 @@ class Message < ActiveRecord::Base
 
   def personalized_subject(message_user)
     self.subject.gsub("{{Customer Name}}", message_user.name) rescue "N/A"
+  end
+
+  def first_response_child
+    children.active_state.first unless self.new_record?
+  end
+
+  def has_children?
+    first_response_child.present? rescue false
+  end
+
+  def is_child?
+    self.parent_id.present?
+  end
+
+  def first_child_message_name
+    first_response_child.name rescue nil
+  end
+
+  def first_child_message_identifier
+    first_response_child.uuid rescue nil
   end
 
   private
@@ -405,6 +457,26 @@ class Message < ActiveRecord::Base
   end
 
   def send_on_greater_by_hour
-    self.errors.add(:send_on, "Message send time should be greater than an hour from now") unless self.send_on > 1.hour.since
+    self.errors.add(:send_on, "Message send time should be greater than an hour from now") if self.send_on.present? && !(self.send_on > 1.hour.since)
+  end
+
+  def validate_child_message
+    if self.first_response_child.present? && !(self.first_response_child.valid?)
+      self.errors.add(:child_message, "Response message is yet to be completed")
+    end
+  end
+
+  def transfer_child_state
+    if self.instance_of?(SurveyMessage)
+      if self.first_response_child.present?
+        first_response_child.update_attribute(:state, self.state)
+      end
+    end
+  end
+
+  def assign_parent_state_if
+    if self.parent_id.present?
+      self.update_attribute(:state, self.parent.state)
+    end
   end
 end

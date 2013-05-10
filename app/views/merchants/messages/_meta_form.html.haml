@@ -10,13 +10,14 @@
       .controls
         = f.text_field :subject, class: "input-large"
 
-    .control-group
-      = f.label :send_on, "Send Date Time", class: "control-label"
-      .controls
-        .input-append.date-time-picker
-          = f.text_field :send_on, value: message_send_on_date(message), class: "input-large", 'data-format' => "MM-dd-yyyy HH:mm PP"
-          %span.add-on
-            %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+    - unless message.is_child?
+      .control-group
+        = f.label :send_on, "Send Date Time", class: "control-label"
+        .controls
+          .input-append.date-time-picker
+            = f.text_field :send_on, value: message_send_on_date(message), class: "input-large", 'data-format' => "MM-dd-yyyy HH:mm PP"
+            %span.add-on
+              %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
 .modal-footer
   = link_to "Close", "#", class: 'btn', 'data-dismiss' => "modal"

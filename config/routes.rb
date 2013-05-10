@@ -178,6 +178,8 @@ Optyn::Application.routes.draw do
         get :preview
         get :launch
         put :update_meta
+        put :create_response_message
+        delete :discard_response_message
       end
     end
   end

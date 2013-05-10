@@ -11,6 +11,7 @@ class Manager < ActiveRecord::Base
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
   has_many :file_imports
+  has_many :messages
 
   mount_uploader :picture, ImageUploader
 
