@@ -151,24 +151,13 @@ body .modal-footer .startbtn:hover{
 	background-color: #f7f7f7;
 	height: 500px;
 }
-#pricing .allplans .howmany {
-	height: auto;
-	padding-bottom: 40px;
-}
-#pricing .allplans .howmany .count {
-	float: left;
-	vertical-align: middle;
-}
-#pricing .allplans .howmany .count input {
-	width: 100px;
-	margin-left: 10px;
-}
-#pricing .allplans .howmany .countslider {
-	width: 500px;
-	float: right;
-}
+
 #pricing .allplans table tr td {
 	line-height: 34px;
+}
+
+#pricing .allplans .howmany {
+	margin-bottom:20px;
 }
 #pricing .allplans .upgrade {
   background: #78CD51;
@@ -367,3 +356,4 @@ body .modal-footer .startbtn:hover{
 	left: 32%;
 	font-weight: bold;
 }
+

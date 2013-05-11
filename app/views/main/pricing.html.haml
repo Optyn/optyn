@@ -44,13 +44,10 @@
             Everyone starts off with a FREE Account. Here's what it costs you to grow:
         %hr
         .howmany
-          .count
-            How many customers?
-            %input{:placeholder => "", :type => "text"}/
-          .countslider
-            .sliderOverlay
-              .slider.sliderMin-2.sliderGreen
-        %table.table.table-striped
+        Number of Customers
+        .quantity
+
+        %table.table.table-striped{:id => 'pricing-table'}
           %thead
             %tr
               %td 
@@ -62,39 +59,27 @@
           %tbody
             %tr
               %td $5/month            
-              %td 250 - 500 Connections
+              %td 101 - 500 Connections
               %td Unlimited E-Mails + All Features Included
               %td
                 %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
               %td $10/month            
-              %td 500 - 1,000 Connections
+              %td 501 - 1,000 Connections
               %td Unlimited E-Mails + All Features Included
               %td 
                 %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
-              %td $20/month            
-              %td 1,000 - 2,500 Connections
+              %td $15/month            
+              %td 1,001 - 2,500 Connections
               %td Unlimited E-Mails + All Features Included
               %td
                 %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
             %tr
-              %td $30/month            
-              %td 2,500 - 5,000 Connections
-              %td Unlimited E-Mails + All Features Included
-              %td 
-                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
-            %tr
-              %td $50/month            
-              %td 5,000 - 10,000 Connections
+              %td $25/month            
+              %td 2,501 - 3,000 Connections
               %td Unlimited E-Mails + All Features Included
               %td
-                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
-            %tr
-              %td $99/month            
-              %td 10,000 - 25,000 Connections
-              %td Unlimited E-Mails + All Features Included
-              %td 
                 %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
     .row  
       .span12.bottom

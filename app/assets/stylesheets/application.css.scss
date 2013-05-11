@@ -1,3 +1,4 @@
+//= require sliders
 @import "compass";
 @import "compass/reset";
 @import "core";
@@ -17,9 +18,10 @@
 @import "reset";
 @import "signup";
 @import "signin";
-@import "sliders";
 @import "staticpages";
 @import "theme";
 @import "chosen";
 @import "datepicker";
 @import "shCoreDefault";
+@import "jquery-ui-1.9.2.custom";
+@import "jquery.ui.1.9.2.ie"
