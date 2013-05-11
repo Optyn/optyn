@@ -1,0 +1,18 @@
+#message_preview_container
+  = render partial: "shared/mailers/banner"
+
+  %table{class: 'outer-table'}
+    %tr
+      %td
+      %td{class: 'outer-cell'}
+        %div
+          %table{class: 'inner-table'}
+            %tr
+              %td
+                .message-content
+                  = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
+
+                  %p.core-content
+                    = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
+
+  = render partial: "shared/mailers/footer"

@@ -1,6 +1,7 @@
 /* All Merchant Account Pages CSS is here */
 #merchants {
   padding-top: 30px;
+  padding-bottom: 20px;
 }
 #merchants .action-buttons{
   padding-bottom: 20px;
@@ -16,6 +17,27 @@
 #connections table {
 
 }
+/* New Edit CSS */
+.edit_page {
+  background-color: #FFF;
+  border-radius: 4px;
+  height: auto;
+  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+.edit_page h3 {
+  margin: 0px;
+  padding-bottom: 20px;
+  line-height: 24px;
+  font-size: 24px;
+}
+.edit_page .form {
+
+}
+
 /* Merchant Edit Pages */
 #edit {
 
@@ -334,7 +356,7 @@
 #merchants .preview .main {
   background-color: #FFF;
   border-radius: 6px;
-  height: 400px;
+  height: 475px;
   -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
   -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
   box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);

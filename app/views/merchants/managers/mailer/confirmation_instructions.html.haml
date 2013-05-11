@@ -3,19 +3,12 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica;sans-serif;"}
-    %table{:width => "100%", :height => "30px", :bgcolor => "#1791c0"}
-      %tr
-        %td
-        %td
-          %div{:style => "max-width:600px;margin:0 auto;display:block;"}
-            %table{:bgcolor => "#1791c0", :width => "100%"}
-              %tr
-                %td{:style => "padding:15px;"}
-                  %img{:src => "http://development.optyn.com/assets/logo.png"}
-                %td{:padding => "10px", :align => "right"}
-                  %h6{:style => "margin:0px;padding: 0px;font-size: 16px;color: #ffffff;weight:900;"} Welcome to Optyn
-        %td
+  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica, sans-serif;"}
+    = content_for :header do
+      Welcome to Optyn
+
+    = render partial: "shared/mailers/banner"
+
     %table{:width => "100%"}
       %tr
         %td
@@ -65,40 +58,6 @@
                                 %a{:href => "http://www.optyn.com"} How to Get Started
                         %span.clear
         %td
-    %table{:width => "100%", :clear => "both", :bgcolor => "#ebebeb", :align => "center"}
-      %tr
-        %td
-        %td
-          %div{:padding => "15px", :margin => "left:10px", :style => "max-width:600px;margin:0 auto;display:block;"}
-            %table{:width => "100%"}
-              %tr
-                %td{:align => "center"}
-                  %p{:font => "bold", :style => "font-size: 14px;"}
-                    %a{:href => "http://www.optyn.com", :style => "color:#2BA6CB;"} Home
-                    |
-                    %a{:href => "http://support.optyn.com", :style => "color:#2BA6CB;"} Support
-                    |
-                    %a{:href => "http://www.optyn.com", :style => "color:#2BA6CB;"} E-Mail Preferences
-        %td
 
-    %table.body-wrap
-      %tr
-        %td
-        %td.container{:bgcolor => "#FFFFFF"}
-          .content
-            %table
-              %tr
-                %td
-                  %h3 Welcome #{@resource.name}!,
-                  %p We are excited to have you and {Merchant-Name} on board. The good news is we are ready to get you going.
-                  %p
-                    To make sure you are the person signing up using this email, please click on the link below to confirm your account.
-                    %p.callout
-                      %strong= link_to 'Confirm Your Account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :host => SiteConfig.app_host)
-                    %h5 Here are some awesome things that Optyn can do for you:
-                    %p Features will go here. Waiting for Designer + Content!
-                    %p
-                      Cheers,
-                      %br/
-                      The Optyn Team
+    = render partial: "shared/mailers/footer"
 

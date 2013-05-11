@@ -4,18 +4,11 @@
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica;sans-serif;"}
-    %table{:width => "100%", :height => "30px", :bgcolor => "#1791c0"}
-      %tr
-        %td
-        %td
-          %div{:style => "max-width:600px;margin:0 auto;display:block;"}
-            %table{:bgcolor => "#1791c0", :width => "100%"}
-              %tr
-                %td{:style => "padding:15px;"}
-                  %img{:src => "http://development.optyn.com/assets/logo.png"}
-                %td{:padding => "10px", :align => "right"}
-                  %h6{:style => "margin:0px;padding: 0px;font-size: 16px;color: #ffffff;weight:900;"} Unlock your Account
-        %td
+    = content_for :header do
+      Unlock your Account
+
+    = render partial: "shared/mailers/banner"
+
     %table{:width => "100%"}
       %tr
         %td
@@ -33,18 +26,5 @@
                     %br/
                     The Optyn Team
         %td
-    %table{:width => "100%", :clear => "both", :bgcolor => "#ebebeb", :align => "center"}
-      %tr
-        %td
-        %td
-          %div{:padding => "15px", :margin => "left:10px", :style => "max-width:600px;margin:0 auto;display:block;"}
-            %table{:width => "100%"}
-              %tr
-                %td{:align => "center"}
-                  %p{:font => "bold", :style => "font-size: 14px;"}
-                    %a{:href => "http://www.optyn.com", :style => "color:#2BA6CB;"} Home
-                    |
-                    %a{:href => "http://support.optyn.com", :style => "color:#2BA6CB;"} Support
-                    |
-                    %a{:href => "http://www.optyn.com", :style => "color:#2BA6CB;"} E-Mail Preferences
-        %td
+
+    = render partial: "shared/mailers/footer"

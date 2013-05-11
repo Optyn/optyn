@@ -1,0 +1,39 @@
+.headertext
+  %h3
+    New Coupon Campaign
+  %h5
+    This is easy! A coupon will get customers in your door and you will earn on average a 30% increase in sales.
+  %h6
+    Let's get started!
+
+
+= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
+
+= render partial: 'merchants/shared/messages/content', locals: {f: f}
+
+.control-group
+  = f.label :type_of_discount, class: "control-label"
+  .controls.checkbox
+    = f.radio_button :type_of_discount, :dollar_off
+    = '$off'
+    = 'or'
+    = f.radio_button :type_of_discount, :percentage_off
+    = '%off'
+
+.control-group
+  = f.label :discount_amount, "How much?", class: 'control-label'
+  .controls
+    = f.number_field :discount_amount
+    %span.help-inline
+      The amount of the coupon, in percentage or dollar amount value.
+
+.control-group
+  = f.label :coupon_code, "Coupon Code", class: 'control-label'
+  .controls
+    = f.text_field :coupon_code
+
+= render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
+fine_print_verbiage: 'You can use this to say things like 1 per customer or One Per order. The less limitations the better.'}
+
+
+= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

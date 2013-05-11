@@ -1,11 +1,13 @@
-#edit
+= display_flash_message
+#merchants
   .container
-    .span12.edit_wrapper
-      .span12.box
-        %div  
-          .address 
-            .head.pull-left.lead 
-              = "Edit Shop Details"
-            .form 
-              = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form'} do |f|
-                = render :partial => 'form', :locals => {f: f}
+    = render partial: "merchants/shared/menu"
+    .span8.edit_page
+      %h3
+        %img{:src => "/assets/edit-account-icon.png"}
+        Edit
+        = current_shop.name
+        Details
+      .form 
+        = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form'} do |f|
+          = render :partial => 'form', :locals => {f: f}

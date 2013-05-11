@@ -41,6 +41,14 @@ gem 'whenever'
 gem 'stripe'
 
 
+#gems for messagecenter
+gem "state_machine", "~> 1.2.0"
+gem "uuidtools"
+gem 'redis'
+gem 'redis-store'
+gem 'redis-rails'
+gem 'aws-ses', :require => 'aws/ses'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -57,9 +65,9 @@ end
 gem 'jquery-rails'
 
 group :development do
+  gem 'thin'
   gem 'sextant'
   gem 'pry'
-  gem 'mailcatcher'
   gem 'debugger'
   gem 'quiet_assets'
   gem 'capistrano'

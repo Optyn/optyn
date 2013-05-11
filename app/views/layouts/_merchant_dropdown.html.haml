@@ -1,19 +1,19 @@
 %li
-  %a{:href => "#"}
+  %a{:href => merchants_root_path}
     %i.icon-list-alt.icon-white
     Dashboard
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-    %img{:src => current_merchants_manager.image_url, :alt => "User Avatar", :class => "profile_image"}
+    %img{:src => current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
   %ul.dropdown-menu
     %li
-      %a.active{:href => "merchants/dashboard"}
+      %a.active{:href => merchants_root_path}
         %img{:src => "/assets/dropdown_dashicon.png", :float => "left"}
         My Dashboard
     %li
       %a{:href => "connections"}
         %img{:src => "/assets/dropdown_manager.png", :float => "left"}
-        My Connections
+        My Customers
     %li
       %a{:href => "#"}
         %img{:src => "/assets/dropdown_segments.png", :float => "left"}
@@ -23,17 +23,9 @@
         %img{:src => "/assets/dropdown_surveys.png", :float => "left"}
         My Surveys
     %li
-      %a{:href => edit_user_registration_path, :method => :put}
-        %img{:src => "/assets/drop_icon_settings.png", :float => "left"}
-        My Account
-    %li
-      %a{:href => edit_merchants_manager_registration_path}
-        %img{:src => "/assets/dropdown_profile.png", :float => "left"}
-        My Profile
-    %li
-      %a{:href => "#"}
+      %a{:href => merchants_shop_path}
         %img{:src => "/assets/dropdown_settings.png", :float => "left"}
-        My Settings
+        Manage Shop
     %hr
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

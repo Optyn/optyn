@@ -6,6 +6,8 @@ module Api
 			before_filter :fetch_store
 			
 			def button_framework
+        @application = @shop.oauth_application
+
 				respond_to do |format|
 
 					script = %Q(jQuery(document).ready(function(){
@@ -24,9 +26,19 @@ module Api
 														id: 'optyn-oauth-link',
 														onClick: 'login()'
 													});
+
+
+                          var optynImageCb = jQuery('<img />')
+                          optynImageCb.attr({
+														src: '#{SiteConfig.app_base_url}/assets/optyn_button_checkbox.png',
+														alt: 'Optyn Logo'
+													});
+
+                          #{"optynLink.append(optynImageCb);" if @application.checkmark_icon}
+
 													var optynImage = jQuery('<img />')
 													optynImage.attr({
-														src: '#{SiteConfig.app_base_url}/assets/logo.png',
+														src: '#{SiteConfig.app_base_url}/assets/#{@application.button_size == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
 														alt: 'Optyn Logo'
 													});
 													optynLink.append(optynImage);
@@ -70,7 +82,7 @@ module Api
 							        var win = null;
 
 											function login() {
-          							win         =   window.open(_url, "Login - Optyn", 'scrollbars=1, width=800, height=600'); 
+          							win         =   window.open(_url, "Login - Optyn", 'scrollbars=1, width=600, height=520'); 
 
           							var pollTimer   =   window.setInterval(function() { 
               							try {

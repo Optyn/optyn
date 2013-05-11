@@ -1,0 +1,84 @@
+/Flash Notice
+= display_flash_message
+/Main Body
+#consumer_dashboard
+  .container
+    = render partial: "shared/menu"
+    .span8
+      .header
+        .span3.maintitle
+          %h3
+            Hi
+            = current_user.name
+          Here's what's going on today!
+      .row.stats
+        .span2.leading
+          .count
+            4
+          .info
+            .img
+              %img{:src => "/assets/md_new_connections.png"}
+            .text
+              New Coupons
+        .span2.box
+          .count
+            14
+          .info
+            .img
+              %img{:src => "/assets/md_connections_week.png"}
+            .text
+              New Messages
+        .span2.box
+          .count
+            3
+          .info
+            .img
+              %img{:src => "/assets/md_connections_month.png"}
+            .text
+              Active Surveys
+        .span2.box
+          .count
+            2
+          .info
+            .img
+              %img{:src => "/assets/md_active_connections.png"}
+            .text
+              Available Specials
+      .latest
+        .title
+          Your Latest Activity
+        .sortby
+          Sort By
+          \&nbsp;
+          %select
+            %option All Recent Activity
+            %option New Sign Ups
+            %option Revoked Permissions
+            %option E-Mail Replies
+            %option Coupon Redemptions
+            %option Survey Actions
+      %br
+
+      %table.table.table-striped#my_connections_table
+        %thead
+          %tr
+            %th.alert.alert-error.flash_message_disconnected{:colspan => 5}
+          %tr
+            %th{} #
+            %th{:width => "25%"} Shop 
+            %th{:width => "25%"} Business Category
+            %th{:width => "30%"} Location
+            %th{:width => "20%"} Connect
+            
+        %tbody
+          %tr
+            %td 
+              1
+            %td 
+              Dana Cafe
+            %td 
+              Restaurant / Cafe
+            %td
+              Chicago, IL
+            %td
+              Connect

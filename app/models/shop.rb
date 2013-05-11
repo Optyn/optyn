@@ -35,7 +35,8 @@ class Shop < ActiveRecord::Base
 
   scope :disconnected, ->(connected_ids){where(["shops.id NOT IN (:exisiting_ids)", exisiting_ids: connected_ids])}
 
-  after_create :create_dummy_survey
+  after_create :create_dummy_survey, :create_select_all_label
+
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
   def self.by_app_id(app_id)
@@ -43,8 +44,8 @@ class Shop < ActiveRecord::Base
   end
 
   def self.disconnected_connections(connected_ids)
-    return all if connected_ids.blank?
-    disconnected(connected_ids) 
+    return order(:name) if connected_ids.blank?
+    disconnected(connected_ids).order(:name)
   end
 
   def shop_already_exists?
@@ -87,7 +88,7 @@ class Shop < ActiveRecord::Base
     first_location.zip rescue ""
   end
 
-  def generate_oauth_token(redirect_uri, force=false)
+  def generate_oauth_token(options, force=false)
     app = nil
     if force
       oauth_application.destroy
@@ -96,10 +97,12 @@ class Shop < ActiveRecord::Base
 
     app = self.oauth_application
     if app.present?
-      app.redirect_uri = redirect_uri
+      set_app_attrs(app, options)
+      app.save!
+      assign_embed_code(app)
       app.save!
     else
-      generate_application(redirect_uri)
+      generate_application(options)
     end
   end
 
@@ -114,10 +117,10 @@ class Shop < ActiveRecord::Base
       details[:location] = useful_location.as_json(except: [:id, :created_at, :updated_at, :longitude, :latitude])
     end
 
-    details[:button_url] = SiteConfig.app_base_url + "/assets/logo.png"
+    details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.button_size == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
 
     # put the oauth details
-    details[:welcome_message] = SiteConfig.api_welcome_message
+    details[:welcome_message] = oauth_application.show_default_optyn_text ? SiteConfig.api_welcome_message : oauth_application.custom_text
 
     details
   end
@@ -136,6 +139,10 @@ class Shop < ActiveRecord::Base
 
   def business_category_names
     businesses.collect(&:name)
+  end
+
+  def inactive_label
+    labels.inactive(self).first
   end
 
   def get_connection_for_user(user)
@@ -159,17 +166,35 @@ class Shop < ActiveRecord::Base
     end
   end
 
-  def generate_application(redirect_uri)
+  def create_select_all_label
+    label = Label.new(shop_id: self.id,  name: Label::SELECT_ALL_NAME)
+    label.active = false
+    label.save
+  end
+
+  def generate_application(options)
     Shop.transaction do
-      app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip,
-                                        :redirect_uri => redirect_uri)
-      app.owner = self
+      app = Doorkeeper::Application.new(:name => self.name + self.first_location_zip)
+      set_app_attrs(app, options)
+      app.save
+
+      assign_embed_code(app)
       app.save
 
       self.oauth_application = app
-
-      self.embed_code = EmbedCodeGenerator.generate_embed_code(self)
-      save(validate: false)
     end
+  end
+
+  def set_app_attrs(app, options)
+    app.redirect_uri = options[:redirect_uri]
+    app.owner = self
+    app.button_size = options[:button_size]
+    app.checkmark_icon = options[:checkmark_icon]
+    app.show_default_optyn_text = options[:show_default_optyn_text]
+    app.custom_text = options[:custom_text]
+  end
+
+  def assign_embed_code(app)
+    app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
   end
 end

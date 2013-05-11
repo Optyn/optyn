@@ -1,0 +1,41 @@
+#title_header
+  %h3
+    Your Messages
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "shared/menu"
+
+    .span8
+      = render partial: "messages/message_menu"
+
+      #messages_collection_container.row.text-center
+        = render partial: "shared/messages/collection_form"
+
+      .display-none
+        .message-list
+          = check_box_tag(:message_id, @message.uuid, true, class: 'real')
+
+      = render partial: 'shared/messages/show_actions'
+
+      %h4
+        = @message.personalized_subject(@message_user)
+      %hr/
+
+      .row
+        .span4
+          .span1
+            = shop.logo_img.url rescue nil
+          .span3
+            ==  to: #{@message_user.name}
+
+        .span3
+          .span2.text-right
+            = message_detail_date(@message)
+
+          /reply all
+
+        = render partial: "shared/messages/core_content", locals: {preview: false, customer_name: @message_user.name}
+

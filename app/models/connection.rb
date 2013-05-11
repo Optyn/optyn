@@ -14,6 +14,8 @@ class Connection < ActiveRecord::Base
 
   scope :includes_user_and_permissions, includes(user: {permissions_users: :permission})
 
+  scope :for_users, ->(user_identifiers){where(user_id: user_identifiers)}
+
   def toggle_connection
   	if self.active
   		self.active = false

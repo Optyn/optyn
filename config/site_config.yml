@@ -5,6 +5,10 @@ defaults:
   app_host: 'www.optyn.com'
   api_welcome_message: 'Optyn to receive cool offers, new product announcements, giveaways and other cool announcements.'
   app_base_url: 'http://www.optyn.com'
+  deployment_shared_path: <%= "#{Rails.root}/tmp/" %>
+  ttls:
+    message_folder: <%= 24.hours %>
+
   #Add the twitter consumer key and twitter consumer secret
   #Add the facebook app key and facebook app secret
   #Add the google client key and google client secret

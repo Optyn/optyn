@@ -1,13 +1,44 @@
-%fieldset 
-  .clearfix
-    = label_tag(:business_name, 'Business Name:')
-    .input
-      = text_field_tag(:business_name, current_merchants_manager.business_name, :readonly => :readonly)
-        
-  .clearfix
-    = label_tag(:redirect_uri, 'Redirect Uri:')
+= hidden_field_tag :reset, false
+.custom
+  = f.text_field :redirect_uri, placeholder: 'Redirect uri'
 
-    .input
-      = text_field_tag(:redirect_uri, (params[:redirect_uri] || current_shop.oauth_application.redirect_uri rescue nil))
+  .option
+    = f.radio_button(:button_size, 1)
+    Small Button
+    = f.radio_button(:button_size, 2)
+    Large Button
 
-    = hidden_field_tag :reset, false  
+  .option
+    %label.checkbox
+      = f.check_box(:checkmark_icon)
+      Show Checkmark Icon
+
+  .option
+    %label.checkbox
+      = f.check_box(:show_default_optyn_text, class: 'optyn-text-preference')
+      Show Optyn Text
+
+    %textarea{:rows => "3", :placeholder => SiteConfig.api_welcome_message, :readonly => 'readonly'}
+
+  .option
+    %p
+      %strong Or
+
+  .option
+    %label.checkbox
+      = check_box_tag(:show_custom_optyn_text, '1', false,  class: 'optyn-text-preference')
+      Use Custom Optyn Text
+
+    = f.text_area(:custom_text, rows: 3, :placeholder => "Your Custom Tag Line")
+
+    - unless @application.new_record?
+      .refresh
+        %a.btn.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save
+        %a.btn.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Token
+    - else
+      .refresh
+        %a.btn.refreshbtn{:id => "generate_button", :href => "javascript:void(0)"} Generate Button
+
+    #loading{style: "display: none; text-align: right;"}
+      %strong
+        Loading...

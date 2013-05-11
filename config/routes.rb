@@ -7,6 +7,8 @@ Optyn::Application.routes.draw do
   root to: 'main#index'
   match 'connections' => 'connections#index', as: :customers_root
   match 'merchants' => 'merchants/dashboard#index', as: :merchants_root
+  match 'dashboard' => 'dashboards#index', as: :consumer_dashboard
+
 
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
@@ -27,6 +29,8 @@ Optyn::Application.routes.draw do
 
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://support.optyn.com"), :as => :support
+
+  match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
 
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
@@ -70,9 +74,23 @@ Optyn::Application.routes.draw do
       get 'make'
     end    
   end
+
   resources :segments do
     member do
       post :save_answers
+    end
+  end
+
+  match '/messages', to: 'messages#inbox'
+  resources :messages, except: [:index, :new, :create, :edit, :update, :destroy]  do
+    collection do
+      get :inbox
+      get :saved
+      get :trash
+      put :move_to_trash
+      put :move_to_saved
+      put :move_to_inbox
+      put :discard
     end
   end
 
@@ -142,6 +160,28 @@ Optyn::Application.routes.draw do
 
     resources :labels, except: [:show]
 
+    get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
+    get "messages/" => "messages#types", as: 'campaign_types'
+    resources :messages do
+      collection do
+        get :types
+        get :drafts
+        get :trash
+        get :sent
+        get :queued
+        put :move_to_trash
+        put :move_to_draft
+        put :discard
+      end
+
+      member do
+        get :preview
+        get :launch
+        put :update_meta
+        put :create_response_message
+        delete :discard_response_message
+      end
+    end
   end
 
   use_doorkeeper  do

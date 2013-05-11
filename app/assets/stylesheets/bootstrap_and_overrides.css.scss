@@ -83,6 +83,18 @@ $fontAwesomeWoffPath: image-path("fontawesome-webfont.woff");
 $fontAwesomeTtfPath: image-path("fontawesome-webfont.ttf");
 $fontAwesomeSvgPath: image-path("fontawesome-webfont.svg");
 
+.text-left {text-align: left;}
+
+.text-right {text-align: right;}
+
+.text-center {text-align: center;}
+
+.display-none{display: none;}
+
+.field-with-errors .error{color: #b94a48}
+
+.field-with-errors label{color: #b94a48}
+
 // Font Awesome
 //@import "bootstrap/fontawesome";
 

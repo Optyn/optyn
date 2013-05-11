@@ -1,0 +1,17 @@
+.row
+  %p
+    - @survey = @message.survey
+    - @survey_questions = @survey.survey_questions
+
+    %h3= "#{@survey.title}"
+
+    - if preview
+
+      = render partial: "shared/surveys/markup", locals: {preview: false}
+
+      = link_to "Submit Feedback", "javascript:void(0)", class: "btn btn-primary"
+
+    - else
+      = render file: "segments/show"
+
+  = render partial: "shared/messages/fine_print"

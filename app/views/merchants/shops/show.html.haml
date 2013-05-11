@@ -10,9 +10,10 @@
     .span8
       .action-buttons
         = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
-        %a.btn{:href => "#"} Your Pricing Plan
+        %a.btn{:href => "upgrade"} Your Pricing Plan
         %a.btn{:href => edit_merchants_manager_registration_path} Edit Personal Info
-        %a.btn{:href => merchants_managers_list_path} View Managers
+        %a.btn{:href => merchants_managers_list_path} View / Add Managers
+        %a.btn{:href => merchants_locations_path} View / Add Locations
       %p
         %strong Name
         %br

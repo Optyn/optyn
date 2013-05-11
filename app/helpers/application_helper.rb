@@ -77,4 +77,14 @@ module ApplicationHelper
     image_name = shop.logo_img? ? shop.logo_img.url : 'no_shop_logo.gif'
     image_tag(image_name, alt: shop.name, class: 'shop-logo')
   end
+
+  def human_paginated_range(collection)
+    endnumber = ((collection.offset_value + collection.limit_value) > collection.total_count) ? collection.total_count : (collection.offset_value + collection.limit_value)
+    return "" if collection.blank? || collection.total_count <= collection.limit_value
+    "Showing #{collection.offset_value + 1}-#{endnumber} of #{collection.total_count}"
+  end
+
+  def active_tab_class(highlight_action_name)
+    highlight_action_name == action_name ? "active" : ""
+  end
 end

@@ -7,7 +7,7 @@ class Merchants::BaseController < ApplicationController
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
 	private
-  
+
   def is_current_manager_owner?
     unless current_manager.owner?
       redirect_to merchants_locations_path
@@ -16,9 +16,8 @@ class Merchants::BaseController < ApplicationController
   end
 
   def set_time_zone
-    if current_shop.time_zone.present?
-      Time.zone = current_shop.time_zone
-    end
+    timezone = current_shop.time_zone.present? ? current_shop.time_zone : "Eastern Time (US & Canada)"
+    Time.zone = timezone
   end
 
 	def active_subscription?
@@ -29,7 +28,7 @@ class Merchants::BaseController < ApplicationController
     end
   end
 
-	def current_shop 
+	def current_shop
 		@_shop ||= current_merchants_manager.shop if merchants_manager_signed_in?
 	end
 

@@ -1,0 +1,16 @@
+- if collection.total_count > Message::PER_PAGE
+  .pagination.text-right
+    = human_paginated_range(collection)
+    %ul
+      %li
+        - if link_to_previous_page(collection, '«').blank?
+          %span
+            «
+        - else
+          = link_to_previous_page(collection, '«')
+      %li
+        - if link_to_next_page(collection, '»').blank?
+          %span
+            »
+        - else
+          = link_to_next_page(collection, '»')

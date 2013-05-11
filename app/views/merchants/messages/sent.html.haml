@@ -1,0 +1,18 @@
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+
+    .span8#message_fields_wrapper
+      = render partial: "merchants/messages/message_menu"
+
+      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+
+      = render partial: 'merchants/messages/list'
+
+      = render partial: 'shared/messages/pager', locals: {collection: @messages}

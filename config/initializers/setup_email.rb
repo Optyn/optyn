@@ -1,14 +1,18 @@
-unless Rails.env.development?
-	ActionMailer::Base.delivery_method = :smtp
-	ActionMailer::Base.smtp_settings = {
-		:tls => true,
-		:enable_starttls_auto => false,
-		:port => 465,
-		:address => "smtp.gmail.com",
-		:domain => 'optyn.com',
-		:user_name => "services@optyn.com",
-		:password => "7cd5a95!",
-		:authentication => :plain,
-		:openssl_verify_mode => 'none'
-	}
-end
+#unless Rails.env.development?
+#	ActionMailer::Base.delivery_method = :smtp
+#	ActionMailer::Base.smtp_settings = {
+#		:tls => true,
+#		:enable_starttls_auto => false,
+#		:port => 465,
+#		:address => "smtp.gmail.com",
+#		:domain => 'optyn.com',
+#		:user_name => "services@optyn.com",
+#		:password => "7cd5a95!",
+#		:authentication => :plain,
+#		:openssl_verify_mode => 'none'
+#	}
+#end
+
+ActionMailer::Base.add_delivery_method :ses, AWS::SES::Base,
+   :access_key_id     => 'AKIAJO7WB66NE2EDUV2Q',
+   :secret_access_key => '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'

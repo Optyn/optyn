@@ -1,0 +1,135 @@
+/* Consumer Main */
+#consumer {
+  padding-top: 40px;
+}
+
+/* Consumer Dashboard Page */
+#consumer_dashboard {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0px;
+}
+#consumer_dashboard .header {
+  height: 50px;
+}
+#consumer_dashboard .header .maintitle {
+  margin: 0px;
+}
+#consumer_dashboard .header .maintitle h3 {
+  margin: 0px;
+  padding-top: 0px;
+  color: #263d45;
+  font-size: 25px;
+  line-height: 27px;
+}
+#consumer_dashboard .header .new {
+  float: right;
+}
+#consumer_dashboard .header .new .newcampaign {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 36px;
+  line-height: 32px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  font-weight: bold;
+  border: 1px #304d58;
+  float: right;
+}
+#consumer_dashboard .header .new .newcampaign img {
+  padding-right: 10px;
+}
+#consumer_dashboard .header .newcampaign:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#consumer_dashboard .latest {
+  border-radius: 4px;
+  background-color: #7d8f96;
+  height: 50px;
+  margin-top: 10px;
+}
+#consumer_dashboard .latest .title {
+  font-size: 18px;
+  color: #fff;
+  line-height: 26px;
+  float: left;
+  padding-left: 20px;
+  vertical-align: middle;
+  padding-top: 10px;
+  font-weight: bold;
+}
+#consumer_dashboard .latest .sortby {
+  float: right;
+  color: #fff;
+  vertical-align: middle;
+  padding-top: 12px;
+  padding-right: 20px;
+}
+#consumer_dashboard latest .sortby select {
+  border: 0px !important;
+  width: 150px !important;
+}
+#consumer_dashboard table a {
+  color: #1791c0 !important;
+}
+#consumer_dashboard table a:hover {
+  color: #263d45 !important;
+}
+/* consumer_dashboard Statistics */
+#consumer_dashboard .stats {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#consumer_dashboard .stats .span2 {
+  margin-left: 0px;
+  width: 186px;
+}
+#consumer_dashboard .stats .leading {
+  margin-left: 30px;
+}
+#consumer_dashboard .stats .box {
+  padding-left: 8px;
+}
+#consumer_dashboard .stats .box .count,
+#consumer_dashboard .stats .leading .count {
+  text-align: center;
+  background-color: #1791c0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 36px;
+  line-height: 40px;
+  color: white;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#consumer_dashboard .stats .box .info,
+#consumer_dashboard .stats .leading .info {
+  background-color: white;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+#consumer_dashboard .stats .box .info .img,
+#consumer_dashboard .stats .leading .info .img {
+  float: left;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+#consumer_dashboard .stats .box .info .text,
+#consumer_dashboard .stats .leading .info .text {
+  text-align: left;
+  vertical-align: middle;
+  padding-left: 5px;
+}

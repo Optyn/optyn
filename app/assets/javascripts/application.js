@@ -16,10 +16,28 @@
 //= require bootstrap
 //= require_directory ./stripe
 //= require chosen-jquery
-//= require bootstrap-datepicker
+//= require bootstrap-datetimepicker
 //= require jquery.zclip.min.js
 //= require shCore.js
 //= require shLegacy.js
 //= require shBrushXml.js
 //= require_self
 //= require_tree
+
+$(document).ready(function () {
+    if ($('.date-time-picker').length && $('.date-time-picker .error').length) {
+        moveDatetimepickerErrorMessage();
+    }
+});
+
+function moveDatetimepickerErrorMessage() {
+    var $errorMessage = $('.date-time-picker .error');
+    var $errorMessageGrandParent = $errorMessage.parent().parent().parent();
+
+    var $newErrorMesageContainer = $('<span />');
+    $newErrorMesageContainer.attr({
+        class: 'field-with-errors'
+    })
+    $newErrorMesageContainer.append($errorMessage)
+    $errorMessageGrandParent.append($newErrorMesageContainer);
+}

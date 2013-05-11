@@ -1,0 +1,11 @@
+.row
+  %p
+    == #{@message.shop_name} is inviting you to its special. Here are the details:
+    = render partial: "shared/messages/content"
+
+  %p
+    %strong Fine Print:
+    = render partial: "shared/messages/fine_print"
+
+
+  /TODO ANY OTHER TEXT GOES HERE

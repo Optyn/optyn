@@ -5,7 +5,7 @@ class ConnectionsController < BaseController
 	end
 
 	def make
-  	@shops = Shop.disconnected_connections(current_user.active_shop_ids).order('name ASC')
+  	@shops = Shop.disconnected_connections(current_user.active_shop_ids)
 	end
 
 	def add_connection

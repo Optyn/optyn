@@ -1,0 +1,23 @@
+.actions
+  = link_to "<i class='icon-arrow-left icon-white'></i>".html_safe, registered_action_location , class: 'btn btn-primary', title: 'Back'
+
+  - if manager_signed_in?
+    - if @message.trash?
+      %button{class: 'collection-action btn btn-danger', title: 'Discard Permanently', name: 'discard'}
+        %i{class: 'icon-trash icon-white'}
+      = hidden_field_tag :discard_link, discard_merchants_messages_path
+    -elsif @message.queued_editable?
+      %button{class: 'collection-action btn btn-danger', title: 'Trash', name: 'move_to_trash'}
+        %i{class: 'icon-trash icon-white'}
+      = hidden_field_tag :move_to_trash_link, move_to_trash_merchants_messages_path
+
+  - if user_signed_in?
+    %button{class: 'collection-action btn btn-danger', title: 'Trash', name: 'move_to_trash'}
+      %i{class: 'icon-trash icon-white'}
+    = hidden_field_tag :move_to_trash_link, move_to_trash_messages_path
+
+
+  - if @message.editable_state?
+    = link_to "<i class='icon-edit icon-white'></i>".html_safe, edit_merchants_message_path, class: 'btn btn-success', title: 'Trash'
+
+

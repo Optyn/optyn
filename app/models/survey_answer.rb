@@ -2,6 +2,8 @@ class SurveyAnswer < ActiveRecord::Base
   belongs_to :survey_question
   belongs_to :user
 
+  delegate :survey, to: :survey_question
+
   attr_accessible :survey_question_id, :value, :user_id
   serialize :value, Array
 
@@ -37,6 +39,7 @@ class SurveyAnswer < ActiveRecord::Base
         answer.save!
       end
     end
+
   end
 
   def self.paginated_users(survey_id, page_number=PAGE, per_page=PER_PAGE)

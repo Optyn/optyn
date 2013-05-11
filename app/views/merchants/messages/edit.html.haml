@@ -1,0 +1,12 @@
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+
+    .span8
+      = render partial: "merchants/messages/edit_fields_wrapper"

@@ -1,6 +1,7 @@
 //= require sliders
 @import "compass";
 @import "compass/reset";
+@import "consumers";
 @import "core";
 @import "animate";
 @import "blog";
@@ -14,6 +15,7 @@
 @import "main";
 @import "menus";
 @import "merchant";
+@import "oauth";
 @import "pricing";
 @import "reset";
 @import "signup";
@@ -21,7 +23,8 @@
 @import "staticpages";
 @import "theme";
 @import "chosen";
-@import "datepicker";
 @import "shCoreDefault";
 @import "jquery-ui-1.9.2.custom";
-@import "jquery.ui.1.9.2.ie"
+@import "jquery.ui.1.9.2.ie";
+@import "bootstrap-datetimepicker";
+@import "messages";

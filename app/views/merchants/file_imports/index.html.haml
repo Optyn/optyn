@@ -3,3 +3,18 @@
 /Main Body
 #dashboard
   .container
+    = render partial: "merchants/shared/menu"
+    .span8
+      .header
+        .maintitle
+          %h3
+            Import Users for
+            = current_shop.name
+          If you have a previous email list, you can easily import it into Optyn below.
+      .import
+      %br
+      %br
+        = form_for current_merchants_manager,:url => merchants_file_imports_path, :method => "post",multipart: true do |f|
+          = f.fields_for :file_imports do |import_form|
+            = import_form.file_field :csv_file
+          = f.submit "Import Users", class: 'btn btn-primary'

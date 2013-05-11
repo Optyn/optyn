@@ -41,7 +41,7 @@ manager_names = ["Johny Cash",
                  "Vanessa Carlton",
                  "Alan Edgar",
                  "Lyn Morales",
-                 "Lauren Mielie",
+                 "Lauren Mieli",
                  "Deni Malkoc",
                  "Dennis Love",
                  "Ben Dover",
@@ -108,7 +108,7 @@ shop_names = ["Dana Cafe",
 
 manager_names.each_with_index do |name, index|
   shop = Shop.create!(:name => shop_names[index], :stype => "local", :identifier => shop_names[index].downcase.gsub(/\s/, ''), :time_zone => 'Eastern Time (US & Canada)')
-  manager  = shop.managers.create(:name => name, :email => "#{name.downcase.gsub(/\s/, "")}@idyllic-software.com", :password => "test1234", :password_confirmation => "test1234")
+  manager = shop.managers.create(:name => name, :email => "#{name.downcase.gsub(/\s/, "")}@idyllic-software.com", :password => "test1234", :password_confirmation => "test1234")
   manager.confirm!
   manager.save!
 end
@@ -158,4 +158,9 @@ users.each_with_index do |user, index|
       SurveyAnswer.create(:user_id => user.id, :survey_question_id => question.id, :value => ["This is a test"])
     end
   end
+end
+
+20.times do
+  messagecenter = "#{File.dirname(__FILE__)}/messagecenter.rb"
+  eval(IO.read(messagecenter), binding, messagecenter)
 end

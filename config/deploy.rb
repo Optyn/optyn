@@ -32,6 +32,9 @@ set :deploy_via, :remote_cache
 #set the reque workers add other queues here...
 set :workers, { "devise_queue" => 1 }
 
+#set the lock file while deploying so that messagecenter tasks and deployments don't run parallel
+set :lock_file_path, "#{shared_path}/pids"
+set :lock_file_name, 'deployment.pid'
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -44,11 +47,13 @@ set :workers, { "devise_queue" => 1 }
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
+before 'deploy:update_code', 'messenger:lock'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:web:enable"
+after "deploy:restart", "messenger:unlock"
 after "deploy", "deploy:cleanup"
 #after "deploy:create_symlink", "whenever"
 
@@ -64,49 +69,49 @@ namespace "whenever" do
 end
 
 namespace :deploy do
-	desc "reload the database with seed data"
-	task :seed do
-		run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-	end
+  desc "reload the database with seed data"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
 
-	desc "Make sure local git is in sync with remote."
-	task :check_revision, roles: :web do
-		branch_rev = `git rev-parse HEAD`
-		head_rev = `git rev-parse origin/#{branch || master}`
+  desc "Make sure local git is in sync with remote."
+  task :check_revision, roles: :web do
+    branch_rev = `git rev-parse HEAD`
+    head_rev = `git rev-parse origin/#{branch || master}`
 
-		unless branch_rev == head_rev
-			puts "WARNING: HEAD is not the same as origin/master"
-			puts "Run `git push` to sync changes."
-			exit
-		end
-	end
+    unless branch_rev == head_rev
+      puts "WARNING: HEAD is not the same as origin/master"
+      puts "Run `git push` to sync changes."
+      exit
+    end
+  end
 
-	task :setup_nginx_config, roles: :app do
-		unless "production" == rails_env
-			sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-		end
-	end
+  task :setup_nginx_config, roles: :app do
+    unless "production" == rails_env
+      sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    end
+  end
 
-	desc 'Copy database.yml from shared to current folder'
-	task :create_symlinks, :roles => :app, :except => {:no_release => true} do
-		puts "*" * 50
-		puts "Running symlinks"
-		run "ln -s #{shared_path}/config/database.yml #{current_release}/config/database.yml"
-	end
+  desc 'Copy database.yml from shared to current folder'
+  task :create_symlinks, :roles => :app, :except => {:no_release => true} do
+    puts "*" * 50
+    puts "Running symlinks"
+    run "ln -s #{shared_path}/config/database.yml #{current_release}/config/database.yml"
+  end
 
-	desc 'Start unicorn'
-	task :start, :roles => :app, :except => { :no_release => true } do
-		puts "Starting Unicorn"
-		run "cd #{current_path}; bundle exec unicorn -E #{rails_env} -c config/unicorn.rb -D"
-	end
+  desc 'Start unicorn'
+  task :start, :roles => :app, :except => { :no_release => true } do
+    puts "Starting Unicorn"
+    run "cd #{current_path}; bundle exec unicorn -E #{rails_env} -c config/unicorn.rb -D"
+  end
 
-	desc 'Stop unicorn'
-	task :stop, :roles => :app, :except => { :no_release => true } do
-		run "kill -9 `lsof -t -i:3000`" rescue nil
-	end
+  desc 'Stop unicorn'
+  task :stop, :roles => :app, :except => { :no_release => true } do
+    run "kill -9 `lsof -t -i:3000`" rescue nil
+  end
 
-	desc 'Restart unicorn'
-	task :restart, :roles => :app, :except => { :no_release => true } do
+  desc 'Restart unicorn'
+  task :restart, :roles => :app, :except => { :no_release => true } do
     #run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     stop
     start
@@ -114,7 +119,7 @@ namespace :deploy do
 
   desc "Migrating the database"
   task :migrate, :roles => :db do
-  	run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate --trace"
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate --trace"
   end
 
   namespace :assets do
@@ -133,7 +138,7 @@ namespace :deploy do
       deadline = ENV['UNTIL']
 
       template = File.read(File.join(File.dirname(__FILE__), "deploy",
-          "maintenance.html.erb"))
+                                     "maintenance.html.erb"))
       result = ERB.new(template).result(binding)
 
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
@@ -141,6 +146,24 @@ namespace :deploy do
 
     task :enable, :roles => :web, :except => { :no_release => true } do
       run "rm #{shared_path}/system/maintenance.html"
+    end
+  end
+
+  namespace :messenger do
+    #task create a lock file.
+    task :lock, :roles => :messenger, :only => {:primary => true} do
+      msg = %Q{
+      ACTION:deployment
+      PID:#{Process.pid}
+      MESSAGE:'Running Deployment'
+      TIME:#{Time.now}
+      }
+      put msg, "#{lock_file_path}/#{lock_file_name}", :mode => 0644
+    end
+
+    #task delete lock file.
+    task :unlock, :roles => :messenger, :only => {:primary => true} do
+      run "rm #{shared_path}/pids/#{lock_file_name}"
     end
   end
 end
