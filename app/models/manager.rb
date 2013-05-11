@@ -4,7 +4,7 @@ class Manager < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :async, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable,:confirmable
+    :recoverable, :rememberable, :trackable, :validatable
 
   has_many :authentications,:as=>:account, dependent: :destroy
   has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
@@ -21,6 +21,8 @@ class Manager < ActiveRecord::Base
   attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at, :picture
   attr_accessor :skip_password
   accepts_nested_attributes_for :file_imports
+
+  after_create :send_welcome_email
 
   def self.create_from_omniauth(auth)
     authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "Manager")
@@ -91,5 +93,8 @@ class Manager < ActiveRecord::Base
     %Q("#{name} <#{email}>")
   end
 
+  def send_welcome_email
+    Resque.enqueue(WelcomeMessageSender, :manager, self.id)
+  end
 end
 

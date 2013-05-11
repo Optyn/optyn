@@ -23,10 +23,12 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation,
                   :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture
 
+  attr_accessor :show_password
+
   accepts_nested_attributes_for :permissions_users
 
   #accepts_nested_attributes_for :permission
-  after_create :update_zip_prompted, :create_permission_users
+  after_create :update_zip_prompted, :create_permission_users, :send_welcome_email
 
   PER_PAGE = 30
 
@@ -180,5 +182,9 @@ class User < ActiveRecord::Base
         self.errors.add(attr, "invalid")
       end
     end
+  end
+
+  def send_welcome_email
+    Resque.enqueue(WelcomeMessageSender, :user, self.id, (show_password ? self.password : nil))
   end
 end
