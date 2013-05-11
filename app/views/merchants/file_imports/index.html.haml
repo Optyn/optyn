@@ -14,7 +14,11 @@
       .import
       %br
       %br
-        = form_for current_merchants_manager,:url => merchants_file_imports_path, :method => "post",multipart: true do |f|
-          = f.fields_for :file_imports do |import_form|
-            = import_form.file_field :csv_file
-          = f.submit "Import Users", class: 'btn btn-primary'
+        = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true do |f|
+          .control-group
+            = f.label :csv_file, "Customer CSV file to Import", class: 'control-label'
+            .controls
+              = f.file_field :csv_file
+
+          .actions
+            = f.submit "Import", class: "btn btn-primary"

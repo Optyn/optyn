@@ -30,35 +30,6 @@ class User < ActiveRecord::Base
 
   PER_PAGE = 30
 
-  def self.import(file, shop, manager)
-    invalid_records = []
-    index, valid_index = 0
-    CSV.foreach(file, headers: true) do |row|
-      user_password = Devise.friendly_token.first(8)
-      new_user = User.new row.to_hash.merge({password: user_password, password_confirmation: user_password})
-      if new_user.save
-        new_connection = new_user.connections.create(shop_id: shop.id) if new_user.present?
-        new_user.permissions_users.create(action: "true", permission_id: "1") if new_user.present?
-        new_user.permissions_users.create(action: "true", permission_id: "2") if new_user.present?
-        valid_index = valid_index + 1
-      else
-        invalid_records <<{:index => index, :csv_row => row.to_hash, :error => new_user.errors.full_messages.join(",")}
-      end
-      index = index + 1
-    end
-    # Return an array of invalid records and total no of record
-    [invalid_records, index, valid_index]
-    filepath = "/tmp/record_#{Time.now}.csv"
-    csv_string = CSV.open(filepath, 'w',) do |csv|
-      cols = ["name", "email", "gender", "errors"]
-      csv << cols
-      invalid_records.each do |record|
-        csv << [record.csv_row.name, record.csv_row.email, record.csv_row.gender, record.error]
-      end
-    end
-    MerchantMailer.user_contacts_imported_notifier(manager, filepath, index, valid_index).deliver
-  end
-
   def self.from_omniauth(auth)
     authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "User")
     authentication.image_url = auth.info.image

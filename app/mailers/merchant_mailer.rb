@@ -6,11 +6,27 @@ class MerchantMailer < ActionMailer::Base
     mail(:to => @manager.email, :subject => "Payment Successfull!")
   end
 
-  def user_contacts_imported_notifier(manager,filepath,counter,valid_counters)
-  	@manager = manager
-    @counter = counter
-    @valid_counters =  valid_counters
-    attachments['invalid_records.csv'] = File.read(filepath)
-  	mail(to: @manager.email,  subject: "Customer conctacts imported")  	
+  def import_stats(file_import, counters)
+    puts "*" * 100
+    puts counters.inspect
+    puts "-" * 100
+
+    @file_import = file_import
+    @manager = @file_import.manager
+    @counters = counters
+
+    filepath = @file_import.create_unparsed_rows_file_if
+    if filepath.present?
+      attachments['invalid_records.csv'] = File.read(filepath)
+    end
+
+    mail(to: "#{@manager.name} <#{@manager.email}>", subject: "Import user task complete!")
+  end
+
+  def import_error(file_import, error)
+    @file_import = file_import
+    @manager = @file_import.manager
+    @error = error
+    mail(to: "#{@manager.name} <#{@manager.email}>", subject: "Error while importing users")
   end
 end
