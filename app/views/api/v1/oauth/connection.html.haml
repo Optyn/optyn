@@ -52,7 +52,10 @@
             if(data.message.length){
               $('#connection_auth').html(data.message);
               setTimeout(function(){
-                window.location = redirect_uri;
+                //window.location = redirect_uri;
+                //wondow.close();
+                var ww = window.open("#", "_self");
+                    ww.close();
               }, 1500)
             }
           }catch(e){
