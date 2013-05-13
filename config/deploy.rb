@@ -47,13 +47,13 @@ set :lock_file_name, 'deployment.pid'
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
-before 'deploy:update_code', 'messenger:lock'
+before 'deploy:update_code', 'deploy:messenger:lock'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:web:enable"
-after "deploy:restart", "messenger:unlock"
+after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
 #after "deploy:create_symlink", "whenever"
 
