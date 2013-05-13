@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def human_date(time)
+    time.strftime(HUMAN_DATE_FORMAT)
+  end
+
+  def human_time(time)
+    time.strftime(HUMAN_TIME_FORMAT)
+  end
+
   def user_present?
     user_signed_in? || merchants_manager_signed_in?
   end

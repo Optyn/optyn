@@ -22,3 +22,35 @@
 
           .actions
             = f.submit "Import", class: "btn btn-primary"
+
+
+      %table.table.table-striped
+        %thead
+          %tr
+            %th #
+            %th Name
+            %th Status
+            %th Stats
+            %th Uploaded
+        %tbody
+        - if @file_imports.present?
+          - @file_imports.each_with_index do |import, index|
+            %tr
+              %td= index + 1
+              %td
+                = File.basename(import.csv_file.to_s)
+              %td
+                = import.status.humanize rescue "-"
+              %td
+                - if import.stats.keys.present?
+                  - import.stats.each_pair do |key, value|
+                    == #{key.to_s.humanize.pluralize} = #{value}
+                    %br
+                - else
+                  -
+              %td
+                = human_date(import.created_at) rescue "-"
+        - else
+          %tr
+            %td{colspan: 5}
+              No files uploaded yet for imports.

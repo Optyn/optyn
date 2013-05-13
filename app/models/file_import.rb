@@ -6,10 +6,14 @@ class FileImport < ActiveRecord::Base
 
   attr_accessible :csv_file
 
+  serialize :stats, Hash
+
   mount_uploader :csv_file, FileUploader
 
   validates :csv_file, presence: true
   validates :csv_file, file_size: {maximum: 10.megabytes.to_i}, :if => :should_validate?
+
+  after_create :assign_queued_status
 
   def create_connections()
     begin
@@ -63,11 +67,16 @@ class FileImport < ActiveRecord::Base
         UserLabel.find_or_create_by_user_id_and_label_id(user.id, label.id)
       end
 
+      self.stats = counters
+      self.save
+
+      assign_complete_status
+
       MerchantMailer.import_stats(self, counters).deliver
     rescue => e
-      puts "Boom!"
-      puts e.message
-      puts e.backtrace
+      Rails.logger.error e.message
+      Rails.logger.error
+      assign_error_status
       MerchantMailer.import_error(self, e.message).deliver
     end
   end
@@ -85,6 +94,21 @@ class FileImport < ActiveRecord::Base
     end
 
     file_path
+  end
+
+  def assign_being_parsed_status
+    self.status = "being_parsed"
+    self.save
+  end
+
+  def assign_complete_status
+    self.status = "complete"
+    self.save
+  end
+
+  def assign_error_status
+    self.status = "error"
+    self.save
   end
 
   private
@@ -118,5 +142,10 @@ class FileImport < ActiveRecord::Base
     File.open(unparsed_file_path, "a") do |file|
       file << (row.to_s + "\n")
     end
+  end
+
+  def assign_queued_status
+    self.status = "queued"
+    self.save
   end
 end

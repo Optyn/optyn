@@ -22,7 +22,7 @@
                   %p Below are the stats for the file.
                   - @counters.each_pair do |key, value|
                     %p
-                      == #{key.to_s.humanize} = #{value}
+                      == #{key.to_s.humanize.pluralize} = #{value}
 
                   %p
                     Cheers,

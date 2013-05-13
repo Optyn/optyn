@@ -1,11 +1,8 @@
 class Merchants::FileImportsController < Merchants::BaseController
 
-  def new
-    current_merchants_manager.file_imports.build
-  end
-
   def index
-    current_merchants_manager.file_imports.build
+    @file_imports = current_manager.file_imports
+    @file_import = FileImport.new
   end
 
   def create
@@ -14,7 +11,7 @@ class Merchants::FileImportsController < Merchants::BaseController
 
     if @file_import.save
       Resque.enqueue(UserImporter, @file_import.id)
-      redirect_to merchants_dashboard_index_path, notice: "Your CSV file has been queued for import. We will send you an email with the statistics once the import is complete."
+      redirect_to merchants_file_imports_path, notice: "Your CSV file has been queued for import. We will send you an email with the statistics once the import is complete."
     else
       render 'index'
     end
