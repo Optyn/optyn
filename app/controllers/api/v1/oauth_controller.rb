@@ -27,13 +27,7 @@ module Api
         user_changed = current_user.changed? || @connection
 
         if current_user.update_attributes(params[:user])
-          if user_changed
-
-            render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
-          else
-            render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
-            #head :ok
-          end
+          render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
         else
           head :unprocessable_entity
         end
