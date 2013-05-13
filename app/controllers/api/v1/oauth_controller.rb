@@ -31,7 +31,8 @@ module Api
 
             render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
           else
-            head :ok
+            render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
+            #head :ok
           end
         else
           head :unprocessable_entity

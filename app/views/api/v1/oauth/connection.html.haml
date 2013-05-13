@@ -50,10 +50,10 @@
         success: function(data) {
           try{
             if(data.message.length){
-              $('#box_login').html(data.message);
+              $('#connection_auth').html(data.message);
               setTimeout(function(){
                 window.location = redirect_uri;
-              }, 3000)
+              }, 1500)
             }
           }catch(e){
             window.location = redirect_uri;
