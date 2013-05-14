@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513084358) do
+ActiveRecord::Schema.define(:version => 20130514045617) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -296,8 +296,8 @@ ActiveRecord::Schema.define(:version => 20130513084358) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.string   "stype"
     t.string   "description"
     t.string   "logo_img"
@@ -305,6 +305,7 @@ ActiveRecord::Schema.define(:version => 20130513084358) do
     t.string   "website"
     t.string   "identifier"
     t.string   "time_zone"
+    t.integer  "button_impression_count"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true

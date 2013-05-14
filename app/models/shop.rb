@@ -88,6 +88,11 @@ class Shop < ActiveRecord::Base
     first_location.zip rescue ""
   end
 
+  def increment_impression_count
+    self.button_impression_count = button_impression_count.to_i + 1
+    self.save(validate: false)
+  end
+
   def generate_oauth_token(options, force=false)
     app = nil
     if force

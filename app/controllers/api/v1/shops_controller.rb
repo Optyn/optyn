@@ -4,6 +4,7 @@ module Api
 			respond_to :json, :except => [:button_framework]
 
 			before_filter :fetch_store
+      before_filter :log_impression_count, only: [:details]
 			
 			def button_framework
         @application = @shop.oauth_application
@@ -158,7 +159,11 @@ module Api
 				@shop = Shop.by_app_id(params[:app_id].to_s)
 
 				head :unauthorized and false unless @shop.present?
-			end
+      end
+
+      def log_impression_count
+        @shop.increment_impression_count
+      end
 		end
 	end
 end
