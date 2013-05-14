@@ -1,7 +1,7 @@
 Optyn::Application.routes.draw do
 
   #Admin
-  devise_for :admins , :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
+  devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root to: 'main#index'
@@ -13,7 +13,7 @@ Optyn::Application.routes.draw do
   # Static Pages created by Alen
   match 'comingsoon' => 'main#comingsoon'
   match 'about' => 'main#about', :as => :about
-  match 'faq' => 'main#faq', :as => :faq  
+  match 'faq' => 'main#faq', :as => :faq
   match 'pricing' => 'main#pricing', :as => :pricing
   match 'merchantfeatures' => 'main#merchantfeatures', :as => :merchant_features
   match 'consumerfeatures' => 'main#consumerfeatures', :as => :consumer_features
@@ -22,7 +22,7 @@ Optyn::Application.routes.draw do
   match 'privacy' => 'main#privacy', :as => :privacy
   match 'danacafe' => 'main#danacafe'
   match 'thankyou' => 'main#thankyou'
-  match 'old_index' =>'main#old_index' 
+  match 'old_index' => 'main#old_index'
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
@@ -36,7 +36,7 @@ Optyn::Application.routes.draw do
                                      :sign_in => 'login',
                                      :sign_up => 'register'
   }, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :passwords => 'users/passwords'} do
-     get  "/users/sessions/cross_domain_app_login" => "sessions#cross_domain_app_login", :as => :cross_domain_app_login
+    get "/users/sessions/cross_domain_app_login" => "sessions#cross_domain_app_login", :as => :cross_domain_app_login
   end
 
   devise_scope :user do
@@ -72,7 +72,7 @@ Optyn::Application.routes.draw do
     collection do
       post 'add_connection'
       get 'make'
-    end    
+    end
   end
 
   resources :segments do
@@ -82,7 +82,7 @@ Optyn::Application.routes.draw do
   end
 
   match '/messages', to: 'messages#inbox'
-  resources :messages, except: [:index, :new, :create, :edit, :update, :destroy]  do
+  resources :messages, except: [:index, :new, :create, :edit, :update, :destroy] do
     collection do
       get :inbox
       get :saved
@@ -124,7 +124,7 @@ Optyn::Application.routes.draw do
     end
 
     resource :app
-    resources :connections 
+    resources :connections
     resources :locations
     resources :dashboard
     resources :file_imports
@@ -184,7 +184,7 @@ Optyn::Application.routes.draw do
     end
   end
 
-  use_doorkeeper  do
+  use_doorkeeper do
     controllers :authorizations => 'oauth_authorizations'
   end
 

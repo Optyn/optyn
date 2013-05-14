@@ -1,3 +1,6 @@
+
+= display_flash_message
+
 #box_login
   .container
     .span12.box_wrapper
@@ -10,7 +13,8 @@
 
         .form
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-            = f.text_field :email, :placeholder => "Email"
+
+            = f.text_field :email, :placeholder => "Email", value: params[:email]
 
             = f.password_field :password, :placeholder => "Password"
 
@@ -24,4 +28,6 @@
 
       %p{class: "already"}
         Don't have an account?
-        = link_to "Sign Up", new_user_registration_path
+        = link_to "Sign up as a user", new_user_registration_path
+        |
+        = link_to "Sign up as a shop", new_merchants_manager_registration_path

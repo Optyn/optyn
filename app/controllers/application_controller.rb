@@ -69,16 +69,13 @@ class ApplicationController < ActionController::Base
     end
 
     flash[:notice] = "Signed in successfully"
-    if !current_admin && user_signed_in? && current_user.zip_prompted?
-      return connections_path
-    else
-      return new_user_zip_path
-    end
-
-    if current_admin
+    if admin_signed_in?
       '/admin'
-    elsif current_user.zip_prompted?
-      connections_path
+    elsif user_signed_in?
+      return connections_path if current_user.zip_prompted?
+      new_user_zip_path
+    elsif manager_signed_in?
+      merchants_connections_path
     end
   end
 end
