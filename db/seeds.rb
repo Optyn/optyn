@@ -21,11 +21,11 @@ admin = Admin.create!(
 puts 'New admin created: ' << admin.email
 
 # Add the stripe plans
-Plan.create(plan_id: 'pro', interval: 'month', name: 'Pro', amount: 10000, currency: 'usd')
-Plan.create(plan_id: 'advanced', interval: 'month', name: 'Advanced', amount: 5000, currency: 'usd')
-Plan.create(plan_id: 'standard', interval: 'month', name: 'Standard', amount: 2500, currency: 'usd')
-Plan.create(plan_id: 'starter', interval: 'month', name: 'Starter', amount: 1000, currency: 'usd')
-Plan.create(plan_id: 'lite', interval: 'month', name: 'Lite', amount: 500, currency: 'usd')
+Plan.create(plan_id: '1', interval: 'month', name: 'FREE 4EVER', amount: 0, currency: 'usd')
+Plan.create(plan_id: '2', interval: 'month', name: '$5/month', amount: 5, currency: 'usd')
+Plan.create(plan_id: '3', interval: 'month', name: '$10/month', amount: 10, currency: 'usd')
+Plan.create(plan_id: '4', interval: 'month', name: '$15/month', amount: 15, currency: 'usd')
+Plan.create(plan_id: '5', interval: 'month', name: '$25/month', amount: 25, currency: 'usd')
 
 #Add the states
 State.create(:name => "Alabama", :abbreviation => "AL")
