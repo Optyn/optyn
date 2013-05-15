@@ -370,6 +370,7 @@ DEPENDENCIES
   capistrano-resque (~> 0.1.0)
   carrierwave
   chosen-rails
+  chronic
   client_side_validations
   coffee-rails (~> 3.2.1)
   compass-rails

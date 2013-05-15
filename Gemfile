@@ -39,6 +39,7 @@ gem 'geocoder'
 gem 'whenever'
 # gems for stripe payment
 gem 'stripe'
+gem 'chronic', :require => 'chronic'
 
 
 #gems for messagecenter

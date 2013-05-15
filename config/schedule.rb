@@ -20,6 +20,13 @@ set :output, "#{path}/log/cron.log"
 
 # Learn more: http://github.com/javan/whenever
 rvm_trust_rvmrcs_flag=1
+#update the latitude and longitudes for shops
 every :day, :at => "1:30am" do
   rake "geo:fetch_location"
 end
+
+#run nightly jobs
+every :day, :at => "3:00am" do
+  runner "Util.nightly_jobs"
+end
+
