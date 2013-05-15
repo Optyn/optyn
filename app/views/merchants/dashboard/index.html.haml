@@ -98,8 +98,8 @@
             %option All Recent Activity
             %option New Sign Ups
             %option Revoked Permissions
-            %option E-Mail Replies
-            %option Coupon Redemptions
+            //%option E-Mail Replies
+            //%option Coupon Redemptions
             %option Survey Actions
       %br
 
@@ -108,9 +108,8 @@
           %tr
             %th When
             %th User
-            %th Action
             %th Type
-            %th More Details
+            %th More Info
         %tbody
         - current_shop.users.each_with_index do |user, index|
           %tr
@@ -119,7 +118,6 @@
               minutes ago
             %td
               = user.name
-            %td Website
             %td
               = user_permission(user)
             %td
