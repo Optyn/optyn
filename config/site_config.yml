@@ -8,6 +8,7 @@ defaults:
   deployment_shared_path: <%= "#{Rails.root}/tmp/" %>
   ttls:
     message_folder: <%= 24.hours %>
+    merchant_dashbaord_count: <%= 30.minutes %>
 
   #Add the twitter consumer key and twitter consumer secret
   #Add the facebook app key and facebook app secret
