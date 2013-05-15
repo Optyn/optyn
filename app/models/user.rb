@@ -123,9 +123,16 @@ class User < ActiveRecord::Base
   end
 
   def unanswered_surveys
-    connection_shop_ids = connections.active.collect(&:shop_id)
-    survey_shop_ids = SurveyAnswer.uniq_shop_ids(self.id)
-    Survey.for_shop_ids(connection_shop_ids - survey_shop_ids).includes_shop
+    shop_ids = fetch_uanswered_survey_shop_ids
+    Survey.for_shop_ids(shop_ids).includes_shop
+  end
+
+  def unanswered_surveys_count(force = false)
+    cache_key = "unanswered-surveys-count-#{self.id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.merchant_dashbaord_count) do
+      shop_ids = fetch_uanswered_survey_shop_ids
+      Survey.for_shop_ids(shop_ids).count
+    end
   end
 
   def adjust_labels(label_ids)
@@ -203,5 +210,11 @@ class User < ActiveRecord::Base
       manager = Manager.find_by_email(self.email)
       self.errors.add(:email, "already taken") if manager.present?
     end
+  end
+
+  def fetch_uanswered_survey_shop_ids
+    connection_shop_ids = connections.active.collect(&:shop_id)
+    survey_shop_ids = SurveyAnswer.uniq_shop_ids(self.id)
+    connection_shop_ids - survey_shop_ids
   end
 end
