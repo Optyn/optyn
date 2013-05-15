@@ -1,8 +1,7 @@
 class OmniauthClientsController < ApplicationController
-	after_filter :nullify_omniauth_user_type
+	after_filter :nullify_omniauth_user_type, except: [:login_type]
 
 	def create
-		# raise env['omniauth.auth'].to_yaml
 		omniauth = env['omniauth.auth']
 		session[:omniauth_user].present? ? create_user(omniauth) : create_manager(omniauth)
 	end
@@ -13,7 +12,19 @@ class OmniauthClientsController < ApplicationController
 		else
 			redirect_to new_user_session_path, :flash => { :error => "Operation Cancelled" }
 		end
-	end
+  end
+
+  def login_type
+    if "shop" == params[:user_type]
+      session[:omniauth_manager] = true
+      session[:omniauth_user] = nil
+    else
+      session[:omniauth_manager] = nil
+      session[:omniauth_user] = true
+    end
+
+    head :ok
+  end
 
 	private
 
@@ -39,8 +50,8 @@ class OmniauthClientsController < ApplicationController
 			flash.notice = "Signed in!"
 			sign_in_and_redirect user
       session[:omniauth_user_authentication_id] = authentication.id
-		else
-			session["devise.user_attributes"] = user.attributes
+    else
+      flash[:alert] = authentication.provider.humanize + " cannot be used to sign-up on Optyn as the email address is already in use. Please sign up with a different email."
 			redirect_to new_user_registration_path
 		end
 	end

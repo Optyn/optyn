@@ -1,0 +1,12 @@
+/ Modal
+#login_type_modal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-footer
+    .actions-wrapper
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .actions.text-center
+        = link_to "I am a user", "#user", class: "btn btn-primary login-type-action"
+        = link_to "I am a Shop owner", "#shop", class: "btn btn-success login-type-action"
+
+    #loading{style: 'display:none;'}
+      %strong Please Wait...
+

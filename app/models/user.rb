@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :presence => true
+  validate :check_for_used_manager_email
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
@@ -35,7 +36,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "User")
     authentication.image_url = auth.info.image
-    authentication.save
+    authentication.save!
     user = authentication.account
     [user, authentication]
   rescue
@@ -43,16 +44,18 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_omniauth(auth)
+    binding.pry
     user = nil
     authentication = nil
 
     User.transaction do
       email = auth.info.email.to_s
       user = User.find_by_email(email) || User.new(name: auth.info.name, email: email)
-      user.save(validate: false)
 
       provider = auth.provider
       uid = auth.uid
+
+      persist_with_twitter_exception(user, provider)
 
       authentication = Authentication.fetch_authentication(provider, uid, "User")
 
@@ -165,6 +168,13 @@ class User < ActiveRecord::Base
   end
 
   private
+  def self.persist_with_twitter_exception(user, provider)
+    if 'twitter' == provider
+      user.save(validate: false)
+    end
+    user.save
+  end
+
   def assign_office_zip_code(attrs)
     assign_zip_code(:office_zip_code, attrs)
   end
@@ -186,5 +196,12 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     Resque.enqueue(WelcomeMessageSender, :user, self.id, (show_password ? self.password : nil))
+  end
+
+  def check_for_used_manager_email
+    unless self.errors.include?(:email)
+      manager = Manager.find_by_email(self.email)
+      self.errors.add(:email, "already taken") if manager.present?
+    end
   end
 end

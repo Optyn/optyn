@@ -9,6 +9,8 @@ class Authentication < ActiveRecord::Base
 
 	validates :provider, presence: true
 	validates :uid, presence: true, :uniqueness => { :scope => :account_type }
+  validates :account_id, presence: true
+  validates :account_type, presence: true
   
 	scope :by_provider_and_uid, ->(provider, uid,account_type=nil) {where(provider: provider, uid: uid,account_type: account_type)}
 
