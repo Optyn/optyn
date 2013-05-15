@@ -1,5 +1,5 @@
-class Users::ZipsController < ApplicationController
-  before_filter :authenticate_user!, :update_zip_prompted
+class Users::ZipsController < BaseController
+  before_filter :update_zip_prompted
 
   def new
     @user = current_user
