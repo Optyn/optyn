@@ -1,6 +1,6 @@
 module Api
 	module V1
-		class UsersController < BaseController
+		class UsersController < ApiBaseController
 			doorkeeper_for :all
 			
 			before_filter :map_current_user_to_store

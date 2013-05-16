@@ -1,6 +1,6 @@
 module Api
   module V1
-    class OauthController < BaseController
+    class OauthController < ApiBaseController
       layout "cross_domain"
 
       respond_to :html, :json

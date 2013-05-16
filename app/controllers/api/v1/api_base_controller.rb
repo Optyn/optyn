@@ -1,6 +1,6 @@
 module Api
   module V1
-    class BaseController < ApplicationController
+    class ApiBaseController < ApplicationController
       respond_to :json
 
       private
