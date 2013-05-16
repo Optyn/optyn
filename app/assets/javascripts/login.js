@@ -46,6 +46,8 @@ function Login() {
                 $('#login_type_modal #loading').show();
             },
             success: function (data) {
+                $('#login_type_modal #loading').hide();
+                $('#login_type_modal .actions-wrapper').show();
                 $('#login_type_modal').modal('hide');
                 setTimeout(function(){
                     window.location = linkHref;
@@ -53,7 +55,6 @@ function Login() {
 
             },
             error: function (data) {
-                alert(data.responseText)
                 alert('Sorry an error has occurred. Please refresh your page and try logging in again.');
                 isTypeSet = false;
             }
