@@ -52,10 +52,12 @@
             if(data.message.length){
               $('#connection_auth').html(data.message);
               setTimeout(function(){
-                //window.location = redirect_uri;
-                //wondow.close();
-                var ww = window.open("#", "_self");
-                    ww.close();
+                window.location = redirect_uri;
+                //if ($.browser.msie) {
+                //  document.execCommand('Stop')
+                //}else{
+                //  window.stop();
+                //}
               }, 1500)
             }
           }catch(e){
