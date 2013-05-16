@@ -3,7 +3,14 @@ class CustomFailure < Devise::FailureApp
     if warden_options[:scope] == :user && params[:cross_domain_login].present?
       api_login_path
     elsif warden_options[:scope] == :user || warden_options[:scope] == :merchants_manager
-      flash[:alert] = i18n_message(:invalid)
+
+      if (instance = (User.find_by_email(params[:user][:email]) || Manager.find_by_email(params[:user][:email]))).present?  && instance.authentications.present?
+        provider = instance.authentications.last.provider.gsub(/_oauth2/, '').humanize
+        flash[:alert] = "We have found that you are registered with #{provider} in Optyn. Please login appropriately."
+      else
+        flash[:alert] = i18n_message(:invalid)
+      end
+
       new_user_session_path(email: params[:email])
     else
       super
