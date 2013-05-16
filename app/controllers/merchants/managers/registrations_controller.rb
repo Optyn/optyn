@@ -25,8 +25,9 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
       flash[:notice] = "Merchant account created successfully"
       redirect_to after_sign_in_path_for(nil) 	
     else
+      flash[:alert] = "Could not sign-up"
       @omniauth={:uid => params[:auth_id],:provider => params[:auth_provider]} if params[:auth_id].present?
-      @shop.errors[:base] << "Business with entered details exists already" if @shop.shop_already_exists?
+      @shop.errors[:name] << "Business with entered details exists already" if @shop.shop_already_exists?
       render 'new'
     end
 

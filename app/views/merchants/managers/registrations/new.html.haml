@@ -16,10 +16,7 @@
               .errors
                 - if @omniauth.present?
                   = "You are just one step from creating your account, just provide following details"
-                - if @shop.errors.any?
-                  %ul
-                  - @shop.errors.full_messages.each do |error|
-                    = error
+
               %br
               %label.pull-left Enter Business Details :
               %br
