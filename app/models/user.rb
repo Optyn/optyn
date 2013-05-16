@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation,
                   :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture
 
-  attr_accessor :show_password
+  attr_accessor :show_password, :skip_password
 
   accepts_nested_attributes_for :permissions_users
 
@@ -80,6 +80,8 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
+    return false if skip_password.present? && skip_password
+
     super && authentications.blank?
   end
 
@@ -175,6 +177,7 @@ class User < ActiveRecord::Base
 
   private
   def self.persist_with_twitter_exception(user, provider)
+    user.skip_password = true
     if 'twitter' == provider
       user.save(validate: false)
     end
