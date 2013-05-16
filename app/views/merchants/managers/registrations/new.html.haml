@@ -19,7 +19,7 @@
                 - if @shop.errors.any?
                   %ul
                   - @shop.errors.full_messages.each do |error|
-                    = #error
+                    = error
               %br
               %label.pull-left Enter Business Details :
               %br
@@ -43,7 +43,7 @@
               
               = f.submit "Sign up", :class => "btn signup-button"
       %p{:class => "already"}
-        = link_to "Sign in", new_session_path(:merchants_manager)
+        = link_to "Sign in", new_user_session_path()
 
         %strong OR
-        = link_to "Forgot your password?", new_password_path(:merchants_manager)
+        = link_to "Forgot your password?", new_user_password_path()
