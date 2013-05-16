@@ -26,9 +26,10 @@ module Api
         @shop = doorkeeper_token.application.owner
         user_changed = current_user.changed? || @connection
 
-        if current_user.update_attributes(params[:user])
+        if current_user.save(validate: false) #current_user.update_attributes(params[:user])
           render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
         else
+          session[:user_return_to] = nil
           head :unprocessable_entity
         end
       end
