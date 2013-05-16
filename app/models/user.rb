@@ -44,7 +44,6 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_omniauth(auth)
-    binding.pry
     user = nil
     authentication = nil
 
