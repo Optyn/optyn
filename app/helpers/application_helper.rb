@@ -67,6 +67,21 @@ module ApplicationHelper
     end
   end
 
+  def custom_error_messages(errors, options={})
+    unless errors.blank?()
+      content_tag(:div, :class => "error") do
+        content_tag(:strong, (options[:header] || "Please correct the following fields:")).+(
+            content_tag(:ol) do
+              errors.full_messages().collect() do |error|
+                content_tag(:li, error)
+              end.join("").html_safe()
+            end
+        )
+      end
+    end
+  end
+
+
   def user_permission(user)
     visible_permissions_users = user.permissions_users.select(&:action)
     if visible_permissions_users.present?
