@@ -123,3 +123,5 @@ Manager.all.each do |manager|
     message.launch
   end
 end
+
+Message.batch_send
