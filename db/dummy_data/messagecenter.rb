@@ -14,6 +14,8 @@ Manager.all.each do |manager|
     message.manager_id = manager.id
     message.label_ids = [inactive_label.id]
     message.save_draft
+    message.update_attribute(:send_on, Date.yesterday)
+    message.launch
   end
 end
 
@@ -33,6 +35,8 @@ Manager.all.each do |manager|
     message.manager_id = manager.id
     message.label_ids = [inactive_label.id]
     message.save_draft
+    message.update_attribute(:send_on, Date.yesterday)
+    message.launch
   end
 end
 
@@ -52,6 +56,8 @@ Manager.all.each do |manager|
     message.manager_id = manager.id
     message.label_ids = [inactive_label.id]
     message.save_draft
+    message.update_attribute(:send_on, Date.yesterday)
+    message.launch
   end
 end
 
@@ -71,6 +77,8 @@ Manager.all.each do |manager|
     message.manager_id = manager.id
     message.label_ids = [inactive_label.id]
     message.save_draft
+    message.update_attribute(:send_on, Date.yesterday)
+    message.launch
   end
 end
 
@@ -90,6 +98,8 @@ Manager.all.each do |manager|
     message.manager_id = manager.id
     message.label_ids = [inactive_label.id]
     message.save_draft
+    message.update_attribute(:send_on, Date.yesterday)
+    message.launch
   end
 end
 
@@ -109,5 +119,7 @@ Manager.all.each do |manager|
     message.manager_id = manager.id
     message.label_ids = [inactive_label.id]
     message.save_draft
+    message.update_attribute(:send_on, Date.yesterday)
+    message.launch
   end
 end
