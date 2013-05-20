@@ -23,6 +23,7 @@ Optyn::Application.routes.draw do
   match 'danacafe' => 'main#danacafe'
   match 'thankyou' => 'main#thankyou'
   match 'old_index' => 'main#old_index'
+  match 'cache/flush' => "cache#flush"
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog

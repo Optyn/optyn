@@ -52,6 +52,7 @@ after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 after "deploy:restart", "resque:restart"
+after "deploy:restart", "maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
@@ -146,6 +147,13 @@ namespace :deploy do
 
     task :enable, :roles => :web, :except => { :no_release => true } do
       run "rm #{shared_path}/system/maintenance.html"
+    end
+  end
+
+  namespace :maint do
+    task :flush_cache, :roles => :db, :only => { :primary => true } do
+      puts '  * flushing cache on the app servers...'
+      send(run_method, "/usr/bin/curl -u optyn:9p5yn123 #{local_app_url}cache/flush") # &> /dev/null")
     end
   end
 

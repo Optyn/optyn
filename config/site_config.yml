@@ -2,6 +2,8 @@ defaults:
   template_engine_username: 'admin'
   template_engine_password: 'test123'
   resque_auth_password: '9p5yn123'
+  cache_auth_username: 'optyn'
+  cache_auth_password: '9p5yn123'
   app_host: 'www.optyn.com'
   api_welcome_message: 'Optyn to receive cool offers, new product announcements, giveaways and other cool announcements.'
   app_base_url: 'http://www.optyn.com'
