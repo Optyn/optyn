@@ -52,7 +52,7 @@ class ConnectionsController < BaseController
     end
 
     @connection.update_attribute(:active, false)
-    redirect_to(params[:return_to] || connections_path, notice: "Connection with #{@shop.name} successfully deactivated.")
+    redirect_to(params[:return_to] || dropped_connections_path, notice: "Connection with #{@shop.name} successfully deactivated.")
   end
 
   def connect
