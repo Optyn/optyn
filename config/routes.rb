@@ -32,6 +32,8 @@ Optyn::Application.routes.draw do
 
   match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
 
+  #match '/shop/'
+
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
                                      :sign_up => 'register'

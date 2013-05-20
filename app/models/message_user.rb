@@ -18,9 +18,20 @@ class MessageUser < ActiveRecord::Base
 
   scope :include_message, includes(message: {manager: :shop})
 
+  scope :include_user, includes(:user)
+
   scope :for_message_ids, ->(message_ids) { where(message_id: message_ids) }
 
   scope :for_user_ids, ->(user_ids) { where(user_id: user_ids) }
+
+  scope :joins_message, joins(:message)
+
+  scope :all_unread, where(["message_users.is_read <> :is_read AND message_users.email_read <> :email_read", {is_read: false, email_read: false}])
+
+  scope :for_message_type_and_end_date, ->(klass) { joins_message
+  .where(["messages.type LIKE :message_type", {message_type: klass.to_s}])
+  .where(["messages.ending > :now", {now: Time.now}])
+  }
 
   def self.inbox_messages(user, page_number=1, per_page=Message::PER_PAGE)
     receivers_folder(MessageFolder.inbox_id, user.id).created_at_descending.include_message.page(page_number).per(per_page)
@@ -125,6 +136,38 @@ class MessageUser < ActiveRecord::Base
     error_message
   end
 
+  def self.coupon_messages_count(user_id, force = false)
+    cache_key = create_count_cache_key(user_id, CouponMessage.to_s)
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      receivers_folder(MessageFolder.inbox_id, user_id).for_message_type_and_end_date(CouponMessage).all_unread.count
+    end
+  end
+
+  def self.new_messages_count(user_id, force = false)
+    cache_key = "message-user-#{user_id}-new-message-count"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      receivers_folder(MessageFolder.inbox_id, user_id).all_unread.count
+    end
+  end
+
+  def self.special_messages_count(user_id, force = false)
+    cache_key = create_count_cache_key(user_id, SpecialMessage.to_s)
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      receivers_folder(MessageFolder.inbox_id, user_id).for_message_type_and_end_date(SpecialMessage).all_unread.count
+    end
+  end
+
+  def self.latest_messages(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-latest-messages-user-#{user_id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      for_user_ids(user_id).include_message.include_user.limit(limit_count).all
+    end
+  end
+
+  def shop
+    message.manager.shop
+  end
+
   def email
     user.email
   end
@@ -159,6 +202,10 @@ class MessageUser < ActiveRecord::Base
 
   def self.unread_conditions_hash
     {:is_read => false}
+  end
+
+  def self.create_count_cache_key(user_id, message_type)
+    "message-user-#{user_id}-message-type-#{message_type}-count"
   end
 
   def assign_uuid

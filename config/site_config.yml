@@ -6,9 +6,10 @@ defaults:
   api_welcome_message: 'Optyn to receive cool offers, new product announcements, giveaways and other cool announcements.'
   app_base_url: 'http://www.optyn.com'
   deployment_shared_path: <%= "#{Rails.root}/tmp/" %>
+  dashboard_limit: 5
   ttls:
     message_folder: <%= 24.hours %>
-    merchant_dashbaord_count: <%= 30.minutes %>
+    dashboard_count: <%= 1.minutes %>
 
   #Add the twitter consumer key and twitter consumer secret
   #Add the facebook app key and facebook app secret

@@ -28,7 +28,7 @@ class SegmentsController < BaseController
   private
   def fetch_survey_and_user_from_params
     token = params[:id]
-    plain_text = Surveys::Encryptor.decrypt(token)
+    plain_text = Encryptor.decrypt(token)
     email, survey_id = plain_text.split("--")
     @user = User.find_by_email(email)
     @survey = Survey.find(survey_id)

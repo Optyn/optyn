@@ -9,8 +9,8 @@ class Shop < ActiveRecord::Base
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :users, through: :connections
   has_one :survey, dependent: :destroy
-  has_many :businesses, :through => :interests
   has_many :interests, :as => :holder
+  has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
 
   SHOP_TYPES=['local', 'online']
@@ -29,11 +29,19 @@ class Shop < ActiveRecord::Base
 
   scope :inlcudes_locations, includes(:locations)
 
+  scope :joins_locations, joins(:locations)
+
+  scope :joins_businesses, joins(:businesses)
+
   scope :for_app_id, ->(app_id) { inlcudes_locations.includes_app.where(["oauth_applications.uid = :app_id", {app_id: app_id}]) }
 
   scope :fetch_same_identifier, ->(shop_id, q) { where(["shops.id <> :shop_id AND shops.identifier LIKE :q", {shop_id: shop_id, q: q}]) }
 
-  scope :disconnected, ->(connected_ids){where(["shops.id NOT IN (:exisiting_ids)", exisiting_ids: connected_ids])}
+  scope :disconnected, ->(connected_ids) { where(["shops.id NOT IN (:exisiting_ids)", exisiting_ids: connected_ids]) }
+
+  scope :for_zips, ->(zips, shop_ids) { disconnected(shop_ids).joins_locations.where(["locations.zip IN (:zips)", {zips: zips}]) }
+
+  scope :for_businesses, ->(business_ids, shop_ids) { disconnected(shop_ids).joins_businesses.where(["businesses.id IN (:business_ids)", {business_ids: business_ids}]) }
 
   after_create :create_dummy_survey, :create_select_all_label
 
@@ -46,6 +54,10 @@ class Shop < ActiveRecord::Base
   def self.disconnected_connections(connected_ids)
     return order(:name) if connected_ids.blank?
     disconnected(connected_ids).order(:name)
+  end
+
+  def shop
+    self
   end
 
   def shop_already_exists?
@@ -172,7 +184,7 @@ class Shop < ActiveRecord::Base
   end
 
   def create_select_all_label
-    label = Label.new(shop_id: self.id,  name: Label::SELECT_ALL_NAME)
+    label = Label.new(shop_id: self.id, name: Label::SELECT_ALL_NAME)
     label.active = false
     label.save
   end

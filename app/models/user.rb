@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
-  has_many :interests, :as => :holder
+  has_many :interests, dependent: :destroy, as: :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
   has_many :permissions_users, dependent: :destroy
@@ -67,6 +67,24 @@ class User < ActiveRecord::Base
     [user, authentication]
   end
 
+  def self.recommend_connections(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-recommended-connections-user-#{user_id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      user = User.find(user_id)
+      zips = [user.home_zip_code, user.office_zip_code].compact
+
+      connection_shop_ids = user.connections.collect(&:shop_id) #Add both connections that are active and inactive
+      connection_shop_ids = [0] if connection_shop_ids.blank?
+
+      recommend_shops = []
+      recommend_shops << Shop.for_zips(zips, connection_shop_ids).limit(limit_count) if zips.present? && connection_shop_ids.present?
+
+      business_ids = user.interests.collect(&:id)
+      recommend_shops << Shop.for_businesses(business_ids, connection_shop_ids).limit(limit_count) if zips.present? && connection_shop_ids.present?
+      recommend_shops.flatten.uniq
+    end
+  end
+
   def active_connections(page_number=1, per_page=PER_PAGE)
     connections.active.includes_business_and_locations.ordered_by_shop_name.page(page_number).per(per_page)
   end
@@ -123,6 +141,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def dashboard_unanswered_surveys(limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-unanswered-surveys-user-#{self.id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      shop_ids = fetch_uanswered_survey_shop_ids
+      Survey.for_shop_ids(shop_ids).includes_shop.limit(limit_count).all
+    end
+  end
+
   def unanswered_surveys
     shop_ids = fetch_uanswered_survey_shop_ids
     Survey.for_shop_ids(shop_ids).includes_shop
@@ -130,7 +156,7 @@ class User < ActiveRecord::Base
 
   def unanswered_surveys_count(force = false)
     cache_key = "unanswered-surveys-count-#{self.id}"
-    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.merchant_dashbaord_count) do
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
       shop_ids = fetch_uanswered_survey_shop_ids
       Survey.for_shop_ids(shop_ids).count
     end

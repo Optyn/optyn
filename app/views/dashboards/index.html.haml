@@ -14,7 +14,7 @@
       .row.stats
         .span2.leading
           .count
-            4
+            = @new_coupons_count
           .info
             .img
               %img{:src => "/assets/md_new_connections.png"}
@@ -22,7 +22,7 @@
               New Coupons
         .span2.box
           .count
-            14
+            = @new_messages_count
           .info
             .img
               %img{:src => "/assets/md_connections_week.png"}
@@ -38,7 +38,7 @@
               Active Surveys
         .span2.box
           .count
-            2
+            = @new_specials_count
           .info
             .img
               %img{:src => "/assets/md_active_connections.png"}
@@ -47,39 +47,32 @@
       .latest
         .title
           Your Latest Activity
-        .sortby
-          Sort By
-          \&nbsp;
-          %select
-            %option All Recent Activity
-            %option New Sign Ups
-            %option Revoked Permissions
-            %option E-Mail Replies
-            %option Coupon Redemptions
-            %option Survey Actions
       %br
 
       %table.table.table-striped#my_connections_table
         %thead
           %tr
             %th.alert.alert-error.flash_message_disconnected{:colspan => 5}
-          %tr
-            %th{:width => "20%"} When
-            %th{:width => "20%"} Merchant 
-            %th{:width => "20%"} Type of Message
-            %th{:width => "20%"} Location
-            %th{:width => "20%"} More Info
-            
         %tbody
-          %tr
-            %td 
-              12 min ago
-            %td 
-              Dana Cafe
-            %td 
-              New Coupon
-            %td
-              Chicago, IL
-            %td
-              %a{:href => "#"}
-                Details
+          - if @feed.present?
+            - @feed.each do |feed_element|
+
+              %tr
+                %td
+                  %h3
+                    = feed_element['title']
+                  .headline
+                    - if feed_element['image_url'].present?
+                      = image_tag(feed_element['image_url'], alt: feed_element['shop_name'], class: 'profile_image')
+                    - else
+                      = image_tag('no_shop_logo.gif', alt: feed_element['shop_name'], class: 'profile_image')
+
+                    %strong
+                      = feed_element['shop_name']
+                  .description
+                    = feed_description(feed_element)
+                  .actions
+                    = link_to "Details", feed_element['action_url']
+          - else
+            No activities. Please start connecting with shops
+            = link_to 'here', connections_path

@@ -309,6 +309,10 @@ class Message < ActiveRecord::Base
     self.subject.gsub("{{Customer Name}}", message_user.name) rescue "N/A"
   end
 
+  def excerpt
+    self.content.to_s.truncate(250)
+  end
+
   def first_response_child
     children.active_state.first unless self.new_record?
   end
