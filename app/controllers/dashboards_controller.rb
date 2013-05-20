@@ -47,7 +47,7 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: connections_path
+              action_url: shop_connection_path(connection.shop.identifier)
           }
       )
     end
@@ -62,7 +62,7 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: make_connections_path
+              action_url: shop_connection_path(connection.shop.identifier)
           }
       )
     end
@@ -92,7 +92,7 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: '' #modularize the form tag action
+              action_url: shop_connection_path(connection.shop.identifier)
           }
       )
     end

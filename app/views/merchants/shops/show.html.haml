@@ -14,41 +14,5 @@
         %a.btn{:href => edit_merchants_manager_registration_path} Edit Personal Info
         %a.btn{:href => merchants_managers_list_path} View / Add Managers
         %a.btn{:href => merchants_locations_path} View / Add Locations
-      %p
-        %strong Name
-        %br
-        = @shop.name
-      %p
-        %strong Description
-        %br
-        = show_description(@shop)
 
-      %p
-        %strong Business Type
-        %br
-        = @shop.stype.humanize
-
-      %p
-        %strong Website
-        %br
-        = show_website(@shop)
-
-      %p
-        %strong Identifier
-        %br
-        = show_identifier(@shop)
-
-      %p
-        %strong Timezone
-        %br
-        = @shop.time_zone
-
-      %p
-        %strong Logo
-        %br
-        = show_logo(@shop)
-
-      %p
-        %strong Business Categories
-        %br
-          = show_business_category_names(@shop)
+      = render partial: "shared/shops/detail"

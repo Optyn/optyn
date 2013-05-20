@@ -12,6 +12,9 @@ module ConnectionsHelper
 		highlight_action_name == action_name ? "active" : ""
 	end
 
+  def business_type(shop)
+    shop.stype.titleize
+  end
 end
 
 

@@ -32,7 +32,6 @@ Optyn::Application.routes.draw do
 
   match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
 
-  #match '/shop/'
 
   devise_for :users, :path_names => {:sign_out => 'logout',
                                      :sign_in => 'login',
@@ -76,6 +75,13 @@ Optyn::Application.routes.draw do
     collection do
       post 'add_connection'
       get 'make'
+      get 'dropped'
+    end
+
+    member do
+      get 'shop'
+      put 'disconnect', as: :disconnect
+      post 'connect',   as: :connect
     end
   end
 
@@ -130,7 +136,7 @@ Optyn::Application.routes.draw do
     resource :app
     resources :connections
     resources :locations
-    resources :dashboard
+    resources :dashboards
     resources :file_imports
 
     resource :shop do

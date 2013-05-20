@@ -89,6 +89,10 @@ class User < ActiveRecord::Base
     connections.active.includes_business_and_locations.ordered_by_shop_name.page(page_number).per(per_page)
   end
 
+  def inactive_connections(page_number=1, per_page=PER_PAGE)
+    connections.inactive.includes_business_and_locations.ordered_by_shop_name.page(page_number).per(per_page)
+  end
+
   def active_shop_ids
     connections.active.collect(&:shop_id)
   end
