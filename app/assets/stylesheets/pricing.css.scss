@@ -157,7 +157,15 @@ body .modal-footer .startbtn:hover{
 }
 
 #pricing .allplans .howmany {
-	margin-bottom:20px;
+	margin: 0px;
+}
+#pricing .allplans .numberofcustomers {
+	padding-left: 20px;
+	line-height: 12px;
+}
+#pricing .allplans .quantity {
+	font-weight: bold;
+	line-height: 12px;
 }
 #pricing .allplans .upgrade {
   background: #78CD51;
@@ -192,7 +200,7 @@ body .modal-footer .startbtn:hover{
 	border-radius: 4px;
 	display: inline-block;
 	height: 40px;
-	line-height: 36px;
+	line-height: 38px;
 	top: 4px;
 	color: #1791c0;
 	font-size: 16px;

@@ -6,7 +6,7 @@
     = render partial: "merchants/shared/menu"
     .span8
       .header
-        .span3.maintitle
+        .span5.maintitle
           %h3
             = current_shop.name
             Dashboard
@@ -14,7 +14,7 @@
           == #{current_manager.name}.
           Here's what's going on!
 
-        .span4.new
+        .span3.new
           %a.btn.newcampaign{:href =>merchants_messages_path}
             %img{:src => "/assets/menu_icon_campaigns_white.png"}
             Create New Campaign
