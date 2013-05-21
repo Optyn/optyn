@@ -25,7 +25,7 @@
               %td
                 = survey.title
               %td
-                = link_to "Provide a quick feedback", segment_path(Encryptor.encrypt(current_user.email, survey.id)), class: 'btn btn-info'
+                = link_to "Provide Quick feedback", segment_path(Encryptor.encrypt(current_user.email, survey.id)), class: 'btn btn-info'
         - else
           %tr
             %td{colspan: 4}
