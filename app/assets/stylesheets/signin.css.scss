@@ -7,11 +7,57 @@
 	text-align: center;
 	font-style: 15px;
 	color: #454B52;
+	margin-top: 20px;
 }
 #box_login .box_wrapper p.already a{
 	color: #454B52;
 	margin-left: 3px;
 	text-decoration: underline;
+}
+#box_login .box_wrapper p.already .consumer-btn {
+  background: #64b905;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  line-height: 28px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  font-weight: bold;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+#box_login .box_wrapper p.already .consumer-btn:hover{
+  background: #5dad03;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#box_login .box_wrapper p.already .merchant-btn {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  line-height: 28px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  font-weight: bold;
+  padding-left: 14px;
+  padding-right: 14px;
+  margin-left: 20px;
+}
+#box_login .box_wrapper p.already .merchant-btn:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
 }
 #box_login .box{
     background-color: white;
@@ -134,14 +180,6 @@
     height: 30px;
     margin-bottom: 16px;
     width: 95%;
-}
-#box_login .box .form input[type="submit"]{
-	border-color: #CCCCCC;
-    border-radius: 7px 7px 7px 7px;
-    color: #394350;
-    font-size: 16px;
-    font-weight: 900;
-    margin-top: 34px;
 }
 #box_login .box .form .remember{
 	margin-top: 10px;
