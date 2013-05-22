@@ -17,9 +17,9 @@ class SegmentsController < BaseController
     answers = dummy_survey.survey_answers
 
     SurveyAnswer.persist(@user, answers)
-    Message.create_response_message(current_user.id, params[:message_id])
-    if current_user.present?
-      redirect_to segments_path
+    Message.create_response_message(@user.id, params[:message_id])
+    if user_signed_in?
+      redirect_to segments_path, notice: "Successfully submitted your feedback"
     else
       render "thankyou", layout: "email_feedback"
     end

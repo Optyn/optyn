@@ -195,7 +195,7 @@ class Message < ActiveRecord::Base
   def self.create_response_message(user_id, message_uuid)
     message = Message.find_by_uuid(message_uuid)
 
-    if message.has_children?
+    if message.present? && message.has_children?
       response_message = message.first_response_child
       response_message_keys = response_message.attributes.except('id', 'created_at', 'updated_at', 'uuid', 'send_on', 'type', 'state').keys
       individual_message = response_message.type.classify.constantize.new()
