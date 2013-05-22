@@ -24,13 +24,20 @@
                 =label_tag "remember_me"
               .right
                 = link_to "Forgot your password?", new_password_path(resource_name)
+            %br
+            %br
             = f.submit "Sign in", class: "btn"
 
-      %p{class: "already"}
-        Don't have an account?
-        = link_to "Sign up as a user", new_user_registration_path
-        |
-        = link_to "Sign up as a shop", new_merchants_manager_registration_path
+        %p{class: "already"}
+          Don't have an account?
+          %br
+          %br
+          %a.btn.consumer-btn{:href => new_user_registration_path} 
+            %i.icon-user.icon-white
+            Consumer Sign Up
+          %a.btn.merchant-btn{:href => new_merchants_manager_registration_path}
+            %i.icon-shopping-cart.icon-white
+            Merchant Sign Up
 
 = hidden_field_tag :login_type_omniauth_clients_path, login_type_omniauth_clients_path
 = hidden_field_tag :login_type, ''
