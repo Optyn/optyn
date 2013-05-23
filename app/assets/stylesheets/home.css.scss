@@ -366,3 +366,32 @@
   height: 42px;
   width:  145px;
 }
+/* Mobile Phones*/
+@media (max-width: 480px) {
+  #home {
+    background: none;
+    margin: 0px;
+  }
+  #home .main-area {
+    height: auto;
+  }
+  #home .main-area .headline {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  #home .main-area .headline .slogan1 h3 {
+    font-size: 22px;
+  }
+  #home .main-area .headline .slogan2 h3 {
+    font-size: 22px;
+  }
+  #home .main-area .consumer {
+    width: 390px;
+  }
+  #home .main-area .merchant {
+    width: 390px;
+    margin-left: 0px;
+  }
+}
+
+
