@@ -34,6 +34,7 @@ module DashboardCleaner
   def flush_dashboard_unanswered_surveys
     yield
     if @flush
+      current_user.unanswered_surveys_count(true)
       current_user.dashboard_unanswered_surveys(SiteConfig.dashboard_limit, true)
     end
   end
