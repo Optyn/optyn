@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
   end
 
   def disconnected_connections
-    Shop.disconnected_connections(shop.shop_ids)
+    Shop.disconnected_connections(self.shop_ids)
   end
 
   def active_shop_ids
