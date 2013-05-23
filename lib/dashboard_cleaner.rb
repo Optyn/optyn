@@ -13,14 +13,21 @@ module DashboardCleaner
   def flush_new_connections
     yield
     if @flush
-      Connection.latest_connections(current_user.id, true)
+      Connection.latest_connections(current_user.id, SiteConfig.dashboard_limit, true)
     end
   end
 
   def flush_disconnected_connections
     yield
     if @flush
-      Connection.dashboard_disconnected_connections(current_user.id, true)
+      Connection.dashboard_disconnected_connections(current_user.id, SiteConfig.dashboard_limit, true)
+    end
+  end
+
+  def flush_recommended_connections
+    yield
+    if @flush
+      User.recommend_connections(current_user.id, SiteConfig.dashboard_limit, true)
     end
   end
 end

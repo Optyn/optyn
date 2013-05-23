@@ -3,6 +3,7 @@ class ConnectionsController < BaseController
 
   before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect]
   around_filter :flush_new_connections, only: [:add_connection, :connect]
+  around_filter :flush_recommended_connections, only: [:add_connection, :connect]
   around_filter :flush_disconnected_connections, only: [:disconnect, :add_connection]
 
   def index
@@ -10,7 +11,7 @@ class ConnectionsController < BaseController
   end
 
   def make
-    @shops = Shop.disconnected_connections(current_user.active_shop_ids)
+    @shops = current_user.disconnected_connections()
   end
 
   def dropped
