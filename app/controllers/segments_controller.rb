@@ -1,6 +1,9 @@
 class SegmentsController < BaseController
+  include DashboardCleaner
+
   skip_before_filter :authenticate_user!, :redirect_to_account, only: [:show, :save_answers]
   before_filter :fetch_survey_and_user_from_params, :ensure_survey_answered_once, only: [:show, :save_answers]
+  around_filter :flush_dashboard_unanswered_surveys, only: [:save_answers]
 
   def index
     @surveys = current_user.unanswered_surveys
@@ -19,6 +22,7 @@ class SegmentsController < BaseController
     SurveyAnswer.persist(@user, answers)
     Message.create_response_message(@user.id, params[:message_id])
     if user_signed_in?
+      @flush = true
       redirect_to segments_path, notice: "Successfully submitted your feedback"
     else
       render "thankyou", layout: "email_feedback"

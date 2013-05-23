@@ -30,4 +30,11 @@ module DashboardCleaner
       User.recommend_connections(current_user.id, SiteConfig.dashboard_limit, true)
     end
   end
+
+  def flush_dashboard_unanswered_surveys
+    yield
+    if @flush
+      current_user.dashboard_unanswered_surveys(SiteConfig.dashboard_limit, true)
+    end
+  end
 end
