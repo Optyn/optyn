@@ -198,47 +198,4 @@ Optyn::Application.routes.draw do
   use_doorkeeper do
     controllers :authorizations => 'oauth_authorizations'
   end
-
-
-  #Link to the customer facing side static pages converted to layout with HAML
-  namespace "front_end_static_page" do |front|
-    resources :samples do
-      collection do
-        get 'aboutus'
-        get 'blog'
-        get 'blog_post'
-        get 'coming_soon'
-        get 'faq'
-        get 'features'
-        get 'portfolio'
-        get 'pricing'
-        get 'reset'
-        get 'signin'
-        get 'signup'
-      end
-    end
-  end
-
-  #Link to the admin side static pages converted to layout with HAML
-  namespace "back_end_static_page" do |back|
-    resources :samples do
-      collection do
-        get "calendar"
-        get "chart"
-        get "file_manager"
-        get "form"
-        get "gallery"
-        get "icon"
-        get "infrastructure"
-        get "login"
-        get "messages"
-        get "submenu"
-        get "table"
-        get "tasks"
-        get "typography"
-        get "ui"
-        get "widgets"
-      end
-    end
-  end
 end
