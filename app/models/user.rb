@@ -153,20 +153,20 @@ class User < ActiveRecord::Base
     cache_key = "dashboard-unanswered-surveys-user-#{self.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
       shop_ids = fetch_uanswered_survey_shop_ids
-      Survey.for_shop_ids(shop_ids).includes_shop.limit(limit_count).all
+      Survey.for_shop_ids(shop_ids).active.includes_shop.limit(limit_count).all
     end
   end
 
   def unanswered_surveys
     shop_ids = fetch_uanswered_survey_shop_ids
-    Survey.for_shop_ids(shop_ids).includes_shop
+    Survey.for_shop_ids(shop_ids).active.includes_shop
   end
 
   def unanswered_surveys_count(force = false)
     cache_key = "unanswered-surveys-count-#{self.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
       shop_ids = fetch_uanswered_survey_shop_ids
-      Survey.for_shop_ids(shop_ids).count
+      Survey.for_shop_ids(shop_ids).active.count
     end
   end
 

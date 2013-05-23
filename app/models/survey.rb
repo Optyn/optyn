@@ -9,7 +9,9 @@ class Survey < ActiveRecord::Base
 
   scope :includes_shop, includes(:shop)
 
-  scope :for_shop_ids, ->(shop_ids){where(shop_id: shop_ids)}
+  scope :for_shop_ids, ->(shop_ids) { where(shop_id: shop_ids) }
+
+  scope :active, where(ready: true)
 
 
   def survey_answers_attributes=(answer_attributes)
