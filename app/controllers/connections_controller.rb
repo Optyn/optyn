@@ -1,5 +1,9 @@
 class ConnectionsController < BaseController
+  include DashboardCleaner
+
   before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect]
+  around_filter :flush_new_connections, only: [:add_connection, :connect]
+  around_filter :flush_disconnected_connections, only: [:disconnect, :add_connection]
 
   def index
     @connections = current_user.active_connections(params[:page])
@@ -20,6 +24,7 @@ class ConnectionsController < BaseController
         if current_user.shop_ids.include?(@shop.id)
           @connection = current_user.connections.where(:shop_id => @shop.id).first
           if @connection.toggle_connection
+            @flush = true
             followed=@connection.active
             render :json => {:success => true, :success_text => @connection.connection_status, :hover_text => "Unfollow", :followed => followed}
           else
@@ -28,6 +33,7 @@ class ConnectionsController < BaseController
         else
           @connection = current_user.connections.new(:shop_id => @shop.id)
           if @connection.save
+            @flush = true
             followed=@connection.active
             render :json => {:success => true, :success_text => "Following", :followed => followed}
           else
@@ -52,6 +58,7 @@ class ConnectionsController < BaseController
     end
 
     @connection.update_attribute(:active, false)
+    @flush = true
     redirect_to(params[:return_to] || dropped_connections_path, notice: "Connection with #{@shop.name} successfully deactivated.")
   end
 
@@ -64,6 +71,7 @@ class ConnectionsController < BaseController
     end
 
     @connection.active = true
+    @flush = true
     @connection.save
     redirect_to(params[:return_to] || connections_path, notice: "Connection with #{@shop.name} successfully created.")
   end
