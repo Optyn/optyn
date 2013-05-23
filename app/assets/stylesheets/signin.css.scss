@@ -1,3 +1,69 @@
+/* Social Login Type Page */
+#login_type_modal {
+	width: 500px;
+	left: 55%;
+}
+#login_type_modal .modal-body {
+	height: 100px;
+	width: 500px;
+	border-top-left-radius: 6px;
+	padding: 0px;
+	margin: 0px;
+}
+#login_type_modal .modal-body .actions-wrapper {
+	width: 490px;
+}
+#login_type_modal .modal-body .actions-wrapper .actions {
+	vertical-align: middle;
+	text-align: center;
+	padding-top: 30px;
+}
+#login_type_modal .modal-body .consumer-btn {
+  background: #64b905;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  line-height: 28px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  font-weight: bold;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+#login_type_modal .modal-body .consumer-btn:hover{
+  background: #5dad03;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#login_type_modal .modal-body .merchant-btn {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  line-height: 28px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  font-weight: bold;
+  padding-left: 14px;
+  padding-right: 14px;
+  margin-left: 30px;
+}
+#login_type_modal .modal-body .merchant-btn:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+/* Login Page */
 #box_login{
 }
 #box_login .box_wrapper{
@@ -369,7 +435,7 @@
   width: 56px;
   height: 56px;
   border-radius: 100%;
-  margin-right:34px;
+  margin-right:15px;
   display: inline-block;
   -webkit-transition: border-color ease-in .1s;
   -moz-transition: border-color ease-in .1s;
@@ -391,7 +457,6 @@
 #box_login .box .social a.gplus{
   background: #292929;
   border:2px solid #292929;
-  margin: 0;
 }
 #box_login .box .social a.linkedin{
   background: #0794bd;

@@ -1,12 +1,16 @@
 / Modal
 #login_type_modal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-footer
-    .actions-wrapper
-      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-      .actions.text-center
-        = link_to "I am a Consumer", "#user", class: "btn btn-primary login-type-action"
-        = link_to "I am a Business User", "#shop", class: "btn btn-success login-type-action"
+	.modal-body
+		.actions-wrapper
+			%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+			.actions.text-center
+				%a.btn.consumer-btn{:href => "#user"} 
+					%i.icon-user.icon-white
+					I am a Consumer
+				%a.btn.merchant-btn{:href => "#shop"}
+					%i.icon-shopping-cart.icon-white
+					I am a Business User
 
-    #loading{style: 'display:none;'}
-      %strong Please Wait...
+//#loading{style: 'display:none;'}
+//%strong Please Wait...
 
