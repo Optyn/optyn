@@ -40,21 +40,21 @@ class Connection < ActiveRecord::Base
   def self.shop_connections_count_month(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "month")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop_in_time_range(shop_id, Time.now.beginning_of_month.beginning_of_day, Time.now.end_of_day).count
+      for_shop_in_time_range(shop_id, 30.days.ago.beginning_of_day, Time.now.end_of_day).count
     end
   end
 
   def self.shop_connections_count_week(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "week")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop_in_time_range(shop_id, Time.now.beginning_of_week.beginning_of_day, Time.now.end_of_day).count
+      for_shop_in_time_range(shop_id, 7.days.ago.beginning_of_day, Time.now.end_of_day).count
     end
   end
 
   def self.shop_connections_count_day(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "day")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop_in_time_range(shop_id, Date.yesterday.beginning_of_day, Time.now.end_of_day).count
+      for_shop_in_time_range(shop_id, 24.hours.ago.beginning_of_day, Time.now.end_of_day).count
     end
   end
 
