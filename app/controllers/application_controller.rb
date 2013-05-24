@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
   alias_method :manager_signed_in?, :merchants_manager_signed_in?
   alias_method :current_manager, :current_merchants_manager
 
-  before_filter :raise_test
-
   helper_method :manager_signed_in?, :current_manager
 
   private
@@ -79,9 +77,5 @@ class ApplicationController < ActionController::Base
     elsif manager_signed_in?
       merchants_connections_path
     end
-  end
-
-  def raise_test
-    raise "Test Exception Gaurav"
   end
 end
