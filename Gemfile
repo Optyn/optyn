@@ -40,9 +40,7 @@ gem 'whenever'
 # gems for stripe payment
 gem 'stripe'
 gem 'chronic', :require => 'chronic'
-
-
-#gems for messagecenter
+gem 'airbrake'
 gem "state_machine", "~> 1.2.0"
 gem "uuidtools"
 gem 'redis'
