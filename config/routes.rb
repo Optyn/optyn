@@ -6,7 +6,7 @@ Optyn::Application.routes.draw do
 
   root to: 'main#index'
   match 'connections' => 'connections#index', as: :customers_root
-  match 'merchants' => 'merchants/dashboard#index', as: :merchants_root
+  match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
   match 'dashboard' => 'dashboards#index', as: :consumer_dashboard
 
 

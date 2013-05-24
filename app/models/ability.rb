@@ -4,11 +4,11 @@ class Ability
   def initialize(admin)
     if admin.role == "admin"
         can :access, :rails_admin       # only allow admin users to access Rails Admin
-        can :dashboard                  # allow access to dashboard
+        can :dashboards                  # allow access to dashboard
     end
     if admin.role == "super_admin"
         can :access, :rails_admin      
-        can :dashboard
+        can :dashboards
     end           
     # Define abilities for the passed in user here. For example:
     #
