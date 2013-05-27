@@ -43,7 +43,7 @@ class Shop < ActiveRecord::Base
 
   scope :for_businesses, ->(business_ids, shop_ids) { disconnected(shop_ids).joins_businesses.where(["businesses.id IN (:business_ids)", {business_ids: business_ids}]) }
 
-  after_create :create_dummy_survey, :create_select_all_label
+  after_create :create_dummy_survey, :create_select_all_label, :assign_identifier
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
@@ -187,6 +187,13 @@ class Shop < ActiveRecord::Base
     label = Label.new(shop_id: self.id, name: Label::SELECT_ALL_NAME)
     label.active = false
     label.save
+  end
+
+  def assign_identifier
+    if self.identifier.blank?
+      self.identifier = self.name.parameterize
+      self.save(validate: false)
+    end
   end
 
   def generate_application(options)
