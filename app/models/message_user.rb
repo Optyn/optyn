@@ -26,11 +26,17 @@ class MessageUser < ActiveRecord::Base
 
   scope :joins_message, joins(:message)
 
+  scope :any_read, where(["message_users.is_read = :is_read OR message_users.email_read = :email_read", {is_read: true, email_read: true}])
+
   scope :all_unread, where(["message_users.is_read <> :is_read AND message_users.email_read <> :email_read", {is_read: false, email_read: false}])
 
   scope :for_message_type_and_end_date, ->(klass) { joins_message
   .where(["messages.type LIKE :message_type", {message_type: klass.to_s}])
   .where(["messages.ending > :now", {now: Time.now}])
+  }
+
+  scope :for_message_owner, ->(owner_id) { joins_message
+  .where(["messages.manager_id = :owner_id", {owner_id: owner_id}])
   }
 
   def self.inbox_messages(user, page_number=1, per_page=Message::PER_PAGE)
@@ -161,6 +167,13 @@ class MessageUser < ActiveRecord::Base
     cache_key = "dashboard-latest-messages-user-#{user_id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
       for_user_ids(user_id).include_message.include_user.limit(limit_count).all
+    end
+  end
+
+  def self.merchant_engagement_count(manager_id, force = false)
+    cache_key = "dashboard-merchant-engagement-count-#{manager_id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      MessageUser.for_message_owner(manager_id).any_read.count
     end
   end
 
