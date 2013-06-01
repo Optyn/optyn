@@ -1,7 +1,7 @@
 class CustomFailure < Devise::FailureApp
   def redirect_url
     if warden_options[:scope] == :user && params[:cross_domain_login].present?
-      api_login_path
+      api_login_path(redirect_uri: params[:redirect_uri])
     elsif warden_options[:scope] == :user || warden_options[:scope] == :merchants_manager
 
       if (params[:user].present? || params[:merchants_manager].present?) && (instance = (User.find_by_email(params[:user][:email]) || Manager.find_by_email(params[:merchants_manager][:email]))).present?  && instance.authentications.present?
