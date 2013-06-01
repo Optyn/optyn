@@ -10,7 +10,7 @@ class Merchants::DashboardsController < Merchants::BaseController
     @month_count = Connection.shop_connections_count_month(shop_id)
     @week_count = Connection.shop_connections_count_week(shop_id)
     @day_count = Connection.shop_connections_count_day(shop_id)
-    @engagement_count = MessageUser.merchants_engagement_count(current_manager.id)
+    @engagement_count = MessageUser.merchant_engagement_count(current_manager.id)
   end
 
   def populate_dashboard
