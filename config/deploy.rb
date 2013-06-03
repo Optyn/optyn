@@ -111,8 +111,8 @@ namespace :deploy do
     run "kill -9 `lsof -t -i:3000`" rescue nil
   end
 
-  desc 'Restart unicorn'
   task :restart, :roles => :app, :except => { :no_release => true } do
+    desc 'Restart unicorn'
     #run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     stop
     start
@@ -125,7 +125,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+  		 #run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 
