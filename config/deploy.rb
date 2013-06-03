@@ -30,7 +30,7 @@ set :rvm_type, :user
 set :deploy_via, :remote_cache
 
 #set the reque workers add other queues here...
-set :workers, { "devise_queue" => 1}
+#set :workers, { "devise_queue" => 1}
 
 #set the lock file while deploying so that messagecenter tasks and deployments don't run parallel
 set :lock_file_path, "#{shared_path}/pids"
