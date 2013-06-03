@@ -52,6 +52,7 @@ after 'deploy:update_code', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
+before "whenever:update_crontab", "whenever:clear_crontab"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
