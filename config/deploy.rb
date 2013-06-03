@@ -46,7 +46,7 @@ set :lock_file_name, 'deployment.pid'
 # If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
-before 'deploy:assets:precompile', 'deploy:create_symlinks'
+#before 'deploy:assets:precompile', 'deploy:create_symlinks'
 before 'deploy:update_code', 'deploy:messenger:lock'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
