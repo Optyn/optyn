@@ -48,6 +48,7 @@ before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 #before 'deploy:assets:precompile', 'deploy:create_symlinks'
 before 'deploy:update_code', 'deploy:messenger:lock'
+after 'deploy:update_code', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
