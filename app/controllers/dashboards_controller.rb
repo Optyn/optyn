@@ -20,6 +20,7 @@ class DashboardsController < BaseController
         hasherize_deactivated_connections
 
     @feed = @feed.shuffle.compact.slice(0, 19)
+    p @feed.first
   end
 
   def hasherize_messages
@@ -47,7 +48,7 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: shop_connection_path(connection.shop.identifier)
+              action_url: (shop_connection_path(connection.shop.identifier)rescue '') 
           }
       )
     end

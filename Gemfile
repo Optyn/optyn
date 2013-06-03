@@ -57,7 +57,7 @@ group :assets do
   # gem "less-rails"
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass'
+  gem 'bootstrap-sass', '~> 2.3.1.2'
   gem 'awesome_print'
 end
 

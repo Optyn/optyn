@@ -369,7 +369,7 @@ DEPENDENCIES
   airbrake
   awesome_print
   aws-ses
-  bootstrap-sass
+  bootstrap-sass (~> 2.3.1.2)
   cancan
   capistrano
   capistrano-resque (~> 0.1.0)
