@@ -92,7 +92,7 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: shop_connection_path(connection.shop.identifier)
+              action_url: (shop_connection_path(connection.shop.identifier)rescue '')
           }
       )
     end
