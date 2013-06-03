@@ -46,6 +46,7 @@ class SurveyAnswer < ActiveRecord::Base
     select("DISTINCT(survey_answers.user_id), survey_answers.created_at").for_survey_with_joins(survey_id).created_backwords.page(page_number).per(per_page)
   end
 
+
   def self.answers_arranged_by_users(survey_id, user_ids)
     answers = for_survey_with_inclusion(survey_id).for_user(user_ids).includes_user.created_backwords
 
@@ -62,5 +63,9 @@ class SurveyAnswer < ActiveRecord::Base
 
   def question
     survey_question.label
+  end
+
+  def self.users(survey_id)
+    select("DISTINCT(survey_answers.user_id), survey_answers.created_at").for_survey_with_joins(survey_id).created_backwords
   end
 end

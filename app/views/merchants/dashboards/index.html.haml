@@ -91,16 +91,7 @@
       .latest
         .title
           Your Latest Activity
-        .sortby
-          Sort By
-          \&nbsp;
-          %select
-            %option All Recent Activity
-            %option New Sign Ups
-            %option Revoked Permissions
-            //%option E-Mail Replies
-            //%option Coupon Redemptions
-            %option Survey Actions
+        
       %br
 
       %table.table.table-striped
@@ -111,15 +102,15 @@
             %th Type
             %th More Info
         %tbody
-        - current_shop.users.each_with_index do |user, index|
+        - @feed.each do |feed_element|
           %tr
             %td
-              = index + 1 
-              minutes ago
+              = time_ago_in_words(feed_element['time']) 
+              ago
             %td
-              = user.name
+              = feed_element['user']
             %td
-              = user_permission(user)
+              = feed_element['type']
             %td
               / - if user.permissions_users.present?
               /   %a{:href => "#infoDialog_#{user.id}","data-toggle"=>"modal", "id"=>"#{user.id}","class"=>"open-infoDialog"} More Info

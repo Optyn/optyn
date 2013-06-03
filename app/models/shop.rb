@@ -166,6 +166,10 @@ class Shop < ActiveRecord::Base
     self.connections.where(:user_id => user.id)
   end
 
+  def unfollowed_connections
+    connections.where(:active => false).order('updated_at')
+  end
+
   def first_location
     locations.first rescue nil
   end
@@ -221,4 +225,6 @@ class Shop < ActiveRecord::Base
   def assign_embed_code(app)
     app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
   end
+
+  
 end

@@ -20,7 +20,6 @@ class DashboardsController < BaseController
         hasherize_deactivated_connections
 
     @feed = @feed.shuffle.compact.slice(0, 19)
-    p @feed.first
   end
 
   def hasherize_messages
