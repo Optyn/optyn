@@ -34,7 +34,7 @@ class Merchants::DashboardsController < Merchants::BaseController
           type: 'New connection',
           time: connection.updated_at,
           user: connection.user.name,
-          action_url: '#'
+          action_url: '/merchants/connections'
         })
     end
   end
@@ -46,7 +46,7 @@ class Merchants::DashboardsController < Merchants::BaseController
         type: 'New survey submission',
         time: submission.created_at,
         user: submission.user.name,
-        action_url: '#'
+        action_url: merchants_survey_survey_answers_path
       })
     end
   end
