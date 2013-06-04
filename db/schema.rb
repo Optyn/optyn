@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515060504) do
+ActiveRecord::Schema.define(:version => 20130604165833) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -142,9 +142,14 @@ ActiveRecord::Schema.define(:version => 20130515060504) do
     t.boolean  "delivered"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "ses_message_id"
+    t.boolean  "bounced"
+    t.boolean  "complaint"
+    t.text     "body"
   end
 
   add_index "message_email_auditors", ["message_user_id"], :name => "index_message_email_auditors_on_message_user_id"
+  add_index "message_email_auditors", ["ses_message_id"], :name => "index_message_email_auditors_on_ses_message_id", :unique => true
 
   create_table "message_folders", :force => true do |t|
     t.string   "name"

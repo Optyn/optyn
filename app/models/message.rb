@@ -5,6 +5,7 @@ class Message < ActiveRecord::Base
   has_many :message_labels, dependent: :destroy
   has_many :labels, through: :message_labels
   has_many :message_users, dependent: :destroy
+  has_many :message_email_auditors, through: :message_users
   belongs_to :survey
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
@@ -184,12 +185,25 @@ class Message < ActiveRecord::Base
 
   def self.batch_send
     messages = with_state([:queued]).only_parents.ready_messages
+
     execute_send(messages)
+
+    Messagecenter::AwsDeliveryFailureChecker.failure_stats
+
+    messages.each do |message|
+      personal_email_auditors = message.message_email_auditors
+      personal_email_auditors.each do |auditor|
+        if !auditor.bounced && !auditor.complaint
+          auditor.update_attribute(:delivered, true)
+        end
+      end
+    end
   end
 
   def self.batch_send_responses
     messages = with_state([:transit]).ready_messages
     execute_send(messages)
+
   end
 
   def self.create_response_message(user_id, message_uuid)
@@ -357,6 +371,8 @@ class Message < ActiveRecord::Base
 
         #Iterating through the messages and creating message and attachments for individual receivers
         messages.each do |message|
+          message.state = 'transit'
+          message.save(validate: false)
           dispatched_message = message.dispatch(creation_errors, process_manager)
 
           unless dispatched_message.blank?
