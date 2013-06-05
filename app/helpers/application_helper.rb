@@ -112,6 +112,6 @@ module ApplicationHelper
   end
 
   def shop_public_page_login_location
-    user_signed_in? ? dashboards_path : merchants_dashboards_path
+    user_signed_in? ? consumer_dashboard_path : merchants_manager_signed_in? ? merchants_dashboards_path : new_user_session_path
   end
 end
