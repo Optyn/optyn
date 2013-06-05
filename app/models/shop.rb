@@ -89,11 +89,11 @@ class Shop < ActiveRecord::Base
   end
 
   def first_location_city
-    first_location.ctiy.titleize
+    first_location.city rescue nil
   end
 
   def first_location_state_name
-    first_location.state_name
+    first_location.state_name rescue nil
   end
 
   def first_location_zip

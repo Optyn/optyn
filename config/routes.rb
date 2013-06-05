@@ -198,4 +198,6 @@ Optyn::Application.routes.draw do
   use_doorkeeper do
     controllers :authorizations => 'oauth_authorizations'
   end
+
+  match '/:identifier' => 'shops#show', :as => :shop
 end
