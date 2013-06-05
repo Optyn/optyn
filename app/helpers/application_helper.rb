@@ -110,4 +110,8 @@ module ApplicationHelper
   def active_tab_class(highlight_action_name)
     highlight_action_name == action_name ? "active" : ""
   end
+
+  def shop_public_page_login_location
+    user_signed_in? ? dashboards_path : merchants_dashboards_path
+  end
 end

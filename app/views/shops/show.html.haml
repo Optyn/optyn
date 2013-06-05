@@ -8,7 +8,8 @@
           = shop_name_with_city_state(@shop)
       .span5.optyn
         = pluralize(@shop.connections.active.count, "Optyn")
-        = image_tag("optynbtn.png", alt: "Optyn Button")
+        %a{href: shop_public_page_login_location}
+          = image_tag("optynbtn.png", alt: "Optyn Button")
     .row.mainbody
       .span4.details
         .title
