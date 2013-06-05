@@ -191,10 +191,12 @@ class Message < ActiveRecord::Base
     Messagecenter::AwsDeliveryFailureChecker.failure_stats
 
     messages.each do |message|
-      personal_email_auditors = message.message_email_auditors
-      personal_email_auditors.each do |auditor|
-        if !auditor.bounced && !auditor.complaint
-          auditor.update_attribute(:delivered, true)
+      Message.transaction do
+        personal_email_auditors = message.message_email_auditors
+        personal_email_auditors.each do |auditor|
+          if !auditor.bounced && !auditor.complaint
+            auditor.update_attribute(:delivered, true)
+          end
         end
       end
     end
@@ -371,8 +373,8 @@ class Message < ActiveRecord::Base
 
         #Iterating through the messages and creating message and attachments for individual receivers
         messages.each do |message|
-          message.state = 'transit'
-          message.save(validate: false)
+          #message.state = 'transit'
+          #message.save(validate: false)
           dispatched_message = message.dispatch(creation_errors, process_manager)
 
           unless dispatched_message.blank?
