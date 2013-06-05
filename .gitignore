@@ -22,3 +22,4 @@ public/uploads/*
 dump.rdb
 /nbproject/*
 .ruby-gemset
+public/assets

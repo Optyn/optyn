@@ -46,7 +46,6 @@ set :lock_file_name, 'deployment.pid'
 # If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
-#before 'deploy:assets:precompile', 'deploy:create_symlinks'
 before 'deploy:update_code', 'deploy:messenger:lock'
 after 'deploy:update_code', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
@@ -98,7 +97,6 @@ namespace :deploy do
 
   desc 'Copy database.yml from shared to current folder'
   task :create_symlinks, :roles => :app, :except => {:no_release => true} do
-    puts "*" * 50
     puts "Running symlinks"
     run "ln -s #{shared_path}/config/database.yml #{current_release}/config/database.yml"
   end
@@ -116,7 +114,6 @@ namespace :deploy do
 
   task :restart, :roles => :app, :except => { :no_release => true } do
     desc 'Restart unicorn'
-    #run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     stop
     start
   end
@@ -128,7 +125,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		 #run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 
