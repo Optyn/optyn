@@ -1,0 +1,41 @@
+.preview-menu
+  .preview-header
+    Campaign Message Details
+  %hr
+  .preview-item
+    .preview-img
+      %img{:src => "/assets/preview_list_icon.png"}
+    .preview-text
+      %strong Subject:
+      %br
+      %em
+        =@message.subject
+  .preview-item
+    .preview-img
+      %img{:src => "/assets/preview_time_icon.png"}
+    .preview-text
+      %strong To be sent on:
+      %br
+      %em
+        - unless @message.is_child?
+          = message_send_on_date(@message)
+        - else
+          Message will be sent on the survey submission by the customer
+  .preview-item
+    .preview-img
+      %img{:src => "/assets/preview_subject_icon.png"}
+    .preview-text
+      %strong E-mail will be sent to:
+      %br
+      %em
+        - unless @message.is_child?
+          = message_receiver_labels(@message.label_names)
+          == (#{@message.connections_count} total)
+        - else
+          Survey customer
+
+  .make-changes-button
+    = link_to "Make Changes", '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
+
+#message_meta_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+  = render partial: "merchants/messages/meta_form", locals: {message: @message}

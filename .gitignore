@@ -16,6 +16,12 @@ rerun.txt
 pickle-email-*.html
 .rvmrc
 config/database.yml
+.idea/
+.DS_Store
+public/uploads/*
+dump.rdb
+/nbproject/*
+.ruby-gemset
 public/assets
 .idea/
 *DS_Store

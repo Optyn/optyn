@@ -1,0 +1,18 @@
+%div.modal.hide.fade{:id => "shopDialog_#{shop.id}", :style=> "height:300px"}
+	%div.modal-header{"button type"=>"button", "class"=>"close", "data-dismiss"=>"modal", "aria-hidden"=>"true"}x  
+	%div.modal-body
+		= "Name: " + shop.name
+		%br/
+		- if shop.description.present?
+			= "Description: " + shop.description.to_s 
+			%br/
+		= "Type: " + business_type(shop)
+		%br/
+		- if shop.website.present?
+			= "Webiste-Url:" + shop.website.to_s 
+			%br/
+		- if shop.business_category_names.present?
+			= "Categories: " + shop.business_category_names.join(", ") 
+			%br/
+		- if shop.locations.present?
+			= "Locations: " + shop.locations.collect(&:city).join(',') 

@@ -1,0 +1,12 @@
+%label.pull-left Personal Information :
+= f.fields_for :managers do |builder|
+
+  = builder.text_field :name, :placeholder => "Name"
+  = builder.text_field :email, :placeholder => "Email"
+
+  - unless @omniauth.present?
+    = builder.password_field :password, :placeholder => "Password"
+    = builder.password_field :password_confirmation, :placeholder => "Confirm Password"
+
+  = hidden_field_tag :auth_id, nil, value: @omniauth[:uid] if @omniauth.present?
+  = hidden_field_tag :auth_provider, nil, value: @omniauth[:provider] if @omniauth.present?

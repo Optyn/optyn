@@ -1,0 +1,80 @@
+/Flash Notice
+= display_flash_message
+/Main Body
+#consumer_dashboard
+  .container
+    = render partial: "shared/menu"
+    .span8
+      .header
+        .span3.maintitle
+          %h3
+            Hi
+            = current_user.name
+          Here's what's going on today!
+      .row.stats
+        .span2.leading
+          .count
+            = @new_coupons_count
+          .info
+            .img
+              %img{:src => "/assets/md_new_connections.png"}
+            .text
+              New Coupons
+        .span2.box
+          .count
+            = @new_messages_count
+          .info
+            .img
+              %img{:src => "/assets/md_connections_week.png"}
+            .text
+              New Messages
+        .span2.box
+          .count
+            = @pending_survey_count
+          .info
+            .img
+              %img{:src => "/assets/md_connections_month.png"}
+            .text
+              Active Surveys
+        .span2.box
+          .count
+            = @new_specials_count
+          .info
+            .img
+              %img{:src => "/assets/md_active_connections.png"}
+            .text
+              Available Specials
+      .latest
+        .title
+          Your Latest Activity
+      %br
+
+      
+      - if @feed.present?
+        %table.table.table-striped#my_connections_table
+          %thead
+            %tr
+              %th Connection
+              %th Type
+              %th More Info
+          %tbody
+          - @feed.each do |feed_element|
+            %tr
+              %td
+                / .headline
+                /   - if feed_element['image_url'].present?
+                /     = image_tag(feed_element['image_url'], alt: feed_element['shop_name'], class: 'profile_image')
+                /   - else
+                /     = image_tag('no_shop_logo.gif', alt: feed_element['shop_name'], class: 'profile_image')
+
+                = feed_element['shop_name']
+              %td
+                = feed_element['title']
+              %td      
+                .description
+                  = feed_element['subject']
+                .actions
+                  = link_to "Details", feed_element['action_url']
+      - else
+        No activities. Please start connecting with shops
+        = link_to 'here', connections_path

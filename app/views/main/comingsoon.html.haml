@@ -1,0 +1,26 @@
+/ coming soon
+#comingsoon.comingsoon_page
+  .container
+    .countdown
+      .row
+        .span6.offset1.left
+          %h1 We are launching very soon...
+          %p
+            We are working on something big...
+            %br/
+            Something that will make marketing easier for consumers and
+            merchants.
+        .span5.right
+          %iframe{:allowFullScreen => "", :frameborder => "0", :height => "225", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/58841871", :webkitAllowFullScreen => "", :width => "400"}
+  .subscribe
+    .row
+      .span12
+        %form
+          %input.span4{:placeholder => "Email address", :type => "text"}/
+          %button.btn{:type => "submit"} Subscribe
+        .follow
+          %strong Follow us
+          %a{:href => "http://www.twitter.com/optyn", :target => "_blank"}
+            %i.social.tw
+          %a{:href => "http://www.facebook.com/optyn", :target => "_blank"}
+            %i.social.fb

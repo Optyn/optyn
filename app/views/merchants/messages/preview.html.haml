@@ -1,0 +1,31 @@
+#title_header
+  %h3
+    Message Center - Message Preview
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    .span3.preview-left
+      = render partial: "merchants/messages/preview_meta"
+
+    .span8#message_fields_wrapper
+      = render partial: "merchants/messages/message_menu"
+      #message_details
+        .row
+          %h1{class: 'text-center'}
+            Email Preview
+            = link_to "Edit Campaign", edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
+            = link_to "Send it", launch_merchants_message_path(@message.uuid), class: "btn btn-success"
+            - if @message.is_child?
+              = link_to "Parent Message", edit_merchants_message_path(@message.parent.uuid), class: "btn btn-warning"
+
+          %hr/
+
+        .row
+
+          = content_for :header do
+            Preview
+
+          .span8
+            = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}

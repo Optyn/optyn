@@ -1,0 +1,11 @@
+#box_sign
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div  
+          .address 
+            .head.pull-left.lead 
+              = "Enter Location Details"
+            .form 
+              = form_for :location, url: merchants_locations_path, method: :post do |f| 
+                = render :partial => 'form', :locals => {f: f}

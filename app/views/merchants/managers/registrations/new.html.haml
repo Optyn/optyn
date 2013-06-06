@@ -1,0 +1,46 @@
+
+= display_flash_message
+
+#box_sign
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div  
+          .head
+            %h4 Create your account
+            
+          = render partial: "merchants/managers/shared/social_login_buttons" if !@omniauth.present?
+
+          .form  
+            = form_for(@shop, :as => 'shop_name', :url => merchants_manager_registration_path(@shop)) do |f|
+              .errors
+                - if @omniauth.present?
+                  = "You are just one step from creating your account, just provide following details"
+
+              %br
+              %label.pull-left Enter Business Details :
+              %br
+               
+              = f.text_field :name,:autofocus => true,:placeholder => "Business Name"
+
+              %label.pull-left Business Type:
+              = f.radio_button :stype,'online'
+              = "Online"
+              = f.radio_button :stype,'local',:checked=>true
+              = "Local"
+
+              %hr
+                
+              = render partial: "merchants/managers/registrations/personal_info_form",:locals=>{:f => f}  
+              
+              %br  
+
+              %div 
+                %em ** All the fields above are required 
+              
+              = f.submit "Sign up", :class => "btn signup-button"
+      %p{:class => "already"}
+        = link_to "Sign in", new_user_session_path()
+
+        %strong OR
+        = link_to "Forgot your password?", new_user_password_path()

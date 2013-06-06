@@ -1,0 +1,56 @@
+/Flash Notice
+= display_flash_message
+/Main Body
+#dashboard
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8
+      .header
+        .maintitle
+          %h3
+            Import Users for
+            = current_shop.name
+          If you have a previous email list, you can easily import it into Optyn below.
+      .import
+      %br
+      %br
+        = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true do |f|
+          .control-group
+            = f.label :csv_file, "Customer CSV file to Import", class: 'control-label'
+            .controls
+              = f.file_field :csv_file
+
+          .actions
+            = f.submit "Import", class: "btn btn-primary"
+
+
+      %table.table.table-striped
+        %thead
+          %tr
+            %th #
+            %th Name
+            %th Status
+            %th Stats
+            %th Uploaded
+        %tbody
+        - if @file_imports.present?
+          - @file_imports.each_with_index do |import, index|
+            %tr
+              %td= index + 1
+              %td
+                = File.basename(import.csv_file.to_s)
+              %td
+                = import.status.humanize rescue "-"
+              %td
+                - if import.stats.present?
+                  - import.stats.each_pair do |key, value|
+                    == #{key.to_s.humanize.pluralize} = #{value}
+                    %br
+                - else
+                  N/A
+              %td
+                = human_time(import.created_at) rescue "-"
+        - else
+          %tr
+            %td{colspan: 5}
+              No files uploaded yet for imports.

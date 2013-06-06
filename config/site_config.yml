@@ -1,3 +1,50 @@
 defaults:
-  template_engine_username: 'admin'
-  template_engine_password: 'test123'
+  resque_auth_password: '9p5yn123'
+  cache_auth_username: 'optyn'
+  cache_auth_password: '9p5yn123'
+  app_host: 'www.optyn.com'
+  api_welcome_message: 'Optyn to receive cool offers, new product announcements, giveaways and other cool announcements.'
+  app_base_url: 'http://www.optyn.com'
+  deployment_shared_path: <%= "#{Rails.root}/tmp/" %>
+  dashboard_limit: 5
+  ttls:
+    message_folder: <%= 24.hours %>
+    dashboard_count: <%= 1.minutes %>
+
+  #Add the twitter consumer key and twitter consumer secret
+  #Add the facebook app key and facebook app secret
+  #Add the google client key and google client secret
+  #Add the linkedin app id and linkedin client secret   
+  #Add the app_base_url
+  #Add the welcome message for the optyn button
+  #Add Bucket name for s3
+
+staging:
+  twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
+  twitter_consumer_secret: 'bTGpU2SLyqai4yGbMzqfrTP20zxbNYySroKd9HIxeM'
+  facebook_app_key: '624632634229184'
+  facebook_app_secret: 'f1675b7e3b2027d69b14e8421e80ebaa'
+  google_client_id: '951432870594-kfenjdp27bk83bb5r9vm55rielr30i4h.apps.googleusercontent.com'
+  google_client_secret: 'Nb-tX1RofqWfyiSsh3GNt8Wn'
+  linkedin_api_key: 'j90jf1gvh8t7'
+  linkedin_secret_key: 'fHPWIwhGCnVr2Iue'
+  app_host: "development.optyn.com"
+  stripe_api_key: "sk_test_LvqRzhN1kzeKaqQRPsQ9Vug0"
+  stripe_public_key: "pk_test_JpL5IkK8MiKjycqdYsfAQO1c" # while deploying change to live keys
+  app_base_url: 'http://development.optyn.com'
+  bucket: 'optynstaging'
+
+development:  
+  twitter_consumer_key: 'Acwx2jBkCCbFZHkW8wEubQ'
+  twitter_consumer_secret: 'zGevh2gWCvuW2h2BXPe84arg5sm7A4bEWmxvHddno'
+  facebook_app_key: '427608267320854'
+  facebook_app_secret: 'f2dd8beb43c9c952d5b45a31534e56ba'
+  google_client_id: '951432870594.apps.googleusercontent.com'
+  google_client_secret: 'sR-X_aq5jf3QGNvBkZlPIADz'
+  linkedin_api_key: 'f5thzgptqhu8'
+  linkedin_secret_key: '6ZZACokbw3IJfwRN'
+  app_host: "localhost:3000"
+  stripe_api_key: "sk_test_LvqRzhN1kzeKaqQRPsQ9Vug0"
+  stripe_public_key: "pk_test_JpL5IkK8MiKjycqdYsfAQO1c"
+  app_base_url: 'http://localhost:3000'
+  bucket: 'optyndevelopment'

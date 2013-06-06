@@ -1,0 +1,7 @@
+.control-group
+  = f.label :ending, ending_label, class: "control-label"
+  .controls
+    .input-append.date-time-picker
+      = f.text_field :ending, value: formatted_message_form_datetime(@message, :ending), class: "input-large", 'data-format' => "yyyy-MM-dd HH:mm PP"
+      %span.add-on
+        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}

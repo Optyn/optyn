@@ -1,0 +1,27 @@
+#title_header
+  %h3
+    Your Inbox Messages
+/Flash Notice
+= display_flash_message
+/Main Body
+#consumer
+  .container
+    = render partial: "shared/menu"
+
+    .span8
+      = render partial: "messages/message_menu"
+
+      = render partial: 'shared/messages/pager', locals: {collection: @inbox_message_users}
+
+      #messages_collection_container.row.text-center
+        = render partial: "shared/messages/collection_form"
+
+        .actions
+          = submit_tag "Move to Saved", name: 'move_to_saved', class: 'collection-action btn btn-primary'
+          = hidden_field_tag 'move_to_saved_link', move_to_saved_messages_path
+          = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
+          = hidden_field_tag 'move_to_trash_link', move_to_trash_messages_path
+
+      = render partial: "messages/list", locals: {messages: @inbox_messages}
+
+      = render partial: 'shared/messages/pager', locals: {collection: @inbox_message_users}

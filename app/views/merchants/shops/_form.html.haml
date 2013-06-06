@@ -1,0 +1,58 @@
+#update_shop_wrapper
+  .control-group
+    .clabel
+      = f.label :name
+    .controls
+      = f.text_field :name
+
+  .control-group
+    .clabel
+      = f.label :description
+    .controls
+      = f.text_field :description
+
+  .control-group
+    .clabel
+      = f.label :website
+    .controls.input-prepend
+      %span.add-on
+        %i.icon-globe
+      = f.url_field :website
+      .help-block
+        %em Example: http://www.example.com
+
+  .control-group
+    .clabel
+      = f.label :identifier
+    .controls.input-prepend.input-append
+      %span.add-on
+        == #{SiteConfig.app_base_url}/
+      =f.text_field :identifier
+      %span.help-block
+        %em Example: http://www.optyn.com/example
+  %div#loading.control-group{style: "display:none"}
+    %span.help-block
+      %em.text Loading...
+
+  .control-group
+    .clabel
+      = f.label :time_zone
+    .controls
+      = f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s, {include_blank: '-- Timezone --'}, {}
+
+  .control-group
+    .clabel
+      = f.label :logo_img, "Logo"
+    .controls
+      = f.file_field :logo_img
+
+  .control-group
+    .clabel
+      = f.label :business_ids, "Business Category"
+    .controls
+      = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px", :multiple => true}
+  .action-buttons
+    = f.submit "Update" , class: "btn btn-primary"
+    = link_to "Cancel", merchants_shop_path, class: 'btn'
+
+    = hidden_field_tag "check_identifier_merchants_shop_path", check_identifier_merchants_shop_path()

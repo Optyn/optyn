@@ -1,0 +1,13 @@
+= display_flash_message
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8.edit_page
+      %h3
+        %img{:src => "/assets/edit-account-icon.png"}
+        Edit
+        = current_shop.name
+        Details
+      .form 
+        = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form'} do |f|
+          = render :partial => 'form', :locals => {f: f}

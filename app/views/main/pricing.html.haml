@@ -1,0 +1,131 @@
+#header1
+  .container
+    .row
+      %h3.intro
+        Optyn is always FREE to get Started and Priced to GROW
+#pricing.pricing_page
+  .container
+    .row
+      .span3.starter
+        .header
+          %img{:src => '/assets/starter_flag.png', :alt => "Starter Plan"}
+          Starter Plan
+        .cust_count
+          %img{:src => '/assets/cust_count.png', :alt => "Customer Count"}
+          %strong
+            up to 50 Customers
+        %hr
+        .details
+          .hdr
+            All Features Included
+          %ul
+            %li
+              Easy Customer Capture
+            %li
+              Automated Marketing
+            %li
+              Engagement Engine
+            %li
+              Unlimited E-Mails
+            %li 
+              %a{"data-toggle" => "modal", :href => "#pricingpopup", :role => "button"}
+                plus 30 more features
+        %hr
+        .getstarted{:style => "center"}
+          %h3
+            FREE for Life
+          %a.btn.getstartedbtn{:href => new_merchants_manager_registration_path} Get Started
+          %br
+          %strong 
+            No Credit Card Required
+      .span9.allplans
+        .title
+          %h3
+            Everyone starts off with a FREE Account. Here's what it costs you to grow:
+        %hr
+        .span5.howmany
+        .span2.numberofcustomers
+          Number of Customers
+        .span1.quantity
+
+        %table.table.table-striped{:id => 'pricing-table'}
+          %thead
+            %tr
+              %td 
+                %strong
+                  FREE 4EVER            
+              %td up to 100 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td 
+          %tbody
+            %tr
+              %td $5/month            
+              %td 101 - 500 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $10/month            
+              %td 501 - 1,000 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td 
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $15/month            
+              %td 1,001 - 2,500 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
+            %tr
+              %td $25/month            
+              %td 2,501 - 3,000 Connections
+              %td Unlimited E-Mails + All Features Included
+              %td
+                %a.btn.upgrade{:href => new_merchants_manager_registration_path} Get Started
+    .row  
+      .span12.bottom
+        Have millions or billions of customers? We CAN help.
+        %a.btn.enterprisebtn{:href => "contact"} Contact Our Enterprise Team
+
+/ Features Popup Window
+#pricingpopup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "PricingPopup", :role => "dialog", :tabindex => "-1", :width => "800px", :height => "400px"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Every customer gets ALL of these COOL features:
+  .modal-body
+    .row
+      .span4.left
+        %ul
+          %li 
+            Easy Customer Enrollment – in your store or on-line
+          %li 
+            Ability to Segment Customers based on your requirements
+          %li 
+            Automated marketing campaigns
+          %li
+            No more hassles with list management
+          %li
+            No longer having to worry about being reported as spam
+      .span4.right
+        %ul
+          %li 
+            Pre-written popular email types from which to choose: Announcements, sales events,
+            updates and more
+          %li 
+            The ability to personalize each email to your specific needs.
+          %li 
+            Pre entered e-mail subject lines based on best practices and the experience of our
+            client base.
+          %li
+            Significantly reduced risk of your customers unsubscribing from your emails.
+  .modal-footer
+    What are you waiting for?
+    %a.btn.startbtn{:href => new_merchants_manager_registration_path} Get Started
+
+
+
+
+
+
+
+

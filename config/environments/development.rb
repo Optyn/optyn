@@ -14,7 +14,7 @@ Optyn::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -31,7 +31,12 @@ Optyn::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+  config.cache_store = :redis_store
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  #config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  #config.action_mailer.delivery_method = :ses
 end

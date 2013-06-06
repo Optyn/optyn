@@ -1,0 +1,20 @@
+.span3.btn-preview
+  - unless @application.new_record?
+    .header
+      Optyn Button Preview
+      %hr
+    .optyn-preview
+      == #{image_tag('optyn_button_checkbox.png', alt: 'checkmark') if @application.checkmark_icon}#{image_tag @application.button_size == 1 ? "optyn_button_small.png" : "optyn_button_large.png", alt: 'optyn button'}
+      %p
+        = @application.show_default_optyn_text ? SiteConfig.api_welcome_message : @application.custom_text
+    .codesnippet
+      %textarea{:id => 'embed_code', :rows => "5", :readonly => 'readonly'}
+        = current_shop.oauth_application.embed_code
+    .btns
+      %span#copy_description_cover
+        %a.btn.copybtn{:id => 'copy_description', :href => "javascript:void(0)"} Copy to Clipboard
+    .need-help
+      Need Help Installing this? Click Here and we will do it for you.
+  - else
+    .header
+      No preview available yet.

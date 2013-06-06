@@ -1,0 +1,68 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica;sans-serif;"}
+    = content_for :header do
+      Welcome to Optyn
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:15px; max-width:600px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %h3 Welcome to Optyn #{@resource.name} !
+                  %p We are so excited to have you and we want to make sure you have the full Optyn Experience.
+                  We work hard, day in and out, to create a wonderful experience for a product that makes your life easier.
+                  %p{:style => "padding:10px;background-color:#ecf8ff;margin-bottom:10px;"}= link_to 'Click here to Confirm Your Account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+                  %p Keep in mind, Optyn is really easy to use and you can:
+                  %p
+                    %ul
+                      %li Opt into any business online!
+                      %li Opt into any business with a physical location!
+                      %li With each business, you can control which information you share.
+                      %li We put you in control with the frequency of emails or types of emails you want to receive.
+                      %li Explore and find new places that you want to take for a test drive without ever compromising your information.
+                      %li and much more
+                  %p
+                    %a{:href => "http://www.optyn.com", :style => "color: #2BA6CB; text-decoration:none; color: #FFF; background-color: #666; padding:10px 16px; font-weight:bold; margin-right:10px; text-align:center; cursor:pointer; display: inline-block;"} Learn More about Optyn
+                  %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and your fellow Optyners, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
+                  %p
+                    Cheers,
+                    %br/
+                    The Optyn Team
+                  %table{:width => "100%", :bgcolor => "#ebebeb"}
+                    %tr
+                      %td
+                        %table{:align => "left", :width => "280px", :style => "min-width:279px;float:left;"}
+                          %tr
+                            %td
+                              %h5 Connect with Us:
+                              %p
+                                %a{:href => "http://www.facebook.com/optyn",:bgcolor => "#3B5998", :style => "padding: 3px 7px;font-size:12px;margin-bottom:10px;text-decoration:none;color:#FFF;font-weight:bold;display:block;text-align:center;"} Facebook
+                                %a{:href => "http://www.twitter.com/optyn", :bgcolor => "#1daced", :style => "padding: 3px 7px;font-size:12px;margin-bottom:10px;text-decoration:none;color:#FFF;font-weight:bold;display:block;text-align:center;"} Twitter
+                        %table{:align => "left", :width => "280px", :style => "min-width:279px;float:left;"}
+                          %tr
+                            %td
+                              %h5 Contact Info:
+                              %p
+                                Phone:
+                                %strong 773-828-9462
+                                %br/
+                                Email:
+                                %strong
+                                  %a{:href => "emailto:support@optyn.com"} support@optyn.com
+                                %br/
+                                %a{:href => "http://www.optyn.com"} Knowledge Base
+                                +
+                                %a{:href => "http://www.optyn.com"} How to Get Started
+                        %span.clear
+        %td
+
+    = render partial: "shared/mailers/footer"

@@ -1,0 +1,14 @@
+#title_header
+  %h3
+    Segments
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "shared/menu"
+    .span8
+      %h3
+        = @survey.title
+
+      = render partial: "segments/actual_form"

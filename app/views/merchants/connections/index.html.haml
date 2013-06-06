@@ -1,0 +1,37 @@
+#title_header
+  %h3
+    Your Connections
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+    .span8
+      %div
+        Here's a list of all your connections. Click on 'More Info' to learn more about each customer.
+        %br
+      %table.table.table-striped
+        %thead
+          %tr
+            %th #
+            %th Name
+            %th Connected via
+            %th Permission
+            %th Details
+        %tbody
+        - @connections.each_with_index do |connection, index|
+          %tr
+            %td= index + 1
+            %td
+              = connection.user.name
+            %td
+              = connection.connected_via
+            %td
+              = user_permission(connection.user)
+            %td
+              - if connection.user.permissions_users.present?
+                %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
+                = render partial: 'more_info_prompt', locals:{user: connection.user}
+              - else
+                %a{:href => "#",:style => "color:#7D8B8F"} More Info

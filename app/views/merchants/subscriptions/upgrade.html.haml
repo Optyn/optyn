@@ -1,0 +1,33 @@
+= tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY
+#box_sign
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div 
+          .head Enter Payment Information 
+          .payment-errors
+            - if @subscription.errors.any? || @subscription.stripe_error
+              =@subscription.stripe_error
+              %ul
+                - @subscription.errors.full_messages.each do |error|
+                  %li
+                    = error  
+
+          .form
+            = form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
+
+              = f.hidden_field :plan_id, :value => @plan.id
+              = f.hidden_field :email, :value => current_merchants_manager.email
+              = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
+
+              = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
+
+              = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left'
+
+              = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security'
+
+              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox"})
+
+              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox"})
+
+              = f.submit "Pay", :class => "btn"

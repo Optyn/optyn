@@ -1,0 +1,41 @@
+.control-group
+  %div{:id => 'please_wait', :style => "display:none;"}
+    %strong Please Wait...  
+
+#form_container
+  .control-group
+    = f.label :element_type, "Type", class: 'control-label'
+    .controls
+      = f.select(:element_type, SurveyQuestion::ELEMENT_TYPES, {include_blank: '-- Select Question --'}, {})
+
+  .control-group
+    = f.label :label, "Question".html_safe, class: 'control-label'
+    .controls
+      = f.text_field :label
+      %span.help-block
+        %em example: How are you?
+
+  .control-group.values-container
+    .controls.values
+      = f.label :values, "Answer Options"
+      - @survey_question.values.each do |value|
+        = fields_for :values, value do |field|
+          .value-container
+            = f.text_field "", value: value, name: "survey_question[values][]"      
+            %span.remove-value.close
+              x
+
+    .control-group
+      .actions.pull-right
+        = link_to "Add Value", "javascript:void(0)", id: "add_value", class: 'btn btn-info'
+
+  .control-group
+    .controls
+      %label.checkbox
+        = f.check_box :required, {}, true, false
+        Required?
+
+  .control-group
+    = f.label :position, class: 'control-label'
+    .controls
+      = f.text_field :position

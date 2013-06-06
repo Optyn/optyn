@@ -9,10 +9,45 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'cancan'
 gem 'config_reader', '0.0.8' #ENV specific configuration
-gem 'backbone-on-rails'
 gem 'google-analytics-rails'
 gem 'unicorn'
+gem 'haml'
+gem 'haml-rails'
+gem 'devise'
+gem 'devise-async'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-linkedin'
+gem 'rails_admin'
+gem 'resque', :require => 'resque/server'
+gem 'resque-scheduler', :require => 'resque_scheduler'
+gem 'resque_mailer'
+gem 'client_side_validations'
+gem 'doorkeeper', '~> 0.6.7'
+gem 'oauth2'
+gem 'carrierwave'
+gem "fog"
+gem 'localtunnel'
+gem 'chosen-rails'
+gem 'kaminari'
+gem 'newrelic_rpm'
+gem 'geocoder'
+gem 'whenever'
+# gems for stripe payment
+gem 'stripe'
+gem 'chronic', :require => 'chronic'
+gem 'airbrake'
+gem "state_machine", "~> 1.2.0"
+gem "uuidtools"
+gem 'redis'
+gem 'redis-store'
+gem 'redis-rails'
+gem 'aws-ses', :require => 'aws/ses'
+gem 'aws-sdk'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,18 +58,22 @@ group :assets do
   # gem "less-rails"
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass'
+  gem 'bootstrap-sass', '~> 2.3.1.2'
+  gem 'awesome_print'
 end
 
 gem 'jquery-rails'
 
 group :development do
+  gem 'thin'
+  gem 'sextant'
   gem 'pry'
-  gem 'mailcatcher'
   gem 'debugger'
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'rails-erd'
+  gem "capistrano-resque", "~> 0.1.0"
 end
 
 group :development, :test do
@@ -53,6 +92,3 @@ end
 
 # To use debugger
 # gem 'debugger'
-
-gem 'front_end_static_page', :path => "vendor/engines/front_end_static_page"
-gem 'back_end_static_page', :path => "vendor/engines/back_end_static_page"

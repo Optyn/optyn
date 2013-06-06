@@ -1,24 +1,73 @@
 @import "bootstrap";
 body {
-  padding-top: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  background: #1eb0e9;
+  padding-top: 60px;
+  background-color: #f7f7f7;
 }
-
 #container {
-  width: 100%;
+  background-color: #f7f7f7;
 }
-
-input {
-  background: #102134;
-  padding: 8px 20px;
-  font-size: 16px;
-  color: #fff;
-  width: 300px;
+.alert {
+  height: 40px;
+  padding-left: 40px;
+  line-height: 34px;
+  font-size: 18px;
+  vertical-align: middle;
+  border-radius: 0px;
+  margin-bottom: 0px;
+}
+.alert .close {
+  line-height: 40px;
+}
+/* DROPDOWN MENU for NAVBAR */
+.dropdown {
+  margin-top: -5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+.dropdown-menu {
+  margin-top: 0px;
+  background-color: #263d45;
+  border-radius: 4px;
+}
+.dropdown .open .dropdown-menu:before {
+  display: none;
+}
+.dropdown .open .dropdown-menu:after {
+  display: none;
+}
+.dropdown-menu hr {
+  margin-left: 10px;
   margin-right: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border-top: 1px #7d8b8f;
+  border-top-style: solid;
+  border-bottom: 0px;
+}
+.dropdown-menu ul {
+  color: #7d8b8f;
+}
+.dropdown-menu li {
+
+}
+.dropdown-menu li a {
+  color: #7d8b8f;
+}
+.dropdown-menu li a img {
+  float: left;
+  padding-right: 10px;
+}
+.dropdown-menu li a:active{
+  color: #86c440;
 }
 
+/* Responsive Bootstrap Overrides */
+.navbar .btn-navbar {
+  padding: 10px;
+  margin-top: 13px;
+  margin-right: 0px;
+}
 @import "bootstrap-responsive";
 
 // Set the correct sprite paths
@@ -27,12 +76,24 @@ $iconWhiteSpritePath: image-path("twitter/bootstrap/glyphicons-halflings-white")
 
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
 // Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
-//       have the proper paths. So for now we use the absolute path.
+// have the proper paths. So for now we use the absolute path.
 $fontAwesomeEotPath: image-path("fontawesome-webfont.eot");
 $fontAwesomeEotPath_iefix: image-path("fontawesome-webfont.eot#iefix");
 $fontAwesomeWoffPath: image-path("fontawesome-webfont.woff");
 $fontAwesomeTtfPath: image-path("fontawesome-webfont.ttf");
 $fontAwesomeSvgPath: image-path("fontawesome-webfont.svg");
+
+.text-left {text-align: left;}
+
+.text-right {text-align: right;}
+
+.text-center {text-align: center;}
+
+.display-none{display: none;}
+
+.field-with-errors .error{color: #b94a48}
+
+.field-with-errors label{color: #b94a48}
 
 // Font Awesome
 //@import "bootstrap/fontawesome";

@@ -1,0 +1,6 @@
+.form
+  = form_for @user, :url =>  user_zips_path, :method => :post, :validate => false do |f|
+    = f.text_field :home_zip_code, :placeholder => 'Zip Code (Home)'
+    = f.text_field :office_zip_code, :placeholder => 'Zip Code (Office)'
+    = f.submit 'Submit'
+

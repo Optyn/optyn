@@ -1,0 +1,7 @@
+.address 
+  %label.pull-left Enter Location Details :
+  = f.fields_for :locations do |address|
+    = address.text_field :street_address1, :placeholder => "Street Address 1"
+    = address.text_field :street_address2, :placeholder => "Street Address 2"
+    = address.text_field :city, :placeholder => "City"
+    = address.text_field :state, :placeholder => "State"

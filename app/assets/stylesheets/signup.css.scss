@@ -97,6 +97,72 @@
 	}
 }
 
+#box_sign .box .social{
+  float: none;
+  text-align: center;
+}
+#box_sign .box .social a.circle{
+  text-align: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  margin-right:10px;
+  display: inline-block;
+  -webkit-transition: border-color ease-in .1s;
+  -moz-transition: border-color ease-in .1s;
+  -o-transition: border-color ease-in .1s;
+  transition: border-color ease-in .1s;
+}
+#box_sign .box .social a.circle img{
+  display: inline-block;
+  margin-top: 15px;
+}
+#box_sign .box .social a.facebook{
+  background: #233678;
+  border:2px solid #233678;
+}
+#box_sign .box .social a.twitter{
+  background: #54AEE1;
+  border:2px solid #54AEE1;
+}
+#box_sign .box .social a.gplus{
+  background: #292929;
+  border:2px solid #292929;
+  margin: 0;
+}
+#box_sign .box .social a.linkedin{
+  background: #0794bd;
+  border:2px solid #0794bd;
+  margin: 0;
+}
+#box_sign .box .social a.circle:hover{
+  border-color: rgba(0,0,0,0.7);
+}
+#box_sign .box .division{
+  display: inline-block;
+  margin: 17px 0 23px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+#box_sign .box .division hr{
+  border-color: #E2E2E4;
+  border-width: 1px;
+  margin: 0;
+  position: absolute;
+  width: 40%;
+}
+#box_sign .box .division hr.left{
+  top: 13px;
+}
+#box_sign .box .division hr.right{
+  bottom: 6px;
+  right: 0;
+}
+#box_sign .box .division span{
+  color: #666666;
+  font-size: 18px;
+}
 
 
 

@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica;sans-serif;"}
+    = content_for :header do
+      Welcome to Optyn
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:15px; max-width:600px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %h3 Hi #{@manager.name},
+                  %p Welcome to Optyn,
+                  %p Hope you like it.
+
+                  %p
+                    Cheers,
+                    %br/
+                    The Optyn Team
+        %td
+
+        = render partial: "shared/mailers/footer"

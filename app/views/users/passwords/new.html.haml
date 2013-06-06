@@ -1,0 +1,25 @@
+= display_flash_message
+
+#box_login
+  .container
+    .span12.box_wrapper
+      .span12.box
+        %div
+          .head
+            %h4 Forgot your password?
+        
+        .form
+          = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|  
+
+            = devise_error_messages!  
+
+            = f.email_field :email, placeholder: "Email", autofocus: true
+
+            = f.submit "Send me reset password instructions", class: "btn"
+
+      %p{class: "already"}
+        = link_to "Sign in", new_user_session_path 
+        |
+        = link_to "Sign up as a user", new_user_registration_path
+        |
+        = link_to "Sign up as a shop", new_merchants_manager_registration_path

@@ -1,0 +1,33 @@
+#title_header
+  %h3
+    Your Customer Surveys
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "shared/menu"
+    .span8
+      %table.table
+        %tr
+          %th Merchant
+          %th Description
+          %th Survey
+          %th Actions
+
+        - if @surveys.present?
+          - @surveys.each_with_index do |survey, index|
+            %tr
+              %td
+                = survey.shop_name
+              %td
+                = survey.shop_description
+              %td
+                = survey.title
+              %td
+                = link_to "Provide Quick feedback", segment_path(Encryptor.encrypt(current_user.email, survey.id)), class: 'btn btn-info'
+        - else
+          %tr
+            %td{colspan: 4}
+              No surveys available right now
+

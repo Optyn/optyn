@@ -1,0 +1,397 @@
+/* New Home Page */
+#home {
+  background: url('/assets/main1.jpg');
+  background-position: center;
+}
+#home .startbutton {
+  background: #64b905;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 38px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  font-weight: bold;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+#home .startbutton:hover{
+  background: #80d81c;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#home .quickvid {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 38px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  font-weight: bold;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 20px;
+}
+#home .quickvid:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#home .main-area {
+  height: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 1180px;
+}
+#home .main-area .headline {
+  padding-top: 40px;
+  padding-bottom: 180px;
+}
+#home .main-area .headline .slogan1 {
+  background: rgba(0, 0, 0, 0.6);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 330px;
+}
+#home .main-area .headline .slogan1 h3 {
+  margin: 0;
+  font-size: 38px;
+  color: #ffffff;
+  font-weight: normal;
+}
+#home .main-area .headline .slogan2 {
+  background: rgba(0, 0, 0, 0.65);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 540px;
+  margin-top: 5px;
+}
+#home .main-area .headline .slogan2 h3 {
+  margin: 0;
+  font-size: 38px;
+  color: #ffffff;
+  font-weight: normal;
+}
+#home .main-area .consumer {
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  margin-left: 0px;
+  text-align: center;
+}
+#home .main-area .consumer h3 {
+  text-align: left;
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+
+}
+#home .main-area .consumer .content {
+  color: #fff;
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#home .main-area .consumer h4 {
+  color: #fff;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 30px;
+}
+#home .main-area .consumer .buttons {
+  padding-bottom: 30px;
+}
+#home .main-area .consumer .buttons span {
+  color: #fff;
+  text-decoration: underline;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#home .main-area .consumer .buttons span a {
+  color: #fff;
+}
+#home .main-area .merchant {
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  margin-left: 30px;
+  text-align: center;
+}
+#home .main-area .merchant .content {
+  color: #fff;
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#home .main-area .merchant h3 {
+  text-align: left;
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#home .main-area .merchant h4 {
+  color: #fff;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 30px;
+}
+#home .main-area .merchant .buttons {
+  padding-bottom: 30px;
+}
+#home .main-area .merchant .buttons span {
+  color: #fff;
+  text-decoration: underline;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#home .main-area .merchant .buttons span a {
+  color: #fff;
+}
+/* home features section */
+#home_features {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+#home_features .consumer {
+  background-color: #FFF;
+  border-radius: 6px;
+  height: auto;
+  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+}
+
+#home_features .consumer .main_title {
+  padding-left: 20px;
+}
+#home_features .consumer .main_title h3 {
+  font-size: 32px;
+  color: #1791c0;
+}
+#home_features .consumer .ftr {
+  height: auto;
+  padding-left: 20px;
+  padding-top: 10px;
+  overflow: hidden;
+}
+#home_features .consumer .ftr .ftrimg {
+  height: auto;
+  width: 60px;
+  float: left;
+}
+#home_features .consumer .ftr .ftrtxt {
+  padding-left: 14px;
+  padding-right: 14px;
+  vertical-align: middle;
+  height: 80px;
+  font-size: 16px;
+}
+#home_features .consumer .start {
+  height: auto;
+  text-align: center;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+#home_features .consumer .start .homestart {
+  background: #1791c0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 36px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 32px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+}
+#home_features .consumer .start .homestart:hover{
+  background: #147ea7;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#home_features .biz {
+  background-color: #FFF;
+  border-radius: 6px;
+  height: auto;
+  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+}
+#home_features .biz .main_title {
+  padding-left: 20px;
+}
+#home_features .biz .main_title h3 {
+  color: #78CD51;
+  font-size: 32px;
+}
+#home_features .biz .ftr {
+  height: auto;
+  padding-left: 20px;
+  padding-top: 10px;
+  overflow: hidden;
+}
+#home_features .biz .ftr .ftrimg {
+  height: auto;
+  width: 60px;
+  float: left;
+}
+#home_features .biz .ftr .ftrtxt {
+  padding-left: 14px;
+  padding-right: 10px;
+  vertical-align: middle;
+  height: 80px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+#home_features .biz .start {
+  height: auto;
+  text-align: center;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+#home_features .biz .start .homestart {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 40px;
+  line-height: 36px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 32px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+}
+#home_features .biz .start .homestart:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#home_features ul {
+  list-style-type:none;
+  padding:0px;
+  margin:0px;
+}
+#home_features li {
+  background-image: url('/assets/checkmark.png');
+  background-repeat: no-repeat;
+  background-position: 0px 5px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+#home_features .container { }
+#home_features .feature img.thumb {
+  border: 3px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 1px #bcbcbc;
+  display: block;
+  margin: 0 auto;
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+}
+#home_features img.mainimg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#home_features .feature img.thumb:hover {
+  box-shadow: 0px 0px 7px 1px #8cbe5b;
+}
+#home_features .feature h3 {
+  font-size: 22px;
+  font-weight: bolder;
+  color: #252b34;
+  margin-top: 25px;
+  /*text-align: center;*/
+  padding-left: 35px;
+}
+#home_features .feature h3 i {
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+#home_features .feature p.description {
+  color: #44474D;
+  width: 85%;
+  padding-left: 35px;
+}
+#home_features .feature .btn {
+  margin-top: 15px;
+  margin-left: 35px;
+}
+#home_features .feature .btn .getstarted {
+  background: #1791c0;
+  height: 42px;
+  width: 145px;
+}
+#home_features .feature .btn .learnmore {
+  height: 42px;
+  width: 145px;
+  background-color: hsl(201, 100%, 30%) !important;
+  height: 42px;
+  width:  145px;
+}
+/* Mobile Phones*/
+@media (max-width: 480px) {
+  #home {
+    background: none;
+    margin: 0px;
+  }
+  #home .main-area {
+    height: auto;
+  }
+  #home .main-area .headline {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  #home .main-area .headline .slogan1 h3 {
+    font-size: 22px;
+  }
+  #home .main-area .headline .slogan2 h3 {
+    font-size: 22px;
+  }
+  #home .main-area .consumer {
+    width: 390px;
+  }
+  #home .main-area .merchant {
+    width: 390px;
+    margin-left: 0px;
+  }
+}
+
+

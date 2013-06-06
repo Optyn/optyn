@@ -1,0 +1,33 @@
+#merchant_page
+  .container
+    .row.titlebar
+      .span2.logo
+        = shop_logo(@shop)
+      .span5.title
+        %strong
+          = shop_name_with_city_state(@shop)
+      .span5.optyn
+        = pluralize(@shop.connections.active.count, "Optyn")
+        %a{href: shop_public_page_login_location}
+          = image_tag("optynbtn.png", alt: "Optyn Button")
+    .row.mainbody
+      .span4.details
+        .title
+          %h3
+            == #{@shop.name} Details
+        .details-list
+          - if @shop.businesses.present?
+            .item
+              %strong
+                Category:
+              = @shop.business_category_names.join(" | ")
+          - if @shop.locations.present?
+            .item
+              %strong
+                Location:
+              = shop_address_components(@shop).join(", ")
+          - if @shop.website.present?
+            .item
+              %strong
+                Website:
+              = link_to @shop.website, @shop.website, target: '_blank'

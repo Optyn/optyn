@@ -1,0 +1,305 @@
+#consumer_features {
+	padding-bottom: 40px;
+}
+#consumer_features .main {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+#consumer_features .main .image {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin-top: 30px;
+}
+#consumer_features .main .copy {
+	padding-left: 10px;
+}
+#consumer_features .main .copy h3 {
+	color: #86c440;
+	font-weight: bold;
+}
+#consumer_features .features {
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+#consumer_features .features .feature {
+	width: 350px;
+	padding-left: 15px;
+}
+#consumer_features .features .feature .image {
+	float: left;
+	width: 60px;
+	height: 120px;
+	margin-top: 20px;
+}
+#consumer_features .features .feature .copy {
+	padding-left: 20px;
+	padding-top: 5px;
+}
+#consumer_features .features .feature .copy h3 {
+	color: #304d58;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 22px;
+}
+#consumer_features .bottom {
+	padding-top: 25px;
+}
+#consumer_features .bottom .creditcard {
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#consumer_features .bottom .creditcard .featurestart {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  margin-left: 15px;
+}
+#consumer_features .bottom .creditcard .featurestart:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#consumer_features .bottom .pricing{
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#consumer_features .bottom .pricing .viewpricing {
+  	background: #1791c0;
+	border-radius: 4px;
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	top: 4px;
+	color: #ffffff;
+	font-size: 18px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+	margin-left: 15px;
+}
+#consumer_features .bottom .pricing .viewpricing:hover{
+	background: #147ea7;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+}
+#merchant_features {
+	padding-bottom: 40px;
+}
+#merchant_features .main {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+#merchant_features .main .image {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin-top: 30px;
+}
+#merchant_features .main .copy {
+	padding-left: 10px;
+}
+#merchant_features .main .copy h3 {
+	color: #86c440;
+	font-weight: bold;
+}
+#merchant_features .features {
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+#merchant_features .features .feature {
+	width: 350px;
+	padding-left: 15px;
+}
+#merchant_features .features .feature .image {
+	float: left;
+	width: 60px;
+	height: 120px;
+	margin-top: 20px;
+}
+#merchant_features .features .feature .copy {
+	padding-left: 20px;
+	padding-top: 5px;
+}
+#merchant_features .features .feature .copy h3 {
+	color: #304d58;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 22px;
+}
+#merchant_features .bottom {
+	padding-top: 25px;
+}
+#merchant_features .bottom .creditcard {
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#merchant_features .bottom .creditcard .featurestart {
+  background: #78CD51;
+  border-radius: 4px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  top: 4px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px #304d58;
+  margin-left: 15px;
+}
+#merchant_features .bottom .creditcard .featurestart:hover{
+  background: #64b905;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+#merchant_features .bottom .pricing{
+	background-color: #ffffff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+#merchant_features .bottom .pricing .viewpricing {
+  	background: #1791c0;
+	border-radius: 4px;
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	top: 4px;
+	color: #ffffff;
+	font-size: 18px;
+	text-decoration: none;
+	text-shadow: none;
+	border: 1px #304d58;
+	margin-left: 15px;
+}
+#merchant_features .bottom .pricing .viewpricing:hover{
+	background: #147ea7;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+}
+
+/* Features
+-------------------------------------------------- */
+.features_page .section_header {
+	margin-top: 55px;
+}
+.features_page h3.intro {
+	color: #282F39;
+	text-align: center;
+	font-weight: normal;
+	font-size: 48px;
+	line-height: 32px;
+	width: 83%;
+	margin: 0 auto;
+    padding-bottom: 20px;
+}
+.features_page .features2 {
+	margin-top: 70px;
+}
+.features_page .feature2 {
+	margin-bottom: 50px;
+	position: relative;
+}
+.features_page .feature2 .icon {
+	width: 65px;
+	height: 65px;
+	background-color: white;
+	border-radius: 100px;
+	position: absolute;	
+}
+.features_page .feature2 .icon i {
+	background: url('/assets/features_icons.png') no-repeat;
+	display: block;
+	position: relative;
+}
+.features_page .feature2 i.cloud {
+	background-position: 0 0;
+	width: 36px;
+	height: 23px;
+	top: 19px;
+	left: 14px;
+}
+.features_page .feature2 i.tools {
+	background-position: -5px -97px;
+	width: 25px;
+	height: 25px;
+	top: 19px;
+	left: 20px;
+}
+.features_page .feature2 i.graph {
+	background-position: -8px -47px;
+	width: 22px;
+	height: 25px;
+	top: 19px;
+	left: 21px
+}
+.features_page .feature2 i.mobile {
+	background-position: -7px -153px;
+	width: 21px;
+	height: 31px;
+	top: 18px;
+	left: 22px;
+}
+.features_page .feature2 i.lab {
+	background-position: -7px -212px;
+	width: 21px;
+	height: 34px;
+	top: 14px;
+	left: 22px;
+}
+.features_page .feature2 i.secure {
+	background-position: -4px -270px;
+	width: 24px;
+	height: 29px;
+	top: 16px;
+	left: 20px;
+}
+.features_page .feature2 h4,
+.features_page .feature2 p {
+	margin-left: 80px;
+	width: 70%;
+}
+.features_page .feature2 h4 {
+	line-height: 25px;
+	color: #000;
+}
+
+@media (max-width: 979px) {
+	.features_page h3.intro {
+		font-size: 17px;
+		line-height: 20px;
+	}
+}
+
+

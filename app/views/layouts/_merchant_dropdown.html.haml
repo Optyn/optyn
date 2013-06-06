@@ -1,0 +1,31 @@
+%li
+  %a{:href => merchants_root_path}
+    %i.icon-list-alt.icon-white
+    Dashboard
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    %img{:src => current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
+  %ul.dropdown-menu
+    %li
+      %a.active{:href => merchants_root_path}
+        %img{:src => "/assets/dropdown_dashicon.png", :float => "left"}
+        My Dashboard
+    %li
+      %a{:href => "connections"}
+        %img{:src => "/assets/dropdown_manager.png", :float => "left"}
+        My Customers
+    %li
+      %a{:href => "#"}
+        %img{:src => "/assets/dropdown_segments.png", :float => "left"}
+        My Messages
+    %li
+      %a{:href => "segments"}
+        %img{:src => "/assets/dropdown_surveys.png", :float => "left"}
+        My Surveys
+    %li
+      %a{:href => merchants_shop_path}
+        %img{:src => "/assets/dropdown_settings.png", :float => "left"}
+        Manage Shop
+    %hr
+    %li
+      = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

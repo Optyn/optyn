@@ -1,0 +1,4 @@
+= form_for current_merchants_manager,:url => merchants_file_imports_path, :method => "post",multipart: true do |f|
+  = f.fields_for :file_imports do |import_form|
+    = import_form.file_field :csv_file
+  = f.submit "Import"
