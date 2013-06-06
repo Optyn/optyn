@@ -66,6 +66,9 @@ class SurveyAnswer < ActiveRecord::Base
   end
 
   def self.users(survey_id)
-    select("DISTINCT(survey_answers.user_id), survey_answers.created_at").for_survey_with_joins(survey_id).created_backwords
+    cache_key = "users-for-survey-#{survey_id}"
+    Rails.cache.fetch(cache_key, :expires_in => SiteConfig.ttls.dashboard_count) do
+      select("DISTINCT(survey_answers.user_id), survey_answers.created_at").for_survey_with_joins(survey_id).created_backwords
+    end
   end
 end
