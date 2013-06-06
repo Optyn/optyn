@@ -52,7 +52,7 @@ class Merchants::DashboardsController < Merchants::BaseController
   end
 
   def hasherize_unfollowed_connections
-    @disconnections = current_shop.unfollowed_connections
+    @disconnections = Shop.unfollowed_connections(current_shop)
     @disconnections.collect do |connection|
       HashWithIndifferentAccess.new({
           type: 'Revoked connection',
