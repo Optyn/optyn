@@ -58,7 +58,7 @@ class Merchants::DashboardsController < Merchants::BaseController
           type: 'Revoked connection',
           time: connection.updated_at,
           user: connection.user.name,
-          action_url: '#'
+          action_url: nil
         })
     end
   end
