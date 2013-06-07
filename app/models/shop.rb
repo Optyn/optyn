@@ -167,14 +167,6 @@ class Shop < ActiveRecord::Base
   end
 
     
-  def self.unfollowed_connections(shop_id)
-    shop = Shop.find(shop_id) 
-    cache_key = "dashboard-unfollowed-connections-shop-#{shop_id}"
-    Rails.cache.fetch(cache_key, :expires_in => SiteConfig.ttls.dashboard_count) do
-      Connection.for_shop(1).inactive.order('updated_at desc')
-    end
-  end
-
   def first_location
     locations.first rescue nil
   end

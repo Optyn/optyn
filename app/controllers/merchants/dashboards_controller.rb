@@ -18,7 +18,7 @@ class Merchants::DashboardsController < Merchants::BaseController
     shop_id = current_shop.id
     @feed = hasherize_connections +
             hasherize_surveys +
-            hasherize_unfollowed_connections
+     hasherize_unfollowed_connections
     @feed = @feed.shuffle.compact.slice(0, 19)
   end
 
@@ -28,31 +28,31 @@ class Merchants::DashboardsController < Merchants::BaseController
   end
 
   def hasherize_connections
-    @new_connections = current_shop.connections.order('updated_at DESC')
+    @new_connections = Connection.shop_latest_connections(current_shop.id)
     @new_connections.collect do |connection|
       HashWithIndifferentAccess.new({
           type: 'New connection',
           time: connection.updated_at,
           user: connection.user.name,
-          action_url: '/merchants/connections'
+          action_url: merchants_connections_path
         })
     end
   end
 
   def hasherize_surveys
-    @new_answered_surveys = SurveyAnswer.users(current_survey)
-    @new_answered_surveys.collect do |submission|
+    @survey_users = SurveyAnswer.users(current_shop.id, current_survey.id)
+    @survey_users.collect do |answer|
       HashWithIndifferentAccess.new({
         type: 'New survey submission',
-        time: submission.created_at,
-        user: submission.user.name,
+        time: Time.at(answer.last.to_i),
+        user: answer.first,
         action_url: merchants_survey_survey_answers_path
       })
     end
   end
 
   def hasherize_unfollowed_connections
-    @disconnections = Shop.unfollowed_connections(current_shop)
+    @disconnections = Connection.shop_dashboard_disconnected_connections(current_shop.id)
     @disconnections.collect do |connection|
       HashWithIndifferentAccess.new({
           type: 'Revoked connection',

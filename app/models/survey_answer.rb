@@ -16,6 +16,8 @@ class SurveyAnswer < ActiveRecord::Base
 
   scope :includes_user, includes(:user)
 
+  scope :joins_user, joins(:user)
+
   scope :for_user, ->(user_id) { where(user_id: user_id) }
 
   scope :joins_surveys, joins(survey_question: :survey)
@@ -27,6 +29,8 @@ class SurveyAnswer < ActiveRecord::Base
   scope :created_backwords, order("\"survey_answers\".created_at DESC")
 
   scope :uniq_users, ->(survey_id){for_survey(survey_id).pluck(:user_id).uniq}
+
+  scope :group_by_user, group("survey_answers.user_id")
 
   def self.uniq_shop_ids(user_id)
     for_user(user_id).includes_surveys.collect(&:survey_question).collect(&:survey).collect(&:shop_id).uniq
@@ -43,7 +47,7 @@ class SurveyAnswer < ActiveRecord::Base
   end
 
   def self.paginated_users(survey_id, page_number=PAGE, per_page=PER_PAGE)
-    select("DISTINCT(survey_answers.user_id), survey_answers.created_at").for_survey_with_joins(survey_id).created_backwords.page(page_number).per(per_page)
+    select_distinct_users_and_created.for_survey_with_joins(survey_id).created_backwords.page(page_number).per(per_page)
   end
 
 
@@ -61,14 +65,15 @@ class SurveyAnswer < ActiveRecord::Base
     users_hash
   end
 
-  def question
-    survey_question.label
+  def self.users(shop_id, survey_id, limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-recent-surveys-shop-#{shop_id}"
+    Rails.cache.fetch(cache_key, force: force, expires_in: SiteConfig.ttls.dashboard_count) do
+      answers = select("users.id, users.name AS user_name, AVG(EXTRACT(EPOCH FROM survey_answers.created_at)) as ts").group("users.id").for_survey_with_joins(survey_id).order("ts").joins_user.limit(limit_count).all
+      answers.collect{|answer| [answer['user_name'], answer['ts']]}
+    end
   end
 
-  def self.users(survey_id)
-    cache_key = "users-for-survey-#{survey_id}"
-    Rails.cache.fetch(cache_key, :expires_in => SiteConfig.ttls.dashboard_count) do
-      select("DISTINCT(survey_answers.user_id), survey_answers.created_at").for_survey_with_joins(survey_id).created_backwords
-    end
+  def question
+    survey_question.label
   end
 end

@@ -20,6 +20,8 @@ class Connection < ActiveRecord::Base
 
   scope :includes_user_and_permissions, includes(user: {permissions_users: :permission})
 
+  scope :includes_user, includes(:user)
+
   scope :for_users, ->(user_identifiers) { where(user_id: user_identifiers) }
 
   scope :time_range, ->(start_timestamp, end_timestamp) { where(created_at: start_timestamp..end_timestamp) }
@@ -58,13 +60,29 @@ class Connection < ActiveRecord::Base
     end
   end
 
-  def self.latest_connections(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
-    cache_key = "dashboard-latest-connections-user-#{user_id}"
-    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_users(user_id).active.includes_shop.limit(limit_count).all
+  def self.shop_latest_connections(shop_id, limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-latest-connections-shop-#{shop_id}"
+    Rails.cache.fetch(cache_key, force: force, expires_in: SiteConfig.ttls.dashboard_count) do
+      for_shop(shop_id).active.includes_shop.includes_user.limit(limit_count).all
     end
   end
 
+  def self.shop_dashboard_disconnected_connections(shop_id, limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-disconnected-connections-shop-#{shop_id}"
+    Rails.cache.fetch(cache_key, force: force, expires_in: SiteConfig.ttls.dashboard_count) do
+      for_shop(shop_id).inactive.latest_updates.includes_shop.limit(limit_count).all
+    end
+  end
+
+  #user dashboard latest connections
+  def self.latest_connections(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
+    cache_key = "dashboard-latest-connections-user-#{user_id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
+      for_users(user_id).active.includes_shop.latest_updates.limit(limit_count).all
+    end
+  end
+
+  #user dashboard dropped connections
   def self.dashboard_disconnected_connections(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
     cache_key = "dashboard-disconnected-connections-user-#{user_id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
