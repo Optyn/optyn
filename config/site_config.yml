@@ -2,20 +2,23 @@ defaults:
   resque_auth_password: '9p5yn123'
   cache_auth_username: 'optyn'
   cache_auth_password: '9p5yn123'
-  app_host: 'www.optyn.com'
+  app_host: 'beta.optyn.com'
   api_welcome_message: 'Optyn to receive cool offers, new product announcements, giveaways and other cool announcements.'
-  app_base_url: 'http://www.optyn.com'
+  app_base_url: 'http://beta.optyn.com'
+  bucket: 'optynproduction'
   deployment_shared_path: <%= "#{Rails.root}/tmp/" %>
   dashboard_limit: 5
   ttls:
     message_folder: <%= 24.hours %>
     dashboard_count: <%= 1.minutes %>
-
-  #Add the twitter consumer key and twitter consumer secret
-  #Add the facebook app key and facebook app secret
-  #Add the google client key and google client secret
-  #Add the linkedin app id and linkedin client secret   
-  #Add the app_base_url
+  twitter_consumer_key: 'vJiyJWYJZ12Tstri6mixCA'
+  twitter_consumer_secret: 'VXn4l4p84wVSp6RK6n2NAIpkBfTAxJOHemjvAiAzU'
+  facebook_app_key: '585087778190652'
+  facebook_app_secret: '01b7451dffc56a99a02dee21fa0a2e1c'
+  google_client_id: '951432870594-tgl40gk38gsg55cmvgpm3gsb5mvovbfl.apps.googleusercontent.com'
+  google_client_secret: '2wbPrU70K8Je6LTQyRzSIhQ4'
+  linkedin_api_key: 'r5c0m0cjxhr1'
+  linkedin_secret_key: 'A9t9kMCWlkQKjHVj'
   #Add the welcome message for the optyn button
   #Add Bucket name for s3
 
