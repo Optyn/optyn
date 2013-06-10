@@ -70,8 +70,16 @@ module Optyn
 
     config.generators do |g|
       g.template_engine :haml
-
     end
+
+    #Don't enforce ssl for the homepage and cache flushing for now...
+    config.middleware.use Rack::SslEnforcer,
+                          :except => [ %r{/$}, %r{/cache/flush$}, %r{/old_index$}, %r{/faq$}, %r{/pricing$}, %r{/merchantfeatures},
+                                       %r{/consumerfeatures$}, %r{/contact$}, %r{/terms$}, %r{/privacy$}, %r{/danacafe$}, %r{/thankyou$},
+                                       %r{/old_index$}],
+                          :ignore => %r{/assets},
+                          :strict => true,
+                          :except_environments => 'development'
   end
 
 end
