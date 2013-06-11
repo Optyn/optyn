@@ -19,6 +19,8 @@ defaults:
   google_client_secret: '2wbPrU70K8Je6LTQyRzSIhQ4'
   linkedin_api_key: 'r5c0m0cjxhr1'
   linkedin_secret_key: 'A9t9kMCWlkQKjHVj'
+  aws_access_key_id: 'AKIAJO7WB66NE2EDUV2Q'
+  aws_secret_access_key: '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'
   #Add the welcome message for the optyn button
   #Add Bucket name for s3
 

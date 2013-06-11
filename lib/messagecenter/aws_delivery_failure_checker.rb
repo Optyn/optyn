@@ -1,9 +1,11 @@
+require File.expand_path('../../../config/initializers/site_config', __FILE__)
+
 module Messagecenter
   class AwsDeliveryFailureChecker
     def self.failure_stats
       sqs = AWS::SQS.new(
-          :access_key_id => 'AKIAJO7WB66NE2EDUV2Q',
-          :secret_access_key => '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'
+          :access_key_id => SiteConfig.aws_access_key_id,
+          :secret_access_key => SiteConfig.aws_secret_access_key
       )
 
       queues = sqs.queues
