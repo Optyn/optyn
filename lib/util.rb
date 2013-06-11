@@ -21,4 +21,30 @@ class Util
     content << "#{"-" * 5} End Error while running #{method_name} task #{"-" * 5}"
     NightlyJobsMailer.announce_failure(content, method_name).deliver
   end
+
+  def self.verify_website_response
+    check_uri_response
+  end
+
+  private
+  def self.check_uri_response
+    begin
+      uri = URI.parse(SiteConfig.app_base_url)
+      host = uri.host
+      port = uri.port
+
+      response = Net::HTTP.start(host, port) { |http|
+        req = Net::HTTP::Get.new("/")
+        http.request(req)
+      }
+
+      response_code = response.code.strip
+      unless response_code == "200"
+        PingMailer.announce_downtime("uri => " + host + " returned status code => " + response_code).deliver
+      end
+
+    rescue Exception => ex
+      PingMailer.announce_downtime("uri => " + host + " Raised Exception => " + ex.to_s).deliver
+    end
+  end
 end
