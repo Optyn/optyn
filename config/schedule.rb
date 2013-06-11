@@ -25,6 +25,10 @@ every :day, :at => "1:30am" do
   rake "geo:fetch_location"
 end
 
+every :day, :at => "2:00am" do
+  rake "pg:backup"
+end
+
 #run nightly jobs
 every :day, :at => "3:00am" do
   runner "Util.nightly_jobs"
