@@ -21,6 +21,7 @@
             %th Street Address 2
             %th City
             %th State
+            %th Zip
             %th Manage
         %tbody
         - unless @locations.blank?
@@ -36,6 +37,8 @@
                 = location.city
               %td
                 = location.state_name
+              %td
+                = location.zip
               %td
                 = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary'
                 = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger'
