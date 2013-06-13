@@ -39,6 +39,8 @@ every '*/30 4-22 * * *' do
   runner "Message.batch_send"
 end
 
-every 3.minutes do
-  runner "Util.verify_website_response"
+unless Rails.env.staging?
+  every 3.minutes do
+    runner "Util.verify_website_response"
+  end
 end
