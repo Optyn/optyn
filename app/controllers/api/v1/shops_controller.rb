@@ -46,12 +46,12 @@ module Api
 													optynLinkContainer.append(optynLink);
 													firstContainer.append(optynLinkContainer);
 
-													var userCountContainer = jQuery('<span />')
-													userCountContainer.attr({id: 'optyn-user-count-container'});
-													var userMessageContainer = jQuery('<strong />')
-													userMessageContainer.append(optynShop.user_count + " " + "user(s) connected");
-													userCountContainer.append(userMessageContainer);
-													firstContainer.append(userCountContainer);
+												  //var userCountContainer = jQuery('<span />')
+												  //userCountContainer.attr({id: 'optyn-user-count-container'});
+													//var userMessageContainer = jQuery('<strong />')
+													//userMessageContainer.append(optynShop.user_count + " " + "user(s) connected");
+													//userCountContainer.append(userMessageContainer);
+													//firstContainer.append(userCountContainer);
 
 													outerContainer.append(firstContainer);
 
