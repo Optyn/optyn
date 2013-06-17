@@ -47,7 +47,7 @@ class SurveyAnswer < ActiveRecord::Base
   end
 
   def self.paginated_users(survey_id, page_number=PAGE, per_page=PER_PAGE)
-    select_distinct_users_and_created.for_survey_with_joins(survey_id).created_backwords.page(page_number).per(per_page)
+    select('DISTINCT(survey_answers.user_id), survey_answers.created_at').for_survey_with_joins(survey_id).created_backwords.page(page_number).per(per_page)
   end
 
 
