@@ -35,16 +35,9 @@ class Merchants::AppsController < Merchants::BaseController
 
   def set_report_content #PIVOTAL STORY 51368293
     @optyn_button_stats = true
-    @optyn_impressions = get_optyn_impressions
-    @opt_ins = get_opt_ins_via_button
+    @optyn_impressions = current_shop.button_impression_count.to_i
+    @opt_ins = current_shop.opt_ins_via_button
     @conversion_percent = @opt_ins/@optyn_impressions * 100  rescue 'NA' #Conversion percent (Opt-ins/Optyn impressions * 100)
   end
 
-  def get_optyn_impressions #Optyn button impressions count
-    current_shop.button_impression_count.to_i
-  end
-
-  def get_opt_ins_via_button #Opt-ins through the Optyn button
-    current_shop.connections.where("connected_via LIKE 'Optyn Button'").count
-  end
 end

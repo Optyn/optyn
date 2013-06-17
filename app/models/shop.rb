@@ -171,6 +171,10 @@ class Shop < ActiveRecord::Base
     locations.first rescue nil
   end
 
+  def opt_ins_via_button
+    connections.where("connected_via LIKE 'Optyn Button'").count
+  end
+
   private
   def create_dummy_survey
     unless survey.present?
