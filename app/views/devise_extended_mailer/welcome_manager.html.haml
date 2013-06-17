@@ -3,7 +3,7 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica;sans-serif;"}
+  %body{:height => "100%", :width => "100%", :bgcolor => "#ffffff", :style => "font-family: Helvetica, sans-serif;"}
     = content_for :header do
       Welcome to Optyn
 
@@ -17,14 +17,43 @@
             %table{:style => "padding:15px; max-width:600px; margin:0 auto; display:block;"}
               %tr
                 %td
-                  %h3 Hi #{@manager.name},
-                  %p Welcome to Optyn,
-                  %p Hope you like it.
-
+                  %h3 Welcome to Optyn #{@resource.name}!
+                  %p We are excited to have you and #{@resource.shop.name} on board. The good news is we are ready to get you going.
+                  %h5 Here are some awesome things that Optyn can do for you:
+                  %p
+                    %a{:href => "http://www.optyn.com", :style => "color: #2BA6CB; text-decoration:none; color: #FFF; background-color: #666; padding:10px 16px; font-weight:bold; margin-right:10px; text-align:center; cursor:pointer; display: inline-block;"} Learn More about Optyn
+                  %p Here are some awesome features to look forward to:
                   %p
                     Cheers,
                     %br/
                     The Optyn Team
+                  %table{:width => "100%", :bgcolor => "#ebebeb"}
+                    %tr
+                      %td
+                        %table{:align => "left", :width => "280px", :style => "min-width:279px;float:left;"}
+                          %tr
+                            %td
+                              %h5 Connect with Us:
+                              %p
+                                %a{:href => "http://www.facebook.com/optyn",:bgcolor => "#3B5998", :style => "padding: 3px 7px;font-size:12px;margin-bottom:10px;text-decoration:none;color:#FFF;font-weight:bold;display:block;text-align:center;"} Facebook
+                                %a{:href => "http://www.twitter.com/optyn", :bgcolor => "#1daced", :style => "padding: 3px 7px;font-size:12px;margin-bottom:10px;text-decoration:none;color:#FFF;font-weight:bold;display:block;text-align:center;"} Twitter
+                        %table{:align => "left", :width => "280px", :style => "min-width:279px;float:left;"}
+                          %tr
+                            %td
+                              %h5 Contact Info:
+                              %p
+                                Phone:
+                                %strong 773-828-9462
+                                %br/
+                                Email:
+                                %strong
+                                  %a{:href => "emailto:support@optyn.com"} support@optyn.com
+                                %br/
+                                %a{:href => "http://www.optyn.com"} Knowledge Base
+                                +
+                                %a{:href => "http://www.optyn.com"} How to Get Started
+                        %span.clear
         %td
 
-        = render partial: "shared/mailers/footer"
+    = render partial: "shared/mailers/footer"
+
