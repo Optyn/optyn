@@ -102,6 +102,32 @@
     margin-bottom: 16px;
     width: 95%;
 }
+/* Optyn Button Stats */
+#button_stats {
+  background-color: #FFF;
+  border-radius: 4px;
+  height: auto;
+  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
+  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+  margin-left: 0px;
+}
+#button_stats h3 {
+  padding-left: 10px;
+}
+#button_stats hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+#button_stats .line {
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+#button_stats .line strong {
+  font-size: 18px;
+}
 /* Update Shop Wrapper */
 #update_shop_wrapper {
 

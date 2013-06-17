@@ -1,10 +1,16 @@
-%ul
-  %li
-  Conversion percent:
-  = @conversion_percent 
-  %li
-  Count of opt-ins:
-  = @opt_ins
-  %li
-  Count of impressions:
-  = @optyn_impressions
+#button_stats.span3
+	%h3
+		Your Optyn Stats
+	%hr
+	.line
+		Conversion %:
+		%strong
+			= @conversion_percent 
+	.line
+		Total Opt-ins:
+		%strong
+			= @opt_ins
+	.line
+		Total impressions:
+		%strong
+			= @optyn_impressions
