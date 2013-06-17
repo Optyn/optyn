@@ -441,7 +441,8 @@ class Message < ActiveRecord::Base
 
 
   def canned_from
-    manager.email_like_from
+    #manager.email_like_from
+    %{#{self.shop_name.titleize} via Optyn <email@optyn.com>}
   end
 
   def canned_subject

@@ -1,5 +1,5 @@
 class MerchantMailer < ActionMailer::Base
-  default from: "services@optyn.com"
+  default from: "Optyn.com <services@optyn.com>"
 
   def payment_notification(manager)
     @manager = manager

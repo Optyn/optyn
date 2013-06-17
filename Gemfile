@@ -75,6 +75,7 @@ group :development do
   gem 'rvm-capistrano'
   gem 'rails-erd'
   gem "capistrano-resque", "~> 0.1.0"
+  gem "mailcatcher"
 end
 
 group :development, :test do

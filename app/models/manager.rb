@@ -90,10 +90,6 @@ class Manager < ActiveRecord::Base
     end
   end
 
-  def email_like_from
-    %Q("#{name} <#{email}>")
-  end
-
   def send_welcome_email
     Resque.enqueue(WelcomeMessageSender, :manager, self.id)
   end

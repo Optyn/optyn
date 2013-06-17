@@ -7,10 +7,10 @@ class MessageMailer < ActionMailer::Base
     @message = message
     @message_user = message_user
 
-    mail(to: %Q(#{@message_user.name} <#{@message_user.email}>), subject: @message.personalized_subject(@message_user))
+    mail(to: %Q(#{@message_user.name} <#{@message_user.email}>), from: @message.from, subject: @message.personalized_subject(@message_user))
   end
 
   def error_notification(error_message)
-    mail(to: ["gaurav@optyn.com", "alen@optyn.com"], subject: @message.personalized_subject(@message_user), body: error_message)
+    mail(to: ["gaurav@optyn.com", "alen@optyn.com"], subject: "Error while sending the emal", body: error_message)
   end
 end
