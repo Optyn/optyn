@@ -10,7 +10,8 @@
                 - if @shop.has_logo?
                   = image_tag @shop.logo_location, alt: @shop.name, title: @shop.name
                 - else
-                  = @shop.name
+                  %h3
+                    = @shop.name
               - else
                 %img{:src => "http://development.optyn.com/assets/logo.png"}
 
