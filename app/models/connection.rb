@@ -91,11 +91,7 @@ class Connection < ActiveRecord::Base
   end
 
   def toggle_connection
-    if self.active
-      self.active = false
-    else
-      self.active = true
-    end
+    self.active = !self.active
     self.save
   end
 

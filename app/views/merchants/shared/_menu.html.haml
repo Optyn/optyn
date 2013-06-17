@@ -38,3 +38,6 @@
     %li
       %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+
+  - if @optyn_button_stats.present?
+    = render partial: "merchants/apps/button_stats_report"
