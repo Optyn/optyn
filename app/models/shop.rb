@@ -175,6 +175,14 @@ class Shop < ActiveRecord::Base
     connections.where("connected_via LIKE 'Optyn Button'").count
   end
 
+  def has_logo?
+    logo_img?
+  end
+
+  def logo_location
+    logo_img? ? logo_img_url : nil
+  end
+
   private
   def create_dummy_survey
     unless survey.present?
@@ -226,6 +234,4 @@ class Shop < ActiveRecord::Base
   def assign_embed_code(app)
     app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
   end
-
-  
 end
