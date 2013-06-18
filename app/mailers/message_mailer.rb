@@ -6,7 +6,7 @@ class MessageMailer < ActionMailer::Base
   def send_announcement(message, message_user)
     @message = message
     @message_user = message_user
-
+    @shop = @message.manager.shop
     mail(to: %Q(#{@message_user.name} <#{@message_user.email}>), from: @message.from, subject: @message.personalized_subject(@message_user))
   end
 

@@ -142,6 +142,14 @@ class Merchants::MessagesController < Merchants::BaseController
     render json: {response_email_fields: render_to_string(partial: "merchants/shared/messages/response_email_fields", locals: {parent_message: parent_message})}
   end
 
+  #pivotal story 51368113
+  def report 
+    @message = Message.find_by_uuid(params[:id])
+    @intended_recipients = @message.intended_recipients
+    @actual_recipients = @message.actual_recipients
+    @opt_outs = @message.opt-outs
+  end
+
   private
   def populate_message_type
     @message_type = Message.fetch_template_name(params[:message_type])
@@ -215,4 +223,5 @@ class Merchants::MessagesController < Merchants::BaseController
     message.save_draft
     parent_message
   end
+
 end

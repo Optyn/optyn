@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612175205) do
+ActiveRecord::Schema.define(:version => 20130617114344) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(:version => 20130612175205) do
     t.string   "uuid"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+    t.boolean  "opt_out"
   end
 
   add_index "message_users", ["message_id", "added_individually"], :name => "index_message_users_on_message_id_and_added_individually"

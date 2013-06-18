@@ -349,6 +349,18 @@ class Message < ActiveRecord::Base
     first_response_child.uuid rescue nil
   end
 
+  def intended_recipients
+    
+  end
+
+  def actual_recipients
+    
+  end
+
+  def opt_outs
+    
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)

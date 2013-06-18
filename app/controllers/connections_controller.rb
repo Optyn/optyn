@@ -1,7 +1,7 @@
 class ConnectionsController < BaseController
   include DashboardCleaner
 
-  before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect]
+  before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect, :removal_confirmation]
   around_filter :flush_new_connections, only: [:add_connection, :connect]
   around_filter :flush_recommended_connections, only: [:add_connection, :connect]
   around_filter :flush_disconnected_connections, only: [:disconnect, :add_connection]
@@ -59,6 +59,10 @@ class ConnectionsController < BaseController
     end
 
     @connection.update_attribute(:active, false)
+    if params[:mu].present?
+      @message_user = MessageUser.find(params[:mu])
+      @message_user.update_attribute(:opt_out, true)
+    end
     @flush = true
     redirect_to(params[:return_to] || dropped_connections_path, notice: "Connection with #{@shop.name} successfully deactivated.")
   end

@@ -22,6 +22,7 @@
                     - @target_blank = true
                     - @email_survey = true
                     = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
+                    = link_to 'Opt out', removal_confirmation_connection_path(@shop.identifier, :params => {:mu => @message_user})
 
     = render partial: "shared/mailers/footer"
 

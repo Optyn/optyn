@@ -82,6 +82,7 @@ Optyn::Application.routes.draw do
       get 'shop'
       put 'disconnect', as: :disconnect
       post 'connect',   as: :connect
+      get 'removal_confirmation'
     end
   end
 

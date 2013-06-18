@@ -32,9 +32,9 @@ class MessagesController < BaseController
     if !@message_user.blank? && !@message_user.is_read
       @flush = true
       @message_user.update_attribute(:is_read, true)
-
       populate_user_folder_count(true)
     end
+    @shop = @message.manager.shop
   end
 
   def move_to_inbox

@@ -1,0 +1,9 @@
+#consumer
+  .container
+    = render partial: "shared/menu"
+    .span8   
+      
+      Are you sure you want to opt out???
+
+      %br
+      = link_to "Opt-out?", disconnect_connection_path(@shop.identifier, :params => {:mu=>params[:mu]}), class: 'btn-primary btn', method: :put
