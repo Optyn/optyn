@@ -4,7 +4,6 @@
       %th= check_box_tag :select, '', false, class: 'select-all'
       %th Campaign Name
       %th Name
-      %th= second_name_label_text(nil)
       %th Last Updated
       %th Report
 
@@ -18,8 +17,6 @@
             = message_type_title(message)
           %td.show-link
             = message.name
-          %td.show-link
-            = message.second_name
           %td.show-link
             = formatted_message_form_datetime(message, 'updated_at')
           %td.show-link-address.display-none

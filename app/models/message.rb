@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread
 
-  attr_accessible :label_ids, :name, :second_name, :send_immediately
+  attr_accessible :label_ids, :name, :send_immediately
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
@@ -33,7 +33,6 @@ class Message < ActiveRecord::Base
   after_create :assign_parent_state_if
 
   validates :name, presence: true
-  validates :second_name, presence: true
   validates :subject, presence: true
   validate :send_on_greater_by_hour
   validate :validate_child_message

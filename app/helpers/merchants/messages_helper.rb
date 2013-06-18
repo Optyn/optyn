@@ -77,27 +77,6 @@ module Merchants::MessagesHelper
     "#{greeting_prefix} #{greeting_suffix},"
   end
 
-  def second_name_label_text(message)
-    case
-      when message.instance_of?(CouponMessage)
-        'Coupon Name'
-      when message.instance_of?(SpecialMessage)
-        "Special Name"
-      when message.instance_of?(SaleMessage)
-        'Sale Name'
-      when message.instance_of?(GeneralMessage)
-        'Announcement Name'
-      when message.instance_of?(ProductMessage)
-        'Product Name'
-      when message.instance_of?(EventMessage)
-        'Event Name'
-      when message.instance_of?(SurveyMessage)
-        "Survey Name"
-      else
-        'Second Name'
-    end
-  end
-
   def message_rendering_partial(message)
     message.type.underscore
   end
