@@ -489,7 +489,7 @@ class Message < ActiveRecord::Base
   end
 
   def validate_date_time(attr_name, attr_name_message)
-    unless self.send(attr_name.to_sym).blank?
+    if self.send(attr_name.to_sym).present?
       begin
         Date.parse(self.send(attr_name.to_sym).to_s)
       rescue

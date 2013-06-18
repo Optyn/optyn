@@ -1,10 +1,11 @@
 class CouponMessage < Message
-  attr_accessible :type_of_discount, :discount_amount, :fine_print, :coupon_code, :content
+  attr_accessible :type_of_discount, :discount_amount, :fine_print, :coupon_code, :content, :ending, :permanent_coupon
 
   validate :validate_ending
   validates :type_of_discount, presence: true
   validate :validate_discount_amount
   validates :content, presence: true
+  validate :validate_ending
 
   private
   def validate_discount_amount

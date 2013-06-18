@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618192714) do
+ActiveRecord::Schema.define(:version => 20130618203752) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20130618192714) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.integer  "survey_id"
+    t.boolean  "permanent_coupon"
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"

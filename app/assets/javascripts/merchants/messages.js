@@ -12,6 +12,8 @@ function MerchantMessage() {
             this.hookChosen();
             this.hookActionEvent();
             this.hookDateTimePicker();
+            this.hookPermanentCouponSelection();
+            this.hookUncheckPermanentCouponCheck();
         }
 
         if ($('#messages_collection_container').length) {
@@ -74,6 +76,24 @@ function MerchantMessage() {
 
             }
         });
+    };
+
+    this.hookPermanentCouponSelection = function(){
+        $('body').on('change', '#message_permanent_coupon', function(){
+            if($(this).is(":checked")){
+                $('#message_ending').val('');
+            }
+        });
+    };
+
+    this.hookUncheckPermanentCouponCheck = function(){
+        if($('#message_permanent_coupon').length){
+            window.setInterval(function(){
+                if($('#message_ending').val().length){
+                    $('#message_permanent_coupon').attr('checked', false);
+                }
+            }, 500);
+        }
     };
 
     this.hookCheckUncheckAll = function () {

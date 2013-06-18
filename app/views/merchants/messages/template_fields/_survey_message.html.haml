@@ -8,8 +8,6 @@
 
 = hidden_field_tag :edit_child_location, ""
 
-= render partial: 'merchants/shared/messages/fine_print', locals: {f: f, fine_print_verbiage: ''}
-
 #response_message_section
   = render partial: 'merchants/shared/messages/response_email_fields', locals: {parent_message: @message}
 

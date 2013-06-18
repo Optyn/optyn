@@ -32,6 +32,14 @@
   .controls
     = f.text_field :coupon_code
 
+= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration"}
+
+.control-group
+  .controls
+    %label.checkbox
+      = f.check_box(:permanent_coupon)
+      This coupon does not expire
+
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
 fine_print_verbiage: 'You can use this to say things like 1 per customer or One Per order. The less limitations the better.'}
 
