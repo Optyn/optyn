@@ -147,7 +147,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.find_by_uuid(params[:id])
     @intended_recipients = @message.intended_recipients
     @actual_recipients = @message.actual_recipients
-    @opt_outs = @message.opt-outs
+    @opt_outs = @message.opt_outs
   end
 
   private

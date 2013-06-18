@@ -1,0 +1,29 @@
+#title_header
+  %h3
+    Messagecenter
+/Flash Notice
+= display_flash_message
+/Main Body
+#merchants
+  .container
+    = render partial: "merchants/shared/menu"
+
+    .span8
+      %h3
+        = 'Message stats for "' + @message.name + ' "'
+      %hr/
+
+    .span8
+      %ul
+        %li
+        Count of intended recipients:
+        = @intended_recipients
+        %li
+        Count of actual recipients:
+        = @actual_recipients
+        %li
+        Opt-outs from this message:
+        = @opt_outs
+
+
+    

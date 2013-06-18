@@ -25,7 +25,8 @@
           %td.show-link-address.display-none
             = edit_merchants_message_path(message.uuid)
           %td
-            = link_to 'report', report_merchants_message_path(message.uuid)
+            = message.state == 'sent' ? link_to('report', report_merchants_message_path(message.uuid)) : 'NA'
+            
     - else
       %tr
         %td{colspan: '4'}

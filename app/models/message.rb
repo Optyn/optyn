@@ -350,15 +350,17 @@ class Message < ActiveRecord::Base
   end
 
   def intended_recipients
-    
+    fetch_receiver_ids.count
   end
 
   def actual_recipients
-    
+    message_user_ids = message_users.collect(&:id)
+    undelivered_msgs = MessageEmailAuditor.where("delivered is true AND message_user_id in (?)", message_user_ids)
+    undelivered_msgs.count
   end
 
   def opt_outs
-    
+    message_users.where('opt_out is true').count
   end
 
   private
