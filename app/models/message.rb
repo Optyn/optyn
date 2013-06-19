@@ -303,7 +303,7 @@ class Message < ActiveRecord::Base
 
   def percentage_off?
     discount_type = type_of_discount.to_s.to_sym
-    :dollar_off == discount_type
+    !(:dollar_off == discount_type)
   end
 
   def dispatch(creation_errors=[], process_manager=nil)
