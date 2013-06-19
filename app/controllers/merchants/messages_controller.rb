@@ -98,6 +98,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def show
     @message = Message.find_by_uuid(params[:id])
+    @shop = @message.shop
   end
 
   def launch
