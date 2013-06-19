@@ -462,7 +462,7 @@ class Message < ActiveRecord::Base
     if self.instance_of?(GeneralMessage)
       "#{shop.name}, wants to make sure you hear the latest.."
     elsif self.instance_of?(CouponMessage)
-      "{{Customer Name}}, Here's a Coupon for #{shop.name}!"
+      "{{Customer Name}}, here's a Coupon for #{shop.name}!"
     elsif self.instance_of?(EventMessage)
       "#{shop.name} invites you to an event!"
     elsif self.instance_of?(ProductMessage)
