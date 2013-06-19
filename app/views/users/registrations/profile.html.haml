@@ -16,12 +16,14 @@
             = f.label :Gender
             = f.radio_button :gender,'m'
             = "Male"
-            = f.radio_button :gender,'f',:checked=>true
+            = f.radio_button :gender,'f',:checked => @user.gender.blank? || @user.gender == 'f'
             = "Female"
             %br/
             %br/
             = f.label :Date_Of_Birth
-            = f.text_field :birth_date , :class=>"datepicker"
+            = f.text_field :birth_date, value: (human_date(resource.birth_date) rescue nil), :class => "datepicker"
+            %span.inline-help
+              (mm/dd/yyyy)
             %br/
             = f.label :Office_Zip_Code
             = f.text_field :office_zip_code
