@@ -32,7 +32,7 @@ class ConnectionsController < BaseController
             render :json => {:success => false, :success_text => @connection.connection_status, :error_message => "Connection failed"}
           end
         else
-          @connection = current_user.connections.new(:shop_id => @shop.id)
+          @connection = current_user.connections.new(:shop_id => @shop.id, :connected_via => Connection::CONNECTED_VIA_WEBSITE)
           if @connection.save
             @flush = true
             followed=@connection.active
@@ -76,6 +76,7 @@ class ConnectionsController < BaseController
     end
 
     @connection.active = true
+    @connection.connected_via = Connection::CONNECTED_VIA_TYPES.include?(params[:via]) ? params[:via] : Connection::CONNECTED_VIA_WEBSITE
     @flush = true
     @connection.save
     redirect_to(params[:return_to] || connections_path, notice: "Connection with #{@shop.name} successfully created.")

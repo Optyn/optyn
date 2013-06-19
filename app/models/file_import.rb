@@ -56,7 +56,7 @@ class FileImport < ActiveRecord::Base
         connection = Connection.find_by_shop_id_and_user_id(shop.id, user.id) || Connection.new(shop_id: shop.id, user_id: user.id)
         if connection.new_record?
           connection.active = true
-          connection.connected_via = 'Import'
+          connection.connected_via = Connection::CONNECTED_VIA_IMPORT
           counters[:connection_creation] += 1
         else
           counters[:existing_connection] += 1

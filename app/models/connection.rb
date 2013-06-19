@@ -1,4 +1,10 @@
 class Connection < ActiveRecord::Base
+  CONNECTED_VIA_WEBSITE = 'Website'
+  CONNECTED_VIA_DASHBOARD = 'Optyn Dashboard'
+  CONNECTED_VIA_BUTTON = 'Optyn Button'
+  CONNECTED_VIA_IMPORT = 'Import'
+  CONNECTED_VIA_TYPES = [CONNECTED_VIA_BUTTON, CONNECTED_VIA_WEBSITE, CONNECTED_VIA_DASHBOARD, CONNECTED_VIA_IMPORT]
+
   belongs_to :user
   belongs_to :shop
 

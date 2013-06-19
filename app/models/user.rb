@@ -79,8 +79,8 @@ class User < ActiveRecord::Base
       recommend_shops = []
       recommend_shops << Shop.for_zips(zips, connection_shop_ids).limit(limit_count) if zips.present? && connection_shop_ids.present?
 
-      business_ids = user.interests.collect(&:id)
-      recommend_shops << Shop.for_businesses(business_ids, connection_shop_ids).limit(limit_count) if zips.present? && connection_shop_ids.present?
+      business_ids = user.interests.collect(&:business_id)
+      recommend_shops << Shop.for_businesses(business_ids, connection_shop_ids).limit(limit_count) if business_ids.present? && connection_shop_ids.present?
       recommend_shops.flatten.uniq
     end
   end
@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
 
   def make_connection_if!(shop)
     unless connections.for_shop(shop.id).present?
-      connections.create!(user_id: self.id, shop_id: shop.id, connected_via: 'Optyn Button')
+      connections.create!(user_id: self.id, shop_id: shop.id, connected_via: Connection::CONNECTED_VIA_BUTTON)
     end
   end
 

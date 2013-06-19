@@ -172,7 +172,7 @@ class Shop < ActiveRecord::Base
   end
 
   def opt_ins_via_button
-    connections.where("connected_via LIKE 'Optyn Button'").count
+    connections.where("connected_via LIKE '#{Connection::CONNECTED_VIA_BUTTON}'").count
   end
 
   def has_logo?

@@ -138,7 +138,7 @@ users.each_with_index do |user, index|
   end
 
   shops.each do |shop|
-    connection = Connection.create(:user_id => user.id, :shop_id => shop.id, connected_via: 'Website')
+    connection = Connection.create(:user_id => user.id, :shop_id => shop.id, connected_via: Connection::CONNECTED_VIA_WEBSITE)
   end
 end
 
