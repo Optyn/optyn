@@ -5,7 +5,7 @@ Optyn::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root to: 'main#index'
-  match 'connections' => 'connections#index', as: :customers_root
+  match 'connections' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
   match 'dashboard' => 'dashboards#index', as: :consumer_dashboard
 

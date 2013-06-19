@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   def require_customer_logged_out
     if user_signed_in?
       flash[:alert] = "You are already logged in"
-      redirect_to customers_root_path
+      redirect_to consumers_root_path
     end
   end
 
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     end
 
     if user_signed_in?
-      return redirect_to(customers_root_path) && false
+      return redirect_to(consumers_root_path) && false
     end
   end
 
@@ -72,10 +72,10 @@ class ApplicationController < ActionController::Base
     if admin_signed_in?
       '/admin'
     elsif user_signed_in?
-      return connections_path if current_user.zip_prompted?
+      return consumers_root_path if current_user.zip_prompted?
       new_user_zip_path
     elsif manager_signed_in?
-      merchants_connections_path
+      merchants_root_path
     end
   end
 end
