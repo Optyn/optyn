@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619183653) do
+ActiveRecord::Schema.define(:version => 20130619194525) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -322,6 +322,7 @@ ActiveRecord::Schema.define(:version => 20130619183653) do
     t.string   "identifier"
     t.string   "time_zone"
     t.integer  "button_impression_count"
+    t.integer  "button_click_count"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true

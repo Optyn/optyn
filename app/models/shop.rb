@@ -105,6 +105,11 @@ class Shop < ActiveRecord::Base
     self.save(validate: false)
   end
 
+  def increment_click_count
+    self.button_click_count = self.button_click_count.to_i + 1
+    self.save(validate: false)
+  end
+
   def generate_oauth_token(options, force=false)
     app = nil
     if force
