@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :permissions_users
 
   #accepts_nested_attributes_for :permission
-  after_create :update_zip_prompted, :create_permission_users, :send_welcome_email
+  after_create :create_permission_users, :send_welcome_email
 
   PER_PAGE = 30
 
@@ -101,10 +101,6 @@ class User < ActiveRecord::Base
     connections.active.collect(&:shop_id)
   end
 
-  def zip_prompted?
-    zip_prompted
-  end
-
   def password_required?
     return false if skip_password.present? && skip_password
 
@@ -119,27 +115,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def update_zip_prompted(force=false)
-    if home_zip_code.present? || office_zip_code.present? || force
-      self.zip_prompted = true
-      save!(validate: false)
-    end
-  end
-
   def create_permission_users
     Permission.all.each do |permission|
       PermissionsUser.create(user_id: self.id, permission_id: permission.id, action: true)
-    end
-  end
-
-  def create_or_update_zips(attrs={})
-    assign_office_zip_code(attrs)
-    assign_home_zip_code(attrs)
-    if self.errors.has_key?(:home_zip_code) || self.errors.has_key?(:home_zip_code)
-      false
-    else
-      zip_prompted = true
-      save(:validate => false)
     end
   end
 

@@ -72,8 +72,7 @@ class ApplicationController < ActionController::Base
     if admin_signed_in?
       '/admin'
     elsif user_signed_in?
-      return consumers_root_path if current_user.zip_prompted?
-      new_user_zip_path
+      consumers_root_path
     elsif manager_signed_in?
       merchants_root_path
     end

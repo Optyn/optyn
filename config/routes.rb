@@ -58,8 +58,6 @@ Optyn::Application.routes.draw do
     get '/account' => 'users/registrations#edit', :as => :edit_user_registration
     put '/account' => 'users/registrations#update'
     delete '/account' => 'users/registrations#destroy'
-    get '/zips/new' => 'users/zips#new', :as => :new_user_zip
-    post '/zips' => 'users/zips#create', :as => :user_zips
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
 
