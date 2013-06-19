@@ -12,4 +12,6 @@
                 %a{:href => "http://support.optyn.com", :style => "color:#2BA6CB;"} Support
                 |
                 %a{:href => "http://www.optyn.com", :style => "color:#2BA6CB;"} E-Mail Preferences
+                |
+                = link_to('Unsubscribe', removal_confirmation_connection_path(@shop.identifier, :params => {:mu => @message_user}))
     %td
