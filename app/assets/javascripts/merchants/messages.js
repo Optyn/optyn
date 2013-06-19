@@ -51,13 +51,19 @@ function MerchantMessage() {
         var todaysDate = new Date();
         var sixMonthsSince = new Date(new Date(todaysDate).setMonth(todaysDate.getMonth() + 3));
 
-        $('.date-time-picker').datetimepicker({
+        $('.date-picker').datetimepicker({
+            language: 'en',
+            startDate: new Date(),
+            endDate: sixMonthsSince,
+            pickTime: false
+        });
+
+        $('.time-picker').datetimepicker({
             language: 'en',
             pick12HourFormat: true,
             pickSeconds: false,
-            startDate: new Date(),
-            endDate: sixMonthsSince
-        })
+            pickDate: false
+        });
     };
 
     this.hookCollectionSubmission = function () {

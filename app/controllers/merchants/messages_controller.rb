@@ -6,6 +6,7 @@ class Merchants::MessagesController < Merchants::BaseController
   before_filter :message_editable?, only: [:edit, :update]
   before_filter :message_showable?, only: [:show]
   before_filter :populate_manager_folder_count
+  before_filter :merge_end_date_time, only: [:create, :update]
 
   helper_method :registered_action_location
 
@@ -224,6 +225,12 @@ class Merchants::MessagesController < Merchants::BaseController
     message.parent_id = parent_message.id
     message.save_draft
     parent_message
+  end
+
+  def merge_end_date_time
+    if params[:end_date].present? || params[:end_time].present?
+      params[:message][:ending] = params[:ending_date].to_s + params[:ending_time].to_s
+    end
   end
 
 end

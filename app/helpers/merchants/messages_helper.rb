@@ -4,6 +4,18 @@ module Merchants::MessagesHelper
      formatted_message_form_datetime(message, 'send_on')
   end
 
+  def formatted_message_form_date(message, message_attr)
+    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d')
+  rescue
+    ""
+  end
+
+  def formatted_message_form_time(message, message_attr)
+    message.send(message_attr.to_s.to_sym).strftime('%I:%M %p')
+  rescue
+    ""
+  end
+
   def formatted_message_form_datetime(message, message_attr)
     message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p')
   rescue
