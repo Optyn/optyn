@@ -35,7 +35,7 @@ class Connection < ActiveRecord::Base
   scope :for_shop_in_time_range, ->(shop_id, start_timestamp, end_timestamp) { for_shop(shop_id).time_range(start_timestamp, end_timestamp) }
 
   def self.shops_connections(shop_id)
-    for_shop(shop_id).includes_user_and_permissions
+    for_shop(shop_id).includes_user_and_permissions.latest_updates
   end
 
   def self.shop_connections_count_total(shop_id, force = false)
