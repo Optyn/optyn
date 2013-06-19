@@ -1,6 +1,8 @@
 .row
   %p
-    == #{@message.shop_name} is treating you with a #{message_discount_type_text(@message)} off coupon. Here are the details:
+    == #{@message.shop_name} is treating you with a #{message_discount_type_text(@message)} off coupon. 
+  %p  
+    Here are the details:
   %p
     %strong Coupon Name:
     = @message.name
@@ -14,9 +16,10 @@
     = render partial: "shared/messages/fine_print"
 
 
-  /TODO QRCODE IMAGE HERE...ITS MORE SORT OF A QUESTION
-  %h3
-    = @message.coupon_code
+  /TODO QRCODE IMAGE WILL COME HERE LATER
+  %p{:style => "text-align:center;"}
+    %h1
+      = @message.coupon_code
 
 .row
   %strong How to Redeem:
@@ -27,7 +30,7 @@
     == How awesome is that? Go ahead and hurry before it expires on #{formatted_message_form_datetime(@message, 'ending')}.
 
   %p
-    You can also share this coupon with your friends. Share via Fb | Tw.
+    You can also share this coupon with your friends. Share via Facebook or Twitter.
 
   %p
     == Can't View this Coupon? #{link_to('Click here', "", onclick: "Coming Soon")} to view it in your Account.

@@ -1,11 +1,11 @@
 .row
   %p
-    == #{@message.shop_name} is inviting you for a special #{@message.name}.
+    == #{@message.shop_name} is inviting you for to a special #{@message.name}.
 
   %p
     %strong Details:
     = render partial: "shared/messages/content"
 
   %p
-    %strong RSVP:
+    %strong RSVP Directions:
   = simple_format(@message.rsvp)

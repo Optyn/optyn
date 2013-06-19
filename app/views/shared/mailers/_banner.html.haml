@@ -5,12 +5,12 @@
       %div{:style => "max-width:600px;margin:0 auto;display:block;"}
         %table{:style => 'width:100%; background-color:#1791c0;'}
           %tr
-            %td{:style => "padding:15px;"}
+            %td{:style => "padding-top:10px;padding-bottom:10px;"}
               - if @shop_logo
                 - if @shop.has_logo?
                   = image_tag @shop.logo_location, alt: @shop.name, title: @shop.name
                 - else
-                  %h3
+                  %h3{:style => "color:white;"}
                     = @shop.name
               - else
                 %img{:src => "http://development.optyn.com/assets/logo.png"}
