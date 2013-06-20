@@ -3,7 +3,9 @@
     = render partial: "shared/menu" if current_user.present?
     .span8   
       
-      Are you sure you want to opt out???
+      Are you sure you want to Opt-out of message from
+      = @shop.name
+      ?
 
       %br
-      = link_to "Opt-out?", opt_out_connection_path(@shop.identifier, :params => {:mu=>params[:mu]}), class: 'btn-primary btn', method: :put
+      = link_to "Opt-out?", opt_out_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid)), class: 'btn-primary btn', method: :put
