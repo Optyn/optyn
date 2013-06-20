@@ -234,3 +234,9 @@ function MerchantMessage() {
         });
     };
 }
+
+$(document).ready(function(){
+   $(".open-reports").click(function(){ 
+     $('#reportDialog').modal('show');
+   });
+});
