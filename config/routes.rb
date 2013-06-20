@@ -80,6 +80,7 @@ Optyn::Application.routes.draw do
       put 'disconnect', as: :disconnect
       post 'connect',   as: :connect
       get 'removal_confirmation'
+      put 'opt_out'
     end
   end
 

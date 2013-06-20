@@ -1,10 +1,11 @@
 class ConnectionsController < BaseController
   include DashboardCleaner
 
-  before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect, :removal_confirmation]
+  before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect]
   around_filter :flush_new_connections, only: [:add_connection, :connect]
   around_filter :flush_recommended_connections, only: [:add_connection, :connect]
   around_filter :flush_disconnected_connections, only: [:disconnect, :add_connection]
+  skip_before_filter :authenticate_user!, :only => [:removal_confirmation, :opt_out]
 
   def index
     @connections = current_user.active_connections(params[:page])
@@ -59,10 +60,6 @@ class ConnectionsController < BaseController
     end
 
     @connection.update_attribute(:active, false)
-    if params[:mu].present?
-      @message_user = MessageUser.find(params[:mu])
-      @message_user.update_attribute(:opt_out, true)
-    end
     @flush = true
     redirect_to(params[:return_to] || dropped_connections_path, notice: "Connection with #{@shop.name} successfully deactivated.")
   end
@@ -80,6 +77,27 @@ class ConnectionsController < BaseController
     @flush = true
     @connection.save
     redirect_to(params[:return_to] || connections_path, notice: "Connection with #{@shop.name} successfully created.")
+  end
+
+  def opt_out
+    @shop = Shop.find_by_identifier(params[:id])
+    @message_user = MessageUser.find(params[:mu])
+    @connection = @message_user.user.connections.active.find_by_shop_id(@shop.id)
+
+    @connection.update_attribute(:active, false)
+    @message_user.update_attribute(:opt_out, true)
+    @flush = true
+
+    return_path = user_logged_in? ? dropped_connections_path : root_path
+    redirect_to( return_path, notice: "Connection with #{@shop.name} successfully deactivated.")
+  rescue
+    flash[:alert] = "Sorry could not disconnect you from this store. Please try again a little later." &&
+          redirect_to(params[:return_to] || connections_path) &&
+          return
+  end
+
+  def removal_confirmation
+    @shop = Shop.find_by_identifier(params[:id])
   end
 
   private
