@@ -1,17 +1,31 @@
 module Api
-	module V1
-		class ShopsController < ApplicationController
-			respond_to :json, :except => [:button_framework]
+  module V1
+    class ShopsController < ApplicationController
+      respond_to :json, :except => [:button_framework]
 
-			before_filter :fetch_store
+      before_filter :fetch_store
       before_filter :log_impression_count, only: [:details]
-			
-			def button_framework
+
+      skip_before_filter :verify_authenticity_token
+      skip_before_filter :fetch_store, :log_impression_count, only: [:external]
+
+      def external
+        if params[:optyn_domain_name].present?
+          virtual_shop_domain = params[:optyn_domain_name]
+          shop = Shop.search_or_add_by_domain(virtual_shop_domain)
+          render json: {:name => shop['name']}, status: :created
+        else
+          render status: :unprocessable_entity
+        end
+
+      end
+
+      def button_framework
         @application = @shop.oauth_application
 
-				respond_to do |format|
+        respond_to do |format|
 
-					script = %Q(jQuery(document).ready(function(){
+          script = %Q(jQuery(document).ready(function(){
 												jQuery.getJSON('#{SiteConfig.app_base_url}#{api_shop_details_path(app_id: params[:app_id], format: :json)}?callback=?', null, function(data){
 
 													var outerContainer = jQuery('<div />');
@@ -140,30 +154,30 @@ module Api
             						}
         							}
 										)
-					format.any {response.headers['Content-Type'] = "application/javascript";render text: script}
-				end
-			end
+          format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
+        end
+      end
 
-			def details
-				callback_name = params[:callback]
-				response_body =  %Q(
+      def details
+        callback_name = params[:callback]
+        response_body = %Q(
 					var optynShop = #{@shop.api_welcome_details.to_json}
-					#{callback_name}(optynShop);
+        #{callback_name}(optynShop);
 				)
 
-				render text: response_body
-			end
+        render text: response_body
+      end
 
-			private
-			def fetch_store
-				@shop = Shop.by_app_id(params[:app_id].to_s)
+      private
+      def fetch_store
+        @shop = Shop.by_app_id(params[:app_id].to_s)
 
-				head :unauthorized and false unless @shop.present?
+        head :unauthorized and false unless @shop.present?
       end
 
       def log_impression_count
         @shop.increment_impression_count
       end
-		end
-	end
+    end
+  end
 end

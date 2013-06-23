@@ -14,7 +14,7 @@ class Shop < ActiveRecord::Base
   has_many :labels, dependent: :destroy
 
   SHOP_TYPES=['local', 'online']
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual
   mount_uploader :logo_img, ImageUploader
 
   validates :name, :presence => true
@@ -54,6 +54,17 @@ class Shop < ActiveRecord::Base
   def self.disconnected_connections(connected_ids)
     return order(:name) if connected_ids.blank?
     disconnected(connected_ids).order(:name)
+  end
+
+  def self.search_or_add_by_domain(domain)
+    sanitized_domain = sanitize_domain(domain)
+    shop = find_by_name(sanitized_domain)
+    unless shop.present?
+      shop = Shop.new(name: sanitized_domain, virtual: true)
+      shop.save(validate: false)
+    end
+
+    shop
   end
 
   def shop
@@ -171,7 +182,6 @@ class Shop < ActiveRecord::Base
     self.connections.where(:user_id => user.id)
   end
 
-    
   def first_location
     locations.first rescue nil
   end
@@ -189,28 +199,38 @@ class Shop < ActiveRecord::Base
   end
 
   private
+  def self.sanitize_domain(domain_name)
+    domain_name.gsub(/(https?:\/\/)?w{3}\./, "")
+  end
+
   def create_dummy_survey
-    unless survey.present?
-      dummy_survey = Survey.new
-      dummy_survey.shop_id = self.id
-      dummy_survey.add_canned_questions
-      dummy_survey.save(validate: false)
-      dummy_survey
-    else
-      survey
+    unless self.virtual?
+      unless survey.present?
+        dummy_survey = Survey.new
+        dummy_survey.shop_id = self.id
+        dummy_survey.add_canned_questions
+        dummy_survey.save(validate: false)
+        dummy_survey
+      else
+        survey
+      end
     end
   end
 
   def create_select_all_label
-    label = Label.new(shop_id: self.id, name: Label::SELECT_ALL_NAME)
-    label.active = false
-    label.save
+    unless self.virtual?
+      label = Label.new(shop_id: self.id, name: Label::SELECT_ALL_NAME)
+      label.active = false
+      label.save
+    end
   end
 
   def assign_identifier
-    if self.identifier.blank?
-      self.identifier = self.name.parameterize
-      self.save(validate: false)
+    unless self.virtual?
+      if self.identifier.blank?
+        self.identifier = self.name.parameterize
+        self.save(validate: false)
+      end
     end
   end
 

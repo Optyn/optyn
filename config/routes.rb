@@ -78,7 +78,7 @@ Optyn::Application.routes.draw do
     member do
       get 'shop'
       put 'disconnect', as: :disconnect
-      post 'connect',   as: :connect
+      post 'connect', as: :connect
       get 'removal_confirmation'
       put 'opt_out'
     end
@@ -110,6 +110,7 @@ Optyn::Application.routes.draw do
     scope module: :v1 do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_framework.js', to: 'shops#button_framework'
+      post 'shop/external', to: 'shops#external'
       match 'user', to: 'users#show', as: :user_profile
       get '/login', to: 'oauth#login', as: :login
       get '/connection', to: 'oauth#connection', as: :connection

@@ -13,7 +13,7 @@ module ConnectionsHelper
 	end
 
   def business_type(shop)
-    shop.stype.titleize
+    shop.stype.titleize rescue "-"
   end
 end
 
