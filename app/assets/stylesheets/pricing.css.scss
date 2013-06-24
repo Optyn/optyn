@@ -365,3 +365,7 @@ body .modal-footer .startbtn:hover{
 	font-weight: bold;
 }
 
+#pricing-table tr {
+	td {background-color: transparent;}
+	&.selected td {background-color: #e4e3e3;}
+}
