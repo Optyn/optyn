@@ -12,7 +12,7 @@
                 %a{:href => "http://support.optyn.com", :style => "color:#2BA6CB;"} Support
                 |
                 %a{:href => "http://www.optyn.com", :style => "color:#2BA6CB;"} E-Mail Preferences
-                - if @message.present?
+                - if @message.present? && @message_user.present?
                   |
                   = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}")
     %td

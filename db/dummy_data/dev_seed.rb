@@ -120,6 +120,7 @@ shops = Shop.all
 shops.each do |shop|
   survey = shop.survey
   survey.title = shop.name + " questionaire"
+  survey.ready = true
   survey.save!
   survey.reload
 end
