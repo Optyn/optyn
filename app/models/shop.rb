@@ -198,6 +198,10 @@ class Shop < ActiveRecord::Base
     logo_img? ? logo_img_url : nil
   end
 
+  def active_connections
+    connections.where('active IS TRUE')
+  end
+
   private
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "")
