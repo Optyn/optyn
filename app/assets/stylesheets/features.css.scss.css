@@ -12,7 +12,7 @@
 	margin-top: 30px;
 }
 #consumer_features .main .copy {
-	padding-left: 10px;
+	padding-left: 100px;
 }
 #consumer_features .main .copy h3 {
 	color: #86c440;
@@ -35,8 +35,7 @@
 	margin-top: 20px;
 }
 #consumer_features .features .feature .copy {
-	padding-left: 20px;
-	padding-top: 5px;
+	padding-left: 60px;
 }
 #consumer_features .features .feature .copy h3 {
 	color: #304d58;
@@ -302,4 +301,45 @@
 	}
 }
 
-
+#consumer_features .image {
+}
+#consumer_features .cd-control {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+#consumer_features .cf-optin {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -1039px;
+}
+#consumer_features .cd-ctrl {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -164px;
+}
+#consumer_features .cf_manage {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -902px;
+}
+#consumer_features .cf_allinone {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -449px;
+}
+#consumer_features .cd_free {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -301px;
+}
+#consumer_features .cf_easy {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -606px;
+}
+#consumer_features .cf_explore {
+	background: url( '/assets/sprite-consumer-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -606px;
+}
