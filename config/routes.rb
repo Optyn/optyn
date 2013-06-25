@@ -195,8 +195,10 @@ Optyn::Application.routes.draw do
     end
   end
 
+  match 'oauth/token', to: "oauth_tokens#create"
   use_doorkeeper do
     controllers :authorizations => 'oauth_authorizations'
+    controllers :tokens => 'oauth_tokens'
   end
 
   match '/:identifier' => 'shops#show', :as => :shop

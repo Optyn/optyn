@@ -86,13 +86,15 @@ module Api
 											});
 											
 											var OAUTHURL    =   '#{SiteConfig.app_base_url}#{oauth_authorization_path}?';
-							        var VALIDURL    =   '#{SiteConfig.app_base_url}/oauth/authorize/'; //Show page url
+							        var VALIDURL    =   '#{SiteConfig.app_base_url}#{oauth_token_path}'; //Show page url
 							        var SCOPE       =   '#{SiteConfig.app_base_url}#{api_user_profile_path}'; //Need to find out what this is used for?
 							        var CLIENTID    =   '#{@shop.app_id}';
+                      var CLIENTSECRET =  '#{@shop.secret}'
 							        var REDIRECT    =   '#{@shop.redirect_uri}';
-							        var TYPE        =   'token';
-							        //+ 'scope=' + SCOPE
-							        var _url        =   OAUTHURL  + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
+                      var SCOPE       =   'public'
+							        var TYPE        =   'code';
+
+							        var _url        =   OAUTHURL  + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE + '&scope=' + SCOPE;
                       //alert(_url);
 							        var win = null;
 
@@ -104,10 +106,8 @@ module Api
               								domainUrl = win.location.href.split('?')[0];
                     					if (domainUrl.match(REDIRECT)) {
                       					window.clearInterval(pollTimer);
-                      					var url =   win.location;
-                      					acToken =   gup(url, 'access_token');
-                      					tokenType = gup(url, 'token_type');
-                      					expiresIn = gup(url, 'expires_in');
+                      					var url =   win.location.toString();
+                                acToken = url.split("?")[1].split("=")[1];
                       					win.close();
                       					validateToken(acToken);
                   						}
@@ -117,41 +117,18 @@ module Api
       								}
 
         							function validateToken(token) {
-            						jQuery.ajax({
-                					url: VALIDURL + token + ".json",
-                					data: null,
-                					success: function(data){  
-                    				getUserInfo();
-                    				loggedIn = true;
-                					},  
-                					dataType: "jsonp"  
-            						});
+                        param_obj = {'client_id': CLIENTID, 'client_secret': CLIENTSECRET, 'code': token, 'grant_type': 'authorization_code', 'redirect_uri': REDIRECT}
+            						jQuery.getJSON((VALIDURL + "?callback=?&" + $.param(param_obj)), function(data){
+                          parsed_data = JSON.parse(data);
+                          accessToken = parsed_data;
+                          getUserInfo(parsed_data.access_token);
+                        });
         							}
 
-        							function getUserInfo() {
-            						jQuery.ajax({
-                					url: '#{SiteConfig.app_base_url}#{api_user_profile_path}?access_token=' + acToken,
-                					data: null,
-                					success: function(resp) {
-                    				user    =   resp;
-                    				jQuery('#optyn-first-container').text('Welcome ' + user.name + "!");
-                					},
-                					dataType: "jsonp"
+        							function getUserInfo(token) {
+            						jQuery.getJSON('#{SiteConfig.app_base_url}#{api_user_profile_path}?callback=?&access_token=' + token, function(user){
+                    		  jQuery('#optyn-first-container').text('Welcome ' + user.name + "!");
             						});
-        							}
-
-        							//credits: http://www.netlobo.com/url_query_string_javascript.html
-        							function gup(url, name) {
-            						name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-            						var regexS = "[\\#&]"+name+"=([^&#]*)";
-            						var regex = new RegExp( regexS );
-            						var results = regex.exec( url );
-            						if( results == null ){
-                					return "";
-            						}
-            						else{
-                					return results[1];
-            						}
         							}
 										)
           format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
