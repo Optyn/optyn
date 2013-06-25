@@ -116,7 +116,7 @@
 	margin-top: 30px;
 }
 #merchant_features .main .copy {
-	padding-left: 10px;
+	padding-left: 100px;
 }
 #merchant_features .main .copy h3 {
 	color: #86c440;
@@ -139,8 +139,7 @@
 	margin-top: 20px;
 }
 #merchant_features .features .feature .copy {
-	padding-left: 20px;
-	padding-top: 5px;
+	padding-left: 60px;
 }
 #merchant_features .features .feature .copy h3 {
 	color: #304d58;
@@ -342,4 +341,60 @@
 	background: url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
 	background-position: 0 -606px;
+}
+
+#merchant_features .mf_free {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -576px;
+}
+#merchant_features .mf_versatile {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -1479px;
+}
+#merchant_features .mf_capture {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -148px;
+}
+#merchant_features .mf_auto {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+#merchant_features .mf_insights {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -888px;
+}
+#merchant_features .mf_segment {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -1334px;
+}
+#merchant_features .mf_choice {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -294px;
+}
+#merchant_features .mf_engage {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -437px;
+}
+#merchant_features .mf_hasslefree {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -740px;
+}
+#merchant_features .mf_pricing {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -1186px;
+}
+#merchant_features .mf_more {
+	background: url( '/assets/sprite-merchant-features.png' );
+	background-repeat: no-repeat;
+	background-position: 0 -1040px;
 }
