@@ -22,11 +22,15 @@ class Users::PasswordsController < Devise::PasswordsController
 
   def user_logged_in_through_social
     if @klass == User
-      set_logged_in_through_social_message
-      redirect_to new_user_password_path if @user.authentications.present?
+      if @user.present? && @user.authentications.present?
+        set_logged_in_through_social_message
+        redirect_to new_user_password_path
+      end
     elsif @klass == Manager
-      set_logged_in_through_social_message
-      redirect_to new_user_password_path if @manager.authentications.present?
+      if @manager.present? && @manager.authentications.present?
+        set_logged_in_through_social_message
+        redirect_to new_user_password_path
+      end
     end
   end
 
