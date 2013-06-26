@@ -1,26 +1,26 @@
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-    %img{:src => current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
+    = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
   %ul.dropdown-menu
     %li
       %a.active{:href => "dashboard"}
-        %img{:src => "/assets/dropdown_dashicon.png", :float => "left"}
+        = image_tag "/assets/dropdown_dashicon.png", :float => "left"
         My Dashboard
     %li
       %a{:href => inbox_messages_path}
-        %img{:src => "/assets/dropdown_segments.png", :float => "left"}
+        = image_tag "/assets/dropdown_segments.png", :float => "left"
         My Messages
     %li
       %a{:href => "connections"}
-        %img{:src => "/assets/dropdown_manager.png", :float => "left"}
+        = image_tag "/assets/dropdown_manager.png", :float => "left"
         My Connections
     %li
       %a{:href => "segments"}
-        %img{:src => "/assets/dropdown_surveys.png", :float => "left"}
+        = image_tag "/assets/dropdown_surveys.png", :float => "left"
         My Surveys
     %li
       %a{:href => profile_path}
-        %img{:src => "/assets/dropdown_profile.png", :float => "left"}
+        = image_tag "/assets/dropdown_profile.png", :float => "left"
         My Account
     %hr
     %li
