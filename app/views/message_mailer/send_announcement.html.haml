@@ -26,4 +26,4 @@
 
     = render partial: "shared/mailers/footer"
 
-    %img{src: "#{SiteConfig.app_base_url}#{email_read_logger_path(@message_user.encode64_uuid)}", :style => "width: 1px; height: 1px;"}
+    = image_tag "#{SiteConfig.app_base_url}#{email_read_logger_path(@message_user.encode64_uuid)}", :style => "width: 1px; height: 1px;", :alt => ''

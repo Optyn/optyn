@@ -4,39 +4,39 @@
       Hello
     %hr
     %li
-      %a.active{:href => merchants_root_path} 
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Dashboard"}
+      %a.active{:href => merchants_root_path}
+        = image_tag "/assets/menu_icon_dashboard.png", :alt => "Dashboard"
         My Dashboard
     %li
       %a{:href => merchants_messages_path, :alt => "My Messages"}
-        %img{:src => "/assets/menu_icon_messages.png", :alt => "Messages"}
+        = image_tag "/assets/menu_icon_messages.png", :alt => "Messages"
         Message Center
     %li
       %a{:href => "/merchants/connections"}
-        %img{:src => "/assets/menu_icon_connections.png"}
+        = image_tag "/assets/menu_icon_connections.png", :alt => ""
         My Customers
     %li
       %a{:href => merchants_app_path}
-        %img{:src => "/assets/menu_icon_connections.png", :alt => "Your API Button"}
+        = image_tag "/assets/menu_icon_connections.png", :alt => "Your API Button"
         Your Optyn Button
     %li
       %a{:href => merchants_survey_path}
-        %img{:src => "/assets/menu_icon_campaigns.png", :alt => "Surveys"}
+        = image_tag "/assets/menu_icon_campaigns.png", :alt => "Surveys"
         Customer Surveys
     %li
       %a{:href => merchants_survey_survey_answers_path}
-        %img{:src => "/assets/menu_icon_messages.png", :alt => "Segmentation"}
+        = image_tag "/assets/menu_icon_messages.png", :alt => "Segmentation"
         Customer Segmentation
     %li
       %a{:href => merchants_shop_path}
-        %img{:src => "/assets/menu_icon_shop_details.png", :alt => "Your Shop"}
+        = image_tag "/assets/menu_icon_shop_details.png", :alt => "Your Shop"
         Manage Your Shop
     %li
       %a{:href => merchants_file_imports_path}
-        %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Connections"}
+        = image_tag "/assets/menu_icon_dashboard.png", :alt => "Connections"
         Import Users
     %li
-      %img{:src => "/assets/menu_icon_dashboard.png", :alt => "Logout"}
+      = image_tag "/assets/menu_icon_dashboard.png", :alt => "Logout"
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
 
   - if @optyn_button_stats.present?

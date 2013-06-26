@@ -30,7 +30,7 @@
               %span.help-inline (we need your current password to confirm your changes)
             %div
               = f.label :picture
-              %img{:src => current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
+              = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
               %br
               = f.file_field :picture 
               %br

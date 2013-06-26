@@ -136,6 +136,7 @@
 }
 #consumer_dashboard .sprite-img {
   background-image: url( '/assets/sprite.png' );
+  /*background-image: url( <%= asset_path 'sprite.png' %> );*/
   background-repeat: no-repeat;
 }
 #consumer_dashboard #md_new_connections0 {

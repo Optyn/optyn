@@ -4,7 +4,7 @@
   %hr
   .preview-item
     .preview-img
-      %img{:src => "/assets/preview_list_icon.png"}
+      = image_tag "/assets/preview_list_icon.png", :alt => ''
     .preview-text
       %strong Subject:
       %br
@@ -12,7 +12,7 @@
         =@message.subject
   .preview-item
     .preview-img
-      %img{:src => "/assets/preview_time_icon.png"}
+      = image_tag "/assets/preview_time_icon.png", :alt => ''
     .preview-text
       %strong To be sent on:
       %br
@@ -23,7 +23,7 @@
           Message will be sent on the survey submission by the customer
   .preview-item
     .preview-img
-      %img{:src => "/assets/preview_subject_icon.png"}
+      = image_tag "/assets/preview_subject_icon.png", :alt => ''
     .preview-text
       %strong E-mail will be sent to:
       %br

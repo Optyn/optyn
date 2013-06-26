@@ -5,7 +5,7 @@
       %div
         %h3
           Change Your Profile
-          %a.btn{:href => edit_user_registration_path, :style => "float: right"} Change Account Details
+          %a.btn{:href => edit_user_registration_path, :style => "float: right"}Change Account Details
         %hr
         .form
           = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
@@ -32,7 +32,7 @@
             = f.text_field :home_zip_code
             %br/
             = f.label :picture
-            %img{:src => current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"}
+            = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
             = f.file_field :picture 
             %br/
             ="What information should we share with you connections?"
