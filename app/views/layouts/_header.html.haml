@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
       %a.brand{:href => root_path}
-        %img{:alt => "logo", :src => "/assets/logo.png"}/
+        = image_tag "/assets/logo.png", :alt => 'logo'
       .nav-collapse.collapse
         %ul.nav.pull-right
           - unless someone_logged_in? 
