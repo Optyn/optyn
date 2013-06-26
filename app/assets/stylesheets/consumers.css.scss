@@ -134,23 +134,19 @@
   padding-left: 35px;
   min-height: 30px;
 }
-#consumer_dashboard #md_new_connections0 {
+#consumer_dashboard .sprite-img {
   background-image: url( '/assets/sprite.png' );
   background-repeat: no-repeat;
+}
+#consumer_dashboard #md_new_connections0 {
   background-position: 0 -651px;
 }
 #consumer_dashboard #md_connections_week0 {
-  background-image: url( '/assets/sprite.png' );
-  background-repeat: no-repeat;
   background-position: 0 -527px;
 }
 #consumer_dashboard #md_connections_month0 {
-  background-image: url( '/assets/sprite.png' );
-  background-repeat: no-repeat;
   background-position: 0 -403px;
 }
 #consumer_dashboard #md_active_connections0 {
-  background-image: url( '/assets/sprite.png' );
-  background-repeat: no-repeat;
   background-position: 0 -279px;
 }
