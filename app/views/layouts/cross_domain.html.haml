@@ -17,12 +17,12 @@
       .navbar-inner
         .container
           %a.brand{:href => root_path}
-            = image_tag "/assets/logo.png", :alt => "logo", :width => "70px"
+            = image_tag "logo.png", :alt => "logo", :width => "70px"
           %ul.nav.pull-right
             - if user_signed_in?
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  = image_tag "/assets/avatar.png", :alt => "User Avatar"
+                  = image_tag "avatar.png", :alt => "User Avatar"
             - else
               %li.authenticationMsg
                 %span{:style => "color: #fff; font-size: 16px; vertical-align: middle; padding-right: 10px;"}
