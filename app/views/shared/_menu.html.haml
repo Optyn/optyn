@@ -6,24 +6,24 @@
     %hr
     %li
       %a{:href => consumers_root_path}
-        = image_tag "/assets/menu_icon_dashboard.png", :alt => "Dashboard"
+        = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
         My Dashboard
     %li
       %a{:href => inbox_messages_path, :alt => "My Messages"}
-        = image_tag "/assets/menu_icon_messages.png", :alt => "Messages"
+        = image_tag "menu_icon_messages.png", :alt => "Messages"
         My Messages
     %li
       %a{:href => connections_path}
-        = image_tag "/assets/menu_icon_shop_details.png", :alt => "My Connections"
+        = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
         My Connections
     %li
       %a{:href => merchants_survey_path}
-        = image_tag "/assets/menu_icon_campaigns.png", :alt => "My Surveys"
+        = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
         = link_to("My Surveys", segments_path)
     %li
       %a{:href => profile_path}
-        = image_tag "/assets/menu_icon_connections.png", :alt => "My Profile"
+        = image_tag "menu_icon_connections.png", :alt => "My Profile"
         My Account
     %li
-      = image_tag "/assets/menu_icon_dashboard.png", :alt => "Logout"
+      = image_tag "menu_icon_dashboard.png", :alt => "Logout"
       %a{:href => destroy_user_session_path} Logout
