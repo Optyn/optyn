@@ -4,7 +4,7 @@
     = render partial: "merchants/shared/menu"
     .span8.edit_page
       %h3
-        %img{:src => "/assets/edit-account-icon.png"}
+        = image_tag "/assets/edit-account-icon.png", :alt => 'Edit your account'
         Edit Your Account
       .form
         = form_for(resource, :as => resource_name, :url => merchants_manager_registration_path, :html => { :method => :put }) do |f|
