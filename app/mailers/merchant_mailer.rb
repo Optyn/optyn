@@ -29,4 +29,15 @@ class MerchantMailer < ActionMailer::Base
     @error = error
     mail(to: "#{@manager.name} <#{@manager.email}>", subject: "An Error occured while importing users.")
   end
+
+  def notify_passing_free_tier(manager)
+    @manager = manager
+    mail(:to => @manager.email, :subject => "Congratulations!! You have exceeded the FREE tier limit.")
+  end
+
+  def notify_plan_upgrade(manager)
+    @manager = manager
+    @connections = manager.shop.active_connections.count
+    mail(:to => @manager.email, :subject => "Congratulations!! You are growing.")
+  end
 end

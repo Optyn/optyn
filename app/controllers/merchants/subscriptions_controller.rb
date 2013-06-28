@@ -4,7 +4,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   before_filter :require_shop_local_and_inactive, :only => [:upgrade, :subscribe]
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
   def upgrade
-    @plan=Plan.find_by_plan_id("starter")
+    @plan=Plan.starter
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
   end
 
@@ -29,12 +29,13 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def subscribe
     begin 
-      @plan=Plan.find_by_plan_id("starter")
+      @plan=Plan.starter
       @subscription=Subscription.new(params[:subscription])
       customer = Subscription.create_stripe_customer(params)
       @subscription.stripe_customer_token=customer.id
 
       if @subscription.save
+        @subscription.update_attribute(:active, true)
         MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email)).deliver
         flash[:notice]="Payment done successfully"
         redirect_to (session[:return_to] || root_path)

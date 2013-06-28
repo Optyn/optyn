@@ -37,8 +37,8 @@ MessageFolder.create(:name => "Deleted")
 MessageFolder.create!(:name => "Saved")
 MessageFolder.create!(:name => "Discarded")
 
-# #Add some dummy data in the development mode.
-# if Rails.env.development?
-#   dev_data = "#{File.dirname(__FILE__)}/dummy_data/dev_seed.rb"
-#   eval(IO.read(dev_data), binding, dev_data)
-# end
+#Add some dummy data in the development mode.
+if Rails.env.development?
+  dev_data = "#{File.dirname(__FILE__)}/dummy_data/dev_seed.rb"
+  eval(IO.read(dev_data), binding, dev_data)
+end
