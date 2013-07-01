@@ -7,7 +7,7 @@
 #merchants
   .container
     = render partial: "merchants/shared/menu"
-    .span8
+    .span9
       .action-buttons
         = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
         %a.btn{:href => "upgrade"} Your Pricing Plan
