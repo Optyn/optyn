@@ -212,13 +212,13 @@ class Shop < ActiveRecord::Base
 
   def upgrade_plan
     self.subscription.update_plan(Plan.which(self))
-    MerchantMailer.notify_plan_upgrade(shop.manager)
+    MerchantMailer.notify_plan_upgrade(shop.manager).deliver
   end
 
   def self.batch_check_subscriptions
     all.each do |shop|
       if shop.active_connections.count < Plan.starter.max and !shop.is_subscription_active?
-        MerchantMailer.notify_passing_free_tier(shop.manager)
+        MerchantMailer.notify_passing_free_tier(shop.manager).deliver
       elsif shop.tier_change_required?
         shop.upgrade_plan
       end
