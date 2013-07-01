@@ -1,6 +1,4 @@
 class OauthTokensController < Doorkeeper::TokensController
-  ActionController::Metal.send(:include, Airbrake::Rails::ControllerMethods)
-  include ActionController::Rendering
 
   def create
     super
