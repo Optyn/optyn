@@ -12,8 +12,7 @@
 			= link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
 			= render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
 			= render partial: "shared/surveys/markup", locals: {preview: true}
-			.row
-				.actions{:style => "padding-left: 20px;"}
-					= link_to "Show", merchants_survey_path, class: 'btn btn-info'
-					= link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
-					= render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
+			.actions{:style => "margin-top: 20px;"}
+				= link_to "Show", merchants_survey_path, class: 'btn btn-info'
+				= link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
+				= render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
