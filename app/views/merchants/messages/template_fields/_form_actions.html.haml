@@ -4,7 +4,7 @@
       = submit_tag("Save as Draft", name: "save_draft", class: 'btn btn-info')
 
     = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary')
-    = submit_tag("Launch", name: "launch", class: 'btn btn-success')
+    = submit_tag("Launch", name: "launch", class: 'btn btn-success') unless current_shop.disabled?
   - else
     = submit_tag("Save", name: "save_draft", class: 'btn btn-info')
     = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary')

@@ -42,6 +42,7 @@ Optyn::Application.routes.draw do
   devise_scope :user do
     # Sessions
     post '/login' => 'users/sessions#create', :as => :user_session
+    post '/api/login', to: 'users/sessions#create'
     get '/login' => 'users/sessions#new', :as => :new_user_session
     get '/logout' => 'devise/sessions#destroy', :as => :destroy_user_session
 
@@ -53,7 +54,9 @@ Optyn::Application.routes.draw do
 
     # Registrations
     post '/register' => 'users/registrations#create', :as => :user_registration
+    post '/api/register', to: 'users/registrations#create'
     get '/register' => 'users/registrations#new', :as => :new_user_registration
+    get '/api/register', to: 'users/registrations#new'
     get '/account' => 'users/registrations#edit', :as => :edit_user_registration
     put '/account' => 'users/registrations#update'
     delete '/account' => 'users/registrations#destroy'
@@ -110,8 +113,9 @@ Optyn::Application.routes.draw do
     scope module: :v1 do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_framework.js', to: 'shops#button_framework'
-      post 'shop/external', to: 'shops#external'
+      post 'shop', to: 'shops#create'
       match 'user', to: 'users#show', as: :user_profile
+      get 'user/:shop_name/connection_state', to: 'users#connection_state'
       get '/login', to: 'oauth#login', as: :login
       get '/connection', to: 'oauth#connection', as: :connection
       put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
@@ -147,7 +151,7 @@ Optyn::Application.routes.draw do
 
     resource :subscription
     get '/upgrade' => 'subscriptions#upgrade'
-    post '/subscribe' => 'subscriptions#subscribe', as: :subscribe
+    put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
 

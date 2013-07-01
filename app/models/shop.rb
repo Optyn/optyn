@@ -43,7 +43,7 @@ class Shop < ActiveRecord::Base
 
   scope :for_businesses, ->(business_ids, shop_ids) { disconnected(shop_ids).joins_businesses.where(["businesses.id IN (:business_ids)", {business_ids: business_ids}]) }
 
-  after_create :create_dummy_survey, :create_select_all_label, :assign_identifier
+  after_create :create_dummy_survey, :create_select_all_label, :assign_identifier, :create_default_subscription
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
@@ -202,6 +202,30 @@ class Shop < ActiveRecord::Base
     connections.where('active IS TRUE')
   end
 
+  def tier_change_required?
+    self.plan.max < self.active_connections.count
+  end
+
+  def upgrade_plan
+    self.subscription.update_plan(Plan.which(self))
+    MerchantMailer.notify_plan_upgrade(shop.manager)
+  end
+
+  def self.batch_check_subscriptions
+    all.each do |shop|
+      if shop.active_connections.count < Plan.starter.max and !shop.is_subscription_active?
+        MerchantMailer.notify_passing_free_tier(shop.manager)
+      elsif shop.tier_change_required?
+        shop.upgrade_plan
+      end
+    end
+  end
+
+  def disabled?
+    true#(Plan.which(self) != Plan.starter and self.subscription.active) rescue false
+  end 
+
+
   private
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "")
@@ -262,5 +286,9 @@ class Shop < ActiveRecord::Base
 
   def assign_embed_code(app)
     app.embed_code = EmbedCodeGenerator.generate_embed_code(app)
+  end
+
+  def create_default_subscription
+    create_subscription(:plan_id => Plan.starter.id, :active => false)
   end
 end
