@@ -6,6 +6,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     @plan=Plan.starter
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
 
   def edit_billing_info
@@ -36,7 +37,10 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
       if @subscription.save
         @subscription.update_attribute(:active, true)
-        MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email)).deliver
+        amount = customer.subscription.plan.amount
+        conn_count = current_shop.active_connection_count
+        last4 = customer.active_card.last4
+        MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email), amount, conn_count, last4).deliver
         flash[:notice]="Payment done successfully"
         redirect_to (session[:return_to] || root_path)
       else

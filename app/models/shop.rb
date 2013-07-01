@@ -202,6 +202,10 @@ class Shop < ActiveRecord::Base
     connections.where('active IS TRUE')
   end
 
+  def active_connection_count
+    active_connections.count
+  end
+
   def tier_change_required?
     self.plan.max < self.active_connections.count
   end
@@ -222,7 +226,7 @@ class Shop < ActiveRecord::Base
   end
 
   def disabled?
-    true#(Plan.which(self) != Plan.starter and self.subscription.active) rescue false
+    (Plan.which(self) != Plan.starter and !self.subscription.active)# rescue false
   end 
 
 

@@ -28,16 +28,16 @@ module ApplicationHelper
   end
 
   def display_flash_message
-    if (flash_type = fetch_flash_type)
-      content_tag :div, class: "alert #{bootstrap_class_for(flash_type)}" do
-        content = ""
-        content << content_tag(:button, {:type => "button", :class => "close", :'data-dismiss' => "alert"}) do
-          "x"
-        end
-        content << flash[flash_type]
-        content.html_safe
+    flash_type = fetch_flash_type
+    content_tag :div, class: "alert #{bootstrap_class_for(flash_type)}" do
+      content = ""
+      content << content_tag(:button, {:type => "button", :class => "close", :'data-dismiss' => "alert"}) do
+        "x"
       end
-    end
+      content << flash[flash_type]
+      content.html_safe
+    end if flash_type.present?
+    
   end
 
   def fetch_flash_type

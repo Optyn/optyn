@@ -1,8 +1,11 @@
 class MerchantMailer < ActionMailer::Base
   default from: "Optyn.com <services@optyn.com>"
 
-  def payment_notification(manager)
+  def payment_notification(manager, amount, connection_count, card_ending)
     @manager = manager
+    @amount = amount
+    @conn_count = connection_count
+    @last4 = card_ending
     mail(:to => @manager.email, :subject => "Payment Successfull!")
   end
 

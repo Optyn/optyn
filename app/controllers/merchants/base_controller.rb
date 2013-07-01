@@ -22,8 +22,9 @@ class Merchants::BaseController < ApplicationController
   end
 
   def check_connection_count
-    p '-'*80
-    return if current_manager.shop.active_connections.count <= Plan.starter.max
+    Rails.logger.info '-'*80
+    Rails.logger.info current_shop
+    return if current_shop.active_connection_count <= Plan.starter.max
     flash[:alert] = "Please provide your payment details <a href='#{merchants_upgrade_path}'>here</a> in order to continue sending messages/emails." if current_shop.disabled?
   end
 
