@@ -111,20 +111,21 @@ module Api
                               window.clearInterval(pollTimer);
                               var url =   win.location.toString();
                               acToken = url.split("?")[1].split("=")[1];
-                              win.close();
-                              validateToken(acToken);
+                              $(win.document).find('body').html("<h1>Loading....</h1>")
+                              //win.close();
+                              validateToken(acToken, win);
                             }
                           } catch(e) {
                           }
                       }, 500);
                     }
 
-                    function validateToken(token) {
+                    function validateToken(token, win) {
                       param_obj = {'client_id': CLIENTID, 'client_secret': CLIENTSECRET, 'code': token, 'grant_type': 'authorization_code', 'redirect_uri': REDIRECT}
                       jQuery.getJSON((VALIDURL + "?callback=?&" + $.param(param_obj)), function(data){
-                        parsed_data = JSON.parse(data);
-                        accessToken = parsed_data;
-                        getUserInfo(parsed_data.access_token);
+                        win.location = '#{SiteConfig.app_base_url}#{api_connection_path}?access_token=' + data.access_token;
+                        getUserInfo(data.access_token);
+                        //win.close();
                       });
                     }
 
