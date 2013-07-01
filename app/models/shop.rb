@@ -293,6 +293,6 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    create_subscription(:plan_id => Plan.starter.id, :active => false)
+    create_subscription(:plan_id => Plan.starter.id, :active => false) unless shop.virtual
   end
 end
