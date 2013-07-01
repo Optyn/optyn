@@ -6,7 +6,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     session[:omniauth_manager] =nil
     session[:omniauth_user] =true
-    super
+
+    resource = build_resource({})
+    #respond_with resource
+
+    respond_to do |format|
+      format.html{respond_with resource}
+      format.json { render(status: :ok, json: {data: {authenticity_token: form_authenticity_token, error: nil}}) }
+      format.any { render text: "Only HTML and JSON supported" }
+    end
   end
 
   def create
@@ -16,11 +24,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
-        respond_with resource, :location => after_sign_up_path_for(resource)
+        #respond_with resource, :location => after_sign_up_path_for(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
         expire_session_data_after_sign_in!
-        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+        #respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+      end
+
+      respond_to do |format|
+        format.html {respond_with resource, :location => after_sign_up_path_for(resource)}
+        format.json{render(status: :created, json: {data: {user: resource.as_json(only: [:name])}})}
       end
     else
       clean_up_passwords resource
@@ -29,7 +42,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @user = resource
         render "api/v1/oauth/login", layout: 'cross_domain' and return
       end
-      respond_with resource
+
+      respond_to do |format|
+        format.html {respond_with resource}
+        format.json{render(status: :unprocessable_entity, json: {data: {user: resource.as_json(only: [:name, :email]), errors: resource.errors.full_messages.as_json}})}
+      end
     end
   end
 

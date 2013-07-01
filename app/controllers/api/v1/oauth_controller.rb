@@ -14,6 +14,11 @@ module Api
         session[:omniauth_user] = true
         @user_login = User.new
         @user = User.new
+        respond_to do |format|
+          format.html {render(file: 'api/v1/oauth/login')}
+          format.json { render(status: :ok, json: {data: {authenticity_token: form_authenticity_token, error: nil}}) }
+          format.any { render text: "Only HTML and JSON supported" }
+        end
       end
 
       def connection

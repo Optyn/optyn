@@ -11,10 +11,18 @@ module Api
 					resp = "var userInfo = #{current_user.as_json(only: [:name]).to_json};" 
 					resp << "#{params[:callback]}(userInfo);"
 					render text: resp
-				else
-					respond_with current_user.as_json(only: [:name])
+        else
+          render(json: {data: {name: current_user.as_json(only: [:name])}}, status: :ok)
 				end
-			end
+      end
+
+      def connection_state
+        # TODO TO BE IMPLEMENTED
+      end
+
+      def subscribe
+        # TODO TO BE IMPLEMENTED
+      end
 
 			private
 		end
