@@ -232,7 +232,7 @@ class Shop < ActiveRecord::Base
 
   private
   def self.sanitize_domain(domain_name)
-    domain_name.gsub(/(https?:\/\/)?w{3}\./, "")
+    domain_name.gsub(/(https?:\/\/)?w{3}\./, "").downcase
   end
 
   def create_dummy_survey
