@@ -11,6 +11,7 @@ class Connection < ActiveRecord::Base
   attr_accessible :user_id, :shop_id, :active, :connected_via
 
   after_save :check_shop_tier
+  after_create :make_shop_audit_entry
 
   scope :active, where(active: true)
 
@@ -108,6 +109,10 @@ class Connection < ActiveRecord::Base
 
   def check_shop_tier
     self.shop.check_subscription
+  end
+
+  def make_shop_audit_entry
+    self.shop.create_audit_entry("new connection created via #{self.connected_via}")
   end
 
   private

@@ -12,6 +12,7 @@ class Shop < ActiveRecord::Base
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
+  has_many :shop_audits
   has_many :virtual_connections
   has_many :virtual_subscribers, through: :virtual_connections, source: :user
 
@@ -207,7 +208,7 @@ class Shop < ActiveRecord::Base
   end
 
   def active_connection_count
-    101#active_connections.count
+    active_connections.count
   end
 
   def tier_change_required?
@@ -215,8 +216,10 @@ class Shop < ActiveRecord::Base
   end
 
   def upgrade_plan
-    self.subscription.update_plan(Plan.which(self))
+    new_plan = Plan.which(self)
+    self.subscription.update_plan(new_plan)
     MerchantMailer.notify_plan_upgrade(shop.manager).deliver
+    create_audit_entry("subscription updated to plan #{new_plan.name}")
   end
 
   def check_subscription
@@ -235,6 +238,9 @@ class Shop < ActiveRecord::Base
     (Plan.which(self) != Plan.starter and !self.subscription.active)# rescue false
   end 
 
+  def create_audit_entry(message)
+    self.shop_audits.create(:description => message)
+  end
 
   private
   def self.sanitize_domain(domain_name)
@@ -300,5 +306,6 @@ class Shop < ActiveRecord::Base
 
   def create_default_subscription
     create_subscription(:plan_id => Plan.starter.id, :active => false) unless shop.virtual
+    create_audit_entry('subscribed to default/starter plan') unless shop.virtual
   end
 end
