@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :user_labels, dependent: :destroy
   has_many :permissions_users, dependent: :destroy
   has_many :permissions, :through => :permissions_users
+  has_many :virtual_connections
+  has_many :virtual_vendors, through: :virtual_connections, source: :shop
 
   mount_uploader :picture, ImageUploader
 
@@ -122,7 +124,7 @@ class User < ActiveRecord::Base
   end
 
   def make_connection_if!(shop)
-    unless connections.for_shop(shop.id).present?
+    if shop.present? && !connections.for_shop(shop.id).present?
       connections.create!(user_id: self.id, shop_id: shop.id, connected_via: Connection::CONNECTED_VIA_BUTTON)
     end
   end

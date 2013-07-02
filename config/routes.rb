@@ -115,7 +115,8 @@ Optyn::Application.routes.draw do
       get 'shop/button_framework.js', to: 'shops#button_framework'
       post 'shop', to: 'shops#create'
       match 'user', to: 'users#show', as: :user_profile
-      get 'user/:shop_name/connection_state', to: 'users#connection_state'
+      get 'user/connection_state.json', to: 'users#connection_state'
+      post 'user/subscribe.json', to: 'users#subscribe'
       get '/login', to: 'oauth#login', as: :login
       get '/connection', to: 'oauth#connection', as: :connection
       put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions

@@ -8,6 +8,7 @@ module Api
       private
       def map_current_user_to_store
         @shop = current_shop
+        return true if @shop.blank?
 
         @connection = current_user.make_connection_if!(@shop)
       end

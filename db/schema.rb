@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702103930) do
+ActiveRecord::Schema.define(:version => 20130702165458) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -423,5 +423,16 @@ ActiveRecord::Schema.define(:version => 20130702103930) do
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "virtual_connections", :force => true do |t|
+    t.integer  "shop_id"
+    t.integer  "user_id"
+    t.text     "html_content"
+    t.string   "state"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "virtual_connections", ["shop_id", "user_id"], :name => "index_virtual_connections_on_shop_id_and_user_id"
 
 end

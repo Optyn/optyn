@@ -11,14 +11,14 @@ module Api
       skip_before_filter :fetch_store, :log_impression_count, only: [:create, :clear_session]
 
       def create
-        if params[:name].present? && params[:email_frequency].present?
+        if params[:name].present? #&& params[:email_frequency].present?
           virtual_shop_domain = params[:name]
           shop = Shop.search_or_add_by_domain(virtual_shop_domain)
           render(json: {data: {name: shop['name']}}, status: :created)
         else
           errors = []
           errors << ["Shop name cannot be blank"] if params[:name].blank?
-          errors << ["Email Frequency needs to be selected"] if params[:email_frequency].blank?
+          #errors << ["Email Frequency needs to be selected"] if params[:email_frequency].blank?
           render(status: :unprocessable_entity, json: {data: {errors: errors.as_json}})
         end
       end

@@ -12,6 +12,8 @@ class Shop < ActiveRecord::Base
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
+  has_many :virtual_connections
+  has_many :virtual_subscribers, through: :virtual_connections, source: :user
 
   SHOP_TYPES=['local', 'online']
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual
@@ -218,9 +220,9 @@ class Shop < ActiveRecord::Base
   end
 
   def check_subscription
-    if shop.active_connection_count < Plan.starter.max and !shop.is_subscription_active?
+    if !self.virtual && self.active_connection_count < Plan.starter.max and !self.is_subscription_active?
       MerchantMailer.notify_passing_free_tier(shop.manager).deliver
-    elsif shop.tier_change_required?
+    elsif !self.virtual && self.tier_change_required?
       shop.upgrade_plan
     end
   end
