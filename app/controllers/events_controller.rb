@@ -4,7 +4,9 @@ class EventsController < ApplicationController
   require 'stripe_event_handlers'
 
   def stripe_events
-    
+    Rails.logger.info '='*100
+    Rails.logger.info 'Webhook ' + params['type'] +' has been called'
+    Rails.logger.info '='*100  
     case params['type']
 
     when 'customer.subscription.updated'
@@ -19,6 +21,12 @@ class EventsController < ApplicationController
       StripeEventHandlers.handle_plan_updated(params)
     when 'plan.deleted'
       StripeEventHandlers.handle_plan_deleted(params)
+    when 'invoice.created'
+      StripeEventHandlers.handle_invoice_created(params)
+    when 'invoice.payment_succeeded'
+      StripeEventHandlers.handle_invoice_payment_succeeded(params)
+    when 'invoice.payment_failed'
+      StripeEventHandlers.handle_invoice_payment_failed(params)
     else
 
     end

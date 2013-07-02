@@ -39,7 +39,3 @@ every '*/30 4-22 * * *' do
   runner "Message.batch_send"
 end
 
-#run a check for number of connections for each shop
-every :day, :at => "1:00am" do
-	runner "Shop.batch_check_subscriptions"
-end

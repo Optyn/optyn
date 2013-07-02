@@ -9,6 +9,19 @@ class MerchantMailer < ActionMailer::Base
     mail(:to => @manager.email, :subject => "Payment Successfull!")
   end
 
+  def invoice_payment_failure(manager, amount, connection_count)
+    @manager = manager
+    @amount = amount
+    @conn_count = connection_count
+    mail(:to => @manager.email, :subject => "Payment Failure!")
+  end
+
+  def invoice_payment_succeeded(manager, amount, connection_count)
+    @manager = manager
+    @amount = amount
+    @conn_count = connection_count
+    mail(:to => @manager.email, :subject => "Payment Successfull!")
+
   def import_stats(file_import, counters)
     puts "*" * 100
     puts counters.inspect

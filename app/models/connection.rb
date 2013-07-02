@@ -10,6 +10,8 @@ class Connection < ActiveRecord::Base
 
   attr_accessible :user_id, :shop_id, :active, :connected_via
 
+  after_save :check_shop_tier
+
   scope :active, where(active: true)
 
   scope :inactive, where(active: false)
@@ -102,6 +104,10 @@ class Connection < ActiveRecord::Base
 
   def connection_status
     self.active ? "Following" : "Opt in"
+  end
+
+  def check_shop_tier
+    self.shop.check_subscription
   end
 
   private
