@@ -5,6 +5,7 @@ class Subscription < ActiveRecord::Base
 
   belongs_to :plan
   belongs_to :shop
+  has_many :invoices
 
   validates :email, presence: true, unless: :new_record?
   validates :plan_id, presence: true

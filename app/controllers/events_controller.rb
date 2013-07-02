@@ -27,6 +27,8 @@ class EventsController < ApplicationController
       StripeEventHandlers.handle_invoice_payment_succeeded(params)
     when 'invoice.payment_failed'
       StripeEventHandlers.handle_invoice_payment_failed(params)
+    when 'invoice.updated'
+      StripeEventHandlers.handle_invoice_updated(params)
     else
 
     end

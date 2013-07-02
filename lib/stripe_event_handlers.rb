@@ -65,7 +65,7 @@ module StripeEventHandlers
     Rails.logger.error e
   end
 
-  def handle_invoice_payment_succeeded
+  def handle_invoice_payment_succeeded(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
@@ -74,11 +74,26 @@ module StripeEventHandlers
     Rails.logger.error e
   end
 
-  def handle_invoice_payment_failed
+  def handle_invoice_payment_failed(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     MerchantMailer.invoice_payment_failure(Manager.find_by_email(subscription.email), amount, conn_count).deliver
+  rescue => e
+    Rails.logger.error e
+  end
+
+  def handle_invoice_updated(params)
+    if params['data']['object']['closed']==true
+      subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+      Invoice.create(
+            :subscription_id => subscription, 
+            :stripe_customer_token => params['data']['object']['customer'], 
+            :stripe_invoice_id => params['data']['object']['id'], 
+            :paid_status => params['data']['object']['paid'], 
+            :amount => params['data']['object']['total']
+          )
+    end
   rescue => e
     Rails.logger.error e
   end
