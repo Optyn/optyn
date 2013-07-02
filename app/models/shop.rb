@@ -43,6 +43,8 @@ class Shop < ActiveRecord::Base
 
   scope :for_businesses, ->(business_ids, shop_ids) { disconnected(shop_ids).joins_businesses.where(["businesses.id IN (:business_ids)", {business_ids: business_ids}]) }
 
+  scope :real, where(virtual: false)
+
   after_create :create_dummy_survey, :create_select_all_label, :assign_identifier, :create_default_subscription
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
@@ -52,8 +54,8 @@ class Shop < ActiveRecord::Base
   end
 
   def self.disconnected_connections(connected_ids)
-    return order(:name) if connected_ids.blank?
-    disconnected(connected_ids).order(:name)
+    return real.order(:name) if connected_ids.blank?
+    real.disconnected(connected_ids).order(:name)
   end
 
   def self.search_or_add_by_domain(domain)

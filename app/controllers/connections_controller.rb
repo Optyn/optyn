@@ -12,7 +12,7 @@ class ConnectionsController < BaseController
   end
 
   def make
-    @shops = current_user.disconnected_connections()
+    @shops = current_user.disconnected_connections
   end
 
   def dropped
