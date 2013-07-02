@@ -21,7 +21,7 @@ class MerchantMailer < ActionMailer::Base
     @amount = amount
     @conn_count = connection_count
     mail(:to => @manager.email, :subject => "Payment Successfull!")
-  endßß
+  end
 
   def import_stats(file_import, counters)
     puts "*" * 100
