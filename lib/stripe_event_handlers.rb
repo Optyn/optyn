@@ -2,7 +2,7 @@ module StripeEventHandlers
 
   def self.handle_customer_subscription_created(params)
     @subscription=Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    @subscription.update_attributes(:active => true) if @subscription
+    @subscription.update_attributes(:active => true)
   rescue => e
     Rails.logger.error e
   end
@@ -36,7 +36,7 @@ module StripeEventHandlers
             :name => @plan.name,
             :interval => @plan.interval,
             :amount => @plan.amount,
-            :currency=>@plan.currency) if @plan  
+            :currency=>@plan.currency)
 
     rescue => e
       Rails.logger.error e
@@ -51,7 +51,7 @@ module StripeEventHandlers
               :name => @stripe_plan.name,
               :interval => @stripe_plan.interval,
               :amount => @stripe_plan.amount,
-              :currency=>@stripe_plan.currency) if @plan
+              :currency=>@stripe_plan.currency)
     rescue => e
       Rails.logger.error e
     end  
@@ -76,6 +76,7 @@ module StripeEventHandlers
 
   def handle_invoice_payment_failed(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    subscription.update_attribute(:active, false)
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     MerchantMailer.invoice_payment_failure(Manager.find_by_email(subscription.email), amount, conn_count).deliver
