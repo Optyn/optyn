@@ -34,8 +34,8 @@ staging:
   linkedin_api_key: 'j90jf1gvh8t7'
   linkedin_secret_key: 'fHPWIwhGCnVr2Iue'
   app_host: "development.optyn.com"
-  stripe_api_key: "sk_test_LvqRzhN1kzeKaqQRPsQ9Vug0"
-  stripe_public_key: "pk_test_JpL5IkK8MiKjycqdYsfAQO1c" # while deploying change to live keys
+  stripe_api_key: "sk_test_4BJp7qosDLIvEocBeWMgxhI9"
+  stripe_public_key: "pk_test_OvjvjiEuAFjvonAaaNAbh9XT"
   app_base_url: 'http://development.optyn.com'
   bucket: 'optynstaging'
 
