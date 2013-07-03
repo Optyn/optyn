@@ -3,6 +3,7 @@ require 'embed_code_generator'
 class Shop < ActiveRecord::Base
 
   has_one :subscription, dependent: :destroy
+  has_one :plan, through: :subscription
   has_many :managers, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
@@ -218,15 +219,17 @@ class Shop < ActiveRecord::Base
   def upgrade_plan
     new_plan = Plan.which(self)
     self.subscription.update_plan(new_plan)
-    MerchantMailer.notify_plan_upgrade(shop.manager).deliver
-    create_audit_entry("subscription updated to plan #{new_plan.name}")
+    MerchantMailer.notify_plan_upgrade(self.manager).deliver
+    create_audit_entry("Subscription updated to plan #{new_plan.name}")
   end
 
   def check_subscription
-    if !self.virtual && self.active_connection_count < Plan.starter.max and !self.is_subscription_active?
-      MerchantMailer.notify_passing_free_tier(shop.manager).deliver
-    elsif !self.virtual && self.tier_change_required?
-      shop.upgrade_plan
+    if !self.virtual
+      if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
+        MerchantMailer.notify_passing_free_tier(self.manager).deliver
+      elsif !self.virtual && self.tier_change_required?
+        self.upgrade_plan
+      end
     end
   end
 
@@ -235,11 +238,15 @@ class Shop < ActiveRecord::Base
   end
 
   def disabled?
-    (Plan.which(self) != Plan.starter and !self.subscription.active)# rescue false
-  end 
+    (Plan.which(self) != Plan.starter and !self.subscription.active) # rescue false
+  end
 
   def create_audit_entry(message)
     self.shop_audits.create(:description => message)
+  end
+
+  def manager
+    managers.owner.first || managers.first
   end
 
   private

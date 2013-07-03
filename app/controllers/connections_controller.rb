@@ -43,8 +43,10 @@ class ConnectionsController < BaseController
           end
         end
       end
-    rescue
-      render :json => {:success => false, :error_message => "Oops, Something went wrong."}
+    rescue => e
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace
+      render :json => {:success => false, :error_message => "Oops, Something went wrong."}, status: :unprocessable_entity
     end
   end
 
