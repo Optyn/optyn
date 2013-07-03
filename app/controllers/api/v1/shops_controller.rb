@@ -23,6 +23,11 @@ module Api
         end
       end
 
+      def button_script
+        @application = @shop.oauth_application
+        return button_script_content
+      end
+
       def button_framework
         @application = @shop.oauth_application
 
@@ -158,6 +163,40 @@ module Api
 
       def log_impression_count
         @shop.increment_impression_count
+      end
+
+      def button_script_content
+        respond_to do |format|
+          script = %Q(
+              var outerScript = document.createElement('script');
+              outerScript.text =
+              "try{" +
+                "jQuery();" +
+              "}catch(e){" +
+
+                "var js = document.createElement('script');" +
+
+                'js.type = "text/javascript";' +
+                'js.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js";' +
+
+                'document.body.appendChild(js);' +
+
+              '}';
+              document.body.appendChild(outerScript);
+
+              setTimeout(function(){
+                 jQuery('body').prepend(
+                  '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+                  '<div id="optyn-container">' +
+                  '<h4>Welcome to Optyn</h4>'  +
+                  '</div>' +
+                  '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
+                 )
+              }, 1000);
+          )
+
+          format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
+        end
       end
     end
   end
