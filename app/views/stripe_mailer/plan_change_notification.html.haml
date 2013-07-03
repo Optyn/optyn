@@ -1,0 +1,25 @@
+%p
+  Hello Admins-
+
+  A plan has been created or updated in stripe, and a corresponding plan has been created/updated in Optyn database using webhooks. Kindly go through the new plan and set the min and max counts for the same. Details of the plan are as follows:
+
+%ul
+  %li
+    Plan id:
+    = @plan.id
+  %li
+    Stripe Plan id:
+    = @plan.id
+  %li
+    Plan name:
+    = @plan.name
+  %li
+    Plan amount:
+    = @plan.amount
+  %li
+    Plan currency:
+    = @plan.currency
+  %li
+    Plan interval:
+    = @plan.interval
+

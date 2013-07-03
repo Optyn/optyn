@@ -31,12 +31,15 @@ module StripeEventHandlers
   
   def self.handle_plan_created(params)
     begin
-      @plan = Stripe::Plan.retrieve(params['data']['object']['id'])
-      Plan.create(:plan_id => @plan.id,
-            :name => @plan.name,
-            :interval => @plan.interval,
-            :amount => @plan.amount,
-            :currency=>@plan.currency)
+      @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
+
+      @plan = Plan.find_by_plan_id(@stripe_plan.id) || Plan.new
+      @plan.plan_id = @stripe_plan.id
+      @plan.name = @stripe_plan.name
+      @plan.interval = @stripe_plan.interval
+      @plan.amount = @stripe_plan.amount
+      @plan.currency = @stripe_plan.currency
+      @plan.save!
 
     rescue => e
       Rails.logger.error e
