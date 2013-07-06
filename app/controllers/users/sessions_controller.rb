@@ -41,23 +41,36 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def authenticate_with_email
-    @user = User.find_by_email(params[:user][:email])
-    sudo_registration unless @user.present?
+    if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
+      @user = User.find_by_email(params[:user][:email])
+      sudo_registration unless @user.present?
 
-    sign_in @user
-    session[:user_return_to] = nil
-    respond_to do |format|
-      format.json {
-        json_data = {data: {user: @user.as_json(only: [:name])}}.to_json
-        if params[:callback].present?
-          render text: "#{params[:callback]}('#{json_data}')"
-        else
-          render(json: json_data, status: created)
-        end
+      sign_in @user
+      session[:user_return_to] = nil
+      respond_to do |format|
+        format.json {
+          json_data = {data: {user: @user.as_json(only: [:name])}}.to_json
+          if params[:callback].present?
+            render text: "#{params[:callback]}(#{json_data})"
+          else
+            render(json: json_data, status: created)
+          end
 
-      }
+        }
 
-      format.any { render text: "Only HTML and JSON supported" }
+        format.any { render text: "Only HTML and JSON supported" }
+      end
+    else
+      respond_to do |format|
+        format.json {
+          json_data = {data: {errors: "Please check the email address"}}.to_json
+          if params[:callback].present?
+            render text: "#{params[:callback]}(#{json_data})"
+          else
+            render json: json_data, status: :unprocessable_entity
+          end
+        }
+      end
     end
   end
 

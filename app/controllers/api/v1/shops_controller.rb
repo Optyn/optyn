@@ -269,11 +269,12 @@ module Api
                     type: 'GET',
                     data: $(this).serialize(),
                     dataType: 'jsonp',
-                    success: function(data){
-                      replaceWithUserInfo();
-                    },
-                    error: function(data){
-                      $('#optyn-first-container').html('<strong>Sorry could not create a connection. Please got to optyn.com and find your favorite shops</strong>')
+                    success: function(respJson){
+                      if(respJson.data.errors){
+                        $('#optyn-first-container').html('<strong>Sorry could not create a connection. Please got to optyn.com and find your favorite shops OR Refresh this page.</strong>');
+                      }else{
+                        replaceWithUserInfo();
+                      }
                     }
                   });
                 });
