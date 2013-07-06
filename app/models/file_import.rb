@@ -45,7 +45,7 @@ class FileImport < ActiveRecord::Base
           passwd = Devise.friendly_token.first(8)
           user.password = passwd
           user.password_confirmation = passwd
-          user.show_password
+          user.show_password = true
           counters[:user_creation] += 1
         else
           counters[:existing_user] += 1

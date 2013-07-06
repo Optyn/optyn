@@ -10,16 +10,33 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
 
         respond_to do |format|
           format.html { redirect_to auth.redirect_uri }
-          format.json { render(json: {data: {code: auth.auth.token.token}}) }
+          format.json {
+            json_str = {data: {code: auth.auth.token.token}}.to_json
+            if params[:callback].present?
+              render(text: "#{params[:callback]}(#{json_str})")
+            else
+              render(json: json_str)
+            end
+
+          }
         end
       else
         respond_to do |format|
           format.html { render :new }
-          format.json { render(status: :accepted, json: {data: {user_permission_requested: true}}) }
+          format.json {
+            json_str = {data: {user_permission_requested: true}}.to_json
+            if params[:callback].present?
+              render text: "#{params[:callback]}(#{json_str})", status: :accepted
+            else
+              render(status: :accepted, json: json_str)
+            end
+          }
         end
       end
     else
-      render :error
+      respond_to do |format|
+        format.any { render :error }
+      end
     end
   end
 
@@ -28,8 +45,8 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
 
     if auth.redirectable?
       respond_to do |format|
-        format.html {redirect_to auth.redirect_uri}
-        format.json{render(status: :created, json: {data: {code: auth.auth.token.token}})}
+        format.html { redirect_to auth.redirect_uri }
+        format.json { render(status: :created, json: {data: {code: auth.auth.token.token}}) }
       end
     else
       render :json => auth.body, :status => auth.status
@@ -41,8 +58,8 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
 
     if auth.redirectable?
       respond_to do |format|
-        format.html {redirect_to auth.redirect_uri}
-        format.json{render json: {data: auth.body}, :status => auth.status}
+        format.html { redirect_to auth.redirect_uri }
+        format.json { render json: {data: auth.body}, :status => auth.status }
       end
     else
       render :json => auth.body, :status => auth.status

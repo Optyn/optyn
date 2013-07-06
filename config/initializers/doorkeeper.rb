@@ -9,7 +9,8 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
-    current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format]))) #warden.authenticate!(:scope => :user)
+    binding.pry if request.post?
+    current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
@@ -67,7 +68,8 @@ Doorkeeper.configure do
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
   # For example if dealing with trusted a application.
-  # skip_authorization do |resource_owner, client|
-  #   client.superapp? or resource_owner.admin?
-  # end
+  skip_authorization do |resource_owner, client|
+    true
+     #client.superapp? or resource_owner.admin?
+  end
 end

@@ -9,7 +9,6 @@ module Api
       def map_current_user_to_store
         @shop = current_shop
         return true if @shop.blank?
-
         @connection = current_user.make_connection_if!(@shop)
       end
 
@@ -21,7 +20,7 @@ module Api
 
       def current_shop
         if doorkeeper_token
-          return @shop ||= doorkeeper_token.application.owner
+          return @shop = doorkeeper_token.application.owner
         end
 
         @shop = Shop.by_app_id(params[:client_id].to_s)

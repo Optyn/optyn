@@ -31,6 +31,69 @@ module Api
       def button_framework
         @application = @shop.oauth_application
 
+        if 1.to_s == AppSetting.optyn_oauth_client_id
+          return button_framework_script
+        elsif 2.to_s == AppSetting.optyn_oauth_client_id
+           return email_box_framework_script
+        end
+      end
+
+      def details
+        callback_name = params[:callback]
+        response_body = %Q(
+        var optynShop = #{@shop.api_welcome_details.to_json}
+        #{callback_name}(optynShop);
+      )
+
+        render text: response_body
+      end
+
+      private
+      def fetch_store
+        @shop = Shop.by_app_id(params[:app_id].to_s)
+
+        head :unauthorized and false unless @shop.present?
+      end
+
+      def log_impression_count
+        @shop.increment_impression_count
+      end
+
+      def button_script_content
+        respond_to do |format|
+          script = %Q(
+              var outerScript = document.createElement('script');
+              outerScript.text =
+              "try{" +
+                "jQuery();" +
+              "}catch(e){" +
+
+                "var js = document.createElement('script');" +
+
+                'js.type = "text/javascript";' +
+                'js.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js";' +
+
+                'document.body.appendChild(js);' +
+
+              '}';
+              document.body.appendChild(outerScript);
+
+              setTimeout(function(){
+                 jQuery('body').prepend(
+                  '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+                  '<div id="optyn-container">' +
+                  '<h4>Welcome to Optyn</h4>'  +
+                  '</div>' +
+                  '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
+                 )
+              }, 1000);
+          )
+
+          format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
+        end
+      end
+
+      def button_framework_script
         respond_to do |format|
 
           script = %Q(jQuery(document).ready(function(){
@@ -95,11 +158,10 @@ module Api
 
                     var OAUTHURL    =   '#{SiteConfig.app_base_url}#{oauth_authorization_path}?';
                     var VALIDURL    =   '#{SiteConfig.app_base_url}#{oauth_token_path}'; //Show page url
-                    var SCOPE       =   '#{SiteConfig.app_base_url}#{api_user_profile_path}'; //Need to find out what this is used for?
+                    var SCOPE       =   'public'; //Need to find out what this is used for?
                     var CLIENTID    =   '#{@shop.app_id}';
                     var CLIENTSECRET =  '#{@shop.secret}'
                     var REDIRECT    =   '#{@shop.redirect_uri}';
-                    var SCOPE       =   'public'
                     var TYPE        =   'code';
 
                     var _url        =   OAUTHURL  + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE + '&scope=' + SCOPE;
@@ -144,56 +206,113 @@ module Api
         end
       end
 
-      def details
-        callback_name = params[:callback]
-        response_body = %Q(
-        var optynShop = #{@shop.api_welcome_details.to_json}
-        #{callback_name}(optynShop);
-      )
-
-        render text: response_body
-      end
-
-      private
-      def fetch_store
-        @shop = Shop.by_app_id(params[:app_id].to_s)
-
-        head :unauthorized and false unless @shop.present?
-      end
-
-      def log_impression_count
-        @shop.increment_impression_count
-      end
-
-      def button_script_content
+      def email_box_framework_script
         respond_to do |format|
-          script = %Q(
-              var outerScript = document.createElement('script');
-              outerScript.text =
-              "try{" +
-                "jQuery();" +
-              "}catch(e){" +
+          script = %Q(jQuery(document).ready(function(){
+                        jQuery.getJSON('#{SiteConfig.app_base_url}#{api_shop_details_path(app_id: params[:app_id], format: :json)}?callback=?', null, function(data){
+                         var $formContainer = jQuery("<div />");
+                         $formContainer.attr({
+                           id: 'optyn-first-container'
+                         })
 
-                "var js = document.createElement('script');" +
+                         var $form = jQuery('<form />');
+                         $form.attr({
+                            id: 'optyn-email-form',
+                            action: '#{SiteConfig.app_base_url}#{authenticate_with_email_path}.json?callback=?',
+                            method: 'post'
+                         });
 
-                'js.type = "text/javascript";' +
-                'js.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js";' +
+                         var $emailBox = jQuery('<input />');
+                         $emailBox.attr({
+                           id: 'user_email',
+                           name: 'user[email]',
+                           type: 'input'
+                         });
 
-                'document.body.appendChild(js);' +
+                         var $submitButton = jQuery('<input />');
+                         $submitButton.attr({
+                           id: 'commit',
+                           name: 'commit',
+                           value: 'Submit',
+                           type: 'submit'
+                         });
 
-              '}';
-              document.body.appendChild(outerScript);
+                          $form.append($emailBox);
+                          $form.append($submitButton);
+                          $formContainer.append($form)
+                          var $temp = jQuery('<div />');
+                          $temp.append($formContainer);
+                          jQuery('#optyn-container').html($temp.html());
+                  });
+                });
 
-              setTimeout(function(){
-                 jQuery('body').prepend(
-                  '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
-                  '<div id="optyn-container">' +
-                  '<h4>Welcome to Optyn</h4>'  +
-                  '</div>' +
-                  '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
-                 )
-              }, 1000);
-          )
+                var OAUTHURL    =   '#{SiteConfig.app_base_url}#{oauth_authorization_path(format: 'json')}?callback=?';
+                var VALIDURL    =   '#{SiteConfig.app_base_url}#{oauth_token_path}'; //Show page url
+                var SCOPE       =   'public'; //Need to find out what this is used for?
+                var CLIENTID    =   '#{@shop.app_id}';
+                var CLIENTSECRET =  '#{@shop.secret}'
+                var REDIRECT    =   '#{@shop.redirect_uri}';
+                var TYPE        =   'code';
+
+                var _url = OAUTHURL  + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE + '&scope=' + SCOPE;
+
+                //Call the get authentication method.
+                jQuery.getJSON(_url, null, function(data){
+                  //DO NOTHING
+                });
+
+                //Hook the form submission
+                jQuery('body').on('submit', '#optyn-email-form', function(event){
+                  event.preventDefault();
+                  $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'GET',
+                    data: $(this).serialize(),
+                    dataType: 'jsonp',
+                    success: function(data){
+                      replaceWithUserInfo();
+                    },
+                    error: function(data){
+                      $('#optyn-first-container').html('<strong>Sorry could not create a connection. Please got to optyn.com and find your favorite shops</strong>')
+                    }
+                  });
+                });
+
+                //fetch the authentication code
+                function replaceWithUserInfo(){
+                    jQuery.getJSON(_url, null, function(respJson){
+                        if(respJson.data.code){
+                          validateToken(respJson.data.code);
+                        }
+                    });
+                }
+
+                //fetch the accessToken
+                function validateToken(token) {
+                      param_obj = {'client_id': CLIENTID, 'client_secret': CLIENTSECRET, 'code': token, 'grant_type': 'authorization_code', 'redirect_uri': REDIRECT}
+                      jQuery.getJSON((VALIDURL + "?callback=?&" + $.param(param_obj)), function(data){
+                        getUserInfo(data.access_token);
+                      });
+                }
+
+                //fetch the user info
+                function getUserInfo(token) {
+                  jQuery.getJSON('#{SiteConfig.app_base_url}#{api_user_profile_path}?callback=?&access_token=' + token, function(user){
+                    jQuery('#optyn-first-container').text('Welcome ' + user.name + "!");
+                    automaticConnection(token);
+                  });
+                }
+
+
+                //Create an automatic connection.
+                function automaticConnection(token){
+                   jQuery.ajax({
+                    url: '#{SiteConfig.app_base_url}#{api_automatic_connection_path}',
+                    type: 'POST',
+                    data: {'_method': 'put', 'access_token': token}
+                   });
+                }
+            )
 
           format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
         end

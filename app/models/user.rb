@@ -124,8 +124,11 @@ class User < ActiveRecord::Base
   end
 
   def make_connection_if!(shop)
-    if shop.present? && !connections.for_shop(shop.id).present?
-      connections.create!(user_id: self.id, shop_id: shop.id, connected_via: Connection::CONNECTED_VIA_BUTTON)
+    if shop.present?
+      if !connections.for_shop(shop.id).present?
+        connections.create!(user_id: self.id, shop_id: shop.id, connected_via: Connection::CONNECTED_VIA_BUTTON)
+      end
+      connections.for_shop(shop.id).first
     end
   end
 

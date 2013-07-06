@@ -5,7 +5,7 @@ module Api
 
       respond_to :html, :json
 
-      doorkeeper_for :connection, :update_permissions
+      doorkeeper_for :connection, :update_permissions, :automatic_connection
 
       before_filter :map_current_user_to_store, only: [:update_permissions]
 
@@ -14,9 +14,18 @@ module Api
         session[:omniauth_user] = true
         @user_login = User.new
         @user = User.new
+
         respond_to do |format|
-          format.html {render(file: 'api/v1/oauth/login')}
-          format.json { render(status: :ok, json: {data: {authenticity_token: form_authenticity_token, error: nil}}) }
+          format.html { render(file: 'api/v1/oauth/login') }
+          json_str = {data: {authenticity_token: form_authenticity_token, errors: nil}}.to_json
+          format.json {
+            if params[:callback].present?
+              render(text: "#{params[:callback]}('#{json_str}')")
+            else
+              render(status: :ok, json: json_str)
+            end
+          }
+
           format.any { render text: "Only HTML and JSON supported" }
         end
       end
@@ -36,6 +45,25 @@ module Api
         else
           session[:user_return_to] = nil
           head :unprocessable_entity
+        end
+      end
+
+      def automatic_connection
+        map_current_user_to_store
+        if @shop.present? && @connection.present? && current_user.present?
+          json_str = {data: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}}.to_json
+          if params[:callback].present?
+            render text: "#{params[:callback]}(#{json_str})", status: :ok
+          else
+            render json: json_str, status: :ok
+          end
+        else
+          json_str = {data: {errors: "A connection could not be created"}}.to_json
+          if params[:callback].present?
+            render text: "#{params[:callback]}(#{json_str})", status: :unprocessable_entity
+          else
+            render json: json_str, status: :unprocessable_entity
+          end
         end
       end
     end

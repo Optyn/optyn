@@ -62,7 +62,7 @@ Optyn::Application.routes.draw do
     delete '/account' => 'users/registrations#destroy'
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
-
+    match '/authenticate_with_email' => 'users/sessions#authenticate_with_email', :as => :authenticate_with_email
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
@@ -120,7 +120,9 @@ Optyn::Application.routes.draw do
       post 'user/subscribe.json', to: 'users#subscribe'
       get '/login', to: 'oauth#login', as: :login
       get '/connection', to: 'oauth#connection', as: :connection
+      put '/automatic_connection', to: 'oauth#automatic_connection', as: :automatic_connection
       put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
+      put '/connect_with_email', to: 'oauth#connect_via_email'
     end
   end
 
