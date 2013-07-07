@@ -62,7 +62,7 @@ class OmniauthClientsController < ApplicationController
 	end
 
 	def after_sign_in_path_for(resource)
-		return merchants_connections_path if current_merchants_manager
+		return merchants_root_path if current_merchants_manager
 		super
 	end
 end
