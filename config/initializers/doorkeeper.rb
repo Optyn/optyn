@@ -9,7 +9,6 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
-    binding.pry if request.post?
     current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
   end
 
