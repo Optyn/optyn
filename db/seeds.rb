@@ -7,7 +7,7 @@ require "#{File.dirname(__FILE__)}/seed_data/message_folders.rb"
 
 
 #Add some dummy data in the development mode.
-if Rails.env.development?
-  dev_data = "#{File.dirname(__FILE__)}/seed_data/dummy_data/dev_seed.rb"
-  eval(IO.read(dev_data), binding, dev_data)
-end
+#if Rails.env.development?
+ # dev_data = "#{File.dirname(__FILE__)}/seed_data/dummy_data/dev_seed.rb"
+  #eval(IO.read(dev_data), binding, dev_data)
+#end
