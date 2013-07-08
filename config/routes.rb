@@ -4,10 +4,9 @@ Optyn::Application.routes.draw do
   devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  root to: 'main#index'
+  root :to => redirect("/login")
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
-
 
   # Static Pages created by Alen. Please make sure if the static pages are modified the ssl enforcement is changed too.
   match 'about' => 'main#about', :as => :about
