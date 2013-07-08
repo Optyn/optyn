@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130706163812) do
+ActiveRecord::Schema.define(:version => 20130708191649) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -269,10 +269,10 @@ ActiveRecord::Schema.define(:version => 20130706163812) do
     t.integer  "owner_id"
     t.string   "owner_type"
     t.text     "embed_code"
-    t.integer  "button_size",             :default => 1
     t.boolean  "checkmark_icon",          :default => true
     t.boolean  "show_default_optyn_text", :default => true
     t.text     "custom_text"
+    t.integer  "render_choice",           :default => 2
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"

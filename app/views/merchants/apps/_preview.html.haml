@@ -4,7 +4,10 @@
       Optyn Button Preview
       %hr
     .optyn-preview
-      == #{image_tag('optyn_button_checkbox.png', alt: 'checkmark') if @application.checkmark_icon}#{image_tag @application.button_size == 1 ? "optyn_button_small.png" : "optyn_button_large.png", alt: 'optyn button'}
+      - if [1, 2].include?(@application.render_choice.to_i)
+        == #{image_tag('optyn_button_checkbox.png', alt: 'checkmark') if @application.checkmark_icon}#{image_tag @application.render_choice == 1 ? "optyn_button_small.png" : "optyn_button_large.png", alt: 'optyn button'}
+      - else
+        = text_field_tag "email", nil, placeholder: 'Your Email'
       %p
         = @application.show_default_optyn_text ? SiteConfig.api_welcome_message : @application.custom_text
     .codesnippet

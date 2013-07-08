@@ -30,10 +30,11 @@ module Api
 
       def button_framework
         @application = @shop.oauth_application
+        render_choice =  @application.render_choice.to_i
 
-        if 1.to_s == AppSetting.optyn_oauth_client_id
-          return button_framework_script
-        elsif 2.to_s == AppSetting.optyn_oauth_client_id
+        if [1, 2].include?(render_choice)
+           return button_framework_script
+        elsif 3 == render_choice
            return email_box_framework_script
         end
       end
@@ -124,7 +125,7 @@ module Api
 
                         var optynImage = jQuery('<img />')
                         optynImage.attr({
-                          src: '#{SiteConfig.app_base_url}/assets/#{@application.button_size == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
+                          src: '#{SiteConfig.app_base_url}/assets/#{@application.render_choice.to_i == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
                           alt: 'Optyn Logo'
                         });
                         optynLink.append(optynImage);
@@ -226,7 +227,8 @@ module Api
                          $emailBox.attr({
                            id: 'user_email',
                            name: 'user[email]',
-                           type: 'input'
+                           type: 'input',
+                           placeholder: 'Your Email'
                          });
 
                          var $submitButton = jQuery('<input />');
