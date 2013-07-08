@@ -1,29 +1,10 @@
-.span3.menuleft
-  %ul.merchant-menu
-    %li.menu-header 
-      Hello
-      = current_user.name
-    %hr
-    %li
-      %a{:href => consumers_root_path}
-        = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
-        My Dashboard
-    %li
-      %a{:href => inbox_messages_path, :alt => "My Messages"}
-        = image_tag "menu_icon_messages.png", :alt => "Messages"
-        My Messages
-    %li
-      %a{:href => connections_path}
-        = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
-        My Connections
-    %li
-      %a{:href => merchants_survey_path}
-        = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
-        = link_to("My Surveys", segments_path)
-    %li
-      %a{:href => profile_path}
-        = image_tag "menu_icon_connections.png", :alt => "My Profile"
-        My Account
-    %li
-      = image_tag "menu_icon_dashboard.png", :alt => "Logout"
-      %a{:href => destroy_user_session_path} Logout
+.span3.menuleft.leftNav
+  %div
+    / Hello
+    / = current_user.name
+    = link_to "Dashboard", consumers_root_path, :class => active(params[:controller], "dashboards")
+    = link_to "Messages", inbox_messages_path, :class => active(params[:controller], "messages")
+    = link_to "Connections", connections_path, :class => active(params[:controller], "connections")
+    = link_to "Surveys", merchants_survey_path, :class => active(params[:controller], "merchants")
+    = link_to "Account", profile_path, :class => active(params[:controller], "users/registrations")
+    %a{:href => destroy_user_session_path} Logout

@@ -95,16 +95,16 @@
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:focus,
 .dropdown-submenu:hover > a {
-  background-color: #475B77 !important;
+  //background-color: #475B77 !important;
   text-decoration: none;
   color: #ffffff;
-  background-image: -moz-linear-gradient(top, #475B77, #475B77);
+  /*background-image: -moz-linear-gradient(top, #475B77, #475B77);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#475B77), to(#475B77));
   background-image: -webkit-linear-gradient(top, #475B77, #475B77);
   background-image: -o-linear-gradient(top, #475B77, #475B77);
   background-image: linear-gradient(to bottom, #475B77, #475B77);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#475B77', endColorstr='#475B77', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#475B77', endColorstr='#475B77', GradientType=0);*/
 }
 .navbar .btn-navbar .icon-bar {
   display: block;

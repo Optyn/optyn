@@ -1,27 +1,29 @@
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-    = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
+    My Account
+    %span.icon{"class" => "icon"}
+    / = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
   %ul.dropdown-menu
     %li
       %a.active{:href => "dashboard"}
-        = image_tag "dropdown_dashicon.png", :float => "left"
+        / = image_tag "dropdown_dashicon.png", :float => "left"
         My Dashboard
     %li
       %a{:href => inbox_messages_path}
-        = image_tag "dropdown_segments.png", :float => "left"
+        / = image_tag "dropdown_segments.png", :float => "left"
         My Messages
     %li
       %a{:href => "connections"}
-        = image_tag "dropdown_manager.png", :float => "left"
+        / = image_tag "dropdown_manager.png", :float => "left"
         My Connections
     %li
       %a{:href => "segments"}
-        = image_tag "dropdown_surveys.png", :float => "left"
+        / = image_tag "dropdown_surveys.png", :float => "left"
         My Surveys
     %li
       %a{:href => profile_path}
-        = image_tag "dropdown_profile.png", :float => "left"
+        / = image_tag "dropdown_profile.png", :float => "left"
         My Account
-    %hr
+    / %hr
     %li
       = link_to("Logout", destroy_user_session_path)

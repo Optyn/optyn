@@ -111,6 +111,10 @@ module ApplicationHelper
     highlight_action_name == action_name ? "active" : ""
   end
 
+  def active(params_controller, current_controller)
+      params_controller == current_controller ? "current" : ""
+   end 
+
   def shop_public_page_login_location
     user_signed_in? ? consumer_dashboard_path : merchants_manager_signed_in? ? merchants_dashboards_path : new_user_session_path
   end

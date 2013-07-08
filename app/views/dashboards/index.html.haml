@@ -4,69 +4,62 @@
 #consumer_dashboard
   .container
     = render partial: "shared/menu"
-    .span8
+    .span8.rightContainer.clearfix
       .header
         .span3.maintitle
           %h3
             Hi
             = current_user.name
-          Here's what's going on today!
-      .row.stats
-        .span2.leading
-          .count
-            = @new_coupons_count
-          .info
-            .text.sprite-img#md_new_connections0
-              New Coupons
-        .span2.box
-          .count
-            = @new_messages_count
-          .info
-            .text.sprite-img#md_connections_week0
-              New Messages
-        .span2.box
-          .count
-            = @pending_survey_count
-          .info
-            .text.sprite-img#md_connections_month0
-              Active Surveys
-        .span2.box
-          .count
-            = @new_specials_count
-          .info
-            .text.sprite-img#md_active_connections0
-              Available Specials
-      .latest
-        .title
+          / Here's what's going on today!
+      .dashBox
+        %h2
+          New Coupons
+        %div
+          = @new_coupons_count
+      .dashBox
+        %h2
+          New Messages
+        %div
+          = @new_messages_count
+      .dashBox
+        %h2
+          Active Surveys
+        %div
+          = @pending_survey_count
+      .dashBox
+        %h2
+          Available Specials
+        %div
+          = @new_specials_count
+      .dashBox.wideDashBox
+        %h2
           Your Latest Activity
-      %br
+        %div
+          - if @feed.present?
+            %table.table.table-striped#my_connections_table
+              %thead
+                %tr
+                  %th Connection
+                  %th Type
+                  %th More Info
+              %tbody
+              - @feed.each do |feed_element|
+                %tr
+                  %td
+                    / .headline
+                    /   - if feed_element['image_url'].present?
+                    /     = image_tag(feed_element['image_url'], alt: feed_element['shop_name'], class: 'profile_image')
+                    /   - else
+                    /     = image_tag('no_shop_logo.gif', alt: feed_element['shop_name'], class: 'profile_image')
 
-      
-      - if @feed.present?
-        %table.table.table-striped#my_connections_table
-          %thead
-            %tr
-              %th Connection
-              %th Type
-              %th More Info
-          %tbody
-          - @feed.each do |feed_element|
-            %tr
-              %td
-                / .headline
-                /   - if feed_element['image_url'].present?
-                /     = image_tag(feed_element['image_url'], alt: feed_element['shop_name'], class: 'profile_image')
-                /   - else
-                /     = image_tag('no_shop_logo.gif', alt: feed_element['shop_name'], class: 'profile_image')
-
-                = feed_element['shop_name']
-              %td
-                = feed_element['title']
-              %td      
-                .description
-                  = feed_element['subject']
-                .actions
-                  = link_to "Details", feed_element['action_url']
-      - else
-        No activities. Please start connecting with shops
-        = link_to 'here', connections_path
+                    = feed_element['shop_name']
+                  %td
+                    = feed_element['title']
+                  %td      
+                    .description
+                      = feed_element['subject']
+                    .actions
+                      = link_to "Details", feed_element['action_url']
+          - else
+            No activities. Please start connecting with shops
+            = link_to 'here', connections_path
