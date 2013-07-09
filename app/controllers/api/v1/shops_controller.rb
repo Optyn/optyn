@@ -80,13 +80,8 @@ module Api
               document.body.appendChild(outerScript);
 
               setTimeout(function(){
-                 jQuery('body').prepend(
-                  '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
-                  '<div id="optyn-container">' +
-                  '<h4>Welcome to Optyn</h4>'  +
-                  '</div>' +
-                  '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
-                 )
+                  #{@application.render_choice.to_i == 1 ? bar : part}
+
               }, 1000);
           )
 
@@ -319,6 +314,31 @@ module Api
 
           format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
         end
+      end
+
+      def bar
+        %Q(
+            jQuery('body').prepend(
+              '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+              '<div id="optyn-container">' +
+              '<h4>Welcome to Optyn</h4>'  +
+              '</div>' +
+              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
+            )
+        )
+      end
+
+      def part
+        %Q(
+            var scriptElem = $("script[src='#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{@application.uid}']");
+            jQuery(scriptElem).before(
+              '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+              '<div id="optyn-container">' +
+              '<h4>Welcome to Optyn</h4>'  +
+              '</div>' +
+              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
+            )
+        )
       end
     end
   end
