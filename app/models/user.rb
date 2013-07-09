@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :permissions_users
 
   #accepts_nested_attributes_for :permission
-  after_create :create_permission_users, :send_welcome_email
+  after_create :create_permission_users, :create_alias, :send_welcome_email
 
   PER_PAGE = 30
 
@@ -121,6 +121,16 @@ class User < ActiveRecord::Base
     Permission.all.each do |permission|
       PermissionsUser.create(user_id: self.id, permission_id: permission.id, action: true)
     end
+  end
+
+  def create_alias
+    optyn_alias = "optyn#{Devise.friendly_token.first(8).downcase}@optynmail.com"
+    while User.find_by_alias(optyn_alias).present?
+      optyn_alias = "optyn#{Devise.friendly_token.first(8).downcase}@optynmail.com"
+    end
+
+    self.alias = optyn_alias
+    self.save
   end
 
   def make_connection_if!(shop)

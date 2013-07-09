@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708191649) do
+ActiveRecord::Schema.define(:version => 20130709024445) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20130708191649) do
 
   create_table "businesses", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "connection_errors", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "shop_id"
+    t.text     "error"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -433,20 +441,11 @@ ActiveRecord::Schema.define(:version => 20130708191649) do
     t.string   "gender",                 :limit => 1
     t.date     "birth_date"
     t.string   "picture"
+    t.string   "alias"
   end
 
+  add_index "users", ["alias"], :name => "index_users_on_alias", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "virtual_connections", :force => true do |t|
-    t.integer  "shop_id"
-    t.integer  "user_id"
-    t.text     "html_content"
-    t.string   "state"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "virtual_connections", ["shop_id", "user_id"], :name => "index_virtual_connections_on_shop_id_and_user_id"
 
 end
