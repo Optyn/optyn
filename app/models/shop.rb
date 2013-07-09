@@ -156,7 +156,7 @@ class Shop < ActiveRecord::Base
       details[:location] = useful_location.as_json(except: [:id, :created_at, :updated_at, :longitude, :latitude])
     end
 
-    details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.render_choice == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
+    details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.call_to_action == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
 
     # put the oauth details
     details[:welcome_message] = oauth_application.show_default_optyn_text ? SiteConfig.api_welcome_message : oauth_application.custom_text
@@ -301,6 +301,7 @@ class Shop < ActiveRecord::Base
   def set_app_attrs(app, options)
     app.redirect_uri = options[:redirect_uri]
     app.owner = self
+    app.call_to_action = options[:call_to_action]
     app.render_choice = options[:render_choice]
     app.checkmark_icon = options[:checkmark_icon]
     app.show_default_optyn_text = options[:show_default_optyn_text]

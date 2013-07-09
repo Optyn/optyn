@@ -30,11 +30,11 @@ module Api
 
       def button_framework
         @application = @shop.oauth_application
-        render_choice =  @application.render_choice.to_i
+        call_to_action =  @application.call_to_action.to_i
 
-        if [1, 2].include?(render_choice)
+        if [1, 2].include?(call_to_action)
            return button_framework_script
-        elsif 3 == render_choice
+        elsif 3 == call_to_action
            return email_box_framework_script
         end
       end
@@ -125,7 +125,7 @@ module Api
 
                         var optynImage = jQuery('<img />')
                         optynImage.attr({
-                          src: '#{SiteConfig.app_base_url}/assets/#{@application.render_choice.to_i == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
+                          src: '#{SiteConfig.app_base_url}/assets/#{@application.call_to_action.to_i == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
                           alt: 'Optyn Logo'
                         });
                         optynLink.append(optynImage);

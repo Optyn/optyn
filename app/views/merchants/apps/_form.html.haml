@@ -3,12 +3,18 @@
   = f.text_field :redirect_uri, placeholder: 'Redirect uri'
 
   .option
-    = f.radio_button(:render_choice, 1.to_s)
+    = f.radio_button(:call_to_action, 1.to_s)
     Small Button
-    = f.radio_button(:render_choice, 2.to_s)
+    = f.radio_button(:call_to_action, 2.to_s)
     Large Button
-    = f.radio_button(:render_choice, 3.to_s)
+    = f.radio_button(:call_to_action, 3.to_s)
     Email Box
+
+  .option
+    = f.radio_button :render_choice, 1.to_s
+    Bar
+    = f.radio_button :render_choice, 2.to_s
+    Module
 
   .option
     %label.checkbox

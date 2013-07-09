@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709024445) do
+ActiveRecord::Schema.define(:version => 20130709165721) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(:version => 20130709024445) do
     t.boolean  "show_default_optyn_text", :default => true
     t.text     "custom_text"
     t.integer  "render_choice",           :default => 2
+    t.integer  "call_to_action",          :default => 2
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
