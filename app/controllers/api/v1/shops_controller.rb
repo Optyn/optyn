@@ -222,15 +222,16 @@ module Api
                          $emailBox.attr({
                            id: 'user_email',
                            name: 'user[email]',
-                           type: 'input',
-                           placeholder: 'Your Email'
+                           type: 'email',
+                           size: '34',
+                           placeholder: 'enter your e-mail'
                          });
 
                          var $submitButton = jQuery('<input />');
                          $submitButton.attr({
                            id: 'commit',
                            name: 'commit',
-                           value: 'Submit',
+                           value: 'Subscribe',
                            type: 'submit'
                          });
 
@@ -322,20 +323,22 @@ module Api
               '#{style}' +
               '<div id="optyn_button_wrapper">' +
               '<div class="optyn-text">' +
-              'Get Exclusive Specials, Coupons, and more.</div>' +
+              optynShop.welcome_message +
+              '</div>' +
+              '<div id="optyn-container">' +
+              '<h4>Welcome to Optyn</h4>'  +
+              '</div>' +
               '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
               '<div id="close_optyn_button">' +
               '<a href="javascript:void(0)" onclick="hideOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '">' +
               '<img src ="http://s11.postimg.org/5i89xyvsf/x_btn.png" /></a>' +
               '</div>' +
               '</div>' +
+              '</div>' +
+              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>' +
               '<div id="show_optyn_button_wrapper" style="display:none">' +
               '<a href="javascript:void(0)" onclick="showOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '"><img src="http://s23.postimg.org/gm12p8p2f/optyn_button_logo.png" /></a>' +
               '</div>' +
-              '<div id="optyn-container">' +
-              '<h4>Welcome to Optyn</h4>'  +
-              '</div></div>' +
-              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>' +
               #{show_hide}
             )
         )
@@ -356,7 +359,7 @@ module Api
       end
 
       def style
-        %Q(<style type="text/css"> #optyn_button_wrapper { background-color: #1791c0; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px; } #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; } #optyn_button_wrapper .optyn-button { } #show_optyn_button_wrapper { background-color: #1791c0; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; } #close_optyn_button { float: right; font-weight: bold; margin: 0px; padding-right: 30px; padding-top: 20px; color: white; vertical-align: middle; } #close_optyn_button a { color: white; position: absolute; z-index: 100; } #optyn-container { padding-right: 120px; padding-top: 10px; } #optyn-container h4 { margin: 0px; color: white; } </style>)
+        %Q(<style type="text/css"> #optyn_button_wrapper { background-color: #1791c0; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px; } #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; } #optyn_button_wrapper .optyn-button { } #show_optyn_button_wrapper { background-color: #1791c0; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; } #close_optyn_button { float: right; font-weight: bold; margin: 0px; padding-right: 30px; padding-top: 20px; color: white; vertical-align: middle; } #close_optyn_button a { color: white; position: absolute; z-index: 100; } #optyn-container { float:left; padding-left: 100px; padding-top: 10px; } #optyn-container form { margin: 0px; } #optyn-container form input[type="submit"] { background: #64b905; border-radius: 4px; display: inline-block; height: 40px; line-height: 38px; top: 4px; color: #ffffff; font size: 18px; text-decoration: none; text-shadow: none; border: 1px #304d58; font-weight: bold; padding-left: 10px; padding-right: 10px; font-size: 14px; } #optyn-container form input:hover[type="Submit"] { background: #80d81c; color: #fff; text-decoration: none; text-shadow: none; } #optyn-container form input[type="email"] { border-color: rgba(1, 59, 81, 0.93); border-style: solid; border-width: 1px; font-size: 16px; height: 38px; padding: 6px; color: white; background-color: #0b6283; margin-right: 10px; font-weight: bold;} #optyn-container h4 { margin: 0px; color: white; } ::-webkit-input-placeholder { /* WebKit browsers */ color: white; } :-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: white; }::-moz-placeholder { /* Mozilla Firefox 19+ */ color: white; } :-ms-input-placeholder { /* Internet Explorer 10+ */ color: white; } </style>)
       end
 
       def show_hide
