@@ -325,12 +325,12 @@ module Api
               'Get Exclusive Specials, Coupons, and more.</div>' +
               '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
               '<div id="close_optyn_button">' +
-              '<a href="javascript:void(0)" onclick="hideOptynButtonWrapper(\'optyn_button_wrapper\', \'show_optyn_button_wrapper\')">' +
+              '<a href="javascript:void(0)" onclick="hideOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '">' +
               '<img src ="http://s11.postimg.org/5i89xyvsf/x_btn.png" /></a>' +
               '</div>' +
               '</div>' +
               '<div id="show_optyn_button_wrapper" style="display:none">' +
-              '<a href="javascript:void(0)" onclick="showOptynButtonWrapper(\'optyn_button_wrapper\', \'show_optyn_button_wrapper\')"><img src="http://s23.postimg.org/gm12p8p2f/optyn_button_logo.png" /></a>' +
+              '<a href="javascript:void(0)" onclick="showOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '"><img src="http://s23.postimg.org/gm12p8p2f/optyn_button_logo.png" /></a>' +
               '</div>' +
               '<div id="optyn-container">' +
               '<h4>Welcome to Optyn</h4>'  +
