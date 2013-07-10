@@ -319,11 +319,24 @@ module Api
       def bar
         %Q(
             jQuery('body').prepend(
+              '#{style}' +
+              '<div id="optyn_button_wrapper">' +
+              '<div class="optyn-text">' +
+              'Get Exclusive Specials, Coupons, and more.</div>' +
               '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+              '<div id="close_optyn_button">' +
+              '<a href="javascript:void(0)" onclick="hideOptynButtonWrapper(\'optyn_button_wrapper\', \'show_optyn_button_wrapper\')">' +
+              '<img src ="http://s11.postimg.org/5i89xyvsf/x_btn.png" /></a>' +
+              '</div>' +
+              '</div>' +
+              '<div id="show_optyn_button_wrapper" style="display:none">' +
+              '<a href="javascript:void(0)" onclick="showOptynButtonWrapper(\'optyn_button_wrapper\', \'show_optyn_button_wrapper\')"><img src="http://s23.postimg.org/gm12p8p2f/optyn_button_logo.png" /></a>' +
+              '</div>' +
               '<div id="optyn-container">' +
               '<h4>Welcome to Optyn</h4>'  +
-              '</div>' +
-              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
+              '</div></div>' +
+              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>' +
+              #{show_hide}
             )
         )
       end
@@ -333,11 +346,32 @@ module Api
             var scriptElem = $("script[src='#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{@application.uid}']");
             jQuery(scriptElem).before(
               '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
-              '<div id="optyn-container">' +
+              '#{style}' +
+              '<div  id="optyn-container">' +
               '<h4>Welcome to Optyn</h4>'  +
               '</div>' +
               '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
             )
+        )
+      end
+
+      def style
+        %Q(<style type="text/css"> #optyn_button_wrapper { background-color: #1791c0; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px; } #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; } #optyn_button_wrapper .optyn-button { } #show_optyn_button_wrapper { background-color: #1791c0; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; } #close_optyn_button { float: right; font-weight: bold; margin: 0px; padding-right: 30px; padding-top: 20px; color: white; vertical-align: middle; } #close_optyn_button a { color: white; position: absolute; z-index: 100; } #optyn-container { padding-right: 120px; padding-top: 10px; } #optyn-container h4 { margin: 0px; color: white; } </style>)
+      end
+
+      def show_hide
+      %Q(
+        '<script type="text/javascript">' +
+        'function hideOptynButtonWrapper(wrapperId, showLinkId){' +
+          'document.getElementById(wrapperId).style.display = "none";' +
+          'document.getElementById(showLinkId).style.display = "block";' +
+    '}' +
+
+        'function showOptynButtonWrapper(wrapperId, showLinkId){' +
+        'document.getElementById(wrapperId).style.display = "block";' +
+        'document.getElementById(showLinkId).style.display = "none";' +
+    '}' +
+    '</script>'
         )
       end
     end
