@@ -117,13 +117,31 @@ class Shop < ActiveRecord::Base
     first_location.zip rescue ""
   end
 
-  def increment_impression_count
+  def button_display?
+    [1, 2].include?(oauth_application.call_to_action.to_i)
+  end
+
+  def display_bar?
+    1 == oauth_application.render_choice.to_i
+  end
+
+  def increment_button_impression_count
     self.button_impression_count = button_impression_count.to_i + 1
     self.save(validate: false)
   end
 
-  def increment_click_count
+  def increment_button_click_count
     self.button_click_count = self.button_click_count.to_i + 1
+    self.save(validate: false)
+  end
+
+  def increment_email_box_impression_count
+    self.email_box_impression_count = email_box_impression_count.to_i + 1
+    self.save(validate: false)
+  end
+
+  def increment_email_box_click_count
+    self.email_box_click_count = self.email_box_click_count.to_i + 1
     self.save(validate: false)
   end
 
@@ -193,7 +211,15 @@ class Shop < ActiveRecord::Base
   end
 
   def opt_ins_via_button
-    connections.where("connected_via LIKE '#{Connection::CONNECTED_VIA_BUTTON}'").count
+    connections.connected_via_optyn_button.count
+  end
+
+  def opt_ins_via_email_box
+    connections.connected_via_email_box.count
+  end
+
+  def email_box_conversion_percent
+    ((100 / email_box_impression_count.to_f) * opt_ins_via_email_box.to_f) #rescue "N/A"
   end
 
   def has_logo?

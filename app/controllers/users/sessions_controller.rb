@@ -3,6 +3,7 @@ class Users::SessionsController < Devise::SessionsController
   respond_to :html, :json
   prepend_before_filter :require_no_authentication, :only => [:new, :create, :authenticate_with_email]
   prepend_before_filter :allow_params_authentication!, :only => [:create, :authenticate_with_email]
+  prepend_before_filter :increment_email_box_click_count, :only => [:authenticate_with_email]
 
   def new
     session[:omniauth_manager] = nil
@@ -89,4 +90,9 @@ class Users::SessionsController < Devise::SessionsController
       @user.show_password = true
     end
   end
+
+  def increment_email_box_click_count
+    @shop = Shop.by_app_id(params[:app_id])
+    @shop.increment_email_box_click_count if @shop.present?
+  end  
 end

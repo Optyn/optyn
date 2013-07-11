@@ -2,9 +2,10 @@ class Connection < ActiveRecord::Base
   CONNECTED_VIA_WEBSITE = 'Website'
   CONNECTED_VIA_DASHBOARD = 'Optyn Dashboard'
   CONNECTED_VIA_BUTTON = 'Optyn Button'
+  CONNECTED_VIA_EMAIL_BOX = 'Optyn Email Box'
   CONNECTED_VIA_IMPORT = 'Import'
   CONNECTED_VIA_EXTENSION = 'Chrome Extension'
-  CONNECTED_VIA_TYPES = [CONNECTED_VIA_BUTTON, CONNECTED_VIA_WEBSITE, CONNECTED_VIA_DASHBOARD, CONNECTED_VIA_IMPORT, CONNECTED_VIA_EXTENSION]
+  CONNECTED_VIA_TYPES = [CONNECTED_VIA_BUTTON, CONNECTED_VIA_EMAIL_BOX, CONNECTED_VIA_WEBSITE, CONNECTED_VIA_DASHBOARD, CONNECTED_VIA_IMPORT, CONNECTED_VIA_EXTENSION]
 
   belongs_to :user
   belongs_to :shop
@@ -37,6 +38,12 @@ class Connection < ActiveRecord::Base
   scope :time_range, ->(start_timestamp, end_timestamp) { where(created_at: start_timestamp..end_timestamp) }
 
   scope :for_shop_in_time_range, ->(shop_id, start_timestamp, end_timestamp) { for_shop(shop_id).time_range(start_timestamp, end_timestamp) }
+
+  scope :connection_medium, ->(medium) { where(["connections.connected_via = :medium", {medium: medium}]) }
+
+  scope :connected_via_optyn_button, connection_medium(CONNECTED_VIA_BUTTON)
+
+  scope :connected_via_email_box, connection_medium(CONNECTED_VIA_EMAIL_BOX)
 
   def self.shops_connections(shop_id)
     for_shop(shop_id).includes_user_and_permissions.latest_updates

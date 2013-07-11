@@ -2,13 +2,13 @@ module Api
   module V1
     class ShopsController < ApplicationController
       respond_to :json, :except => [:button_framework]
-      doorkeeper_for [:create, :clear_session]
+      doorkeeper_for [:create]
 
       before_filter :fetch_store
       before_filter :log_impression_count, only: [:details]
 
       skip_before_filter :verify_authenticity_token
-      skip_before_filter :fetch_store, :log_impression_count, only: [:create, :clear_session]
+      skip_before_filter :fetch_store, only: [:create]
 
       def create
         if params[:name].present? #&& params[:email_frequency].present?
@@ -52,12 +52,17 @@ module Api
       private
       def fetch_store
         @shop = Shop.by_app_id(params[:app_id].to_s)
-
         head :unauthorized and false unless @shop.present?
       end
 
       def log_impression_count
-        @shop.increment_impression_count
+        unless @shop.virtual
+          if @shop.button_display? 
+            @shop.increment_button_impression_count
+          else
+            @shop.increment_email_box_impression_count
+          end
+        end
       end
 
       def button_script_content
@@ -142,7 +147,7 @@ module Api
                         var messageContainer = jQuery('<span />');
                         messageContainer.attr({id: 'optyn-welcome-container'});
                         messageContainer.append(optynShop.welcome_message);
-                        secondContainer.append(messageContainer);
+                        #{"secondContainer.append(messageContainer);" unless @shop.display_bar?}
 
                         outerContainer.append(secondContainer);
 
@@ -231,6 +236,14 @@ module Api
                            placeholder: 'enter your e-mail'
                          });
 
+                         var $hddenAppId = jQuery('<input />');
+                         $hddenAppId.attr({
+                           id: 'app_id',
+                           name: 'app_id',
+                           type: 'hidden',
+                           value: '#{params[:app_id]}'
+                         });
+
                          var $submitButton = jQuery('<input />');
                          $submitButton.attr({
                            id: 'commit',
@@ -240,6 +253,7 @@ module Api
                          });
 
                           $form.append($emailBox);
+                          $form.append($hddenAppId);
                           $form.append($submitButton);
                           $formContainer.append($form)
                           var $temp = jQuery('<div />');
