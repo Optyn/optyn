@@ -33,7 +33,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     begin
       @plan = current_shop.subscription.plan
       params[:subscription][:plan_id] = @plan.plan_id
-      params[:stripe_plan_id] = @plan.id
+      params[:stripe_plan_id] = @plan.plan_id
       @subscription = current_shop.subscription || Subscription.new()
       @subscription.attributes = params[:subscription]
 
