@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130706163812) do
+ActiveRecord::Schema.define(:version => 20130711003922) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20130706163812) do
 
   create_table "businesses", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "connection_errors", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "shop_id"
+    t.text     "error"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -269,10 +277,11 @@ ActiveRecord::Schema.define(:version => 20130706163812) do
     t.integer  "owner_id"
     t.string   "owner_type"
     t.text     "embed_code"
-    t.integer  "button_size",             :default => 1
     t.boolean  "checkmark_icon",          :default => true
     t.boolean  "show_default_optyn_text", :default => true
     t.text     "custom_text"
+    t.integer  "render_choice",           :default => 2
+    t.integer  "call_to_action",          :default => 2
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
@@ -338,8 +347,8 @@ ActiveRecord::Schema.define(:version => 20130706163812) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "stype"
     t.text     "description"
     t.string   "logo_img"
@@ -349,7 +358,9 @@ ActiveRecord::Schema.define(:version => 20130706163812) do
     t.string   "time_zone"
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
-    t.boolean  "virtual",                 :default => false
+    t.boolean  "virtual",                    :default => false
+    t.integer  "email_box_impression_count"
+    t.integer  "email_box_click_count"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
@@ -433,20 +444,11 @@ ActiveRecord::Schema.define(:version => 20130706163812) do
     t.string   "gender",                 :limit => 1
     t.date     "birth_date"
     t.string   "picture"
+    t.string   "alias"
   end
 
+  add_index "users", ["alias"], :name => "index_users_on_alias", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "virtual_connections", :force => true do |t|
-    t.integer  "shop_id"
-    t.integer  "user_id"
-    t.text     "html_content"
-    t.string   "state"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "virtual_connections", ["shop_id", "user_id"], :name => "index_virtual_connections_on_shop_id_and_user_id"
 
 end

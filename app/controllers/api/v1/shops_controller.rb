@@ -2,13 +2,13 @@ module Api
   module V1
     class ShopsController < ApplicationController
       respond_to :json, :except => [:button_framework]
-      doorkeeper_for [:create, :clear_session]
+      doorkeeper_for [:create]
 
       before_filter :fetch_store
       before_filter :log_impression_count, only: [:details]
 
       skip_before_filter :verify_authenticity_token
-      skip_before_filter :fetch_store, :log_impression_count, only: [:create, :clear_session]
+      skip_before_filter :fetch_store, only: [:create]
 
       def create
         if params[:name].present? #&& params[:email_frequency].present?
@@ -30,10 +30,11 @@ module Api
 
       def button_framework
         @application = @shop.oauth_application
+        call_to_action =  @application.call_to_action.to_i
 
-        if 1.to_s == AppSetting.optyn_oauth_client_id
-          return button_framework_script
-        elsif 2.to_s == AppSetting.optyn_oauth_client_id
+        if [1, 2].include?(call_to_action)
+           return button_framework_script
+        elsif 3 == call_to_action
            return email_box_framework_script
         end
       end
@@ -51,12 +52,17 @@ module Api
       private
       def fetch_store
         @shop = Shop.by_app_id(params[:app_id].to_s)
-
         head :unauthorized and false unless @shop.present?
       end
 
       def log_impression_count
-        @shop.increment_impression_count
+        unless @shop.virtual
+          if @shop.button_display? 
+            @shop.increment_button_impression_count
+          else
+            @shop.increment_email_box_impression_count
+          end
+        end
       end
 
       def button_script_content
@@ -79,13 +85,8 @@ module Api
               document.body.appendChild(outerScript);
 
               setTimeout(function(){
-                 jQuery('body').prepend(
-                  '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
-                  '<div id="optyn-container">' +
-                  '<h4>Welcome to Optyn</h4>'  +
-                  '</div>' +
-                  '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
-                 )
+                  #{@application.render_choice.to_i == 1 ? bar : part}
+
               }, 1000);
           )
 
@@ -98,7 +99,8 @@ module Api
 
           script = %Q(jQuery(document).ready(function(){
                       jQuery.getJSON('#{SiteConfig.app_base_url}#{api_shop_details_path(app_id: params[:app_id], format: :json)}?callback=?', null, function(data){
-
+                        jQuery('#optyn_button_wrapper .optyn-text').html(data.welcome_message);
+                        
                         var outerContainer = jQuery('<div />');
 
                         //Create the first container for button and user count.
@@ -124,7 +126,7 @@ module Api
 
                         var optynImage = jQuery('<img />')
                         optynImage.attr({
-                          src: '#{SiteConfig.app_base_url}/assets/#{@application.button_size == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
+                          src: '#{SiteConfig.app_base_url}/assets/#{@application.call_to_action.to_i == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png'}',
                           alt: 'Optyn Logo'
                         });
                         optynLink.append(optynImage);
@@ -145,7 +147,7 @@ module Api
                         var messageContainer = jQuery('<span />');
                         messageContainer.attr({id: 'optyn-welcome-container'});
                         messageContainer.append(optynShop.welcome_message);
-                        secondContainer.append(messageContainer);
+                        #{"secondContainer.append(messageContainer);" unless @shop.display_bar?}
 
                         outerContainer.append(secondContainer);
 
@@ -210,6 +212,9 @@ module Api
         respond_to do |format|
           script = %Q(jQuery(document).ready(function(){
                         jQuery.getJSON('#{SiteConfig.app_base_url}#{api_shop_details_path(app_id: params[:app_id], format: :json)}?callback=?', null, function(data){
+
+                        jQuery('#optyn_button_wrapper .optyn-text').html(data.welcome_message);
+                         
                          var $formContainer = jQuery("<div />");
                          $formContainer.attr({
                            id: 'optyn-first-container'
@@ -226,18 +231,29 @@ module Api
                          $emailBox.attr({
                            id: 'user_email',
                            name: 'user[email]',
-                           type: 'input'
+                           type: 'email',
+                           size: '34',
+                           placeholder: 'enter your e-mail'
+                         });
+
+                         var $hddenAppId = jQuery('<input />');
+                         $hddenAppId.attr({
+                           id: 'app_id',
+                           name: 'app_id',
+                           type: 'hidden',
+                           value: '#{params[:app_id]}'
                          });
 
                          var $submitButton = jQuery('<input />');
                          $submitButton.attr({
                            id: 'commit',
                            name: 'commit',
-                           value: 'Submit',
+                           value: 'Subscribe',
                            type: 'submit'
                          });
 
                           $form.append($emailBox);
+                          $form.append($hddenAppId);
                           $form.append($submitButton);
                           $formContainer.append($form)
                           var $temp = jQuery('<div />');
@@ -317,6 +333,66 @@ module Api
 
           format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
         end
+      end
+
+      def bar
+        %Q(
+            jQuery('body').prepend(
+              '#{style}' +
+              '<div id="optyn_button_wrapper">' +
+              '<div class="optyn-text">' +
+              '</div>' +
+              '<div id="optyn-container">' +
+              '<h4>Welcome to Optyn</h4>'  +
+              '</div>' +
+              '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+              '<div id="close_optyn_button">' +
+              '<a href="javascript:void(0)" onclick="hideOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '">' +
+              '<img src ="http://s11.postimg.org/5i89xyvsf/x_btn.png" /></a>' +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>' +
+              '<div id="show_optyn_button_wrapper" style="display:none">' +
+              '<a href="javascript:void(0)" onclick="showOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '"><img src="http://s23.postimg.org/gm12p8p2f/optyn_button_logo.png" /></a>' +
+              '</div>' +
+              #{show_hide}
+            )
+        )
+      end
+
+      def part
+        %Q(
+            var scriptElem = $("script[src='#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{@application.uid}']");
+            jQuery(scriptElem).before(
+              '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
+              '#{style}' +
+              '<div  id="optyn-container">' +
+              '<h4>Welcome to Optyn</h4>'  +
+              '</div>' +
+              '<iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>'
+            )
+        )
+      end
+
+      def style
+        %Q(<style type="text/css"> #optyn_button_wrapper { background-color: #1791c0; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px; } #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; } #optyn_button_wrapper .optyn-button { } #show_optyn_button_wrapper { background-color: #1791c0; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; } #close_optyn_button { float: right; font-weight: bold; margin: 0px; padding-right: 30px; padding-top: 20px; color: white; vertical-align: middle; } #close_optyn_button a { color: white; position: absolute; z-index: 100; } #optyn-container { float:left; padding-left: 100px; padding-top: 10px; } #optyn-container form { margin: 0px; } #optyn-container form input[type="submit"] { background: #64b905; border-radius: 4px; display: inline-block; height: 40px; line-height: 38px; top: 4px; color: #ffffff; font size: 18px; text-decoration: none; text-shadow: none; border: 1px #304d58; font-weight: bold; padding-left: 10px; padding-right: 10px; font-size: 14px; } #optyn-container form input:hover[type="Submit"] { background: #80d81c; color: #fff; text-decoration: none; text-shadow: none; } #optyn-container form input[type="email"] { border-color: rgba(1, 59, 81, 0.93); border-style: solid; border-width: 1px; font-size: 16px; height: 38px; padding: 6px; color: white; background-color: #0b6283; margin-right: 10px; font-weight: bold;} #optyn-container h4 { margin: 0px; color: white; } ::-webkit-input-placeholder { /* WebKit browsers */ color: white; } :-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: white; }::-moz-placeholder { /* Mozilla Firefox 19+ */ color: white; } :-ms-input-placeholder { /* Internet Explorer 10+ */ color: white; } </style>)
+      end
+
+      def show_hide
+      %Q(
+        '<script type="text/javascript">' +
+        'function hideOptynButtonWrapper(wrapperId, showLinkId){' +
+          'document.getElementById(wrapperId).style.display = "none";' +
+          'document.getElementById(showLinkId).style.display = "block";' +
+    '}' +
+
+        'function showOptynButtonWrapper(wrapperId, showLinkId){' +
+        'document.getElementById(wrapperId).style.display = "block";' +
+        'document.getElementById(showLinkId).style.display = "none";' +
+    '}' +
+    '</script>'
+        )
       end
     end
   end

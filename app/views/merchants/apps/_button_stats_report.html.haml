@@ -1,11 +1,11 @@
 #button_stats.span3
-	%h3
-		Your Optyn Stats
+	%h4
+		Optyn Button Stats
 	%hr
 	.line
 		Conversion %:
 		%strong
-			= @conversion_percent 
+			= number_with_precision(@conversion_percent.to_f, precision: 2)
 	.line
 		Total Opt-ins:
 		%strong
@@ -18,3 +18,23 @@
 		Total clicks:
 		%strong
 			= @optyn_button_clicks
+
+	%h4
+		Optyn Email Box Stats
+	%hr
+	.line
+		Conversion %:
+		%strong
+			= number_with_precision(@email_box_conversion_percent.to_f, precision: 2)
+	.line
+		Total Opt-ins:
+		%strong
+			= @email_box_opt_ins
+	.line
+		Total impressions:
+		%strong
+			= @email_box_impressions
+	.line
+		Total clicks:
+		%strong
+			= @email_box_clicks			        

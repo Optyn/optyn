@@ -115,8 +115,10 @@ Optyn::Application.routes.draw do
       get 'shop/button_framework.js', to: 'shops#button_framework'
       post 'shop', to: 'shops#create'
       match 'user', to: 'users#show', as: :user_profile
-      get 'user/connection_state.json', to: 'users#connection_state'
-      post 'user/subscribe.json', to: 'users#subscribe'
+      get 'user/check_connection.json', to: 'users#check_connection'
+      post 'user/create_connection.json', to: 'users#create_connection'
+      get 'user/create_error', to: 'users#create_error'
+      get 'user/alias', to: 'users#alias'
       get '/login', to: 'oauth#login', as: :login
       get '/connection', to: 'oauth#connection', as: :connection
       put '/automatic_connection', to: 'oauth#automatic_connection', as: :automatic_connection

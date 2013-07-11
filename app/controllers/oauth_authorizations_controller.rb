@@ -1,8 +1,6 @@
 class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
   layout 'oauth_dialog'
 
-  prepend_before_filter :increment_button_click_count
-
   def new
     if pre_auth.authorizable?
       if Doorkeeper::AccessToken.matching_token_for(pre_auth.client, current_resource_owner.id, pre_auth.scopes) || skip_authorization?
@@ -21,6 +19,7 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
           }
         end
       else
+        increment_button_click_count
         respond_to do |format|
           format.html { render :new }
           format.json {
@@ -77,6 +76,8 @@ class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
   private
   def increment_button_click_count
     @shop = Shop.by_app_id(params[:client_id])
-    @shop.increment_click_count if @shop.present?
+    if @shop.present? && !@shop.virtual && @shop.button_display?
+      @shop.increment_button_click_count
+    end  
   end
 end

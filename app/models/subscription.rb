@@ -18,7 +18,9 @@ class Subscription < ActiveRecord::Base
 
   def update_plan(plan)
     self.update_attribute(:plan_id, plan.id)
-    cu = Stripe::Customer.retrieve(self.stripe_customer_token) 
-    cu.update_subscription(:plan => plan.plan_id, :prorate => false)
+    if self.stripe_customer_token.present?
+      cu = Stripe::Customer.retrieve(self.stripe_customer_token)
+      cu.update_subscription(:plan => plan.plan_id, :prorate => false)
+    end
   end
 end

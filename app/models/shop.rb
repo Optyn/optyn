@@ -117,13 +117,31 @@ class Shop < ActiveRecord::Base
     first_location.zip rescue ""
   end
 
-  def increment_impression_count
+  def button_display?
+    [1, 2].include?(oauth_application.call_to_action.to_i)
+  end
+
+  def display_bar?
+    1 == oauth_application.render_choice.to_i
+  end
+
+  def increment_button_impression_count
     self.button_impression_count = button_impression_count.to_i + 1
     self.save(validate: false)
   end
 
-  def increment_click_count
+  def increment_button_click_count
     self.button_click_count = self.button_click_count.to_i + 1
+    self.save(validate: false)
+  end
+
+  def increment_email_box_impression_count
+    self.email_box_impression_count = email_box_impression_count.to_i + 1
+    self.save(validate: false)
+  end
+
+  def increment_email_box_click_count
+    self.email_box_click_count = self.email_box_click_count.to_i + 1
     self.save(validate: false)
   end
 
@@ -156,7 +174,7 @@ class Shop < ActiveRecord::Base
       details[:location] = useful_location.as_json(except: [:id, :created_at, :updated_at, :longitude, :latitude])
     end
 
-    details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.button_size == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
+    details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.call_to_action == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
 
     # put the oauth details
     details[:welcome_message] = oauth_application.show_default_optyn_text ? SiteConfig.api_welcome_message : oauth_application.custom_text
@@ -193,7 +211,15 @@ class Shop < ActiveRecord::Base
   end
 
   def opt_ins_via_button
-    connections.where("connected_via LIKE '#{Connection::CONNECTED_VIA_BUTTON}'").count
+    connections.connected_via_optyn_button.count
+  end
+
+  def opt_ins_via_email_box
+    connections.connected_via_email_box.count
+  end
+
+  def email_box_conversion_percent
+    ((100 / email_box_impression_count.to_f) * opt_ins_via_email_box.to_f) #rescue "N/A"
   end
 
   def has_logo?
@@ -301,7 +327,8 @@ class Shop < ActiveRecord::Base
   def set_app_attrs(app, options)
     app.redirect_uri = options[:redirect_uri]
     app.owner = self
-    app.button_size = options[:button_size]
+    app.call_to_action = options[:call_to_action]
+    app.render_choice = options[:render_choice]
     app.checkmark_icon = options[:checkmark_icon]
     app.show_default_optyn_text = options[:show_default_optyn_text]
     app.custom_text = options[:custom_text]

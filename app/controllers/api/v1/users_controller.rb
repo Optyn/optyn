@@ -3,64 +3,72 @@ module Api
     class UsersController < ApiBaseController
       doorkeeper_for :all
 
-      before_filter :map_current_user_to_store
-      before_filter :sanitize_tab_html, :validate_subscribe_params, only: [:subscribe]
-      before_filter :validate_connection_state_params, only: [:connection_state]
-      before_filter :validate_shop
+      before_filter :map_current_user_to_store, only: [:show]
+      before_filter :validate_subscribe_params, only: [:create_connection]
+      before_filter :validate_shop, :validate_connection_state_params, except: [:show]
 
       def show
         #respond_with current_user.as_json(only: [:name])
         if params[:callback].present?
-          resp = "var userInfo = #{current_user.as_json(only: [:name]).to_json};"
+          resp = "var userInfo = #{{name: current_user.display_name}.to_json};"
           resp << "#{params[:callback]}(userInfo);"
           render text: resp
         else
-          render(json: {data: {name: current_user.as_json(only: [:name])}}, status: :ok)
+          render(json: {data: {name: current_user.display_name}}, status: :ok)
         end
       end
 
-      def connection_state
-        connection = Connection.find_by_shop_id_and_user_id(@shop.id, current_user.id)
+      def check_connection
+        connection = Connection.find_by_user_id_and_shop_id(current_user.id, @shop.id)
         if connection.present?
-          return render(status: :ok, json: {data: {state: "Connected"}})
+          render json: {data: {user: connection.user.display_name, shop: connection.shop.name, active: connection.active}}
+        else
+          render json: {data: {user: nil, shop: nil}}
         end
-
-        virtual_connection = VirtualConnection.find_by_shop_id_and_user_id(@shop.id, current_user.id)
-        render(status: :ok, json: {data: {state: virtual_connection.state}})
       end
 
-      def subscribe
-        sanitized_html = @sanitized_tab_html.scan(/(<form(.*?)<\/form>)/imx).collect(&:first).collect { |form| "<div>#{form}</div>" }.join("")
-        @virtual_connection = VirtualConnection.find_or_create_by_shop_id_and_user_id(@shop.id, current_user.id, html_content: sanitized_html, state: VirtualConnection::IN_PROCESS_STATE)
-        render(json: {data: {user: {name: current_user.name}, connection: {state: @virtual_connection.state}, shop: {name: @shop.name}}}, status: :ok)
+      def create_connection
+        connection = Connection.find_by_user_id_and_shop_id(current_user.id, @shop.id) ||
+            Connection.new(user_id: current_user.id, shop_id: @shop.id)
+        connection.active = true
+        connection.connected_via = Connection::CONNECTED_VIA_EXTENSION if connection.new_record?
+        connection.save
+
+        render json: {data: {user: current_user.display_name, shop: @shop.name, active: connection.active}}
+      end
+
+      def create_error
+        connection_error = ConnectionError.create(user_id: current_user.id, shop_id: @shop.id, error: params[:error])
+        render json: {data: {user: current_user.display_name, shop: @shop.name}}
+      end
+
+      def alias
+        render json: {data: {user: current_user.display_name, alias: current_user.alias}}
       end
 
       private
       def validate_subscribe_params
-        if params[:shop_name].blank? || @sanitized_tab_html.blank?
+        if params[:name].blank?
           errors = []
-          errors << ["Shop name cannot be blank"] if params[:shop_name].blank?
+          errors << ["Shop name cannot be blank"] if params[:name].blank?
           errors << ["The form content of the current tab is missing"] if @sanitized_tab_html.blank?
           render(status: :unprocessable_entity, json: {data: {errors: errors.as_json}})
           false
         end
       end
 
-      def sanitize_tab_html
-        @sanitized_tab_html = params[:tab_html].encode('UTF-16', 'UTF-8', :invalid => :replace, :replace => '').encode('UTF-8', 'UTF-16')
-      end
-
       def validate_shop
-        if params[:shop_name].present?
+        if params[:name].present?
+          @shop = Shop.find_by_name(params[:name])
           if @shop.blank?
-            render(status: :unprocessable_entity, json: {data: {errors: "Could find the shop"}})
+            render(status: :unprocessable_entity, json: {data: {errors: "Could not find the shop"}})
             false
           end
         end
       end
 
       def validate_connection_state_params
-        if params[:shop_name].blank?
+        if params[:name].blank?
           render(status: :unprocessable_entity, json: {data: {errors: "Shop name cannot be blank"}})
           false
         end

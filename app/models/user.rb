@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :permissions_users
 
   #accepts_nested_attributes_for :permission
-  after_create :create_permission_users, :send_welcome_email
+  after_create :create_permission_users, :create_alias, :send_welcome_email
 
   PER_PAGE = 30
 
@@ -123,10 +123,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def create_alias
+    optyn_alias = "optyn#{Devise.friendly_token.first(8).downcase}@optynmail.com"
+    while User.find_by_alias(optyn_alias).present?
+      optyn_alias = "optyn#{Devise.friendly_token.first(8).downcase}@optynmail.com"
+    end
+
+    self.alias = optyn_alias
+    self.save
+  end
+
   def make_connection_if!(shop)
     if shop.present?
       if !connections.for_shop(shop.id).present?
-        connections.create!(user_id: self.id, shop_id: shop.id, connected_via: Connection::CONNECTED_VIA_BUTTON)
+        connected_via = shop.button_display? ? Connection::CONNECTED_VIA_BUTTON : Connection::CONNECTED_VIA_EMAIL_BOX
+        connections.create!(user_id: self.id, shop_id: shop.id, connected_via: connected_via)
       end
       connections.for_shop(shop.id).first
     end
@@ -179,6 +190,10 @@ class User < ActiveRecord::Base
 
   def permission_names
     permissions_users.select(&:action).collect(&:permission).collect(&:name)
+  end
+
+  def display_name
+    name || "Optyn User"
   end
 
   def image_url(omniauth_provider_id=nil)

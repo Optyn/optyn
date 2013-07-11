@@ -35,10 +35,16 @@ class Merchants::AppsController < Merchants::BaseController
 
   def set_report_content #PIVOTAL STORY 51368293
     @optyn_button_stats = true
+    #optyn button stats
     @optyn_impressions = current_shop.button_impression_count.to_i
     @optyn_button_clicks = current_shop.button_click_count.to_i
     @opt_ins = current_shop.opt_ins_via_button
-    @conversion_percent = @opt_ins/@optyn_impressions * 100  rescue 'NA' #Conversion percent (Opt-ins/Optyn impressions * 100)
+    @conversion_percent = @opt_ins.to_f / @optyn_impressions.to_f * 100  rescue 'NA' #Conversion percent (Opt-ins/Optyn impressions * 100)
+    #optyn email box stats
+    @email_box_impressions = current_shop.email_box_impression_count.to_i
+    @email_box_clicks = current_shop.email_box_click_count.to_i
+    @email_box_opt_ins = current_shop.opt_ins_via_email_box
+    @email_box_conversion_percent = current_shop.email_box_conversion_percent
   end
 
 end

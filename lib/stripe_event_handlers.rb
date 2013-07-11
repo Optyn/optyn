@@ -60,7 +60,7 @@ module StripeEventHandlers
     end  
   end
 
-  def handle_invoice_created(params)
+  def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     evaluated_plan = Plan.which(subscription.shop)
     subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
@@ -68,7 +68,7 @@ module StripeEventHandlers
     Rails.logger.error e
   end
 
-  def handle_invoice_payment_succeeded(params)
+  def self.handle_invoice_payment_succeeded(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
@@ -77,7 +77,7 @@ module StripeEventHandlers
     Rails.logger.error e
   end
 
-  def handle_invoice_payment_failed(params)
+  def self.handle_invoice_payment_failed(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     subscription.update_attribute(:active, false)
     amount = params['data']['object']['total']
@@ -87,7 +87,7 @@ module StripeEventHandlers
     Rails.logger.error e
   end
 
-  def handle_invoice_updated(params)
+  def self.handle_invoice_updated(params)
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
       Invoice.create(
