@@ -148,7 +148,6 @@ Optyn::Application.routes.draw do
     resources :locations
     resources :dashboards
     resources :file_imports
-
     resource :shop do
       member do
         get :check_identifier

@@ -15,6 +15,7 @@ function Apps() {
             this.hookSaveButton();
             this.hookSaveAndResetButton();
             this.hookOptynButtonTextToggle();
+            this.hookTooltip();
         }
 
         if ($('.app-container').length) {
@@ -109,5 +110,9 @@ function Apps() {
                 $('#oauth_application_show_default_optyn_text').prop('checked', true);
             }
         });
+    };
+
+    this.hookTooltip = function(){
+        $('.tip').tooltip()
     };
 }
