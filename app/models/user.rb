@@ -192,6 +192,10 @@ class User < ActiveRecord::Base
     permissions_users.select(&:action).collect(&:permission).collect(&:name)
   end
 
+  def display_name
+    name || "Optyn User"
+  end
+
   def image_url(omniauth_provider_id=nil)
     if !picture.blank?
       picture

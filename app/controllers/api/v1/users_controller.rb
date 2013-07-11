@@ -10,18 +10,18 @@ module Api
       def show
         #respond_with current_user.as_json(only: [:name])
         if params[:callback].present?
-          resp = "var userInfo = #{current_user.as_json(only: [:name]).to_json};"
+          resp = "var userInfo = #{{name: current_user.display_name}.to_json};"
           resp << "#{params[:callback]}(userInfo);"
           render text: resp
         else
-          render(json: {data: {name: current_user.as_json(only: [:name])}}, status: :ok)
+          render(json: {data: {name: current_user.display_name}}, status: :ok)
         end
       end
 
       def check_connection
         connection = Connection.find_by_user_id_and_shop_id(current_user.id, @shop.id)
         if connection.present?
-          render json: {data: {user: connection.user.name, shop: connection.shop.name, active: connection.active}}
+          render json: {data: {user: connection.user.display_name, shop: connection.shop.name, active: connection.active}}
         else
           render json: {data: {user: nil, shop: nil}}
         end
@@ -34,16 +34,16 @@ module Api
         connection.connected_via = Connection::CONNECTED_VIA_EXTENSION if connection.new_record?
         connection.save
 
-        render json: {data: {user: current_user.name, shop: @shop.name, active: connection.active}}
+        render json: {data: {user: current_user.display_name, shop: @shop.name, active: connection.active}}
       end
 
       def create_error
         connection_error = ConnectionError.create(user_id: current_user.id, shop_id: @shop.id, error: params[:error])
-        render json: {data: {user: current_user.name, shop: @shop.name}}
+        render json: {data: {user: current_user.display_name, shop: @shop.name}}
       end
 
       def alias
-        render json: {data: {user: current_user.name, alias: current_user.alias}}
+        render json: {data: {user: current_user.display_name, alias: current_user.alias}}
       end
 
       private
