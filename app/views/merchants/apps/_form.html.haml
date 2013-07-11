@@ -3,18 +3,30 @@
   = f.text_field :redirect_uri, placeholder: 'Enter your website URL.'
 
   .option
-    = f.radio_button(:call_to_action, 1.to_s)
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Small button is great for inline content and if there is limited space.", :class => "tip"} Small Button
-    = f.radio_button(:call_to_action, 2.to_s)
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Large Button gives you a great way to get noticed. Put it anywhere on the site.", :class => "tip"} Large Button
-    = f.radio_button(:call_to_action, 3.to_s)
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "An E-Mail Box is an alternative to the optyn button. The E-Mail Box is the traditional way to capture users.", :class => "tip"} Email Box
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Small button is great for inline content and if there is limited space.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button(:call_to_action, 1.to_s)
+        Small Button
+
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Large Button gives you a great way to get noticed. Put it anywhere on the site.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button(:call_to_action, 2.to_s)
+        Large Button
+
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "An E-Mail Box is an alternative to the optyn button. The E-Mail Box is the traditional way to capture users.", :class => "tip"} 
+      %label.radio.inline
+        = f.radio_button(:call_to_action, 3.to_s)
+        Email Box
 
   .option
-    = f.radio_button :render_choice, 1.to_s
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "Highly Recommended. We recommend the Top bar that gives you a better way of capturing your customers.", :class => "tip"} Top Bar
-    = f.radio_button :render_choice, 2.to_s
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "A module can be placed anywhere on a website and within a content.", :class => "tip"} Module
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "Highly Recommended. We recommend the Top bar that gives you a better way of capturing your customers.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button :render_choice, 1.to_s
+        Top Bar
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "A module can be placed anywhere on a website and within a content.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button :render_choice, 2.to_s
+        Module
 
   .option
     %label.checkbox
