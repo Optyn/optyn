@@ -72,7 +72,7 @@ module StripeEventHandlers
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
-    MerchantMailer.invoice_payment_succeeded(Manager.find_by_email(subscription.email), amount, conn_count).deliver
+    Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
   rescue => e
     Rails.logger.error e
   end
@@ -82,7 +82,7 @@ module StripeEventHandlers
     subscription.update_attribute(:active, false)
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
-    MerchantMailer.invoice_payment_failure(Manager.find_by_email(subscription.email), amount, conn_count).deliver
+    Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'invoice_payment_failure', {shop_id: subscription.shop.id, amount: amount, connection_count: conn_count})
   rescue => e
     Rails.logger.error e
   end

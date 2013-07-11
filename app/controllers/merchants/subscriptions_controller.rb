@@ -36,17 +36,18 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       params[:stripe_plan_id] = @plan.id
       @subscription = current_shop.subscription || Subscription.new()
       @subscription.attributes = params[:subscription]
+
+      @customer = @subscription.stripe_customer_token.present? ? Stripe::Customer.retrieve(@subscription.stripe_customer_token) : customer = Subscription.create_stripe_customer(params)
       if @subscription.stripe_customer_token.blank?
-        customer = Subscription.create_stripe_customer(params)
         @subscription.stripe_customer_token = customer.id
       end
 
       if @subscription.save
         @subscription.update_attribute(:active, true) if @subscription.stripe_customer_token.present?
-        amount = customer.subscription.plan.amount
+        amount = @customer.subscription.plan.amount
         conn_count = current_shop.active_connection_count
-        last4 = customer.active_card.last4
-        MerchantMailer.payment_notification(Manager.find_by_email(@subscription.email), amount, conn_count, last4).deliver
+        last4 = @customer.active_card.last4
+        Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop, amount: amount, conn_count: conn_count, last4: last4})
         flash[:notice]="Payment done successfully"
         redirect_to (session[:return_to] || root_path)
       else

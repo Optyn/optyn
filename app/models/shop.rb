@@ -245,14 +245,14 @@ class Shop < ActiveRecord::Base
   def upgrade_plan
     new_plan = Plan.which(self)
     self.subscription.update_plan(new_plan)
-    MerchantMailer.notify_plan_upgrade(self.manager).deliver
+    Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
     create_audit_entry("Subscription updated to plan #{new_plan.name}")
   end
 
   def check_subscription
     if !self.virtual
       if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
-        MerchantMailer.notify_passing_free_tier(self.manager).deliver
+        Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
       elsif !self.virtual && self.tier_change_required?
         self.upgrade_plan
       end
