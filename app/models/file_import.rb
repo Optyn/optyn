@@ -37,6 +37,13 @@ class FileImport < ActiveRecord::Base
 
         user = User.find_by_email(row[:email]) || User.new(email: row[:email])
         user.name = row[:name] unless user.name.present?
+        gender = if (gender_val = row[:gender].to_s.downcase).length == 1
+                   gender_val
+                 else
+                    gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
+                 end
+        user.gender = gender
+        user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
         user.valid?
 
         (counters[:unparsed_rows] += 1) and (add_unparsed_row(row)) and next if user.errors.include?(:email) || user.errors.include?(:name)
