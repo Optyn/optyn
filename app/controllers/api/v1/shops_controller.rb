@@ -94,7 +94,8 @@ module Api
 
           script = %Q(jQuery(document).ready(function(){
                       jQuery.getJSON('#{SiteConfig.app_base_url}#{api_shop_details_path(app_id: params[:app_id], format: :json)}?callback=?', null, function(data){
-
+                        jQuery('#optyn_button_wrapper .optyn-text').html(data.welcome_message);
+                        
                         var outerContainer = jQuery('<div />');
 
                         //Create the first container for button and user count.
@@ -206,6 +207,9 @@ module Api
         respond_to do |format|
           script = %Q(jQuery(document).ready(function(){
                         jQuery.getJSON('#{SiteConfig.app_base_url}#{api_shop_details_path(app_id: params[:app_id], format: :json)}?callback=?', null, function(data){
+
+                        jQuery('#optyn_button_wrapper .optyn-text').html(data.welcome_message);
+                         
                          var $formContainer = jQuery("<div />");
                          $formContainer.attr({
                            id: 'optyn-first-container'
@@ -323,7 +327,6 @@ module Api
               '#{style}' +
               '<div id="optyn_button_wrapper">' +
               '<div class="optyn-text">' +
-              optynShop.welcome_message +
               '</div>' +
               '<div id="optyn-container">' +
               '<h4>Welcome to Optyn</h4>'  +
