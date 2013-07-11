@@ -64,6 +64,7 @@ module StripeEventHandlers
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     evaluated_plan = Plan.which(subscription.shop)
     subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
+    ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
   rescue => e
     Rails.logger.error e
   end
@@ -100,5 +101,10 @@ module StripeEventHandlers
     end
   rescue => e
     Rails.logger.error e
+  end
+
+  def self.handle_charge_succeeded(params)
+    subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    ShopAudit.create(shop_id: subscription.shop.id, description: "Customer Succeeded")
   end
 end
