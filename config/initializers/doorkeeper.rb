@@ -24,12 +24,12 @@ Doorkeeper.configure do
   end
 
   # Authorization Code expiration time (default 10 minutes).
-  authorization_code_expires_in 2.hours
+  authorization_code_expires_in 1.minute
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
   # access_token_expires_in 2.hours
-  access_token_expires_in 2.hours
+  access_token_expires_in 1.minute
 
   # Issue access tokens with refresh token (disabled by default)
   # use_refresh_token
