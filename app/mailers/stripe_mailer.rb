@@ -3,7 +3,7 @@ class StripeMailer < ActionMailer::Base
 
   def plan_change_notification(plan)
     @plan = plan
-    mail(to: ["Gaurav Gaglani <gaurav@optyn.com>", "Alen Malkoc <alen@optyn.com>"],
+    mail(to: ["Gaurav Gaglani <gaurav@optyn.com>"],
          subject: "Plan created or changed"
     )
   end
