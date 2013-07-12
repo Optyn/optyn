@@ -14,11 +14,12 @@
 .control-group
   = f.label :type_of_discount, class: "control-label"
   .controls.checkbox
-    = f.radio_button :type_of_discount, :dollar_off
-    = '$off'
-    = 'or'
-    = f.radio_button :type_of_discount, :percentage_off
-    = '%off'
+    %label.radio.inline
+      = f.radio_button :type_of_discount, :dollar_off
+      '$' off or 
+    %label.radio.inline
+      = f.radio_button :type_of_discount, :percentage_off
+      '%' off
 
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
