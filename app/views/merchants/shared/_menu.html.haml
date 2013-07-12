@@ -1,42 +1,30 @@
-.span3.menuleft
+.span2.menuleft
   %ul.merchant-menu
-    %li.menu-header
-      Hello
-    %hr
     %li
       %a.active{:href => merchants_root_path}
-        = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
-        My Dashboard
+        Dashboard
     %li
       %a{:href => merchants_messages_path, :alt => "My Messages"}
-        = image_tag "menu_icon_messages.png", :alt => "Messages"
-        Message Center
+        Engage!
     %li
       %a{:href => "/merchants/connections"}
-        = image_tag "menu_icon_connections.png", :alt => ""
         My Customers
     %li
       %a{:href => merchants_app_path}
-        = image_tag "menu_icon_connections.png", :alt => "Your API Button"
-        Your Optyn Button
+        Setup
     %li
       %a{:href => merchants_survey_path}
-        = image_tag "menu_icon_campaigns.png", :alt => "Surveys"
-        Customer Surveys
+        Surveys
     %li
       %a{:href => merchants_survey_survey_answers_path}
-        = image_tag "menu_icon_messages.png", :alt => "Segmentation"
-        Customer Segmentation
+        Segmentation
     %li
       %a{:href => merchants_shop_path}
-        = image_tag "menu_icon_shop_details.png", :alt => "Your Shop"
-        Manage Your Shop
+        Manage Account
     %li
       %a{:href => merchants_file_imports_path}
-        = image_tag "menu_icon_dashboard.png", :alt => "Connections"
         Import Users
     %li
-      = image_tag "menu_icon_dashboard.png", :alt => "Logout"
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
 
   - if @optyn_button_stats.present?

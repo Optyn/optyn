@@ -12,7 +12,12 @@
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   filter: none;
-  background: #1791c0;
+  background: #8ab953;
+}
+.navbar-inner .container-header {
+  width: 980px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .navbar .brand {
   font-size: 26px;
@@ -46,7 +51,7 @@
   position: static;
   background-color: white;
   border-radius: 4px;
-  color: #1791c0;
+  color: #8ab953;
   display: block;
   margin-left: 8px;
 }
