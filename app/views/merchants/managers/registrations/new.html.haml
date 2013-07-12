@@ -8,8 +8,6 @@
         %div  
           .head
             %h4 Create your account
-            
-          = render partial: "merchants/managers/shared/social_login_buttons" if !@omniauth.present?
 
           .form  
             = form_for(@shop, :as => 'shop_name', :url => merchants_manager_registration_path(@shop)) do |f|
