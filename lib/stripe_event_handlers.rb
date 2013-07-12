@@ -9,7 +9,7 @@ module StripeEventHandlers
 
   def self.handle_customer_subscription_updated(params)
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    status =  params['data']['object']['customer']['subscription']['status']
+    status = params['data']['object']['customer']['subscription']['status']
     @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
   rescue => e
     Rails.logger.error e
@@ -28,7 +28,7 @@ module StripeEventHandlers
   rescue => e
     Rails.logger.error e
   end
-  
+
   def self.handle_plan_created(params)
     begin
       @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
@@ -51,13 +51,13 @@ module StripeEventHandlers
       @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
       @plan=Plan.find_by_plan_id(params['data']['object']['id']) if @stripe_plan
       @plan.update_attributes(:plan_id => @stripe_plan.id,
-              :name => @stripe_plan.name,
-              :interval => @stripe_plan.interval,
-              :amount => @stripe_plan.amount,
-              :currency=>@stripe_plan.currency)
+                              :name => @stripe_plan.name,
+                              :interval => @stripe_plan.interval,
+                              :amount => @stripe_plan.amount,
+                              :currency => @stripe_plan.currency)
     rescue => e
       Rails.logger.error e
-    end  
+    end
   end
 
   def self.handle_invoice_created(params)
@@ -92,19 +92,49 @@ module StripeEventHandlers
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
       Invoice.create(
-            :subscription_id => subscription, 
-            :stripe_customer_token => params['data']['object']['customer'], 
-            :stripe_invoice_id => params['data']['object']['id'], 
-            :paid_status => params['data']['object']['paid'], 
-            :amount => params['data']['object']['total']
-          )
+          :subscription_id => subscription,
+          :stripe_customer_token => params['data']['object']['customer'],
+          :stripe_invoice_id => params['data']['object']['id'],
+          :paid_status => params['data']['object']['paid'],
+          :amount => params['data']['object']['total']
+      )
     end
   rescue => e
     Rails.logger.error e
   end
 
-  def self.handle_charge_succeeded(params)
-    subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    ShopAudit.create(shop_id: subscription.shop.id, description: "Customer Succeeded")
+  def self.handle_coupon_created(params)
+    coupon = Coupon.from_attrs(params)
+    coupon.save!
+  end
+
+  def self.handle_coupon_deleted(params)
+    coupon = Coupon.from_attrs(params)
+    unless coupon.new_record?
+      shop = Shop.find_by_coupon_id(coupon_id)
+      shop.update_attribute(:coupon_id, nil)
+      coupon.destroy
+    end
+  end
+
+  def self.handle_customer_created(params)
+    manage_coupon(params)
+  end
+
+  def self.handle_customer_updated(params)
+    manage_coupon(params)
+  end
+
+  private
+  def self.manage_coupon(customer_params)
+    if params["discount"].present?
+      discount_map = customer_params["discount"]
+      stripe_coupon_id = discount_map['coupon']['id']
+      coupon = Coupon.find_by_stripe_id(stripe_coupon_id)
+      subscription = Subscription.find_by_stripe_customer_token(customer_params['id'])
+      shop = subscription.shop
+      shop.coupon_id = coupon.id
+      shop.save(validate: false)
+    end
   end
 end

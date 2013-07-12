@@ -12,6 +12,8 @@ class Subscription < ActiveRecord::Base
   validates :stripe_customer_token, presence: true, unless: :new_record?
   validates :shop_id, presence: true
 
+  after_create :create_stripe_customer_with_email
+
   def self.create_stripe_customer(params)
     Stripe::Customer.create(email: params['subscription']['email'], card: params['stripeToken'],:plan=>params['stripe_plan_id'])
   end
@@ -22,5 +24,10 @@ class Subscription < ActiveRecord::Base
       cu = Stripe::Customer.retrieve(self.stripe_customer_token)
       cu.update_subscription(:plan => plan.plan_id, :prorate => false)
     end
+  end
+
+  private
+  def create_stripe_customer_with_email
+    Resque.enqueue(SubscriptionBackgroundProcessor, self.id)
   end
 end

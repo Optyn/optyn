@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711003922) do
+ActiveRecord::Schema.define(:version => 20130712025807) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -73,6 +73,23 @@ ActiveRecord::Schema.define(:version => 20130711003922) do
   end
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
+
+  create_table "coupons", :force => true do |t|
+    t.string   "stripe_id"
+    t.decimal  "percent_off"
+    t.decimal  "amount_off"
+    t.string   "currency"
+    t.boolean  "livemode"
+    t.string   "duration"
+    t.string   "redeem_by"
+    t.string   "max_redemptions"
+    t.string   "times_redeemed"
+    t.string   "duration_in_months"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "coupons", ["stripe_id"], :name => "index_coupons_on_stripe_id", :unique => true
 
   create_table "file_imports", :force => true do |t|
     t.string   "csv_file"
@@ -361,6 +378,8 @@ ActiveRecord::Schema.define(:version => 20130711003922) do
     t.boolean  "virtual",                    :default => false
     t.integer  "email_box_impression_count"
     t.integer  "email_box_click_count"
+    t.integer  "coupon_id"
+    t.datetime "discount_end_at"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true

@@ -16,6 +16,7 @@ class Shop < ActiveRecord::Base
   has_many :shop_audits
   has_many :virtual_connections
   has_many :virtual_subscribers, through: :virtual_connections, source: :user
+  belongs_to :coupon
 
   SHOP_TYPES=['local', 'online']
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual
@@ -264,6 +265,7 @@ class Shop < ActiveRecord::Base
   end
 
   def disabled?
+    return false if self.coupon.free_forever?
     (Plan.which(self) != Plan.starter and !self.subscription.active) # rescue false
   end
 
