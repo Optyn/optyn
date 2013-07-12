@@ -17,14 +17,17 @@
 
 
   /TODO QRCODE IMAGE WILL COME HERE LATER
+  /SAMPLE QR CODE
   %p{:style => "text-align:center;"}
-    %h1
+    = image_tag "http://s10.postimg.org/bqz2kmeg9/qrcode.png", :alt => 'Preview Code'
+  %p{:style => "text-align:center;"}
+    %h1{:align => "center"}
       = @message.coupon_code
 
 .row
   %strong How to Redeem:
   %p
-    == Just bring or show this email to #{@message.shop_name} (print out or show it on your iPhone) and bamm, you got yourself an awesome #{message_discount_type_text(@message)} off at #{@message.shop_name}.
+    == Just bring or show this email onto #{@message.shop_name} (print out or show it on your iPhone) and bamm, you got yourself an awesome #{message_discount_type_text(@message)} off at #{@message.shop_name}.
 
   %p
     == How awesome is that? Go ahead and hurry before it expires on #{formatted_message_form_datetime(@message, 'ending')}.
