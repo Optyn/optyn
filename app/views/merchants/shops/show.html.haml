@@ -1,13 +1,10 @@
-#title_header
-  %h3
-    Your Shop Details
-/Flash Notice
-= display_flash_message
 /Main Body
 #merchants
   .container
     = render partial: "merchants/shared/menu"
-    .span9
+    .span8
+      %h4
+        Manage Your Shop
       .action-buttons
         = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
         %a.btn{:href => "upgrade"} Your Pricing Plan

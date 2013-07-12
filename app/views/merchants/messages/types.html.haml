@@ -1,8 +1,3 @@
-#title_header
-  %h3
-    Message Center
-/Flash Notice
-= display_flash_message
 /Main Body
 #merchants
   .container
@@ -22,15 +17,15 @@
           %a{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
             .span2.type
               = image_tag "mc_coupon_icon.png", :alt => ''
-              %h3 Let's Create a Coupon
+              %h3 Create a Coupon
           %a{:href => merchants_new_campaign_path(message_type: 'special_message')}
             .span2.type
               = image_tag "mc_special_icon.png", :alt => ''
-              %h3 Let's Announce a Special
+              %h3 Announce a Special
           %a{:href => merchants_new_campaign_path(message_type: 'sale_message')}
             .span2.type
               = image_tag "mc_sale_icon.png", :alt => ''
-              %h3 Let's Announce a Sale
+              %h3 Announce a Sale
         .row
           %a{:href => merchants_new_campaign_path(message_type: 'general_message')}
             .span2.type
@@ -39,7 +34,7 @@
           %a{:href => merchants_new_campaign_path(message_type: 'product_message')}
             .span2.type
               = image_tag "mc_product_icon.png", :alt => ''
-              %h3 New Product Announcement
+              %h3 New Product
           %a{:href => merchants_new_campaign_path(message_type: 'event_message')}
             .span2.type
               = image_tag "mc_events_icon.png", :alt => ''
@@ -48,8 +43,8 @@
           %a{:href => merchants_new_campaign_path(message_type: 'survey_message')}
             .span2.type
               = image_tag "mc_survey_icon.png", :alt => ''
-              %h3 Let's send out a Survey
+              %h3 Survey Time
           %a{:href => "#"}
             .span2.type
               = image_tag "mc_survey_icon.png", :alt => ''
-              %h3 Let's create a Custom E-mail
+              %h3 Custom HTML Campaign

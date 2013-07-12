@@ -1,15 +1,10 @@
-#title_header
-  %h3
-    Message Center - Message Preview
-/Flash Notice
-= display_flash_message
 /Main Body
 #merchants
   .container
-    .span3.preview-left
+    .row.preview-left
       = render partial: "merchants/messages/preview_meta"
 
-    .span8#message_fields_wrapper
+    .span9#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
       #message_details
         .row
