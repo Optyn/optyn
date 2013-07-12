@@ -35,7 +35,7 @@ every :day, :at => "3:00am" do
 end
 
 #run the messagecenter emails send every half hour but 10 PM - 4 AM
-every '*/30 4-22 * * *' do
-  runner "Message.batch_send"
-end
+#every '*/30 4-22 * * *' do
+ # runner "Message.batch_send"
+#end
 
