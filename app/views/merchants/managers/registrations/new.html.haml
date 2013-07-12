@@ -23,11 +23,13 @@
                
               = f.text_field :name,:autofocus => true,:placeholder => "Business Name"
 
-              %label.pull-left Business Type:
-              = f.radio_button :stype,'online'
-              = "Online"
-              = f.radio_button :stype,'local',:checked=>true
-              = "Local"
+              %label.pull-left.inline Business Type:
+              %label.radio.inline
+                = f.radio_button :stype,'online'
+                Online
+              %label.radio.inline
+                = f.radio_button :stype,'local',:checked=>true
+                Local
 
               %hr
                 
@@ -38,9 +40,10 @@
               %div 
                 %em ** All the fields above are required 
               
-              = f.submit "Sign up", :class => "btn signup-button"
+              = f.submit "Sign up", :class => "btn"
       %p{:class => "already"}
         = link_to "Sign in", new_user_session_path()
 
         %strong OR
         = link_to "Forgot your password?", new_user_password_path()
+        %br
