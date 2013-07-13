@@ -16,10 +16,10 @@
   .controls.checkbox
     %label.radio.inline
       = f.radio_button :type_of_discount, :dollar_off
-      '$' off or 
+      == $ off or 
     %label.radio.inline
       = f.radio_button :type_of_discount, :percentage_off
-      '%' off
+      == % off
 
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
