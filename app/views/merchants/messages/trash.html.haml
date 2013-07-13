@@ -1,6 +1,6 @@
-#title_header
-  %h3
-    Message Center - Deleted Messages
+/ #title_header
+/   %h3
+/     Message Center - Deleted Messages
 /Flash Notice
 = display_flash_message
 /Main Body
@@ -8,7 +8,7 @@
   .container
     = render partial: "merchants/shared/menu"
 
-    .span8#message_fields_wrapper
+    .span8.rightContainer#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
 
       #messages_collection_container.row.text-center

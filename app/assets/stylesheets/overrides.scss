@@ -39,7 +39,7 @@ body {
 	}
 }
 
-.navbar-fixed-top + div[id] {
+.navbar-fixed-top ~ div[id] {
 	padding-top: 0;
 	.container{
 		width: 982px;
@@ -63,9 +63,11 @@ body {
 		font-size: 13px;
 		font-weight: bold;
 		height: 100%;
-		position: absolute;
+		float: left;
+		//position: absolute;
 		text-shadow: 0 1px 0 white;
 		width: 143px;
+		min-height: 450px;
 		a {
 		    border: 1px solid transparent;
 		    color: gray;
@@ -88,7 +90,7 @@ body {
 	.rightContainer {
 	    padding: 16px 20px;
 	    float: right;
-	    width: 839px;
+	    width: 837px;
 	    margin: 0;
 	}
 }

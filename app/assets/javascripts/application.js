@@ -29,6 +29,9 @@ $(document).ready(function () {
     if ($('.date-time-picker').length && $('.date-time-picker .error').length) {
         moveDatetimepickerErrorMessage();
     }
+    
+    //This should have been done using CSS
+    $('.leftNav').css({height: $('.container').outerHeight()});
 });
 
 function moveDatetimepickerErrorMessage() {
