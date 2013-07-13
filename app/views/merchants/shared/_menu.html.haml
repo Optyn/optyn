@@ -6,10 +6,10 @@
     = link_to "Engage!", merchants_messages_path, :class => active(params[:controller], "My Messages")
     = link_to "My Customers", :href => '/merchants/connections', :class => active(params[:controller], "connections")
     = link_to "Surveys", merchants_survey_path, :class => active(params[:controller], "Surveys")
-    = link_to "Segmentation", merchants_survey_survey_answers_path, :class => active(params[:controller], "Segmentation")
+    /= link_to "Segmentation", merchants_survey_survey_answers_path, :class => active(params[:controller], "Segmentation")
     = link_to "Manage Account", merchants_shop_path, :class => active(params[:controller], "Manage Account")
-    = link_to "Setup", merchants_app_path, :class => active(params[:controller], "Setup")
-    = link_to "Import Users", merchants_file_imports_path, :class => active(params[:controller], "Import Users")
+    /= link_to "Setup", merchants_app_path, :class => active(params[:controller], "Setup")
+    /= link_to "Import Users", merchants_file_imports_path, :class => active(params[:controller], "Import Users")
     = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
   - if @optyn_button_stats.present?
     = render partial: "merchants/apps/button_stats_report"
