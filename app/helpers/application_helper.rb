@@ -27,6 +27,27 @@ module ApplicationHelper
     shop.is_local?
   end
 
+  def display_title(content = nil)
+    @title_called = true
+    default_content = "Optyn"
+    content_for :title do
+      title_content = content.blank? ? default_content : content
+      content_tag :title do
+        title_content 
+      end  
+    end
+  end
+
+  def display_meta_description(description = nil, keywords = nil)
+    @meta_description_called = true
+    content_for :meta_description do
+      default_description = "Optyn is a Email Remarketing Tool"
+      default_keywords = "email marketing"
+      content_tag(:meta, "", name: "Description", content: description.blank? ? default_description : description) +
+      content_tag(:meta, "", name: "keywords", content: keywords.blank? ? default_keywords : keywords)
+    end
+  end
+
   def display_flash_message
     flash_type = fetch_flash_type
     content_tag :div, class: "alert #{bootstrap_class_for(flash_type)}" do
