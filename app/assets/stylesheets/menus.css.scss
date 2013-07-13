@@ -12,6 +12,24 @@
   margin-right: 0px;
   margin-top: 0px;
   margin-bottom: 20px;
+  position: absolute;
+width: 143px;
+background-color: #fafafa;
+color: gray;
+font-weight: bold;
+font-size: 13px;
+text-shadow: #fff 0 1px 0;
+height: 100%;
+border-right: 1px solid #d9d9d9;
+border-bottom: 1px solid #d9d9d9;
+-webkit-border-radius: 0px 0px 0px 9px;
+-moz-border-radius: 0px 0px 0px 9px;
+-ms-border-radius: 0px 0px 0px 9px;
+-o-border-radius: 0px 0px 0px 9px;
+border-radius: 0px 0px 0px 9px;
+-webkit-box-shadow: inset -1px -1px 5px #ebebeb;
+-moz-box-shadow: inset -1px -1px 5px #ebebeb;
+box-shadow: inset -1px -1px 5px #ebebeb;
 }
 .merchant-menu .menu-header {
   color: #ffffff;
@@ -30,14 +48,7 @@
   margin: 0px;
 }
 .merchant-menu > li {
-  margin-top: 10px;
-  margin-left: 10px;
-  border-bottom: 1px #354b52;
-  font-size: 16px;
-  line-height: 20px;
-  vertical-align: middle;
-  padding-bottom: 2px;
-  padding-top: 2px;
+  padding-bottom: 10px;
 }
 .merchant-menu > li > a {
   color: #7d8b8f;
@@ -47,15 +58,15 @@
   padding-right: 10px;
 }
 .merchant-menu > li > a:hover {
-  color: #ffffff;
+  color: black;
   text-decoration: none;
 }
 .merchant-menu > li > a:active {
-  color: #9ae544;
+  color: black;
   text-decoration: none;
 }
 .merchant-menu > li > a:active {
-  color: #9ae544;
+  color: black;
   text-decoration: none;
 }
 /* Preview Menu Left */

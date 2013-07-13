@@ -1,15 +1,10 @@
-
-= display_flash_message
-
 #box_login.login-container
-  .container
-    .span12.box_wrapper
-      .span12.box
+  .container1
+    .div
+      .box
         %div
           .head
             %h4 Log in to your account
-
-          = render partial: "users/shared/social_login_buttons"
 
         .form
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
@@ -18,25 +13,16 @@
 
             = f.password_field :password, :placeholder => "Password"
 
-            .remember
-              .left
-                = f.check_box :remember_me, id: 'remember_me'
-                =label_tag "remember_me"
-              .right
-                = link_to "Forgot your password?", new_password_path(resource_name)
-            %br
             %br
             = f.submit "Sign in", class: "btn"
 
-        %p{class: "already"}
+        %p{:align => "center"}
+          %br
           Don't have an account?
           %br
           %br
-          %a.btn.consumer-btn{:href => new_user_registration_path} 
-            %i.icon-user.icon-white
-            Consumer Sign Up
           %a.btn.merchant-btn{:href => new_merchants_manager_registration_path}
-            %i.icon-shopping-cart.icon-white
+            %i.icon-shopping-cart
             Merchant Sign Up
 
 = hidden_field_tag :login_type_omniauth_clients_path, login_type_omniauth_clients_path

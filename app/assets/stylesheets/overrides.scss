@@ -5,6 +5,27 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding-top: 51px;
 }
+.container {
+	width: 980px;
+	background: white;
+	border: 1px solid #ccc;
+	border-top-color: initial;
+	border-top-style: none;
+	border-top-width: initial;
+	border-right-color: rgb(204, 204, 204);
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-color: rgb(204, 204, 204);
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-left-color: rgb(204, 204, 204);
+	border-left-style: solid;
+	border-left-width: 1px;
+	position: relative;
+	min-height: 458px;
+	border-top: none;
+
+}
 
 .navbar-fixed-top {
 	.navbar-inner {
@@ -13,7 +34,7 @@ body {
 	    height: 51px;
 	    > .container {width: 1009px;}
 		.brand {
-			padding: 6px 0 0 0;
+			padding: 14px 0 0 0;
 			margin: 0;
 		}
 	}

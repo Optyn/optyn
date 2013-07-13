@@ -41,7 +41,7 @@
   text-shadow: none;
 }
 #login_type_modal .modal-body .merchant-btn {
-  background: #1791c0;
+  background: #8ab953;
   border-radius: 4px;
   display: inline-block;
   height: 30px;
@@ -65,6 +65,11 @@
 }
 /* Login Page */
 #box_login{
+}
+#box_login .container1 {
+	width: 980px;
+	margin-right: auto;
+	margin-left: auto;
 }
 #box_login .box_wrapper{
 	margin-left: 0;
@@ -103,7 +108,7 @@
   text-shadow: none;
 }
 #box_login .box_wrapper p.already .merchant-btn {
-  background: #1791c0;
+  background: #8ab953;
   border-radius: 4px;
   display: inline-block;
   height: 30px;
