@@ -111,8 +111,6 @@ module StripeEventHandlers
   def self.handle_coupon_deleted(params)
     coupon = Coupon.from_attrs(params)
     unless coupon.new_record?
-      shop = Shop.find_by_coupon_id(coupon_id)
-      shop.update_attribute(:coupon_id, nil)
       coupon.destroy
     end
   end

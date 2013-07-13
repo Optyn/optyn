@@ -7,7 +7,7 @@ class Coupon < ActiveRecord::Base
                   :times_redeemed, :duration_in_months
 
   def self.from_attrs(event)
-    stripe_coupon = event['data']['object']['coupon'] 
+    stripe_coupon = event['data']['object'] 
     coupon = Coupon.find_by_stripe_id(stripe_coupon['id']) || Coupon.new
     coupon.stripe_id = stripe_coupon['id']
     coupon.percent_off = stripe_coupon['percent_off']
