@@ -127,7 +127,7 @@ module StripeEventHandlers
 
   private
   def self.manage_coupon(customer_params)
-    if params["discount"].present?
+    if customer_params["discount"].present?
       discount_map = customer_params["discount"]
       stripe_coupon_id = discount_map['coupon']['id']
       coupon = Coupon.find_by_stripe_id(stripe_coupon_id)
