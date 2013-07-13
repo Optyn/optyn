@@ -341,7 +341,7 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    create_subscription(:plan_id => Plan.starter.id, :active => false) unless shop.virtual
+    create_subscription(:plan_id => Plan.starter.id, :active => false, :email => self.manager.email) unless shop.virtual
     create_audit_entry('subscribed to default/starter plan') unless shop.virtual
   end
 end
