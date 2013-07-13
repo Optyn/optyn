@@ -5,8 +5,8 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding-top: 51px;
 }
-.container {
-	width: 980px;
+/*.container {
+	width: 982px;
 	background: white;
 	border: 1px solid #ccc;
 	border-top-color: initial;
@@ -24,8 +24,7 @@ body {
 	position: relative;
 	min-height: 458px;
 	border-top: none;
-
-}
+}*/
 
 .navbar-fixed-top {
 	.navbar-inner {
@@ -34,13 +33,13 @@ body {
 	    height: 51px;
 	    > .container {width: 1009px;}
 		.brand {
-			padding: 14px 0 0 0;
+			padding: 14px 20px 0 20px;
 			margin: 0;
 		}
 	}
 }
 
-#consumer_dashboard {
+.navbar-fixed-top + div[id] {
 	padding-top: 0;
 	.container{
 		width: 982px;
@@ -133,6 +132,38 @@ body {
 	font-weight: 500;
 	height: 51px;
 	top: 0;
+	> li:not(.dropdown) {
+		margin-right: 26px;
+		&.help {margin-right: 16px;}
+	    > a[class]:not(.dropdown-toggle) {
+	    	display: block;
+	    	width: 30px;
+	    	padding: 0;
+	    	margin-top: 15px;
+	    	background-repeat: no-repeat;
+	    	text-indent: -9999px;
+	    	&:hover {
+	    		background-color: transparent;
+	    	}
+	    	@include border-radius(0);
+		    &.redemption {
+		    	background-image: url('/assets/barcodeSprite.png');
+		    	//&:hover {background-position: 0 -25px;}
+		    }
+		    &.notifications {
+		    	background-image: url('/assets/messages.png');
+		    	//&:hover {background-position: -25px 0;}
+		    	width: 25px;
+		    	height: 22px;
+		    }
+		    &.helpCenter {
+		    	background-image: url('/assets/helpIcons.png');
+		    	//&:hover {background-position: -23px 0;}
+		    	width: 23px;
+		    	height: 23px;
+		    }
+	    }
+	}
 	> li.dropdown {
 		margin: 0;
 		padding: 0 10px;
@@ -222,4 +253,36 @@ body {
     line-height: 20px;
     text-align: center;
     text-shadow: 0 1px 0 white;
+}
+
+.headerNav {
+	margin: 0;
+	float: left;
+	> li {
+		float: left;
+	    border-right: 1px solid rgba(0, 0, 0, 0.2);
+	    margin: 0;
+	    vertical-align: middle;
+	    &:first-child {border-left: 1px solid rgba(0, 0, 0, 0.2);}
+	    &.current {
+			background-image: linear-gradient(#7CA748, #537931);
+			> a {color: white;}
+	    }
+	    &:hover:not(.current) {
+			background-image: linear-gradient(#95BD66, #6B9D3F);
+			> a {color: white;}
+	    }
+	    > a {
+	    	display: block;
+		    color: #DDEDCC;
+		    cursor: pointer;
+		    font-size: 14px;
+		    font-weight: 600;
+		    padding: 0 20px;
+		    line-height: 50px;
+		    text-decoration: none;
+		    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+		    //width: 90px;
+	    }
+	}
 }

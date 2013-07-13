@@ -1,31 +1,43 @@
-.span2.menuleft
-  %ul.merchant-menu
-    %li
-      %a.active{:href => merchants_root_path}
-        Dashboard
-    %li
-      %a{:href => merchants_messages_path, :alt => "My Messages"}
-        Engage!
-    %li
-      %a{:href => "/merchants/connections"}
-        My Customers
-    %li
-      %a{:href => merchants_survey_path}
-        Surveys
-    /%li
-    /%a{:href => merchants_survey_survey_answers_path}
-    /Segmentation
-    %li
-      %a{:href => merchants_shop_path}
-        Manage Account
-    /%li
-    /%a{:href => merchants_app_path}
-    /Setup
-    /%li
-    /%a{:href => merchants_file_imports_path}
-    /Import Users
-    %li
-      = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+.leftNav
+  %div
+    / Hello
+    / = current_user.name
+    = link_to "Dashboard", merchants_root_path, :class => active(params[:controller], "dashboards")
+    = link_to "Messages", inbox_messages_path, :class => active(params[:controller], "messages")
+    = link_to "Connections", connections_path, :class => active(params[:controller], "connections")
+    = link_to "Surveys", merchants_survey_path, :class => active(params[:controller], "merchants")
+    = link_to "Account", profile_path, :class => active(params[:controller], "users/registrations")
+    %a{:href => destroy_user_session_path} Logout
 
-  - if @optyn_button_stats.present?
-    = render partial: "merchants/apps/button_stats_report"
+
+/ .span2.leftNav
+/   %ul.merchant-menu
+/     %li
+/       %a.active{:href => merchants_root_path}
+/         Dashboard
+/     %li
+/       %a{:href => merchants_messages_path, :alt => "My Messages"}
+/         Engage!
+/     %li
+/       %a{:href => "/merchants/connections"}
+/         My Customers
+/     %li
+/       %a{:href => merchants_survey_path}
+/         Surveys
+/     /%li
+/     /%a{:href => merchants_survey_survey_answers_path}
+/     /Segmentation
+/     %li
+/       %a{:href => merchants_shop_path}
+/         Manage Account
+/     /%li
+/     /%a{:href => merchants_app_path}
+/     /Setup
+/     /%li
+/     /%a{:href => merchants_file_imports_path}
+/     /Import Users
+/     %li
+/       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+
+/   - if @optyn_button_stats.present?
+/     = render partial: "merchants/apps/button_stats_report"

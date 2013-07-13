@@ -1,9 +1,9 @@
 /Main Body
 #merchants
-  .container
+  .container.clearfix
     = render partial: "merchants/shared/menu"
 
-    .span8#message_fields_wrapper
+    .span8.rightContainer#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
       .headertext
         %h3

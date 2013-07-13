@@ -7,8 +7,20 @@
         %span.icon-bar
         %span.icon-bar
       %a.brand{:href => root_path}
-        = image_tag "logo.png", :alt => 'logo'
-      / .nav-collapse.collapse
+        = image_tag "app-groupon-logo.png", :alt => 'logo'
+      %ul.headerNav.clearfix
+        %li.current
+          %a{:href => '#'}
+            Home
+        %li
+          %a{:href => '#'}
+            Deals
+        %li
+          %a{:href => '#'}
+            breadcrumb
+        %li
+          %a{:href => '#'}
+            Engage your customers
       %ul.nav.pull-right.accDropDown
         - if merchants_manager_signed_in?
           = render partial: "layouts/merchant_dropdown"
