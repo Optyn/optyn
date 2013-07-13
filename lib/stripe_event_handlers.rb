@@ -118,29 +118,29 @@ module StripeEventHandlers
   end
 
   def self.handle_customer_created(params)
-    if params["discount"].present?
-      discount_map = customer_params["discount"]
+    discount_map = params['data']['object']["discount"]
+    if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params['id'])
     end
   end
 
   def self.handle_customer_updated(params)
-    if params["discount"].present?
-      discount_map = customer_params["discount"]
+    discount_map = params['data']['object']["discount"]
+    if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params['id'])
     end
   end
 
   def self.handle_customer_discount_created(params)
-    manage_coupon(params['coupon']['id'], params['customer'])
+    manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
   def self.handle_customer_discount_updated(params)
-    manage_coupon(params['coupon']['id'], params['customer'])
+    manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
   def self.handle_customer_discount_deleted(params) 
-    coupon, shop = fetch_coupon_and_shop(params['coupon']['id'], params['customer'])
+    coupon, shop = fetch_coupon_and_shop(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
     shop.coupon_id = nil
     shop.save(validate: false)
   end
