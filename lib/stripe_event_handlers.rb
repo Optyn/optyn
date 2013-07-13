@@ -111,7 +111,8 @@ module StripeEventHandlers
   def self.handle_coupon_deleted(params)
     coupon = Coupon.from_attrs(params)
     unless coupon.new_record?
-      coupon.destroy
+      coupon.deleted = true
+      coupon.save
     end
   end
 
