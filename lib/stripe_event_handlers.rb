@@ -118,23 +118,44 @@ module StripeEventHandlers
   end
 
   def self.handle_customer_created(params)
-    manage_coupon(params)
+    if params["discount"].present?
+      discount_map = customer_params["discount"]
+      manage_coupon(discount_map['coupon']['id'], params['id'])
+    end
   end
 
   def self.handle_customer_updated(params)
-    manage_coupon(params)
+    if params["discount"].present?
+      discount_map = customer_params["discount"]
+      manage_coupon(discount_map['coupon']['id'], params['id'])
+    end
+  end
+
+  def self.handle_customer_discount_created(params)
+    manage_coupon(params['coupon']['id'], params['customer'])
+  end
+
+  def self.handle_customer_discount_updated(params)
+    manage_coupon(params['coupon']['id'], params['customer'])
+  end
+
+  def self.handle_customer_discount_deleted(params) 
+    coupon, shop = fetch_coupon_and_shop(params['coupon']['id'], params['customer'])
+    shop.coupon_id = nil
+    shop.save(validate: false)
   end
 
   private
-  def self.manage_coupon(customer_params)
-    if customer_params["discount"].present?
-      discount_map = customer_params["discount"]
-      stripe_coupon_id = discount_map['coupon']['id']
-      coupon = Coupon.find_by_stripe_id(stripe_coupon_id)
-      subscription = Subscription.find_by_stripe_customer_token(customer_params['id'])
-      shop = subscription.shop
-      shop.coupon_id = coupon.id
-      shop.save(validate: false)
-    end
+  def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
+    coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
+    shop.coupon_id = coupon.id
+    shop.save(validate: false)
+  end
+
+  def self.fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
+    coupon = (Coupon.find_by_stripe_id(coupon_stripe_id) rescue nil)
+    subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
+    shop = subscription.shop
+    [coupon, shop]
   end
 end

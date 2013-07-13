@@ -37,6 +37,12 @@ class EventsController < ApplicationController
         StripeEventHandlers.handle_customer_created(params)
       when 'customer.updated'
         StripeEventHandlers.handle_customer_updated(params)
+      when 'customer.discount.created'
+        StripeEventHandlers.handle_customer_discount_created(params)
+      when 'customer.discount.updated'
+        StripeEventHandlers.handle_customer_discount_updated(params)
+      when 'customer.discount.deleted'
+        StripeEventHandlers.handle_customer_discount_deleted(params)
       else
 
     end
