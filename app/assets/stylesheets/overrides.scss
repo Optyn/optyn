@@ -198,6 +198,9 @@ body {
 		    padding: 0;
 		    > li {
 		    	border-bottom: 1px solid #ccc;
+		    	&.userSection {padding: 14px;}
+		    	span {display: block; font-size: 14px; color: #666; font-weight: bold; line-height: 15px;}
+		    	.userEmail {font-weight: normal;}
 		    	&:last-child {
 		    		a {
 					    background-color: #F7F7F7;
