@@ -6,21 +6,23 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.brand{:href => root_path}
+      %a.brand{:href => merchants_root_path}
         = image_tag "app-groupon-logo.png", :alt => 'logo'
-      %ul.headerNav.clearfix
-        %li.current
-          %a{:href => '#'}
-            Home
-        %li
-          %a{:href => '#'}
-            Deals
-        %li
-          %a{:href => '#'}
-            breadcrumb
-        %li
-          %a{:href => '#'}
-            Engage your customers
+      - if merchants_manager_signed_in?
+        %ul.headerNav.clearfix
+          %li.current
+            %a{:href => merchants_root_path}
+              Home
+          %li
+            %a{:href => '#'}
+              Deals
+          %li
+            %a{:href => '#'}
+              Breadcrumb
+          %li
+            %a{:href => merchants_messages_path }
+              Engage!
+              %span.label.label-inverse New
       %ul.nav.pull-right.accDropDown
         - if merchants_manager_signed_in?
           = render partial: "layouts/merchant_dropdown"
