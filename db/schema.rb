@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712025807) do
+ActiveRecord::Schema.define(:version => 20130713235013) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -85,8 +85,9 @@ ActiveRecord::Schema.define(:version => 20130712025807) do
     t.string   "max_redemptions"
     t.string   "times_redeemed"
     t.string   "duration_in_months"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "deleted",            :default => false
   end
 
   add_index "coupons", ["stripe_id"], :name => "index_coupons_on_stripe_id", :unique => true
