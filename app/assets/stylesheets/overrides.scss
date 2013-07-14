@@ -291,3 +291,23 @@ body {
 	    }
 	}
 }
+
+//Forms Configuration
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+	height: 32px;
+	line-height: 22px;
+	&:focus {
+		border-color: #81A74C;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #92C65F;
+	}
+}
+textarea {resize: none;}
+.input-append .add-on, .input-prepend .add-on {height: 32px;}
+.chzn-container-multi .chzn-choices .search-field input {height: 26px;}
+.radio, .checkbox {padding-left: 0;}
+.inline-help, .help-inline {
+    background-color: #D5EDF8;
+    display: inline-block;
+    font-size: 12px;
+    padding: 1px 4px;
+}
