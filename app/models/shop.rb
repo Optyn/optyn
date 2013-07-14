@@ -14,8 +14,6 @@ class Shop < ActiveRecord::Base
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
   has_many :shop_audits
-  has_many :virtual_connections
-  has_many :virtual_subscribers, through: :virtual_connections, source: :user
   belongs_to :coupon
 
   SHOP_TYPES=['local', 'online']

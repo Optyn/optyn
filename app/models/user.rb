@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   has_many :user_labels, dependent: :destroy
   has_many :permissions_users, dependent: :destroy
   has_many :permissions, :through => :permissions_users
-  has_many :virtual_connections
-  has_many :virtual_vendors, through: :virtual_connections, source: :shop
 
   mount_uploader :picture, ImageUploader
 
