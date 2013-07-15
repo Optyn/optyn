@@ -33,7 +33,7 @@
         %h3
           = image_tag "quick-login.png", :alt => 'Quick login'
           Quick Sign Up
-        = form_for @user, as: :user, url: user_registration_path, :html => {method: :post, class: 'new_user', id: 'new_user'} do |f|
+        = form_for @user, as: :user, url: user_registration_path(app_id: params[:client_id]), :html => {method: :post, class: 'new_user', id: 'new_user'} do |f|
 
           = hidden_field_tag :cross_domain_login, value: "1"
 

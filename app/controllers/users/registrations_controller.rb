@@ -20,6 +20,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
 
+    if (@shop = Shop.by_app_id(params[:app_id])).present?
+      resource.show_shop = true
+      resource.shop_identifier = @shop.id
+    end 
+
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?

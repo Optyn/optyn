@@ -86,8 +86,11 @@ class Users::SessionsController < Devise::SessionsController
     @user.errors.delete(:name)
 
     if !saved && @user.errors.blank?
-      @user.save(validate: false)
       @user.show_password = true
+      @shop = Shop.by_app_id(params[:app_id])
+      @user.show_shop = true
+      @user.shop_identifier = @shop.id
+      @user.save(validate: false)
     end
   end
 

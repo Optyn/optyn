@@ -19,11 +19,16 @@
                 %td
                   %h3 Welcome to Optyn #{@resource.name || @resource.email} !
                   %br
-                  %h4 {Merchant Name} added you to their customer list. 
+                  - if @shop.present?
+                    %h4 
+                      == #{@shop.name} added you to their customer list. 
+                      
                   - if @password.present?
-                    %p You can start using your Optyn account and manage your connections by logging in:
+                    %p 
+                      You can start using your Optyn account and manage your connections by logging in:
                       %ul
-                        %li Your E-Mail is: #{@resource.email}
+                        %li 
+                          == Your E-Mail is: #{@resource.email}
                         %li 
                           Your pssword is: 
                           = @password

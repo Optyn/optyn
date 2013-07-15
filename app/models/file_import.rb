@@ -53,6 +53,8 @@ class FileImport < ActiveRecord::Base
           user.password = passwd
           user.password_confirmation = passwd
           user.show_password = true
+          user.show_shop = true
+          user.shop_indetifier = shop.id
           counters[:user_creation] += 1
         else
           counters[:existing_user] += 1
