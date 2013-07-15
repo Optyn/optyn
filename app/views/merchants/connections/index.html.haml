@@ -7,10 +7,9 @@
 #merchants
   .container
     = render partial: "merchants/shared/menu"
-    .span8
-      %div
-        Here's a list of all your connections. Click on 'More Info' to learn more about each customer.
-        %br
+    .span8{:style => "padding-bottom: 10px;"}
+      Here's a list of all your connections. Click on 'More Info' to learn more about each customer.
+      %a.btn{:href => merchants_file_imports_path, :style => "float: right"} Import Users
       %table.table.table-striped
         %thead
           %tr
