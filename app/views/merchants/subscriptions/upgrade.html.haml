@@ -1,10 +1,12 @@
+
+
 = tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY
 #box_sign
   .container
     .span12.box_wrapper
-      .span12.box
+      .span12.box{:style => "height: 320px;"}
         %div 
-          .head Enter Payment Information 
+          .head Enter Your Payment Information 
           .payment-errors
             - if @subscription.errors.any? || @subscription.stripe_error
               =@subscription.stripe_error
@@ -13,7 +15,7 @@
                   %li
                     = error  
 
-          .form
+          .form{:style => "height: 200px;"}
             = form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
 
               = f.hidden_field :plan_id, :value => @plan.id
@@ -31,3 +33,6 @@
               = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox"})
 
               = f.submit "Pay", :class => "btn"
+        %div{:style => "text-align: center"}
+          %p
+            All payments are processed securely.
