@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def display_title(content = nil)
     @title_called = true
-    default_content = "Optyn"
+    default_content = "Optyn.com - Improving the Marketing Relationship"
     content_for :title do
       title_content = content.blank? ? default_content : content
       content_tag :title do
@@ -41,8 +41,8 @@ module ApplicationHelper
   def display_meta_description(description = nil, keywords = nil)
     @meta_description_called = true
     content_for :meta_description do
-      default_description = "Optyn is a Email Remarketing Tool"
-      default_keywords = "email marketing"
+      default_description = "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications."
+      default_keywords = "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
       content_tag(:meta, "", name: "Description", content: description.blank? ? default_description : description) +
       content_tag(:meta, "", name: "keywords", content: keywords.blank? ? default_keywords : keywords)
     end
