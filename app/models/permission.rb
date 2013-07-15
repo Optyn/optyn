@@ -19,4 +19,22 @@ class Permission < ActiveRecord::Base
   def self.cached_count
     @@PERMISSIONS ||= Permission.count
   end
+
+  class << self
+    class_eval do
+      if Permission.table_exists?
+        permissions = Permission.all()
+        permissions.each do |permission|
+          define_method(permission.name.underscore.to_sym) do
+            eval("@@#{permission.name.upcase} ||= permission")
+          end
+
+          define_method("#{permission.name.underscore}_id".to_sym) do
+            permission.id
+          end
+
+        end
+      end
+    end
+  end #end of self block
 end

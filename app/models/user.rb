@@ -191,7 +191,11 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    name || "Optyn User"
+     permission_name || permission_email || "Optyn User"
+  end
+
+  def display_email
+    permission_email || "N/A"
   end
 
   def image_url(omniauth_provider_id=nil)
@@ -212,6 +216,14 @@ class User < ActiveRecord::Base
       user.save(validate: false)
     end
     user.save
+  end
+
+  def permission_name
+    self.name if permissions_users.permission_visible?(Permission.name_id)
+  end
+
+  def permission_email
+    self.email if permissions_users.permission_visible?(Permission.email_id)
   end
 
   def assign_office_zip_code(attrs)
