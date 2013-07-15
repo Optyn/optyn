@@ -20,6 +20,8 @@
     %a.scrolltop{:href => "#"}
     = render partial: "layouts/header"
 
+    = display_flash_message
+
     = yield
 
     = render partial: "layouts/footer"
