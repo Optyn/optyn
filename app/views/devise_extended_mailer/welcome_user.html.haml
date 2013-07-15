@@ -18,19 +18,29 @@
               %tr
                 %td
                   %h3 Welcome to Optyn #{@resource.name || @resource.email} !
+                  %br
+                  %h4 {Merchant Name} added you to their customer list. 
+                  - if @password.present?
+                    %p You can start using your Optyn account and manage your connections by logging in:
+                      %ul
+                        %li Your E-Mail is: #{@resource.email}
+                        %li 
+                          Your pssword is: 
+                          = @password
+
                   %p We are so excited to have you and we want to make sure you have the full Optyn Experience.
                   We work hard, day in and out, to create a wonderful experience for a product that makes your life easier.
                   %p Keep in mind, Optyn is really easy to use and you can:
                   %p
                     %ul
-                      %li Opt into any business online!
-                      %li Opt into any business with a physical location!
-                      %li With each business, you can control which information you share.
+                      %li Opt into any business online.
+                      %li Opt into any business with a physical location. (coming soon)
+                      %li With each business, you can control which information.
                       %li We put you in control with the frequency of emails or types of emails you want to receive.
-                      %li Explore and find new places that you want to take for a test drive without ever compromising your information.
+                      %li Explore and find new places that you want to take for a test drive without ever compromising your information. (coming soon)
                       %li and much more
                   %p
-                    %a{:href => "http://www.optyn.com", :style => "color: #2BA6CB; text-decoration:none; color: #FFF; background-color: #666; padding:10px 16px; font-weight:bold; margin-right:10px; text-align:center; cursor:pointer; display: inline-block;"} Learn More about Optyn
+                    %a{:href => "http://www.optyn.com/consumerfeatures", :style => "color: #2BA6CB; text-decoration:none; color: #FFF; background-color: #666; padding:10px 16px; font-weight:bold; margin-right:10px; text-align:center; cursor:pointer; display: inline-block;"} Learn More about Optyn
                   %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and your fellow Optyners, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
                   %p
                     Cheers,
