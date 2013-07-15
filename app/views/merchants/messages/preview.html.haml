@@ -1,7 +1,3 @@
-#title_header
-  %h3
-    Message Center - Message Preview
-/Main Body
 #merchants
   .container
     .span3.preview-left
@@ -23,7 +19,7 @@
         .row
 
           = content_for :header do
-            Preview
+            Preview Only. Subject goes here.
 
           .span8
             = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
