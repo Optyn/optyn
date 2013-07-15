@@ -36,7 +36,7 @@
         = image_tag "menu_icon_dashboard.png", :alt => "Connections"
         Import Users
     %li
-      = image_tag "menu_icon_dashboard.png", :alt => "Logout"
+      = image_tag "menu_icon_dashboard.png", :alt => "Logout", :style => "padding-right: 6px;"
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
 
   - if @optyn_button_stats.present?
