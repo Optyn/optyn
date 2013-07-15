@@ -14,7 +14,7 @@
       #messages_collection_container.row.text-center
         = render partial: "shared/messages/collection_form"
 
-        .actions
+        .actions{:style => "float: right; padding-bottom: 8px;"}
           = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
           = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
           = submit_tag "Discard", name: 'discard', class: 'collection-action btn btn-danger'
