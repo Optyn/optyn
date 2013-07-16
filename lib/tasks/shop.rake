@@ -20,4 +20,18 @@ namespace :shop do
     end
     shop.save(validate: false)
   end
+
+  desc "Add Virtual Shop for Optyn Postfix shop"
+  task :add_optyn_postfix_shop => :environment do
+    puts "Adding/Updating Optyn Postfix shop"
+    shop = Shop.find_by_name('Optyn Postfix') || Shop.new(name: 'Optyn Postfix')
+    shop.virtual = true
+    shop.description = "This shop will be used for Optyn Postfix emails"
+    shop.save(validate: false)
+
+    manager = Manager.find_by_email("optynpostfix@optyn.com") || Manager.new(name: "Optyn Postfix", email: "optynpostfix@optyn.com", password: '9p5yn123', password_confirmation: '9p5yn123')
+    manager.save(validate: false)
+
+    shop.update_manager
+  end 
 end
