@@ -1,4 +1,4 @@
-.row
+%div
   %p
     == #{@message.shop_name} is treating you with a #{message_discount_type_text(@message)} off coupon. 
   %p  
@@ -22,7 +22,7 @@
       = @message.coupon_code
 
 %hr
-.row
+%div
   %strong How to Redeem:
   %p
     == Just bring or show this email to #{@message.shop_name} (print out or show it on your iPhone) and bamm, you got yourself an awesome #{message_discount_type_text(@message)} off at #{@message.shop_name}.
