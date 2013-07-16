@@ -33,7 +33,7 @@ class Merchants::DashboardsController < Merchants::BaseController
       HashWithIndifferentAccess.new({
           type: 'New connection',
           time: connection.updated_at,
-          user: connection.user.name,
+          user: connection.user.display_name,
           action_url: merchants_connections_path
         })
     end
@@ -57,7 +57,7 @@ class Merchants::DashboardsController < Merchants::BaseController
       HashWithIndifferentAccess.new({
           type: 'Revoked connection',
           time: connection.updated_at,
-          user: connection.user.name,
+          user: connection.user.display_name,
           action_url: nil
         })
     end
