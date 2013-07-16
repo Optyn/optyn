@@ -8,7 +8,7 @@ class PermissionsUser < ActiveRecord::Base
 
   scope :visible, where(action: true)
 
-  def self.permission_visible?(permission_indetifier)
-  	for_permission(permission_indetifier).visible.present?
+  def self.permission_visible?(permission_identifier)
+  	for_permission(permission_identifier).visible.present?
   end
 end
