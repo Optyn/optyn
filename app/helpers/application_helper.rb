@@ -135,4 +135,8 @@ module ApplicationHelper
   def shop_public_page_login_location
     user_signed_in? ? consumer_dashboard_path : merchants_manager_signed_in? ? merchants_dashboards_path : new_user_session_path
   end
+  def small_cass(application_call_to_action)
+    application_call_to_action == 1 ? "small" : ""
+
+  end
 end
