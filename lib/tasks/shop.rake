@@ -31,8 +31,9 @@ namespace :shop do
 
     puts "Adding/Updating Optyn Postfix Manager"
     manager = Manager.find_by_email("optynpostfix@optyn.com") || Manager.new(name: "Optyn Postfix", email: "optynpostfix@optyn.com", password: '9p5yn123', password_confirmation: '9p5yn123')
+    manager.shop_id = shop.id
     manager.save(validate: false)
-
+    puts manager.inspect    
     manager.owner = true
     manager.save(validate: false)
   end 
