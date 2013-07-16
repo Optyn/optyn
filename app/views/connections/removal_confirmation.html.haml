@@ -1,11 +1,13 @@
+= display_title 'Unsubscribe'
 #consumer
-  .container
-    = render partial: "shared/menu" if current_user.present?
-    .span8   
-      
-      Are you sure you want to Opt-out of message from
-      = @shop.name
-      ?
+	.container
+		= render partial: "shared/menu" if current_user.present?
+		.span8{:style => "height: 200px; text-align: center;"}
+			%p
+				Are you sure you want to unsubscribe from receiving all messages and communications from
+				= @shop.name
+				?
 
-      %br
-      = link_to "Opt-out?", opt_out_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid)), class: 'btn-primary btn', method: :put
+			%br
+			%br
+			= link_to "Unsubscribe", opt_out_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid)), class: 'btn-primary btn btn-large', method: :put
