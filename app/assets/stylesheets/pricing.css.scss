@@ -16,17 +16,17 @@ body .modal-header h3 {
 body .modal-body {
 	height: 200px;
 }
-body .modal-body ul {
+/*body .modal-body ul {
 	padding-top: 10px;
 	padding-left: 20px;
-}
-body .modal-body li {
-	list-style-image: url('/assets/bluechkmark.png');
-	height: 14px;
+}*/
+/*body .modal-body li {
+	//list-style-image: url('/assets/bluechkmark.png');
+	//height: 14px;
 	padding-left: 0px;
 	padding-top: 10px;
 	margin-top: 10px;
-}
+}*/
 body .modal-body .left {
 	float: left;
 }
@@ -248,17 +248,17 @@ body .modal-footer .startbtn:hover{
 #pricingpopup .modal-body {
 	height: 200px;
 }
-#pricingpopup .modal-body ul {
+/*#pricingpopup .modal-body ul {
 	padding-top: 10px;
 	padding-left: 20px;
-}
-#pricingpopup .modal-body li {
-	list-style-image: url('/assets/bluechkmark.png');
+}*/
+/*#pricingpopup .modal-body li {
+	background: url('/assets/bluechkmark.png') no-repeat left center;
 	height: 14px;
 	padding-left: 0px;
 	padding-top: 10px;
 	margin-top: 10px;
-}
+}*/
 #pricingpopup .modal-body .left {
 	float: left;
 }
@@ -368,4 +368,17 @@ body .modal-footer .startbtn:hover{
 #pricing-table tr {
 	td {background-color: transparent;}
 	&.selected td {background-color: #e4e3e3;}
+}
+
+.featuresList {
+	margin: 0 1% 0 0;
+	float: left;
+	width: 48%;
+	> li {
+		background: url('/assets/bluechkmark.png') no-repeat left 5px;
+		margin: 0 0 18px 0;
+		padding-left: 19px;
+		font: normal 13px/18px Helvetica, arial;
+		&:last-child {margin-bottom: 0;}
+	}
 }

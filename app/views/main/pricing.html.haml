@@ -95,31 +95,28 @@
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3 Every customer gets ALL of these COOL features:
   .modal-body
-    .row
-      .span4.left
-        %ul
-          %li 
-            Easy Customer Enrollment – in your store or on-line
-          %li 
-            Ability to Segment Customers based on your requirements
-          %li 
-            Automated marketing campaigns
-          %li
-            No more hassles with list management
-          %li
-            No longer having to worry about being reported as spam
-      .span4.right
-        %ul
-          %li 
-            Pre-written popular email types from which to choose: Announcements, sales events,
-            updates and more
-          %li 
-            The ability to personalize each email to your specific needs.
-          %li 
-            Pre entered e-mail subject lines based on best practices and the experience of our
-            client base.
-          %li
-            Significantly reduced risk of your customers unsubscribing from your emails.
+    %ul.featuresList
+      %li
+        Easy Customer Enrollment – in your store or on-line
+      %li 
+        Ability to Segment Customers based on your requirements
+      %li 
+        Automated marketing campaigns
+      %li
+        No more hassles with list management
+      %li
+        No longer having to worry about being reported as spam
+    %ul.featuresList
+      %li 
+        Pre-written popular email types from which to choose: Announcements, sales events,
+        updates and more
+      %li 
+        The ability to personalize each email to your specific needs.
+      %li 
+        Pre entered e-mail subject lines based on best practices and the experience of our
+        client base.
+      %li
+        Significantly reduced risk of your customers unsubscribing from your emails.
   .modal-footer
     What are you waiting for?
     %a.btn.startbtn{:href => new_merchants_manager_registration_path} Get Started
