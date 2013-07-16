@@ -9,15 +9,16 @@
 
     = render partial: "shared/mailers/banner"
 
-    %table{:width => "100%"}
+    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
       %tr
         %td
         %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
           %div
-            %table{:style => "padding:15px; max-width:600px; margin:0 auto; display:block;"}
+            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
               %tr
                 %td
-                  %h3 Hi #{@manager.name},
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
+                    Hi #{@manager.name},
                   %p Your file import failed.
                   %p
                     It failed because of the following error:
