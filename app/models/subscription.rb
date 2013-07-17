@@ -21,6 +21,8 @@ class Subscription < ActiveRecord::Base
     else
       Stripe::Customer.create(email: params['subscription']['email'], card: params['stripeToken'], :plan => params['stripe_plan_id'])
     end
+
+    Stripe::Customer.retrieve(subscription.stripe_customer_token)
   end
 
   def update_plan(plan)

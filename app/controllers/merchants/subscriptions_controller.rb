@@ -39,6 +39,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       Subscription.transaction do
         @customer = Subscription.create_or_stripe_customer_card(@subscription, params)
 
+        @subscription.stripe_customer_token = @customer['id']
         if @subscription.save
           @subscription.update_attribute(:active, true)
           amount = @customer.subscription.plan.amount
@@ -60,6 +61,8 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       end
       render 'upgrade'
     end
+
+
 
   end
 end
