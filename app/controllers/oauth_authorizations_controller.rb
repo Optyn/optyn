@@ -1,4 +1,6 @@
 class OauthAuthorizationsController < Doorkeeper::AuthorizationsController
+  include Doorkeeper::ResourceTypeManager
+  
   layout 'oauth_dialog'
 
   def new

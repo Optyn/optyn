@@ -9,7 +9,12 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
-    current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
+    set_optyn_oauth_resource_type(params[:client_id])
+    if optyn_oauth_resource_type_merchant_app?
+      current_merchants_manager || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
+    else
+      current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
+    end  
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
@@ -20,7 +25,11 @@ Doorkeeper.configure do
   # end
 
   resource_owner_from_credentials do
-    warden.authenticate!(:scope => :user)
+    if optyn_oauth_resource_type_merchant_app?
+      warden.authenticate(:scope => :merchants_manager)
+    else  
+      warden.authenticate!(:scope => :user)
+    end
   end
 
   # Authorization Code expiration time (default 10 minutes).
