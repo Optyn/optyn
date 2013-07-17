@@ -14,6 +14,7 @@
     = display_meta_description unless @meta_description_called
     = yield :meta_description
     = analytics_init if Rails.env.production?
+    = render(partial: "layouts/uservoice") if Rails.env.production? || Rails.env.staging?
   %body
     %a.scrolltop{:href => "#"}
     / begin navbar

@@ -15,6 +15,7 @@
     = yield :meta_description
     = analytics_init if Rails.env.production?
     = render(partial: "layouts/mixpanel") if Rails.env.production? || Rails.env.staging?
+    = render(partial: "layouts/uservoice") if Rails.env.production? || Rails.env.staging?
 
   %body
     %a.scrolltop{:href => "#"}
