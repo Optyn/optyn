@@ -73,11 +73,11 @@ class Shop < ActiveRecord::Base
     shop
   end
 
-  def self.postfix
+  def self.optyn_magic
     find_by_name(OPTYN_POSTFIX)
   end
 
-  def self.postfix_manager
+  def self.optyn_magic_manager
     postfix.manager
   end
 

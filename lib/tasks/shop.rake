@@ -22,7 +22,7 @@ namespace :shop do
   end
 
   desc "Add Virtual Shop for Optyn Magic shop"
-  task :add_optyn_postfix_shop => :environment do
+  task :add_optyn_magic_shop => :environment do
     puts "Adding/Updating Optyn Magic shop"
     shop = Shop.find_by_name('Optyn Magic') || Shop.new(name: 'Optyn Magic')
     shop.virtual = true
