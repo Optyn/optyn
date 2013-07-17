@@ -1,5 +1,8 @@
+require 'doorkeeper/resource_type_manager'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include Doorkeeper::ResourceTypeManager
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to (:back), :alert => exception.message

@@ -17,6 +17,7 @@ class Shop < ActiveRecord::Base
   belongs_to :coupon
 
   SHOP_TYPES=['local', 'online']
+  OPTYN_POSTFIX = 'Optyn Postfix'
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual
   mount_uploader :logo_img, ImageUploader
 
@@ -70,6 +71,14 @@ class Shop < ActiveRecord::Base
     end
 
     shop
+  end
+
+  def self.optyn_magic
+    find_by_name(OPTYN_POSTFIX)
+  end
+
+  def self.optyn_magic_manager
+    postfix.manager
   end
 
   def shop
