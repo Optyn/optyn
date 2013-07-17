@@ -17,7 +17,7 @@ class Plan < ActiveRecord::Base
   end
 
   def self.starter
-    Plan.where("plans.name ILIKE 'starter'")
+    Plan.where("plans.name ILIKE 'starter'").first
   end
 
 
