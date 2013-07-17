@@ -18,7 +18,7 @@
               %tr
                 %td
                   %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
-                    Welcome to Optyn #{@resource.name || @resource.email} !
+                    Welcome #{@resource.name || @resource.email}!
                   - if @shop.present?
                     %h4 
                       == #{@shop.name} added you to their customer list. 
