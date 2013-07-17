@@ -1,70 +1,85 @@
-// $(document).ready(function(){
-// 	$('.howmany').slider({
-// 	    range: "min",
-// 	    min:0,
-// 	    max:3000,
-// 	    value: 10,
-// 	    slide: function (event, ui) {
-// 	        var quantity = ui.value;
-// 	        // clear all row styles
-// 	        $("#pricing-table tbody tr").each(function(){
-// 	        	$(this).css('background-color','none')
-// 	        })
-
-// 	        // highlight new row
-// 	        if(quantity <= 100) {
-// 	        	$("#pricing-table tbody tr:nth-child(0)").css('background-color','#e4e3e3')
-// 	        }
-// 	        else if(quantity <= 500) {
-// 	        	$("#pricing-table tbody tr:nth-child(1)").css('background-color','#e4e3e3')
-// 	        }
-// 	        else if(quantity <= 1000) {
-// 	        	$("#pricing-table tbody tr:nth-child(2)").css('background-color','#e4e3e3')	
-// 	        }
-// 	        else if(quantity <= 2500) {
-// 	        	$("#pricing-table tbody tr:nth-child(3)").css('background-color','#e4e3e3')
-// 	        }
-// 	        else if(quantity <= 3000) {
-// 	        	$("#pricing-table tbody tr:nth-child(4)").css('background-color','#e4e3e3')
-// 	        }
-// 	        $(".quantity").html(quantity)
-// 	    }
-// 	})
-// })
-
-
 $(function(){
-	$('.numberofcustomers').text(10);
-  	var row = '#pricing-table > tbody > tr';
 
-  	function highlight(index){
-  		$(row).removeClass('selected');
-  		$(row+':nth-child('+index+')').addClass('selected');
-  	}
+    $('.howmany').slider({
+        range: "min",
+        min: 10,
+        max: 100000,
+        value: 0,
+        slide: function(event, ui){
 
-  	$('.howmany').slider({
-	    range: "min",
-	    min: 10,
- 	    max: 3000,
-	    value: 10,
-        slide: function( event, ui ) {
-          $('.numberofcustomers').html(ui.value);
+            $('.numberofcustomers').text(ui.value);
+            function highlightRow(index){
+                var row = '.pricingList > li';
+                $(row).removeClass('selected');
+                $(row).hide();
+                $(row+':nth-child('+index+')').addClass('selected').show();
+                $(row+'.selected').next().show();
+                $(row+'.selected').next().next().show();
+                $(row+'.selected').prev().show();
+                $(row+'.selected').prev().prev().show();
+            }
 
-		if((ui.value > 100) && (ui.value < 500)){
-			highlight(1);
-          }
-          else if((ui.value > 500) && (ui.value <= 1000)){
-            highlight(2);
-          }
-          else if((ui.value > 1000) && (ui.value <= 2500)){
-			highlight(3);
-          }
-          else if((ui.value > 2500) && (ui.value <= 3000)){
-			highlight(4);
-          }
-          else {
-            $(row).removeClass('selected');
-          } 
-       }
+            switch (true) {
+                case ((ui.value === 0)):
+                    highlightRow(0);
+                    break;
+                case ((ui.value > 0) && (ui.value <= 100)):
+                    highlightRow(1);
+                    break;
+                case ((ui.value >= 101) && (ui.value <= 250)):
+                    highlightRow(2);
+                    break;
+                case ((ui.value >= 251) && (ui.value <= 500)):
+                    highlightRow(3);
+                    break;
+                case ((ui.value >= 501) && (ui.value <= 1000)):
+                    highlightRow(4);
+                    break;
+                case ((ui.value >= 1001) && (ui.value <= 2500)):
+                    highlightRow(5);
+                    break;
+                case ((ui.value >= 2501) && (ui.value <= 5000)):
+                    highlightRow(6);
+                    break;
+                case ((ui.value >= 5001) && (ui.value <= 10000)):
+                    highlightRow(7);
+                    break;
+                case ((ui.value >= 10001) && (ui.value <= 15000)):
+                    highlightRow(8);
+                    break;
+                case ((ui.value >= 15001) && (ui.value <= 20000)):
+                    highlightRow(9);
+                    break;
+                case ((ui.value >= 20001) && (ui.value <= 25000)):
+                    highlightRow(10);
+                    break;
+                case ((ui.value >= 25001) && (ui.value <= 30000)):
+                    highlightRow(11);
+                    break;
+                case ((ui.value >= 30001) && (ui.value <= 40000)):
+                    highlightRow(12);
+                    break;
+                case ((ui.value >= 40001) && (ui.value <= 50000)):
+                    highlightRow(13);
+                    break;
+                case ((ui.value >= 50001) && (ui.value <= 60000)):
+                    highlightRow(14);
+                    break;
+                case ((ui.value >= 60001) && (ui.value <= 70000)):
+                    highlightRow(15);
+                    break;
+                case ((ui.value >= 70001) && (ui.value <= 80000)):
+                    highlightRow(16);
+                    break;
+                case ((ui.value >= 80001) && (ui.value <= 90000)):
+                    highlightRow(17);
+                    break;
+                case ((ui.value >= 90001) && (ui.value <= 100000)):
+                    highlightRow(18);
+                    break;
+              default:
+                //Default Case
+            }
+        }
     });
 });

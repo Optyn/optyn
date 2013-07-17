@@ -149,7 +149,7 @@ body .modal-footer .startbtn:hover{
 }
 #pricing .allplans {
 	background-color: #f7f7f7;
-	height: 500px;
+	//height: 500px;
 }
 
 #pricing .allplans table tr td {
@@ -170,15 +170,14 @@ body .modal-footer .startbtn:hover{
 #pricing .allplans .upgrade {
   background: #78CD51;
   border-radius: 4px;
-  display: inline-block;
+  //display: inline-block;
   height: 26px;
   line-height: 26px;
-  top: 4px;
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   text-decoration: none;
   text-shadow: none;
-  border: 1px #304d58;
+  //border: 1px #304d58 solid;
 }
 #pricing .allplans .upgrade:hover{
   background: #64b905;
@@ -365,10 +364,6 @@ body .modal-footer .startbtn:hover{
 	font-weight: bold;
 }
 
-#pricing-table tr {
-	td {background-color: transparent;}
-	&.selected td {background-color: #e4e3e3;}
-}
 
 .featuresList {
 	margin: 0 1% 0 0;
@@ -380,5 +375,36 @@ body .modal-footer .startbtn:hover{
 		padding-left: 19px;
 		font: normal 13px/18px Helvetica, arial;
 		&:last-child {margin-bottom: 0;}
+	}
+}
+
+#pricing-table > tbody > tr {
+	display: none;
+	td {background-color: transparent;}
+	&.selected td {background-color: #e4e3e3;}
+	&.show {display: block;}
+	&.hide {display: none;}
+}
+
+.ui-slider.ui-slider-horizontal .ui-slider-handle {
+	cursor: -moz-grab;
+	&.ui-state-active {
+		cursor: -moz-grabbing;
+	}
+}
+
+.pricingList {
+	clear: both;
+	margin: 0;
+	padding: 20px 0 0 0;
+	> li {
+		display: none;
+		margin-bottom: 15px;
+		padding: 8px;
+		//border: #ccc solid 1px;
+		&.selected {background-color: #E7E5E6;}
+		&.show {display: block;}
+		> * {float: left; margin-right: 5%; width: 20%;}
+		> *:last-child {float: right; margin: 0;}
 	}
 }
