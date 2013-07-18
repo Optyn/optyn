@@ -417,9 +417,50 @@
     position: fixed;
     top: 0;
     left: 0;
+    overflow: hidden;
     h2 {
       font-size: 23px;
       line-height: 40px;
+      text-shadow: rgb(35, 48, 62) 1px 1px,
+        rgb(35, 48, 62) 2px 2px,
+        rgb(35, 48, 62) 3px 3px,
+        rgb(35, 48, 62) 4px 4px,
+        rgb(35, 48, 62) 5px 5px,
+        rgb(35, 48, 62) 6px 6px,
+        rgb(35, 48, 62) 7px 7px,
+        rgb(35, 48, 62) 8px 8px,
+        rgb(35, 48, 62) 9px 9px,
+        rgb(35, 48, 62) 10px 10px,
+        rgb(35, 48, 62) 11px 11px,
+        rgb(35, 48, 62) 12px 12px,
+        rgb(35, 48, 62) 13px 13px,
+        rgb(35, 48, 62) 14px 14px,
+        rgb(35, 48, 62) 15px 15px,
+        rgb(35, 48, 62) 16px 16px,
+        rgb(35, 48, 62) 17px 17px,
+        rgb(35, 48, 62) 18px 18px,
+        rgb(35, 48, 62) 19px 19px,
+        rgb(35, 48, 62) 20px 20px,
+        rgb(35, 48, 62) 21px 21px,
+        rgb(35, 48, 62) 22px 22px,
+        rgb(35, 48, 62) 23px 23px,
+        rgb(35, 48, 62) 24px 24px,
+        rgb(35, 48, 62) 25px 25px,
+        rgb(35, 48, 62) 26px 26px,
+        rgb(35, 48, 62) 27px 27px,
+        rgb(35, 48, 62) 28px 28px,
+        rgb(35, 48, 62) 29px 29px,
+        rgb(35, 48, 62) 30px 30px,
+        rgb(35, 48, 62) 31px 31px,
+        rgb(35, 48, 62) 32px 32px,
+        rgb(35, 48, 62) 33px 33px,
+        rgb(35, 48, 62) 34px 34px,
+        rgb(35, 48, 62) 35px 35px,
+        rgb(35, 48, 62) 36px 36px,
+        rgb(35, 48, 62) 37px 37px,
+        rgb(35, 48, 62) 38px 38px,
+        rgb(35, 48, 62) 39px 39px,
+        rgb(35, 48, 62) 40px 40px;
     }
     .span2 a { line-height: 60px; }
     .login {
@@ -510,7 +551,7 @@
     border-radius: 1px;
     display: inline-block;
     transition: all 0.2s;
-    padding: 15px 30px;
+    padding: 16px 30px;
     font-size: 18px;
     line-height: 20px;
     &:hover {
@@ -523,7 +564,9 @@
     }
   }
   .btn-orange.icon_chrome > a {
-    background: image-url( 'sprite-landing.png' ) no-repeat 9px -381px;
+    background-image: image-url( 'sprite-landing.png' );
+    background-repeat: no-repeat;
+    background-position: 9px -381px;
     padding-left: 65px;
   }
 
