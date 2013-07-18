@@ -508,6 +508,7 @@
     color: #fff;
     border-bottom: solid 3px rgba( 0, 0, 0, 0.2 );
     border-radius: 1px;
+    display: inline-block;
     transition: all 0.2s;
     padding: 15px 30px;
     font-size: 18px;
@@ -522,9 +523,7 @@
     }
   }
   .btn-orange.icon_chrome > a {
-    background-image: image-url( 'sprite-landing.png' );
-    background-repeat: no-repeat;
-    background-position: 9px -381px;
+    background: image-url( 'sprite-landing.png' ) no-repeat 9px -381px;
     padding-left: 65px;
   }
 
