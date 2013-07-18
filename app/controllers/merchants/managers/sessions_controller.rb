@@ -7,6 +7,7 @@ class Merchants::Managers::SessionsController < Devise::SessionsController
   def new
     session[:omniauth_manager] = true
     session[:omniauth_user] = nil
+    clear_session_anyone_logged_in
     super
   end
 

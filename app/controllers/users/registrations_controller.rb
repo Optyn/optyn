@@ -23,7 +23,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if (@shop = Shop.by_app_id(params[:app_id])).present?
       resource.show_shop = true
       resource.shop_identifier = @shop.id
-    end 
+    end
+
+    clear_session_anyone_logged_in
 
     if resource.save
       if resource.active_for_authentication?
