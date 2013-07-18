@@ -6,8 +6,7 @@ class Coupon < ActiveRecord::Base
   attr_accessible :stripe_id, :percent_off, :amount_off, :currency, :livemode, :duration, :redeem_by, :max_redemptions,
                   :times_redeemed, :duration_in_months
 
-  def self.from_attrs(event)
-    stripe_coupon = event['data']['object'] 
+  def self.from_attrs(stripe_coupon)
     coupon = Coupon.find_by_stripe_id(stripe_coupon['id']) || Coupon.new
     coupon.stripe_id = stripe_coupon['id']
     coupon.percent_off = stripe_coupon['percent_off']
