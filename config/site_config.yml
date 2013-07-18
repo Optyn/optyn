@@ -2,9 +2,9 @@ defaults:
   resque_auth_password: '9p5yn123'
   cache_auth_username: 'optyn'
   cache_auth_password: '9p5yn123'
-  app_host: 'beta.optyn.com'
+  app_host: 'www.optyn.com'
   api_welcome_message: 'Optyn to receive cool offers, new product announcements, giveaways and other cool announcements.'
-  app_base_url: 'https://beta.optyn.com'
+  app_base_url: 'https://www.optyn.com'
   bucket: 'optynproduction'
   deployment_shared_path: <%= "#{Rails.root}/tmp/" %>
   dashboard_limit: 5
