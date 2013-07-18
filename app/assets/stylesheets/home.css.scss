@@ -477,6 +477,12 @@
   }
 
   .consumers {
+    & > a {
+      color: #333;
+      border-right: solid 1px #333;
+      padding: 0 7px;
+    }
+    & > a:last-child { border: 0; }
     .mktg, .easy, .ctrl, .cool {
       background-repeat: no-repeat;
       background-image: image-url( 'sprite-landing.png' );
