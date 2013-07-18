@@ -2,7 +2,7 @@ class MainController < ApplicationController
   before_filter :require_not_logged_in, only: [:index]
 
   def index
+    render layout: false
   end
 
-  
 end

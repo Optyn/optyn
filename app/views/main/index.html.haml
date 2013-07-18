@@ -1,40 +1,101 @@
-= display_title "Optyn.com - Improving the Marketing Relationship"
-= display_meta_description "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications.", "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
-/New Content          
-#home
-  .main-area
-    .headline
-      .slogan1
-        %h3
-          Finally, an easy way
-      .slogan2
-        %h3
-          to connect with your customers!
-    .span6.consumer
-      %h3
-        Are you a Consumer?
-      .content
-        %strong
-          Connect to Businesses Like NEVER before. Optyn puts you in control of how you are being marketed to and most importantly which information you share...and so much more.
-      %h4
-        You are one step away from a better Life!
-      .buttons
-        %a.btn.startbutton{:href => new_user_registration_path} Get Started
-        %a.btn.quickvid{:href => consumer_features_path} Learn More
-        /%span
-        /%a{:href => consumer_features_path} Learn More
-    .span6.merchant
-      %h3
-        Do you own or run a Business?
-      .content
-        %strong
-          The first automated marketing solution that captures your customers in-store and online.
+!!!
+%html
+  %head
+    = display_title unless @title_called
+    =  yield :title
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    = stylesheet_link_tag "application", :media => "all"
+    %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic", :rel => "stylesheet", :type => "text/css"}/
+    = javascript_include_tag "https://js.stripe.com/v1/","application"
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+
+    = display_meta_description unless @meta_description_called
+    = yield :meta_description
+
+    = analytics_init if Rails.env.production?
+
+    = display_title "Optyn.com - Improving the Marketing Relationship"
+    = display_meta_description "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications.", "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
+
+
+  %body#landing
+    .container-fluid
+      %header.row-fluid
+        .span5
+          %h2 FOR BUSINESSES
+        .span2
+          %a{ :href => root_path }
+            = image_tag "logo.png", :alt => 'logo'
+        .span4
+          %h2 FOR ALL MANKIND
+        .span1
+          %a.login{ :href => new_user_session_path } Log in
+
+      .row-fluid
+        .span6.businesses
+          %h3 Simple marketing is here
+          %h4 WHY
+          .line1 Every business needs to use optyn
+          .line2 The simplest marketing tools that work for you
+          %h4 HOW
+          .line1 Businesses will be benefited by using optyn
+          .line2 Automatically capture online and in-store customers
+          %h4 WHAT
+          .line1 Every business needs to use optyn
+          .line2 The simplest marketing tools that work for you
+          %p Easy hassle. Works for free.
+          .btn-orange
+            %a{ :href => '#' } Get started for FREE
+          %a{ :href => '#' } Learn more
+          %a{ :href => merchant_features_path } Features
+          %a{ :href => new_user_session_path } Log in
+        .span6.consumers
+          %h3 Your marketing inbox has arrived
+          %h4 WHY
+          .line1 Everybody should use optyn
+          .line2 opt-in to any website and control what personal information you share
+          %h4 HOW
+          .line1 Everyone will be benefited by using optyn
+          .line2 All of your subscriptions in one place
+          %h4 WHAT
+          .line1 You get as an individual using optyn
+          .line2
+            Explore new places, subscriptions and more
+            %br
+            Protect your information and eliminate spam
           %br
-          We make marketing to your customers simple and easy.
-      %h4
-        Get Started with a FREE Account for Life!
-      .buttons
-        %a.btn.startbutton{:href => new_merchants_manager_registration_path} Get Started
-        %a.btn.quickvid{:href => merchant_features_path} Learn More
-        /%span
-        /%a{:href => merchant_features_path} Learn More
+          .btn-orange
+            %a{ :href => '#' } Download Chrome plugin
+          %br
+          %p Let's track and opt-in to any website and puts you in control
+
+      .row-fluid
+        %h2 Still not convinced?
+
+      .row-fluid
+        .span6.businesses
+          %h3 What we can do for your businesses?
+          %ul
+            %li.mktg Easiest marketing solutions for SMBs.
+            %li.auto Automated marketing and engagement.
+            %li.get The easiest way to get customers into program.
+            %li.free Free for upto 100 customers. All features included. No gimmicks.
+          .btn-orange
+            %a{ :href => '#' } Get started for FREE
+          %a{ :href => merchant_features_path } Features
+          %a{ :href => pricing_path } Pricing
+
+        .span6.consumers
+          %h3 This is the cool stuff you get
+          %ul
+            %li.mktg All of your marketing messages + subscriptions at one place.
+            %li.easy opt-in with confidence. Worry, hassle and spam free.
+            %li.ctrl You are finally in control of your information.
+            %li.cool Explore cool places, new subscriptions and much more.
+          .btn-orange
+            %a{ :href => '#' } Get started for FREE
+          %a{ :href => consumer_features_path } Features
+          %a{ :href => '#' } Download
+          %a{ :href => '#' } Chrome plugin
