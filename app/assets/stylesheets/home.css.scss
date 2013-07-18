@@ -428,44 +428,71 @@
       background-color: #5fabe7;
       color: #fff;
       font-family: 'Open Sans Condensed' !important;
-      margin: 13px 0;
+      margin: 13px 1% 13px 0;
       display: inline-block;
       padding: 0 20px;
       border-bottom: solid 4px rgba( 0, 0, 0, 0.2);
+      transition: all 0.2s;
+      &:hover {
+        background-color: #327ebb;
+        border-bottom: solid 4px rgba( 0, 0, 0, 0.3);
+        text-decoration: none;
+      }
+    }
+  }
+
+  h2.convinced {
+    margin: 50px 0 0 42px;
+    & > span {
+      color: #fff;
     }
   }
 
   li {
-    padding-left: 30px;
+    padding-left: 55px;
     text-align: left;
+    min-height: 44px;
+    margin: 10px 0;
   }
 
   .businesses {
     color: #fff;
-    a {
+    & > a {
       color: #fff;
       border-right: solid 1px #fff;
       padding: 0 7px;
     }
-    a:last-child { border: 0; }
+    & > a:last-child { border: 0; }
+
+    .margin_top { margin-top: 2em; }
 
     .mktg, .auto, .get, .free {
       background-repeat: no-repeat;
+      background-image: image-url( 'sprite-landing.png' );
     }
-    .mktg { background-image: url( '' ); }
-    .auto { background-image: url( '' ); }
-    .get { background-image: url( '' ); }
-    .free { background-image: url( '' ); }
+    .mktg { background-position: 0 -581px; }
+    .auto { background-position: 0 -770px; }
+    .get { background-position: 0 -1135px; }
+    .free { background-position: 0 -190px; }
   }
 
   .consumers {
     .mktg, .easy, .ctrl, .cool {
       background-repeat: no-repeat;
+      background-image: image-url( 'sprite-landing.png' );
     }
-    .mktg {}
-    .easy {}
-    .ctrl {}
-    .cool {}
+    .mktg {
+      background-position: 0 -956px;
+    }
+    .easy {
+      background-position: 0 0;
+    }
+    .ctrl {
+      background-position: 0 -1500px;
+    }
+    .cool {
+      background-position: 0 -1315px;
+    }
   }
 
   .btn-orange { margin: 30px 0; }
@@ -473,16 +500,26 @@
   .btn-orange > a {
     background-color: #e34e37;
     color: #fff;
-    border-bottom: solid 4px rgba( 0, 0, 0, 0.2 );
+    border-bottom: solid 3px rgba( 0, 0, 0, 0.2 );
     border-radius: 1px;
-    transition: border 0.2s;
-    padding: 10px 30px;
+    transition: all 0.2s;
+    padding: 15px 30px;
+    font-size: 18px;
+    line-height: 20px;
     &:hover {
       text-decoration: none;
+      background-color: #bb300f;
+      border-bottom: solid 4px rgba( 0, 0, 0, 0.3 );
     }
     &:active {
-      border-bottom: solid 1px rgba( 0, 0, 0, 0.2 );
+      border: solid 4px rgba( 0, 0, 0, 0.2 );
     }
+  }
+  .btn-orange.icon_chrome > a {
+    background-image: image-url( 'sprite-landing.png' );
+    background-repeat: no-repeat;
+    background-position: 9px -381px;
+    padding-left: 65px;
   }
 
   h4 {

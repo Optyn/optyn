@@ -28,10 +28,9 @@
         .span2
           %a{ :href => root_path }
             = image_tag "logo.png", :alt => 'logo'
-        .span4
+        .span5
+          %a.login.pull-right{ :href => new_user_session_path } Log in
           %h2 FOR ALL MANKIND
-        .span1
-          %a.login{ :href => new_user_session_path } Log in
 
       .row-fluid
         .span6.businesses
@@ -45,7 +44,7 @@
           %h4 WHAT
           .line1 Every business needs to use optyn
           .line2 The simplest marketing tools that work for you
-          %p Easy hassle. Works for free.
+          %p.margin_top Easy hassle. Works for free.
           .btn-orange
             %a{ :href => '#' } Get started for FREE
           %a{ :href => '#' } Learn more
@@ -66,13 +65,15 @@
             %br
             Protect your information and eliminate spam
           %br
-          .btn-orange
+          .btn-orange.icon_chrome
             %a{ :href => '#' } Download Chrome plugin
           %br
           %p Let's track and opt-in to any website and puts you in control
 
       .row-fluid
-        %h2 Still not convinced?
+        %h2.convinced
+          %span Still not
+          convinced?
 
       .row-fluid
         .span6.businesses
