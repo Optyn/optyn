@@ -32,6 +32,7 @@ class Users::SessionsController < Devise::SessionsController
       resource_name = :user
       auth_options = {scope: :user, recall: 'sessions#new'}
     end
+    clear_session_anyone_logged_in
     resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource)
@@ -97,5 +98,5 @@ class Users::SessionsController < Devise::SessionsController
   def increment_email_box_click_count
     @shop = Shop.by_app_id(params[:app_id])
     @shop.increment_email_box_click_count if @shop.present?
-  end  
+  end
 end

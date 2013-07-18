@@ -67,4 +67,9 @@ class ApplicationController < ActionController::Base
       merchants_root_path
     end
   end
+
+  def clear_session_anyone_logged_in
+    session['warden.user.merchants_manager.key'] = nil
+    session['warden.user.user.key'] = nil
+  end
 end
