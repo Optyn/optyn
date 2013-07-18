@@ -402,7 +402,7 @@ body .modal-footer .startbtn:hover{
 		margin-bottom: 15px;
 		padding: 8px;
 		//border: #ccc solid 1px;
-		&.selected {background-color: #E7E5E6;}
+		&.selected {background-color: #E7E5E6; font-size: 16px; font-weight: bold;}
 		&.show {display: block;}
 		> * {float: left; margin-right: 5%; width: 20%;}
 		> *:last-child {float: right; margin: 0;}

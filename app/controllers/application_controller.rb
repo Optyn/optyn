@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
     redirect_to (:back), :alert => exception.message
   end
 
-  helper_method :is_shop_local_and_active?
-
   alias_method :manager_signed_in?, :merchants_manager_signed_in?
   alias_method :current_manager, :current_merchants_manager
 
@@ -53,17 +51,6 @@ class ApplicationController < ActionController::Base
 
   def require_user
     redirect_to root_path unless user_signed_in?
-  end
-
-  def is_shop_local_and_active?
-    current_merchants_manager.shop.is_subscription_active? if merchants_manager_signed_in?
-  end
-
-  def is_shop_local?(shop)
-  end
-
-  def require_shop_local_and_inactive
-    redirect_to root_path if is_shop_local_and_active?
   end
 
   def after_sign_in_path_for(resource)

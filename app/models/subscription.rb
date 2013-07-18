@@ -14,15 +14,24 @@ class Subscription < ActiveRecord::Base
 
   after_create :create_stripe_customer_with_email
 
-  def self.create_stripe_customer(params)
-    Stripe::Customer.create(email: params['subscription']['email'], card: params['stripeToken'],:plan=>params['stripe_plan_id'])
+  def self.create_or_stripe_customer_card(subscription, params)
+    if subscription.stripe_customer_token
+      stripe_customer = Stripe::Customer.retrieve(subscription.stripe_customer_token)
+      stripe_customer.update_subscription(card: params['stripeToken'], plan: params['stripe_plan_id'])
+    else
+      Stripe::Customer.create(email: params['subscription']['email'], card: params['stripeToken'], :plan => params['stripe_plan_id'])
+    end
+
+    Stripe::Customer.retrieve(subscription.stripe_customer_token)
   end
 
   def update_plan(plan)
     self.update_attribute(:plan_id, plan.id)
     if self.stripe_customer_token.present?
       cu = Stripe::Customer.retrieve(self.stripe_customer_token)
-      cu.update_subscription(:plan => plan.plan_id, :prorate => false)
+      if cu['cards']['count'] > 0
+        cu.update_subscription(:plan => plan.plan_id, :prorate => false)
+      end
     end
   end
 

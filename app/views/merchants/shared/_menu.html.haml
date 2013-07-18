@@ -8,16 +8,16 @@
         = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
         My Dashboard
     %li
-      %a{:href => merchants_messages_path, :alt => "My Messages"}
-        = image_tag "menu_icon_messages.png", :alt => "Messages"
+      %a{:href => merchants_messages_path, :alt => "Campaign Center"}
+        = image_tag "merchant_menu_campaigncenter_icon.png", :alt => "Campaign"
         Campaign Center
     %li
       %a{:href => "/merchants/connections"}
-        = image_tag "menu_icon_connections.png", :alt => ""
+        = image_tag "menu_icon_connections.png", :alt => "Connections", :style => "padding-left: 5px;"
         My Customers
     %li
       %a{:href => merchants_app_path}
-        = image_tag "menu_icon_connections.png", :alt => "Your API Button"
+        = image_tag "merchant_menu_button_icon.png", :alt => "Your API Button"
         Your Optyn Button
     %li
       %a{:href => merchants_survey_path}
@@ -29,14 +29,14 @@
         Customer Segmentation
     %li
       %a{:href => merchants_shop_path}
-        = image_tag "menu_icon_shop_details.png", :alt => "Your Shop"
+        = image_tag "merchant_menu_settings_icon.png", :alt => "Your Shop"
         Manage Your Shop
     %li
       %a{:href => merchants_file_imports_path}
-        = image_tag "menu_icon_dashboard.png", :alt => "Connections"
+        = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
         Import Customers
     %li
-      = image_tag "menu_icon_dashboard.png", :alt => "Logout", :style => "padding-right: 6px;"
+      = image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
 
   - if @optyn_button_stats.present?
