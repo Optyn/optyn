@@ -223,7 +223,7 @@ class User < ActiveRecord::Base
   end
 
   def permission_name
-    self.name if permissions_users.permission_visible?(Permission.fullname_id)
+    self.name if permissions_users.permission_visible?(Permission.name_id)
   end
 
   def permission_email

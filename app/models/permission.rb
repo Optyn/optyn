@@ -16,7 +16,7 @@ class Permission < ActiveRecord::Base
     lookup_name(NAME).first
   end
     
-  def self.fullname_id()
+  def self.name_id()
   	Permission.lookup_name(NAME).first.id
   end
 
