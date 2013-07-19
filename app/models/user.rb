@@ -194,6 +194,10 @@ class User < ActiveRecord::Base
      permission_name || permission_email || "Optyn User"
   end
 
+  def display_fullname
+    display_name
+  end
+
   def display_email
     permission_email || "N/A"
   end
