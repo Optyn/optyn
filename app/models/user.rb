@@ -194,6 +194,10 @@ class User < ActiveRecord::Base
      permission_name || permission_email || "Optyn User"
   end
 
+  def display_fullname
+    display_name
+  end
+
   def display_email
     permission_email || "N/A"
   end
@@ -219,7 +223,7 @@ class User < ActiveRecord::Base
   end
 
   def permission_name
-    self.name if permissions_users.permission_visible?(Permission.name_id)
+    self.name if permissions_users.permission_visible?(Permission.fullname_id)
   end
 
   def permission_email

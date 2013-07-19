@@ -26,7 +26,7 @@
             .controls
               %label.checkbox
                 = p.check_box :action
-                =  "Show #{p.object.permission.name.titleize}"
+                =  "Show #{p.object.permission.fullname.titleize}"
                 = p.hidden_field :permission_id
         .p
           *If you don't share your e-mail, #{@shop.name} can still contact you. :)
