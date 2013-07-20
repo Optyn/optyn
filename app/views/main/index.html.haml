@@ -33,7 +33,7 @@
           %h2 FOR ALL MANKIND
 
       .row-fluid
-        .span6.businesses
+        .span6.businesses.has-heading
           %h3 Simple marketing is here
           %h4 WHY
           .line1 Every business needs to use optyn
@@ -50,7 +50,7 @@
           %a{ :href => '#' } Learn more
           %a{ :href => merchant_features_path } Features
           %a{ :href => new_user_session_path } Log in
-        .span6.consumers
+        .span6.consumers.has-heading
           %h3 Your marketing inbox has arrived
           %h4 WHY
           .line1 Everybody should use optyn
@@ -71,9 +71,7 @@
           %p Let's track and opt-in to any website and puts you in control
 
       .row-fluid
-        %h2.convinced
-          %span Still not
-          convinced?
+        %h2.navy Still not convinced?
 
       .row-fluid
         .span6.businesses
@@ -99,3 +97,99 @@
             %a{ :href => '#' } Get started for FREE
           %a{ :href => consumer_features_path } Features
           %a{ :href => '#' } Download Chrome plugin
+
+      .row-fluid
+        %h2.navy What? Still not convinced?
+
+      .row-fluid
+        .span6.businesses
+          %a{ :href => '#', :class =>'video' }
+          %p Check out this awesome + quick video that tells you more
+        .span6.consumers
+          %a{ :href => '#', :class => 'video' }
+          %p Check out this awesome + quick video that tells you more
+
+      .row-fluid
+        %h2.navy Are you frikken kiddin?
+
+      .row-fluid
+        .span6.businesses
+          %p A whole new world awaits!
+          %input{ :type => 'text', :placeholder => 'Sign up with email' }
+          %input{ :type => 'submit', :value => 'Sign up' }
+          Clicking sign up you agree to Optyn's
+          %a{ :href => '#' } Terms of Use
+          %p Or sign up with Social account
+          %a{ :href => '#', :class => 'icon google' } Google Plus
+          %a{ :href => '#', :class => 'icon twitter' } Twitter
+          %a{ :href => '#', :class => 'icon facebook' } Facebook
+        .span6.consumers
+          %p Your customers are waiting
+          %input{ :type => 'text', :placeholder => 'Sign up with email' }
+          %input{ :type => 'submit', :value => 'Sign up' }
+          Clicking sign up you agree to Optyn's
+          %a{ :href => '#' } Terms of Use
+          %p Or sign up with Social account
+          %a{ :href => '#', :class => 'icon google' } Google Plus
+          %a{ :href => '#', :class => 'icon twitter' } Twitter
+          %a{ :href => '#', :class => 'icon facebook' } Facebook
+
+      %footer.row-fluid
+        .span2
+          %h4 Our Company
+          %ul
+            %li
+              %a{ :href => '#' } About us
+            %li
+              %a{ :href => '#' } Our blog
+            %li
+              %a{ :href => '#' } Contact us
+            %li
+              %a{ :href => '#' } Terms of use
+            %li
+              %a{ :href => '#' } Privacy policy
+        .span2
+          %h4 For Consumers
+          %ul
+            %li
+              %a{ :href => '#' } Features
+            %li
+              %a{ :href => '#' } Why use optyn
+            %li
+              %a{ :href => '#' } FAQs
+            %li
+              %a{ :href => '#' } Support
+            %li
+              %a{ :href => '#' } Get started
+        .span2
+          %h4 For Merchants
+          %ul
+            %li
+              %a{ :href => '#' } Features
+            %li
+              %a{ :href => '#' } Why use optyn
+            %li
+              %a{ :href => '#' } FAQs
+            %li
+              %a{ :href => '#' } Support
+            %li
+              %a{ :href => '#' } Get started
+        .span2
+          %h4 For Publishers
+          %ul
+            %li
+              %a{ :href => '#' } Features
+            %li
+              %a{ :href => '#' } Why use optyn
+            %li
+              %a{ :href => '#' } FAQs
+            %li
+              %a{ :href => '#' } Support
+            %li
+              %a{ :href => '#' } Get started
+        .span4
+          %a{ :href => '#', :class => 'pg-twitter' }Our Twitter page
+          %a{ :href => '#', :class => 'pg-facebook' }Our Facebook page
+          %p 2013 &copy; optyn.com
+          %br
+          All rights reserved

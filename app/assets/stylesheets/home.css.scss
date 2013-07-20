@@ -403,11 +403,9 @@
   padding: 70px 0 0 0;
   margin: 0;
   text-align: center;
-  /*background-image: url('/assets/bg_landing.png');*/
-  /*background-image: url(<% asset_path '/assets/bg_landing.png' %>);*/
   background-image: image-url( '/assets/bg_landing.png' );
   background-position: center;
-  font-family: 'Open Sans' !important;
+  font-family: 'Open Sans', sans-serif !important;
 
   .container-fluid { padding: 0; }
 
@@ -428,7 +426,7 @@
       line-height: 30px;
       background-color: #5fabe7;
       color: #fff;
-      font-family: 'Open Sans Condensed' !important;
+      font-family: 'Open Sans Condensed', sans-serif !important;
       margin: 13px 1% 13px 0;
       display: inline-block;
       padding: 0 20px;
@@ -442,12 +440,14 @@
     }
   }
 
-  h2.convinced {
-    margin: 50px 0 0 42px;
-    & > span {
-      color: #fff;
-    }
+  h2.navy {
+    background: navy;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    padding: 10px 0;
   }
+
 
   li {
     padding-left: 55px;
@@ -473,8 +473,19 @@
     }
     .mktg { background-position: 0 -581px; }
     .auto { background-position: 0 -770px; }
-    .get { background-position: 0 -1135px; }
+    .get  { background-position: 0 -1135px; }
     .free { background-position: 0 -190px; }
+  }
+  .has-heading::before {
+    display: none;
+    font-size: 23px;
+    line-height: 40px;
+  }
+  .businesses.has-heading::before{
+    content: 'FOR BUSINESSES';
+  }
+  .consumers.has-heading::before{
+    content: 'FOR ALL MANKIND';
   }
 
   .consumers {
@@ -538,7 +549,33 @@
     font-size: 0.85em;
   }
 
-  h2, h3, .btn-orange {
-    font-family: 'Open Sans Condensed';
+  h2, h3, .btn-orange, .has-heading::before {
+    font-family: 'Open Sans Condensed', sans-serif;
+  }
+
+  footer {
+    background-color: navy;
+    color: #fff;
+    h4 {
+      color: green;
+    }
+  }
+}
+
+@media( max-width: 768px ) {
+  #landing {
+    background-position: left;
+    padding-top: 150px;
+    header .span5:first-child { display: none; }
+    header .span5:last-child {
+      h2 {
+        display: none;
+      }
+    }
+    .businesses.has-heading::before,
+    .consumers.has-heading::before { display: block; }
+  }
+  .consumers {
+    background-color: #ecf0f1;
   }
 }
