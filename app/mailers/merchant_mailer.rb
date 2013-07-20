@@ -5,7 +5,7 @@ class MerchantMailer < ActionMailer::Base
   def payment_notification(options={})
     options = options.symbolize_keys
     receivers = fetch_payment_receivers(options)
-    @amount = options[:amount]
+    @amount = ((options[:amount].to_f)/100)
     @conn_count = options[:connection_count]
     @last4 = options[:last4]
     mail(:to => receivers, :subject => "Payment Successfull!")
@@ -15,7 +15,7 @@ class MerchantMailer < ActionMailer::Base
   def invoice_payment_failure(options={})
     options = options.symbolize_keys
     receivers = fetch_payment_receivers(options)
-    @amount = options[:amount]
+    @amount = ((options[:amount].to_f)/100)
     @conn_count = options[:connection_count]
     mail(:to => receivers, :subject => "Payment Failure!")
   end
@@ -25,7 +25,7 @@ class MerchantMailer < ActionMailer::Base
     options = options.symbolize_keys
     receivers = fetch_payment_receivers(options)
 
-    @amount = options[:amount]
+    @amount = ((options[:amount].to_f)/100)
     @conn_count = options[:connection_count]
     mail(:to => receivers, :subject => "Payment Successfull!")
   end

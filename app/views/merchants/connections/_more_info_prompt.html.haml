@@ -6,5 +6,5 @@
     - user.permissions_users.collect(&:permission).each do |permission|
       %p
         %strong
-          == #{permission.name.titleize}:
-        = eval("user.display_#{permission.name}")
+          == #{(permission.permission_name == 'fullname' ? 'name'.titleize : permission.permission_name.titleize)}:
+        = eval("user.display_#{permission.permission_name}")

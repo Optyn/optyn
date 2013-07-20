@@ -25,7 +25,7 @@
                   %ul
                     %li
                     Amount charged
-                    = @amount
+                    = number_to_currency(@amount, precision: 2)
                     %li
                     Connection count
                     = @conn_count

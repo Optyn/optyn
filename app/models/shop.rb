@@ -67,6 +67,7 @@ class Shop < ActiveRecord::Base
     shop = find_by_name(sanitized_domain)
     unless shop.present?
       shop = Shop.new(name: sanitized_domain, virtual: true)
+      shop.stype = "online"
       shop.save(validate: false)
     end
 

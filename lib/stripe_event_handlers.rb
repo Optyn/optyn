@@ -78,12 +78,14 @@ module StripeEventHandlers
   end
 
   def self.handle_coupon_created(params)
-    coupon = Coupon.from_attrs(params)
+    stripe_coupon = params['data']['object']
+    coupon = Coupon.from_attrs(stripe_coupon)
     coupon.save!
   end
 
   def self.handle_coupon_deleted(params)
-    coupon = Coupon.from_attrs(params)
+    stripe_coupon = params['data']['object']
+    coupon = Coupon.from_attrs(stripe_coupon)
     unless coupon.new_record?
       coupon.deleted = true
       coupon.save

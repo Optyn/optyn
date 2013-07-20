@@ -16,6 +16,8 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     @manager = @shop.managers.first
     @manager.skip_password = true if params[:auth_id].present? && params[:auth_provider].present?
 
+    clear_session_anyone_logged_in
+
     if !@shop.shop_already_exists? && @shop.save
       @shop.update_manager
       @shop.managers.first.create_authentication(params[:auth_id], params[:auth_provider]) if params[:auth_id].present?
