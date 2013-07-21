@@ -25,3 +25,4 @@ dump.rdb
 public/assets
 .idea/
 *DS_Store
+public/sitemap.xml.gz
