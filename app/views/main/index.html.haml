@@ -47,9 +47,9 @@
           %p.margin_top Easy hassle. Works for free.
           .btn-orange
             %a{ :href => '#' } Get started for FREE
-          %a{ :href => '#' } Learn more
-          %a{ :href => merchant_features_path } Features
-          %a{ :href => new_user_session_path } Log in
+          %a.bordered{ :href => '#' } Learn more
+          %a.bordered{ :href => merchant_features_path } Features
+          %a.bordered{ :href => new_user_session_path } Log in
         .span6.consumers.has-heading
           %h3 Your marketing inbox has arrived
           %h4 WHY
@@ -70,10 +70,11 @@
           %br
           %p Let's track and opt-in to any website and puts you in control
 
-      .row-fluid
+      .row-fluid.hdg
+        %a.scroll-down{ :href => '#' }
         %h2.navy Still not convinced?
 
-      .row-fluid
+      .row-fluid.features
         .span6.businesses
           %h3 What we can do for your businesses?
           %ul
@@ -83,8 +84,8 @@
             %li.free Free for upto 100 customers. All features included. No gimmicks.
           .btn-orange
             %a{ :href => '#' } Get started for FREE
-          %a{ :href => merchant_features_path } Features
-          %a{ :href => pricing_path } Pricing
+          %a.bordered{ :href => merchant_features_path } Features
+          %a.bordered{ :href => pricing_path } Pricing
 
         .span6.consumers
           %h3 This is the cool stuff you get
@@ -95,40 +96,46 @@
             %li.cool Explore cool places, new subscriptions and much more.
           .btn-orange
             %a{ :href => '#' } Get started for FREE
-          %a{ :href => consumer_features_path } Features
-          %a{ :href => '#' } Download Chrome plugin
+          %a.bordered{ :href => consumer_features_path } Features
+          %a.bordered{ :href => '#' } Download Chrome plugin
 
-      .row-fluid
+      .row-fluid.hdg
+        %a.scroll-down{ :href => '#' }
         %h2.navy What? Still not convinced?
 
-      .row-fluid
+      .row-fluid.videos
         .span6.businesses
-          %a{ :href => '#', :class =>'video' }
+          %a.light{ :href => '#', :class =>'video' }
           %p Check out this awesome + quick video that tells you more
         .span6.consumers
-          %a{ :href => '#', :class => 'video' }
+          %a.dark{ :href => '#', :class => 'video' }
           %p Check out this awesome + quick video that tells you more
 
-      .row-fluid
+      .row-fluid.hdg
+        %a.scroll-down{ :href => '#' }
         %h2.navy Are you frikken kiddin?
 
-      .row-fluid
+      .row-fluid.sign-up
         .span6.businesses
           %p A whole new world awaits!
-          %input{ :type => 'text', :placeholder => 'Sign up with email' }
-          %input{ :type => 'submit', :value => 'Sign up' }
-          Clicking sign up you agree to Optyn's
-          %a{ :href => '#' } Terms of Use
+          %form
+            %input{ :type => 'text', :placeholder => 'Sign up with email' }
+            %input{ :type => 'submit', :value => 'Sign up' }
+          %aside
+            Clicking sign up you agree to Optyn's
+            %a{ :href => '#' } Terms of Use
           %p Or sign up with Social account
           %a{ :href => '#', :class => 'icon google' } Google Plus
           %a{ :href => '#', :class => 'icon twitter' } Twitter
           %a{ :href => '#', :class => 'icon facebook' } Facebook
         .span6.consumers
           %p Your customers are waiting
-          %input{ :type => 'text', :placeholder => 'Sign up with email' }
-          %input{ :type => 'submit', :value => 'Sign up' }
-          Clicking sign up you agree to Optyn's
-          %a{ :href => '#' } Terms of Use
+          %form
+            %input{ :type => 'text', :placeholder => 'Sign up with email' }
+            %input{ :type => 'submit', :value => 'Sign up' }
+          %aside
+            Clicking sign up you agree to Optyn's
+            %a{ :href => '#' } Terms of Use
           %p Or sign up with Social account
           %a{ :href => '#', :class => 'icon google' } Google Plus
           %a{ :href => '#', :class => 'icon twitter' } Twitter
@@ -190,6 +197,7 @@
         .span4
           %a{ :href => '#', :class => 'pg-twitter' }Our Twitter page
           %a{ :href => '#', :class => 'pg-facebook' }Our Facebook page
-          %p 2013 &copy; optyn.com
-          %br
-          All rights reserved
+          %p
+            2013 &copy; optyn.com
+            %br
+            All rights reserved
