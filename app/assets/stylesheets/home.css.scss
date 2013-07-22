@@ -399,9 +399,12 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
 
+/* Variables */
 $dark-blue: #2e3e51;
 $orange: #e34e37;
 $green: #51b8a2;
+$black: #333;
+$white: #fff;
 
 #landing {
   padding: 70px 0 0 0;
@@ -455,7 +458,6 @@ $green: #51b8a2;
     margin: 0;
   }
 
-
   .features li {
     padding-left: 55px;
     text-align: left;
@@ -477,7 +479,7 @@ $green: #51b8a2;
     position: absolute;
     top: -20px;
     left: 50%;
-    margin-left: -11px;
+    margin-left: -10px;
     z-index: 2;
   }
 
@@ -486,7 +488,7 @@ $green: #51b8a2;
     line-height: 30px;
   }
   .video {
-    background-image: url(/assets/sprite-landing.png);
+    background-image: image-url( 'sprite-landing.png' );
     display: inline-block;
     width: 82px;
     height: 82px;
@@ -500,7 +502,7 @@ $green: #51b8a2;
   }
 
   .icon {
-    background-image: url('/assets/sprite-landing.png');
+    background-image: image-url( 'sprite-landing.png' );
     display: inline-block;
     width: 43px;
     height: 42px;
@@ -539,6 +541,9 @@ $green: #51b8a2;
     .auto { background-position: 0 -770px; }
     .get  { background-position: 0 -1135px; }
     .free { background-position: 0 -190px; }
+    aside a {
+      color: $white;
+    }
   }
   .businesses::before,
   .consumers::before {
@@ -556,8 +561,8 @@ $green: #51b8a2;
 
   .consumers {
     & > a {
-      color: #333;
-      border-color: #333;
+      color: $black;
+      border-color: $black;
     }
     & > a:last-child { border: 0; }
     .mktg, .easy, .ctrl, .cool {
@@ -575,6 +580,9 @@ $green: #51b8a2;
     }
     .cool {
       background-position: 0 -1315px;
+    }
+    aside a {
+      color: $black;
     }
   }
 
@@ -632,7 +640,6 @@ $green: #51b8a2;
       line-height: 35px;
     }
     aside a {
-      color: #fff;
       text-decoration: underline;
     }
     input[type='text'] {
