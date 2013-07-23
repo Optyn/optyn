@@ -71,6 +71,13 @@ class Shop < ActiveRecord::Base
       shop.save(validate: false)
     end
 
+    if shop.managers.blank?
+      manager = shop.managers.build
+      puts "Email: #{"virtualmanager@#{shop.name}"}"
+      manager.attributes=({name: "#{shop.name} Virtual Manager", email: "virtualmanager@#{shop.name}", password: "virtualmanager", password_confirmation: "virtualmanager", owner: true})
+      manager.save!
+    end
+
     shop
   end
 

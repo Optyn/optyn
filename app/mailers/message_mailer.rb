@@ -6,8 +6,10 @@ class MessageMailer < ActionMailer::Base
   def send_announcement(message, message_user)
     @message = message
     @message_user = message_user
-    @shop = @message.shop
-    @shop_logo = true #flag set for displaying the shop logo or just the shop name
+    if @message.manager.present?
+      @shop = @message.shop
+      @shop_logo = true #flag set for displaying the shop logo or just the shop name
+    end
 
     mail(to: %Q(#{@message_user.name} <#{@message_user.email}>), from: @message.from, subject: @message.personalized_subject(@message_user))
   end

@@ -245,6 +245,10 @@ class Message < ActiveRecord::Base
     !draft?
   end
 
+  def send_only_content?
+    self.instance_of?(VirtualMessage)
+  end
+
   def shop
     manager.shop
   end

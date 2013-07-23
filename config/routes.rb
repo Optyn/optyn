@@ -125,6 +125,10 @@ Optyn::Application.routes.draw do
       put '/automatic_connection', to: 'oauth#automatic_connection', as: :automatic_connection
       put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
       put '/connect_with_email', to: 'oauth#connect_via_email'
+
+      namespace :merchants do
+        post 'messages/create_virtual', to: 'virtual_messages#create_virtual', as: :create_virtual
+      end
     end
   end
 
