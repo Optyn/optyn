@@ -19,7 +19,9 @@ class Merchants::DashboardsController < Merchants::BaseController
     @feed = hasherize_connections +
             hasherize_surveys +
      hasherize_unfollowed_connections
-    @feed = @feed.shuffle.compact.slice(0, 19)
+    @feed = @feed.shuffle.compact.slice(0, 19).sort do |elem1, elem2|
+      -(elem1[:time] <=> elem2[:time])
+    end
   end
 
   private

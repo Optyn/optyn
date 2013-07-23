@@ -49,6 +49,7 @@ gem 'redis-rails'
 gem 'aws-ses', :require => 'aws/ses'
 gem 'aws-sdk'
 gem 'rack-ssl-enforcer'
+gem 'sitemap_generator'
 
 # Gems used only for assets and not required
 # in production environments by default.

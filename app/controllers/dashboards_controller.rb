@@ -19,7 +19,9 @@ class DashboardsController < BaseController
         hasherize_surveys +
         hasherize_deactivated_connections
 
-    @feed = @feed.shuffle.compact.slice(0, 19)
+    @feed = @feed.shuffle.compact.slice(0, 19).sort do |elem1, elem2|
+      -(elem1[:time] <=> elem2[:time])
+    end
   end
 
   def hasherize_messages
@@ -32,7 +34,8 @@ class DashboardsController < BaseController
               image_url: message_user.shop.logo_img.url,
               subject: message_user.message.personalized_subject(message_user),
               excerpt: message_user.message.excerpt,
-              action_url: message_path(message_user.message.uuid)
+              action_url: message_path(message_user.message.uuid),
+              time: message_user.updated_at
           }
       )
     end
@@ -47,7 +50,8 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: (shop_connection_path(connection.shop.identifier) rescue '')
+              action_url: (shop_connection_path(connection.shop.identifier) rescue ''),
+              time: connection.updated_at
           }
       )
     end
@@ -62,7 +66,8 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: (shop_connection_path(connection.shop.identifier, via: Connection::CONNECTED_VIA_DASHBOARD) rescue '')
+              action_url: (shop_connection_path(connection.shop.identifier, via: Connection::CONNECTED_VIA_DASHBOARD) rescue ''),
+              time: connection.updated_at
           }
       )
     end
@@ -77,7 +82,8 @@ class DashboardsController < BaseController
               shop_name: survey.shop.name,
               image_url: survey.shop.logo_img.url,
               excerpt: survey.shop.description,
-              action_url: segment_path(Encryptor.encrypt(current_user.email, survey.id))
+              action_url: segment_path(Encryptor.encrypt(current_user.email, survey.id)),
+              time: Connection.find_by_user_id_and_shop_id(current_user.id, survey.shop.id).updated_at
           }
       )
     end
@@ -92,7 +98,8 @@ class DashboardsController < BaseController
               shop_name: connection.shop.name,
               image_url: connection.shop.logo_img.url,
               excerpt: connection.shop.description,
-              action_url: (shop_connection_path(connection.shop.identifier) rescue '')
+              action_url: (shop_connection_path(connection.shop.identifier) rescue ''),
+              time: connection.updated_at
           }
       )
     end

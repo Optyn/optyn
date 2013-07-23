@@ -109,15 +109,7 @@ class MessageUser < ActiveRecord::Base
 
 
       begin
-        message_receiver = find_or_generate!(receiver_identifier, message_instance_id)
-
-        if message_receiver.message_folder_id.blank?
-          message_receiver.update_attributes!(:message_id => message_instance_id,
-                                              :message_folder_id => inbox_folder_id, :user_id => receiver_identifier,
-                                              :received_at => Time.now)
-        end
-
-        MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
+        create_individual_entry(inbox_folder_id, message_instance_id, receiver_identifier)
 
       rescue Messagecenter::Exceptions::MessageUserCreationException => invalid
         puts "Adding to creation errors:"
@@ -140,6 +132,17 @@ class MessageUser < ActiveRecord::Base
 
     end
     error_message
+  end
+
+  def self.create_individual_entry(inbox_folder_id, message_instance_id, receiver_identifier)
+    message_receiver = find_or_generate!(receiver_identifier, message_instance_id)
+    if message_receiver.message_folder_id.blank?
+      message_receiver.update_attributes!(:message_id => message_instance_id,
+                                          :message_folder_id => inbox_folder_id, :user_id => receiver_identifier,
+                                          :received_at => Time.now)
+    end
+
+    MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
   end
 
   def self.coupon_messages_count(user_id, force = false)

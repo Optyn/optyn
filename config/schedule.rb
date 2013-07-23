@@ -29,6 +29,10 @@ every :day, :at => "2:00am" do
   rake "pg:backup"
 end
 
+every :day, :at => "2:15am" do
+  rake "sitemap:refresh"	
+end
+
 #run nightly jobs
 every :day, :at => "3:00am" do
   runner "Util.nightly_jobs"

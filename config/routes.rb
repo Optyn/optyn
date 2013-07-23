@@ -14,8 +14,8 @@ Optyn::Application.routes.draw do
   match 'about' => 'main#about', :as => :about
   match 'faq' => 'main#faq', :as => :faq
   match 'pricing' => 'main#pricing', :as => :pricing
-  match 'merchantfeatures' => 'main#merchantfeatures', :as => :merchant_features
-  match 'consumerfeatures' => 'main#consumerfeatures', :as => :consumer_features
+  match 'merchant-features' => 'main#merchantfeatures', :as => :merchant_features
+  match 'consumer-features' => 'main#consumerfeatures', :as => :consumer_features
   match 'contact' => 'main#contact', :as => :contact
   match 'terms' => 'main#terms', :as => :terms
   match 'privacy' => 'main#privacy', :as => :privacy
@@ -126,6 +126,10 @@ Optyn::Application.routes.draw do
       put '/automatic_connection', to: 'oauth#automatic_connection', as: :automatic_connection
       put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
       put '/connect_with_email', to: 'oauth#connect_via_email'
+
+      namespace :merchants do
+        post 'messages/create_virtual', to: 'virtual_messages#create_virtual', as: :create_virtual
+      end
     end
   end
 
