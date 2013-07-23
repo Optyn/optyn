@@ -200,3 +200,10 @@
             2013 &copy; optyn.com
             %br
             All rights reserved
+
+    :javascript
+      $( document ).ready( function() {
+        $( '.hdg' ).click( function() {
+          $.scrollTo( $( this ), 300 );
+        });
+      });
