@@ -1,5 +1,7 @@
 #message_preview_container{:style => "background-color: #EEEEEE; text-align: center; max-width: 600px;"}
-  = render partial: "shared/mailers/banner"
+
+  - if @message.show_banner?
+    = render partial: "shared/mailers/banner"
 
   %table{class: 'outer-table', :style => "background-color: white;"}
     %tr
@@ -10,8 +12,10 @@
             %tr
               %td
                 .message-content
-                  = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
+                  - if @message.show_greeting?
+                    = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
 
                   %p.core-content
                     = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
-  = render partial: "shared/mailers/footer"
+  - if @message.show_footer?
+    = render partial: "shared/mailers/footer"

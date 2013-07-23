@@ -7,7 +7,7 @@ class VirtualMessage < Message
       virtual_message = new(options)
       virtual_message.manager_id = shop.manager.id
       virtual_message.send_on = Time.now
-      virtual_message.save(validate: false)
+      virtual_message.save!
 
       inbox_folder_id = MessageFolder.inbox_id
       message_instance_id = virtual_message.id
