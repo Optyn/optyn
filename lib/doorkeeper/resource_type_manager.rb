@@ -21,6 +21,10 @@ module Doorkeeper
 
   	def optyn_oauth_resource_type_merchant_app?
   	  MerchantApp.name.to_s == optyn_oauth_resource_type
-  	end
+    end
+
+    def optyn_oauth_resource_type_partner_app?
+      Partner.name.to_s == optyn_oauth_resource_type
+    end
   end
 end

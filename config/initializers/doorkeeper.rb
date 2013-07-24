@@ -12,6 +12,8 @@ Doorkeeper.configure do
     set_optyn_oauth_resource_type(params[:client_id])
     if optyn_oauth_resource_type_merchant_app?
       current_merchants_manager || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
+    elsif optyn_oauth_resource_type_partner_app?
+      current_reseller_partner || (session[:user_return_to] = request.fullpath and redirect_to(new_reseller_partner_session_path))
     else
       current_user || (session[:user_return_to] = request.fullpath and redirect_to(api_login_path(redirect_uri: params[:redirect_uri], client_id: params[:client_id], format: params[:format], callback: params[:callback], "_" => params["_"] ))) #warden.authenticate!(:scope => :user)
     end  
@@ -27,6 +29,8 @@ Doorkeeper.configure do
   resource_owner_from_credentials do
     if optyn_oauth_resource_type_merchant_app?
       warden.authenticate(:scope => :merchants_manager)
+    elsif optyn_oauth_resource_type_partner_app?
+      warden.authenticate(:scope => :reseller_partner)
     else  
       warden.authenticate!(:scope => :user)
     end
