@@ -5,7 +5,7 @@ namespace :partner do
                                                                        phone: "3125233844",
                                                                        password: "9p5yn123",
                                                                        password_confirmation: "9p5yn123",
-                                                                       email: "gaurav@partner.com",
+                                                                       email: "gaurav@optyn.com",
                                                                        organization: "Optyn Inc.",
                                                                        redirect_uri: "http://www.optyn.com/robots.txt")
     partner.save!
