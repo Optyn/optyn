@@ -5,4 +5,8 @@ class MainController < ApplicationController
     render layout: 'flat'
   end
 
+  def terms
+    render layout: 'flat'
+  end
+
 end
