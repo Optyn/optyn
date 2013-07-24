@@ -286,7 +286,7 @@ module Api
                     data: $(this).serialize(),
                     dataType: 'jsonp',
                     success: function(respJson){
-                      if(respJson.data.errors){
+                      if(respJson.data.errors.length){
                         $('#optyn-first-container').html('<strong>Sorry could not create a connection. Please got to optyn.com and find your favorite shops OR Refresh this page.</strong>');
                       }else{
                         replaceWithUserInfo();
@@ -314,7 +314,8 @@ module Api
 
                 //fetch the user info
                 function getUserInfo(token) {
-                  jQuery.getJSON('#{SiteConfig.app_base_url}#{api_user_profile_path}?callback=?&access_token=' + token, function(user){
+                  jQuery.getJSON('#{SiteConfig.app_base_url}#{api_user_profile_path}?callback=?&access_token=' + token, function(respJson){
+                    var user = respJson.data;
                     jQuery('#optyn-first-container').text('Welcome ' + user.name + "!");
                     automaticConnection(token);
                   });

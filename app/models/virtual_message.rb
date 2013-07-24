@@ -2,9 +2,8 @@ class VirtualMessage < Message
   attr_accessible :from, :subject, :content
 
   def self.persist_and_add_to_queue(shop, receiver, options={})
-    puts "Shop: #{shop.inspect}"
+    virtual_message = new(options)
     ActiveRecord::Base.transaction do
-      virtual_message = new(options)
       virtual_message.manager_id = shop.manager.id
       virtual_message.send_on = Time.now
       virtual_message.save!
@@ -17,7 +16,7 @@ class VirtualMessage < Message
       #Set the state of the message to sent
       virtual_message.state = 'sent'
       virtual_message.save
-      virtual_message
     end
+    virtual_message
   end
 end

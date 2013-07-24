@@ -47,10 +47,11 @@
         type: 'POST',
         url: $form.prop('action'),
         data: $form.serialize(),
-        success: function(data) {
+        success: function(respJson) {
+          var data = respJson.data;
           try{
             if(data.message.length){
-              $('#connection_auth').html(data.message);
+              $('#connection_auth').html("<h1>" + data.message + "</h1>");
               setTimeout(function(){
                 window.close();
               }, 1500)

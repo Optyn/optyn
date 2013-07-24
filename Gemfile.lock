@@ -200,6 +200,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    oj (2.1.4)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -228,6 +229,8 @@ GEM
       slop (~> 3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
+    rabl (0.8.6)
+      activesupport (>= 2.3.14)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -428,6 +431,7 @@ DEPENDENCIES
   mailcatcher
   newrelic_rpm
   oauth2
+  oj
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
@@ -436,6 +440,7 @@ DEPENDENCIES
   pg
   pry
   quiet_assets
+  rabl
   rack-ssl-enforcer
   rails (= 3.2.11)
   rails-erd

@@ -4,14 +4,20 @@ class Api::V1::Merchants::VirtualMessagesController < ApplicationController
 
   def create_virtual
     @virtual_message = VirtualMessage.persist_and_add_to_queue(@shop, @receiver, params[:message])
-    render(json: {data: @virtual_message.as_json}, status: :created)
+    render(status: :created)
+  rescue ActiveRecord::RecordInvalid
+    @virtual_message = VirtualMessage.new(params[:message])
+    @virtual_message.valid?
+    @errors = @virtual_message.errors.full_messages
+    render(action: 'errors', status: :unprocessable_entity)
   end
 
   private
   def locate_receiver
     @receiver = User.find_by_alias(params[:email])
     if params[:email].blank? || @receiver.blank?
-      render(json: {data: {errors: ["Could not find the receiver for the message."]}}, status: :unprocessable_entity)
+      @errors = ["Could not find the receiver for the message."]
+      render(action: 'errors', status: :unprocessable_entity)
       false
     end
   end
@@ -19,7 +25,8 @@ class Api::V1::Merchants::VirtualMessagesController < ApplicationController
   def locate_shop
     @shop = Shop.find_by_name(params[:shop])
     if params[:shop].blank? || @shop.blank?
-      render(json: {data: {errors: ["Could not find the shop for the message."]}}, status: :unprocessable_entity)
+      @errors = ["Could not find the shop for the message."]
+      render(action: 'errors', status: :unprocessable_entity)
       false
     end
   end
@@ -27,7 +34,8 @@ class Api::V1::Merchants::VirtualMessagesController < ApplicationController
   def check_active_connection
     @connection = @receiver.connections.active.find_by_shop_id(@shop)
     if @connection.blank?
-      render(json: {data: {errors: ["A connection between the consumer and shop does not exist. The consumer out perhaps."]}}, status: :unprocessable_entity)
+      @errors = ["A connection between the consumer and shop does not exist. The consumer out perhaps."]
+      render(action: 'errors', status: :unprocessable_entity)
       false
     end
   end

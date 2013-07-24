@@ -14,20 +14,6 @@ module Api
         session[:omniauth_user] = true
         @user_login = User.new
         @user = User.new
-
-        respond_to do |format|
-          format.html { render(file: 'api/v1/oauth/login') }
-          json_str = {data: {authenticity_token: form_authenticity_token, errors: nil}}.to_json
-          format.json {
-            if params[:callback].present?
-              render(text: "#{params[:callback]}('#{json_str}')")
-            else
-              render(status: :ok, json: json_str)
-            end
-          }
-
-          format.any { render text: "Only HTML and JSON supported" }
-        end
       end
 
       def connection
@@ -41,7 +27,7 @@ module Api
         user_changed = current_user.changed? || @connection
 
         if current_user.save(validate: false) #current_user.update_attributes(params[:user])
-          render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
+          @message = permissions_message
         else
           session[:user_return_to] = nil
           head :unprocessable_entity
@@ -51,20 +37,15 @@ module Api
       def automatic_connection
         map_current_user_to_store
         if @shop.present? && @connection.present? && current_user.present?
-          json_str = {data: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}}.to_json
-          if params[:callback].present?
-            render text: "#{params[:callback]}(#{json_str})", status: :ok
-          else
-            render json: json_str, status: :ok
-          end
+          @message = permissions_message
         else
-          json_str = {data: {errors: "A connection could not be created"}}.to_json
-          if params[:callback].present?
-            render text: "#{params[:callback]}(#{json_str})", status: :unprocessable_entity
-          else
-            render json: json_str, status: :unprocessable_entity
-          end
+          @errors =  ["A connection could not be created"]
         end
+      end
+
+      private
+      def permissions_message
+        "A connection between you and #{@shop.name} has been successfully created. Thank you and keep on keepin' on."
       end
     end
   end

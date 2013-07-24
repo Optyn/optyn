@@ -14,8 +14,7 @@ class Users::SessionsController < Devise::SessionsController
 
     respond_to do |format|
       format.html { super }
-      format.json { render(status: :ok, json: {data: {authenticity_token: form_authenticity_token, error: nil}}) }
-      format.any { render text: "Only HTML and JSON supported" }
+      format.json { render(status: :ok) }
     end
   end
 
@@ -38,7 +37,7 @@ class Users::SessionsController < Devise::SessionsController
     sign_in(resource)
     respond_to do |format|
       format.html { respond_with resource, :location => after_sign_in_path_for(resource) }
-      format.json { render(status: :created, json: {data: {user: resource.as_json(only: [:name])}}) }
+      format.json { render(status: :created) }
     end
   end
 
@@ -50,28 +49,13 @@ class Users::SessionsController < Devise::SessionsController
       sign_in @user
       session[:user_return_to] = nil
       respond_to do |format|
-        format.json {
-          json_data = {data: {user: @user.as_json(only: [:name])}}.to_json
-          if params[:callback].present?
-            render text: "#{params[:callback]}(#{json_data})"
-          else
-            render(json: json_data, status: created)
-          end
-
-        }
+        format.json { render(status: :created) }
 
         format.any { render text: "Only HTML and JSON supported" }
       end
     else
       respond_to do |format|
-        format.json {
-          json_data = {data: {errors: "Please check the email address"}}.to_json
-          if params[:callback].present?
-            render text: "#{params[:callback]}(#{json_data})"
-          else
-            render json: json_data, status: :unprocessable_entity
-          end
-        }
+        format.json { render(status: :unprocessable_entity) }
       end
     end
   end
