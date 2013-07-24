@@ -245,6 +245,16 @@ class Message < ActiveRecord::Base
     !draft?
   end
 
+  def send_only_content?
+    self.instance_of?(VirtualMessage)
+  end
+
+  def show_greeting?
+    !self.instance_of?(VirtualMessage)
+  end
+  alias_method :show_banner?, :show_greeting?
+  alias_method :show_footer?, :show_greeting?
+
   def shop
     manager.shop
   end
@@ -523,7 +533,7 @@ class Message < ActiveRecord::Base
   end
 
   def send_on_greater_by_hour
-    self.errors.add(:send_on, "Message send time should be greater than an hour from now") if self.send_on.present? && !(self.send_on > 1.hour.since)
+    self.errors.add(:send_on, "Message send time should be greater than an hour from now") if self.send_on.present? && !(self.shop.virtual) && !(self.send_on > 1.hour.since)
   end
 
   def validate_child_message
