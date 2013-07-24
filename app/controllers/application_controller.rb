@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   end
 
   alias_method :manager_signed_in?, :merchants_manager_signed_in?
+  alias_method :partner_signed_in?, :reseller_partner_signed_in?
   alias_method :current_manager, :current_merchants_manager
+  alias_method :current_partner, :current_reseller_partner
 
   helper_method :manager_signed_in?, :current_manager
 
@@ -61,6 +63,8 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "Signed in successfully"
     if admin_signed_in?
       '/admin'
+    elsif partner_signed_in?
+      partners_root_path
     elsif user_signed_in?
       consumers_root_path
     elsif manager_signed_in?
