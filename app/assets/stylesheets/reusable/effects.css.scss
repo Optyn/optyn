@@ -1,0 +1,22 @@
+@mixin rotate( $degree ) {
+  -webkit-transform: rotate( $degree );
+     -moz-transform: rotate( $degree );
+      -ms-transform: rotate( $degree );
+       -o-transform: rotate( $degree );
+          transform: rotate( $degree );
+}
+
+@mixin scale( $factor ) {
+  -webkit-transform: scale( $factor );  /* Chrome, Safari 3.1+ */
+     -moz-transform: scale( $factor );  /* Firefox 3.5+ */
+      -ms-transform: scale( $factor );  /* IE 9 */
+       -o-transform: scale( $factor );  /* Opera 10.50-12.00 */
+          transform: scale( $factor );
+}
+
+@mixin transition( $params... ) {
+  -webkit-transition: $params;
+     -moz-transition: $params;
+       -o-transition: $params;
+          transition: $params;
+}
