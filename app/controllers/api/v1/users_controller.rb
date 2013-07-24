@@ -51,7 +51,6 @@ module Api
         if params[:name].blank?
           errors = []
           errors << ["Shop name cannot be blank"] if params[:name].blank?
-          errors << ["The form content of the current tab is missing"] if @sanitized_tab_html.blank?
           render(status: :unprocessable_entity, json: {data: {errors: errors.as_json}})
           false
         end

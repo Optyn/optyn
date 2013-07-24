@@ -122,7 +122,7 @@ class User < ActiveRecord::Base
   end
 
   def create_alias
-    optyn_alias = "optyn#{Devise.friendly_token.first(8).downcase}@optynmail.com"
+    optyn_alias = "#{Devise.friendly_token.first(8).downcase}@optynmail.com"
     while User.find_by_alias(optyn_alias).present?
       optyn_alias = "optyn#{Devise.friendly_token.first(8).downcase}@optynmail.com"
     end
