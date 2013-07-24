@@ -1,0 +1,106 @@
+!!!
+%html
+  %head
+    = display_title unless @title_called
+    =  yield :title
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "https://js.stripe.com/v1/","application"
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+
+    = display_meta_description unless @meta_description_called
+    = yield :meta_description
+
+    = analytics_init if Rails.env.production?
+
+
+  %body#landing
+    .container-fluid
+      %header.row-fluid
+        .span5
+          %h2 FOR BUSINESSES
+        .span2
+          %a{ :href => root_path }
+            = image_tag "logo.png", :alt => 'logo'
+        .span5
+          %a.login.pull-right{ :href => new_user_session_path } Log in
+          %h2 FOR ALL MANKIND
+
+      = yield
+
+      %footer.row-fluid
+        .span2
+          %h4 Our Company
+          %ul
+            %li
+              %a{ :href => about_path } About us
+            %li
+              %a{ :href => blog_path } Our blog
+            %li
+              %a{ :href => contact_path } Contact us
+            %li
+              %a{ :href => terms_path } Terms of use
+            %li
+              %a{ :href => privacy_path } Privacy policy
+        .span2
+          %h4 For Consumers
+          %ul
+            %li
+              %a{ :href => consumer_features_path } Features
+            %li
+              %a{ :href => '#' } Why use optyn
+            %li
+              %a{ :href => faq_path } FAQs
+            %li
+              %a{ :href => support_path } Support
+            %li
+              %a{ :href => new_user_registration_path } Get started
+        .span2
+          %h4 For Merchants
+          %ul
+            %li
+              %a{ :href => merchant_features_path } Features
+            %li
+              %a{ :href => '#' } Why use optyn
+            %li
+              %a{ :href => faq_path } FAQs
+            %li
+              %a{ :href => support_path } Support
+            %li
+              %a{ :href => new_merchants_manager_registration_path } Get started
+        .span2
+          %h4 For Publishers
+          %ul
+            %li
+              %a{ :href => '#' } Features
+            %li
+              %a{ :href => '#' } Why use optyn
+            %li
+              %a{ :href => '#' } FAQs
+            %li
+              %a{ :href => '#' } Support
+            %li
+              %a{ :href => '#' } Get started
+        .span4
+          %a{ :href => "http://www.twitter.com/optyn", :target => "_blank", :class => 'pg-twitter' }Our Twitter page
+          %a{ :href => "http://www.facebook.com/optyn", :target => "_blank", :class => 'pg-facebook' }Our Facebook page
+          %p
+            2013 &copy; optyn.com
+            %br
+            All rights reserved
+
+    :javascript
+      $( document ).ready( function() {
+        // Placeholder support for old browsers.
+        if ( 'placeholder' in document.createElement( 'input' )) {}
+        else {
+          $( 'input[type=text]' ).each( function( i, v ) {
+            if ( $( this ).attr( 'placeholder' ).length > 0 && $( this ).attr( 'value' ).length == 0 ) {
+              $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
+            }
+          });
+        }
+
+      });
