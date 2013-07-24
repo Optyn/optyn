@@ -395,6 +395,9 @@
 }
 
 
+/* ##################################################################
+   ################################## Styles for new landing page. */
+
 /* Include fonts */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
@@ -441,7 +444,7 @@ $white: #fff;
       display: inline-block;
       padding: 0 20px;
       border-bottom: solid 4px rgba( 0, 0, 0, 0.2);
-      transition: all 0.2s;
+      @include transition( all 0.2s ease-out );
       &:hover {
         background-color: #327ebb;
         border-bottom: solid 4px rgba( 0, 0, 0, 0.3);
@@ -508,9 +511,9 @@ $white: #fff;
     height: 42px;
     text-indent: -999px;
     overflow: hidden;
-    transition: all 0.2s;
+    @include transition( all 0.2s ease-out );
     &:hover {
-      -webkit-transform: rotate(4deg);
+      @include rotate(4deg);
     }
   }
   .icon.google {
@@ -594,7 +597,7 @@ $white: #fff;
     border-bottom: solid 3px rgba( 0, 0, 0, 0.2 );
     border-radius: 1px;
     display: inline-block;
-    transition: all 0.2s;
+    @include transition( all 0.2s ease-out );
     padding: 16px 30px;
     font-size: 18px;
     line-height: 20px;
@@ -602,7 +605,7 @@ $white: #fff;
       text-decoration: none;
       background-color: #bb300f;
       border-color: rgba( 0, 0, 0, 0.3 );
-      -webkit-transform: scale( 1.1, 1.1 );
+      @include scale( 1.1 );
     }
   }
   .btn-orange.icon_chrome > a {
@@ -689,7 +692,7 @@ $white: #fff;
       color: #61abe6;
     }
     h4 {
-      color: $green;
+      color: $white;
       font-weight: normal;
       font-size: 18px;
     }
@@ -720,9 +723,9 @@ $white: #fff;
     text-indent: -999px;
     overflow: hidden;
     margin-bottom: 20px;
-    transition: all 0.2s;
+    @include transition( all 0.2s ease-out );
     &:hover {
-      -webkit-transform: rotate( -6deg );
+      @include rotate( -6deg );
     }
   }
   .pg-twitter {
