@@ -7,7 +7,7 @@ Optyn::Application.routes.draw do
   root to: 'main#index'
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
-
+  match 'reseller' => 'reseller/dashboards#index', as: :partners_root
 
   # Static Pages created by Alen. Please make sure if the static pages are modified the ssl enforcement is changed too.
   match 'about' => 'main#about', :as => :about
@@ -109,7 +109,7 @@ Optyn::Application.routes.draw do
   #Mount resque :)
   mount Resque::Server, :at => "/resque"
 
-  namespace :api do
+  namespace :api  do
     scope module: :v1 do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_script.js', to: 'shops#button_script'
