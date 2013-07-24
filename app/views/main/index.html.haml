@@ -1,221 +1,121 @@
-!!!
-%html
-  %head
-    = display_title unless @title_called
-    =  yield :title
-    /[if lt IE 9]
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    = stylesheet_link_tag "application", :media => "all"
-    = javascript_include_tag "https://js.stripe.com/v1/","application"
-    = csrf_meta_tags
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-
-    = display_meta_description unless @meta_description_called
-    = yield :meta_description
-
-    = analytics_init if Rails.env.production?
-
-    = display_title "Optyn.com - Improving the Marketing Relationship"
-    = display_meta_description "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications.", "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
+= display_title "Optyn.com - Improving the Marketing Relationship"
+= display_meta_description "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications.", "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
 
 
-  %body#landing
-    .container-fluid
-      %header.row-fluid
-        .span5
-          %h2 FOR BUSINESSES
-        .span2
-          %a{ :href => root_path }
-            = image_tag "logo.png", :alt => 'logo'
-        .span5
-          %a.login.pull-right{ :href => new_user_session_path } Log in
-          %h2 FOR ALL MANKIND
 
-      %section.row-fluid
-        .span6.businesses.has-heading
-          %h3 Simple marketing is here
-          %h4 WHY
-          .line1 Every business needs to use optyn
-          .line2 The simplest marketing tools that work for you
-          %h4 HOW
-          .line1 Businesses will be benefited by using optyn
-          .line2 Automatically capture online and in-store customers
-          %h4 WHAT
-          .line1 Every business needs to use optyn
-          .line2 The simplest marketing tools that work for you
-          %p.margin_top Easy hassle. Works for free.
-          .btn-orange
-            %a{ :href => new_merchants_manager_registration_path } Get started for FREE
-          %a.bordered{ :href => '#' } Learn more
-          %a.bordered{ :href => merchant_features_path } Features
-          %a.bordered{ :href => new_user_session_path } Log in
-        .span6.consumers.has-heading
-          %h3 Your marketing inbox has arrived
-          %h4 WHY
-          .line1 Everybody should use optyn
-          .line2 opt-in to any website and control what personal information you share
-          %h4 HOW
-          .line1 Everyone will be benefited by using optyn
-          .line2 All of your subscriptions in one place
-          %h4 WHAT
-          .line1 You get as an individual using optyn
-          .line2
-            Explore new places, subscriptions and more
-            %br
-            Protect your information and eliminate spam
-          %br
-          .btn-orange.icon_chrome
-            %a{ :href => '#' } Download Chrome plugin
-          %br
-          %p Let's track and opt-in to any website and puts you in control
+%section.row-fluid
+  .span6.businesses.has-heading
+    %h3 Simple marketing is here
+    %h4 WHY
+    .line1 Every business needs to use optyn
+    .line2 The simplest marketing tools that work for you
+    %h4 HOW
+    .line1 Businesses will be benefited by using optyn
+    .line2 Automatically capture online and in-store customers
+    %h4 WHAT
+    .line1 Every business needs to use optyn
+    .line2 The simplest marketing tools that work for you
+    %p.margin_top Easy hassle. Works for free.
+    .btn-orange
+      %a{ :href => new_merchants_manager_registration_path } Get started for FREE
+    %a.bordered{ :href => '#' } Learn more
+    %a.bordered{ :href => merchant_features_path } Features
+    %a.bordered{ :href => new_user_session_path } Log in
+  .span6.consumers.has-heading
+    %h3 Your marketing inbox has arrived
+    %h4 WHY
+    .line1 Everybody should use optyn
+    .line2 opt-in to any website and control what personal information you share
+    %h4 HOW
+    .line1 Everyone will be benefited by using optyn
+    .line2 All of your subscriptions in one place
+    %h4 WHAT
+    .line1 You get as an individual using optyn
+    .line2
+      Explore new places, subscriptions and more
+      %br
+      Protect your information and eliminate spam
+    %br
+    .btn-orange.icon_chrome
+      %a{ :href => '#' } Download Chrome plugin
+    %br
+    %p Let's track and opt-in to any website and puts you in control
 
-      .row-fluid.hdg
-        %a.scroll-down{ :href => '#' }
-        %h2.navy Still not convinced?
+.row-fluid.hdg
+  %a.scroll-down{ :href => '#' }
+  %h2.navy Still not convinced?
 
-      %section.row-fluid.features
-        .span6.businesses
-          %h3 What we can do for your businesses?
-          %ul
-            %li.mktg Easiest marketing solutions for SMBs.
-            %li.auto Automated marketing and engagement.
-            %li.get The easiest way to get customers into program.
-            %li.free Free for upto 100 customers. All features included. No gimmicks.
-          .btn-orange
-            %a{ :href => new_merchants_manager_registration_path } Get started for FREE
-          %a.bordered{ :href => merchant_features_path } Features
-          %a.bordered{ :href => pricing_path } Pricing
+%section.row-fluid.features
+  .span6.businesses
+    %h3 What we can do for your businesses?
+    %ul
+      %li.mktg Easiest marketing solutions for SMBs.
+      %li.auto Automated marketing and engagement.
+      %li.get The easiest way to get customers into program.
+      %li.free Free for upto 100 customers. All features included. No gimmicks.
+    .btn-orange
+      %a{ :href => new_merchants_manager_registration_path } Get started for FREE
+    %a.bordered{ :href => merchant_features_path } Features
+    %a.bordered{ :href => pricing_path } Pricing
 
-        .span6.consumers
-          %h3 This is the cool stuff you get
-          %ul
-            %li.mktg All of your marketing messages + subscriptions at one place.
-            %li.easy opt-in with confidence. Worry, hassle and spam free.
-            %li.ctrl You are finally in control of your information.
-            %li.cool Explore cool places, new subscriptions and much more.
-          .btn-orange
-            %a{ :href => new_user_registration_path } Get started for FREE
-          %a.bordered{ :href => consumer_features_path } Features
-          %a.bordered{ :href => '#' } Download Chrome plugin
+  .span6.consumers
+    %h3 This is the cool stuff you get
+    %ul
+      %li.mktg All of your marketing messages + subscriptions at one place.
+      %li.easy opt-in with confidence. Worry, hassle and spam free.
+      %li.ctrl You are finally in control of your information.
+      %li.cool Explore cool places, new subscriptions and much more.
+    .btn-orange
+      %a{ :href => new_user_registration_path } Get started for FREE
+    %a.bordered{ :href => consumer_features_path } Features
+    %a.bordered{ :href => '#' } Download Chrome plugin
 
-      .row-fluid.hdg
-        %a.scroll-down{ :href => '#' }
-        %h2.navy What? Still not convinced?
+.row-fluid.hdg
+  %a.scroll-down{ :href => '#' }
+  %h2.navy What? Still not convinced?
 
-      %section.row-fluid.videos
-        .span6.businesses
-          %a.light{ :href => '#', :class =>'video' }
-          %p Check out this awesome + quick video that tells you more
-        .span6.consumers
-          %a.dark{ :href => '#', :class => 'video' }
-          %p Check out this awesome + quick video that tells you more
+%section.row-fluid.videos
+  .span6.businesses
+    %a.light{ :href => '#', :class =>'video' }
+    %p Check out this awesome + quick video that tells you more
+  .span6.consumers
+    %a.dark{ :href => '#', :class => 'video' }
+    %p Check out this awesome + quick video that tells you more
 
-      .row-fluid.hdg
-        %a.scroll-down{ :href => '#' }
-        %h2.navy Are you frikken kiddin?
+.row-fluid.hdg
+  %a.scroll-down{ :href => '#' }
+  %h2.navy Are you frikken kiddin?
 
-      %section.row-fluid.sign-up
-        .span6.businesses
-          %p A whole new world awaits!
-          %form
-            %input{ :type => 'text', :placeholder => 'Sign up with email' }
-            %input{ :type => 'submit', :value => 'Sign up' }
-          %aside
-            Clicking sign up you agree to Optyn's
-            %a{ :href => terms_path } Terms of Use
-          %p Or sign up with Social account
-          %a{ :href => '#', :class => 'icon google' } Google Plus
-          %a{ :href => '#', :class => 'icon twitter' } Twitter
-          %a{ :href => '#', :class => 'icon facebook' } Facebook
-        .span6.consumers
-          %p Your customers are waiting
-          %form
-            %input{ :type => 'text', :placeholder => 'Sign up with email' }
-            %input{ :type => 'submit', :value => 'Sign up' }
-          %aside
-            Clicking sign up you agree to Optyn's
-            %a{ :href => terms_path } Terms of Use
-          %p Or sign up with Social account
-          %a{ :href => '#', :class => 'icon google' } Google Plus
-          %a{ :href => '#', :class => 'icon twitter' } Twitter
-          %a{ :href => '#', :class => 'icon facebook' } Facebook
+%section.row-fluid.sign-up
+  .span6.businesses
+    %p A whole new world awaits!
+    %form
+      %input{ :type => 'text', :placeholder => 'Sign up with email' }
+      %input{ :type => 'submit', :value => 'Sign up' }
+    %aside
+      Clicking sign up you agree to Optyn's
+      %a{ :href => terms_path } Terms of Use
+    %p Or sign up with Social account
+    %a{ :href => '#', :class => 'icon google' } Google Plus
+    %a{ :href => '#', :class => 'icon twitter' } Twitter
+    %a{ :href => '#', :class => 'icon facebook' } Facebook
+  .span6.consumers
+    %p Your customers are waiting
+    %form
+      %input{ :type => 'text', :placeholder => 'Sign up with email' }
+      %input{ :type => 'submit', :value => 'Sign up' }
+    %aside
+      Clicking sign up you agree to Optyn's
+      %a{ :href => terms_path } Terms of Use
+    %p Or sign up with Social account
+    %a{ :href => '#', :class => 'icon google' } Google Plus
+    %a{ :href => '#', :class => 'icon twitter' } Twitter
+    %a{ :href => '#', :class => 'icon facebook' } Facebook
 
-      %footer.row-fluid
-        .span2
-          %h4 Our Company
-          %ul
-            %li
-              %a{ :href => about_path } About us
-            %li
-              %a{ :href => blog_path } Our blog
-            %li
-              %a{ :href => contact_path } Contact us
-            %li
-              %a{ :href => terms_path } Terms of use
-            %li
-              %a{ :href => privacy_path } Privacy policy
-        .span2
-          %h4 For Consumers
-          %ul
-            %li
-              %a{ :href => consumer_features_path } Features
-            %li
-              %a{ :href => '#' } Why use optyn
-            %li
-              %a{ :href => faq_path } FAQs
-            %li
-              %a{ :href => support_path } Support
-            %li
-              %a{ :href => new_user_registration_path } Get started
-        .span2
-          %h4 For Merchants
-          %ul
-            %li
-              %a{ :href => merchant_features_path } Features
-            %li
-              %a{ :href => '#' } Why use optyn
-            %li
-              %a{ :href => faq_path } FAQs
-            %li
-              %a{ :href => support_path } Support
-            %li
-              %a{ :href => new_merchants_manager_registration_path } Get started
-        .span2
-          %h4 For Publishers
-          %ul
-            %li
-              %a{ :href => '#' } Features
-            %li
-              %a{ :href => '#' } Why use optyn
-            %li
-              %a{ :href => '#' } FAQs
-            %li
-              %a{ :href => '#' } Support
-            %li
-              %a{ :href => '#' } Get started
-        .span4
-          %a{ :href => "http://www.twitter.com/optyn", :target => "_blank", :class => 'pg-twitter' }Our Twitter page
-          %a{ :href => "http://www.facebook.com/optyn", :target => "_blank", :class => 'pg-facebook' }Our Facebook page
-          %p
-            2013 &copy; optyn.com
-            %br
-            All rights reserved
-
-    :javascript
-      $( document ).ready( function() {
-        // Scroll functionality.
-        $( '.hdg' ).click( function() {
-          $.scrollTo( $( this ), 300 );
-        });
-
-        // Placeholder support for old browsers.
-        if ( 'placeholder' in document.createElement( 'input' )) {}
-        else {
-          $( 'input[type=text]' ).each( function( i, v ) {
-            if ( $( this ).attr( 'placeholder' ).length > 0 && $( this ).attr( 'value' ).length == 0 ) {
-              $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
-            }
-          });
-        }
-
-      });
+:javascript
+  $( document ).ready( function() {
+    // Scroll functionality.
+    $( '.hdg' ).click( function() {
+      $.scrollTo( $( this ), 300 );
+    });
+  });
