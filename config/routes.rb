@@ -215,4 +215,13 @@ Optyn::Application.routes.draw do
   end
 
   match '/:identifier' => 'shops#show', :as => :shop
+
+  namespace :reseller do
+    devise_for :partners, :controllers => {
+        :registrations => 'reseller/partners/registrations',
+        :sessions => 'reseller/partners/sessions',
+        :passwords => 'reseller/partners/passwords',
+        :confirmations => 'reseller/partners/confirmations'
+    }
+  end
 end

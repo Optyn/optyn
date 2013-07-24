@@ -82,6 +82,7 @@ end
 group :development, :test do
 	gem 'rspec'
 	gem 'rspec-rails'
+  gem "erb2haml"
 end
 
 # To use ActiveModel has_secure_password

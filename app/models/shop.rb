@@ -15,6 +15,7 @@ class Shop < ActiveRecord::Base
   has_many :labels, dependent: :destroy
   has_many :shop_audits
   belongs_to :coupon
+  belongs_to :partner
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719141204) do
+ActiveRecord::Schema.define(:version => 20130723225652) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -311,6 +311,29 @@ ActiveRecord::Schema.define(:version => 20130719141204) do
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
   add_index "oauth_applications", ["uid"], :name => "index_oauth_applications_on_uid", :unique => true
 
+  create_table "partners", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "organization"
+    t.string   "phone"
+    t.boolean  "active",                 :default => true
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "partners", ["email"], :name => "index_partners_on_email", :unique => true
+  add_index "partners", ["reset_password_token"], :name => "index_partners_on_reset_password_token", :unique => true
+
   create_table "permissions", :force => true do |t|
     t.string   "permission_name"
     t.datetime "created_at",      :null => false
@@ -387,9 +410,11 @@ ActiveRecord::Schema.define(:version => 20130719141204) do
     t.integer  "email_box_click_count"
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
+    t.integer  "partner_id"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
+  add_index "shops", ["partner_id"], :name => "index_shops_on_partner_id"
 
   create_table "states", :force => true do |t|
     t.string   "name"
