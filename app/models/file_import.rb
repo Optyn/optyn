@@ -4,7 +4,7 @@ require 'open-uri'
 class FileImport < ActiveRecord::Base
   belongs_to :manager
 
-  attr_accessible :csv_file
+  attr_accessible :csv_file, :label
 
   serialize :stats, Hash
 
@@ -12,6 +12,8 @@ class FileImport < ActiveRecord::Base
 
   validates :csv_file, presence: true
   validates :csv_file, file_size: {maximum: 10.megabytes.to_i}, :if => :should_validate?
+
+  DEFAULT_LABEL_NAME = 'Import'
 
   after_create :assign_queued_status
 
@@ -72,7 +74,7 @@ class FileImport < ActiveRecord::Base
         end
         connection.save()
 
-        label = Label.find_or_create_by_shop_id_and_name(shop.id, 'Import')
+        label = Label.find_or_create_by_shop_id_and_name(shop.id, (self.label || DEFAULT_LABEL_NAME))
         UserLabel.find_or_create_by_user_id_and_label_id(user.id, label.id)
       end
 

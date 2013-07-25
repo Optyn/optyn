@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723225652) do
+ActiveRecord::Schema.define(:version => 20130725181445) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20130723225652) do
     t.datetime "updated_at", :null => false
     t.string   "status"
     t.text     "stats"
+    t.string   "label"
   end
 
   create_table "interests", :force => true do |t|
@@ -292,12 +293,12 @@ ActiveRecord::Schema.define(:version => 20130723225652) do
   add_index "oauth_access_tokens", ["token"], :name => "index_oauth_access_tokens_on_token", :unique => true
 
   create_table "oauth_applications", :force => true do |t|
-    t.string   "name",                                      :null => false
-    t.string   "uid",                                       :null => false
-    t.string   "secret",                                    :null => false
-    t.string   "redirect_uri",                              :null => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.string   "name",                                           :null => false
+    t.string   "uid",                                            :null => false
+    t.string   "secret",                                         :null => false
+    t.string   "redirect_uri",                                   :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "owner_id"
     t.string   "owner_type"
     t.text     "embed_code"
@@ -306,6 +307,8 @@ ActiveRecord::Schema.define(:version => 20130723225652) do
     t.text     "custom_text"
     t.integer  "render_choice",           :default => 2
     t.integer  "call_to_action",          :default => 2
+    t.integer  "begin_state",             :default => 1
+    t.string   "background_color",        :default => "#046D95"
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"

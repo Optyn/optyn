@@ -22,6 +22,7 @@
 //= require shCore.js
 //= require shLegacy.js
 //= require shBrushXml.js
+//= require bootstrap-colorpicker
 //= require_self
 //= require_tree
 

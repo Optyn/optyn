@@ -10,6 +10,9 @@ module Api
       skip_before_filter :verify_authenticity_token
       skip_before_filter :fetch_store, only: [:create]
 
+      BEGIN_STATE_HIDDEN = 0
+      RENDER_CHOICE_BAR = 1
+
       def create
         if params[:name].present? #&& params[:email_frequency].present?
           virtual_shop_domain = params[:name]
@@ -30,12 +33,12 @@ module Api
 
       def button_framework
         @application = @shop.oauth_application
-        call_to_action =  @application.call_to_action.to_i
+        call_to_action = @application.call_to_action.to_i
 
         if [1, 2].include?(call_to_action)
-           return button_framework_script
+          return button_framework_script
         elsif 3 == call_to_action
-           return email_box_framework_script
+          return email_box_framework_script
         end
       end
 
@@ -57,7 +60,7 @@ module Api
 
       def log_impression_count
         unless @shop.virtual
-          if @shop.button_display? 
+          if @shop.button_display?
             @shop.increment_button_impression_count
           else
             @shop.increment_email_box_impression_count
@@ -88,6 +91,7 @@ module Api
                   #{@application.render_choice.to_i == 1 ? bar : part}
 
               }, 1000);
+
           )
 
           format.any { response.headers['Content-Type'] = "application/javascript"; render text: script }
@@ -340,6 +344,8 @@ module Api
         %Q(
             jQuery('body').prepend(
               '#{style}' +
+              '#{email_box_style}' +
+              #{optyn_wrapper_style} +
               '<div id="optyn_button_wrapper">' +
               '<div class="optyn-text">' +
               '</div>' +
@@ -349,7 +355,7 @@ module Api
               '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
               '<div id="close_optyn_button">' +
               '<a href="javascript:void(0)" onclick="hideOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '">' +
-              '<img src ="http://s11.postimg.org/5i89xyvsf/x_btn.png" /></a>' +
+              'X</a>' +
               '</div>' +
               '</div>' +
               '</div>' +
@@ -357,7 +363,11 @@ module Api
               '<div id="show_optyn_button_wrapper" style="display:none">' +
               '<a href="javascript:void(0)" onclick="showOptynButtonWrapper(' + "'optyn_button_wrapper', 'show_optyn_button_wrapper')" + '"><img src="http://s23.postimg.org/gm12p8p2f/optyn_button_logo.png" /></a>' +
               '</div>' +
-              #{show_hide}
+              #{show_hide} +
+              #{collapse_bar} +
+              #{color_luminance_script} +
+              #{color_luminance_components} +
+              '<script>adjustColorLuminanceComponents();</script>'
             )
         )
       end
@@ -377,11 +387,29 @@ module Api
       end
 
       def style
-        %Q(<style type="text/css"> #optyn_button_wrapper { background-color: #1791c0; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px; } #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; } #optyn_button_wrapper .optyn-button { } #show_optyn_button_wrapper { background-color: #1791c0; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; } #close_optyn_button { float: right; font-weight: bold; margin: 0px; padding-right: 30px; padding-top: 20px; color: white; vertical-align: middle; } #close_optyn_button a { color: white; position: absolute; z-index: 100; } #optyn-container { float:left; padding-left: 100px; padding-top: 12px; } #optyn-container form { margin: 0px; } #optyn-container form input[type="submit"] { background: #6BC704; border-radius: 4px; display: inline-block; height: 35px; top: 4px; color: #ffffff; font-size: 15px; border: 1px #304d58; font-weight: bold; padding-left: 10px; padding-right: 10px; } #optyn-container form input:hover[type="Submit"] { background: #80d81c; color: #fff;} #optyn-container form input[type="email"] { border-bottom: 1px rgba(9, 67, 89, 0.75); border-top: none; border-left:none; border-right: none; font-size: 14px; height: 26px; padding: 5px; color: white; background-color: #0f6282; border-radius: 4px; margin-right: 10px; font-weight: bold;} #optyn-container h4 { margin: 0px; color: white; } ::-webkit-input-placeholder { /* WebKit browsers */ color: white; } :-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: white; }::-moz-placeholder { /* Mozilla Firefox 19+ */ color: white; } :-ms-input-placeholder { /* Internet Explorer 10+ */ color: white; } </style>)
+        %Q(<style type="text/css"> #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; } #optyn_button_wrapper .optyn-button { }  #close_optyn_button { float: right; font-weight: bold; margin: 0px; padding-right: 30px; padding-top: 20px; color: white; vertical-align: middle; } #close_optyn_button a { color: white; position: absolute; z-index: 100; } #optyn-container { float:left; padding-left: 100px; padding-top: 12px; } #optyn-container form { margin: 0px; } #optyn-container form input[type="submit"] { background: #6BC704; border-radius: 4px; display: inline-block; height: 35px; top: 4px; color: #ffffff; font-size: 15px; border: 1px #304d58; font-weight: bold; padding-left: 10px; padding-right: 10px; } #optyn-container form input:hover[type="Submit"] { background: #80d81c; color: #fff;}  #optyn-container h4 { margin: 0px; color: white; } </style>)
+      end
+
+      def email_box_style
+        if RENDER_CHOICE_BAR == @application.render_choice.to_i
+          #::-webkit-input-placeholder { /* WebKit browsers */ color: white; } :-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: white; }::-moz-placeholder { /* Mozilla Firefox 19+ */ color: white; } :-ms-input-placeholder { /* Internet Explorer 10+ */ color: white; }
+          %Q(<style type="text/css">#optyn-container form input[type="email"] { border-bottom: 1px rgba(9, 67, 89, 0.75); border-top: none; border-left:none; border-right: none; font-size: 14px; height: 26px; padding: 5px; border-radius: 4px; margin-right: 10px; font-weight: bold;}</style>)
+        else
+          ""
+        end
+      end
+
+      def optyn_wrapper_style
+        if RENDER_CHOICE_BAR == @application.render_choice.to_i
+          %Q('<style type="text/css">' +
+              '#optyn_button_wrapper { background-color: #{@application.background_color}; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px;}' +
+              '#show_optyn_button_wrapper { background-color: #{@application.background_color}; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; }' +
+            '</style>')
+        end
       end
 
       def show_hide
-      %Q(
+        %Q(
         '<script type="text/javascript">' +
         'function hideOptynButtonWrapper(wrapperId, showLinkId){' +
           'document.getElementById(wrapperId).style.display = "none";' +
@@ -394,6 +422,53 @@ module Api
     '}' +
     '</script>'
         )
+      end
+
+      def collapse_bar
+        if BEGIN_STATE_HIDDEN == @application.begin_state.to_i
+          %Q(
+          '<script>hideOptynButtonWrapper("optyn_button_wrapper", "show_optyn_button_wrapper")</script>'
+          )
+        else
+          %Q(
+          ''
+          )
+        end
+      end
+
+      def color_luminance_script
+        %Q(
+        '<script type="text/javascript">' +
+          'function ColorLuminance(hex, lum) {' +
+            'hex = String(hex).replace(/[^0-9a-f]/gi, "");' +
+            'if (hex.length < 6) {' +
+              'hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];' +
+            '}' +
+            'lum = lum || 0;' +
+            'var rgb = "#", c, i;' +
+            'for (i = 0; i < 3; i++) {' +
+              'c = parseInt(hex.substr(i*2,2), 16);' +
+              'c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);' +
+              'rgb += ("00"+c).substr(c.length);' +
+            '}' +
+            'return rgb;' +
+          '}' +
+        '</script>'
+        )
+      end
+
+      def color_luminance_components
+       %Q(
+          '<script type="text/javascript">' +
+            'function adjustColorLuminanceComponents(){' +
+              'var darkShade = ColorLuminance("#{@application.background_color}", -0.5);' +
+              'console.log("Color:", darkShade);' +
+              'jQuery("#close_optyn_button a").css({"color": darkShade});' +
+              'jQuery("#optyn_button_wrapper").css({"border-bottom": ("2px solid " + darkShade)});' +
+              'jQuery("#show_optyn_button_wrapper").css({"border": ("2px solid " + darkShade)});' +
+            '}' +
+          '</script>'
+       )
       end
     end
   end
