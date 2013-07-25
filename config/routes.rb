@@ -121,11 +121,11 @@ Optyn::Application.routes.draw do
       post 'user/create_connection.json', to: 'users#create_connection'
       get 'user/create_error', to: 'users#create_error'
       get 'user/alias', to: 'users#alias'
-      get '/login', to: 'oauth#login', as: :login
-      get '/connection', to: 'oauth#connection', as: :connection
-      put '/automatic_connection', to: 'oauth#automatic_connection', as: :automatic_connection
-      put '/update_permissions', to: 'oauth#update_permissions', as: :update_permissions
-      put '/connect_with_email', to: 'oauth#connect_via_email'
+      get '/login', to: 'optyn_button#login', as: :login
+      get '/connection', to: 'optyn_button#connection', as: :connection
+      put '/automatic_connection', to: 'optyn_button#automatic_connection', as: :automatic_connection
+      put '/update_permissions', to: 'optyn_button#update_permissions', as: :update_permissions
+      put '/connect_with_email', to: 'optyn_button#connect_via_email'
 
       namespace :merchants do
         post 'messages/create_virtual', to: 'virtual_messages#create_virtual', as: :create_virtual
