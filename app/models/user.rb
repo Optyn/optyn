@@ -187,7 +187,7 @@ class User < ActiveRecord::Base
   end
 
   def permission_names
-    permissions_users.select(&:action).collect(&:permission).collect(&:name)
+    permissions_users.select(&:action).collect(&:permission).collect(&:permission_name)
   end
 
   def display_name
