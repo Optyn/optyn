@@ -29,6 +29,18 @@
         Module
 
   .option
+    %label.radio.inline
+      = f.radio_button :begin_state, 1
+      Bar Expanded
+
+    %label.radio.inline
+      = f.radio_button :begin_state, 0
+      Bar Collapsed
+
+  .custom
+    = f.text_field :background_color
+
+  .option
     %label.checkbox
       = f.check_box(:checkmark_icon)
       Show Checkmark Icon
@@ -62,3 +74,9 @@
     #loading{style: "display: none; text-align: right;"}
       %strong
         Loading...
+
+
+:javascript
+  $(document).ready(function(){
+     $('#oauth_application_background_color').colorpicker({format: 'hex'});
+  });

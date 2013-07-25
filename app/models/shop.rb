@@ -349,6 +349,8 @@ class Shop < ActiveRecord::Base
     app.checkmark_icon = options[:checkmark_icon]
     app.show_default_optyn_text = options[:show_default_optyn_text]
     app.custom_text = options[:custom_text]
+    app.begin_state = options[:begin_state]
+    app.background_color = options[:background_color]
   end
 
   def assign_embed_code(app)
