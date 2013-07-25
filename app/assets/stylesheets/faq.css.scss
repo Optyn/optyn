@@ -1,12 +1,5 @@
 #faq {
 	margin-bottom: 40px;
-	margin-top: 40px;
-	background-color: #ffffff;
-	border-radius: 6px;
-	padding-left: 20px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-right: 20px;
 }
 #faq .section_header {
 	margin-top: 55px;
@@ -14,46 +7,35 @@
 #faq .faq {
 	padding-left: 50px;
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 #faq .faq:hover .number {
-	background-color: #1791c0;
-	color: #fff;
+	background-color: #86c440;
 }
 #faq .faq:hover .question {
 	color: #7fa662;
 }
 #faq .faq .number {
-	background-color: #86c440;
+	background-color: $blue;
 	border-radius: 20px;
-	color: #394350;
+	color: $white;
 	position: absolute;
 	left: 0px;
-	padding: 5px 10px;
+	padding: 1px 9px;
 	font-weight: bold;
-	font-size: 17px;
-	top: -5px;
-	transition: background-color 0.3s linear;
-	-moz-transition: background-color 0.3s linear;
-	-webkit-transition: background-color 0.3s linear;
-	-o-transition: background-color 0.3s linear;
+	font-size: 13px;
+	top: 0;
+	@include transition( background-color 0.3s linear );
 }
 #faq .faq .question {
-	color: #2c3339;
-	font-weight: bold;
 	font-size: 17px;
 	cursor: pointer;
-	transition: color 0.2s linear;
-	-moz-transition: color 0.2s linear;
-	-webkit-transition: color 0.2s linear;
-	-o-transition: color 0.2s linear;
+	@include transition ( color 0.2s linear );
 }
 #faq .faq .answer {
-	margin-top: 30px;
-	margin-bottom: 60px;
+	margin-top: 10px;
+	margin-bottom: 25px;
 	font-size: 15px;
-	border-bottom: 1px solid #BEC0C3;
-	padding-bottom: 35px;
-	box-shadow: 0px 1px 1px 0px white;
+	padding-bottom: 15px;
 	display: none;
 }

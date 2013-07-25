@@ -16,54 +16,20 @@
 
 /* About Us
 -------------------------------------------------- */
-.about_page .container {
-  background-color: #f7f7f7;
-}
-.about_page .section_header {
-  margin-top: 55px;
-}
-.about_page h3.intro {
-  color: #282F39;
-  text-align: center;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 32px;
-  width: 83%;
-  margin: 0 auto;
-  margin-bottom: 70px;
-}
-.about_page p.intro_text {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #57595C;
-  width: 100%;
-}
-.about_page .span12 {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.about_page .section_header.team {
-  margin-top: 90px;
-}
 .about_page .teammate {
-  height: 380px;
   margin-bottom: 50px;
   background-color: #fff;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 0px 5px 2px #E8E8E8;
-  border-radius: 6px;
+  padding: 20px;
+  background: rgb( 236, 240, 241 );
+  border-bottom: solid rgba( 0, 0, 0, 0.15);
 }
 .about_page .teammate .team_member {
   height: 80px;
 }
 .about_page .teammate .team_member img {
-  margin-bottom: 5px;
-  margin-right: 20px;
   height: 75px;
   width: 75px;
+  margin: -12px 20px 5px 0;
 }
 .about_page .teammate .team_member .team_name {
   margin-bottom: 2px;
@@ -84,8 +50,8 @@
   margin-bottom: 2px;
 }
 .about_page .teammate hr {
-  border-top: 1px solid #BDBFC2;
   border-bottom: 2px solid white;
+  margin: 5px 0 15px 0;
 }
 .about_page .teammate p.description {
   font-size: 14px;
@@ -105,10 +71,30 @@
 .about_page .teammate .social i {
   margin-right: 5px;
 }
+.about_page .twitter-follow-button {
+  background-image: url('/assets/sprite-landing.png');
+  background-repeat: no-repeat;
+  padding-left: 60px;
+  height: 43px;
+  display: inline-block;
+  line-height: 43px;
+  background-position: 0 -3520px;
+  margin-top: 15px;
+  @include transition( all 0.2s ease-out );
+  &:hover {
+    background-position: 8px -3520px;
+  }
+}
 
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 980px) {
-  .about_page .teammate > * {
-    margin-left: 25px;
+@media ( min-width: 980px ) {
+  .about_page .teammate {
+    padding: 2%;
+  }
+}
+@media ( max-width: 768px ) {
+  .about_page .teammate {
+    margin-bottom: 0;
+    height: auto !important;
   }
 }

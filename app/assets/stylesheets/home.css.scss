@@ -412,9 +412,12 @@ $white: #fff;
 #flat {
   padding: 70px 0 0 0;
   margin: 0;
-  font-family: 'Open Sans', sans-serif !important;
-  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
   line-height: 23px;
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    @include transition ( width 0.3s ease-out );
+  }
 
   .container-fluid { padding: 0; }
 
@@ -739,6 +742,7 @@ $white: #fff;
   text-align: center;
   background-image: image-url( '/assets/bg_landing.png' );
   background-position: center;
+  font-size: 18px;
 }
 
 .terms {
@@ -753,6 +757,11 @@ $white: #fff;
 }
 
 /* General Styles */
+h1 {
+  border-bottom: solid 1px #eee;
+  line-height: 2.5em;
+  margin-bottom: 2%;
+}
 h1, h5 {
   font-weight: 300;
 }
@@ -764,17 +773,16 @@ h4 {
   font-weight: normal;
   margin-bottom: 0;
 }
+.row-fluid {
+  @include box-sizing( border-box );
+  padding-left: 2%;
+  padding-right: 2%;
+}
 
 @media( max-width: 768px ) {
-  #flat {
+  #flat.index {
     background-position: left;
     padding-top: 150px;
-    header .span5:first-child { display: none; }
-    header .span5:last-child {
-      h2 {
-        display: none;
-      }
-    }
     .businesses::before,
     .consumers::before { display: block; }
     .row-fluid .scroll-down {
@@ -782,6 +790,17 @@ h4 {
     }
     div.row-fluid {
       padding: 0;
+    }
+  }
+  #flat {
+    header .span5:first-child { display: none; }
+    header .span5:last-child {
+      h2 {
+        display: none;
+      }
+    }
+    header {
+      text-align: center;
     }
     footer {
       .span2:first-child {

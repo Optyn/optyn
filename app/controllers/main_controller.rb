@@ -9,4 +9,11 @@ class MainController < ApplicationController
     render layout: 'flat'
   end
 
+  def about
+    render layout: 'flat'
+  end
+
+  def faq
+    render layout: 'flat'
+  end
 end

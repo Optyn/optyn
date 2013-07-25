@@ -1,74 +1,90 @@
 = display_title "About Optyn - The Team & Mission"
 = display_meta_description "We are passionate about helping small businesses succeed and making sure consumers have a choice.", "alen, alen malkoc, lou, lou morales, helping small businesses, gaurav, gaurav gaglani, optyn team, optyn"
-#title_header
-  %h3
-    About Us
+.row-fluid
+  .span12
+    %h1
+      About Us
+    %p.intro_text
+      Whether you are a consumer or merchant, we know that you are overwhelmed with email marketing? The
+      good news is that someone finally figured it out... Us.
+    %p.intro_text
+      We started focusing on ways to help merchants increase sales years ago
+      when we launched one of the first daily deal sites in Chicago.
+      We’re now taking that expertise and helping merchants attract and
+      retain customs through Optyn.
+    %p.intro_text
+      As for making it easy for consumers to control emails and protect their
+      private information – well, we’re consumers and we felt the pain.
+      We developed Optyn based on what we wanted.  OK, accuse us of being
+      self-serving, but admit it, you’re benefiting from a great product.
 / About Us Page
-#about.about_page
-  .container
-    .row
-      .span12
-        %p.intro_text
-          Whether you are a consumer or merchant, we know that you are overwhelmed with email marketing? The
-          good news is that someone finally figured it out... Us.
-        %p.intro_text
-          We started focusing on ways to help merchants increase sales years ago
-          when we launched one of the first daily deal sites in Chicago.
-          We’re now taking that expertise and helping merchants attract and
-          retain customs through Optyn.
-        %p.intro_text
-          As for making it easy for consumers to control emails and protect their
-          private information – well, we’re consumers and we felt the pain.
-          We developed Optyn based on what we wanted.  OK, accuse us of being
-          self-serving, but admit it, you’re benefiting from a great product.
-    %span
-      %h3 Our Team
-    .row
-      .span4.teammate
-        .team_member
-          = image_tag 'am.png', :class => 'img-circle', :align => 'left', :alt => 'Alen Malkoc'
-          .team_name
-            %h5 Alen Malkoc
-            %h6 Co-Founder / CEO
-        %hr/
-        %p.description
-          Alen loves creating products people want to use. Prior to Optyn, Alen built and sold Dealster, Chitown Deals,
-          and other smaller businesses such as Dana Cafe and the Chicago Street Cup. He's an avid chess player and an
-          All American and 2x National Champion in Soccer.
-        %p.description
-          Alen's most annoying thing in the world is that people have no way to control and manage
-          their information with companies. That's what we are here to solve.
-        %div
-          %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/alenmalkoc", :target => "_blank"} Follow @alenmalkoc
-      .span4.teammate
-        .team_member
-          = image_tag 'lm.png', :class => 'img-circle', :align => 'left', :alt => 'Lou Morales'
-          .team_name
-            %h5 Lou Morales
-            %h6 Co-Founder / COO
-        %hr/
-        %p.description
-          Lou Morales started and ran businesses for GE, First Data and other Fortune 500 companies. In fact, every
-          time you use that debit card in your wallet it is most likely processed by the First Data business unit Lou
-          helped start.
-        %p.description
-          Lou's most annoying thing is that email marketing for businesses requires
-          a lot of effort, resources, and probably a degree in E-Mail Marketing. Optyn will change that.
-        %div
-          %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/loumorales", :target => "_blank"} Follow @loumorales
-      .span4.teammate
-        .team_member
-          = image_tag 'gg.png', :class => 'img-circle', :align => 'left', :alt => 'Gaurav Gaglani'
-          .team_name
-            %h5 Gaurav Gaglani
-            %h6 Co-Founder / CTO
-        %hr/
-        %p.description
-          Gaurav's an experienced Ruby on Rails developer. He earned his Masters in Software Engineering
-          from DePaul University in Chicago. He has experience building scalable products and has
-          business experience which is a vital mix.
-        %p.description
-          His most annoying thing about E-Mail is
-          that there's just way to much of it.
-        %div
-          %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/gauravgaglani", :target => "_blank"} Follow @gauravgaglani
+.row-fluid
+  .span12
+    %h1 Our Team
+#about.about_page.row-fluid
+  .span4.teammate
+    .team_member
+      = image_tag 'am.png', :class => 'img-circle', :align => 'left', :alt => 'Alen Malkoc'
+      .team_name
+        %h5 Alen Malkoc
+        %h6 Co-Founder / CEO
+    %hr/
+    %p.description
+      Alen loves creating products people want to use. Prior to Optyn, Alen built and sold Dealster, Chitown Deals,
+      and other smaller businesses such as Dana Cafe and the Chicago Street Cup. He's an avid chess player and an
+      All American and 2x National Champion in Soccer.
+    %p.description
+      Alen's most annoying thing in the world is that people have no way to control and manage
+      their information with companies. That's what we are here to solve.
+    %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/alenmalkoc", :target => "_blank"} Follow @alenmalkoc
+  .span4.teammate
+    .team_member
+      = image_tag 'lm.png', :class => 'img-circle', :align => 'left', :alt => 'Lou Morales'
+      .team_name
+        %h5 Lou Morales
+        %h6 Co-Founder / COO
+    %hr/
+    %p.description
+      Lou Morales started and ran businesses for GE, First Data and other Fortune 500 companies. In fact, every
+      time you use that debit card in your wallet it is most likely processed by the First Data business unit Lou
+      helped start.
+    %p.description
+      Lou's most annoying thing is that email marketing for businesses requires
+      a lot of effort, resources, and probably a degree in E-Mail Marketing. Optyn will change that.
+    %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/loumorales", :target => "_blank"} Follow @loumorales
+  .span4.teammate
+    .team_member
+      = image_tag 'gg.png', :class => 'img-circle', :align => 'left', :alt => 'Gaurav Gaglani'
+      .team_name
+        %h5 Gaurav Gaglani
+        %h6 Co-Founder / CTO
+    %hr/
+    %p.description
+      Gaurav's an experienced Ruby on Rails developer. He earned his Masters in Software Engineering
+      from DePaul University in Chicago. He has experience building scalable products and has
+      business experience which is a vital mix.
+    %p.description
+      His most annoying thing about E-Mail is
+      that there's just way to much of it.
+    %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/gauravgaglani", :target => "_blank"} Follow @gauravgaglani
+
+:javascript
+  $( document ).ready( function() {
+    var setHt = function() {
+      // This function sets width of the team member divs.
+      var maxHt = 0;
+      $( '.teammate' ).each( function() {
+        $( this ).css( 'height', 'auto' );
+      });
+      $( '.teammate' ).each( function() {
+        if ( parseInt($( this ).css( 'height' )) > maxHt ) {
+          maxHt = parseInt($( this ).css( 'height' ));
+        }
+      });
+      $( '.teammate' ).each( function() {
+        $( this ).css( 'height', maxHt + 10 );
+      });
+    };
+    setTimeout( setHt, 100);
+    $( window ).resize( setHt );
+  });

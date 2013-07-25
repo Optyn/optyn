@@ -20,3 +20,9 @@
        -o-transition: $params;
           transition: $params;
 }
+
+@mixin box-sizing( $param ) {
+  -webkit-box-sizing: $param; /* Safari/Chrome, other WebKit */
+     -moz-box-sizing: $param;    /* Firefox, other Gecko */
+          box-sizing: $param;         /* Opera/IE 8+ */
+}
