@@ -47,7 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if params[:cross_domain_login].present?
         @user_login = User.new
         @user = resource
-        render "api/v1/oauth/login", layout: 'cross_domain' and return
+        render "api/v1/optyn_button/login", layout: 'cross_domain' and return
       end
 
       respond_to do |format|

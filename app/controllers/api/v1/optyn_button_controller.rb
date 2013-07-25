@@ -16,7 +16,7 @@ module Api
         @user = User.new
 
         respond_to do |format|
-          format.html { render(file: 'api/v1/oauth/login') }
+          format.html { render(file: 'api/v1/optyn_button/login') }
           json_str = {data: {authenticity_token: form_authenticity_token, errors: nil}}.to_json
           format.json {
             if params[:callback].present?
@@ -41,7 +41,7 @@ module Api
         user_changed = current_user.changed? || @connection
 
         if current_user.save(validate: false) #current_user.update_attributes(params[:user])
-          render json: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}
+          render json: {message: render_to_string(partial: "api/v1/optyn_button/confirmation_message")}
         else
           session[:user_return_to] = nil
           head :unprocessable_entity
@@ -51,7 +51,7 @@ module Api
       def automatic_connection
         map_current_user_to_store
         if @shop.present? && @connection.present? && current_user.present?
-          json_str = {data: {message: render_to_string(partial: "api/v1/oauth/confirmation_message")}}.to_json
+          json_str = {data: {message: render_to_string(partial: "api/v1/optyn_button/confirmation_message")}}.to_json
           if params[:callback].present?
             render text: "#{params[:callback]}(#{json_str})", status: :ok
           else
