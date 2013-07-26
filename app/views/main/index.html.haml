@@ -1,6 +1,14 @@
 = display_title "Optyn.com - Simple e-mail marketing for everyone."
 = display_meta_description "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications.", "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
-/New Content          
+/New Content
+:javascript
+  $(function(){
+    if(window.chrome) {
+       $('#get-started').hide();
+    } else {
+       $('#download-extension').hide();
+    }
+  });
 #home
   .main-area
     .headline
@@ -19,7 +27,8 @@
       %h4
         You are one click away from a simplified inbox!
       .buttons
-        %a.btn.startbutton{:href => new_user_registration_path} Get Started
+        %a.btn.startbutton#get-started{:href => new_user_registration_path} Get Started
+        %a.btn.startbutton#download-extension{:styles => 'display: none;' ,:href => "#", :onclick => "chrome.webstore.install('', function(a){console.log(a);}, function(a){console.log(a);}); return false"} Download our Chrome Extension
         %a.btn.quickvid{:href => consumer_features_path} Learn More
         /%span
         /%a{:href => consumer_features_path} Learn More
