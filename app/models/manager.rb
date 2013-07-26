@@ -93,7 +93,7 @@ class Manager < ActiveRecord::Base
   end
 
   def send_welcome_email
-    Resque.enqueue(WelcomeMessageSender, :manager, self.id)
+    Resque.enqueue(WelcomeMessageSender, :manager, self.id) unless self.shop.virtual
   end
 
   def check_for_used_user_email
