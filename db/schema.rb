@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725181445) do
+ActiveRecord::Schema.define(:version => 20130728151900) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -417,6 +417,7 @@ ActiveRecord::Schema.define(:version => 20130725181445) do
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
+  add_index "shops", ["name"], :name => "index_shops_on_name", :unique => true
   add_index "shops", ["partner_id"], :name => "index_shops_on_partner_id"
 
   create_table "states", :force => true do |t|
