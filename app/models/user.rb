@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
     end
 
     self.alias = optyn_alias
-    self.save
+    self.save(validate: false) #Don't validate for the name to be present
   end
 
   def make_connection_if!(shop)
