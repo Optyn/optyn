@@ -99,7 +99,12 @@ module Merchants::MessagesHelper
   end
 
   def message_content(message)
-    simple_format(message.content.blank? ? "-" : message.content)
+    display_content = message.content.blank? ? "-" : message.content
+    if message.instance_of?(VirtualMessage)
+      return display_content.html_safe
+    end
+
+    simple_format(display_content)
   end
 
   def message_receiver_labels(label_names)
