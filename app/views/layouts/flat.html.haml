@@ -16,7 +16,7 @@
     = analytics_init if Rails.env.production?
 
 
-  %body#flat{:class => params[:action]}
+  %body#flat{:class => params[:action] + ' ' + params[:controller]}
     .container-fluid
       %header.row-fluid
         .span5
