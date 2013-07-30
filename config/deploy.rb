@@ -5,7 +5,7 @@ require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 require "capistrano-resque"
 
 
-set :default_stage, "staging"
+set :default_stage, "launchrock"
 set :whenever_command, "bundle exec whenever"
 set :whenever_environment, defer { default_stage }
 require "whenever/capistrano"
