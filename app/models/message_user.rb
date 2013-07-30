@@ -225,6 +225,6 @@ class MessageUser < ActiveRecord::Base
   end
 
   def assign_uuid
-    self.uuid = UUIDTools::UUID.random_create.to_s.gsub(/[-]/, "")
+    IdentifierAssigner.assign_random(self, 'uuid')
   end
 end

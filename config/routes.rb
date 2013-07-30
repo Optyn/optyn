@@ -128,6 +128,13 @@ Optyn::Application.routes.draw do
 
       namespace :merchants do
         post 'messages/create_virtual', to: 'virtual_messages#create_virtual', as: :create_virtual
+        resources :shops do
+          collection do
+            get :import_list
+            post :import
+            get :import_status
+          end
+        end
       end
     end
   end

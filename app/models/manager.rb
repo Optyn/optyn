@@ -4,10 +4,10 @@ class Manager < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :async, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :authentications,:as=>:account, dependent: :destroy
-  has_many :children, :class_name => "Manager",:foreign_key => "parent_id"
+  has_many :authentications, :as => :account, dependent: :destroy
+  has_many :children, :class_name => "Manager", :foreign_key => "parent_id"
   belongs_to :parent, :class_name => "Manager"
   belongs_to :shop
   has_many :file_imports
@@ -19,11 +19,11 @@ class Manager < ActiveRecord::Base
   validate :check_for_used_user_email
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
 
-  attr_accessible :name,:email, :password, :password_confirmation, :remember_me,:shop_id,:parent_id,:owner,:confirmed_at, :picture
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner, :confirmed_at, :picture
   attr_accessor :skip_password
   accepts_nested_attributes_for :file_imports
 
-  after_create :send_welcome_email
+  after_create :assign_uuid, :send_welcome_email
 
   scope :owner, where(owner: true)
 
@@ -57,7 +57,7 @@ class Manager < ActiveRecord::Base
   end
 
   def update_with_password(params, *options)
-    
+
     if encrypted_password.blank?
       update_attributes(params, *options)
     else
@@ -92,8 +92,15 @@ class Manager < ActiveRecord::Base
     end
   end
 
+  def assign_uuid
+    IdentifierAssigner.assign_random(self, 'uuid')
+    self.save
+  end
+
   def send_welcome_email
-    Resque.enqueue(WelcomeMessageSender, :manager, self.id) unless self.shop.virtual
+    if self.partner_optyn? && !self.shop.virtual
+      Resque.enqueue(WelcomeMessageSender, :manager, self.id)
+    end
   end
 
   def check_for_used_user_email
@@ -101,6 +108,10 @@ class Manager < ActiveRecord::Base
       user = User.find_by_email(self.email)
       self.errors.add(:email, "already taken") if user.present?
     end
+  end
+
+  def partner_optyn?
+    self.shop.partner_optyn?
   end
 end
 

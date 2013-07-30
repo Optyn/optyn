@@ -22,13 +22,22 @@ class Partner < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :organization, presence: true
+  validates :organization, presence: true, uniqueness: true
   validates :phone , presence: true
   validate :validate_phone_digits
 
+  ORGANIZATION_OPTYN = 'Optyn Inc.'
+
+  def self.optyn_id
+    Partner.find_by_organization(ORGANIZATION_OPTYN).id
+  end
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def optyn?
+    self.id == Partner.optyn_id
   end
 
   private

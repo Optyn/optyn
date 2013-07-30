@@ -36,5 +36,13 @@ namespace :shop do
     puts manager.inspect    
     manager.owner = true
     manager.save(validate: false)
-  end 
+  end
+
+  desc "Assign uuids to the shops that don't have already"
+  task :assign_missing_uuid => :environment do
+    missing_uuid_shops = Shop.where(uuid: nil)
+    missing_uuid_shops.each do |shop|
+      shop.send(:assign_uuid)
+    end
+  end
 end

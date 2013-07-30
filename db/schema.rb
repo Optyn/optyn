@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728151900) do
+ActiveRecord::Schema.define(:version => 20130729130814) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "api_request_payloads", :force => true do |t|
+    t.string   "uuid"
+    t.string   "controller"
+    t.string   "action"
+    t.integer  "partner_id"
+    t.text     "body"
+    t.text     "stats"
+    t.text     "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "api_request_payloads", ["uuid"], :name => "index_api_request_payloads_on_uuid", :unique => true
 
   create_table "app_settings", :force => true do |t|
     t.string   "name"
@@ -166,11 +180,13 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "picture"
+    t.string   "uuid"
   end
 
   add_index "managers", ["confirmation_token"], :name => "index_managers_on_confirmation_token", :unique => true
   add_index "managers", ["email"], :name => "index_managers_on_email", :unique => true
   add_index "managers", ["reset_password_token"], :name => "index_managers_on_reset_password_token", :unique => true
+  add_index "managers", ["uuid"], :name => "index_managers_on_uuid", :unique => true
 
   create_table "merchant_apps", :force => true do |t|
     t.string   "name"
@@ -409,16 +425,18 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
     t.boolean  "virtual",                    :default => false
-    t.integer  "email_box_impression_count", :default => 0
-    t.integer  "email_box_click_count",      :default => 0
+    t.integer  "email_box_impression_count"
+    t.integer  "email_box_click_count"
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
     t.integer  "partner_id"
+    t.string   "uuid"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
   add_index "shops", ["name"], :name => "index_shops_on_name", :unique => true
   add_index "shops", ["partner_id"], :name => "index_shops_on_partner_id"
+  add_index "shops", ["uuid"], :name => "index_shops_on_uuid", :unique => true
 
   create_table "states", :force => true do |t|
     t.string   "name"

@@ -50,9 +50,17 @@ class Shop < ActiveRecord::Base
 
   scope :real, where(virtual: false)
 
-  after_create :create_dummy_survey, :create_select_all_label, :assign_identifier, :create_default_subscription
+  scope :by_name, ->(shop_name) { where(["shops.name ILIKE :name", {name: shop_name}]) }
+
+  scope :by_uuid, ->(uuid) { where(uuid: uuid) }
+
+  after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :assign_identifier, :create_default_subscription, :assign_partner_if
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
+
+  def self.for_name(shop_name)
+    by_name(shop_name).first
+  end
 
   def self.by_app_id(app_id)
     for_app_id(app_id).first
@@ -83,11 +91,46 @@ class Shop < ActiveRecord::Base
   end
 
   def self.optyn_magic
-    find_by_name(OPTYN_POSTFIX)
+    for_name(OPTYN_POSTFIX)
   end
 
   def self.optyn_magic_manager
-    postfix.manager
+    optyn_magic.manager
+  end
+
+  def self.import(param_shops, payload)
+    payload.stats = []
+
+    param_shops.each do |shop_params|
+      status = nil
+      begin
+        Shop.transaction do
+          shop_name = shop_params['shop']['name']
+          shop = for_name(shop_name) || Shop.new()
+          if shop.new_record?
+            shop.attributes = shop_params['shop']
+            shop.partner_id = payload.partner_id
+            shop.save!
+            shop.update_manager
+            status = "New Shop"
+          else
+            status "Existing Shop"
+          end
+
+          payload.stats << {shop: {name: shop_name, uuid: shop.uuid, status: status, created_at: shop.created_at}}
+        end
+      rescue Exception => e
+        Rails.logger.error e.message
+        Rails.logger.error e.backtrace
+        payload.stats << {shop: {name: shop_name, uuid: "-", status: "Error"}}
+      end
+    end
+  end
+
+  def self.for_uuid(uuid)
+    shop = by_uuid(uuid).first
+    raise ActiveRecord::RecordNotFound if shop.blank?
+    shop
   end
 
   def shop
@@ -293,9 +336,22 @@ class Shop < ActiveRecord::Base
     managers.owner.first || managers.first
   end
 
+  def partner_optyn?
+    self.partner.optyn?
+  end
+
+  def error_messages
+    self.errors.full_messages
+  end
+
   private
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "").downcase
+  end
+
+  def assign_uuid
+    IdentifierAssigner.assign_random(self, 'uuid')
+    self.save(validate: false)
   end
 
   def create_dummy_survey
@@ -326,6 +382,13 @@ class Shop < ActiveRecord::Base
         self.identifier = self.name.parameterize
         self.save(validate: false)
       end
+    end
+  end
+
+  def assign_partner_if
+    if self.partner.blank?
+      self.partner_id = Partner.optyn_id
+      self.save(validate: false)
     end
   end
 
