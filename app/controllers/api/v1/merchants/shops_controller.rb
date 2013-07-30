@@ -3,14 +3,12 @@ module Api
     module Merchants
       class ShopsController < PartnerOwnerBaseController
         def import_list
-          #TODO get the patner from the access token
-          partner_id = Partner.optyn_id
+          partner_id = current_partner.id
           @import_list = ApiRequestPayload.for_partner(partner_id)
         end
 
         def import
-          #TODO get the patner from the access token
-          @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: Partner.optyn_id,
+          @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
                                               body: params, status: 'Queued')
           payload_id = @payload.id
           Resque.enqueue(ShopImporter, payload_id)
@@ -23,7 +21,7 @@ module Api
         def create
           begin
             @shop = Shop.new(params[:shop])
-            @shop.partner_id = Partner.optyn_id #Need to set this explicitly
+            @shop.partner_id = current_partner.id
             @shop.save!
             @shop.update_manager
             render(status: :created)
