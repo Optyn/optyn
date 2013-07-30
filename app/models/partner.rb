@@ -28,8 +28,12 @@ class Partner < ActiveRecord::Base
 
   ORGANIZATION_OPTYN = 'Optyn Inc.'
 
+  def self.optyn
+    find_by_organization(ORGANIZATION_OPTYN)
+  end
+
   def self.optyn_id
-    Partner.find_by_organization(ORGANIZATION_OPTYN).id
+    optyn.id
   end
 
   def name
