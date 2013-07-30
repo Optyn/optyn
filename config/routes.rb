@@ -25,7 +25,7 @@ Optyn::Application.routes.draw do
   match 'cache/flush' => "cache#flush"
 
   # Blog Redirect
-  match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
+  match "/blog" => redirect("http://optynblog.com"), :as => :blog
 
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://support.optyn.com"), :as => :support
