@@ -2,14 +2,13 @@ html {
   margin: 0;
 }
 body {
-  position: relative;
-  padding-top: 69px;
-  background: #000;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
-  color: #333333;
+  color: $black;
+  padding-top: 60px;
 }
+body.index.main { padding-top: 0; }
 .scrolltop {
   background: url('/assets/scrolltop.png') 0 0 no-repeat;
   height: 38px;

@@ -1,11 +1,4 @@
 @import "bootstrap";
-body {
-  padding-top: 60px;
-  background-color: #f7f7f7;
-}
-#container {
-  background-color: #f7f7f7;
-}
 .alert {
   height: 40px;
   padding-left: 40px;
@@ -63,11 +56,6 @@ body {
 }
 
 /* Responsive Bootstrap Overrides */
-.navbar .btn-navbar {
-  padding: 10px;
-  margin-top: 13px;
-  margin-right: 0px;
-}
 @import "bootstrap-responsive";
 
 // Set the correct sprite paths

@@ -16,4 +16,8 @@ class MainController < ApplicationController
   def faq
     render layout: 'flat'
   end
+
+  def consumerfeatures
+    render layout: 'flat'
+  end
 end
