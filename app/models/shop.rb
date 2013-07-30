@@ -24,7 +24,7 @@ class Shop < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :stype, :presence => true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
-  validates :identifier, uniqueness: true, presence: true, unless: :new_record?
+  validates :identifier, uniqueness: true, presence: true
   validates :time_zone, presence: true, unless: :new_record?
 
   accepts_nested_attributes_for :managers
@@ -54,7 +54,9 @@ class Shop < ActiveRecord::Base
 
   scope :by_uuid, ->(uuid) { where(uuid: uuid) }
 
-  after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :assign_identifier, :create_default_subscription, :assign_partner_if
+  before_validation :assign_identifier, on: :create
+
+  after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription, :assign_partner_if
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
@@ -104,8 +106,8 @@ class Shop < ActiveRecord::Base
     param_shops.each do |shop_params|
       status = nil
       begin
+        shop_name = shop_params['shop']['name']
         Shop.transaction do
-          shop_name = shop_params['shop']['name']
           shop = for_name(shop_name) || Shop.new()
           if shop.new_record?
             shop.attributes = shop_params['shop']
@@ -114,7 +116,7 @@ class Shop < ActiveRecord::Base
             shop.update_manager
             status = "New Shop"
           else
-            status "Existing Shop"
+            status = "Existing Shop"
           end
 
           payload.stats << {shop: {name: shop_name, uuid: shop.uuid, status: status, created_at: shop.created_at}}
@@ -378,9 +380,11 @@ class Shop < ActiveRecord::Base
 
   def assign_identifier
     unless self.virtual?
-      if self.identifier.blank?
+      if self.identifier.blank? || (self.new_record? && (shop = Shop.find_by_identifier(self.identifier)).present?)
         self.identifier = self.name.parameterize
-        self.save(validate: false)
+        while (shop = Shop.find_by_identifier(self.identifier)).present?
+          self.identifier = self.name.parameterize + "-" + Devise.friendly_token.first(8).downcase
+        end
       end
     end
   end
