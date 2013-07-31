@@ -297,7 +297,7 @@ body {
   }
 }
 
-#flat.index {
+#flat.main.index {
   /* Styles for landing page */
   text-align: center;
   background-image: image-url( '/assets/bg_landing.png' );
@@ -316,7 +316,7 @@ body {
   }
 }
 
-/* General Styles */
+/* General Styles ----------------------------------------------------- */
 #flat {
   a, input {
     text-shadow: none;
@@ -337,6 +337,11 @@ body {
   h4 {
     font-weight: normal;
     margin-bottom: 0;
+  }
+  strong {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    font-weight: 300;
   }
   .row-fluid {
     @include box-sizing( border-box );
@@ -406,10 +411,13 @@ body {
   }
 
   .btn {}
+  .text-justify {
+    text-align: justify;
+  }
 }
 
 @media( max-width: 768px ) {
-  #flat.index {
+  #flat.main.index {
     background-position: left;
     .businesses::before,
     .consumers::before { display: block; }

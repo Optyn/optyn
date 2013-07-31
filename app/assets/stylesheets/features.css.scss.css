@@ -64,14 +64,14 @@
 		background-position: 0 -4748px;
 	}
 
-	.sign-up {
-		font-size: 1.5em;
-		line-height: 1.5em;
-		font-weight: 300;
+	.sign-up, .roomy {
 		padding: 6% 2%;
 		p {
 			margin-top: 3%;
 		}
+	}
+	.merchantfeatures .roomy .p {
+		text-align: justify;
 	}
 }
 
