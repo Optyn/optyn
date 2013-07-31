@@ -6,11 +6,11 @@
   .navbar-inner {
     box-shadow: none;
     border: 0;
-    background: $dark-blue;
+    background: transparent;
   }
 }
 .navbar-fixed-top.scroll {
-  opacity: 0.96;
+  background-color: rgba( $dark-blue, .95 );
 }
 
 @media (max-width: 979px) {
@@ -28,21 +28,7 @@
     margin: 5px;
   }
 }
-/* HEADER 1 */
-#header1 {
-  display: block;
-  height: auto;
-  background: #304d58;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  text-align: center;
-  vertical-align: middle;
-}
-#header1 h3 {
-  color: #fff;
-  font-size: 40px;
-  font-weight: normal;
-}
+
 /* TITLE HEADER */
 #title_header {
   display: block;

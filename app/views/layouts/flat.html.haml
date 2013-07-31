@@ -22,7 +22,7 @@
         .span5
           %h2 FOR BUSINESSES
         .span2
-          %a{ :href => root_path }
+          %a.logo{ :href => root_path }
             = image_tag "logo.png", :alt => 'logo'
         .span5
           %a.link.blue.pull-right{ :href => new_user_session_path } Log in
@@ -35,7 +35,7 @@
               %span{ :class => 'icon-bar' }
               %span{ :class => 'icon-bar' }
               %span{ :class => 'icon-bar' }
-            %a.pull-left{ :href => root_path }
+            %a.logo.pull-left{ :href => root_path }
               = image_tag "logo.png", :alt => 'logo'
             .nav-collapse.collapse
               %ul.pull-right.nav.nav-pills
@@ -46,7 +46,7 @@
                 %li
                   %a{ :href => '#' } Customers
                 %li
-                  %a{ :href => '#' } Pricing
+                  %a{ :href => pricing_path } Pricing
                 %li
                   %a.link.orange{ :href => '#' } Sign up
                 %li

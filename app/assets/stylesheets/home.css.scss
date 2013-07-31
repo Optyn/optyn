@@ -14,11 +14,12 @@ body {
     overflow: hidden;
     background-color: $dark-blue;
     color: #fff;
+    padding: 0 2%;
     h2 {
       font-size: 23px;
       line-height: 40px;
+      margin: 5px 0;
     }
-    .span2 a { line-height: 60px; }
     .nav {
       margin: 0;
       a {
@@ -26,6 +27,12 @@ body {
         color: $white;
         font-weight: 400;
       }
+    }
+    .link, .nav a {
+      margin: 10px 0 10px 0;
+    }
+    .logo {
+      line-height: 50px;
     }
   }
 
@@ -336,7 +343,7 @@ body {
     padding-left: 2%;
     padding-right: 2%;
   }
-  .link {
+  .link, .btn {
     @include border-radius( 0 );
     font-size: 18px;
     line-height: 30px;
@@ -345,24 +352,34 @@ body {
     padding: 0 20px;
     border-bottom: solid 4px rgba( 0, 0, 0, 0.2);
     @include transition( all 0.2s ease-out );
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background: $light-gray;
     &:hover {
       border-bottom: solid 4px rgba( 0, 0, 0, 0.3);
       text-decoration: none;
+      background-color: darken( $light-gray, 10% );
     }
   }
-  .link.blue {
+  .link.blue, .btn-primary {
     color: #fff;
     background: #5fabe7;
     &:hover {
       background-color: darken( $blue, 10% );
     }
   }
-  .link.orange {
+  .link.orange, .btn-warning {
     color: #fff;
     background-color: $orange;
     &:hover {
       background-color: darken( $orange, 10% );
     }
+  }
+  .btn-large {
+    padding: 11px 19px;
+    font-size: 1.2em;
+    line-height: 1.2em;
   }
   input[type='text'] {
     font-family: 'Open Sans', sans-serif;
@@ -387,6 +404,8 @@ body {
     font-size: 20px;
     letter-spacing: 1px;
   }
+
+  .btn {}
 }
 
 @media( max-width: 768px ) {

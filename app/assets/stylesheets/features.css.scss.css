@@ -1,4 +1,5 @@
-#flat.consumerfeatures.main {
+#flat.consumerfeatures.main,
+#flat.merchantfeatures.main {
 	.wrapper {
 		text-align: center;
 	}
@@ -16,6 +17,10 @@
 			padding: 2%;
 			margin: 0;
 			width: 33.3333%;
+		}
+		a {
+			color: #fff;
+			text-decoration: underline;
 		}
 	}
 	.blue-bg-2 {
@@ -63,7 +68,7 @@
 		font-size: 1.5em;
 		line-height: 1.5em;
 		font-weight: 300;
-		padding: 6% 0;
+		padding: 6% 2%;
 		p {
 			margin-top: 3%;
 		}
@@ -71,7 +76,8 @@
 }
 
 @media ( max-width: 767px ) {
-	.consumerfeatures.main {
+	#flat.consumerfeatures.main,
+	#flat.merchantfeatures.main {
 		.features {
 			.span4 {
 				width: 100%;
@@ -97,17 +103,7 @@
 	margin-top: 30px;
 }
 #merchant_features .main .copy {
-	padding-left: 100px;
-}
-#merchant_features .main .copy h3 {
-	color: #86c440;
-	font-weight: bold;
-}
-#merchant_features .features {
-	background-color: #ffffff;
-	border-radius: 6px;
-	padding-right: 10px;
-	padding-bottom: 10px;
+	height: 70px;
 }
 #merchant_features .features .feature {
 	width: 350px;
@@ -120,14 +116,9 @@
 	margin-top: 20px;
 }
 #merchant_features .features .feature .copy {
-	padding-left: 60px;
+	height: 70px;
 }
-#merchant_features .features .feature .copy h3 {
-	color: #304d58;
-	font-weight: bold;
-	font-size: 18px;
-	line-height: 22px;
-}
+
 
 /* Features
 -------------------------------------------------- */
@@ -159,7 +150,7 @@
 	position: absolute;	
 }
 .features_page .feature2 .icon i {
-	background: url('/assets/features_icons.png') no-repeat;
+	background: image-url('/assets/features_icons.png') no-repeat;
 	display: block;
 	position: relative;
 }
@@ -225,98 +216,98 @@
 #consumer_features .image {
 }
 #consumer_features .cd-control {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
 #consumer_features .cf-optin {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
 	background-position: 0 -1039px;
 }
 #consumer_features .cd-ctrl {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
 	background-position: 0 -164px;
 }
 #consumer_features .cf_manage {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
 	background-position: 0 -902px;
 }
 #consumer_features .cf_allinone {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
 	background-position: 0 -449px;
 }
 #consumer_features .cd_free {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -301px;
+	background-position: 50% -301px;
 }
 #consumer_features .cf_easy {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -606px;
+	background-position: 50% -606px;
 }
 #consumer_features .cf_explore {
-	background: url( '/assets/sprite-consumer-features.png' );
+	background: image-url( '/assets/sprite-consumer-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -606px;
+	background-position: 50% -606px;
 }
 
 #merchant_features .mf_free {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -576px;
+	background-position: 50% -576px;
 }
 #merchant_features .mf_versatile {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -1479px;
+	background-position: 50% -1479px;
 }
 #merchant_features .mf_capture {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -148px;
+	background-position: 50% -148px;
 }
 #merchant_features .mf_auto {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 0;
+	background-position: 50% 0;
 }
 #merchant_features .mf_insights {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -888px;
+	background-position: 50% -888px;
 }
 #merchant_features .mf_segment {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -1334px;
+	background-position: 50% -1334px;
 }
 #merchant_features .mf_choice {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -294px;
+	background-position: 50% -294px;
 }
 #merchant_features .mf_engage {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -437px;
+	background-position: 50% -437px;
 }
 #merchant_features .mf_hasslefree {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -740px;
+	background-position: 50% -740px;
 }
 #merchant_features .mf_pricing {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -1186px;
+	background-position: 50% -1186px;
 }
 #merchant_features .mf_more {
-	background: url( '/assets/sprite-merchant-features.png' );
+	background: image-url( '/assets/sprite-merchant-features.png' );
 	background-repeat: no-repeat;
-	background-position: 0 -1040px;
+	background-position: 50% -1040px;
 }
