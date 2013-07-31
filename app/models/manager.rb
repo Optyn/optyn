@@ -1,4 +1,6 @@
 class Manager < ActiveRecord::Base
+  include UuidFinder
+
   # Include default devise modules. Others available are:
   # :token_authenticatable,
   # :lockable, :timeoutable and :omniauthable
@@ -47,10 +49,6 @@ class Manager < ActiveRecord::Base
 
       [manager, authentication]
     end
-  end
-
-  def self.for_uuid(uuid)
-    by_uuid(uuid).first || (raise(ActiveRecord::RecordNotFound))
   end
 
   def create_authentication(uid, provider)

@@ -137,6 +137,7 @@ Optyn::Application.routes.draw do
         end
 
         resources :managers
+        resources :locations
       end
     end
   end

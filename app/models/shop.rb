@@ -1,6 +1,7 @@
 require 'embed_code_generator'
 
 class Shop < ActiveRecord::Base
+  include UuidFinder
 
   has_one :subscription, dependent: :destroy
   has_one :plan, through: :subscription
@@ -127,12 +128,6 @@ class Shop < ActiveRecord::Base
         payload.stats << {shop: {name: shop_name, uuid: "-", status: "Error"}}
       end
     end
-  end
-
-  def self.for_uuid(uuid)
-    shop = by_uuid(uuid).first
-    raise ActiveRecord::RecordNotFound if shop.blank?
-    shop
   end
 
   def shop
