@@ -135,6 +135,8 @@ Optyn::Application.routes.draw do
             get :import_status
           end
         end
+
+        resources :managers
       end
     end
   end

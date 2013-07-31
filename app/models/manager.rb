@@ -19,13 +19,16 @@ class Manager < ActiveRecord::Base
   validate :check_for_used_user_email
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner, :confirmed_at, :picture
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner,
+                  :confirmed_at, :picture, :current_password
   attr_accessor :skip_password
   accepts_nested_attributes_for :file_imports
 
   after_create :assign_uuid, :send_welcome_email
 
   scope :owner, where(owner: true)
+
+  scope :by_uuid, ->(uuid) { where(uuid: uuid) }
 
   def self.create_from_omniauth(auth)
     authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "Manager")
@@ -44,6 +47,10 @@ class Manager < ActiveRecord::Base
 
       [manager, authentication]
     end
+  end
+
+  def self.for_uuid(uuid)
+    by_uuid(uuid).first || (raise(ActiveRecord::RecordNotFound))
   end
 
   def create_authentication(uid, provider)
@@ -74,7 +81,7 @@ class Manager < ActiveRecord::Base
   end
 
   def business_name
-    shop.name
+    shop.name rescue nil
   end
 
   def first_shop
@@ -112,6 +119,10 @@ class Manager < ActiveRecord::Base
 
   def partner_optyn?
     self.shop.partner_optyn?
+  end
+
+  def error_messages
+    self.errors.full_messages
   end
 end
 
