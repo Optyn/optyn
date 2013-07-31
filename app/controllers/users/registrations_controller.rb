@@ -1,6 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :profile, :update_profile]
   before_filter :require_manager_logged_out
   before_filter :redirect_to_account, only: [:profile, :update_profile]
+
 
 
   def new
@@ -59,6 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   def profile
+    binding.pry
     @user = current_user
     @permissions_user = @user.permissions_users.present? ? @user.permissions_users : @user.build_permission_users
   end
