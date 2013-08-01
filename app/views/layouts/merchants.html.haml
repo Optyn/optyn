@@ -22,9 +22,11 @@
   %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize }
     %a.scrolltop{:href => "#"}
     = render partial: "layouts/header"
-
     = display_flash_message
-
-    = yield
+    #dashboard.container-fluid
+      .row-fluid
+        = render partial: "merchants/shared/menu"
+        .span9.wid75pc.content
+          = yield
 
     = render partial: "layouts/footer_flat"
