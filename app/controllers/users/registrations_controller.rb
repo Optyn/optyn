@@ -61,7 +61,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   def profile
-    binding.pry
     @user = current_user
     @permissions_user = @user.permissions_users.present? ? @user.permissions_users : @user.build_permission_users
   end
