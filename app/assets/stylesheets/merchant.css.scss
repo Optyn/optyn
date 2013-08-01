@@ -60,6 +60,41 @@
     font-weight: 400;
   }
 }
+
+#flat .nav-collapse {
+  background-color: $dark-blue;
+}
+
+@media( max-width: 768px ) {
+  /* For Merchants dash -------------------------------- */
+  #flat {
+      .span6 {
+      padding: 0;
+      height: 42px;
+      text-align: center;
+    }
+    .navbar-inner {
+      padding: 0;
+    }
+    .brand {
+      border: 0;
+      padding: 17px 0 0 0;
+    }
+  }
+  #flat.merchants-dashboards #dashboard .stats .span3 {
+    padding: 1%;
+    margin-bottom: 1%;
+  }
+  #flat.merchants-dashboards #dashboard .stats .leading {
+    margin-top: 50px;
+  }
+  #flat.merchants-dashboards #dashboard {
+    margin-top: 0;
+  }
+}
+
+
+
 #merchants {
   padding-top: 30px;
   padding-bottom: 20px;

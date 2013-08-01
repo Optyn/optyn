@@ -430,6 +430,9 @@ body {
 }
 
 @media( max-width: 768px ) {
+  body {
+    padding: 0;
+  }
   #flat.main.index {
     background-position: left;
     .businesses::before,
@@ -440,6 +443,9 @@ body {
     div.row-fluid {
       padding: 0;
     }
+  }
+  #flat.merchants-dashboards div#dashboard {
+    background-image: none;
   }
   #flat {
     header .span5:first-child { display: none; }
@@ -462,6 +468,9 @@ body {
     .wid25pc, .wid75pc {
       width: 100%;
       float: none;
+    }
+    .btn-navbar {
+      padding: 10px;
     }
   } // #flat
   .consumers {
