@@ -50,9 +50,11 @@
 /* Header for Merchants inner app */
 #flat {
   .navbar.inner {
+    background-color: $blue;
     height: 70px;
     padding: 0;
     margin: 0;
+    border-bottom: solid 2px darken( $blue, 10% );
     a.tour {
       color: #fff;
       line-height: 70px;
@@ -70,10 +72,6 @@
         margin-top: 10px;
       }
     }
-  }
-  .navbar.navbar-fixed-top {
-    background-color: $blue;
-    border-bottom: solid 2px darken( $blue, 10% );
   }
   .brand {
     margin: 0;
