@@ -27,6 +27,9 @@ Optyn::Application.routes.draw do
   # Blog Redirect
   match "/blog" => redirect("http://optynblog.com"), :as => :blog
 
+  # Biz Redirect
+  match "/biz" => 'main#merchantfeatures'    
+
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://support.optyn.com"), :as => :support
 
