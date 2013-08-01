@@ -46,3 +46,40 @@
 }
 
 .profile_image{height:36px;width:36px;}
+
+/* Header for Merchants inner app */
+#flat {
+  .navbar.inner {
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    a.tour {
+      color: #fff;
+      line-height: 70px;
+      padding: 0 10px 0 0;
+      margin: 0;
+      border-right: solid 2px;
+      border-color: darken( $blue, 10% );
+    }
+    a.dropdown-toggle {
+      height: 70px;
+      overflow: hidden;
+      box-sizing: border-box;
+      vertical-align: middle;
+      img {
+        margin-top: 10px;
+      }
+    }
+  }
+  .navbar.navbar-fixed-top {
+    background-color: $blue;
+    border-bottom: solid 2px darken( $blue, 10% );
+  }
+  .brand {
+    margin: 0;
+    border-right: solid 2px darken( $blue, 10% );
+    padding: 17px 0px 10px 55px;
+    box-sizing: border-box;
+    width: 25%;
+  }
+}

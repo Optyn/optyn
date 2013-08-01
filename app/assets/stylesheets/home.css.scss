@@ -1,3 +1,9 @@
+* {
+  -webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
+     -moz-box-sizing: border-box; /* Firefox 1+ */
+          box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+}
+
 body {
   @include transition( width 0.3s ease-out );
 }
@@ -410,9 +416,16 @@ body {
     letter-spacing: 1px;
   }
 
-  .btn {}
   .text-justify {
     text-align: justify;
+  }
+  .wid25pc {
+    width: 25%;
+    margin: 0;
+  }
+  .wid75pc {
+    width: 75%;
+    margin: 0;
   }
 }
 
@@ -443,14 +456,18 @@ body {
         text-align: center;
       }
     }
-  }
+    .span6 {
+      padding: 5% 0;
+    }
+    .wid25pc, .wid75pc {
+      width: 100%;
+      float: none;
+    }
+  } // #flat
   .consumers {
     background-color: #ecf0f1;
   }
   header.row-fluid .span5 .link.blue {
     margin: -48px 5px 5px 0;
-  }
-  .span6 {
-    padding: 5% 0;
   }
 }

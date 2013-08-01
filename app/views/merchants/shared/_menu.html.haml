@@ -1,8 +1,7 @@
-.span3.menuleft
+.span3.menuleft.wid25pc
   %ul.merchant-menu
     %li.menu-header
-      Hello
-    %hr
+      Get started
     %li
       %a.active{:href => merchants_root_path}
         = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
@@ -35,9 +34,9 @@
       %a{:href => merchants_file_imports_path}
         = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
         Import Customers
-    %li
-      = image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
-      = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+    / %li
+    /   = image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
+    /   = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
 
   - if @optyn_button_stats.present?
     = render partial: "merchants/apps/button_stats_report"

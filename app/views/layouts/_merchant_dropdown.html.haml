@@ -1,7 +1,6 @@
 %li
-  %a{:href => merchants_root_path}
-    %i.icon-list-alt.icon-white
-    Dashboard
+  %a.tour{:href => '#'}
+    Take a tour
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
     = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"

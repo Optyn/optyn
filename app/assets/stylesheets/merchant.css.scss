@@ -1,4 +1,65 @@
 /* All Merchant Account Pages CSS is here */
+#flat {
+    footer.inner {
+    background-color: $light-gray;
+    color: $dark-gray;
+    padding: 2%;
+    line-height: 42px;
+    a {
+      margin-right: 5px;
+    }
+    .copy a {
+      color: $dark-gray;
+      text-decoration: underline;
+      margin-right: 30px;
+    }
+  }
+}
+#flat.merchants-dashboards {
+  #dashboard {
+    background: image-url( 'bg_dash.png' );
+    background-size: contain;
+    background-repeat: repeat-y;
+    margin-top: 10px;
+    .row-fluid {
+      padding: 0;
+    }
+    .pad3pc {
+      padding: 3%;
+    }
+    .stats {
+      .span3 {
+        padding: 5% 1%;
+        text-align: center;
+        background-color: $light-gray;
+        .count {
+          font-size: 30px;
+          line-height: 50px;
+          color: $orange;
+        }
+      }
+    }
+    .content {
+      background-color: $white;
+    }
+  }
+  h1, h2 {
+    line-height: 50px;
+    background-color: $light-gray;
+    margin-top: 0;
+    padding: 0 0 0 2%;
+    border-bottom: solid 1px darken( $light-gray, 10% );
+    font-family: 'Open Sans';
+  }
+  h1 {
+    font-size: 35px;
+    font-weight: 300;
+  }
+  h2 {
+    font-size: 23px;
+    font-weight: 400;
+  }
+}
 #merchants {
   padding-top: 30px;
   padding-bottom: 20px;
@@ -204,58 +265,11 @@
 #dashboard .header {
   height: 50px;
 }
-#dashboard .header .maintitle {
-  margin: 0px;
-}
-#dashboard .header .maintitle h3 {
-  margin: 0px;
-  padding-top: 0px;
-  color: #263d45;
-  font-size: 25px;
-  line-height: 27px;
-}
 #dashboard .header .new {
-  float: right;
-}
-#dashboard .header .new .newcampaign {
-  background: #1791c0;
-  border-radius: 4px;
-  display: inline-block;
-  height: 36px;
-  line-height: 32px;
-  top: 4px;
-  color: #ffffff;
-  font-size: 18px;
-  text-decoration: none;
-  text-shadow: none;
-  font-weight: bold;
-  border: 1px #304d58;
   float: right;
 }
 #dashboard .header .new .newcampaign img {
   padding-right: 10px;
-}
-#dashboard .header .newcampaign:hover{
-  background: #147ea7;
-  color: #fff;
-  text-decoration: none;
-  text-shadow: none;
-}
-#dashboard .latest {
-  border-radius: 4px;
-  background-color: #7d8f96;
-  height: 50px;
-  margin-top: 10px;
-}
-#dashboard .latest .title {
-  font-size: 18px;
-  color: #fff;
-  line-height: 26px;
-  float: left;
-  padding-left: 20px;
-  vertical-align: middle;
-  padding-top: 10px;
-  font-weight: bold;
 }
 #dashboard .latest .sortby {
   float: right;
@@ -275,52 +289,12 @@
   color: #263d45 !important;
 }
 /* Dashboard Statistics */
-#dashboard .stats {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 #dashboard .stats .span2 {
   margin-left: 0px;
   width: 186px;
 }
-#dashboard .stats .leading {
-  margin-left: 30px;
-}
 #dashboard .stats .box {
   padding-left: 8px;
-}
-#dashboard .stats .box .count,
-#dashboard .stats .leading .count {
-  text-align: center;
-  background-color: #1791c0;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  font-size: 36px;
-  line-height: 40px;
-  color: white;
-  font-weight: bold;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#dashboard .stats .box .info,
-#dashboard .stats .leading .info {
-  background-color: white;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-#dashboard .stats .box .info .img,
-#dashboard .stats .leading .info .img {
-  float: left;
-  padding-right: 5px;
-  padding-top: 4px;
-}
-#dashboard .stats .box .info .text,
-#dashboard .stats .leading .info .text {
-  text-align: left;
 }
 /* Merchant Settings Page */
 #settings {
@@ -354,15 +328,10 @@
   padding-right: 10px;
   margin: 0px;
 }
-#messages table {
 
-}
 /* Optyn Button Preview Page */
 #merchants .preview {
   padding-left: 20px;
-}
-#merchants .preview .header {
-
 }
 #merchants .preview .header h3 {
   color: #304d58;
@@ -510,12 +479,6 @@
 #merchants .preview .advanced {
   padding-top: 20px;
 }
-#merchants .preview .advanced .title {
-
-}
-#merchants .preview .advanced .title h3 {
-
-}
 #merchants .preview .advanced .main-advanced {
   background-color: #FFF;
   border-radius: 6px;
@@ -637,4 +600,3 @@
 #merchant_page .mainbody .marketing .details li:hover {
   background-color: #e7eff1;
 }
-

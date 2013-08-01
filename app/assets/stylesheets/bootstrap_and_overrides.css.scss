@@ -19,9 +19,8 @@
   margin-bottom: 0px;
 }
 .dropdown-menu {
-  margin-top: 0px;
-  background-color: #263d45;
-  border-radius: 4px;
+  box-shadow: -3px 3px 0 darken( $light-gray, 20% );
+  @include border-radius( 0 );
 }
 .dropdown .open .dropdown-menu:before {
   display: none;
@@ -45,7 +44,11 @@
 
 }
 .dropdown-menu li a {
-  color: #7d8b8f;
+  color: $black;
+  &:hover {
+    background: $blue;
+    color: $white;
+  }
 }
 .dropdown-menu li a img {
   float: left;

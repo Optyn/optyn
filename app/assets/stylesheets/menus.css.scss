@@ -1,48 +1,45 @@
 /* Main Menu Left */
 .menuleft {
   margin-left: 0px;
+  width: 25%;
+  padding: 0;
+  margin: 0;
 }
-.merchant-menu {
-  background-color: #263d45;
+#flat .merchant-menu {
+  background-color: $black;
   border-radius: 4px;
-  padding: 10px;
-  color: #7d8b8f;
+  padding: 0;
+  color: $white;
   height: auto;
   margin-left: 0px;
   margin-right: 0px;
   margin-top: 0px;
   margin-bottom: 20px;
+  @include border-radius( 0 );
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  li.menu-header {
+    padding-left: 55px;
+    font-size: 30px;
+    color: $blue;
+    line-height: 50px;
+    border-bottom: solid 1px darken( $black, 20% );
+  }
+  a {
+    display: block;
+    line-height: 50px;
+    border-bottom: solid 1px darken( $black, 20% );
+    padding-left: 20px;
+    color: darken( $white, 10% );
+    &:hover {
+      background-color: darken( $black, 30% );
+      color: $white;
+    }
+  }
 }
-.merchant-menu .menu-header {
-  color: #ffffff;
-  margin-bottom: 4px;
-}
-.merchant-menu > hr {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  border-top: 1px #7d8b8f;
-  border-top-style: solid;
-  border-bottom: 0px;
-}
-.merchant-menu > ul {
-  margin: 0px;
-}
-.merchant-menu > li {
-  margin-top: 10px;
-  margin-left: 10px;
-  border-bottom: 1px #354b52;
-  font-size: 16px;
-  line-height: 20px;
-  vertical-align: middle;
-  padding-bottom: 2px;
-  padding-top: 2px;
-}
-.merchant-menu > li > a {
-  color: #7d8b8f;
-  text-decoration: none;
-}
+
 .merchant-menu > li > a > img {
   padding-right: 10px;
 }
@@ -112,5 +109,3 @@
   text-align: center;
   padding-top: 20px;
 }
-
-
