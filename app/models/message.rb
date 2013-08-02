@@ -32,7 +32,7 @@ class Message < ActiveRecord::Base
 
   after_create :assign_parent_state_if
 
-  validates :name, presence: true
+  validates :name, presence: true, unless: :virtual
   validates :subject, presence: true
   validate :send_on_greater_by_hour
   validate :validate_child_message
