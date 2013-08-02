@@ -1,16 +1,11 @@
-#title_header
-  %h3
-    Message Center - Sent messages
-/Main Body
 #merchants
-  .container
-    = render partial: "merchants/shared/menu"
+  %h1
+    Message Center - Sent messages
+  #message_fields_wrapper.pad3pc
+    = render partial: "merchants/messages/message_menu"
 
-    .span8#message_fields_wrapper
-      = render partial: "merchants/messages/message_menu"
+    = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+    = render partial: 'merchants/messages/list'
 
-      = render partial: 'merchants/messages/list'
-
-      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+    = render partial: 'shared/messages/pager', locals: {collection: @messages}

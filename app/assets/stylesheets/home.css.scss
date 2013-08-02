@@ -350,7 +350,6 @@ body {
     font-weight: 300;
   }
   .row-fluid {
-    @include box-sizing( border-box );
     padding-left: 2%;
     padding-right: 2%;
   }
