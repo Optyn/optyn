@@ -1,0 +1,1 @@
+Rake::Task['message:header_message_visual_section'].invoke
