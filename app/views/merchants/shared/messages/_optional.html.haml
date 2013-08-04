@@ -2,11 +2,11 @@
 	%h5
 		Optional
 
-= f.fields_for :message_image do |fields|
+= f.fields_for :message_image_attributes, @message.message_image do |builder|
 	.control-group
-		= fields.label :image, "Add an Image?", class: 'control-label'
+		= builder.label :image, "Add an Image?", class: 'control-label'
 		.controls
-			= fields.file_field :image
+			= builder.file_field :image
 			Your image will be autmatically added under the details of your message if you upload it.
 
 .control-group

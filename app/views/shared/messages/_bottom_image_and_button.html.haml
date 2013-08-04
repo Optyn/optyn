@@ -1,0 +1,6 @@
+- if @message.show_image?
+	= image_tag @message.message_image.image.to_s, title: @message.subject
+
+- if @message.show_button?
+	= link_to @message.button_text, @message.display_button_link
+

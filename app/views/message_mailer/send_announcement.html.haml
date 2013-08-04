@@ -24,6 +24,8 @@
                       - @email_survey = true
                       = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
 
+                      = render partial: "shared/messages/bottom_image_and_button" 
+
       = render partial: "shared/mailers/footer"
 
       = image_tag "#{SiteConfig.app_base_url}#{email_read_logger_path(@message_user.encode64_uuid)}", :style => "width: 1px; height: 1px;", :alt => ''

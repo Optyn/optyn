@@ -17,7 +17,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def new
     @message = Message.new
     @message.manager_id = current_manager.id
-    @message.build_message_image
+    #@message.build_message_image
   end
 
   def create
@@ -38,7 +38,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def edit
     @message = Message.find_by_uuid(params[:id])
     @message_type = @message.type.underscore
-    @message.build_message_image if @message.message_image.blank?
+    #@message.build_message_image if @message.message_image.blank?
   end
 
   def update
