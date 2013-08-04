@@ -381,11 +381,11 @@ class Message < ActiveRecord::Base
   def header_background_properties
     headers = MessageVisualProperty.header(self.id)
 
-    headers.blank? ? message_visual_properties.build : headers
+    headers.blank? ? message_visual_properties.build(property_value: "background-color: #{shop.header_background_color.strip}") : headers
   end
 
   def header_background_color_css_val
-    return "background-color: #{shop_header_background_color_hex};" if self.header_background_properties.present? && self.header_background_properties.first.new_record?
+    return "background-color: #{shop_header_background_color_hex};" if self.header_background_properties.present? && self.header_background_properties.new_record?
     css = self.header_background_properties.first.property_value
     css
   end

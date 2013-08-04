@@ -16,6 +16,6 @@ class MessageVisualProperty < ActiveRecord::Base
 
   private
   def extract_hex_from_property
-  	self.property_value.split(":").last.gsub(";", "").strip
+  	self.property_value.split(":").last.gsub(";", "").strip rescue ""
   end
 end
