@@ -18,7 +18,7 @@ class Shop < ActiveRecord::Base
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color
   mount_uploader :logo_img, ImageUploader
 
   validates :name, :presence => true
@@ -290,6 +290,11 @@ class Shop < ActiveRecord::Base
 
   def manager
     managers.owner.first || managers.first
+  end
+
+  def set_header_background(color_hex)
+    shop.header_background_color = color_hex
+    shop.save(validate: false)
   end
 
   private

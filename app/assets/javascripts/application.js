@@ -30,6 +30,10 @@ $(document).ready(function () {
     if ($('.date-time-picker').length && $('.date-time-picker .error').length) {
         moveDatetimepickerErrorMessage();
     }
+
+    if($('label.checkbox').length){
+      fixCheckboxLabel();  
+    }
 });
 
 function moveDatetimepickerErrorMessage() {
@@ -44,3 +48,11 @@ function moveDatetimepickerErrorMessage() {
     $errorMessageGrandParent.append($newErrorMesageContainer);
 }
 
+function fixCheckboxLabel(){
+    var $temp = $('<div />');
+    $('label.checkbox').find('input[type=hidden]').each(function(index, element){
+        $temp.append(element);
+    });
+
+    $('label.checkbox').before($temp.html());
+}

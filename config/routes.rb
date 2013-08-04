@@ -207,6 +207,7 @@ Optyn::Application.routes.draw do
         put :create_response_message
         delete :discard_response_message
         get :report
+        put :update_header
       end
     end
   end

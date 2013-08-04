@@ -7,15 +7,18 @@ class Message < ActiveRecord::Base
   has_many :message_users, dependent: :destroy
   has_many :message_email_auditors, through: :message_users
   belongs_to :survey
+  has_many :message_visual_properties, dependent: :destroy
   has_one :message_image
+
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
   attr_accessor :unread
 
-  attr_accessible :label_ids, :name, :send_immediately, :button_url, :button_text, :message_image
+  attr_accessible :label_ids, :name, :send_immediately, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes
 
+  accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
   accepts_nested_attributes_for :message_image
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
@@ -373,6 +376,36 @@ class Message < ActiveRecord::Base
 
   def opt_outs
     message_users.where('opt_out is true').count
+  end
+
+  def header_background_properties
+    headers = MessageVisualProperty.header(self.id)
+
+    headers.blank? ? message_visual_properties.build : headers
+  end
+
+  def header_background_color_css_val
+    return "background-color: #{shop_header_background_color_hex};" if self.header_background_properties.present? && self.header_background_properties.first.new_record?
+    css = self.header_background_properties.first.property_value
+    css
+  end
+
+  def header_background_color_hex
+    header_background_color_css_val.split(/:/).last.to_s.gsub(/;/, "")
+  end
+
+  def update_visuals(options={})
+    Message.transaction do 
+      update_attributes!(options)
+      if options['message_visual_properties_attributes']['0']['make_default'].to_s == "1"
+        hex = self.header_background_color_hex
+        shop.set_header_background(hex)
+      end
+    end
+  end
+
+  def shop_header_background_color_hex
+    self.shop.header_background_color.strip
   end
 
   private

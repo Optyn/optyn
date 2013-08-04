@@ -148,6 +148,16 @@ class Merchants::MessagesController < Merchants::BaseController
     render json: {response_email_fields: render_to_string(partial: "merchants/shared/messages/response_email_fields", locals: {parent_message: parent_message})}
   end
 
+  def update_header
+    @message = Message.find_by_uuid(params[:id])
+    @message.update_visuals(params[:message])
+    @shop_logo = true
+    @shop = @message.shop
+    
+
+    render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
+  end
+
   
   private
   def populate_message_type
