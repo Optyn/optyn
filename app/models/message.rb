@@ -7,13 +7,16 @@ class Message < ActiveRecord::Base
   has_many :message_users, dependent: :destroy
   has_many :message_email_auditors, through: :message_users
   belongs_to :survey
+  has_one :message_image
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
   attr_accessor :unread
 
-  attr_accessible :label_ids, :name, :send_immediately
+  attr_accessible :label_ids, :name, :send_immediately, :button_url, :button_text, :message_image
+
+  accepts_nested_attributes_for :message_image
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
