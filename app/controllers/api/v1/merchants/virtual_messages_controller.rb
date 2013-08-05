@@ -17,7 +17,7 @@ class Api::V1::Merchants::VirtualMessagesController < ApplicationController
     @receiver = User.find_by_alias(params[:email])
     if params[:email].blank? || @receiver.blank?
       @errors = ["Could not find the receiver for the message."]
-      render(action: 'errors', status: :unprocessable_entity)
+      render(action: 'errors', status: 410)
       false
     end
   end
@@ -25,8 +25,9 @@ class Api::V1::Merchants::VirtualMessagesController < ApplicationController
   def locate_shop
     @shop = Shop.find_by_name(params[:shop])
     if params[:shop].blank? || @shop.blank?
+
       @errors = ["Could not find the shop for the message."]
-      render(action: 'errors', status: :unprocessable_entity)
+      render(action: 'errors', status: 410)
       false
     end
   end
@@ -35,7 +36,7 @@ class Api::V1::Merchants::VirtualMessagesController < ApplicationController
     @connection = @receiver.connections.active.find_by_shop_id(@shop)
     if @connection.blank?
       @errors = ["A connection between the consumer and shop does not exist. The consumer out perhaps."]
-      render(action: 'errors', status: :unprocessable_entity)
+      render(action: 'errors', status: 410)
       false
     end
   end
