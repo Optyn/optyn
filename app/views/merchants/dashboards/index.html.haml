@@ -1,20 +1,15 @@
 /Main Body
 
+= banner("#{current_shop.name} Dashboard")
+
 .header.row-fluid
-  .span12
-    %h1
-      = current_shop.name
-      Dashboard
+  .span12  
     %p.pad3pc
       Hi
       == #{current_manager.name}.
       !
       Here's what's going on.
 
-  / .span3.new
-  /   %a.btn.btn-primary{:href =>merchants_messages_path}
-  /     = image_tag "merchant_menu_campaigncenter_icon_white.png", :alt => 'Campaign'
-  /     Create New Campaign
 .row-fluid.stats.pad3pc
   .span3.leading
     .count

@@ -161,4 +161,12 @@ module ApplicationHelper
       end 
     end
   end
+
+  def banner(content="Optyn")
+    content_for :banner do
+      content_tag(:h1) do 
+        content
+      end
+    end
+  end
 end

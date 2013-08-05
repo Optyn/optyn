@@ -1,4 +1,6 @@
-#merchants
+= banner("Email Preview")
+
+#merchants.pad3pc
   .container
     .span3.preview-left
       = render partial: "merchants/messages/preview_meta"
@@ -6,8 +8,8 @@
     .span8#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
       #message_details
-        %h1{class: 'text-center'}
-          Email Preview
+        %h3{class: 'text-center'}
+          Your email will appear like below
           = link_to "Edit Campaign", edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
           = link_to "Send it", launch_merchants_message_path(@message.uuid), class: "btn btn-success"
           - if @message.is_child?

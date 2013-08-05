@@ -1,11 +1,8 @@
-#title_header
-  %h3
-    Message Center
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
+= banner(@message.name)
 
+/Main Body
+#merchants.pad3pc
+  .container
     .span8#message_fields_wrapper
       = render partial: "merchants/messages/message_menu"
       #messages_collection_container.row.text-center

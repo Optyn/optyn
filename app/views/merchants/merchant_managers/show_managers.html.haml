@@ -1,9 +1,7 @@
-#title_header
-  %h3
-    = current_shop.name
-    Managers
+= banner("#{current_shop.name} Managers")
+
 /Main Body
-#merchants
+#merchants.pad3pc
   .container
     .span8
       %div
@@ -17,8 +15,6 @@
           %th Name
           %th Email
           %th Created at
-
-          
 
         - @managers.each_with_index do |manager,index|
           %tr
