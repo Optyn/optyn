@@ -38,7 +38,7 @@ class Message < ActiveRecord::Base
 
   after_create :assign_parent_state_if
 
-  validates :name, presence: true
+  validates :name, presence: true, unless: :shop_virtual?
   validates :subject, presence: true
   validate :send_on_greater_by_hour
   validate :validate_child_message
@@ -616,5 +616,9 @@ class Message < ActiveRecord::Base
     if self.parent_id.present?
       self.update_attribute(:state, self.parent.state)
     end
+  end
+
+  def shop_virtual?
+    self.manager.present? && self.shop.present? && self.shop.virtual
   end
 end
