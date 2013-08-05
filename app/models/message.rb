@@ -42,7 +42,7 @@ class Message < ActiveRecord::Base
   validates :subject, presence: true
   validate :send_on_greater_by_hour
   validate :validate_child_message
-  validate :validate_button_url_and_text
+  validate :validate_button_url
 
   scope :only_parents, where(parent_id: nil)
 
@@ -558,16 +558,15 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def validate_button_url_and_text
-    if button_url.present? || button_text.present?
-      self.errors.add(:button_url, "cannot be blank") && return if button_url.blank?
-      unless button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
-        self.errors.add(:button_url, "is invalid example http://example.com") 
-        return
-      end
-
-      self.errors.add(:button_text, "cannot be blank") if button_text.blank?
+  def validate_button_url
+    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+      self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   
+      return
     end 
+
+    if message_image.blank? && button_text.blank?
+      self.errors.add(:button_url, "You have added a link but there is no image uploaded or button pointing to it. Please add one.")
+    end
   end
 
   def assign_uuid
