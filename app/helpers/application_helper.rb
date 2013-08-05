@@ -128,8 +128,8 @@ module ApplicationHelper
     "Showing #{collection.offset_value + 1}-#{endnumber} of #{collection.total_count}"
   end
 
-  def active_tab_class(highlight_action_name)
-    highlight_action_name == action_name ? "active" : ""
+  def active_tab_class(hightlight_controllers=[])
+     "active" if hightlight_controllers.include?(controller_name)
   end
 
   def shop_public_page_login_location
