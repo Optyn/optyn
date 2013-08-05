@@ -51,6 +51,7 @@
       = f.label :business_ids, "Business Category"
     .controls
       = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px", :multiple => true}
+
   .action-buttons
     = f.submit "Update" , class: "btn btn-primary"
     = link_to "Cancel", merchants_shop_path, class: 'btn'

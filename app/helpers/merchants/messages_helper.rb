@@ -149,4 +149,17 @@ module Merchants::MessagesHelper
   def mark_message_unread_if(message)
     message.unread ? 'message-unread' : ''
   end
+
+  def message_bottom_image(message)
+    if message.show_image?
+      button_url = message.button_url
+      website = message.shop.website
+      if button_url.present? || website.present?
+        href = button_url.present? ? button_url : website
+        link_to(image_tag(message.message_image.image.to_s, title: message.subject).html_safe, href)
+      else
+        image_tag(message.message_image.image.to_s, title: message.subject)
+      end  
+    end
+  end
 end

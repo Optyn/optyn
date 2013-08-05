@@ -9,4 +9,6 @@
   .controls
     = f.text_area :rsvp, class: 'input-xxlarge details', rows: 3, cols: 10
 
+= render partial: 'merchants/shared/messages/optional', locals: {f: f}    
+
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

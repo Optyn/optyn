@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728151900) do
+ActiveRecord::Schema.define(:version => 20130804154237) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -95,11 +95,11 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
   create_table "file_imports", :force => true do |t|
     t.string   "csv_file"
     t.integer  "manager_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "status"
     t.text     "stats"
-    t.string   "label"
+    t.string   "label",      :default => "Import"
   end
 
   create_table "interests", :force => true do |t|
@@ -207,6 +207,14 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "message_images", :force => true do |t|
+    t.integer  "message_id"
+    t.string   "title"
+    t.string   "image"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "message_labels", :force => true do |t|
     t.integer  "label_id"
     t.integer  "message_id"
@@ -234,6 +242,23 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
   add_index "message_users", ["user_id", "message_folder_id"], :name => "index_message_users_on_user_id_and_message_folder_id"
   add_index "message_users", ["uuid"], :name => "index_message_users_on_uuid", :unique => true
 
+  create_table "message_visual_properties", :force => true do |t|
+    t.integer  "message_id"
+    t.integer  "message_visual_section_id"
+    t.string   "property_key"
+    t.text     "property_value"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "message_visual_properties", ["message_id", "message_visual_section_id"], :name => "join_table_index"
+
+  create_table "message_visual_sections", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "messages", :force => true do |t|
     t.string   "type"
     t.integer  "manager_id"
@@ -243,7 +268,7 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
     t.text     "content"
     t.string   "state"
     t.datetime "send_on"
-    t.boolean  "send_immediately", :default => false
+    t.boolean  "send_immediately",                 :default => false
     t.integer  "parent_id"
     t.string   "uuid"
     t.text     "fine_print"
@@ -255,10 +280,12 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
     t.boolean  "call_to_action"
     t.boolean  "special_try"
     t.text     "rsvp"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "survey_id"
     t.boolean  "permanent_coupon"
+    t.string   "button_url",       :limit => 2303
+    t.string   "button_text",      :limit => 1000
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
@@ -313,29 +340,6 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
   add_index "oauth_applications", ["uid"], :name => "index_oauth_applications_on_uid", :unique => true
-
-  create_table "partners", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "organization"
-    t.string   "phone"
-    t.boolean  "active",                 :default => true
-    t.string   "email",                  :default => "",   :null => false
-    t.string   "encrypted_password",     :default => "",   :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-  end
-
-  add_index "partners", ["email"], :name => "index_partners_on_email", :unique => true
-  add_index "partners", ["reset_password_token"], :name => "index_partners_on_reset_password_token", :unique => true
 
   create_table "permissions", :force => true do |t|
     t.string   "permission_name"
@@ -397,8 +401,8 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.string   "stype"
     t.text     "description"
     t.string   "logo_img"
@@ -409,16 +413,15 @@ ActiveRecord::Schema.define(:version => 20130728151900) do
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
     t.boolean  "virtual",                    :default => false
-    t.integer  "email_box_impression_count"
-    t.integer  "email_box_click_count"
+    t.integer  "email_box_impression_count", :default => 0
+    t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
+    t.string   "header_background_color",    :default => "#1791C0"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
   add_index "shops", ["name"], :name => "index_shops_on_name", :unique => true
-  add_index "shops", ["partner_id"], :name => "index_shops_on_partner_id"
 
   create_table "states", :force => true do |t|
     t.string   "name"
