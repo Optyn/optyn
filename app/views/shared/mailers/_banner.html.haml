@@ -8,11 +8,7 @@
           %tr
             %td{:style => "padding-left: 10px; max-height: 40px; padding-top: 5px;"}
               - if @shop_logo
-                - if @shop.has_logo?
-                  = image_tag @shop.logo_location, alt: @shop.name, title: @shop.name
-                - else
-                  %h3{:style => "color:white;"}
-                    = @shop.name
+                = email_body_shop_logo(@shop)
               - else
                 = image_tag "http://development.optyn.com/assets/email_logo_white.png"
 
