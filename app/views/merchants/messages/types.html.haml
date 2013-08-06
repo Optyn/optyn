@@ -9,45 +9,34 @@
     What kind of e-mail do you want to create?
   #choose_message
     .row-fluid
-      %a{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
-        .span2.type
-          = image_tag "mc_coupon_icon.png", :alt => ''
-          %h3 Create a Coupon
-      %a{:href => merchants_new_campaign_path(message_type: 'special_message')}
-        .span2.type
-          = image_tag "mc_special_icon.png", :alt => ''
-          %h3 Announce a Special
-      %a{:href => merchants_new_campaign_path(message_type: 'sale_message')}
-        .span2.type
-          = image_tag "mc_sale_icon.png", :alt => ''
-          %h3 Announce a Sale
+      %a.span4.type.coupon{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
+        = image_tag "mc_coupon_icon.png", :alt => ''
+        %span Create a Coupon
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'special_message')}
+        = image_tag "mc_special_icon.png", :alt => ''
+        %span Announce a Special
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'sale_message')}
+        = image_tag "mc_sale_icon.png", :alt => ''
+        %span Announce a Sale
     .row-fluid
-      %a{:href => merchants_new_campaign_path(message_type: 'general_message')}
-        .span2.type
-          = image_tag "mc_general_icon.png", :alt => ''
-          %h3 General Announcement
-      %a{:href => merchants_new_campaign_path(message_type: 'product_message')}
-        .span2.type
-          = image_tag "mc_product_icon.png", :alt => ''
-          %h3 Product Announcement
-      %a{:href => merchants_new_campaign_path(message_type: 'event_message')}
-        .span2.type
-          = image_tag "mc_events_icon.png", :alt => ''
-          %h3 New Event
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'general_message')}
+        = image_tag "mc_general_icon.png", :alt => ''
+        %span General Announcement
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'product_message')}
+        = image_tag "mc_product_icon.png", :alt => ''
+        %span Product Announcement
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'event_message')}
+        = image_tag "mc_events_icon.png", :alt => ''
+        %span New Event
     .row-fluid
-      %a{:href => merchants_new_campaign_path(message_type: 'survey_message')}
-        .span2.type
-          = image_tag "mc_survey_icon.png", :alt => ''
-          %h3 Send a Survey
-      %a{:href => "#"}
-        .span2.type
-          = image_tag "html_trigger.png", :alt => ''
-          %h3{:style => "padding-bottom: 0px; line-height: 20px;"}
-            Custom HTML Campaign
-          coming soon
-      %a{:href => "#"}
-        .span2.type
-          = image_tag "contest_trigger.png", :alt => ''
-          %h3{:style => "padding-bottom: 0px; line-height: 20px;"}
-            Create a Contest
-          coming soon
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'survey_message')}
+        = image_tag "mc_survey_icon.png", :alt => ''
+        %span Send a Survey
+      %a.span4.type{:href => "#"}
+        = image_tag "html_trigger.png", :alt => ''
+        %span Custom HTML Campaign
+        %aside coming soon
+      %a.span4.type{:href => "#"}
+        = image_tag "contest_trigger.png", :alt => ''
+        %span Create a Contest
+        %aside coming soon
