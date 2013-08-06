@@ -413,8 +413,8 @@ ActiveRecord::Schema.define(:version => 20130804154237) do
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
     t.boolean  "virtual",                    :default => false
-    t.integer  "email_box_impression_count", :default => 0
-    t.integer  "email_box_click_count",      :default => 0
+    t.integer  "email_box_impression_count"
+    t.integer  "email_box_click_count"
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
     t.string   "header_background_color",    :default => "#1791C0"
