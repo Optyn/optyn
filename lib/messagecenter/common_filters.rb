@@ -45,7 +45,7 @@ module Messagecenter
     end
 
     def show_my_messages_only
-      @message = Message.find_by_uuid(params[:id])
+      @message = Message.for_uuid(params[:id])
       @message_manager = @message.manager(current_user)
       if @message_manager != current_manager
         redirect_to(inbox_messages_path)
@@ -55,7 +55,7 @@ module Messagecenter
     end
 
     def message_editable?
-      @message = Message.find_by_uuid(params[:id])
+      @message = Message.for_uuid(params[:id])
 
       if !current_manager == @message.manager || !@message.editable_state?
         redirect_to merchants_message_path(@message.uuid)
@@ -63,7 +63,7 @@ module Messagecenter
     end
 
     def message_showable?
-      @message = Message.find_by_uuid(params[:id])
+      @message = Message.for_uuid(params[:id])
       unless @message.showable?
         redirect_to edit_merchants_message_path(params[:id])
       end
@@ -79,7 +79,7 @@ module Messagecenter
     end
 
     def create_child_message
-      parent_message = Message.find_by_uuid(params[:id])
+      parent_message = Message.for_uuid(params[:id])
       klass = params[:child_message_type].classify.constantize
       message = klass.new(name: params[:child_message_name])
       message.manager_id = current_manager.id

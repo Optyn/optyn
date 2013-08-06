@@ -1,6 +1,8 @@
 require 'messagecenter/process_manager'
 
 class Message < ActiveRecord::Base
+  include UuidFinder
+  
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
   has_many :labels, through: :message_labels
@@ -208,7 +210,7 @@ class Message < ActiveRecord::Base
   end
 
   def self.create_response_message(user_id, message_uuid)
-    message = Message.find_by_uuid(message_uuid)
+    message = Message.for_uuid(message_uuid)
 
     if message.present? && message.has_children?
       response_message = message.first_response_child

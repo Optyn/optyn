@@ -124,6 +124,6 @@ class ConnectionsController < BaseController
     plain_text = Encryptor.decrypt(token)
     email, message_uuid = plain_text.split("--")
     @user = User.find_by_email(email)
-    @message = Message.find_by_uuid(message_uuid)
+    @message = Message.for_uuid(message_uuid)
   end
 end

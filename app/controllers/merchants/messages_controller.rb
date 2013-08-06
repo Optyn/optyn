@@ -28,14 +28,14 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def edit
-    @message = Message.find_by_uuid(params[:id])
+    @message = Message.for_uuid(params[:id])
     @message_type = @message.type.underscore
   end
 
   def update
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.find_by_uuid(params[:id])
+      @message = klass.for_uuid(params[:id])
       @message.manager_id = current_manager.id
 
       @message.attributes = params[:message].except(:label_ids)
@@ -52,7 +52,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def update_meta
     klass = params[:message_type].classify.constantize
-    @message = klass.find_by_uuid(params[:id])
+    @message = klass.for_uuid(params[:id])
     @message.subject = params[:message][:subject]
     @message.send_on = params[:message][:send_on]
     @message.save!
@@ -84,18 +84,18 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def preview
-    @message = Message.find_by_uuid(params[:id])
+    @message = Message.for_uuid(params[:id])
     @shop_logo = true
     @shop = @message.shop
   end
 
   def show
-    @message = Message.find_by_uuid(params[:id])
+    @message = Message.for_uuid(params[:id])
     @shop = @message.shop
   end
 
   def launch
-    @message = Message.find_by_uuid(params[:id])
+    @message = Message.for_uuid(params[:id])
     @message.launch
     message_redirection
   end
@@ -133,7 +133,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def discard_response_message
     Message.discard([params[:id]])
-    parent_message = Message.find_by_uuid(params[:id]).parent
+    parent_message = Message.for_uuid(params[:id]).parent
     parent_message.reload
 
     render json: {response_email_fields: render_to_string(partial: "merchants/shared/messages/response_email_fields", locals: {parent_message: parent_message})}

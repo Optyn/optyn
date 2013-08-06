@@ -28,7 +28,9 @@ module Api
         end
 
         def show
-          
+          @message = Message.for_uuid(params[:id])
+          template = "api/v1/merchants/messages/message"
+          render(status: :created, template: template)
         end
 
         private

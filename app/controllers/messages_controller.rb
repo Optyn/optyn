@@ -75,7 +75,7 @@ class MessagesController < BaseController
   end
 
   def show_my_messages_only
-    @message = Message.find_by_uuid(params[:id])
+    @message = Message.for_uuid(params[:id])
     @message_user = @message.message_user(current_user)
     if @message_user.blank?
       redirect_to(inbox_messages_path)

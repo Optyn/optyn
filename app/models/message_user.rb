@@ -2,6 +2,8 @@ require 'messagecenter/process_manager'
 require 'messagecenter/exceptions'
 
 class MessageUser < ActiveRecord::Base
+  include UuidFinder
+
   belongs_to :message
   belongs_to :user
   belongs_to :receiver, class_name: "User", foreign_key: :user_id
@@ -94,7 +96,7 @@ class MessageUser < ActiveRecord::Base
 
   def self.log_email_read(token)
     identifier = Base64.urlsafe_decode64(token)
-    message_user_entry = MessageUser.find_by_uuid(identifier)
+    message_user_entry = MessageUser.for_uuid(identifier)
     if message_user_entry.present?
       message_user_entry.update_attribute(:email_read, true)
     end
