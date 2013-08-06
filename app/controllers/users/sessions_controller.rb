@@ -67,7 +67,7 @@ class Users::SessionsController < Devise::SessionsController
         format.json {
           json_data = {data: {errors: "Please check the email address"}}.to_json
           if params[:callback].present?
-            render text: "#{params[:callback]}(#{json_data})"
+            render text: "#{params[:callback]}(#{json_data})", status: :unprocessable_entity
           else
             render json: json_data, status: :unprocessable_entity
           end
