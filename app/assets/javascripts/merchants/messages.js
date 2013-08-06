@@ -38,7 +38,8 @@ function MerchantMessage() {
 
         if($('#message_header_settings_form').length){
             this.hookHeaderColorPicker();
-            this.hookColorPickerHide();
+            this.hookColorPickerChange();
+            this.hookHeaderColorChange();
             this.hookHeaderSettingSubmission();
         }
     };
@@ -253,10 +254,17 @@ function MerchantMessage() {
         $('#header_background').colorpicker({format: 'hex'});
     };
 
-    this.hookColorPickerHide = function(){
-      $('#header_background').colorpicker().on('hide', function(event){
+    this.hookHeaderColorChange = function(){
+        $('body').on('change', '#header_background_color', function(){
+            $('#header_background').colorpicker('setValue', $('#header_background_color').val());      
+        });
+    };
+
+    this.hookColorPickerChange = function(){
+      $('#header_background').colorpicker().on('changeColor', function(event){
         var hexVal = event.color.toHex();
         $('.message-visual-property-value').val('background-color: ' + hexVal);
+        $('#header_background_color').val(hexVal);
 
       });      
     };
@@ -282,7 +290,7 @@ function MerchantMessage() {
             success: function(data){
                $('#perview_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
-                current.hookColorPickerHide();
+                current.hookColorPickerChange();
             },
             error: function(){
                 alert("An Error Occured white setting the color. Please refresh you page and try again.");
