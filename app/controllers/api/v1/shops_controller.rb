@@ -291,7 +291,7 @@ module Api
                     dataType: 'jsonp',
                     success: function(respJson){
                       if(respJson.data.errors){
-                        $('#optyn-first-container').html('<strong>Please check the email you entered.</strong>');
+                        $('#optyn-first-container').append('<strong>Please check the email you entered.</strong>');
                       }else{
                         replaceWithUserInfo();
                       }
