@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread
 
-  attr_accessible :label_ids, :name, :send_immediately
+  attr_accessible :label_ids, :name, :send_immediately, :send_on_date, :send_on_time
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
@@ -533,7 +533,7 @@ class Message < ActiveRecord::Base
   end
 
   def send_on_greater_by_hour
-    self.errors.add(:send_on, "Message send time should be greater than an hour from now") if self.send_on.present? && !(self.shop.virtual) && !(self.send_on > 1.hour.since)
+    self.errors.add(:send_on, "should be more than an hour") if self.send_on.present? && !(self.shop.virtual) && !(self.send_on > 1.hour.since)
   end
 
   def validate_child_message
