@@ -141,6 +141,11 @@ Optyn::Application.routes.draw do
 
         resources :managers
         resources :locations
+        resources :messages do
+          collection do
+            get :types
+          end
+        end
       end
     end
   end

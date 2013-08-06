@@ -259,6 +259,10 @@ class Message < ActiveRecord::Base
     manager.shop
   end
 
+  def shop_id
+    shop.id
+  end
+
   def message_user(user)
     message_users.find_by_user_id(user.id)
   end
@@ -370,6 +374,10 @@ class Message < ActiveRecord::Base
 
   def opt_outs
     message_users.where('opt_out is true').count
+  end
+
+  def error_messages
+    self.errors.full_messages
   end
 
   private
