@@ -289,9 +289,15 @@ module Api
                     type: 'GET',
                     data: $(this).serialize(),
                     dataType: 'jsonp',
+                    beforeSend: function(){
+                      jQuery('#optyn-email-error').remove();
+                    },
                     success: function(respJson){
                       if(respJson.data.errors){
-                        $('#optyn-first-container').append('<strong>Please check the email you entered.</strong>');
+                        var $tempErr = jQuery('<div />');
+                        $tempErr.append('<div id="optyn-email-error"><strong>Please check the email you entered.</strong></div>');
+
+                        $('#optyn-first-container').append($tempErr.html());
                       }else{
                         replaceWithUserInfo();
                       }
