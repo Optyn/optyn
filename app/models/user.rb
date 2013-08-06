@@ -86,7 +86,6 @@ class User < ActiveRecord::Base
   end
 
   def active_connections(page_number=1, per_page=PER_PAGE)
-    Rails.logger.info "Current User id: #{self.id}"
     self.connections.active.includes_business_and_locations.ordered_by_shop_name.page(page_number).per(per_page)
   end
 
@@ -135,11 +134,9 @@ class User < ActiveRecord::Base
   def make_connection_if!(shop)
     if shop.present?
       if !connections.for_shop(shop.id).present?
-        Rails.logger.info "Existing connection NOT found #{connections.for_shop(shop.id).inspect}"
         connected_via = shop.button_display? ? Connection::CONNECTED_VIA_BUTTON : Connection::CONNECTED_VIA_EMAIL_BOX
         connections.create!(user_id: self.id, shop_id: shop.id, connected_via: connected_via)
       end
-      Rails.logger.info "Existing connection found #{connections.for_shop(shop.id).inspect}"
       connections.for_shop(shop.id).first
     end
   end
