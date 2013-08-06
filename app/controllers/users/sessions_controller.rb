@@ -55,7 +55,8 @@ class Users::SessionsController < Devise::SessionsController
       end
     else
       respond_to do |format|
-        format.json { render(status: :unprocessable_entity) }
+
+        format.json { render(status: :unprocessable_entity) } 
       end
     end
   end
