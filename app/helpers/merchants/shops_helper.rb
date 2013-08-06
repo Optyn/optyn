@@ -1,6 +1,6 @@
 module Merchants::ShopsHelper
   def show_identifier(shop)
-    shop.identifier.present? ? "#{SiteConfig.app_base_url}/#{shop.identifier}" : "Please pick an appropriate identifier for your shop example"
+    shop.identifier.present? ? "#{SiteConfig.app_base_url}/#{shop.identifier}" : "Please choose an appropriate identifier for your shop example"
   end
 
   def show_business_category_names(shop)
@@ -12,7 +12,7 @@ module Merchants::ShopsHelper
   end
 
   def show_description(shop)
-    shop.description.present? ? shop.description.html_safe : "Please enter the nature of your business for the your customers"
+    shop.description.present? ? shop.description.html_safe : "Please describe your business for your customers"
   end
 
   def show_logo(shop)
