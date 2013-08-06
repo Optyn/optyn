@@ -1,6 +1,6 @@
-%h1
-  = current_shop.name
-  Managers
+<<<<<<< HEAD
+= banner("#{current_shop.name} Managers")
+
 #merchants.pad3pc
   %div
     %a.btn{:href => merchants_add_manager_path}
@@ -12,8 +12,6 @@
       %th Name
       %th Email
       %th Created at
-
-      
 
     - @managers.each_with_index do |manager,index|
       %tr

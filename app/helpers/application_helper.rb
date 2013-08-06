@@ -128,8 +128,8 @@ module ApplicationHelper
     "Showing #{collection.offset_value + 1}-#{endnumber} of #{collection.total_count}"
   end
 
-  def active_tab_class(highlight_action_name)
-    highlight_action_name == action_name ? "active" : ""
+  def active_tab_class(hightlight_controllers=[])
+     "active" if hightlight_controllers.include?(controller_name)
   end
 
   def shop_public_page_login_location
@@ -144,4 +144,29 @@ module ApplicationHelper
     checkmark_icon == false ?  "noCheckMark" : ""
   end
 
+  def email_body_shop_logo(shop)
+    if shop.has_logo?
+      if shop.website.present?
+        link_to(image_tag(shop.logo_location, alt: shop.name, title: @shop.name).html_safe, shop.website, target: "_blank")
+      else
+        image_tag(shop.logo_location, alt: shop.name, title: shop.name)
+      end
+    else
+      if shop.website.present?
+        link_to(%Q(<h3 style="color:white">#{shop.name}</h3>).html_safe, shop.website, target: "_blank")
+      else
+        content_tag(:h3, style: 'color:white') do
+          shop.name
+        end
+      end 
+    end
+  end
+
+  def banner(content="Optyn")
+    content_for :banner do
+      content_tag(:h1) do 
+        content
+      end
+    end
+  end
 end

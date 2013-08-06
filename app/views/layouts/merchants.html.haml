@@ -23,12 +23,14 @@
     %a.scrolltop{:href => "#"}
     = render partial: "layouts/header"
 
-    = display_flash_message
-
     #dashboard.container-fluid
       .row-fluid
         = render partial: "merchants/shared/menu"
         .span9.wid75pc.content
+          
+          = yield :banner
+
+          = display_flash_message  
 
           = yield
 

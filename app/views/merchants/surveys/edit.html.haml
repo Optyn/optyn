@@ -1,6 +1,5 @@
-%h1
-  = current_shop.name
-  Survey
+= banner("#{current_shop.name} Survey")
+  
 #merchants.pad3pc
   .form
     = form_for current_survey, as: :survey, url: merchants_survey_path, method: :put, :html => {class: 'form-horizontal'} do |f|

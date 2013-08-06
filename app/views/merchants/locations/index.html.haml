@@ -1,13 +1,11 @@
-%h1
-  = current_shop.name
-  Locations
+= banner("#{current_shop.name} Locations")
 #merchants.pad3pc
   %div
     %a.btn{:href => new_merchants_location_path}
       %i.icon-black.icon-map-marker
       Add New Location
   %br
-  %table.table.table-striped
+  %table.table.table-striped.table-hover
     %thead
       %tr
         %th #

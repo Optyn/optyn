@@ -1,5 +1,4 @@
-#merchants.container
-  %h1 Message Center - Edit Message
+= banner(message_form_title(@message_type))
 
-  .span8
-    = render partial: "merchants/messages/edit_fields_wrapper"
+#merchants.pad3pc
+  = render partial: "merchants/messages/edit_fields_wrapper"
