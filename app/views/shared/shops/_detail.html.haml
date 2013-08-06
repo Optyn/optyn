@@ -1,38 +1,34 @@
-%p
-  %strong Name
-  %br
-  = @shop.name
-%p
-  %strong Description
-  %br
-  = show_description(@shop)
-
-%p
-  %strong Business Type
-  %br
-  = @shop.stype.humanize
-
-%p
-  %strong Website
-  %br
-  = show_website(@shop)
-
-%p
-  %strong Identifier
-  %br
-  = link_to show_identifier(@shop), show_identifier(@shop)
-
-%p
-  %strong Timezone
-  %br
-  = @shop.time_zone
-
-%p
-  %strong Logo
-  %br
-  = show_logo(@shop)
-
-%p
-  %strong Business Categories
-  %br
-    = show_business_category_names(@shop)
+%table.table.table-striped.table-hover
+  %tbody
+    %tr
+      %th Name
+      %td
+        = @shop.name
+    %tr
+      %th Description
+      %td
+        = show_description(@shop)
+    %tr
+      %th Business Type
+      %td
+        = @shop.stype.humanize
+    %tr
+      %th Website
+      %td
+        = show_website(@shop)
+    %tr
+      %th Identifier
+      %td 
+        = link_to show_identifier(@shop), show_identifier(@shop)
+    %tr
+      %th Timezone
+      %td
+        = @shop.time_zone
+    %tr
+      %th Logo
+      %td
+        = show_logo(@shop)
+    %tr
+      %th Business Categories
+      %td
+        = show_business_category_names(@shop)

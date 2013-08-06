@@ -33,3 +33,8 @@
           = yield
 
     = render partial: "layouts/footer_flat"
+
+    :javascript
+      $( function() {
+        $('form [data-toggle=tooltip]').tooltip({ placement: 'left' });
+      });

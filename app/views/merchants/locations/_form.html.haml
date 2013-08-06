@@ -1,13 +1,9 @@
-%label.pull-left Street Address 1
-= f.text_field :street_address1
-%label.pull-left Street Address 2
-= f.text_field :street_address2
-%label.pull-left City
-= f.text_field :city
-%label.pull-left State
+= f.text_field :street_address1, :placeholder => 'Street Address 1'
+= f.text_field :street_address2, :placeholder => 'Street Address 2'
+= f.text_field :city, :placeholder => 'City'
+%label.text-left State
 = f.collection_select :state_id, @states, :id, :name, include_blank: "-- Select State --"
-%br
-%label.pull-left Zip Code
-= f.text_field :zip      
+%label.pull-left
+= f.text_field :zip, :placeholder => 'Zip Code'
 
-= f.submit @location.new_record? ? "Add location" : "Update location", class: "btn"
+= f.submit @location.new_record? ? "Add location" : "Update location", class: "btn btn-block"

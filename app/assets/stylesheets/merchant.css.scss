@@ -20,13 +20,13 @@
   background: image-url( 'bg_dash.png' );
   background-size: contain;
   background-repeat: repeat-y;
+  padding-top: 70px;
   #dashboard {
-    margin-top: 10px;
     .row-fluid {
       padding: 0;
     }
     .pad3pc {
-      padding: 3%;
+      padding: 0 3% 5% 3%;
     }
     .stats {
       .span3 {
@@ -48,9 +48,9 @@
     line-height: 50px;
     background-color: $light-gray;
     margin-top: 0;
-    padding: 0 0 0 2%;
+    padding: 0 0 0 3%;
     border-bottom: solid 1px darken( $light-gray, 10% );
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', sans-serif;
   }
   h1 {
     font-size: 35px;
@@ -60,10 +60,25 @@
     font-size: 23px;
     font-weight: 400;
   }
+  .action-buttons {
+    margin-bottom: 20px;
+  }
+} /* / .m-app */
+
+.edit.merchants-shops.m-app textarea {
+  height: 70px; resize: none;
+}
+.edit.merchants-shops.m-app textarea, input {
+  width: 100%;
 }
 
 #flat .nav-collapse {
   background-color: $dark-blue;
+}
+
+.edit.merchants-managers-registrations.m-app .form {
+  width: 80%;
+  margin: auto;
 }
 
 @media( max-width: 768px ) {
@@ -94,45 +109,10 @@
   }
 }
 
+.merchants-connections.index #merchants > p {
+  line-height: 30px;
+}
 
-
-#merchants {
-  padding-bottom: 20px;
-}
-#merchants .action-buttons{
-  padding-bottom: 20px;
-}
-/* To be Used Later */
-#connections {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 0px;
-}
-#connections table {
-
-}
-/* New Edit CSS */
-.edit_page {
-  background-color: #FFF;
-  border-radius: 4px;
-  height: auto;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding: 30px;
-  margin-bottom: 30px;
-}
-.edit_page h3 {
-  margin: 0px;
-  padding-bottom: 20px;
-  line-height: 24px;
-  font-size: 24px;
-}
-.edit_page .form {
-
-}
 
 /* Merchant Edit Pages */
 #edit {
@@ -226,43 +206,17 @@
 }
 /* Update Shop Wrapper */
 #update_shop_wrapper {
-
-}
-#update_shop_wrapper .control-group {
-  padding-bottom: 20px;
-  height: 60px;
-}
-#update_shop_wrapper .control-group .clabel {
-  width: 20%;
-  float: left;
-  height: 50px;
-  vertical-align: middle;
-  font-size: 16px;
-}
-#update_shop_wrapper .control-group .clabel label {
-  padding-top: 10px;
+  width: 80%;
+  margin: auto;
 }
 #update_shop_wrapper .control-group .input-append .add-on,
 #update_shop_wrapper .control-group .input-prepend .add-on {
-  height: 30px;
+  height: 33px;
   font-size: 12px;
-  line-height: 30px;
-}
-#update_shop_wrapper .control-group .input-append input[type="text"],
-#update_shop_wrapper .control-group .input-prepend input[type="text"] {
-  width: 80%;
-}
-#update_shop_wrapper .control-group .controls {
-  width: 80%;
-  float: right;
-  height: 50px;
+  line-height: 33px;
 }
 #update_shop_wrapper .control-group .controls .help-block {
   float: right;
-}
-#update_shop_wrapper .action-buttons {
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
@@ -317,12 +271,6 @@
   border: 0px !important;
   width: 150px !important;
 }
-#dashboard table a {
-  color: #1791c0 !important;
-}
-#dashboard table a:hover {
-  color: #263d45 !important;
-}
 /* Dashboard Statistics */
 #dashboard .stats .span2 {
   margin-left: 0px;
@@ -362,24 +310,6 @@
 }
 
 /* Optyn Button Preview Page */
-#merchants .preview {
-  padding-left: 20px;
-}
-#merchants .preview .header h3 {
-  color: #304d58;
-  padding-top: 0px;
-  font-size: 24px;
-  line-height: 24px;
-  margin-top: 0px;
-}
-#merchants .preview .header h6 {
-  color: #304d58;
-  padding-top: 5px;
-  font-size: 14px;
-  line-height: 16px;
-  margin-top: 0px;
-  font-style: normal;
-}
 #merchants .preview .main {
   background-color: #FFF;
   border-radius: 6px;
@@ -523,14 +453,11 @@
 #merchants .preview .advanced .actions {
   float: right;
 }
-#merchants #edit_survey .controls {
-  margin-left: 0;
-}
 #merchants {
-  #edit_shop_form .add-on {
+  /*#edit_shop_form .add-on {
     height: 20px;
     line-height: 20px;
-  }
+  }*/
 }
 /* Public Merchant Page - i.e. /danacafe" */
 #merchant_page {

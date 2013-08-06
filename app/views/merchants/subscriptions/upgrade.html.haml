@@ -1,8 +1,8 @@
 = display_title "Upgrade your Account"
-#box_sign
-  .container
+#box_sign.container-fluid
+  .row-fluid
     .span12.box_wrapper
-      .span12.box{:style => "height: 320px;"}
+      .span12.box{:style => "height: 360px;"}
         %div 
           .head Enter Your Payment Information 
           .payment-errors
@@ -30,7 +30,7 @@
 
               = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox"})
 
-              = f.submit "Pay", :class => "btn"
-        %div{:style => "text-align: center"}
+              = f.submit "Pay", :class => "btn btn-block btn-success"
+        %div{:style => "text-align: center; margin-top: 25px;"}
           %p
             All payments are processed securely.

@@ -7,13 +7,11 @@
 = f.hidden_field :ready
 = hidden_field_tag :choice, 'draft'
 
-.control-group
-  .controls.form-bg
-    %h3 Questions List
-    #questions_list
-      Please Wait...
+%h2 Questions List
+#questions_list
+  Please Wait...
 
-      = hidden_field_tag "new_merchants_survey_survey_question_path", new_merchants_survey_survey_question_path
-      = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
+  = hidden_field_tag "new_merchants_survey_survey_question_path", new_merchants_survey_survey_question_path
+  = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
 
-    = render partial: "merchants/surveys/survey_questions_buttons"
+= render partial: "merchants/surveys/survey_questions_buttons"

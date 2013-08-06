@@ -1,36 +1,27 @@
-#title_header
-  %h3
-    = current_shop.name
-    Managers
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
-    .span8
-      %div
-        %a.btn{:href => merchants_add_manager_path}
-          %i.icon-black.icon-user
-          Add Manager
-      %br
-      %table.table.table-striped
-        %tr 
-          %th #
-          %th Name
-          %th Email
-          %th Created at
+%h1
+  = current_shop.name
+  Managers
+#merchants.pad3pc
+  %div
+    %a.btn{:href => merchants_add_manager_path}
+      Add Manager
+  %br
+  %table.table.table-striped.table-hover
+    %tr 
+      %th #
+      %th Name
+      %th Email
+      %th Created at
 
-          
+      
 
-        - @managers.each_with_index do |manager,index|
-          %tr
-            %td
-              = index + 1
-            %td
-              = manager.name
-            %td
-              = manager.email
-            %td
-              = format_managers_created_at(manager.created_at)
-
-
-
+    - @managers.each_with_index do |manager,index|
+      %tr
+        %td
+          = index + 1
+        %td
+          = manager.name
+        %td
+          = manager.email
+        %td
+          = format_managers_created_at(manager.created_at)
