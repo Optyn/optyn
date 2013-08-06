@@ -55,8 +55,9 @@ class Users::SessionsController < Devise::SessionsController
       end
     else
       respond_to do |format|
-
-        format.json { render(status: :unprocessable_entity) } 
+        @user = User.new
+        @user.errors.add(:base, "Please check your email address")
+        format.json { render(status: :ok) } 
       end
     end
   end

@@ -293,10 +293,9 @@ module Api
                       jQuery('#optyn-email-error').remove();
                     },
                     success: function(respJson){
-                      if(respJson.data.errors){
+                      if(respJson.data.errors.length){
                         var $tempErr = jQuery('<div />');
-                        $tempErr.append('<div id="optyn-email-error"><strong>Please check the email you entered.</strong></div>');
-
+                        $tempErr.append('<div id="optyn-email-error"><strong>Please check the email you entered.</strong></div>');  
                         $('#optyn-first-container').append($tempErr.html());
                       }else{
                         replaceWithUserInfo();
@@ -468,7 +467,6 @@ module Api
           '<script type="text/javascript">' +
             'function adjustColorLuminanceComponents(){' +
               'var darkShade = ColorLuminance("#{@application.background_color}", -0.5);' +
-              'console.log("Color:", darkShade);' +
               'jQuery("#close_optyn_button a").css({"color": darkShade});' +
               'jQuery("#optyn_button_wrapper").css({"border-bottom": ("2px solid " + darkShade)});' +
               'jQuery("#show_optyn_button_wrapper").css({"border": ("2px solid " + darkShade)});' +

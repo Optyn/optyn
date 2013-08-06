@@ -1,4 +1,4 @@
-object current_user => :data
+object @user => :data
 attributes :name
 node :errors do |user|
   user.errors.full_messages
