@@ -109,11 +109,11 @@ ActiveRecord::Schema.define(:version => 20130731024251) do
   create_table "file_imports", :force => true do |t|
     t.string   "csv_file"
     t.integer  "manager_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "status"
     t.text     "stats"
-    t.string   "label"
+    t.string   "label",      :default => "Import"
   end
 
   create_table "interests", :force => true do |t|
@@ -428,8 +428,8 @@ ActiveRecord::Schema.define(:version => 20130731024251) do
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
     t.boolean  "virtual",                    :default => false
-    t.integer  "email_box_impression_count"
-    t.integer  "email_box_click_count"
+    t.integer  "email_box_impression_count", :default => 0
+    t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
     t.integer  "partner_id"

@@ -55,9 +55,9 @@ class Shop < ActiveRecord::Base
 
   scope :by_uuid, ->(uuid) { where(uuid: uuid) }
 
-  before_validation :assign_identifier, on: :create
+  before_validation :assign_identifier, :assign_partner_if, on: :create
 
-  after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription, :assign_partner_if
+  after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
@@ -387,7 +387,6 @@ class Shop < ActiveRecord::Base
   def assign_partner_if
     if self.partner.blank?
       self.partner_id = Partner.optyn_id
-      self.save(validate: false)
     end
   end
 
