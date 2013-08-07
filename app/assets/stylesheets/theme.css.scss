@@ -670,27 +670,36 @@ i.myspace { background-position: -233px -51px; }
 .progress-bar {
   clear: both;
   margin: 2% 0;
-  & > .wrapper {
-    display: block;
+  display: block;
+  height: 30px;
+  border-radius: 100px;
+  background-color: $medium-gray;
+  & > .step {
+    float: left;
+    padding: 2px 30px;
+    color: $white;
+    text-align: center;
+    line-height: 26px;
     height: 30px;
     border-radius: 100px;
-    background-color: $medium-gray;
-    float: left;
-    & > .step {
-      float: left;
-      padding: 2px 30px;
-      color: $white;
-      text-align: center;
-      line-height: 26px;
-      height: 30px;
-      border-radius: 100px;
-    }
-    & > .current {
-      background-color: $blue;
-    }
+  }
+  &.steps2 .step { width: 50%; }
+  &.steps3 .step { width: 33.3333% }
+  &.steps4 .step { width: 25% }
+  & > .current {
+    background-color: $blue;
   }
 }
 
+
+#flat.m-app {
+  .btn {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+}
 
 /* -------------------------- Margins & paddings */
 .mr3pc { margin-right: 3%; }

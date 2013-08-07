@@ -1,11 +1,11 @@
 = banner("Sent")
 
-#merchants.pad3pc
-  #message_fields_wrapper.pad3pc
-    = render partial: "merchants/messages/message_menu"
+= render partial: "merchants/messages/message_menu"
 
-    = render partial: 'shared/messages/pager', locals: {collection: @messages}
+#message_fields_wrapper.pad3pc
 
-    = render partial: 'merchants/messages/list'
+  = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-    = render partial: 'shared/messages/pager', locals: {collection: @messages}
+  = render partial: 'merchants/messages/list'
+
+  = render partial: 'shared/messages/pager', locals: {collection: @messages}

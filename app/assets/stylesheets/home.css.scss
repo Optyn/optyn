@@ -357,7 +357,7 @@ body {
     @include border-radius( 0 );
     font-size: 18px;
     line-height: 30px;
-    font-family: 'Open Sans Condensed', sans-serif !important;
+    font-family: 'Open Sans Condensed', sans-serif;
     /*margin: 13px 1% 13px 0;*/
     padding: 0 20px;
     border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
@@ -367,7 +367,7 @@ body {
     border-right: 0;
     background: $light-gray;
     &:hover {
-      border-bottom: solid 4px rgba( 0, 0, 0, 0.3);
+      border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
       text-decoration: none;
       background-color: darken( $light-gray, 10% );
     }

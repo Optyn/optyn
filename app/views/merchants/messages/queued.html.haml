@@ -1,8 +1,9 @@
 = banner("Queued")
 
+= render partial: "merchants/messages/message_menu"
+
 #merchants.pad3pc
   #message_fields_wrapper.pad3pc
-    = render partial: "merchants/messages/message_menu"
 
     #messages_collection_container.row.text-center
       = render partial: "shared/messages/collection_form"

@@ -1,10 +1,11 @@
 = banner(@message.name)
 
+= render partial: "merchants/messages/message_menu"
+
 /Main Body
 #merchants.pad3pc
   .container
     .span8#message_fields_wrapper
-      = render partial: "merchants/messages/message_menu"
       #messages_collection_container.row.text-center
         = render partial: "shared/messages/collection_form"
 

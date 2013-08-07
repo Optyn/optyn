@@ -117,7 +117,7 @@ module Merchants::MessagesHelper
 
   def messages_menu_links(user, path, link_name, count, force_visible=false, highlight_actions=[])
     #if force_visible || user.message_authoring_or_admin_rights?
-    link_to("#{link_name}#{" (#{count})" if (count.to_i > 0 rescue false)}", path, :class => message_menu_highlight_class(highlight_actions, link_name))
+    link_to(raw("#{link_name}#{" <span>#{count}</span>" if (count.to_i > 0 rescue false)}"), path, :class => message_menu_highlight_class(highlight_actions, link_name))
     #end
   end
 
