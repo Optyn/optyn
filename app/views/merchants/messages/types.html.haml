@@ -1,12 +1,21 @@
 = banner("Campaign Center")
 
 #merchants.container-fluid.pad3pc
-  %h3
+  %h3.pull-left.mr3pc
     Create a New Campaign
-  %h5
-    Let's create a new Campaign for your customers. They'll get excited to hear from you.
-  %h6
-    What kind of e-mail do you want to create?
+  %p Let's create a new Campaign for your customers. They'll get excited to hear from you.
+  %p What kind of e-mail do you want to create?
+
+  .progress-bar
+    .wrapper
+      .step.current
+        CHOOSE EMAIL TEMPLATE
+      .step
+        SET CAMPAIGN
+      .step
+        PREVIEW CAMPAIGN
+    %p.pull-right Step 1 of 3  
+
   #choose_message
     .row-fluid
       %a.span4.type.coupon{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
