@@ -670,24 +670,24 @@ i.myspace { background-position: -233px -51px; }
 .progress-bar {
   clear: both;
   margin: 2% 0;
-  .wrapper {
+  & > .wrapper {
     display: block;
     height: 30px;
     border-radius: 100px;
     background-color: $medium-gray;
     float: left;
-  }
-  .step {
-    float: left;
-    padding: 2px 30px;
-    color: $white;
-    text-align: center;
-    line-height: 26px;
-    height: 30px;
-    border-radius: 100px;
-  }
-  .current {
-    background-color: $blue;
+    & > .step {
+      float: left;
+      padding: 2px 30px;
+      color: $white;
+      text-align: center;
+      line-height: 26px;
+      height: 30px;
+      border-radius: 100px;
+    }
+    & > .current {
+      background-color: $blue;
+    }
   }
 }
 

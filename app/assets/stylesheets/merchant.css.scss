@@ -83,7 +83,8 @@
 
 @media( max-width: 768px ) {
   /* For Merchants dash -------------------------------- */
-  #flat {
+  #flat.m-app {
+    background-image: none;
       .span6 {
       padding: 0;
       height: 42px;
