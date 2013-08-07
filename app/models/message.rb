@@ -272,7 +272,7 @@ class Message < ActiveRecord::Base
   def label_ids(labels=[])
     label_identifiers = message_labels.pluck(:label_id)
     if label_identifiers.blank?
-      label_identifiers = shop.inactive_label.id
+      label_identifiers = [shop.inactive_label.id]
     end
     label_identifiers
   end

@@ -5,6 +5,8 @@ module Api
         include Messagecenter::CommonsHelper
         include Messagecenter::CommonFilters
 
+        skip_before_filter :message_showable?
+        
         before_filter :require_message_type, only: [:new, :create, :edit, :update, :create_response_message]
 
         def types
