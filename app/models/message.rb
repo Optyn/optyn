@@ -15,7 +15,7 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread
 
-  attr_accessible :label_ids, :name, :send_immediately, :send_on_date, :send_on_time
+  attr_accessible :label_ids, :name, :subject, :send_on, :send_immediately, :send_on_date, :send_on_time, :ending_date, :ending_time 
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"

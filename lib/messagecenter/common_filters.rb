@@ -89,8 +89,8 @@ module Messagecenter
     end
 
     def merge_end_date_time
-      if params[:end_date].present? || params[:end_time].present?
-        params[:message][:ending] = params[:ending_date].to_s + params[:ending_time].to_s
+      if params[:message][:ending_date].present? || params[:message][:ending_time].present?
+        params[:message][:ending] = params[:message][:ending_date].to_s + " " + params[:message][:ending_time].to_s
       end
     end
 
