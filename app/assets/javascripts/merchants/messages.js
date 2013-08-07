@@ -38,7 +38,8 @@ function MerchantMessage() {
 
         if($('#message_header_settings_form').length){
             this.hookHeaderColorPicker();
-            this.hookColorPickerHide();
+            this.hookColorPickerChange();
+            this.hookHeaderColorChange();
             this.hookHeaderSettingSubmission();
         }
     };
@@ -148,7 +149,7 @@ function MerchantMessage() {
                 success: function (data) {
                     $('#message_meta_modal').modal('hide');
                     setTimeout(function () {
-                        $('#message_meta_data').replaceWith(data.message);
+                        $('#preview-meta-data-view').replaceWith(data.message);
                         current.hookDateTimePicker();
                     }, 1000);
 
@@ -159,6 +160,15 @@ function MerchantMessage() {
                     $modal.html($.parseJSON(data.responseText).message);
                     setTimeout(function () {
                         current.hookDateTimePicker();
+                        var sendOnErrorMessage = $('#message_meta_modal #send_on_error').val();
+                        if(sendOnErrorMessage.length){
+                            var $tempErr = $('<div />');
+                            $tempErr.append("<span class='field-with-errors'><span class='help-inline error'>" + sendOnErrorMessage + "</span></span>");
+                            console.log("Error Message:", sendOnErrorMessage);
+                            console.log("html:", $tempErr.html());
+                            $('#message_meta_modal #message_send_on_container').append($tempErr.html());
+                        }
+
                         $('#message_meta_modal').modal('show');
                         moveDatetimepickerErrorMessage();
                     }, 500);
@@ -244,10 +254,17 @@ function MerchantMessage() {
         $('#header_background').colorpicker({format: 'hex'});
     };
 
-    this.hookColorPickerHide = function(){
-      $('#header_background').colorpicker().on('hide', function(event){
+    this.hookHeaderColorChange = function(){
+        $('body').on('change', '#header_background_color', function(){
+            $('#header_background').colorpicker('setValue', $('#header_background_color').val());      
+        });
+    };
+
+    this.hookColorPickerChange = function(){
+      $('#header_background').colorpicker().on('changeColor', function(event){
         var hexVal = event.color.toHex();
         $('.message-visual-property-value').val('background-color: ' + hexVal);
+        $('#header_background_color').val(hexVal);
 
       });      
     };
@@ -273,7 +290,7 @@ function MerchantMessage() {
             success: function(data){
                $('#perview_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
-                current.hookColorPickerHide();
+                current.hookColorPickerChange();
             },
             error: function(){
                 alert("An Error Occured white setting the color. Please refresh you page and try again.");

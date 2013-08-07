@@ -37,4 +37,13 @@ namespace :shop do
     manager.owner = true
     manager.save(validate: false)
   end 
+
+  desc "Task to make all the virtual shops online"
+  task :make_virtual_ones_online => :environment do 
+    Shop.where(virtual: true).each do |shop|
+      puts "Updating Shop: #{shop.name}"
+      shop.stype = "online"
+      shop.save(validate: false)
+    end
+  end
 end
