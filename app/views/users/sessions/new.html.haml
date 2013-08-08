@@ -4,8 +4,7 @@
       .box
         %div
           .head
-            %h4 Log in to your account
-
+            = image_tag "logo_new.png", :alt => 'logo'
         .form
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
 
