@@ -27,8 +27,8 @@ class Shop < ActiveRecord::Base
   validates :stype, :presence => true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
-  validates :phone_number, presence: true
-  validates :phone_number, :phony_plausible => true#, unless: :virtual
+  validates :phone_number, presence: true, unless: :virtual
+  validates :phone_number, :phony_plausible => true 
   
 
   accepts_nested_attributes_for :managers
