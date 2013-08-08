@@ -15,7 +15,7 @@ module Api
         end
 
         def import_status
-          @payload = ApiRequestPayload.for_uuid(params[:uuid])
+          @payload = ApiRequestPayload.for_uuid(params[:id])
         end
 
         def create
