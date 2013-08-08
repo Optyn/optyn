@@ -1,9 +1,14 @@
+
 %table.table.table-striped.table-hover
   %tbody
     %tr
       %th Name
       %td
         = @shop.name
+    %tr
+      %th Phone Number
+      %td
+        = shop_formatted_phone_number(@shop)
     %tr
       %th Description
       %td

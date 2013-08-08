@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804154237) do
+
+ActiveRecord::Schema.define(:version => 20130808145856) do
+
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -418,6 +420,7 @@ ActiveRecord::Schema.define(:version => 20130804154237) do
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
     t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
