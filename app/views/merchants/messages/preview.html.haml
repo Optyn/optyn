@@ -1,13 +1,15 @@
-= banner("Email Preview")
+= banner( "Campaign Center" )
+= render partial: "merchants/messages/message_menu"
 
 #merchants.pad3pc
+  %h2 Email Preview
+
   = render :partial => 'progress_bar'
-  .container
+  .container-fluid
     .span3.preview-left
       = render partial: "merchants/messages/preview_meta"
 
-    .span8#message_fields_wrapper
-      = render partial: "merchants/messages/message_menu"
+    .span9#message_fields_wrapper
       #message_details
         %h3{class: 'text-center'}
           Your email will appear like below

@@ -45,21 +45,22 @@
     }
   }
   h1, h2 {
-    line-height: 50px;
-    height: 50px;
-    background-color: $light-gray;
     margin-top: 0;
-    padding: 0 0 0 3%;
-    border-bottom: solid 1px darken( $light-gray, 10% );
     font-family: 'Open Sans', sans-serif;
-  }
-  h1 {
-    font-size: 35px;
     font-weight: 300;
   }
+  h1 {
+    line-height: 44px;
+    height: 50px;
+    padding: 0 0 0 3%;
+    border-bottom: solid 1px darken( $light-gray, 10% );
+    background-color: $light-gray;
+    font-size: 35px;
+  }
   h2 {
-    font-size: 23px;
-    font-weight: 400;
+    font-size: 30px;
+    line-height: 40px;
+    height: 40px;
   }
   .action-buttons {
     margin-bottom: 20px;
@@ -98,10 +99,6 @@
   width: 100%;
 }
 
-#flat .nav-collapse {
-  background-color: $dark-blue;
-}
-
 .edit.merchants-managers-registrations.m-app .form {
   width: 80%;
   margin: auto;
@@ -112,9 +109,16 @@
 .edit.merchants-messages h1,
 .queued.merchants-messages h1,
 .drafts.merchants-messages h1,
+.trash.merchants-messages h1,
+.preview.merchants-messages h1,
+.merchants-messages h1,
 .sent.merchants-messages h1 {
   float: left;
   padding-right: 3%;
+}
+
+.merchants-messages h2 {
+  float: left;
 }
 
 @media( max-width: 768px ) {
@@ -131,7 +135,7 @@
     }
     .brand {
       border: 0;
-      padding: 17px 0 0 0;
+      padding: 17px 0 0 10px;
     }
   }
   #flat.merchants-dashboards #dashboard .stats .span3 {
@@ -264,6 +268,9 @@
 @media (max-width: 979px) {
   #edit .box{
     width: 48%;
+  }
+  #flat.m-app {
+    padding-top: 0;
   }
 }
 @media (min-width: 980px) {

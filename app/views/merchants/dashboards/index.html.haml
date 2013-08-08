@@ -2,39 +2,39 @@
 
 = banner("#{current_shop.name} Dashboard")
 
-.header.row-fluid
-  .span12  
-    %p.pad3pc
-      Hi
-      == #{current_manager.name}.
-      !
-      Here's what's going on.
-
-.row-fluid.stats.pad3pc
-  .span3.leading
-    .count
-      = @day_count
-    .info
-      New Connections in last 24 hours
-  .span3.box
-    .count
-      = @week_count
-    .info
-      New Connections last 7 days
-  .span3.box
-    .count
-      = @month_count
-    .info
-      New Connections last 30 days
-  .span3.box
-    .count
-      = @total_count
-    .info
-      Total Active New Connections
-%h2
-  Your Latest Activity
-  
 .pad3pc
+  .header.row-fluid
+    .span12  
+      %p
+        Hi
+        == #{current_manager.name}.
+        !
+        Here's what's going on.
+
+  .row-fluid.stats
+    .span3.leading
+      .count
+        = @day_count
+      .info
+        New Connections in last 24 hours
+    .span3.box
+      .count
+        = @week_count
+      .info
+        New Connections last 7 days
+    .span3.box
+      .count
+        = @month_count
+      .info
+        New Connections last 30 days
+    .span3.box
+      .count
+        = @total_count
+      .info
+        Total Active New Connections
+  %h2
+    Your Latest Activity
+    
   %table.table.table-striped.table-hover
     %thead
       %tr

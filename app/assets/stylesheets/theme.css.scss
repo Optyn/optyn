@@ -434,6 +434,10 @@ input[type="color"]:focus,
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+  #flat .merchant-menu a {
+    line-height: 30px;
+    height: 40px;
+  }
   #intro h1 {
     width: 90%;
   }
@@ -701,5 +705,56 @@ i.myspace { background-position: -233px -51px; }
   }
 }
 
-/* -------------------------- Margins & paddings */
+
+/* --------------------------------- Margins & paddings */
 .mr3pc { margin-right: 3%; }
+
+
+/* --------------------------------- Form elements */
+form.flat {
+}
+#flat {
+  input[type='text'],
+  input[type='number'],
+  input[type='email'],
+  input[type='password'],
+  input[type='url'],
+  textarea,
+  .uneditable-input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    margin: 0;
+    border: solid 2px $medium-gray;
+    @include border-radius( 0 );
+    padding: 0 10px;
+    line-height: 30px;
+    border: solid 2px rgba( 0, 0, 0, 0.3 );
+  }
+  input[type='text'],
+  input[type='number'],
+  input[type='email'],
+  input[type='password'],
+  input[type='url'] {
+    height: 35px;
+  }
+  .uneditable-input {
+    background-color: $light-gray;
+  }
+}
+#flat {
+  .input-append {
+    .add-on {
+      height: 35px;
+      font-size: 12px;
+      line-height: 33px;
+      @include border-radius( 0 );
+      border-color: $medium-gray;
+      border-width: 2px;
+      margin-left: -2px;
+      > i {
+        margin-top: -3px;
+      }
+    }
+  }
+}

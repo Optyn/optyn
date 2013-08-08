@@ -13,19 +13,53 @@
   background-color: rgba( $dark-blue, .95 );
 }
 
+#flat .btn.btn-navbar {
+  border: solid 2px darken( $blue, 10% );
+  background: transparent;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
 @media (max-width: 979px) {
   header {
     text-align: center;
   }
   .nav-collapse .nav > li > a:hover,
   .nav-collapse .dropdown-menu a:hover {
-    background: lighten( $dark-blue, 5% );
+    background: lighten( $blue, 10% );
   }
   .nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a {
     color: #fff;
   }
   .nav a {
     margin: 5px;
+  }
+  #flat.m-app {
+    .navbar-fixed-top .navbar.inner {
+      padding: 0;
+    }
+    a {
+      color: $black;
+      @include border-radius( 0 );
+      padding: 5px 0;
+      margin: 0;
+      font-weight: 400;
+    }
+    .navbar.inner a.tour {
+      line-height: 30px;
+      padding: 0 10px;
+      border: 0;
+      @include border-radius( 0 );
+      color: $black;
+    }
+    a.dropdown-toggle {
+      margin: 0;
+      @include border-radius( 0 );
+    }
   }
 }
 
@@ -34,6 +68,9 @@
 
 /* Header for Merchants inner app */
 #flat {
+  .nav-collapse {
+    background-color: $light-gray;
+  }
   .navbar.inner {
     background-color: $blue;
     height: 70px;
@@ -63,4 +100,7 @@
     padding: 17px 0px 10px 55px;
     width: 25%;
   }
+}
+
+@media ( max-width: 768px ) {
 }

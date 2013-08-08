@@ -1,6 +1,9 @@
 = render partial: "merchants/messages/message_menu"
 
 #message_fields_wrapper.pad3pc
+  %h2
+    = message_form_title(@message_type)
+
   = render :partial => 'progress_bar'
 
   = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|

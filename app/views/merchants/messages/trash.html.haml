@@ -1,7 +1,9 @@
-= banner("Trash")
+= banner("Campaign Center")
+
+= render partial: "merchants/messages/message_menu"
 
 #message_fields_wrapper.pad3pc
-  = render partial: "merchants/messages/message_menu"
+  %h2 Trash
   #messages_collection_container.text-center
     = render partial: "shared/messages/collection_form"
 

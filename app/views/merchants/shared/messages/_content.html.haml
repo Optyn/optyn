@@ -1,4 +1,3 @@
 .control-group
-  = f.label :content, "Details", class: 'control-label'
-  .controls
-    = f.text_area :content, class: 'input-xxlarge details', rows: 8, cols: 10
+  .controls.row
+    = f.text_area :content, class: 'input-xxlarge details span12', rows: 8, cols: 10, 'data-toggle' => 'tooltip', title: 'Details', placeholder: 'Details'
