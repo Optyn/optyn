@@ -7,6 +7,14 @@
 
   .control-group
     .clabel
+      = f.label :phone_number
+    .controls
+      = f.text_field :phone_number
+      %span.help-block
+        example: +1 (xxx) xxx-xxxx    
+
+  .control-group
+    .clabel
       = f.label :description
     .controls
       = f.text_area :description, {:style => "width: 500px; height: 70px; resize: none;"}

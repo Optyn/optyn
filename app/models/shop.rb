@@ -18,13 +18,18 @@ class Shop < ActiveRecord::Base
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color
+
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number
+
   mount_uploader :logo_img, ImageUploader
 
   validates :name, :presence => true
   validates :stype, :presence => true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
+  validates :phone_number, presence: true
+  validates :phone_number, :phony_plausible => true#, unless: :virtual
+  
 
   accepts_nested_attributes_for :managers
   accepts_nested_attributes_for :locations
