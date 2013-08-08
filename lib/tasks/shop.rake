@@ -40,9 +40,10 @@ namespace :shop do
 
   desc "Assign uuids to the shops that don't have already"
   task :assign_missing_uuid => :environment do
-    missing_uuid_shops = Shop.where(uuid: nil)
-    missing_uuid_shops.each do |shop|
+      missing_uuid_shops = Shop.where(uuid: nil)
+      missing_uuid_shops.each do |shop|
       shop.send(:assign_uuid)
+    end
   end 
 
   desc "Task to make all the virtual shops online"
