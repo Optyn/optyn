@@ -1,49 +1,8 @@
-%li
-  %a{:class => 'redemption', :href => "#"}
-    Redemption
-%li
-  %a{:class => 'notifications', :href => "#"}
-    Notifications
-%li.help
-  %a{:class => 'helpCenter', :href => "#"}
-    Help Center
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-    My Account
+    Hi Alen@Zimamail.Com | Account Settings
     %span.icon
     /= image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
   %ul.dropdown-menu
-    %li
-      %a{:href => '#'}
-        Merchant Settings
-    %li
-      %a{:href => '#'}
-        Take the Deals Tour
-    %li.userSection
-      %span.userName
-        Sally Wiggins
-      %span.userEmail
-        info@sallyscupcakes.com
-    / %li
-    /   %a.active{:href => merchants_root_path}
-    /     = image_tag "dropdown_dashicon.png", :float => "left"
-    /     My Dashboard
-    / %li
-    /   %a{:href => "connections"}
-    /     = image_tag "dropdown_manager.png", :float => "left"
-    /     My Customers
-    / %li
-    /   %a{:href => "#"}
-    /     = image_tag "dropdown_segments.png", :float => "left"
-    /     My Messages
-    / %li
-    /   %a{:href => "segments"}
-    /     = image_tag "dropdown_surveys.png", :float => "left"
-    /     My Surveys
-    / %li
-    /   %a{:href => merchants_shop_path}
-    /     = image_tag "dropdown_settings.png", :float => "left"
-    /     Manage Shop
-    / %hr
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

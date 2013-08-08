@@ -12,17 +12,20 @@
         %ul.headerNav.clearfix
           %li.current
             %a{:href => merchants_root_path}
-              Home
+              Launch
           %li
             %a{:href => '#'}
-              Deals
-          %li
-            %a{:href => '#'}
-              Breadcrumb
+              Insights
           %li
             %a{:href => merchants_messages_path }
               Engage!
-              %span.label.label-inverse New
+              %span.label New
+          %li
+            %a{:href => '#'}
+              App Store
+          %li
+            %a{:href => '#'}
+              Build
       %ul.nav.pull-right.accDropDown
         - if merchants_manager_signed_in?
           = render partial: "layouts/merchant_dropdown"
