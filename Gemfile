@@ -50,6 +50,7 @@ gem 'aws-ses', :require => 'aws/ses'
 gem 'aws-sdk'
 gem 'rack-ssl-enforcer'
 gem 'sitemap_generator'
+gem 'phony_rails'
 
 gem 'rabl'
 gem 'oj'

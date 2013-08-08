@@ -85,6 +85,9 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     config_reader (0.0.8)
+    countries (0.9.2)
+      currencies (>= 0.4.0)
+    currencies (0.4.2)
     daemons (1.1.9)
     debugger (1.6.0)
       columnize (>= 0.3.1)
@@ -222,6 +225,11 @@ GEM
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
     pg (0.15.1)
+    phony (1.9.0)
+    phony_rails (0.4.1)
+      activesupport (>= 3.0)
+      countries (>= 0.8.2)
+      phony (>= 1.7.7)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -438,6 +446,7 @@ DEPENDENCIES
   omniauth-linkedin
   omniauth-twitter
   pg
+  phony_rails
   pry
   quiet_assets
   rabl

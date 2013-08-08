@@ -18,4 +18,8 @@ module Merchants::ShopsHelper
   def show_logo(shop)
     shop.logo_img.present? ? image_tag(shop.logo_img.url) : "Please update your Logo"
   end
+
+  def shop_formatted_phone_number(shop)
+    PhonyRails.normalize_number(shop.phone_number, :country_code => 'US').phony_formatted(:format => :international, :spaces => '-')
+  end
 end
