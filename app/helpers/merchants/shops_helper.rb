@@ -20,6 +20,6 @@ module Merchants::ShopsHelper
   end
 
   def shop_formatted_phone_number(shop)
-    PhonyRails.normalize_number(shop.phone_number, :country_code => 'US').phony_formatted(:format => :international, :spaces => '-')
+    PhonyRails.normalize_number(shop.phone_number, :country_code => 'US').phony_formatted(:format => :international, :spaces => '-') rescue "-"
   end
 end
