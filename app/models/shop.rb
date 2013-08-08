@@ -58,6 +58,8 @@ class Shop < ActiveRecord::Base
 
   scope :by_uuid, ->(uuid) { where(uuid: uuid) }
 
+  before_validation :assign_identifier, :assign_partner_if, on: :create
+
   before_create :assign_identifier, :assign_partner_if
 
   after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
