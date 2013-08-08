@@ -27,8 +27,8 @@ module Api
             else
               updated = @manager.update_with_password(params[:manager])
             end
-
-            render(status: :unprocessable_entity) and return unless updated
+            
+            render(status: :unprocessable_entity, template: 'api/v1/merchants/managers/manager') and return unless updated
             render(status: :ok, template: 'api/v1/merchants/managers/manager')
           rescue ActiveRecord::RecordInvalid => e
             render(status: :unprocessable_entity, template: 'api/v1/merchants/managers/manager')
