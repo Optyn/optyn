@@ -14,6 +14,7 @@ function MerchantMessage() {
             this.hookDateTimePicker();
             this.hookPermanentCouponSelection();
             this.hookUncheckPermanentCouponCheck();
+            this.clearDuplicateErrors();
         }
 
         if ($('#messages_collection_container').length) {
@@ -298,6 +299,17 @@ function MerchantMessage() {
                 $('.loading').hide(); 
             }
         });
+    };
+
+    this.clearDuplicateErrors = function(){
+        if($('#message_type_of_discount_percentage_off').next('.error').length){
+            alert('Test');
+            var error = true;
+            var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
+            $('#message_type_of_discount_percentage_off').next('.error').remove();
+            $('#message_type_of_discount_dollar_off').next('.error').remove();
+            $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
+        }
     };
 }
 
