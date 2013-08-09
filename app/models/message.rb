@@ -565,7 +565,7 @@ class Message < ActiveRecord::Base
       return
     end 
 
-    if message_image.blank? && button_text.blank?
+    if button_url.present? && message_image.blank? && button_text.blank?
       self.errors.add(:button_url, "You have added a link but there is no image uploaded or button pointing to it. Please add one.")
     end
   end
