@@ -28,7 +28,7 @@ class Shop < ActiveRecord::Base
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual
-  #validates :phone_number, :phony_plausible => true 
+  validates :phone_number, :phony_plausible => true 
   
 
   accepts_nested_attributes_for :managers
