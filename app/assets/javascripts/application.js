@@ -23,6 +23,7 @@
 //= require shLegacy.js
 //= require shBrushXml.js
 //= require bootstrap-colorpicker
+//= require jquery.colorbox
 //= require_self
 //= require_tree
 
