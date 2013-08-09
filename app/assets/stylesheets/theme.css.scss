@@ -673,7 +673,7 @@ i.myspace { background-position: -233px -51px; }
 
 .progress-bar {
   clear: both;
-  margin: 2% 0;
+  margin: 5% 0;
   display: block;
   height: 30px;
   border-radius: 100px;
@@ -740,6 +740,7 @@ form.flat {
     border: solid 2px darken( $light-gray, 10% );
     background-color: $light-gray;
     box-shadow: none;
+    color: $black;
     @include transition( all 0.3s ease-out );
     &:focus {
       border-color: $medium-gray;

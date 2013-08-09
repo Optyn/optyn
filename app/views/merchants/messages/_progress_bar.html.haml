@@ -1,13 +1,12 @@
-/ = utv_action
-/ = params[:action]
+/= params[:action]
 .progress-bar.steps3
-  - if params[:action] == 'types'
+  - if params[:action] == 'types' || params[:action] == 'create' || params[:action] == 'create_response_message'
     .step.current{ 'data-toggle' => 'tooltip', :title => 'Click on a template below to get started.' }
       CHOOSE EMAIL TEMPLATE
   - else
     .step
       CHOOSE EMAIL TEMPLATE
-  - if params[:action] == 'new' || params[:action] == 'edit'
+  - if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'update'
     .step.current{ 'data-toggle' => 'tooltip', :title => 'Fill and submit the form below to proceed.' }
       SET CAMPAIGN
   - else
