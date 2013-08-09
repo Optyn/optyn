@@ -1,20 +1,8 @@
 /= params[:action]
 .progress-bar.steps3
-  - if params[:action] == 'types' || params[:action] == 'create' || params[:action] == 'create_response_message'
-    .step.current{ 'data-toggle' => 'tooltip', :title => 'Click on a template below to get started.' }
-      CHOOSE EMAIL TEMPLATE
-  - else
-    .step
-      CHOOSE EMAIL TEMPLATE
-  - if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'update'
-    .step.current{ 'data-toggle' => 'tooltip', :title => 'Fill and submit the form below to proceed.' }
-      SET CAMPAIGN
-  - else
-    .step
-      SET CAMPAIGN
-  - if params[:action] == 'preview'
-    .step.current{ 'data-toggle' => 'tooltip', :title => 'Now you are ready for launch.' }
-      PREVIEW CAMPAIGN
-  - else
-    .step
-      PREVIEW CAMPAIGN
+  %div{class: "step #{message_progress_bar_highlight(['types'])}", 'data-toggle' => 'tooltip', :title => 'Click on a template below to get started.'}
+    CHOOSE EMAIL TEMPLATE    
+  %div{class: "step #{message_progress_bar_highlight(['new', 'create', 'edit', 'update'])}", 'data-toggle' => 'tooltip', :title => 'Fill and submit the form below to proceed.'}
+    SET CAMPAIGN
+  %div{class: "step #{message_progress_bar_highlight(['preview'])}", 'data-toggle' => 'tooltip', :title => 'Now you are ready for launch.'}      
+    PREVIEW CAMPAIGN

@@ -162,4 +162,8 @@ module Merchants::MessagesHelper
       end  
     end
   end
+
+  def message_progress_bar_highlight(hightlight_action_names=[])
+    "current" if hightlight_action_names.include?(action_name)
+  end
 end
