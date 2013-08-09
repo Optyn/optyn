@@ -144,6 +144,17 @@ Optyn::Application.routes.draw do
         resources :messages do
           collection do
             get :types
+            get :drafts
+            get :queued
+            get :sent
+            get :trash
+            put :move_to_trash
+            put :move_to_draft
+            put :discard
+          end
+
+          member do
+            put :launch
           end
         end
       end

@@ -19,6 +19,8 @@ module Messagecenter
     end
 
     def uuids_from_message_ids
+      return params[:message_ids] if params[:message_ids].is_a?(Array)
+
       params[:message_ids].split(",")
     end
   end
