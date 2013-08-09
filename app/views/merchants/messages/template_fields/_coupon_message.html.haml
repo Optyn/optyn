@@ -24,9 +24,7 @@
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
   .controls
-    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'Amount of discount', placeholder: 'Amount of discount'
-    %span.help-inline
-      The amount of the coupon, in percentage or dollar amount value.
+    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'The amount of the coupon, in percentage or dollar amount value.'
 
 .control-group
   = f.label :coupon_code, "Coupon Code", class: 'control-label'

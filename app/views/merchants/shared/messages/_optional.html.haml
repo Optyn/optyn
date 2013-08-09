@@ -1,24 +1,20 @@
-.headertext
-	%h5
-		Optional
+.optional
+	.headertext
+		%h4
+			Optional
 
-= f.fields_for :message_image_attributes, @message.message_image do |builder|
+	= f.fields_for :message_image_attributes, @message.message_image do |builder|
+		.control-group
+			= builder.label :image, "Add an Image?", class: 'control-label'
+			.controls
+				= builder.file_field :image, 'data-toggle' => 'tooltip', title: 'Your image will be autmatically added under the details of your message if you upload it.'
+
 	.control-group
-		= builder.label :image, "Add an Image?", class: 'control-label'
+		= f.label :button_url, "Url", class: 'control-label'
 		.controls
-			= builder.file_field :image
-			Your image will be autmatically added under the details of your message if you upload it.
+			= f.text_field :button_url, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Enter the URL where you want the button and/or image to link.'
 
-.control-group
-	= f.label :button_url, "Url", class: 'control-label'
-	.controls
-		= f.text_field :button_url, class: 'input-xlarge'
-		enter the URL where you want the button and/or image to link
-
-.control-group
-	= f.label :button_text, class: 'control-label'
-	.controls
-		= f.text_field :button_text, class: 'input-xlarge'
-
-
-
+	.control-group
+		= f.label :button_text, class: 'control-label'
+		.controls
+			= f.text_field :button_text, class: 'input-xlarge span12'

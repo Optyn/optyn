@@ -90,6 +90,9 @@
       }
     }
   }
+  #message_form .actions {
+    margin-top: 7%;
+  }
 } /* / .m-app */
 
 .edit.merchants-shops.m-app textarea {
@@ -104,15 +107,7 @@
   margin: auto;
 }
 
-.types.merchants-messages h1,
-.new.merchants-messages h1,
-.edit.merchants-messages h1,
-.queued.merchants-messages h1,
-.drafts.merchants-messages h1,
-.trash.merchants-messages h1,
-.preview.merchants-messages h1,
-.merchants-messages h1,
-.sent.merchants-messages h1 {
+.merchants-messages h1{
   float: left;
   padding-right: 3%;
 }
@@ -137,6 +132,10 @@
       border: 0;
       padding: 17px 0 0 10px;
     }
+  }
+  #flat.merchants-messages h1 {
+    float: none;
+    margin-bottom: 0;
   }
   #flat.merchants-dashboards #dashboard .stats .span3 {
     padding: 1%;
@@ -260,12 +259,16 @@
   float: right;
 }
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { 
+@media (min-width: 768px) and (max-width: 979px) {
   #edit .box{
     width: 54%;
   }
 }
 @media (max-width: 979px) {
+  #flat.m-app .nav-tabs a {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   #edit .box{
     width: 48%;
   }

@@ -37,7 +37,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 #choose_message .coupon:before {
 	content: 'A coupon will get customers in your door and you will earn on average a 30% increase in sales.';
 	position: absolute;
-	top: -140px;
+	top: -150px;
 	left: 0;
 	background-color: $green;
 	display: block;
@@ -49,6 +49,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	@include transition( all 0.2s ease-out );
 	font-size: 0.8em;
 	color: $white;
+	text-decoration: none;
 }
 #choose_message .type {
 	position: relative;
@@ -87,5 +88,14 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		position: absolute;
 		left: 100px;
 		bottom: 10px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	#choose_message .type span {
+		left: 70px;
+	}
+	#choose_message .type aside {
+		left: 10px;
 	}
 }

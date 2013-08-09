@@ -1,12 +1,12 @@
 .control-group
-  = f.label :ending, ending_label
-  .controls.row
-    .input-append.date-picker.span6
-      = text_field_tag :ending_date, formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input-large", 'data-format' => "yyyy-MM-dd", placeholder: 'Date', 'data-toggle' => 'tooltip', title: 'Date'
+  = f.label :ending, ending_label, class: "control-label"
+  .controls
+    .input-append.date-picker
+      = text_field_tag :ending_date, formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input-large", 'data-format' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: 'Coupon expiration date'
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
-    .input-append.time-picker.span6.text-right
-      = text_field_tag :ending_time, formatted_message_form_time(@message, :ending), class: "input-large", 'data-format' => "HH:mm PP", placeholder: 'Time', 'data-toggle' => 'tooltip', title: 'Time'
+    .input-append.time-picker
+      = text_field_tag :ending_time, formatted_message_form_time(@message, :ending), class: "input-large", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: 'Time'
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}

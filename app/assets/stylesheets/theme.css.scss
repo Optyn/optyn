@@ -702,6 +702,7 @@ i.myspace { background-position: -233px -51px; }
     font-weight: 300;
     font-size: 14px;
     letter-spacing: 1px;
+    height: 32px;
   }
 }
 
@@ -712,6 +713,14 @@ i.myspace { background-position: -233px -51px; }
 
 /* --------------------------------- Form elements */
 form.flat {
+  .optional {
+    background-color: $light-gray;
+    padding: 1%;
+    margin-bottom: 2%;
+    > h4 {
+      margin-top: 0;
+    }
+  }
 }
 #flat {
   input[type='text'],
@@ -724,28 +733,46 @@ form.flat {
     font-family: 'Open Sans', sans-serif;
     font-size: 17px;
     font-weight: 300;
+    line-height: 17px;
     margin: 0;
-    border: solid 2px $medium-gray;
     @include border-radius( 0 );
     padding: 0 10px;
-    line-height: 30px;
-    border: solid 2px rgba( 0, 0, 0, 0.3 );
+    border: solid 2px darken( $light-gray, 10% );
+    background-color: $light-gray;
+    box-shadow: none;
+    @include transition( all 0.3s ease-out );
+    &:focus {
+      border-color: $medium-gray;
+      background-color: $white;
+    }
   }
   input[type='text'],
   input[type='number'],
   input[type='email'],
   input[type='password'],
-  input[type='url'] {
-    height: 35px;
+  input[type='url'],
+  .uneditable-input {
+    min-height: 35px;
   }
   .uneditable-input {
-    background-color: $light-gray;
+    background-color: $white;
+  }
+  input[type='file'] {
+    height: 25px;
+    line-height: 17px;
+    font-size: 17px;
+    font-family: 'Open Sans';
+    vertical-align: middle;
+    box-shadow: none;
+    &:active {
+      background-color: $white;
+    }
   }
 }
 #flat {
   .input-append {
     .add-on {
-      height: 35px;
+      min-height: 35px;
       font-size: 12px;
       line-height: 33px;
       @include border-radius( 0 );

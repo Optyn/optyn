@@ -1,7 +1,7 @@
 .control-group
   = label_tag :incentive, "Incentivise/Thank your customer for the survey?",  class: 'control-label'
   .controls
-    %span.input-large.uneditable-input
+    %span.input-large.uneditable-input{ 'data-toggle' => 'tooltip', title: 'This email will be triggered once the user takes the survey through their Optyn inbox or Email sent to them.'}
       = parent_message.first_child_message_name
 
     %span.adjust-child-message-link
@@ -19,8 +19,8 @@
       .child-error-message
         = %{<span class="field-with-errors"><span class="help-inline error">#{parent_message.errors.get(:child_message).first}</span></span>}.html_safe
 
-    .trigger-message
-      This email will be triggered once the user takes the survey through their Optyn inbox or Email sent to them
+    / .trigger-message
+    /   This email will be triggered once the user takes the survey through their Optyn inbox or Email sent to them
 
 - unless parent_message.has_children?
   #response_message_modal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}

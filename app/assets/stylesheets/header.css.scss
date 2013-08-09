@@ -94,6 +94,9 @@
       }
     }
   }
+  .navbar.inner .container-fluid { /* Required for IE9 and below. */
+    background-color: $blue;
+  }
   .brand {
     margin: 0;
     border-right: solid 2px darken( $blue, 10% );

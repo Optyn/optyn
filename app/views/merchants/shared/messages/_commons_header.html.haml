@@ -1,4 +1,4 @@
 .control-group
-  .controls.row
-    = f.text_field :name, class: 'input-xlarge span12', placeholder: (name_label_text rescue "Name"), 'data-toggle' => 'tooltip', title: 'Name the campaign'
-    .span12 Something easy to remember.
+  = f.label :name, (name_label_text rescue "Name"), class: 'control-label'
+  .controls
+    = f.text_field :name, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Something easy to remember.'
