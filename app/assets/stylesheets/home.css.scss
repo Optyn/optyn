@@ -131,6 +131,16 @@
 #home .main-area .consumer .buttons span a {
   color: #fff;
 }
+#home .main-area .consumer .buttons span {
+  color: #fff;
+  text-decoration: underline;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#home .main-area .consumer .buttons span a {
+  color: #fff;
+}
 #home .main-area .merchant {
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.7);
