@@ -14,22 +14,6 @@
 
 /* Bootstrap overrides */
 
-.btn-success {
-  background-color: #5bb75b;
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-image: -moz-linear-gradient(top, #8fb450, #648a43);
-  background-image: -ms-linear-gradient(top, #8fb450, #648a43);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8fb450), to(#648a43));
-  background-image: -webkit-linear-gradient(top, #8fb450, #648a43);
-  background-image: -o-linear-gradient(top, #8fb450, #648a43);
-  background-image: linear-gradient(top, #8fb450, #648a43);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'8fb450, endColorstr='#'648a43, GradientType=0);
-  border-color: #51a351 #51a351 #387038;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-}
 .btn-success:hover,
 .btn-success:active,
 .btn-success.active,
@@ -80,13 +64,6 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
-  border-color: #81A74C;
-  outline: 0;
-  outline: thin dotted \9;
-  /* IE6-9 */
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #92C65F;
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #92C65F;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #92C65F;
 }
 
 /* Index
@@ -704,6 +681,15 @@ i.myspace { background-position: -233px -51px; }
     letter-spacing: 1px;
     height: 32px;
   }
+  .btn > i {
+    margin-left: -13px;
+  }
+  h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 25px;
+  }
 }
 
 
@@ -723,6 +709,9 @@ form.flat {
   }
 }
 #flat {
+  i {
+    margin-top: 4px;
+  }
   input[type='text'],
   input[type='number'],
   input[type='email'],
@@ -733,7 +722,7 @@ form.flat {
     font-family: 'Open Sans', sans-serif;
     font-size: 17px;
     font-weight: 300;
-    line-height: 17px;
+    line-height: 20px;
     margin: 0;
     @include border-radius( 0 );
     padding: 0 10px;
@@ -769,7 +758,14 @@ form.flat {
       background-color: $white;
     }
   }
-}
+
+  .tooltip {
+    opacity: 0.9;
+  }
+  .tooltip-inner {
+    border-radius: 0;
+  }
+}  /* /#flat */
 #flat {
   .input-append {
     .add-on {
@@ -784,5 +780,8 @@ form.flat {
         margin-top: -3px;
       }
     }
+  }
+  #message_form .add-on i {
+    margin-top: -3px;
   }
 }

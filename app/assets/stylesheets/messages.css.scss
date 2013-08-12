@@ -9,6 +9,19 @@
 
 #message_preview_container .outer-table .outer-cell .inner-table{padding:15px; max-width:600px; margin:0 auto; display:block;}
 
+#message_preview_container {
+	strong {
+		font-size: 1em;
+		font-weight: bold;
+		font-family: sans-serif;
+	}
+	h1 {
+		font-family: sans-serif;
+		background-color: transparent;
+		border: 0;
+	}
+}
+
 /**
  * Message list styles
  */

@@ -4,7 +4,7 @@
     background-color: rgba( #000, 0.2 );
     color: $dark-gray;
     padding: 2%;
-    margin-top: 5%;
+    margin-top: 150px;
     line-height: 42px;
     a {
       margin-right: 5px;
@@ -92,6 +92,9 @@
   }
   #message_form .actions {
     margin-top: 7%;
+  }
+  .modal-footer .actions {
+    margin-top: 0;
   }
 } /* / .m-app */
 
@@ -558,9 +561,6 @@
   width: 330px;
   border-right: 1px solid #ececec;
 }
-#merchant_page .mainbody .details-list {
-
-}
 #merchant_page .mainbody .details-list .item {
   padding-bottom: 15px;
 }
@@ -570,22 +570,10 @@
 #merchant_page .mainbody .marketing {
   width: 330px;
 }
-#merchant_page .mainbody .marketing .title {
-
-}
-#merchant_page .mainbody .marketing .title h3 {
-  padding-top: 0px;
-  color: #304d58;
-  margin-top: 0px;
-  font-size: 20px;
-  line-height: 20px;
-}
 #merchant_page .mainbody .marketing .details {
   font-size: 16px;
   color: #304d58;
   border-right: none;
-}
-#merchant_page .mainbody .marketing .details ul {
 }
 #merchant_page .mainbody .marketing .details li {
   padding-top: 11px;
@@ -599,4 +587,7 @@
 }
 #merchant_page .mainbody .marketing .details li:hover {
   background-color: #e7eff1;
+}
+#flat.preview.merchants-messages .add-on i {
+  margin-top: 4px;
 }

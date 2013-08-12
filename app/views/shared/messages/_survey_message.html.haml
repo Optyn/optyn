@@ -3,7 +3,8 @@
     - @survey = @message.survey
     - @survey_questions = @survey.survey_questions
 
-    %h3= "#{@survey.title}"
+    %h3{ style: 'font-family: sans-serif; font-size: 1.1em; font-weight: bold;' }
+      = "#{@survey.title}"
 
     - if preview
 

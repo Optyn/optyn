@@ -208,12 +208,6 @@ body {
     padding-left: 65px;
   }
 
-  h4 {
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 26px;
-  }
-
   .line1 {
     font-size: 0.85em;
   }
@@ -311,7 +305,7 @@ body {
 #flat.main.index {
   /* Styles for landing page */
   text-align: center;
-  background-image: image-url( '/assets/bg_landing.png' );
+  background-image: image-url( 'bg_landing.png' );
   background-position: center;
   font-size: 18px;
 }
@@ -348,6 +342,9 @@ body {
   h4 {
     font-weight: normal;
     margin-bottom: 0;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 26px;
   }
   strong {
     font-size: 1.5em;
