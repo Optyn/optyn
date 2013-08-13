@@ -47,14 +47,11 @@
 
 #merchants.pad3pc.clearfix
   .preview.app-container
-    .header
-      %h6
-        Use this cool tool to generate the Javascript so that you can just plug and play your Optyn button and start getting your customers to optin and grow your Customer Base.
-    .main
-      .customize
-        .header
-          Customize Your Optyn Button
-          %hr
+    %strong
+      Use this cool tool to generate the Javascript so that you can just plug and play your Optyn button and start getting your customers to opt-in and grow your customer base.
+    .main.row-fluid
+      .customize.span6
+        %h3 Customize
         .custom
           .form-wrapper
             - if  @application.blank? || @application.new_record?
@@ -62,6 +59,8 @@
             - else
               = render partial: 'edit'
 
-      = render partial: "preview"
+      .span6
+        %h3 Preview
+        = render partial: "preview"
 
     = render partial: 'advanced'

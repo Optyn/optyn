@@ -362,33 +362,6 @@
 }
 
 /* Optyn Button Preview Page */
-#merchants .preview .main {
-  background-color: #FFF;
-  border-radius: 6px;
-  height: 575px;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-#merchants .preview .main .header {
-  color: #1791c0;
-  font-weight: bold;
-  font-size: 18px;
-}
-#merchants .preview .main .header hr {
-  margin-top: 5px;
-  margin-bottom: 0px;
-}
-#merchants .preview .main .customize {
-  border-right: 1px solid #ececec;
-  padding-right: 30px;
-  width: 320px;
-}
-#merchants .preview .main .customize .custom {
-
-}
 #merchants .preview .main .customize .custom .option {
   padding-top: 10px;
   padding-right: 10px;
@@ -397,34 +370,7 @@
   width: 95%;
 }
 #merchants .preview .main .customize .refresh {
-  float: right;
-}
-#merchants .preview .main .customize .refresh .refreshbtn {
-  background: #e7eaeb;
-  border-radius: 4px;
-  display: inline-block;
-  height: 20px;
-  line-height: 18px;
-  top: 4px;
-  color: #1791c0;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  border: 1px #304d58;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#merchants .preview .main .customize .refresh .refreshbtn:hover{
-  background: #d6d6d6;
-  text-decoration: none;
-  text-shadow: none;
-}
-#merchants .preview .main .btn-preview {
-  border-left: 1px solid #ececec;
-  width: 320px;
-  padding-left: 30px;
-  margin-left: 0px;
+  margin-top: 30px;
 }
 #merchants .preview .main .btn-preview .optyn-preview {
   padding-top: 40px;
@@ -435,7 +381,7 @@
   padding-bottom: 10px;
 }
 #merchants .preview .main .btn-preview .codesnippet textarea {
-  width: 95%;
+  width: 100%;
 }
 #merchants .preview .main .btn-preview .btns {
   float: right;
@@ -461,28 +407,6 @@
   text-decoration: none;
   text-shadow: none;
 }
-#merchants .preview .main .btn-preview .btns .copybtn {
-  background: #86c440;
-  border-radius: 4px;
-  display: inline-block;
-  height: 20px;
-  line-height: 18px;
-  top: 4px;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  border: 1px #304d58;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 10px;
-}
-#merchants .preview .main .btn-preview .btns .copybtn:hover {
-  background: #64b905;
-  text-decoration: none;
-  text-shadow: none;
-}
 #merchants .preview .main .btn-preview .need-help {
   text-align: right;
   font-size: 10px;
@@ -492,15 +416,6 @@
   padding-top: 20px;
 }
 #merchants .preview .advanced .main-advanced {
-  background-color: #FFF;
-  border-radius: 6px;
-  height: 200px;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
 }
 #merchants .preview .advanced .actions {
   float: right;
