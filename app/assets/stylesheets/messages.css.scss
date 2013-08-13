@@ -76,6 +76,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	color: $black;
 	font-size: 1.2em;
 	z-index: 2;
+	text-decoration: none;
 	&:hover {
 		background-color: $green;
 		color: $white;
@@ -102,6 +103,22 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		left: 100px;
 		bottom: 10px;
 	}
+}
+
+#flat.preview.merchants-messages .add-on i {
+  margin-top: 4px;
+}
+.merchants-messages {
+  table {
+    clear: both;
+  }
+}
+#flat #message_meta_modal .add-on > i {
+  margin-top: 0;
+}
+#message_header_settings_form label {
+	display: inline;
+	margin-right: 10px;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
