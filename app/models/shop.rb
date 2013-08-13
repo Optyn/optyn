@@ -1,6 +1,7 @@
 require 'embed_code_generator'
 
 class Shop < ActiveRecord::Base
+  acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
   has_one :subscription, dependent: :destroy
   has_one :plan, through: :subscription
@@ -23,12 +24,14 @@ class Shop < ActiveRecord::Base
 
   mount_uploader :logo_img, ImageUploader
 
-  validates :name, :presence => true
-  validates :stype, :presence => true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
+  validates_as_paranoid
+  validates :name, presence: true, uniqueness:  { case_sensitive: false }
+  validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual
   validates :phone_number, :phony_plausible => true 
+  validates_uniqueness_of_without_deleted :name
   
 
   accepts_nested_attributes_for :managers
@@ -54,9 +57,27 @@ class Shop < ActiveRecord::Base
 
   scope :real, where(virtual: false)
 
+  scope :lower_name, ->(shop_name) { where(["LOWER(shops.name) LIKE LOWER(:shop_name)", {shop_name: shop_name}]) }
+
+  # Please run these callback after you recover a deleted shop
   after_create :create_dummy_survey, :create_select_all_label, :assign_identifier, :create_default_subscription
 
+  set_callback :recover do
+    self.deleted_at = nil
+    self.time_zone = "Eastern Time (US & Canada)"
+    self.save
+    create_dummy_survey
+    create_select_all_label
+    assign_identifier
+    create_default_subscription 
+    true
+  end
+
+
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
+  def self.for_name(shop_name)
+    lower_name(shop_name.to_s).first
+  end
 
   def self.by_app_id(app_id)
     for_app_id(app_id).first
@@ -308,9 +329,12 @@ class Shop < ActiveRecord::Base
   end
 
   def create_dummy_survey
+    puts "*" * 100
+    puts "In the callback"
+    puts "-" * 100
     unless self.virtual?
       unless survey.present?
-        dummy_survey = Survey.new
+        dummy_survey = self.build_survey
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)
@@ -323,7 +347,7 @@ class Shop < ActiveRecord::Base
 
   def create_select_all_label
     unless self.virtual?
-      label = Label.new(shop_id: self.id, name: Label::SELECT_ALL_NAME)
+      label = Label.find_or_initialize_by_shop_id_and_name(self.id, Label::SELECT_ALL_NAME)
       label.active = false
       label.save
     end
@@ -368,7 +392,13 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    create_subscription(:plan_id => Plan.starter.id, :active => false, :email => self.manager.email) unless shop.virtual
-    create_audit_entry('subscribed to default/starter plan') unless shop.virtual
+    unless shop.virtual
+      shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
+      if shop_subscription.new_record?
+        shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
+      end
+      shop_subscription.save
+      create_audit_entry('subscribed to default/starter plan')
+    end
   end
 end

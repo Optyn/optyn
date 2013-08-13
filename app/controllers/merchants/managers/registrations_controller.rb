@@ -11,14 +11,21 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
   end
 
   def create 
-    @shop = Shop.new(params[:shop_name])
+    shop_name = params[:shop_name][:name].to_s.downcase
+    @shop = Shop.with_deleted.for_name(shop_name) || Shop.new
+    @shop.attributes = params[:shop_name]
+
+    if @shop.managers.size > 1
+      @shop.managers.shift
+    end
 
     @manager = @shop.managers.first
     @manager.skip_password = true if params[:auth_id].present? && params[:auth_provider].present?
 
     clear_session_anyone_logged_in
 
-    if !@shop.shop_already_exists? && @shop.save
+    shop_created = (@shop.deleted? || @shop.new_record?) ? (@shop.new_record? ? @shop.save : @shop.recover) : @shop.valid?
+    if shop_created
       @shop.update_manager
       @shop.managers.first.create_authentication(params[:auth_id], params[:auth_provider]) if params[:auth_id].present?
       sign_in(@shop.managers.first)
