@@ -399,7 +399,9 @@ class Message < ActiveRecord::Base
 
   def update_visuals(options={})
     Message.transaction do 
-      update_attributes!(options)
+      # update_attributes!(options)
+      self.attributes = options
+      preview
       if options['message_visual_properties_attributes']['0']['make_default'].to_s == "1"
         hex = self.header_background_color_hex
         shop.set_header_background(hex)
