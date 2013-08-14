@@ -1,0 +1,28 @@
+= form_for @message, as: :message, url: update_header_merchants_message_path(@message.uuid), method: :put, html: {id: "message_header_settings_form"} do |f|
+
+  - starting_color = @message.header_background_color_css_val
+  - color_hex = @message.header_background_color_hex
+  = f.fields_for :message_visual_properties, @message.header_background_properties do |builder|
+    = builder.hidden_field :message_visual_section_id, value: MessageVisualSection.header_id
+    = builder.hidden_field :property_key, value: "header_background"
+    = builder.hidden_field :property_value, value: starting_color, class: "message-visual-property-value"
+
+    .span3
+      .control-group
+        = f.label :name, 'Customize Your Header Background Color', class: 'control-label'
+        #header_background.input-append.color{"data-color" => color_hex, "data-color-format" => "hex"}
+          .btn-group
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag :header_background_color, color_hex
+              %span.add-on
+                %i{:style => "background-color: #{color_hex};"}              
+    .span3
+      .control-group
+        .controls
+          %label.checkbox
+            = builder.check_box(:make_default)
+            Make this my default background color
+    .span2
+      .control-group
+        .actions
+          = submit_tag "Apply", class: 'btn'      

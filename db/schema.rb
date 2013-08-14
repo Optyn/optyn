@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808145856) do
+ActiveRecord::Schema.define(:version => 20130813155502) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -207,6 +207,14 @@ ActiveRecord::Schema.define(:version => 20130808145856) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "message_images", :force => true do |t|
+    t.integer  "message_id"
+    t.string   "title"
+    t.string   "image"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "message_labels", :force => true do |t|
     t.integer  "label_id"
     t.integer  "message_id"
@@ -234,6 +242,23 @@ ActiveRecord::Schema.define(:version => 20130808145856) do
   add_index "message_users", ["user_id", "message_folder_id"], :name => "index_message_users_on_user_id_and_message_folder_id"
   add_index "message_users", ["uuid"], :name => "index_message_users_on_uuid", :unique => true
 
+  create_table "message_visual_properties", :force => true do |t|
+    t.integer  "message_id"
+    t.integer  "message_visual_section_id"
+    t.string   "property_key"
+    t.text     "property_value"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "message_visual_properties", ["message_id", "message_visual_section_id"], :name => "join_table_index"
+
+  create_table "message_visual_sections", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "messages", :force => true do |t|
     t.string   "type"
     t.integer  "manager_id"
@@ -243,7 +268,7 @@ ActiveRecord::Schema.define(:version => 20130808145856) do
     t.text     "content"
     t.string   "state"
     t.datetime "send_on"
-    t.boolean  "send_immediately", :default => false
+    t.boolean  "send_immediately",                 :default => false
     t.integer  "parent_id"
     t.string   "uuid"
     t.text     "fine_print"
@@ -255,10 +280,12 @@ ActiveRecord::Schema.define(:version => 20130808145856) do
     t.boolean  "call_to_action"
     t.boolean  "special_try"
     t.text     "rsvp"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "survey_id"
     t.boolean  "permanent_coupon"
+    t.string   "button_url",       :limit => 2303
+    t.string   "button_text",      :limit => 1000
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
@@ -374,8 +401,8 @@ ActiveRecord::Schema.define(:version => 20130808145856) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.string   "stype"
     t.text     "description"
     t.string   "logo_img"
@@ -386,11 +413,13 @@ ActiveRecord::Schema.define(:version => 20130808145856) do
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
     t.boolean  "virtual",                    :default => false
-    t.integer  "email_box_impression_count", :default => 0
+    t.integer  "email_box_impression_count", :default => 0  
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.datetime "deleted_at"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true

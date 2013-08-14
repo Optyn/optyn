@@ -1,0 +1,5 @@
+= message_bottom_image(@message)
+
+- if @message.show_button?
+	= link_to @message.button_text, @message.display_button_link
+

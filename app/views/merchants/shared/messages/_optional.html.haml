@@ -1,0 +1,24 @@
+.headertext
+	%h5
+		Optional
+
+= f.fields_for :message_image_attributes, @message.message_image do |builder|
+	.control-group
+		= builder.label :image, "Add an Image?", class: 'control-label'
+		.controls
+			= builder.file_field :image
+			Your image will be autmatically added under the details of your message if you upload it.
+
+.control-group
+	= f.label :button_url, "Url", class: 'control-label'
+	.controls
+		= f.text_field :button_url, class: 'input-xlarge'
+		enter the URL where you want the button and/or image to link
+
+.control-group
+	= f.label :button_text, class: 'control-label'
+	.controls
+		= f.text_field :button_text, class: 'input-xlarge'
+
+
+
