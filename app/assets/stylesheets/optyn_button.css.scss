@@ -15,13 +15,14 @@
         border-color: $medium-gray;
       }
     }
-    .title {
+    caption {
       font-weight: bold;
       color: $gray;
       padding: 0 5px;
     }
     .dropdown-toggle {
       margin-right: 10px;
+      padding-right: 10px;
       height: 50px;
       border: 0;
       background-color: transparent;
@@ -46,5 +47,11 @@
   }
   .pad3pc {
     clear: both;
+  }
+  .tip {
+    margin-right: 10px;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

@@ -6,44 +6,8 @@
       STATISTICS
       %span.caret
     %ul.dropdown-menu
-      %li.title OPTYN BUTTON
       %li
-        %table.table.table-condensed
-          %tr
-            %td Conversion
-            %td 10%
-            %td up
-          %tr
-            %td Total opt-ins
-            %td 123
-            %td up
-          %tr
-            %td Total impressions
-            %td 456
-            %td up
-          %tr
-            %td Total clicks
-            %td 789
-            %td up
-      %li.title Email Box
-      %li
-        %table.table.table-condensed
-          %tr
-            %td Conversion
-            %td 10%
-            %td up
-          %tr
-            %td Total opt-ins
-            %td 123
-            %td up
-          %tr
-            %td Total impressions
-            %td 456
-            %td up
-          %tr
-            %td Total clicks
-            %td 789
-            %td up
+        = render partial: 'button_stats_report'
 
 #merchants.pad3pc.clearfix
   .preview.app-container

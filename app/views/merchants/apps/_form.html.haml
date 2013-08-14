@@ -5,17 +5,20 @@
   .option
     %h5 Button Size
 
-    %label.radio.inline{"data-toggle" => "tooltip", :title => "The Small button is great for inline content and if there is limited space."}
-      = f.radio_button(:call_to_action, 1.to_s)
-      Small
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Small button is great for inline content and if there is limited space.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button(:call_to_action, 1.to_s)
+        Small
 
-    %label.radio.inline{"data-toggle" => "tooltip", :title => "The Large Button gives you a great way to get noticed. Put it anywhere on the site."}
-      = f.radio_button(:call_to_action, 2.to_s)
-      Large
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Large Button gives you a great way to get noticed. Put it anywhere on the site.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button(:call_to_action, 2.to_s)
+        Large
 
-    %label.radio.inline{"data-toggle" => "tooltip", :title => "An E-Mail Box is an alternative to the optyn button. The E-Mail Box is the traditional way to capture users."}
-      = f.radio_button(:call_to_action, 3.to_s)
-      Email Box
+    %a{"data-toggle" => "tooltip", :href => "#", :title => "An E-Mail Box is an alternative to the optyn button. The E-Mail Box is the traditional way to capture users.", :class => "tip"}
+      %label.radio.inline
+        = f.radio_button(:call_to_action, 3.to_s)
+        Email Box
 
   .option
     %h5 Bar Option
@@ -65,7 +68,7 @@
 
     - unless @application.new_record?
       .refresh
-        %a.btn.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save
+        %a.btn.refreshbtn{:id => "save_button", :href => "javascript:void(0)", :class => 'btn-success'} Save
         %a.btn.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Token
     - else
       .refresh

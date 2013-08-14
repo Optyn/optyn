@@ -38,5 +38,5 @@
     /   = image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
     /   = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
 
-  - if @optyn_button_stats.present?
-    = render partial: "merchants/apps/button_stats_report"
+  / - if @optyn_button_stats.present?
+  /   = render partial: "merchants/apps/button_stats_report"
