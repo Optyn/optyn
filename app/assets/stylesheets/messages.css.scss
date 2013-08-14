@@ -120,6 +120,9 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	display: inline;
 	margin-right: 10px;
 }
+.preview-text > .span3 {
+	text-align: right;
+}
 
 @media (min-width: 768px) and (max-width: 979px) {
 	#choose_message .type span {

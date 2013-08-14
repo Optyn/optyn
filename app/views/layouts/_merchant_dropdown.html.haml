@@ -22,9 +22,8 @@
         = image_tag "dropdown_surveys.png"
         My Surveys
     %li
-      %a{:href => merchants_shop_path}
+      %a{:href => merchants_shop_path, :class => 'hr'}
         = image_tag "dropdown_settings.png"
         Manage Shop
-    %hr
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

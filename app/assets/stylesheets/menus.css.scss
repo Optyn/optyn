@@ -40,7 +40,10 @@
       color: $white;
     }
   }
-}
+  .active {
+    background-color: lighten( $black, 15% );
+  }
+}  /* /#flat .merchant-menu */
 
 .merchant-menu > li > a > img {
   padding-right: 10px;
