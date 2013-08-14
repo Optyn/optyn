@@ -10,6 +10,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def new
     @message = Message.new
     @message.manager_id = current_manager.id
+    #@message.build_message_image
   end
 
   def create
@@ -30,6 +31,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def edit
     @message = Message.for_uuid(params[:id])
     @message_type = @message.type.underscore
+    #@message.build_message_image if @message.message_image.blank?
   end
 
   def update
@@ -92,6 +94,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def show
     @message = Message.for_uuid(params[:id])
     @shop = @message.shop
+    @shop_logo = true
   end
 
   def launch
@@ -137,5 +140,15 @@ class Merchants::MessagesController < Merchants::BaseController
     parent_message.reload
 
     render json: {response_email_fields: render_to_string(partial: "merchants/shared/messages/response_email_fields", locals: {parent_message: parent_message})}
+  end
+
+  def update_header
+    @message = Message.find_by_uuid(params[:id])
+    @message.update_visuals(params[:message])
+    @shop_logo = true
+    @shop = @message.shop
+    
+
+    render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
   end
 end

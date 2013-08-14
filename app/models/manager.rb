@@ -21,9 +21,9 @@ class Manager < ActiveRecord::Base
   validate :check_for_used_user_email
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner,
-                  :confirmed_at, :picture, :current_password
-  attr_accessor :skip_password
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner, :confirmed_at, :picture, :current_password
+  attr_accessor :skip_password, :skip_email
+
   accepts_nested_attributes_for :file_imports
 
   after_create :assign_uuid, :send_welcome_email
@@ -103,9 +103,8 @@ class Manager < ActiveRecord::Base
   end
 
   def send_welcome_email
-    if self.partner_optyn? && !self.shop.virtual
-      Resque.enqueue(WelcomeMessageSender, :manager, self.id)
-    end
+    return if self.shop.virtual || self.skip_email || !(self.partner_optyn?)
+    Resque.enqueue(WelcomeMessageSender, :manager, self.id) 
   end
 
   def check_for_used_user_email

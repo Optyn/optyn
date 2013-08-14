@@ -35,6 +35,13 @@ function MerchantMessage() {
             this.hookDiscardChildMessage();
             this.hookEditChildMessage();
         }
+
+        if($('#message_header_settings_form').length){
+            this.hookHeaderColorPicker();
+            this.hookColorPickerChange();
+            this.hookHeaderColorChange();
+            this.hookHeaderSettingSubmission();
+        }
     };
 
     this.hookChosen = function () {
@@ -240,6 +247,56 @@ function MerchantMessage() {
             e.preventDefault();
             $('#edit_child_location').val($(this).prop('href'));
             $('#message_fields_wrapper form').submit();
+        });
+    };
+
+    this.hookHeaderColorPicker = function(){
+        $('#header_background').colorpicker({format: 'hex'});
+    };
+
+    this.hookHeaderColorChange = function(){
+        $('body').on('change', '#header_background_color', function(){
+            $('#header_background').colorpicker('setValue', $('#header_background_color').val());      
+        });
+    };
+
+    this.hookColorPickerChange = function(){
+      $('#header_background').colorpicker().on('changeColor', function(event){
+        var hexVal = event.color.toHex();
+        $('.message-visual-property-value').val('background-color: ' + hexVal);
+        $('#header_background_color').val(hexVal);
+
+      });      
+    };
+
+    this.hookHeaderSettingSubmission = function(){
+        $('body').on('submit', '#message_header_settings_form', function(event){
+            event.preventDefault();
+            current.ajaxHeaderFormSubmit();
+        });
+    };
+
+    this.ajaxHeaderFormSubmit = function(){
+        var $headerForm = $('#message_header_settings_form');
+        
+        $.ajax({
+            type: 'POST',
+            url: $headerForm.attr('action'),
+            data: $headerForm.serialize(),
+            beforeSend: function(){
+              $('#message_preview_container').hide();
+              $('.loading').show();      
+            },
+            success: function(data){
+               $('#perview_wrapper').replaceWith(data);
+                current.hookHeaderColorPicker();
+                current.hookColorPickerChange();
+            },
+            error: function(){
+                alert("An Error Occured white setting the color. Please refresh you page and try again.");
+                $('#message_preview_container').show();
+                $('.loading').hide(); 
+            }
         });
     };
 }

@@ -1,0 +1,10 @@
+#perview_wrapper
+  .span8
+    = render partial: "header_form"
+
+  .span8{:style => "margin-left: 100px;"}
+    = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
+
+  %div.loading{:style => "display: none;"}
+    %strong
+      Please Wait....    

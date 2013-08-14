@@ -4,6 +4,7 @@ require "#{File.dirname(__FILE__)}/seed_data/plans.rb"
 require "#{File.dirname(__FILE__)}/seed_data/states.rb"
 require "#{File.dirname(__FILE__)}/seed_data/permissions.rb"
 require "#{File.dirname(__FILE__)}/seed_data/message_folders.rb"
+require "#{File.dirname(__FILE__)}/seed_data/message_visual_sections.rb"
 puts "Adding the Optyn Partner"
 Rake::Task['partner:create_optyn'].invoke
 puts "Generating client_id and client_secret for Optyn Magic Owner"

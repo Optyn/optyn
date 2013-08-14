@@ -55,4 +55,61 @@ namespace :shop do
 
     end
   end
+
+  desc "Create shops for sales reps going door to door"
+  task :pre_add_for_sales => :environment do
+    filepath = ENV['filepath']
+    if filepath.present?
+      csv_table = CSV.table(filepath, {headers: true})
+      headers = csv_table.headers
+      output = []  
+      output_headers = %Q("Shop Name","Shop Phone","Manager Name","Manager Email","Password",Status")
+      output << output_headers
+      puts "Starting the parser..."
+      counter = 1
+      csv_table.each do |row|
+        puts "Parsing row #{counter}: Shop: #{row[:shop_name]}"
+        output_row = []
+        output_row << %Q("#{row[:shop_name]}")
+        output_row << %Q("#{row[:shop_phone]}")
+        output_row << %Q("#{row[:manager_name]}")
+        output_row << %Q("#{row[:manager_email]}")
+        existing_shop = Shop.where(["LOWER(shops.name) LIKE LOWER(?)", row[:shop_name].to_s])
+
+        unless existing_shop.present?
+          begin
+            shop = Shop.new()
+            shop.name = row[:shop_name] 
+            shop.phone_number = row[:shop_phone]
+            shop.stype = "local"
+            manager = shop.managers.build
+            manager.name = row[:manager_name]
+            manager.email = row[:manager_email]
+            token =  Devise.friendly_token.first(8).downcase
+            manager.password = token
+            manager.password_confirmation = token
+            shop.save!
+
+            output_row << %Q("#{manager.password}")
+            output_row << %Q{"New Shop Created"}
+          rescue => e
+            output_row << %Q("-")
+            output_row << %Q("#{e.message}")  
+          end
+        else
+          output_row << %Q("-")
+          output_row << %Q("Existing Shop")
+        end
+
+        puts "Status for row: #{output_row.last}"
+        output << output_row.join(",")
+        counter += 1
+      end
+
+      output_filepath = "#{Rails.root.to_s}/tmp/#{File.basename(filepath)}.#{Time.now.to_i}"
+      File.open(output_filepath, "w+") do |file|
+        file.puts(output.join("\n"))
+      end
+    end
+  end
 end

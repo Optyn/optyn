@@ -3,6 +3,9 @@ require 'embed_code_generator'
 class Shop < ActiveRecord::Base
   include UuidFinder
 
+  acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
+
+
   has_one :subscription, dependent: :destroy
   has_one :plan, through: :subscription
   has_many :managers, dependent: :destroy
@@ -20,15 +23,19 @@ class Shop < ActiveRecord::Base
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :phone_number
+
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number
+
   mount_uploader :logo_img, ImageUploader
 
-  validates :name, :presence => true
-  validates :stype, :presence => true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
-  validates :identifier, uniqueness: true, presence: true
+  validates_as_paranoid
+  validates :name, presence: true, uniqueness:  { case_sensitive: false }
+  validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
+  validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual
   validates :phone_number, :phony_plausible => true 
+  validates_uniqueness_of_without_deleted :name
   
 
   accepts_nested_attributes_for :managers
@@ -56,7 +63,7 @@ class Shop < ActiveRecord::Base
 
   scope :by_name, ->(shop_name) { where(["shops.name ILIKE :name", {name: shop_name}]) }
 
-  scope :by_uuid, ->(uuid) { where(uuid: uuid) }
+  scope :lower_name, ->(shop_name) { where(["LOWER(shops.name) LIKE LOWER(:shop_name)", {shop_name: shop_name}]) }
 
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
@@ -64,7 +71,22 @@ class Shop < ActiveRecord::Base
 
   after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
 
+  set_callback :recover do
+    self.deleted_at = nil
+    self.time_zone = "Eastern Time (US & Canada)"
+    self.save
+    create_dummy_survey
+    create_select_all_label
+    assign_identifier
+    create_default_subscription 
+    true
+  end
+
+
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
+  def self.for_name(shop_name)
+    lower_name(shop_name.to_s).first
+  end
 
   def self.for_name(shop_name)
     by_name(shop_name).first
@@ -338,13 +360,19 @@ class Shop < ActiveRecord::Base
     managers.owner.first || managers.first
   end
 
+  def set_header_background(color_hex)
+    shop.header_background_color = color_hex
+    shop.save(validate: false)
+  end
+
   def partner_optyn?
     self.partner.optyn?
   end
 
   def error_messages
     self.errors.full_messages
-  end
+  end  
+  
 
   private
   def self.sanitize_domain(domain_name)
@@ -359,7 +387,7 @@ class Shop < ActiveRecord::Base
   def create_dummy_survey
     unless self.virtual?
       unless survey.present?
-        dummy_survey = Survey.new
+        dummy_survey = self.build_survey
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)
@@ -372,7 +400,7 @@ class Shop < ActiveRecord::Base
 
   def create_select_all_label
     unless self.virtual?
-      label = Label.new(shop_id: self.id, name: Label::SELECT_ALL_NAME)
+      label = Label.find_or_initialize_by_shop_id_and_name(self.id, Label::SELECT_ALL_NAME)
       label.active = false
       label.save
     end
@@ -425,7 +453,13 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    create_subscription(:plan_id => Plan.starter.id, :active => false, :email => self.manager.email) unless shop.virtual
-    create_audit_entry('subscribed to default/starter plan') unless shop.virtual
+    unless shop.virtual
+      shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
+      if shop_subscription.new_record?
+        shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
+      end
+      shop_subscription.save
+      create_audit_entry('subscribed to default/starter plan')
+    end
   end
 end
