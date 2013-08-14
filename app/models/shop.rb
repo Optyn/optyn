@@ -329,9 +329,6 @@ class Shop < ActiveRecord::Base
   end
 
   def create_dummy_survey
-    puts "*" * 100
-    puts "In the callback"
-    puts "-" * 100
     unless self.virtual?
       unless survey.present?
         dummy_survey = self.build_survey
