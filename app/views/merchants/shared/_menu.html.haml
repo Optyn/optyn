@@ -1,18 +1,50 @@
-.leftNav
-  %div
-    / Hello
-    / = current_user.name
-    = link_to "Dashboard", merchants_root_path, :class => active(params[:controller], "dashboards")
-    = link_to "Engage!", merchants_messages_path, :class => active(params[:controller], "My Messages")
-    = link_to "My Customers", :href => '/merchants/connections', :class => active(params[:controller], "connections")
-    = link_to "Surveys", merchants_survey_path, :class => active(params[:controller], "Surveys")
-    /= link_to "Segmentation", merchants_survey_survey_answers_path, :class => active(params[:controller], "Segmentation")
-    = link_to "Manage Account", merchants_shop_path, :class => active(params[:controller], "Manage Account")
-    /= link_to "Setup", merchants_app_path, :class => active(params[:controller], "Setup")
-    /= link_to "Import Users", merchants_file_imports_path, :class => active(params[:controller], "Import Users")
-    = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
-  - if @optyn_button_stats.present?
-    = render partial: "merchants/apps/button_stats_report"
+.leftNav.span4
+  #accordion.accordion
+    .accordion-group
+      .accordion-heading
+        .accordion-toggle
+          %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#one' } Dashboard
+      #one.accordion-body.collapse.in
+        .accordion-inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    .accordion-group
+      .accordion-heading
+        .accordion-toggle
+          %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#two' } Engage!
+      #two.accordion-body.collapse
+        .accordion-inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    .accordion-group
+      .accordion-heading
+        .accordion-toggle
+          %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#three' } My Customers
+      #three.accordion-body.collapse
+        .accordion-inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    .accordion-group
+      .accordion-heading
+        .accordion-toggle
+          %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#four' } Statistics
+      #four.accordion-body.collapse
+        .accordion-inner
+          - if @optyn_button_stats.present?
+            = render partial: "merchants/apps/button_stats_report"
+
+
+  / %div
+  /   / Hello
+  /   / = current_user.name
+  /   = link_to "Dashboard", merchants_root_path, :class => active(params[:controller], "dashboards")
+  /   = link_to "Engage!", merchants_messages_path, :class => active(params[:controller], "My Messages")
+  /   = link_to "My Customers", :href => '/merchants/connections', :class => active(params[:controller], "connections")
+  /   = link_to "Surveys", merchants_survey_path, :class => active(params[:controller], "Surveys")
+  /   /= link_to "Segmentation", merchants_survey_survey_answers_path, :class => active(params[:controller], "Segmentation")
+  /   = link_to "Manage Account", merchants_shop_path, :class => active(params[:controller], "Manage Account")
+  /   /= link_to "Setup", merchants_app_path, :class => active(params[:controller], "Setup")
+  /   /= link_to "Import Users", merchants_file_imports_path, :class => active(params[:controller], "Import Users")
+  /   = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+  / - if @optyn_button_stats.present?
+  /   = render partial: "merchants/apps/button_stats_report"
+
+
+
 
 / .span2.leftNav
 /   %ul.merchant-menu
