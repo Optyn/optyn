@@ -1,7 +1,7 @@
 class BetaUserMailer < ActionMailer::Base
-	default from: '"Email" <email@optyn.com>'
+	default from: '"Optyn.com" <email@optyn.com>'
 
 	def send_invite(email_address)
-		mail(:to => email_address, :subject => "Welcome to Optyn!", bcc: ['"Gaurav Gaglani" <gaurav@optyn.com>', '"Alen Malkoc" <alen@optyn.com>'])
+		mail(:to => email_address, :subject => "Optyn is now live. Check it out!" )
 	end	
 end
