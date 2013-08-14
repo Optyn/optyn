@@ -399,7 +399,9 @@ class Message < ActiveRecord::Base
 
   def update_visuals(options={})
     Message.transaction do 
-      update_attributes!(options)
+      # update_attributes!(options)
+      self.attributes = options
+      preview
       if options['message_visual_properties_attributes']['0']['make_default'].to_s == "1"
         hex = self.header_background_color_hex
         shop.set_header_background(hex)
@@ -565,7 +567,7 @@ class Message < ActiveRecord::Base
       return
     end 
 
-    if message_image.blank? && button_text.blank?
+    if button_url.present? && message_image.blank? && button_text.blank?
       self.errors.add(:button_url, "You have added a link but there is no image uploaded or button pointing to it. Please add one.")
     end
   end
