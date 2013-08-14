@@ -671,10 +671,6 @@ i.myspace { background-position: -233px -51px; }
     font-weight: 300;
     font-size: 14px;
     letter-spacing: 1px;
-    height: 32px;
-  }
-  .btn > i {
-    margin-left: -13px;
   }
   h3 {
     font-family: 'Open Sans', sans-serif;
@@ -749,6 +745,9 @@ form.flat {
     &:active {
       background-color: $white;
     }
+  }
+  textarea {
+    padding-top: 5px;
   }
 
   .tooltip {

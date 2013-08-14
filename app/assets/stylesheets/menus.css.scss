@@ -42,6 +42,10 @@
   }
   .active {
     background-color: lighten( $black, 15% );
+    color: $white;
+    &:hover {
+      background-color: $black;
+    }
   }
 }  /* /#flat .merchant-menu */
 
