@@ -648,6 +648,7 @@ i.myspace { background-position: -233px -51px; }
   border-radius: 100px;
   background-color: $medium-gray;
   & > .step {
+    cursor: default;
     float: left;
     padding: 2px 30px;
     color: $white;
