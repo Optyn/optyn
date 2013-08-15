@@ -46,7 +46,8 @@
     .clabel
       = f.label :time_zone
     .controls
-      = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, model: ActiveSupport::TimeZone
+      = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, {model: ActiveSupport::TimeZone, include_blank: '-- Timezone --'}
+      = hidden_field_tag(:timezone_mapping, ActiveSupport::TimeZone::MAPPING.sort.to_json)
 
   .control-group
     .clabel
