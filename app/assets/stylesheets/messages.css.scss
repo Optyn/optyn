@@ -30,10 +30,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 #choose_message {
 	padding-bottom: 20px;
 }
-#choose_message .row {
+#choose_message .row-fluid {
 	margin-bottom: 20px;
 }
-#choose_message .row .type {
+#choose_message a:hover {
+	text-decoration: none;
+}
+#choose_message .row-fluid .type {
 	background-color: white;
 	border-radius: 6px;
 	text-align: center;
@@ -44,20 +47,20 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	padding-right: 10px;
 	width: 215px;
 	-webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  	-moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  	box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
+	-moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
+	box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
 }
-#choose_message .row .type:hover {
+#choose_message .row-fluid .type:hover {
 	background-color: #8ab953;
 	color:white;
 }
-#choose_message .row .type h3 {
+#choose_message .row-fluid .type h3 {
 	color: #263d45;
 	font-size: 16px;
 	font-weight: bold;
 }
 
-#choose_message .row .type img {
+#choose_message .row-fluid .type img {
 
 }
 /* Header Text for compose */
