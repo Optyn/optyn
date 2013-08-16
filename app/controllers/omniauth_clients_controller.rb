@@ -35,11 +35,14 @@ class OmniauthClientsController < ApplicationController
 		  		@user.save
 		  		@authentication = @user.authentications.build(params[:user][:authentication])
 		  		@authentication.save
-		  		sign_in_and_redirect @user
 	  	  end
+	  	  sign_in @user
+	  		session[:omniauth_user_authentication_id] = @authentication.id
+	  		redirect_to after_sign_in_path_for(@user)
+	  		nullify_omniauth_user_type
   		rescue ActiveRecord::RecordInvalid => e
   			flash[:alert] = "Email is already in use."
- 				render action: "new_twitter" 			
+ 			render action: "new_twitter" 			
   		end	
   	end
   end
