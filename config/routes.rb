@@ -71,6 +71,7 @@ Optyn::Application.routes.draw do
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
   match '/auth/failure' => 'omniauth_clients#failure'
   match '/omniauth_clients/login_type', to: 'omniauth_clients#login_type', as: :login_type_omniauth_clients
+  post 'omniauth_clients/create_for_twitter', to: 'omniauth_clients#create_for_twitter', as: :create_for_twitter_omniauth_clients
 
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
