@@ -1,0 +1,57 @@
+#flat.merchants-apps.show {
+  .menu-cont {
+    height: 50px;
+    background: $light-gray;
+    border-bottom: solid 1px $medium-gray;
+    text-align: right;
+    > .btn-group {
+    }
+    > .btn-group.open {
+      .dropdown-toggle {
+        background-color: $white;
+        border-style: solid;
+        border-left-width: 3px;
+        border-right-width: 3px;
+        border-color: $medium-gray;
+      }
+    }
+    caption {
+      font-weight: bold;
+      color: $gray;
+      padding: 0 5px;
+    }
+    .dropdown-toggle {
+      margin-right: 10px;
+      padding-right: 10px;
+      height: 50px;
+      border: 0;
+      background-color: transparent;
+      box-shadow: none;
+      line-height: 50px;
+      width: 250px;
+      text-align: right;
+      > .caret {
+        margin-top: 23px;
+      }
+    }
+    .dropdown-menu {
+      width: 250px;
+      text-align: left;
+      left: auto;
+      right: 10px;
+      margin: 0;
+      border: solid 3px $medium-gray;
+      border-top: 0;
+      @include box-shadow( none );
+    }
+  }
+  .pad3pc {
+    clear: both;
+  }
+  .tip {
+    margin-right: 10px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

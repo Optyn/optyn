@@ -47,13 +47,8 @@ $(document).ready(function () {
 
 $( function() {
     // Code for responsive design for Launchrock theme.
-    $( '#dashboard' ).css( 'overflow', 'scroll' );
-    $( '.leftNav' ).css( 'overflow', 'scroll' );
-    $( '.leftNav' ).css( 'position', 'fixed' );
-    $( '.span8' ).addClass( 'offset4' );
     function setDashboardHt() {
-        var height = $( window ).innerHeight() - parseInt( $( '.navbar' ).css( 'height' )) - 20;
-        $( '#dashboard' ).css( 'height', height );
+        var height = $( window ).innerHeight() - parseInt( $( '.navbar' ).css( 'height' ));
         $( '.leftNav' ).css( 'height', height );
     }
     setDashboardHt();

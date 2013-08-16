@@ -5,13 +5,41 @@
         .accordion-toggle
           %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#one' } Dashboard
       #one.accordion-body.collapse.in
-        .accordion-inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .accordion-inner
+          %table.table.table-condensed.table-striped.db-overview
+            %tbody
+              %tr
+                %td New Connections in last 24 hours
+                %td 123
+              %tr
+                %td New Connections last 7 days
+                %td 456
+              %tr
+                %td New Connections last 30 days
+                %td 789
+              %tr
+                %td Total Active New Connections
+                %td 123
+          %a.btn.btn-primary.btn-block{ href: '/' } Visit dashboard
     .accordion-group
       .accordion-heading
         .accordion-toggle
           %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#two' } Engage!
       #two.accordion-body.collapse
-        .accordion-inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .accordion-inner.create-campaign-links
+          %a.btn.btn-block{ href: '#' } Create a coupon
+          %a.btn.btn-block{ href: '#' } Announce a special
+          %a.btn.btn-block{ href: '#' } Announce a sale
+          %a.btn.btn-block{ href: '#' } General announcement
+          %a.btn.btn-block{ href: '#' } New product
+          %a.btn.btn-block{ href: '#' } New event
+          %a.btn.btn-block{ href: '#' } Survey time
+          %a.btn.btn-block.disabled{ href: '#' }
+            Create a contest
+            %span.pull-right COMING SOON
+          %a.btn.btn-block.disabled{ href: '#' }
+            Custom HTML Campaign
+            %span.pull-right COMING SOON
     .accordion-group
       .accordion-heading
         .accordion-toggle
@@ -26,6 +54,8 @@
         .accordion-inner
           - if @optyn_button_stats.present?
             = render partial: "merchants/apps/button_stats_report"
+          - else
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
   / %div
