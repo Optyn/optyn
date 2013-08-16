@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 
       if authentication.blank?
         authentication = user.authentications.new(uid: auth['uid'], provider: auth['provider'], image_url: auth.info.image)
-        authentication.save
+        authentication.save unless user.new_record?
       end
     end
 
@@ -216,9 +216,7 @@ class User < ActiveRecord::Base
   private
   def self.persist_with_twitter_exception(user, provider)
     user.skip_password = true
-    if 'twitter' == provider
-      user.save(validate: false)
-    end
+    return if 'twitter' == provider
     user.save
   end
 
