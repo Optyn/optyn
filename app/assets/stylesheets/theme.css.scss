@@ -759,11 +759,12 @@ form.flat {
   }
 }  /* /#flat */
 #flat {
-  .input-append {
+  .input-append,
+  .input-prepend {
     .add-on {
       min-height: 35px;
       font-size: 12px;
-      line-height: 33px;
+      line-height: 25px;
       @include border-radius( 0 );
       border-color: $medium-gray;
       border-width: 2px;

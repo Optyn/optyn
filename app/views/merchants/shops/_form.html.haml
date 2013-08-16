@@ -1,7 +1,7 @@
 #update_shop_wrapper
   .control-group
     .controls
-      = f.text_field :name, 'data-toggle' => "tooltip", 'title' => :name
+      = f.text_field :name, 'data-toggle' => "tooltip", 'title' => :name, class: 'span12'
 
   .control-group
     .clabel
@@ -15,13 +15,13 @@
     .clabel
       = f.label :description
     .controls
-      = f.text_area :description, 'data-toggle' => "tooltip", 'title' => :description, :placeholder => :description
+      = f.text_area :description, 'data-toggle' => "tooltip", 'title' => :description, :placeholder => :description, class: 'span12'
 
   .control-group
     .controls.input-prepend
       %span.add-on
         %i.icon-globe
-      = f.url_field :website, 'data-toggle' => "tooltip", 'title' => :website, :placeholder => :website
+      = f.url_field :website, 'data-toggle' => "tooltip", 'title' => :website, :placeholder => :website, class: 'span12'
       .help-block
         %em Example: http://www.example.com
 
@@ -48,7 +48,7 @@
 
   .control-group
     .controls{ 'data-toggle' => 'tooltip', :title => 'Business Category' }
-      = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:80%; height:0px", :multiple => true}
+      = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select span12", :style => "height:0px", :multiple => true}
   .action-buttons
     = f.submit "Update" , class: "btn btn-primary"
     = link_to "Cancel", merchants_shop_path, class: 'btn'

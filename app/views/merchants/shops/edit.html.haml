@@ -1,7 +1,9 @@
 = banner("Edit #{current_shop.name} Details")
 
+= render partial: 'merchants/merchant_managers/tabs'
+
 #merchants.pad3pc
-  .container
+  .container-fluid
     .form 
       = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form'} do |f|
         = render :partial => 'form', :locals => {f: f}
