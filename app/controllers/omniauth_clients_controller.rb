@@ -1,5 +1,5 @@
 class OmniauthClientsController < ApplicationController
-	after_filter :nullify_omniauth_user_type, except: [:login_type]
+	after_filter :nullify_omniauth_user_type, except: [:login_type, :create_for_twitter, :create]
 
 	def create
 		omniauth = env['omniauth.auth']
@@ -26,33 +26,57 @@ class OmniauthClientsController < ApplicationController
     head :ok
   end
 
+  def create_for_twitter
+  	if session[:omniauth_user].present?
+  		begin
+  			User.transaction do
+		  		@user = User.new(params[:user].except(:authentication))
+		  		@user.skip_password = true
+		  		@user.save
+		  		@authentication = @user.authentications.build(params[:user][:authentication])
+		  		@authentication.save
+	  	  end
+	  	  sign_in @user
+	  		session[:omniauth_user_authentication_id] = @authentication.id
+	  		redirect_to after_sign_in_path_for(@user)
+	  		nullify_omniauth_user_type
+  		rescue ActiveRecord::RecordInvalid => e
+  			flash[:alert] = "Email is already in use."
+ 			render action: "new_twitter" 			
+  		end	
+  	end
+  end
+
 	private
 
 	def create_manager(omniauth)
-		manager, authentication = Manager.create_from_omniauth(omniauth)
+		@manager, @authentication = Manager.create_from_omniauth(omniauth)
 
-		if manager.new_record?
+		if @manager.new_record?
 			@shop = Shop.new
-			@shop.managers.build(:name => manager.name, :email => manager.email)
+			@shop.managers.build(:name => @manager.name, :email => @manager.email)
 			@omniauth = omniauth
 			render :template => "merchants/managers/registrations/new"
 		else
 			flash.notice = "Signed in!"
-			sign_in_and_redirect manager
-      session[:omniauth_manager_authentication_id] = authentication.id
+			sign_in_and_redirect @manager
+      session[:omniauth_manager_authentication_id] = @authentication.id
+      nullify_omniauth_user_type
 		end
 
 	end
 
 	def create_user(omniauth)
-		user, authentication = User.from_omniauth(omniauth)
-		if user.persisted?
+		@user, @authentication = User.from_omniauth(omniauth)
+
+		if @user.persisted?
 			flash.notice = "Signed in!"
-			sign_in_and_redirect user
-      session[:omniauth_user_authentication_id] = authentication.id
+			sign_in_and_redirect @user
+      session[:omniauth_user_authentication_id] = @authentication.id
+      nullify_omniauth_user_type
     else
-      flash[:alert] = authentication.provider.humanize + " cannot be used to sign-up on Optyn as the email address is already in use. Please sign up with a different email."
-			redirect_to new_user_registration_path
+      flash[:alert] =  "Could not create an account without an email. Please enter your email."
+			render :action => "new_twitter"
 		end
 	end
 

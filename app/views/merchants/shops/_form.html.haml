@@ -39,7 +39,9 @@
   .control-group
     .controls
       = f.label :time_zone
-      = f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s, {include_blank: '-- Timezone --'}, {}
+      = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, {model: ActiveSupport::TimeZone, include_blank: '-- Timezone --'}
+      = hidden_field_tag(:timezone_mapping, ActiveSupport::TimeZone::MAPPING.sort.to_json)
+
 
   .control-group
     .controls
