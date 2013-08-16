@@ -98,6 +98,13 @@
   }
 } /* / .m-app */
 
+.merchants-shops h1,
+.edit.merchants-managers-registrations h1,
+.show_managers.merchants-merchant_managers h1,
+.index.merchants-locations h1,
+.upgrade.merchants-subscriptions h1 {
+  float: left;
+}
 .edit.merchants-shops.m-app textarea {
   height: 70px; resize: none;
 }

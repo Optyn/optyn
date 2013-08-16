@@ -1,5 +1,7 @@
 = banner("Edit Account")
 
+= render partial: 'merchants/merchant_managers/tabs'
+
 #merchants.edit_page
   .form.pad3pc
     = form_for(resource, :as => resource_name, :url => merchants_manager_registration_path, :html => { :method => :put }) do |f|

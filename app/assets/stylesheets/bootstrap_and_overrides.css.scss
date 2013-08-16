@@ -1,15 +1,16 @@
 @import "bootstrap";
 .alert {
-  height: 40px;
-  padding-left: 40px;
-  line-height: 34px;
-  font-size: 18px;
+  height: 30px;
+  padding: 0 30px 0 15px;
+  line-height: 24px;
+  font-size: 15px;
   vertical-align: middle;
   border-radius: 0px;
   margin-bottom: 0px;
+  clear: both;
 }
 .alert .close {
-  line-height: 40px;
+  line-height: 24px;
 }
 /* DROPDOWN MENU for NAVBAR */
 .dropdown {

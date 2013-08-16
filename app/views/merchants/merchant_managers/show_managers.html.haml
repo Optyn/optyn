@@ -1,8 +1,10 @@
 = banner("#{current_shop.name} Managers")
 
+= render partial: 'merchants/merchant_managers/tabs'
+
 #merchants.pad3pc
   %div
-    %a.btn{:href => merchants_add_manager_path}
+    %a.btn.btn-primary{:href => merchants_add_manager_path}
       Add Manager
   %br
   %table.table.table-striped.table-hover
