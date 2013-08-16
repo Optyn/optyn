@@ -28,8 +28,8 @@ class Survey < ActiveRecord::Base
     ready ? "Yes" : "No"
   end
 
-  def shop_name
-    shop.name
+  def shop_name 
+    Shop.with_deleted.find(self.shop_id).name
   end
 
   def shop_description
