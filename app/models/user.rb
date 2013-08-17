@@ -17,14 +17,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :presence => true
+  validates :name, :presence => true, unless: :skip_name
   validate :check_for_used_manager_email
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
                   :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture
 
-  attr_accessor :show_password, :skip_password, :show_shop, :shop_identifier
+  attr_accessor :show_password, :skip_password,:skip_name, :show_shop, :shop_identifier
 
   accepts_nested_attributes_for :permissions_users
 
