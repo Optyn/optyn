@@ -5,21 +5,11 @@
   %h2 Email Preview
 
   = render :partial => 'progress_bar'
-  .preview-left
-    = render partial: "merchants/messages/preview_meta"
 
-  #message_fields_wrapper
-    #message_details
-      / %h3{class: 'text-center'}
-      /   Your email will appear like below
+  = render :partial => 'preview_wrapper'
+             
 
-      .row-fluid.email-preview
-        = content_for :header do
-          Preview Only
-
-        = render partial: "preview_wrapper"
-
-      = link_to raw( "<i class='icon-pencil icon-white'></i> Edit Campaign" ), edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
-      = link_to raw( "<i class='icon-envelope icon-white'></i> Send it" ), launch_merchants_message_path(@message.uuid), class: "btn btn-success"
-      - if @message.is_child?
-        = link_to "Parent Message", edit_merchants_message_path(@message.parent.uuid), class: "btn btn-warning"
+  = link_to raw( "<i class='icon-pencil icon-white'></i> Edit Campaign" ), edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
+  = link_to raw( "<i class='icon-envelope icon-white'></i> Send it" ), launch_merchants_message_path(@message.uuid), class: "btn btn-success"
+  - if @message.is_child?
+    = link_to "Parent Message", edit_merchants_message_path(@message.parent.uuid), class: "btn btn-warning"

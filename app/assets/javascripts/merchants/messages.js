@@ -285,11 +285,11 @@ function MerchantMessage() {
             url: $headerForm.attr('action'),
             data: $headerForm.serialize(),
             beforeSend: function(){
-              $('#message_preview_container').hide();
+              $('#preview-meta-data-view').hide();
               $('.loading').show();      
             },
             success: function(data){
-               $('#perview_wrapper').replaceWith(data);
+               $('#message_fields_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
                 current.hookColorPickerChange();
             },
