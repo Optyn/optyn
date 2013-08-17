@@ -144,4 +144,21 @@ module ApplicationHelper
     checkmark_icon == false ?  "noCheckMark" : ""
   end
 
+  def email_body_shop_logo(shop)
+    if shop.has_logo?
+      if shop.website.present?
+        link_to(image_tag(shop.logo_location, alt: shop.name, title: @shop.name).html_safe, shop.website, target: "_blank")
+      else
+        image_tag(shop.logo_location, alt: shop.name, title: shop.name)
+      end
+    else
+      if shop.website.present?
+        link_to(%Q(<h3 style="color:white">#{shop.name}</h3>).html_safe, shop.website, target: "_blank")
+      else
+        content_tag(:h3, style: 'color:white') do
+          shop.name
+        end
+      end 
+    end
+  end
 end

@@ -14,10 +14,28 @@ function Shop() {
     };
 
     this.setTimeZone = function(){
-        var tz = jstz.determine();
-        var tz1 = tz.name();
-        var timezone = tz1.split('/').pop();
-        $("#shop_time_zone").val(timezone);
+        if(!($('#shop_time_zone').val().length)){
+           var tz = jstz.determine();
+           var tzinfo = tz.name();
+           var mapping = JSON.parse($('#timezone_mapping').val());
+           var detection = null;
+
+           $(mapping).each(function(){  
+             
+             if($(this).last()[0].match(tzinfo)){
+                detection = $(this).first()[0];
+                return false;
+             }
+           });
+
+           $("#shop_time_zone").val('');
+           $("#shop_time_zone option").each(function(index, element){
+             if($(element).val() === detection){
+                $(element).prop('selected', 'selected');
+                return false;
+             }
+           });
+        }
     };
 
     this.hookChosen = function () {

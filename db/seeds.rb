@@ -4,7 +4,7 @@ require "#{File.dirname(__FILE__)}/seed_data/plans.rb"
 require "#{File.dirname(__FILE__)}/seed_data/states.rb"
 require "#{File.dirname(__FILE__)}/seed_data/permissions.rb"
 require "#{File.dirname(__FILE__)}/seed_data/message_folders.rb"
-
+require "#{File.dirname(__FILE__)}/seed_data/message_visual_sections.rb"
 
 #Add some dummy data in the development mode.
 #if Rails.env.development?

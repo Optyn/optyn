@@ -7,13 +7,20 @@ class Message < ActiveRecord::Base
   has_many :message_users, dependent: :destroy
   has_many :message_email_auditors, through: :message_users
   belongs_to :survey
+  has_many :message_visual_properties, dependent: :destroy
+  has_one :message_image, dependent: :destroy
+
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
   attr_accessor :unread
 
-  attr_accessible :label_ids, :name, :send_immediately, :send_on_date, :send_on_time
+  attr_accessible :label_ids, :name, :send_immediately, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes
+
+  accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
+  accepts_nested_attributes_for :message_image, allow_destroy: true
+
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
@@ -36,6 +43,7 @@ class Message < ActiveRecord::Base
   validates :subject, presence: true
   validate :send_on_greater_by_hour
   validate :validate_child_message
+  validate :validate_button_url
 
   scope :only_parents, where(parent_id: nil)
 
@@ -372,6 +380,51 @@ class Message < ActiveRecord::Base
     message_users.where('opt_out is true').count
   end
 
+  def header_background_properties
+    headers = MessageVisualProperty.header(self.id)
+
+    headers.blank? ? message_visual_properties.build(property_value: "background-color: #{shop.header_background_color.strip}") : headers
+  end
+
+  def header_background_color_css_val
+    properties = self.header_background_properties
+    return "background-color: #{shop_header_background_color_hex};" if properties.present? && (properties.instance_of?(ActiveRecord::Relation) ? properties.first : properties).new_record?
+    css = self.header_background_properties.first.property_value
+    css
+  end
+
+  def header_background_color_hex
+    header_background_color_css_val.split(/:/).last.to_s.gsub(/;/, "")
+  end
+
+  def update_visuals(options={})
+    Message.transaction do 
+      # update_attributes!(options)
+      self.attributes = options
+      preview
+      if options['message_visual_properties_attributes']['0']['make_default'].to_s == "1"
+        hex = self.header_background_color_hex
+        shop.set_header_background(hex)
+      end
+    end
+  end
+
+  def shop_header_background_color_hex
+    self.shop.header_background_color.strip
+  end
+
+  def show_image?
+    message_image.present?    
+  end
+
+  def show_button?
+    button_url.present? && button_text.present?
+  end
+
+  def display_button_link
+    button_url
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
@@ -505,6 +558,17 @@ class Message < ActiveRecord::Base
       rescue
         errors.add(:base, "#{attr_name} is invalid")
       end
+    end
+  end
+
+  def validate_button_url
+    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+      self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   
+      return
+    end 
+
+    if button_url.present? && message_image.blank? && button_text.blank?
+      self.errors.add(:button_url, "You have added a link but there is no image uploaded or button pointing to it. Please add one.")
     end
   end
 

@@ -17,5 +17,8 @@
 
                   %p.core-content
                     = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
+
+                    = render partial: "shared/messages/bottom_image_and_button" 
+                    
   - if @message.show_footer?
     = render partial: "shared/mailers/footer"
