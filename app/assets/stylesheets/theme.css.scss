@@ -173,10 +173,6 @@ input[type="color"]:focus,
 #testimonials {
   margin-top: 50px;
 }
-#testimonials .controls hr {
-  border-top: 1px solid #BEC0C3;
-  border-bottom: 2px solid white;
-}
 #testimonials .phrases_wrapper {
   margin-bottom: 50px;
   padding: 20px 10px 0px 10px;
@@ -227,17 +223,6 @@ input[type="color"]:focus,
 .section_header.left span {
   margin-left: 0px;
   text-align: left;
-}
-.section_header hr {
-  border-top: 1px solid #BEC0C3;
-  border-bottom: 2px solid white;
-  width: 36%;
-  position: absolute;
-}
-.section_header hr.left { }
-.section_header hr.right {
-  right: 0px;
-  top: 0px;
 }
 .section_header span {
   width: 27%;
@@ -716,7 +701,7 @@ form.flat {
     @include border-radius( 0 );
     padding: 0 10px;
     border: solid 2px darken( $light-gray, 10% );
-    background-color: $light-gray;
+    background-color: lighten( $light-gray, 5% );
     box-shadow: none;
     color: $black;
     @include transition( all 0.3s ease-out );
@@ -764,7 +749,7 @@ form.flat {
     .add-on {
       min-height: 35px;
       font-size: 12px;
-      line-height: 25px;
+      line-height: 33px;
       @include border-radius( 0 );
       border-color: $medium-gray;
       border-width: 2px;
@@ -777,8 +762,4 @@ form.flat {
   #message_form .add-on i {
     margin-top: -3px;
   }
-}
-
-.hr {
-  border-bottom: solid 1px $medium-gray;
 }

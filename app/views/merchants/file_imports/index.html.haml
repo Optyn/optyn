@@ -1,21 +1,21 @@
 = banner("Import Customers for #{current_shop.name}")
   
-#dashboard.pad3pc
+.pad3pc
   .import
-    %br
-      = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
-        .control-group.span6
-          = f.label :csv_file, "Customer CSV file", class: 'control-label'
-          .controls
-            = f.file_field :csv_file
+    %br/
+    = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
+      .control-group.span6
+        = f.label :csv_file, "Customer CSV file", class: 'control-label'
+        .controls
+          = f.file_field :csv_file
 
-        .control-group.span5
-          = f.label :label, "Label for import records", class: 'control-label'
-          .controls
-            = f.text_field :label, value: (params[:file_import][:label] rescue FileImport::DEFAULT_LABEL_NAME)
+      .control-group.span5
+        = f.label :label, "Label for import records", class: 'control-label'
+        .controls
+          = f.text_field :label, value: (params[:file_import][:label] rescue FileImport::DEFAULT_LABEL_NAME)
 
-        .actions
-          = f.submit "Import", class: "btn btn-primary btn-block"
+      .actions
+        = f.submit "Import", class: "btn btn-primary btn-block"
 
     %ul
       %li If you have a previous email list, you can easily import it into Optyn below. 
@@ -25,6 +25,7 @@
         here
 
     %table.table.table-striped.table-hover
+      %caption Imported files
       %thead
         %tr
           %th #
@@ -35,7 +36,6 @@
           %th Uploaded
       %tbody
         - if @file_imports.present?
-          %h2 Imported files
           - @file_imports.each_with_index do |import, index|
             %tr
               %td= index + 1

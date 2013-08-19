@@ -365,11 +365,11 @@ body {
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    background: $light-gray;
+    background: darken( $light-gray, 5% );
     &:hover {
       border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
       text-decoration: none;
-      background-color: darken( $light-gray, 10% );
+      background-color: darken( $light-gray, 15% );
     }
   }
   .link.blue, .btn-primary {

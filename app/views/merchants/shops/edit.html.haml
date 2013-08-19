@@ -4,6 +4,6 @@
 
 #merchants.pad3pc
   .container-fluid
-    .form 
-      = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form'} do |f|
+    .form
+      = form_for :shop, url: merchants_shop_path, method: :put, html: {id: 'edit_shop_form', class: 'form-horizontal'} do |f|
         = render :partial => 'form', :locals => {f: f}

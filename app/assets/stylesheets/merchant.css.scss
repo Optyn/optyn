@@ -99,19 +99,13 @@
 } /* / .m-app */
 
 .merchants-shops h1,
-.edit.merchants-managers-registrations h1,
-.show_managers.merchants-merchant_managers h1,
-.index.merchants-locations h1,
-.upgrade.merchants-subscriptions h1 {
+.merchants-merchant_managers h1,
+.merchants-managers-registrations h1 {
+  /* Applies to all views under the merchant_managers controller */
   float: left;
 }
 .edit.merchants-shops.m-app textarea {
   height: 70px; resize: none;
-}
-
-.edit.merchants-managers-registrations.m-app .form {
-  width: 80%;
-  margin: auto;
 }
 
 .merchants-messages h1,
@@ -241,16 +235,6 @@
   font-size: 18px;
 }
 /* Update Shop Wrapper */
-#update_shop_wrapper {
-  width: 80%;
-  margin: auto;
-}
-#update_shop_wrapper .control-group .input-append .add-on,
-#update_shop_wrapper .control-group .input-prepend .add-on {
-  height: 33px;
-  font-size: 12px;
-  line-height: 33px;
-}
 #update_shop_wrapper .control-group .controls .help-block {
   float: right;
 }
