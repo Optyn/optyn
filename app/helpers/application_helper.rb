@@ -43,8 +43,8 @@ module ApplicationHelper
     content_for :meta_description do
       default_description = "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications."
       default_keywords = "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
-      content_tag(:meta, "", name: "Description", content: description.blank? ? default_description : description) +
-      content_tag(:meta, "", name: "keywords", content: keywords.blank? ? default_keywords : keywords)
+      tag('meta', name: "Description", content: description.blank? ? default_description : description) +
+      tag('meta', name: "keywords", content: keywords.blank? ? default_keywords : keywords)
     end
   end
 
