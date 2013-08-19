@@ -1,5 +1,5 @@
 module Shops
-  module ShopImporter  
+  module Importer  
     def import(payload)
     content = download_csv_file(payload)
 
