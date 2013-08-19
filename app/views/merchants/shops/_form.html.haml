@@ -59,8 +59,6 @@
       = f.file_field :logo_img, 'data-toggle' => "tooltip", 'title' => 'Logo'
 
   .control-group
-    .control-label
-      = f.label 'Business Category'
     .controls{ 'data-toggle' => 'tooltip', :title => 'Business Category' }
       = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select span12", :style => "height:0px", :multiple => true}
   .action-buttons
