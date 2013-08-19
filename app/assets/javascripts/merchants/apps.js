@@ -19,21 +19,31 @@ function Apps() {
         }
 
         if ($('.app-container').length) {
+            console.log( $('.app-container').length );
             this.hookCopyButtonEmbedCode();
         }
     };
 
     this.hookCopyButtonEmbedCode = function () {
+        console.log( 'hookCopyButtonEmbedCode' );
         $('a#copy_description').zclip('remove');
         $('a#copy_description').zclip({
             path: '/ZeroClipboard.swf',
             copy: function () {
                 return $('.app-container').first().find('#embed_code').val()
             },
-            afterCopy: function () {
-                return null;
-            }
+            afterCopy: this.showCopiedNotice
         });
+    };
+
+    this.showCopiedNotice = function() {
+        $( '.copy-notice' ).text( 'Copied to clipboard.' ).slideDown( 300, function() {
+            setTimeout( function() {
+                $( '.copy-notice' ).text( '' )
+                    .slideUp();
+            }, 3000 );
+        });
+        return null;
     };
 
     this.hookGenerateButton = function () {
@@ -79,9 +89,7 @@ function Apps() {
                     copy: function () {
                         return $('.app-container').first().find('#embed_code').val()
                     },
-                    afterCopy: function () {
-                        return null;
-                    }
+                    afterCopy: this.showCopiedNotice
                 });
 
                 $('.app-container #loading').hide();

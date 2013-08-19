@@ -374,30 +374,6 @@
 #merchants .preview .main .btn-preview .codesnippet textarea {
   width: 100%;
 }
-#merchants .preview .main .btn-preview .btns {
-  float: right;
-}
-#merchants .preview .main .btn-preview .btns .refreshbtn {
-  background: #e7eaeb;
-  border-radius: 4px;
-  display: inline-block;
-  height: 20px;
-  line-height: 18px;
-  top: 4px;
-  color: #1791c0;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  border: 1px #304d58;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#merchants .preview .main .btn-preview .btns .refreshbtn:hover {
-  background: #d6d6d6;
-  text-decoration: none;
-  text-shadow: none;
-}
 #merchants .preview .main .btn-preview .need-help {
   text-align: right;
   font-size: 10px;
@@ -410,6 +386,14 @@
 }
 #merchants .preview .advanced .actions {
   float: right;
+}
+#merchants .preview .btns .btn {
+  float: left;
+  margin-right: 15px;
+}
+#merchants .preview .copy-notice {
+  display: none;
+  line-height: 37px;
 }
 #merchants {
   /*#edit_shop_form .add-on {
