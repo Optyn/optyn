@@ -5,7 +5,7 @@
 #merchants.pad3pc
   %div
     %a.btn.btn-primary{:href => new_merchants_location_path}
-      %i.icon-black.icon-map-marker
+      %i.icon-white.icon-map-marker
       Add New Location
   %br
   %table.table.table-striped.table-hover
@@ -35,8 +35,8 @@
           %td
             = location.zip
           %td
-            = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary'
-            = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger'
+            = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary btn-mini'
+            = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger btn-mini'
     - else
       %tr
         %td{colspan: 6}

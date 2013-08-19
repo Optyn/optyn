@@ -19,8 +19,6 @@
 .btn-success.active,
 .btn-success.disabled,
 .btn-success[disabled] {
-  background-color: #648a43;
-  color: #fff;
 }
 
 .btn-success:active,
@@ -396,9 +394,12 @@ input[type="color"]:focus,
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  #flat .merchant-menu a {
-    line-height: 30px;
-    height: 40px;
+  #flat {
+    #dashboard h1 {
+      margin-bottom: 0;
+      float: none;
+      height: auto;
+    }
   }
   #intro h1 {
     width: 90%;
@@ -654,7 +655,7 @@ i.myspace { background-position: -233px -51px; }
 #flat.m-app {
   .btn {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
     letter-spacing: 1px;
   }
@@ -663,6 +664,9 @@ i.myspace { background-position: -233px -51px; }
     font-weight: 400;
     font-size: 25px;
     line-height: 25px;
+  }
+  .table {
+    margin-top: 10px;
   }
 }
 
@@ -743,6 +747,11 @@ form.flat {
     border-radius: 0;
   }
 }  /* /#flat */
+#flat.main {
+  .nav-pills > li > a {
+    @include border-radius( 0 );
+  }
+}
 #flat {
   .input-append,
   .input-prepend {
@@ -762,4 +771,119 @@ form.flat {
   #message_form .add-on i {
     margin-top: -3px;
   }
+}
+
+a, input {
+  text-shadow: none;
+}
+h1 {
+  border-bottom: solid 1px #eee;
+  line-height: 1.5em;
+  margin-bottom: 2%;
+  padding-bottom: 0.5em;
+}
+h1, h5 {
+  font-weight: 300;
+}
+h5 {
+  font-size: 17px;
+  line-height: 23px;
+}
+h4 {
+  font-weight: normal;
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 26px;
+}
+strong {
+  font-weight: 700;
+}
+.row-fluid {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.link, .btn {
+  @include border-radius( 0 );
+  font-size: 18px;
+  line-height: 30px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
+  @include transition( all 0.2s ease-out );
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  background: darken( $light-gray, 5% );
+  &:hover {
+    border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
+    text-decoration: none;
+    background-color: darken( $light-gray, 15% );
+  }
+}
+.link.blue, .btn-primary {
+  color: $white;
+  background: $blue;
+  &:hover {
+    background-color: darken( $blue, 10% );
+  }
+}
+.link.blue {
+  padding: 0 15px;
+}
+.btn-primary[disabled] {
+  background-color: saturate( $blue, 20% );
+}
+.link.orange, .btn-warning {
+  color: #fff;
+  background-color: $orange;
+  &:hover {
+    background-color: darken( $orange, 10% );
+  }
+}
+.btn-info, .btn-info[type='submit'] {
+  color: $white;
+  background-color: $bluish-green;
+  &:hover {
+    background-color: darken( $bluish-green, 10% );
+  }
+}
+.btn-success, .btn-success[type='submit'] {
+  background-color: $green;
+  &:hover {
+    background-color: darken( $green, 10% );
+  }
+}
+.btn-danger {
+  background-color: $red;
+  &:hover {
+    background-color: darken( $red, 15% );
+  }
+}
+.btn-large {
+  padding: 11px 19px;
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
+.text-justify {
+  text-align: justify;
+}
+#dashboard {
+  .wid25pc {
+    width: 25%;
+    margin: 0;
+  }
+  .wid75pc {
+    width: 75%;
+    margin: 0;
+  }
+}
+thead {
+  border-top: solid 2px #ccc;
+  border-bottom: solid 2px #ccc;
+}
+th {
+  text-transform: uppercase;
+  color: $gray;
+  font-weight: 700;
 }

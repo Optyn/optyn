@@ -212,7 +212,7 @@ body {
     font-size: 0.85em;
   }
 
-  h2, h3, .btn-orange, .has-heading::before {
+  h2, h3 .has-heading::before {
     font-family: 'Open Sans Condensed', sans-serif;
   }
 
@@ -323,114 +323,8 @@ body {
 
 /* General Styles ----------------------------------------------------- */
 #flat {
-  a, input {
-    text-shadow: none;
-  }
-  h1 {
-    border-bottom: solid 1px #eee;
-    line-height: 1.5em;
-    margin-bottom: 2%;
-    padding-bottom: 0.5em;
-  }
-  h1, h5 {
-    font-weight: 300;
-  }
-  h5 {
-    font-size: 17px;
-    line-height: 23px;
-  }
-  h4 {
-    font-weight: normal;
-    margin-bottom: 0;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 26px;
-  }
-  strong {
-    font-size: 1.5em;
-    line-height: 1.5em;
-    font-weight: 300;
-  }
-  .row-fluid {
-    padding-left: 2%;
-    padding-right: 2%;
-  }
-  .link, .btn {
-    @include border-radius( 0 );
-    font-size: 18px;
-    line-height: 30px;
-    font-family: 'Open Sans Condensed', sans-serif;
-    border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
-    @include transition( all 0.2s ease-out );
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    background: darken( $light-gray, 5% );
-    &:hover {
-      border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
-      text-decoration: none;
-      background-color: darken( $light-gray, 15% );
-    }
-  }
-  .link.blue, .btn-primary {
-    color: #fff;
-    background: #5fabe7;
-    &:hover {
-      background-color: darken( $blue, 10% );
-    }
-  }
-  .link.orange, .btn-warning {
-    color: #fff;
-    background-color: $orange;
-    &:hover {
-      background-color: darken( $orange, 10% );
-    }
-  }
-  .btn-info, .btn-info[type='submit'] {
-    color: $white;
-    background-color: $bluish-green;
-    &:hover {
-      background-color: darken( $bluish-green, 10% );
-    }
-  }
-  .btn-success, .btn-success[type='submit'] {
-    background-color: $green;
-    &:hover {
-      background-color: darken( $green, 10% );
-    }
-  }
-  .btn-danger {
-    background-color: $red;
-    &:hover {
-      background-color: darken( $red, 15% );
-    }
-  }
-  .btn-large {
-    padding: 11px 19px;
-    font-size: 1.2em;
-    line-height: 1.2em;
-  }
 
-  .text-justify {
-    text-align: justify;
-  }
-  .wid25pc {
-    width: 25%;
-    margin: 0;
-  }
-  .wid75pc {
-    width: 75%;
-    margin: 0;
-  }
-  thead {
-    border-top: solid 2px #ccc;
-    border-bottom: solid 2px #ccc;
-  }
-  th {
-    text-transform: uppercase;
-    color: $gray;
-    font-weight: 700;
-  }
+
 } /* / #flat */
 
 @media( max-width: 768px ) {
@@ -444,7 +338,7 @@ body {
     .row-fluid .scroll-down {
       display: none;
     }
-    div.row-fluid {
+    .row-fluid {
       padding: 0;
     }
     input[type='submit'] {
@@ -481,9 +375,11 @@ body {
     .span6 {
       padding: 5% 0;
     }
-    .wid25pc, .wid75pc {
-      width: 100%;
-      float: none;
+    #dashboard {
+      .wid25pc, .wid75pc {
+        width: 100%;
+        float: none;
+      }
     }
     .btn-navbar {
       padding: 10px;
@@ -494,5 +390,28 @@ body {
   }
   header.row-fluid .span5 .link.blue {
     margin: -48px 5px 5px 0;
+  }
+}
+
+@media ( max-width: 980px ) {
+  #flat {
+    header, .navbar-inner {
+      padding: 0;
+    }
+    .nav-pills > li > a {
+      color: $black;
+      &:hover {
+        color: $white;
+      }
+    }
+    .nav-pills > li > a.link {
+      color: $white;
+    }
+    .btn.btn-navbar {
+      margin-right: 20px;
+    }
+  }
+  .logo {
+    margin-left: 30px;
   }
 }

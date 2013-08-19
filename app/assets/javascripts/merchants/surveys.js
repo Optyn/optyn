@@ -161,8 +161,8 @@ function MerchantSurvey() {
                     "<td>" + element.label + "</td>" +
                     "<td>" + element.position + "</td>" +
                     "<td>" + element.values.join("<br />") + "</td>" +
-                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary">Edit</a>' +
-                        '<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger">Delete</a>' + "</td>" +
+                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>' +
+                        '<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger btn-mini">Delete</a>' + "</td>" +
                     "</tr>";
             });
 

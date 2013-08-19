@@ -20,6 +20,9 @@
 		background-color: transparent;
 		border: 0;
 	}
+	tr {
+		overflow: scroll;
+	}
 }
 
 /**
@@ -130,5 +133,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	}
 	#choose_message .type aside {
 		left: 10px;
+	}
+}
+
+@media ( max-width: 767px ) {
+	.preview-text > .span3 {
+		text-align: left;
 	}
 }

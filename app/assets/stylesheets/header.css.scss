@@ -32,7 +32,7 @@
   .nav-collapse .dropdown-menu a:hover {
     background: lighten( $blue, 10% );
   }
-  .nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a {
+  .nav-collapse .nav > li > a {
     color: #fff;
   }
   .nav a {
@@ -41,13 +41,6 @@
   #flat.m-app {
     .navbar-fixed-top .navbar.inner {
       padding: 0;
-    }
-    a {
-      color: $black;
-      @include border-radius( 0 );
-      padding: 5px 0;
-      margin: 0;
-      font-weight: 400;
     }
     .navbar.inner a.tour {
       line-height: 30px;

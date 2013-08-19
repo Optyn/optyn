@@ -3,16 +3,20 @@
 #merchants.pad3pc
   = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
 
-  %div
-    = label_tag :title, "Title:", class: 'pull-left'
-    .span6
-      = @survey.title
-
-  .clearfix
-  %div
-    = label_tag :ready, "Launched?", class: 'pull-left'
-    .span6
-      = @survey.ready_text
+  %table.table
+    %tbody
+      %tr
+        %td
+          = label_tag :title, "Title:", class: 'pull-left'
+        %td
+          %strong
+            = @survey.title
+      %tr
+        %td
+          = label_tag :ready, "Launched?", class: 'pull-left'
+        %td
+          %strong
+            = @survey.ready_text
 
   .clearfix
   %h3 Questions List

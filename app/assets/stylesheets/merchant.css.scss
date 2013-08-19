@@ -60,7 +60,6 @@
   h2 {
     font-size: 30px;
     line-height: 40px;
-    height: 40px;
   }
   .action-buttons {
     margin-bottom: 20px;
@@ -100,7 +99,8 @@
 
 .merchants-shops h1,
 .merchants-merchant_managers h1,
-.merchants-managers-registrations h1 {
+.merchants-managers-registrations h1,
+.merchants-locations h1 {
   /* Applies to all views under the merchant_managers controller */
   float: left;
 }
@@ -137,6 +137,9 @@
       border: 0;
       padding: 17px 0 0 10px;
     }
+    .preview .customize {
+      text-align: left;
+    }
   }
   #flat.merchants-messages h1 {
     float: none;
@@ -151,6 +154,10 @@
   }
   #flat.merchants-dashboards #dashboard {
     margin-top: 0;
+  }
+  .merchants-shops h1 {
+    float: none;
+    padding-bottom: 0;
   }
 }
 
@@ -440,13 +447,6 @@
 #merchant_page .mainbody .title {
 
 }
-#merchant_page .mainbody .title h3 {
-  padding-top: 0px;
-  color: #304d58;
-  margin-top: 0px;
-  font-size: 20px;
-  line-height: 20px;
-}
 #merchant_page .mainbody .details {
   width: 330px;
   border-right: 1px solid #ececec;
@@ -486,7 +486,7 @@
       padding-top: 0;
     }
   }
-  #dashboard ul {
+  .import ul {
     margin-bottom: 30px;
     list-style-type: circle;
   }
