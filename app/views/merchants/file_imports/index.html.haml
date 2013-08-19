@@ -1,28 +1,28 @@
 = banner("Import Customers for #{current_shop.name}")
   
 #dashboard.pad3pc
-  %p If you have a previous email list, you can easily import it into Optyn below. 
-  %p
-    You could download the
-    = link_to "Sample File", "/file_import_stub.csv"
-    here
   .import
     %br
-    %br
       = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
-        .control-group
-          = f.label :csv_file, "Customer CSV file to Import", class: 'control-label'
+        .control-group.span6
+          = f.label :csv_file, "Customer CSV file", class: 'control-label'
           .controls
             = f.file_field :csv_file
 
-        .control-group
+        .control-group.span5
           = f.label :label, "Label for import records", class: 'control-label'
           .controls
             = f.text_field :label, value: (params[:file_import][:label] rescue FileImport::DEFAULT_LABEL_NAME)
 
         .actions
-          = f.submit "Import", class: "btn btn-primary"
+          = f.submit "Import", class: "btn btn-primary btn-block"
 
+    %ul
+      %li If you have a previous email list, you can easily import it into Optyn below. 
+      %li
+        You could download the
+        = link_to "Sample File", "/file_import_stub.csv"
+        here
 
     %table.table.table-striped.table-hover
       %thead
@@ -35,6 +35,7 @@
           %th Uploaded
       %tbody
         - if @file_imports.present?
+          %h2 Imported files
           - @file_imports.each_with_index do |import, index|
             %tr
               %td= index + 1
@@ -57,3 +58,17 @@
           %tr
             %td{colspan: 5}
               No files uploaded yet for imports.
+
+:javascript
+  $( function() {
+    if ( $( '.import input[type=file]').val() == '' ) {
+      $( 'input[name=commit]' ).addClass( 'disabled' )
+        .attr( 'disabled', '' );
+    }
+
+    $('.import input[type=file]').change( function() {
+      $( 'input[name=commit]' ).tooltip( 'destroy' )
+        .removeAttr( 'disabled' )
+        .removeClass( 'disabled' );
+    });
+  });
