@@ -1,9 +1,9 @@
 require 'embed_code_generator'
-require 'shops/shop_importer'
+require 'shops/importer'
 
 class Shop < ActiveRecord::Base
   include UuidFinder
-  extend Shops::ShopImporter
+  extend Shops::Importer
 
   acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
