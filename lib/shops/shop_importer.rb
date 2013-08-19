@@ -1,6 +1,6 @@
 module Shops
   module ShopImporter  
-    def self.import(payload)
+    def import(payload)
     content = download_csv_file(payload)
 
     csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
@@ -45,7 +45,7 @@ module Shops
     end
   end
 
-  def self.download_csv_file(payload)
+  def download_csv_file(payload)
     s3 = AWS::S3.new(
       :access_key_id => SiteConfig.aws_access_key_id,
       :secret_access_key => SiteConfig.aws_secret_access_key)
