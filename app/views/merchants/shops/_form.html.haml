@@ -34,12 +34,10 @@
     .control-label
       = f.label :identifier
     .controls
-      .input-prepend.input-append
+      .input-prepend.input-append{ 'data-toggle' => "tooltip", 'title' => 'Example: http://www.optyn.com/example' }
         %span.add-on
           == #{SiteConfig.app_base_url}/
-        =f.text_field :identifier, 'data-toggle' => "tooltip", 'title' => :identifier, :placeholder => :identifier
-        %span.help-block
-          %em Example: http://www.optyn.com/example
+        =f.text_field :identifier, :placeholder => :identifier
   %div#loading.control-group{style: "display:none"}
     %span.help-block.controls
       %em.text Loading...
