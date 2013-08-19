@@ -272,6 +272,17 @@
     padding-top: 0;
   }
 }
+@media (min-width: 768px) {
+  .merchants-dashboards.index {
+    .stats {
+      margin-bottom: 20px;
+      .span3 {
+        height: 190px;
+        overflow: hidden;
+      }
+    }
+  }
+}
 @media (min-width: 980px) {
   #edit .box{   
     width: 37%;
