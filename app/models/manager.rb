@@ -30,8 +30,6 @@ class Manager < ActiveRecord::Base
 
   scope :owner, where(owner: true)
 
-  scope :by_uuid, ->(uuid) { where(uuid: uuid) }
-
   def self.create_from_omniauth(auth)
     authentication = Authentication.fetch_authentication(auth.provider, auth.uid, "Manager")
     manager = authentication.account rescue Manager.find_by_email(auth.info.email)
