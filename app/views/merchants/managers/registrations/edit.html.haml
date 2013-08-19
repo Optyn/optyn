@@ -3,34 +3,43 @@
 = render partial: 'merchants/merchant_managers/tabs'
 
 #merchants.edit_page
-  .form.pad3pc
+  .form.pad3pc.form-horizontal
     = form_for(resource, :as => resource_name, :url => merchants_manager_registration_path, :html => { :method => :put }) do |f|
       = devise_error_messages!
-      %div
-        = f.label :email
-        = f.email_field :email
+      .control-group
+        .control-label
+          = f.label :email
+        .controls
+          = f.email_field :email
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         %div
           Currently waiting confirmation for: #{resource.unconfirmed_email}
       - if resource.authentications.blank?
-        %div
-          = f.label :password
-          = f.password_field :password, :autocomplete => "off"
-          %span.help-inline (leave blank if you don't want to change it)
-        %div
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation
-          %span.help-inline (leave blank if you don't want to change it)
-        %div
-          = f.label :current_password
-          = f.password_field :current_password
-          %span.help-inline (we need your current password to confirm your changes)
-        %div
-          = f.label :picture
-          = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
-          %br
-          = f.file_field :picture 
-          %br
+        .control-group
+          .control-label
+            = f.label :password
+          .controls
+            = f.password_field :password, :autocomplete => "off"
+            %span.help-inline (leave blank if you don't want to change it)
+        .control-group
+          .control-label
+            = f.label :password_confirmation
+          .controls
+            = f.password_field :password_confirmation
+            %span.help-inline (leave blank if you don't want to change it)
+        .control-group
+          .control-label
+            = f.label :current_password
+          .controls
+            = f.password_field :current_password
+            %span.help-inline (we need your current password to confirm your changes)
+        .control-group
+          .control-label
+            = f.label :picture
+          .controls
+            = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
+            .select-dp
+              = f.file_field :picture 
       %div{:style => "padding-top: 20px;"}
         = f.submit "Update", class: 'btn btn-primary'
         = link_to "Back", :back, class: 'btn'

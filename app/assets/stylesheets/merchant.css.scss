@@ -104,6 +104,10 @@
   /* Applies to all views under the merchant_managers controller */
   float: left;
 }
+.merchants-managers-registrations #edit_merchants_manager .profile_image {
+  float: left;
+  margin-right: 20px;
+}
 .edit.merchants-shops.m-app textarea {
   height: 70px; resize: none;
 }
