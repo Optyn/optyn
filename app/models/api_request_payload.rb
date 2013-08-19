@@ -1,7 +1,7 @@
 class ApiRequestPayload < ActiveRecord::Base
   belongs_to :partner
 
-  attr_accessible :controller, :action, :partner_id, :body, :stats, :status
+  attr_accessible :controller, :action, :partner_id, :filepath, :stats, :status
 
   serialize :body, Hash
   serialize :stats, Array

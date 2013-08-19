@@ -5,10 +5,10 @@ class ShopImporter
     payload = ApiRequestPayload.find(payload_id)
     if payload.present?
       payload.update_attribute(:status, 'Inprocess')
-      params = payload.body
-      param_shops = params['shops']
-      Shop.import(param_shops, payload)
-      payload.update_attributes(body: nil, status: 'Processed')
+      Shop.import(payload)
+      payload.save
+      payload.update_attributes(status: 'Processed')
+      PartnerMailer.import_complete(payload).deliver
     end
   end
 end

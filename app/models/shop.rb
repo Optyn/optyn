@@ -1,7 +1,9 @@
 require 'embed_code_generator'
+require 'shops/shop_importer'
 
 class Shop < ActiveRecord::Base
   include UuidFinder
+  extend Shops::ShopImporter
 
   acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
@@ -85,12 +87,9 @@ class Shop < ActiveRecord::Base
 
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
-  def self.for_name(shop_name)
-    lower_name(shop_name.to_s).first
-  end
 
   def self.for_name(shop_name)
-    by_name(shop_name).first
+    lower_name(shop_name.to_s).first
   end
 
   def self.by_app_id(app_id)
@@ -127,35 +126,6 @@ class Shop < ActiveRecord::Base
 
   def self.optyn_magic_manager
     optyn_magic.manager
-  end
-
-  def self.import(param_shops, payload)
-    payload.stats = []
-
-    param_shops.each do |shop_params|
-      status = nil
-      begin
-        shop_name = shop_params['shop']['name']
-        Shop.transaction do
-          shop = for_name(shop_name) || Shop.new()
-          if shop.new_record?
-            shop.attributes = shop_params['shop']
-            shop.partner_id = payload.partner_id
-            shop.save!
-            shop.update_manager
-            status = "New Shop"
-          else
-            status = "Existing Shop"
-          end
-
-          payload.stats << {shop: {name: shop_name, uuid: shop.uuid, status: status, created_at: shop.created_at}}
-        end
-      rescue Exception => e
-        Rails.logger.error e.message
-        Rails.logger.error e.backtrace
-        payload.stats << {shop: {name: shop_name, uuid: "-", status: "Error"}}
-      end
-    end
   end
 
   def shop

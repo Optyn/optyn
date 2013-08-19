@@ -9,7 +9,7 @@ module Api
 
         def import
           @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
-                                              body: params, status: 'Queued')
+                                              filepath: params[:filepath], status: 'Queued')
           payload_id = @payload.id
           Resque.enqueue(ShopImporter, payload_id)
         end
