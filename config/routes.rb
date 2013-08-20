@@ -157,10 +157,18 @@ Optyn::Application.routes.draw do
           member do
             put :launch
           end
-        end
-      end
-    end
-  end
+        end #end of messages resource
+
+        resources :users do
+          collection do
+            post :import
+            get :import_list
+            get :import_status
+          end
+        end #end of consumers resources   
+      end #end of the merchants namespace
+    end #end of the scope v1
+  end #end of the api namespace
 
   namespace "merchants" do |merchant|
 

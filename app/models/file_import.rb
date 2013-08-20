@@ -18,76 +18,15 @@ class FileImport < ActiveRecord::Base
   after_create :assign_queued_status
 
   def create_connections()
+    content = download_file
     begin
-      shop = manager.shop
-      path = download_file()
-
-      csv_table = CSV.table(path, {headers: true})
-
-      headers = csv_table.headers
-      validate_headers(headers)
-
-      counters = ActiveSupport::OrderedHash.new()
-      counters[:user_creation] = 0
-      counters[:existing_user] = 0
-      counters[:connection_creation] = 0
-      counters[:existing_connection]  = 0
-      counters[:unparsed_rows] = 0
-
-      csv_table.each do |row|
-
-
-        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
-        user.skip_name = true
-        user.name = row[:name] unless user.name.present?
-        gender = if (gender_val = row[:gender].to_s.downcase).length == 1
-                   gender_val
-                 else
-                    gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
-                 end
-        user.gender = gender
-        user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
-        user.valid?
-
-        (counters[:unparsed_rows] += 1) and (add_unparsed_row(row)) and next if user.errors.include?(:email) || user.errors.include?(:name)
-
-        if user.new_record?
-          passwd = Devise.friendly_token.first(8)
-          user.password = passwd
-          user.password_confirmation = passwd
-          user.show_password = true
-          user.show_shop = true
-          user.shop_identifier = shop.id
-          counters[:user_creation] += 1
-        else
-          counters[:existing_user] += 1
-        end
-        user.save()
-
-
-        connection = Connection.find_by_shop_id_and_user_id(shop.id, user.id) || Connection.new(shop_id: shop.id, user_id: user.id)
-        if connection.new_record?
-          connection.active = true
-          connection.connected_via = Connection::CONNECTED_VIA_IMPORT
-          counters[:connection_creation] += 1
-        else
-          counters[:existing_connection] += 1
-        end
-        connection.save()
-
-        label = Label.find_or_create_by_shop_id_and_name(shop.id, (self.label || DEFAULT_LABEL_NAME))
-        UserLabel.find_or_create_by_user_id_and_label_id(user.id, label.id)
-      end
-
-      self.stats = counters
+      self.stats = User.import(content, manager, label)
       self.save
-
       assign_complete_status
-
-      MerchantMailer.import_stats(self, counters).deliver
+      MerchantMailer.import_stats(self).deliver
     rescue => e
       Rails.logger.error e.message
-      Rails.logger.error
+      Rails.logger.error e.backtrace
       assign_error_status
       MerchantMailer.import_error(self, e.message).deliver
     end
@@ -130,18 +69,7 @@ class FileImport < ActiveRecord::Base
 
   def download_file
     io_string = open(self.csv_file.to_s)
-
-    if io_string.is_a?(Tempfile)
-      path = io_string.path
-    elsif io_string.is_a?(StringIO)
-      File.open("#{Rails.root.to_s}/tmp/#{File.basename(self.csv_file.to_s)}", 'wb+') do |file|
-        file << io_string.read
-        path = file.path
-      end
-    else
-      raise ArgumentError, 'Document not opening properly'
-    end
-    path
+    io_string.read
   end
 
   def validate_headers(headers)

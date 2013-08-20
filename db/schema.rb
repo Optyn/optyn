@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130817181432) do
+ActiveRecord::Schema.define(:version => 20130819221016) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20130817181432) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.string   "filepath",   :limit => 2303
+    t.integer  "manager_id"
+    t.string   "label"
   end
 
   add_index "api_request_payloads", ["uuid"], :name => "index_api_request_payloads_on_uuid", :unique => true

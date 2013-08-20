@@ -45,12 +45,12 @@ class MerchantMailer < ActionMailer::Base
     mail(:to => @manager.email, :subject => "Congratulations!! You are growing.")
   end
 
-  def import_stats(file_import, counters)
+  def import_stats(file_import)
     @file_import = file_import
     @manager = @file_import.manager
-    @counters = counters
+    @counters = @file_import.stats.is_a?(Array) ? @file_import.stats.first : @file_import.stats
 
-    filepath = @file_import.create_unparsed_rows_file_if
+    filepath = @file_import.create_unparsed_rows_file_if rescue nil
     if filepath.present?
       attachments['invalid_records.csv'] = File.read(filepath)
     end

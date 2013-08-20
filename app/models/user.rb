@@ -1,5 +1,9 @@
 require 'digest/sha1'
+require 'users/importer'
+
 class User < ActiveRecord::Base
+  extend Users::Importer
+
   has_many :authentications, :as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
