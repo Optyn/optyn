@@ -503,3 +503,18 @@
     list-style-type: circle;
   }
 }
+
+#survey_answer_list {
+  .question {
+    font-weight: bold
+  }
+  .user, .answer {
+    margin-bottom: 15px;
+  }
+  span {
+    border-right: solid 1px #ccc;
+    width: 30px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+}

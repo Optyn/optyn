@@ -5,22 +5,22 @@
 
   - if @users_map.present?
     - @users_map.each_pair do |user_id, answers|
-      %ul#survey_answer_list
+      #survey_answer_list
         - user = answers.collect(&:user).first()
-        %li
-          .name
+        .name
+          %h5.user
             User:
             = answers.first.user.name
             at:
             = answers.last.created_at #Need to verify with the best way to show the time format and zone
 
-            - answers.each do |answer|
-              .question
-                Q:
-                = answer.question
-              .answer
-                A:
-                = answer.value.join("\n")
+          - answers.each do |answer|
+            .question
+              %span Q
+              = answer.question
+            .answer
+              %span A
+              = answer.value.join("\n")
 
         .labels
           = select_tag :label, options_from_collection_for_select(@names, :id, :name, user.user_labels.collect(&:label_id)),
