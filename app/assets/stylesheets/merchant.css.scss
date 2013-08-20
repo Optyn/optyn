@@ -408,22 +408,26 @@
   }*/
 }
 /* Public Merchant Page - i.e. /danacafe" */
-#merchant_page {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
 #merchant_page .titlebar {
   height: auto;
   padding-top: 40px;
 }
 #merchant_page .titlebar .logo {
   height: 60px;
-}
-#merchant_page .titlebar .title {
-  vertical-align: middle;
-  color: #304d58;
-  font-size: 28px;
-  padding-top: 15px;
+  > h1 {
+    display: inline-block;
+  }
+  > .logo-cont {
+    width: 100px;
+    height: 80px;
+    display: inline-block;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 1px;
+    border: solid 1px $medium-gray;
+  }
 }
 #merchant_page .titlebar .optyn {
   vertical-align: middle;
@@ -447,16 +451,6 @@
 #merchant_page .mainbody .title {
 
 }
-#merchant_page .mainbody .details {
-  width: 330px;
-  border-right: 1px solid #ececec;
-}
-#merchant_page .mainbody .details-list .item {
-  padding-bottom: 15px;
-}
-#merchant_page .mainbody .details-list .item-icons {
-  padding-bottom: 10px;
-}
 #merchant_page .mainbody .marketing {
   width: 330px;
 }
@@ -477,6 +471,24 @@
 }
 #merchant_page .mainbody .marketing .details li:hover {
   background-color: #e7eff1;
+}
+#merchant_page {
+  .row-fluid {
+    margin: 0;
+    padding: 3% 0;
+    &.titlebar {
+      background-color: $light-gray;
+    }
+    &.button {
+      background-color: $blue;
+      color: $white;
+      font: bold 20px/30px 'Open Sans', sans-serif;
+      strong {
+        margin-right: 10px;
+      }
+    }
+    &.mainbody {}
+  }
 }
 
 /* Styles for file imports page */

@@ -1,37 +1,36 @@
 #merchant_page
-  .container
-    .row.titlebar
-      .span2.logo
-        = shop_logo(@shop)
-      .span5.title
-        %strong
+  .container-fluid
+    .row-fluid.titlebar
+      .span12.logo.text-center
+        .logo-cont
+          = shop_logo(@shop)
+        %h1
           = shop_name_with_city_state(@shop)
-      .span5.optyn
-        = pluralize(@shop.connections.active.count, "Optyn")
+    .row-fluid.button
+      .span12.text-center.optyn
+        %strong
+          = pluralize(@shop.connections.active.count, "Optyn")
         %a{href: shop_public_page_login_location}
           = image_tag("optynbtn.png", alt: "Optyn Button")
-        %a.optynButton
-          %strong
-          %span
-            Subscribe via
-    .row.mainbody
-      .span4.details
+    .row-fluid.mainbody
+      .span8.offset2.details
         .title
           %h3
             == #{@shop.name} Details
-        .details-list
-          - if @shop.businesses.present?
-            .item
-              %strong
-                Category:
-              = @shop.business_category_names.join(" | ")
-          - if @shop.locations.present?
-            .item
-              %strong
-                Location:
-              = shop_address_components(@shop).join(", ")
-          - if @shop.website.present?
-            .item
-              %strong
-                Website:
-              = link_to @shop.website, @shop.website, target: '_blank'
+        %table.table.table-striped
+          %tbody
+            - if @shop.businesses.present?
+              %tr
+                %th Category:
+                %td
+                  = @shop.business_category_names.join(" | ")
+            - if @shop.locations.present?
+              %tr
+                %th Location:
+                %td
+                  = shop_address_components(@shop).join(", ")
+            - if @shop.website.present?
+              %tr
+                %th Website:
+                %td
+                  = link_to @shop.website, @shop.website, target: '_blank'
