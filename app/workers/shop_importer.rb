@@ -3,12 +3,19 @@ class ShopImporter
 
   def self.perform(payload_id)
     payload = ApiRequestPayload.find(payload_id)
-    if payload.present?
-      payload.update_attribute(:status, 'Inprocess')
-      Shop.import(payload)
-      payload.save
-      payload.update_attributes(status: 'Processed')
-      PartnerMailer.import_complete(payload).deliver
+    begin
+      if payload.present?
+        payload.update_attribute(:status, 'Inprocess')
+        counters, output, unparsed = Shop.import(payload)
+        payload.stats = counters
+        payload.save
+        payload.update_attributes(status: 'Processed')
+        PartnerMailer.import_complete(payload, output, unparsed).deliver
+      end
+    rescue => e
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace
+      PartnerMailer.import_error(payload, e.message).deliver
     end
   end
 end

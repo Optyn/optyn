@@ -17,15 +17,12 @@
             %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
               %tr
                 %td
-                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"} 
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
                     Hi #{@partner.name},
-                  %p Your file import is complete.
-                  %p Below are the stats for the file.
-                  - @payload.stats.each do |shop_stat|
-                    %p
-                      - shop_stat.each_pair do |key, value|
-                        %p
-                          == #{key.to_s.humanize}: #{value}
+                  %p Your file import failed.
+                  %p
+                    It failed because of the following error:
+                    = @error
 
 
                   %p
