@@ -147,9 +147,9 @@ module ApplicationHelper
   def email_body_shop_logo(shop)
     if shop.has_logo?
       if shop.website.present?
-        link_to(image_tag(shop.logo_location, alt: shop.name, title: @shop.name).html_safe, shop.website, target: "_blank")
+        link_to(image_tag(shop.logo_location, alt: shop.name, title: @shop.name, style:'max-height: 150px;').html_safe, shop.website, target: "_blank")
       else
-        image_tag(shop.logo_location, alt: shop.name, title: shop.name)
+        image_tag(shop.logo_location, alt: shop.name, title: shop.name, style:'max-height: 150px;')
       end
     else
       if shop.website.present?

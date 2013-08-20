@@ -22,16 +22,15 @@
       %hr/
 
       .row-fluid
-        .span5
-          .span1
-            = shop.logo_img.url rescue nil
+        .span6
           .span3
+            = shop.logo_img.url rescue nil
+          .span9
             ==  to: #{message_receiver_labels(@message.label_names)}
             == (#{@message.connections_count} total)
 
-        .span3
-          .span2.text-right
-            = message_detail_date(@message)
+        .span6
+          = message_detail_date(@message)
 
           /reply all
 
