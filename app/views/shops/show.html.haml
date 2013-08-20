@@ -10,6 +10,10 @@
         = pluralize(@shop.connections.active.count, "Optyn")
         %a{href: shop_public_page_login_location}
           = image_tag("optynbtn.png", alt: "Optyn Button")
+        %a.optynButton
+          %strong
+          %span
+            Subscribe via
     .row.mainbody
       .span4.details
         .title

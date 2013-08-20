@@ -575,12 +575,11 @@ i.myspace { background-position: -233px -51px; }
 
 .optynButton {
     display: inline-block;
-    height: 40px;
     cursor: pointer;
     color: $white !important;
     text-decoration: none;
     border: darken( $green, 10% ) solid 2px;
-    font: normal 16px/39px 'Lucida grande', arial;
+    font: normal 16px/47px 'Lucida grande', arial;
     @include transition( all 0.2s ease-out );
     &:hover, &:focus {
         @include scale( 1.1 );
@@ -591,16 +590,28 @@ i.myspace { background-position: -233px -51px; }
     }
     &:active {
     }
+    > .tick {
+      float: left;
+      padding: 0 15px;
+      border-right: solid 2px darken( $green, 10% );
+      height: 48px;
+      > img {
+        margin-top: -4px;
+      }
+    }
     > strong {
         background: url('/assets/optyn-button-logo.png') no-repeat 0 0;
         float: right;
         height: 20px;
         position: relative;
-        top: 11px;
+        top: 15px;
         width: 51px;
         left: -28px;
     }
     &#noCheckMark {
+        .tick {
+          display: none;
+        }
         > span {background: none; padding: 0 30px; text-indent: 0;}
     }
     &#noCheckMark.large {
@@ -608,21 +619,39 @@ i.myspace { background-position: -233px -51px; }
         > strong {left: -49px;}
     }
     &#noCheckMark.small {
-        > span {text-indent: -9999px;}
+        > span {/*text-indent: -9999px;*/}
     }
     > span {
         float: left;
-        background: url('/assets/optyn_button_checkbox.png') no-repeat 0 0;
+        background-image: image-src( 'OptynButtonTick.png' );
+        background-repeat: no-repeat;
+        background-position: 0 0;
         padding: 0 51px 0 101px;
         text-indent: -9999px;
         > img {margin-left: 4px;}
     }
     &.small {
-        > span {padding: 0 33px 0 74px;}
+        height: 40px;
+        line-height: 37px;
+        > span {
+          padding: 0 33px 0 33px;
+          text-indent: 0;
+        }
+        > strong {
+            top: 10px;
+            left: -25px;
+        }
+        .tick {
+          height: 38px;
+          padding: 0 10px;
+        }
     }
     &.large {
-        > strong {left: -48px;}
-        > span {text-indent: 0; padding: 0 59px 0 101px; }
+        height: 50px;
+        > strong {
+            left: -44px;
+        }
+        > span {text-indent: 0; padding: 0 50px 0 50px; }
     }
 }
 
@@ -667,6 +696,7 @@ i.myspace { background-position: -233px -51px; }
   }
   .table {
     margin-top: 10px;
+    clear: both;
   }
 }
 
@@ -786,8 +816,8 @@ h1, h5 {
   font-weight: 300;
 }
 h5 {
-  font-size: 17px;
-  line-height: 23px;
+  font-size: 20px;
+  line-height: 25px;
 }
 h4 {
   font-weight: normal;

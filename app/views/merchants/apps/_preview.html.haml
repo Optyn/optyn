@@ -5,6 +5,8 @@
       - if [1, 2].include?(@application.call_to_action.to_i)
         /== #{image_tag('optyn_button_checkbox.png', alt: 'checkmark') if @application.checkmark_icon}#{image_tag @application.call_to_action == 1 ? "optyn_button_small.png" : "optyn_button_large.png", alt: 'optyn button'}
         %a.optynButton{:class => small_cass(@application.call_to_action ) , :id => checkbox_image(@application.checkmark_icon)}
+          .tick
+            %img{ src: asset_path( 'OptynButtonTick.png'), alt: '' }
           %strong
           %span
             = @application.call_to_action == 1 ? "Optyn" : "Subscribe via"
