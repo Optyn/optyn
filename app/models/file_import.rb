@@ -20,31 +20,22 @@ class FileImport < ActiveRecord::Base
   def create_connections()
     content = download_file
     begin
-      self.stats = User.import(content, manager, label)
+      statistics, output, unparsed = User.import(content, manager, label)
+      puts ("-" * 25) + "OUTPUT" + ("-" * 25)
+      puts "Statistics: #{statistics.inspect}"
+      puts "Unparsed: #{unparsed}"
+      puts "Output: #{output}"
+      puts "-" * 56
+      self.stats = statistics
       self.save
       assign_complete_status
-      MerchantMailer.import_stats(self).deliver
+      MerchantMailer.import_stats(self, output, unparsed).deliver
     rescue => e
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
       assign_error_status
       MerchantMailer.import_error(self, e.message).deliver
     end
-  end
-
-  def create_unparsed_rows_file_if
-    dir_path = "#{Rails.root}/tmp/file_import/"
-    file_path = "#{dir_path}/FileImport#{self.id}.csv"
-
-    FileUtils.mkdir_p(dir_path) unless Dir.exists?("#{Rails.root}/tmp/file_import/")
-
-    unless File.exists?(file_path)
-      File.open(file_path, "wb+") do |file|
-        file << %{"Name","Email"\n}
-      end
-    end
-
-    file_path
   end
 
   def assign_being_parsed_status
@@ -70,18 +61,6 @@ class FileImport < ActiveRecord::Base
   def download_file
     io_string = open(self.csv_file.to_s)
     io_string.read
-  end
-
-  def validate_headers(headers)
-    raise "Incorrect Headers. The file should have headers of 'Name' and 'Email'" if !headers.include?(:name) || !headers.include?(:email)
-  end
-
-  def add_unparsed_row(row)
-    puts "Adding an unparsed row"
-    unparsed_file_path = create_unparsed_rows_file_if
-    File.open(unparsed_file_path, "a") do |file|
-      file << (row.to_s + "\n")
-    end
   end
 
   def assign_queued_status

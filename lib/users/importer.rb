@@ -9,6 +9,12 @@ module Users
 	    headers = csv_table.headers
 	    validate_headers(headers)
 
+	    output = []
+	    unparsed_rows = []
+	    output_headers = %{"Name","Email","Gender","Birth Date","Status"}
+	    output << output_headers
+	    unparsed_rows << output_headers
+
 	    counters = ActiveSupport::OrderedHash.new()
 	    counters[:user_creation] = 0
 	    counters[:existing_user] = 0
@@ -17,7 +23,7 @@ module Users
 	    counters[:unparsed_rows] = 0
 
 	    csv_table.each do |row|
-
+	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
 	      user = User.find_by_email(row[:email]) || User.new(email: row[:email])
 	      user.skip_name = true
 	      user.name = row[:name] unless user.name.present?
@@ -30,7 +36,14 @@ module Users
 	      user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
 	      user.valid?
 
-	      (counters[:unparsed_rows] += 1) and (add_unparsed_row(row)) and next if user.errors.include?(:email) || user.errors.include?(:name)
+	      if user.errors.include?(:email) || user.errors.include?(:name)
+	      	counters[:unparsed_rows] += 1 
+	      	error_str = %{"Error: #{user.errors.full_messages.first}"}   
+					output_row << error_str
+					output << output_row.join(",")
+					unparsed_rows << output_row.join(",") 
+					next 
+				end
 
 	      if user.new_record?
 	        passwd = Devise.friendly_token.first(8)
@@ -40,8 +53,10 @@ module Users
 	        user.show_shop = true
 	        user.shop_identifier = shop.id
 	        counters[:user_creation] += 1
+	        output_row << %{"Created a New User"}
 	      else
 	        counters[:existing_user] += 1
+	        output_row << %{"User exists"}
 	      end
 	      user.save()
 
@@ -58,22 +73,18 @@ module Users
 
 	      label_instance = Label.find_or_create_by_shop_id_and_name(shop.id, (label || FileImport::DEFAULT_LABEL_NAME))
 	      UserLabel.find_or_create_by_user_id_and_label_id(user.id, label_instance.id)
+
+	      output << output_row.join(",")
 	    end
 	    
-	    counters
+	    unparsed = unparsed_rows.length > 0 ? unparsed_rows.join("\n") : ""
+
+	    [counters, output.join("\n"), unparsed]
 		end
 
     def validate_headers(headers)
     	raise "Incorrect Headers. The file should have headers of 'Name' and 'Email'" if !headers.include?(:name) || !headers.include?(:email)
   	end
-
-	  def add_unparsed_row(row)
-	    puts "Adding an unparsed row"
-	    unparsed_file_path = create_unparsed_rows_file_if
-	    File.open(unparsed_file_path, "a") do |file|
-	      file << (row.to_s + "\n")
-	    end
-	  end
 
 	  def download_file_from_payload(payload)
       s3 = AWS::S3.new(

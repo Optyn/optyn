@@ -45,14 +45,17 @@ class MerchantMailer < ActionMailer::Base
     mail(:to => @manager.email, :subject => "Congratulations!! You are growing.")
   end
 
-  def import_stats(file_import)
-    @file_import = file_import
+  def import_stats(import_holder, output="", unparsed="")
+    @file_import = import_holder
     @manager = @file_import.manager
     @counters = @file_import.stats.is_a?(Array) ? @file_import.stats.first : @file_import.stats
 
-    filepath = @file_import.create_unparsed_rows_file_if rescue nil
-    if filepath.present?
-      attachments['invalid_records.csv'] = File.read(filepath)
+    unless output.blank?
+      attachments['output.csv'] = output
+    end
+
+    unless unparsed.blank?
+      attachments['unparsed.csv'] = unparsed
     end
 
     mail(to: "#{@manager.name} <#{@manager.email}>", subject: "Import user task is complete!")
