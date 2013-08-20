@@ -679,12 +679,6 @@ i.myspace { background-position: -233px -51px; }
 
 
 #flat.m-app {
-  .btn {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    letter-spacing: 1px;
-  }
   h3 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
@@ -694,6 +688,11 @@ i.myspace { background-position: -233px -51px; }
   .table {
     margin-top: 10px;
     clear: both;
+    caption {
+      font-size: 20px;
+      line-height: 30px;
+      text-align: center;
+    }
   }
 }
 
@@ -714,6 +713,7 @@ form.flat {
   }
 }
 #flat {
+  .nav-pills > li > a { @include border-radius( 0 ); }
   i {
     margin-top: 4px;
   }
@@ -773,12 +773,68 @@ form.flat {
   .tooltip-inner {
     border-radius: 0;
   }
-}  /* /#flat */
-#flat.main {
-  .nav-pills > li > a {
+  .btn {
     @include border-radius( 0 );
+    font: normal 16px/25px 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
+    @include transition( all 0.2s ease-out );
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background: darken( $light-gray, 5% );
+    &:hover {
+      border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
+      text-decoration: none;
+      background-color: darken( $light-gray, 15% );
+    }
   }
-}
+  .link.blue, .btn-primary {
+    color: $white;
+    background: $blue;
+    &:hover {
+      background-color: darken( $blue, 10% );
+    }
+  }
+  .link.blue {
+    padding: 0 15px;
+  }
+  .btn-primary[disabled] {
+    background-color: saturate( $blue, 20% );
+  }
+  .link.orange, .btn-warning {
+    color: #fff;
+    background-color: $orange;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+    &:hover {
+      background-color: darken( $orange, 10% );
+    }
+  }
+  .btn-info, .btn-info[type='submit'] {
+    color: $white;
+    background-color: $bluish-green;
+    &:hover {
+      background-color: darken( $bluish-green, 10% );
+    }
+  }
+  .btn-success, .btn-success[type='submit'] {
+    background-color: $green;
+    &:hover {
+      background-color: darken( $green, 10% );
+    }
+  }
+  .btn-danger {
+    background-color: $red;
+    &:hover {
+      background-color: darken( $red, 15% );
+    }
+  }
+  .btn-large {
+    padding: 11px 19px;
+    font-size: 1.2em;
+    line-height: 1.4em;
+  }
+}  /* /#flat */
 #flat {
   .input-append,
   .input-prepend {
@@ -829,67 +885,6 @@ strong {
 .row-fluid {
   padding-left: 2%;
   padding-right: 2%;
-}
-.link, .btn {
-  @include border-radius( 0 );
-  font-size: 18px;
-  line-height: 30px;
-  font-family: 'Open Sans Condensed', sans-serif;
-  border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
-  @include transition( all 0.2s ease-out );
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  background: darken( $light-gray, 5% );
-  &:hover {
-    border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
-    text-decoration: none;
-    background-color: darken( $light-gray, 15% );
-  }
-}
-.link.blue, .btn-primary {
-  color: $white;
-  background: $blue;
-  &:hover {
-    background-color: darken( $blue, 10% );
-  }
-}
-.link.blue {
-  padding: 0 15px;
-}
-.btn-primary[disabled] {
-  background-color: saturate( $blue, 20% );
-}
-.link.orange, .btn-warning {
-  color: #fff;
-  background-color: $orange;
-  &:hover {
-    background-color: darken( $orange, 10% );
-  }
-}
-.btn-info, .btn-info[type='submit'] {
-  color: $white;
-  background-color: $bluish-green;
-  &:hover {
-    background-color: darken( $bluish-green, 10% );
-  }
-}
-.btn-success, .btn-success[type='submit'] {
-  background-color: $green;
-  &:hover {
-    background-color: darken( $green, 10% );
-  }
-}
-.btn-danger {
-  background-color: $red;
-  &:hover {
-    background-color: darken( $red, 15% );
-  }
-}
-.btn-large {
-  padding: 11px 19px;
-  font-size: 1.2em;
-  line-height: 1.2em;
 }
 
 .text-justify {

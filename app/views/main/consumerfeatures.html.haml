@@ -11,12 +11,12 @@
       %div.ico.ctrl.offset5
       %h3 Finally, YOU are in control
       %p.text-justify
-        %strong Guess what? Optyn puts you in control of how you are being marketed to. We make the marketing process easier and better for all, including you and merchants.
+        %h5 Guess what? Optyn puts you in control of how you are being marketed to. We make the marketing process easier and better for all, including you and merchants.
     .span6
       %div.ico.globe.offset5
       %h3 Opt in. Any business. Anywhere.
       %p.text-justify
-        %strong Optyn is the easiest way to opt into any business, anywhere. Whether it's a website, a local store, an event, or tradeshow, now you can opt into receiving marketing messages anywhere, anytime, and any business or organization. One Optyn, to rule them all.
+        %h5 Optyn is the easiest way to opt into any business, anywhere. Whether it's a website, a local store, an event, or tradeshow, now you can opt into receiving marketing messages anywhere, anytime, and any business or organization. One Optyn, to rule them all.
 
   .row-fluid
     .span12
@@ -64,12 +64,12 @@
 
   .row-fluid.sign-up
     .span12
-      %strong So, what are you waiting for? Get started now.
+      %h5 So, what are you waiting for? Get started now.
       /%a.link.blue{:href => new_user_registration_path} Get Started
       %form
-        %input{ :type => 'text', :placeholder => 'Enter your e-mail address' }
-        %input{ :type => 'submit', :value => 'Sign up as a customer' }
+        %input{ :type => 'text', :placeholder => 'Enter your e-mail address', 'data-toggle' => 'tooltip', title: 'Enter your e-mail address' }
+        %input.btn.btn-warning{ :type => 'submit', :value => 'Sign up as a customer' }
       %p
-        %strong Or
+        %h5 Or
       .btn-orange.icon_chrome
-        %a{ :href => '#' } Download Chrome plugin
+        %a.btn.btn-danger.btn-large{ :href => '#' } Download Chrome plugin

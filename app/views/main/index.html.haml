@@ -16,7 +16,7 @@
     .line2 The simplest marketing tools that work for you
     %p.margin_top Easy hassle. Works for free.
     .btn-orange
-      %a{ :href => new_merchants_manager_registration_path, class: 'btn btn-warning btn-large' } Get started for FREE
+      %a.btn.btn-danger.btn-large{ :href => new_merchants_manager_registration_path } Get started for FREE
     %a.bordered{ :href => '#' } Learn more
     %a.bordered{ :href => merchant_features_path } Features
     %a.bordered{ :href => new_user_session_path } Log in
@@ -36,7 +36,7 @@
       Protect your information and eliminate spam
     %br
     #chrome-icon-button.btn-orange.icon_chrome
-      %a{ :href => '#', class: 'btn btn-warning btn-large' } Download Chrome plugin
+      %a.btn.btn-danger.btn-large{ :href => '#' } Download Chrome plugin
     #consumer-get-started.btn-orange
       %a{ :href => user_registration_path } Get started Now!  
     %br
@@ -55,7 +55,7 @@
       %li.get The easiest way to get customers into program.
       %li.free Free for upto 100 customers. All features included. No gimmicks.
     .btn-orange
-      %a.btn.btn-warning.btn-large{ :href => new_merchants_manager_registration_path } Get started for FREE
+      %a.btn.btn-danger.btn-large{ :href => new_merchants_manager_registration_path } Get started for FREE
     %a.bordered{ :href => merchant_features_path } Features
     %a.bordered{ :href => pricing_path } Pricing
 
@@ -67,7 +67,7 @@
       %li.ctrl You are finally in control of your information.
       %li.cool Explore cool places, new subscriptions and much more.
     .btn-orange
-      %a.btn.btn-warning.btn-large{ :href => new_user_registration_path } Get started for FREE
+      %a.btn.btn-danger.btn-large{ :href => new_user_registration_path } Get started for FREE
     %a.bordered{ :href => consumer_features_path } Features
     %a.bordered{ :href => '#' } Download Chrome plugin
 
@@ -91,8 +91,8 @@
   .span6.businesses
     %p A whole new world awaits!
     %form
-      %input{ :type => 'text', :placeholder => 'Sign up with email' }
-      %input{ :type => 'submit', :value => 'Sign up' }
+      %input{ :type => 'text', :placeholder => 'Sign up with email', 'data-toggle' => 'tooltip', title: 'Sign up with email' }
+      %input.btn.btn-warning{ :type => 'submit', :value => 'Sign up' }
     %aside
       Clicking sign up you agree to Optyn's
       %a{ :href => terms_path } Terms of Use
@@ -103,8 +103,8 @@
   .span6.consumers
     %p Your customers are waiting
     %form
-      %input{ :type => 'text', :placeholder => 'Sign up with email' }
-      %input{ :type => 'submit', :value => 'Sign up' }
+      %input{ :type => 'text', :placeholder => 'Sign up with email', 'data-toggle' => 'tooltip', title: 'Sign up with email' }
+      %input.btn.btn-warning{ :type => 'submit', :value => 'Sign up' }
     %aside
       Clicking sign up you agree to Optyn's
       %a{ :href => terms_path } Terms of Use
