@@ -600,7 +600,7 @@ i.myspace { background-position: -233px -51px; }
       }
     }
     > strong {
-        background: url('/assets/optyn-button-logo.png') no-repeat 0 0;
+        background: image-url('optyn-button-logo.png') no-repeat 0 0;
         float: right;
         height: 20px;
         position: relative;
@@ -623,9 +623,6 @@ i.myspace { background-position: -233px -51px; }
     }
     > span {
         float: left;
-        background-image: image-src( 'OptynButtonTick.png' );
-        background-repeat: no-repeat;
-        background-position: 0 0;
         padding: 0 51px 0 101px;
         text-indent: -9999px;
         > img {margin-left: 4px;}
