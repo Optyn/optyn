@@ -1,10 +1,10 @@
 %div
   %p
-    == #{@message.shop_name} would like to invite you to #{@message.name}. Here are the details:
+    == "We have a new product. Here are the details:"
 
   = render partial: "shared/messages/content"
 
   - if @message.special_try
     %p
       %strong
-        == P.S. You are one of the special people who have been invited by #{@message.shop_name} to try our new product.
+        == P.S. You are one of the special few who are invited to try our new product.
