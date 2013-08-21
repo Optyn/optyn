@@ -49,6 +49,7 @@ after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:update_code', 'deploy:messenger:lock'
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
+after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
@@ -121,6 +122,12 @@ namespace :deploy do
   desc "Migrating the database"
   task :migrate, :roles => :db do
     run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate --trace"
+  end
+
+  desc "Generate the site map"
+  task :sitemap, :roles => :app do
+    puts "Generating the sitemap"
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:clean && RAILS_ENV=#{rails_env} bundle exec rake sitemap:create "
   end
 
   namespace :assets do
