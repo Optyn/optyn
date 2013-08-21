@@ -16,7 +16,7 @@
     = analytics_init if Rails.env.production?
 
 
-  %body#flat{:class => params[:action] + ' ' + params[:controller]}
+  %body#flat{:class => params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')}
     - if params[:action] == 'index' && params[:controller] == 'main'
       %header.row-fluid
         .span5
