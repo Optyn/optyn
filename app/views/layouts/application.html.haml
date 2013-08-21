@@ -17,6 +17,7 @@
 
 
   %body#flat{:class => params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')}
+    = display_flash_message
     - if params[:action] == 'index' && params[:controller] == 'main'
       %header.row-fluid
         .span5
