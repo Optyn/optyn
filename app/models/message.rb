@@ -529,24 +529,24 @@ class Message < ActiveRecord::Base
 
   def canned_from
     #manager.email_like_from
-    %{#{self.shop_name.titleize} via Optyn <email@optyn.com>}
+    %{#{self.shop_name.titleize} <email@optyn.com>}
   end
 
   def canned_subject
     if self.instance_of?(GeneralMessage)
-      "#{shop.name}, wants to make sure you hear the latest.."
+      "{{Customer Name}}, we have an announcement."
     elsif self.instance_of?(CouponMessage)
-      "{{Customer Name}}, here's a Coupon for #{shop.name}!"
+      "{{Customer Name}}, here's a Coupon for just for you."
     elsif self.instance_of?(EventMessage)
-      "#{shop.name} invites you to an event!"
+      "{{Customer Name}}, we are hosting a special event and you are invited."
     elsif self.instance_of?(ProductMessage)
-      "#{shop.name} is introducing a New Product you'll want to have"
+      "{{Customer Name}}, check out our new product!"
     elsif self.instance_of?(SaleMessage)
-      "#{shop.name} is having a sale! Don't miss out."
+      "We are having a sale! {{Customer Name}}, don't miss out."
     elsif self.instance_of?(SpecialMessage)
-      "A special offer just for you {{Customer Name}}, Courtesy of #{shop.name}."
+      "A special offer just for {{Customer Name}}."
     elsif self.instance_of?(SurveyMessage)
-      "#{shop.name} would like your feedback!"
+      "{{Customer Name}}, we need your feedback!"
     end
   end
 
