@@ -64,13 +64,16 @@
   text-shadow: none;
 }
 /* Login Page */
-#box_login .box{
+.box {
   background-color: $light-gray;
-	border: 1px solid $medium-gray;
-	float: none;
-	margin: 50px auto 0;
-	padding-bottom: 26px;
-	margin-bottom: 25px;
+  min-width: 350px;
+}
+#box_login .box, .box2 {
+  border: 1px solid $medium-gray;
+  float: none;
+  margin: 50px auto 0;
+  padding-bottom: 26px;
+  margin-bottom: 25px;
 }
 #box_login .box .head{
   border-bottom: 1px solid $medium-gray;
@@ -169,14 +172,8 @@
 }
 #box_login .box .form input[type="text"],
 #box_login .box .form input[type="password"] {
-	border-color: #DBDBDB #EAEAEA #EAEAEA #DBDBDB;
-    border-left: 1px solid #DBDBDB;
-    border-style: solid;
-    border-width: 1px;
-    font-size: 16px;
-    height: 30px;
-    margin-bottom: 16px;
-    width: 100%;
+  margin-bottom: 16px;
+  width: 100%;
 }
 #box_login .box .form .remember{
 	margin-top: 10px;
