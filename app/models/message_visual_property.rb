@@ -7,7 +7,7 @@ class MessageVisualProperty < ActiveRecord::Base
   attr_accessible :message_id, :message_visual_section_id, :property_key, :property_value, :make_default
 
   def self.header(message_id)
-  	where(message_id: message_id, message_visual_section_id: MessageVisualSection.header_id)
+  	where(message_id: message_id, message_visual_section_id: MessageVisualSection.header_id).first
   end
 
   def make_default

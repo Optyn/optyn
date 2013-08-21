@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
-  attr_accessor :unread
+  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
 
 
   attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time
@@ -391,21 +391,29 @@ class Message < ActiveRecord::Base
     self.errors.full_messages
   end
     
-  def header_background_properties
-    headers = MessageVisualProperty.header(self.id)
+  def header_background_property
+    header = MessageVisualProperty.header(self.id)
 
-    headers.blank? ? message_visual_properties.build(property_value: "background-color: #{shop.header_background_color.strip}") : headers
+    header.blank? ? message_visual_properties.build(property_value: "background-color: #{shop.header_background_color.strip}") : header
   end
 
   def header_background_color_css_val
-    properties = self.header_background_properties
-    return "background-color: #{shop_header_background_color_hex};" if properties.present? && (properties.instance_of?(ActiveRecord::Relation) ? properties.first : properties).new_record?
-    css = self.header_background_properties.first.property_value
+    property = self.header_background_property
+    return "background-color: #{shop_header_background_color_hex};" if property.present? && (property.instance_of?(ActiveRecord::Relation) ? property.first : property).new_record?
+    css = self.header_background_property.property_value
     css
   end
 
   def header_background_color_hex
-    header_background_color_css_val.split(/:/).last.to_s.gsub(/;/, "")
+    header_background_color_css_val.split(/:/).last.to_s.gsub(/;/, "").strip
+  end
+
+  def header_background_color_property_present?
+    !header_background_property.new_record?
+  end
+
+  def header_background_color_property_id
+    header_background_property.id
   end
 
   def update_visuals(options={})
@@ -426,6 +434,12 @@ class Message < ActiveRecord::Base
 
   def show_image?
     message_image.present?    
+  end
+
+  def image_location
+    if show_image?
+      message_image.image.url
+    end
   end
 
   def show_button?

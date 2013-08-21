@@ -44,9 +44,29 @@ node :rsvp do |message|
   message.rsvp
 end unless locals[:message_instance].rsvp.blank?
 
+node :header_background_color do |message|
+  message.header_background_color_hex
+end 
+
+node :header_background_color_property_id do |message|
+  message.header_background_color_property_id
+end if locals[:message_instance].header_background_color_property_present?
+
 node :folder_counts do
   {:drafts => @drafts_count, :queued => @queued_count}
 end
+
+node :image do |message|
+  message.image_location
+end if locals[:message_instance].show_image?
+
+node :button_url do |message|
+  message.button_url
+end if locals[:message_instance].button_url.present?
+
+node :button_text do |message|
+  message.button_text
+end if locals[:message_instance].button_text.present?
 
 node :shop do |message|
   {name: message.shop.name, logo: message.shop.logo_location}
