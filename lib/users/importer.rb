@@ -26,7 +26,7 @@ module Users
 	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
 	      user = User.find_by_email(row[:email]) || User.new(email: row[:email])
 	      user.skip_name = true
-	      user.skip_email = true
+	      user.skip_welcome_email = true
 	      user.name = row[:name] unless user.name.present?
 	      gender = if (gender_val = row[:gender].to_s.downcase).length == 1
 	                 gender_val

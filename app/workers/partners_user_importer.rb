@@ -17,8 +17,9 @@ class PartnersUserImporter
     rescue => e
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
-      payload.update_attributes(status: "Error")
+      payload.update_attributes(status: "Error", stats: [{error: "Exception Occured"}])
       MerchantMailer.import_error(payload, e.message).deliver
+      return
     end
     payload.update_attributes(status: 'Processed')
     MerchantMailer.import_stats(payload, output, unparsed).deliver

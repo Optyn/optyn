@@ -4,7 +4,7 @@ module Api
       class ShopsController < PartnerOwnerBaseController
         def import_list
           partner_id = current_partner.id
-          @import_list = ApiRequestPayload.for_partner(partner_id)
+          @import_list = ApiRequestPayload.shop_imports(partner_id)
         end
 
         def import

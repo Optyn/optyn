@@ -14,8 +14,8 @@ module Api
 				end
 
 				def import_list
-					partner_id = current_partner.id
-          @import_list = ApiRequestPayload.for_partner(partner_id)
+					manager_id = current_manager.id
+          @import_list = ApiRequestPayload.consumer_imports(manager_id)
 				end
 			end #end of the ConsumersController class
     end #end of Merchants module

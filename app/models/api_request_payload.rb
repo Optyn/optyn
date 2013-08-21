@@ -15,6 +15,18 @@ class ApiRequestPayload < ActiveRecord::Base
 
   scope :for_partner, ->(partner_identifier) { where(partner_id: partner_identifier) }
 
+  scope :for_manager, ->(manager_identifier) { where(manager_id: manager_identifier) }
+  
+  scope :for_controller_and_action, ->(controller_name, action_name) { where(controller: controller_name, action: action_name) }
+
+  def self.shop_imports(partner_identifer)
+    for_partner(partner_identifer).for_controller_and_action("shops", "import")
+  end
+
+  def self.consumer_imports(manager_identifier)
+    for_manager(manager_identifier).for_controller_and_action("users", "import")
+  end
+
   private
   def assign_uuid
     IdentifierAssigner.assign_random(self, 'uuid')

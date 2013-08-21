@@ -1,2 +1,2 @@
 object @payload => :data
-attributes :uuid, :status, :stats
+attributes :uuid, :status, :stats, :created_at
