@@ -64,9 +64,17 @@
   text-shadow: none;
 }
 /* Login Page */
-.box {
+.users-sessions .box,
+.users-passwords .box,
+.merchants-managers-registrations .box,
+.users-registrations .box {
   background-color: $light-gray;
   min-width: 350px;
+}
+.personal-info {
+  border-top: solid 1px $medium-gray;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 #box_login .box, .box2 {
   border: 1px solid $medium-gray;
