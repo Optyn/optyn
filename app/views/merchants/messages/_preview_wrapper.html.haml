@@ -16,7 +16,7 @@
           Header Colors
       #collapse_message_colors.row-fluid.email-preview.accordion-body.collapse
         #message_color_body.accordion-inner
-          .span8{:style => "margin-left: 100px;"}
+          .row-fluid
             = render partial: "header_form"
             %div.loading{:style => "display: none;"}
               %strong Loading... 
@@ -28,4 +28,4 @@
       #collapse_message_preview.row-fluid.email-preview.accordion-body.collapse.in
         #message_preview.accordion-inner
           #preview_wrapper.span8.offset2
-            = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}  
+            = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
