@@ -127,7 +127,7 @@ namespace :deploy do
   desc "Generate the site map"
   task :sitemap, :roles => :app do
     puts "Generating the sitemap"
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:clean && RAILS_ENV=#{rails_env} bundle exec rake sitemap:create "
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:clean && RAILS_ENV=#{rails_env} bundle exec rake sitemap:refresh"
   end
 
   namespace :assets do
