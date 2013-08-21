@@ -53,7 +53,7 @@ module Api
             populate_datetimes
             
             if @message.send(params[:choice].to_s.to_sym)
-              render(status: :created, template: individual_message_template_location)
+              render(status: :ok, template: individual_message_template_location)
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
             end

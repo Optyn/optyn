@@ -9,12 +9,13 @@ module Api
 					Resque.enqueue(PartnersUserImporter, payload_id)
 				end
 
-				#TODO TO BE IMPLEMENTED
 				def import_status
+					@payload = ApiRequestPayload.for_uuid(params[:id])
 				end
 
-				#TODO TO BE IMPLEMENTED
 				def import_list
+					partner_id = current_partner.id
+          @import_list = ApiRequestPayload.for_partner(partner_id)
 				end
 			end #end of the ConsumersController class
     end #end of Merchants module

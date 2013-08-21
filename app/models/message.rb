@@ -409,7 +409,7 @@ class Message < ActiveRecord::Base
   end
 
   def header_background_color_property_present?
-    !header_background_property.new_record?
+    !(header_background_property.new_record?)
   end
 
   def header_background_color_property_id
