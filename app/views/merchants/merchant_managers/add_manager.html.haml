@@ -2,20 +2,20 @@
 
 = render partial: 'merchants/merchant_managers/tabs'
 
-#box_sign
+#box_login
   .box_wrapper
-    .box
+    .box.span4.offset4
       .head
         %h4 Add a new manager to your business 
-      .form
+      .form.row-fluid
         = form_for @manager ,:url => merchants_create_new_manager_path do |f|
           = f.hidden_field :parent_id, :value => @manager.parent_id
           = f.hidden_field :shop_id, :value => @shop.id
 
-          = f.text_field :name, :placeholder => "Name"
-          = f.text_field :email, :placeholder => "Email"
-          = f.password_field :password, :placeholder => "Password"
+          = f.text_field :name, :placeholder => "Name", 'data-toggle' => 'tooltip', title: 'Name'
+          = f.text_field :email, :placeholder => "Email", 'data-toggle' => 'tooltip', title: 'Email'
+          = f.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password'
 
-          = f.password_field :password_confirmation, :placeholder => "Confirm Password"
+          = f.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password'
 
           = f.submit "Submit", :class => 'btn btn-success btn-block'
