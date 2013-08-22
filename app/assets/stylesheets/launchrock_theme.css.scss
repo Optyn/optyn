@@ -66,3 +66,73 @@
     background-color: rgba( 255, 255, 255, 0.5 );
   }
 }
+.navbar .help {
+  background: #333032;
+  color: #808285;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 2px 12px 1px;
+  margin: 8px 0 0;
+  text-shadow: none;
+  text-transform: uppercase;
+  &:hover {
+    background: #000;
+    color: #808285;
+    text-decoration: none;
+  }
+}
+.hi-user {
+  color: #58595b;
+  padding: 6px 5px 3px;
+  text-shadow: 0 1px 0 #282527;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.navbar-fixed-top {
+  .navbar-inner {
+    .headerNav {
+      a:hover {
+        background-color: #e6e7e8;
+        background-image: -moz-linear-gradient(top,#e6e7e8,#f1f2f3);
+        background-image: -webkit-gradient(linear,0 0,0 100%,from(#e6e7e8),to(#f1f2f3));
+        background-image: -webkit-linear-gradient(top,#e6e7e8,#f1f2f3);
+        background-image: -o-linear-gradient(top,#e6e7e8,#f1f2f3);
+        background-image: linear-gradient(to bottom,#e6e7e8,#f1f2f3);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e7e8',endColorstr='#f1f2f3',GradientType=0);
+        border-top: 2px solid #474647;
+        border-bottom: 2px solid #e6e7e8;
+        text-decoration: none;
+      }
+      .launch {
+        &:hover {
+          border-top: 2px solid #e52a46;
+        }
+      }
+      .insights {
+        &:hover {
+          border-top: 2px solid #6ab8ba;
+        }
+      }
+      .engage {
+        &:hover {
+          border-top: 2px solid #e52a46;
+        }
+      }
+      .app-store {
+        &:hover {
+          border-top: 2px solid #e2cf6d;
+        }
+      }
+      .build {
+        &:hover {
+          border-top: 2px solid #822873;
+        }
+      }
+    }
+  }
+  .admin, .navbar-inner {
+    padding: 0 20px;
+  }
+}

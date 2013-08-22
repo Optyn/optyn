@@ -1,34 +1,39 @@
 / begin navbar
 .navbar.navbar-fixed-top
+  .admin.row-fluid
+    .span12
+      %a.brand{:href => merchants_root_path}
+        = image_tag "logo.png", :alt => 'logo'
+      %ul.nav.pull-right.accDropDown
+        - if merchants_manager_signed_in?
+          = render partial: "layouts/merchant_dropdown"
+        - if user_signed_in?
+          = render partial: "layouts/consumer_dropdown"
+
   .navbar-inner
     .container-header
       %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.brand{:href => merchants_root_path}
-        = image_tag "logo.png", :alt => 'logo'
       - if merchants_manager_signed_in?
         %ul.headerNav.clearfix
-          %li.current
-            %a{:href => merchants_root_path}
+          %li
+            %a.launch{:href => merchants_root_path}
               Launch
           %li
-            %a{:href => '#'}
+            %a.insights{:href => '#'}
               Insights
           %li
-            %a{:href => merchants_messages_path }
+            %a.engage.active{:href => merchants_messages_path }
               Engage!
               %span.label New
           %li
-            %a{:href => '#'}
+            %a.app-store{:href => '#'}
               App Store
           %li
-            %a{:href => '#'}
+            %a.build{:href => '#'}
               Build
-      %ul.nav.pull-right.accDropDown
-        - if merchants_manager_signed_in?
-          = render partial: "layouts/merchant_dropdown"
-        - if user_signed_in?
-          = render partial: "layouts/consumer_dropdown"
+        %a.help.pull-right{ href: '#' }
+          Help & Feedback
 / ends navbar
