@@ -50,8 +50,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
 }
 #choose_message .row-fluid .type:hover {
-	background-color: #8ab953;
+	background-color: rgb( 232, 45, 70 );
 	color:white;
+	> h3 {
+		color: #fff;
+	}
 }
 #choose_message .row-fluid .type h3 {
 	color: #263d45;
