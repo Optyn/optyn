@@ -1,5 +1,14 @@
 * {margin: 0; padding: 0; @include box-sizing(border-box);}
 
+@mixin icon-caret {
+  background-image: url("/assets/navArrowSprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  display: inline-block;
+  height: 8px;
+  width: 9px;
+}
+
 body {
 	background: url(/assets/body-bg.png) repeat;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -196,22 +205,17 @@ body {
 			padding: 0;
 			@include border-radius(0);
 			display: inline-block;
-		    color: #EFF5E7;
+	    color: #EFF5E7;
 			transition: none;
-		    font-size: 14px;
-		    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-		    &:hover {
-		    	color: white;
-		    	background-color: transparent;
-		    }
-		    .icon {
-			    background-image: url("/assets/navArrowSprite.png");
-			    background-repeat: no-repeat;
-			    background-position: 0 0;
-			    display: inline-block;
-			    height: 8px;
-			    width: 9px;
-		    }
+	    font-size: 14px;
+	    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+	    &:hover {
+	    	color: white;
+	    	background-color: transparent;
+	    }
+	    .icon {
+	    	@include icon-caret;
+	    }
 		}
 	}
 }

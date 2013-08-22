@@ -4,6 +4,9 @@
     .span12
       %a.brand{:href => merchants_root_path}
         = image_tag "logo.png", :alt => 'logo'
+      %a.user-ctrls{ href: '#' }
+        %span.icon
+        zima
       %ul.nav.pull-right.accDropDown
         - if merchants_manager_signed_in?
           = render partial: "layouts/merchant_dropdown"

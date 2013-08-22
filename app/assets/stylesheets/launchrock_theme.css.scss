@@ -132,6 +132,20 @@
       }
     }
   }
+  .admin {
+    .user-ctrls {
+      display: inline-block;
+      margin: 4px 0 0 10px;
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .icon {
+      @include icon-caret;
+    }
+  }
   .admin, .navbar-inner {
     padding: 0 20px;
   }
