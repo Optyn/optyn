@@ -23,6 +23,7 @@ Optyn::Application.routes.draw do
   match 'thankyou' => 'main#thankyou'
   match 'old_index' => 'main#old_index'
   match 'cache/flush' => "cache#flush"
+  match '/shop/public/:identifier', to: 'shops#show'
 
   # Blog Redirect
   match "/blog" => redirect("http://optynblog.com"), :as => :blog
@@ -220,5 +221,5 @@ Optyn::Application.routes.draw do
     controllers :tokens => 'oauth_tokens'
   end
 
-  match '/:identifier' => 'shops#show', :as => :shop
+  # match '/:identifier' => 'shops#show', :as => :shop
 end

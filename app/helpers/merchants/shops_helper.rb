@@ -1,6 +1,6 @@
 module Merchants::ShopsHelper
   def show_identifier(shop)
-    shop.identifier.present? ? "#{SiteConfig.app_base_url}/#{shop.identifier}" : "Please choose an appropriate identifier for your shop example"
+    shop.identifier.present? ? "#{SiteConfig.app_base_url}/shop/public/#{shop.identifier}" : "Please choose an appropriate identifier for your shop example"
   end
 
   def show_business_category_names(shop)
