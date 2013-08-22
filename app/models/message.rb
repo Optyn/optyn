@@ -339,7 +339,9 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    self.subject.gsub("{{Customer Name}}", message_user.name) rescue "N/A"
+    user_name = message_user.name.to_s
+    self.subject.gsub("{{Customer Name}}", user_name) 
+  rescue "A message from #{shop.name}"
   end
 
   def excerpt
