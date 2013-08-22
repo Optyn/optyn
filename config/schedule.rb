@@ -30,7 +30,6 @@ every :day, :at => "2:00am" do
 end
 
 every :day, :at => "2:15am" do
-  rake "sitemap:clear"
   rake "sitemap:refresh"	
 end
 
