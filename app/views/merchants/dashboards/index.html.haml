@@ -3,77 +3,81 @@
   .row-fluid
     = render partial: "merchants/shared/menu"
     .span8.offset4
+
       .header
-        .span5.maintitle
+        .span6.maintitle
           %h3
             = current_shop.name
             Dashboard
+        .span5.new
+          %a.newcampaign{:href =>merchants_messages_path}
+            = image_tag "menu_icon_campaigns_white.png", :alt => 'Campaign'
+            Create New Campaign
+
+      .pad10px
+        %p
           Hi
           == #{current_manager.name}.
           Here's what's going on!
 
-        .span3.new
-          %a.btn.newcampaign{:href =>merchants_messages_path}
-            = image_tag "menu_icon_campaigns_white.png", :alt => 'Campaign'
-            Create New Campaign
-      .row-fluid.stats
-        .span2.leading
-          .count
-            = @day_count
-          .info
-            .img
-              = image_tag "md_new_connections.png", :alt => 'New connection'
-            .text
-              New Connections in last 24 hours
-        .span2.box
-          .count
-            = @week_count
-          .info
-            .img
-              = image_tag "md_connections_week.png", :alt => 'Connections'
-            .text
-              New Connections last 7 days
-        .span2.box
-          .count
-            = @month_count
-          .info
-            .img
-              = image_tag "md_connections_month.png", :alt => 'Connections'
-            .text
-              New Connections last 30 days
-        .span2.box
-          .count
-            = @total_count
-          .info
-            .img
-              = image_tag "md_active_connections.png", :alt => 'Active connections'
-            .text
-              Total Active New Connections
-      .latest
-        .title
-          Your Latest Activity
-        
-      %br
+        .row-fluid.stats
+          .span3.leading
+            .count
+              = @day_count
+            .info
+              .img
+                = image_tag "md_new_connections.png", :alt => 'New connection'
+              .text
+                New Connections in last 24 hours
+          .span3.box
+            .count
+              = @week_count
+            .info
+              .img
+                = image_tag "md_connections_week.png", :alt => 'Connections'
+              .text
+                New Connections last 7 days
+          .span3.box
+            .count
+              = @month_count
+            .info
+              .img
+                = image_tag "md_connections_month.png", :alt => 'Connections'
+              .text
+                New Connections last 30 days
+          .span3.box
+            .count
+              = @total_count
+            .info
+              .img
+                = image_tag "md_active_connections.png", :alt => 'Active connections'
+              .text
+                Total Active New Connections
+        .latest
+          .title
+            Your Latest Activity
+          
+        %br
 
-      %table.table.table-striped
-        %thead
-          %tr
-            %th When
-            %th User
-            %th Type
-            %th More Info
-        %tbody
-        - @feed.each do |feed_element|
-          %tr
-            %td
-              = time_ago_in_words(feed_element['time']) 
-              ago
-            %td
-              = feed_element['user']
-            %td
-              = feed_element['type']
-            %td
-              - if feed_element['action_url'].present?
-                %a{:href => feed_element['action_url']} Details
-              - else
-                = "--"
+        %table.table.table-striped
+          %thead
+            %tr
+              %th When
+              %th User
+              %th Type
+              %th More Info
+          %tbody
+          - @feed.each do |feed_element|
+            %tr
+              %td
+                = time_ago_in_words(feed_element['time']) 
+                ago
+              %td
+                = feed_element['user']
+              %td
+                = feed_element['type']
+              %td
+                - if feed_element['action_url'].present?
+                  %a{:href => feed_element['action_url']} Details
+                - else
+                  = "--"

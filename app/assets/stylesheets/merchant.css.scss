@@ -200,58 +200,56 @@
   margin: 0px;
 }
 #dashboard .header {
-  height: 50px;
-  padding-top: 10px;
+  height: 40px;
+  padding-top: 10px 8px 0 8px;
+  background-color: #333032;
+  color: #eee;
+  padding-left: 10px;
 }
 #dashboard .header .maintitle {
   margin: 0px;
 }
 #dashboard .header .maintitle h3 {
-  margin: 0px;
-  padding-top: 0px;
-  color: #263d45;
-  font-size: 25px;
-  line-height: 27px;
+  font-family: inherit;
+  line-height: 38px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  margin: 0;
 }
 #dashboard .header .new {
   float: right;
 }
 #dashboard .header .new .newcampaign {
-  background: $red;
-  border-radius: 4px;
+  color: lighten( $red, 30% );
   display: inline-block;
-  height: 36px;
-  line-height: 25px;
+  line-height: 38px;
   top: 4px;
-  color: #ffffff;
   font-size: 18px;
   text-decoration: none;
   text-shadow: none;
   font-weight: bold;
-  border: 1px #304d58;
   float: right;
+  height: 40px;
+  padding: 0 10px;
 }
-#dashboard .header .new .newcampaign img {
+#dashboard .header .new .newcampaign > img {
   padding-right: 10px;
 }
 #dashboard .header .newcampaign:hover{
-  background: darken( $red, 10% );
+  background-color: $red;
   color: #fff;
   text-decoration: none;
   text-shadow: none;
 }
 #dashboard .latest {
-  border-radius: 4px;
-  background-color: #7d8f96;
+  border-bottom: 1px solid #B9B9B9;
   height: 50px;
   margin-top: 10px;
 }
 #dashboard .latest .title {
   font-size: 18px;
-  color: #fff;
   line-height: 26px;
   float: left;
-  padding-left: 20px;
   vertical-align: middle;
   padding-top: 10px;
   font-weight: bold;
@@ -271,16 +269,6 @@
 #dashboard .stats {
   padding-top: 20px;
   padding-bottom: 20px;
-}
-#dashboard .stats .span2 {
-  margin-left: 0px;
-  width: 186px;
-}
-#dashboard .stats .leading {
-  margin-left: 30px;
-}
-#dashboard .stats .box {
-  padding-left: 8px;
 }
 #dashboard .stats .box .count,
 #dashboard .stats .leading .count {
@@ -627,4 +615,12 @@
 #merchant_page .mainbody .marketing .details li:hover {
   background-color: #e7eff1;
 }
-
+.lr-cont {
+  border: 1px solid #414042;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.pad10px {
+  padding: 10px;
+}
