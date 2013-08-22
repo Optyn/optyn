@@ -9,17 +9,17 @@
           %table.table.table-condensed.table-striped.db-overview
             %tbody
               %tr
-                %td New Connections in last 24 hours
-                %td 123
+                %td New Signups in last 24 hours
+                %td 4
               %tr
-                %td New Connections last 7 days
-                %td 456
+                %td New Signups last 7 days
+                %td 18
               %tr
-                %td New Connections last 30 days
-                %td 789
+                %td New Signups last 30 days
+                %td 46
               %tr
-                %td Total Active New Connections
-                %td 123
+                %td Total Active New Signups
+                %td 46
           %a.btn.btn-primary.btn-block{ href: merchants_root_path } Visit dashboard
     .accordion-group
       .accordion-heading
@@ -27,13 +27,9 @@
           %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion', href: '#two' } Engage!
       #two.accordion-body.collapse
         .accordion-inner.create-campaign-links
-          %a.btn.btn-block{ href: '#' } Create a coupon
-          %a.btn.btn-block{ href: '#' } Announce a special
-          %a.btn.btn-block{ href: '#' } Announce a sale
-          %a.btn.btn-block{ href: '#' } General announcement
-          %a.btn.btn-block{ href: '#' } New product
-          %a.btn.btn-block{ href: '#' } New event
-          %a.btn.btn-block{ href: '#' } Survey time
+          %a.btn.btn-block{ href: '#' } Send a Beta Update
+          %a.btn.btn-block{ href: '#' } Announce the Big Launch
+          %a.btn.btn-block{ href: '#' } Send a Survey
           %a.btn.btn-block.disabled{ href: '#' }
             Create a contest
             %span.pull-right COMING SOON
