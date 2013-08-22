@@ -1,14 +1,12 @@
-%h2 Change your password
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
-  = f.hidden_field :reset_password_token
-  %div
-    = f.label :password, "New password"
-    %br/
-    = f.password_field :password, :autofocus => true
-  %div
-    = f.label :password_confirmation, "Confirm new password"
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Change my password"
-= render "users/shared/links"
+#box_login.row-fluid
+  .box.span4.offset4
+    .head
+      %h4 Change your password
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, class: 'form row-fluid' }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      = f.password_field :password, :autofocus => true, 'data-toggle' => 'tooltip', title: 'New password', placeholder: 'New password'
+      = f.password_field :password_confirmation, 'data-toggle' => 'tooltip', title: 'Confirm new password', placeholder: 'Confirm new password'
+      = f.submit "Change my password", class: 'btn btn-primary btn-large'
+    %p.already
+      = render "users/shared/links"
