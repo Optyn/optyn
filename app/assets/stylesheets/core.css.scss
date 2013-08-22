@@ -1,3 +1,9 @@
+* {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
 html {
   margin: 0;
 }
@@ -29,6 +35,10 @@ body {
 }
 #content {}
 #content .container {
-  background-color: #000000;
-
+}
+#dashboard .span8.offset4 {
+  background: #fff;
+  margin-top: 10px;
+  padding: 10px;
+  margin-left: 33%;
 }

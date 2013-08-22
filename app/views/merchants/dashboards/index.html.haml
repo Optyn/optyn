@@ -1,8 +1,8 @@
 /Main Body
-#dashboard
-  .container
+#dashboard.container-fluid
+  .row-fluid
     = render partial: "merchants/shared/menu"
-    .span8
+    .span8.offset4
       .header
         .span5.maintitle
           %h3
@@ -16,7 +16,7 @@
           %a.btn.newcampaign{:href =>merchants_messages_path}
             = image_tag "menu_icon_campaigns_white.png", :alt => 'Campaign'
             Create New Campaign
-      .row.stats
+      .row-fluid.stats
         .span2.leading
           .count
             = @day_count
@@ -74,6 +74,6 @@
               = feed_element['type']
             %td
               - if feed_element['action_url'].present?
-                %a{:href => feed_element['action_url'],:style => "color:#7D8B8F"} Details
+                %a{:href => feed_element['action_url']} Details
               - else
                 = "--"
