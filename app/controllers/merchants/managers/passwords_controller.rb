@@ -1,4 +1,4 @@
 class Merchants::Managers::PasswordsController < Devise::PasswordsController
-  layout 'merchants'
+  layout 'application'
 
 end
