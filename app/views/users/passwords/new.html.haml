@@ -1,19 +1,19 @@
-#box_login
-  .container
+#box_login.container-fluid
+  .row-fluid
     .span12.box_wrapper
-      .span12.box
+      .box.span4.offset4
         %div
           .head
             %h4 Forgot your password?
         
-        .form
+        .form.row-fluid
           = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|  
 
             = devise_error_messages!  
 
-            = f.email_field :email, placeholder: "Email", autofocus: true
+            = f.email_field :email, placeholder: "Email", autofocus: true, 'data-toggle' => 'tooltip', title: 'Email'
 
-            = f.submit "Send me reset password instructions", class: "btn"
+            = f.submit "Reset password", class: "btn btn-primary", 'data-toggle' => 'tooltip', title: 'Send me reset password instructions'
 
       %p{class: "already"}
         = link_to "Sign in", new_user_session_path 
