@@ -2,12 +2,12 @@
 
 = render partial: 'merchants/merchant_managers/tabs'
 
-#box_sign
+#box_login
   .box_wrapper
-    .span12.box
-      .address 
-        .head.pull-left.lead 
-          = "Enter Location Details"
-        .form 
-          = form_for :location, url: merchants_locations_path, method: :post do |f| 
+    .span4.offset4.box
+      .address
+        .head.pull-left.lead
+          %h4 Enter Location Details
+        .form.row-fluid
+          = form_for :location, url: merchants_locations_path, method: :post do |f|
             = render :partial => 'form', :locals => {f: f}
