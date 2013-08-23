@@ -7,9 +7,7 @@
             %h4 Forgot your password?
         
         .form
-          = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|  
-
-            = devise_error_messages!  
+          = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|
 
             = f.email_field :email, placeholder: "Email", autofocus: true
 
