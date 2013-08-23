@@ -196,25 +196,11 @@ class Message < ActiveRecord::Base
     messages = with_state([:queued]).only_parents.ready_messages
 
     execute_send(messages)
-
-    Messagecenter::AwsDeliveryFailureChecker.failure_stats
-
-    messages.each do |message|
-      Message.transaction do
-        personal_email_auditors = message.message_email_auditors
-        personal_email_auditors.each do |auditor|
-          if !auditor.bounced && !auditor.complaint
-            auditor.update_attribute(:delivered, true)
-          end
-        end
-      end
-    end
   end
 
   def self.batch_send_responses
     messages = with_state([:transit]).ready_messages
     execute_send(messages)
-
   end
 
   def self.create_response_message(user_id, message_uuid)
@@ -345,7 +331,9 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    self.subject.gsub("{{Customer Name}}", message_user.name) rescue "N/A"
+    user_name = message_user.name.to_s
+    self.subject.gsub("{{Customer Name}}", user_name) 
+  rescue "A message from #{shop.name}"
   end
 
   def excerpt
