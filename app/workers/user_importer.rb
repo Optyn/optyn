@@ -1,5 +1,5 @@
 class UserImporter
-  @queue = :users_import_queue
+  @queue = :import_queue
 
   def self.perform(file_import_id)
     file_import = FileImport.find(file_import_id)
