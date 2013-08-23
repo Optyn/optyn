@@ -32,7 +32,14 @@ function Apps() {
             copy: function () {
                 return $('.app-container').first().find('#embed_code').val()
             },
-            afterCopy: this.showCopiedNotice
+            afterCopy: function(){
+                if("copied" === $('a#copy_description').html().toLowerCase()){
+                    $('a#copy_description').html('Copy to Clipboard');
+                }else{
+                    $('a#copy_description').html('Copied');
+                }
+                return null;
+            }
         });
     };
 
@@ -89,7 +96,14 @@ function Apps() {
                     copy: function () {
                         return $('.app-container').first().find('#embed_code').val()
                     },
-                    afterCopy: this.showCopiedNotice
+                    afterCopy: function(){
+                        if("copied" === $('a#copy_description').html().toLowerCase()){
+                            $('a#copy_description').html('Copy to Clipboard');
+                        }else{
+                            $('a#copy_description').html('Copied');
+                        }
+                        return null;
+                    }
                 });
 
                 $('.app-container #loading').hide();
