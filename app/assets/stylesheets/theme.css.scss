@@ -909,3 +909,12 @@ th {
   color: $gray;
   font-weight: 700;
 }
+.separator {
+  height: 1px;
+  background-color: $medium-gray;
+  margin: 20px 0;
+  clear: both;
+  &.white {
+    background-color: $white;
+  }
+}

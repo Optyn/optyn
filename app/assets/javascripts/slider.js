@@ -1,55 +1,66 @@
-$(function(){
+$( function() {
 
-    $('.howmany').slider({
-        range: "min",
-        min: 1,
-        max: 25000,
-        value: 0,
-        slide: function(event, ui){
+  $( '#tiers #myCarousel' ).carousel();
+  $( '#tiers #myCarousel' ).carousel( 'pause' );
 
-            $('.numberofcustomers').text(ui.value);
-            function highlightRow(index){
-                var row = '.pricingList > li';
-                $(row).removeClass('selected');
-                $(row).hide();
-                $(row+':nth-child('+index+')').addClass('selected').show();
-                $(row+'.selected').next().show();
-                $(row+'.selected').next().next().show();
-                $(row+'.selected').prev().show();
-                $(row+'.selected').prev().prev().show();
-            }
+  $( '#tiers #pricing-slider' ).slider({
+    min: 1,
+    max: 25000,
+    range: 'min',
+    interval: 9000,
+    change: function( event, ui ) {
+      $( '#tiers .cus-count' ).text( ui.value + ' customers' );
+      suggestPlan( ui.value );
+    }
+  });
 
-            switch (true) {
-                case ((ui.value === 0)):
-                    highlightRow(0);
-                    break;
-                case ((ui.value > 0) && (ui.value <= 100)):
-                    highlightRow(1);
-                    break;
-                case ((ui.value >= 101) && (ui.value <= 1000)):
-                    highlightRow(2);
-                    break;
-                case ((ui.value >= 1001) && (ui.value <= 2500)):
-                    highlightRow(3);
-                    break;
-                case ((ui.value >= 2501) && (ui.value <= 5000)):
-                    highlightRow(4);
-                    break;
-                case ((ui.value >= 5001) && (ui.value <= 10000)):
-                    highlightRow(5);
-                    break;
-                case ((ui.value >= 10001) && (ui.value <= 15000)):
-                    highlightRow(6);
-                    break;
-                case ((ui.value >= 15001) && (ui.value <= 20000)):
-                    highlightRow(7);
-                    break;
-                case ((ui.value >= 20001) && (ui.value <= 25000)):
-                    highlightRow(8);
-                    break;
-              default:
-                //Default Case
-            }
-        }
-    });
+  function highlightPlan( carouselIndex, planId ) {
+    $( '#tiers #myCarousel' ).carousel( carouselIndex );
+    $( '#tiers #myCarousel' ).carousel( 'pause' );
+
+    // Highlight current plan.
+    $( '#myCarousel .plan.current' ).removeClass( 'current' );
+    $( '[data-plan-id=' + planId + ']' ).addClass( 'current' );
+
+    // Highlight button for current plan.
+    $( '.plans .btn.btn-primary' ).removeClass( 'btn-primary' );
+    $( '[data-plan-id=' + planId + '] .btn' ).addClass( 'btn-primary' );
+
+    $( '#tiers .plan-price' ).text( $( '[data-plan-id=' + planId + '] h5' ).text());
+  }
+
+  function suggestPlan( customerCount ) {
+    switch (true) {
+      case ((customerCount === 0)):
+        highlightPlan( 0 );
+        break;
+      case ((customerCount > 0) && (customerCount <= 100)):
+        highlightPlan( 0, 0 );
+        break;
+      case ((customerCount >= 101) && (customerCount <= 1000)):
+        highlightPlan( 0, 1 );
+        break;
+      case ((customerCount >= 1001) && (customerCount <= 2500)):
+        highlightPlan( 0, 2 );
+        break;
+      case ((customerCount >= 2501) && (customerCount <= 5000)):
+        highlightPlan( 1, 3 );
+        break;
+      case ((customerCount >= 5001) && (customerCount <= 10000)):
+        highlightPlan( 1, 4 );
+        break;
+      case ((customerCount >= 10001) && (customerCount <= 15000)):
+        highlightPlan( 1, 5 );
+        break;
+      case ((customerCount >= 15001) && (customerCount <= 20000)):
+        highlightPlan( 2, 6 );
+        break;
+      case ((customerCount >= 20001) && (customerCount <= 25000)):
+        highlightPlan( 2, 7 );
+        break;
+      default:
+        console.log( 'value out of range' );
+    }  // end of switch
+  }  // /suggestPlan()
+
 });

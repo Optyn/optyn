@@ -14,17 +14,6 @@ body .modal-header h3 {
 body .modal-body {
 	height: 200px;
 }
-/*body .modal-body ul {
-	padding-top: 10px;
-	padding-left: 20px;
-}*/
-/*body .modal-body li {
-	//list-style-image: url('/assets/bluechkmark.png');
-	//height: 14px;
-	padding-left: 0px;
-	padding-top: 10px;
-	margin-top: 10px;
-}*/
 body .modal-body .left {
 	float: left;
 }
@@ -57,330 +46,8 @@ body .modal-footer .startbtn:hover{
 	text-decoration: none;
 	text-shadow: none;
 }
-/* Pricing starts here */
-#pricing { 
-	padding-top: 40px;
-	padding-bottom: 40px;
-	height: auto;
-}
-
-#pricing .starter {
-	background-color: #fff;
-	border-radius: 6px;
-	-moz-box-shadow: 1px 1px 1px 1px #cccbcb;
-	-webkit-box-shadow: 1px 1px 1px 1px #cccbcb;
-	box-shadow: 1px 1px 1px 1px #cccbcb;
-}
-#pricing .starter hr {
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-#pricing .starter .header {
-	background-color: #1791c0;
-	height: 70px;
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
-	color: #fff;
-	font-size: 28px;
-	line-height: 48px;
-	text-align: center;
-	font-family: Helvetica, Helvetica Neue, Arial;
-	padding-top: 10px;
-	font-weight: bold;
-
-}
-#pricing .starter .cust_count {
-	height: 66px;
-	text-align: center;
-	font-size: 18px;
-	line-height: 60px;
-	color: #304d58;
-	padding-top: 10px;
-}
-#pricing .starter .details {
-	height: 162px;
-	border-top-width: 80%;
-	border-top: 1px #354b52;
-	padding-top: 20px;
-}
-#pricing .starter .details .hdr  {
-	color: #1791c0;
-	text-align: center;
-	font-size: 24px;
-}
-#pricing .starter .details ul {
-	padding-top: 10px;
-	padding-left: 20px;
-}
-#pricing .starter .details li {
-	list-style-image: url('/assets/bluechkmark.png');
-	height: 14px;
-	padding-left: 0px;
-	padding-top: 10px;
-}
-#pricing .starter .getstarted {
-	height: 130px;
-	text-align: center;
-	font-size: 12px;
-}
-#pricing .starter .getstarted h3 {
-	color: #304d58;
-}
-#pricing .starter .getstarted .getstartedbtn {
-  	background: #1791c0;
-	border-radius: 4px;
-	display: inline-block;
-	height: 40px;
-	line-height: 36px;
-	top: 4px;
-	color: #ffffff;
-	font-size: 32px;
-	text-decoration: none;
-	text-shadow: none;
-	border: 1px #304d58;
-}
-#pricing .starter .getstarted .getstartedbtn:hover{
-	background: #147ea7;
-	color: #fff;
-	text-decoration: none;
-	text-shadow: none;
-}
-#pricing .allplans {
-	background-color: #f7f7f7;
-	//height: 500px;
-}
-
-#pricing .allplans table tr td {
-	line-height: 34px;
-}
-
-#pricing .allplans .howmany {
-	margin: 0px;
-}
-#pricing .allplans .numberofcustomers {
-	padding-left: 20px;
-	line-height: 12px;
-}
-#pricing .allplans .quantity {
-	font-weight: bold;
-	line-height: 12px;
-}
-#pricing .allplans .upgrade {
-  background: #78CD51;
-  border-radius: 4px;
-  //display: inline-block;
-  height: 26px;
-  line-height: 26px;
-  color: white;
-  font-size: 18px;
-  text-decoration: none;
-  text-shadow: none;
-  //border: 1px #304d58 solid;
-}
-#pricing .allplans .upgrade:hover{
-  background: #64b905;
-  color: #fff;
-  text-decoration: none;
-  text-shadow: none;
-}
-#pricing .bottom {
-	background-color: #fff;
-	border-radius: 6px;
-	padding-top: 25px;
-	padding-bottom: 25px;
-	text-align: center;
-	font-size: 32px;
-	margin-top: 20px;
-}
-#pricing .bottom .enterprisebtn {
-	background: #e7eaeb;
-	border-radius: 4px;
-	display: inline-block;
-	height: 40px;
-	line-height: 38px;
-	top: 4px;
-	color: #1791c0;
-	font-size: 16px;
-	text-decoration: none;
-	text-shadow: none;
-	border: 1px #304d58;
-	font-weight: bold;
-}
-#pricing .bottom .enterprisebtn:hover {
-	background: #d1d2d3;
-	color: #1791c0;
-	text-decoration: none;
-	text-shadow: none;
-	font-weight: bold;
-}
-#pricing .bottom .left {
-	float: left;
-	background-color: #fff;
-	border-radius: 6px;
-
-}
-#pricing .bottom .right {
-	float: right;
-	background-color: #fff;
-	border-radius: 6px;
-}
-#pricingpopup {
-
-}
-/* Popup */
-#pricingpopup .modal {
-	width: 800px;
-	left: 40%;
-	border-radius: 6px;
-}
-#pricingpopup .modal-header {
-	height: 50px;
-
-}
-#pricingpopup .modal-header h3 {
-	padding-top: 10px;
-}
-#pricingpopup .modal-body {
-	height: 200px;
-}
-/*#pricingpopup .modal-body ul {
-	padding-top: 10px;
-	padding-left: 20px;
-}*/
-/*#pricingpopup .modal-body li {
-	background: url('/assets/bluechkmark.png') no-repeat left center;
-	height: 14px;
-	padding-left: 0px;
-	padding-top: 10px;
-	margin-top: 10px;
-}*/
-#pricingpopup .modal-body .left {
-	float: left;
-}
-#pricingpopup .modal-body .right {
-	float: right;
-}
-#pricingpopup .modal-footer {
-	height: 70px;
-	font-size: 36px;
-	line-height: 60px;
-	text-align: center;
-	vertical-align: middle;
-}
-#pricingpopup .modal-footer .startbtn {
-  	background: #1791c0;
-	border-radius: 4px;
-	display: inline-block;
-	height: 40px;
-	line-height: 36px;
-	top: 4px;
-	color: #ffffff;
-	font-size: 32px;
-	text-decoration: none;
-	text-shadow: none;
-	border: 1px #304d58;
-}
-#pricingpopup .modal-footer .startbtn:hover{
-	background: #147ea7;
-	color: #fff;
-	text-decoration: none;
-	text-shadow: none;
-}
-/* Old Stuff */
-#pricing .section_header {
-	margin-bottom: 70px;
-}
-#pricing .section_header hr {
-	width: 35%;
-}
-#pricing .price_wrapper {
-	background-color: #fafafa;
-	border: 1px solid #d9d9d9;
-	box-shadow: 0px 0px 5px 2px #E8E8E8;
-	border-radius: 6px;
-	width: 321px;
-	min-height: 375px;
-	position: relative;	
-}
-#pricing .price_wrapper.regular .header {
-	background: url('/assets/chart1.png') 0 0 no-repeat;
-}
-#pricing .price_wrapper.pro {
-	width: 331px;
-	margin: 0 auto;
-}
-#pricing .price_wrapper.pro .header {
-	background: url('/assets/chart2.png') 0 0 no-repeat;
-}
-#pricing .price_wrapper section .btn {
-	left: 35%;
-}
-#pricing .price_wrapper .header {
-	height: 98px;
-	color: #fff;
-	padding: 25px 0px 0px 40px;
-}
-#pricing .price_wrapper .header > span {
-	font-size: 24px;
-	font-style: italic;
-}
-#pricing .price_wrapper .header .price {
-	font-size: 20px;
-	top: 25px;
-	position: relative;
-	font-weight: bold;
-}
-#pricing .price_wrapper .header .price span {
-	font-size: 48px;
-	margin-right: 10px;
-}
-#pricing .price_wrapper .section {
-	padding: 15px 30px;
-}
-#pricing .price_wrapper .section h3 {
-	color: #535861;
-	font-size: 17px;
-	line-height: 22px;
-}
-#pricing .price_wrapper .section ul.perks {
-	list-style-type: none;
-	margin-left: 0px;
-	margin-top: 18px;
-}
-#pricing .price_wrapper .section ul.perks li {
-	padding: 3px 0px;
-}
-#pricing .price_wrapper .section ul.perks i {
-	margin-right: 10px;
-}
-#pricing .price_wrapper .section .btn {
-	position: absolute;
-	bottom: 15px;
-	left: 32%;
-	font-weight: bold;
-}
 
 
-.featuresList {
-	margin: 0 1% 0 0;
-	float: left;
-	width: 48%;
-	> li {
-		background: url('/assets/bluechkmark.png') no-repeat left 5px;
-		margin: 0 0 18px 0;
-		padding-left: 19px;
-		font: normal 13px/18px Helvetica, arial;
-		&:last-child {margin-bottom: 0;}
-	}
-}
-
-#pricing-table > tbody > tr {
-	display: none;
-	td {background-color: transparent;}
-	&.selected td {background-color: #e4e3e3;}
-	&.show {display: block;}
-	&.hide {display: none;}
-}
 
 .ui-slider.ui-slider-horizontal .ui-slider-handle {
 	cursor: -moz-grab;
@@ -389,18 +56,68 @@ body .modal-footer .startbtn:hover{
 	}
 }
 
-.pricingList {
-	clear: both;
-	margin: 0;
-	padding: 20px 0 0 0;
-	> li {
-		display: none;
-		margin-bottom: 15px;
-		padding: 8px;
-		//border: #ccc solid 1px;
-		&.selected {background-color: #E7E5E6; font-size: 16px; font-weight: bold;}
-		&.show {display: block;}
-		> * {float: left; margin-right: 5%; width: 20%;}
-		> *:last-child {float: right; margin: 0;}
+#tiers {
+	.intro {
+		margin-top: 2%;
+	}
+	.plan-price {
+	  height: 30px;
+	  line-height: 27px;
+	  font-size: 18px;
+	  border: solid 1px $blue;
+	  margin-left: 0;
+	  text-align: center;
+	  border-left: 0;
+	  color: $blue;
+	}
+}
+.plan-f {
+	margin: 5% 0;
+	ul {
+		list-style-type: circle;
+	}
+}
+#pricing-slider {
+  height: 30px;
+  border: solid 1px $blue;
+  a.ui-slider-handle { top: 4px; margin-left: -.6em; }
+}
+.carousel.plans {
+	margin: 2% 0;
+  .plan {
+    text-align: center;
+    background-color: $light-gray;
+    padding: 2%;
+    opacity: 0.8;
+    @include transition( all 0.3s ease-out );
+    &.current {
+    	opacity: 1;
+    	background-color: lighten( $blue, 20% );
+    }
+    > div {
+    	margin: 20px 0;
+    }
+  }
+}
+
+@media( max-width: 767px ) {
+	.p-sider-cont .plan-price {
+		border: 0;
+	}
+	#tiers {
+		.labels {
+			display: none;
+		}
+	}
+	.plans {
+		h5 {
+			float: left;
+			margin-right: 10px;
+		}
+		small {
+			display: block;
+			text-align: left;
+			margin-top: 14px;
+		}
 	}
 }
