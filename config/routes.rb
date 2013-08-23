@@ -164,8 +164,9 @@ Optyn::Application.routes.draw do
       end
     end
 
-    get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
+    
     resource :subscription
+    get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
