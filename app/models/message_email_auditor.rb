@@ -10,6 +10,20 @@ class MessageEmailAuditor < ActiveRecord::Base
   BOUNCED = "ses-bounced-queue"
   COMPLAINT = "ses-complaints-queue"
 
+  @@counter = 0
+
+  def self.check_for_failures
+    increment_counter
+    if @@counter > 99
+      Messagecenter::AwsDeliveryFailureChecker.failure_stats
+      reset_counter 
+    end
+  end
+
+  def self.counter
+    @@counter
+  end
+
   def register_problem(queue_arn, sns_message_body)
     self.body = sns_message_body
 
@@ -23,6 +37,14 @@ class MessageEmailAuditor < ActiveRecord::Base
   end
 
   private
+  def self.increment_counter
+    @@counter += 1
+  end
+
+  def self.reset_counter
+    @@coutner = 0
+  end
+
   def enqueue_message
     Resque.enqueue(SesEmailSender, self.id)
   end
