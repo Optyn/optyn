@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
-require "capistrano-resque"
+# require "capistrano-resque"
 
 
 set :default_stage, "staging"
@@ -30,9 +30,9 @@ set :rvm_type, :user
 set :deploy_via, :remote_cache
 
 #set the reque workers add other queues here...
-if "production" == rails_env
-  set :workers, { "general_queue" => 1, "import_queue" => 1, "message_queue" => 1, "payment_queue" => 1}
-end
+# if "production" == rails_env
+#   set :workers, { "general_queue" => 1, "import_queue" => 1, "message_queue" => 1, "payment_queue" => 1}
+# end
 
 #set the lock file while deploying so that messagecenter tasks and deployments don't run parallel
 set :lock_file_path, "#{shared_path}/pids"
@@ -54,6 +54,7 @@ after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
+after "deploy", "resque:restart_pool"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:maint:flush_cache"
@@ -184,5 +185,29 @@ namespace :deploy do
     end
   end
 end
+
+namespace :resque do
+  task :start, roles => :app do
+    puts "--- Executing Resque start task that is resque:work"
+    run "cd #{release_path} && QUEUE=email_processor BACKGROUND=yes rake resque:work"
+  end
+
+  task :stop, roles => :app do
+    puts "--- Executing Resque stop task"
+    run "pkill -9 -f email_processor" rescue nil
+  end
+
+  task :restart, roles => :app do
+    stop
+    start
+  end
+
+  task :restart_pool, :roles => :app, :except => {:no_release => true} do
+    run "if [ -e #{release_path}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{release_path}/tmp/pids/resque-pool.pid) ; rm #{release_path}/tmp/pids/resque-pool.pid ;fi"
+    run "echo Starting Pool Daemon"
+    run "cd #{release_path} && bundle exec resque-pool --daemon"
+  end
+end
+
         require './config/boot'
         require 'airbrake/capistrano'
