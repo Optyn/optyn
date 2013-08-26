@@ -183,23 +183,23 @@ end
 namespace :resque do
 
   desc "Starts resque-pool daemon."
-  task :start, :roles => :app, :only => { :jobs => true } do
+  task :start, :roles => :app do
     run "cd #{current_path};resque_pool -d -e #{rails_env} start"
   end
 
   desc "Sends INT to resque-pool daemon to close master, letting workers finish their jobs."
-  task :stop, :roles => :app, :only => { :jobs => true } do
+  task :stop, :roles => :app do
     pid = "#{current_path}/tmp/pids/resque-pool.pid"
-    sudo "kill -2 `cat #{pid}`"
+    "kill -2 `cat #{pid}`"
   end
 
   desc "Restart resque workers - actually uses resque.stop and lets God restart in due course."
-  task :restart, :roles => :app, :only => { :jobs => true } do
+  task :restart, :roles => :app do
     stop # let God restart.
   end
 
   desc "List all resque processes."
-  task :ps, :roles => :app, :only => { :jobs => true } do
+  task :ps, :roles => :app do
     run 'ps -ef f | grep -E "[r]esque-(pool|[0-9])"'
   end
 
