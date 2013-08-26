@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
-# require "capistrano-resque"
+
 
 
 set :default_stage, "staging"
@@ -29,11 +29,6 @@ set :rvm_ruby_string, "ruby-1.9.3-p385@optyn"
 set :rvm_type, :user
 set :deploy_via, :remote_cache
 
-#set the reque workers add other queues here...
-# if "production" == rails_env
-#   set :workers, { "general_queue" => 1, "import_queue" => 1, "message_queue" => 1, "payment_queue" => 1}
-# end
-
 #set the lock file while deploying so that messagecenter tasks and deployments don't run parallel
 set :lock_file_path, "#{shared_path}/pids"
 set :lock_file_name, 'deployment.pid'
@@ -56,7 +51,6 @@ after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 after "deploy", "resque:restart_pool"
 before "whenever:update_crontab", "whenever:clear_crontab"
-after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
@@ -135,7 +129,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+  		 #run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 
@@ -189,12 +183,19 @@ end
 namespace :resque do
   task :start, roles => :app do
     puts "--- Executing Resque start task that is resque:work"
-    run "cd #{release_path} && QUEUE=email_processor BACKGROUND=yes rake resque:work"
+    if "production" == rails_env
+      run "cd #{release_path} && QUEUE=general_queue BACKGROUND=yes rake resque:work"
+      run "cd #{release_path} && QUEUE=payment_queue BACKGROUND=yes rake resque:work"
+      run "cd #{release_path} && QUEUE=import_queue BACKGROUND=yes rake resque:work"
+      run "cd #{release_path} && QUEUE=message_queue BACKGROUND=yes rake resque:work"
+    else
+      run "cd #{release_path} && QUEUE=* BACKGROUND=yes rake resque:work"
+    end
   end
 
   task :stop, roles => :app do
     puts "--- Executing Resque stop task"
-    run "pkill -9 -f email_processor" rescue nil
+    run "pkill -9 -f resque" rescue nil
   end
 
   task :restart, roles => :app do
@@ -205,7 +206,7 @@ namespace :resque do
   task :restart_pool, :roles => :app, :except => {:no_release => true} do
     run "if [ -e #{release_path}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{release_path}/tmp/pids/resque-pool.pid) ; rm #{release_path}/tmp/pids/resque-pool.pid ;fi"
     run "echo Starting Pool Daemon"
-    run "cd #{release_path} && bundle exec resque-pool --daemon"
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec resque-pool --daemon --environment #{rails_env}"
   end
 end
 
