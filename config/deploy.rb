@@ -31,7 +31,7 @@ set :deploy_via, :remote_cache
 
 #set the reque workers add other queues here...
 if "production" == rails_env
-  set :workers, { "general_queue" => 1, "import_queue" => 1, "message_queue" => 1}
+  set :workers, { "general_queue" => 1, "import_queue" => 1, "message_queue" => 1, "payment_queue" => "1"}
 end
 
 #set the lock file while deploying so that messagecenter tasks and deployments don't run parallel
