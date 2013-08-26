@@ -49,7 +49,7 @@ after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
-after "deploy", "resque:restart"
+after "deploy", "resque:restart_pool"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
@@ -181,33 +181,33 @@ namespace :deploy do
 end
 
 namespace :resque do
-
-  desc "Starts resque-pool daemon."
-  task :start, :roles => :app do
-    run "cd #{current_path};resque_pool -d -e #{rails_env} start"
+  task :start, roles => :app do
+    puts "--- Executing Resque start task that is resque:work"
+    if "production" == rails_env
+      run "cd #{release_path} && QUEUE=general_queue BACKGROUND=yes rake resque:work"
+      run "cd #{release_path} && QUEUE=payment_queue BACKGROUND=yes rake resque:work"
+      run "cd #{release_path} && QUEUE=import_queue BACKGROUND=yes rake resque:work"
+      run "cd #{release_path} && QUEUE=message_queue BACKGROUND=yes rake resque:work"
+    else
+      run "cd #{release_path} && QUEUE=* BACKGROUND=yes rake resque:work"
+    end
   end
 
-  desc "Sends INT to resque-pool daemon to close master, letting workers finish their jobs."
-  task :stop, :roles => :app do
-    pid = "#{current_path}/tmp/pids/resque-pool.pid"
-    "kill -2 `cat #{pid}`"
+  task :stop, roles => :app do
+    puts "--- Executing Resque stop task"
+    run "pkill -9 -f resque" rescue nil
   end
 
-  desc "Restart resque workers - actually uses resque.stop and lets God restart in due course."
-  task :restart, :roles => :app do
-    stop # let God restart.
+  task :restart, roles => :app do
+    stop
+    start
   end
 
-  desc "List all resque processes."
-  task :ps, :roles => :app do
-    run 'ps -ef f | grep -E "[r]esque-(pool|[0-9])"'
+  task :restart_pool, :roles => :app, :except => {:no_release => true} do
+    run "if [ -e #{previous_release}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{previous_release}/tmp/pids/resque-pool.pid) ; rm #{previous_release}/tmp/pids/resque-pool.pid ;fi"
+    run "echo Starting Pool Daemon"
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec resque-pool --daemon --environment #{rails_env}"
   end
-
-  desc "List all resque pool processes."
-  task :psm, :roles => :app, :only => { :jobs => true } do
-    run 'ps -ef f | grep -E "[r]esque-pool"'
-  end
-
 end
 
         require './config/boot'
