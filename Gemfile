@@ -52,6 +52,7 @@ gem 'rack-ssl-enforcer'
 gem 'sitemap_generator'
 gem 'phony_rails'
 gem "acts_as_paranoid", "~>0.4.0"
+gem "god"
 
 # Gems used only for assets and not required
 # in production environments by default.

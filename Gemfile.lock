@@ -125,6 +125,7 @@ GEM
     formatador (0.2.4)
     fssm (0.2.10)
     geocoder (1.1.8)
+    god (0.13.2)
     google-analytics-rails (0.0.4)
     haml (4.0.3)
       tilt
@@ -412,6 +413,7 @@ DEPENDENCIES
   doorkeeper (~> 0.6.7)
   fog
   geocoder
+  god
   google-analytics-rails
   haml
   haml-rails

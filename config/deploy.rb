@@ -181,33 +181,33 @@ namespace :deploy do
 end
 
 namespace :resque do
-  task :start, roles => :app do
-    puts "--- Executing Resque start task that is resque:work"
-    if "production" == rails_env
-      run "cd #{release_path} && QUEUE=general_queue BACKGROUND=yes rake resque:work"
-      run "cd #{release_path} && QUEUE=payment_queue BACKGROUND=yes rake resque:work"
-      run "cd #{release_path} && QUEUE=import_queue BACKGROUND=yes rake resque:work"
-      run "cd #{release_path} && QUEUE=message_queue BACKGROUND=yes rake resque:work"
-    else
-      run "cd #{release_path} && QUEUE=* BACKGROUND=yes rake resque:work"
-    end
+
+  desc "Starts resque-pool daemon."
+  task :start, :roles => :app, :only => { :jobs => true } do
+    run "cd #{current_path};resque_pool -d -e #{rails_env} start"
   end
 
-  task :stop, roles => :app do
-    puts "--- Executing Resque stop task"
-    run "pkill -9 -f resque" rescue nil
+  desc "Sends INT to resque-pool daemon to close master, letting workers finish their jobs."
+  task :stop, :roles => :app, :only => { :jobs => true } do
+    pid = "#{current_path}/tmp/pids/resque-pool.pid"
+    sudo "kill -2 `cat #{pid}`"
   end
 
-  task :restart, roles => :app do
-    stop
-    start
+  desc "Restart resque workers - actually uses resque.stop and lets God restart in due course."
+  task :restart, :roles => :app, :only => { :jobs => true } do
+    stop # let God restart.
   end
 
-  task :restart_pool, :roles => :app, :except => {:no_release => true} do
-    run "if [ -e #{release_path}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{release_path}/tmp/pids/resque-pool.pid) ; rm #{release_path}/tmp/pids/resque-pool.pid ;fi"
-    run "echo Starting Pool Daemon"
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec resque-pool --daemon --environment #{rails_env}"
+  desc "List all resque processes."
+  task :ps, :roles => :app, :only => { :jobs => true } do
+    run 'ps -ef f | grep -E "[r]esque-(pool|[0-9])"'
   end
+
+  desc "List all resque pool processes."
+  task :psm, :roles => :app, :only => { :jobs => true } do
+    run 'ps -ef f | grep -E "[r]esque-pool"'
+  end
+
 end
 
         require './config/boot'
