@@ -49,7 +49,7 @@ after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
-after "deploy", "resque:restart_pool"
+after "deploy", "resque:restart"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
