@@ -204,9 +204,9 @@ namespace :resque do
   end
 
   task :restart_pool, :roles => :app, :except => {:no_release => true} do
-    run "if [ -e #{previous_release}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{previous_release}/tmp/pids/resque-pool.pid) ; rm #{previous_release}/tmp/pids/resque-pool.pid ;fi"
+    run "if [ -e #{current_path}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{current_path}/tmp/pids/resque-pool.pid) ; rm #{current_path}/tmp/pids/resque-pool.pid ;fi"
     run "echo Starting Pool Daemon"
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec resque-pool --daemon --environment #{rails_env}"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec resque-pool --daemon --environment #{rails_env}"
   end
 end
 
