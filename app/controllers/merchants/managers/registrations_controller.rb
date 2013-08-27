@@ -1,10 +1,9 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
-  layout 'merchants'
+  layout 'application'
 
   before_filter :require_customer_logged_out
   
   def new
-    render layout: 'application'
     session[:omniauth_manager] = true
     session[:omniauth_user] = nil
     @shop = Shop.new
