@@ -6,6 +6,7 @@ class VirtualMessage < Message
     ActiveRecord::Base.transaction do
       virtual_message = new(options)
       virtual_message.manager_id = shop.manager.id
+      virtual_message.from = virtual_message.canned_from
       virtual_message.send_on = Time.now
       virtual_message.save!
 
