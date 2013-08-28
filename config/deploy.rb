@@ -101,23 +101,6 @@ namespace :deploy do
     run "ln -s #{shared_path}/config/database.yml #{current_release}/config/database.yml"
   end
 
-  # desc 'Start unicorn'
-  # task :start, :roles => :app, :except => { :no_release => true } do
-  #   puts "Starting Unicorn"
-  #   run "cd #{current_path}; bundle exec unicorn -E #{rails_env} -c config/unicorn.rb -D"
-  # end
-
-  # desc 'Stop unicorn'
-  # task :stop, :roles => :app, :except => { :no_release => true } do
-  #   run "kill -9 `lsof -t -i:3000`" rescue nil
-  # end
-
-  # task :restart, :roles => :app, :except => { :no_release => true } do
-  #   desc 'Restart unicorn'
-  #   stop
-  #   start
-  # end
-
   desc "Migrating the database"
   task :migrate, :roles => :db do
     run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate --trace"
