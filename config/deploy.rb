@@ -1,6 +1,7 @@
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
+require 'capistrano-unicorn'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 
@@ -49,8 +50,9 @@ after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
-after "deploy", "resque:restart_pool"
+# after "deploy", "resque:restart_pool"
 before "whenever:update_crontab", "whenever:clear_crontab"
+after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
@@ -110,11 +112,11 @@ namespace :deploy do
     run "kill -9 `lsof -t -i:3000`" rescue nil
   end
 
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    desc 'Restart unicorn'
-    stop
-    start
-  end
+  # task :restart, :roles => :app, :except => { :no_release => true } do
+  #   desc 'Restart unicorn'
+  #   stop
+  #   start
+  # end
 
   desc "Migrating the database"
   task :migrate, :roles => :db do
