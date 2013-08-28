@@ -2,7 +2,7 @@
   %div{:id => 'please_wait', :style => "display:none;"}
     %strong Please Wait...  
 
-#form_container
+#form_container.form-horizontal
   .control-group
     = f.label :element_type, "Type", class: 'control-label'
     .controls
@@ -25,8 +25,9 @@
             %span.remove-value.close
               x
 
+    %br
     .control-group
-      .actions.pull-right
+      .actions.text-center
         = link_to "Add Value", "javascript:void(0)", id: "add_value", class: 'btn btn-info'
 
   .control-group

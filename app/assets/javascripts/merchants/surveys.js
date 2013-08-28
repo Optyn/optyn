@@ -11,6 +11,7 @@ function MerchantSurvey() {
     this.initialize = function () {
         addQuestionPath = this.getAddQuestionPath();
         loadQuestionsPath = this.getLoadQuestionsPath();
+        console.log( 'merchantSurvey created.', addQuestionPath, loadQuestionsPath );
 
         if ($('#new_survey_questions_content').length) {
             this.loadQuestions();
@@ -47,7 +48,7 @@ function MerchantSurvey() {
     //Add a question to the survey
     this.hookAddQuestion = function () {
         var current = this;
-        $('#add_question_button').click(function (e) {
+        $('button.add_question_button').click(function (e) {
 
             $('#new_survey_questions_content .modal-footer').hide();
 
@@ -72,6 +73,7 @@ function MerchantSurvey() {
     this.hookEditQuestion = function () {
         var current = this;
         var href = null;
+        console.log( $(this).attr('href'));
         $('body').on('click', '.edit_question_link', function (e) {
             var href = $(this).attr('href');
             e.preventDefault();
@@ -102,7 +104,7 @@ function MerchantSurvey() {
 
     //Observer for the save changes button click
     this.hookSaveChanges = function () {
-        $('body').on('click', '#save_question_change', function () {
+        $('body').on('click', 'button.save_question_change', function () {
             $('#survey_question_form').submit();
         });
     };

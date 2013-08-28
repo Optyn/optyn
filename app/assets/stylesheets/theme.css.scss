@@ -838,6 +838,34 @@ form {
     font-size: 1.2em;
     line-height: 1.4em;
   }
+  .modal {
+    @include border-radius( 0 );
+    border: solid 4px $medium-gray;
+  }
+  .modal-header {
+    height: 40px;
+    > h3 {
+      padding: 0;
+    }
+  }
+  .modal-body {
+    height: 220px;
+    .form-horizontal input[type='text'],
+      input[type='number'],
+      input[type='email'],
+      input[type='password'],
+      input[type='url'],
+      textarea,
+      select,
+      .uneditable-input {
+      width: 100%;
+    }
+  }
+  .modal-footer {
+    height: 50px;
+    line-height: 44px;
+    padding: 0;
+  }
 }  /* /#flat */
 #flat {
   .input-append,
