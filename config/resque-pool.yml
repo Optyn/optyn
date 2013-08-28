@@ -1,0 +1,7 @@
+"*": 1
+
+production:
+  "general_queue": 1
+  "import_queue": 1
+  "message_queue": 1
+  "payment_queue": 1

@@ -82,10 +82,14 @@ namespace :shop do
             shop.name = row[:shop_name] 
             shop.phone_number = row[:shop_phone]
             shop.stype = "local"
+            shop.website = row[:shop_website]
+            shop.pre_added = true
             manager = shop.managers.build
             manager.name = row[:manager_name]
             manager.email = row[:manager_email]
             token =  Devise.friendly_token.first(8).downcase
+            manager.skip_email = true
+            manager.skip_name = true
             manager.password = token
             manager.password_confirmation = token
             shop.save!
@@ -106,7 +110,7 @@ namespace :shop do
         counter += 1
       end
 
-      output_filepath = "#{Rails.root.to_s}/tmp/#{File.basename(filepath)}.#{Time.now.to_i}"
+      output_filepath = "#{Rails.root.to_s}/tmp/#{File.basename(filepath)}"
       File.open(output_filepath, "w+") do |file|
         file.puts(output.join("\n"))
       end

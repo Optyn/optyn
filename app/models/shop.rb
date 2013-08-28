@@ -27,7 +27,8 @@ class Shop < ActiveRecord::Base
   OPTYN_POSTFIX = 'Optyn Postfix'
   DEFAULT_HEADER_BACKGROUND_COLOR = '#1791C0'
 
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added
+
 
   mount_uploader :logo_img, ImageUploader
 
