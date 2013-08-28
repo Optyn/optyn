@@ -1,5 +1,9 @@
 require 'digest/sha1'
+require 'users/importer'
+
 class User < ActiveRecord::Base
+  extend Users::Importer
+
   has_many :authentications, :as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
@@ -24,7 +28,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation,
                   :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture
 
-  attr_accessor :show_password, :skip_password,:skip_name, :show_shop, :shop_identifier
+  attr_accessor :show_password, :skip_password,:skip_name, :show_shop, :shop_identifier, :skip_welcome_email
 
   accepts_nested_attributes_for :permissions_users
 
@@ -248,6 +252,7 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_email
+    return if self.skip_welcome_email
     Resque.enqueue(WelcomeMessageSender, :user, self.id, (show_password ? self.password : nil), (show_shop ? shop_identifier : nil))
   end
 

@@ -75,9 +75,9 @@ module Optyn
     unless Rails.env.development?
       #Don't enforce ssl for the homepage and cache flushing for now...
       config.middleware.use Rack::SslEnforcer,
-                            :except => [ %r{/$}, %r{/cache/flush$}, %r{/old_index$}, %r{/faq$}, %r{/pricing$}, %r{/merchantfeatures},
-                                         %r{/consumerfeatures$}, %r{/contact$}, %r{/terms$}, %r{/privacy$}, %r{/danacafe$}, %r{/thankyou$},
-                                         %r{/old_index$}],
+                            :except => [ %r{/$}, %r{/cache/flush$}, %r{/old_index$}, %r{/faq$}, %r{/pricing$}, %r{/merchant-features},
+                                         %r{/consumer-features$}, %r{/contact$}, %r{/terms$}, %r{/privacy$}, %r{/danacafe$}, %r{/thankyou$},
+                                         %r{/old_index$}, %r{/about$}, %r{/shop/public/(.*)$}],
                             :ignore => %r{/assets},
                             :strict => true,
                             :except_environments => 'development'

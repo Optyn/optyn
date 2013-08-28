@@ -461,7 +461,6 @@ DEPENDENCIES
   redis-rails
   redis-store
   resque
-  resque-scheduler
   resque_mailer
   rspec
   rspec-rails

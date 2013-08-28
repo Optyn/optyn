@@ -63,7 +63,7 @@ namespace :shop do
       csv_table = CSV.table(filepath, {headers: true})
       headers = csv_table.headers
       output = []  
-      output_headers = %Q("Shop Name","Shop Phone","Manager Name","Manager Email","Password",Status")
+      output_headers = %Q("Shop Name","Shop Phone","Manager Name","Manager Email","Password","Status")
       output << output_headers
       puts "Starting the parser..."
       counter = 1

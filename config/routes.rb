@@ -22,6 +22,7 @@ Optyn::Application.routes.draw do
   match 'thankyou' => 'main#thankyou'
   match 'old_index' => 'main#old_index'
   match 'cache/flush' => "cache#flush"
+  match '/shop/public/:identifier', to: 'shops#show'
 
   # Blog Redirect
   match "/blog" => redirect("http://optynblog.com"), :as => :blog
@@ -157,10 +158,18 @@ Optyn::Application.routes.draw do
           member do
             put :launch
           end
-        end
-      end
-    end
-  end
+        end #end of messages resource
+
+        resources :users do
+          collection do
+            post :import
+            get :import_list
+            get :import_status
+          end
+        end #end of consumers resources   
+      end #end of the merchants namespace
+    end #end of the scope v1
+  end #end of the api namespace
 
   namespace "merchants" do |merchant|
 
@@ -189,7 +198,7 @@ Optyn::Application.routes.draw do
     end
 
     resource :subscription
-    get '/upgrade' => 'subscriptions#upgrade'
+    get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
@@ -244,8 +253,6 @@ Optyn::Application.routes.draw do
     controllers :authorizations => 'oauth_authorizations'
     controllers :tokens => 'oauth_tokens'
   end
-
-  match '/:identifier' => 'shops#show', :as => :shop
 
   namespace :reseller do
     devise_for :partners, :controllers => {

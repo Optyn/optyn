@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
-  attr_accessor :unread
+  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
 
 
   attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time
@@ -196,25 +196,11 @@ class Message < ActiveRecord::Base
     messages = with_state([:queued]).only_parents.ready_messages
 
     execute_send(messages)
-
-    Messagecenter::AwsDeliveryFailureChecker.failure_stats
-
-    messages.each do |message|
-      Message.transaction do
-        personal_email_auditors = message.message_email_auditors
-        personal_email_auditors.each do |auditor|
-          if !auditor.bounced && !auditor.complaint
-            auditor.update_attribute(:delivered, true)
-          end
-        end
-      end
-    end
   end
 
   def self.batch_send_responses
     messages = with_state([:transit]).ready_messages
     execute_send(messages)
-
   end
 
   def self.create_response_message(user_id, message_uuid)
@@ -345,7 +331,9 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    self.subject.gsub("{{Customer Name}}", message_user.name) rescue "N/A"
+    user_name = message_user.name.to_s
+    self.subject.gsub("{{Customer Name}}", user_name) 
+  rescue "A message from #{shop.name}"
   end
 
   def excerpt
@@ -391,21 +379,29 @@ class Message < ActiveRecord::Base
     self.errors.full_messages
   end
     
-  def header_background_properties
-    headers = MessageVisualProperty.header(self.id)
+  def header_background_property
+    header = MessageVisualProperty.header(self.id)
 
-    headers.blank? ? message_visual_properties.build(property_value: "background-color: #{shop.header_background_color.strip}") : headers
+    header.blank? ? message_visual_properties.build(property_value: "background-color: #{shop.header_background_color.strip}") : header
   end
 
   def header_background_color_css_val
-    properties = self.header_background_properties
-    return "background-color: #{shop_header_background_color_hex};" if properties.present? && (properties.instance_of?(ActiveRecord::Relation) ? properties.first : properties).new_record?
-    css = self.header_background_properties.first.property_value
+    property = self.header_background_property
+    return "background-color: #{shop_header_background_color_hex};" if property.present? && (property.instance_of?(ActiveRecord::Relation) ? property.first : property).new_record?
+    css = self.header_background_property.property_value
     css
   end
 
   def header_background_color_hex
-    header_background_color_css_val.split(/:/).last.to_s.gsub(/;/, "")
+    header_background_color_css_val.split(/:/).last.to_s.gsub(/;/, "").strip
+  end
+
+  def header_background_color_property_present?
+    !(header_background_property.new_record?)
+  end
+
+  def header_background_color_property_id
+    header_background_property.id
   end
 
   def update_visuals(options={})
@@ -426,6 +422,12 @@ class Message < ActiveRecord::Base
 
   def show_image?
     message_image.present?    
+  end
+
+  def image_location
+    if show_image?
+      message_image.image.url
+    end
   end
 
   def show_button?
@@ -529,24 +531,24 @@ class Message < ActiveRecord::Base
 
   def canned_from
     #manager.email_like_from
-    %{#{self.shop_name.titleize} via Optyn <email@optyn.com>}
+    %{#{self.shop_name.titleize} <email@optyn.com>}
   end
 
   def canned_subject
     if self.instance_of?(GeneralMessage)
-      "#{shop.name}, wants to make sure you hear the latest.."
+      "{{Customer Name}}, we have an announcement."
     elsif self.instance_of?(CouponMessage)
-      "{{Customer Name}}, here's a Coupon for #{shop.name}!"
+      "{{Customer Name}}, here's a Coupon for just for you."
     elsif self.instance_of?(EventMessage)
-      "#{shop.name} invites you to an event!"
+      "{{Customer Name}}, we are hosting a special event and you are invited."
     elsif self.instance_of?(ProductMessage)
-      "#{shop.name} is introducing a New Product you'll want to have"
+      "{{Customer Name}}, check out our new product!"
     elsif self.instance_of?(SaleMessage)
-      "#{shop.name} is having a sale! Don't miss out."
+      "We are having a sale! {{Customer Name}}, don't miss out."
     elsif self.instance_of?(SpecialMessage)
-      "A special offer just for you {{Customer Name}}, Courtesy of #{shop.name}."
+      "A special offer just for {{Customer Name}}."
     elsif self.instance_of?(SurveyMessage)
-      "#{shop.name} would like your feedback!"
+      "{{Customer Name}}, we need your feedback!"
     end
   end
 

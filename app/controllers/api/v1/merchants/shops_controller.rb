@@ -6,12 +6,12 @@ module Api
 	before_filter :import_list, :import, :import_status, :update
         def import_list
           partner_id = current_partner.id
-          @import_list = ApiRequestPayload.for_partner(partner_id)
+          @import_list = ApiRequestPayload.shop_imports(partner_id)
         end
 
         def import
           @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
-                                              body: params, status: 'Queued')
+                                              filepath: params[:filepath], status: 'Queued')
           payload_id = @payload.id
           Resque.enqueue(ShopImporter, payload_id)
         end

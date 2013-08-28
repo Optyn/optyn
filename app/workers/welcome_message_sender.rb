@@ -1,5 +1,5 @@
 class WelcomeMessageSender
- @queue = :devise_queue
+ @queue = :general_queue
 
   def self.perform(account_type, account_id, password=nil, shop_id=nil)
     if 'user' == account_type
