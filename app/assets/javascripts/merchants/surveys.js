@@ -11,7 +11,6 @@ function MerchantSurvey() {
     this.initialize = function () {
         addQuestionPath = this.getAddQuestionPath();
         loadQuestionsPath = this.getLoadQuestionsPath();
-        console.log( 'merchantSurvey created.', addQuestionPath, loadQuestionsPath );
 
         if ($('#new_survey_questions_content').length) {
             this.loadQuestions();
@@ -73,7 +72,6 @@ function MerchantSurvey() {
     this.hookEditQuestion = function () {
         var current = this;
         var href = null;
-        console.log( $(this).attr('href'));
         $('body').on('click', '.edit_question_link', function (e) {
             var href = $(this).attr('href');
             e.preventDefault();
