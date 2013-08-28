@@ -1,9 +1,9 @@
 = f.text_field :street_address1, :placeholder => 'Street Address 1', 'data-toggle' => 'tooltip', title: 'Street Address 1'
 = f.text_field :street_address2, :placeholder => 'Street Address 2', 'data-toggle' => 'tooltip', title: 'Street Address 2'
 = f.text_field :city, :placeholder => 'City', 'data-toggle' => 'tooltip', title: 'City'
-%label.text-left State
+/%label.text-left State
 = f.collection_select :state_id, @states, :id, :name, include_blank: "-- Select State --"
-%label.pull-left
+/%label.pull-left
 = f.text_field :zip, :placeholder => 'Zip Code', 'data-toggle' => 'tooltip', title: 'Zip Code'
 
 = f.submit @location.new_record? ? "Add location" : "Update location", class: "btn btn-success btn-block"

@@ -702,7 +702,7 @@ i.myspace { background-position: -233px -51px; }
 
 
 /* --------------------------------- Form elements */
-form.flat {
+form {
   .optional {
     background-color: $light-gray;
     padding: 1%;
@@ -723,6 +723,7 @@ form.flat {
   input[type='password'],
   input[type='url'],
   textarea,
+  select,
   .uneditable-input {
     font-family: 'Open Sans', sans-serif;
     font-size: 17px;
@@ -740,6 +741,9 @@ form.flat {
       border-color: $medium-gray;
       background-color: $white;
     }
+  }
+  select {
+    min-height: 35px;
   }
   input[type='text'],
   input[type='number'],

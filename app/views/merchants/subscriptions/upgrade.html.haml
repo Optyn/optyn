@@ -31,9 +31,9 @@
 
               = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security', 'data-toggle' => 'tooltip', title: 'CVV'
 
-              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12"})
+              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry month'})
 
-              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12"})
+              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry year'})
 
               = f.submit "Pay", :class => "btn btn-block btn-success"
         %div{:style => "text-align: center; margin-top: 25px;"}
