@@ -1,48 +1,50 @@
-#button_stats
-	%table.table.table-condensed
-		%caption Optyn Button
-		%tbody
-			%tr
-				%td Conversion
-				%td
-					= number_with_precision(@conversion_percent.to_f, precision: 2)
-				%td up
-			%tr
-				%td Total opt-ins
-				%td
-					= @opt_ins
-				%td
-			%tr
-				%td Total impressions
-				%td
-					= @optyn_impressions
-				%td
-			%tr
-				%td Total clicks
-				%td
-					= @optyn_button_clicks
-				%td
+#button_stats.row-fluid
+	.span6
+		%table.table.table-condensed.table-striped.table-hover
+			%caption Optyn Button
+			%tbody
+				%tr
+					%td Conversion
+					%td
+						= number_with_precision(@conversion_percent.to_f, precision: 2)
+					%td up
+				%tr
+					%td Total opt-ins
+					%td
+						= @opt_ins
+					%td
+				%tr
+					%td Total impressions
+					%td
+						= @optyn_impressions
+					%td
+				%tr
+					%td Total clicks
+					%td
+						= @optyn_button_clicks
+					%td
 
-	%table.table.table-condensed
-		%caption Email Box
-		%tbody
-			%tr
-				%td Conversion
-				%td
-					= number_with_precision(@email_box_conversion_percent.to_f, precision: 2)
-				%td up
-			%tr
-				%td Total opt-ins
-				%td
-					= @email_box_opt_ins
-				%td
-			%tr
-				%td Total impressions
-				%td
-					= @email_box_impressions
-				%td
-			%tr
-				%td Total clicks
-				%td
-					= @email_box_clicks
-				%td
+	.span6
+		%table.table.table-condensed.table-striped.table-hover
+			%caption Email Box
+			%tbody
+				%tr
+					%td Conversion
+					%td
+						= number_with_precision(@email_box_conversion_percent.to_f, precision: 2)
+					%td up
+				%tr
+					%td Total opt-ins
+					%td
+						= @email_box_opt_ins
+					%td
+				%tr
+					%td Total impressions
+					%td
+						= @email_box_impressions
+					%td
+				%tr
+					%td Total clicks
+					%td
+						= @email_box_clicks
+					%td

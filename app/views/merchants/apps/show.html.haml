@@ -1,30 +1,41 @@
 = banner( "Optyn Button" )
 
-.menu-cont
-  .btn-group
-    %a.btn.dropdown-toggle{ 'data-toggle' => "dropdown", href: "#" }
-      STATISTICS
-      %span.caret
-    %ul.dropdown-menu
-      %li
-        = render partial: 'button_stats_report'
-
 #merchants.pad3pc.clearfix
-  .preview.app-container
-    %h5
-      Use this cool tool to generate the Javascript so that you can just plug and play your Optyn button and start getting your customers to opt-in and grow your customer base.
-    .main.row-fluid
-      .customize.span6
-        %h3 Customize
-        .custom
-          .form-wrapper
-            - if  @application.blank? || @application.new_record?
-              = render partial: 'new'
-            - else
-              = render partial: 'edit'
 
-      .span6
-        %h3 Preview
-        = render partial: "preview"
+  #ob-accordion.accordion.o-btn
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-stats' }
+          Statistics
+      #clps-stats.accordion-body.collapse.in
+        .accordion-inner
+          = render partial: 'button_stats_report'
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-o-btn' }
+          Optyn Button
+      #clps-o-btn.accordion-body.collapse
+        .accordion-inner
+          .preview.app-container
+            %h5
+              Use this cool tool to generate the Javascript so that you can just plug and play your Optyn button and start getting your customers to opt-in and grow your customer base.
+            .main.row-fluid
+              .customize.span6
+                %h3 Customize
+                .custom
+                  .form-wrapper
+                    - if  @application.blank? || @application.new_record?
+                      = render partial: 'new'
+                    - else
+                      = render partial: 'edit'
 
-    = render partial: 'advanced'
+              .span6
+                %h3 Preview
+                = render partial: "preview"
+
+            = render partial: 'advanced'
+
+:javascript
+  $( function() {
+    //$('#ob-accordion').collapse('toggle');
+  });
