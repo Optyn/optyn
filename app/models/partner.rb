@@ -26,6 +26,8 @@ class Partner < ActiveRecord::Base
   validates :phone , presence: true
   validate :validate_phone_digits
 
+  scope :lower_name, ->(org) { where(["LOWER(partners.organization) LIKE LOWER(:org)", {org: org}]) }
+
   ORGANIZATION_OPTYN = 'Optyn Inc.'
 
   def self.optyn
@@ -34,6 +36,10 @@ class Partner < ActiveRecord::Base
 
   def self.optyn_id
     optyn.id
+  end
+
+  def self.for_organization(org)
+    lower_name(org.to_s).first
   end
 
   def name
