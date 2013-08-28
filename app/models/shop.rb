@@ -30,7 +30,7 @@ class Shop < ActiveRecord::Base
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added
 
 
-  mount_uploader :logo_img, ImageUploader
+  mount_uploader :logo_img, ShopImageUploader
 
   validates_as_paranoid
   validates :name, presence: true, uniqueness:  { case_sensitive: false }
