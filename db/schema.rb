@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813155502) do
+ActiveRecord::Schema.define(:version => 20130827153430) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -420,6 +420,7 @@ ActiveRecord::Schema.define(:version => 20130813155502) do
     t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
     t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true

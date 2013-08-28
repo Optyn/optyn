@@ -76,6 +76,7 @@ group :development do
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'capistrano-unicorn', :require => false
   gem 'rails-erd'
   #gem "capistrano-resque", "~> 0.1.0"
   gem "mailcatcher"
