@@ -1,7 +1,7 @@
 worker_processes 4
 timeout 120
 app_path = "/srv/apps/optyn"
-rails_env = ENV['RAILS_ENV'] || 'production'
+rails_env = ENV['RAILS_ENV'] || 'staging'
 stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
 stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 pid "#{app_path}/current/tmp/pids/unicorn.pid"
