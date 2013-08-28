@@ -2,8 +2,8 @@ module Api
   module V1
     module Merchants
       class ShopsController < PartnerOwnerBaseController
-	#doorkeeper_for :all
-
+	doorkeeper_for :all
+	before_filter :import_list, :import, :import_status, :update
         def import_list
           partner_id = current_partner.id
           @import_list = ApiRequestPayload.for_partner(partner_id)
