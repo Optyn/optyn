@@ -16,7 +16,9 @@
     = analytics_init if Rails.env.production?
 
 
-  %body#flat{:class => params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-') + (' m-app' if params[:controller] != "main")}
+  - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
+  - ( cssClasses += ' m-app' if params[:controller] != 'main' )
+  %body#flat{:class => cssClasses }
     = display_flash_message
     - if params[:action] == 'index' && params[:controller] == 'main'
       %header.row-fluid
