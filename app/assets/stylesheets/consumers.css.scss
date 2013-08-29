@@ -5,7 +5,6 @@
 
 /* Consumer Dashboard Page */
 #consumer_dashboard {
-  padding-top: 50px;
   padding-bottom: 50px;
   margin: 0px;
 }
@@ -86,16 +85,7 @@
 #consumer_dashboard .stats {
   padding-top: 20px;
   padding-bottom: 20px;
-}
-#consumer_dashboard .stats .span2 {
-  margin-left: 0px;
-  width: 186px;
-}
-#consumer_dashboard .stats .leading {
-  margin-left: 30px;
-}
-#consumer_dashboard .stats .box {
-  padding-left: 8px;
+  clear: both;
 }
 #consumer_dashboard .stats .box .count,
 #consumer_dashboard .stats .leading .count {

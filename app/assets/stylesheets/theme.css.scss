@@ -949,4 +949,7 @@ th {
   &.white {
     background-color: $white;
   }
+  &.small {
+    margin: 7px 0;
+  }
 }
