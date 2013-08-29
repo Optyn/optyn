@@ -1,8 +1,9 @@
 /Main Body
 #consumer_dashboard
-  .container
+  .container-fluid
     = render partial: "shared/menu"
-    .span8
+    .span9
+      %h1 Dashboard
       .header
         .span3.maintitle
           %h3
@@ -10,26 +11,26 @@
             = current_user.name
             !
           Here's what's going on today.
-      .row.stats
-        .span2.leading
+      .row-fluid.stats
+        .span3.leading
           .count
             = @new_coupons_count
           .info
             .text.sprite-img#md_new_connections0
               New Coupons
-        .span2.box
+        .span3.box
           .count
             = @new_messages_count
           .info
             .text.sprite-img#md_connections_week0
               New Messages
-        .span2.box
+        .span3.box
           .count
             = @pending_survey_count
           .info
             .text.sprite-img#md_connections_month0
               Active Surveys
-        .span2.box
+        .span3.box
           .count
             = @new_specials_count
           .info
