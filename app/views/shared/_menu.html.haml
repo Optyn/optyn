@@ -16,13 +16,14 @@
         = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
         Connections
     %li
-      %a{:href => merchants_survey_path}
+      %a{:href => segments_path}
         = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
-        = link_to("Surveys", segments_path)
+        Surveys
     %li
       %a{:href => profile_path}
         = image_tag "menu_icon_connections.png", :alt => "My Profile", :style => "padding-left: 2px; padding-right: 12px;"
         My Account
     %li
-      = image_tag "menu_icon_dashboard.png", :alt => "Logout", :style => "padding-right: 8px;"
-      %a{:href => destroy_user_session_path} Logout
+      %a{:href => destroy_user_session_path}
+        = image_tag "menu_icon_dashboard.png", :alt => "Logout", :style => "padding-right: 8px;"
+        Logout
