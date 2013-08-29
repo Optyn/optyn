@@ -15,35 +15,25 @@
       margin-right: 30px;
     }
   }
+  .stats {
+    /* Styles for Consumer & Merchant dashboard statistics. */
+    .span3 {
+      padding: 5% 1%;
+      text-align: center;
+      background-color: $light-gray;
+      .count {
+        font-size: 30px;
+        line-height: 50px;
+        color: $orange;
+      }
+    }
+  }
 }
 #flat.m-app {
   background: image-url( 'bg_dash.png' );
   background-size: contain;
   background-repeat: repeat-y;
   padding-top: 70px;
-  #dashboard {
-    .row-fluid {
-      padding: 0;
-    }
-    .pad3pc {
-      padding: 0 3% 5% 3%;
-    }
-    .stats {
-      .span3 {
-        padding: 5% 1%;
-        text-align: center;
-        background-color: $light-gray;
-        .count {
-          font-size: 30px;
-          line-height: 50px;
-          color: $orange;
-        }
-      }
-    }
-    .content {
-      background-color: $white;
-    }
-  }
   h1, h2 {
     margin-top: 0;
     font-family: 'Open Sans', sans-serif;

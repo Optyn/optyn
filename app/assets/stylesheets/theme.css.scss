@@ -392,6 +392,23 @@ input[type="color"]:focus,
     margin-left: 50px;
   }
 }
+#flat.m-app {
+  #dashboard,
+  #consumer_dashboard{
+    > .row-fluid {
+      padding: 0;
+    }
+  }
+  #dashboard,
+  #consumer_dashboard {
+    .pad3pc {
+      padding: 0 3% 5% 3%;
+    }
+    .content {
+      background-color: $white;
+    }
+  }
+}
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   #flat {
@@ -922,7 +939,8 @@ strong {
 .text-justify {
   text-align: justify;
 }
-#dashboard {
+#dashboard,
+#consumer_dashboard {
   .wid25pc {
     width: 25%;
     margin: 0;
