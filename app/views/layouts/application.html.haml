@@ -38,20 +38,24 @@
               %span{ :class => 'icon-bar' }
             %a.logo.pull-left{ :href => root_path }
               = image_tag "logo.png", :alt => 'logo'
-            .nav-collapse.collapse
-              %ul.pull-right.nav.nav-pills
-                %li
-                  %a{ :href => root_path } Home
-                %li
-                  %a{ :href => merchant_features_path } Merchants
-                %li
-                  %a{ :href => consumer_features_path } Customers
-                %li
-                  %a{ :href => pricing_path } Pricing
-                %li
-                  %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
-                %li
-                  %a.btn.btn-primary{ :href => new_user_session_path } Log in
+            - if user_signed_in?
+              .pull-right
+                = render partial: "layouts/consumer_dropdown"
+            - else
+              .nav-collapse.collapse
+                %ul.pull-right.nav.nav-pills
+                  %li
+                    %a{ :href => root_path } Home
+                  %li
+                    %a{ :href => merchant_features_path } Merchants
+                  %li
+                    %a{ :href => consumer_features_path } Customers
+                  %li
+                    %a{ :href => pricing_path } Pricing
+                  %li
+                    %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
+                  %li
+                    %a.btn.btn-primary{ :href => new_user_session_path } Log in
 
     .container-fluid
 
