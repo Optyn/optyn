@@ -1,50 +1,62 @@
-#consumer
-  .container
-    = render partial: "shared/menu"
-    .span8.edit_page.profile-container
-      %div
-        %h3
-          Change Your Profile
-          %a.btn{:href => edit_user_registration_path, :style => "float: right"}Change Account Details
-        %hr
-        .form
-          = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
-            = devise_error_messages!
-            = f.label :Name
-            = f.text_field :name, :autofocus => true
-            %br/
-            = f.label :Gender
-            = f.radio_button :gender,'m'
-            = "Male"
-            = f.radio_button :gender,'f',:checked => @user.gender.blank? || @user.gender == 'f'
-            = "Female"
-            %br/
-            %br/
-            = f.label :Date_Of_Birth
-            = f.text_field :birth_date, value: (human_date(resource.birth_date) rescue nil), :class => "datepicker"
-            %span.inline-help
-              (mm/dd/yyyy)
-            %br/
-            = f.label :Office_Zip_Code
-            = f.text_field :office_zip_code
-            %br/
-            = f.label :Home_Zip_Code
-            = f.text_field :home_zip_code
-            %br/
-            = f.label :picture
-            = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
-            = f.file_field :picture 
-            %br/
-            ="What information should we share with you connections?"
-            %br/
-            = f.fields_for :permissions_users do |p|
-              = p.check_box :action
-              = p.hidden_field :permission_id
-              = p.object.permission.permission_name
-            %br/
-            = f.label :Interest
-            = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true}
-            %br/
-            %div{:style => "padding-top: 20px;"}
-              = f.submit "Update", class: 'btn btn-primary'
-              = link_to "Back", :back, class: 'btn'
+%h1
+  Change Your Profile
+
+#consumer.pad3pc
+  .edit_page.profile-container
+    %div
+      %a.btn.btn-warning.pull-right{:href => edit_user_registration_path}Change Account Details
+      .clearfix
+      .form-horizontal
+        = form_for(resource, :as => resource_name, :url => profile_path, :method => :put) do |f|
+          = devise_error_messages!
+
+          .control-group
+            = f.label :Name, class: 'control-label'
+            .controls
+              = f.text_field :name, :autofocus => true
+
+          .control-group
+            = f.label :Gender, class: 'control-label'
+            .controls
+              = f.radio_button :gender,'m'
+              = "Male"
+              = f.radio_button :gender,'f',:checked => @user.gender.blank? || @user.gender == 'f'
+              = "Female"
+
+          .control-group
+            = f.label :Date_Of_Birth, class: 'control-label'
+            .controls
+              = f.text_field :birth_date, value: (human_date(resource.birth_date) rescue nil), :class => "datepicker", 'data-toggle' => 'tooltip', title: 'mm/dd/yyyy'
+
+          .control-group
+            = f.label :Office_Zip_Code, class: 'control-label'
+            .controls
+              = f.text_field :office_zip_code
+
+          .control-group
+            = f.label :Home_Zip_Code, class: 'control-label'
+            .controls
+              = f.text_field :home_zip_code
+
+          .control-group
+            = f.label :picture, class: 'control-label'
+            .controls
+              = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
+              = f.file_field :picture 
+
+          .control-group
+            .control-label Share with connections
+            .controls
+              = f.fields_for :permissions_users do |p|
+                = p.check_box :action, 'data-toggle' => 'tooltip', title: 'What information should we share with your connections?'
+                = p.hidden_field :permission_id
+                = p.object.permission.permission_name
+
+          .control-group
+            = f.label :Interest, class: 'control-label'
+            .controls
+              = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px",:multiple=>true, 'data-toggle' => 'tooltip', title: 'Select some options'}
+
+          %div{:style => "padding-top: 20px;"}
+            = f.submit "Update", class: 'btn btn-primary'
+            = link_to "Back", :back, class: 'btn'
