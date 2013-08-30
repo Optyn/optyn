@@ -1,39 +1,35 @@
-#features.features_page
-  .container
-    .features1
-      .row
-        = render partial: "shared/menu"
+%h1.pull-left Connections
 
-        .span8
-          #div.tab-content
-            = render partial: "connections/tab"
-          
-          #div.tab-pane#all_connections
-            %table.table.table-striped.table-hover#all_connections_table
-              %thead
-                %tr
-                  %th.alert.alert-success.flash_message_connected{:colspan => 5}
-                %tr
-                %th{} #
-                %th{:width => "25%"} Shop 
-                %th{:width => "25%"} Business Category
-                %th{:width => "30%"} Location
-                %th{:width => "20%"} Connect
-                  
-              %tbody
-              - @shops.each_with_index do |shop, i|
-                %tr
-                  %td 
-                    = i+1
-                  %td 
-                    -# link_to shop.name, connection_path(shop.id)
-                    %a{:href => "#shopDialog_#{shop.id}","data-toggle"=>"modal", "id"=>"#{shop.id}","class"=>"open-shopDialog"} #{shop.name}
-                    = render partial: 'shop_dialog', locals:{:shop=>shop}
+= render partial: "connections/tab"
 
-                  %td 
-                    = shop.business_category_names.join(", ")
-                  %td 
-                    = shop.locations.collect(&:city).join(',')
-                  %td
-                    %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => get_connection_status(shop,current_user),"data-shop"=>shop.id,"data-shop_name"=>shop.name,:style => "width:75px"} 
-                      = get_connection_status(shop,current_user)
+#features.features_page.pad3pc
+  .features1
+    #div.tab-pane#all_connections
+      %table.table.table-striped.table-hover#all_connections_table
+        %thead
+          %tr
+            %th.alert.alert-success.flash_message_connected{:colspan => 5}
+          %tr
+          %th{} #
+          %th{:width => "25%"} Shop 
+          %th{:width => "25%"} Business Category
+          %th{:width => "30%"} Location
+          %th{:width => "20%"} Connect
+            
+        %tbody
+          - @shops.each_with_index do |shop, i|
+            %tr
+              %td 
+                = i+1
+              %td 
+                -# link_to shop.name, connection_path(shop.id)
+                %a{:href => "#shopDialog_#{shop.id}","data-toggle"=>"modal", "id"=>"#{shop.id}","class"=>"open-shopDialog"} #{shop.name}
+                = render partial: 'shop_dialog', locals:{:shop=>shop}
+
+              %td 
+                = shop.business_category_names.join(", ")
+              %td 
+                = shop.locations.collect(&:city).join(',')
+              %td
+                %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => get_connection_status(shop,current_user),"data-shop"=>shop.id,"data-shop_name"=>shop.name,:style => "width:75px"} 
+                  = get_connection_status(shop,current_user)

@@ -8,23 +8,23 @@
       %th Date
 
   %tbody
-  - if messages.present?
-    - messages.each do |message|
-      %tr{class: mark_message_unread_if(message)}
-        %td= check_box_tag(:uuid, message.uuid, false, class: 'real')
+    - if messages.present?
+      - messages.each do |message|
+        %tr{class: mark_message_unread_if(message)}
+          %td= check_box_tag(:uuid, message.uuid, false, class: 'real')
 
-        %td= shop_logo(message.shop)
+          %td= shop_logo(message.shop)
 
-        %td= message.shop_name
+          %td= message.shop_name
 
-        %td.show-link= message_type_title(message)
+          %td.show-link= message_type_title(message)
 
-        %td.show-link= message.personalized_subject(current_user)
+          %td.show-link= message.personalized_subject(current_user)
 
-        %td.show-link= message_detail_date(message)
+          %td.show-link= message_detail_date(message)
 
-        %td.show-link-address.display-none
-          = message_path(message.uuid)
-  - else
-    %tr
-      %td{colspan: '4'} No messages available
+          %td.show-link-address.display-none
+            = message_path(message.uuid)
+    - else
+      %tr
+        %td{colspan: '7'} No messages available

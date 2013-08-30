@@ -1,4 +1,6 @@
 class ConnectionsController < BaseController
+  layout 'merchants'
+
   include DashboardCleaner
 
   before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect]

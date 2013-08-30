@@ -1,34 +1,32 @@
-#consumer
-  .container
-    = render partial: "shared/menu"
-    .span8
-      %div.tab-content
+%h1.pull-left Connections
 
-        = render partial: "connections/tab"
+= render partial: "connections/tab"
 
-        %table.table.table-striped.table-hover#my_connections_table
-          %thead
-            %tr
-              %th.alert.alert-error.flash_message_disconnected{:colspan => 5}
-            %tr
-              %th{} #
-              %th{:width => "25%"} Shop
-              %th{:width => "25%"} Business Category
-              %th{:width => "30%"} Location
-              %th{:width => "20%"} Connect
+#consumer.pad3pc
+  %div.tab-content
+    %table.table.table-striped.table-hover#my_connections_table
+      %thead
+        %tr
+          %th.alert.alert-error.flash_message_disconnected{:colspan => 5}
+        %tr
+          %th{} #
+          %th{:width => "25%"} Shop
+          %th{:width => "25%"} Business Category
+          %th{:width => "30%"} Location
+          %th{:width => "20%"} Connect
 
-          %tbody
-          - @connections.each_with_index do |connection,i|
-            %tr
-              %td
-                = i+1
-              %td
-                %a{:href => "#shopDialog_#{connection.shop.id}","data-toggle"=>"modal", "id"=>"#{connection.shop.id}","class"=>"open-shopDialog"} #{connection.shop.name}
-                = render partial: 'shop_dialog', locals:{:shop=>connection.shop}
-              %td
-                = connection.shop.business_category_names.join(", ")
-              %td
-                = connection.shop.locations.collect(&:city).join(',')
-              %td
-                %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => connection.connection_status,"data-shop"=>connection.shop.id,"data-shop_name"=>connection.shop.name,:style => "width:75px"}
-                  = connection.connection_status
+      %tbody
+        - @connections.each_with_index do |connection,i|
+          %tr
+            %td
+              = i+1
+            %td
+              %a{:href => "#shopDialog_#{connection.shop.id}","data-toggle"=>"modal", "id"=>"#{connection.shop.id}","class"=>"open-shopDialog"} #{connection.shop.name}
+              = render partial: 'shop_dialog', locals:{:shop=>connection.shop}
+            %td
+              = connection.shop.business_category_names.join(", ")
+            %td
+              = connection.shop.locations.collect(&:city).join(',')
+            %td
+              %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => connection.connection_status,"data-shop"=>connection.shop.id,"data-shop_name"=>connection.shop.name,:style => "width:75px"}
+                = connection.connection_status

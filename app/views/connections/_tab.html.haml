@@ -1,8 +1,8 @@
-#div.tab-pane.active#my_connections{:style => "padding-top: 20px;"}
-	%ul.nav.nav-tabs{}
-		%li{class: connections_tab_class('index')}
-			= link_to("My Connections", connections_path, id: 'my_connections')
-		%li{class: connections_tab_class('make')}
-			= link_to("Explore New Connections", make_connections_path, id: 'new_connections')
-		%li{class: connections_tab_class('dropped')}
-			= link_to("Past Connections", dropped_connections_path, id: 'dropped_connections')
+#div.tab-pane.active#my_connections
+  %ul.nav.nav-tabs{}
+    %li{class: connections_tab_class('dropped')}
+      = link_to("Past Connections", dropped_connections_path, id: 'dropped_connections')
+    %li{class: connections_tab_class('make')}
+      = link_to("Explore New Connections", make_connections_path, id: 'new_connections')
+    %li{class: connections_tab_class('index')}
+      = link_to("My Connections", connections_path, id: 'my_connections')

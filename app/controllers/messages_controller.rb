@@ -2,6 +2,8 @@ class MessagesController < BaseController
   include Messagecenter::CommonsHelper
   include DashboardCleaner
 
+  layout 'merchants'
+
   before_filter :populate_user_folder_count
 
   before_filter :show_my_messages_only, :only => [:show]
