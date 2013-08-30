@@ -8,7 +8,7 @@ class DashboardsController < BaseController
   private
   def populate_counts
     @pending_survey_count = current_user.unanswered_surveys_count
-    @new_coupons_count = MessageUser.coupon_messages_count(current_user.id)
+    @new_coupons_count =5# MessageUser.coupon_messages_count(current_user.id)
     @new_messages_count = MessageUser.new_messages_count(current_user.id)
     @new_specials_count = MessageUser.special_messages_count(current_user.id)
   end

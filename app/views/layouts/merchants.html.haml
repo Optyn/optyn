@@ -27,9 +27,12 @@
 
     #dashboard.container-fluid
       .row-fluid
-        = render partial: "merchants/shared/menu"
+        - if manager_signed_in?
+          = render partial: "merchants/shared/menu"
+        - if user_signed_in?
+          = render partial: "shared/menu"
         .span9.wid75pc.content
-          
+
           = yield :banner
 
 
