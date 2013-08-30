@@ -31,5 +31,5 @@
               %td 
                 = shop.locations.collect(&:city).join(',')
               %td
-                %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => get_connection_status(shop,current_user),"data-shop"=>shop.id,"data-shop_name"=>shop.name,:style => "width:75px"} 
+                %a{:href => "#", :class => "btn optyn_btn", :id=>"optyn_btn", "data-status" => get_connection_status(shop,current_user),"data-shop"=>shop.id,"data-shop_name"=>shop.name} 
                   = get_connection_status(shop,current_user)
