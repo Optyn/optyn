@@ -1,12 +1,8 @@
-#title_header
-  %h3
-    Segments
+%h1
+  Segments
 /Main Body
-#merchants
-  .container
-    = render partial: "shared/menu"
-    .span8
-      %h3
-        = @survey.title
+#merchants.pad3pc
+  %h2
+    = @survey.title
 
-      = render partial: "segments/actual_form"
+  = render partial: "segments/actual_form"
