@@ -749,6 +749,7 @@ form {
     .uneditable-input {
       border-color: lighten( $red, 20% );
       background-color: lighten( $red, 35% );
+      color: $red;
     }
   }
   .nav-pills > li > a { @include border-radius( 0 ); }
