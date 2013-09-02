@@ -67,6 +67,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
+    #render layout: 'merchants'
     @user = current_user
     @user.attributes = params[:user].except(:birth_date)
 
@@ -88,4 +89,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render 'edit'
     end
   end
+
+
+  def edit
+    render layout: 'merchants'
+  end
+
 end
