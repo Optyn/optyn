@@ -730,6 +730,27 @@ form {
   }
 }
 #flat {
+  .field-with-errors {
+    textarea:focus,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    .uneditable-input {
+      border-color: lighten( $red, 20% );
+      background-color: lighten( $red, 35% );
+    }
+  }
   .nav-pills > li > a { @include border-radius( 0 ); }
   i {
     margin-top: 4px;

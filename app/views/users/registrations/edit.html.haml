@@ -21,7 +21,8 @@
               = f.label :password
             .controls
               = f.password_field :password, :autocomplete => "off"
-              %small (leave blank if you don't want to change it)
+              %div
+                %small (leave blank if you don't want to change it)
           .control-group
             .control-label
               = f.label :password_confirmation
@@ -32,7 +33,8 @@
               = f.label :current_password
             .controls
               = f.password_field :current_password
-              %small (we need your current password to confirm your changes)
+              %div
+                %small (we need your current password to confirm your changes)
         %div{:style => "padding-top: 20px;"}
         = f.submit "Update", class: 'btn btn-primary'
         = link_to "Back", :back, class: 'btn'
