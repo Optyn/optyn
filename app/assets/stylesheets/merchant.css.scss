@@ -6,13 +6,23 @@
     padding: 2%;
     margin-top: 150px;
     line-height: 42px;
+    .span4 {
+      text-align: left;
+    }
     a {
       margin-right: 5px;
     }
     .copy a {
-      color: $dark-gray;
+      padding: 0 10px;
+      border-right: solid 1px $dark-gray;
+      text-decoration: none;
+      &:last-child {
+        border: 0;
+      }
+    }
+    a {
       text-decoration: underline;
-      margin-right: 30px;
+      color: $dark-gray;
     }
   }
   .stats {

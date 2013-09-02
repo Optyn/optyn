@@ -1,9 +1,13 @@
 %footer.container-fluid.inner
   .row-fluid.copyright
-    .span6
+    .span4
       %a.icon.facebook{:href => "http://www.facebook.com/optyn", :target => "_blank"}
       %a.icon.twitter{:href => "http://www.twitter.com/optyn", :target => "_blank"}
-    .span6.copy.text-right
-      %a{ :href => about_path } About
-      %a{ :href => support_path } Support
-      2013 &copy; optyn.com. All Rights Reserved.
+    .span8.text-center
+      .copy
+        %a{ :href => contact_path } Contact Us
+        %a{ :href => about_path } About
+        %a{ :href => support_path } Support
+        %a{ :href => blog_path } Blog
+      %small
+        2013 &copy; optyn.com. All Rights Reserved.
