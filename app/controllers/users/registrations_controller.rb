@@ -3,6 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :require_manager_logged_out
   before_filter :redirect_to_account, only: [:profile, :update_profile]
 
+  layout :define_layout
 
 
   def new
@@ -93,6 +94,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def edit
     render layout: 'merchants'
+  end
+
+  private
+
+  def define_layout
+    return "merchants" if ["update", "update_profile"].include?( action_name )
+    return "application"
   end
 
 end
