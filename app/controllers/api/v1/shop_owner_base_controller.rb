@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ShopOwnerBaseController < ApplicationController
+    class ShopOwnerBaseController < ApiController
       respond_to :json
 
       helper_method :current_shop
