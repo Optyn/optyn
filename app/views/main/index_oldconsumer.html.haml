@@ -21,13 +21,26 @@
       .slogan2
         %h3
           for Small Businesses
-    .span6.merchant
+    .span6.consumer
+      %h3
+        For Consumers
       .content
         %strong
-          Create and send email campaigns to your customers in under 2 minutes!
-          %br
-          %br
-          Optyn is the fastest and easiest e-mail marketing platform AND we help you capture and engage your customers in-store and online.
+          Engage with favorite brands and merchants on your own terms. Optyn eliminates spam and allows you to control what marketing emails you receive and how often you receive them. Manage your email subscriptions with ease!
+      %h4
+        You are one click away from a simplified inbox!
+      .buttons
+        %a.btn.startbutton#get-started{:href => new_user_registration_path} Get Started
+        %a.btn.startbutton#download-extension{:styles => 'display: none;' ,:href => "#", :onclick => "chrome.webstore.install('', function(a){console.log(a);}, function(a){console.log(a);}); return false"} Download Chrome Extension
+        %a.btn.quickvid{:href => "//www.youtube.com/embed/xL8lHQMyVJ8?autoplay=1", :id => "consumer_video_container"} Watch Video
+        /%span
+        /%a{:href => consumer_features_path} Learn More
+    .span6.merchant
+      %h3
+        For Businesses
+      .content
+        %strong
+          Create and send email campaigns to your customers in under 2 minutes! Optyn is the fastest and easiest e-mail marketing platform AND we help you capture customers in-store and online.
       %h4
         Get started with a FREE account for life!
       .buttons
