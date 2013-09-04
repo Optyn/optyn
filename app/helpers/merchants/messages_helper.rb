@@ -101,7 +101,7 @@ module Merchants::MessagesHelper
   def message_content(message)
     display_content = message.content.blank? ? "-" : message.content
     if message.instance_of?(VirtualMessage)
-      return display_content.html_safe
+      return raw(display_content)
     end
 
     simple_format(display_content)
