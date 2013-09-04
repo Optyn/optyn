@@ -4,12 +4,12 @@
     .actions-wrapper
       %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
       .actions.text-center
-        %a.btn.consumer-btn{:href => "#user", class: 'login-type-action'}
-          %i.icon-user.icon-white
-          I am a Consumer
         %a.btn.merchant-btn{:href => "#shop", class: 'login-type-action'}
           %i.icon-shopping-cart.icon-white
           I am a Business User
+        %a.btn.consumer-btn{:href => "#user", class: 'login-type-action'}
+          %i.icon-user.icon-white
+          I am a Consumer
 
     #loading{style: 'display:none;'}
       %strong Please Wait...

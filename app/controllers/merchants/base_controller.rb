@@ -22,7 +22,7 @@ class Merchants::BaseController < ApplicationController
 
   def check_connection_count
     return if current_shop.active_connection_count <= Plan.starter.max
-    flash[:alert] = "Please provide your payment details <a href='#{merchants_upgrade_path}'>here</a> in order to continue sending messages/emails." if current_shop.disabled?
+    flash[:alert] = "Please provide your payment details <a href='#{merchants_upgrade_subscription_path}'>here</a> in order to continue sending messages/emails." if current_shop.disabled?
   end
 
 	

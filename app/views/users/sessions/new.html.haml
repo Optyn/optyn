@@ -29,12 +29,12 @@
           Don't have an account?
           %br
           %br
-          %a.btn.consumer-btn{:href => new_user_registration_path} 
-            %i.icon-user.icon-white
-            Consumer Sign Up
           %a.btn.merchant-btn{:href => new_merchants_manager_registration_path}
             %i.icon-shopping-cart.icon-white
             Merchant Sign Up
+          %a.btn.consumer-btn{:href => new_user_registration_path} 
+            %i.icon-user.icon-white
+            Consumer Sign Up
 
 = hidden_field_tag :login_type_omniauth_clients_path, login_type_omniauth_clients_path
 = hidden_field_tag :login_type, ''
