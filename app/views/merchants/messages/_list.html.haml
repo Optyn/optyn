@@ -22,7 +22,7 @@
           %td.show-link-address.display-none
             = edit_merchants_message_path(message.uuid)
           %td
-            -if message.state == 'sent'
+            - if message.sent?
               %a{:href => "#reportDialog_#{message.uuid}", "data-toggle" => "modal", "id" => "#{message.uuid}", "class" => "open-reports"} report
               = render :partial => "report", :locals => {:message => message}
             -else
