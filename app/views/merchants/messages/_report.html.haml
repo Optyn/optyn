@@ -7,11 +7,14 @@
     .span6
       %ul
         %li
-        Count of intended recipients:
-        = message.intended_recipients
+          Email Sent to:
+          = message.intended_recipients
         %li
-        Count of actual recipients:
-        = message.actual_recipients
+          Email Received by:
+          = message.actual_recipients  
         %li
-        Opt-outs from this message:
-        = message.opt_outs
+          Email Opened By:
+          = message.opens_count
+        %li
+          Opt-outs from this message:
+          = message.opt_outs
