@@ -10,9 +10,9 @@
         .form.row-fluid
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
 
-            = f.text_field :email, :placeholder => "Email", value: params[:email], 'data-toggle' => 'tooltip', title: 'Email'
+            = f.text_field :email, :placeholder => "Email", value: params[:email], 'data-toggle' => 'tooltip', title: 'Email', 'data-tooltip-pos' => 'right'
 
-            = f.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password'
+            = f.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password', 'data-tooltip-pos' => 'right'
 
             .remember
               .left

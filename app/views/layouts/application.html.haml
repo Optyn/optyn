@@ -121,19 +121,3 @@
             2013 &copy; Optyn, Inc.
             %br
             All rights reserved.
-
-    :javascript
-      $( document ).ready( function() {
-        // Placeholder support for old browsers.
-        if ( 'placeholder' in document.createElement( 'input' )) {}
-        else {
-          $( 'input[type=text]' ).each( function( i, v ) {
-            if ( $( this ).attr( 'placeholder' ).length > 0 && $( this ).attr( 'value' ).length == 0 ) {
-              $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
-            }
-          });
-        }
-
-        // Initialise tooltips.
-        $( '[data-toggle=tooltip]' ).tooltip({ placement: 'top' });
-      });

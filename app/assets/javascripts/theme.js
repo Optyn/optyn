@@ -42,4 +42,30 @@ $(document).ready(function () {
         //IE7 and 8 stuff
         $("body").addClass("old-ie");
     }
+
+
+    // Placeholder support for old browsers ....................................
+    if ( 'placeholder' in document.createElement( 'input' )) {}
+    else {
+      $( 'input[type=text]' ).each( function( i, v ) {
+        if ( $( this ).attr( 'placeholder' ).length > 0 && $( this ).attr( 'value' ).length == 0 ) {
+          $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
+        }
+      });
+    }
+
+
+    // Initialise tooltips .....................................................
+    initTooltips = function() {
+        $( '[data-toggle=tooltip]' ).each( function( index, value ) {
+            position = $( this ).attr( 'data-tooltip-pos' );
+            if ( position == '' ) {
+                position = 'top';
+            }
+            $( this ).tooltip({
+                placement: $( this ).attr( 'data-tooltip-pos' )
+            });
+        });
+    };
+    initTooltips();
 });

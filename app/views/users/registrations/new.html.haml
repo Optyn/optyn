@@ -10,13 +10,13 @@
         .form.row-fluid
           = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
 
-            = f.text_field :name, :autofocus => true, :placeholder => "Name", 'data-toggle' => 'tooltip', title: 'Name'
+            = f.text_field :name, :autofocus => true, :placeholder => "Name", 'data-toggle' => 'tooltip', title: 'Name', 'data-tooltip-pos' => 'right'
 
-            = f.text_field :email, :placeholder => "Email", 'data-toggle' => 'tooltip', title: 'Email'
+            = f.text_field :email, :placeholder => "Email", 'data-toggle' => 'tooltip', title: 'Email', 'data-tooltip-pos' => 'right'
 
-            = f.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password'
-            
-            = f.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password'
+            = f.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password', 'data-tooltip-pos' => 'right'
+
+            = f.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password', 'data-tooltip-pos' => 'right'
 
             %div 
               %small * All the fields above are required.
