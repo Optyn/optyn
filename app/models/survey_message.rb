@@ -1,5 +1,5 @@
 class SurveyMessage < Message
-  attr_accessible :survey_id
+  attr_accessible :survey_id, :content
 
   validates :survey_id, presence: true
 end
