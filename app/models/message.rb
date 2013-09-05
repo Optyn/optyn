@@ -570,7 +570,7 @@ class Message < ActiveRecord::Base
     return shop.connections.active.collect(&:user_id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
 
     label_user_ids = labels.collect(&:user_labels).flatten.collect(&:user_id)
-    Connection.for_users(label_user_ids).active.collect(&:user_id)
+    Connection.for_users(label_user_ids).distinct_receiver_ids.active.collect(&:user_id)
   end
 
   def replenish_draft_count
