@@ -463,8 +463,8 @@ ActiveRecord::Schema.define(:version => 20130904092256) do
     t.datetime "discount_end_at"
     t.integer  "partner_id"
     t.string   "uuid"
-    t.string   "phone_number",               :default => ""
     t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
     t.boolean  "uploaded_directly",          :default => false
