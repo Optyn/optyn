@@ -45,6 +45,8 @@ class Connection < ActiveRecord::Base
 
   scope :connected_via_email_box, connection_medium(CONNECTED_VIA_EMAIL_BOX)
 
+  scope :distinct_receiver_ids, select('DISTINCT(connections.user_id)')
+
   def self.shops_connections(shop_id)
     for_shop(shop_id).includes_user_and_permissions.latest_updates
   end
