@@ -1,4 +1,4 @@
-%table{:style => 'width:100%; height:20px; max-width: 600px;border-top-left-radius:5px; border-top-right-radius:5px;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}", :align => "center"}
+%table{:style => 'width:100%; height:20px; max-width: 600px;border-top-left-radius:5px; border-top-right-radius:5px;' + "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}", :align => "center"}
   %tr
     %td
       %div{:style => "max-width:600px;margin:0 auto;display:block;"}
