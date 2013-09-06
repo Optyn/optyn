@@ -1,13 +1,12 @@
 $( function() {
 
-  $( '#tiers #myCarousel' ).carousel();
-  $( '#tiers #myCarousel' ).carousel( 'pause' );
+  $( '#tiers #myCarousel' ).carousel({ interval: false });
+  //$( '#tiers #myCarousel' ).carousel( 'pause' );
 
   $( '#tiers #pricing-slider' ).slider({
     min: 1,
     max: 25000,
     range: 'min',
-    interval: 9000,
     change: function( event, ui ) {
       $( '#tiers .cus-count' ).text( ui.value + ' customers' );
       suggestPlan( ui.value );
