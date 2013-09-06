@@ -326,8 +326,14 @@ class Message < ActiveRecord::Base
 
   def personalized_subject(message_user)
     user_name = message_user.name.to_s
-    self.subject.gsub("{{Customer Name}}", user_name) 
-  rescue "A message from #{shop.name}"
+    if user_name.present?
+      self.subject.gsub("{{Customer Name}}", user_name)
+    else
+      personal_subject = (self.subject.gsub("{{Customer Name}},", "")).strip.capitalize
+      personal_subject
+    end
+  rescue 
+    "A message from #{shop.name}"
   end
 
   def excerpt

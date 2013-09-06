@@ -86,7 +86,7 @@ module Merchants::MessagesHelper
 
     greeting_suffix = message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : customer_name
 
-    "#{greeting_prefix} #{greeting_suffix},"
+    "#{greeting_prefix}#{(" " + greeting_suffix) if greeting_suffix.present?},"
   end
 
   def message_rendering_partial(message)
