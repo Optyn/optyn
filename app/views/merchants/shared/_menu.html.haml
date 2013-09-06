@@ -32,9 +32,9 @@
       %a{:href => merchants_file_imports_path, :class => active_tab_class(['file_imports'])}
         = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
         Import Customers
-    / %li
-    /   = image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
-    /   = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+    %li
+      /= image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
+      = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete, :class => 'logout')
 
   / - if @optyn_button_stats.present?
   /   = render partial: "merchants/apps/button_stats_report"
