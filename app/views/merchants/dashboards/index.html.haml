@@ -3,17 +3,23 @@
 = banner("#{current_shop.name} Dashboard")
 
 .pad3pc
-  .header.row-fluid
+  .header.row-fluid.no-pad
     .span8  
-      %p
+      .text-warning
         Hi
-        == #{current_manager.name}!
+        %strong
+          == #{current_manager.name}
+        !
         Here's what's going on today.
     /.span4
     /%a.btn.btn-success{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
     /Create New Campaign
 
-  .row-fluid.stats
+  .row-fluid.no-pad
+    .span12.new-conn
+      %h2 New Customers
+
+  .row-fluid.stats.no-pad
     .span3.leading
       .count
         = @day_count

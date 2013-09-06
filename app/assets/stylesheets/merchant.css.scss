@@ -4,9 +4,6 @@
     background-color: rgba( #000, 0.2 );
     color: $dark-gray;
     line-height: 42px;
-    a {
-      margin-right: 5px;
-    }
     .copy a {
       padding: 0 10px;
       border-right: solid 1px $dark-gray;
@@ -144,7 +141,7 @@
     padding: 1%;
     margin-bottom: 1%;
   }
-  #flat.merchants-dashboards #dashboard .stats .leading {
+  #flat.merchants-dashboards #dashboard .text-warning {
     margin-top: 50px;
   }
   #flat.merchants-dashboards #dashboard {
@@ -297,9 +294,6 @@
   padding-top: 50px;
   padding-bottom: 50px;
   margin: 0px;
-}
-#dashboard .header {
-  height: 50px;
 }
 #dashboard .header .new {
   float: right;
@@ -527,4 +521,12 @@
 }
 .tab-content {
   clear: both;
+}
+.new-conn {
+  background-color: $black;
+  color: $white;
+  padding: 0 20px;
+  > h2 {
+    margin-bottom: 0;
+  }
 }
