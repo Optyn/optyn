@@ -3,12 +3,7 @@
     footer.inner {
     background-color: rgba( #000, 0.2 );
     color: $dark-gray;
-    padding: 2%;
-    margin-top: 150px;
     line-height: 42px;
-    .span4 {
-      text-align: left;
-    }
     a {
       margin-right: 5px;
     }
@@ -40,7 +35,6 @@
   }
 }
 #flat.m-app {
-  background: image-url( 'bg_dash.png' );
   background-size: contain;
   background-repeat: repeat-y;
   padding-top: 70px;
@@ -297,6 +291,9 @@
 }
 /* Merchant Dashboard Page */
 #dashboard {
+  background: image-url( 'bg_dash.png' );
+  background-size: contain;
+  background-repeat: repeat-y;
   padding-top: 50px;
   padding-bottom: 50px;
   margin: 0px;

@@ -19,7 +19,6 @@
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')
   %body#flat{:class => cssClasses }
-    = display_flash_message
     - if params[:action] == 'index' && params[:controller] == 'main'
       %header.row-fluid
         .span5
@@ -56,6 +55,8 @@
                     %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
                   %li
                     %a.btn.btn-primary{ :href => new_user_session_path } Log in
+
+    = display_flash_message
 
     .container-fluid
 

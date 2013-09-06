@@ -56,7 +56,7 @@ $(document).ready(function () {
 
 
     // Initialise tooltips .....................................................
-    initTooltips = function() {
+    var initTooltips = function() {
         $( '[data-toggle=tooltip]' ).each( function( index, value ) {
             position = $( this ).attr( 'data-tooltip-pos' );
             if ( position == '' ) {
@@ -68,4 +68,15 @@ $(document).ready(function () {
         });
     };
     initTooltips();
+
+
+    // Ensure footer is stuck to bottom of window ..............................
+    var setContentHt = function() {
+        var headerHt = parseInt( $( '.navbar.inner' ).css( 'height' ));
+        var footerHt = parseInt( $( 'footer' ).css( 'height' ));
+        var windowHt = $( window ).height();
+        $( '#dashboard .yield' ).css( 'min-height', windowHt - headerHt - footerHt );
+    };
+    setContentHt();
+    $( window ).resize( setContentHt );
 });
