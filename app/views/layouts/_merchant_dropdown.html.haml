@@ -1,6 +1,7 @@
 %li
   /%a.tour{:href => '#'}
   /Take a tour
+  %a.tour{ :href => merchants_messages_path} Create new campaign
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
     = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
