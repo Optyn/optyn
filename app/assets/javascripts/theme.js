@@ -58,12 +58,12 @@ $(document).ready(function () {
     // Initialise tooltips .....................................................
     var initTooltips = function() {
         $( '[data-toggle=tooltip]' ).each( function( index, value ) {
-            position = $( this ).attr( 'data-tooltip-pos' );
+            var position = $( this ).attr( 'data-tooltip-pos' );
             if ( position == '' ) {
                 position = 'top';
             }
             $( this ).tooltip({
-                placement: $( this ).attr( 'data-tooltip-pos' )
+                placement: position
             });
         });
     };
