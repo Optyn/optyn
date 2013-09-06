@@ -24,7 +24,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'rails_admin'
 gem 'resque', :require => 'resque/server'
-gem 'resque-pool'
+gem "capistrano-resque", "~> 0.1.0"
 gem 'resque_mailer'
 gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.6.7'

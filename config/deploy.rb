@@ -2,6 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
+require "capistrano-resque"
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 
@@ -34,6 +35,10 @@ set :deploy_via, :remote_cache
 set :lock_file_path, "#{shared_path}/pids"
 set :lock_file_name, 'deployment.pid'
 
+if "production" == rails_env
+  set :workers, {"general_queue" => 1, "import_queue" => 1, "message_queue" => 2, "payment_queue" => 1}
+end
+
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 #
@@ -50,9 +55,9 @@ after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
-after "deploy", "resque:restart_pool"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
+after "deploy:restart", "resque:restart"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
@@ -162,36 +167,6 @@ namespace :deploy do
     task :unlock, :roles => :messenger, :only => {:primary => true} do
       run "rm #{shared_path}/pids/#{lock_file_name}"
     end
-  end
-end
-
-namespace :resque do
-  task :start, roles => :app do
-    puts "--- Executing Resque start task that is resque:work"
-    if "production" == rails_env
-      run "cd #{release_path} && QUEUE=general_queue BACKGROUND=yes rake resque:work"
-      run "cd #{release_path} && QUEUE=payment_queue BACKGROUND=yes rake resque:work"
-      run "cd #{release_path} && QUEUE=import_queue BACKGROUND=yes rake resque:work"
-      run "cd #{release_path} && QUEUE=message_queue BACKGROUND=yes rake resque:work"
-    else
-      run "cd #{release_path} && QUEUE=* BACKGROUND=yes rake resque:work"
-    end
-  end
-
-  task :stop, roles => :app do
-    puts "--- Executing Resque stop task"
-    run "pkill -9 -f resque" rescue nil
-  end
-
-  task :restart, roles => :app do
-    stop
-    start
-  end
-
-  task :restart_pool, :roles => :app, :except => {:no_release => true} do
-    run "if [ -e #{current_path}/tmp/pids/resque-pool.pid ]; then kill -s QUIT $(cat #{current_path}/tmp/pids/resque-pool.pid) ; rm #{current_path}/tmp/pids/resque-pool.pid ;fi"
-    run "echo Starting Pool Daemon"
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec resque-pool --daemon --environment #{rails_env}"
   end
 end
 
