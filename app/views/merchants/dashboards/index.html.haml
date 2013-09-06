@@ -4,12 +4,14 @@
 
 .pad3pc
   .header.row-fluid
-    .span12  
+    .span8  
       %p
         Hi
-        == #{current_manager.name}.
-        !
-        Here's what's going on.
+        == #{current_manager.name}!
+        Here's what's going on today.
+    /.span4
+    /%a.btn.btn-success{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
+    /Create New Campaign
 
   .row-fluid.stats
     .span3.leading
