@@ -361,7 +361,7 @@ class Message < ActiveRecord::Base
   end
 
   def intended_recipients
-    fetch_receiver_ids.count
+    message_users.count
   end
 
   def actual_recipients
