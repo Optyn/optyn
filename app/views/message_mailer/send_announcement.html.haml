@@ -28,6 +28,6 @@
 
       = render partial: "shared/mailers/footer"
 
-      = image_tag "#{SiteConfig.app_base_url}#{email_read_logger_path(@message_user.encode64_uuid)}", :style => "width: 1px; height: 1px;", :alt => ''
+      = image_tag "#{SiteConfig.app_base_url}#{email_read_logger_path(@message_user.encode64_uuid)}?tracker=#{@message_user.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
 - else
   = message_content(@message)
