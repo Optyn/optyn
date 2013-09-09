@@ -361,7 +361,7 @@ class Message < ActiveRecord::Base
   end
 
   def intended_recipients
-    fetch_receiver_ids.count
+    message_users.count
   end
 
   def actual_recipients
@@ -516,7 +516,7 @@ class Message < ActiveRecord::Base
 
   def canned_from
     #manager.email_like_from
-    %{#{self.shop_name.titleize} <email@optyn.com>}
+    %{"#{self.shop_name.titleize}" <email@optyn.com>}
   end
 
   def canned_subject
