@@ -95,14 +95,14 @@ module StripeEventHandlers
   def self.handle_customer_created(params)
     discount_map = params['data']['object']["discount"]
     if discount_map.present?
-      manage_coupon(discount_map['coupon']['id'], params['id'])
+      manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
   end
 
   def self.handle_customer_updated(params)
     discount_map = params['data']['object']["discount"]
     if discount_map.present?
-      manage_coupon(discount_map['coupon']['id'], params['id'])
+      manage_coupon(discount_map['coupon']['id'], params['data']['object']['id'])
     end
   end
 

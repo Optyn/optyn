@@ -4,7 +4,10 @@
   = f.label :survey_id, "Embed Survey", class: 'control-label'
   .controls
     = f.hidden_field :survey_id, value: current_shop.survey.id
-    = current_shop.survey.title
+    %label.control-label
+      = current_shop.survey.title
+
+= render partial: 'merchants/shared/messages/content', locals: {f: f}    	
 
 = hidden_field_tag :edit_child_location, ""
 
