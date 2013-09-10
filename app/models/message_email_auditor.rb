@@ -12,9 +12,9 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   @@counter = 0
 
-  def self.check_for_failures
+  def self.check_for_failures(force = true)
     increment_counter
-    if @@counter > 99
+    if @@counter > 99 || force
       Messagecenter::AwsDeliveryFailureChecker.failure_stats
       reset_counter 
     end
