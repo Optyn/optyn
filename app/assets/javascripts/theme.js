@@ -76,10 +76,22 @@ $(document).ready(function () {
         var footerHt = parseInt( $( 'footer' ).css( 'height' ));
         var windowHt = $( window ).height();
         $( '#dashboard .yield' ).css( 'min-height', windowHt - headerHt - footerHt );
+
     };
     setContentHt();
     $( window ).resize( setContentHt );
 
+
+    // Ensuring footer is stuck to the bottom in email_feedback layout .........
+    var setEFLContentHt = function() {
+        var headerHt = parseInt( $( '.ef-l .navbar' ).css( 'height' ));
+        var footerHt = parseInt( $( 'footer' ).css( 'height' ));
+        var windowHt = $( window ).height();
+        $( '.ef-l .yield' ).css( 'min-height', windowHt - headerHt - footerHt );
+
+    };
+    setEFLContentHt();
+    $( window ).resize( setEFLContentHt );
 
     // Setting height of modal .................................................
     var setModalHt = function() {

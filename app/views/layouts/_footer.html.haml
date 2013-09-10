@@ -1,56 +1,60 @@
-/ starts footer
-#footer
-  .container
-    .row
-      .span4
-        %h3 Our Company
-        %ul
-          %li
-            %a{:href => about_path} About Us
-          %li
-            %a{:href => blog_path} Our Blog
-          %li
-            %a{:href => contact_path} Partner With Us
-          %li
-            %a{:href => terms_path} Terms of Use
-          %li
-            %a{:href => privacy_path} Privacy Policy
-      .span4
-        %h3 For Merchants
-        %ul
-          %li
-            %a{:href => merchant_features_path} Features
-          %li
-            %a{:href => pricing_path} Pricing
-          %li
-            %a{:href => faq_path} FAQs
-          %li
-            %a{:href => support_path} Support
-          %li
-            %a{:href => new_user_session_path} Merchant Login
-          %li
-            %a{:href => new_merchants_manager_registration_path} Get Started
-      .span4
-        %h3 For Consumers
-        %ul
-          %li
-            %a{:href => consumer_features_path} Features
-          %li
-            %a{:href => faq_path} FAQs
-          %li
-            %a{:href => support_path} Customer Support
-          %li
-            %a{:href => new_user_session_path} Consumer Login
-          %li
-            %a{:href => new_user_registration_path} Get Started
-    %hr/
-    .row.copyright
-      .span4
-        %h3 Follow Us
-        %a.social.fb{:href => "http://www.facebook.com/optyn", :target => "_blank"}
-          %i.i_facebook
-        %a.social.tw{:href => "http://www.twitter.com/optyn", :target => "_blank"}
-          %i.i_twitter
-      .span4.offset4.copy
-        %p 2013 &copy; optyn.com. All Rights Reserved.
-/ ends footer
+%footer.row-fluid
+  .span2
+    %h4 Our Company
+    %ul
+      %li
+        %a{ :href => about_path } About us
+      %li
+        %a{ :href => blog_path } Our blog
+      %li
+        %a{ :href => contact_path } Contact us
+      %li
+        %a{ :href => terms_path } Terms of use
+      %li
+        %a{ :href => privacy_path } Privacy policy
+  .span2
+    %h4 For Consumers
+    %ul
+      %li
+        %a{ :href => consumer_features_path } Features
+      %li
+        %a{ :href => '#' } Why use optyn
+      %li
+        %a{ :href => faq_path } FAQs
+      %li
+        %a{ :href => support_path } Support
+      %li
+        %a{ :href => new_user_registration_path } Get started
+  .span2
+    %h4 For Merchants
+    %ul
+      %li
+        %a{ :href => merchant_features_path } Features
+      %li
+        %a{ :href => '#' } Why use optyn
+      %li
+        %a{ :href => faq_path } FAQs
+      %li
+        %a{ :href => support_path } Support
+      %li
+        %a{ :href => new_merchants_manager_registration_path } Get started
+  .span2
+    %h4 For Publishers
+    %ul
+      %li
+        %a{ :href => '#' } Features
+      %li
+        %a{ :href => '#' } Why use optyn
+      %li
+        %a{ :href => '#' } FAQs
+      %li
+        %a{ :href => '#' } Support
+      %li
+        %a{ :href => '#' } Get started
+  .span4.text-center
+    %a{ :href => "http://www.twitter.com/optyn", :target => "_blank", :class => 'pg-twitter' }Our Twitter page
+    %a{ :href => "http://www.facebook.com/optyn", :target => "_blank", :class => 'pg-facebook' }Our Facebook page
+    %p
+      2013 &copy; Optyn, Inc.
+      %br
+      All rights reserved.
