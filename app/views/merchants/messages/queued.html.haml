@@ -15,8 +15,9 @@
         = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
         = hidden_field_tag 'move_to_trash_link', move_to_trash_merchants_messages_path
 
+
     = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-    = render partial: 'merchants/messages/list'
+    = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Scheduled For', timestamp_attr: 'send_on'}
 
     = render partial: 'shared/messages/pager', locals: {collection: @messages}
