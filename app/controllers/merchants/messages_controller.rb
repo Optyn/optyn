@@ -104,19 +104,19 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def trash
-    @messages = Message.paginated_trash(current_manager, params[:page])
+    @messages = Message.paginated_trash(current_shop, params[:page])
   end
 
   def drafts
-    @messages = Message.paginated_drafts(current_manager, params[:page])
+    @messages = Message.paginated_drafts(current_shop, params[:page])
   end
 
   def sent
-    @messages = Message.paginated_sent(current_manager, params[:page])
+    @messages = Message.paginated_sent(current_shop, params[:page])
   end
 
   def queued
-    @messages = Message.paginated_queued(current_manager, params[:page])
+    @messages = Message.paginated_queued(current_shop, params[:page])
   end
 
   def move_to_trash

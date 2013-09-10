@@ -1,6 +1,11 @@
 %div
   %p
-    == We need your feedback. Help us out by filling out the survey below.
+    - if @message.content.present?
+      = render partial: "shared/messages/content"
+    - else
+      %p
+        == We need your feedback. Help us out by filling out the survey below.
+
     - @survey = @message.survey
     - @survey_questions = @survey.survey_questions
 

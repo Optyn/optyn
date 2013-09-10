@@ -86,7 +86,7 @@ module Merchants::MessagesHelper
 
     greeting_suffix = message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : customer_name
 
-    "#{greeting_prefix} #{greeting_suffix},"
+    "#{greeting_prefix}#{(" " + greeting_suffix) if greeting_suffix.present?},"
   end
 
   def message_rendering_partial(message)
@@ -156,9 +156,9 @@ module Merchants::MessagesHelper
       website = message.shop.website
       if button_url.present? || website.present?
         href = button_url.present? ? button_url : website
-        link_to(image_tag(message.message_image.image.to_s, title: message.subject).html_safe, href)
+        link_to(image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 100%;').html_safe, href)
       else
-        image_tag(message.message_image.image.to_s, title: message.subject)
+        image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 100%;')
       end  
     end
   end

@@ -49,7 +49,7 @@ class Message < ActiveRecord::Base
 
   scope :only_parents, where(parent_id: nil)
 
-  scope :for_state_and_sender, ->(state_name, manager_identifier) { only_parents.with_state(state_name).where(manager_id: manager_identifier) }
+  scope :for_state_and_shop, ->(state_name, shop_id) { only_parents.with_state(state_name).joins(manager: :shop).where(["shops.id = :shop_id", {shop_id: shop_id}]) }
 
   scope :for_uuids, ->(uuids) { where(uuid: uuids) }
 
@@ -150,33 +150,33 @@ class Message < ActiveRecord::Base
     type_name.downcase.parameterize.underscore.<<("_message")
   end
 
-  def self.paginated_drafts(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:draft, manager.id).latest.page(page_number).per(per_page)
+  def self.paginated_drafts(shop, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_shop(:draft, shop.id).latest.page(page_number).per(per_page)
   end
 
-  def self.paginated_trash(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:trash, manager.id).latest.page(page_number).per(per_page)
+  def self.paginated_trash(shop, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_shop(:trash, shop.id).latest.page(page_number).per(per_page)
   end
 
-  def self.paginated_sent(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:sent, manager.id).latest.page(page_number).per(per_page)
+  def self.paginated_sent(shop, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_shop(:sent, shop.id).latest.page(page_number).per(per_page)
   end
 
-  def self.paginated_queued(manager, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_sender(:queued, manager.id).latest.page(page_number).per(per_page)
+  def self.paginated_queued(shop, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_shop(:queued, shop.id).latest.page(page_number).per(per_page)
   end
 
-  def self.cached_drafts_count(manager, force=false)
-    cache_key = "draft-count-manager-#{manager.id}"
+  def self.cached_drafts_count(shop, force=false)
+    cache_key = "draft-count-manager-#{shop.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.message_folder) do
-      for_state_and_sender(:draft, manager.id).count
+      for_state_and_shop(:draft, shop.id).count
     end
   end
 
-  def self.cached_queued_count(manager, force=false)
-    cache_key = "queued-count-manager-#{manager.id}"
+  def self.cached_queued_count(shop, force=false)
+    cache_key = "queued-count-manager-#{shop.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.message_folder) do
-      for_state_and_sender(:queued, manager.id).count
+      for_state_and_shop(:queued, shop.id).count
     end
   end
 
@@ -332,8 +332,14 @@ class Message < ActiveRecord::Base
 
   def personalized_subject(message_user)
     user_name = message_user.name.to_s
-    self.subject.gsub("{{Customer Name}}", user_name) 
-  rescue "A message from #{shop.name}"
+    if user_name.present?
+      self.subject.gsub("{{Customer Name}}", user_name)
+    else
+      personal_subject = (self.subject.gsub("{{Customer Name}},", "")).strip.capitalize
+      personal_subject
+    end
+  rescue 
+    "A message from #{shop.name}"
   end
 
   def excerpt
@@ -361,7 +367,7 @@ class Message < ActiveRecord::Base
   end
 
   def intended_recipients
-    fetch_receiver_ids.count
+    message_users.count
   end
 
   def actual_recipients
@@ -535,7 +541,7 @@ class Message < ActiveRecord::Base
 
   def canned_from
     #manager.email_like_from
-    %{#{self.shop_name.titleize} <email@optyn.com>}
+    %{"#{self.shop_name.titleize}" <email@optyn.com>}
   end
 
   def canned_subject
@@ -603,14 +609,12 @@ class Message < ActiveRecord::Base
   end
 
   def replenish_draft_count
-    messager_owner = self.manager
-    Message.cached_drafts_count(messager_owner, true)
+    Message.cached_drafts_count(shop, true)
   end
 
   def replenish_draft_and_queued_count
-    message_owner = self.manager
-    Message.cached_drafts_count(message_owner, true)
-    Message.cached_queued_count(message_owner, true)
+    Message.cached_drafts_count(shop, true)
+    Message.cached_queued_count(shop, true)
   end
 
   def send_on_greater_by_hour

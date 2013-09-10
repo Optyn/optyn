@@ -70,8 +70,8 @@ module Messagecenter
     end
 
     def populate_manager_folder_count
-      @drafts_count = Message.cached_drafts_count(current_manager)
-      @queued_count = Message.cached_queued_count(current_manager)
+      @drafts_count = Message.cached_drafts_count(current_shop)
+      @queued_count = Message.cached_queued_count(current_shop)
     end
 
     def registered_action_location
