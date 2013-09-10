@@ -418,6 +418,10 @@ input[type="color"]:focus,
       float: none;
       height: auto;
     }
+    .modal {
+      left: 5%;
+      width: 90%;
+    }
   }
   #intro h1 {
     width: 90%;
@@ -881,6 +885,8 @@ form {
   .modal {
     @include border-radius( 0 );
     border: solid 4px $medium-gray;
+    top: 30px;
+    max-width: 90%;
   }
   .modal-header {
     height: 40px;
@@ -889,7 +895,7 @@ form {
     }
   }
   .modal-body {
-    height: 220px;
+    height: auto;
     .form-horizontal input[type='text'],
       input[type='number'],
       input[type='email'],

@@ -79,4 +79,17 @@ $(document).ready(function () {
     };
     setContentHt();
     $( window ).resize( setContentHt );
+
+
+    // Setting height of modal .................................................
+    var setModalHt = function() {
+        $( '.modal-body' ).each( function( index, value ) {
+            var modalHeaderHt = parseInt( $( this ).parent().find( '.modal-header' ).css( 'height' ));
+            var modalFooterHt = parseInt( $( this ).parent().find( '.modal-footer' ).css( 'height' ));
+            console.log( modalHeaderHt, modalFooterHt );
+            $( this ).css( 'max-height', $( window ).height() - modalHeaderHt - modalFooterHt - 80 );
+        });
+    };
+    setModalHt();
+    $( window ).resize( setModalHt );
 });
