@@ -2,7 +2,15 @@
   
 .pad3pc
   %br
+  
   .import
+    %ul.text-left
+      %li If you have a previous email list, you can easily import it into Optyn. 
+      %li
+        You can download the
+        = link_to "Sample File", "/file_import_stub.csv"
+        by
+        = link_to "clicking here.", "/file_import_stub.csv"
     = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
       .row-fluid
         .span8.offset2.text-center
@@ -18,16 +26,6 @@
 
           .actions
             = f.submit "Import", class: "btn btn-primary"
-          %br
-          %br
-
-      %ul.text-left
-        %li If you have a previous email list, you can easily import it into Optyn. 
-        %li
-          You can download the
-          = link_to "Sample File", "/file_import_stub.csv"
-          by
-          = link_to "clicking here", "/file_import_stub.csv"
 
     %table.table.table-striped.table-hover
       %caption Imported files
