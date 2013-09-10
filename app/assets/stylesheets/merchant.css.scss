@@ -1,12 +1,12 @@
 /* All Merchant Account Pages CSS is here */
 #flat {
     footer.inner {
-    background-color: rgba( #000, 0.2 );
+    background-color: $light-gray;
     color: $dark-gray;
     line-height: 42px;
     .copy a {
       padding: 0 10px;
-      border-right: solid 1px $dark-gray;
+      border-right: solid 1px $medium-gray;
       text-decoration: none;
       &:last-child {
         border: 0;
@@ -14,7 +14,7 @@
     }
     a {
       text-decoration: underline;
-      color: $dark-gray;
+      color: $gray;
     }
   }
   .stats {
