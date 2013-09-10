@@ -86,7 +86,6 @@ $(document).ready(function () {
         $( '.modal-body' ).each( function( index, value ) {
             var modalHeaderHt = parseInt( $( this ).parent().find( '.modal-header' ).css( 'height' ));
             var modalFooterHt = parseInt( $( this ).parent().find( '.modal-footer' ).css( 'height' ));
-            console.log( modalHeaderHt, modalFooterHt );
             $( this ).css( 'max-height', $( window ).height() - modalHeaderHt - modalFooterHt - 80 );
         });
     };
