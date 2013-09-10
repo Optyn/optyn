@@ -20,6 +20,6 @@
 
       = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-      = render partial: 'merchants/messages/list'
+      = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Scheduled For', timestamp_attr: 'send_on'}
 
       = render partial: 'shared/messages/pager', locals: {collection: @messages}

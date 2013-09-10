@@ -12,6 +12,10 @@ module Messagecenter
 
       queues.each do |queue|
         queue_arn = queue.arn
+        Rails.logger.info "*" * 100
+        Rails.logger.info "Checking the Queue: #{queue_arn}"
+        Rails.logger.info "-" * 100
+
         while queue.visible_messages > 0
           queue.receive_message(limit: 10) do |sns_message|
             sns_message_body = sns_message.body
