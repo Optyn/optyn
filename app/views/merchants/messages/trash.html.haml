@@ -21,6 +21,6 @@
 
       = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-      = render partial: 'merchants/messages/list'
+      = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Last Updated', timestamp_attr: 'updated_at'}
 
       = render partial: 'shared/messages/pager', locals: {collection: @messages}

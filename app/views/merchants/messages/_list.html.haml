@@ -4,7 +4,7 @@
       %th= check_box_tag :select, '', false, class: 'select-all'
       %th Campaign Name
       %th Name
-      %th Last Updated
+      %th= timestamp_header
       %th Report
 
   %tbody
@@ -18,7 +18,7 @@
           %td.show-link
             = message.name
           %td.show-link
-            = formatted_message_form_datetime(message, 'updated_at')
+            = formatted_message_form_datetime(message, timestamp_attr)
           %td.show-link-address.display-none
             = edit_merchants_message_path(message.uuid)
           %td
