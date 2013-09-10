@@ -12,7 +12,7 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   @@counter = 0
 
-  def self.check_for_failures(force = true)
+  def self.check_for_failures(force = false)
     increment_counter
     if @@counter > 99 || force
       Messagecenter::AwsDeliveryFailureChecker.failure_stats
@@ -32,6 +32,8 @@ class MessageEmailAuditor < ActiveRecord::Base
     elsif queue_arn.include?(COMPLAINT)
       self.complaint = true
     end
+
+    self.delivered = false
 
     self.save
   end
