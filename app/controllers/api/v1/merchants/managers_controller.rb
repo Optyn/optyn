@@ -2,6 +2,7 @@ module Api
   module V1
     module Merchants
       class ManagersController < PartnerOwnerBaseController
+        doorkeeper_for :all
         before_filter :fetch_manager, :update_or_destroy_allowed?, only: [:update, :destroy]
         #before filter to check update the manager self or not admin
         #before filter to check only a owner should be able to delete a manager
