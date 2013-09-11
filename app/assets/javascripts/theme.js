@@ -71,27 +71,22 @@ $(document).ready(function () {
 
 
     // Ensure footer is stuck to bottom of window ..............................
-    var setContentHt = function() {
-        var headerHt = parseInt( $( '.navbar.inner' ).css( 'height' ));
-        var footerHt = parseInt( $( 'footer' ).css( 'height' ));
+    var setMidContentHt = function ( headerSelector, contentSelector, footerSelector ) {
+        var headerHt = parseInt( $( headerSelector ).css( 'height' ));
+        var footerHt = parseInt( $( footerSelector ).css( 'height' ));
         var windowHt = $( window ).height();
-        $( '#dashboard .yield' ).css( 'min-height', windowHt - headerHt - footerHt );
-
+        $( contentSelector ).css( 'min-height', windowHt - headerHt - footerHt );
     };
-    setContentHt();
-    $( window ).resize( setContentHt );
 
+    // For Merchant and Consumer app pages.
+    setMidContentHt( '.navbar.inner', '#dashboard .yield', 'footer' );
+
+    // For shops#show page.
+    setMidContentHt( '.navbar', '.shops.show #merchant_page', 'footer' );
 
     // Ensuring footer is stuck to the bottom in email_feedback layout .........
-    var setEFLContentHt = function() {
-        var headerHt = parseInt( $( '.ef-l .navbar' ).css( 'height' ));
-        var footerHt = parseInt( $( 'footer' ).css( 'height' ));
-        var windowHt = $( window ).height();
-        $( '.ef-l .yield' ).css( 'min-height', windowHt - headerHt - footerHt );
+    setMidContentHt( '.ef-l .navbar', '.ef-l .yield', 'footer' );
 
-    };
-    setEFLContentHt();
-    $( window ).resize( setEFLContentHt );
 
     // Setting height of modal .................................................
     var setModalHt = function() {
