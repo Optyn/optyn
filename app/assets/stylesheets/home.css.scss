@@ -286,6 +286,52 @@ body {
   .pg-facebook {
     background-position: 19px -2780px;
   }
+
+  .m-i {  /* Merchant's index */
+    background-color: $gray;
+    background-image: image-url( 'main1.jpg' );
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 2% 0;
+    h1 {
+      font-weight: 700;
+      border: none;
+      > span {
+        background: rgba( $black, 0.8 );
+        color: $white;
+        padding:0 10px 3px 10px;
+        display: inline-block;
+      }
+      > span:first-child {
+        margin-bottom: 10px;
+
+      }
+    }
+    .box-white {
+      background: rgba( $white, 0.7 );
+      padding: 1%;
+      border: solid 1px $light-gray;
+      margin-bottom: 1%;
+    }
+    .signup {
+      input {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+    .vid-lnk {
+      color: darken( $black, 50% );
+      font-weight: 700;
+      text-shadow: 2px 2px 0 #fff;
+      margin-top: 200px;
+      @include transition( background-color 0.3s ease-out );
+    }
+    .vid-lnk:hover {
+      text-decoration: none;
+      background-color: rgba( $white, 0.9 );
+    }
+  }  /* End .m-i */
 }
 
 
@@ -367,6 +413,9 @@ body {
     }
     .btn-navbar {
       padding: 10px;
+    }
+    .m-i .vid-lnk {
+      margin-top: 0;
     }
   } // #flat
   .consumers {

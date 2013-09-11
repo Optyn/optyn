@@ -1,0 +1,30 @@
+.m-i
+  .row-fluid
+    .span12
+      %h1
+        %span
+          Marketing Made Simple
+        %br
+        %span
+          for Small Businesses
+  .row-fluid
+    .span4.box-white.signup
+      %h2 Start engaging your customers right away.
+      %form
+        %input{ type: 'text', placeholder: 'enter your Business name', 'data-toggle' => 'tooltip', title: 'Please enter your business name.', 'data-placement' => 'right' }
+        %input{ type: 'text', placeholder: 'enter your email', 'data-toggle' => 'tooltip', title: 'Please enter your email address.', 'data-placement' => 'right' }
+        %input{ type: 'password', placeholder: 'enter your password', 'data-toggle' => 'tooltip', title: 'Please enter your password.', 'data-placement' => 'right' }
+        %input{ type: 'password', placeholder: 'confirm your password', 'data-toggle' => 'tooltip', title: 'Please confirm your password by entering the same as above.', 'data-placement' => 'right' }
+        %input{ type: 'button', value: 'Get started for free', class: 'btn btn-primary' }
+    %a.span4.offset3.box-white.vid-lnk#show-vid{ href: 'http://www.youtube.com/embed/w13YkiT1J7E?autoplay=1' }
+      Ahmed K., Owner of Chez Joel Bistro
+      %br
+      Chicago, IL
+      %br
+      %i.icon-facetime-video
+      See how Ahmed uses Optyn.
+
+:javascript
+  $( function() {
+    $("#show-vid").colorbox({iframe:true, innerWidth:640, innerHeight:390});
+  });
