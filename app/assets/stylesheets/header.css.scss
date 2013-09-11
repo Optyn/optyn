@@ -87,6 +87,20 @@
         margin-top: 10px;
       }
     }
+    .dropdown.open {
+      .dropdown-toggle {
+        background-color: #fff;
+      }
+    }
+    .dropdown-menu {
+      margin: 0;
+      border-top: 0;
+      &:before,
+      &:after {
+        content: none;
+        display: none;
+      }
+    }
   }
   .navbar.inner .container-fluid { /* Required for IE9 and below. */
     background-color: $blue;

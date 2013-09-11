@@ -844,6 +844,9 @@ form {
     &:hover {
       background-color: darken( $blue, 10% );
     }
+    &.active {
+      background-color: darken( $blue, 30% );
+    }
   }
   .link.blue {
     padding: 0 15px;
@@ -858,6 +861,9 @@ form {
     &:hover {
       background-color: darken( $orange, 10% );
     }
+    &.active {
+      background-color: darken( $orange, 30% );
+    }
   }
   .btn-info, .btn-info[type='submit'] {
     color: $white;
@@ -865,17 +871,26 @@ form {
     &:hover {
       background-color: darken( $bluish-green, 10% );
     }
+    &.active {
+      background-color: darken( $bluish-green, 30% );
+    }
   }
   .btn-success, .btn-success[type='submit'] {
     background-color: $green;
     &:hover {
       background-color: darken( $green, 10% );
     }
+    &.active {
+      background-color: darken( $green, 30% );
+    }
   }
   .btn-danger {
     background-color: $red;
     &:hover {
       background-color: darken( $red, 15% );
+    }
+    &.active {
+      background-color: darken( $red, 30% );
     }
   }
   .btn-large {
