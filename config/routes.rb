@@ -15,7 +15,7 @@ Optyn::Application.routes.draw do
   match 'about' => 'main#about', :as => :about
   match 'faq' => 'main#faq', :as => :faq
   match 'pricing' => 'main#pricing', :as => :pricing
-  match 'merchant-features' => 'main#merchantfeatures', :as => :merchant_features
+  match 'features' => 'main#merchantfeatures', :as => :merchant_features
   match 'consumer-features' => 'main#consumerfeatures', :as => :consumer_features
   match 'contact' => 'main#contact', :as => :contact
   match 'terms' => 'main#terms', :as => :terms
@@ -30,7 +30,8 @@ Optyn::Application.routes.draw do
   match "/blog" => redirect("http://optynblog.com"), :as => :blog
 
   # Biz Redirect
-  match "/biz" => 'main#merchantfeatures'    
+  match "/biz" => 'main#merchantfeatures'
+  match "/merchant-features" => 'main#merchantfeatures'  
 
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://support.optyn.com"), :as => :support
