@@ -298,7 +298,7 @@ body {
       font-weight: 700;
       border: none;
       > span {
-        background: rgba( $black, 0.8 );
+        background: rgba( $black, 0.85 );
         color: $white;
         padding:0 10px 3px 10px;
         display: inline-block;
@@ -309,7 +309,7 @@ body {
       }
     }
     .box-white {
-      background: rgba( $white, 0.7 );
+      background: rgba( $white, 0.75 );
       padding: 1%;
       border: solid 1px $medium-gray;
       margin-bottom: 1%;
@@ -323,8 +323,8 @@ body {
     .vid-lnk {
       color: darken( $black, 50% );
       font-weight: 700;
-      text-shadow: 2px 2px 0 #fff;
-      margin-top: 200px;
+      text-shadow: 1px 1px 0 #fff;
+      margin-top: 320px;
       @include transition( background-color 0.3s ease-out );
     }
     .vid-lnk:hover {
