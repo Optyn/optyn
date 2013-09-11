@@ -120,7 +120,10 @@ Optyn::Application.routes.draw do
       get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
       get 'shop/button_script.js', to: 'shops#button_script'
       get 'shop/button_framework.js', to: 'shops#button_framework'
+
       post 'shop', to: 'shops#create'
+      get 'shop', to: 'shops#all'
+
       match 'user', to: 'users#show', as: :user_profile
       get 'user/check_connection.json', to: 'users#check_connection'
       post 'user/create_connection.json', to: 'users#create_connection'
