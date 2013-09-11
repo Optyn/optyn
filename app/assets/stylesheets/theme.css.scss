@@ -403,6 +403,7 @@ input[type="color"]:focus,
   #consumer_dashboard {
     .pad3pc {
       padding: 0 3% 5% 3%;
+      clear: both;
     }
     .yield {
       background-color: $white;

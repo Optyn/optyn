@@ -1,10 +1,8 @@
-= banner( "Campaign Center" )
+= banner( "Sent" )
 
 = render partial: "merchants/messages/message_menu"
 
 #message_fields_wrapper.pad3pc
-  %h2 Sent
-
 
   = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
