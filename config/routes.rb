@@ -95,6 +95,7 @@ Optyn::Application.routes.draw do
   resources :segments do
     member do
       post :save_answers
+      get :default
     end
   end
 

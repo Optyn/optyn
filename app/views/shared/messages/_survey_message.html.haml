@@ -21,3 +21,13 @@
       = render partial: "segments/actual_form"
 
   = render partial: "shared/messages/fine_print"
+
+  %div
+    %p
+      %strong
+        Having Problem submitting the survey. Take the survey online?
+        - survey_name = (@survey.title.blank? ? "#{@survey.shop.name} Survey" : @survey.title)
+        - if preview
+          = link_to survey_name, "javascript:void(0)"
+        - else
+          = link_to(survey_name, SiteConfig.app_base_url + default_segment_path(Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id), email_survey: true, message_id: (@message.uuid rescue nil)))

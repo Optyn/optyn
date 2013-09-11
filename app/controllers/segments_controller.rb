@@ -1,8 +1,8 @@
 class SegmentsController < BaseController
   include DashboardCleaner
 
-  skip_before_filter :authenticate_user!, :redirect_to_account, only: [:show, :save_answers]
-  before_filter :fetch_survey_and_user_from_params, :ensure_survey_answered_once, only: [:show, :save_answers]
+  skip_before_filter :authenticate_user!, :redirect_to_account, only: [:show, :save_answers, :default]
+  before_filter :fetch_survey_and_user_from_params, :ensure_survey_answered_once, only: [:show, :save_answers, :default]
   around_filter :flush_dashboard_unanswered_surveys, only: [:save_answers]
 
   def index
@@ -11,6 +11,12 @@ class SegmentsController < BaseController
 
   def show
     @survey_questions = @survey.survey_questions
+  end
+
+  def default
+    @survey_questions = @survey.survey_questions
+    sign_in @user
+    render action: :show
   end
 
   def save_answers
