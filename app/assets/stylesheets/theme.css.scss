@@ -677,10 +677,9 @@ i.myspace { background-position: -233px -51px; }
 
 .progress-bar {
   clear: both;
-  margin: 5% 0;
+  margin: 1% 0;
   display: block;
   height: 30px;
-  border-radius: 100px;
   background-color: $medium-gray;
   & > .step {
     cursor: default;
@@ -690,7 +689,6 @@ i.myspace { background-position: -233px -51px; }
     text-align: center;
     line-height: 26px;
     height: 30px;
-    border-radius: 100px;
   }
   &.steps2 .step { width: 50%; }
   &.steps3 .step { width: 33.3333% }

@@ -523,7 +523,7 @@ class Message < ActiveRecord::Base
     if self.instance_of?(GeneralMessage)
       "{{Customer Name}}, we have an announcement."
     elsif self.instance_of?(CouponMessage)
-      "{{Customer Name}}, here's a Coupon for just for you."
+      "{{Customer Name}}, here's a Coupon just for you."
     elsif self.instance_of?(EventMessage)
       "{{Customer Name}}, we are hosting a special event and you are invited."
     elsif self.instance_of?(ProductMessage)

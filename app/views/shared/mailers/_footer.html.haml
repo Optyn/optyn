@@ -8,6 +8,5 @@
             %td{:style => "text-align:center"}
               %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
                 - if @message.present? && @message_user.present?
-                  |
                   = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}?tracker=#{@message_user.uuid}")
     %td
