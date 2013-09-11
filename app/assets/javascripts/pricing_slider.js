@@ -7,7 +7,7 @@ $( function() {
     min: 1,
     max: 25000,
     range: 'min',
-    change: function( event, ui ) {
+    slide: function( event, ui ) {
       $( '#tiers .cus-count' ).text( ui.value + ' customers' );
       suggestPlan( ui.value );
     }
