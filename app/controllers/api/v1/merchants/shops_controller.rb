@@ -44,6 +44,14 @@ module Api
           end
         end
 
+        def all
+          begin
+            @shop = Shop.all()
+          rescue ActiveRecord::RecordInvalid => e
+            render(status: :unprocessable_entity)
+          end
+        end
+
         def update
           begin
             @shop = Shop.for_uuid(params[:id])
