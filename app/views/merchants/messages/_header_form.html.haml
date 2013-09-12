@@ -9,7 +9,7 @@
 
     .span5
       .control-group
-        = f.label :name, 'Customize Your Header Background Color', class: 'control-label'
+        = f.label :name, 'Customize Header Background Color', class: 'control-label'
         #header_background.input-append.color{"data-color" => color_hex, "data-color-format" => "hex"}
           .btn-group
             %a.dropdown-toggle{"data-toggle" => "dropdown"}
@@ -17,12 +17,12 @@
               %span.add-on
                 %i{:style => "background-color: #{color_hex};"}
     .span4
-      .control-group
+      .control-group{:style => "padding-top:28px;"}
         .controls
           %label.checkbox
             = builder.check_box(:make_default)
-            Make this my default background color
+            Make it my default background color
     .span2
-      .control-group
+      .control-group{:style => "padding-top:20px;"}
         .actions
           = submit_tag "Apply", class: 'btn pull-right'
