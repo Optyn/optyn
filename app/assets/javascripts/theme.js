@@ -80,12 +80,21 @@ $(document).ready(function () {
 
     // For Merchant and Consumer app pages.
     setMidContentHt( '.navbar.inner', '#dashboard .yield', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( '.navbar.inner', '#dashboard .yield', 'footer' );
+    });
 
     // For shops#show page.
     setMidContentHt( '.navbar', '.shops.show #merchant_page', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( '.navbar', '.shops.show #merchant_page', 'footer' );
+    });
 
     // Ensuring footer is stuck to the bottom in email_feedback layout .........
     setMidContentHt( '.ef-l .navbar', '.ef-l .yield', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( '.ef-l .navbar', '.ef-l .yield', 'footer' );
+    });
 
 
     // Setting height of modal .................................................
