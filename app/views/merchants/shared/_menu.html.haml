@@ -33,6 +33,7 @@
         = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
         Import Customers
     %li
+      /Gaurav we need to fix this so it shows up with the Logout Icon
       /= image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
       = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete, :class => 'logout')
 
