@@ -34,7 +34,7 @@ Optyn::Application.routes.draw do
   match "/merchant-features" => 'main#merchantfeatures'  
 
   # Zendesk Support Desk Redirect
-  match "/support" => redirect("http://support.optyn.com"), :as => :support
+  match "/support" => redirect("http://optyn.uservoice.com"), :as => :support
 
   match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
 

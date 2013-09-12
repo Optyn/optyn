@@ -1,8 +1,8 @@
 /= params[:action]
 .progress-bar.steps3
-  %div{class: "step #{message_progress_bar_highlight(['types'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['types']) == 'current'), :title => 'Click on a template below to get started.'}
+  %div{class: "step #{message_progress_bar_highlight(['types'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['types']) == 'current'), :title => 'Choose what type of campaign you want to do.'}
     CHOOSE EMAIL TEMPLATE
-  %div{class: "step #{message_progress_bar_highlight(['new', 'create', 'edit', 'update'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['new', 'create', 'edit', 'update']) == 'current'), :title => 'Fill and submit the form below to proceed.'}
+  %div{class: "step #{message_progress_bar_highlight(['new', 'create', 'edit', 'update'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['new', 'create', 'edit', 'update']) == 'current'), :title => 'Customize your campaign.'}
     SET CAMPAIGN
-  %div{class: "step #{message_progress_bar_highlight(['preview'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['preview']) == 'current'), :title => 'Now you are ready for launch.'}
+  %div{class: "step #{message_progress_bar_highlight(['preview'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['preview']) == 'current'), :title => 'Preview, schedule, and send your campaign.'}
     PREVIEW CAMPAIGN

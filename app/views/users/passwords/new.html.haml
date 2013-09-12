@@ -11,11 +11,11 @@
 
             = f.email_field :email, placeholder: "Email", autofocus: true, 'data-toggle' => 'tooltip', title: 'Email'
 
-            = f.submit "Reset password", class: "btn btn-primary", 'data-toggle' => 'tooltip', title: 'Send me reset password instructions'
+            = f.submit "Reset password", class: "btn btn-primary"
 
-      %p{class: "already"}
-        = link_to "Sign in", new_user_session_path 
-        |
-        = link_to "Sign up as a user", new_user_registration_path
-        |
-        = link_to "Sign up as a shop", new_merchants_manager_registration_path
+        %p{class: "already"}
+          = link_to "Sign in", new_user_session_path 
+          /|
+          /= link_to "Sign up as a user", new_user_registration_path
+          |
+          = link_to "Sign Up", new_merchants_manager_registration_path
