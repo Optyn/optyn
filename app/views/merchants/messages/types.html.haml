@@ -21,7 +21,7 @@
 
   #choose_message
     .row-fluid
-      %a.span4.type.coupon{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'coupon_message')}
         = image_tag "mc_coupon_icon.png", :alt => ''
         %span Create a Coupon
       %a.span4.type{:href => merchants_new_campaign_path(message_type: 'special_message')}
