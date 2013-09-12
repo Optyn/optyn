@@ -15,11 +15,7 @@
       %p.text-justify
         %h5 We want to simplify marketing and make it simple fast and easy for you. We help you create powerful and effective marketing promotions in 2 minutes or less. Who said you had to be a marketer to be good at it?
     .span6.main
-      .copy.mf_free
-      %h3
-        FREE for Life. Priced to Grow.
-      %p.text-justify
-        %h5 Optyn is perfect to get you engaged with your customers. Whatever your size, industry, audience, and message, Optyn is a way to start. The first tier is always FREE and comes with all features. No gimmicks.
+      %a.video.dark#m-feat-vid{ href: 'http://www.youtube.com/embed/w13YkiT1J7E?autoplay=1' }
 
   .row-fluid.features
     .span4.feature
@@ -97,4 +93,7 @@ $( function() {
       equalizeBoxHeights();
     }
   });
+
+  // Initialise video modal.
+  $("#m-feat-vid").colorbox({iframe:true, innerWidth:640, innerHeight:390});
 });
