@@ -677,10 +677,8 @@ i.myspace { background-position: -233px -51px; }
 
 .progress-bar {
   clear: both;
-  margin: 1% 0;
+  margin: 3% 0;
   display: block;
-  height: 30px;
-  background-color: $medium-gray;
   & > .step {
     cursor: default;
     float: left;
