@@ -11,20 +11,16 @@
         = image_tag "dropdown_dashicon.png"
         My Dashboard
     %li
-      %a{:href => "connections"}
+      %a{:href => merchants_messages_path}
         = image_tag "dropdown_manager.png"
         My Campaigns
     %li
-      %a{:href => "#"}
-        = image_tag "dropdown_segments.png"
-        My Messages
-    %li
-      %a{:href => "segments"}
+      %a{:href => merchants_survey_path}
         = image_tag "dropdown_surveys.png"
         My Surveys
     %li
       %a{:href => merchants_shop_path, :class => 'hr'}
         = image_tag "dropdown_settings.png"
-        Manage Shop
+        Account
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

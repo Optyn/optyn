@@ -8,8 +8,7 @@
       .text-warning
         Hi
         %strong
-          == #{current_manager.name}
-        !
+          == #{current_manager.name}!
         Here's what's going on today.
     /.span4
     /%a.btn.btn-success{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
@@ -24,22 +23,22 @@
       .count
         = @day_count
       .info
-        New Connections in last 24 hours
+        24 hours
     .span3.box
       .count
         = @week_count
       .info
-        New Connections last 7 days
+        7 days
     .span3.box
       .count
         = @month_count
       .info
-        New Connections last 30 days
+        30 days
     .span3.box
       .count
         = @total_count
       .info
-        Total Active New Connections
+        Total Active
   %h2
     Your Latest Activity
     

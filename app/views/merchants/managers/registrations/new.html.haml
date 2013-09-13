@@ -13,37 +13,31 @@
               .errors
                 - if @omniauth.present?
                   = "You are just one step from creating your account, just provide following details"
-
               %br
-              %label.pull-left Enter Business Details:
-              %br
-
-              = f.text_field :name,:autofocus => true,:placeholder => "Business Name", 'data-toggle' => 'tooltip', title: 'Business name', 'data-tooltip-pos' => 'right'
-
-              %br
-              = f.text_field :phone_number, :placeholder => "Phone Number", 'data-toggle' => 'tooltip', title: 'Phone number', 'data-tooltip-pos' => 'right'
-              %small.help-block
-                example: +1 (xxx) xxx-xxxx    
-              %br
-              
-              %label Business Type:
+              %label What type of Business is this?:
               %label.radio.inline
                 = f.radio_button :stype,'online'
                 Online
               %label.radio.inline
                 = f.radio_button :stype,'local',:checked=>true
                 Local
+              %br
+              %br
+              %label.pull-left Please enter Business Details:
+              %br
+
+              = f.text_field :name,:autofocus => true,:placeholder => "Business Name", 'data-toggle' => 'tooltip', title: 'Business name', 'data-tooltip-pos' => 'right'
+
+              %br
+              = f.text_field :phone_number, :placeholder => "Phone Number", 'data-toggle' => 'tooltip', title: 'Please enter your phone number in this format: +1 (xxx) xxx-xxxx', 'data-tooltip-pos' => 'right'  
 
               = render partial: "merchants/managers/registrations/personal_info_form",:locals=>{:f => f}  
               
-              %br  
-
+              = f.submit "Sign up", :class => "btn btn-primary btn-large"
               %div 
                 %small ** All the fields above are required 
-              
-              = f.submit "Sign up", :class => "btn btn-primary btn-large"
-      %p{:class => "already"}
-        = link_to "Sign in", new_user_session_path()
-        OR
-        = link_to "Forgot your password?", new_user_password_path()
-        %br
+        %p{:class => "already"}
+          = link_to "Sign in", new_user_session_path()
+          OR
+          = link_to "Forgot your password?", new_user_password_path()
+          %br
