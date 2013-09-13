@@ -11,7 +11,7 @@
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-.control-group
+.control-group.disc
   = f.label :type_of_discount, class: "control-label"
   .controls.checkbox{ 'data-toggle' => 'tooltip', title: :type_of_discount }
     %label.radio.inline
@@ -20,6 +20,13 @@
     %label.radio.inline
       = f.radio_button :type_of_discount, :percentage_off
       == % off
+    / .btn-group{ 'data-toggle' => 'buttons-radio' }
+    /   type_of_discount:
+    /   = :type_of_discount
+    /   %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
+    /   %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
+
+    /   = f.hidden_field :type_of_discount, :id => "type_of_message_value", :value => ""
 
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
@@ -45,3 +52,12 @@ fine_print_verbiage: 'You can use this to say things like 1 per customer or One 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
 
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
+
+
+/ :javascript
+/ $( function() {
+/   $( '.disc .btn' ).click( function() {
+/     var value = $( this ).data( 'value' );
+/     $( '#type_of_message_value' ).attr( 'value', value );
+/   });
+/ });
