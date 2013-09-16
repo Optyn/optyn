@@ -25,7 +25,7 @@ namespace :partner do
                                                                        password_confirmation: "9p5yn123",
                                                                        email: "gaurav+1@optyn.com",
                                                                        organization: "Optyn Partners",
-                                                                       redirect_uri: "https://www.optyn.com/robots.txt")
+                                                                       redirect_uri: "http://localhost:3001/partners/auth/optyn/callback")
     partner.save!
   end
 end

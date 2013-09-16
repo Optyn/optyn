@@ -10,5 +10,5 @@ node :errors do |shop|
 end
 
 child :manager do
-  attributes :uuid, :email, :owner, :identifier
+  attributes :uuid, :email, :owner
 end

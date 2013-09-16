@@ -26,8 +26,9 @@ class Shop < ActiveRecord::Base
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
   DEFAULT_HEADER_BACKGROUND_COLOR = '#1791C0'
+  DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added, :uploaded_directly
 
 
   mount_uploader :logo_img, ShopImageUploader
@@ -48,6 +49,8 @@ class Shop < ActiveRecord::Base
   scope :includes_app, includes(:oauth_application)
 
   scope :inlcudes_locations, includes(:locations)
+
+  scope :includes_managers, includes(:managers)
 
   scope :joins_locations, joins(:locations)
 
@@ -71,13 +74,13 @@ class Shop < ActiveRecord::Base
 
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
-  before_create :assign_identifier, :assign_partner_if
+  before_create :assign_identifier, :assign_partner_if, :assign_timezone_if
 
   after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
 
   set_callback :recover do
     self.deleted_at = nil
-    self.time_zone = "Eastern Time (US & Canada)"
+    self.time_zone = 
     self.save
     create_dummy_survey
     create_select_all_label
@@ -392,6 +395,12 @@ class Shop < ActiveRecord::Base
   def assign_partner_if
     if self.partner.blank?
       self.partner_id = Partner.optyn_id
+    end
+  end
+
+  def assign_timezone_if
+    if self.time_zone.blank?
+      self.time_zone = DEFUALT_TIMEZONE
     end
   end
 
