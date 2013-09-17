@@ -15,8 +15,8 @@ class ShopImporter
     rescue => e
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
-      PartnerMailer.import_error(payload, e.message).deliver
       payload.update_attributes(status: 'Error')
+      PartnerMailer.import_error(payload, e.message).deliver
     end
   end
 end
