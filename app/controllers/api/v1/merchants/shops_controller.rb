@@ -51,7 +51,7 @@ module Api
         def update
           begin
             @shop = Shop.for_uuid(params[:id])
-            @shop.update_attributes!(params[:shop])
+            @shop.update_with_existing_manager(params[:shop])
           rescue ActiveRecord::RecordInvalid => e
             render(status: :unprocessable_entity)
           rescue ActiveRecord::RecordNotFound => e

@@ -136,6 +136,25 @@ class Shop < ActiveRecord::Base
     self
   end
 
+
+  def update_with_existing_manager(attrs)
+    Shop.transaction do
+      manager_attrs = attrs['managers_attributes'].values.first
+      existing_manager = managers.find_by_uuid(manager_attrs['uuid'])
+      
+      manager_attrs.delete('uuid')
+      if manager_attrs['password'].blank? && manager_attrs['password_confirmation'].blank?
+        manager_attrs.delete('password')
+        manager_attrs.delete('password_confirmation')
+      end
+
+      existing_manager.attributes = manager_attrs
+      existing_manager.save!
+      self.attributes = attrs.except('managers_attributes')
+      self.save!
+    end
+  end
+
   def shop_already_exists?
     Shop.where("name LIKE ?", self.name).count != 0
   end
