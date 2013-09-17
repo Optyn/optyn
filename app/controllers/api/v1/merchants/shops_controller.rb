@@ -26,12 +26,9 @@ module Api
 
         def create
           begin
-            binding.pry
             @shop = Shop.new(params[:shop])
             @shop.partner_id = current_partner.id
             @shop.save!
-            binding.pry
-            @shop.update_attribute(:logo_img, params[:shop][:logo_img])
             @shop.update_manager
             render(status: :created)
           rescue ActiveRecord::RecordInvalid => e
