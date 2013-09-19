@@ -80,8 +80,8 @@ module Shops
       s3 = AWS::S3.new(
         :access_key_id => SiteConfig.aws_access_key_id,
         :secret_access_key => SiteConfig.aws_secret_access_key)
-      bucket = s3.buckets["partner#{Rails.env}"]
-      content = bucket.objects[payload.filepath].read
+      bucket = s3.buckets["optyn#{Rails.env}"]
+      content = bucket.objects[CGI::unescape(payload.filepath)].read
     end
   end # end of the shops importer module
 end #end of the shops module

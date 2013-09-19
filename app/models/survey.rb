@@ -29,7 +29,7 @@ class Survey < ActiveRecord::Base
   end
 
   def shop_name 
-    Shop.with_deleted.find(self.shop_id).name
+    Shop.with_deleted.find_by_id(self.shop_id).name
   end
 
   def shop_description

@@ -23,6 +23,7 @@ defaults:
   aws_secret_access_key: 'jY2yhFWFzr+BAQrjqLEdqHJ3kLRiB1TKlGvXzklK'
   #Add the welcome message for the optyn button
   #Add Bucket name for s3
+  optyn_partner_redirect_uri: 'http://partners.optyn.com/partners/auth/optyn/callback'
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
@@ -38,6 +39,7 @@ staging:
   stripe_public_key: "pk_test_OvjvjiEuAFjvonAaaNAbh9XT"
   app_base_url: 'http://development.optyn.com'
   bucket: 'optynstaging'
+  optyn_partner_redirect_uri: 'http://partners-staging.optyn.com/partners/auth/optyn/callback'
 
 development:  
   twitter_consumer_key: 'Acwx2jBkCCbFZHkW8wEubQ'
@@ -53,6 +55,7 @@ development:
   stripe_public_key: "pk_test_OvjvjiEuAFjvonAaaNAbh9XT"
   app_base_url: 'http://localhost:3000'
   bucket: 'optyndevelopment'
+  optyn_partner_redirect_uri: 'http://localhost:3001/partners/auth/optyn/callback'
 
 production:
   #change in the live mode

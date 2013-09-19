@@ -2,8 +2,12 @@ module Api
   module V1
     module Merchants
       class ShopsController < PartnerOwnerBaseController
-	      doorkeeper_for :all
-	      #before_filter :import_list, :import, :import_status, :update
+	      # doorkeeper_for :all
+	
+        def index
+          @shops = current_partner.shops.real.includes_managers
+        end  
+
         def import_list
           partner_id = current_partner.id
           @import_list = ApiRequestPayload.shop_imports(partner_id)
@@ -44,18 +48,10 @@ module Api
           end
         end
 
-        def all
-          begin
-            @shop = Shop.all()
-          rescue ActiveRecord::RecordInvalid => e
-            render(status: :unprocessable_entity)
-          end
-        end
-
         def update
           begin
             @shop = Shop.for_uuid(params[:id])
-            @shop.update_attributes!(params[:shop])
+            @shop.update_with_existing_manager(params[:shop])
           rescue ActiveRecord::RecordInvalid => e
             render(status: :unprocessable_entity)
           rescue ActiveRecord::RecordNotFound => e
