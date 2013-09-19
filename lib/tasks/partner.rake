@@ -28,4 +28,17 @@ namespace :partner do
                                                                        redirect_uri: "http://localhost:3001/partners/auth/optyn/callback")
     partner.save!
   end
+
+  desc "Add the Partner: Eatstreet Inc. if not present and then assign the client_id and client_secret"
+  task :create_eatstreet_partner => :environment do
+    #TODO PUT IN THE REAL EATSTREET VALUES.
+    partner = Partner.for_organization('Eatstreet Inc.') || Partner.new(first_name: "Gaurav", last_name: "Gaglani",
+                                                                       phone: "3127722109",
+                                                                       password: "9p5yn123",
+                                                                       password_confirmation: "9p5yn123",
+                                                                       email: "gaurav+2@optyn.com",
+                                                                       organization: "Eatstreet Inc.",
+                                                                       redirect_uri: "http://localhost:3002/partners/auth/optyn/callback")
+    partner.save!
+  end
 end
