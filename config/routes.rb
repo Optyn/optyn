@@ -146,7 +146,12 @@ Optyn::Application.routes.draw do
           end
         end
 
-        resources :managers
+        resources :managers do
+          collection do
+            get :get_manager_from_email
+          end
+        end
+        
         resources :locations
         resources :messages do
           collection do
@@ -266,5 +271,6 @@ Optyn::Application.routes.draw do
         :passwords => 'reseller/partners/passwords',
         :confirmations => 'reseller/partners/confirmations'
     }
+    get '/resellerjs' => 'dashboards#resellerjs'
   end
 end

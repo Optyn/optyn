@@ -27,7 +27,7 @@ gem 'resque', :require => 'resque/server'
 gem "capistrano-resque", "~> 0.1.0"
 gem 'resque_mailer'
 gem 'client_side_validations'
-gem 'doorkeeper', '~> 0.6.7'
+gem 'doorkeeper', '~> 0.7.2'
 gem 'oauth2'
 gem 'carrierwave'
 gem "fog"

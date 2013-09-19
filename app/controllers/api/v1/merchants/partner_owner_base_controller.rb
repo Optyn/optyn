@@ -2,19 +2,17 @@ module Api
   module V1
     module Merchants
       class PartnerOwnerBaseController < ApplicationController
-
+        doorkeeper_for :all
         private
-        #TODO TO BE IMPLEMTED. THIS IS ONLY A PLACEHOLDER
+        
         def current_partner
-          Partner.optyn
+          current_shop.partner        
         end
 
-        #TODO TO BE IMPLEMTED. THIS IS ONLY A PLACEHOLDER
         def current_manager
-          Manager.find_by_email('gaurav+10@optyn.com')
+          Manager.where(:uuid=>params[:manager_uuid]).first
         end
-
-        #TODO TO BE IMPLEMTED. THIS IS ONLY A PLACEHOLDER
+        
         def current_shop
           current_manager.shop
         end

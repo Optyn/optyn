@@ -37,6 +37,7 @@ class Users::SessionsController < Devise::SessionsController
     sign_in(resource)
     respond_to do |format|
       format.html { respond_with resource, :location => after_sign_in_path_for(resource) }
+      # API RESPONSE FOR MANAGER GENERATE ME_ACCESS_TOKEN IF it's partner 
       format.json { render(status: :created) }
     end
   end

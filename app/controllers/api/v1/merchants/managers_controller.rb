@@ -54,6 +54,14 @@ module Api
           render(template: 'api/v1/merchants/managers/manager', status: :ok)
         end
 
+        def get_manager_from_email
+          @manager = Manager.where(:email=>params[:email]).limit(1).first
+
+          unless @manager
+             render(status: :unprocessable_entity)
+          end
+        end
+
         private
         def fetch_manager
           @manager = Manager.for_uuid(params[:id])
