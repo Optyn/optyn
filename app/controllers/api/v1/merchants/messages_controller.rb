@@ -21,6 +21,7 @@ module Api
         def create
           Message.transaction do
             klass = params[:message_type].classify.constantize
+            
             @message = klass.new(filter_time_params)
             @message.manager_id = current_manager.id
             populate_datetimes
@@ -76,22 +77,22 @@ module Api
         end
 
         def trash
-          @messages = Message.paginated_trash(current_manager, params[:page])
+          @messages = Message.paginated_trash(current_manager.shop, params[:page])
           render(template: message_list_template_location)
         end
 
         def drafts
-          @messages = Message.paginated_drafts(current_manager, params[:page])
+          @messages = Message.paginated_drafts(current_manager.shop, params[:page])
           render(template: message_list_template_location)
         end
 
         def sent
-          @messages = Message.paginated_sent(current_manager, params[:page])
+          @messages = Message.paginated_sent(current_manager.shop, params[:page])
           render(template: message_list_template_location)
         end
 
         def queued
-          @messages = Message.paginated_queued(current_manager, params[:page])
+          @messages = Message.paginated_queued(current_manager.shop, params[:page])
           render(template: message_list_template_location)
         end
 
