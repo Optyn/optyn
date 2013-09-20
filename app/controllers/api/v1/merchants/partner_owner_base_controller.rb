@@ -10,7 +10,7 @@ module Api
         end
 
         def current_manager
-          Manager.where(:uuid=>params[:manager_uuid]).first
+          Manager.for_uuid(params[:manager_uuid])
         end
         
         def current_shop
