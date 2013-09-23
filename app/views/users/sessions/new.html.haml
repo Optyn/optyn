@@ -24,11 +24,11 @@
             = f.submit "Sign in", class: "btn btn-primary btn-large"
 
         %h5{class: "already"} Don't have an account?
-        .row-fluid
+        .row-fluid.text-center
           /%a.btn.btn-info.consumer-btn.span6{:href => new_user_registration_path} 
           /%i.icon-user.icon-white
           /Consumer
-          %a.btn.btn-info.merchant-btn.span6{:href => new_merchants_manager_registration_path}
+          %a.btn.btn-info.merchant-btn{:href => new_merchants_manager_registration_path}
             %i.icon-user.icon-white
             Get Started!
 
