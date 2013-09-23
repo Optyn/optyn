@@ -1,6 +1,6 @@
 /* All Merchant Account Pages CSS is here */
 #flat {
-    footer.inner {
+  footer.inner {
     background-color: $light-gray;
     color: $dark-gray;
     line-height: 42px;
@@ -30,7 +30,20 @@
       }
     }
   }
-}
+  /* Override chosen's CSS */
+  .chzn-container-multi .chzn-choices {
+    .search-choice {
+      background-color: $green;
+      background-image: none;
+      color: $white;
+      border-radius: 0;
+      line-height: 20px;
+    }
+    .search-choice .search-choice-close {
+      top: 8px;
+    }
+  }
+}  /* End #flat */
 #flat.m-app {
   background-size: contain;
   background-repeat: repeat-y;
