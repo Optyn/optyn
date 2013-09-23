@@ -61,6 +61,7 @@ class Message < ActiveRecord::Base
 
   scope :active_state, where("messages.state NOT IN ('delete', 'trash')")
 
+  
   state_machine :state, :initial => :draft do
 
     event :save_draft do
@@ -194,7 +195,6 @@ class Message < ActiveRecord::Base
 
   def self.batch_send
     messages = with_state([:queued]).only_parents.ready_messages
-
     execute_send(messages)
   end
 
@@ -474,13 +474,15 @@ class Message < ActiveRecord::Base
         messages.each do |message|
           #message.state = 'transit'
           #message.save(validate: false)
-          dispatched_message = message.dispatch(creation_errors, process_manager)
+          unless message.shop.disabled?
+            dispatched_message = message.dispatch(creation_errors, process_manager)
 
-          unless dispatched_message.blank?
-            raise dispatched_message.inspect
-            processing_errors << dispatched_message
-            break
-          end
+            unless dispatched_message.blank?
+              raise dispatched_message.inspect
+              processing_errors << dispatched_message
+              break
+            end
+          end  
         end
 
         unless processing_errors.blank?
