@@ -59,6 +59,8 @@ class Message < ActiveRecord::Base
 
   scope :active_state, where("messages.state NOT IN ('delete', 'trash')")
 
+  scope :active_shop, joins(manager: {shop: :subscription}).where("subscriptions.active = true")
+
   state_machine :state, :initial => :draft do
 
     event :save_draft do
@@ -191,7 +193,7 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    messages = with_state([:queued]).only_parents.ready_messages
+    messages = with_state([:queued]).only_parents.ready_messages.active_shop
 
     execute_send(messages)
   end
