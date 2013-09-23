@@ -60,6 +60,10 @@ module Api
             render(status: :unprocessable_entity)
           end
         end
+        
+        def active_connections
+          render :json=>{:data=>{:active_connections=>current_shop.active_connection_count}} 
+        end
       end
     end
   end

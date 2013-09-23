@@ -143,7 +143,9 @@ Optyn::Application.routes.draw do
             get :import_list
             post :import
             get :import_status
+            get :active_connections
           end
+
         end
 
         resources :managers do
