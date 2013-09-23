@@ -25,7 +25,8 @@ namespace :partner do
                                                                        password_confirmation: "9p5yn123",
                                                                        email: "gaurav+1@optyn.com",
                                                                        organization: "Optyn Partners",
-                                                                       redirect_uri: "http://localhost:3001/partners/auth/optyn/callback")
+                                                                       redirect_uri: "http://localhost:3001/partners/auth/optyn/callback",
+                                                                       :subscription_required=>false)
     partner.save!
   end
 
@@ -38,7 +39,8 @@ namespace :partner do
                                                                        password_confirmation: "9p5yn123",
                                                                        email: "gaurav+2@optyn.com",
                                                                        organization: "Eatstreet Inc.",
-                                                                       redirect_uri: "http://localhost:3002/partners/auth/optyn/callback")
+                                                                       redirect_uri: "http://localhost:3002/partners/auth/optyn/callback",,
+                                                                       :subscription_required=>false)
     partner.save!
   end
 end

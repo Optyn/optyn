@@ -345,6 +345,7 @@ class Shop < ActiveRecord::Base
 
   def disabled?
     return false if self.coupon.present? && self.coupon.free_forever?
+    return false if !self.partner.subscription_required?
     (Plan.which(self) != Plan.starter and !self.subscription.active) # rescue false
   end
 
