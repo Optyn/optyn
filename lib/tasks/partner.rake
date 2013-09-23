@@ -39,7 +39,7 @@ namespace :partner do
                                                                        password_confirmation: "9p5yn123",
                                                                        email: "gaurav+2@optyn.com",
                                                                        organization: "Eatstreet Inc.",
-                                                                       redirect_uri: "http://localhost:3002/partners/auth/optyn/callback",,
+                                                                       redirect_uri: "http://localhost:3002/partners/auth/optyn/callback",
                                                                        :subscription_required=>false)
     partner.save!
   end
