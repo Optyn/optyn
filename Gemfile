@@ -75,7 +75,7 @@ group :development do
   gem 'thin'
   gem 'sextant'
   gem 'pry'
-  gem 'debugger'
+  #gem 'debugger'
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'

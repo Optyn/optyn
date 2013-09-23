@@ -113,6 +113,15 @@ module Api
          drafts
         end
 
+        def preview
+          #this function renders a preview
+          #input uuid of email
+          #output html encassed in json
+          binding.pry
+          @message = Message.for_uuid(params[:id])
+          @rendered_string = render_to_string(:action => "shared/messages/_core_content.html", :layout => false)
+        end
+
         private
         def require_message_type
           if @message_type.blank?
