@@ -16,10 +16,10 @@
 
           - answers.each do |answer|
             .question
-              %span Q
+              %span.bordered Q
               = answer.question
             .answer
-              %span A
+              %span.bordered A
               = answer.value.join("\n")
 
         .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
