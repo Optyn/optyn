@@ -14,7 +14,7 @@
       .accordion-heading
         %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_message_colors"}
           Header Colors
-      #collapse_message_colors.row-fluid.email-preview.accordion-body.collapse
+      #collapse_message_colors.email-preview.accordion-body.collapse
         #message_color_body.accordion-inner
           .row-fluid
             = render partial: "header_form"
@@ -25,7 +25,7 @@
       .accordion-heading
         %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_message_preview"}
           Message Preview
-      #collapse_message_preview.row-fluid.email-preview.accordion-body.collapse.in
+      #collapse_message_preview.email-preview.accordion-body.collapse.in
         #message_preview.accordion-inner
           #preview_wrapper.span8.offset2
             = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
