@@ -24,7 +24,7 @@
           %td
             - if message.sent?
               %a{:href => "#reportDialog_#{message.uuid}", "data-toggle" => "modal", "id" => "#{message.uuid}", "class" => "open-reports"} report
-              = render :partial => "report", :locals => {:message => message}
+              = render :partial => "report", :locals => {:message => message, :timestamp_attr => timestamp_attr}
             -else
               NA
             
