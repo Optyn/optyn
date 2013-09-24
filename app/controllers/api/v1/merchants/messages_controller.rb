@@ -121,6 +121,7 @@ module Api
           binding.pry
           #@rendered_string = render_to_string(:template => "shared/messages/_core_content")  
           @rendered_string =  @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+          return
         end
 
         private
