@@ -52,10 +52,6 @@ node :header_background_color_property_id do |message|
   message.header_background_color_property_id
 end if locals[:message_instance].header_background_color_property_present?
 
-node :folder_counts do
-  {:drafts => @drafts_count, :queued => @queued_count}
-end
-
 node :image do |message|
   message.image_location
 end if locals[:message_instance].show_image?
