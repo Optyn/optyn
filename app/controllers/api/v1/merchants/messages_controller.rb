@@ -119,7 +119,8 @@ module Api
           #output html encassed in json
           binding.pry
           @message = Message.for_uuid(params[:id])
-          @rendered_string = render_to_string(:action => "shared/messages/_core_content.html", :layout => false)
+          #@rendered_string = render_to_string(:template => "shared/messages/_core_content")  
+          @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview', :layout => false)
         end
 
         private
