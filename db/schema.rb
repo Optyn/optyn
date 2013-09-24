@@ -462,8 +462,8 @@ ActiveRecord::Schema.define(:version => 20130923075828) do
     t.integer  "email_box_click_count",                      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "header_background_color",                    :default => "#1791C0"
     t.string   "phone_number",                               :default => ""
+    t.string   "header_background_color",                    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                                  :default => false
     t.integer  "partner_id"

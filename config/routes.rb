@@ -109,7 +109,7 @@ Optyn::Application.routes.draw do
       put :move_to_saved
       put :move_to_inbox
       put :discard
-    end
+    end    
   end
 
   #Mount resque :)
@@ -170,6 +170,7 @@ Optyn::Application.routes.draw do
 
           member do
             put :launch
+            get :preview
           end
         end #end of messages resource
 
