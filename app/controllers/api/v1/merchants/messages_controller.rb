@@ -120,7 +120,7 @@ module Api
           binding.pry
           @message = Message.for_uuid(params[:id])
           #@rendered_string = render_to_string(:template => "shared/messages/_core_content")  
-          @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview', :layout => false)
+          @rendered_string =  @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
         end
 
         private
