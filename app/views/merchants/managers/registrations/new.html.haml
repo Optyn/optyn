@@ -32,10 +32,14 @@
               = f.text_field :phone_number, :placeholder => "Phone Number", 'data-toggle' => 'tooltip', title: 'Please enter your phone number in this format: +1 (xxx) xxx-xxxx', 'data-tooltip-pos' => 'right'  
 
               = render partial: "merchants/managers/registrations/personal_info_form",:locals=>{:f => f}  
-              
-              = f.submit "Sign up", :class => "btn btn-primary btn-large"
-              %div 
-                %small ** All the fields above are required 
+
+              %br
+              .text-center
+                = f.submit "Sign up", :class => "btn btn-primary btn-large"
+                %br
+                %br
+                %small ** All the fields above are required
+
         %p{:class => "already"}
           = link_to "Sign in", new_user_session_path()
           OR
