@@ -151,6 +151,7 @@ Optyn::Application.routes.draw do
         resources :managers do
           collection do
             get :get_manager_from_email
+            post :logout_manager
           end
         end
         

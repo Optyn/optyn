@@ -55,10 +55,22 @@ module Api
         end
 
         def get_manager_from_email
-          @manager = Manager.where(:email=>params[:email]).limit(1).first
+          @manager = current_partner.managers.where(:email=>params[:email]).limit(1).first
 
           unless @manager
              render(status: :unprocessable_entity)
+          end
+        end
+
+        # Expire Access Token 
+        def logout_manager
+          access_token = current_partner.access_tokens.where(:token=>params[:access_token]).limit(1).first
+          if access_token
+            access_token.revoked_at = Time.now
+            access_token.save
+            render(status: :ok)
+          else
+            render(status: :unprocessable_entity)
           end
         end
 
