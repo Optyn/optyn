@@ -43,4 +43,13 @@ namespace :partner do
                                                                        :subscription_required=>false)
     partner.save!
   end
+
+  desc "Add the Partner: Eatstreet Inc. and a dummy shop with a manager"
+  task :eatstreet_with_dummy_shop => :create_eatstreet_partner do
+    partner = Partner.find_by_organization("Eatstreet Inc.")
+    partner.shops.create(name: 'Optyn Test', stype: 'online', phone_number: '+3125233844', managers_attributes: {'0' => {name: "Gaurav Gaglani", email: 'eatstreet+test@optyn.com', password: 'test1234', password_confirmation: 'test1234'}})
+  end
+
+  desc "Run all the tasks serially"
+  task :seed => [:create_optyn, :create_optyn_partner, :eatstreet_with_dummy_shop]
 end
