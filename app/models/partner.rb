@@ -4,6 +4,7 @@ class Partner < ActiveRecord::Base
   include Doorkeeper::PlainApplicationGenerator
 
   has_many :shops
+  has_many :managers,:through=>:shops
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -17,7 +18,8 @@ class Partner < ActiveRecord::Base
   attr_accessor :redirect_uri
 
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
-
+  has_many :access_tokens,:through=>:oauth_application
+  
   after_create :generate_application
 
   validates :first_name, presence: true
