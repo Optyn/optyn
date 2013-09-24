@@ -1,18 +1,21 @@
-.progress-bar
-  / %div{class: "step #{message_progress_bar_highlight(['types'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['types']) == 'current'), :title => 'Click on a template below to get started.'}
-  /   CHOOSE EMAIL TEMPLATE
-  / %div{class: "step #{message_progress_bar_highlight(['new', 'create', 'edit', 'update'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['new', 'create', 'edit', 'update']) == 'current'), :title => 'Fill and submit the form below to proceed.'}
-  /   SET CAMPAIGN
-  / %div{class: "step #{message_progress_bar_highlight(['preview'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['preview']) == 'current'), :title => 'Now you are ready for launch.'}
-  /   PREVIEW CAMPAIGN
+.progress-bar.steps3
+  %div{class: "step #{message_progress_bar_highlight(['types'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['types']) == 'current'), :title => 'Click on a template below to get started.'}
+    %span.left.edge
+    CHOOSE EMAIL TEMPLATE
+    %span.right.edge
+  %div{class: "step #{message_progress_bar_highlight(['new', 'create', 'edit', 'update'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['new', 'create', 'edit', 'update']) == 'current'), :title => 'Fill and submit the form below to proceed.'}
+    %span.left.edge
+    SET CAMPAIGN
+    %span.right.edge
+  %div{class: "step #{message_progress_bar_highlight(['preview'])}", 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['preview']) == 'current'), :title => 'Now you are ready for launch.'}
+    %span.left.edge
+    PREVIEW CAMPAIGN
+    %span.right.edge
 
-  .text-center
-    - if params[:action] == 'types'
-      = image_tag 'pbar-1.png', alt: '', 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['types']) == 'current'), :title => 'Choose what type of campaign you want to do.', 'data-tooltip-pos' => 'left'
+  .clearfix
 
-    - step2 = ['new', 'create', 'edit', 'update']
-    - if step2.include? params[:action]
-      = image_tag 'pbar-2.png', alt: '', 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['new', 'create', 'edit', 'update']) == 'current'), :title => 'Customize your campaign.'
-
-    - if params[:action] == 'preview'
-      = image_tag 'pbar-3.png', alt: '', 'data-toggle' => ('tooltip' if message_progress_bar_highlight(['preview']) == 'current'), :title => 'Preview, schedule, and send your campaign.', 'data-tooltip-pos' => 'right'
+:javascript
+$( function() {
+  $('.progress-bar > .step:first-child > .left.edge').show();
+  $('.progress-bar .step:last > .right.edge').show();
+});

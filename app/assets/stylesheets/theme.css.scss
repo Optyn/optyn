@@ -685,14 +685,39 @@ i.myspace { background-position: -233px -51px; }
     padding: 2px 30px;
     color: $white;
     text-align: center;
-    line-height: 26px;
-    height: 30px;
+    font-size: 17px;
+    line-height: 31px;
+    height: 35px;
+    background-color: #bdbfc1;
+    position: relative;
+    /*background-image: image-url( 'sprite-pbar.png' );*/
+    > .edge {
+      display: inline-block;
+      width: 13px;
+      height: 35px;
+      position: absolute;
+      background-image: image-url( 'sprite-pbar.png' );
+      display: none;
+    }
+    > .left.edge {
+      background-position: 0px -123px;
+      left: -13px;
+      top: 0;
+    }
+    > .right.edge {
+      background-position: 0px -66px;
+      right: -13px;
+      top: 0;
+    }
   }
   &.steps2 .step { width: 50%; }
   &.steps3 .step { width: 33.3333% }
   &.steps4 .step { width: 25% }
   & > .current {
     background-color: $blue;
+    .edge { z-index: 2; display: block; }
+    .left.edge { background-position: 0px -251px; }
+    .right.edge { background-position: 0px -191px; }
   }
 }
 
