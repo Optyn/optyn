@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $( '.scrolltop' ).html( "<i class='icon-arrow-up icon-white'></i>" );
     $(window).scroll(function(){
         // add navbar opacity on scroll
         if ($(this).scrollTop() > 100) {

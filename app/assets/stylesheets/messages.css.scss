@@ -43,6 +43,9 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 #choose_message {
 	padding: 2% 0;
 	clear: both;
+	> .row-fluid {
+		padding: 0;
+	}
 }
 #choose_message .row {
 	margin-bottom: 20px;

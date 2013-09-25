@@ -10,7 +10,8 @@ body {
 }
 body.index.main { padding-top: 0; }
 .scrolltop {
-  background: url('/assets/scrolltop.png') 0 0 no-repeat;
+  /*background: url('/assets/scrolltop.png') 0 0 no-repeat;*/
+  background-color: saturate( $green, 20% );
   height: 38px;
   opacity: 0.9;
   filter: alpha(opacity=90);
@@ -20,6 +21,16 @@ body.index.main { padding-top: 0; }
   top: 90%;
   width: 38px;
   z-index: 33;
+  text-align: center;
+  padding-top: 7px;
+  color: #fff;
+  font-size: 25px;
+  transition: all 0.2s ease-out;
+  &:hover {
+    text-decoration: none;
+    color: #fff;
+    padding-top: 3px;
+  }
 }
 .scrolltop span {
   position: relative;
