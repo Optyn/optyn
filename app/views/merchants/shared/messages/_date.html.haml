@@ -2,11 +2,11 @@
   = f.label :ending, ending_label, class: "control-label"
   .controls
     .input-append.date-picker
-      = text_field_tag :ending_date, formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input-large", 'data-format' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: 'Coupon expiration date'
+      = text_field_tag :ending_date, formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input-large", 'data-format' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: 'When does the Coupon expire?'
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
     .input-append.time-picker
-      = text_field_tag :ending_time, formatted_message_form_time(@message, :ending), class: "input-large", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: 'Time'
+      = text_field_tag :ending_time, formatted_message_form_time(@message, :ending), class: "input-large", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: 'You can also set a time when the coupon expires.'
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}

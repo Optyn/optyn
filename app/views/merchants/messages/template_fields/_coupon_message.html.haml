@@ -15,7 +15,7 @@
 
 .control-group.disc
   = f.label :type_of_discount, class: "control-label"
-  .controls.checkbox{ 'data-toggle' => 'tooltip', title: :type_of_discount }
+  .controls.checkbox{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
     %label.radio.inline
       = f.radio_button :type_of_discount, :dollar_off
       == $ off or
@@ -33,12 +33,12 @@
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
   .controls
-    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'The amount of the coupon, in percentage or dollar amount value.'
+    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'Please enter the value of the coupon.'
 
 .control-group
   = f.label :coupon_code, "Coupon Code", class: 'control-label'
   .controls
-    = f.text_field :coupon_code
+    = f.text_field :coupon_code, 'data-toggle' => 'tooltip', title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.'
 
 = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration"}
 
@@ -49,7 +49,7 @@
       This coupon does not expire
 
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
-fine_print_verbiage: 'You can use this to say things like 1 per customer or One Per order. The less limitations the better.'}
+fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
 

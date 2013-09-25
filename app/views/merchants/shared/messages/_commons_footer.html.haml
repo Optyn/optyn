@@ -1,6 +1,6 @@
 - unless @message.is_child?
   .control-group
-    = f.label :label_ids, "Send this to:", class: 'control-label'
+    = f.label :label_ids, "Send Campaign to:", class: 'control-label'
     .controls
       = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @message.label_ids(@labels)),
         {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}

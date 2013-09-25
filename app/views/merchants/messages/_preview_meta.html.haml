@@ -4,16 +4,16 @@
 
   .preview-item
     .preview-text.row-fluid
-      %strong.span3 Recepients:
+      %strong.span3 Recipients:
       .span9
         - unless @message.is_child?
           = message_receiver_labels(@message.label_names)
           == (#{@message.connections_count} total)
         - else
-          Survey customer
+          Customers who complete the survey.
   .preview-item
     .preview-text.row-fluid
-      %strong.span3 Subject:
+      %strong.span3 Campaign Subject:
       .span9
         =@message.subject
   .preview-item
@@ -23,7 +23,7 @@
         - unless @message.is_child?
           = message_send_on_date(@message)
         - else
-          Message will be sent on the survey submission by the customer
+          Message will be sent automatically when the user completes the survey.
 
   .text-right
     = link_to raw( "<i class='icon-pencil icon-white'></i> Make Changes" ), '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
