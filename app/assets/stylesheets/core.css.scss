@@ -11,6 +11,7 @@ body {
 body.index.main { padding-top: 0; }
 .scrolltop {
   /*background: url('/assets/scrolltop.png') 0 0 no-repeat;*/
+  display: none;
   background-color: saturate( $green, 20% );
   height: 38px;
   opacity: 0.9;
