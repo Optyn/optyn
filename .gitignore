@@ -22,6 +22,7 @@ public/uploads/*
 dump.rdb
 /nbproject/*
 .ruby-gemset
+public/assets
 .idea/
 *DS_Store
 public/sitemap.xml.gz
