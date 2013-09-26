@@ -59,7 +59,7 @@ after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
-after "deploy:restart", "resque:restart"
+#after "deploy:restart", "resque:restart"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
