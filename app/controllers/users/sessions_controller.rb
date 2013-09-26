@@ -4,6 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   prepend_before_filter :require_no_authentication, :only => [:new, :create, :authenticate_with_email]
   prepend_before_filter :allow_params_authentication!, :only => [:create, :authenticate_with_email]
   prepend_before_filter :increment_email_box_click_count, :only => [:authenticate_with_email]
+  prepend_before_filter :require_not_logged_in, :except => [:destroy] 
 
   def new
     session[:omniauth_manager] = nil
