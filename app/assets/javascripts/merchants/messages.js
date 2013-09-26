@@ -15,6 +15,8 @@ function MerchantMessage() {
             this.hookPermanentCouponSelection();
             this.hookUncheckPermanentCouponCheck();
             this.clearDuplicateErrors();
+            this.hookDiscountType();
+            this.setDiscountTypeSelected();
         }
 
         if ($('#messages_collection_container').length) {
@@ -309,6 +311,29 @@ function MerchantMessage() {
             $('#message_type_of_discount_percentage_off').next('.error').remove();
             $('#message_type_of_discount_dollar_off').next('.error').remove();
             $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
+        }
+    };
+
+    this.hookDiscountType = function(){
+        $( '.disc .btn' ).click( function() {
+            var value = $( this ).data( 'value' );
+            $( '#type_of_message_value' ).attr( 'value', value );
+        });
+    };
+
+    this.setDiscountTypeSelected = function(){
+        var discountTypeVal = $('#type_of_message_value').val();
+        var $discountContainer = $('#discount_type_container');
+        console.log("Val", discountTypeVal);
+        if(discountTypeVal.length){
+           $discountContainer.find('button').each(function(index, element){
+            console.log("Data Val", $(element).attr('data-value'));
+            if($(element).attr('data-value') === discountTypeVal){
+                $(element).addClass('active');
+            }else{
+                $(element).removeClass('active');
+            }
+           });
         }
     };
 }

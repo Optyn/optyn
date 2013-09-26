@@ -15,20 +15,14 @@
 
 .control-group.disc
   = f.label :type_of_discount, class: "control-label"
-  .controls.checkbox{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
-    %label.radio.inline
-      = f.radio_button :type_of_discount, :dollar_off
-      == $ off or
-    %label.radio.inline
-      = f.radio_button :type_of_discount, :percentage_off
-      == % off
-    / .btn-group{ 'data-toggle' => 'buttons-radio' }
-    /   type_of_discount:
-    /   = :type_of_discount
-    /   %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
-    /   %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
+  #discount_type_container.controls.checkbox{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
+    .btn-group{ 'data-toggle' => 'buttons-radio' }
+      type_of_discount:
+      = :type_of_discount
+      %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
+      %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
 
-    /   = f.hidden_field :type_of_discount, :id => "type_of_message_value", :value => ""
+      = f.hidden_field :type_of_discount, :id => "type_of_message_value"
 
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
@@ -54,12 +48,3 @@ fine_print_verbiage: 'Is there any limitations or fine print for this promotion?
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
 
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
-
-
-/ :javascript
-/ $( function() {
-/   $( '.disc .btn' ).click( function() {
-/     var value = $( this ).data( 'value' );
-/     $( '#type_of_message_value' ).attr( 'value', value );
-/   });
-/ });
