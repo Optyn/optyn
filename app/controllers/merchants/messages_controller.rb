@@ -237,7 +237,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def merge_end_date_time
     if params[:ending_date].present? || params[:ending_time].present?
-      params[:message][:ending] = params[:ending_date].to_s + params[:ending_time].to_s
+      params[:message][:ending] = params[:ending_date].to_s + " " + params[:ending_time].to_s
     end
   end
 
