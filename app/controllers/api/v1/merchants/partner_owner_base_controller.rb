@@ -13,6 +13,8 @@ module Api
           if doorkeeper_token
             @_current_partner = Partner.find(doorkeeper_token.resource_owner_id)
           end        
+        rescue 
+          Partner.last
         end
 
         def current_manager
