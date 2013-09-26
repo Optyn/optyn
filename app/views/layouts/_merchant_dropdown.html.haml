@@ -1,6 +1,4 @@
 %li
-  /%a.tour{:href => '#'}
-  /Take a tour
   %a.tour{ :href => merchants_messages_path} Create new campaign
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -22,5 +20,6 @@
       %a{:href => merchants_shop_path, :class => 'hr'}
         = image_tag "dropdown_settings.png"
         Account
+      .separator-thin.small
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

@@ -18,7 +18,7 @@
 
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')
-  %body#flat{:class => cssClasses }
+  %body#flat.a-layout{:class => cssClasses }
     %header.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container-fluid
@@ -33,7 +33,7 @@
               .pull-right
                 = render partial: "layouts/consumer_dropdown"
             - if manager_signed_in?
-              .pull-right
+              %ul.nav.pull-right
                 = render partial: "layouts/merchant_dropdown"    
           - else
             .nav-collapse.collapse
