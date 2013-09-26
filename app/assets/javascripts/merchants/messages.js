@@ -324,10 +324,8 @@ function MerchantMessage() {
     this.setDiscountTypeSelected = function(){
         var discountTypeVal = $('#type_of_message_value').val();
         var $discountContainer = $('#discount_type_container');
-        console.log("Val", discountTypeVal);
         if(discountTypeVal.length){
            $discountContainer.find('button').each(function(index, element){
-            console.log("Data Val", $(element).attr('data-value'));
             if($(element).attr('data-value') === discountTypeVal){
                 $(element).addClass('active');
             }else{
