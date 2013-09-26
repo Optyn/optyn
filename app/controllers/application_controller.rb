@@ -76,6 +76,6 @@ class ApplicationController < ActionController::Base
   end
 
   def switch_layout
-    user_signed_in? || manager_signed_in? ? 'merchants' : 'application'
+    user_signed_in? || manager_signed_in? ? 'base' : 'application'
   end
 end
