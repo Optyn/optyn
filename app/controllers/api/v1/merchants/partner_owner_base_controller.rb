@@ -6,7 +6,9 @@ module Api
         private
         
         def current_partner
-          current_shop.partner        
+          if doorkeeper_token
+            @_current_partner ||= Partner.find(doorkeeper_token.resource_owner_id)
+          end        
         end
 
         def current_manager
