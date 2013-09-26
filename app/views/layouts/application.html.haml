@@ -19,17 +19,6 @@
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')
   %body#flat{:class => cssClasses }
-    / - if params[:action] == 'index' && params[:controller] == 'main'
-    /   %header.row-fluid
-    /     .span5
-    /       %h2 FOR BUSINESSES
-    /     .span2
-    /       %a.logo{ :href => root_path }
-    /         = image_tag "logo.png", :alt => 'logo'
-    /     .span5
-    /       %a.btn.btn-primary.login.pull-right{ :href => new_user_session_path } Log in
-    /       %h2 FOR ALL MANKIND
-    / - else
     %header.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container-fluid
