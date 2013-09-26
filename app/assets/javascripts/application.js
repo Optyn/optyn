@@ -43,7 +43,7 @@ function moveDatetimepickerErrorMessage() {
 
     var $newErrorMesageContainer = $('<span />');
     $newErrorMesageContainer.attr({
-        class: 'field-with-errors'
+        'class': 'field-with-errors'
     })
     $newErrorMesageContainer.append($errorMessage)
     $errorMessageGrandParent.append($newErrorMesageContainer);
