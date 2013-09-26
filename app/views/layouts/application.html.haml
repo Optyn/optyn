@@ -19,46 +19,46 @@
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')
   %body#flat{:class => cssClasses }
-    - if params[:action] == 'index' && params[:controller] == 'main'
-      %header.row-fluid
-        .span5
-          %h2 FOR BUSINESSES
-        .span2
-          %a.logo{ :href => root_path }
+    / - if params[:action] == 'index' && params[:controller] == 'main'
+    /   %header.row-fluid
+    /     .span5
+    /       %h2 FOR BUSINESSES
+    /     .span2
+    /       %a.logo{ :href => root_path }
+    /         = image_tag "logo.png", :alt => 'logo'
+    /     .span5
+    /       %a.btn.btn-primary.login.pull-right{ :href => new_user_session_path } Log in
+    /       %h2 FOR ALL MANKIND
+    / - else
+    %header.navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %button{ :type => 'button', :class => 'btn btn-navbar', "data-toggle" => 'collapse', "data-target" => '.nav-collapse' }
+            %span{ :class => 'icon-bar' }
+            %span{ :class => 'icon-bar' }
+            %span{ :class => 'icon-bar' }
+          %a.logo.pull-left{ :href => root_path }
             = image_tag "logo.png", :alt => 'logo'
-        .span5
-          %a.btn.btn-primary.login.pull-right{ :href => new_user_session_path } Log in
-          %h2 FOR ALL MANKIND
-    - else
-      %header.navbar.navbar-inverse.navbar-fixed-top
-        .navbar-inner
-          .container-fluid
-            %button{ :type => 'button', :class => 'btn btn-navbar', "data-toggle" => 'collapse', "data-target" => '.nav-collapse' }
-              %span{ :class => 'icon-bar' }
-              %span{ :class => 'icon-bar' }
-              %span{ :class => 'icon-bar' }
-            %a.logo.pull-left{ :href => root_path }
-              = image_tag "logo.png", :alt => 'logo'
-            - if user_signed_in? || manager_signed_in?
-              - if user_signed_in?
-                .pull-right
-                  = render partial: "layouts/consumer_dropdown"
-              - if manager_signed_in?
-                .pull-right
-                  = render partial: "layouts/merchant_dropdown"    
-            - else
-              .nav-collapse.collapse
-                %ul.pull-right.nav.nav-pills
-                  %li
-                    %a{ :href => root_path } Home
-                  %li
-                    %a{ :href => merchant_features_path } Features
-                  %li
-                    %a{ :href => pricing_path } Pricing
-                  %li
-                    %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
-                  %li
-                    %a.btn.btn-primary{ :href => new_user_session_path } Log in
+          - if user_signed_in? || manager_signed_in?
+            - if user_signed_in?
+              .pull-right
+                = render partial: "layouts/consumer_dropdown"
+            - if manager_signed_in?
+              .pull-right
+                = render partial: "layouts/merchant_dropdown"    
+          - else
+            .nav-collapse.collapse
+              %ul.pull-right.nav.nav-pills
+                %li
+                  %a{ :href => root_path } Home
+                %li
+                  %a{ :href => merchant_features_path } Features
+                %li
+                  %a{ :href => pricing_path } Pricing
+                %li
+                  %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
+                %li
+                  %a.btn.btn-primary{ :href => new_user_session_path } Log in
 
     = display_flash_message
 
