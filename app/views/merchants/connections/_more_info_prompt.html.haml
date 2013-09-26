@@ -3,8 +3,12 @@
     %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
     %h3 User Info
   .modal-body
-    - user.permissions_users.collect(&:permission).each do |permission|
+    - user.permissions_users.each do |permission_user|
+      - permission = permission_user.permission
       %p
         %strong
           == #{(permission.permission_name == 'fullname' ? 'name'.titleize : permission.permission_name.titleize)}:
-        = eval("user.display_#{permission.permission_name}")
+        - if name_id == permission_user.permission_id
+          = connection_user_name(permission_user, user, name_id)
+        - elsif email_id ==  permission_user.permission_id
+          = connection_user_email(permission_user, user, email_id)
