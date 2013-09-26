@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include Doorkeeper::ResourceTypeManager
 
+  layout :switch_layout
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to (:back), :alert => exception.message
   end
@@ -71,5 +73,9 @@ class ApplicationController < ActionController::Base
   def clear_session_anyone_logged_in
     session['warden.user.merchants_manager.key'] = nil
     session['warden.user.user.key'] = nil
+  end
+
+  def switch_layout
+    user_signed_in? || manager_signed_in? ? 'merchants' : 'application'
   end
 end

@@ -1,5 +1,4 @@
 class ConnectionsController < BaseController
-  layout 'merchants'
 
   include DashboardCleaner
 

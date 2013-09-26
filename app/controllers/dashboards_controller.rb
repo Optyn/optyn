@@ -1,6 +1,5 @@
 class DashboardsController < BaseController
   def index
-    render layout: 'merchants'
     populate_counts
     populate_feed
   end

@@ -39,9 +39,13 @@
               %span{ :class => 'icon-bar' }
             %a.logo.pull-left{ :href => root_path }
               = image_tag "logo.png", :alt => 'logo'
-            - if user_signed_in?
-              .pull-right
-                = render partial: "layouts/consumer_dropdown"
+            - if user_signed_in? || manager_signed_in?
+              - if user_signed_in?
+                .pull-right
+                  = render partial: "layouts/consumer_dropdown"
+              - if manager_signed_in?
+                .pull-right
+                  = render partial: "layouts/merchant_dropdown"    
             - else
               .nav-collapse.collapse
                 %ul.pull-right.nav.nav-pills

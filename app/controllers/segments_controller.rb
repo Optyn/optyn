@@ -1,5 +1,4 @@
 class SegmentsController < BaseController
-  layout 'merchants'
 
   include DashboardCleaner
 
