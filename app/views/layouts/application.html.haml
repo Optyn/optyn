@@ -33,7 +33,7 @@
               .pull-right
                 = render partial: "layouts/consumer_dropdown"
             - if manager_signed_in?
-              %ul.nav.pull-right
+              %ul.nav.pull-right.logged-in
                 = render partial: "layouts/merchant_dropdown"    
           - else
             .nav-collapse.collapse
