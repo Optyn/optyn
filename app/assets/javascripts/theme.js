@@ -73,6 +73,7 @@ $(document).ready(function () {
 
     // Ensure footer is stuck to bottom of window ..............................
     var setMidContentHt = function ( headerSelector, contentSelector, footerSelector ) {
+        console.log( 'setMidContentHt' );
         var headerHt = parseInt( $( headerSelector ).css( 'height' ));
         var footerHt = parseInt( $( footerSelector ).css( 'height' ));
         var windowHt = $( window ).height();
@@ -97,6 +98,11 @@ $(document).ready(function () {
         setMidContentHt( '.ef-l .navbar', '.ef-l .yield', 'footer' );
     });
 
+    // Ensuring footer is stuck to the bottom in removal_confirmation layout ...
+    setMidContentHt( 'header.navbar', '#consumer.unsubscribe', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( 'header.navbar', '#consumer.unsubscribe', 'footer' );
+    });
 
     // Setting height of modal .................................................
     var setModalHt = function() {

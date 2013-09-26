@@ -1,13 +1,12 @@
 = display_title 'Unsubscribe'
-#consumer
+#consumer.unsubscribe
 	.container
 		= render partial: "shared/menu" if current_user.present?
-		.span8{:style => "height: 200px; text-align: center;"}
-			%p
+		.span8.offset2.text-center{:style => "height: 200px;"}
+			%h5
 				Are you sure you want to unsubscribe from receiving all messages and communications from
 				= @shop.name
 				?
 
-			%br
-			%br
-			= link_to "Unsubscribe", opt_out_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid)), class: 'btn-primary btn btn-large', method: :put
+			.blank-space
+			= link_to "Unsubscribe", opt_out_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid)), class: 'btn-warning btn btn-large', method: :put
