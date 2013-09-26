@@ -6,8 +6,12 @@ module Api
         private
         
         def current_partner
+          Rails.logger.info "=" * 100
+          Rails.logger.info doorkeeper_token
+          Rails.logger.info "&" * 100
+
           if doorkeeper_token
-            @_current_partner ||= Partner.find(doorkeeper_token.resource_owner_id)
+            @_current_partner = Partner.find(doorkeeper_token.resource_owner_id)
           end        
         end
 
