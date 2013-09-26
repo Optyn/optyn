@@ -7,7 +7,7 @@ module Api
         
         def current_partner
           Rails.logger.info "=" * 100
-          Rails.logger.info doorkeeper_token
+          Rails.logger.info doorkeeper_token.resource_owner_id.inspect
           Rails.logger.info "&" * 100
 
           if doorkeeper_token
