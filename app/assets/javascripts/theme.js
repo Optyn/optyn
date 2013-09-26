@@ -49,8 +49,8 @@ $(document).ready(function () {
     if ( 'placeholder' in document.createElement( 'input' )) {}
     else {
       $( 'input[type=text]' ).each( function( i, v ) {
-        if ( $( this ).attr( 'placeholder' ).length > 0 && $( this ).attr( 'value' ).length == 0 ) {
-          $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
+        if ( $( this ).attr( 'value' ).length == 0 ) {
+            $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
         }
       });
     }
