@@ -56,6 +56,10 @@ module Api
 
         def get_manager_from_email
           @manager = current_partner.managers.where(:email=>params[:email]).limit(1).first
+          Rails.logger.info "$" * 100
+          Rails.logger.info @manager.info
+          Rails.logger.info "#" * 100
+
 
           unless @manager
              render(status: :unprocessable_entity)
