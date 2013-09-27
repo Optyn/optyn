@@ -319,7 +319,7 @@ body {
       padding: 1%;
       border: solid 1px $medium-gray;
       margin-bottom: 1%;
-      margin-top: 152px;
+      margin-top: 187px;
     }
     .signup {
       input {
@@ -333,6 +333,7 @@ body {
       text-shadow: 1px 1px 0 #fff;
       margin-top: 330px;
       @include transition( background-color 0.3s ease-out );
+      font-size: 16px;
     }
     .vid-lnk:hover {
       text-decoration: none;
