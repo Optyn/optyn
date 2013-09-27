@@ -79,29 +79,18 @@ $(document).ready(function () {
         $( contentSelector ).css( 'min-height', windowHt - headerHt - footerHt );
     };
 
-    // For Merchant and Consumer app pages.
-    setMidContentHt( '.navbar.inner', '#dashboard .yield', 'footer' );
+    // Ensuring footer is stuck to the bottom in application layout ............
+    setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
     $( window ).resize( function() {
-        setMidContentHt( '.navbar.inner', '#dashboard .yield', 'footer' );
+        setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
     });
 
-    // For shops#show page.
-    setMidContentHt( '.navbar', '.shops.show #merchant_page', 'footer' );
+    // Ensuring footer is stuck to the bottom in base layout ...................
+    setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
     $( window ).resize( function() {
-        setMidContentHt( '.navbar', '.shops.show #merchant_page', 'footer' );
+        setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
     });
 
-    // Ensuring footer is stuck to the bottom in email_feedback layout .........
-    setMidContentHt( '.ef-l .navbar', '.ef-l .yield', 'footer' );
-    $( window ).resize( function() {
-        setMidContentHt( '.ef-l .navbar', '.ef-l .yield', 'footer' );
-    });
-
-    // Ensuring footer is stuck to the bottom in removal_confirmation layout ...
-    setMidContentHt( 'header.navbar', '#consumer.unsubscribe', 'footer' );
-    $( window ).resize( function() {
-        setMidContentHt( 'header.navbar', '#consumer.unsubscribe', 'footer' );
-    });
 
     // Setting height of modal .................................................
     var setModalHt = function() {

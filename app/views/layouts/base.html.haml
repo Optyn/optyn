@@ -19,7 +19,7 @@
     = render(partial: "layouts/mixpanel") if Rails.env.production? || Rails.env.staging?
     = render(partial: "layouts/uservoice") if Rails.env.production? || Rails.env.staging?
 
-  %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize + ' m-app' }
+  %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize + ' m-app b-layout' }
     %a.scrolltop{:href => "#"}
     = render partial: "layouts/header"
 
