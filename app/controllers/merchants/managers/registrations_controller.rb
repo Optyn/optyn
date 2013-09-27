@@ -1,5 +1,4 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
-  layout :define_layout
 
   before_filter :require_customer_logged_out
   
@@ -39,13 +38,4 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     end
 
   end
-
-
-  private
-
-  def define_layout
-    return "merchants" if [ "edit", "update" ].include?( action_name )
-    return "application"
-  end
-
 end
