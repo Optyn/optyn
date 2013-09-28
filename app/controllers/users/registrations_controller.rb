@@ -90,7 +90,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   def edit
-    render layout: 'merchants'
   end
 
 end
