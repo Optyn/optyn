@@ -100,7 +100,8 @@ module Api
 
         def move_to_trash
           Message.move_to_trash(uuids_from_message_ids)
-          drafts  
+          drafts
+          #binding.pry
         end
 
         def move_to_draft

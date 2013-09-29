@@ -81,7 +81,8 @@ class Message < ActiveRecord::Base
     end
 
     event :move_to_trash do
-      transition [:draft, :queued, :sent] => :trash
+      transition [:draft, :queued, :sent, :trash] => :trash
+      #binding.pry
     end
 
     event :move_to_draft do
@@ -183,6 +184,7 @@ class Message < ActiveRecord::Base
 
   def self.move_to_trash(uuids)
     trigger_event(uuids, 'move_to_trash')
+    #binding.pry
   end
 
   def self.move_to_draft(uuids)
