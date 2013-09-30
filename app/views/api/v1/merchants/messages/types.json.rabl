@@ -1,4 +1,11 @@
-collection @types, :root => "data", :object_root => false
-node(:type) do |type|
-    type.to_s
-end
+object false
+
+  child :data do 
+    child @types => :types do |type|
+      node(false){|type| type}
+    end
+
+    node :folder_counts do
+      {:drafts => @drafts_count, :queued => @queued_count}
+    end
+  end
