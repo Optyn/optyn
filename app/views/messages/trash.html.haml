@@ -1,23 +1,19 @@
-#title_header
-  %h3
-    Your Saved Messages
+%h1.pull-left
+  Trashed Messages
+
+= render partial: "messages/message_menu"
+
 /Main Body
-#merchants
-  .container
-    = render partial: "shared/menu"
+#merchants.pad3pc
+  #messages_collection_container.row.text-center
+    = render partial: "shared/messages/collection_form"
 
-    .span8
-      = render partial: "messages/message_menu"
+    .actions
+      = submit_tag "Move to Inbox", name: 'move_to_inbox', class: 'collection-action btn btn-primary'
+      = hidden_field_tag 'move_to_inbox_link', move_to_inbox_messages_path
+      = submit_tag "Move to Saved", name: 'move_to_saved', class: 'collection-action btn btn-success'
+      = hidden_field_tag 'move_to_saved_link', move_to_saved_messages_path
+      = submit_tag "Discard", name: 'discard', class: 'collection-action btn btn-danger'
+      = hidden_field_tag 'discard_link', discard_messages_path
 
-      #messages_collection_container.row.text-center
-        = render partial: "shared/messages/collection_form"
-
-        .actions
-          = submit_tag "Move to Inbox", name: 'move_to_inbox', class: 'collection-action btn btn-primary'
-          = hidden_field_tag 'move_to_inbox_link', move_to_inbox_messages_path
-          = submit_tag "Move to Saved", name: 'move_to_saved', class: 'collection-action btn btn-success'
-          = hidden_field_tag 'move_to_saved_link', move_to_saved_messages_path
-          = submit_tag "Discard", name: 'discard', class: 'collection-action btn btn-danger'
-          = hidden_field_tag 'discard_link', discard_messages_path
-
-      = render partial: "messages/list", locals: {messages: @trash_messages}
+  = render partial: "messages/list", locals: {messages: @trash_messages}

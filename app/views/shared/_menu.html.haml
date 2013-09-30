@@ -1,30 +1,29 @@
-.span3.menuleft
+.span3.menuleft.wid25pc
   %ul.merchant-menu
     %li.menu-header 
-      Hello
-      = current_user.name
-      !
-    %hr
+      Get started
+      /= current_user.name
     %li
       %a{:href => consumers_root_path}
         = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
-        My Dashboard
+        Dashboard
     %li
       %a{:href => inbox_messages_path, :alt => "My Messages"}
         = image_tag "menu_icon_messages.png", :alt => "Messages"
-        My Marketing Inbox
+        Marketing Inbox
     %li
       %a{:href => connections_path}
         = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
-        My Connections
+        Connections
     %li
-      %a{:href => merchants_survey_path}
+      %a{:href => segments_path}
         = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
-        = link_to("My Surveys", segments_path)
+        Surveys
     %li
       %a{:href => profile_path}
         = image_tag "menu_icon_connections.png", :alt => "My Profile", :style => "padding-left: 2px; padding-right: 12px;"
         My Account
     %li
-      = image_tag "menu_icon_dashboard.png", :alt => "Logout", :style => "padding-right: 8px;"
-      %a{:href => destroy_user_session_path} Logout
+      %a{:href => destroy_user_session_path}
+        = image_tag "menu_icon_dashboard.png", :alt => "Logout", :style => "padding-right: 8px;"
+        Logout

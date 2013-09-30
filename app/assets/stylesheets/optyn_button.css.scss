@@ -1,0 +1,11 @@
+#flat.merchants-apps.show {
+  .pad3pc {
+    clear: both;
+  }
+  .tip {
+    margin-right: 10px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

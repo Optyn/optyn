@@ -1,26 +1,27 @@
 .modal-header
   %button{:class => "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"}x
-  %h3 Edit the Subject and Send time of your Message
+  %h3 Edit the Subject Line and Sending Details of your Message
 .modal-body
   = form_for :message, url: update_meta_merchants_message_path(message.uuid), :method => :put, :html => {id: "message_meta_data", class: 'form-horizontal'} do |f|
     = hidden_field_tag :message_type, message.type.underscore
-
+    %br
+    %br
+    %br
     .control-group
       = f.label :subject, class: "control-label"
       .controls
-        = f.text_field :subject, class: "input-large"
-
+        = f.text_field :subject, class: "input-xlarge", 'data-toggle' => 'tooltip', title: 'If you want to the subject line to display the user name like Tom, please use this: "{{Customer Name}}"'
     - unless message.is_child?
       .control-group
         = f.label :send_on, "Send Date Time", class: "control-label"
         #message_send_on_container.controls
           .input-append.date-picker
-            = f.text_field :send_on_date, value: formatted_message_form_date(@message, :send_on), id: 'message_send_on_date', class: "input-small", 'data-format' => "yyyy-MM-dd"
+            = f.text_field :send_on_date, value: formatted_message_form_date(@message, :send_on), id: 'message_send_on_date', class: "input-medium", 'data-format' => "yyyy-MM-dd"
             %span.add-on
               %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
           .input-append.time-picker
-            = f.text_field :send_on_time, value: formatted_message_form_time(@message, :send_on), class: "input-small", 'data-format' => "HH:mm PP"
+            = f.text_field :send_on_time, value: formatted_message_form_time(@message, :send_on), class: "input-medium", 'data-format' => "HH:mm PP"
             %span.add-on
               %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 

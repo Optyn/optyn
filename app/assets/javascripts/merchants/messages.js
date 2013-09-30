@@ -14,6 +14,9 @@ function MerchantMessage() {
             this.hookDateTimePicker();
             this.hookPermanentCouponSelection();
             this.hookUncheckPermanentCouponCheck();
+            this.clearDuplicateErrors();
+            this.hookDiscountType();
+            this.setDiscountTypeSelected();
         }
 
         if ($('#messages_collection_container').length) {
@@ -284,11 +287,11 @@ function MerchantMessage() {
             url: $headerForm.attr('action'),
             data: $headerForm.serialize(),
             beforeSend: function(){
-              $('#message_preview_container').hide();
+              $('#preview-meta-data-view').hide();
               $('.loading').show();      
             },
             success: function(data){
-               $('#perview_wrapper').replaceWith(data);
+               $('#message_fields_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
                 current.hookColorPickerChange();
             },
@@ -298,6 +301,40 @@ function MerchantMessage() {
                 $('.loading').hide(); 
             }
         });
+    };
+
+    this.clearDuplicateErrors = function(){
+        if($('#message_type_of_discount_percentage_off').next('.error').length){
+            alert('Test');
+            var error = true;
+            var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
+            $('#message_type_of_discount_percentage_off').next('.error').remove();
+            $('#message_type_of_discount_dollar_off').next('.error').remove();
+            $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
+        }
+    };
+
+    this.hookDiscountType = function(){
+        $( '.disc .btn' ).click( function() {
+            var value = $( this ).data( 'value' );
+            $( '#type_of_message_value' ).attr( 'value', value );
+        });
+    };
+
+    this.setDiscountTypeSelected = function(){
+        if($('#type_of_message_value').length){
+            var discountTypeVal = $('#type_of_message_value').val();
+            var $discountContainer = $('#discount_type_container');
+            if(discountTypeVal.length){
+               $discountContainer.find('button').each(function(index, element){
+                if($(element).attr('data-value') === discountTypeVal){
+                    $(element).addClass('active');
+                }else{
+                    $(element).removeClass('active');
+                }
+               });
+            }
+        }
     };
 }
 

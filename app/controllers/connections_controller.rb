@@ -1,4 +1,5 @@
 class ConnectionsController < BaseController
+
   include DashboardCleaner
 
   before_filter :verify_shop, :fetch_connection, only: [:shop, :disconnect, :connect]

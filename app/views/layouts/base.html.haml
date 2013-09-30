@@ -7,7 +7,6 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
 
     = stylesheet_link_tag   "application", :media => "all"
-    %link{:href => "http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic", :rel => "stylesheet", :type => "text/css"}/
     = javascript_include_tag "https://js.stripe.com/v1/","application"
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
@@ -20,12 +19,24 @@
     = render(partial: "layouts/mixpanel") if Rails.env.production? || Rails.env.staging?
     = render(partial: "layouts/uservoice") if Rails.env.production? || Rails.env.staging?
 
-  %body
+  %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize + ' m-app b-layout' }
     %a.scrolltop{:href => "#"}
     = render partial: "layouts/header"
 
     = display_flash_message
 
-    = yield
+    #dashboard.container-fluid
+      .row-fluid
+        - unless @skip_menu
+          - if manager_signed_in?
+            = render partial: "merchants/shared/menu"
+          - if user_signed_in?
+            = render partial: "shared/menu"
+        .span9.wid75pc.yield
 
-    = render partial: "layouts/footer"
+          = yield :banner
+
+
+          = yield
+
+    = render partial: "layouts/footer_flat"

@@ -1,10 +1,15 @@
 = display_title "Upgrade your Account"
-#box_sign
-  .container
+= banner("Pricing")
+
+= render partial: 'merchants/merchant_managers/tabs'
+
+#box_login.container-fluid
+  .row-fluid
     .span12.box_wrapper
-      .span12.box{:style => "height: 320px;"}
+      .box.span4.offset4
         %div 
-          .head Enter Your Payment Information 
+          .head
+            %h4 Enter Your Payment Information 
           .payment-errors
             - if @subscription.errors.any? || @subscription.stripe_error
               =@subscription.stripe_error
@@ -13,7 +18,7 @@
                   %li
                     = error  
 
-          .form{:style => "height: 200px;"}
+          .form.row-fluid
             = form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
 
               = f.hidden_field :plan_id, :value => @plan.id
@@ -22,15 +27,15 @@
 
               = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
 
-              = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left'
+              = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left', 'data-toggle' => 'tooltip', title: 'Your 16 digit Credit Card number'
 
-              = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security'
+              = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security', 'data-toggle' => 'tooltip', title: 'CVV'
 
-              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox"})
+              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry month'})
 
-              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox"})
+              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry year'})
 
-              = f.submit "Pay", :class => "btn"
-        %div{:style => "text-align: center"}
+              = f.submit "Pay", :class => "btn btn-block btn-success"
+        %div{:style => "text-align: center; margin-top: 25px;"}
           %p
             All payments are processed securely.

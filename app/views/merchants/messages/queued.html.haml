@@ -1,25 +1,22 @@
-#title_header
-  %h3
-    Message Center - Queued messages
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
+= banner( "Queued" )
 
-    .span8#message_fields_wrapper
-      = render partial: "merchants/messages/message_menu"
+= render partial: "merchants/messages/message_menu"
 
-      #messages_collection_container.row.text-center
-        = render partial: "shared/messages/collection_form"
+#merchants.pad3pc
+  #message_fields_wrapper
 
-        .actions{:style => "float: right; padding-bottom: 8px;"}
-          = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
-          = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
-          = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
-          = hidden_field_tag 'move_to_trash_link', move_to_trash_merchants_messages_path
+    #messages_collection_container.row.text-center
+      = render partial: "shared/messages/collection_form"
 
-      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+      .actions{:style => "float: right; padding-bottom: 8px;"}
+        = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
+        = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
+        = submit_tag "Move to Trash", name: 'move_to_trash', class: 'collection-action btn btn-danger'
+        = hidden_field_tag 'move_to_trash_link', move_to_trash_merchants_messages_path
 
-      = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Scheduled For', timestamp_attr: 'send_on'}
 
-      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+    = render partial: 'shared/messages/pager', locals: {collection: @messages}
+
+    = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Scheduled For', timestamp_attr: 'send_on'}
+
+    = render partial: 'shared/messages/pager', locals: {collection: @messages}

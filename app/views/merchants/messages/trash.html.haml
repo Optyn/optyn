@@ -1,26 +1,20 @@
-#title_header
-  %h3
-    Message Center - Deleted Messages
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
+= banner("Trash")
 
-    .span8#message_fields_wrapper
-      = render partial: "merchants/messages/message_menu"
+= render partial: "merchants/messages/message_menu"
 
-      #messages_collection_container.row.text-center
-        = render partial: "shared/messages/collection_form"
+#message_fields_wrapper.pad3pc
+  #messages_collection_container.text-center
+    = render partial: "shared/messages/collection_form"
 
-        .actions{:style => "float: right; padding-bottom: 8px;"}
-          = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
-          = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
-          = submit_tag "Discard", name: 'discard', class: 'collection-action btn btn-danger'
-          = hidden_field_tag 'discard_link', discard_merchants_messages_path
+    .actions{:style => "float: right; padding-bottom: 8px;"}
+      = submit_tag "Move to Draft", name: 'move_to_draft', class: 'collection-action btn btn-primary'
+      = hidden_field_tag 'move_to_draft_link', move_to_draft_merchants_messages_path
+      = submit_tag "Discard", name: 'discard', class: 'collection-action btn btn-danger'
+      = hidden_field_tag 'discard_link', discard_merchants_messages_path
 
 
-      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+  = render partial: 'shared/messages/pager', locals: {collection: @messages}
 
-      = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Last Updated', timestamp_attr: 'updated_at'}
+  = render partial: 'merchants/messages/list', locals: {timestamp_header: 'Last Updated', timestamp_attr: 'updated_at'}
 
-      = render partial: 'shared/messages/pager', locals: {collection: @messages}
+  = render partial: 'shared/messages/pager', locals: {collection: @messages}

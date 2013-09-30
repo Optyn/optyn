@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $( '.scrolltop' ).html( "<i class='icon-arrow-up icon-white'></i>" );
     $(window).scroll(function(){
         // add navbar opacity on scroll
         if ($(this).scrollTop() > 100) {
@@ -42,4 +43,63 @@ $(document).ready(function () {
         //IE7 and 8 stuff
         $("body").addClass("old-ie");
     }
+
+
+    // Placeholder support for old browsers ....................................
+    if ( 'placeholder' in document.createElement( 'input' )) {}
+    else {
+      $( 'input[type=text]' ).each( function( i, v ) {
+        if ( $( this ).attr( 'value' ).length == 0 ) {
+            $( v ).attr( 'value', $( v ).attr( 'placeholder' ));
+        }
+      });
+    }
+
+
+    // Initialise tooltips .....................................................
+    var initTooltips = function() {
+        $( '[data-toggle=tooltip]' ).each( function( index, value ) {
+            var position = $( this ).attr( 'data-tooltip-pos' );
+            if ( position == '' ) {
+                position = 'top';
+            }
+            $( this ).tooltip({
+                placement: position
+            });
+        });
+    };
+    initTooltips();
+
+
+    // Ensure footer is stuck to bottom of window ..............................
+    var setMidContentHt = function ( headerSelector, contentSelector, footerSelector ) {
+        var headerHt = parseInt( $( headerSelector ).css( 'height' ));
+        var footerHt = parseInt( $( footerSelector ).css( 'height' ));
+        var windowHt = $( window ).height();
+        $( contentSelector ).css( 'min-height', windowHt - headerHt - footerHt );
+    };
+
+    // Ensuring footer is stuck to the bottom in application layout ............
+    setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
+    });
+
+    // Ensuring footer is stuck to the bottom in base layout ...................
+    setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
+    });
+
+
+    // Setting height of modal .................................................
+    var setModalHt = function() {
+        $( '.modal-body' ).each( function( index, value ) {
+            var modalHeaderHt = parseInt( $( this ).parent().find( '.modal-header' ).css( 'height' ));
+            var modalFooterHt = parseInt( $( this ).parent().find( '.modal-footer' ).css( 'height' ));
+            $( this ).css( 'max-height', $( window ).height() - modalHeaderHt - modalFooterHt - 80 );
+        });
+    };
+    setModalHt();
+    $( window ).resize( setModalHt );
 });

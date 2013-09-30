@@ -1,21 +1,21 @@
-#box_login
-  .container
+#box_login.container-fluid
+  .row-fluid
     .span12.box_wrapper
-      .span12.box
+      .box.span4.offset4
         %div
           .head
             %h4 Forgot your password?
         
-        .form
+        .form.row-fluid
           = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|
 
-            = f.email_field :email, placeholder: "Email", autofocus: true
+            = f.email_field :email, placeholder: "Email", autofocus: true, 'data-toggle' => 'tooltip', title: 'Email'
 
-            = f.submit "Send me reset password instructions", class: "btn"
+            = f.submit "Reset password", class: "btn btn-primary"
 
-      %p{class: "already"}
-        = link_to "Sign in", new_user_session_path 
-        |
-        = link_to "Sign up as a user", new_user_registration_path
-        |
-        = link_to "Sign up as a shop", new_merchants_manager_registration_path
+        %p{class: "already"}
+          = link_to "Sign in", new_user_session_path 
+          /|
+          /= link_to "Sign up as a user", new_user_registration_path
+          |
+          = link_to "Sign Up", new_merchants_manager_registration_path

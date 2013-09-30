@@ -1,25 +1,23 @@
-#box_sign
-  .container
-    .span12.box_wrapper
-      .span12.box
-        %div  
-          .head
-            %h4 Create your account
-            
-          %br
-          .form
-            = form_for(@user, :as => :user, :url => create_for_twitter_omniauth_clients_path) do |f|
+#box_login
+  .row-fluid.box_wrapper
+    .span4.offset4.box
+      .head
+        %h4 Create your account
+        
+      %br
+      .form.row-fluid
+        = form_for(@user, :as => :user, :url => create_for_twitter_omniauth_clients_path) do |f|
 
-              = f.text_field :name, :autofocus => true, :placeholder => "Name"
+          = f.text_field :name, :autofocus => true, :placeholder => "Name"
 
-              = f.text_field :email, :placeholder => "Email"
+          = f.text_field :email, :placeholder => "Email"
 
-              = f.fields_for :authentication do |authentication_fields|
-                = authentication_fields.hidden_field :uid, value: @authentication.uid
-                = authentication_fields.hidden_field :provider, value: @authentication.provider
-                = authentication_fields.hidden_field :image_url, value: @authentication.image_url
+          = f.fields_for :authentication do |authentication_fields|
+            = authentication_fields.hidden_field :uid, value: @authentication.uid
+            = authentication_fields.hidden_field :provider, value: @authentication.provider
+            = authentication_fields.hidden_field :image_url, value: @authentication.image_url
 
-              %div 
-                %em * All the fields above are required.
-              
-              = f.submit "Sign up", :class => "btn"
+          %div 
+            %em * All the fields above are required.
+          
+          = f.submit "Sign up", :class => "btn"

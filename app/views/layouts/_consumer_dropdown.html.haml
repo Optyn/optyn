@@ -1,3 +1,6 @@
+%li
+  %a.tour{:href => '#'}
+    Take a tour
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
     = image_tag current_user.image_url(session[:omniauth_authentication_id]), :alt => "User Avatar", :class => "profile_image"
@@ -5,23 +8,23 @@
     %li
       %a.active{:href => "dashboard"}
         = image_tag "dropdown_dashicon.png", :float => "left"
-        My Dashboard
+        Dashboard
     %li
       %a{:href => inbox_messages_path}
         = image_tag "dropdown_segments.png", :float => "left"
-        My Messages
+        Messages
     %li
       %a{:href => "connections"}
         = image_tag "dropdown_manager.png", :float => "left"
-        My Connections
+        Connections
     %li
       %a{:href => "segments"}
         = image_tag "dropdown_surveys.png", :float => "left"
-        My Surveys
+        Surveys
     %li
       %a{:href => profile_path}
         = image_tag "dropdown_profile.png", :float => "left"
-        My Account
-    %hr
+        Account
     %li
+      .separator-thin.small
       = link_to("Logout", destroy_user_session_path)

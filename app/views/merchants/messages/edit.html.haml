@@ -1,10 +1,6 @@
-#title_header
-  %h3
-    Message Center - Edit Message
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
+= banner( message_form_title(@message_type) )
 
-    .span8
-      = render partial: "merchants/messages/edit_fields_wrapper"
+= render partial: "merchants/messages/message_menu"
+
+#merchants
+  = render partial: "merchants/messages/edit_fields_wrapper"

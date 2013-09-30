@@ -1,5 +1,4 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
-  layout 'merchants'
 
   before_filter :require_customer_logged_out
   
@@ -39,6 +38,4 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     end
 
   end
-
-
 end

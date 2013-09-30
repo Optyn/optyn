@@ -47,7 +47,7 @@ function MerchantSurvey() {
     //Add a question to the survey
     this.hookAddQuestion = function () {
         var current = this;
-        $('#add_question_button').click(function (e) {
+        $('button.add_question_button').click(function (e) {
 
             $('#new_survey_questions_content .modal-footer').hide();
 
@@ -102,7 +102,7 @@ function MerchantSurvey() {
 
     //Observer for the save changes button click
     this.hookSaveChanges = function () {
-        $('body').on('click', '#save_question_change', function () {
+        $('body').on('click', 'button.save_question_change', function () {
             $('#survey_question_form').submit();
         });
     };
@@ -138,14 +138,14 @@ function MerchantSurvey() {
     // Populate the list of questions
     this.processQuestions = function (questions) {
         if (questions.length) {
-            var tableHeader = '<table class="table table-bordered table-striped">' +
+            var tableHeader = '<table class="table table-hover table-striped">' +
                 '<thead>' +
                 '<tr>' +
                 '<th>Element Type</th>' +
                 '<th>Question</th>' +
                 '<th>Position</th>' +
                 '<th>Values</th>' +
-                '<th colspan="2">Actions</th>' +
+                '<th>Actions</th>' +
                 '</tr>' +
                 '</thead>' +
                 '<tbody>';
@@ -161,8 +161,8 @@ function MerchantSurvey() {
                     "<td>" + element.label + "</td>" +
                     "<td>" + element.position + "</td>" +
                     "<td>" + element.values.join("<br />") + "</td>" +
-                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary">Edit</a>' + "</td>" +
-                    "<td>" + '<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger">Delete</a>' + "</td>" +
+                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>' +
+                        '<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger btn-mini">Delete</a>' + "</td>" +
                     "</tr>";
             });
 

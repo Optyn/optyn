@@ -43,8 +43,8 @@ module ApplicationHelper
     content_for :meta_description do
       default_description = "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications."
       default_keywords = "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
-      content_tag(:meta, "", name: "Description", content: description.blank? ? default_description : description) +
-      content_tag(:meta, "", name: "keywords", content: keywords.blank? ? default_keywords : keywords)
+      tag('meta', name: "Description", content: description.blank? ? default_description : description) +
+      tag('meta', name: "keywords", content: keywords.blank? ? default_keywords : keywords)
     end
   end
 
@@ -128,8 +128,8 @@ module ApplicationHelper
     "Showing #{collection.offset_value + 1}-#{endnumber} of #{collection.total_count}"
   end
 
-  def active_tab_class(highlight_action_name)
-    highlight_action_name == action_name ? "active" : ""
+  def active_tab_class(hightlight_controllers=[])
+     "active" if hightlight_controllers.include?(controller_name)
   end
 
   def shop_public_page_login_location
@@ -147,9 +147,9 @@ module ApplicationHelper
   def email_body_shop_logo(shop)
     if shop.has_logo?
       if shop.website.present?
-        link_to(image_tag(shop.logo_location, alt: shop.name, title: @shop.name).html_safe, shop.website, target: "_blank")
+        link_to(image_tag(shop.logo_location, alt: shop.name, title: @shop.name, style:'max-height: 150px;').html_safe, shop.website, target: "_blank")
       else
-        image_tag(shop.logo_location, alt: shop.name, title: shop.name)
+        image_tag(shop.logo_location, alt: shop.name, title: shop.name, style:'max-height: 150px;')
       end
     else
       if shop.website.present?
@@ -159,6 +159,14 @@ module ApplicationHelper
           shop.name
         end
       end 
+    end
+  end
+
+  def banner(content="Optyn")
+    content_for :banner do
+      content_tag(:h1) do 
+        content
+      end
     end
   end
 end

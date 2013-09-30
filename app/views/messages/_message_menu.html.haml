@@ -1,8 +1,8 @@
-%div.tab-pane.active#message_menu{:style => "padding-top: 20px;"}
-	%ul.nav.nav-tabs{}
-		%li{class: message_menu_highlight_class(['inbox'], "Inbox", "active")}
-			= messages_menu_links(current_user, inbox_messages_path, "Inbox", @inbox_count, false, ["inbox"])
-		%li{class: message_menu_highlight_class(['saved'], "Saved", "active")}
-			= messages_menu_links(current_user, saved_messages_path, "Saved", 0, false, ["saved"])
-		%li{class: message_menu_highlight_class(['trash'], "Trash", "active")}
-			= messages_menu_links(current_user, trash_messages_path, "Trash", 0, false, ["trash"])
+%div.tab-pane.active#message_menu
+  %ul.nav.nav-tabs{}
+    %li{class: message_menu_highlight_class(['trash'], "Trash", "active")}
+      = messages_menu_links(current_user, trash_messages_path, "Trash", 0, false, ["trash"])
+    %li{class: message_menu_highlight_class(['saved'], "Saved", "active")}
+      = messages_menu_links(current_user, saved_messages_path, "Saved", 0, false, ["saved"])
+    %li{class: message_menu_highlight_class(['inbox'], "Inbox", "active")}
+      = messages_menu_links(current_user, inbox_messages_path, "Inbox", @inbox_count, false, ["inbox"])

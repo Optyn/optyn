@@ -1,16 +1,12 @@
-#title_header
-  %h3
-    Your Shop Details
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
-    .span9
-      .action-buttons
-        = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
-        %a.btn{:href => merchants_upgrade_subscription_path} Your Pricing Plan
-        %a.btn{:href => edit_merchants_manager_registration_path} Edit Personal Info
-        %a.btn{:href => merchants_managers_list_path} View / Add Managers
-        %a.btn{:href => merchants_locations_path} View / Add Locations
+= banner( 'Manage Shop' )
 
-      = render partial: "shared/shops/detail"
+= render partial: 'merchants/merchant_managers/tabs'
+
+#merchants.pad3pc
+  %h2
+    = "#{current_shop.name} Details"
+  .action-buttons
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_merchants_shop_path(), :class => 'btn btn-primary'
+    %a.btn{:href => edit_merchants_manager_registration_path} Edit Personal Info
+
+  = render partial: "shared/shops/detail"

@@ -6,12 +6,9 @@
     - @survey_questions.each do |question|
       - if question.show_label
         %div
-          %span
-            = question.label.html_safe
+          = question.label.html_safe
 
-      .clearfix
-
-      %div
+      %div{ style: 'margin-bottom: 20px;' }
         = question.markup.html_safe
         %br
         

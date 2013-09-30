@@ -33,7 +33,7 @@ class Merchants::DashboardsController < Merchants::BaseController
     @new_connections = Connection.shop_latest_connections(current_shop.id)
     @new_connections.collect do |connection|
       HashWithIndifferentAccess.new({
-          type: 'New connection',
+          type: 'Subscribed',
           time: connection.updated_at,
           user: connection.user.display_name,
           action_url: merchants_connections_path
@@ -57,7 +57,7 @@ class Merchants::DashboardsController < Merchants::BaseController
     @disconnections = Connection.shop_dashboard_disconnected_connections(current_shop.id)
     @disconnections.collect do |connection|
       HashWithIndifferentAccess.new({
-          type: 'Revoked connection',
+          type: 'Unsubscribed',
           time: connection.updated_at,
           user: connection.user.display_name,
           action_url: nil

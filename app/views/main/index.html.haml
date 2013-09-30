@@ -1,37 +1,27 @@
-= display_title "Optyn.com - The Simplest Marketing Tool for Small Businesses."
-= display_meta_description "Optyn improves the marketing relationship between businesses and their customers. We help businesses easily engage their customers, while giving tools to consumers to help them manage their incoming marketing communications.", "optyn, opt-in, opt in, email marketing, universal opt-in, universal opt in, customer engagement, engagement marketing, local marketing, local e-mail marketing"
-/New Content
-:javascript
-  $(function(){
-    if(window.chrome) {
-       $('#get-started').hide();
-    } else {
-       $('#download-extension').hide();
-    }
-
-    $("#consumer_video_container").colorbox({iframe:true, innerWidth:640, innerHeight:390});
-    $("#merchant_video_container").colorbox({iframe:true, innerWidth:640, innerHeight:390});
-  });
-#home
-  .main-area
-    .headline
-      .slogan1
-        %h3
-          Marketing Made Simple
-      .slogan2
-        %h3
-          for Small Businesses
-    .span6.merchant
-      .content
-        %strong
-          Create and send email campaigns to your customers in under 2 minutes!
-          %br
-          %br
-          Optyn is the fastest and easiest e-mail marketing platform AND we help you capture and engage your customers in-store and online.
-      %h4
-        Get started with a FREE account for life!
-      .buttons
-        %a.btn.startbutton{:href => new_merchants_manager_registration_path} Get Started
-        %a.btn.quickvid{:href => "http://www.youtube.com/embed/w13YkiT1J7E?autoplay=1", :id => "merchant_video_container"} Watch Video
+.m-i
+  .row-fluid
+    .span12
+      %h1.pull-left
         %span
-          %a{:href => merchant_features_path} Learn More
+          Marketing Made Simple
+        %br
+        %span
+          for Small Businesses
+  .row-fluid
+    .span4.box-white.signup
+      %h2 Start marketing to your customers right away.
+      %h5 It takes 2 minutes to create a campaign.
+      %a{ href: new_merchants_manager_registration_path, class: 'btn btn-large btn-success btn-block' }
+        Get started for FREE!
+    .span4.offset4.box-white.vid-lnk
+      Darren & Ross, Owners of Alley Gallery
+      %br
+      Evanston, IL
+      /%br
+      /%i.icon-facetime-video
+      /See how Darren & Ross use Optyn.
+
+:javascript
+  $( function() {
+    $("#show-vid").colorbox({iframe:true, innerWidth:640, innerHeight:390});
+  });

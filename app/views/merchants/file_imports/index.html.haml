@@ -1,46 +1,43 @@
-/Main Body
-#dashboard
-  .container
-    = render partial: "merchants/shared/menu"
-    .span8
-      .header
-        .maintitle
-          %h3
-            Import Customers for
-            = current_shop.name
-          If you have a previous email list, you can easily import it into Optyn below. 
-          %br
-          You could download the
-          = link_to "Sample File", "/file_import_stub.csv"
-          here
-      .import
-      %br
-      %br
-        = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
+= banner("Import Customers for #{current_shop.name}")
+  
+.pad3pc
+  %br
+  
+  .import
+    %ul.text-left
+      %li If you have a previous email list, you can easily import it into Optyn. 
+      %li
+        You can download the
+        = link_to "Sample File", "/file_import_stub.csv"
+        by
+        = link_to "clicking here.", "/file_import_stub.csv"
+    = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
+      .row-fluid
+        .span8.offset2.text-center
           .control-group
-            = f.label :csv_file, "Customer CSV file to Import", class: 'control-label'
-            .controls
+            = f.label :csv_file, "Customer CSV file", class: 'control-label'
+            .controls.text-left
               = f.file_field :csv_file
 
           .control-group
             = f.label :label, "Label for import records", class: 'control-label'
-            .controls
+            .controls.text-left
               = f.text_field :label, value: (params[:file_import][:label] rescue FileImport::DEFAULT_LABEL_NAME)
 
           .actions
             = f.submit "Import", class: "btn btn-primary"
 
-
-      %table.table.table-striped
-        %thead
-          %tr
-            %th #
-            %th Name
-            %th Status
-            %th Label
-            %th Stats
-            %th Uploaded
-        %tbody
+    %table.table.table-striped.table-hover
+      %caption Imported files
+      %thead
+        %tr
+          %th #
+          %th Name
+          %th Status
+          %th Label
+          %th Stats
+          %th Uploaded
+      %tbody
         - if @file_imports.present?
           - @file_imports.each_with_index do |import, index|
             %tr
@@ -62,5 +59,19 @@
                 = human_time(import.created_at) rescue "-"
         - else
           %tr
-            %td{colspan: 5}
+            %td{colspan: 6}
               No files uploaded yet for imports.
+
+:javascript
+  $( function() {
+    if ( $( '.import input[type=file]').val() == '' ) {
+      $( 'input[name=commit]' ).addClass( 'disabled' )
+        .attr( 'disabled', '' );
+    }
+
+    $('.import input[type=file]').change( function() {
+      $( 'input[name=commit]' ).tooltip( 'destroy' )
+        .removeAttr( 'disabled' )
+        .removeClass( 'disabled' );
+    });
+  });

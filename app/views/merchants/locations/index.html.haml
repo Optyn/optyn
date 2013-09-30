@@ -1,48 +1,43 @@
-#title_header
-  %h3
-    = current_shop.name
-    Locations
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
-    .span8
-      %div
-        %a.btn{:href => new_merchants_location_path}
-          %i.icon-black.icon-map-marker
-          Add New Location
-      %br
-      %table.table.table-striped
-        %thead
-          %tr
-            %th #
-            %th Street Address 1
-            %th Street Address 2
-            %th City
-            %th State
-            %th Zip
-            %th Manage
-        %tbody
-        - unless @locations.blank?
-          - @locations.each_with_index do |location, index|
-            %tr
-              %td
-                = index + 1
-              %td
-                = location.street_address1
-              %td
-                = location.street_address2
-              %td
-                = location.city
-              %td
-                = location.state_name
-              %td
-                = location.zip
-              %td
-                = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary'
-                = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger'
-        - else
-          %tr
-            %td{colspan: 6}
-              No locations added so far
+= banner("#{current_shop.name} Locations")
 
+= render partial: 'merchants/merchant_managers/tabs'
+
+#merchants.pad3pc
+  %div
+    %a.btn.btn-primary{:href => new_merchants_location_path}
+      %i.icon-white.icon-map-marker
+      Add New Location
+  %br
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th #
+        %th Street Address 1
+        %th Street Address 2
+        %th City
+        %th State
+        %th Zip
+        %th Manage
+    %tbody
+    - unless @locations.blank?
+      - @locations.each_with_index do |location, index|
+        %tr
+          %td
+            = index + 1
+          %td
+            = location.street_address1
+          %td
+            = location.street_address2
+          %td
+            = location.city
+          %td
+            = location.state_name
+          %td
+            = location.zip
+          %td
+            = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary btn-mini'
+            = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger btn-mini'
+    - else
+      %tr
+        %td{colspan: 7}
+          No locations added so far

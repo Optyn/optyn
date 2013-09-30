@@ -28,6 +28,7 @@ class Shop < ActiveRecord::Base
   DEFAULT_HEADER_BACKGROUND_COLOR = '#1791C0'
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
+
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added, :uploaded_directly
 
 
