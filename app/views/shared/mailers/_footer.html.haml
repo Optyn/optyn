@@ -1,4 +1,4 @@
-%table{:style => "width: 100%; clear:both; background-color:#d6d6d6; text-align:center; max-width: 600px; height: 60px;", :align => "center"}
+%table{:style => "width: 100%; clear:both; text-align:center; max-width: 600px; height: 60px;", :align => "center"}
   %tr
     %td
     %td
@@ -6,13 +6,7 @@
         %table{:width => "100%"}
           %tr
             %td{:style => "text-align:center"}
-              %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
-                %a{:href => "http://www.optyn.com", :style => "color:#252525;"} Home
-                |
-                %a{:href => "http://support.optyn.com", :style => "color:#252525;"} Support
-                |
-                %a{:href => "http://www.optyn.com/connections", :style => "color:#252525;"} E-Mail Preferences
+              %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
                 - if @message.present? && @message_user.present?
-                  |
                   = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}?tracker=#{@message_user.uuid}")
     %td

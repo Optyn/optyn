@@ -15,20 +15,22 @@
     = yield :meta_description
     = analytics_init if Rails.env.production?
     = render(partial: "layouts/uservoice") if Rails.env.production? || Rails.env.staging?
-  %body
+  %body.ef-l#flat
     %a.scrolltop{:href => "#"}
     / begin navbar
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{:href => root_path}
-            = image_tag "logo.png", :alt => "logo"
-    / ends navbar
+    .container-fluid
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container-fluid
+            %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.brand{:href => root_path}
+              = image_tag "logo.png", :alt => "logo"
+      / ends navbar
 
-    = yield
+      .yield
+        = yield
 
-    = render partial: "layouts/footer"
+      = render partial: "layouts/footer"

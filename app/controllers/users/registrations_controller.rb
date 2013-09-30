@@ -4,7 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :redirect_to_account, only: [:profile, :update_profile]
 
 
-
   def new
     session[:omniauth_manager] =nil
     session[:omniauth_user] =true
@@ -66,6 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
+    #render layout: 'merchants'
     @user = current_user
     @user.attributes = params[:user].except(:birth_date)
 
@@ -87,4 +87,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render 'edit'
     end
   end
+
+
+  def edit
+  end
+
 end

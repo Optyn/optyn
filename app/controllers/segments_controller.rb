@@ -1,4 +1,5 @@
 class SegmentsController < BaseController
+
   include DashboardCleaner
 
   skip_before_filter :authenticate_user!, :redirect_to_account, only: [:show, :save_answers, :default]

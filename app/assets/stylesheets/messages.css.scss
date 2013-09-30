@@ -9,6 +9,22 @@
 
 #message_preview_container .outer-table .outer-cell .inner-table{padding:15px; max-width:600px; margin:0 auto; display:block;}
 
+#message_preview_container {
+	strong {
+		font-size: 1em;
+		font-weight: bold;
+		font-family: sans-serif;
+	}
+	h1 {
+		font-family: sans-serif;
+		background-color: transparent;
+		border: 0;
+	}
+	tr {
+		overflow: scroll;
+	}
+}
+
 /**
  * Message list styles
  */
@@ -24,62 +40,107 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 .message-shop-logo{width: 125px;}
 
 /* Message Center Design */
-#message_center {
-
-}
 #choose_message {
-	padding-bottom: 20px;
+	padding: 2% 0;
+	clear: both;
+	> .row-fluid {
+		padding: 0;
+	}
 }
 #choose_message .row {
 	margin-bottom: 20px;
 }
-#choose_message .row .type {
-	background-color: white;
-	border-radius: 6px;
-	text-align: center;
+#choose_message .type.coupon:hover {
+	background-color: $light-gray;
+}
+#choose_message .coupon:before {
+	content: 'A coupon will get customers in your door and you will earn on average a 30% increase in sales.';
+	position: absolute;
+	top: -150px;
+	left: 0;
+	background-color: $green;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	z-index: 3;
+	box-sizing: border-box;
+	@include transition( all 0.2s ease-out );
+	font-size: 0.8em;
+	color: $white;
+	text-decoration: none;
+}
+#choose_message .type {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	background-color: $light-gray;
 	vertical-align: middle;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 10px;
-	padding-right: 10px;
-	width: 215px;
-	-webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  	-moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  	box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-}
-#choose_message .row .type:hover {
-	background-color: #1791c0;
-	color:white;
-}
-#choose_message .row .type h3 {
-	color: #263d45;
-	font-size: 16px;
-	font-weight: bold;
+	border: solid 1px $medium-gray;
+	margin-bottom: 2%;
+	height: 140px;
+	color: $black;
+	font-size: 1.2em;
+	z-index: 2;
+	text-decoration: none;
+	&:hover {
+		background-color: $green;
+		color: $white;
+	}
+	&:hover:before {
+		top: 0;
+	}
+	img {
+		float: left;
+		margin-right: 15px;
+		position: absolute;
+		left: 10px;
+		top: 32%;
+	}
+	> span {
+		position: absolute;
+		top: 36%;
+		left: 100px;
+	}
+	> aside {
+		font-size: 0.8em;
+		color: $orange;
+		position: absolute;
+		left: 100px;
+		bottom: 10px;
+	}
 }
 
-#choose_message .row .type img {
+#flat.preview.merchants-messages .add-on i {
+  margin-top: 4px;
+}
+.merchants-messages {
+  table {
+    clear: both;
+  }
+}
+#flat #message_meta_modal .add-on > i {
+  margin-top: 0;
+}
+#message_header_settings_form label {
+	display: inline;
+	margin-right: 10px;
+}
+.preview-text > .span3 {
+	text-align: right;
+}
 
+@media (min-width: 768px) and (max-width: 979px) {
+	#choose_message .type span {
+		left: 70px;
+	}
+	#choose_message .type aside {
+		left: 10px;
+	}
 }
-/* Header Text for compose */
-.headertext {
 
-}
-.headertext h3 {
-	font-weight: bold;
-	margin: 0px;
-	padding-bottom: 10px;
-	font-size: 26px;
-	line-height: 28px;
-}
-.headertext h5 {
-	margin: 0px;
-	font-size: 16px;
-	line-height: 16px;
-	padding-bottom: 10px;
-}
-.headertext h6 {
-	color: #1791c0;
-	font-size: 14px;
-	line-height: 14px;
-	padding-bottom: 10px;
+@media ( max-width: 767px ) {
+	.preview-text > .span3 {
+		text-align: left;
+	}
 }

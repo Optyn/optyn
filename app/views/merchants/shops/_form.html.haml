@@ -1,12 +1,12 @@
 #update_shop_wrapper
   .control-group
-    .clabel
+    .control-label
       = f.label :name
     .controls
-      = f.text_field :name
+      = f.text_field :name, 'data-toggle' => "tooltip", 'title' => :name, class: 'span12'
 
   .control-group
-    .clabel
+    .control-label
       = f.label :phone_number
     .controls
       = f.text_field :phone_number
@@ -14,53 +14,51 @@
         example: +1 (xxx) xxx-xxxx    
 
   .control-group
-    .clabel
+    .control-label
       = f.label :description
     .controls
-      = f.text_area :description, {:style => "width: 500px; height: 70px; resize: none;"}
+      = f.text_area :description, 'data-toggle' => "tooltip", 'title' => :description, :placeholder => :description, class: 'span12'
 
   .control-group
-    .clabel
+    .control-label
       = f.label :website
-    .controls.input-prepend
-      %span.add-on
-        %i.icon-globe
-      = f.url_field :website
-      .help-block
-        %em Example: http://www.example.com
+    .controls
+      .input-prepend
+        %span.add-on
+          %i.icon-globe
+        = f.url_field :website, 'data-toggle' => "tooltip", 'title' => 'URL of the website', :placeholder => :website, class: 'span12'
+        .help-block
+          %em Example: http://www.example.com
 
   .control-group
-    .clabel
+    .control-label
       = f.label :identifier
-    .controls.input-prepend.input-append
-      %span.add-on
-        == #{SiteConfig.app_base_url}/
-      =f.text_field :identifier
-      %span.help-block
-        %em Example: http://www.optyn.com/example
+    .controls
+      .input-prepend.input-append{ 'data-toggle' => "tooltip", 'title' => 'Example: http://www.optyn.com/example' }
+        %span.add-on
+          == #{SiteConfig.app_base_url}/
+        =f.text_field :identifier, :placeholder => :identifier
   %div#loading.control-group{style: "display:none"}
-    %span.help-block
+    %span.help-block.controls
       %em.text Loading...
 
   .control-group
-    .clabel
+    .control-label
       = f.label :time_zone
     .controls
       = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, {model: ActiveSupport::TimeZone, include_blank: '-- Timezone --'}
       = hidden_field_tag(:timezone_mapping, ActiveSupport::TimeZone::MAPPING.sort.to_json)
 
+
   .control-group
-    .clabel
+    .control-label
       = f.label :logo_img, "Logo"
     .controls
-      = f.file_field :logo_img
+      = f.file_field :logo_img, 'data-toggle' => "tooltip", 'title' => 'Logo'
 
   .control-group
-    .clabel
-      = f.label :business_ids, "Business Category"
-    .controls
-      = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select", :style => "width:250px; height:0px", :multiple => true}
-
+    .controls{ 'data-toggle' => 'tooltip', :title => 'Business Category' }
+      = f.select "business_ids",Business.all.collect {|p| [ p.name, p.id ] },{}, {:class => "chzn-select span12", :style => "height:0px", :multiple => true}
   .action-buttons
     = f.submit "Update" , class: "btn btn-primary"
     = link_to "Cancel", merchants_shop_path, class: 'btn'

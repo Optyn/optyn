@@ -1,11 +1,13 @@
-#box_sign
-  .container
-    .span12.box_wrapper
-      .span12.box
-        %div  
-          .address 
-            .head.pull-left.lead 
-              = "Enter Location Details"
-            .form 
-              = form_for :location, url: merchants_locations_path, method: :post do |f| 
-                = render :partial => 'form', :locals => {f: f}
+= banner("New Location")
+
+= render partial: 'merchants/merchant_managers/tabs'
+
+#box_login
+  .box_wrapper
+    .span4.offset4.box
+      .address
+        .head.pull-left.lead
+          %h4 Enter Location Details
+        .form.row-fluid
+          = form_for :location, url: merchants_locations_path, method: :post do |f|
+            = render :partial => 'form', :locals => {f: f}

@@ -1,10 +1,4 @@
-#title_header
-  %h3
-    Message Center - New Campaign
-/Main Body
-#merchants
-  .container
-    = render partial: "merchants/shared/menu"
+= banner( message_form_title(@message_type) )
 
-    .span8
-      = render partial: "merchants/messages/new_fields_wrapper"
+#merchants
+  = render partial: "merchants/messages/new_fields_wrapper"

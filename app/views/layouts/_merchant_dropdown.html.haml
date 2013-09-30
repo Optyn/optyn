@@ -1,31 +1,25 @@
 %li
-  %a{:href => merchants_root_path}
-    %i.icon-list-alt.icon-white
-    Dashboard
+  %a.tour{ :href => merchants_messages_path} Create new campaign
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
     = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
   %ul.dropdown-menu
     %li
       %a.active{:href => merchants_root_path}
-        = image_tag "dropdown_dashicon.png", :float => "left"
+        = image_tag "dropdown_dashicon.png"
         My Dashboard
     %li
-      %a{:href => "connections"}
-        = image_tag "dropdown_manager.png", :float => "left"
+      %a{:href => merchants_messages_path}
+        = image_tag "dropdown_manager.png"
         My Campaigns
     %li
-      %a{:href => "#"}
-        = image_tag "dropdown_segments.png", :float => "left"
-        My Messages
-    %li
-      %a{:href => "segments"}
-        = image_tag "dropdown_surveys.png", :float => "left"
+      %a{:href => merchants_survey_path}
+        = image_tag "dropdown_surveys.png"
         My Surveys
     %li
-      %a{:href => merchants_shop_path}
-        = image_tag "dropdown_settings.png", :float => "left"
-        Manage Shop
-    %hr
+      %a{:href => merchants_shop_path, :class => 'hr'}
+        = image_tag "dropdown_settings.png"
+        Account
+      .separator-thin.small
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

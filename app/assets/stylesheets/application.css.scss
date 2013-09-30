@@ -1,4 +1,7 @@
 //= require sliders
+@import "utilities/fonts.css.scss";
+@import "utilities/effects.css.scss";
+@import "utilities/variables.css.scss";
 @import "compass";
 @import "compass/reset";
 @import "consumers";
@@ -9,7 +12,6 @@
 @import "external-pages";
 @import "faq";
 @import "features";
-@import "footer";
 @import "header";
 @import "home";
 @import "main";
@@ -30,3 +32,5 @@
 @import "messages";
 @import "colorpicker";
 @import "colorbox";
+@import "optyn_button";
+@import "email_feedback";

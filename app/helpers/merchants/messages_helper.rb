@@ -117,7 +117,7 @@ module Merchants::MessagesHelper
 
   def messages_menu_links(user, path, link_name, count, force_visible=false, highlight_actions=[])
     #if force_visible || user.message_authoring_or_admin_rights?
-    link_to("#{link_name}#{" (#{count})" if (count.to_i > 0 rescue false)}", path, :class => message_menu_highlight_class(highlight_actions, link_name))
+    link_to(raw("#{link_name}#{" <span>#{count}</span>" if (count.to_i > 0 rescue false)}"), path, :class => message_menu_highlight_class(highlight_actions, link_name))
     #end
   end
 
@@ -161,5 +161,9 @@ module Merchants::MessagesHelper
         image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 100%;')
       end  
     end
+  end
+
+  def message_progress_bar_highlight(hightlight_action_names=[])
+    "current" if hightlight_action_names.include?(action_name)
   end
 end

@@ -1,16 +1,13 @@
-#title_header
-	%h3= "#{@survey.title}"
+= banner("#{@survey.title}")
 /Main Body
-#merchants
-	.container
-		= render partial: "merchants/shared/menu"
-		.span9.form-bg
-			.actions{:style => "padding-left: 20px;"}
+#merchants.pad3pc
+	.form-bg
+		.actions{:style => "padding-left: 20px;"}
+		= link_to "Show", merchants_survey_path, class: 'btn btn-info'
+		= link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
+		= render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
+		= render partial: "shared/surveys/markup", locals: {preview: true}
+		.actions{:style => "margin-top: 20px;"}
 			= link_to "Show", merchants_survey_path, class: 'btn btn-info'
 			= link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
 			= render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}
-			= render partial: "shared/surveys/markup", locals: {preview: true}
-			.actions{:style => "margin-top: 20px;"}
-				= link_to "Show", merchants_survey_path, class: 'btn btn-info'
-				= link_to "Edit", edit_merchants_survey_path, class: 'btn btn-primary'
-				= render partial: 'merchants/surveys/launch_button', locals: {survey: @survey}

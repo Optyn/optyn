@@ -1,42 +1,175 @@
 /* All Merchant Account Pages CSS is here */
-#merchants {
-  padding-top: 30px;
-  padding-bottom: 20px;
-}
-#merchants .action-buttons{
-  padding-bottom: 20px;
-}
-/* To be Used Later */
-#connections {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 0px;
-}
-#connections table {
+#flat {
+  footer.inner {
+    background-color: $light-gray;
+    color: $dark-gray;
+    line-height: 42px;
+    .copy a {
+      padding: 0 10px;
+      border-right: solid 1px $medium-gray;
+      text-decoration: none;
+      &:last-child {
+        border: 0;
+      }
+    }
+    a {
+      text-decoration: underline;
+      color: $gray;
+    }
+  }
+  .stats {
+    /* Styles for Consumer & Merchant dashboard statistics. */
+    .span3 {
+      padding: 5% 1%;
+      text-align: center;
+      background-color: $light-gray;
+      .count {
+        font-size: 42px;
+        line-height: 80px;
+        color: $orange;
+      }
+    }
+  }
+  /* Override chosen's CSS */
+  .chzn-container-multi .chzn-choices {
+    .search-choice {
+      background-color: $light-gray;
+      background-image: none;
+      color: $black;
+      border-radius: 0;
+      line-height: 20px;
+    }
+    .search-choice .search-choice-close {
+      top: 8px;
+    }
+  }
+}  /* End #flat */
+#flat.m-app {
+  background-size: contain;
+  background-repeat: repeat-y;
+  padding-top: 70px;
+  h1, h2 {
+    margin-top: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+  }
+  h1 {
+    line-height: 46px;
+    height: 50px;
+    padding: 0 0 0 3%;
+    border-bottom: solid 1px darken( $light-gray, 10% );
+    background-color: $light-gray;
+    font-size: 27px;
+  }
+  h2 {
+    font-size: 30px;
+    line-height: 40px;
+    clear: left;
+  }
+  .action-buttons {
+    margin-bottom: 20px;
+  }
+  .nav-tabs {
+    background-color: $light-gray;
+    height: 50px;
+    border-color: darken( $light-gray, 10% );
+    > li {
+      float: right;
+    }
+    a {
+      line-height: 35px;
+      height: 50px;
+      border-top: 0;
+      border-radius: 0;
+      color: $black;
+      margin: 0;
+      &:hover {
+        background-color: $white;
+      }
+      > span {
+        border-radius: 100px;
+        padding: 0 5px;
+        background-color: $medium-gray;
+        color: $white;
+      }
+    }
+  }
+  #message_form .actions {
+    margin-top: 7%;
+  }
+  .modal-footer .actions {
+    margin-top: 0;
+  }
+} /* / .m-app */
 
+.merchants-shops h1,
+.merchants-merchant_managers h1,
+.merchants-managers-registrations h1,
+.merchants-locations h1,
+.merchants-subscriptions h1 {
+  /* Applies to all views under the merchant_managers controller */
+  float: left;
 }
-/* New Edit CSS */
-.edit_page {
-  background-color: #FFF;
-  border-radius: 4px;
-  height: auto;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding: 30px;
-  margin-bottom: 30px;
+.merchants-managers-registrations #edit_merchants_manager .profile_image {
+  float: left;
+  margin-right: 20px;
 }
-.edit_page h3 {
-  margin: 0px;
-  padding-bottom: 20px;
-  line-height: 24px;
-  font-size: 24px;
+.edit.merchants-shops.m-app textarea {
+  height: 70px; resize: none;
 }
-.edit_page .form {
 
+.merchants-messages h1{
+  float: left;
+  padding-right: 3%;
 }
+
+.merchants-messages h2 {
+  float: left;
+}
+
+@media( max-width: 768px ) {
+  /* For Merchants dash -------------------------------- */
+  #flat.m-app {
+    background-image: none;
+      .span6 {
+      padding: 0;
+      text-align: center;
+    }
+    .navbar-inner {
+      padding: 0;
+    }
+    .brand {
+      border: 0;
+      padding: 17px 0 0 10px;
+    }
+    .preview .customize {
+      text-align: left;
+    }
+  }
+  #flat.merchants-messages h1 {
+    float: none;
+    margin-bottom: 0;
+  }
+  #flat.merchants-dashboards #dashboard .stats .span3 {
+    padding: 1%;
+    margin-bottom: 1%;
+  }
+  #flat.merchants-dashboards #dashboard .text-warning {
+    margin-top: 50px;
+  }
+  #flat.merchants-dashboards #dashboard {
+    margin-top: 0;
+  }
+  .merchants-shops h1 {
+    float: none;
+    padding-bottom: 0;
+  }
+}
+
+.merchants-connections.index #merchants > p {
+  line-height: 30px;
+}
+
 
 /* Merchant Edit Pages */
 #edit {
@@ -104,79 +237,50 @@
 }
 /* Optyn Button Stats */
 #button_stats {
-  background-color: #FFF;
-  border-radius: 4px;
+  color: $dark-gray;
   height: auto;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
   margin-left: 0px;
 }
 #button_stats h3 {
   padding-left: 10px;
 }
-#button_stats hr {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 #button_stats .line {
-  padding-left: 20px;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  font-size: 16px;
+  padding: 2px 0 2px 20px;
 }
 #button_stats .line strong {
   font-size: 18px;
 }
 /* Update Shop Wrapper */
-#update_shop_wrapper {
-
-}
-#update_shop_wrapper .control-group {
-  padding-bottom: 20px;
-  height: 60px;
-}
-#update_shop_wrapper .control-group .clabel {
-  width: 20%;
-  float: left;
-  height: 50px;
-  vertical-align: middle;
-  font-size: 16px;
-}
-#update_shop_wrapper .control-group .clabel label {
-  padding-top: 10px;
-}
-#update_shop_wrapper .control-group .input-append .add-on,
-#update_shop_wrapper .control-group .input-prepend .add-on {
-  height: 30px;
-  font-size: 12px;
-  line-height: 30px;
-}
-#update_shop_wrapper .control-group .input-append input[type="text"],
-#update_shop_wrapper .control-group .input-prepend input[type="text"] {
-  width: 80%;
-}
-#update_shop_wrapper .control-group .controls {
-  width: 80%;
-  float: right;
-  height: 50px;
-}
 #update_shop_wrapper .control-group .controls .help-block {
   float: right;
 }
-#update_shop_wrapper .action-buttons {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { 
+@media (min-width: 768px) and (max-width: 979px) {
   #edit .box{
     width: 54%;
   }
 }
 @media (max-width: 979px) {
+  #flat.m-app .nav-tabs a {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   #edit .box{
     width: 48%;
+  }
+  #flat.m-app {
+    padding-top: 0;
+  }
+}
+@media (min-width: 768px) {
+  .merchants-dashboards.index {
+    .stats {
+      margin-bottom: 20px;
+      .span3 {
+        height: 190px;
+        overflow: hidden;
+      }
+    }
   }
 }
 @media (min-width: 980px) {
@@ -197,65 +301,18 @@
 }
 /* Merchant Dashboard Page */
 #dashboard {
+  background: image-url( 'bg_dash.png' );
+  background-size: contain;
+  background-repeat: repeat-y;
   padding-top: 50px;
   padding-bottom: 50px;
   margin: 0px;
 }
-#dashboard .header {
-  height: 50px;
-}
-#dashboard .header .maintitle {
-  margin: 0px;
-}
-#dashboard .header .maintitle h3 {
-  margin: 0px;
-  padding-top: 0px;
-  color: #263d45;
-  font-size: 25px;
-  line-height: 27px;
-}
 #dashboard .header .new {
-  float: right;
-}
-#dashboard .header .new .newcampaign {
-  background: #1791c0;
-  border-radius: 4px;
-  display: inline-block;
-  height: 36px;
-  line-height: 32px;
-  top: 4px;
-  color: #ffffff;
-  font-size: 18px;
-  text-decoration: none;
-  text-shadow: none;
-  font-weight: bold;
-  border: 1px #304d58;
   float: right;
 }
 #dashboard .header .new .newcampaign img {
   padding-right: 10px;
-}
-#dashboard .header .newcampaign:hover{
-  background: #147ea7;
-  color: #fff;
-  text-decoration: none;
-  text-shadow: none;
-}
-#dashboard .latest {
-  border-radius: 4px;
-  background-color: #7d8f96;
-  height: 50px;
-  margin-top: 10px;
-}
-#dashboard .latest .title {
-  font-size: 18px;
-  color: #fff;
-  line-height: 26px;
-  float: left;
-  padding-left: 20px;
-  vertical-align: middle;
-  padding-top: 10px;
-  font-weight: bold;
 }
 #dashboard .latest .sortby {
   float: right;
@@ -268,59 +325,13 @@
   border: 0px !important;
   width: 150px !important;
 }
-#dashboard table a {
-  color: #1791c0 !important;
-}
-#dashboard table a:hover {
-  color: #263d45 !important;
-}
 /* Dashboard Statistics */
-#dashboard .stats {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 #dashboard .stats .span2 {
   margin-left: 0px;
   width: 186px;
 }
-#dashboard .stats .leading {
-  margin-left: 30px;
-}
 #dashboard .stats .box {
   padding-left: 8px;
-}
-#dashboard .stats .box .count,
-#dashboard .stats .leading .count {
-  text-align: center;
-  background-color: #1791c0;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  font-size: 36px;
-  line-height: 40px;
-  color: white;
-  font-weight: bold;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#dashboard .stats .box .info,
-#dashboard .stats .leading .info {
-  background-color: white;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-#dashboard .stats .box .info .img,
-#dashboard .stats .leading .info .img {
-  float: left;
-  padding-right: 5px;
-  padding-top: 4px;
-}
-#dashboard .stats .box .info .text,
-#dashboard .stats .leading .info .text {
-  text-align: left;
 }
 /* Merchant Settings Page */
 #settings {
@@ -344,9 +355,6 @@
   padding-right: 10px;
   margin: 0px;
 }
-#campaigns table {
-
-}
 #messages {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -354,60 +362,8 @@
   padding-right: 10px;
   margin: 0px;
 }
-#messages table {
 
-}
 /* Optyn Button Preview Page */
-#merchants .preview {
-  padding-left: 20px;
-}
-#merchants .preview .header {
-
-}
-#merchants .preview .header h3 {
-  color: #304d58;
-  padding-top: 0px;
-  font-size: 24px;
-  line-height: 24px;
-  margin-top: 0px;
-}
-#merchants .preview .header h6 {
-  color: #304d58;
-  padding-top: 5px;
-  font-size: 14px;
-  line-height: 16px;
-  margin-top: 0px;
-  font-style: normal;
-}
-#merchants .preview .main,
-.form-bg {
-  background-color: #FFF;
-  border-radius: 6px;
-  height: 575px;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  box-sizing: border-box;
-}
-#merchants .preview .main .header {
-  color: #1791c0;
-  font-weight: bold;
-  font-size: 18px;
-}
-#merchants .preview .main .header hr {
-  margin-top: 5px;
-  margin-bottom: 0px;
-}
-#merchants .preview .main .customize {
-  border-right: 1px solid #ececec;
-  padding-right: 30px;
-  width: 320px;
-}
-#merchants .preview .main .customize .custom {
-
-}
 #merchants .preview .main .customize .custom .option {
   padding-top: 10px;
   padding-right: 10px;
@@ -416,34 +372,7 @@
   width: 95%;
 }
 #merchants .preview .main .customize .refresh {
-  float: right;
-}
-#merchants .preview .main .customize .refresh .refreshbtn {
-  background: #e7eaeb;
-  border-radius: 4px;
-  display: inline-block;
-  height: 20px;
-  line-height: 18px;
-  top: 4px;
-  color: #1791c0;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  border: 1px #304d58;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#merchants .preview .main .customize .refresh .refreshbtn:hover{
-  background: #d6d6d6;
-  text-decoration: none;
-  text-shadow: none;
-}
-#merchants .preview .main .btn-preview {
-  border-left: 1px solid #ececec;
-  width: 320px;
-  padding-left: 30px;
-  margin-left: 0px;
+  margin-top: 30px;
 }
 #merchants .preview .main .btn-preview .optyn-preview {
   padding-top: 40px;
@@ -454,53 +383,7 @@
   padding-bottom: 10px;
 }
 #merchants .preview .main .btn-preview .codesnippet textarea {
-  width: 95%;
-}
-#merchants .preview .main .btn-preview .btns {
-  float: right;
-}
-#merchants .preview .main .btn-preview .btns .refreshbtn {
-  background: #e7eaeb;
-  border-radius: 4px;
-  display: inline-block;
-  height: 20px;
-  line-height: 18px;
-  top: 4px;
-  color: #1791c0;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  border: 1px #304d58;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#merchants .preview .main .btn-preview .btns .refreshbtn:hover {
-  background: #d6d6d6;
-  text-decoration: none;
-  text-shadow: none;
-}
-#merchants .preview .main .btn-preview .btns .copybtn {
-  background: #86c440;
-  border-radius: 4px;
-  display: inline-block;
-  height: 20px;
-  line-height: 18px;
-  top: 4px;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  border: 1px #304d58;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 10px;
-}
-#merchants .preview .main .btn-preview .btns .copybtn:hover {
-  background: #64b905;
-  text-decoration: none;
-  text-shadow: none;
+  width: 100%;
 }
 #merchants .preview .main .btn-preview .need-help {
   text-align: right;
@@ -510,57 +393,41 @@
 #merchants .preview .advanced {
   padding-top: 20px;
 }
-#merchants .preview .advanced .title {
-
-}
-#merchants .preview .advanced .title h3 {
-
-}
 #merchants .preview .advanced .main-advanced {
-  background-color: #FFF;
-  border-radius: 6px;
-  height: 200px;
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
 }
 #merchants .preview .advanced .actions {
   float: right;
 }
-#merchants #edit_survey .controls {
-  margin-left: 0;
+#merchants .preview .btns .btn {
+  float: left;
+  margin-right: 15px;
 }
-#merchants {
-  #edit_survey .form-bg,
-  .span9.form-bg {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  #edit_shop_form .add-on {
-    height: 20px;
-    line-height: 20px;
-  }
+#merchants .preview .copy-notice {
+  display: none;
+  line-height: 37px;
 }
+
 /* Public Merchant Page - i.e. /danacafe" */
-#merchant_page {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
 #merchant_page .titlebar {
   height: auto;
   padding-top: 40px;
 }
 #merchant_page .titlebar .logo {
   height: 60px;
-}
-#merchant_page .titlebar .title {
-  vertical-align: middle;
-  color: #304d58;
-  font-size: 28px;
-  padding-top: 15px;
+  > h1 {
+    display: inline-block;
+  }
+  > .logo-cont {
+    width: 100px;
+    height: 80px;
+    display: inline-block;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 1px;
+    border: solid 1px $medium-gray;
+  }
 }
 #merchant_page .titlebar .optyn {
   vertical-align: middle;
@@ -584,45 +451,13 @@
 #merchant_page .mainbody .title {
 
 }
-#merchant_page .mainbody .title h3 {
-  padding-top: 0px;
-  color: #304d58;
-  margin-top: 0px;
-  font-size: 20px;
-  line-height: 20px;
-}
-#merchant_page .mainbody .details {
-  width: 330px;
-  border-right: 1px solid #ececec;
-}
-#merchant_page .mainbody .details-list {
-
-}
-#merchant_page .mainbody .details-list .item {
-  padding-bottom: 15px;
-}
-#merchant_page .mainbody .details-list .item-icons {
-  padding-bottom: 10px;
-}
 #merchant_page .mainbody .marketing {
   width: 330px;
-}
-#merchant_page .mainbody .marketing .title {
-
-}
-#merchant_page .mainbody .marketing .title h3 {
-  padding-top: 0px;
-  color: #304d58;
-  margin-top: 0px;
-  font-size: 20px;
-  line-height: 20px;
 }
 #merchant_page .mainbody .marketing .details {
   font-size: 16px;
   color: #304d58;
   border-right: none;
-}
-#merchant_page .mainbody .marketing .details ul {
 }
 #merchant_page .mainbody .marketing .details li {
   padding-top: 11px;
@@ -637,4 +472,72 @@
 #merchant_page .mainbody .marketing .details li:hover {
   background-color: #e7eff1;
 }
+#merchant_page {
+  .row-fluid {
+    margin: 0;
+    padding: 3% 0;
+    &.titlebar {
+      background-color: $light-gray;
+    }
+    &.button {
+      background-color: $blue;
+      color: $white;
+      font: bold 20px/30px 'Open Sans', sans-serif;
+      strong {
+        margin-right: 10px;
+      }
+    }
+    &.mainbody {}
+  }
+}
 
+/* Styles for file imports page */
+.merchants-file_imports.index {
+  .import {
+    .control-label {
+      padding-top: 0;
+    }
+  }
+  .import ul {
+    margin-bottom: 30px;
+    list-style-type: circle;
+  }
+}
+
+#survey_answer_list {
+  .question {
+    font-weight: bold
+  }
+  .user, .answer {
+    margin-bottom: 15px;
+  }
+  span.bordered {
+    border-right: solid 1px #ccc;
+    width: 30px;
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
+#flat.m-app #message_form .modal .actions { margin-top: 0; }
+#flat.m-app #dashboard #box_login .row-fluid { padding: 0 10px;}
+.payment-errors {
+  padding: 10px;
+  color: red;
+}
+#survey_question_form .form-horizontal .close {
+  display: inline-block;
+  position: relative;
+  left: -10px;
+  top: -30px;
+}
+.tab-content {
+  clear: both;
+}
+.new-conn {
+  background-color: $black;
+  color: $white;
+  padding: 0 20px;
+  > h2 {
+    margin-bottom: 0;
+  }
+}

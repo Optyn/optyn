@@ -1,31 +1,27 @@
-#title_header
-  %h3
-    Your Customer Surveys
+%h1
+  Customer Surveys
+
 /Main Body
-#merchants
-  .container
-    = render partial: "shared/menu"
-    .span8
-      %table.table.table-striped.table-hover
+#merchants.pad3pc
+  %table.table.table-striped.table-hover
+    %tr
+      %th Merchant
+      %th Description
+      %th Survey
+      %th Actions
+
+    - if @surveys.present?
+      - @surveys.each_with_index do |survey, index|
         %tr
-          %th Merchant
-          %th Description
-          %th Survey
-          %th Actions
-
-        - if @surveys.present?
-          - @surveys.each_with_index do |survey, index|
-            %tr
-              %td
-                = survey.shop_name
-              %td
-                = survey.shop_description
-              %td
-                = survey.title
-              %td
-                = link_to "Provide Quick feedback", segment_path(Encryptor.encrypt(current_user.email, survey.id)), class: 'btn btn-info'
-        - else
-          %tr
-            %td{colspan: 4}
-              No surveys available right now
-
+          %td
+            = survey.shop_name
+          %td
+            = survey.shop_description
+          %td
+            = survey.title
+          %td
+            = link_to "Provide Quick feedback", segment_path(Encryptor.encrypt(current_user.email, survey.id)), class: 'btn btn-info'
+    - else
+      %tr
+        %td{colspan: 4}
+          No surveys available right now

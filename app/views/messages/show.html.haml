@@ -1,42 +1,34 @@
-#title_header
-  %h3
-    Your Messages
+%h1.pull-left
+  Your Messages
+
+= render partial: "messages/message_menu"
+
 /Main Body
-#merchants
-  .container
-    = render partial: "shared/menu"
+#merchants.pad3pc
+  #messages_collection_container.row.text-center
+    = render partial: "shared/messages/collection_form"
 
-    .span8
-      = render partial: "messages/message_menu"
+  .display-none
+    .message-list
+      = check_box_tag(:message_id, @message.uuid, true, class: 'real')
 
-      #messages_collection_container.row.text-center
-        = render partial: "shared/messages/collection_form"
+  = render partial: 'shared/messages/show_actions'
 
-      .display-none
-        .message-list
-          = check_box_tag(:message_id, @message.uuid, true, class: 'real')
+  %h4
+    = @message.personalized_subject(@message_user)
+  %hr/
 
-      = render partial: 'shared/messages/show_actions'
+  .row
+    .span4
+      .span1
+        = shop.logo_img.url rescue nil
+      .span3
+        ==  to: #{@message_user.name}
 
-      %h4
-        = @message.personalized_subject(@message_user)
-      %hr/
+    .span3
+      .span2.text-right
+        = message_detail_date(@message)
 
-      .row
-        .span4
-          .span1
-            = shop.logo_img.url rescue nil
-          .span3
-            ==  to: #{@message_user.name}
+      /reply all
 
-        .span3
-          .span2.text-right
-            = message_detail_date(@message)
-
-          /reply all
-
-        = render partial: "shared/messages/core_content", locals: {preview: false, customer_name: @message_user.name}
-
-        
-
-
+    = render partial: "shared/messages/core_content", locals: {preview: false, customer_name: @message_user.name}

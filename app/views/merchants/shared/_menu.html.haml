@@ -1,43 +1,39 @@
-.span3.menuleft
+.span3.menuleft.wid25pc
   %ul.merchant-menu
-    %li.menu-header
-      Hello
-    %hr
     %li
-      %a.active{:href => merchants_root_path}
+      %a{:href => merchants_root_path, :class => active_tab_class(['dashboards'])}
         = image_tag "menu_icon_dashboard.png", :alt => "Dashboard"
-        My Dashboard
+        Dashboard
     %li
-      %a{:href => merchants_messages_path, :alt => "Campaign Center"}
+      %a{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
         = image_tag "merchant_menu_campaigncenter_icon.png", :alt => "Campaign"
         Campaign Center
     %li
-      %a{:href => "/merchants/connections"}
+      %a{:href => merchants_connections_path, :class => active_tab_class(['connections'])}
         = image_tag "menu_icon_connections.png", :alt => "Connections", :style => "padding-left: 5px;"
         My Customers
     %li
-      %a{:href => merchants_app_path}
+      %a{:href => merchants_app_path, :class => active_tab_class(['apps'])}
         = image_tag "merchant_menu_button_icon.png", :alt => "Your API Button"
-        Your Optyn Button
+        Optyn Button
     %li
-      %a{:href => merchants_survey_path}
+      %a{:href => merchants_survey_path, :class => active_tab_class(['surveys'])}
         = image_tag "menu_icon_campaigns.png", :alt => "Surveys"
         Customer Surveys
     %li
-      %a{:href => merchants_survey_survey_answers_path}
+      %a{:href => merchants_survey_survey_answers_path, :class => active_tab_class(['survey_answers'])}
         = image_tag "menu_icon_messages.png", :alt => "Segmentation"
-        Customer Segmentation
+        Survey Responses
     %li
-      %a{:href => merchants_shop_path}
+      %a{:href => merchants_shop_path, :class => active_tab_class(['shops', 'subscriptions', 'registrations', 'merchant_managers', 'locations'])}
         = image_tag "merchant_menu_settings_icon.png", :alt => "Your Shop"
-        Manage Your Shop
+        Manage Account
     %li
-      %a{:href => merchants_file_imports_path}
+      %a{:href => merchants_file_imports_path, :class => active_tab_class(['file_imports'])}
         = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
         Import Customers
     %li
-      = image_tag "merchant_menu_logout_icon.png", :alt => "Logout", :style => "padding-right: 8px;"
-      = link_to("Logout",  destroy_merchants_manager_session_path, :method => :delete)
+      = link_to(raw( "#{image_tag "merchant_menu_logout_icon.png"} Logout" ),  destroy_merchants_manager_session_path, :method => :delete, :class => 'logout')
 
-  - if @optyn_button_stats.present?
-    = render partial: "merchants/apps/button_stats_report"
+  / - if @optyn_button_stats.present?
+  /   = render partial: "merchants/apps/button_stats_report"

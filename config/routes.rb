@@ -9,11 +9,12 @@ Optyn::Application.routes.draw do
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
   match 'reseller' => 'reseller/dashboards#index', as: :partners_root
 
+
   # Static Pages created by Alen. Please make sure if the static pages are modified the ssl enforcement is changed too.
   match 'about' => 'main#about', :as => :about
   match 'faq' => 'main#faq', :as => :faq
   match 'pricing' => 'main#pricing', :as => :pricing
-  match 'merchant-features' => 'main#merchantfeatures', :as => :merchant_features
+  match 'features' => 'main#merchantfeatures', :as => :merchant_features
   match 'consumer-features' => 'main#consumerfeatures', :as => :consumer_features
   match 'contact' => 'main#contact', :as => :contact
   match 'terms' => 'main#terms', :as => :terms
@@ -28,10 +29,11 @@ Optyn::Application.routes.draw do
   match "/blog" => redirect("http://optynblog.com"), :as => :blog
 
   # Biz Redirect
-  match "/biz" => 'main#merchantfeatures'    
+  match "/biz" => 'main#merchantfeatures'
+  match "/merchant-features" => 'main#merchantfeatures'  
 
   # Zendesk Support Desk Redirect
-  match "/support" => redirect("http://support.optyn.com"), :as => :support
+  match "/support" => redirect("http://optyn.uservoice.com"), :as => :support
 
   match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
 
@@ -211,6 +213,7 @@ Optyn::Application.routes.draw do
       end
     end
 
+    
     resource :subscription
     get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe

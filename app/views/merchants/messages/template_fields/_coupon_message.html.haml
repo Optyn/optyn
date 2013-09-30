@@ -1,9 +1,11 @@
 .headertext
-  %h3
-    New Coupon Campaign
-  %h5
-    This is easy! A coupon will get customers in your door and you will earn on average a 30% increase in sales.
-  %h6
+  / %h3
+  /   New Coupon Campaign
+  %p
+    This is easy! A coupon will get customers excited and get you a 
+    %a{:href => "http://wapo.st/18pncMx", :target => "_blank"}
+      net return in excess of 15%.
+  %p
     Let's get started!
 
 
@@ -11,27 +13,26 @@
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-.control-group
+.control-group.disc
   = f.label :type_of_discount, class: "control-label"
-  .controls.checkbox
-    %label.radio.inline
-      = f.radio_button :type_of_discount, :dollar_off
-      == $ off or 
-    %label.radio.inline
-      = f.radio_button :type_of_discount, :percentage_off
-      == % off
+  #discount_type_container.controls.checkbox{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
+    .btn-group{ 'data-toggle' => 'buttons-radio' }
+      type_of_discount:
+      = :type_of_discount
+      %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
+      %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
+
+      = f.hidden_field :type_of_discount, :id => "type_of_message_value"
 
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'
   .controls
-    = f.number_field :discount_amount
-    %span.help-inline
-      The amount of the coupon, in percentage or dollar amount value.
+    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'Please enter the value of the coupon.'
 
 .control-group
   = f.label :coupon_code, "Coupon Code", class: 'control-label'
   .controls
-    = f.text_field :coupon_code
+    = f.text_field :coupon_code, 'data-toggle' => 'tooltip', title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.'
 
 = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration"}
 
@@ -42,7 +43,7 @@
       This coupon does not expire
 
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
-fine_print_verbiage: 'You can use this to say things like 1 per customer or One Per order. The less limitations the better.'}
+fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
 

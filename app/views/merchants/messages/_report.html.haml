@@ -2,19 +2,39 @@
   .modal-header
     %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
     %h3 
-      = 'Message stats'
+      /= 'Message stats'
+      Campaign Stats for
+      %strong
+        = message.name
   .modal-body
-    .span6
-      %ul
-        %li
+    .pull-right.text-success
+      Sent on
+      %strong
+        = formatted_message_form_datetime(message, timestamp_attr)
+    .clearfix
+
+    .blank-space
+
+    .row-fluid.stats
+      .span3.box
+        .info
           Email Sent to:
+        .count
           = message.intended_recipients
-        %li
+      .span3.box
+        .info
           Email Received by:
-          = message.actual_recipients  
-        %li
+        .count
+          = message.actual_recipients
+      .span3.box
+        .info
           Email Opened By:
+        .count
           = message.opens_count
-        %li
+      .span3.box
+        .info
           Unsubscribes:
+        .count
           = message.opt_outs
+
+    .blank-space

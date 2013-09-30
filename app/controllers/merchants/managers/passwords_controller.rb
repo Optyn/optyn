@@ -1,5 +1,5 @@
 class Merchants::Managers::PasswordsController < Devise::PasswordsController
-  layout 'merchants'
+  layout 'application'
 
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)

@@ -1,19 +1,18 @@
-#box_login.login-container
-  .container
-    .span12.box_wrapper
-      .span12.box
-        %div
-          .head
-            %h4 Log in to your account
+#box_login.login-container.container-fluid
+  .row-fluid
+    .span4.offset4.box_wrapper
+      .box
+        .head
+          %h4 Log in to your account
 
-          = render partial: "users/shared/social_login_buttons"
+        = render partial: "users/shared/social_login_buttons"
 
-        .form
+        .form.row-fluid
           = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
 
-            = f.text_field :email, :placeholder => "Email", value: params[:email]
+            = f.text_field :email, :placeholder => "Email", value: params[:email], 'data-toggle' => 'tooltip', title: 'Email', 'data-tooltip-pos' => 'right'
 
-            = f.password_field :password, :placeholder => "Password"
+            = f.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password', 'data-tooltip-pos' => 'right'
 
             .remember
               .left
@@ -22,19 +21,16 @@
               .right
                 = link_to "Forgot your password?", new_password_path(resource_name)
             %br
-            %br
-            = f.submit "Sign in", class: "btn"
+            = f.submit "Sign in", class: "btn btn-primary btn-large"
 
-        %p{class: "already"}
-          Don't have an account?
-          %br
-          %br
-          %a.btn.merchant-btn{:href => new_merchants_manager_registration_path}
-            %i.icon-shopping-cart.icon-white
-            Merchant Sign Up
-          %a.btn.consumer-btn{:href => new_user_registration_path} 
+        %h5{class: "already"} Don't have an account?
+        .row-fluid.text-center
+          /%a.btn.btn-info.consumer-btn.span6{:href => new_user_registration_path} 
+          /%i.icon-user.icon-white
+          /Consumer
+          %a.btn.btn-info.merchant-btn{:href => new_merchants_manager_registration_path}
             %i.icon-user.icon-white
-            Consumer Sign Up
+            Get Started!
 
 = hidden_field_tag :login_type_omniauth_clients_path, login_type_omniauth_clients_path
 = hidden_field_tag :login_type, ''
