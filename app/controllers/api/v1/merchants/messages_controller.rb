@@ -19,12 +19,14 @@ module Api
         end
 
         def create
+          
           Message.transaction do
             klass = params[:message_type].classify.constantize
             
             @message = klass.new(filter_time_params)
             @message.manager_id = current_manager.id
             populate_datetimes
+            set_message_image
 
             if @message.send(params[:choice].to_s.to_sym)
               render(status: :created, template: individual_message_template_location)
@@ -50,9 +52,8 @@ module Api
 
             @message.attributes = filter_time_params
             @message.label_ids = params[:message][:label_ids]  || []
-
             populate_datetimes
-            
+            set_message_image
             if @message.send(params[:choice].to_s.to_sym)
               render(status: :ok, template: individual_message_template_location)
             else
@@ -124,6 +125,21 @@ module Api
         end
 
         private
+        def set_message_image
+          
+           if params[:message][:message_image_attributes] && params[:message][:message_image_attributes][:image] 
+            image_params = params[:message][:message_image_attributes][:image] 
+            tempfile = Tempfile.new("fileupload")
+            tempfile.binmode
+            tempfile.write(Base64.decode64(image_params["file"]))
+            @uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => image_params["filename"], :original_filename => image_params["original_filename"]) 
+            @uploaded_file.headers=image_params[:headers]
+            @uploaded_file.content_type=image_params[:content_type]
+            params[:message][:message_image_attributes] = {:image=>@uploaded_file }
+            #message_image = @message.build_message_image(params[:message][:message_image_attributes])
+            @message.message_image_attributes = params[:message][:message_image_attributes]
+          end
+        end
         def require_message_type
           if @message_type.blank?
             @message = Message.new
