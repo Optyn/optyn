@@ -120,8 +120,10 @@ module Api
           #input uuid of email
           #output html encassed in json
           @message = Message.for_uuid(params[:id])
-          @rendered_string =  @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
-          return
+
+          @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+          render  :template => 'api/v1/merchants/messages/preview',:layout => false, :formats=>[:json],:handlers=>[:rabl]
+         return
         end
 
         private

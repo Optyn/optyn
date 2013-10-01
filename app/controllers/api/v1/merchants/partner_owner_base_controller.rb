@@ -3,6 +3,7 @@ module Api
     module Merchants
       class PartnerOwnerBaseController < ApplicationController
         doorkeeper_for :all
+        respond_to :json
         private
         
         def current_partner
