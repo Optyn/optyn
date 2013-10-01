@@ -33,6 +33,10 @@ every :day, :at => "2:15am" do
   rake "sitemap:refresh"	
 end
 
+every :day, :at => "2:30am" do
+  runner "VirtualMessage.destroy_all"
+end
+
 #run nightly jobs
 every :day, :at => "3:00am" do
   runner "Util.nightly_jobs"
