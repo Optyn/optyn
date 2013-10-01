@@ -108,6 +108,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def launch
     @message = Message.find_by_uuid(params[:id])
     @message.launch
+    params[:choice] = "launch"
     message_redirection
   end
 
