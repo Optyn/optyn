@@ -899,12 +899,12 @@ form {
     }
   }
   .btn-success, .btn-success[type='submit'] {
-    background-color: $green;
+    background-color: #1cc057;
     &:hover {
-      background-color: darken( $green, 10% );
+      background-color: darken( #1cc057, 10% );
     }
     &.active {
-      background-color: darken( $green, 30% );
+      background-color: darken( #1cc057, 30% );
     }
   }
   .btn-danger {
