@@ -170,7 +170,7 @@ namespace :deploy do
     end
   end
 
-  namespace :list
+  namespace :list do
     desc "List all the resque workers"
     task :workers do
       puts "* Listing all the resque workers"
