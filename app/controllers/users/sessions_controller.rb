@@ -23,15 +23,15 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     params[:email] = params[:user][:email]
-    unless User.find_by_email(params[:user][:email])
+    unless Manager.find_by_email(params[:user][:email])
+      resource_name = :user
+      auth_options = {scope: :user, recall: 'sessions#new'}
+    else
       auth_options = {scope: :merchants_manager, recall: 'sessions#new'}
       resource_name = :merchants_manager
       warden.config[:default_scope] = :merchants_manager
       params[:merchants_manager] = params.delete(:user)
       resource_name = :merchants_manager
-    else
-      resource_name = :user
-      auth_options = {scope: :user, recall: 'sessions#new'}
     end
     clear_session_anyone_logged_in
     resource = warden.authenticate!(auth_options)
