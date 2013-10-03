@@ -8,5 +8,7 @@ class SesEmailSender
 
     ses_message = MessageMailer.send_announcement(message, message_user).deliver
     message_email_auditor.update_attributes(delivered: true, ses_message_id: ses_message['message_id'].to_s.split(/@/).first)
+    message = message_email_auditor.message_user.message
+    message.destroy if message.instance_of?(VirtualMessage) 
   end
 end
