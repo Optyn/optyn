@@ -2,23 +2,7 @@
 .custom
   = f.text_field :redirect_uri, placeholder: 'Your website URL', 'data-toggle' => 'tooltip', title: 'Enter your website URL'
 
-  .option
-    %h5 Button Size
-
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Small button is great for inline content and if there is limited space.", :class => "tip"}
-      %label.radio.inline
-        = f.radio_button(:call_to_action, 1.to_s)
-        Small
-
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "The Large Button gives you a great way to get noticed. Put it anywhere on the site.", :class => "tip"}
-      %label.radio.inline
-        = f.radio_button(:call_to_action, 2.to_s)
-        Large
-
-    %a{"data-toggle" => "tooltip", :href => "#", :title => "An E-Mail Box is an alternative to the optyn button. The E-Mail Box is the traditional way to capture users.", :class => "tip"}
-      %label.radio.inline
-        = f.radio_button(:call_to_action, 3.to_s)
-        Email Box
+  = f.hidden_field :call_to_action, value: 3.to_s
 
   .option
     %h5 Bar Option

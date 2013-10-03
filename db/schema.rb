@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20130923075828) do
 
   create_table "admins", :force => true do |t|
@@ -462,8 +463,8 @@ ActiveRecord::Schema.define(:version => 20130923075828) do
     t.integer  "email_box_click_count",                      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",                               :default => ""
-    t.string   "header_background_color",                    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                                  :default => false
     t.integer  "partner_id"
@@ -560,7 +561,7 @@ ActiveRecord::Schema.define(:version => 20130923075828) do
   end
 
   add_index "users", ["alias"], :name => "index_users_on_alias", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

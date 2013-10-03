@@ -189,7 +189,9 @@ Optyn::Application.routes.draw do
 
   namespace "merchants" do |merchant|
 
-    devise_for :managers, :controllers => {
+    devise_for :managers, :path => '', :path_names => {:sign_in => 'signin',
+                                     :sign_up => 'signup'
+  }, :controllers => {
         :registrations => 'merchants/managers/registrations',
         :sessions => 'merchants/managers/sessions',
         :passwords => 'merchants/managers/passwords',
@@ -197,6 +199,8 @@ Optyn::Application.routes.draw do
     }
 
     devise_scope :managers do
+      post '/signup' => 'managers/registrations#create', :as => :manager_registration
+      get '/signup' => 'managers/registrations#new', as: :new_manager_registration
       get "show_managers" => "merchant_managers#show_managers", as: :managers_list
       get '/add_manager' => 'merchant_managers#add_manager'
       post '/create_new_manager' => 'merchant_managers#create_new_manager'

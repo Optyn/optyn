@@ -1,6 +1,9 @@
 class OmniauthClientsController < ApplicationController
 	after_filter :nullify_omniauth_user_type, except: [:login_type, :create_for_twitter, :create]
 
+  #SET THE session[:omniauth_manager] = true BY DEFAULT, REMOVE THE FILTER BELOW ONCE THE SOCIAL LOGIN FOR USER IS ACTIVATED 
+  before_filter :set_omniauth_manager_in_session, only: [:create, :create_for_twitter]
+
 	def create
 		omniauth = env['omniauth.auth']
 		session[:omniauth_user].present? ? create_user(omniauth) : create_manager(omniauth)
@@ -89,4 +92,9 @@ class OmniauthClientsController < ApplicationController
 		return merchants_root_path if current_merchants_manager
 		super
 	end
+
+  def set_omniauth_manager_in_session
+    session[:omniauth_manager] = true
+    session[:omniauth_user] = nil
+  end
 end
