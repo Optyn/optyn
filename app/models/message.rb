@@ -32,7 +32,7 @@ class Message < ActiveRecord::Base
   SALE_FIELD_TEMPLATE_TYPE = "sale_message"
   SPECIAL_FIELD_TEMPLATE_TYPE = "special_message"
   SURVEY_FIELD_TEMPLATE_TYPE = "survey_message"
-  PER_PAGE = 50
+  PER_PAGE = 1
   PAGE = 1
   MESSAGE_BATCH_SEND_NAME = "message_batch_send.pid"
   FORWARD_MESSAGE_BATCH_SEND_NAME = "forward_message_batch_send.pid"
