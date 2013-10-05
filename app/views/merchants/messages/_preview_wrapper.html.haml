@@ -27,5 +27,5 @@
           Message Preview
       #collapse_message_preview.email-preview.accordion-body.collapse.in
         #message_preview.accordion-inner
-          #preview_wrapper.span8.offset2
+          #preview_wrapper
             = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
