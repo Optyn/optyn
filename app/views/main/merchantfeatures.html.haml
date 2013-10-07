@@ -78,12 +78,9 @@ $( function() {
         if ( ht > maxHt ) {
           maxHt = ht;
         }
-        //$( this ).css( 'height', maxHt + 'px' );
-        $( this ).parent().find( '.span4' ).each( function( i, v ) {
-          $( this ).css( 'height', maxHt + 'px' );
-        });
       });
     });
+    $( '.features .span4' ).css( 'height', maxHt + 'px' );
   };
   window.setTimeout( function() { equalizeBoxHeights(); }, 1000 );
 
