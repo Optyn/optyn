@@ -126,6 +126,19 @@ module Api
          return
         end
 
+        def update_meta
+          klass = params[:message_type].classify.constantize
+          @message = klass.for_uuid(params[:id])
+          @message.subject = params[:message][:subject]
+          @message.send_on = params[:message][:send_on]
+          @message.save(validate: false)
+
+          render(template: individual_message_template_location, status: :ok)
+
+        rescue => e
+          render(template: individual_message_template_location, status: :unprocessable_entity)
+        end
+
         private
         def set_message_image
           

@@ -173,6 +173,7 @@ Optyn::Application.routes.draw do
           member do
             put :launch
             get :preview
+            put :update_meta
           end
         end #end of messages resource
 
