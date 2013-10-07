@@ -47,8 +47,11 @@ class Connection < ActiveRecord::Base
 
   scope :distinct_receiver_ids, select('DISTINCT(connections.user_id)')
 
-  def self.shops_connections(shop_id)
-    active.for_shop(shop_id).includes_user_and_permissions.latest_updates
+  PER_PAGE = 50
+  PAGE = 1
+
+  def self.paginated_shops_connections(shop_id, page = PAGE, per_page = PER_PAGE)
+    active.for_shop(shop_id).includes_user_and_permissions.latest_updates.page(page).per(per_page)
   end
 
   def self.shop_connections_count_total(shop_id, force = false)
