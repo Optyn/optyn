@@ -7,6 +7,7 @@ Optyn::Application.routes.draw do
   root to: 'main#index'
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
+  match 'index_backup_2_columns' => 'main#index_backup_2_columns'
 
   # Static Pages created by Alen. Please make sure if the static pages are modified the ssl enforcement is changed too.
   match 'about' => 'main#about', :as => :about
