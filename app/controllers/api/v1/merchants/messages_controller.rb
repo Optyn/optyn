@@ -139,6 +139,10 @@ module Api
           render(template: individual_message_template_location, status: :unprocessable_entity)
         end
 
+        def folder_counts
+          #DO NOTHING
+       end
+
         private
         def set_message_image
           

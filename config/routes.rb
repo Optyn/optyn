@@ -168,6 +168,7 @@ Optyn::Application.routes.draw do
             put :move_to_trash
             put :move_to_draft
             put :discard
+            get :folder_counts
           end
 
           member do
