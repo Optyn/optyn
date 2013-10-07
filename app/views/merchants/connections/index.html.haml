@@ -31,3 +31,5 @@
               = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id}
             - else
               %a{:href => "#",:style => "color:#7D8B8F"} More Info
+
+  = paginate @connections

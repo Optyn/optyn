@@ -34,7 +34,7 @@
   .controls
     = f.text_field :coupon_code, 'data-toggle' => 'tooltip', title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.'
 
-= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration"}
+= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
 
 .control-group
   .controls
