@@ -9,11 +9,11 @@ function Login() {
 
     this.initialize = function () {
         if ($('.login-container').length) {
-            this.hookSocialMediaRedirection();
+            //this.hookSocialMediaRedirection();
         }
 
         if($('#login_type_modal').length){
-            this.hookLoginTypeSelection();
+            //this.hookLoginTypeSelection();
         }
     };
 

@@ -291,6 +291,7 @@ module Api
                     dataType: 'jsonp',
                     beforeSend: function(){
                       jQuery('#optyn-email-error').remove();
+                      $('input[type=submit]', this).attr('disabled', 'disabled');
                     },
                     success: function(respJson){
                       if(respJson.data.errors){
@@ -298,6 +299,7 @@ module Api
                         $tempErr.append('<div id="optyn-email-error"><strong>Please check the email you entered.</strong></div>');
 
                         $('#optyn-first-container').append($tempErr.html());
+                        $('input[type=submit]', this).attr('disabled', '');
                       }else{
                         replaceWithUserInfo();
                       }
