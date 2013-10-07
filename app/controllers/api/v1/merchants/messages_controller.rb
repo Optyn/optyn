@@ -24,7 +24,7 @@ module Api
             #binding.pry
             klass = params[:message_type].classify.constantize
             #@message = klass.new(filter_time_params)
-            @message = klass.new(klass.new(filter_time_params.except(:image_params)))
+            @message = klass.new(filter_time_params.except(:image_params))
             @message.manager_id = current_manager.id
             populate_datetimes
             set_message_image
