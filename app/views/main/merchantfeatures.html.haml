@@ -86,7 +86,7 @@ $( function() {
 
   $( window ).resize( function() {
     $( '.features .span4' ).css( 'height', 'auto' );
-    if ( $( window ).innerWidth() > 767 ) {
+    if ( window.innerWidth > 767 ) {
       equalizeBoxHeights();
     }
   });
