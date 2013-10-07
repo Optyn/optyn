@@ -71,8 +71,8 @@
 $( function() {
   // Code for equal height boxes.
   var equalizeBoxHeights = function() {
+    var maxHt = 0;
     $( '.features' ).each( function( i, v ) {
-      var maxHt = 0;
       $( this ).find( '.span4' ).each( function( ii, vv ) {
         ht = parseInt($( this ).css( 'height' ));
         if ( ht > maxHt ) {
