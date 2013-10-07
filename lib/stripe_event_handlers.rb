@@ -7,7 +7,7 @@ module StripeEventHandlers
 
   def self.handle_customer_subscription_updated(params)
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    status = params['data']['object']['customer']['subscription']['status']
+    status = params['data']['object']['status']
     @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
   end
 
@@ -68,7 +68,7 @@ module StripeEventHandlers
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
       Invoice.create(
-          :subscription_id => subscription,
+          :subscription_id => subscription.id,
           :stripe_customer_token => params['data']['object']['customer'],
           :stripe_invoice_id => params['data']['object']['id'],
           :paid_status => params['data']['object']['paid'],
