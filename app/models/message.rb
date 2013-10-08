@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
 
-  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time
+  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id
  
   accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
   accepts_nested_attributes_for :message_image, allow_destroy: true
@@ -514,7 +514,7 @@ class Message < ActiveRecord::Base
 
   def build_new_message_labels(identifiers)
     identifiers.each do |identifier|
-      message_labels.build(label_id: identifier)
+      message_labels.build(label_id: identifier, shop_identifier: shop_id)
     end
   end
 

@@ -16,8 +16,8 @@ class Merchants::MessagesController < Merchants::BaseController
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.new(params[:message])
-      @message.manager_id = current_manager.id
+      @message = klass.new(params[:message].except(:label_ids).merge(manager_id: current_manager.id))
+      @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
       if @message.send(params[:choice].to_sym)
