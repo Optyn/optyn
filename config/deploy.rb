@@ -51,16 +51,16 @@ end
 # If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
-before 'deploy:update_code', 'deploy:messenger:lock'
+# before 'deploy:update_code', 'deploy:messenger:lock'
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
-after 'deploy:update_code', 'deploy:migrate'
-after 'deploy:update_code', 'deploy:sitemap'
+# after 'deploy:update_code', 'deploy:migrate'
+# after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 # after "deploy:restart", "resque:restart"
-after "deploy:restart", "deploy:list:workers"
+# after "deploy:restart", "deploy:list:workers"
 
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
@@ -71,12 +71,12 @@ after "deploy", "deploy:cleanup"
 
 namespace "whenever" do
   task :clear_crontab do
-    run "cd #{fetch(:previous_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
-    run "cd #{fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
+    # run "cd #{fetch(:previous_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
+    # run "cd #{fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
   end
 
   task :update_crontab do
-    run "cd #{release_path} &&  bundle exec whenever --update-crontab --set environment=#{rails_env} #{application}"
+    # run "cd #{release_path} &&  bundle exec whenever --update-crontab --set environment=#{rails_env} #{application}"
   end
 end
 
@@ -123,7 +123,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+  		 #run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 
@@ -183,4 +183,4 @@ namespace :deploy do
 end
 
         require './config/boot'
-        require 'airbrake/capistrano'
+        # require 'airbrake/capistrano'

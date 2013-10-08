@@ -68,6 +68,10 @@ node :shop do |message|
   {name: message.shop.name, logo: message.shop.logo_location}
 end
 
+node :send_on do |message|
+  message.send_on
+end
+
 node :receivers do |message|
   {labels: message_receiver_labels(locals[:message_instance].label_names), count: locals[:message_instance].connections_count}
 end if locals[:message_instance].sent? 
