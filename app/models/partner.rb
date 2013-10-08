@@ -13,7 +13,7 @@ class Partner < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :organization, :phone, :email, :password, :password_confirmation, :remember_me, :redirect_uri, :subscription_required
+  attr_accessible :first_name, :last_name, :organization, :phone, :email, :password, :password_confirmation, :remember_me, :redirect_uri, :subscription_required, :header_background_color, :footer_background_color
 
   attr_accessor :redirect_uri
 

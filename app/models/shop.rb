@@ -29,7 +29,7 @@ class Shop < ActiveRecord::Base
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
 
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added, :uploaded_directly
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added, :uploaded_directly, :footer_background_color
 
 
   mount_uploader :logo_img, ShopImageUploader
@@ -75,7 +75,7 @@ class Shop < ActiveRecord::Base
 
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
-  before_create :assign_identifier, :assign_partner_if, :assign_timezone_if
+  before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
 
   after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
 
@@ -425,6 +425,14 @@ class Shop < ActiveRecord::Base
     if self.time_zone.blank?
       self.time_zone = DEFUALT_TIMEZONE
     end
+  end
+
+  def assign_header_background_color
+    self.header_background_color = partner.header_background_color
+  end
+
+  def assign_footer_background_color
+    self.footer_background_color = partner.footer_background_color
   end
 
   def generate_application(options)

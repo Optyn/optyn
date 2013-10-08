@@ -390,6 +390,12 @@ class Message < ActiveRecord::Base
     self.errors.full_messages
   end
     
+  #Returning the default value for now.
+  #Nothing to do with any message visual properties for now  
+  def footer_background_color_css_val
+    "background-color: " + shop.footer_background_color
+  end
+
   def header_background_property
     header = MessageVisualProperty.header(self.id)
 

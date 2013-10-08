@@ -2,7 +2,7 @@
 
   - starting_color = @message.header_background_color_css_val
   - color_hex = @message.header_background_color_hex
-  = f.fields_for :message_visual_properties, @message.header_background_properties do |builder|
+  = f.fields_for :message_visual_properties, @message.header_background_property do |builder|
     = builder.hidden_field :message_visual_section_id, value: MessageVisualSection.header_id
     = builder.hidden_field :property_key, value: "header_background"
     = builder.hidden_field :property_value, value: starting_color, class: "message-visual-property-value"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003102817) do
+ActiveRecord::Schema.define(:version => 20131008094237) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -367,20 +367,22 @@ ActiveRecord::Schema.define(:version => 20131003102817) do
     t.string   "last_name"
     t.string   "organization"
     t.string   "phone"
-    t.boolean  "active",                 :default => true
-    t.string   "email",                  :default => "",   :null => false
-    t.string   "encrypted_password",     :default => "",   :null => false
+    t.boolean  "active",                  :default => true
+    t.string   "email",                   :default => "",   :null => false
+    t.string   "encrypted_password",      :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",           :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.boolean  "subscription_required",  :default => true
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "subscription_required",   :default => true
+    t.string   "header_background_color"
+    t.string   "footer_background_color"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email", :unique => true
@@ -470,6 +472,7 @@ ActiveRecord::Schema.define(:version => 20131003102817) do
     t.boolean  "pre_added",                                  :default => false
     t.boolean  "uploaded_directly",                          :default => false
     t.string   "upload_location",            :limit => 1000
+    t.string   "footer_background_color",                    :default => "#ffffff"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
