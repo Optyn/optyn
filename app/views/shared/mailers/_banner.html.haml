@@ -1,7 +1,7 @@
-%table{:style => 'width:100%; height:20px; max-width: 600px;border-top-left-radius:5px; border-top-right-radius:5px;' + "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}", :align => "center"}
+%table{:style => 'width:100%; min-height:20px;' + "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}", :align => "center"}
   %tr
     %td
-      %div{:style => "max-width:600px;margin:0 auto;display:block;"}
+      %div{:style => "margin:0 auto;display:block;"}
         /#20A8DD for background - try it #0C9FD8
         %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
           %tr
