@@ -2,7 +2,7 @@
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Event Date and Time", ending_date_title: 'Date when the event ends', ending_time_title: 'Time when the event ends.'}
+= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Event Date and Time", ending_date_title: 'Date of the event', ending_time_title: 'Time when the event starts'}
 
 .control-group
   = f.label :rsvp, "RSVP Instructions", class: "control-label"
