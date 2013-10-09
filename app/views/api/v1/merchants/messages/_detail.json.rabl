@@ -1,4 +1,4 @@
-attributes :uuid, :name, :content, :created_at, :state, :subject,:intended_recipients,:actual_recipients,:opens_count,:opt_outs
+attributes :uuid, :name, :content, :created_at, :updated_at, :state, :subject,:intended_recipients,:actual_recipients,:opens_count,:opt_outs
 
 node :message_type do |message|
   message.type.underscore
