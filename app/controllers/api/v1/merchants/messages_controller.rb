@@ -39,11 +39,6 @@ module Api
           render(status: :unprocessable_entity, template: individual_message_template_location)
         end
 
-        def show
-          @message = Message.for_uuid(params[:id])
-          render(status: :created, template: individual_message_template_location)
-        end
-
         def update
           Message.transaction do
             klass = params[:message_type].classify.constantize
@@ -68,7 +63,8 @@ module Api
         def show
           @message = Message.for_uuid(params[:id])
           @shop = @message.shop
-          render(template: individual_message_template_location)
+          @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+          render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl]
         end
 
         def launch
@@ -122,7 +118,7 @@ module Api
           @message = Message.for_uuid(params[:id])
 
           @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
-          render  :template => 'api/v1/merchants/messages/preview',:layout => false, :formats=>[:json],:handlers=>[:rabl]
+          render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl]
          return
         end
 
