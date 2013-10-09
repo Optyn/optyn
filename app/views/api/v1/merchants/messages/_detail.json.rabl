@@ -72,6 +72,10 @@ node :send_on do |message|
   message.send_on
 end
 
+node :editable do |message|
+  message.editable_state?
+end
+
 node :receivers do |message|
   {labels: message_receiver_labels(locals[:message_instance].label_names), count: locals[:message_instance].connections_count}
 end if locals[:message_instance].sent? 
