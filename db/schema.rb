@@ -464,12 +464,12 @@ ActiveRecord::Schema.define(:version => 20131008094237) do
     t.integer  "email_box_click_count",                      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",                    :default => "#1791C0"
     t.string   "phone_number",                               :default => ""
+    t.string   "header_background_color",                    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.boolean  "uploaded_directly",                          :default => false
     t.string   "upload_location",            :limit => 1000
     t.string   "footer_background_color",                    :default => "#ffffff"

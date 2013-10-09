@@ -51,9 +51,9 @@ end
 # If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
-# before 'deploy:update_code', 'deploy:messenger:lock'
+before 'deploy:update_code', 'deploy:messenger:lock'
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
-# after 'deploy:update_code', 'deploy:migrate'
+after 'deploy:update_code', 'deploy:migrate'
 # after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
@@ -123,7 +123,7 @@ namespace :deploy do
 
   namespace :assets do
   	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		 #run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
   	end
   end
 
