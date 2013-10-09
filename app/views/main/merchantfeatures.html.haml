@@ -78,18 +78,15 @@ $( function() {
         if ( ht > maxHt ) {
           maxHt = ht;
         }
-        //$( this ).css( 'height', maxHt + 'px' );
-        $( this ).parent().find( '.span4' ).each( function( i, v ) {
-          $( this ).css( 'height', maxHt + 'px' );
-        });
       });
     });
+    $( '.features .span4' ).css( 'height', maxHt + 'px' );
   };
   window.setTimeout( function() { equalizeBoxHeights(); }, 1000 );
 
   $( window ).resize( function() {
     $( '.features .span4' ).css( 'height', 'auto' );
-    if ( $( window ).innerWidth() > 767 ) {
+    if ( window.innerWidth > 767 ) {
       equalizeBoxHeights();
     }
   });

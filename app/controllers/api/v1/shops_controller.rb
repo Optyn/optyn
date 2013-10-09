@@ -88,9 +88,21 @@ module Api
               document.body.appendChild(outerScript);
 
               setTimeout(function(){
-                  #{@application.render_choice.to_i == 1 ? bar : part}
-
+                checkOptynJqueryAvailability();
               }, 1000);
+
+              function checkOptynJqueryAvailability(){
+                if (window.jQuery){
+                  //possibly some other JQuery checks to make sure that everything is loaded here
+                  renderOptynScript();
+                } else {
+                  setTimeout(checkOptynJqueryAvailability, 50);
+                }
+              }
+
+              function renderOptynScript(){
+                #{@application.render_choice.to_i == 1 ? bar : part}
+              }
 
           )
 
