@@ -474,4 +474,21 @@ class Shop < ActiveRecord::Base
       create_audit_entry('subscribed to default/starter plan')
     end
   end
+
+  private
+  def set_message_image
+    binding.pry
+    if params[:shop][:logo_img]
+      image_params = params[:shop][:logo_img] 
+      tempfile = Tempfile.new("fileupload")
+      tempfile.binmode
+      tempfile.write(Base64.decode64(image_params["file"]))
+      @uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => image_params["filename"], :original_filename => image_params["original_filename"]) 
+      @uploaded_file.headers=image_params[:headers]
+      @uploaded_file.content_type=image_params[:content_type]
+      params[:shop][:logo_img] = {:image=>@uploaded_file }
+      #message_image = @message.build_message_image(params[:message][:message_image_attributes])
+      @shop.logo_img = params[:shop][:logo_img]
+    end
+end
 end

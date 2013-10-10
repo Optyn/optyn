@@ -28,6 +28,8 @@ module Api
           begin
             @shop = Shop.new(params[:shop])
             @shop.partner_id = current_partner.id
+            set_message_image
+            binding.pry
             @shop.save!
             @shop.update_manager
             render(status: :created)
