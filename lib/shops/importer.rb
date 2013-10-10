@@ -33,6 +33,7 @@ module Shops
               shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
               ##part of the carrier wave magic
               ##if you set this parameter carrier wave automatically downloads it
+              binding.pry
               shop.remote_logo_img_url = row[:shop_image_uri]
 
 
