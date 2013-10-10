@@ -6,7 +6,7 @@ module Messagecenter
     end
 
     def get_pagination_data
-      @page = [1, params[:page].to_i].max
+      @page = session[:page] = [1, params[:page].to_i].max
       @per_page = session[:per_page]
     end
 

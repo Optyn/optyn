@@ -75,7 +75,7 @@ module Messagecenter
     end
 
     def registered_action_location
-      eval("#{registered_action}_merchants_messages_path(:page => #{@page || 1})")
+      eval("#{registered_action}_merchants_messages_path(:page => #{@page || session[:page] || 1})")
     end
 
     def create_child_message
