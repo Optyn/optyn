@@ -31,6 +31,9 @@ module Shops
               shop.phone_number = row[:shop_phone]
               shop.partner_id = payload.partner_id
               shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
+              ##part of the carrier wave magic
+              ##if you set this parameter carrier wave automatically downloads it
+              shop.remote_logo_img_url = row[:shop_image_uri]
 
 
               manager = shop.managers.build
