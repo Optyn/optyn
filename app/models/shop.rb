@@ -29,7 +29,10 @@ class Shop < ActiveRecord::Base
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
 
-  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img, :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual, :header_background_color, :phone_number, :remote_logo_img_url, :pre_added, :uploaded_directly, :footer_background_color
+  attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img
+  attr_accessible :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual
+  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url, :pre_added 
+  attr_accessible :uploaded_directly, :footer_background_color
 
 
   mount_uploader :logo_img, ShopImageUploader
@@ -474,4 +477,6 @@ class Shop < ActiveRecord::Base
       create_audit_entry('subscribed to default/starter plan')
     end
   end
+
+
 end

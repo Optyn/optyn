@@ -5,6 +5,9 @@ require 'capistrano-unicorn'
 require "capistrano-resque"
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
+require './config/boot'
+require 'airbrake/capistrano'
+
 
 
 set :default_stage, "staging"
@@ -54,14 +57,13 @@ after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:update_code', 'deploy:messenger:lock'
 before 'deploy:assets:precompile', 'deploy:create_symlinks'
 after 'deploy:update_code', 'deploy:migrate'
-# after 'deploy:update_code', 'deploy:sitemap'
+after 'deploy:update_code', 'deploy:sitemap'
 after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
-# after "deploy:restart", "resque:restart"
-# after "deploy:restart", "deploy:list:workers"
-
+after "deploy:restart", "resque:restart"
+after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
@@ -71,12 +73,12 @@ after "deploy", "deploy:cleanup"
 
 namespace "whenever" do
   task :clear_crontab do
-    # run "cd #{fetch(:previous_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
-    # run "cd #{fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
+    run "cd #{fetch(:previous_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
+    run "cd #{fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
   end
 
   task :update_crontab do
-    # run "cd #{release_path} &&  bundle exec whenever --update-crontab --set environment=#{rails_env} #{application}"
+    run "cd #{release_path} &&  bundle exec whenever --update-crontab --set environment=#{rails_env} #{application}"
   end
 end
 
@@ -122,9 +124,9 @@ namespace :deploy do
   end
 
   namespace :assets do
-  	task :precompile, :roles => :web, :except => { :no_release => true } do
-  		 run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
-  	end
+    task :precompile, :roles => :web, :except => { :no_release => true } do
+       run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+    end
   end
 
   #show hide maintenance page
@@ -179,8 +181,6 @@ namespace :deploy do
       puts "* Listing all the resque workers"
       run "ps aux |grep resque"
     end
-  end  
+  end
 end
 
-        require './config/boot'
-        # require 'airbrake/capistrano'

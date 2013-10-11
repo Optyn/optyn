@@ -1,9 +1,10 @@
 module Shops
   module Importer  
     def import(payload)
+      #binding.pry
       content = download_csv_file(payload)
 
-      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
+      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
       headers = csv_table.headers
       validate_headers(headers)
 
@@ -31,6 +32,10 @@ module Shops
               shop.phone_number = row[:shop_phone]
               shop.partner_id = payload.partner_id
               shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
+              ##part of the carrier wave magic
+              ##if you set this parameter carrier wave automatically downloads it
+              # binding.pry
+              shop.remote_logo_img_url = row[:shop_image_uri]
 
 
               manager = shop.managers.build
@@ -71,6 +76,7 @@ module Shops
     end
 
     def validate_headers(headers)
+      # binding.pry
       if !headers.include?(:shop_name) || !headers.include?(:shop_phone) || !headers.include?(:manager_email) || !headers.include?(:manager_password)
         raise "Incorrect Headers. The file should have headers of 'Shop Name','Shop Phone','Shop Type', 'Manager Name', 'Manager Email' and 'Manager Password'" 
       end  
