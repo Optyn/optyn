@@ -4,7 +4,7 @@ module Shops
       #binding.pry
       content = download_csv_file(payload)
 
-      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol, :col_sep => "\t" })
+      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
       headers = csv_table.headers
       validate_headers(headers)
 
