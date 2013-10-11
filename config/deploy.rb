@@ -171,16 +171,18 @@ namespace :deploy do
       run "rm #{shared_path}/pids/#{lock_file_name}"
     end
   end
-end
 
-namespace :list do
+  namespace :list do
     desc "List all the resque workers"
     task :workers do
       puts "* Listing all the resque workers"
       run "ps aux |grep resque"
     end
-  end  
+  end
 end
+
+  
+
 
         require './config/boot'
         require 'airbrake/capistrano'
