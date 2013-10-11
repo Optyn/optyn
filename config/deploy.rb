@@ -5,6 +5,9 @@ require 'capistrano-unicorn'
 require "capistrano-resque"
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
+require './config/boot'
+require 'airbrake/capistrano'
+
 
 
 set :default_stage, "staging"
@@ -181,8 +184,3 @@ namespace :deploy do
   end
 end
 
-  
-
-
-        require './config/boot'
-        require 'airbrake/capistrano'
