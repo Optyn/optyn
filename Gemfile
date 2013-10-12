@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #Define the ruby version
-ruby '1.9.3'
+#ruby '1.9.3'
 
 gem 'rails', '3.2.11'
 
@@ -9,12 +9,18 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'cancan'
 gem 'config_reader', '0.0.8' #ENV specific configuration
 gem 'google-analytics-rails'
 gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
+
+#admin_gems
+gem 'inherited_resources'
+gem 'has_scope'
+gem 'responders'
+gem 'simple_form'
+
 gem 'devise'
 gem 'devise-async'
 gem 'omniauth'
@@ -22,7 +28,6 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
-gem 'rails_admin'
 gem 'resque', :require => 'resque/server'
 gem "capistrano-resque", "~> 0.1.0"
 gem 'resque_mailer'

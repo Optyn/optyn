@@ -1,8 +1,13 @@
 Optyn::Application.routes.draw do
 
   #Admin
-  devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}, :skip => :registrations
+
+  namespace :admin do 
+    root :to => "dashboard#index"
+    resources :connections
+    resources :businesses
+  end
 
   root to: 'main#index'
   match 'dashboard' => 'dashboards#index', as: :consumers_root

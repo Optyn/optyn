@@ -6,10 +6,6 @@ class ApplicationController < ActionController::Base
 
   layout :switch_layout
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to (:back), :alert => exception.message
-  end
-
   alias_method :manager_signed_in?, :merchants_manager_signed_in?
   alias_method :partner_signed_in?, :reseller_partner_signed_in?
   alias_method :current_manager, :current_merchants_manager

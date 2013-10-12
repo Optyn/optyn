@@ -8,6 +8,5 @@ class Admin < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role, :email, :password, :password_confirmation, :remember_me
 
-  ROLES = %w[super_admin admin ]
   # attr_accessible :title, :body
 end
