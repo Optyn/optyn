@@ -4,7 +4,7 @@ Optyn::Application.routes.draw do
   devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}, :skip => :registrations
 
   namespace :admin do 
-    root :to => "dashboard#index"
+    root :to => "dashboard#index", as: :dashboard
     resources :connections
     resources :businesses
   end

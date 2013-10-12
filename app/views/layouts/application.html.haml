@@ -28,7 +28,13 @@
             %span{ :class => 'icon-bar' }
           %a.logo.pull-left{ :href => root_path }
             = image_tag "logo.png", :alt => 'logo'
-          - if user_signed_in? || manager_signed_in?
+          - if user_signed_in? || manager_signed_in? || admin_signed_in?
+            - if admin_signed_in?
+              %ul.pull-right.nav.nav-pills
+                %li
+                  = link_to 'Dashboard', admin_dashboard_path, class: 'btn btn-warning'
+                %li
+                  = link_to 'Logout', destroy_admin_session_path, class: 'btn btn-primary', method: :delete
             - if user_signed_in?
               .pull-right
                 = render partial: "layouts/consumer_dropdown"
