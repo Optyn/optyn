@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131008121603) do
+ActiveRecord::Schema.define(:version => 20131013194154) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -467,10 +467,8 @@ ActiveRecord::Schema.define(:version => 20131008121603) do
     t.string   "phone_number",                               :default => ""
     t.string   "header_background_color",                    :default => "#1791C0"
     t.datetime "deleted_at"
-    t.boolean  "pre_added",                                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
-    t.boolean  "uploaded_directly",                          :default => false
     t.string   "upload_location",            :limit => 1000
     t.string   "footer_background_color",                    :default => "#ffffff"
   end
