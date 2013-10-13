@@ -11,7 +11,9 @@ class MessageEmailAuditor < ActiveRecord::Base
   COMPLAINT = "arn:aws:sqs:us-east-1:946687270082:ses-complaints-queue"
 
   def self.check_for_failures()
-    Messagecenter::AwsDeliveryFailureChecker.failure_stats
+    if Rails.env.production?
+      Messagecenter::AwsDeliveryFailureChecker.failure_stats
+    end
   end
 
   def register_problem(queue_arn, sns_message_body)

@@ -3,10 +3,10 @@
   - if @message.show_banner?
     = render partial: "shared/mailers/banner"
 
-  %table{class: 'outer-table', :style => "background-color: white;;"}
+  %table{class: 'outer-table', :style => "background-color: white; width: 100%;"}
     %tr
       %td
-      %td{class: 'outer-cell'}
+      %td{class: 'outer-cell', style: 'padding: 1%;'}
         %div
           %table{class: 'inner-table'}
             %tr
