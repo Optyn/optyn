@@ -31,8 +31,10 @@ class Shop < ActiveRecord::Base
 
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img
   attr_accessible :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual
-  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url, :pre_added 
-  attr_accessible :uploaded_directly, :footer_background_color
+  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url
+  #attr_accessible :pre_added 
+  #attr_accessible :uploaded_directly
+  attr_accessible :footer_background_color
 
 
   mount_uploader :logo_img, ShopImageUploader
