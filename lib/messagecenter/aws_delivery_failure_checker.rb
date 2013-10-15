@@ -24,7 +24,12 @@ module Messagecenter
             ses_message_detail = JSON.parse(sns_message_str)
             message_id = ses_message_detail["mail"]["messageId"]
             audit_entry = MessageEmailAuditor.find_by_ses_message_id(message_id)
-            audit_entry.register_problem(queue_arn, sns_message_body) unless audit_entry.blank?
+            unless audit_entry.blank?
+              audit_entry.register_problem(queue_arn, sns_message_body) 
+              
+              Connection.mark_inactive_bounce_or_complaint(audit_entry)
+            end
+
           end
         end
       end
