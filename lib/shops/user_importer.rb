@@ -77,8 +77,8 @@ module Shops
 
     def validate_headers(headers)
       # binding.pry
-      if !headers.include?(:shop_name) || !headers.include?(:shop_phone) || !headers.include?(:manager_email) || !headers.include?(:manager_password)
-        raise "Incorrect Headers. The file should have headers of 'Shop Name','Shop Phone','Shop Type', 'Manager Name', 'Manager Email' and 'Manager Password'" 
+      if !headers.include?(:shop) || !headers.include?(:name) || !headers.include?(:gender) || !headers.include?(:birth_date)
+        raise "Incorrect Headers. The file should have headers of 'Shop','Name','Gender', 'Birth Date'" 
       end  
     end
 
