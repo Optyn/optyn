@@ -15,8 +15,8 @@ module Shops
       unparsed_rows << output_headers
       
       counters = ActiveSupport::OrderedHash.new()
-      counters[:shops_created] = 0
-      counters[:existing_shops] = 0
+      counters[:users_created] = 0
+      counters[:existing_users] = 0
       counters[:unparsed_rows] = 0
 
       csv_table.each do |row|
@@ -24,38 +24,26 @@ module Shops
         output_row = [%{"#{row[:shop]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
         
         begin
-          shop_name = row[:shop]
+          user_name = row[:name]
           Shop.transaction do
-            shop = for_name(shop_name) || Shop.new()
-            if shop.new_record?
-              shop.name = shop_name
-              shop.phone_number = row[:shop_phone]
-              shop.partner_id = payload.partner_id
-              shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
-              ##part of the carrier wave magic
-              ##if you set this parameter carrier wave automatically downloads it
-              # binding.pry
-              shop.remote_logo_img_url = row[:shop_image_uri]
+            user = for_name(user_name) || Shop.new()
+            if user.new_record?
+              user.name = shop_name
+              ##find shop and set the shop id heere
+              shop_id = 23
+              user.shop_id = shop_id
+              user.gender = row[:gender]
+              user.birth_date = row[:birth_date]
 
-
-              manager = shop.managers.build
-
-              manager.email                  = row[:manager_email]
-              manager.name                   = row[:manager_name]
-              manager.skip_name              = true
-              manager.password               = row[:manager_password]
-              manager.password_confirmation  = row[:manager_password]
-
-              shop.save!
-              shop.update_manager
-              status = %{"New Shop"}
+              user.save!
+              status = %{"New User"}
               output_row << status
-              counters[:shops_created] += 1
+              counters[:users_created] += 1
               output << output_row.join(",")
             else
-              status = %{"Existing Shop"}
+              status = %{"Existing User"}
               output_row << status
-              counters[:existing_shops] += 1 
+              counters[:existing_user] += 1 
               output << output_row.join(",")
             end
           end
