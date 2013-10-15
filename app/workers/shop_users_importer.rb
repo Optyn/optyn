@@ -10,13 +10,13 @@ class ShopUsersImporter
         payload.stats = counters
         payload.save
         payload.update_attributes(status: 'Processed')
-        PartnerMailer.import_complete(payload, output, unparsed).deliver
+        ShopUserMailer.import_complete(payload, output, unparsed).deliver
       end
     rescue => e
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
       payload.update_attributes(status: 'Error')
-      PartnerMailer.import_error(payload, e.message).deliver
+      ShopUserMailer.import_error(payload, e.message).deliver
     end
   end
 end
