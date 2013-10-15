@@ -14,6 +14,7 @@ module Api
         end
 
         def import
+          ##import shops
           @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
                                               filepath: params[:filepath], status: 'Queued')
           payload_id = @payload.id
@@ -29,6 +30,7 @@ module Api
         end
 
         def import_status
+          ##get stats for a paritcular import
           @payload = ApiRequestPayload.for_uuid(params[:id])
         end
 
