@@ -10,7 +10,7 @@ module Shops
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop Name","Shop Phone","Shop Type","Manager Name","Manager Email","Manager Password","Status"}
+      output_headers = %{"Shop","Name","Gender","Birth Date"}
       output << output_headers
       unparsed_rows << output_headers
       
@@ -21,10 +21,10 @@ module Shops
 
       csv_table.each do |row|
         status = nil
-        output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
+        output_row = [%{"#{row[:shop]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
         
         begin
-          shop_name = row[:shop_name]
+          shop_name = row[:shop]
           Shop.transaction do
             shop = for_name(shop_name) || Shop.new()
             if shop.new_record?
