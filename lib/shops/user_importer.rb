@@ -10,7 +10,7 @@ module Shops
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop","Name","Gender","Birth Date"}
+      output_headers = %{"Shop","Email","Name",Gender","Birth Date"}
       output << output_headers
       unparsed_rows << output_headers
       
@@ -21,31 +21,66 @@ module Shops
 
       csv_table.each do |row|
         status = nil
-        output_row = [%{"#{row[:shop]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
+        output_row = [%{"#{row[:shop]}"}, %{"#{row[:email]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
         
         begin
-          user_name = row[:name]
+          shop_name = row[:shop]
           Shop.transaction do
-            user = for_name(user_name) || Shop.new()
-            if user.new_record?
-              user.name = shop_name
+            shop = for_name(shop_name)
+            if shop.present?
+              # user = User.find_or_initialize_by_email(row[:email])	
+              # user.name = row[:name]
               ##find shop and set the shop id heere
-              shop_id = 23
+              shop_id = 
               user.shop_id = shop_id
-              user.gender = row[:gender]
-              user.birth_date = row[:birth_date]
+		      user = User.find_by_email(row[:email]) || User.new(email: row[:email])
+		      user.skip_name = true
+		      user.skip_welcome_email = true
+		      user.name = row[:name] unless user.name.present?
+		      gender = if (gender_val = row[:gender].to_s.downcase).length == 1
+		                 gender_val
+		               else
+		                  gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
+		               end
+		      user.gender = gender
+		      user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
+		      user.valid?
 
-              user.save!
-              status = %{"New User"}
-              output_row << status
-              counters[:users_created] += 1
-              output << output_row.join(",")
-            else
-              status = %{"Existing User"}
-              output_row << status
-              counters[:existing_user] += 1 
-              output << output_row.join(",")
-            end
+		      if user.errors.include?(:email) || user.errors.include?(:name)
+		      	counters[:unparsed_rows] += 1 
+		      	error_str = %{"Error: #{user.errors.full_messages.first}"}   
+						output_row << error_str
+						output << output_row.join(",")
+						unparsed_rows << output_row.join(",") 
+						next 
+					end
+
+		      if user.new_record?
+		        passwd = Devise.friendly_token.first(8)
+		        user.password = passwd
+		        user.password_confirmation = passwd
+		        user.show_password = true
+		        user.show_shop = true
+		        user.shop_identifier = shop.id
+		        counters[:user_creation] += 1
+		        output_row << %{"Created a New User"}
+		      else
+		        counters[:existing_user] += 1
+		        output_row << %{"User exists"}
+		      end
+		      user.save()
+
+
+            #   status = %{"New User"}
+            #   output_row << status
+            #   counters[:users_created] += 1
+            #   output << output_row.join(",")
+            # else
+            #   status = %{"Existing User"}
+            #   output_row << status
+            #   counters[:existing_user] += 1 
+            #   output << output_row.join(",")
+            # end
           end
         rescue Exception => e    
           Rails.logger.error e.message
