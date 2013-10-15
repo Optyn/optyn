@@ -6,7 +6,7 @@ class ShopUsersImporter
     begin
       if payload.present?
         payload.update_attribute(:status, 'Inprocess')
-        counters, output, unparsed = Shop.import(payload)
+        counters, output, unparsed = Shop.user_import(payload)
         payload.stats = counters
         payload.save
         payload.update_attributes(status: 'Processed')
