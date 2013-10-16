@@ -38,7 +38,10 @@ module Users
             output_row << status
             unparsed_rows << output_row.join(",")
           end
+          output << output_row.join(",")
         end
+        unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 
+        [[counters], output.join("\n"), unparsed]
       end#end of user_import
 
 
