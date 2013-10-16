@@ -1,12 +1,13 @@
 module Shops
   module Importer  
     def user_import(payload)
-      #binding.pry
+      binding.pry
       content = download_csv_file(payload)
 
       csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
       headers = csv_table.headers
       validate_headers(headers)
+      binding.pry
 
       output = []
       unparsed_rows = []
@@ -45,7 +46,7 @@ module Shops
 		      user.gender = gender
 		      user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
 		      user.valid?
-
+		      binding.pry
 		      if user.errors.include?(:email) || user.errors.include?(:name)
 		      	counters[:unparsed_rows] += 1 
 		      	error_str = %{"Error: #{user.errors.full_messages.first}"}   
