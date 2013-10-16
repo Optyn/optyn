@@ -24,7 +24,8 @@ module Api
         def import_user
           ##will import users for a Partner > shop :post
           #binding.pry
-          @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
+          #FIXME:manually setting controller name and actions is bit of hack, will look into it later
+          @payload = ApiRequestPayload.create(controller: "users", action: "import" , partner_id: current_partner.id,
                                               filepath: params[:filepath], status: 'Queued')
           payload_id = @payload.id
           Resque.enqueue(ShopUsersImporter, payload_id)
