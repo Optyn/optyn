@@ -26,6 +26,7 @@ class Shop < ActiveRecord::Base
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
   DEFAULT_HEADER_BACKGROUND_COLOR = '#1791C0'
+  DEFAULT_FOOTER_BACKGROUND_COLOR = '#ffffff'
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
 
