@@ -10,7 +10,7 @@ namespace :message do
   end
 
   desc "Mark the connections whose emails were marked as bounced or complaint as inactive"
-  task :make_bounced_or_complaint_connections_inactive do
+  task :make_bounced_or_complaint_connections_inactive => :environment do
     message_email_auditors = MessageEmailAuditor.bounced_or_complains
     message_email_auditors.each do |audit_entry|
       Connection.mark_inactive_bounce_or_complaint(audit_entry)
