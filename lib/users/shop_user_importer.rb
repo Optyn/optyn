@@ -25,7 +25,7 @@ module Users
         begin
           shop_name = row[:shop]
           Shop.transaction do
-            binding.pry
+            #binding.pry
             shop = Shop.for_name(shop_name)
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
             user.skip_name = true
@@ -38,7 +38,7 @@ module Users
                      end
             user.gender = gender
             user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
-            
+
             if user.errors.include?(:email) || user.errors.include?(:name)
               counters[:unparsed_rows] += 1 
               error_str = %{"Error: #{user.errors.full_messages.first}"}   
@@ -75,7 +75,7 @@ module Users
         end#end of begin
         unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 
         [[counters], output.join("\n"), unparsed]
-        binding.pry
+        #binding.pry
       end#end of user_import
 
 
