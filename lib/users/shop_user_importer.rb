@@ -82,7 +82,7 @@ module Shops
             #   counters[:existing_user] += 1 
             #   output << output_row.join(",")
             # end
-          end
+          #end
         rescue Exception => e    
           Rails.logger.error e.message
           Rails.logger.error e.backtrace
