@@ -1,7 +1,6 @@
 module Users
   module ShopUserImporter  
     def user_import(payload)
-      binding.pry
       content = download_csv_file(payload)
 
       csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
@@ -26,7 +25,8 @@ module Users
         begin
           shop_name = row[:shop]
           Shop.transaction do
-            shop = for_name(shop_name)
+            binding.pry
+            shop = Shop.for_name(shop_name)
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
             if user.new_record?
               passwd = Devise.friendly_token.first(8)
@@ -40,9 +40,9 @@ module Users
             else
               counters[:existing_user] += 1
               output_row << %{"User exists"}
-            end
+            end#end of user.new_record?
             user.save()
-          end
+          end#end of transaction
           rescue Exception => e
             Rails.logger.error e.message
             Rails.logger.error e.backtrace
@@ -50,11 +50,12 @@ module Users
             status = %{"Error: #{e.message}"}
             output_row << status
             unparsed_rows << output_row.join(",")
-          end
+          end#end of rescue
           output << output_row.join(",")
-        end
+        end#end of begin
         unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 
         [[counters], output.join("\n"), unparsed]
+        binding.pry
       end#end of user_import
 
 
