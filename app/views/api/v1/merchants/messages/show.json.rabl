@@ -1,5 +1,9 @@
 object false
 child :data do
+  node :select_list do
+    {:labels => @labels}
+   end
+
   node :folder_counts do
     {:drafts => @drafts_count, :queued => @queued_count}
   end
