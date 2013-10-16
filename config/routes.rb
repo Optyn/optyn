@@ -143,6 +143,8 @@ Optyn::Application.routes.draw do
         resources :shops do
           collection do
             get :import_list
+            get :import_user_list
+            post :import_user
             post :import
             get :import_status
             get :active_connections
