@@ -10,7 +10,7 @@ class Connection < ActiveRecord::Base
   belongs_to :user
   belongs_to :shop
 
-  attr_accessible :user_id, :shop_id, :active, :connected_via
+  attr_accessible :user_id, :shop_id, :active, :connected_via, :disconnect_event
 
   after_save :check_shop_tier
   after_create :make_shop_audit_entry
