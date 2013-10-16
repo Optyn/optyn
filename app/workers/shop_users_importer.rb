@@ -3,11 +3,9 @@ class ShopUsersImporter
 
   def self.perform(payload_id)
     payload = ApiRequestPayload.find(payload_id)
-    binding.pry
     begin
       if payload.present?
         payload.update_attribute(:status, 'Inprocess')
-        binding.pry
         counters, output, unparsed = User.user_import(payload)
         payload.stats = counters
         payload.save

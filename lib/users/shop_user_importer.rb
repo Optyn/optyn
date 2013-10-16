@@ -28,6 +28,26 @@ module Users
             binding.pry
             shop = Shop.for_name(shop_name)
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
+            user.skip_name = true
+            user.skip_welcome_email = true
+            user.name = row[:name] unless user.name.present?
+            gender = if (gender_val = row[:gender].to_s.downcase).length == 1
+                       gender_val
+                     else
+                        gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
+                     end
+            user.gender = gender
+            user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
+            
+            if user.errors.include?(:email) || user.errors.include?(:name)
+              counters[:unparsed_rows] += 1 
+              error_str = %{"Error: #{user.errors.full_messages.first}"}   
+              output_row << error_str
+              output << output_row.join(",")
+              unparsed_rows << output_row.join(",") 
+              next 
+            end
+
             if user.new_record?
               passwd = Devise.friendly_token.first(8)
               user.password = passwd
