@@ -28,6 +28,19 @@ module Users
           Shop.transaction do
             shop = for_name(shop_name)
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
+            if user.new_record?
+              passwd = Devise.friendly_token.first(8)
+              user.password = passwd
+              user.password_confirmation = passwd
+              user.show_password = true
+              user.show_shop = true
+              user.shop_identifier = shop.id
+              counters[:user_creation] += 1
+              output_row << %{"Created a New User"}
+            else
+              counters[:existing_user] += 1
+              output_row << %{"User exists"}
+            end
             user.save()
           end
           rescue Exception => e
