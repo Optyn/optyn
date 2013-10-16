@@ -23,7 +23,7 @@ module Api
 
         def import_user
           ##will import users for a Partner > shop :post
-          binding.pry
+          #binding.pry
           @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
                                               filepath: params[:filepath], status: 'Queued')
           payload_id = @payload.id
@@ -34,7 +34,7 @@ module Api
           ##gets list of all the user import
           partner_id = current_partner.id
           @import_list = ApiRequestPayload.user_imports_for_partner(partner_id)
-          binding.pry
+          #binding.pry
         end
 
         def import_status
