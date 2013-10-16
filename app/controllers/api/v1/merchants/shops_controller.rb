@@ -32,9 +32,9 @@ module Api
 
         def import_user_list
           ##gets list of all the user import
-          binding.pry
           partner_id = current_partner.id
           @import_list = ApiRequestPayload.user_imports_for_partner(partner_id)
+          binding.pry
         end
 
         def import_status

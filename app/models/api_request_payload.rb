@@ -29,7 +29,6 @@ class ApiRequestPayload < ActiveRecord::Base
 
   def self.user_imports_for_partner(partner_identifer)
     for_partner(partner_identifer).for_controller_and_action("users", "import")
-    binding.pry
   end
 
   private
