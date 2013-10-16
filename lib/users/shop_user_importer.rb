@@ -28,68 +28,13 @@ module Users
           Shop.transaction do
             shop = for_name(shop_name)
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
-# 		      user.skip_name = true
-# 		      user.skip_welcome_email = true
-# 		      user.name = row[:name] unless user.name.present?
-# 		      gender = if (gender_val = row[:gender].to_s.downcase).length == 1
-# 		                 gender_val
-# 		               else
-# 		                  gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
-# 		               end
-# 		      user.gender = gender
-# 		      user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
-# 		      user.valid?
-# 		      if user.errors.include?(:email) || user.errors.include?(:name)
-# 		      	counters[:unparsed_rows] += 1 
-# 		      	error_str = %{"Error: #{user.errors.full_messages.first}"}   
-# 						output_row << error_str
-# 						output << output_row.join(",")
-# 						unparsed_rows << output_row.join(",") 
-# 						next 
-# 					end
-#         end
-# 		      if user.new_record?
-# 		        passwd = Devise.friendly_token.first(8)
-# 		        user.password = passwd
-# 		        user.password_confirmation = passwd
-# 		        user.show_password = true
-# 		        user.show_shop = true
-# 		        user.shop_identifier = shop.id
-# 		        counters[:user_creation] += 1
-# 		        output_row << %{"Created a New User"}
-# 		      else
-# 		        counters[:existing_user] += 1
-# 		        output_row << %{"User exists"}
-# 		      end
-		      user.save()
-
-
-#             #   status = %{"New User"}
-#             #   output_row << status
-#             #   counters[:users_created] += 1
-#             #   output << output_row.join(",")
-#             # else
-#             #   status = %{"Existing User"}
-#             #   output_row << status
-#             #   counters[:existing_user] += 1 
-#             #   output << output_row.join(",")
-#             # end
-          end#end of transaction do
-        # rescue Exception => e    
-        #   Rails.logger.error e.message
-        #   Rails.logger.error e.backtrace
-        #   counters[:unparsed_rows] += 1
-        #   status = %{"Error: #{e.message}"}
-        #   output_row << status
-        #   unparsed_rows << output_row.join(",")
+          end
+          rescue Exception => e
+          end
         end
-#         output << output_row.join(",")
-#       end
+      end#end of user_import
 
-#       unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 
 
-#       [[counters], output.join("\n"), unparsed]
-    end#end of user_import
 
     def validate_headers(headers)
       # binding.pry
