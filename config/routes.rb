@@ -26,7 +26,7 @@ Optyn::Application.routes.draw do
   match '/shop/public/:identifier', to: 'shops#show'
 
   # Blog Redirect
-  match "/blog" => redirect("http://optynblog.com"), :as => :blog
+  match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
 
   # Biz Redirect
   match "/biz" => 'main#merchantfeatures'
