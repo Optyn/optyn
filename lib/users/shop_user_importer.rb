@@ -55,7 +55,7 @@ module Users
               user.show_password = true
               user.show_shop = true
               user.shop_identifier = shop.id
-              counters[:user_creation] += 1
+              counters[:users_created] += 1
               output_row << %{"Created a New User"}
             else
               counters[:existing_user] += 1
