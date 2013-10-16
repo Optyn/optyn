@@ -27,6 +27,11 @@ class ApiRequestPayload < ActiveRecord::Base
     for_manager(manager_identifier).for_controller_and_action("users", "import")
   end
 
+  def self.user_imports_for_partner(partner_identifer)
+    for_partner(partner_identifer).for_controller_and_action("users", "import")
+    binding.pry
+  end
+
   private
   def assign_uuid
     IdentifierAssigner.assign_random(self, 'uuid')

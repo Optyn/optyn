@@ -23,10 +23,17 @@ module Api
 
         def import_user
           ##will import users for a Partner > shop
+          binding.pry
           @payload = ApiRequestPayload.create(controller: controller_name, action: action_name, partner_id: current_partner.id,
                                               filepath: params[:filepath], status: 'Queued')
           payload_id = @payload.id
           Resque.enqueue(ShopUsersImporter, payload_id)
+        end
+
+        def import_user_list
+          ##gets list of all the user import
+          partner_id = current_partner.id
+          @import_list = ApiRequestPayload.user_imports_for_partner(partner_id)
         end
 
         def import_status
