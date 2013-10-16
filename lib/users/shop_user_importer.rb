@@ -28,8 +28,15 @@ module Users
           Shop.transaction do
             shop = for_name(shop_name)
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
+            user.save()
           end
           rescue Exception => e
+            Rails.logger.error e.message
+            Rails.logger.error e.backtrace
+            counters[:unparsed_rows] += 1
+            status = %{"Error: #{e.message}"}
+            output_row << status
+            unparsed_rows << output_row.join(",")
           end
         end
       end#end of user_import
