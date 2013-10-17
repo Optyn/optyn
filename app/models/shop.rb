@@ -40,13 +40,13 @@ class Shop < ActiveRecord::Base
   mount_uploader :logo_img, ShopImageUploader
 
   validates_as_paranoid
-  validates :name, presence: true, uniqueness:  { case_sensitive: false }
+  validates :name, presence: true , uniqueness:  { case_sensitive: false, if: :virtual}
   validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual
   validates :phone_number, :phony_plausible => true 
-  validates_uniqueness_of_without_deleted :name
+  # validates_uniqueness_of_without_deleted :name
   
 
   accepts_nested_attributes_for :managers
