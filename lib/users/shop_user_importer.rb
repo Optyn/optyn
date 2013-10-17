@@ -24,9 +24,11 @@ module Users
         
         begin
           shop_name = row[:shop]
+          manager_email = row[:manager_email]
           Shop.transaction do
             #binding.pry
-            shop = Shop.for_name(shop_name)
+            shop = Shop.for_name_and_manager_email(shop_name,manager_email)
+            
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
             user.skip_name = true
             user.skip_welcome_email = true
