@@ -108,7 +108,6 @@ class Shop < ActiveRecord::Base
     ##get shop id by shop_name, manager email id
     #lower_name(shop_name.to_s).first
     #@shop = self.managers.where(:email => manager_email).first
-    binding.pry
     self.where(:id=>Manager.where(:email=>manager_email).first.id)
   end
 
