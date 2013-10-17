@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016103741) do
+
+ActiveRecord::Schema.define(:version => 20131017052221) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -475,7 +476,7 @@ ActiveRecord::Schema.define(:version => 20131016103741) do
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
-  add_index "shops", ["name"], :name => "index_shops_on_name", :unique => true
+  add_index "shops", ["name"], :name => "index_shops_on_name"
   add_index "shops", ["partner_id"], :name => "index_shops_on_partner_id"
   add_index "shops", ["uuid"], :name => "index_shops_on_uuid", :unique => true
 
