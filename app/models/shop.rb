@@ -78,8 +78,8 @@ class Shop < ActiveRecord::Base
 
   scope :lower_name, ->(shop_name) { where(["LOWER(shops.name) LIKE LOWER(:shop_name)", {shop_name: shop_name}]) }
 
-  scope :for_manager_email, ->(manager_email) {where("",{manager_email: manager_email})}
-  
+  #scope :for_manager_email, ->(manager_email) {where("",{manager_email: manager_email})}
+
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
   before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
@@ -108,6 +108,8 @@ class Shop < ActiveRecord::Base
     ##get shop id by shop_name, manager email id
     #lower_name(shop_name.to_s).first
     #@shop = self.managers.where(:email => manager_email).first
+    binding.pry
+    self.where(:id=>Manager.where(:email=>manager_email).first.id)
   end
 
   def self.by_app_id(app_id)
