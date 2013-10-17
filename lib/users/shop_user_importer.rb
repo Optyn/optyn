@@ -9,7 +9,7 @@ module Users
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop","Email","Name",Gender","Birth Date"}
+      output_headers = %{"Shop","Manager Email","Email","Name",Gender","Birth Date"}
       output << output_headers
       unparsed_rows << output_headers
       
@@ -20,13 +20,15 @@ module Users
 
       csv_table.each do |row|
         status = nil
-        output_row = [%{"#{row[:shop]}"}, %{"#{row[:email]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
+        output_row = [%{"#{row[:shop]}"},%{"#{row[:manager_email]}"}, %{"#{row[:email]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
         
         begin
           shop_name = row[:shop]
+          manager_email = row[:manager_email]
           Shop.transaction do
             #binding.pry
-            shop = Shop.for_name(shop_name)
+            shop = Shop.for_manager_email(manager_email)
+
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
             user.skip_name = true
             user.skip_welcome_email = true

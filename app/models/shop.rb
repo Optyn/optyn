@@ -102,6 +102,11 @@ class Shop < ActiveRecord::Base
     lower_name(shop_name.to_s).first
   end
 
+  def self.for_manager_email(manager_email)
+    ##get shop id by shop_name, manager email id
+    #lower_name(shop_name.to_s).first
+  end
+
   def self.by_app_id(app_id)
     for_app_id(app_id).first
   end
