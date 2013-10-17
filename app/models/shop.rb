@@ -371,6 +371,10 @@ class Shop < ActiveRecord::Base
     self.partner.optyn?
   end
 
+  def partner_eatstreet?
+    self.partner.eatstreet?
+  end
+
   def error_messages
     self.errors.full_messages
   end  
