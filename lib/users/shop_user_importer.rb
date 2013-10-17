@@ -27,7 +27,6 @@ module Users
           manager_email = row[:manager_email]
           Shop.transaction do
             shop = Shop.for_manager_email(manager_email)
-            binding.pry
 		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
             user.skip_name = true
             user.skip_welcome_email = true
@@ -39,6 +38,8 @@ module Users
                      end
             user.gender = gender
             user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
+            #setting of shop
+            user.shops = shop
 
             if user.errors.include?(:email) || user.errors.include?(:name)
               counters[:unparsed_rows] += 1 
@@ -59,7 +60,7 @@ module Users
               counters[:users_created] += 1
               output_row << %{"Created a New User"}
             else
-              counters[:existing_user] += 1
+              counters[:existing_users] += 1
               output_row << %{"User exists"}
             end#end of user.new_record?
             user.save()
@@ -76,7 +77,7 @@ module Users
         end#end of begin
         unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 
         [[counters], output.join("\n"), unparsed]
-        #binding.pry
+        binding.pry
       end#end of user_import
 
 
