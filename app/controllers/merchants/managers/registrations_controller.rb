@@ -11,7 +11,7 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
 
   def create 
     shop_name = params[:shop_name][:name].to_s.downcase
-    @shop = Shop.with_deleted.for_name(shop_name) || Shop.new
+    @shop = Shop.new
     @shop.attributes = params[:shop_name]
 
     if @shop.managers.size > 1
