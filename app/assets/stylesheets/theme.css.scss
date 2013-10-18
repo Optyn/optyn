@@ -974,6 +974,9 @@ form {
   #message_form .add-on i {
     margin-top: -3px;
   }
+  .bootstrap-datetimepicker-widget {
+    z-index: 10001;
+  }
 }
 
 a, input {
