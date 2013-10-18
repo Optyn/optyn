@@ -143,6 +143,8 @@ Optyn::Application.routes.draw do
         resources :shops do
           collection do
             get :import_list
+            get :import_user_list
+            post :import_user
             post :import
             get :import_status
             get :active_connections
@@ -186,6 +188,11 @@ Optyn::Application.routes.draw do
           end
         end #end of consumers resources   
       end #end of the merchants namespace
+
+      namespace :partners do
+        get 'login', to: 'login#new'
+        post 'login', to: 'login#create'
+      end #end of the partners namespace
     end #end of the scope v1
   end #end of the api namespace
 
@@ -280,6 +287,11 @@ Optyn::Application.routes.draw do
         :passwords => 'reseller/partners/passwords',
         :confirmations => 'reseller/partners/confirmations'
     }
+
+    # devise_scope :partner do
+    #   get '/api/partners/login', to: 'partners/sessions#new'
+    # end
+
     get '/resellerjs' => 'dashboards#resellerjs'
   end
 end
