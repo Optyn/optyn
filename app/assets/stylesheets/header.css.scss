@@ -14,14 +14,15 @@
 }
 
 #flat .btn.btn-navbar {
-  border: solid 2px darken( $blue, 10% );
-  /*background: transparent;*/
+  border: 0;
+  background: transparent;
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 7px;
   margin-right: 10px;
-  /*&:hover {
-    background-color: transparent;
-  }*/
+  &:hover {
+    background-color: $gray;
+    border: 0;
+  }
 }
 
 @media (max-width: 979px) {
