@@ -207,7 +207,13 @@ Optyn::Application.routes.draw do
     end
 
     resource :app
-    resources :connections
+    resources :connections do
+      collection do
+        match 'unsubscribe/:id', to: "connections#unsubscribe_user", as: :unsubscribe
+        post 'create_label'
+        post 'update_labels'
+      end
+    end
     resources :locations
     resources :dashboards
     resources :file_imports
