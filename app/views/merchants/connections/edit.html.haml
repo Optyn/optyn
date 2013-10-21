@@ -1,0 +1,42 @@
+= javascript_include_tag "merchants/customer_tag"
+= banner("Edit user")
+
+#merchants.pad3pc
+  .container-fluid
+    .errors
+      - if @user.errors.any?
+        %ui
+        - @user.errors.full_messages.each do |error|
+          %li
+            = error
+    .form
+      = form_for :user, url: merchants_connection_path(@user.id), method: :put, html: {id: 'edit_user_form', class: 'form-horizontal'} do |f|
+        #update_shop_wrapper
+          .control-group
+            .control-label
+              = f.label :name
+            .controls
+              .labels{'data-toggle' => 'tooltip', title: 'Enter user name'}
+                = f.text_field :name, :placeholder => 'Enter user name', class: 'span12'
+          .control-group
+            .control-label
+              = f.label :email
+            .controls
+              .labels{'data-toggle' => 'tooltip', title: 'Enter user email'}
+                = f.text_field :email, :placeholder => 'Enter user email', class: 'span12'
+          
+          .control-group
+            = hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_connections_path
+            = hidden_field_tag "update_labels_merchants_survey_survey_answers_path", update_labels_merchants_connections_path
+            
+            #user_label_list
+              .control-label
+                = label_tag "Labels"
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
+                  = select_tag :label, options_from_collection_for_select(@names, :id, :name, @user.user_labels.collect(&:label_id)),{ id:"labels_#{@user.id}", multiple: 'multiple', class: 'chzn-select', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
+                  = hidden_field_tag "user_id", @user.id, class: 'user_id'
+          
+          .action-buttons
+            = f.submit "Update" , class: "btn btn-primary"
+            = link_to "Cancel", merchants_connections_path, class: 'btn'

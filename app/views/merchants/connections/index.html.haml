@@ -13,6 +13,7 @@
         %th Connected via
         %th Permission
         %th Details
+        %th Edit
     %tbody
       - email_id = Permission.email_id
       - name_id = Permission.name_id
@@ -32,5 +33,7 @@
               = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id}
             - else
               %a{:href => "#",:style => "color:#7D8B8F"} More Info
+          %td
+            = link_to "Edit", edit_user_merchants_connections_path(connection.user_id)
 
   = paginate @connections

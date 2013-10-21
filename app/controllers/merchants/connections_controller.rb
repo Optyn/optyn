@@ -82,6 +82,22 @@ class Merchants::ConnectionsController < Merchants::BaseController
     render json: (label.attributes.except('shop_id', 'created_at', 'updated_at') rescue []).to_json
   end
 
+  def edit
+  	@user = User.find(params[:id])
+  	populate_labels
+  end
+
+  def update
+  	@user = User.find(params[:id])
+ 		
+	  if @user.update_attributes(name: "#{params[:user][:name]}", email: "#{params[:user][:email]}")
+	    redirect_to merchants_connections_path, :notice => "User updated successfully."
+	  else
+	  	populate_labels
+	    render 'edit'
+	  end
+  end
+
   private
   def populate_labels
     @names = current_shop.labels.active
