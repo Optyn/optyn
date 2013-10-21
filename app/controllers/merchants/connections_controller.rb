@@ -43,6 +43,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
           flag = true
           break
         else
+          params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "")
           conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
           total_labels_selected = params["label_ids"]
           label_loop_size = total_labels_selected.size - 1
