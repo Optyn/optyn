@@ -4,7 +4,7 @@
       = label_tag :To
     .controls
       .labels{'data-toggle' => 'tooltip', title: 'Enter user names in format like Alein Dsouza (abc@test.com)'}
-        = text_field_tag 'To', nil, :placeholder => 'Enter user names', class: 'span12'
+        = text_field_tag 'To', "#{params[:To]}", :placeholder => 'Enter user names', class: 'span12'
   
   .control-group
     = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
@@ -13,7 +13,7 @@
         = label_tag "Labels"
       .controls
         .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
-          - selected = @user.new_record? ? [] : @user.user_labels.collect(&:label_id)
+          - selected = params['label_ids'].nil? ? [] : params['label_ids'].map{|x| x}
           = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
   
   .action-buttons

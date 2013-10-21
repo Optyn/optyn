@@ -38,41 +38,32 @@ class Merchants::ConnectionsController < Merchants::BaseController
   			name_email_arr = total_users[u].strip.split("(")
   			name = name_email_arr[0].strip
   			email = name_email_arr[1].gsub(")", " ").strip
-  			flag = find_duplicate_users(email)
-  			break if flag
+  			@user = User.new(:name => name, :email => email, :password => "test1234")
+  			if not @user.save
+          flag = true
+          break
+        else
+          conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
+          total_labels_selected = params["label_ids"]
+          label_loop_size = total_labels_selected.size - 1
+          (0..label_loop_size).each do |l|
+            user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: total_labels_selected[l])
+          end
+        end
   		end
 
   		if not flag
-	  		(0..loop_size).each do |u|
-	  			name_email_arr = total_users[u].strip.split("(")
-	  			name = name_email_arr[0].strip
-	  			email = name_email_arr[1].gsub(")", " ").strip
-	  			user = User.new(:name => name, :email => email, :password => "test1234")
-	  			if user.save
-	  				conn = Connection.create(:user_id => user.id, :shop_id => current_shop.id, :connected_via => "Website")
-						total_labels_selected = params["label_ids"]
-						label_loop_size = total_labels_selected.size - 1
-						(0..label_loop_size).each do |l|
-							user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: user.id, label_id: total_labels_selected[l])
-						end
-	  			end
-	  		end
 	  		redirect_to merchants_connections_path, :notice => "User(s) added successfully."
 	  	else
-	  		redirect_to add_user_merchants_connections_path	
+        populate_labels
+	  		render 'add_user'	
 	  	end
   	else
-  		redirect_to add_user_merchants_connections_path
+  		populate_labels
+      @user = User.new(:name => params["To"])
+      @user.save
+      render 'add_user'
   	end
-  end
-
-  def find_duplicate_users(email)
-  	u = User.find_by_email(email)
-  	if u
-  		flag = true
-  	end
-
-  	return flag
   end
 
   def create_labels_for_user
