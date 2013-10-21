@@ -24,6 +24,43 @@ class Merchants::ConnectionsController < Merchants::BaseController
     update_labels_helper_method_called
   end
 
+  def add_user
+  	@user = User.new
+  	populate_labels
+  end
+
+  def create_user
+  	if params["To"]
+  		total_users = params["To"].split(",")
+  		loop_size = total_users.size - 1
+  		(0..loop_size).each do |u|
+  			name_email_arr = total_users[u].strip.split("(")
+  			name = name_email_arr[0].strip
+  			email = name_email_arr[1].gsub(")", " ").strip
+  			user = User.new(:name => name, :email => email, :password => "test1234")
+  			if user.save
+  				conn = Connection.create(:user_id => user.id, :shop_id => current_shop.id, :connected_via => "Website")
+					total_labels_selected = params["label_ids"]
+					label_loop_size = total_labels_selected.size - 1
+					(0..label_loop_size).each do |l|
+						user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: user.id, label_id: total_labels_selected[l])
+					end
+				else
+					puts "Errorss"
+  			end
+  		end
+
+  		redirect_to merchants_connections_path, :notice => "User(s) added successfully."
+  	end
+  end
+
+  def create_labels_for_user
+  	existing_label = current_shop.labels.find_by_name(params[:label].strip)
+    label = current_shop.labels.create(name: params[:label].strip) unless existing_label.present?
+
+    render json: (label.attributes.except('shop_id', 'created_at', 'updated_at') rescue []).to_json
+  end
+
   private
   def populate_labels
     @names = current_shop.labels.active

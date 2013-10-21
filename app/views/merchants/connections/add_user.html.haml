@@ -1,0 +1,7 @@
+= banner("Add user")
+
+#merchants.pad3pc
+  .container-fluid
+    .form
+      = form_for :user, url: create_user_merchants_connections_path, method: :post, html: {id: 'add_user_form', class: 'form-horizontal'} do |f|
+        = render :partial => 'form', :locals => {f: f}
