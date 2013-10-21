@@ -12,8 +12,7 @@
         %th Name
         %th Connected via
         %th Permission
-        %th Details
-        %th Edit
+        %th Action
     %tbody
       - email_id = Permission.email_id
       - name_id = Permission.name_id
@@ -22,17 +21,18 @@
         %tr
           %td= index + 1
           %td
-            = connection_user_display_name(connection, name_id, email_id)
+            - name = connection_user_display_name(connection, name_id, email_id)
+            - name = (name.nil? or name.blank?) ? "Optyn User #{connection.user.id}" : name
+            - if connection.user.permissions_users.present?
+              / %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} 
+              = link_to "#{name}", "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"
+              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id}
+            - else
+              %a{:href => "#",:style => "color:#7D8B8F"} More Info
           %td
             = connection.connected_via
           %td
             = user_permission(connection.user)
-          %td
-            - if connection.user.permissions_users.present?
-              %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
-              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id}
-            - else
-              %a{:href => "#",:style => "color:#7D8B8F"} More Info
           %td
             = link_to "Edit", edit_user_merchants_connections_path(connection.user_id)
 

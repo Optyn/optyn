@@ -9,7 +9,7 @@
         %strong
           - if name_id == permission_user.permission_id
             - name = connection_user_name(permission_user, user, name_id)
-            = (name.nil? or name.blank?) ? "No name" : name
+            = (name.nil? or name.blank?) ? "Optyn User #{user.id}" : name
         - if email_id ==  permission_user.permission_id
           %br
           = connection_user_email(permission_user, user, email_id)
