@@ -12,9 +12,9 @@
       .control-label
         = label_tag "Labels"
       .controls
-        .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them'}
+        .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
           - selected = @user.new_record? ? [] : @user.user_labels.collect(&:label_id)
-          = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Segment your customers by entering a label for them'}
+          = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
   
   .action-buttons
     = f.submit "Create" , class: "btn btn-primary"
