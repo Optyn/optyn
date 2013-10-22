@@ -1,13 +1,17 @@
+= stylesheet_link_tag "customer"
 = banner("Add user")
 
 #merchants.pad3pc
   .container-fluid
-    .errors
-      - if @user.errors.any?
-        %ui
-        - @user.errors.full_messages.each do |error|
-          %li
-            = error
+    - if @user.errors.any?
+      #error_explanation
+        %h2 
+          = "Following errors prohibited this user from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |error|
+            - next if error.include?('Password')
+            %li
+              = error
     .form
       = form_for :user, url: create_user_merchants_connections_path, method: :post, html: {id: 'add_user_form', class: 'form-horizontal'} do |f|
         = render :partial => 'form', :locals => {f: f}

@@ -1,14 +1,17 @@
 = javascript_include_tag "merchants/customer_tag"
+= stylesheet_link_tag "customer"
 = banner("Edit user")
 
 #merchants.pad3pc
   .container-fluid
-    .errors
-      - if @user.errors.any?
-        %ui
-        - @user.errors.full_messages.each do |error|
-          %li
-            = error
+    - if @user.errors.any?
+      #error_explanation
+        %h2 
+          = "Following errors prohibited this user from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |error|
+            %li
+              = error
     .form
       = form_for :user, url: merchants_connection_path(@user.id), method: :put, html: {id: 'edit_user_form', class: 'form-horizontal'} do |f|
         #update_shop_wrapper
