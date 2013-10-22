@@ -235,7 +235,7 @@ class User < ActiveRecord::Base
     elsif users # we get user but no label selected
       user_ids = users.map{|x| x.id}
     else #searches only on basis of label
-      select_all = ['423']
+      select_all = ['423'] #id for select_All
       params["label_ids"] = params["label_ids"].nil? ? select_all : params["label_ids"]
       user_ids = UserLabel.where(:label_id => params["label_ids"]).map{|x| x.user_id}
     end
