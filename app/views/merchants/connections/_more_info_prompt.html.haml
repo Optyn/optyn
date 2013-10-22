@@ -16,6 +16,7 @@
           %br
           = "Joined: #{user.created_at.strftime('%d/%m/%y')} | Last Activity: #{user.updated_at.strftime('%d/%m/%y')}"
           %br
+          = "Status: #{status}"
           %br
           = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(user.id), :confirm => "Are you sure?", :class => "btn btn-primary"
 

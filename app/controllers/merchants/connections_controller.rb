@@ -7,7 +7,8 @@ class Merchants::ConnectionsController < Merchants::BaseController
   end
 
   def unsubscribe_user
-  	connection = Connection.where(user_id:"#{params[:id]}").first
+    shop_id = current_shop.id
+  	connection = Connection.where(user_id:"#{params[:id]}", :shop_id => shop_id).first
   	if connection
   		connection.active = "false"
   		connection.save
