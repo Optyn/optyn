@@ -405,7 +405,7 @@ class Message < ActiveRecord::Base
   def header_background_color_css_val
     property = self.header_background_property
     return "background-color: #{shop_header_background_color_hex};" if property.present? && (property.instance_of?(ActiveRecord::Relation) ? property.first : property).new_record?
-    css = "backround-color: #{self.header_background_property.property_value}"
+    css = "backround-color: #{self.header_background_property.property_value};"
     css
   end
 
