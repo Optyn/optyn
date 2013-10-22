@@ -2,6 +2,9 @@
 = link_to "Add new user", add_user_merchants_connections_path, :style => "margin-top: -62px; position: absolute; margin-left: 845px;", :class => "btn btn-primary"
 
 #merchants.pad3pc
+  #filter_Form
+    = render partial: 'filter_form'
+  %hr
   %p.pull-left
     Here's a list of all your connections. Click on name of customer to learn more.
   %a.btn.btn-primary{:href => merchants_file_imports_path, :style => "float: right"} Import Customers

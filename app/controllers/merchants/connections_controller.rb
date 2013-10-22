@@ -100,6 +100,13 @@ class Merchants::ConnectionsController < Merchants::BaseController
 	  end
   end
 
+  def search
+    user_ids = User.search_user(params)
+    @connections = Connection.where(:shop_id => current_shop.id, :user_id => user_ids).paginated_shops_connections(current_shop.id, params[:page])
+    populate_labels
+    render 'index'
+  end
+
   private
   def populate_labels
     @names = current_shop.labels

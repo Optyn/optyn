@@ -219,6 +219,30 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.search_user(params)
+    if not params["name"].blank? and not params["email"].blank?
+      users = User.where('name ilike ? and email = ?', "%#{params[:name].strip}%", "#{params[:email].strip}")
+    elsif not params["name"].blank?
+      users = User.arel_table
+      users = User.where(users[:name].matches("%#{params[:name]}%"))
+    elsif not params["email"].blank?
+      users = User.where(:email => params["email"].strip)
+    end
+
+    if users and not params["label_ids"].blank? #we get the user with given name / email or both
+      user_ids = users.map{|x| x.id}
+      user_ids = UserLabel.where(:label_id => params["label_ids"], :user_id => user_ids).map{|x| x.user_id}
+    elsif users # we get user but no label selected
+      user_ids = users.map{|x| x.id}
+    else #searches only on basis of label
+      select_all = ['423']
+      params["label_ids"] = params["label_ids"].nil? ? select_all : params["label_ids"]
+      user_ids = UserLabel.where(:label_id => params["label_ids"]).map{|x| x.user_id}
+    end
+    
+    return user_ids
+  end
+
   private
   def self.persist_with_twitter_exception(user, provider)
     user.skip_password = true
