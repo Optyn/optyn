@@ -3,15 +3,23 @@
 
 #merchants.pad3pc
   .container-fluid
-    - if @user.errors.any?
+    - if @user.errors.any? or not @error_hash.blank?
       #error_explanation
-        %h2 
-          = "Following errors prohibited this user from being saved:"
-        %ul
-          - @user.errors.full_messages.each do |error|
-            - next if error.include?('Password')
-            %li
-              = error
+        - if @error_hash.blank?
+          %h2
+            = "Following errors prohibited this user from being saved:"
+          %ul
+            - @user.errors.full_messages.each do |error|
+              - next if error.include?('Password')
+              %li
+                = error
+        - else
+          %h2
+            = "Summary:"
+          %ul
+            - @error_hash.each do |error|
+              %li
+                = error
     .form
       = form_for :user, url: create_user_merchants_connections_path, method: :post, html: {id: 'add_user_form', class: 'form-horizontal'} do |f|
         = render :partial => 'form', :locals => {f: f}

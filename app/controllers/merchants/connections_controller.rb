@@ -33,18 +33,25 @@ class Merchants::ConnectionsController < Merchants::BaseController
   def create_user
   	if not params["To"].blank?
   		total_users = params["To"].split(",")
+      @error_hash = []
   		flag = false
   		loop_size = total_users.size - 1
   		(0..loop_size).each do |u|
+        next if total_users[u].blank?
   			name_email_arr = total_users[u].strip.split("(")
   			name = name_email_arr[0].strip
   			email = name_email_arr[1].gsub(")", " ").strip
   			@user = User.new(:name => name, :email => email, :password => "test1234")
   			if not @user.save
           flag = true
-          break
+          if @user.errors.full_messages[0].include?("invalid")
+            @error_hash.push("#{email} is invalid.")
+          else
+            @error_hash.push("#{email} has already been taken.")
+          end
         else
-          params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "")
+          @error_hash.push("#{email} was added successfully.")
+          params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
           conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
           total_labels_selected = params["label_ids"]
           label_loop_size = total_labels_selected.size - 1
@@ -93,6 +100,6 @@ class Merchants::ConnectionsController < Merchants::BaseController
 
   private
   def populate_labels
-    @names = current_shop.labels.active
+    @names = current_shop.labels
   end
 end
