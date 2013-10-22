@@ -53,6 +53,8 @@ class Merchants::ConnectionsController < Merchants::BaseController
           @error_hash.push("#{email} was added successfully.")
           params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
           conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
+          select_all = ['423']
+          params["label_ids"] = params["label_ids"].nil? ? select_all : params["label_ids"]
           total_labels_selected = params["label_ids"]
           label_loop_size = total_labels_selected.size - 1
           (0..label_loop_size).each do |l|
