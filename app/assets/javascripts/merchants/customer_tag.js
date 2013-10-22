@@ -10,7 +10,8 @@ function Label() {
             this.hookChosen();
             this.hookAddNewLabel();
             this.hookChangeChosen();
-            $('div.chzn-container').width(500);
+            if($('#user_label_list .chzn-select').length > 0)
+              $('div.labels div.chzn-container').width(500);
         }
     };
 
@@ -19,7 +20,7 @@ function Label() {
     };
 
     this.hookAddNewLabel = function () {
-        $('body').on('keydown', '.search-field input', function (e) {
+        $('body').on('keydown', '#user_label_list .search-field input', function (e) {
             var $input = $(this);
             var code = e.keycode || e.which;
             if (code == 13) {
@@ -48,7 +49,7 @@ function Label() {
     };
 
     this.hookChangeChosen = function () {
-        $('.chzn-select').chosen().change(function(){
+        $('#user_label_list .chzn-select').chosen().change(function(){
             var $select = $(this);
 
             $.ajax({
