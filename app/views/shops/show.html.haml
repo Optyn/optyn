@@ -11,7 +11,7 @@
         %strong
           = pluralize(@shop.connections.active.count, "Optyn")
         = form_tag(authenticate_with_email_url, method: :post) do
-          %input{:type=>"textbox", :id=>"session_email", :name=>"user[email]" }
+          %input{:type=>"text", :id=>"session_email", :name=>"user[email]" }
           %input{:type=>"hidden", :name=>"uuid", :value=>"#{@shop.uuid}"}
           %input{:type=>"hidden", :name=>"next", :value=>"#{request.original_url}"}
           %input{:type=>"hidden", :name=>"from", :value=>"public_page"}
