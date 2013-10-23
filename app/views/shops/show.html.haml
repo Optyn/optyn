@@ -13,6 +13,7 @@
         = form_tag(authenticate_with_email_url, method: :post) do
           %input{:type=>"textbox", :id=>"session_email", :name=>"user[email]" }
           %input{:type=>"hidden", :name=>"app_id", :value=>"#{@shop.oauth_application.uid}"}
+          %input{:type=>"hidden", :name=>"next", :value=>"#{request.original_url}"}
           %input{:type=>"submit", :value=>"Subscribe"}
     .row-fluid.mainbody
       .span8.offset2.details

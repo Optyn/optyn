@@ -44,7 +44,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def authenticate_with_email
-    binding.pry
+    #binding.pry
     if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
       @user = User.find_by_email(params[:user][:email])
       sudo_registration unless @user.present?
