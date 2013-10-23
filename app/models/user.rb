@@ -229,15 +229,17 @@ class User < ActiveRecord::Base
       users = User.where(:email => params["email"].strip)
     end
 
-    if users and not params["label_ids"].blank? #we get the user with given name / email or both
+    if users and not params["label_ids"].blank? #we get or dont get the user with given name / email or both
       user_ids = users.map{|x| x.id}
       user_ids = UserLabel.where(:label_id => params["label_ids"], :user_id => user_ids).map{|x| x.user_id}
     elsif users # we get user but no label selected
       user_ids = users.map{|x| x.id}
-    else #searches only on basis of label
-      select_all = ['423'] #id for select_All
-      params["label_ids"] = params["label_ids"].nil? ? select_all : params["label_ids"]
+    elsif not params["label_ids"].blank? #searches on the basis of label only
       user_ids = UserLabel.where(:label_id => params["label_ids"]).map{|x| x.user_id}
+    else #searches when everything is blank
+      users_with_name_or_email_blank = User.where('name is NULL or email is NULL').map{|x| x.id}
+      users_with_label_blank = UserLabel.where('label_id is NULL or label_id = 0').map{|x| x.user_id}
+      user_ids = users_with_name_or_email_blank | users_with_label_blank
     end
     
     return user_ids

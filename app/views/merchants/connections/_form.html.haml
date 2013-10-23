@@ -13,7 +13,7 @@
         = label_tag "Labels"
       .controls
         .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
-          - selected = params['label_ids'].nil? ? @names.first.id : params['label_ids'].map{|x| x}
+          - selected = params['label_ids'].nil? ? '' : params['label_ids'].map{|x| x}
           = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
   
   .action-buttons

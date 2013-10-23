@@ -65,6 +65,10 @@ class Partner < ActiveRecord::Base
     self.id == Partner.eatstreet_id
   end
 
+  def subscription_required?
+    self.subscription_required
+  end
+
   private
   def validate_phone_digits
     self.errors.add(:phone, "invalid") if !self.errors.include?(:phone) && self.phone.to_s.gsub(/\D/, '').size != 10
