@@ -9,7 +9,8 @@ namespace :partner do
                                                                        organization: "Optyn Inc.",
                                                                        redirect_uri: SiteConfig.robots_redirect_uri, 
                                                                        header_background_color: "#1791C0",
-                                                                       footer_background_color: "#ffffff")
+                                                                       footer_background_color: "#ffffff",
+                                                                       subscription_required: true)
     partner.save!
     partnerless_shops = Shop.where(partner_id: nil)
     partnerless_shops.each do |shop|
