@@ -67,6 +67,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
   def sudo_registration
+    # binding.pry
     @user = User.new(params[:user])
     passwd = Devise.friendly_token.first(8)
     @user.password = passwd
@@ -77,6 +78,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if !saved && @user.errors.blank?
       @user.show_password = true
+      # binding.pry
       @shop = Shop.by_app_id(params[:app_id])
       @user.show_shop = true
       @user.shop_identifier = @shop.id
