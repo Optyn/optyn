@@ -46,16 +46,29 @@ class Users::SessionsController < Devise::SessionsController
   def authenticate_with_email
     if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
       @user = User.find_by_email(params[:user][:email])
-      sudo_registration unless @user.present?
+      @user = sudo_registration unless @user.present?
+
+      #this code section is called when useris coming from public page of shop
+      if params[:next].present? and params[:from] == "public_page"
+        flash[:alert] = "successfully created"
+        redirect_to "#{params[:next]}" and return
+      end
 
       sign_in @user
       session[:user_return_to] = nil
+
       respond_to do |format|
         format.json { render(status: :created) }
 
         format.any { render text: "Only HTML and JSON supported" }
       end
     else
+      #this code section is called when useris coming from public page of shop
+      if params[:next].present? and params[:from] == "public_page"
+        flash[:alert] = "Please check your email address"
+        redirect_to "#{params[:next]}" and return
+      end
+
       respond_to do |format|
         @user = User.new
         @user.errors.add(:base, "Please check your email address")
@@ -81,6 +94,8 @@ class Users::SessionsController < Devise::SessionsController
       @user.shop_identifier = @shop.id
       @user.save(validate: false)
     end
+    #return the user
+    @user
   end
 
   def increment_email_box_click_count
