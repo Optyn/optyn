@@ -64,7 +64,8 @@ class Users::SessionsController < Devise::SessionsController
       end
     else
       #this code section is called when useris coming from public page of shop
-      if params[:next].present? and params[:from] == "public_page"\
+      if params[:next].present? and params[:from] == "public_page"
+        @shop = Shop.for_uuid(params[:uuid])
         @user.make_connection_if!(@shop)
         flash[:alert] = "Please check your email address"
         redirect_to "#{params[:next]}" and return
