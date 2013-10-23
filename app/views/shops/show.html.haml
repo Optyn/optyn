@@ -14,6 +14,7 @@
           %input{:type=>"textbox", :id=>"session_email", :name=>"user[email]" }
           %input{:type=>"hidden", :name=>"app_id", :value=>"#{@shop.oauth_application.uid}"}
           %input{:type=>"hidden", :name=>"next", :value=>"#{request.original_url}"}
+          %input{:type=>"hidden", :name=>"from", :value=>"public_page"}
           %input{:type=>"submit", :value=>"Subscribe"}
     .row-fluid.mainbody
       .span8.offset2.details
