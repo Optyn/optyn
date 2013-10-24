@@ -28,7 +28,7 @@ class ShopsController < ApplicationController
 		if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
 		  #email id is fine
 		  @user = User.find_by_email(params[:user][:email])
-		  @user = sudo_registration unless @user.present?
+		  @user = sudo_registration(params) unless @user.present?
 		  @shop = Shop.for_uuid(params[:uuid])
 		  @user.make_connection_if!(@shop)
 		  logger.debug "This is from debug"
