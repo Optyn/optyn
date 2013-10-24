@@ -47,7 +47,7 @@ class Users::SessionsController < Devise::SessionsController
     #called in case 
     if !params[:next].present? 
       flash[:alert] = "Parameters Invalid"
-      binding.pry
+      #binding.pry
       redirect_to public_shop_path and return
     end#end of if
 
