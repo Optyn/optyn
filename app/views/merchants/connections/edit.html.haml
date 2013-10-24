@@ -1,19 +1,12 @@
 = javascript_include_tag "merchants/customer_tag"
+= javascript_include_tag "merchants/connections"
 = stylesheet_link_tag "customer"
 = banner("Edit user")
 
 #merchants.pad3pc
   .container-fluid
-    - if @user.errors.any?
-      #error_explanation
-        %h2 
-          = "Following errors prohibited this user from being saved:"
-        %ul
-          - @user.errors.full_messages.each do |error|
-            %li
-              = error
     .form
-      = form_for :user, url: merchants_connection_path(@user.id), method: :put, html: {id: 'edit_user_form', class: 'form-horizontal'} do |f|
+      = form_for :user, url: update_user_merchants_connections_path(@user.id), method: :post, html: {id: 'edit_user_form', class: 'form-horizontal'} do |f|
         #update_shop_wrapper
           .control-group
             .control-label
@@ -41,5 +34,6 @@
                   = hidden_field_tag "user_id", @user.id, class: 'user_id'
           
           .action-buttons
-            = f.submit "Update" , class: "btn btn-primary"
+            / = f.submit "Update" , class: "btn btn-primary"
+            %a.btn.btn-primary{:href => "#", "id" => "#{@user.id}", "class" => "update_user"} Update
             = link_to "Cancel", merchants_connections_path, class: 'btn'

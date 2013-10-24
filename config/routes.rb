@@ -215,6 +215,7 @@ Optyn::Application.routes.draw do
     resources :connections do
       collection do
         match 'unsubscribe/:id', to: "connections#unsubscribe_user", as: :unsubscribe
+        match 'update_user/:id', to: "connections#update_user", as: :update_user
         match 'add_user', to: "connections#add_user", as: :add_user
         match 'create_user', to: "connections#create_user", as: :create_user
         match 'edit_user/:id', to: "connections#edit", as: :edit_user
