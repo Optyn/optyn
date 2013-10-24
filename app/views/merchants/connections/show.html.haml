@@ -1,0 +1,34 @@
+= javascript_include_tag "merchants/customer_tag"
+.modal-header
+  %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
+  = link_to image_tag('avatar_large.png'), 'http://www.google.com'
+  %span{:style => "float: right; position: absolute; padding-left: 15px;"}
+    - email_id = Permission.email_id
+    - name_id = Permission.name_id
+    %strong
+      = connection_user_display_name(@connection, name_id, email_id)
+    - if not (@user.name.blank? or @user.name.nil?)
+      %br
+      = "#{@user.email}"
+    %br
+    = "Joined: #{@user.created_at.strftime('%d/%m/%y')} | Last Activity: #{@user.updated_at.strftime('%d/%m/%y')}"
+    %br
+    - status = @connection.active ? "Active" : "Inactive"
+    = "Status: #{status}"
+    %br
+    = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(@user.id), :confirm => "Are you sure you want to unsubscribe this user?", :class => "btn btn-primary"
+    %a.btn.btn-primary{:href => "#", "data-toggle" => "modal", "id" => "#{@user.id}", "class" => "edit_user"}Edit user
+    = hidden_field_tag "edit_path_#{@user.id}", edit_user_merchants_connections_path(@user.id)
+    / = render partial: 'edit', locals:{user: user}
+    / = link_to 'Edit', edit_user_merchants_connections_path(user.id), :class => "btn btn-primary"
+
+.modal-body{:style => "height:500px"}
+  %h3 Customer Tags
+  = hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_connections_path
+  = hidden_field_tag "update_labels_merchants_survey_survey_answers_path", update_labels_merchants_connections_path
+  
+  #user_label_list
+    - if @user.present?        
+      .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
+        = select_tag :label, options_from_collection_for_select(@names, :id, :name, @user.user_labels.collect(&:label_id)),{ id:"labels_#{@user.id}", multiple: 'multiple', class: 'chzn-select', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
+        = hidden_field_tag "user_id", @user.id, class: 'user_id'

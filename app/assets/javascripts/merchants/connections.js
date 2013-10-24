@@ -1,9 +1,17 @@
 $(document).ready(function(){
-   $(".open-infoDialog").click(function(){ // Click to only happen on more info links
+  $(".open-infoDialog").click(function(){ // Click to only happen on more info links
      //$("#dialogId").val($(this).data('id'));
-     //var userId = $(".open-infoDialog").val($(this).data('id'));
-     $('#infoDialog').modal('show');
-   });
+     //var userId = $(".open-infoDialog").val($(this).data('id'))
+    var id = $(this).attr('id');
+    $.ajax({
+      url: $('#show_path_' + id).val(),
+      type: 'GET',
+      success: function (data) {
+        $("#infoDialog_" + id).html( data );
+      }
+    });
+    $('#infoDialog_' + id).modal('show');
+  });
 
   $(".edit_user").click(function(){
     var id = $(this).attr('id');
