@@ -45,23 +45,22 @@ class Users::SessionsController < Devise::SessionsController
 
   def subscribe_with_email
     #called in case 
-    if !params[:next].present? 
+    if !params[:user].present? 
       flash[:alert] = "Parameters Invalid"
-      #binding.pry
-      redirect_to public_shop_path and return
+      redirect_to public_shop_path(params["uuid"]) and return
     end#end of if
-
+    binding.pry
     if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
       @user = User.find_by_email(params[:user][:email])
       @user = sudo_registration unless @user.present?
       flash[:alert] = "Successfully Subscribed"
-      redirect_to :back and return
     else
       @shop = Shop.for_uuid(params[:uuid])
       @user.make_connection_if!(@shop)
       flash[:alert] = "Please check your email address"
-      redirect_to public_shop_path and return
     end#end of params[:user][:email].match
+
+    redirect_to public_shop_path(params["uuid"]) and return
   end#end if subsribe_with_email
 
   def authenticate_with_email
