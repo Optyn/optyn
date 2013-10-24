@@ -12,10 +12,9 @@
     %thead
       %tr
         %th #
-        %th Name
-        %th Connected via
-        %th Permission
-        %th Action
+        %th Customer
+        %th Tags
+        %th Profile
     %tbody
       - email_id = Permission.email_id
       - name_id = Permission.name_id
@@ -24,20 +23,15 @@
         %tr
           %td= index + 1
           %td
-            - name = connection_user_display_name(connection, name_id, email_id)
-            - name = (name.nil? or name.blank?) ? "Optyn User #{connection.user.id}" : name
+            = connection_user_display_name(connection, name_id, email_id)
+          %td
+            = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name.capitalize}.join(", ")
+          %td
             - status = connection.active ? "Active" : "Inactive"
             - if connection.user.permissions_users.present?
-              / %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} 
-              = link_to "#{name}", "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"
-              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id, :status => status}
+              %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
+              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id, :status => status, :connection => connection}
             - else
               %a{:href => "#",:style => "color:#7D8B8F"} More Info
-          %td
-            = connection.connected_via
-          %td
-            = user_permission(connection.user)
-          %td
-            = link_to "Edit", edit_user_merchants_connections_path(connection.user_id)
 
   = paginate @connections

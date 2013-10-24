@@ -50,10 +50,9 @@ class Users::SessionsController < Devise::SessionsController
 
       #this code section is called when useris coming from public page of shop
       if params[:next].present? and params[:from] == "public_page"
-        flash[:alert] = "successfully created"
-        redirect_to "#{params[:next]}" and return
-      end#end of public_page flow
-
+        flash[:alert] = "Successfully Subscribed"
+        redirect_to public_shop_path and return
+      end
 
       sign_in @user
       session[:user_return_to] = nil
@@ -66,6 +65,8 @@ class Users::SessionsController < Devise::SessionsController
     else
       #this code section is called when useris coming from public page of shop
       if params[:next].present? and params[:from] == "public_page"
+        @shop = Shop.for_uuid(params[:uuid])
+        @user.make_connection_if!(@shop)
         flash[:alert] = "Please check your email address"
         redirect_to "#{params[:next]}" and return
       end#end of public_page flow
@@ -90,7 +91,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if !saved && @user.errors.blank?
       @user.show_password = true
-      @shop = Shop.by_app_id(params[:app_id])
+      @shop = Shop.by_app_id(params[:app_id]) rescue Shop.for_uuid(params[:uuid])
       @user.show_shop = true
       @user.shop_identifier = @shop.id
       @user.save(validate: false)
