@@ -25,7 +25,7 @@
           %td
             = connection_user_display_name(connection, name_id, email_id)
           %td
-            = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name.capitalize}.join(", ")
+            = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name}.join(", ")
           %td
             - if connection.user.permissions_users.present?
               %a{:href => "#", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
