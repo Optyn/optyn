@@ -24,29 +24,29 @@ namespace :pg do
       File.delete backup_file_name
       File.delete compressed_backup_file_name
     end
+  end # end of the backup task
 
-    def fetch_username_and_database
-      conf = YAML::load_file(File.expand_path('../../../config/database.yml', __FILE__))
-      dbenv = conf[Rails.env]
-      [dbenv['username'], dbenv['database']]
-    end
-
-    def send_to_amazon(file_path)
-      s3 = AWS::S3.new(
-          :access_key_id => SiteConfig.aws_access_key_id,
-          :secret_access_key => SiteConfig.aws_secret_access_key)
-
-      bucket = s3.buckets["backup#{Rails.env}"]
-
-      keys = bucket.objects.with_prefix('db/optyn').collect(&:key).sort
-
-      if keys.size >= 3
-        deletes = keys.slice(0, (keys.size - 2))
-        bucket.objects.delete(deletes)
-      end
-
-      db_obj = bucket.objects["db/#{File.basename(file_path)}"]
-      db_obj.write(Pathname.new(file_path))
-    end
+  def fetch_username_and_database
+    conf = YAML::load_file(File.expand_path('../../../config/database.yml', __FILE__))
+    dbenv = conf[Rails.env]
+    [dbenv['username'], dbenv['database']]
   end
-end
+
+  def send_to_amazon(file_path)
+    s3 = AWS::S3.new(
+        :access_key_id => SiteConfig.aws_access_key_id,
+        :secret_access_key => SiteConfig.aws_secret_access_key)
+
+    bucket = s3.buckets["backup#{Rails.env}"]
+
+    keys = bucket.objects.with_prefix('db/optyn').collect(&:key).sort
+
+    if keys.size >= 3
+      deletes = keys.slice(0, (keys.size - 2))
+      bucket.objects.delete(deletes)
+    end
+
+    db_obj = bucket.objects["db/#{File.basename(file_path)}"]
+    db_obj.write(Pathname.new(file_path))
+  end
+end #end of the pg namespace
