@@ -69,7 +69,7 @@ class Users::SessionsController < Devise::SessionsController
         @user.make_connection_if!(@shop)
         flash[:alert] = "Please check your email address"
         redirect_to "#{params[:next]}" and return
-      end
+      end#end of public_page flow
 
       respond_to do |format|
         @user = User.new
