@@ -113,6 +113,15 @@ class Merchants::ConnectionsController < Merchants::BaseController
     render 'index'
   end
 
+  def show
+    @user = User.find(params[:id])
+    @connection = Connection.where(:shop_id => current_shop.id, :user_id => @user.id).first
+    populate_labels
+    respond_to do |format|
+      format.html { render :layout => false}
+    end
+  end
+
   private
   def populate_labels
     @names = current_shop.labels.active
