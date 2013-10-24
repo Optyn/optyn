@@ -23,7 +23,7 @@ Optyn::Application.routes.draw do
   match 'thankyou' => 'main#thankyou'
   match 'old_index' => 'main#old_index'
   match 'cache/flush' => "cache#flush"
-  match '/shop/public/:identifier', to: 'shops#show', as: :public_shop
+  match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
@@ -69,6 +69,7 @@ Optyn::Application.routes.draw do
     get '/profile' => 'users/registrations#profile'
     put '/profile' => 'users/registrations#update_profile'
     match '/authenticate_with_email' => 'users/sessions#authenticate_with_email', :as => :authenticate_with_email
+    match '/subscribe_with_email' => 'users/sessions#subscribe_with_email', :as=>:subscribe_with_email
   end
 
   match '/auth/:provider/callback', to: 'omniauth_clients#create'
