@@ -4,21 +4,18 @@
     %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
     = link_to image_tag('avatar_large.png'), 'http://www.google.com'
     %span{:style => "float: right; position: absolute; padding-left: 15px;"}
-      - user.permissions_users.each do |permission_user|
-        - permission = permission_user.permission
-        %strong
-          - if name_id == permission_user.permission_id
-            - name = connection_user_name(permission_user, user, name_id)
-            = (name.nil? or name.blank?) ? "Optyn User #{user.id}" : name
-        - if email_id ==  permission_user.permission_id
-          %br
-          = connection_user_email(permission_user, user, email_id)
-          %br
-          = "Joined: #{user.created_at.strftime('%d/%m/%y')} | Last Activity: #{user.updated_at.strftime('%d/%m/%y')}"
-          %br
-          = "Status: #{status}"
-          %br
-          = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(user.id), :confirm => "Are you sure?", :class => "btn btn-primary"
+      %strong
+        = connection_user_display_name(connection, name_id, email_id)
+      - if not (user.name.blank? or user.name.nil?)
+        %br
+        = "#{user.email}"
+      %br
+      = "Joined: #{user.created_at.strftime('%d/%m/%y')} | Last Activity: #{user.updated_at.strftime('%d/%m/%y')}"
+      %br
+      = "Status: #{status}"
+      %br
+      = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(user.id), :confirm => "Are you sure you want to unsubscribe this user?", :class => "btn btn-primary"
+      = link_to 'Edit', edit_user_merchants_connections_path(user.id), :class => "btn btn-primary"
 
   .modal-body{:style => "height:500px"}
     %h3 Customer Tags

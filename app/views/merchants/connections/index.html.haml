@@ -30,7 +30,7 @@
             - status = connection.active ? "Active" : "Inactive"
             - if connection.user.permissions_users.present?
               %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
-              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id, :status => status}
+              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id, :status => status, :connection => connection}
             - else
               %a{:href => "#",:style => "color:#7D8B8F"} More Info
 
