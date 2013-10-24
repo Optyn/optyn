@@ -1,4 +1,11 @@
 $(document).ready(function(){
+  $('div#merchants span.expandable').expander({
+    slicePoint:       50,  // default is 100
+    expandPrefix:     ' ', // default is '... '
+    expandText:       '[...]', // default is 'read more'
+    userCollapseText: '[^]'  // default is 'read less'
+  });
+
   $(".open-infoDialog").click(function(){ // Click to only happen on more info links
      //$("#dialogId").val($(this).data('id'));
      //var userId = $(".open-infoDialog").val($(this).data('id'))

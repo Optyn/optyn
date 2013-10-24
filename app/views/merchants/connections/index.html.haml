@@ -7,6 +7,7 @@
   %hr
   %p.pull-left
     Here's a list of all your connections. Click on name of customer to learn more.
+    
   %a.btn.btn-primary{:href => merchants_file_imports_path, :style => "float: right"} Import Customers
   %table.table.table-striped
     %thead
@@ -25,7 +26,9 @@
           %td
             = connection_user_display_name(connection, name_id, email_id)
           %td
-            = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name}.join(", ")
+            %span.expandable
+              = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name}.join(", ")
+              / please dont remove this comment
           %td
             - if connection.user.permissions_users.present?
               %a{:href => "#", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
