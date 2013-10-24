@@ -41,6 +41,8 @@ function Label() {
                             );
                             $currentSelect.find('option[value="' + data.id + '"]').attr('selected', 'selected');
                             $('.chzn-select').trigger("liszt:updated");
+                            $('#label_success').text("Label created successfully")
+                            $('#label_success').show()
                         }
                     });
                 }
@@ -53,9 +55,13 @@ function Label() {
             var $select = $(this);
 
             $.ajax({
-               url: $('#update_labels_merchants_survey_survey_answers_path').val(),
-               type: 'POST',
-               data: {user_id: $select.parent().find('.user_id').val(), label_ids: $select.val()}
+              url: $('#update_labels_merchants_survey_survey_answers_path').val(),
+              type: 'POST',
+              data: {user_id: $select.parent().find('.user_id').val(), label_ids: $select.val()},
+              success: function (data) {
+                $('#label_success').text("Label updated successfully")
+                $('#label_success').show()
+              }
             });
         });
     };
