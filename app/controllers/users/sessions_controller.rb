@@ -52,7 +52,8 @@ class Users::SessionsController < Devise::SessionsController
       if params[:next].present? and params[:from] == "public_page"
         flash[:alert] = "successfully created"
         redirect_to "#{params[:next]}" and return
-      end
+      end#end of public_page flow
+
 
       sign_in @user
       session[:user_return_to] = nil
@@ -67,7 +68,7 @@ class Users::SessionsController < Devise::SessionsController
       if params[:next].present? and params[:from] == "public_page"
         flash[:alert] = "Please check your email address"
         redirect_to "#{params[:next]}" and return
-      end
+      end#end of public_page flow
 
       respond_to do |format|
         @user = User.new
