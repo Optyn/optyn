@@ -1,4 +1,7 @@
 class ShopsController < ApplicationController
+
+	include EmailRegister
+
   def show
   	#binding.pry
     @shop  = Shop.find_by_identifier(params[:identifier])
@@ -18,7 +21,7 @@ class ShopsController < ApplicationController
 		#step 2 : check if user is present
 		if !params[:user].present? 
 		  flash[:alert] = "Parameters Invalid"
-		  redirect_to public_shop_path(@shop_identifier) and return
+		  redirect_to "#{SiteConfig.app_base_url}#{public_shop_path(@shop_identifier)}" and return
 		end#end of if
 
 		#step 3 : check user email
@@ -36,7 +39,7 @@ class ShopsController < ApplicationController
 		  flash[:alert] = "Please check your email address"
 		end#end of params[:user][:email].match
 
-		redirect_to public_shop_path(@shop_identifier) and return
+		redirect_to "#{SiteConfig.app_base_url}#{public_shop_path(@shop_identifier)}" and return
 	end#end if subsribe_with_email
 
 end

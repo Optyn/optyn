@@ -6,6 +6,8 @@ class Users::SessionsController < Devise::SessionsController
   prepend_before_filter :increment_email_box_click_count, :only => [:authenticate_with_email]
   prepend_before_filter :require_not_logged_in, :except => [:destroy] 
 
+  include EmailRegister
+  
   def new
     session[:omniauth_manager] = nil
     session[:omniauth_user] = true
@@ -67,26 +69,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   private
-  def sudo_registration
-    @user = User.new(params[:user])
-    passwd = Devise.friendly_token.first(8)
-    @user.password = passwd
-    @user.password_confirmation = passwd
-
-    saved = @user.save
-    @user.errors.delete(:name)
-
-    if !saved && @user.errors.blank?
-      @user.show_password = true
-      @shop = Shop.by_app_id(params[:app_id]) rescue Shop.for_uuid(params[:uuid])
-      @user.show_shop = true
-      @user.shop_identifier = @shop.id
-      @user.save(validate: false)
-    end
-    #return the user
-    @user
-  end
-
   def increment_email_box_click_count
     @shop = Shop.by_app_id(params[:app_id])
     @shop.increment_email_box_click_count if @shop.present?
