@@ -87,16 +87,22 @@ class Merchants::ConnectionsController < Merchants::BaseController
   def edit
   	@user = User.find(params[:id])
   	populate_labels
+    respond_to do |format|
+      format.html { render :layout => false}
+    end
   end
 
-  def update
+  def update_user
   	@user = User.find(params[:id])
  		
-	  if @user.update_attributes(name: "#{params[:user][:name]}", email: "#{params[:user][:email]}")
-	    redirect_to merchants_connections_path, :notice => "User updated successfully."
+	  if @user.update_attributes(name: "#{params[:name]}", email: "#{params[:email]}")
+	    success_hash  = "User updated successfully."
+      respond_to do |format|
+        format.js { render :json => success_hash.to_json}
+      end
 	  else
 	  	populate_labels
-	    render 'edit'
+	    render 'edit', :layout => false
 	  end
   end
 
