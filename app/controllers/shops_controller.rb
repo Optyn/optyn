@@ -31,8 +31,6 @@ class ShopsController < ApplicationController
 		  @user = sudo_registration(params) unless @user.present?
 		  @shop = Shop.for_uuid(params[:uuid])
 		  @user.make_connection_if!(@shop)
-		  logger.debug "This is from debug"
-		  logger.debug()
 		  flash[:success] = "Successfully Subscribed"
 		else
 		  #your email id is not valid
