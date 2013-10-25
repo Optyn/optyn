@@ -4,6 +4,6 @@ class SocialProfile < ActiveRecord::Base
 
   SOCIAL_PROFILES = [["1", "facebook"], ["2", "twitter"], ["3", "linkedin"]]
 
-  validates :sp_link, :presence => true
+  validates :sp_link, uniqueness: true, :presence => true
   validates :sp_type, :presence => true
 end
