@@ -439,10 +439,7 @@
   float: right;
 }
 #merchant_page .mainbody {
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 6px;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -540,4 +537,8 @@
   > h2 {
     margin-bottom: 0;
   }
+}
+
+#flat.shops.show h1 {
+  border-bottom: 0;
 }

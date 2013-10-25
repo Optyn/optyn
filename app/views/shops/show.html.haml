@@ -16,7 +16,7 @@
           %input{:type=>"hidden", :name=>"next", :value=>"#{request.original_url}"}
           %input{:type=>"hidden", :name=>"from", :value=>"public_page"}
           %input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token}
-          %input{:type=>"submit", :value=>"Subscribe"}
+          %input.btn.btn-warning{:type=>"submit", :value=>"Subscribe"}
     .row-fluid.mainbody
       .span8.offset2.details
         .title
