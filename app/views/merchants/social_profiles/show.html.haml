@@ -1,0 +1,26 @@
+= banner('Social profiles')
+
+= render partial: 'merchants/merchant_managers/tabs'
+
+#merchants.pad3pc
+  = link_to t('.add', :default => t("helpers.links.add")), new_merchants_social_profile_path(), :class => 'btn btn-primary'
+  - if not @social_profiles.blank?
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th #
+          %th Type
+          %th Link
+      %tbody
+        - @social_profiles.each_with_index do |sp, index|
+          %tr
+            %td= index + 1
+            %td
+              - name = ""
+              - SocialProfile::SOCIAL_PROFILES.each do |k, v|
+                - name = v if k.to_i == sp.sp_type
+              = name
+            %td
+              = link_to sp.sp_link, edit_merchants_social_profile_path(sp.id)
+  - else
+    = "No social profiles added."

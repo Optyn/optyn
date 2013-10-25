@@ -227,6 +227,7 @@ Optyn::Application.routes.draw do
       end
     end
     resources :locations
+    resources :social_profiles
     resources :dashboards
     resources :file_imports
     resource :shop do

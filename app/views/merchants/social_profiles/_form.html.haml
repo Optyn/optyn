@@ -1,0 +1,15 @@
+#profile_wrapper
+  .control-group
+    .control-label
+      = f.label :sp_type, 'Social media name'
+    .controls
+      = f.select :sp_type, SocialProfile::SOCIAL_PROFILES.collect{|k, v| [v, k]}, :prompt => 'Select One'
+  .control-group
+    .control-label
+      = f.label :sp_link, "Link"
+    .controls
+      = f.text_field :sp_link, :placeholder => 'Enter link', class: 'span12'
+  .action-buttons
+    - button_name = @social_profile.new_record? ? "Add" : 'Update'
+    = f.submit button_name , class: "btn btn-primary"
+    = link_to "Cancel", merchants_shop_path, class: 'btn'

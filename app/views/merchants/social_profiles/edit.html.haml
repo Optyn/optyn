@@ -1,0 +1,9 @@
+= banner('Social profiles')
+
+= render partial: 'merchants/merchant_managers/tabs'
+
+#merchants.pad3pc
+  .container-fluid
+    .form
+      = form_for :social_profile, url: merchants_social_profile_path(@social_profile.id), method: :put, html: {id: 'update_profile_form', class: 'form-horizontal'} do |f|
+        = render partial: 'merchants/social_profiles/form', :locals => {:f => f}

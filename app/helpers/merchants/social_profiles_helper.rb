@@ -1,0 +1,2 @@
+module Merchants::SocialProfilesHelper
+end
