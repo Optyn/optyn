@@ -64,7 +64,7 @@ module Api
         def show
           @message = Message.for_uuid(params[:id])
           @shop = @message.shop
-          populate_labels
+          @labels = populate_labels
           @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
           render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl]
         end
