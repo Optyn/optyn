@@ -1,18 +1,73 @@
 $(document).ready(function () {
-    var label = new Label();
-    label.initialize();
+    var myConsumerDetail = new MyConsumerDetail();
+    myConsumerDetail.initialize();
 });
 
 
-function Label() {
+function MyConsumerDetail() {
     this.initialize = function () {
-        if ($('#user_label_list .chzn-select').length) {
-            this.hookChosen();
-            this.hookAddNewLabel();
-            this.hookChangeChosen();
-            if($('#user_label_list .chzn-select').length > 0)
+        if ($('#conusmer_connection_modal').length) {
+            this.hookOpenConnectionModal();
+            if($('#user_label_list .chzn-select').length > 0){
               $('div.labels div.chzn-container').width(500);
+            }
+
+            this.hookModalBehavior();
         }
+    };
+
+
+    this.hookModalBehavior = function(){
+      this.hookChosen();
+      this.hookAddNewLabel();
+      this.hookChangeChosen();
+      this.hookEditUserLink();
+
+    };  
+
+    this.hookOpenConnectionModal = function(){
+        var consumerInstance = this;
+        $('.consumer_connection_link').on('click', function(){
+          var $link = $(this);
+
+          // show the modal
+          $('#conusmer_connection_modal').modal({
+            keyboard: false
+          });
+
+          //load the modal content
+          $('#conusmer_connection_modal').on('shown', function () {
+            $.get($link.next('input[type="hidden"]').val(), function(data){
+              //Replace the html
+              $('#conusmer_connection_modal').html(data);
+              
+              //Hook the chosen behavior
+              consumerInstance.hookModalBehavior();
+            });
+            
+          });
+
+          $('#conusmer_connection_modal').on('hidden', function () {
+            $('#conusmer_connection_modal').html('Please Wait...');                          
+          });
+
+        });
+    };
+
+    this.hookEditUserLink = function(){
+      var consumerInstance = this;
+      $('.consumer_edit_link').on('click', function(){
+        var $link = $(this);
+        $('#conusmer_connection_modal').html('Please Wait...');
+        
+        $.get($link.next('input[type="hidden"]').val(), function(data){
+          $('#conusmer_connection_modal').html(data);
+
+          //Hook the chosen behavior
+          consumerInstance.hookModalBehavior();
+        });
+
+      });
     };
 
     this.hookChosen = function () {

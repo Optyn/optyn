@@ -61,7 +61,7 @@ class Connection < ActiveRecord::Base
   def self.shop_connections_count_total(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "total")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop(shop_id).count
+      active.for_shop(shop_id).count
     end
   end
 
