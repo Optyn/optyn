@@ -480,7 +480,7 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    unless shop.virtual
+    unless self.virtual
       if partner.subscription_required?
         shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
         if shop_subscription.new_record?
