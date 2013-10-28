@@ -96,14 +96,11 @@ class Merchants::ConnectionsController < Merchants::BaseController
   	@user = User.find(params[:id])
  		
 	  if @user.update_attributes(name: "#{params[:name]}", email: "#{params[:email]}")
-	    success_hash  = "User updated successfully."
-      respond_to do |format|
-        format.js { render :json => success_hash.to_json}
-      end
+	    @success_hash  = "User updated successfully."
 	  else
 	  	populate_labels
-	    render 'edit', :layout => false
 	  end
+    render 'edit', :layout => false
   end
 
   def search

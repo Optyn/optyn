@@ -22,6 +22,7 @@ function MyConsumerDetail() {
       this.hookAddNewLabel();
       this.hookChangeChosen();
       this.hookEditUserLink();
+      this.hookUpdateUserLink();
 
     };  
 
@@ -68,6 +69,23 @@ function MyConsumerDetail() {
         });
 
       });
+    };
+
+    this.hookUpdateUserLink = function(){
+      var consumerInstance = this;
+      $('.consumer_update_link').on('click', function(){
+        var $link = $(this);
+        selected_name = $("#user_name").val()
+        selected_email = $("#user_email").val()
+        
+        $('#conusmer_connection_modal').html('Please Wait...');
+        $.post($link.next('input[type="hidden"]').val(), {name: selected_name, email: selected_email}, function(data ) {
+          $('#conusmer_connection_modal').html(data);
+
+          //Hook the chosen behavior
+          consumerInstance.hookModalBehavior();
+        });
+      }); 
     };
 
     this.hookChosen = function () {
