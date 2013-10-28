@@ -22,7 +22,7 @@ module Api
           session[:user_return_to] = nil
           head :created
         rescue => e
-          binding.pry
+          #binding.pry
         end
       end
     end
