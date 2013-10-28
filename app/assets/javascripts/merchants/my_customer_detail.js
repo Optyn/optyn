@@ -13,6 +13,14 @@ function MyConsumerDetail() {
             }
 
             this.hookModalBehavior();
+             $('#conusmer_connection_modal').on('hidden', function () {
+              $('#conusmer_connection_modal').html('Please Wait...');                          
+            });
+
+             $('#conusmer_connection_modal').modal({
+              keyboard: false,
+              show: false
+            });
         }
     };
 
@@ -22,20 +30,17 @@ function MyConsumerDetail() {
       this.hookAddNewLabel();
       this.hookChangeChosen();
       this.hookEditUserLink();
+      this.hookUpdateUserLink();
 
     };  
 
     this.hookOpenConnectionModal = function(){
         var consumerInstance = this;
         $('.consumer_connection_link').on('click', function(){
+
           var $link = $(this);
-
-          // show the modal
-          $('#conusmer_connection_modal').modal({
-            keyboard: false
-          });
-
           //load the modal content
+          $('#conusmer_connection_modal').modal('show')
           $('#conusmer_connection_modal').on('shown', function () {
             $.get($link.next('input[type="hidden"]').val(), function(data){
               //Replace the html
@@ -44,13 +49,9 @@ function MyConsumerDetail() {
               //Hook the chosen behavior
               consumerInstance.hookModalBehavior();
             });
-            
+           
+            $('#conusmer_connection_modal').unbind('shown');
           });
-
-          $('#conusmer_connection_modal').on('hidden', function () {
-            $('#conusmer_connection_modal').html('Please Wait...');                          
-          });
-
         });
     };
 
@@ -68,6 +69,23 @@ function MyConsumerDetail() {
         });
 
       });
+    };
+
+    this.hookUpdateUserLink = function(){
+      var consumerInstance = this;
+      $('.consumer_update_link').on('click', function(){
+        var $link = $(this);
+        selected_name = $("#user_name").val()
+        selected_email = $("#user_email").val()
+        
+        $('#conusmer_connection_modal').html('Please Wait...');
+        $.post($link.next('input[type="hidden"]').val(), {name: selected_name, email: selected_email}, function(data ) {
+          $('#conusmer_connection_modal').html(data);
+
+          //Hook the chosen behavior
+          consumerInstance.hookModalBehavior();
+        });
+      }); 
     };
 
     this.hookChosen = function () {
