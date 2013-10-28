@@ -28,3 +28,18 @@
                     = link_to('Unsubscribe', "javascript:void(0)")
                     
     %td
+- if @shop.plan and @shop.plan.name and @shop.plan.name.downcase.include?('starter')
+  %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
+    %tr
+      %td{:style => "padding-left: 30px; max-height: 40px; padding-top: 15px; width: 100%;"}
+        %p{:style => "font-weight: bold; margin: 0px; color:#ccc;"}
+          = "Send Awesome E-Mails like these"
+      %td{:style => "font-size: 11px; margin: 0px; color:#ccc; text-align:center"}
+        = "Sent via"
+    %tr
+      %td{:style => "padding-left: 30px; max-height: 40px; width: 100%;"}
+        %p{:style => "font-size: 11px; margin: 0px; color:#ccc;"}
+          = "Your first 100 subscribers are free. Sign up today at optyn.com"
+          %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#00008B;"} Click here
+      %td{:style => "padding-right: 6px;"}
+        = image_tag "email_logo_white.png", {:style => 'max-width: 100px'}
