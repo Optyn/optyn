@@ -209,7 +209,7 @@ class Shop < ActiveRecord::Base
   end
 
   def button_display?
-    [1, 2].include?(oauth_application.call_to_action.to_i)
+    [1, 2].include?(oauth_application.call_to_action.to_i) rescue false
   end
 
   def display_bar?

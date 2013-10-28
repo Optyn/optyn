@@ -6,6 +6,8 @@ class Users::SessionsController < Devise::SessionsController
   prepend_before_filter :increment_email_box_click_count, :only => [:authenticate_with_email]
   prepend_before_filter :require_not_logged_in, :except => [:destroy] 
 
+  include EmailRegister
+  
   def new
     session[:omniauth_manager] = nil
     session[:omniauth_user] = true
@@ -43,41 +45,11 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
-  def subscribe_with_email
-    #step 1 : if shop is valid
-    if params[:uuid].present? 
-      @shop_identifier = Shop.for_uuid(params["uuid"]).identifier
-    else 
-      flash[:alert] = "No Valid Shop Speicified"
-      redirect_to :back and return
-    end
-
-    #step 2 : check if user is present
-    if !params[:user].present? 
-      flash[:alert] = "Parameters Invalid"
-      redirect_to public_shop_path(@shop_identifier) and return
-    end#end of if
-
-    #step 3 : check user email
-    if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
-      #email id is fine
-      @user = User.find_by_email(params[:user][:email])
-      @user = sudo_registration unless @user.present?
-      @shop = Shop.for_uuid(params[:uuid])
-      @user.make_connection_if!(@shop)
-      flash[:success] = "Successfully Subscribed"
-    else
-      #your email id is not valid
-      flash[:alert] = "Please check your email address"
-    end#end of params[:user][:email].match
-
-    redirect_to public_shop_path(@shop_identifier) and return
-  end#end if subsribe_with_email
 
   def authenticate_with_email
     if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
       @user = User.find_by_email(params[:user][:email])
-      @user = sudo_registration unless @user.present?
+      @user = sudo_registration(params) unless @user.present?
 
       sign_in @user
       session[:user_return_to] = nil
@@ -97,26 +69,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   private
-  def sudo_registration
-    @user = User.new(params[:user])
-    passwd = Devise.friendly_token.first(8)
-    @user.password = passwd
-    @user.password_confirmation = passwd
-
-    saved = @user.save
-    @user.errors.delete(:name)
-
-    if !saved && @user.errors.blank?
-      @user.show_password = true
-      @shop = Shop.by_app_id(params[:app_id]) rescue Shop.for_uuid(params[:uuid])
-      @user.show_shop = true
-      @user.shop_identifier = @shop.id
-      @user.save(validate: false)
-    end
-    #return the user
-    @user
-  end
-
   def increment_email_box_click_count
     @shop = Shop.by_app_id(params[:app_id])
     @shop.increment_email_box_click_count if @shop.present?
