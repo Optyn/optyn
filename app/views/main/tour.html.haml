@@ -1,2 +1,61 @@
 .row-fluid
-  %h1 Tour
+  %h1 We make Marketing for Small businesses EASY AND FUN!
+
+.row-fluid
+  .span6
+    %h3 We Make E-Mail Marketing Overly Simple
+    %p As one of our Investors once said, wow...this is overly simple. YES, and there is absolutely nothing wrong with that. In fact, that's the only way things should be...simple.
+
+    %p We take a lot of the traditional headaches around email marketing out of the equation.
+
+    %p We deal with so you don't have to.
+
+    %a.btn.btn-large.btn-success( href='#' ) Get started for FREE!
+  .span6
+    %a#merchant-video{ href: 'https://www.youtube.com/embed/qeT4ss-mlS4?autoplay=1' }
+      = image_tag 'tour-video.png', alt: 'Video'
+
+.separator-thin.large.light
+
+.row-fluid
+  .span6
+    = image_tag 'screenshot-create-campaign.jpg', alt: 'Create campaign screenshot'
+  .span6
+    %h3 Proven ways to engage your customers
+    %p We are not reinventing the wheel here. We are just putting on some super performance tires on your marketing efforts.
+
+.separator-thin.large.light
+
+.row-fluid
+  .span6
+    %h3 Proven ways to engage your customers
+    %p As one of our Investors once said, wow...this is overly simple. YES, and there is absolutely nothing wrong with that. In fact, that's the only way things should be...simple.
+    %p We take a lot of the traditional headaches around email marketing out of the equation.
+    %p Coming soon ...
+  .span6
+    = image_tag 'screenshot-dana-cafe.jpg', alt: 'Dana Cafe screenshot'
+
+.separator-thin.large.light
+
+.row-fluid
+  .span6
+    = image_tag 'screenshot-dashboard.jpg', alt: 'Optyn dashboard screenshot'
+  .span6
+    %h3 Easily capture users
+    %p Forms are hard. We barely get it. Just add script or contact us to add a capture form for you. We'll even help you.
+
+.separator-thin.large.light
+
+.row-fluid.text-center.t-get-started
+  .span12
+    %div We essentially solve 2 problems:
+    %strong Time & Expertise
+    %div so you don't have to.
+    %a.btn.btn-large.btn-success( href='#' ) Get started for FREE!
+
+
+:javascript
+$( function() {
+  // Initialise video modal.
+  $("#merchant-video").colorbox({iframe:true, innerWidth:640, innerHeight:390});
+});
