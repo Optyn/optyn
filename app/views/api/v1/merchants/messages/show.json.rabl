@@ -1,5 +1,6 @@
 object false
 child :data do
+
   node :select_list do
     {:labels => @labels}
    end
@@ -14,6 +15,10 @@ child :data do
   	node false do
   	  {html: @rendered_string}
   	end
+
+    node :receivers do
+        {labels: message_receiver_labels(@message.label_names),count:@message.connections_count}
+    end
   end
 end
 

@@ -78,7 +78,7 @@ end
 
 node :receivers do |message|
   {labels: message_receiver_labels(locals[:message_instance].label_names), count: locals[:message_instance].connections_count}
-end if locals[:message_instance].sent? 
+end 
 
 node :sent do |message|
   message_detail_date(locals[:message_instance])

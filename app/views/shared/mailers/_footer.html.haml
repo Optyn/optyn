@@ -5,6 +5,19 @@
     %td
       %div{:margin => "left:10px", :style => "vertical-align: middle; margin:0 auto 0 auto;display:block;"}
         %table{:width => "100%"}
+          - if @shop.social_profiles.present?
+            %tr
+              %td{:style => "text-align:center"}
+                %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
+                = "Connect with us"
+            %tr
+              %td{:style => "text-align:center"}
+                %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
+                  - @shop.social_profiles.each do |sp|
+                    - name = ''
+                    - SocialProfile::SOCIAL_PROFILES.each do |k, v|
+                      - name = v if k.to_i == sp.sp_type
+                    = link_to(image_tag("#{name}_icon.png"), "#{sp.sp_link}")
           %tr
             %td{:style => "text-align:center"}
               %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
