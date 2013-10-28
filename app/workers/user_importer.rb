@@ -1,4 +1,6 @@
 class UserImporter
+	##Defination: Imports User By Merchant
+
   @queue = :import_queue
 
   def self.perform(file_import_id)
