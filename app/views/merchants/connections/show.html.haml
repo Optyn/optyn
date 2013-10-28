@@ -1,5 +1,3 @@
-= javascript_include_tag "merchants/customer_tag"
-= javascript_include_tag "merchants/connections"
 .modal-header
   %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
   = link_to image_tag('avatar_large.png'), 'http://www.google.com'
@@ -18,10 +16,8 @@
     = "Status: #{status}"
     %br
     = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(@user.id), :confirm => "Are you sure you want to unsubscribe this user?", :class => "btn btn-primary"
-    %a.btn.btn-primary{:href => "#", "data-toggle" => "modal", "id" => "#{@user.id}", "class" => "edit_user"}Edit user
+    %a.btn.btn-primary{:href => "#", "data-toggle" => "modal", "id" => "#{@user.id}", "class" => "consumer_edit_link"}Edit user
     = hidden_field_tag "edit_path_#{@user.id}", edit_user_merchants_connections_path(@user.id)
-    / = render partial: 'edit', locals:{user: user}
-    / = link_to 'Edit', edit_user_merchants_connections_path(user.id), :class => "btn btn-primary"
 
 .modal-body{:style => "height:500px"}
   %h3 Customer Tags
