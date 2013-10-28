@@ -31,11 +31,12 @@
               / please dont remove this comment
           %td
             - if connection.user.permissions_users.present?
-              %a{:href => "#", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
-              %div{:id => "infoDialog_#{connection.user.id}", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
+              %a{href: "javascript:void(0)", class: "consumer_connection_link"} More Info
               = hidden_field_tag "show_path_#{connection.user.id}", merchants_connection_path(connection.user.id)
-              / = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id, :status => status, :connection => connection}
             - else
               %a{:href => "#",:style => "color:#7D8B8F"} More Info
 
   = paginate @connections
+
+  %div{:id => "conusmer_connection_modal", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
+    Please Wait...
