@@ -11,7 +11,7 @@ class Merchants::SocialProfilesController < Merchants::BaseController
     @social_profile = SocialProfile.new(params[:social_profile])
     @social_profile.shop_id = current_shop.id
     if @social_profile.save
-      redirect_to merchants_social_profile_path(current_shop.id), :notice => "Social Profile inserted successfully."
+      redirect_to merchants_social_profile_path(current_shop.id), :notice => "Social Profile added successfully."
     else
       render 'new'
     end
