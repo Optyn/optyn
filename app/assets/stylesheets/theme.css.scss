@@ -1044,6 +1044,12 @@ th {
   &.small {
     margin: 7px 0;
   }
+  &.large {
+    margin: 40px 0;
+  }
+  &.light {
+    background-color: $light-gray
+  }
 }
 .no-pad {
   padding: 0;
@@ -1054,4 +1060,5 @@ th {
 
 .blank-space {
   padding: 15px 0;
+  clear: both;
 }

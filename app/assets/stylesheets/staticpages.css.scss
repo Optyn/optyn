@@ -47,7 +47,7 @@
 }
 .about_page .teammate .social a,
 .about_page .teammate .social a:hover {
-  text-decoration: none
+  text-decoration: none;
 }
 .about_page .teammate .social a:hover {
   opacity: 0.7;
@@ -67,6 +67,24 @@
   @include transition( all 0.2s ease-out );
   &:hover {
     background-position: 8px -3520px;
+  }
+}
+
+.main.tour {
+  .t-get-started {
+    padding: 3%;
+    font-size: 2em;
+    line-height: 2em;
+  }
+}
+
+.main.partner_with_us {
+  .p-gray-bg {
+    background-color: $light-gray;
+    padding: 2%;
+  }
+  .yield ul {
+    list-style-type: disc;
   }
 }
 
