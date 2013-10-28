@@ -1,6 +1,10 @@
 object false
 child :data do
 
+  node :select_list do
+    {:labels => @labels}
+   end
+
   node :folder_counts do
     {:drafts => @drafts_count, :queued => @queued_count}
   end
@@ -13,8 +17,7 @@ child :data do
   	end
 
     node :receivers do
-        {labels: message_receiver_labels(@labels.first.name),count:@message.connections_count}
-        binding.pry
+        {labels: message_receiver_labels(@message.label_names),count:@message.connections_count}
     end
   end
 end
