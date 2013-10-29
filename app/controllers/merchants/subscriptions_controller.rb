@@ -6,9 +6,10 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-    #binding.pry
+    binding.pry
     @stripe_last_payment = ""
     @stripe_upcoming_payment = ""
+    @list_invoice = ""
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
 
