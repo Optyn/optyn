@@ -1061,4 +1061,9 @@ th {
 .blank-space {
   padding: 15px 0;
   clear: both;
+  &.large { padding: 30px 0; }
+}
+
+blockquote {
+  font-style: italic;
 }
