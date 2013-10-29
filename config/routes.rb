@@ -25,10 +25,9 @@ Optyn::Application.routes.draw do
   match 'cache/flush' => "cache#flush"
   match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
   match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
-  # Static pages created by Aniket.
   match 'tour' => 'main#tour'
   match 'partner_with_us' => 'main#partner_with_us'
-
+  match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view'
