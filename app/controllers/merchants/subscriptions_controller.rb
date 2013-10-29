@@ -6,6 +6,9 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    #binding.pry
+    @stripe_last_payment = ""
+    @stripe_upcoming_payment = ""
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
 
@@ -16,7 +19,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def update_billing_info
     @subscription = current_shop.subscription
-
     begin
       @stripe_customer= Stripe::Customer.retrieve(@subscription.stripe_customer_token)
       @stripe_customer.card = params['stripeToken']
