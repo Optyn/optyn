@@ -28,7 +28,7 @@ Optyn::Application.routes.draw do
   # Static pages created by Aniket.
   match 'tour' => 'main#tour'
   match 'partner_with_us' => 'main#partner_with_us'
-  match 'testimonials' => 'main#testimonials'
+  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
 
 
   # Blog Redirect
