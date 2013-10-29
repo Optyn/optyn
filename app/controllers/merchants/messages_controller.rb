@@ -152,4 +152,23 @@ class Merchants::MessagesController < Merchants::BaseController
 
     render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
   end
+
+  def public_view
+    if params["message_name"]
+      uuid = params["message_name"].split("-").last
+      @message = Message.for_uuid(uuid)
+      @shop_logo = true
+      @shop = @message.shop
+
+      if @shop and @message
+        @msg = @message.make_public ? "" : "This message is not accessible"
+      else
+        @msg = "Incorrect link"
+      end
+      
+      respond_to do |format|
+        format.html {render :layout => false}
+      end
+    end
+  end
 end
