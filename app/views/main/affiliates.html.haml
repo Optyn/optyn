@@ -24,9 +24,8 @@
       .span6
         = image_tag 'logo-eatstreet.png', alt: 'Eatstreet logo'
   .span6.pa-gray-bg
-    %h4 Please fill out the form below to get started with our Affiliate Program. We'll set you up and get you started!
-    .blank-space
-
-    = render partial: 'contact_form'
-
+    %h4{:align => "center"} Affiliate Portal
+    .blank-space{:align => "center"}
+      %a.btn.btn-large.btn-primary{ href: 'http://optyn.salesgust.com/affiliate/signup', :target => "_blank" } Affiliate Signup
+      %a.btn.btn-large.btn-primary{ href: 'http://optyn.salesgust.com/user/login', :target => "_blank" } Affiliate Login
 .blank-space
