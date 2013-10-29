@@ -154,18 +154,21 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def public_view
-    @message = Message.for_uuid(params[:uuid])
-    @shop_logo = true
-    @shop = @message.shop
+    if params["message_name"]
+      uuid = params["message_name"].split("-").last
+      @message = Message.for_uuid(uuid)
+      @shop_logo = true
+      @shop = @message.shop
 
-    if @shop and @message and @shop.name.downcase == "#{params[:shop].downcase}" and @message.name.downcase == "#{params[:message_name].downcase}"
-      @msg = @message.make_public ? "" : "This message is not accessible"
-    else
-      @msg = "Incorrect link"
-    end
-    
-    respond_to do |format|
-      format.html {render :layout => false}
+      if @shop and @message
+        @msg = @message.make_public ? "" : "This message is not accessible"
+      else
+        @msg = "Incorrect link"
+      end
+      
+      respond_to do |format|
+        format.html {render :layout => false}
+      end
     end
   end
 end

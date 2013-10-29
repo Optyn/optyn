@@ -31,7 +31,7 @@ Optyn::Application.routes.draw do
 
   match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'
-  match '/:shop/campaigns/:message_name/:uuid' => 'merchants/messages#public_view'
+  match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view'
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
 
 
