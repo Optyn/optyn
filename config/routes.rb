@@ -30,6 +30,7 @@ Optyn::Application.routes.draw do
   match 'partner_with_us' => 'main#partner_with_us'
   match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'
+  match '/:shop/campaigns/:message_name/:uuid' => 'merchants/messages#public_view'
 
 
   # Blog Redirect

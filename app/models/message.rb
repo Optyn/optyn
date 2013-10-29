@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
 
-  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id
+  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public
  
   accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
   accepts_nested_attributes_for :message_image, allow_destroy: true
