@@ -88,6 +88,67 @@
   }
 }
 
+.testimonial_alley_gallery {
+  blockquote {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 3% 0;
+    &:before {
+      content: '"';
+      margin-right: 5px;
+    }
+    &:after {
+      content: '"';
+      margin-left: 5px;
+    }
+  }
+  .t-coupons,
+  .t-sales,
+  .t-surveys,
+  .t-events,
+  .t-p-announcements,
+  .t-feature {
+    padding-left: 80px;
+    /*background-image: image-url( 'sprite-msg-type.png' );*/
+    position: relative;
+  }
+
+  .t-coupons:before,
+  .t-sales:before,
+  .t-surveys:before,
+  .t-events:before,
+  .t-p-announcements:before,
+  .t-feature:before {
+    content: '';
+    background-image: image-url( 'sprite-msg-type.png' );
+    position: absolute;
+    top: 45px;
+    left: 15px;
+    width: 48px;
+    height: 48px;
+    opacity: 0.5;
+  }
+
+  .t-coupons:before {
+    background-position: 0 0;
+  }
+  .t-sales:before {
+    background-position: 0 -482px;
+  }
+  .t-surveys:before {
+    background-position: 0 -679px;
+  }
+  .t-events:before {
+    background-position: 0 -187px;
+  }
+  .t-p-announcements:before {
+    background-position: 0 -384px;
+  }
+  .t-feature:before {
+    background-position: 0 -384px;
+  }
+}
+
 /* Portrait tablet to landscape and desktop */
 @media ( min-width: 980px ) {
   .about_page .teammate {
