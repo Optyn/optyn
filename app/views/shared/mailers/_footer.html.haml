@@ -5,7 +5,7 @@
     %td
       %div{:margin => "left:10px", :style => "vertical-align: middle; margin:0 auto 0 auto;display:block;"}
         %table{:width => "100%"}
-          - if @shop.social_profiles.present?
+          - if @shop.present? && @shop.social_profiles.present?
             %tr
               %td{:style => "text-align:center"}
                 %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
@@ -17,7 +17,7 @@
                     - name = ''
                     - SocialProfile::SOCIAL_PROFILES.each do |k, v|
                       - name = v if k.to_i == sp.sp_type
-                    = link_to(image_tag("#{name}_icon.png"), "#{sp.sp_link}")
+                    = link_to(image_tag("#{SiteConfig.app_base_url}/assets/#{name}_icon.png"), "#{sp.sp_link}")
           %tr
             %td{:style => "text-align:center"}
               %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
@@ -28,7 +28,7 @@
                     = link_to('Unsubscribe', "javascript:void(0)")
                     
     %td
-- if @shop.plan and @shop.plan.name and @shop.plan.name.downcase.include?('starter')
+- if @shop.present? && @shop.plan and @shop.plan.name and @shop.plan.name.downcase.include?('starter')
   %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
     %tr
       %td{:style => "padding-left: 30px; max-height: 40px; padding-top: 15px; width: 100%;"}

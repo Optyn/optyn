@@ -1,0 +1,51 @@
+.row-fluid
+  %h1 Optyn is built for companies that service Small Businesses.
+
+.row-fluid
+  .span6
+    %h3 We are a white label solution perfect for you and your merchants
+    %p We built Optyn with one thing in mind - distribution. We believe in our product and what it does for small businesses. That is why we are focusing on putting Optyn into a large number of merchants with partnerships like below.
+    %p We are perfect for:
+    %ul
+      %li Daily Deal Sites
+      %li Website Builders
+      %li Transaction Processing Companies
+      %li Directory Sites
+      %li and other companies who focus on helping small merchants succeed
+    %p Get in touch with us today and learn more. We work on a revenue share basis and we only make money when you make money.
+    .blank-space
+    .text-center
+      %h4 Featured partners
+      .row-fluid
+        .span6
+          = image_tag 'logo-eatstreet.png', alt: 'Eatstreet logo'
+        .span6
+          = image_tag 'logo-neofill.jpg', alt: 'Neofill logo'
+
+  .span6.p-gray-bg
+    %h4 Learn more on how you and your customers can benefit from White Label Partnership with Optyn!
+    .blank-space
+    %form
+      %fieldset
+        .row-fluid.no-pad
+          %input.span6{ type: 'text', placeholder: 'Your name' }
+          %input.span6{ type: 'text', placeholder: 'Your company' }
+        .blank-space
+        .row-fluid.no-pad
+          %input.span6{ type: 'text', placeholder: 'Your email address' }
+          %input.span6{ type: 'text', placeholder: 'Your phone number' }
+        .blank-space
+        .row-fluid
+        %select.span6
+          %option How big is your merchant base?
+        %select.span6
+          %option How did you hear about us?
+        .blank-space
+        .row-fluid.no-pad
+          %textarea.span12{ rows: '3', placeholder: 'Additional comments' }
+        .blank-space
+        .text-center
+          %a.btn.btn-large.btn-primary{ href: '#' } Submit Contact Form
+          %p We'll get back in touch with you in 24 hours or less.
+
+.blank-space

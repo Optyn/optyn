@@ -1,11 +1,11 @@
 module Users
   module ShopUserImporter  
     def user_import(payload)
-      content = download_csv_file(payload)
+      content = download_user_import_csv_file(payload)
 
       csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
       headers = csv_table.headers
-      validate_headers(headers)
+      validate_user_import_headers(headers)
 
       output = []
       unparsed_rows = []
@@ -86,14 +86,14 @@ module Users
 
 
 
-    def validate_headers(headers)
+    def validate_user_import_headers(headers)
       # binding.pry
       if !headers.include?(:shop) || !headers.include?(:name) || !headers.include?(:gender) || !headers.include?(:birth_date)
         raise "Incorrect Headers. The file should have headers of 'Shop','Name','Gender', 'Birth Date'" 
       end  
     end
 
-    def download_csv_file(payload)
+    def download_user_import_csv_file(payload)
       s3 = AWS::S3.new(
         :access_key_id => SiteConfig.aws_access_key_id,
         :secret_access_key => SiteConfig.aws_secret_access_key)

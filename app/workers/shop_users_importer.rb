@@ -1,9 +1,10 @@
 class ShopUsersImporter
-  #Imports Merchants
+  ##Defination: Imports Merchants
   @queue = :import_queue
 
   def self.perform(payload_id)
     payload = ApiRequestPayload.find(payload_id)
+    # binding.pry
     begin
       if payload.present?
         payload.update_attribute(:status, 'Inprocess')
