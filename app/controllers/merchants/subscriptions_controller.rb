@@ -6,7 +6,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-    binding.pry
     @stripe_last_payment = ""
     @stripe_upcoming_payment = ""
     @list_invoice = ""
