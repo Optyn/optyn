@@ -22,30 +22,10 @@
         .span6
           = image_tag 'logo-neofill.jpg', alt: 'Neofill logo'
 
-  .span6.p-gray-bg
+  .span6.pa-gray-bg
     %h4 Learn more on how you and your customers can benefit from White Label Partnership with Optyn!
     .blank-space
-    %form
-      %fieldset
-        .row-fluid.no-pad
-          %input.span6{ type: 'text', placeholder: 'Your name' }
-          %input.span6{ type: 'text', placeholder: 'Your company' }
-        .blank-space
-        .row-fluid.no-pad
-          %input.span6{ type: 'text', placeholder: 'Your email address' }
-          %input.span6{ type: 'text', placeholder: 'Your phone number' }
-        .blank-space
-        .row-fluid
-        %select.span6
-          %option How big is your merchant base?
-        %select.span6
-          %option How did you hear about us?
-        .blank-space
-        .row-fluid.no-pad
-          %textarea.span12{ rows: '3', placeholder: 'Additional comments' }
-        .blank-space
-        .text-center
-          %a.btn.btn-large.btn-primary{ href: '#' } Submit Contact Form
-          %p We'll get back in touch with you in 24 hours or less.
+
+    = render partial: 'contact_form'
 
 .blank-space

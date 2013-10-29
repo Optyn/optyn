@@ -26,7 +26,7 @@ Optyn::Application.routes.draw do
   match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
   match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
   match 'tour' => 'main#tour'
-  match 'partner_with_us' => 'main#partner_with_us'
+  match 'partner-with-us' => 'main#partner_with_us'
   match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'

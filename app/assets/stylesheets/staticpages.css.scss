@@ -79,13 +79,14 @@
 }
 
 .main.partner_with_us {
-  .p-gray-bg {
-    background-color: $light-gray;
-    padding: 2%;
-  }
   .yield ul {
     list-style-type: disc;
   }
+}
+
+.pa-gray-bg {
+  background-color: $light-gray;
+  padding: 2%;
 }
 
 .testimonial_alley_gallery {
