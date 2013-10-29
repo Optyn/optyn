@@ -99,6 +99,7 @@ module Users
         :secret_access_key => SiteConfig.aws_secret_access_key)
       bucket = s3.buckets["optyn#{Rails.env}"]
       content = bucket.objects[CGI::unescape(payload.filepath)].read
+      csv_data = Iconv.iconv('utf-8', 'ISO_8859-1', content).to_s
     end#end of function download_csv_file
   end # end of the shops importer module
 end #end of the shops module
