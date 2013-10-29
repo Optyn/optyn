@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025084112) do
+ActiveRecord::Schema.define(:version => 20131029085058) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20131025084112) do
     t.boolean  "permanent_coupon"
     t.string   "button_url",       :limit => 2303
     t.string   "button_text",      :limit => 1000
+    t.boolean  "make_public"
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
@@ -465,12 +466,12 @@ ActiveRecord::Schema.define(:version => 20131025084112) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
   end
 

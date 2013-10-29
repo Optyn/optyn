@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
 
-  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id
+  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public
  
   accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
   accepts_nested_attributes_for :message_image, allow_destroy: true
@@ -405,7 +405,7 @@ class Message < ActiveRecord::Base
   def header_background_color_css_val
     property = self.header_background_property
     return "background-color: #{shop_header_background_color_hex};" if property.present? && (property.instance_of?(ActiveRecord::Relation) ? property.first : property).new_record?
-    css = "background-color: #{self.header_background_property.property_value};"
+    css = "#{self.header_background_property.property_value};"
     css
   end
 
@@ -414,7 +414,6 @@ class Message < ActiveRecord::Base
   end
 
   def header_background_color_property_present?
-    #binding.pry
     !(header_background_property.new_record?)
   end
 

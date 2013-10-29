@@ -4,8 +4,11 @@ class SocialProfile < ActiveRecord::Base
 
   SOCIAL_PROFILES = [["1", "facebook"], ["2", "twitter"], ["3", "linkedin"]]
 
-  validates :sp_link, uniqueness: true, :presence => true
-  validates :sp_type, uniqueness: true,	:presence => true
+  validates :sp_link, :presence => true
+  validates :sp_type,	:presence => true
 
   validates_format_of :sp_link, :with => URI::regexp(%w(http https))
+  
+  validates_uniqueness_of :sp_link, :scope => [:shop_id]
+  validates_uniqueness_of :sp_type, :scope => [:shop_id]
 end
