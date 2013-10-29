@@ -28,7 +28,6 @@ Optyn::Application.routes.draw do
   # Static pages created by Aniket.
   match 'tour' => 'main#tour'
   match 'partner_with_us' => 'main#partner_with_us'
-  match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'
 
 
