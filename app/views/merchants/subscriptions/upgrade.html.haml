@@ -19,9 +19,17 @@
     %h5 Credit Card on File:
     %p ending in 
     %br
-    %a.btn( href='#' )Update Card
+    %a.btn{ 'href' => '#get-payment-info', 'role' => 'button', 'data-toggle' => 'modal' } Update Card
 
 .blank-space
+
+.row-fluid.payment-errors
+  - if @subscription.errors.any? || @subscription.stripe_error
+    =@subscription.stripe_error
+    %ul
+      - @subscription.errors.full_messages.each do |error|
+        %li
+          = error  
 
 .row-fluid
   .span12
@@ -40,43 +48,44 @@
           %td Foo
           %td Bar
 
-#box_login
-  .row-fluid
-    .span12.box_wrapper
-      .box.span4.offset4
-        %div 
-          .head
-            %h4 Enter Your Payment Information 
-          .payment-errors
-            - if @subscription.errors.any? || @subscription.stripe_error
-              =@subscription.stripe_error
-              %ul
-                - @subscription.errors.full_messages.each do |error|
-                  %li
-                    = error  
 
 
-          .form.row-fluid
-            = form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
+= form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
+  .modal.hide.fade#get-payment-info
+    .modal-header
+      %h4 Enter Your Payment Information
+    .modal-body
+      .form.row-fluid
 
-              = f.hidden_field :plan_id, :value => @plan.id
-              = f.hidden_field :email, :value => current_merchants_manager.email
-              = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
+        = f.hidden_field :plan_id, :value => @plan.id
+        = f.hidden_field :email, :value => current_merchants_manager.email
+        = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
 
-              = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
+        = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
 
-              = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left', 'data-toggle' => 'tooltip', title: 'Your 16 digit Credit Card number'
+        .blank-space
 
-              = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security', 'data-toggle' => 'tooltip', title: 'CVV'
+        .row-fluid
+          = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left span6', 'data-toggle' => 'tooltip', title: 'Your 16 digit Credit Card number'
 
-              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry month'})
+          = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security span6', 'data-toggle' => 'tooltip', title: 'CVV'
 
-              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry year'})
+        .blank-space
 
-              = f.submit "Pay", :class => "btn btn-block btn-success"
-        %div{:style => "text-align: center; margin-top: 25px;"}
-          %p
-            All payments are processed securely.
+        .row-fluid
+          = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry month'})
+
+        .blank-space
+
+        .row-fluid
+          = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry year'})
+
+      %div{:style => "text-align: center; margin-top: 25px;"}
+        %p
+          All payments are processed securely.
+    .modal-footer
+      %a.btn( href='#' )Close
+      = f.submit "Pay", :class => "btn btn-success"
 
 :javascript
   $( document ).ready( equalizeDivHeights( '.well.span3' ));
