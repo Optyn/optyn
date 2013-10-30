@@ -6,22 +6,22 @@
 .row-fluid.text-center
   .well.span3
     %h5 You Current Plan:
-    = "#{@plan.min} " " - "
-    = " #{@plan.max}" " Customers"
-    %br
-    = link_to "view plans","/pricing"
+    %p
+      = "#{@plan.min} " " - "
+      = " #{@plan.max}" " Customers"
+    %p
+      = link_to "view plans","/pricing"
   .well.span3
     %h5 Last Payment:
   .well.span3
     %h5 Upcoming Payment:
     %p
-    = "$#{@plan.amount} " " on" " #{@stripe_upcoming_payment}"
+      = "$#{@plan.amount} " " on" " #{@stripe_upcoming_payment}"
     %p
-    (pricing tier may change)
+      (pricing tier may change)
   .well.span3
     %h5 Credit Card on File:
     %p ending in 
-    %br
     %a.btn{ 'href' => '#get-payment-info', 'role' => 'button', 'data-toggle' => 'modal' } Update Card
 
 .blank-space
