@@ -6,8 +6,8 @@
 .row-fluid.text-center
   .well.span3
     %h5 You Current Plan:
-    = @plan.min 
-    = @plan.max
+    = "#{@plan.min}" "-"
+    = "#{@plan.max}" "Customers"
     %br
     = link_to "view plans","/pricing"
   .well.span3
