@@ -722,6 +722,18 @@ i.myspace { background-position: -233px -51px; }
     .right.edge { background-position: 0px -191px; }
   }
 }
+@media ( max-width: 666px ) {
+  .progress-bar .step {
+    font-size: 11px;
+    padding: 2px 11px;
+  }
+}
+@media ( max-width: 1000px ) and ( min-width: 667px ) {
+  .progress-bar .step {
+    font-size: 14px;
+    padding: 2px 22px;
+  }
+}
 
 
 #flat.m-app {
