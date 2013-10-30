@@ -14,9 +14,7 @@
               %td{:style => "text-align:center"}
                 %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
                   - @shop.social_profiles.each do |sp|
-                    - name = ''
-                    - SocialProfile::SOCIAL_PROFILES.each do |k, v|
-                      - name = v if k.to_i == sp.sp_type
+                    - name = SocialProfile::SOCIAL_PROFILES.find{|k, v| v == sp.sp_type}[0]
                     = link_to(image_tag("#{SiteConfig.app_base_url}/assets/#{name}_icon.png"), "#{sp.sp_link}")
           %tr
             %td{:style => "text-align:center"}
