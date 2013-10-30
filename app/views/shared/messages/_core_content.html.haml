@@ -7,18 +7,14 @@
     %tr
       %td
       %td.outer-cell{ style: 'padding: 1%;'}
-        %div
-          %table.inner-table
-            %tr
-              %td
-                .message-content
-                  - if @message.show_greeting?
-                    = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
+        .message-content
+          - if @message.show_greeting?
+            = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
 
-                  %p.core-content
-                    = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
+          %p.core-content
+            = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
 
-                    = render partial: "shared/messages/bottom_image_and_button" 
+            = render partial: "shared/messages/bottom_image_and_button" 
                     
   - if @message.show_footer?
     = render partial: "shared/mailers/footer"
