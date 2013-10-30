@@ -8,7 +8,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
     @stripe_last_payment = ""
     @stripe_upcoming_payment = @subscription.created_at.to_date >> 10
-    binding.pry
+    # binding.pry
     @list_invoice = ""
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
