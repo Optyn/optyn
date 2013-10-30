@@ -7,16 +7,15 @@
     = content_for :header do
       Welcome to Optyn
 
-    = render partial: "shared/mailers/banner"
-
-    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+    %table{:style => "background-color: #eee; padding: 20px; width: 100%; max-width: 800px; margin: auto;"}
       %tr
         %td
-        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
-          %div
-            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
-              %tr
-                %td
+          = render partial: "shared/mailers/banner"
+
+          %table{:width => "100%", :style => "background-color: white;", :align => "center"}
+            %tr
+              %td{:style => "bgcolor:#FFF;display:block!important; margin:0 auto; clear:both; padding: 20px;"}
+                %div
                   %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
                     Welcome to Optyn #{@resource.name}!
                   %p We are excited to have you and #{@resource.shop.name} on board. The good news is we are ready to get you going.
@@ -34,7 +33,5 @@
                     Cheers,
                     %br/
                     The Optyn Team
-        %td
 
-    = render partial: "shared/mailers/footer"
-
+          = render partial: "shared/mailers/footer"
