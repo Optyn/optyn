@@ -7,16 +7,16 @@
     = content_for :header do
       Import File Stats
 
-    = render partial: "shared/mailers/banner"
-
-    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+    %table{ style: 'width: 100%; max-width: 800px; margin: auto; padding: 20px; background: #eee;' }
       %tr
         %td
-        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
-          %div
-            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
-              %tr
-                %td
+          = render partial: "shared/mailers/banner"
+
+          %table{:width => "100%", :style => "background-color: white;", :align => "center"}
+            %tr
+              %td
+              %td{:style => "bgcolor:#FFF;display:block!important; margin:0 auto; clear:both; padding: 20px;"}
+                %div
                   %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
                     Hi #{@manager.name},
                   %p Your file import failed.
@@ -29,6 +29,6 @@
                     Cheers,
                     %br/
                     The Optyn Team
-        %td
+              %td
 
-        = render partial: "shared/mailers/footer"
+              = render partial: "shared/mailers/footer"
