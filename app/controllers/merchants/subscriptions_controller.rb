@@ -7,7 +7,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
     @stripe_last_payment = ""
-
+    @amount_payable = "$49"
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed

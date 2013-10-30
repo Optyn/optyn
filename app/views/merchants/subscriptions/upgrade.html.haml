@@ -14,9 +14,9 @@
     %h5 Last Payment:
   .well.span3
     %h5 Upcoming Payment:
-    %br
-    = @stripe_upcoming_payment
-    %br
+    %p
+    = "#{@amount_payable}" "on" "#{@stripe_upcoming_payment}"
+    %p
     (pricing tier may change)
   .well.span3
     %h5 Credit Card on File:
