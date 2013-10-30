@@ -8,10 +8,28 @@ class Merchants::SocialProfilesController < Merchants::BaseController
   end
 
   def create
-    @social_profile = SocialProfile.new(params[:social_profile])
-    @social_profile.shop_id = current_shop.id
-    if @social_profile.save
-      redirect_to merchants_social_profile_path(current_shop.id), :notice => "Social Profile added successfully."
+    @error_hash = []
+    flag = true
+    
+    SocialProfile::SOCIAL_PROFILES.each do |k, v| 
+      @social_profile = SocialProfile.where(:sp_type => v.to_i, :shop_id => current_shop.id)
+      if not @social_profile.blank?
+        @social_profile = @social_profile.first
+        @social_profile.sp_link = params[k]
+      else
+        next if params[k].blank?
+        @social_profile = SocialProfile.new(:sp_type => v.to_i, :sp_link => params[k])
+        @social_profile.shop_id = current_shop.id
+      end
+
+      if not @social_profile.save
+        flag = false
+        @error_hash.push("Link for #{k} #{@social_profile.errors.messages[:sp_link].first}")
+      end
+    end
+
+    if flag
+      redirect_to merchants_social_profile_path(current_shop.id), :notice => "Social Profiles added successfully."
     else
       render 'new'
     end

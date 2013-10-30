@@ -1,15 +1,18 @@
+- if ((@error_hash) and (not @error_hash.empty?))
+  #error_explanation
+    %ul
+      - @error_hash.each do |error|
+        %li
+          = error
+
 #profile_wrapper
-  .control-group
-    .control-label
-      = f.label :sp_type, 'Social media name'
-    .controls
-      = f.select :sp_type, SocialProfile::SOCIAL_PROFILES.collect{|k, v| [v, k]}, :prompt => 'Select One'
-  .control-group
-    .control-label
-      = f.label :sp_link, "Link"
-    .controls
-      = f.text_field :sp_link, :placeholder => 'Enter link', class: 'span12'
+  - SocialProfile::SOCIAL_PROFILES.each do |type, val|
+    .control-group
+      .control-label
+        = label_tag "#{type}", "#{type.humanize.capitalize} link" 
+      .controls
+        - link = params[type] ? params[type] : get_social_links_for_shop(type)
+        = text_field_tag "#{type}", "#{link}", :placeholder => 'Enter link', class: 'span12'
   .action-buttons
-    - button_name = @social_profile.new_record? ? "Add" : 'Update'
-    = f.submit button_name , class: "btn btn-primary"
-    = link_to "Cancel", merchants_shop_path, class: 'btn'
+    = f.submit 'Add / Update' , class: "btn btn-primary"
+    = link_to "Cancel", merchants_social_profile_path(current_shop.id), class: 'btn'
