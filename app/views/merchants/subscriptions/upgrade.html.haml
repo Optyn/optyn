@@ -45,11 +45,12 @@
           %td Plan
           %td View invoice
       %tbody
+      @list_invoice.each do |invoice|
         %tr
-          %td xx-xx-xxxx
-          %td $X.X
-          %td Foo
-          %td Bar
+          %td invoice.created_at
+          %td invoice.amount
+          %td #{@plan}
+          %td View
 
 
 
