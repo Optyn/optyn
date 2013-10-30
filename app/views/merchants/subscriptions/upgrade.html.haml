@@ -46,7 +46,7 @@
           %td Plan
           %td View invoice
       %tbody
-      @list_invoice.each do |invoice|
+      - @list_invoice.each do |invoice|
         %tr
           %td invoice.created_at
           %td invoice.amount
