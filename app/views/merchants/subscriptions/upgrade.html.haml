@@ -6,8 +6,8 @@
 .row-fluid.text-center
   .well.span3
     %h5 You Current Plan:
-    = "#{@plan.min}" "-"
-    = "#{@plan.max}" "Customers"
+    = "#{@plan.min} " " - "
+    = " #{@plan.max}" " Customers"
     %br
     = link_to "view plans","/pricing"
   .well.span3
@@ -15,7 +15,7 @@
   .well.span3
     %h5 Upcoming Payment:
     %p
-    = "#{@amount_payable}" "on" "#{@stripe_upcoming_payment}"
+    = "$#{@plan.amount} " " on" " #{@stripe_upcoming_payment}"
     %p
     (pricing tier may change)
   .well.span3
