@@ -15,7 +15,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       @stripe_upcoming_payment = "#{@subscription.created_at.day}#{Time.now.month}#{Time.now.year}"
     else
       next_month = Time.now.to_date >> 1 #shift one moth
-      @stripe_upcoming_payment = "#{@subscription.created_at.day}#{next_month.month}#{next_month.year}"
+      @stripe_upcoming_payment = "#{next_month.month}/#{@subscription.created_at.day}/#{next_month.year}"
     end
     @list_invoice = ""
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
