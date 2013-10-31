@@ -158,7 +158,8 @@ class Merchants::MessagesController < Merchants::BaseController
       @message = Message.for_uuid(uuid)
       @shop_logo = true
       @shop = @message.shop
-
+      @inbox_count = populate_user_folder_count(true) if current_user.present?
+      
       if @shop and @message
         if @message.make_public
           if not current_user.present?
@@ -178,5 +179,10 @@ class Merchants::MessagesController < Merchants::BaseController
         end
       end
     end
+  end
+
+  private
+  def populate_user_folder_count(force=false)
+    @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
   end
 end
