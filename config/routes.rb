@@ -245,7 +245,7 @@ Optyn::Application.routes.draw do
     end
 
     
-    resource :subscription
+    resource :subscription 
     get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
     get '/invoice' => 'subscriptions#invoice', as: :subsciption_invoice
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe

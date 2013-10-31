@@ -23,10 +23,19 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def invoice
     #if invoice id present fetch it
-    @invoice_id = params[:invoice_id] rescue nil 
+    @invoice_id = params[:id] rescue nil 
     #wherer(id).group_by plans and then find count of each
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+  end
+
+  def print
+    #if invoice id present fetch it
+    @invoice_id = params[:id] rescue nil 
+    #wherer(id).group_by plans and then find count of each
+    @plan = current_shop.subscription.plan
+    @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    kit = PDFKit.new(html, :page_size => 'Letter')
   end
 
   def edit_billing_info
