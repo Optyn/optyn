@@ -1,5 +1,5 @@
 class Merchants::SubscriptionsController < Merchants::BaseController
-
+  require 'pdfkit'
   before_filter :require_manager
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
@@ -35,7 +35,10 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     #wherer(id).group_by plans and then find count of each
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    html = "<html></html>"
     kit = PDFKit.new(html, :page_size => 'Letter')
+    file = kit.to_file("/tmp/file.pdf")
+    send_file(file,:type => "application/pdf")
   end
 
   def edit_billing_info
