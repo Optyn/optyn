@@ -37,7 +37,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       #wherer(id).group_by plans and then find count of each
       @plan = current_shop.subscription.plan
       @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-      html = render_to_string :partial => "/merchants/subscriptions/invoice",
+      html = render_to_string :partial => "/merchants/subscriptions/core_invoice",
                               :local=> {:params=>params},
                               :layout => false
       kit = PDFKit.new(html, :page_size => 'Letter')
