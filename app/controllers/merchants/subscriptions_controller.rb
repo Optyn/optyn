@@ -31,14 +31,19 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def print
     #if invoice id present fetch it
-    @invoice_id = params[:id] rescue nil 
-    #wherer(id).group_by plans and then find count of each
-    @plan = current_shop.subscription.plan
-    @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-    html = "<html></html>"
-    kit = PDFKit.new(html, :page_size => 'Letter')
-    file = kit.to_file("/tmp/file.pdf")
-    send_file(file,:type => "application/pdf")
+    if params[:id].present?
+      @invoice_id = params[:id]
+      filename = "/tmp/#{Time.now}-#{@invoice_id}.pdf"
+      #wherer(id).group_by plans and then find count of each
+      @plan = current_shop.subscription.plan
+      @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+      html = render_to_string :partial => "/merchants/subscriptions/invoice",
+                              :local=> {:params=>params},
+                              :layout => false
+      kit = PDFKit.new(html, :page_size => 'Letter')
+      file = kit.to_file(filename)
+      send_file(file,:type => "application/pdf")
+    end
   end
 
   def edit_billing_info
