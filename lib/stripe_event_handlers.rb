@@ -9,6 +9,7 @@ module StripeEventHandlers
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     status = params['data']['object']['status']
     @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    binding.pry
   end
 
   def self.handle_customer_subscription_deleted(params)
@@ -44,9 +45,11 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    binding.pry
     evaluated_plan = Plan.which(subscription.shop)
     subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
     ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_payment_succeeded(params)
@@ -54,6 +57,7 @@ module StripeEventHandlers
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_payment_failed(params)
@@ -62,6 +66,7 @@ module StripeEventHandlers
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'invoice_payment_failure', {shop_id: subscription.shop.id, amount: amount, connection_count: conn_count})
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_updated(params)
@@ -132,5 +137,15 @@ module StripeEventHandlers
     subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
     shop = subscription.shop
     [coupon, shop]
+  end
+
+  def self.create_invoice(subscription,params)
+      Invoice.create(
+        :subscription_id => subscription.id,
+        :stripe_customer_token => params['data']['object']['customer'],
+        :stripe_invoice_id => params['data']['object']['id'],
+        :paid_status => params['data']['object']['paid'],
+        :amount => params['data']['object']['total']
+      )
   end
 end
