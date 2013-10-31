@@ -33,7 +33,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     #if invoice id present fetch it
     if params[:id].present?
       @invoice_id = params[:id]
-      binding.pry
       filename = "/tmp/#{Time.now}-#{@invoice_id}.pdf"
       #wherer(id).group_by plans and then find count of each
       @plan = current_shop.subscription.plan
