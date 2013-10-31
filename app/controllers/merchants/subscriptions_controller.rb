@@ -22,8 +22,10 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def invoice
+    @plan = current_shop.subscription.plan
+    @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
   end
-  
+
   def edit_billing_info
     @plan= current_shop.subscription.plan
     @subscription = current_shop.subscription
