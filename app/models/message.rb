@@ -60,6 +60,8 @@ class Message < ActiveRecord::Base
 
   scope :active_state, where("messages.state NOT IN ('delete', 'trash')")
 
+  scope :made_public, where(make_public: true)
+
   
   state_machine :state, :initial => :draft do
 
