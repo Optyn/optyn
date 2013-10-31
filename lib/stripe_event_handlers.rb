@@ -8,7 +8,9 @@ module StripeEventHandlers
   def self.handle_customer_subscription_updated(params)
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     status = params['data']['object']['status']
-    @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    if !@subscription.nil?
+      @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    end
     # binding.pry
   end
 
