@@ -22,7 +22,7 @@ SitemapGenerator::Sitemap.create do
 
     SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
     Message.made_public.each do |message|
-      add("/#{shop.name.parameterize}/campaigns/#{message.name.parameterize}-#{message.uuid}", :changefreq => 'weekly', :priority => 0.8)
+      add("/#{message.shop.name.parameterize}/campaigns/#{message.name.parameterize}-#{message.uuid}", :changefreq => 'weekly', :priority => 0.8)
     end 
   end
 end
