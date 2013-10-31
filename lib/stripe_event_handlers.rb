@@ -9,7 +9,7 @@ module StripeEventHandlers
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     status = params['data']['object']['status']
     @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
-    binding.pry
+    # binding.pry
   end
 
   def self.handle_customer_subscription_deleted(params)
@@ -45,7 +45,7 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    binding.pry
+    # binding.pry
     evaluated_plan = Plan.which(subscription.shop)
     subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
     ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
