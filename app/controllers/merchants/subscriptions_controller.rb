@@ -21,6 +21,9 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
 
+  def invoice
+  end
+  
   def edit_billing_info
     @plan= current_shop.subscription.plan
     @subscription = current_shop.subscription
