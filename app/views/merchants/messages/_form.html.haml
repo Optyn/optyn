@@ -4,5 +4,5 @@
 
   = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
 
-  / = "Make this message public"
-  / = f.check_box :make_public 
+  = "Make this message public"
+  = f.check_box :make_public 

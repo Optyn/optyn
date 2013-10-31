@@ -1,8 +1,7 @@
 class Merchants::MessagesController < Merchants::BaseController
+  
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
-
-
   def types
     #Do Nothing
   end
@@ -161,13 +160,22 @@ class Merchants::MessagesController < Merchants::BaseController
       @shop = @message.shop
 
       if @shop and @message
-        @msg = @message.make_public ? "" : "This message is not accessible"
-      else
-        @msg = "Incorrect link"
-      end
-      
-      respond_to do |format|
-        format.html {render :layout => false}
+        if @message.make_public
+          if not current_user.present?
+            respond_to do |format|
+              format.html {render :layout => false}
+            end
+          end
+        else
+          if current_user.present? #to check if the user is logged in or not
+            recipient = @message.message_user(current_user)
+            if not recipient
+              render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+            end
+          else
+            redirect_to new_user_session_path
+          end
+        end
       end
     end
   end
