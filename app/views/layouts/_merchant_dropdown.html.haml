@@ -7,19 +7,35 @@
     %li
       %a.active{:href => merchants_root_path}
         = image_tag "dropdown_dashicon.png"
-        My Dashboard
+        Dashboard
     %li
       %a{:href => merchants_messages_path}
         = image_tag "dropdown_manager.png"
-        My Campaigns
+        Campaign Center
+    %li
+      %a{:href => merchants_connections_path}
+        = image_tag "menu_icon_connections.png", :alt => "Connections"
+        My Customers
     %li
       %a{:href => merchants_survey_path}
         = image_tag "dropdown_surveys.png"
-        My Surveys
+        Customer Surveys
+    %li
+      %a{:href => merchants_survey_survey_answers_path}
+        = image_tag "menu_icon_messages.png", :alt => "Survey Responses"
+        Survey Responses
     %li
       %a{:href => merchants_shop_path, :class => 'hr'}
         = image_tag "dropdown_settings.png"
-        Account
+        Manage Account
+    %li
+      %a{:href => merchants_app_path}
+        = image_tag "merchant_menu_button_icon.png", :alt => "Your API Button"
+        Grow Customer Base
+    %li
+      %a{:href => merchants_file_imports_path}
+        = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
+        Import Customers
       .separator-thin.small
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)

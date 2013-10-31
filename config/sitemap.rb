@@ -5,9 +5,6 @@ SitemapGenerator::Sitemap.default_host = 'http://www.optyn.com'
 SitemapGenerator::Sitemap.create do
   
   if Rails.env.production?
-    puts "*" * 100
-    puts Rails.env
-    puts "-" * 100
     
     add '/', :changefreq => 'daily', :priority => 0.9  
     add '/consumer-features', :changefreq => 'weekly', :priority => 0.8 
@@ -20,8 +17,13 @@ SitemapGenerator::Sitemap.create do
     add '/privacy', :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
-      add "/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
+      add "public/shop/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
     end
+
+    SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
+    Message.made_public.each do |message|
+      add("/#{shop.name.parameterize}/campaigns/#{message.name.parameterize}-#{message.uuid}", :changefreq => 'weekly', :priority => 0.8)
+    end 
   end
 end
 
