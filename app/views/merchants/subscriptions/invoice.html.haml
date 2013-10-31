@@ -1,12 +1,18 @@
 = display_title "OPTYN.COM"
 = banner("Pricing")
+= render partial: 'merchants/merchant_managers/tabs'
+
 = Time.now.strftime("%B %d,%Y")
 
-Subscription to 
-= @plan.amount 
-pm
-Subtotal 
-Total
+.span3
+	%p
+		Subscription to 
+		= @plan.amount 
+		pm
+	%p
+		Subtotal 
+.span3
+	Total
 
 
 
@@ -27,4 +33,4 @@ Total
 		alen@optyn.com
 
 
-	= link_to "", "View in Your Browser"
+	= link_to "http://optyn.com/merchants/invoice/", "View in Your Browser"

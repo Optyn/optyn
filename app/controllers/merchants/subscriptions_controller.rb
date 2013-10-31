@@ -22,6 +22,8 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def invoice
+    #if invoice id present fetch it
+    @invoice_id = params[:invoice_id] rescue nil 
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
   end
