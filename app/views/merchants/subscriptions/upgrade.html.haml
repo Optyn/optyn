@@ -54,7 +54,9 @@
             %td #{invoice.created_at.to_date.strftime("%B %d,%Y")}
             %td $ #{invoice.amount}
             %td #{@plan.min} - #{@plan.max} Customers
-            %td View
+            %td 
+              .btn
+                = link_to "View" , "/merchants/invoice/?id="#{invoice.id}
 
 
 
