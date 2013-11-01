@@ -131,7 +131,9 @@ module StripeEventHandlers
   end
 
   def self.handle_charge_succeeded(params)
-    Charge.create()
+    Charge.create(
+        :created => params[created],
+      )
   end
 
   private
