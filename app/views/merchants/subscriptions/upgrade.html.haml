@@ -13,6 +13,8 @@
       = link_to "view plans","/pricing"
   .well.span3
     %h5 Last Payment:
+    -if !@stripe_last_payment.nil?
+      = @stripe_last_payment.strftime("%B %d,%Y")
   .well.span3
     %h5 Upcoming Payment:
     %p
@@ -44,15 +46,21 @@
           %td Date
           %td Amount
           %td Plan
-          %td View invoice
+          %td View Invoice 
+          %td Print Invoice
       %tbody
       - if ! @list_invoice.nil?
         - @list_invoice.each do |invoice|
           %tr
-            %td invoice.created_at
-            %td invoice.amount
-            %td #{@plan}
-            %td View
+            %td #{invoice.created_at.to_date.strftime("%B %d,%Y")}
+            %td $ #{invoice.amount}
+            %td #{@plan.min} - #{@plan.max} Customers
+            %td 
+              .btn
+                = link_to "View" , "/merchants/invoice/?id=#{invoice.id}"
+            %td 
+              .btn
+                = link_to "Print" , "/merchants/invoice/print/?id=#{invoice.id}"
 
 
 

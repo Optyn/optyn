@@ -1,5 +1,5 @@
 class Merchants::SubscriptionsController < Merchants::BaseController
-
+  require 'pdfkit'
   before_filter :require_manager
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
@@ -7,7 +7,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
     current_invoice = Invoice.where(:stripe_customer_token=>@subscription.stripe_customer_token)
-    @stripe_last_payment = current_invoice.order(created_at).last.created_at rescue nil
+    @stripe_last_payment = current_invoice.order(:created_at).last.created_at rescue nil
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed
@@ -23,10 +23,27 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def invoice
     #if invoice id present fetch it
-    @invoice_id = params[:invoice_id] rescue nil 
+    @invoice_id = params[:id] rescue nil 
     #wherer(id).group_by plans and then find count of each
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+  end
+
+  def print
+    #if invoice id present fetch it
+    if params[:id].present?
+      @invoice_id = params[:id]
+      filename = "/tmp/#{Time.now}-#{@invoice_id}.pdf"
+      #wherer(id).group_by plans and then find count of each
+      @plan = current_shop.subscription.plan
+      @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+      html = render_to_string :partial => "/merchants/subscriptions/core_invoice",
+                              :local=> {:params=>params},
+                              :layout => false
+      kit = PDFKit.new(html, :page_size => 'Letter')
+      file = kit.to_file(filename)
+      send_file(file,:type => "application/pdf")
+    end
   end
 
   def edit_billing_info

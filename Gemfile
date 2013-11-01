@@ -56,6 +56,8 @@ gem "acts_as_paranoid", "~>0.4.0"
 gem 'rabl'
 gem 'oj'
 
+gem 'pdfkit' #for pdf generation
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
