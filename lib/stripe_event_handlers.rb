@@ -130,6 +130,9 @@ module StripeEventHandlers
     shop.save(validate: false)
   end
 
+  def self.handle_charge_succeeded(params)
+  end
+
   private
   def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
     coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
