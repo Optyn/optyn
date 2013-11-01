@@ -3,41 +3,36 @@
   %tr
     %td
     %td
-      %div{:margin => "left:10px", :style => "vertical-align: middle; margin:0 auto 0 auto;display:block;"}
-        %table{:width => "100%"}
-          - if @shop.present? && @shop.social_profiles.present?
-            %tr
-              %td{:style => "text-align:center"}
-                %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
-                = "Connect with us"
-            %tr
-              %td{:style => "text-align:center"}
-                %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
-                  - @shop.social_profiles.each do |sp|
-                    - name = SocialProfile::SOCIAL_PROFILES.find{|k, v| v == sp.sp_type}[0]
-                    = link_to(image_tag("#{SiteConfig.app_base_url}/assets/#{name}_icon.png"), "#{sp.sp_link}")
-          %tr
-            %td{:style => "text-align:center"}
-              %p{:font => "bold", :style => "font-size: 14px; margin: 0px; color:#ccc;"}
-                - if @message.present?  
-                  - if @message_user.present?
-                    = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}?tracker=#{@message_user.uuid}")
-                  - else
-                    = link_to('Unsubscribe', "javascript:void(0)")
+      - if @shop.present? && @shop.social_profiles.present?
+        %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
+          %p{:font => "bold", :style => "font-size: 14px; margin: 0px; margin-bottom: 10px;"}
+            Connect with us
+          %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
+            - @shop.social_profiles.each do |sp|
+              - name = SocialProfile::SOCIAL_PROFILES.find{|k, v| v == sp.sp_type}[0]
+              = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{sp.sp_link}")
                     
     %td
 - if @shop.present? && @shop.plan and @shop.plan.name and @shop.plan.name.downcase.include?('starter')
-  %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
+  %table{:style => 'width:100%; color:#ccc; color: rgba(255,255,255,0.8);' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
     %tr
-      %td{:style => "padding-left: 30px; max-height: 40px; padding-top: 15px; width: 100%;"}
-        %p{:style => "font-weight: bold; margin: 0px; color:#ccc;"}
+      %td{:style => "padding-left: 20px; max-height: 40px; padding-top: 15px; width: 100%;"}
+        %p{:style => "font-weight: bold; margin: 0px;"}
           = "Send Awesome E-Mails like these"
-      %td{:style => "font-size: 11px; margin: 0px; color:#ccc; text-align:center"}
+      %td{:style => "font-size: 11px; margin: 0px; text-align:center"}
         = "Sent via"
     %tr
-      %td{:style => "padding-left: 30px; max-height: 40px; width: 100%;"}
-        %p{:style => "font-size: 11px; margin: 0px; color:#ccc;"}
+      %td{:style => "padding-left: 20px; max-height: 40px; width: 100%;"}
+        %p{:style => "font-size: 11px; margin: 0px;"}
           = "Your first 100 subscribers are free. Sign up today at optyn.com"
           %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#00008B;"} Click here
       %td{:style => "padding-right: 6px;"}
         = image_tag "email_logo_white.png", {:style => 'max-width: 100px'}
+
+%div{ style: 'width: 100%; padding: 20px 0 0 0;'}
+  %p{:font => "bold", :style => "font-size: 13px; margin: 0px;"}
+    - if @message.present?  
+      - if @message_user.present?
+        = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}?tracker=#{@message_user.uuid}", style: 'color: #666;')
+      - else
+        = link_to('Unsubscribe', "javascript:void(0)", style: 'color: #666;')
