@@ -14,7 +14,7 @@ class CreateCharge < ActiveRecord::Migration
       t.integer :amount_refunded
       t.string :customer
       t.string :fee_description
-      t.references invoice 
+      t.references :invoice 
 
       t.timestamps
     end
