@@ -131,9 +131,10 @@ module StripeEventHandlers
   end
 
   def self.handle_charge_succeeded(params)
-    Charge.create(
-        :created => params[:created]
-      )
+    ##FIXME: gives a PG error on local machine.
+    # Charge.create(
+    #     :created => params[:created]
+    #   )
   end
 
   private
