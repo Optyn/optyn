@@ -7,6 +7,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
     current_invoice = Invoice.where(:stripe_customer_token=>@subscription.stripe_customer_token)
+    @amount = invoice.amount / 100 #because its in cents
     @stripe_last_payment = current_invoice.order(:created_at).last.created_at rescue nil
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
