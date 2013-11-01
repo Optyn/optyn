@@ -131,6 +131,7 @@ module StripeEventHandlers
   end
 
   def self.handle_charge_succeeded(params)
+    Charge.create()
   end
 
   private
