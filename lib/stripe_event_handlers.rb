@@ -132,19 +132,19 @@ module StripeEventHandlers
 
   def self.handle_charge_succeeded(params)
     Charge.create(
-        :created => params[:created],
-        :live_mode => ,
-        :fee_amount => ,
-        :invoice => ,
-        :description => ,
-        :dispute => ,
-        :refunded => ,
-        :paid => ,
-        :amount => ,
-        :card_last4 => ,
-        :amount_refunded => ,
-        :customer => ,
-        :fee_description => 
+        :created => params[:created] rescue nil,
+        :live_mode => params[:livemode] rescue nil,
+        :fee_amount => params[:data][:object][:fee] rescue nil,
+        :invoice => params[]rescue nil,
+        :description => params[]rescue nil,
+        :dispute => params[]rescue nil,
+        :refunded => params[]rescue nil,
+        :paid => params[]rescue nil,
+        :amount => params[]rescue nil,
+        :card_last4 => params[]rescue nil,
+        :amount_refunded => params[]rescue nil,
+        :customer => params[]rescue nil,
+        :fee_description => params[]rescue nil
       )
   end
 
