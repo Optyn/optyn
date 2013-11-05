@@ -655,4 +655,5 @@ class Message < ActiveRecord::Base
   def shop_virtual?
     self.manager.present? && self.shop.present? && self.shop.virtual
   end
+
 end

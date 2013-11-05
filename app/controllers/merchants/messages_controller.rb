@@ -181,6 +181,18 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def generate_qr_code 
+    @message = Message.find(params[:message_id])
+    link = @message.get_qr_code_link(current_user)
+    respond_to do |format|
+      format.html
+      format.svg  { render :qrcode => link, :level => :l, :unit => 10 }
+      format.png  { render :qrcode => link }
+      format.gif  { render :qrcode => link }
+      format.jpeg { render :qrcode => link }
+    end
+  end
+
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
