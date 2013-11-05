@@ -1083,3 +1083,8 @@ blockquote {
 .well {
   @include border-radius(0);
 }
+
+.table-borderless td,
+.table-borderless th {
+    border: 0;
+}
