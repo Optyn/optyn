@@ -11,6 +11,7 @@ class Message < ActiveRecord::Base
   belongs_to :survey
   has_many :message_visual_properties, dependent: :destroy
   has_one :message_image, dependent: :destroy
+  has_many :redeem_coupons, dependent: :destroy
 
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
