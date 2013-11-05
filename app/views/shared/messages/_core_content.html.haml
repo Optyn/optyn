@@ -9,7 +9,6 @@
       %td.outer-cell{ style: 'padding: 20px;'}
         - if @message.type == "CouponMessage" and @message.coupon_code
           = image_tag generate_qr_code_path("svg", :message_id => @message.id), :width => 150, :height => 150, :style => "float: right"
-          = link_to "Redeem coupon", @message.get_qr_code_link(current_user)
         .message-content
           - if @message.show_greeting?
             = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
