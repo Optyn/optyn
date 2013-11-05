@@ -137,14 +137,14 @@ module StripeEventHandlers
         :fee_amount => params[:data][:object][:fee] rescue nil,
         :invoice => params[:data][:object][:invoice]rescue nil,
         :description => params[]rescue nil,
-        :dispute => params[]rescue nil,
+        :dispute => params[:data][:object][:dispute] rescue nil,
         :refunded => params[]rescue nil,
         :paid => params[]rescue nil,
-        :amount => params[]rescue nil,
-        :card_last4 => params[]rescue nil,
+        :amount => params[:data][:object][:amount]rescue nil,
+        :card_last4 => params[:data][:object][:card][:last4]rescue nil,
         :amount_refunded => params[:data][:object][:amount_refunded]rescue nil,
         :customer => params[:data][:object][:customer]rescue nil,
-        :fee_description => params[]rescue nil
+        :fee_description => params[:data][:object][0][:fee_details]rescue nil
       )
   end
 
