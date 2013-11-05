@@ -135,15 +135,15 @@ module StripeEventHandlers
         :created => params[:created] rescue nil,
         :live_mode => params[:livemode] rescue nil,
         :fee_amount => params[:data][:object][:fee] rescue nil,
-        :invoice => params[]rescue nil,
+        :invoice => params[:data][:object][:invoice]rescue nil,
         :description => params[]rescue nil,
         :dispute => params[]rescue nil,
         :refunded => params[]rescue nil,
         :paid => params[]rescue nil,
         :amount => params[]rescue nil,
         :card_last4 => params[]rescue nil,
-        :amount_refunded => params[]rescue nil,
-        :customer => params[]rescue nil,
+        :amount_refunded => params[:data][:object][:amount_refunded]rescue nil,
+        :customer => params[:data][:object][:customer]rescue nil,
         :fee_description => params[]rescue nil
       )
   end
