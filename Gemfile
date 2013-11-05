@@ -57,6 +57,8 @@ gem 'rabl'
 gem 'oj'
 
 gem 'pdfkit' #for pdf generation
+gem 'rqrcode-rails3' #for QR code
+gem 'mini_magick' #for QR code in PNG, JPEG or GIF 
 
 # Gems used only for assets and not required
 # in production environments by default.

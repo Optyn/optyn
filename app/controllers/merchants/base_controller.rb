@@ -1,7 +1,7 @@
 class Merchants::BaseController < ApplicationController
 
-	before_filter :authenticate_merchants_manager!, :set_time_zone, except: [:public_view]
-	before_filter :check_connection_count, except: [:public_view]
+	before_filter :authenticate_merchants_manager!, :set_time_zone, except: [:public_view, :generate_qr_code, :redeem]
+	before_filter :check_connection_count, except: [:public_view, :generate_qr_code, :redeem]
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
 
 	private

@@ -1,0 +1,7 @@
+- if @error_message
+  = @error_message
+- else
+  = "Coupon code #{@message.coupon_code} has been redeemed"
+
+.actions
+  = link_to "<i class='icon-arrow-left icon-white'></i> Back".html_safe, message_path(@message.uuid) , class: 'btn btn-primary', title: 'Back'

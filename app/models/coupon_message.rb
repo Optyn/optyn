@@ -7,6 +7,16 @@ class CouponMessage < Message
   validates :content, presence: true
   validate :validate_ending
 
+  def get_qr_code_link(current_user)
+    url = "#{SiteConfig.app_base_url}/redeem/"
+
+    current_user_id = current_user ? current_user.id : nil
+    message_user = Encryptor.encrypt(self.id, current_user_id)
+    url << message_user
+    p url
+    url
+  end
+  
   private
   def validate_discount_amount
     return self.errors.add(:base, "You need to add the discount amount") if discount_amount.blank?
