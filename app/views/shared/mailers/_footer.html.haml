@@ -30,7 +30,7 @@
       %td{:style => "padding: 0 6px 6px 0;"}
         = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
 
-%div{ style: 'width: 100%; padding: 20px 0 0 0;'}
+%div{ style: 'width: 100%; padding: 20px 0 0 0; text-align: center;'}
   %p{:font => "bold", :style => "font-size: 13px; margin: 0px;"}
     - if @message.present?  
       - if @message_user.present?
