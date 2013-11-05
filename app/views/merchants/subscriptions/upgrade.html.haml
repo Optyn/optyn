@@ -53,7 +53,7 @@
         - @list_invoice.each do |invoice|
           %tr
             %td #{invoice.created_at.to_date.strftime("%B %d,%Y")}
-            %td $ #{invoice.amount}
+            %td $ #{@amount}
             %td #{@plan.min} - #{@plan.max} Customers
             %td 
               .btn

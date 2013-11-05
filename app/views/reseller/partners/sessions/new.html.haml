@@ -1,16 +1,21 @@
-%h2 Sign in
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %div= f.submit "Sign in"
-= render "reseller/partners/shared/links"
+.row-fluid
+  .blank-space
+  .span4.offset4.text-center.sign-in
+    %h1 Sign in
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      %div
+        = f.email_field :email, :autofocus => true, placeholder: 'Email', class: 'span12'
+      .blank-space
+        = f.password_field :password, placeholder: 'Password', class: 'span12'
+      - if devise_mapping.rememberable?
+        %div
+          = f.check_box :remember_me
+          = f.label :remember_me
+          .blank-space
+      %div= f.submit "Sign in", class: 'btn btn-primary btn-block'
+
+    .blank-space
+
+    = render "reseller/partners/shared/links"
+
+    .blank-space

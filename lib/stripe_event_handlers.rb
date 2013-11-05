@@ -130,6 +130,13 @@ module StripeEventHandlers
     shop.save(validate: false)
   end
 
+  def self.handle_charge_succeeded(params)
+    ##FIXME: gives a PG error on local machine.
+    # Charge.create(
+    #     :created => params[:created]
+    #   )
+  end
+
   private
   def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
     coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
