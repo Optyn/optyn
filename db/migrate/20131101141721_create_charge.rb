@@ -1,6 +1,6 @@
 class CreateCharge < ActiveRecord::Migration
   def up
-    create_table :charge do |t|
+    create_table :charges do |t|
       t.integer :created
       t.string :live_mode
       t.integer :fee_amount
