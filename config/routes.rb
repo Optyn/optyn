@@ -32,7 +32,7 @@ Optyn::Application.routes.draw do
   match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view'
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
-
+  match 'generate_qr_code' => 'merchants/messages#generate_qr_code'
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
