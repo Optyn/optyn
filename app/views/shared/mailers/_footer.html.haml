@@ -28,7 +28,8 @@
           = "Your first 100 subscribers are free. Sign up today at optyn.com"
           %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#00008B;"} Click here
       %td{:style => "padding: 0 6px 6px 0;"}
-        = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
+        %a{:href => "http://www.optyn.com", :target => "_blank"}
+          = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
 
 %div{ style: 'width: 100%; padding: 20px 0 0 0; text-align: center;'}
   %p{:font => "bold", :style => "font-size: 13px; margin: 0px;"}
