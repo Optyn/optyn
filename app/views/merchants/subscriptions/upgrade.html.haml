@@ -49,8 +49,8 @@
           %td View Invoice 
           %td Print Invoice
       %tbody
-      - if ! @list_invoice.nil?
-        - @list_invoice.each do |invoice|
+      - if ! @list_charges.nil?
+        - @list_charges.each do |invoice|
           %tr
             %td #{invoice.created_at.to_date.strftime("%B %d,%Y")}
             %td $ #{@amount}
