@@ -1,29 +1,66 @@
-= Time.now.strftime("%B %d,%Y")
-
-.span3
-	%p
-		Subscription to 
-		= @plan.amount 
-		pm
-	%p
-		Subtotal 
-.span3
-	Total
-
-
-
-
-.span3
-	%p
-		OPTYN.COM
-		222 W Merchandise Mart Plaza 
-		Chicago IL 60654
+.row-fluid
+	.span6
+		%h5 OPTYN.COM
 		www.optyn.com
+	.span6.text-right
+		= Time.now.strftime("%B %d,%Y")
 
-.span3
-	%p
-		Questions?
-	%br
-		Contact OPTYN.COM at
-	%br
-		alen@optyn.com
+.blank-space
+
+%table.table.op-invoice
+	%tbody
+		%tr
+			%td
+				Subscription to 
+				= @plan.amount 
+				pm
+			%td
+				$20.00
+		%tr
+			%td
+				Subscription to foobar
+			%td
+				$29.00
+		%tr.info
+			%td
+				%strong Subtotal
+			%td
+				%strong $49.00
+		%tr
+			%td
+				Barbicide12months50 (50% off)
+			%td
+				= "-$24.50"
+		%tr.info
+			%td
+				%strong Total
+			%td
+				%strong $24.50
+	%tfoot
+		%tr
+			%td( colspan='2' )
+				.text-center
+					**** **** **** 7450
+
+.blank-space
+
+
+.row-fluid
+	.span6
+		%p
+			%strong Questions?
+		%p
+			Contact OPTYN.COM at
+			%a( href='mailto:alen@optyn.com') alen@optyn.com
+
+	.span6
+		%p
+			%strong OPTYN.COM
+		%p
+			222 W Merchandise Mart Plaza 
+			%br
+			Chicago IL 60654
+			%br
+			%a( href='www.optyn.com' target='blank') www.optyn.com
+
+.blank-space
