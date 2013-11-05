@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131029085058) do
+ActiveRecord::Schema.define(:version => 20131105070136) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -72,6 +72,25 @@ ActiveRecord::Schema.define(:version => 20131029085058) do
   end
 
   create_table "charge", :force => true do |t|
+    t.integer  "created"
+    t.string   "live_mode"
+    t.integer  "fee_amount"
+    t.string   "invoice"
+    t.string   "description"
+    t.string   "dispute"
+    t.string   "refunded"
+    t.string   "paid"
+    t.integer  "amount"
+    t.integer  "card_last4"
+    t.integer  "amount_refunded"
+    t.string   "customer"
+    t.string   "fee_description"
+    t.integer  "invoice_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "charges", :force => true do |t|
     t.integer  "created"
     t.string   "live_mode"
     t.integer  "fee_amount"
@@ -449,6 +468,13 @@ ActiveRecord::Schema.define(:version => 20131029085058) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "redeem_coupons", :force => true do |t|
+    t.integer  "message_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
