@@ -179,6 +179,8 @@ GEM
       thin (~> 1.5.0)
     method_source (0.8.1)
     mime-types (1.23)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
     mini_portile (0.5.0)
     mono_logger (1.1.0)
     multi_json (1.8.0)
@@ -324,6 +326,9 @@ GEM
       actionmailer (>= 3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rqrcode (0.4.2)
+    rqrcode-rails3 (0.1.6)
+      rqrcode (>= 0.4.2)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -376,6 +381,7 @@ GEM
     stripe (1.8.3)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    subexec (0.2.3)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -437,6 +443,7 @@ DEPENDENCIES
   kaminari
   localtunnel
   mailcatcher
+  mini_magick
   newrelic_rpm
   oauth2
   oj
@@ -460,6 +467,7 @@ DEPENDENCIES
   redis-store
   resque
   resque_mailer
+  rqrcode-rails3
   rspec
   rspec-rails
   rvm-capistrano
