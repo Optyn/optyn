@@ -193,6 +193,18 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def redeem
+    message_user = Encryptor.decrypt(params[:message_user]).split("--")
+    message_id = message_user[0] if message_user[0]
+    user_id = message_user[1] if message_user[1]
+    @message = Message.find(message_id)
+    rc = RedeemCoupon.new(:message_id => message_id)
+    rc.user_id = user_id if user_id
+    if not rc.save
+      @error_message = "Sorry, your coupon could not be redeemed."
+    end
+  end
+
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
