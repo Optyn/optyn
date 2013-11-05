@@ -149,6 +149,12 @@ class Shop < ActiveRecord::Base
     self
   end
 
+  def starter_plan?
+    plan.id = Plan.starter.id
+  rescue
+    false
+  end
+
 
   def update_with_existing_manager(attrs)
     Shop.transaction do
