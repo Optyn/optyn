@@ -4,7 +4,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
   def upgrade
-    binding.pry
+    # binding.pry
     ##FIXME:add a check for valid subscrition
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
