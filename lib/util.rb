@@ -34,7 +34,7 @@ class Util
     content << e.message + "\n"
     content << e.backtrace + "\n"
     content << "#{"-" * 5} End Error while running #{method_name} task #{"-" * 5}"
-    NightlyJobsMailer.announce_failure(content, method_name).deliver
+    GenericMailer.announce_nightly_job_failure(content, method_name).deliver
   end
 
   def self.verify_website_response
@@ -59,11 +59,11 @@ class Util
 
       response_code = response.code.strip
       unless response_code == "200"
-        PingMailer.announce_downtime("uri => " + host + " returned status code => " + response_code).deliver
+        GenericMailer.announce_ping_failure("uri => " + host + " returned status code => " + response_code).deliver
       end
 
     rescue Exception => ex
-      PingMailer.announce_downtime("uri => " + host + " Raised Exception => " + ex.to_s).deliver
+      GenericMailer.announce_ping_failure("uri => " + host + " Raised Exception => " + ex.to_s).deliver
     end
   end
 end
