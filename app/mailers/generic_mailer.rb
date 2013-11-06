@@ -12,4 +12,11 @@ class GenericMailer < ActionMailer::Base
          subject: "Optyn response issue (#{Socket.gethostname})",
          body: content)
   end
+
+  def announce_partner_inquiry(inquiry_id)
+    @inquiry = PartnerInquiry.find(inquiry_id)
+
+    mail(to: ["Alen Malkoc <alen@optyn.com>"],
+      subject: "A new partner inquiry has come in (Company: #{@inquiry.company_name}, Id: #{@inquiry.id})")
+  end
 end
