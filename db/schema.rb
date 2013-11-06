@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131012220304) do
+
+ActiveRecord::Schema.define(:version => 20131029151754) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -81,10 +82,11 @@ ActiveRecord::Schema.define(:version => 20131012220304) do
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
     t.integer  "shop_id"
-    t.boolean  "active",        :default => true
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.boolean  "active",           :default => true
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "connected_via"
+    t.string   "disconnect_event"
   end
 
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
@@ -306,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20131012220304) do
     t.boolean  "permanent_coupon"
     t.string   "button_url",       :limit => 2303
     t.string   "button_text",      :limit => 1000
+    t.boolean  "make_public"
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
@@ -434,8 +437,8 @@ ActiveRecord::Schema.define(:version => 20131012220304) do
 
   create_table "shops", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                                        :null => false
-    t.datetime "updated_at",                                                        :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.string   "stype"
     t.text     "description"
     t.string   "logo_img"
@@ -445,26 +448,34 @@ ActiveRecord::Schema.define(:version => 20131012220304) do
     t.string   "time_zone"
     t.integer  "button_impression_count"
     t.integer  "button_click_count"
-    t.boolean  "virtual",                                    :default => false
-    t.integer  "email_box_impression_count",                 :default => 0
-    t.integer  "email_box_click_count",                      :default => 0
+    t.boolean  "virtual",                    :default => false
+    t.integer  "email_box_impression_count", :default => 0
+    t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",                               :default => ""
-    t.string   "header_background_color",                    :default => "#1791C0"
-    t.datetime "deleted_at"
-    t.boolean  "pre_added",                                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
-    t.boolean  "uploaded_directly",                          :default => false
-    t.string   "upload_location",            :limit => 1000
-    t.string   "footer_background_color",                    :default => "#ffffff"
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
+    t.string   "footer_background_color",    :default => "#ffffff"
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
-  add_index "shops", ["name"], :name => "index_shops_on_name", :unique => true
+  add_index "shops", ["name"], :name => "index_shops_on_name"
   add_index "shops", ["partner_id"], :name => "index_shops_on_partner_id"
   add_index "shops", ["uuid"], :name => "index_shops_on_uuid", :unique => true
+
+  create_table "social_profiles", :force => true do |t|
+    t.integer  "sp_type"
+    t.string   "sp_link"
+    t.integer  "shop_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "social_profiles", ["shop_id"], :name => "index_social_profiles_on_shop_id"
 
   create_table "states", :force => true do |t|
     t.string   "name"

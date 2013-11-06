@@ -166,4 +166,9 @@ module Merchants::MessagesHelper
   def message_progress_bar_highlight(hightlight_action_names=[])
     "current" if hightlight_action_names.include?(action_name)
   end
+
+  def get_public_link(message, shop)
+    msg = "#{message.name} #{message.uuid}"
+    return "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+  end
 end

@@ -6,6 +6,17 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    @stripe_last_payment = ""
+    ##this part calculates upcoming payment with following assumption
+    ##same date next month if date is already passed(date of creation of account)
+    ##or same date this month if date hasnt passed
+    if (@subscription.created_at.day < Time.now.day)
+      @stripe_upcoming_payment = "#{@subscription.created_at.day}#{Time.now.month}#{Time.now.year}"
+    else
+      next_month = Time.now.to_date >> 1 #shift one moth
+      @stripe_upcoming_payment = "#{next_month.month}/#{@subscription.created_at.day}/#{next_month.year}"
+    end
+    @list_invoice = ""
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
 
@@ -16,7 +27,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def update_billing_info
     @subscription = current_shop.subscription
-
     begin
       @stripe_customer= Stripe::Customer.retrieve(@subscription.stripe_customer_token)
       @stripe_customer.card = params['stripeToken']

@@ -1,0 +1,4 @@
+- if @msg.blank?
+  = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
+- else
+  = @msg

@@ -722,6 +722,18 @@ i.myspace { background-position: -233px -51px; }
     .right.edge { background-position: 0px -191px; }
   }
 }
+@media ( max-width: 666px ) {
+  .progress-bar .step {
+    font-size: 11px;
+    padding: 2px 11px;
+  }
+}
+@media ( max-width: 1000px ) and ( min-width: 667px ) {
+  .progress-bar .step {
+    font-size: 14px;
+    padding: 2px 22px;
+  }
+}
 
 
 #flat.m-app {
@@ -927,6 +939,7 @@ form {
     top: 30px;
     max-width: 90%;
     padding-bottom: 10px;
+    z-index: 10000;
   }
   .modal-header {
     height: auto;
@@ -972,6 +985,9 @@ form {
   }
   #message_form .add-on i {
     margin-top: -3px;
+  }
+  .bootstrap-datetimepicker-widget {
+    z-index: 10001;
   }
 }
 
@@ -1040,6 +1056,12 @@ th {
   &.small {
     margin: 7px 0;
   }
+  &.large {
+    margin: 40px 0;
+  }
+  &.light {
+    background-color: $light-gray
+  }
 }
 .no-pad {
   padding: 0;
@@ -1050,4 +1072,14 @@ th {
 
 .blank-space {
   padding: 15px 0;
+  clear: both;
+  &.large { padding: 30px 0; }
+}
+
+blockquote {
+  font-style: italic;
+}
+
+.well {
+  @include border-radius(0);
 }

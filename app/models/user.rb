@@ -1,8 +1,10 @@
 require 'digest/sha1'
 require 'users/importer'
+require 'users/shop_user_importer'
 
 class User < ActiveRecord::Base
   extend Users::Importer
+  extend Users::ShopUserImporter
 
   has_many :authentications, :as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
@@ -215,6 +217,32 @@ class User < ActiveRecord::Base
     else
       "/assets/avatar.png"
     end
+  end
+
+  def self.search_user(params)
+    if not params["name"].blank? and not params["email"].blank?
+      users = User.where('name ilike ? and email = ?', "%#{params[:name].strip}%", "#{params[:email].strip}")
+    elsif not params["name"].blank?
+      users = User.arel_table
+      users = User.where(users[:name].matches("%#{params[:name]}%"))
+    elsif not params["email"].blank?
+      users = User.where(:email => params["email"].strip)
+    end
+
+    if users and not params["label_ids"].blank? #we get or dont get the user with given name / email or both
+      user_ids = users.map{|x| x.id}
+      user_ids = UserLabel.where(:label_id => params["label_ids"], :user_id => user_ids).map{|x| x.user_id}
+    elsif users # we get user but no label selected
+      user_ids = users.map{|x| x.id}
+    elsif not params["label_ids"].blank? #searches on the basis of label only
+      user_ids = UserLabel.where(:label_id => params["label_ids"]).map{|x| x.user_id}
+    else #searches when everything is blank
+      users_with_name_or_email_blank = User.where('name is NULL or email is NULL').map{|x| x.id}
+      users_with_label_blank = UserLabel.where('label_id is NULL or label_id = 0').map{|x| x.user_id}
+      user_ids = users_with_name_or_email_blank | users_with_label_blank
+    end
+    
+    return user_ids
   end
 
   private

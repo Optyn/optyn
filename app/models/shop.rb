@@ -22,29 +22,32 @@ class Shop < ActiveRecord::Base
   has_many :shop_audits
   belongs_to :coupon
   belongs_to :partner
+  has_many :social_profiles, dependent: :destroy
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
   DEFAULT_HEADER_BACKGROUND_COLOR = '#1791C0'
+  DEFAULT_FOOTER_BACKGROUND_COLOR = '#ffffff'
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
 
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img
-  attr_accessible :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual
-  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url, :pre_added 
-  attr_accessible :uploaded_directly, :footer_background_color
+  attr_accessible  :pre_added, :business_ids, :website, :identifier, :time_zone, :virtual
+  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url 
+  #attr_accessible :uploaded_directly, :upload_location,
+  attr_accessible :footer_background_color
 
 
   mount_uploader :logo_img, ShopImageUploader
 
   validates_as_paranoid
-  validates :name, presence: true, uniqueness:  { case_sensitive: false }
+  validates :name, presence: true , uniqueness:  { case_sensitive: false, if: :virtual}
   validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual
   validates :phone_number, :phony_plausible => true 
-  validates_uniqueness_of_without_deleted :name
+  # validates_uniqueness_of_without_deleted :name
   
 
   accepts_nested_attributes_for :managers
@@ -76,6 +79,8 @@ class Shop < ActiveRecord::Base
 
   scope :lower_name, ->(shop_name) { where(["LOWER(shops.name) LIKE LOWER(:shop_name)", {shop_name: shop_name}]) }
 
+  scope :by_manager_email, ->(manager_email) {joins(:managers).where(["managers.email LIKE LOWER(:manager_email)", {manager_email: manager_email}])}
+
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
   before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
@@ -98,6 +103,10 @@ class Shop < ActiveRecord::Base
 
   def self.for_name(shop_name)
     lower_name(shop_name.to_s).first
+  end
+
+  def self.for_manager_email(manager_email)
+    by_manager_email(manager_email).first
   end
 
   def self.by_app_id(app_id)
@@ -200,7 +209,7 @@ class Shop < ActiveRecord::Base
   end
 
   def button_display?
-    [1, 2].include?(oauth_application.call_to_action.to_i)
+    [1, 2].include?(oauth_application.call_to_action.to_i) rescue false
   end
 
   def display_bar?
@@ -309,7 +318,6 @@ class Shop < ActiveRecord::Base
   end
 
   def logo_location
-    return "https://#{SiteConfig.bucket}.s3.amazonaws.com/uploads" + upload_location if uploaded_directly
 
     logo_img? ? logo_img_url : nil rescue "#{}"
   end
@@ -368,6 +376,10 @@ class Shop < ActiveRecord::Base
 
   def partner_optyn?
     self.partner.optyn?
+  end
+
+  def partner_eatstreet?
+    self.partner.eatstreet?
   end
 
   def error_messages
@@ -468,15 +480,15 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    unless shop.virtual
-      shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
-      if shop_subscription.new_record?
-        shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
+    unless self.virtual
+      if partner.subscription_required?
+        shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
+        if shop_subscription.new_record?
+          shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
+        end
+        shop_subscription.save
+        create_audit_entry('subscribed to default/starter plan')
       end
-      shop_subscription.save
-      create_audit_entry('subscribed to default/starter plan')
     end
   end
-
-
-end
+end #end of class Shop

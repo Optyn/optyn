@@ -26,6 +26,7 @@ module Api
             #@message = klass.new(filter_time_params)
             @message = klass.new(filter_time_params.except(:image_params))
             @message.manager_id = current_manager.id
+            @message.label_ids = params[:message][:label_ids]  || []
             populate_datetimes
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
@@ -63,6 +64,7 @@ module Api
         def show
           @message = Message.for_uuid(params[:id])
           @shop = @message.shop
+          populate_labels
           @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
           render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl]
         end
@@ -116,7 +118,7 @@ module Api
           #input uuid of email
           #output html encassed in json
           @message = Message.for_uuid(params[:id])
-
+          @shop = @message.shop
           @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
           render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl]
          return
@@ -136,7 +138,7 @@ module Api
         end
 
         def folder_counts
-          #DO NOTHING
+          populate_labels
        end
 
         private

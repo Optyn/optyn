@@ -26,7 +26,9 @@ module Shops
         begin
           shop_name = row[:shop_name]
           Shop.transaction do
-            shop = for_name(shop_name) || Shop.new()
+            # shop = for_name(shop_name) || Shop.new()
+            manager = Manager.find_by_email(row[:manager_email]) || Manager.new
+            shop = manager.new_record? ? Shop.new : manager.shop
             if shop.new_record?
               shop.name = shop_name
               shop.phone_number = row[:shop_phone]
@@ -67,7 +69,6 @@ module Shops
           output_row << status
           unparsed_rows << output_row.join(",")
         end
-        output << output_row.join(",")
       end
 
       unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 

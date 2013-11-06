@@ -10,7 +10,7 @@ class Connection < ActiveRecord::Base
   belongs_to :user
   belongs_to :shop
 
-  attr_accessible :user_id, :shop_id, :active, :connected_via
+  attr_accessible :user_id, :shop_id, :active, :connected_via, :disconnect_event
 
   after_save :check_shop_tier
   after_create :make_shop_audit_entry
@@ -50,6 +50,10 @@ class Connection < ActiveRecord::Base
   PER_PAGE = 50
   PAGE = 1
 
+  def self.for_shop_and_user(shop_identifier, user_identifier)
+    for_shop(shop_identifier).for_users(user_identifier).first
+  end
+
   def self.paginated_shops_connections(shop_id, page = PAGE, per_page = PER_PAGE)
     active.for_shop(shop_id).includes_user_and_permissions.latest_updates.page(page).per(per_page)
   end
@@ -57,7 +61,7 @@ class Connection < ActiveRecord::Base
   def self.shop_connections_count_total(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "total")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop(shop_id).count
+      active.for_shop(shop_id).count
     end
   end
 
@@ -112,8 +116,22 @@ class Connection < ActiveRecord::Base
     end
   end
 
+  def self.mark_inactive_bounce_or_complaint(message_email_auditor)
+    shop = message_email_auditor.shop
+    user = message_email_auditor.user
+
+    if user.present? && shop.present?
+      connection = Connection.for_shop_and_user(shop.id, user.id)
+      connection.make_inactive
+    end
+  end
+
   def toggle_connection
     self.toggle!(:active)
+  end
+
+  def make_inactive
+    self.update_attribute(:active, false)
   end
 
   def connection_status
