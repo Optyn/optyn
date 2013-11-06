@@ -300,6 +300,7 @@ body {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 2% 0;
     text-align: left;
     h1 {
@@ -355,7 +356,7 @@ body {
 }
 
 
-.next-fold {
+.lp-next-fold {
   background: $dark-blue;
   color: $white;
   text-align: center;
@@ -381,6 +382,47 @@ body {
       }
     }
   }
+}
+
+.lp-testimonials {
+  blockquote {
+    border: 0;
+    padding: 7% 0;
+    font: normal 2rem/3rem $serif;
+    text-align: center;
+    &:before, &:after {
+      content: '"';
+      color: $green;
+    }
+  }
+}
+.lp-testimonial-by {
+  background-color: $dark-blue;
+  color: $white;
+  text-align: center;
+  position: relative;
+  padding: 2% 0;
+  i {
+    position: absolute;
+    top: -8px;
+    left: 49.5%;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0 !important;
+  }
+}
+.lp-usp-1,
+.lp-usp-2 {
+  padding: 2% 0;
+}
+.lp-usp-1 {
+  background: $light-gray;
+}
+.lp-usp-3 {
+  padding: 4% 0;
+  background-attachment: fixed;
+  background-image: image-url( 'bg-landing-2.jpg' );
+  background-size: cover;
 }
 
 
