@@ -7,10 +7,11 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def list
+		# @survey = 
 	end
 
 	def edit
-    flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
+    	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
 	end
 
 	def update
