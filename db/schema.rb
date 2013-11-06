@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105070136) do
+
+ActiveRecord::Schema.define(:version => 20131106051839) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20131105070136) do
     t.datetime "updated_at",      :null => false
   end
 
+<<<<<<< HEAD
   create_table "charges", :force => true do |t|
     t.integer  "created"
     t.string   "live_mode"
@@ -109,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20131105070136) do
     t.datetime "updated_at",      :null => false
   end
 
+=======
+>>>>>>> master
   create_table "connection_errors", :force => true do |t|
     t.integer  "user_id"
     t.integer  "shop_id"
@@ -402,6 +406,18 @@ ActiveRecord::Schema.define(:version => 20131105070136) do
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"
   add_index "oauth_applications", ["uid"], :name => "index_oauth_applications_on_uid", :unique => true
 
+  create_table "partner_inquiries", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "company_name"
+    t.string   "phone_number"
+    t.string   "merchants"
+    t.string   "referrer"
+    t.text     "comment"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "partners", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -511,12 +527,12 @@ ActiveRecord::Schema.define(:version => 20131105070136) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
   end
 
