@@ -232,6 +232,10 @@ class Message < ActiveRecord::Base
 
   end
 
+  def manager_email
+    manager.email
+  end
+
   def editable_state?
     return true if is_child?
     draft? || queued_editable?
