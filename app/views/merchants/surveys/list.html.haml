@@ -6,13 +6,17 @@
   %thead
     %tr
       %th Survey
+      %th Ready
+      %th Last Updated At
       %th Action
 
   %tbody
     - if @list_survey.present?
-      - @list_survey.each do |question|
+      - @list_survey.each do |survey|
         %tr
-          %td= 
+          %td= survey.title
+          %td= survey.ready
+          %td= survey.updated_at
           %td= link_to "Show" , "/show/"#{@survey.id}
     - else
       %tr
