@@ -26,14 +26,21 @@ Optyn::Application.routes.draw do
   match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
   match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
   match 'tour' => 'main#tour'
-  match 'partner-with-us' => 'main#partner_with_us'
   match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
+
   match 'generate_qr_code' => 'merchants/messages#generate_qr_code'
   match 'redeem/:message_user' => 'merchants/messages#redeem'
+  match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
+  match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
+
+  #named routes partner inquiry
+  get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
+  post "/partner-with-us", to: 'partner_inquiries#create', as: :partner_inquiries
+
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
