@@ -132,6 +132,11 @@ module StripeEventHandlers
 
   def self.handle_charge_succeeded(params)
     # binding.pry
+    begin 
+      fee_description = params[:data][:object][:fee_details].first.description
+    rescue
+      fee_description = nil
+    end
     Charge.create(
         :created => params[:created]  ,
         :live_mode => params[:livemode]  ,
@@ -145,7 +150,7 @@ module StripeEventHandlers
         :card_last4 => params[:data][:object][:card][:last4] ,
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
         :customer => params[:data][:object][:customer]  ,
-        :fee_description => params[:data][:object][:fee_details].first
+        :fee_description => fee_description
       )
   end
 
