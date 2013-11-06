@@ -11,6 +11,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     current_charges = Charge.where(:stripe_customer_token=>@subscription.stripe_customer_token)
     @amount = current_charge.amount / 100  rescue nil #because its in cents
     @stripe_last_payment = current_charges.order(:created_at).last.created_at rescue nil
+      
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed
