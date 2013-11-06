@@ -131,7 +131,7 @@ module StripeEventHandlers
   end
 
   def self.handle_charge_succeeded(params)
-    binding.pry
+    # binding.pry
     Charge.create(
         :created => params[:created]  ,
         :live_mode => params[:livemode]  ,
