@@ -4,8 +4,9 @@
     %td
     %td
       - if @shop.present? && @shop.social_profiles.present?
+        %div{:style => "height: 2px; width: 100%; background: #eee;"}
         %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
-          %p{:font => "bold", :style => "font-size: 18px; line-height: 22px; margin: 0px; margin-bottom: 10px;"}
+          %p{:font => "bold", :style => "font-size: 18px; line-height: 22px; margin: 0 20px 0 0; margin-bottom: 10px;"}
             Connect with us
           %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
             - @shop.social_profiles.each do |sp|
@@ -27,9 +28,10 @@
           = "Your first 100 subscribers are free. Sign up today at optyn.com"
           %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#00008B;"} Click here
       %td{:style => "padding: 0 6px 6px 0;"}
-        = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
+        %a{:href => "http://www.optyn.com", :target => "_blank"}
+          = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
 
-%div{ style: 'width: 100%; padding: 20px 0 0 0;'}
+%div{ style: 'width: 100%; padding: 20px 0 0 0; text-align: center;'}
   %p{:font => "bold", :style => "font-size: 13px; margin: 0px;"}
     - if @message.present?  
       - if @message_user.present?
