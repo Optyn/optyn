@@ -7,7 +7,7 @@ class Merchants::SurveysController < Merchants::BaseController
 		@survey = current_survey
 	end
 
-	def list
+	def index
 		@list_survey = current_shop.survey
 	end
 
