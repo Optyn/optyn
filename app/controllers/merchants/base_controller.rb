@@ -35,5 +35,6 @@ class Merchants::BaseController < ApplicationController
     else
       @_survey = current_shop.survey.first #hack
     end
+    return @_survey
 	end
 end
