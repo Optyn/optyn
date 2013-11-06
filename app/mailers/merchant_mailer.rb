@@ -1,5 +1,6 @@
 class MerchantMailer < ActionMailer::Base
-  default from: "Optyn.com <services@optyn.com>"
+  default from: "Optyn.com <services@optyn.com>",
+          reply_to: "services@optyn.com"
 
   #shop_id, amount, connection_count, card_ending
   def payment_notification(options={})
