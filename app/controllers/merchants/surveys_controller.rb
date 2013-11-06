@@ -3,13 +3,13 @@ class Merchants::SurveysController < Merchants::BaseController
 	before_filter :survey_actually_created, only: [:show]
 
 	def show
+		# binding.pry
 		#we will need id in params to show
 		@survey = current_survey
 	end
 
 	def index
 		@list_survey = current_shop.survey
-		render :index , :layout => true
 	end
 
 	def edit
