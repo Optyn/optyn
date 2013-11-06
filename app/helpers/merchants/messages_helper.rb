@@ -169,6 +169,6 @@ module Merchants::MessagesHelper
 
   def get_public_link(message, shop)
     msg = "#{message.name} #{message.uuid}"
-    return "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+    return public_view_messages_path(shop.name.parameterize, msg.parameterize)
   end
 end
