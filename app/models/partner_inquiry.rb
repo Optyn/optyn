@@ -9,5 +9,5 @@ class PartnerInquiry < ActiveRecord::Base
   validates :phone_number, :phony_plausible => true
 
   MERCHANT_RANGES = ["0 - 1000", "1000 - 10000", "10000 - 25000", "25000 - 50000", "50000 and Above"]
-  REFERRER_OPTIONS = []
+  REFERRER_OPTIONS = ["Search", "Through my Network", "News / Media", "Other"]
 end
