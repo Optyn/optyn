@@ -145,7 +145,7 @@ module StripeEventHandlers
         :card_last4 => params[:data][:object][:card][:last4] ,
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
         :customer => params[:data][:object][:customer]  ,
-        :fee_description => params[:data][:object][0][:fee_details]
+        :fee_description => params[:data][:object][:fee_details].first
       )
   end
 
