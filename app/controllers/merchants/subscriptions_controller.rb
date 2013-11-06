@@ -8,7 +8,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     ##FIXME:add a check for valid subscrition
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-    current_charges = Charge.where(:stripe_customer_token=>@subscription.stripe_customer_token)
+    current_charges = Charge.where(:customer=>@subscription.stripe_customer_token)
     @amount = current_charge.amount / 100  rescue nil #because its in cents
     @stripe_last_payment = current_charges.order(:created_at).last.created_at rescue nil
       

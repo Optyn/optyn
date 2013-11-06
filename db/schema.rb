@@ -71,6 +71,25 @@ ActiveRecord::Schema.define(:version => 20131105070136) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "charge", :force => true do |t|
+    t.integer  "created"
+    t.string   "live_mode"
+    t.integer  "fee_amount"
+    t.string   "invoice"
+    t.string   "description"
+    t.string   "dispute"
+    t.string   "refunded"
+    t.string   "paid"
+    t.integer  "amount"
+    t.integer  "card_last4"
+    t.integer  "amount_refunded"
+    t.string   "customer"
+    t.string   "fee_description"
+    t.integer  "invoice_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "charges", :force => true do |t|
     t.integer  "created"
     t.string   "live_mode"
