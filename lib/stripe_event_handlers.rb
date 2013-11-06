@@ -131,20 +131,26 @@ module StripeEventHandlers
   end
 
   def self.handle_charge_succeeded(params)
+    # binding.pry
+    begin 
+      fee_description = params[:data][:object][:fee_details].first.description
+    rescue
+      fee_description = nil
+    end
     Charge.create(
-        :created => params[:created] rescue nil,
-        :live_mode => params[:livemode] rescue nil,
-        :fee_amount => params[:data][:object][:fee] rescue nil,
-        :invoice => params[:data][:object][:invoice]rescue nil,
-        :description => params[:data][:object][:description] rescue nil,
-        :dispute => params[:data][:object][:dispute] rescue nil,
-        :refunded => params[:data][:object][:refunded]rescue nil,
-        :paid => params[:data][:object][:paid] rescue nil,
-        :amount => params[:data][:object][:amount]rescue nil,
-        :card_last4 => params[:data][:object][:card][:last4]rescue nil,
-        :amount_refunded => params[:data][:object][:amount_refunded]rescue nil,
-        :customer => params[:data][:object][:customer]rescue nil,
-        :fee_description => params[:data][:object][0][:fee_details]rescue nil
+        :created => params[:created]  ,
+        :live_mode => params[:livemode]  ,
+        :fee_amount => params[:data][:object][:fee] ,
+        :invoice => params[:data][:object][:invoice] ,
+        :description => params[:data][:object][:description] ,
+        :dispute => params[:data][:object][:dispute]  ,
+        :refunded => params[:data][:object][:refunded] ,
+        :paid => params[:data][:object][:paid] ,
+        :amount => params[:data][:object][:amount]  ,
+        :card_last4 => params[:data][:object][:card][:last4] ,
+        :amount_refunded => params[:data][:object][:amount_refunded]  ,
+        :customer => params[:data][:object][:customer]  ,
+        :fee_description => fee_description
       )
   end
 

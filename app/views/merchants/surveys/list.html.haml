@@ -1,0 +1,23 @@
+= banner("#{current_shop.name} Survey")
+.clearfix
+%br
+#questions_list
+%table{class: 'table table-hover table-striped'}
+  %thead
+    %tr
+      %th Survey
+      %th Action
+
+  %tbody
+    - if @survey.survey_questions.present?
+      - @survey.survey_questions.each do |question|
+        %tr
+          %td= 
+          %td= 
+    - else
+      %tr
+        %td{colspan: "4"} No Survey
+
+
+= render partial: "merchants/surveys/new_question_modal"
+= render partial: "merchants/surveys/edit_question_modal"

@@ -1,5 +1,7 @@
 class MessageMailer < ActionMailer::Base
-  default from: '"Email" <email@optyn.com>'
+  default from: '"Email" <email@optyn.com>',
+          reply_to: "services@optyn.com"
+          
   helper "merchants/messages"
   helper "message_mailer_forgery"
   helper "application"
@@ -12,7 +14,12 @@ class MessageMailer < ActionMailer::Base
       @shop_logo = true #flag set for displaying the shop logo or just the shop name
     end
 
-    mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>), bcc: "gaurav@optyn.com", from: @message.from, subject: @message.personalized_subject(@message_user))
+    mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>), 
+      bcc: "gaurav@optyn.com", 
+      from: @message.from, 
+      subject: @message.personalized_subject(@message_user),
+      reply_to: @message.manager_email
+      ) 
   end
 
   def error_notification(error_message)
