@@ -1,5 +1,6 @@
 class StripeMailer < ActionMailer::Base
-  default from: "services@optyn.com"
+  default from: "services@optyn.com",
+          reply_to: "services@optyn.com"
 
   def plan_change_notification(plan)
     @plan = plan
