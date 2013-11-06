@@ -1,4 +1,4 @@
-= banner("#{current_shop.name} Survey")
+= banner("#{current_shop.name} Surveys")
 .clearfix
 %br
 #questions_list
@@ -17,11 +17,11 @@
           %td= survey.title
           %td= survey.ready
           %td= survey.updated_at
-          %td= link_to "Show" , "/show/"#{@survey.id}
+          %td= link_to "Show" , "/merchants/segments/show" ,:class=>"btn btn-primary btn-mini"#{@survey.id} 
     - else
       %tr
         %td{colspan: "4"} No Survey
 
 
-= render partial: "merchants/surveys/new_question_modal"
-= render partial: "merchants/surveys/edit_question_modal"
+/ = render partial: "merchants/surveys/new_question_modal"
+/ = render partial: "merchants/surveys/edit_question_modal"

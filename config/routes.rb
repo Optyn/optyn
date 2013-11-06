@@ -261,11 +261,8 @@ Optyn::Application.routes.draw do
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
 
-    resource :survey, only: [:index], path: :segment do
+    resources :surveys, only: [:index, :show, :edit, :update], path: :segments do
       member do
-        get 'show'
-        get 'edit'
-        get 'update'
         get 'questions'
         get 'preview'
         get 'launch'

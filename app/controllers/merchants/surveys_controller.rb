@@ -9,6 +9,7 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	def index
 		@list_survey = current_shop.survey
+		render :index , :layout => true
 	end
 
 	def edit
