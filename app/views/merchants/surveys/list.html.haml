@@ -9,11 +9,11 @@
       %th Action
 
   %tbody
-    - if @survey.survey_questions.present?
-      - @survey.survey_questions.each do |question|
+    - if @list_survey.present?
+      - @list_survey.each do |question|
         %tr
           %td= 
-          %td= 
+          %td= link_to "Show" , "/show/"#{@survey.id}
     - else
       %tr
         %td{colspan: "4"} No Survey

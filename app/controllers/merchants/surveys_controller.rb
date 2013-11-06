@@ -3,11 +3,12 @@ class Merchants::SurveysController < Merchants::BaseController
 	before_filter :survey_actually_created, only: [:show]
 
 	def show
+		#we will need id in params to show
 		@survey = current_survey
 	end
 
 	def list
-		@survey = current_shop.survey
+		@list_survey = current_shop.survey
 	end
 
 	def edit
