@@ -346,14 +346,6 @@ body {
 }
 
 
-#flat.main.index {
-  /* Styles for landing page */
-  text-align: center;
-  background-image: image-url( 'bg_landing.png' );
-  background-position: center;
-  font-size: 18px;
-}
-
 .terms {
   /* Styles for Terms of Use page. */
   .content {
@@ -362,11 +354,35 @@ body {
   }
 }
 
-/* General Styles ----------------------------------------------------- */
-#flat {
 
+.next-fold {
+  background: $dark-blue;
+  color: $white;
+  text-align: center;
+  position: relative;
+  padding: 2% 0;
+  > .arrow-down {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    > a {
+      padding: 0 6px;
+      display: inline-block;
+      border-radius: 100px;
+      background: $dark-blue;
+      color: $green;
+      font-size: 25px;
+      line-height: 25px;
+      &:hover {
+        text-decoration: none;
+        color: $white;
+      }
+    }
+  }
+}
 
-} /* / #flat */
 
 @media( max-width: 768px ) {
   body {
