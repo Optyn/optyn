@@ -394,6 +394,20 @@ class Shop < ActiveRecord::Base
   end  
   
 
+  def upcoming_payment_amount_in_dollars
+    plan_amount = plan.amount
+
+    if coupon.present? && coupon.applicable?
+      if coupon.percent_off.present?
+        plan_amount = plan_amount * (coupon.percent_off.to_f / 100)
+      else
+        plan_amount = plan_amount - coupon.amount_off
+      end 
+    end
+
+    plan_amount.to_f / 100
+  end
+
   private
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "").downcase

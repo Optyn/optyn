@@ -6,13 +6,12 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     # binding.pry
     ##FIXME:add a check for valid subscrition
-    @plan = current_shop.subscription.plan
-    @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-    current_charges = Charge.where(:stripe_customer_token=>@subscription.stripe_customer_token)
-    @amount = current_charge.amount / 100  rescue nil #because its in cents
-    @stripe_last_payment = current_charges.order(:created_at).last.created_at rescue nil
-    @list_charges =  current_charges.order(:id)
-
+    @plan = current_shop.plan
+    @subscription = current_shop.subscription || @plan.subscriptions.build
+    @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
+    @amount = (current_charge.amount.to_f / 100 ) rescue nil #because its in cents
+    @stripe_last_payment = @list_charges.first
+      
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed
@@ -22,7 +21,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       next_month = Time.now.to_date >> 1 #shift one moth
       @stripe_upcoming_payment = "#{next_month.month}/#{@subscription.created_at.day}/#{next_month.year}"
     end
-
     flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
   end
 
