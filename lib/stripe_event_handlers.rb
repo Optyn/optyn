@@ -47,7 +47,7 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    # binding.pry
+    binding.pry
     ##only start creating if subscription is not nil
     if !subscription.nil?
       evaluated_plan = Plan.which(subscription.shop)
@@ -58,9 +58,10 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_payment_succeeded(params)
+    binding.pry
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
-    conn_count = subscription.shop.active_connection_count
+    conn_count = subscription.shop.active_connection_count rescue nil
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
     create_invoice(subscription,params)
   end
@@ -117,10 +118,12 @@ module StripeEventHandlers
   end
 
   def self.handle_customer_discount_created(params)
+    binding.pry
     manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
   def self.handle_customer_discount_updated(params)
+    binding.pry
     manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
@@ -169,12 +172,15 @@ module StripeEventHandlers
   end
 
   def self.create_invoice(subscription,params)
+      binding.pry
       Invoice.create(
         :subscription_id => subscription.id,
         :stripe_customer_token => params['data']['object']['customer'],
         :stripe_invoice_id => params['data']['object']['id'],
         :paid_status => params['data']['object']['paid'],
-        :amount => params['data']['object']['total']
+        :amount => params['data']['object']['total'] ,
+        # :stripe_coupon_token => ,
+        :stripe_plan_token => params['data']['object']['lines']['data'].first['plan']['id']
       )
   end
 end

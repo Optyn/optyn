@@ -3,6 +3,8 @@ class Invoice < ActiveRecord::Base
 	belongs_to :subscription
   
 	attr_accessible :subscription_id, :stripe_customer_token, :stripe_invoice_id, :paid_status, :amount
+	attr_accessible :stripe_coupon_token
+	attr_accessible :stripe_plan_token	
 
 	after_create :make_shop_audit_entry
 
