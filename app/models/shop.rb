@@ -421,7 +421,7 @@ class Shop < ActiveRecord::Base
   def create_dummy_survey
     unless self.virtual?
       unless survey.present?
-        dummy_survey = self.build_survey
+        dummy_survey = self.survey.build
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)

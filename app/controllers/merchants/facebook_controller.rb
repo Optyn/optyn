@@ -21,7 +21,7 @@ class Merchants::FacebookController < ApplicationController
     link = "#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
     begin
       options = { 
-          :message     => "Message here",
+          :message     => message.name,
           :description => "Description here",
           :link        => "#{link}", 
         }
