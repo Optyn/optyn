@@ -246,7 +246,7 @@ body {
     color: #fff;
     font-size: 13px;
     line-height: 20px;
-    padding: 2% 0;
+    padding: 1% 0;
     a {
       color: #61abe6;
     }
@@ -445,6 +445,21 @@ body {
   .well {
     border: 0;
     padding: 2.5%;
+  }
+}
+
+#flat .sf-social {
+  > a {
+    font-size: 3rem;
+    line-height: 3rem;
+    color: rgba( $white, 0.8 );
+    margin-right: 5px;
+    @include transition( all 0.4s ease );
+    &:hover {
+      text-decoration: none;
+      color: $white;
+      text-shadow: 3px 3px 0px rgba( #000, 0.8 );
+    }
   }
 }
 

@@ -2,7 +2,7 @@ class CreateCharges < ActiveRecord::Migration
   def change
     create_table :charges do |t|
       t.string :stripe_charge_id, index: true
-      t.integer :created
+      t.integer :created, index: true
       t.boolean :livemode
       t.integer :fee_amount
       t.string :stripe_invoice_id
