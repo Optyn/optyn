@@ -3,14 +3,16 @@ class Merchants::SurveysController < Merchants::BaseController
 	before_filter :survey_actually_created, only: [:show]
 
 	def show
+		#we will need id in params to show
 		@survey = current_survey
 	end
 
 	def list
+		@list_survey = current_shop.survey
 	end
 
 	def edit
-    flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
+    	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
 	end
 
 	def update

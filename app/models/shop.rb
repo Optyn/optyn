@@ -15,7 +15,6 @@ class Shop < ActiveRecord::Base
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :users, through: :connections
-  has_one :survey, dependent: :destroy
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
@@ -23,6 +22,8 @@ class Shop < ActiveRecord::Base
   belongs_to :coupon
   belongs_to :partner
   has_many :social_profiles, dependent: :destroy
+
+  has_many :survey, dependent: :destroy #changing it to has_many
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'

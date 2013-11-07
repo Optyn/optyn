@@ -6,14 +6,18 @@
   %thead
     %tr
       %th Survey
+      %th Ready
+      %th Last Updated At
       %th Action
 
   %tbody
-    - if @survey.survey_questions.present?
-      - @survey.survey_questions.each do |question|
+    - if @list_survey.present?
+      - @list_survey.each do |survey|
         %tr
-          %td= 
-          %td= 
+          %td= survey.title
+          %td= survey.ready
+          %td= survey.updated_at
+          %td= link_to "Show" , "/show/"#{@survey.id}
     - else
       %tr
         %td{colspan: "4"} No Survey

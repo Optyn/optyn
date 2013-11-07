@@ -29,6 +29,12 @@ class Merchants::BaseController < ApplicationController
 	end
 
 	def current_survey
-		@_survey = (current_shop.survey || current_shop.send(:create_dummy_survey))
+		# @_survey = (current_shop.survey || current_shop.send(:create_dummy_survey))
+    if current_shop.survey.nil?
+      @_survey =  current_shop.send(:create_dummy_survey)
+    else
+      @_survey = current_shop.survey.first #hack
+    end
+    return @_survey
 	end
 end
