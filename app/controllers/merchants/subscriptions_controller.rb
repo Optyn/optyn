@@ -51,6 +51,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
                               :local=> {:params=>params},
                               :layout => false
       kit = PDFKit.new(html, :page_size => 'Letter')
+      kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/invoice_pdf.css"
       file = kit.to_file(filename)
       send_file(file,:type => "application/pdf")
     end
