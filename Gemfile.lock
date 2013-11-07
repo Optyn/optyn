@@ -376,6 +376,7 @@ GEM
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
     slop (3.4.5)
+    social-share-button (0.1.5)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -480,6 +481,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sextant
   sitemap_generator
+  social-share-button
   state_machine (~> 1.2.0)
   stripe
   thin
