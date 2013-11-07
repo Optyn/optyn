@@ -1,4 +1,4 @@
-namespace :invoice do
+namespace :invoices do
   task :populate_invoices_so_far => :environment do
     require "stripe"
     Stripe.api_key = SiteConfig.stripe_api_key
