@@ -71,42 +71,24 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "charge", :force => true do |t|
-    t.integer  "created"
-    t.string   "live_mode"
-    t.integer  "fee_amount"
-    t.string   "invoice"
-    t.string   "description"
-    t.string   "dispute"
-    t.string   "refunded"
-    t.string   "paid"
-    t.integer  "amount"
-    t.integer  "card_last4"
-    t.integer  "amount_refunded"
-    t.string   "customer"
-    t.string   "fee_description"
-    t.integer  "invoice_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "charges", :force => true do |t|
+    t.string   "stripe_charge_id"
     t.integer  "created"
-    t.string   "live_mode"
+    t.boolean  "livemode"
     t.integer  "fee_amount"
-    t.string   "invoice"
-    t.string   "description"
+    t.string   "stripe_invoice_id"
+    t.text     "description"
     t.string   "dispute"
-    t.string   "refunded"
-    t.string   "paid"
+    t.boolean  "refunded"
+    t.boolean  "paid"
     t.integer  "amount"
     t.integer  "card_last4"
     t.integer  "amount_refunded"
-    t.string   "customer"
-    t.string   "fee_description"
+    t.string   "stripe_customer_token"
+    t.text     "fee_description"
     t.integer  "invoice_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "connection_errors", :force => true do |t|
