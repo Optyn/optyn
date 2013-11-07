@@ -35,5 +35,16 @@
         Unsubscribes:
       .count
         = message.opt_outs
+  .clearfix
+
+  .blank-space
+
+  .row-fluid.stats
+    - if fb_body and fb_body.first and fb_body.first.include?('share_count')
+      .span3.box
+        .info
+          Facebook shares:
+        .count
+          = fb_body.first["share_count"]
 
   .blank-space

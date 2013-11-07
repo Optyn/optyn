@@ -463,8 +463,8 @@ class Message < ActiveRecord::Base
   end
 
   def call_fb_api(link)
-    response = HTTPARTY.get("http://google.com")
-    return response.body
+    response = HTTParty.get("#{FACEBOOK_STAT_API}" + link)
+    return response.parsed_response
   end
 
   private
