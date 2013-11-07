@@ -60,6 +60,7 @@ gem 'pdfkit' #for pdf generation
 gem 'rqrcode-rails3' #for QR code
 gem 'mini_magick' #for QR code in PNG, JPEG or GIF 
 gem "koala", "~> 1.8.0rc1" #for Facebook integration
+gem 'social-share-button'
 
 # Gems used only for assets and not required
 # in production environments by default.

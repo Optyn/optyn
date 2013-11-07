@@ -300,6 +300,7 @@ body {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 2% 0;
     text-align: left;
     h1 {
@@ -316,11 +317,8 @@ body {
 
       }
     }
-    .box-white {
-      background-color: $white;
-      background: rgba( $white, 0.9 );
+    .well {
       padding: 1%;
-      border: solid 1px $medium-gray;
       margin-bottom: 1%;
       margin-top: 187px;
     }
@@ -346,14 +344,6 @@ body {
 }
 
 
-#flat.main.index {
-  /* Styles for landing page */
-  text-align: center;
-  background-image: image-url( 'bg_landing.png' );
-  background-position: center;
-  font-size: 18px;
-}
-
 .terms {
   /* Styles for Terms of Use page. */
   .content {
@@ -362,11 +352,85 @@ body {
   }
 }
 
-/* General Styles ----------------------------------------------------- */
-#flat {
 
+.lp-next-fold {
+  background-color: lighten( $dark-blue, 10% );
+  color: $white;
+  text-align: center;
+  position: relative;
+  padding: 2% 0;
+  > .arrow-down {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    > a {
+      padding: 0 6px;
+      display: inline-block;
+      border-radius: 100px;
+      background-color: lighten( $dark-blue, 10% );
+      color: $green;
+      font-size: 25px;
+      line-height: 25px;
+      &:hover {
+        text-decoration: none;
+        color: $white;
+      }
+    }
+  }
+}
 
-} /* / #flat */
+.lp-testimonials {
+  blockquote {
+    border: 0;
+    padding: 7% 0;
+    font: normal 2rem/3rem $serif;
+    text-align: center;
+    &:before, &:after {
+      content: '"';
+      color: $green;
+    }
+  }
+}
+.lp-testimonial-by {
+  background-color: lighten( $dark-blue, 10% );
+  color: $white;
+  text-align: center;
+  position: relative;
+  padding: 2% 0;
+  i {
+    position: absolute;
+    top: -8px;
+    left: 49.5%;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0 !important;
+  }
+  img, .author {
+    margin-right: 15px;
+  }
+}
+.lp-usp-1 {
+  background: $light-gray;
+  > .span6 {
+    padding: 2% 0;
+  }
+}
+.lp-usp-2 {
+  padding: 2% 0;
+}
+.lp-usp-3 {
+  padding: 4% 0;
+  background-attachment: fixed;
+  background-image: image-url( 'bg-landing-2.jpg' );
+  background-size: cover;
+  .well {
+    border: 0;
+    padding: 2.5%;
+  }
+}
+
 
 @media( max-width: 768px ) {
   body {
@@ -378,9 +442,6 @@ body {
     .consumers::before { display: block; }
     .row-fluid .scroll-down {
       display: none;
-    }
-    .row-fluid {
-      padding: 0;
     }
     input[type='submit'] {
       font-family: 'Open Sans Condensed', sans-serif;
