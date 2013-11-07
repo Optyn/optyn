@@ -20,6 +20,16 @@
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')
   %body#flat.a-layout{:class => cssClasses }
+    #fb-root
+      / FB SDK for Like button.
+      :javascript
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=233903103356549";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     %header.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container-fluid
