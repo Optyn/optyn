@@ -27,7 +27,9 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def invoice
-    @charge = Charge.find(params[:id]) rescue nil 
+    binding.pry
+    @charge = Charge.find(params[:id]) rescue nil
+    @invoice = Invoice.find(:stripe_invoice_id=>@charge.stripe_invoice_id) rescue nil
     #wherer(id).group_by plans and then find count of each
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
