@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20131106051839) do
 
   create_table "admins", :force => true do |t|
@@ -91,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.datetime "updated_at",      :null => false
   end
 
-<<<<<<< HEAD
   create_table "charges", :force => true do |t|
     t.integer  "created"
     t.string   "live_mode"
@@ -111,8 +109,6 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.datetime "updated_at",      :null => false
   end
 
-=======
->>>>>>> master
   create_table "connection_errors", :force => true do |t|
     t.integer  "user_id"
     t.integer  "shop_id"
@@ -527,12 +523,12 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",               :default => ""
-    t.string   "header_background_color",    :default => "#1791C0"
-    t.datetime "deleted_at"
-    t.boolean  "pre_added",                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
     t.string   "footer_background_color",    :default => "#ffffff"
   end
 

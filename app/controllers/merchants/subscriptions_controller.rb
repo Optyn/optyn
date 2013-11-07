@@ -16,7 +16,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed
     if (@subscription.created_at.day < Time.now.day)
-      @stripe_upcoming_payment = "#{@subscription.created_at.day}#{Time.now.month}#{Time.now.year}"
+      @stripe_upcoming_payment = "#{@subscription.created_at.day}/#{Time.now.month}/#{Time.now.year}"
     else
       next_month = Time.now.to_date >> 1 #shift one moth
       @stripe_upcoming_payment = "#{next_month.month}/#{@subscription.created_at.day}/#{next_month.year}"
@@ -26,8 +26,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def invoice
-    binding.pry
-    #if invoice id present fetch it
     @charge = Charge.find(params[:id]) rescue nil 
     #wherer(id).group_by plans and then find count of each
     @plan = current_shop.subscription.plan
