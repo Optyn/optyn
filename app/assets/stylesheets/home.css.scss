@@ -407,13 +407,18 @@ body {
     line-height: 20px;
     margin: 0 !important;
   }
-}
-.lp-usp-1,
-.lp-usp-2 {
-  padding: 2% 0;
+  img, .author {
+    margin-right: 15px;
+  }
 }
 .lp-usp-1 {
   background: $light-gray;
+  > .span6 {
+    padding: 2% 0;
+  }
+}
+.lp-usp-2 {
+  padding: 2% 0;
 }
 .lp-usp-3 {
   padding: 4% 0;
