@@ -1,7 +1,7 @@
 class Merchants::FacebookController < ApplicationController
 
   def index   
-    session[:oauth] = Koala::Facebook::OAuth.new(Facebook::APP_ID, Facebook::SECRET, "#{SiteConfig.app_base_url}/share_message/#{params[:message_id]}")
+    session[:oauth] = Koala::Facebook::OAuth.new(Facebook::APP_ID, Facebook::SECRET, "#{Facebook::REDIRECT_URL}/share_message/#{params[:message_id]}")
     @auth_url =  session[:oauth].url_for_oauth_code(:permissions=>"publish_stream")  
     puts session.to_s + "<<< session"
     redirect_to @auth_url

@@ -3,7 +3,7 @@
   - if @message.present? and @message.make_public
     %tr
       %td
-        = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-facebook.png", style: 'height: 40px; margin-right: 20px;'), share_on_facebook_path(@message.id))
+        = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-facebook.png", style: 'height: 40px; margin-right: 20px;'), "#{Facebook::REDIRECT_URL}/share_on_facebook/#{@message.id}")
 
 %table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
   %tr
