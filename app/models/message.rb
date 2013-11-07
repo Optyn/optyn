@@ -464,6 +464,8 @@ class Message < ActiveRecord::Base
 
   def call_fb_api(link)
     response = HTTParty.get("#{FACEBOOK_STAT_API}" + link)
+    # response = HTTParty.get("https://api.facebook.com/method/links.getStats?urls=" + link)
+    # response = HTTParty.get("https://api.facebook.com/method/links.getStats?urls=https://development.optyn.com/music-store/campaigns/test-704253849d074870808f056c2db6992f&format=json")
     return response.parsed_response
   end
 
