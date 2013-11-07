@@ -211,10 +211,11 @@ class Merchants::MessagesController < Merchants::BaseController
     fb_body = nil
     if message.make_public
       msg = "#{message.name} #{message.uuid}"
-      link = "#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
+      link = "#{SiteConfig.app_base_url}/#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
       fb_body = message.call_fb_api(link)
+      twitter_body = message.call_twitter_api(link)
     end
-    render partial: 'merchants/messages/report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body}
+    render partial: 'merchants/messages/report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
   end
 
   private
