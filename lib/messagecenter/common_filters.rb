@@ -46,8 +46,8 @@ module Messagecenter
 
     def show_my_messages_only
       @message = Message.for_uuid(params[:id])
-      @message_manager = @message.manager(current_user)
-      if @message_manager != current_manager
+      @message_shop = @message.shop
+      if @message_shop != current_shop
         redirect_to(inbox_messages_path)
         return false
       end
@@ -57,7 +57,7 @@ module Messagecenter
     def message_editable?
       @message = Message.for_uuid(params[:id])
 
-      if !current_manager == @message.manager || !@message.editable_state?
+      if current_shop != @message.shop || !@message.editable_state?
         redirect_to merchants_message_path(@message.uuid)
       end
     end
