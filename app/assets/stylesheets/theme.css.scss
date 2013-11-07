@@ -1082,4 +1082,6 @@ blockquote {
 
 .well {
   @include border-radius(0);
+  background-color: $white;
+  background: rgba( $white, 0.8 );
 }
