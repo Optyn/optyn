@@ -462,6 +462,11 @@ class Message < ActiveRecord::Base
     button_url
   end
 
+  def call_fb_api(link)
+    response = HTTPARTY.get("http://google.com")
+    return response.body
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
