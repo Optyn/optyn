@@ -12,35 +12,35 @@
 		%tr
 			%td
 				Subscription to 
-				= @plan.amount 
+				= @charge.amount 
 				pm
 			%td
-				$20.00
-		%tr
-			%td
-				Subscription to foobar
-			%td
-				$29.00
+				= @charge.amount
+		/ %tr
+		/ 	%td
+		/ 		Subscription to foobar
+		/ 	%td
+		/ 		$29.00
 		%tr.info
 			%td
 				%strong Subtotal
 			%td
-				%strong $49.00
+				%strong #{@charge.amount}
 		%tr
 			%td
-				Barbicide12months50 (50% off)
+				#{@customer_name} #{@discount}
 			%td
-				= "-$24.50"
+				= @discount_amount
 		%tr.info
 			%td
 				%strong Total
 			%td
-				%strong $24.50
+				%strong #{@total}
 	%tfoot
 		%tr
 			%td( colspan='2' )
 				.text-center
-					**** **** **** 7450
+					= **** **** **** #{@charge.card_last4}
 
 .blank-space
 
