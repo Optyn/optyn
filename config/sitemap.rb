@@ -9,7 +9,7 @@ SitemapGenerator::Sitemap.create do
     puts Rails.env
     puts "-" * 100
     
-    add '/', :changefreq => 'daily', :priority => 0.9  
+    add '/', :changefreq => 'daily', :priority => 1.0  
     add '/consumer-features', :changefreq => 'weekly', :priority => 0.8 
     add '/merchant-features', :changefreq => 'weekly', :priority => 0.8 
     add '/pricing', :changefreq => 'weekly', :priority => 0.8 
