@@ -205,6 +205,18 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def report
+    message = Message.find(params[:id])
+    timestamp_attr = 'updated_at'
+    fb_body = nil
+    if message.make_public
+      msg = "#{message.name} #{message.uuid}"
+      link = "#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
+      fb_body = message.call_fb_api(link)
+    end
+    render partial: 'merchants/messages/report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body}
+  end
+
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)

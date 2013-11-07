@@ -1,0 +1,1 @@
+FACEBOOK_STAT_API = "https://api.facebook.com/method/links.getStats?urls="
