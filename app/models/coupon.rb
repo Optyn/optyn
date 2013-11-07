@@ -24,4 +24,9 @@ class Coupon < ActiveRecord::Base
   def free_forever?
     100 == self.percent_off.to_i
   end
+
+  def applicable?
+    return true if "forever" == duration
+    return true if "repeating" == duration && (created_at + duration_in_months.to_i) > Time.now
+  end
 end

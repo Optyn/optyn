@@ -11,14 +11,17 @@
       = " #{@plan.max}" " Customers"
     %p
       = link_to "view plans","/pricing"
+
   .well.span3
     %h5 Last Payment:
-    -if !@stripe_last_payment.nil?
-      = @stripe_last_payment.strftime("%B %d,%Y")
+    = number_to_currency(@stripe_last_payment.amount_in_dollars)
+    - if !@stripe_last_payment.nil?
+      = Time.at(@stripe_last_payment.created).strftime("%B %d, %Y")
+
   .well.span3
     %h5 Upcoming Payment:
     %p
-      = "$#{@plan.amount} " " on" " #{@stripe_upcoming_payment}"
+      = "#{number_to_currency(current_shop.upcoming_payment_amount_in_dollars)} on  #{@stripe_upcoming_payment}"
     %p
       (pricing tier may change)
   .well.span3
@@ -50,17 +53,18 @@
           %td Print Invoice
       %tbody
       - if ! @list_charges.nil?
-        - @list_charges.each do |invoice|
+        - @list_charges.each do |charge|
           %tr
-            %td #{invoice.created_at.to_date.strftime("%B %d,%Y")}
-            %td $ #{@amount}
+            %td 
+              = Time.at(charge.created).strftime("%B %d, %Y")
+            %td #{number_to_currency(charge.amount_in_dollars)}
             %td #{@plan.min} - #{@plan.max} Customers
             %td 
               .btn
-                = link_to "View" , "/merchants/invoice/?id=#{invoice.id}"
+                = link_to "View" , "/merchants/invoice/?id=#{charge.id}"
             %td 
               .btn
-                = link_to "Print" , "/merchants/invoice/print/?id=#{invoice.id}"
+                = link_to "Print" , "/merchants/invoice/print/?id=#{charge.id}"
 
 
 
