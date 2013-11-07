@@ -1,4 +1,4 @@
-#update_shop_wrapper
+#add_user_wrapper
   .control-group
     .control-label
       = label_tag :To
@@ -8,6 +8,8 @@
   
   .control-group
     = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
+    %span#label_success{:style => "display:none;color:green"}
+      ascsdfsdf
     #add_user
       .control-label
         = label_tag "Labels"
