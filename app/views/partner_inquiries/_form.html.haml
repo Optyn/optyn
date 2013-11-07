@@ -30,17 +30,3 @@
         Please Wait...
 
       %p We'll get back in touch with you in 24 hours or less.
-
-:javascript
-  $( function( $ ) {
-    $( '#pin-not-bot' ).slider({
-      min: 0,
-      max: 100,
-      stop: function( event, ui ) {
-        if ( $(this).slider( 'value' ) === 100 )
-          $( '.pin-submit' ).removeAttr( 'disabled');
-        else
-          $( '.pin-submit' ).attr( 'disabled', 'disabled' );
-      }
-    });
-  });
