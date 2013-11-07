@@ -317,11 +317,8 @@ body {
 
       }
     }
-    .box-white {
-      background-color: $white;
-      background: rgba( $white, 0.9 );
+    .well {
       padding: 1%;
-      border: solid 1px $medium-gray;
       margin-bottom: 1%;
       margin-top: 187px;
     }
@@ -357,7 +354,7 @@ body {
 
 
 .lp-next-fold {
-  background: $dark-blue;
+  background-color: lighten( $dark-blue, 10% );
   color: $white;
   text-align: center;
   position: relative;
@@ -372,7 +369,7 @@ body {
       padding: 0 6px;
       display: inline-block;
       border-radius: 100px;
-      background: $dark-blue;
+      background-color: lighten( $dark-blue, 10% );
       color: $green;
       font-size: 25px;
       line-height: 25px;
@@ -397,7 +394,7 @@ body {
   }
 }
 .lp-testimonial-by {
-  background-color: $dark-blue;
+  background-color: lighten( $dark-blue, 10% );
   color: $white;
   text-align: center;
   position: relative;
@@ -423,6 +420,10 @@ body {
   background-attachment: fixed;
   background-image: image-url( 'bg-landing-2.jpg' );
   background-size: cover;
+  .well {
+    border: 0;
+    padding: 2.5%;
+  }
 }
 
 
@@ -436,9 +437,6 @@ body {
     .consumers::before { display: block; }
     .row-fluid .scroll-down {
       display: none;
-    }
-    .row-fluid {
-      padding: 0;
     }
     input[type='submit'] {
       font-family: 'Open Sans Condensed', sans-serif;
