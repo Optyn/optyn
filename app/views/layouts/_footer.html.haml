@@ -37,12 +37,12 @@
   .span4.offset2.text-center.sf-social
     %div
       .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false" }
-
+      &nbsp;
       %a{ "href" => "https://twitter.com/share", "class" => "twitter-share-button", "data-url" => "http://optyn.com", "data-via" => "optyn", "data-related" => "optyn", "data-hashtags" => "marketing"} Tweet
       :javascript
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
-      .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "120" }
+      .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100" }
       :javascript
         (function() {
           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -54,7 +54,7 @@
       %i.icon-facebook
     %a{ href: 'http://www.twitter.com/optyn', target: '_blank', alt: 'Our Twitter page' }
       %i.icon-twitter
-    %a{ href: 'https://plus.google.com/116011843246872354801/about', target: '_blank', alt: 'Our Google+ page' }
+    %a{ href: 'https://plus.google.com/116011843246872354801', target: '_blank', alt: 'Our Google+ page', rel: 'publisher' }
       %i.icon-google-plus
     %p
       2013 &copy; Optyn, Inc.
