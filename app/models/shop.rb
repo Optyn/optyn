@@ -398,14 +398,14 @@ class Shop < ActiveRecord::Base
     plan_amount = plan.amount
 
     if coupon.present? && coupon.applicable?
-      if coupon.percentage_off.present?
-        plan_amount = plan_amount * (coupon.percentage_off/100)
+      if coupon.percent_off.present?
+        plan_amount = plan_amount * (coupon.percent_off.to_f / 100)
       else
         plan_amount = plan_amount - coupon.amount_off
       end 
     end
 
-    plan_amount / 100
+    plan_amount.to_f / 100
   end
 
   private

@@ -16,6 +16,6 @@ class Charge < ActiveRecord::Base
   end
 
   def amount_in_dollars
-    amount.to_i / 100
+    amount.to_f / 100
   end
 end

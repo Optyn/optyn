@@ -27,6 +27,6 @@ class Coupon < ActiveRecord::Base
 
   def applicable?
     return true if "forever" == duration
-    return true if "repeating" == duration && (created_at + duration_in_months.to_i) > Time.now
+    return true if "repeating" == duration && (created_at + (duration_in_months.to_i).months) > Time.now
   end
 end

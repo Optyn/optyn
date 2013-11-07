@@ -6,8 +6,8 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def upgrade
     # binding.pry
     ##FIXME:add a check for valid subscrition
-    @plan = current_shop.subscription.plan
-    @subscription = current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    @plan = current_shop.plan
+    @subscription = current_shop.subscription || @plan.subscriptions.build
     @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
     @amount = current_charge.amount / 100  rescue nil #because its in cents
     @stripe_last_payment = @list_charges.first
