@@ -1,5 +1,5 @@
-class CreateCharge < ActiveRecord::Migration
-  def up
+class CreateCharges < ActiveRecord::Migration
+  def change
     create_table :charges do |t|
       t.integer :created
       t.string :live_mode
@@ -18,8 +18,5 @@ class CreateCharge < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-
-  def down
   end
 end

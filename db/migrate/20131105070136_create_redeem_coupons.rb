@@ -1,4 +1,4 @@
-class CreateRedeemCoupon < ActiveRecord::Migration
+class CreateRedeemCoupons < ActiveRecord::Migration
   def change
   	create_table :redeem_coupons do |t|
       t.references :message, index: true
