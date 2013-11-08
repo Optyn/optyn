@@ -149,11 +149,15 @@ module StripeEventHandlers
     rescue
       fee_description = nil
     end
+    # binding.pry
+    stripe_plan_id = params[:data][:object][:plan][:id] rescue nil
+    stripe_invoice_token = params[:data][:object][:invoice] rescue nil
+
     Charge.create(
         :created => params[:created]  ,
         :livemode => params[:livemode]  ,
         :fee_amount => params[:data][:object][:fee] ,
-        :stripe_invoice_token => params[:data][:object][:invoice] ,
+        :stripe_invoice_token => stripe_invoice_token ,
         :description => params[:data][:object][:description] ,
         :dispute => params[:data][:object][:dispute]  ,
         :refunded => params[:data][:object][:refunded] ,
@@ -163,7 +167,7 @@ module StripeEventHandlers
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
         :stripe_customer_token => params[:data][:object][:customer]  ,
         :fee_description => fee_description ,
-        :stripe_plan_id => params[:data][:object][:plan][:id]
+        :stripe_plan_id => stripe_plan_id
       )
   end
 
