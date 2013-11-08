@@ -218,6 +218,16 @@ class Merchants::MessagesController < Merchants::BaseController
     render partial: 'merchants/messages/report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
   end
 
+  def share_email
+    if current_user
+      message = Message.find(params[:message_id])
+      @user = User.find(current_user)
+      ShareMailer.welcome_email(@user).deliver
+    else
+      render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+    end
+  end
+
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
