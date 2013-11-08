@@ -26,15 +26,15 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def invoice
     # binding.pry
-    @charge = Charge.find(params[:id])
-    @invoice = Invoice.where(:stripe_invoice_id=>@charge.stripe_invoice_token).first
-    @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first
-    @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token).first
+    @charge = Charge.find(params[:id]) rescue nil
+    @invoice = Invoice.where(:stripe_invoice_id=>@charge.stripe_invoice_token).first rescue nil
+    @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first rescue nil
+    @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token).first rescue nil
 
     @amount = @invoice.amount rescue nil
-    @subtotal = @invoice.subtotal
-    @total = @invoice.total
-    @discount_amount = @total - @subtotal
+    @subtotal = @invoice.subtotal rescue nil
+    @total = @invoice.total rescue nil
+    @discount_amount = @total - @subtotal rescue nil
     @card_last4= @charge.card_last4 rescue nil
 
     #wherer(id).group_by plans and then find count of each
@@ -45,16 +45,20 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def print
     #if invoice id present fetch it
     if params[:id].present?
-      charge_id = params[:id]
-      @charge = Charge.find(charge_id)
-      @custmer_name = ""
-      @discount = nil
-      @discount_amount = 0.00
-      @total = @charge.amount
+      # binding.pry
+      @charge = Charge.find(params[:id]) rescue nil
+      @invoice = Invoice.where(:stripe_invoice_id=>@charge.stripe_invoice_token).first rescue nil
+      @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first rescue nil
+      @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token).first rescue nil
+
+      @amount = @invoice.amount rescue nil
+      @subtotal = @invoice.subtotal rescue nil
+      @total = @invoice.total rescue nil
+      @discount_amount = @total - @subtotal rescue nil
+      @card_last4= @charge.card_last4 rescue nil
+
       filename = "/tmp/#{Time.now}-#{@invoice_id}.pdf"
-      #wherer(id).group_by plans and then find count of each
-      @plan = current_shop.subscription.plan
-      @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+ 
       html = render_to_string :partial => "/merchants/subscriptions/core_invoice",
                               :local=> {:params=>params},
                               :layout => false
