@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108102047) do
+ActiveRecord::Schema.define(:version => 20131108103307) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(:version => 20131108102047) do
     t.integer  "amount_refunded"
     t.string   "stripe_customer_token"
     t.text     "fee_description"
-    t.integer  "invoice_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.string   "stripe_plan_id"
+    t.string   "stripe_invoice_token"
   end
 
   create_table "connection_errors", :force => true do |t|
