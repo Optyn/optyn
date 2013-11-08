@@ -26,14 +26,20 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def invoice
     # binding.pry
-    @charge = Charge.find(params[:id]) rescue nil
-    @invoice = Invoice.find(:stripe_invoice_id=>@charge.stripe_invoice_id) rescue nil
-    @discount = @invoice[:discount] rescue nil
+    @charge = Charge.find(params[:id])
+    @invoice = Invoice.find(:stripe_invoice_id=>@charge.stripe_invoice_token)
+    @plan = Plan.where(:stripe_plan_token => @invoice.stripe_plan_token)
+    @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token)
+
     @amount = @charge.amount rescue nil
+    @subtotal = @charge.subtotal
+    @total = @charge.total
+    @discount_amount = @total - @subtotal
     @card_last4= @charge.card_last4 rescue nil
+
     #wherer(id).group_by plans and then find count of each
-    @plan = current_shop.subscription.plan
-    @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+    # @plan = current_shop.subscription.plan
+    # @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
   end
 
   def print

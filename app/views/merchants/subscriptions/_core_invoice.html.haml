@@ -25,10 +25,14 @@
 			%td
 				%strong Subtotal
 			%td
-				%strong #{@amount}
+				%strong #{@subtotal}
 		%tr
 			%td
-				#{current_shop.name} #{@discount}
+				- if @invoice[:stripe_coupon_percent_off].present?
+					#{@invoice[:stripe_coupon_token]} #{@invoice[:stripe_coupon_percent_off]} "%"
+				-elsif  @invoice[:stripe_coupon_amount_off].present?
+					#{@invoice[:stripe_coupon_token]} #{@invoice[:stripe_coupon_amount_off]} "$"
+
 			%td
 				= @discount_amount
 		%tr.info
