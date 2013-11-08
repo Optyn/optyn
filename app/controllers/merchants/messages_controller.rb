@@ -1,8 +1,7 @@
 class Merchants::MessagesController < Merchants::BaseController
+  
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
-
-
   def types
     #Do Nothing
   end
@@ -151,5 +150,90 @@ class Merchants::MessagesController < Merchants::BaseController
     
 
     render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
+  end
+
+  def public_view
+    if params["message_name"]
+      uuid = params["message_name"].split("-").last
+      @message = Message.for_uuid(uuid)
+      @shop_logo = true
+      @shop = @message.shop
+      @inbox_count = populate_user_folder_count(true) if current_user.present?
+      
+      if @shop and @message
+        if @message.make_public
+          if not current_user.present?
+            respond_to do |format|
+              format.html {render :layout => false}
+            end
+          end
+        else
+          if current_user.present? #to check if the user is logged in or not
+            recipient = @message.message_user(current_user)
+            if not recipient
+              render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+            end
+          else
+            redirect_to new_user_session_path
+          end
+        end
+      end
+    end
+  end
+
+  def generate_qr_code 
+    @message = Message.find(params[:message_id])
+    link = @message.get_qr_code_link(current_user)
+    respond_to do |format|
+      format.html
+      format.svg  { render :qrcode => link, :level => :l, :unit => 10 }
+      format.png  { render :qrcode => link }
+      format.gif  { render :qrcode => link }
+      format.jpeg { render :qrcode => link }
+    end
+  end
+
+  def redeem
+    message_user = Encryptor.decrypt(params[:message_user]).split("--")
+    message_id = message_user[0] if message_user[0]
+    user_id = message_user[1] if message_user[1]
+    @message = Message.find(message_id)
+    rc = RedeemCoupon.new(:message_id => message_id)
+    rc.user_id = user_id if user_id
+    if not rc.save
+      @error_message = "Sorry, your coupon could not be redeemed."
+    end
+  end
+
+  def report
+    message = Message.find(params[:id])
+    timestamp_attr = 'updated_at'
+    fb_body = nil
+    if message.make_public
+      msg = "#{message.name} #{message.uuid}"
+      link = "#{SiteConfig.app_base_url}/#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
+      fb_body = message.call_fb_api(link)
+      twitter_body = message.call_twitter_api(link)
+    end
+    render partial: 'merchants/messages/report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
+  end
+
+  def share_email
+
+  end
+
+  def send_shared_email
+    message = Message.find(params[:message_id])
+    ShareMailer.shared_email(params[:To], message).deliver
+    respond_to do |format|
+      format.html { 
+        redirect_to(root_path, notice: 'Email was successfully sent.') 
+      }
+    end
+  end
+
+  private
+  def populate_user_folder_count(force=false)
+    @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
   end
 end

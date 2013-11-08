@@ -1,0 +1,12 @@
+development:
+  app_id: '427608267320854'
+  secret_key: 'f2dd8beb43c9c952d5b45a31534e56ba'
+  redirect_url: 'http://127.0.0.1:3000'
+staging:
+  app_id: '624632634229184'
+  secret_key: 'f1675b7e3b2027d69b14e8421e80ebaa'
+  redirect_url: 'http://development.optyn.com'
+production:
+  app_id: '585087778190652'
+  secret_key: '01b7451dffc56a99a02dee21fa0a2e1c'
+  redirect_url: 'https://www.optyn.com'

@@ -7,9 +7,10 @@ namespace :partner do
                                                                        password_confirmation: "9p5yn123",
                                                                        email: "gaurav@optyn.com",
                                                                        organization: "Optyn Inc.",
-                                                                       redirect_uri: "https://www.optyn.com/robots.txt", 
+                                                                       redirect_uri: SiteConfig.robots_redirect_uri, 
                                                                        header_background_color: "#1791C0",
-                                                                       footer_background_color: "#ffffff")
+                                                                       footer_background_color: "#ffffff",
+                                                                       subscription_required: true)
     partner.save!
     partnerless_shops = Shop.where(partner_id: nil)
     partnerless_shops.each do |shop|
@@ -27,7 +28,7 @@ namespace :partner do
                                                                        password_confirmation: "9p5yn123",
                                                                        email: "gaurav+1@optyn.com",
                                                                        organization: "Optyn Partners",
-                                                                       redirect_uri: "http://localhost:3001/partners/auth/optyn/callback",
+                                                                       redirect_uri: SiteConfig.optyn_partner_redirect_uri,
                                                                        subscription_required: false, 
                                                                        header_background_color: "#1791C0",
                                                                        footer_background_color: "#ffffff")
@@ -38,13 +39,13 @@ namespace :partner do
   task :create_eatstreet_partner => :environment do
     #TODO PUT IN THE REAL EATSTREET VALUES.
     puts "Adding the Eatstreet partner"
-    partner = Partner.for_organization('Eatstreet Inc.') || Partner.new(first_name: "Gaurav", last_name: "Gaglani",
-                                                                       phone: "3127722109",
-                                                                       password: "9p5yn123",
-                                                                       password_confirmation: "9p5yn123",
-                                                                       email: "gaurav+2@optyn.com",
+    partner = Partner.for_organization('Eatstreet Inc.') || Partner.new(first_name: "Eric", last_name: "Martell",
+                                                                       phone: "8666548777",
+                                                                       password: "3atst4eet",
+                                                                       password_confirmation: "3atst4eet",
+                                                                       email: "office@eatstreet.com",
                                                                        organization: "Eatstreet Inc.",
-                                                                       redirect_uri: "http://localhost:3002/partners/auth/optyn/callback",
+                                                                       redirect_uri: SiteConfig.robots_redirect_uri,
                                                                        subscription_required: false,
                                                                        header_background_color: "#6dba3d",
                                                                        footer_background_color: "#393939")
@@ -56,6 +57,16 @@ namespace :partner do
     puts "Adding the Eatstreet dummy shop"
     partner = Partner.find_by_organization("Eatstreet Inc.")
     partner.shops.create(name: 'Optyn Eatstreet Test', stype: 'online', phone_number: '+3125233844', managers_attributes: {'0' => {name: "Gaurav Gaglani", email: 'eatstreet+test@optyn.com', password: 'test1234', password_confirmation: 'test1234'}})
+  end
+
+  task :eatstreet_with_multiple_dummy_shops => :environment do
+    if Rails.env.downcase == 'staging'
+      puts "Adding the Eatstreet dummy shops only in #{Rails.env} env"
+      partner = Partner.find_by_organization("Eatstreet Inc.")
+      (1..5).each do |a|
+        partner.shops.create(name: "Optyn Eatstreet Test #{a}", stype: 'online', phone_number: "+312523373#{a}", managers_attributes: {'0' => {name: "Gaurav Gaglani #{a}", email: "eatstreet+test#{a}@optyn.com", password: 'test1234', password_confirmation: 'test1234'}})
+      end
+    end
   end
 
   desc "Run all the tasks serially"

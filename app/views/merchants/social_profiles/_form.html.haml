@@ -1,0 +1,18 @@
+- if ((@error_hash) and (not @error_hash.empty?))
+  #error_explanation
+    %ul
+      - @error_hash.each do |error|
+        %li
+          = error
+
+#profile_wrapper
+  - SocialProfile::SOCIAL_PROFILES.each do |type, val|
+    .control-group
+      .control-label
+        = label_tag "#{type}", "#{type.humanize.capitalize} link" 
+      .controls
+        - link = params[type] ? params[type] : get_social_links_for_shop(type)
+        = text_field_tag "#{type}", "#{link}", :placeholder => 'Enter link', class: 'span12'
+  .action-buttons
+    = f.submit 'Add / Update' , class: "btn btn-primary"
+    = link_to "Cancel", merchants_social_profile_path(current_shop.id), class: 'btn'

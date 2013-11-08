@@ -1,0 +1,52 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+    = content_for :header do
+      Partner Inquiry
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
+                    A new partner inquiry has come in. Details:
+                 
+                  %p
+                    Company:
+                    = @inquiry.company_name
+                  %p
+                    Name:
+                    = @inquiry.name
+                  %p
+                    Email:
+                    = @inquiry.email
+
+                  %p
+                    Phone:
+                    = @inquiry.phone_number
+                  %p
+                    Merchant Base:
+                    = @inquiry.merchants
+                  %p
+                    Referrer:
+                    = @inquiry.referrer
+                  %p
+                    Comments:
+                    = simple_format(@inquiry.comment)            
+
+                  %p
+                    Cheers,
+                    %br/
+                    The Optyn Team
+        %td
+
+    = render partial: "shared/mailers/footer"

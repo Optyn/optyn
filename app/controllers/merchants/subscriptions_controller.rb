@@ -1,12 +1,53 @@
 class Merchants::SubscriptionsController < Merchants::BaseController
-
+  require 'pdfkit'
   before_filter :require_manager
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
   def upgrade
+    # binding.pry
+    ##FIXME:add a check for valid subscrition
+    @plan = current_shop.plan
+    @subscription = current_shop.subscription || @plan.subscriptions.build
+    @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
+    @amount = current_charge.amount / 100  rescue nil #because its in cents
+    @stripe_last_payment = @list_charges.first
+      
+    ##this part calculates upcoming payment with following assumption
+    ##same date next month if date is already passed(date of creation of account)
+    ##or same date this month if date hasnt passed
+    if (@subscription.created_at.day < Time.now.day)
+      @stripe_upcoming_payment = "#{@subscription.created_at.day}/#{Time.now.month}/#{Time.now.year}"
+    else
+      next_month = Time.now.to_date >> 1 #shift one moth
+      @stripe_upcoming_payment = "#{next_month.month}/#{@subscription.created_at.day}/#{next_month.year}"
+    end
+    # @list_charges =  current_charges.order(:id)
+    flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
+  end
+
+  def invoice
+    #if invoice id present fetch it
+    @invoice_id = params[:id] rescue nil 
+    #wherer(id).group_by plans and then find count of each
     @plan = current_shop.subscription.plan
     @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
-    flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
+  end
+
+  def print
+    #if invoice id present fetch it
+    if params[:id].present?
+      @invoice_id = params[:id]
+      filename = "/tmp/#{Time.now}-#{@invoice_id}.pdf"
+      #wherer(id).group_by plans and then find count of each
+      @plan = current_shop.subscription.plan
+      @subscription=current_merchants_manager.shop.subscription || @plan.subscriptions.build
+      html = render_to_string :partial => "/merchants/subscriptions/core_invoice",
+                              :local=> {:params=>params},
+                              :layout => false
+      kit = PDFKit.new(html, :page_size => 'Letter')
+      file = kit.to_file(filename)
+      send_file(file,:type => "application/pdf")
+    end
   end
 
   def edit_billing_info
@@ -16,7 +57,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
 
   def update_billing_info
     @subscription = current_shop.subscription
-
     begin
       @stripe_customer= Stripe::Customer.retrieve(@subscription.stripe_customer_token)
       @stripe_customer.card = params['stripeToken']

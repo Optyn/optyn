@@ -113,6 +113,10 @@ class Manager < ActiveRecord::Base
     end
   end
 
+  def partner_eatstreet?
+    self.shop.partner_eatstreet?
+  end
+
   def partner_optyn?
     self.shop.partner_optyn?
   end

@@ -15,36 +15,40 @@ class Shop < ActiveRecord::Base
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :users, through: :connections
-  has_one :survey, dependent: :destroy
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
   has_many :shop_audits
   belongs_to :coupon
   belongs_to :partner
+  has_many :social_profiles, dependent: :destroy
+
+  has_many :survey, dependent: :destroy #changing it to has_many
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
   DEFAULT_HEADER_BACKGROUND_COLOR = '#1791C0'
+  DEFAULT_FOOTER_BACKGROUND_COLOR = '#ffffff'
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
 
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img
-  attr_accessible :upload_location, :business_ids, :website, :identifier, :time_zone, :virtual
-  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url, :pre_added 
-  attr_accessible :uploaded_directly, :footer_background_color
+  attr_accessible  :pre_added, :business_ids, :website, :identifier, :time_zone, :virtual
+  attr_accessible :header_background_color, :phone_number, :remote_logo_img_url 
+  #attr_accessible :uploaded_directly, :upload_location,
+  attr_accessible :footer_background_color
 
 
   mount_uploader :logo_img, ShopImageUploader
 
   validates_as_paranoid
-  validates :name, presence: true, uniqueness:  { case_sensitive: false }
+  validates :name, presence: true , uniqueness:  { case_sensitive: false, if: :virtual}
   validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual
   validates :phone_number, :phony_plausible => true 
-  validates_uniqueness_of_without_deleted :name
+  # validates_uniqueness_of_without_deleted :name
   
 
   accepts_nested_attributes_for :managers
@@ -76,6 +80,8 @@ class Shop < ActiveRecord::Base
 
   scope :lower_name, ->(shop_name) { where(["LOWER(shops.name) LIKE LOWER(:shop_name)", {shop_name: shop_name}]) }
 
+  scope :by_manager_email, ->(manager_email) {joins(:managers).where(["managers.email LIKE LOWER(:manager_email)", {manager_email: manager_email}])}
+
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
   before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
@@ -98,6 +104,10 @@ class Shop < ActiveRecord::Base
 
   def self.for_name(shop_name)
     lower_name(shop_name.to_s).first
+  end
+
+  def self.for_manager_email(manager_email)
+    by_manager_email(manager_email).first
   end
 
   def self.by_app_id(app_id)
@@ -138,6 +148,12 @@ class Shop < ActiveRecord::Base
 
   def shop
     self
+  end
+
+  def starter_plan?
+    plan.id = Plan.starter.id
+  rescue
+    false
   end
 
 
@@ -200,7 +216,7 @@ class Shop < ActiveRecord::Base
   end
 
   def button_display?
-    [1, 2].include?(oauth_application.call_to_action.to_i)
+    [1, 2].include?(oauth_application.call_to_action.to_i) rescue false
   end
 
   def display_bar?
@@ -309,7 +325,6 @@ class Shop < ActiveRecord::Base
   end
 
   def logo_location
-    return "https://#{SiteConfig.bucket}.s3.amazonaws.com/uploads" + upload_location if uploaded_directly
 
     logo_img? ? logo_img_url : nil rescue "#{}"
   end
@@ -370,10 +385,28 @@ class Shop < ActiveRecord::Base
     self.partner.optyn?
   end
 
+  def partner_eatstreet?
+    self.partner.eatstreet?
+  end
+
   def error_messages
     self.errors.full_messages
   end  
   
+
+  def upcoming_payment_amount_in_dollars
+    plan_amount = plan.amount
+
+    if coupon.present? && coupon.applicable?
+      if coupon.percent_off.present?
+        plan_amount = plan_amount * (coupon.percent_off.to_f / 100)
+      else
+        plan_amount = plan_amount - coupon.amount_off
+      end 
+    end
+
+    plan_amount.to_f / 100
+  end
 
   private
   def self.sanitize_domain(domain_name)
@@ -388,7 +421,7 @@ class Shop < ActiveRecord::Base
   def create_dummy_survey
     unless self.virtual?
       unless survey.present?
-        dummy_survey = self.build_survey
+        dummy_survey = self.survey.build
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)
@@ -468,15 +501,15 @@ class Shop < ActiveRecord::Base
   end
 
   def create_default_subscription
-    unless shop.virtual
-      shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
-      if shop_subscription.new_record?
-        shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
+    unless self.virtual
+      if partner.subscription_required?
+        shop_subscription = Subscription.find_or_initialize_by_shop_id(self.id)
+        if shop_subscription.new_record?
+          shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
+        end
+        shop_subscription.save
+        create_audit_entry('subscribed to default/starter plan')
       end
-      shop_subscription.save
-      create_audit_entry('subscribed to default/starter plan')
     end
   end
-
-
-end
+end #end of class Shop

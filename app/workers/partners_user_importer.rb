@@ -1,4 +1,5 @@
 class PartnersUserImporter
+  ##
 	@queue = :import_queue
 
   def self.perform(payload_id)

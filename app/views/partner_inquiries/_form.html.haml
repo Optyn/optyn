@@ -1,0 +1,32 @@
+= form_for :partner_inquiry, url: partner_inquiries_path, html: {method: :post, id: :partner_inquiry_form} do |f|
+  %fieldset
+    .row-fluid.no-pad
+      = f.text_field :name, class: :span6, placeholder: 'Your name'
+      = f.text_field :company_name, class: :span6, placeholder: 'Your company'
+    .blank-space
+    .row-fluid.no-pad
+      = f.email_field :email, class: :span6, placeholder: 'Your email address'
+      = f.text_field :phone_number, class: :span6, placeholder: 'Your phone number'
+    .blank-space
+    .row-fluid
+      = f.select(:merchants, PartnerInquiry::MERCHANT_RANGES, {include_blank: "How big is your merchant base?"}, {class: :span6})
+    
+      = f.select(:referrer, PartnerInquiry::REFERRER_OPTIONS, {include_blank: "How did you hear about us?"}, {class: :span6})
+    .blank-space
+    .row-fluid.no-pad
+      = f.text_area :comment, class: :span12, placeholder: 'Additional comments', rows: 3
+      .blank-space
+    .row-fluid.text-center
+      .span6.offset3
+        %strong
+          Slide to unlock...so we know you are a human.
+          %i.icon-arrow-right
+        %br
+        #pin-not-bot
+    .blank-space
+    .text-center
+      = submit_tag 'Submit Contact Form', class: 'btn btn-large btn-primary pin-submit', disabled: 'disabled'
+      %strong#loading{style: 'display: none'}
+        Please Wait...
+
+      %p We'll get back in touch with you in 24 hours or less.

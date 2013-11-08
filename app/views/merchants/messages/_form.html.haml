@@ -3,3 +3,8 @@
   = hidden_field_tag :choice, @message.queued? ? 'launch' : 'save_draft'
 
   = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
+
+  .control-group
+    = f.label :make_public, "Make this message public", class: 'control-label'
+    .controls
+      = f.check_box :make_public 

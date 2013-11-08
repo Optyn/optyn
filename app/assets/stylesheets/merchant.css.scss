@@ -2,7 +2,8 @@
 #flat {
   footer.inner {
     background-color: $light-gray;
-    color: $dark-gray;
+    background-color: rgba(222,222,222,0.4);
+    color: $black;
     line-height: 42px;
     .copy a {
       padding: 0 10px;
@@ -14,7 +15,7 @@
     }
     a {
       text-decoration: underline;
-      color: $gray;
+      color: $black;
     }
   }
   .stats {
@@ -106,6 +107,7 @@
 .merchants-merchant_managers h1,
 .merchants-managers-registrations h1,
 .merchants-locations h1,
+.merchants-social_profiles h1,
 .merchants-subscriptions h1 {
   /* Applies to all views under the merchant_managers controller */
   float: left;
@@ -439,10 +441,7 @@
   float: right;
 }
 #merchant_page .mainbody {
-  -webkit-box-shadow: 1px 1px 8px rgba(54, 48, 50, 0.2);
-  -moz-box-shadow:    1px 1px 8px rgba(54, 48, 50, 0.2);
-  box-shadow:         1px 1px 8px rgba(54, 48, 50, 0.2);
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 6px;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -522,7 +521,6 @@
 #flat.m-app #dashboard #box_login .row-fluid { padding: 0 10px;}
 .payment-errors {
   padding: 10px;
-  color: red;
 }
 #survey_question_form .form-horizontal .close {
   display: inline-block;
@@ -540,4 +538,12 @@
   > h2 {
     margin-bottom: 0;
   }
+}
+
+#flat.shops.show h1 {
+  border-bottom: 0;
+}
+
+#c-sent-criteria h5 {
+  margin-top: 18px;
 }

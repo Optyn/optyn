@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     acts_as_paranoid (0.4.2)
       activerecord (~> 3.2)
+    addressable (2.3.5)
     airbrake (3.1.12)
       activesupport
       builder
@@ -80,6 +81,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    columnize (0.3.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -91,6 +93,12 @@ GEM
       currencies (>= 0.4.0)
     currencies (0.4.2)
     daemons (1.1.9)
+    debugger (1.6.2)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -144,6 +152,9 @@ GEM
       haml (>= 4.0.0.rc.1)
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.5)
     inherited_resources (1.4.1)
@@ -160,6 +171,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
+    koala (1.8.0rc1)
+      addressable
+      faraday
+      multi_json
     localtunnel (0.3)
       json (>= 1.2.4)
       net-ssh (>= 2.0.22)
@@ -179,9 +194,12 @@ GEM
       thin (~> 1.5.0)
     method_source (0.8.1)
     mime-types (1.23)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
     mini_portile (0.5.0)
     mono_logger (1.1.0)
     multi_json (1.8.0)
+    multi_xml (0.5.5)
     multipart-post (1.2.0)
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
@@ -221,6 +239,7 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
+    pdfkit (0.5.4)
     pg (0.15.1)
     phony (1.9.0)
     phony_rails (0.4.1)
@@ -305,6 +324,9 @@ GEM
       actionmailer (>= 3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rqrcode (0.4.2)
+    rqrcode-rails3 (0.1.6)
+      rqrcode (>= 0.4.2)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -349,6 +371,7 @@ GEM
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
     slop (3.4.5)
+    social-share-button (0.1.5)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -359,6 +382,7 @@ GEM
     stripe (1.8.3)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    subexec (0.2.3)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -406,6 +430,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass-rails
   config_reader (= 0.0.8)
+  debugger
   devise
   devise-async
   doorkeeper (~> 0.7.2)
@@ -417,10 +442,13 @@ DEPENDENCIES
   haml-rails
   has_scope
   inherited_resources
+  httparty
   jquery-rails
   kaminari
+  koala (~> 1.8.0rc1)
   localtunnel
   mailcatcher
+  mini_magick
   newrelic_rpm
   oauth2
   oj
@@ -429,6 +457,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-linkedin
   omniauth-twitter
+  pdfkit
   pg
   phony_rails
   pry
@@ -443,6 +472,7 @@ DEPENDENCIES
   responders
   resque
   resque_mailer
+  rqrcode-rails3
   rspec
   rspec-rails
   rvm-capistrano
@@ -450,6 +480,7 @@ DEPENDENCIES
   sextant
   simple_form
   sitemap_generator
+  social-share-button
   state_machine (~> 1.2.0)
   stripe
   thin

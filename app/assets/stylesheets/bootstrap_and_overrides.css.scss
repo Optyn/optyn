@@ -44,8 +44,10 @@
 .dropdown-menu li {
 
 }
-.dropdown-menu li a {
+.dropdown-menu > li > a {
   color: $black;
+  padding: 5px 20px;
+  width: 220px;
   &:hover {
     background: $blue;
     color: $white;
@@ -54,6 +56,8 @@
 .dropdown-menu li a img {
   float: left;
   padding-right: 10px;
+  width: 28px;
+  margin-top: 2px;
 }
 .dropdown-menu li a:active{
   color: #86c440;

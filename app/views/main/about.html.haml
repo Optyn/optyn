@@ -1,5 +1,5 @@
-= display_title "About Optyn - The Team & Mission"
-= display_meta_description "We are passionate about helping small businesses succeed and making sure consumers have a choice.", "alen, alen malkoc, lou, lou morales, helping small businesses, gaurav, gaurav gaglani, optyn team, optyn"
+= display_title "About Optyn - Meet the team of email marketing experts."
+= display_meta_description "We are passionate about helping small businesses succeed through our email marketing platform. Once small business owners, we designed this tool to help small business owners.", "alen, alen malkoc, lou, lou morales, helping small businesses, gaurav, gaurav gaglani, amer, amer grozdanic, optyn team, optyn, email marketing expert"
 .row-fluid
   .span12
     %h1
@@ -45,22 +45,4 @@
     %a.twitter-follow-button{"data-show-count" => "false", "data-size" => "large", :href => "https://twitter.com/gauravgaglani", :target => "_blank"} Follow @gauravgaglani
 
 :javascript
-  $( document ).ready( function() {
-    var setHt = function() {
-      // This function sets width of the team member divs.
-      var maxHt = 0;
-      $( '.teammate' ).each( function() {
-        $( this ).css( 'height', 'auto' );
-      });
-      $( '.teammate' ).each( function() {
-        if ( parseInt($( this ).css( 'height' )) > maxHt ) {
-          maxHt = parseInt($( this ).css( 'height' ));
-        }
-      });
-      $( '.teammate' ).each( function() {
-        $( this ).css( 'height', maxHt + 10 );
-      });
-    };
-    setTimeout( setHt, 100);
-    $( window ).resize( setHt );
-  });
+  $( document ).ready( equalizeDivHeights( '.teammate' ));

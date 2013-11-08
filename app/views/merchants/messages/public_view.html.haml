@@ -1,0 +1,8 @@
+- if current_user.present?
+  %h1.pull-left
+    Marketing Inbox
+  = render partial: "messages/message_menu"
+  - if not @message.message_user(current_user)
+    = "You are viewing a public message"
+
+= render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}

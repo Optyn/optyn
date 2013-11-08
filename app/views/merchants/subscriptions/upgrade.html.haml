@@ -3,39 +3,108 @@
 
 = render partial: 'merchants/merchant_managers/tabs'
 
-#box_login.container-fluid
-  .row-fluid
-    .span12.box_wrapper
-      .box.span4.offset4
-        %div 
-          .head
-            %h4 Enter Your Payment Information 
-          .payment-errors
-            - if @subscription.errors.any? || @subscription.stripe_error
-              =@subscription.stripe_error
-              %ul
-                - @subscription.errors.full_messages.each do |error|
-                  %li
-                    = error  
+.row-fluid.text-center
+  .well.span3
+    %h5 You Current Plan:
+    %p
+      = "#{@plan.min} " " - "
+      = " #{@plan.max}" " Customers"
+    %p
+      = link_to "view plans","/pricing"
 
-          .form.row-fluid
-            = form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
+  .well.span3
+    %h5 Last Payment:
+    = number_to_currency(@stripe_last_payment.amount_in_dollars)
+    - if !@stripe_last_payment.nil?
+      = Time.at(@stripe_last_payment.created).strftime("%B %d, %Y")
 
-              = f.hidden_field :plan_id, :value => @plan.id
-              = f.hidden_field :email, :value => current_merchants_manager.email
-              = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
+  .well.span3
+    %h5 Upcoming Payment:
+    %p
+      = "#{number_to_currency(current_shop.upcoming_payment_amount_in_dollars)} on  #{@stripe_upcoming_payment}"
+    %p
+      (pricing tier may change)
+  .well.span3
+    %h5 Credit Card on File:
+    %p ending in 
+    %a.btn{ 'href' => '#get-payment-info', 'role' => 'button', 'data-toggle' => 'modal' } Update Card
 
-              = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
+.blank-space
 
-              = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left', 'data-toggle' => 'tooltip', title: 'Your 16 digit Credit Card number'
+.row-fluid.payment-errors.text-error
+  - if @subscription.errors.any? || @subscription.stripe_error
+    =@subscription.stripe_error
+    %ul
+      - @subscription.errors.full_messages.each do |error|
+        %li
+          = error
+  .blank-space
 
-              = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security', 'data-toggle' => 'tooltip', title: 'CVV'
+.row-fluid
+  .span12
+    %h2 Your Payment History
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %td Date
+          %td Amount
+          %td Plan
+          %td View Invoice 
+          %td Print Invoice
+      %tbody
+      - if ! @list_charges.nil?
+        - @list_charges.each do |charge|
+          %tr
+            %td 
+              = Time.at(charge.created).strftime("%B %d, %Y")
+            %td #{number_to_currency(charge.amount_in_dollars)}
+            %td #{@plan.min} - #{@plan.max} Customers
+            %td 
+              .btn
+                = link_to "View" , "/merchants/invoice/?id=#{charge.id}"
+            %td 
+              .btn
+                = link_to "Print" , "/merchants/invoice/print/?id=#{charge.id}"
 
-              = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry month'})
 
-              = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry year'})
 
-              = f.submit "Pay", :class => "btn btn-block btn-success"
-        %div{:style => "text-align: center; margin-top: 25px;"}
-          %p
-            All payments are processed securely.
+= form_for @subscription, :url => merchants_subscribe_path ,:html=>{:id =>"stripe-form"} do |f|
+  .modal.hide.fade#get-payment-info
+    .modal-header
+      %h4.pull-left Enter Your Payment Information
+      %a.close.pull-right{ 'href' => '#', 'data-dismiss' => 'modal', 'data-target' => '#get-payment-info' } X
+      .clearfix
+    .modal-body
+      .form.row-fluid
+
+        = f.hidden_field :plan_id, :value => @plan.id
+        = f.hidden_field :email, :value => current_merchants_manager.email
+        = f.hidden_field :shop_id, :value => current_merchants_manager.shop.id
+
+        = hidden_field_tag :stripe_plan_id,nil, :value => @plan.plan_id
+
+        .blank-space
+
+        .row-fluid
+          = text_field_tag :credit_card, nil,:placeholder => "16 digit Credit card number",:autocomplete=>"off",:class=>'credit-number pull-left span6', 'data-toggle' => 'tooltip', title: 'Your 16 digit Credit Card number'
+
+          = text_field_tag :cvv,nil, :placeholder => "CVV",:class=>'credit-security span6', 'data-toggle' => 'tooltip', title: 'CVV'
+
+        .blank-space
+
+        .row-fluid
+          = select_month(Date.today, {},{:class => "card-expiry-month pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry month'})
+
+        .blank-space
+
+        .row-fluid
+          = select_year(Date.today,{:start_year => Date.today.year },{:class => "card-expiry-year pull-left selectbox span12", 'data-toggle' => 'tooltip', title: 'Card expiry year'})
+
+      %div{:style => "text-align: center; margin-top: 25px;"}
+        %p
+          All payments are processed securely.
+    .modal-footer
+      = f.submit "Pay", :class => "btn btn-success"
+
+:javascript
+  $( document ).ready( equalizeDivHeights( '.well.span3' ));
