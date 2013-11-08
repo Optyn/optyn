@@ -1,6 +1,5 @@
 class ShareMailer < ActionMailer::Base
-  default from: "aishwarya@idyllic-software.com",
-          reply_to: "aishwarya@idyllic-software.com"
+  default from: "aishwarya@idyllic-software.com"
 
   def welcome_email(user)
     @user = user

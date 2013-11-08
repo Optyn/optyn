@@ -223,6 +223,11 @@ class Merchants::MessagesController < Merchants::BaseController
       message = Message.find(params[:message_id])
       @user = User.find(current_user)
       ShareMailer.welcome_email(@user).deliver
+      respond_to do |format|
+        format.html { 
+          redirect_to(root_path, notice: 'Email was successfully sent.') 
+        }
+      end
     else
       render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
     end
