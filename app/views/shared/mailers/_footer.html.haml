@@ -5,8 +5,10 @@
         %div{:style => "height: 2px; width: 100%; background: #eee;"}
         %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
           - msg = "#{@message.name} #{@message.uuid}"
-          = social_share_button_tag(@message.name, :url => "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}")
-          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), share_email_path(@message.id))
+          - public_msg = public_view_messages_url(@shop.name.parameterize, msg.parameterize)
+          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "https://www.facebook.com/sharer/sharer.php?u=http://google.com", :target => "_blank")
+          / = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "https://twitter.com/intent/tweet?text=#{@message.name}&url=http://google.com", :target => "_blank")
+          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), share_email_url(@message.id), :target => "_blank")
 
 %table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
   %tr
@@ -35,7 +37,7 @@
       %td{:style => "padding-left: 20px; max-height: 40px; width: 100%;"}
         %p{:style => "font-size: 11px; margin: 0px;"}
           = "Your first 100 subscribers are free. Sign up today at optyn.com"
-          %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#00008B;"} Click here
+          %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#fff; text-decoration: underline;"} Click here
       %td{:style => "padding: 0 6px 6px 0;"}
         %a{:href => "http://www.optyn.com", :target => "_blank"}
           = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
