@@ -1,6 +1,7 @@
 module StripeEventHandlers
 
   def self.handle_customer_subscription_created(params)
+    binding.pry
     @subscription=Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     @subscription.update_attributes(:active => true)
   end
@@ -151,7 +152,7 @@ module StripeEventHandlers
         :created => params[:created]  ,
         :live_mode => params[:livemode]  ,
         :fee_amount => params[:data][:object][:fee] ,
-        :invoice => params[:data][:object][:invoice] ,
+        :invoice_id => params[:data][:object][:invoice] ,
         :description => params[:data][:object][:description] ,
         :dispute => params[:data][:object][:dispute]  ,
         :refunded => params[:data][:object][:refunded] ,
@@ -159,7 +160,7 @@ module StripeEventHandlers
         :amount => params[:data][:object][:amount]  ,
         :card_last4 => params[:data][:object][:card][:last4] ,
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
-        :customer => params[:data][:object][:customer]  ,
+        :stripe_customer_token => params[:data][:object][:customer]  ,
         :fee_description => fee_description
       )
   end
