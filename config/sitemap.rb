@@ -18,8 +18,9 @@ SitemapGenerator::Sitemap.create do
     add '/terms', :changefreq => 'weekly', :priority => 0.8
     add '/privacy', :changefreq => 'weekly', :priority => 0.8
 
+
     Shop.real.each do |shop|
-      add "/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
+      add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
     end
   end
 end
