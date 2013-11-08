@@ -161,7 +161,8 @@ module StripeEventHandlers
         :card_last4 => params[:data][:object][:card][:last4] ,
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
         :stripe_customer_token => params[:data][:object][:customer]  ,
-        :fee_description => fee_description
+        :fee_description => fee_description ,
+        :stripe_plan_id => params[:data][:object][:plan][:id]
       )
   end
 
