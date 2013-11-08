@@ -5,9 +5,9 @@
         %div{:style => "height: 2px; width: 100%; background: #eee;"}
         %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
           - msg = "#{@message.name} #{@message.uuid}"
-          / = social_share_button_tag(@message.name, :url => "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}",:image=>"https://raw.github.com/vkulpa/social-share-button/master/app/assets/images/sprites/social-share-button/tumblr.png")
           - public_msg = public_view_messages_url(@shop.name.parameterize, msg.parameterize)
-          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "https://www.facebook.com/sharer/sharer.php?u=#{public_msg}", :target => "_blank")
+          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "https://www.facebook.com/sharer/sharer.php?u=http://google.com", :target => "_blank")
+          / = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "https://twitter.com/intent/tweet?text=#{@message.name}&url=http://google.com", :target => "_blank")
           = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), share_email_url(@message.id), :target => "_blank")
 
 %table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
