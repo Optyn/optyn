@@ -27,13 +27,13 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def invoice
     # binding.pry
     @charge = Charge.find(params[:id])
-    @invoice = Invoice.find(:stripe_invoice_id=>@charge.stripe_invoice_token)
-    @plan = Plan.where(:stripe_plan_token => @invoice.stripe_plan_token)
-    @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token)
+    @invoice = Invoice.where(:stripe_invoice_id=>@charge.stripe_invoice_token).first
+    @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first
+    @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token).first
 
-    @amount = @charge.amount rescue nil
-    @subtotal = @charge.subtotal
-    @total = @charge.total
+    @amount = @invoice.amount rescue nil
+    @subtotal = @invoice.subtotal
+    @total = @invoice.total
     @discount_amount = @total - @subtotal
     @card_last4= @charge.card_last4 rescue nil
 

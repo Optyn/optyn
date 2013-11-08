@@ -29,9 +29,9 @@
 		%tr
 			%td
 				- if @invoice[:stripe_coupon_percent_off].present?
-					#{@invoice[:stripe_coupon_token]} #{@invoice[:stripe_coupon_percent_off]} "%"
+					#{@invoice[:stripe_coupon_token]} (#{@invoice[:stripe_coupon_percent_off]}% off)
 				-elsif  @invoice[:stripe_coupon_amount_off].present?
-					#{@invoice[:stripe_coupon_token]} #{@invoice[:stripe_coupon_amount_off]} "$"
+					#{@invoice[:stripe_coupon_token]} ($ #{@invoice[:stripe_coupon_amount_off]} off)
 
 			%td
 				= @discount_amount
