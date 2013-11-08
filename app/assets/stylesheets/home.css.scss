@@ -10,7 +10,7 @@ body {
 
 #flat {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $sans-serif;
   font-size: 15px;
   line-height: 23px;
 
@@ -294,55 +294,72 @@ body {
     background-position: 19px -2780px;
   }
 
-  .m-i {  /* Merchant's index */
-    background-color: $gray;
-    background-image: image-url( 'main1.jpg' );
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding: 2% 0;
-    text-align: left;
-    h1 {
-      font-weight: 700;
-      border: none;
-      > span {
-        background: rgba(0, 0, 0, 0.75);
-        color: $white;
-        padding:0 10px 3px 10px;
-        display: inline-block;
-      }
-      > span:first-child {
-        margin-bottom: 10px;
+}
 
+.m-i {  /* Merchant's index */
+  background-color: $gray;
+  background-image: image-url( 'main1.jpg' );
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 2% 0;
+  text-align: left;
+  h1 {
+    font-weight: 700;
+    border: none;
+    > span {
+      background: rgba(0, 0, 0, 0.75);
+      color: $white;
+      padding:0 10px 3px 10px;
+      display: inline-block;
+    }
+    > span:first-child {
+      margin-bottom: 10px;
+    }
+  }
+  .well {
+    padding: 1%;
+    margin-bottom: 1%;
+    margin-top: 130px;
+  }
+  .signup {
+    input {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+  .vid-lnk {
+    color: darken( $black, 50% );
+    font-weight: 700;
+    text-shadow: 1px 1px 0 #fff;
+    margin-top: 290px;
+    @include transition( background-color 0.3s ease-out );
+    font-size: 16px;
+  }
+  .vid-lnk:hover {
+    text-decoration: none;
+    background-color: rgba( $white, 0.99 );
+  }
+}  /* End .m-i */
+
+@media (max-width: $mobile-width + 100) {
+  .m-i {
+    background-image: none;
+    h1 {
+      text-align: center;
+      > span {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        background: transparent;
+        text-align: center;
       }
     }
     .well {
-      padding: 1%;
-      margin-bottom: 1%;
-      margin-top: 187px;
+      margin-top: 10px;
     }
-    .signup {
-      input {
-        width: 100%;
-        margin-top: 20px;
-      }
-    }
-    .vid-lnk {
-      color: darken( $black, 50% );
-      font-weight: 700;
-      text-shadow: 1px 1px 0 #fff;
-      margin-top: 330px;
-      @include transition( background-color 0.3s ease-out );
-      font-size: 16px;
-    }
-    .vid-lnk:hover {
-      text-decoration: none;
-      background-color: rgba( $white, 0.99 );
-    }
-  }  /* End .m-i */
+  }
 }
-
 
 .terms {
   /* Styles for Terms of Use page. */

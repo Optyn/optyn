@@ -6,6 +6,7 @@
         %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
           - msg = "#{@message.name} #{@message.uuid}"
           = social_share_button_tag(@message.name, :url => "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}")
+          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), share_email_path(@message.id))
 
 %table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
   %tr
