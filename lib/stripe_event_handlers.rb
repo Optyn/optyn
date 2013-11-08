@@ -194,6 +194,7 @@ module StripeEventHandlers
 
   def self.create_invoice(subscription,params)
       binding.pry
+      stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
       stripe_coupon_token = "" rescue nil
       subtotal = 0 rescue nil
       total = 0  rescue nil
@@ -207,7 +208,7 @@ module StripeEventHandlers
         :stripe_coupon_token => stripe_coupon_token,
         :subtotal = subtotal,
         :total = total,
-        :stripe_plan_token => params['data']['object']['lines']['data'].first['plan']['id']
+        :stripe_plan_token => stripe_plan_token
       )
   end
 end
