@@ -150,7 +150,7 @@ module StripeEventHandlers
     end
     Charge.create(
         :created => params[:created]  ,
-        :live_mode => params[:livemode]  ,
+        :livemode => params[:livemode]  ,
         :fee_amount => params[:data][:object][:fee] ,
         :invoice_id => params[:data][:object][:invoice] ,
         :description => params[:data][:object][:description] ,
