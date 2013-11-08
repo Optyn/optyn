@@ -16,10 +16,7 @@ gem 'haml'
 gem 'haml-rails'
 
 #admin_gems
-gem 'inherited_resources'
-gem 'has_scope'
-gem 'responders'
-gem 'simple_form'
+gem 'activeadmin'
 
 gem 'devise'
 gem 'devise-async'
@@ -79,9 +76,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.3.1.2'
   gem 'awesome_print'
+  gem 'jquery-rails', "< 3.0.0"
 end
-
-gem 'jquery-rails'
 
 group :development do
   gem 'thin'

@@ -43,7 +43,7 @@
             - if admin_signed_in?
               %ul.pull-right.nav.nav-pills
                 %li
-                  = link_to 'Dashboard', admin_dashboard_path, class: 'btn btn-warning'
+                  = link_to 'Dashboard', admins_root_path, class: 'btn btn-warning'
                 %li
                   = link_to 'Logout', destroy_admin_session_path, class: 'btn btn-primary', method: :delete
             - if user_signed_in?

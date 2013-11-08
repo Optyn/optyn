@@ -1,13 +1,7 @@
 Optyn::Application.routes.draw do
 
   #Admin
-  devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}, :skip => :registrations
-
-  namespace :admin do 
-    root :to => "dashboard#index", as: :dashboard
-    resources :connections
-    resources :businesses
-  end
+  devise_for :admins, :controllers => {:sessions => 'admins/sessions', :passwords => 'admins/passwords'}, :skip => :registrations
 
   root to: 'main#index'
   match 'dashboard' => 'dashboards#index', as: :consumers_root
@@ -334,4 +328,6 @@ Optyn::Application.routes.draw do
 
     get '/resellerjs' => 'dashboards#resellerjs'
   end
+
+  ActiveAdmin.routes(self)
 end
