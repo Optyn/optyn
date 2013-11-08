@@ -1,17 +1,13 @@
+= render partial: "connections/tab"
 #consumer
-  .container
-    = render partial: "shared/menu"
-    .span8   
-      %div.tab-content
+  .pad3pc.tab-content
 
-        = render partial: "connections/tab"
+    .action-buttons
+      - if @active
+        = link_to "Opt-out?", disconnect_connection_path(@shop.identifier), class: 'btn-primary btn', confirm: "Are you sure you want to opt-out of any offers from #{@shop.name}", method: :put
+      - else
+        = link_to "Opt-in?", connect_connection_path(@shop.identifier, via: params[:via]), class: 'btn-primary btn', method: :post
 
-        .action-buttons
-          - if @active
-            = link_to "Opt-out?", disconnect_connection_path(@shop.identifier), class: 'btn-primary btn', confirm: "Are you sure you want to opt-out of any offers from #{@shop.name}", method: :put
-          - else
-            = link_to "Opt-in?", connect_connection_path(@shop.identifier, via: params[:via]), class: 'btn-primary btn', method: :post
+      = link_to "Cancel", params[:return_to].present? ? params[:return_to] : connections_path, class: 'btn'
 
-          = link_to "Cancel", params[:return_to].present? ? params[:return_to] : connections_path, class: 'btn'
-
-        = render partial: "shared/shops/detail"
+    = render partial: "shared/shops/detail"
