@@ -1,6 +1,6 @@
 / #message_preview_container{:style => "  width: 100%; "}
 
-%table#message_preview_container{:style => "width: 100%;margin: auto; font-family: sans-serif;"}
+%table#message_preview_container{:style => "width: 100%; max-width: 600px; margin: auto; font-family: sans-serif;"}
   %tr{:style => "width: 100%;"}
     %td{:style => "width: 100%;background-color: #EEEEEE;padding: 20px;"}
       - if @message.show_banner?
