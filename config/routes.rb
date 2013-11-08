@@ -37,6 +37,7 @@ Optyn::Application.routes.draw do
   match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
   match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
   match 'share_email/:message_id' => 'merchants/messages#share_email', :as => :share_email
+  match 'send_shared_email/:message_id' => 'merchants/messages#send_shared_email', :as => :send_shared_email
 
   #named routes partner inquiry
   get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
