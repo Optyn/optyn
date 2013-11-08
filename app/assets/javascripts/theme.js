@@ -102,4 +102,27 @@ $(document).ready(function () {
     };
     setModalHt();
     $( window ).resize( setModalHt );
+
+
 });
+// Equalize div heights
+function equalizeDivHeights( targetElementSelector ) {
+    console.log( 'equalizeDivHeights', targetElementSelector );
+    var setHt = function() {
+        // This function sets width of the team member divs.
+        var maxHt = 0;
+        $( targetElementSelector ).each( function() {
+            $( this ).css( 'height', 'auto' );
+        });
+        $( targetElementSelector ).each( function() {
+        if ( parseInt($( this ).css( 'height' )) > maxHt ) {
+            maxHt = parseInt($( this ).css( 'height' ));
+        }
+        });
+        $( targetElementSelector ).each( function() {
+            $( this ).css( 'height', maxHt + 10 );
+        });
+    };
+    setTimeout( setHt, 100 );
+    $( window ).resize( setHt );
+}

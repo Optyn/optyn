@@ -31,6 +31,7 @@ class Partner < ActiveRecord::Base
   scope :lower_name, ->(org) { where(["LOWER(partners.organization) LIKE LOWER(:org)", {org: org}]) }
 
   ORGANIZATION_OPTYN = 'Optyn Inc.'
+  ORGANIZATION_EATSTREET = 'Eatstreet Inc.'
 
   def self.optyn
     find_by_organization(ORGANIZATION_OPTYN)
@@ -38,6 +39,14 @@ class Partner < ActiveRecord::Base
 
   def self.optyn_id
     optyn.id
+  end
+
+  def self.eatstreet
+    find_by_organization(ORGANIZATION_EATSTREET)
+  end
+
+  def self.eatstreet_id
+    eatstreet.id
   end
 
   def self.for_organization(org)
@@ -50,6 +59,14 @@ class Partner < ActiveRecord::Base
 
   def optyn?
     self.id == Partner.optyn_id
+  end
+
+  def eatstreet?
+    self.id == Partner.eatstreet_id
+  end
+
+  def subscription_required?
+    self.subscription_required
   end
 
   private

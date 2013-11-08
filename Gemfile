@@ -61,6 +61,13 @@ gem "acts_as_paranoid", "~>0.4.0"
 gem 'rabl'
 gem 'oj'
 
+gem 'pdfkit' #for pdf generation
+gem 'rqrcode-rails3' #for QR code
+gem 'mini_magick' #for QR code in PNG, JPEG or GIF 
+gem "koala", "~> 1.8.0rc1" #for Facebook integration
+gem 'social-share-button'
+gem 'httparty'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -80,7 +87,7 @@ group :development do
   gem 'thin'
   gem 'sextant'
   gem 'pry'
-  #gem 'debugger'
+  gem 'debugger'
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'

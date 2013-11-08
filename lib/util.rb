@@ -5,9 +5,24 @@ class Util
 
   def self.clean_sessions
     begin
-      #date = Chronic.parse('midnight yesterday').to_s(:db)
-      date = Chronic.parse('2 days ago midnight').to_s(:db)
-      ActiveRecord::Base.connection.execute("DELETE FROM sessions WHERE updated_at < '#{date}'")
+
+      results = ActiveRecord::Base.connection.select_all( "SELECT * FROM sessions" )
+      
+      results.each do |session|
+        session_data = Marshal.restore( Base64.decode64( session[ 'data' ] ) ) if session[ 'data' ]
+        manager_session_key = 'warden.user.merchants_manager.key'
+        
+        if session_data.has_key?(manager_session_key)
+          manager_id = session_data[manager_session_key]
+          manager = Manager.where(id: manager_id).first
+
+          next if manager.partner_eatstreet?
+        end
+
+        delete_session_entry(session) if Time.parse(session['updated_at']) < 2.days.ago
+      
+      end
+
       nil
     rescue Exception => e
       email_exception(e, "clean_sessions")
@@ -19,7 +34,7 @@ class Util
     content << e.message + "\n"
     content << e.backtrace + "\n"
     content << "#{"-" * 5} End Error while running #{method_name} task #{"-" * 5}"
-    NightlyJobsMailer.announce_failure(content, method_name).deliver
+    GenericMailer.announce_nightly_job_failure(content, method_name).deliver
   end
 
   def self.verify_website_response
@@ -27,6 +42,10 @@ class Util
   end
 
   private
+  def self.delete_session_entry(session)
+    ActiveRecord::Base.connection.select_all("DELETE FROM sessions WHERE id = #{session['id']}")
+  end
+
   def self.check_uri_response
     begin
       uri = URI.parse(SiteConfig.app_base_url)
@@ -40,11 +59,11 @@ class Util
 
       response_code = response.code.strip
       unless response_code == "200"
-        PingMailer.announce_downtime("uri => " + host + " returned status code => " + response_code).deliver
+        GenericMailer.announce_ping_failure("uri => " + host + " returned status code => " + response_code).deliver
       end
 
     rescue Exception => ex
-      PingMailer.announce_downtime("uri => " + host + " Raised Exception => " + ex.to_s).deliver
+      GenericMailer.announce_ping_failure("uri => " + host + " Raised Exception => " + ex.to_s).deliver
     end
   end
 end

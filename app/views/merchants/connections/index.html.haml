@@ -1,17 +1,26 @@
 = banner("#{current_shop.name} - Connections")
 
 #merchants.pad3pc
+  = link_to raw("<i class='icon-plus'></i> Add new user"), add_user_merchants_connections_path, :class => "btn btn-primary"
+
+  .blank-space
+
+  #filter_Form
+    = render partial: 'filter_form'
+
+  .separator-thin
+
   %p.pull-left
-    Here's a list of all your connections. Click on 'More Info' to learn more about each customer.
+    Here's a list of all your connections. Click on name of customer to learn more.
+    
   %a.btn.btn-primary{:href => merchants_file_imports_path, :style => "float: right"} Import Customers
   %table.table.table-striped
     %thead
       %tr
         %th #
-        %th Name
-        %th Connected via
-        %th Permission
-        %th Details
+        %th Customer
+        %th Tags
+        %th Profile
     %tbody
       - email_id = Permission.email_id
       - name_id = Permission.name_id
@@ -22,14 +31,17 @@
           %td
             = connection_user_display_name(connection, name_id, email_id)
           %td
-            = connection.connected_via
-          %td
-            = user_permission(connection.user)
+            %span.expandable
+              = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name}.join(", ")
+              / please dont remove this comment
           %td
             - if connection.user.permissions_users.present?
-              %a{:href => "#infoDialog_#{connection.user_id}", "data-toggle" => "modal", "id" => "#{connection.user_id}", "class" => "open-infoDialog"} More Info
-              = render partial: 'more_info_prompt', locals:{user: connection.user, name_id: name_id, email_id: email_id}
+              %a{href: "javascript:void(0)", class: "consumer_connection_link"} More Info
+              = hidden_field_tag "show_path_#{connection.user.id}", merchants_connection_path(connection.user.id)
             - else
               %a{:href => "#",:style => "color:#7D8B8F"} More Info
 
   = paginate @connections
+
+  %div{:id => "conusmer_connection_modal", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
+    Please Wait...

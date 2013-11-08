@@ -28,10 +28,29 @@ Optyn::Application.routes.draw do
   match 'thankyou' => 'main#thankyou'
   match 'old_index' => 'main#old_index'
   match 'cache/flush' => "cache#flush"
-  match '/shop/public/:identifier', to: 'shops#show'
+  match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
+  match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
+  match 'tour' => 'main#tour'
+  match 'affiliates' => 'main#affiliates'
+  match 'product_announcement' => 'main#product_announcement'
+  match 'testimonials' => 'main#testimonials'
+  match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
+  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
+
+  match 'generate_qr_code' => 'merchants/messages#generate_qr_code'
+  match 'redeem/:message_user' => 'merchants/messages#redeem'
+  match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
+  match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
+  match 'share_email/:message_id' => 'merchants/messages#share_email', :as => :share_email
+  match 'send_shared_email/:message_id' => 'merchants/messages#send_shared_email', :as => :send_shared_email
+
+  #named routes partner inquiry
+  get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
+  post "/partner-with-us", to: 'partner_inquiries#create', as: :partner_inquiries
+
 
   # Blog Redirect
-  match "/blog" => redirect("http://optynblog.com"), :as => :blog
+  match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
 
   # Biz Redirect
   match "/biz" => 'main#merchantfeatures'
@@ -148,6 +167,8 @@ Optyn::Application.routes.draw do
         resources :shops do
           collection do
             get :import_list
+            get :import_user_list
+            post :import_user
             post :import
             get :import_status
             get :active_connections
@@ -191,6 +212,11 @@ Optyn::Application.routes.draw do
           end
         end #end of consumers resources   
       end #end of the merchants namespace
+
+      namespace :partners do
+        get 'login', to: 'login#new'
+        post 'login', to: 'login#create'
+      end #end of the partners namespace
     end #end of the scope v1
   end #end of the api namespace
 
@@ -210,8 +236,21 @@ Optyn::Application.routes.draw do
     end
 
     resource :app
-    resources :connections
+    resources :connections do
+      collection do
+        match 'unsubscribe/:id', to: "connections#unsubscribe_user", as: :unsubscribe
+        match 'update_user/:id', to: "connections#update_user", as: :update_user
+        match 'add_user', to: "connections#add_user", as: :add_user
+        match 'create_user', to: "connections#create_user", as: :create_user
+        match 'edit_user/:id', to: "connections#edit", as: :edit_user
+        match 'search', to: "connections#search", as: :search
+        post 'create_label'
+        post 'update_labels'
+        post 'create_labels_for_user'
+      end
+    end
     resources :locations
+    resources :social_profiles
     resources :dashboards
     resources :file_imports
     resource :shop do
@@ -221,13 +260,16 @@ Optyn::Application.routes.draw do
     end
 
     
-    resource :subscription
+    resource :subscription 
     get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
+    get '/invoice' => 'subscriptions#invoice', as: :subsciption_invoice
+    get '/invoice/print' => 'subscriptions#print', as: :invoice_print
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
 
     resource :survey, only: [:show, :edit, :update], path: :segment do
+      get 'merchants/segment/all' => 'merchants/surveys#list'
       member do
         get 'questions'
         get 'preview'
@@ -285,6 +327,11 @@ Optyn::Application.routes.draw do
         :passwords => 'reseller/partners/passwords',
         :confirmations => 'reseller/partners/confirmations'
     }
+
+    # devise_scope :partner do
+    #   get '/api/partners/login', to: 'partners/sessions#new'
+    # end
+
     get '/resellerjs' => 'dashboards#resellerjs'
   end
 end

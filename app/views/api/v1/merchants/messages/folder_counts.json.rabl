@@ -4,4 +4,8 @@ object false
     node :folder_counts do
       {:drafts => @drafts_count, :queued => @queued_count}
     end
+
+    node :select_list do
+      {:labels => @labels}
+    end
   end
