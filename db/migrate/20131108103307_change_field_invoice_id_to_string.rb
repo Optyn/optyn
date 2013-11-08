@@ -5,5 +5,7 @@ class ChangeFieldInvoiceIdToString < ActiveRecord::Migration
   end
 
   def down
+    add_column :charges, :invoice_id, :integer
+    remove_column :charges, :stripe_invoice_token
   end
 end
