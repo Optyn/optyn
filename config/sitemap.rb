@@ -22,6 +22,9 @@ SitemapGenerator::Sitemap.create do
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
     end
+
+    SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
+    add '/partner-with-us', :changefreq => 'weekly', :priority => 0.8
   end
 end
 
