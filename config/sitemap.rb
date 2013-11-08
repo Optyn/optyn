@@ -9,9 +9,8 @@ SitemapGenerator::Sitemap.create do
     puts Rails.env
     puts "-" * 100
     
-    add '/', :changefreq => 'daily', :priority => 0.9  
-    add '/consumer-features', :changefreq => 'weekly', :priority => 0.8 
-    add '/merchant-features', :changefreq => 'weekly', :priority => 0.8 
+    add '/', :changefreq => 'daily', :priority => 1.0  
+    add '/features', :changefreq => 'weekly', :priority => 0.8 
     add '/pricing', :changefreq => 'weekly', :priority => 0.8 
     add '/faq', :changefreq => 'weekly', :priority => 0.8 
     add '/about', :changefreq => 'weekly', :priority => 0.8
@@ -19,9 +18,13 @@ SitemapGenerator::Sitemap.create do
     add '/terms', :changefreq => 'weekly', :priority => 0.8
     add '/privacy', :changefreq => 'weekly', :priority => 0.8
 
+
     Shop.real.each do |shop|
-      add "/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
+      add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
     end
+
+    SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
+    add '/partner-with-us', :changefreq => 'weekly', :priority => 0.8
   end
 end
 
