@@ -188,6 +188,6 @@ namespace :robots do
   desc "Generate an updated robots.txt on the server."
   task :generate do
     puts "Generating the updated robots.txt"
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate" 
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate" 
   end
 end
