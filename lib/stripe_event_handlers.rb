@@ -1,7 +1,7 @@
 module StripeEventHandlers
 
   def self.handle_customer_subscription_created(params)
-    binding.pry
+    # binding.pry
     @subscription=Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     @subscription.update_attributes(:active => true)
   end
@@ -63,7 +63,7 @@ module StripeEventHandlers
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
-    binding.pry
+    # binding.pry
     create_invoice(subscription,params)
   end
 
@@ -79,7 +79,7 @@ module StripeEventHandlers
   def self.handle_invoice_updated(params)
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-      binding.pry
+      # binding.pry
       update_invoice(subscription,params)
       # Invoice.create(
       #     :subscription_id => subscription.id,
