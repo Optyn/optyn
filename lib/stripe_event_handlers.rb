@@ -59,11 +59,11 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_payment_succeeded(params)
-    binding.pry
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
+    binding.pry
     create_invoice(subscription,params)
   end
 
@@ -206,8 +206,8 @@ module StripeEventHandlers
         :paid_status => params['data']['object']['paid'],
         :amount => params['data']['object']['total'] ,
         :stripe_coupon_token => stripe_coupon_token,
-        :subtotal = subtotal,
-        :total = total,
+        :subtotal => subtotal,
+        :total => total,
         :stripe_plan_token => stripe_plan_token
       )
   end
