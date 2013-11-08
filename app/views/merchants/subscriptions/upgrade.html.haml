@@ -14,7 +14,8 @@
 
   .well.span3
     %h5 Last Payment:
-    = number_to_currency(@stripe_last_payment.amount_in_dollars)
+    - if @strip_last_payment.present?
+      = number_to_currency(@stripe_last_payment.amount_in_dollars)
     - if !@stripe_last_payment.nil?
       = Time.at(@stripe_last_payment.created).strftime("%B %d, %Y")
 
