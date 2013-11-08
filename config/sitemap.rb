@@ -10,8 +10,7 @@ SitemapGenerator::Sitemap.create do
     puts "-" * 100
     
     add '/', :changefreq => 'daily', :priority => 1.0  
-    add '/consumer-features', :changefreq => 'weekly', :priority => 0.8 
-    add '/merchant-features', :changefreq => 'weekly', :priority => 0.8 
+    add '/features', :changefreq => 'weekly', :priority => 0.8 
     add '/pricing', :changefreq => 'weekly', :priority => 0.8 
     add '/faq', :changefreq => 'weekly', :priority => 0.8 
     add '/about', :changefreq => 'weekly', :priority => 0.8
