@@ -47,7 +47,7 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    binding.pry
+    # binding.pry
     ##only start creating if subscription is not nil
     if !subscription.nil?
       evaluated_plan = Plan.which(subscription.shop)
@@ -58,7 +58,7 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_payment_succeeded(params)
-    binding.pry
+    # binding.pry
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
@@ -104,6 +104,7 @@ module StripeEventHandlers
   end
 
   def self.handle_customer_created(params)
+    # binding.pry
     discount_map = params['data']['object']["discount"]
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
@@ -115,15 +116,21 @@ module StripeEventHandlers
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params['data']['object']['id'])
     end
+    @subscription = Subscription.create(
+                      :stripe_customer_token=>"cus_2twlS7khjVvdKT",
+                      :shop_id=>1,
+                      :plan_id=>1,
+                      :email=>params["event"]["data"]["object"]["email"]
+                      )    
   end
 
   def self.handle_customer_discount_created(params)
-    binding.pry
+    # binding.pry
     manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
   def self.handle_customer_discount_updated(params)
-    binding.pry
+    # binding.pry
     manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
@@ -159,6 +166,7 @@ module StripeEventHandlers
 
   private
   def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
+    #insert discount object into a monthly table
     coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
     shop.coupon_id = coupon.id
     shop.save(validate: false)
@@ -167,12 +175,13 @@ module StripeEventHandlers
   def self.fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
     coupon = (Coupon.find_by_stripe_id(coupon_stripe_id) rescue nil)
     subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
+    # binding.pry
     shop = subscription.shop
     [coupon, shop]
   end
 
   def self.create_invoice(subscription,params)
-      binding.pry
+      # binding.pry
       Invoice.create(
         :subscription_id => subscription.id,
         :stripe_customer_token => params['data']['object']['customer'],

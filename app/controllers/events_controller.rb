@@ -34,10 +34,14 @@ class EventsController < ApplicationController
       when 'coupon.deleted'
         StripeEventHandlers.handle_coupon_deleted(params)
       when 'customer.created'
+        # binding.pry
         StripeEventHandlers.handle_customer_created(params)
+        # binding.pry
       when 'customer.updated'
+        # binding.pry
         StripeEventHandlers.handle_customer_updated(params)
       when 'customer.discount.created'
+        # binding.pry
         StripeEventHandlers.handle_customer_discount_created(params)
       when 'customer.discount.updated'
         StripeEventHandlers.handle_customer_discount_updated(params)

@@ -25,7 +25,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def invoice
-    binding.pry
+    # binding.pry
     @charge = Charge.find(params[:id]) rescue nil
     @invoice = Invoice.find(:stripe_invoice_id=>@charge.stripe_invoice_id) rescue nil
     @discount = @invoice[:discount] rescue nil
