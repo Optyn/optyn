@@ -59,7 +59,7 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_payment_succeeded(params)
-    # binding.pry
+    binding.pry
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
@@ -79,6 +79,7 @@ module StripeEventHandlers
   def self.handle_invoice_updated(params)
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+      binding.pry
       Invoice.create(
           :subscription_id => subscription.id,
           :stripe_customer_token => params['data']['object']['customer'],
@@ -152,7 +153,7 @@ module StripeEventHandlers
         :created => params[:created]  ,
         :livemode => params[:livemode]  ,
         :fee_amount => params[:data][:object][:fee] ,
-        :invoice_id => params[:data][:object][:invoice] ,
+        :stripe_invoice_token => params[:data][:object][:invoice] ,
         :description => params[:data][:object][:description] ,
         :dispute => params[:data][:object][:dispute]  ,
         :refunded => params[:data][:object][:refunded] ,
@@ -182,7 +183,7 @@ module StripeEventHandlers
   end
 
   def self.create_invoice(subscription,params)
-      # binding.pry
+      binding.pry
       Invoice.create(
         :subscription_id => subscription.id,
         :stripe_customer_token => params['data']['object']['customer'],
