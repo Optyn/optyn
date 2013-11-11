@@ -17,11 +17,11 @@
           %td= survey.title
           %td= survey.ready
           %td= survey.updated_at
-          %td= link_to "Show" , "/merchants/segments/show" ,:class=>"btn btn-primary btn-mini"#{@survey.id} 
+          %td= link_to "Show" , merchants_survey_path(survey.id) ,:class=>"btn btn-info btn-mini"#{@survey.id} 
     - else
       %tr
         %td{colspan: "4"} No Survey
 
-
+= link_to "New Survey",  new_merchants_survey_path , :class=>"btn btn-primary"
 / = render partial: "merchants/surveys/new_question_modal"
 / = render partial: "merchants/surveys/edit_question_modal"

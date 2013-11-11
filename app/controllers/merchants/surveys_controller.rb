@@ -2,6 +2,11 @@ class Merchants::SurveysController < Merchants::BaseController
 	before_filter :current_survey
 	before_filter :survey_actually_created, only: [:show]
 
+	def new
+
+	end
+
+
 	def show
 		# binding.pry
 		#we will need id in params to show
