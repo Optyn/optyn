@@ -162,3 +162,26 @@
     height: auto !important;
   }
 }
+
+
+/* Sitemap page ============================================================= */
+.op-sitemap {
+  h4 {
+    color: $green;
+    font-weight: 400;
+  }
+  ul {
+    margin: 0;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 2px 0;
+    @include transition( all 0.3s ease );
+    &:hover {
+      background: $light-gray;
+      padding-left: 10px;
+    }
+  }
+}
+
