@@ -6,9 +6,13 @@
         %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
           - msg = "#{@message.name} #{@message.uuid}"
           - public_msg = public_view_messages_url(@shop.name.parameterize, msg.parameterize)
-          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "https://www.facebook.com/sharer/sharer.php?u=http://google.com", :target => "_blank")
-          / = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "https://twitter.com/intent/tweet?text=#{@message.name}&url=http://google.com", :target => "_blank")
-          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), share_email_url(@message.id), :target => "_blank")
+          - facebook_link = get_social_share_link("facebook", @message, public_msg)
+          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "#{facebook_link}", :target => "_blank")
+          - twitter_link = get_social_share_link("twitter", @message, public_msg)
+          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "#{twitter_link}", :target => "_blank")
+          - @user_email = @user_email ? @user_email : (current_user ? current_user.email : nil)
+          - if optyn_user?(@user_email)
+            = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), share_email_url(@message.id), :target => "_blank")
 
 %table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
   %tr

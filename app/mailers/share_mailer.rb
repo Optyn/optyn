@@ -1,10 +1,11 @@
 class ShareMailer < ActionMailer::Base
   helper Merchants::MessagesHelper
-  default from: "aishwarya@idyllic-software.com"
+  default from: "Optyn <services@optyn.com>"
 
-  def shared_email(users, message)
+  def shared_email(user_email, message)
   	@message = message
     @shop = @message.shop
-    mail(to: users, subject: 'Welcome to My Awesome Site')
+    @user_email = user_email
+    mail(to: user_email, subject: "#{@message.name}")
   end
 end
