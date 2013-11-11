@@ -81,6 +81,10 @@ class Shop < ActiveRecord::Base
 
   scope :by_manager_email, ->(manager_email) {joins(:managers).where(["managers.email LIKE LOWER(:manager_email)", {manager_email: manager_email}])}
 
+  scope :not_pre_added, where(pre_added: false)
+
+  scope :alphabetized, order("shops.name")
+
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
   before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
