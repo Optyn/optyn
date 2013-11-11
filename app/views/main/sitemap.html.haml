@@ -1,33 +1,38 @@
 /Links will be added here...
 
-.row-fluid
-  .span12
-    %h1 Sitemap
+.op-sitemap
+  .row-fluid
+    .span12
+      %h1 Sitemap
 
-.row-fluid
-  .span3
-    %h4 Our Company
-    = render 'layouts/links_company'
+  .row-fluid
+    .span3
+      %h4 Our Company
+      = render 'layouts/links_company'
 
-  .span3
-    %h4 For Merchants
-    = render 'layouts/links_merchants'
+    .span3
+      %h4 For Merchants
+      = render 'layouts/links_merchants'
 
-  .span3
-    %h4 For Partners
-    = render 'layouts/links_partner'
+    .span3
+      %h4 For Partners
+      = render 'layouts/links_partner'
 
-  .span3
-    %h4 For Publishers
-    %ul
-      %li
-        %a( href='#' ) Foo
-
-.row-fluid
-  .span12
-    /Shop public Links
-    %h4 Shops
-    %ul
-      - @shops.each do |shop|
+    .span3
+      %h4 For Publishers
+      %ul
         %li
-          = link_to(shop.name, public_shop_path(shop.identifier))
+          %a( href='#' ) Nothing here
+
+  .blank-space
+
+  .row-fluid
+    .span12
+      /Shop public Links
+      %h4 Shops
+      %ul
+        - @shops.each do |shop|
+          %li
+            = link_to(shop.name, public_shop_path(shop.identifier))
+
+.blank-space
