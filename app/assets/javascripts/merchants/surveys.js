@@ -11,7 +11,8 @@ function MerchantSurvey() {
     this.initialize = function () {
         addQuestionPath = this.getAddQuestionPath();
         loadQuestionsPath = this.getLoadQuestionsPath();
-
+        
+        console.log("Add Question path"+addQuestionPath);
         if ($('#new_survey_questions_content').length) {
             this.loadQuestions();
             this.hookNewQuestionModal();
@@ -30,6 +31,7 @@ function MerchantSurvey() {
 
     //hook the modal for adding questions
     this.hookNewQuestionModal = function () {
+        console.log("New Question");
         $('#new_survey_questions_content').modal({
             keyboard: false,
             show: false
@@ -46,16 +48,18 @@ function MerchantSurvey() {
 
     //Add a question to the survey
     this.hookAddQuestion = function () {
+        console.log("Add question");
         var current = this;
         $('button.add_question_button').click(function (e) {
 
             $('#new_survey_questions_content .modal-footer').hide();
 
             $('#new_survey_questions_content').modal('show');
-
+            console.log(addQuestionPath);
             jQuery.ajax({
                 url: addQuestionPath,
                 success: function (data) {
+                    // console.log(data);
                     $('#new_survey_questions_content .modal-body').html(data);
                     $('#new_survey_questions_content  .values-container').hide();
                 },
@@ -124,11 +128,13 @@ function MerchantSurvey() {
                 data: $('#survey_question_form').serializeArray(),
                 success: function () {
                     $modalBody.html("<strong>Please Wait...</strong>");
+                    console.log(request.responseText);
                     current.loadQuestions();
                     $('#new_survey_questions_content').modal('hide');
                     $('#edit_survey_questions_content').modal('hide');
                 },
                 error: function (request) {
+                    console.log(request.responseText);
                     $modalBody.html(request.responseText);
                 }
             });
