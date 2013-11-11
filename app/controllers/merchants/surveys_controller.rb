@@ -10,7 +10,11 @@ class Merchants::SurveysController < Merchants::BaseController
 	def show
 		# binding.pry
 		#we will need id in params to show
-		@survey = current_survey
+		begin
+			@survey = Survey.find(params[:id])
+		rescue
+			@survey = current_survey
+		end
 	end
 
 	def index
