@@ -4,6 +4,7 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	def new
 		@survey = Survey.create(:title=>"Dummy Title", :ready=>"false", :shop_id=>current_shop.id )
+		#fixme: change with named url
 		redirect_to "/merchants/segments/#{@survey.id}/edit"
 	end
 
@@ -12,8 +13,8 @@ class Merchants::SurveysController < Merchants::BaseController
 		# binding.pry
 		#we will need id in params to show
 		begin
-			#TODO:constrian in current shop
-			@survey = Survey.find(params[:id])
+			#Constrained in current shop
+			@survey = Survey.where(:id=>params[:id], :shop_id => current_shop.id).first
 		rescue
 			@survey = current_survey
 		end
@@ -25,8 +26,8 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	def edit
 		begin
-			#TODO:constrian in current shop
-			@survey = Survey.find(params[:id])
+			#Constrained in current shop
+			@survey = Survey.where(:id=>params[:id], :shop_id => current_shop.id).first
 		rescue
 			@survey = current_survey
 		end
