@@ -4,10 +4,6 @@
           box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
 }
 
-body {
-  @include transition( width 0.3s ease-out );
-}
-
 #flat {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
