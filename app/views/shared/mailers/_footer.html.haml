@@ -5,7 +5,7 @@
         %div{:style => "height: 2px; width: 100%; background: #eee;"}
         %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
           - msg = "#{@message.name} #{@message.uuid}"
-          - public_msg = public_view_messages_url(@shop.name.parameterize, msg.parameterize)
+          - public_msg = "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}"
           - facebook_link = get_social_share_link("facebook", @message, public_msg)
           = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "#{facebook_link}", :target => "_blank")
           - twitter_link = get_social_share_link("twitter", @message, public_msg)
