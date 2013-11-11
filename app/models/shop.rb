@@ -390,6 +390,36 @@ class Shop < ActiveRecord::Base
     self.errors.full_messages
   end  
   
+  def meta_tag_title
+    content = "#{name}"
+
+    if first_location.present?
+      content << " in #{first_location_city}" if first_location_city.present?
+      content << ", #{first_location_state_name}" if first_location_state_name.present?
+    end
+    
+    content
+  end
+
+  def meta_tag_description
+    content = ""
+
+    if description.present?
+      content << description 
+    else
+      content << %{Check out what type of marketing Promotions are available for #{name}. #{name} uses Optyn to create Coupons, specials, sales, surveys, and much more. Follow #{name} on Optyn.com}
+    end
+
+    content
+  end
+
+  def meta_tag_keywords
+    content = []
+    content << name
+    content << meta_tag_title.gsub(/,/, " -")
+    content.join(", ")
+  end
+
 
   private
   def self.sanitize_domain(domain_name)
