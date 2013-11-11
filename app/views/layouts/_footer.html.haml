@@ -1,41 +1,16 @@
 %footer.row-fluid
   .span2
     %h4 Our Company
-    %ul
-      %li
-        %a{ :href => about_path } About Us
-      %li
-        %a{ :href => 'http://www.angel.co/optyn/jobs', :target => "_blank"} Jobs
-      %li
-        %a{ :href => blog_path } Our Blog
-      %li
-        %a{ :href => terms_path } Terms of Use
-      %li
-        %a{ :href => privacy_path } Privacy Policy
+    = render 'layouts/links_company'
+
   .span2
     %h4 For Merchants
-    %ul
-      %li
-        %a{ :href => merchant_features_path } Features
-      %li
-        %a{ :href => '/tour' } Quick Tour
-      %li
-        %a{ :href => 'testimonials/alley-gallery' } Testimonials
-      %li
-        %a{ :href => faq_path } FAQs
-      %li
-        %a{ :href => support_path, :target => "_blank" } Customer Support
-      %li
-        %a{ :href => new_merchants_manager_registration_path } Get Started!
+    = render 'layouts/links_merchants'
+
   .span2
     %h4 For Partners
-    %ul
-      %li
-        %a{ :href => '/partner-with-us' } Partner With Us
-      %li
-        %a{ :href => '/affiliates' } Affiliates
-
-
+    = render 'layouts/links_partner'
+    
   .span4.offset2.text-center.sf-social
     %div
       .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false" }

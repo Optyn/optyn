@@ -1,0 +1,22 @@
+defaults:
+  allow:
+    - '/'  
+    - '/features'
+    - '/pricing'
+    - '/faq'
+    - '/about'
+    - '/contact'
+    - '/terms'
+    - '/privacy'
+    - '/shop/public/*'
+  
+  disallow:
+    - "/merchants"
+    - "/admin"
+    - "/reseller"
+    - "/blog"
+    - "/messages*"
+    - "/connections*"
+    - "/segments*"
+    - "/login"
+    - "/register"  
