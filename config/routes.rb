@@ -1,13 +1,7 @@
 Optyn::Application.routes.draw do
 
   #Admin
-  devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}, :skip => :registrations
-
-  namespace :admin do 
-    root :to => "dashboard#index", as: :dashboard
-    resources :connections
-    resources :businesses
-  end
+  devise_for :admins, :controllers => {:sessions => 'admins/sessions', :passwords => 'admins/passwords'}, :skip => :registrations
 
   root to: 'main#index'
   match 'dashboard' => 'dashboards#index', as: :consumers_root
@@ -34,12 +28,20 @@ Optyn::Application.routes.draw do
   match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
   match 'testimonials' => 'main#testimonials'
-  match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view'
+  match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
+
+  match 'generate_qr_code' => 'merchants/messages#generate_qr_code'
+  match 'redeem/:message_user' => 'merchants/messages#redeem'
+  match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
+  match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
+  match 'share_email/:message_id' => 'merchants/messages#share_email', :as => :share_email
+  match 'send_shared_email/:message_id' => 'merchants/messages#send_shared_email', :as => :send_shared_email
 
   #named routes partner inquiry
   get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
   post "/partner-with-us", to: 'partner_inquiries#create', as: :partner_inquiries
+
 
   # Blog Redirect
   match "/blog" => redirect("http://blog.optyn.com"), :as => :blog
@@ -252,13 +254,16 @@ Optyn::Application.routes.draw do
     end
 
     
-    resource :subscription
+    resource :subscription 
     get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
+    get '/invoice' => 'subscriptions#invoice', as: :subsciption_invoice
+    get '/invoice/print' => 'subscriptions#print', as: :invoice_print
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
 
     resource :survey, only: [:show, :edit, :update], path: :segment do
+      get 'merchants/segment/all' => 'merchants/surveys#list'
       member do
         get 'questions'
         get 'preview'
@@ -323,4 +328,6 @@ Optyn::Application.routes.draw do
 
     get '/resellerjs' => 'dashboards#resellerjs'
   end
+
+  ActiveAdmin.routes(self)
 end

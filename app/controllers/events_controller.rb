@@ -43,6 +43,8 @@ class EventsController < ApplicationController
         StripeEventHandlers.handle_customer_discount_updated(params)
       when 'customer.discount.deleted'
         StripeEventHandlers.handle_customer_discount_deleted(params)
+      when 'charge.succeeded'
+        StripeEventHandlers.handle_charge_succeeded(params)
       else
 
     end

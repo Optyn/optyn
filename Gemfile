@@ -16,10 +16,7 @@ gem 'haml'
 gem 'haml-rails'
 
 #admin_gems
-gem 'inherited_resources'
-gem 'has_scope'
-gem 'responders'
-gem 'simple_form'
+gem 'activeadmin'
 
 gem 'devise'
 gem 'devise-async'
@@ -61,6 +58,13 @@ gem "acts_as_paranoid", "~>0.4.0"
 gem 'rabl'
 gem 'oj'
 
+gem 'pdfkit' #for pdf generation
+gem 'rqrcode-rails3' #for QR code
+gem 'mini_magick' #for QR code in PNG, JPEG or GIF 
+gem "koala", "~> 1.8.0rc1" #for Facebook integration
+gem 'social-share-button'
+gem 'httparty'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -72,15 +76,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.3.1.2'
   gem 'awesome_print'
+  gem 'jquery-rails', "< 3.0.0"
 end
-
-gem 'jquery-rails'
 
 group :development do
   gem 'thin'
   gem 'sextant'
   gem 'pry'
-  #gem 'debugger'
+  gem 'debugger'
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'

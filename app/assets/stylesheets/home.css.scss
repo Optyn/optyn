@@ -10,7 +10,7 @@ body {
 
 #flat {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $sans-serif;
   font-size: 15px;
   line-height: 23px;
 
@@ -246,7 +246,7 @@ body {
     color: #fff;
     font-size: 13px;
     line-height: 20px;
-    padding: 2% 0;
+    padding: 1% 0;
     a {
       color: #61abe6;
     }
@@ -294,58 +294,72 @@ body {
     background-position: 19px -2780px;
   }
 
-  .m-i {  /* Merchant's index */
-    background-color: $gray;
-    background-image: image-url( 'main1.jpg' );
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding: 2% 0;
-    text-align: left;
-    h1 {
-      font-weight: 700;
-      border: none;
-      > span {
-        background: rgba(0, 0, 0, 0.75);
-        color: $white;
-        padding:0 10px 3px 10px;
-        display: inline-block;
-      }
-      > span:first-child {
-        margin-bottom: 10px;
-
-      }
-    }
-    .box-white {
-      background-color: $white;
-      background: rgba( $white, 0.9 );
-      padding: 1%;
-      border: solid 1px $medium-gray;
-      margin-bottom: 1%;
-      margin-top: 187px;
-    }
-    .signup {
-      input {
-        width: 100%;
-        margin-top: 20px;
-      }
-    }
-    .vid-lnk {
-      color: darken( $black, 50% );
-      font-weight: 700;
-      text-shadow: 1px 1px 0 #fff;
-      margin-top: 330px;
-      @include transition( background-color 0.3s ease-out );
-      font-size: 16px;
-    }
-    .vid-lnk:hover {
-      text-decoration: none;
-      background-color: rgba( $white, 0.99 );
-    }
-  }  /* End .m-i */
 }
 
+.m-i {  /* Merchant's index */
+  background-color: $gray;
+  background-image: image-url( 'main1.jpg' );
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 2% 0;
+  text-align: left;
+  h1 {
+    font-weight: 700;
+    border: none;
+    > span {
+      background: rgba(0, 0, 0, 0.75);
+      color: $white;
+      padding:0 10px 3px 10px;
+      display: inline-block;
+    }
+    > span:first-child {
+      margin-bottom: 10px;
+    }
+  }
+  .well {
+    padding: 1%;
+    margin-bottom: 1%;
+    margin-top: 130px;
+  }
+  .signup {
+    input {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+  .vid-lnk {
+    color: darken( $black, 50% );
+    font-weight: 700;
+    text-shadow: 1px 1px 0 #fff;
+    margin-top: 290px;
+    @include transition( background-color 0.3s ease-out );
+    font-size: 16px;
+  }
+  .vid-lnk:hover {
+    text-decoration: none;
+    background-color: rgba( $white, 0.99 );
+  }
+}  /* End .m-i */
+
+@media (max-width: $mobile-width + 100) {
+  .m-i {
+    background-image: none;
+    h1 {
+      text-align: center;
+      > span {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        background: transparent;
+        text-align: center;
+      }
+    }
+    .well {
+      margin-top: 10px;
+    }
+  }
+}
 
 .terms {
   /* Styles for Terms of Use page. */
@@ -357,7 +371,7 @@ body {
 
 
 .lp-next-fold {
-  background: $dark-blue;
+  background-color: lighten( $dark-blue, 10% );
   color: $white;
   text-align: center;
   position: relative;
@@ -372,7 +386,7 @@ body {
       padding: 0 6px;
       display: inline-block;
       border-radius: 100px;
-      background: $dark-blue;
+      background-color: lighten( $dark-blue, 10% );
       color: $green;
       font-size: 25px;
       line-height: 25px;
@@ -397,7 +411,7 @@ body {
   }
 }
 .lp-testimonial-by {
-  background-color: $dark-blue;
+  background-color: lighten( $dark-blue, 10% );
   color: $white;
   text-align: center;
   position: relative;
@@ -410,19 +424,43 @@ body {
     line-height: 20px;
     margin: 0 !important;
   }
-}
-.lp-usp-1,
-.lp-usp-2 {
-  padding: 2% 0;
+  img, .author {
+    margin-right: 15px;
+  }
 }
 .lp-usp-1 {
   background: $light-gray;
+  > .span6 {
+    padding: 2% 0;
+  }
+}
+.lp-usp-2 {
+  padding: 2% 0;
 }
 .lp-usp-3 {
   padding: 4% 0;
   background-attachment: fixed;
   background-image: image-url( 'bg-landing-2.jpg' );
   background-size: cover;
+  .well {
+    border: 0;
+    padding: 2.5%;
+  }
+}
+
+#flat .sf-social {
+  > a {
+    font-size: 3rem;
+    line-height: 3rem;
+    color: rgba( $white, 0.8 );
+    margin-right: 5px;
+    @include transition( all 0.4s ease );
+    &:hover {
+      text-decoration: none;
+      color: $white;
+      text-shadow: 3px 3px 0px rgba( #000, 0.8 );
+    }
+  }
 }
 
 
@@ -436,9 +474,6 @@ body {
     .consumers::before { display: block; }
     .row-fluid .scroll-down {
       display: none;
-    }
-    .row-fluid {
-      padding: 0;
     }
     input[type='submit'] {
       font-family: 'Open Sans Condensed', sans-serif;

@@ -1,0 +1,16 @@
+%h1{:style => "float: none"}
+  = "Add email recepient"
+#merchants.pad3pc
+  .container-fluid
+    .form
+      = form_for :user, url: send_shared_email_path, method: :post, html: {id: 'shared_email_form', class: 'form-horizontal'} do |f|
+        #share_email_wrapper
+          .control-group
+            .control-label
+              = label_tag :To
+            .controls
+              .labels{'data-toggle' => 'tooltip', title: 'Enter email'}
+                = text_field_tag 'To', "#{params[:To]}", :placeholder => 'Enter email', class: 'span12'
+          
+          .action-buttons
+            = f.submit "Send" , class: "btn btn-primary"

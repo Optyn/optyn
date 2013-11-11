@@ -1,20 +1,26 @@
-#message_preview_container{:style => "background-color: #EEEEEE; text-align: center; width: 100%; margin: auto; font-family: sans-serif; padding: 20px;"}
+/ #message_preview_container{:style => "  width: 100%; "}
 
-  - if @message.show_banner?
-    = render partial: "shared/mailers/banner"
+%table#message_preview_container{:style => "width: 100%; max-width: 600px; margin: auto; font-family: sans-serif;"}
+  %tr{:style => "width: 100%;"}
+    %td{:style => "width: 100%;background-color: #EEEEEE;padding: 20px;"}
+      - if @message.show_banner?
+        = render partial: "shared/mailers/banner"
 
-  %table.outer-table{:style => "background-color: white; width: 100%; text-align: left;"}
-    %tr
-      %td
-      %td.outer-cell{ style: 'padding: 20px;'}
-        .message-content
-          - if @message.show_greeting?
-            = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
+      %table.outer-table{:style => "background-color: white; width: 100%; text-align: left;"}
+        %tr
+          %td
+          %td.outer-cell{ style: 'padding: 20px;'}
+            - if @message.type == "CouponMessage" and @message.coupon_code
+              - qr_code_path = generate_qr_code_path('svg', :message_id => @message.id)
+              = image_tag "#{SiteConfig.app_base_url}/#{qr_code_path}", :width => 150, :height => 150, :style => "float: right"
+            .message-content
+              - if @message.show_greeting?
+                = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
 
-          %p.core-content
-            = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
+              %p.core-content
+                = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
 
-            = render partial: "shared/messages/bottom_image_and_button"
-                    
-  - if @message.show_footer?
-    = render partial: "shared/mailers/footer"
+                = render partial: "shared/messages/bottom_image_and_button"
+                        
+      - if @message.show_footer?
+        = render partial: "shared/mailers/footer"

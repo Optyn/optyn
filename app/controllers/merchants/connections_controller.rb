@@ -51,7 +51,9 @@ class Merchants::ConnectionsController < Merchants::BaseController
           end
         else
           @error_hash.push("#{email} was added successfully.")
-          params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
+          params["To"] = total_users - total_users[u].split(",")
+          params["To"] = params["To"].join(",")
+          # params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
           conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
           if not params["label_ids"].nil?
             total_labels_selected = params["label_ids"]

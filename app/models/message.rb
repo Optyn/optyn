@@ -11,6 +11,7 @@ class Message < ActiveRecord::Base
   belongs_to :survey
   has_many :message_visual_properties, dependent: :destroy
   has_one :message_image, dependent: :destroy
+  has_many :redeem_coupons, dependent: :destroy
 
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
@@ -59,6 +60,8 @@ class Message < ActiveRecord::Base
   scope :includes_message_users, includes(:message_users)
 
   scope :active_state, where("messages.state NOT IN ('delete', 'trash')")
+
+  scope :made_public, where(make_public: true)
 
   
   state_machine :state, :initial => :draft do
@@ -459,6 +462,18 @@ class Message < ActiveRecord::Base
     button_url
   end
 
+  def call_fb_api(link)
+    response = HTTParty.get("#{FACEBOOK_STAT_API}" + link)
+    # response = HTTParty.get("https://api.facebook.com/method/links.getStats?urls=https://development.optyn.com/music-store/campaigns/test-704253849d074870808f056c2db6992f&format=json")
+    return response.parsed_response
+  end
+
+  def call_twitter_api(link)
+    response = HTTParty.get("#{TWITTER_STAT_API}" + link)
+    # response = HTTParty.get("http://urls.api.twitter.com/1/urls/count.json?url=https://development.optyn.com/music-store/campaigns/test-704253849d074870808f056c2db6992f")
+    return response.parsed_response
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
@@ -657,4 +672,5 @@ class Message < ActiveRecord::Base
   def shop_virtual?
     self.manager.present? && self.shop.present? && self.shop.virtual
   end
+
 end

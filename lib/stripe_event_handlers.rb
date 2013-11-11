@@ -8,7 +8,10 @@ module StripeEventHandlers
   def self.handle_customer_subscription_updated(params)
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     status = params['data']['object']['status']
-    @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    if !@subscription.nil?
+      @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    end
+    # binding.pry
   end
 
   def self.handle_customer_subscription_deleted(params)
@@ -44,9 +47,14 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    evaluated_plan = Plan.which(subscription.shop)
-    subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
-    ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
+    # binding.pry
+    ##only start creating if subscription is not nil
+    if !subscription.nil?
+      evaluated_plan = Plan.which(subscription.shop)
+      subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
+      ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
+      create_invoice(subscription,params)
+    end
   end
 
   def self.handle_invoice_payment_succeeded(params)
@@ -54,6 +62,7 @@ module StripeEventHandlers
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_payment_failed(params)
@@ -62,6 +71,7 @@ module StripeEventHandlers
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'invoice_payment_failure', {shop_id: subscription.shop.id, amount: amount, connection_count: conn_count})
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_updated(params)
@@ -120,6 +130,30 @@ module StripeEventHandlers
     shop.save(validate: false)
   end
 
+  def self.handle_charge_succeeded(params)
+    # binding.pry
+    begin 
+      fee_description = params[:data][:object][:fee_details].first.description
+    rescue
+      fee_description = nil
+    end
+    Charge.create(
+        :created => params[:created]  ,
+        :live_mode => params[:livemode]  ,
+        :fee_amount => params[:data][:object][:fee] ,
+        :invoice => params[:data][:object][:invoice] ,
+        :description => params[:data][:object][:description] ,
+        :dispute => params[:data][:object][:dispute]  ,
+        :refunded => params[:data][:object][:refunded] ,
+        :paid => params[:data][:object][:paid] ,
+        :amount => params[:data][:object][:amount]  ,
+        :card_last4 => params[:data][:object][:card][:last4] ,
+        :amount_refunded => params[:data][:object][:amount_refunded]  ,
+        :customer => params[:data][:object][:customer]  ,
+        :fee_description => fee_description
+      )
+  end
+
   private
   def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
     coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
@@ -132,5 +166,15 @@ module StripeEventHandlers
     subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
     shop = subscription.shop
     [coupon, shop]
+  end
+
+  def self.create_invoice(subscription,params)
+      Invoice.create(
+        :subscription_id => subscription.id,
+        :stripe_customer_token => params['data']['object']['customer'],
+        :stripe_invoice_id => params['data']['object']['id'],
+        :paid_status => params['data']['object']['paid'],
+        :amount => params['data']['object']['total']
+      )
   end
 end

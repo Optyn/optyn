@@ -3,19 +3,15 @@
     %h4 Our Company
     %ul
       %li
-        %a{ :href => faq_path } FAQs
-      %li
-        %a{ :href => 'testimonials/alley-gallery' } Testimonials
-      %li
         %a{ :href => about_path } About Us
       %li
         %a{ :href => 'http://www.angel.co/optyn/jobs', :target => "_blank"} Jobs
       %li
         %a{ :href => blog_path } Our Blog
       %li
-        %a{ :href => consumer_features_path } Consumers
-      %li
         %a{ :href => terms_path } Terms of Use
+      %li
+        %a{ :href => privacy_path } Privacy Policy
   .span2
     %h4 For Merchants
     %ul
@@ -24,9 +20,11 @@
       %li
         %a{ :href => '/tour' } Quick Tour
       %li
-        %a{ :href => support_path, :target => "_blank" } Customer Support
+        %a{ :href => 'testimonials/alley-gallery' } Testimonials
       %li
-        %a{ :href => privacy_path } Privacy Policy
+        %a{ :href => faq_path } FAQs
+      %li
+        %a{ :href => support_path, :target => "_blank" } Customer Support
       %li
         %a{ :href => new_merchants_manager_registration_path } Get Started!
   .span2
@@ -34,9 +32,34 @@
     %ul
       %li
         %a{ :href => '/partner-with-us' } Partner With Us
-  .span4.offset2.text-center
-    %a{ :href => "http://www.twitter.com/optyn", :target => "_blank", :class => 'pg-twitter' }Our Twitter page
-    %a{ :href => "http://www.facebook.com/optyn", :target => "_blank", :class => 'pg-facebook' }Our Facebook page
+      %li
+        %a{ :href => '/affiliates' } Affiliates
+
+
+  .span4.offset2.text-center.sf-social
+    %div
+      .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false" }
+      &nbsp;
+
+      %a{ :href => "https://twitter.com/optyn", :class => "twitter-follow-button", "data-show-count" => "false"}Follow @optyn
+      :javascript
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+      &nbsp;
+
+      .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100" }
+      :javascript
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/plusone.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    .blank-space
+    %a{ href: 'http://www.facebook.com/optyn', target: '_blank', alt: 'Our Facebook page' }
+      %i.icon-facebook
+    %a{ href: 'http://www.twitter.com/optyn', target: '_blank', alt: 'Our Twitter page' }
+      %i.icon-twitter
+    %a{ href: 'https://plus.google.com/+OptynEmailMarketing', target: '_blank', alt: 'Google Plus E-Mail Marketing Page', rel: 'publisher' }
+      %i.icon-google-plus
     %p
       2013 &copy; Optyn, Inc.
       %br

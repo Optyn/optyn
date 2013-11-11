@@ -15,7 +15,6 @@ class Shop < ActiveRecord::Base
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :users, through: :connections
-  has_one :survey, dependent: :destroy
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
@@ -23,6 +22,8 @@ class Shop < ActiveRecord::Base
   belongs_to :coupon
   belongs_to :partner
   has_many :social_profiles, dependent: :destroy
+
+  has_many :survey, dependent: :destroy #changing it to has_many
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
@@ -147,6 +148,12 @@ class Shop < ActiveRecord::Base
 
   def shop
     self
+  end
+
+  def starter_plan?
+    plan.id = Plan.starter.id
+  rescue
+    false
   end
 
 
@@ -387,6 +394,20 @@ class Shop < ActiveRecord::Base
   end  
   
 
+  def upcoming_payment_amount_in_dollars
+    plan_amount = plan.amount
+
+    if coupon.present? && coupon.applicable?
+      if coupon.percent_off.present?
+        plan_amount = plan_amount * (coupon.percent_off.to_f / 100)
+      else
+        plan_amount = plan_amount - coupon.amount_off
+      end 
+    end
+
+    plan_amount.to_f / 100
+  end
+
   private
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "").downcase
@@ -400,7 +421,7 @@ class Shop < ActiveRecord::Base
   def create_dummy_survey
     unless self.virtual?
       unless survey.present?
-        dummy_survey = self.build_survey
+        dummy_survey = self.survey.build
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)

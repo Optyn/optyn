@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
 
     flash[:notice] = "Signed in successfully"
     if admin_signed_in?
-      '/admin'
+      '/admins'
     elsif partner_signed_in?
       partners_root_path
     elsif user_signed_in?
