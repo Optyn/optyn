@@ -3,7 +3,8 @@ class Merchants::SurveysController < Merchants::BaseController
 	before_filter :survey_actually_created, only: [:show]
 
 	def new
-
+		@survey = Survey.create(:title=>"Dummy Title", :ready=>"false", :shop_id=>current_shop.id )
+		redirect_to "/merchants/segments/#{@survey.id}/edit"
 	end
 
 
@@ -11,6 +12,7 @@ class Merchants::SurveysController < Merchants::BaseController
 		# binding.pry
 		#we will need id in params to show
 		begin
+			#TODO:constrian in current shop
 			@survey = Survey.find(params[:id])
 		rescue
 			@survey = current_survey
