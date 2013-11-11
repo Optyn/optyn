@@ -38,7 +38,7 @@ module StripeEventHandlers
 
   def self.handle_plan_updated(params)
       @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
-      @plan=Plan.find_by_plan_id(params['data']['object']['id']) if @stripe_plan
+      @plan=Plan.find_or_initialize_by_plan_id(params['data']['object']['id']) if @stripe_plan
       @plan.update_attributes(:plan_id => @stripe_plan.id,
                               :name => @stripe_plan.name,
                               :interval => @stripe_plan.interval,
