@@ -171,4 +171,13 @@ module Merchants::MessagesHelper
     msg = "#{message.name} #{message.uuid}"
     return public_view_messages_path(shop.name.parameterize, msg.parameterize)
   end
+
+  def get_social_share_link(type, message, public_msg_url)
+    case type
+    when "facebook"
+      return URI.parse(URI.encode("#{FACEBOOK_SHARE_API}?u=#{public_msg_url}"))
+    when "twitter"
+      return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.name}&url=#{public_msg_url}"))
+    end
+  end
 end

@@ -5,6 +5,6 @@ class ShareMailer < ActionMailer::Base
   def shared_email(users, message)
   	@message = message
     @shop = @message.shop
-    mail(to: users, subject: 'Welcome to My Awesome Site')
+    mail(to: users, subject: "#{@message.name}")
   end
 end
