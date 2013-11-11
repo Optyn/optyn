@@ -30,6 +30,7 @@ Optyn::Application.routes.draw do
   match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
+  match 'sitemap' => 'main#sitemap'
 
   match 'generate_qr_code' => 'merchants/messages#generate_qr_code'
   match 'redeem/:message_user' => 'merchants/messages#redeem'

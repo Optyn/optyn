@@ -82,6 +82,10 @@ class Shop < ActiveRecord::Base
 
   scope :by_manager_email, ->(manager_email) {joins(:managers).where(["managers.email LIKE LOWER(:manager_email)", {manager_email: manager_email}])}
 
+  scope :not_pre_added, where(pre_added: false)
+
+  scope :alphabetized, order("shops.name")
+
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
   before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
@@ -393,6 +397,36 @@ class Shop < ActiveRecord::Base
     self.errors.full_messages
   end  
   
+  def meta_tag_title
+    content = "#{name}"
+
+    if first_location.present?
+      content << " in #{first_location_city}" if first_location_city.present?
+      content << ", #{first_location_state_name}" if first_location_state_name.present?
+    end
+    
+    content
+  end
+
+  def meta_tag_description
+    content = ""
+
+    if description.present?
+      content << description 
+    else
+      content << %{Check out what type of marketing Promotions are available for #{name}. #{name} uses Optyn to create Coupons, specials, sales, surveys, and much more. Follow #{name} on Optyn.com}
+    end
+
+    content
+  end
+
+  def meta_tag_keywords
+    content = []
+    content << name
+    content << meta_tag_title.gsub(/,/, " -")
+    content.join(", ")
+  end
+
 
   def upcoming_payment_amount_in_dollars
     plan_amount = plan.amount

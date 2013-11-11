@@ -1,0 +1,7 @@
+/Links will be added here...
+
+/Shop public Links
+%ul
+  - @shops.each do |shop|
+    %li
+      = link_to(shop.name, public_shop_path(shop.identifier))
