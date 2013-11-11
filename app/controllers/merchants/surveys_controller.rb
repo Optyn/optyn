@@ -24,6 +24,12 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def edit
+		begin
+			#TODO:constrian in current shop
+			@survey = Survey.find(params[:id])
+		rescue
+			@survey = current_survey
+		end
     	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
 	end
 
