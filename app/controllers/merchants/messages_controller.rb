@@ -224,7 +224,10 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def send_shared_email
     message = Message.find(params[:message_id])
-    ShareMailer.shared_email(params[:To], message).deliver
+    @users = params[:To].split(",")
+    @users.each do |user_email|
+      ShareMailer.shared_email(user_email.strip, message).deliver
+    end
     respond_to do |format|
       format.html { 
         redirect_to(root_path, notice: 'Email was successfully sent.') 

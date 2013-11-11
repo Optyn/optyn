@@ -2,9 +2,10 @@ class ShareMailer < ActionMailer::Base
   helper Merchants::MessagesHelper
   default from: "aishwarya@idyllic-software.com"
 
-  def shared_email(users, message)
+  def shared_email(user_email, message)
   	@message = message
     @shop = @message.shop
-    mail(to: users, subject: "#{@message.name}")
+    @user_email = user_email
+    mail(to: user_email, subject: "#{@message.name}")
   end
 end

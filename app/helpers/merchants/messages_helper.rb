@@ -180,4 +180,16 @@ module Merchants::MessagesHelper
       return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.name}&url=#{public_msg_url}"))
     end
   end
+
+  def optyn_user?(email_of_recepient=nil)
+    return false if email_of_recepient.nil?
+    
+    if email_of_recepient
+      if User.find_by_email(email_of_recepient)
+        return true
+      else
+        return false
+      end
+    end
+  end
 end
