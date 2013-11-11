@@ -1,5 +1,332 @@
-# See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
-#
-# To ban all spiders from the entire site uncomment the next two lines:
-# User-Agent: *
-# Disallow: /
+#Welcome to Optyn! Please contact us at support@optyn.com for any details.
+
+
+User-agent: Googlebot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: baiduspider
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: msnbot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: naverbot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: seznambot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: Slurp
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: teoma
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: Yandex
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: CCBot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: Telefonica
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: SandDollar
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: dotbot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: rogerbot
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: IntuitGSACrawler
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
+
+User-agent: red-app-gsa-p-one
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /shop/public/*
+Disallow: /merchants
+Disallow: /admin
+Disallow: /reseller
+Disallow: /blog
+Disallow: /messages*
+Disallow: /connections*
+Disallow: /segments*
+Disallow: /login
+Disallow: /register
+
+
