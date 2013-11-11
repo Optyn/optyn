@@ -4,21 +4,18 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	def new
 		@survey = Survey.create(:title=>"Dummy Title", :ready=>"false", :shop_id=>current_shop.id )
-		#fixme: change with named url
+		#FIXME: change with named url
 		redirect_to "/merchants/segments/#{@survey.id}/edit"
 	end
 
 
 	def show
-		# binding.pry
-		#we will need id in params to show
 		begin
-			#Constrained in current shop
-			@survey = Survey.where(:id=>params[:id], :shop_id => current_shop.id).first
-		rescue
+			@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
+		rescue ActiveRecord::RecordNotFound
 			@survey = current_survey
-		end
-	end
+		end#end of begin
+	end#end of show
 
 	def index
 		@list_survey = current_shop.survey
@@ -26,11 +23,10 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	def edit
 		begin
-			#Constrained in current shop
-			@survey = Survey.where(:id=>params[:id], :shop_id => current_shop.id).first
-		rescue
+			@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
+		rescue ActiveRecord::RecordNotFound
 			@survey = current_survey
-		end
+		end#end of begin
     	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
 	end
 
