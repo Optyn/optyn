@@ -2,6 +2,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	before_filter :current_survey
 	before_filter :survey_actually_created, only: [:show]
 
+
 	def new
 		@survey = Survey.create(:title=>"Dummy Title", :ready=>"false", :shop_id=>current_shop.id )
 		#FIXME: change with named url
@@ -14,6 +15,7 @@ class Merchants::SurveysController < Merchants::BaseController
 			@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
 		rescue ActiveRecord::RecordNotFound
 			@survey = current_survey
+			flash.now[:alert] = "Record Not Found"
 		end#end of begin
 	end#end of show
 
@@ -26,6 +28,7 @@ class Merchants::SurveysController < Merchants::BaseController
 			@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
 		rescue ActiveRecord::RecordNotFound
 			@survey = current_survey
+			flash.now[:alert] = "Record Not Found"
 		end#end of begin
     	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
 	end
