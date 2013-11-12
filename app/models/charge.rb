@@ -1,5 +1,4 @@
 class Charge < ActiveRecord::Base
-  belongs_to :invoice
 
   attr_accessible :created, :livemode, :fee_amount, :stripe_charge_id
   attr_accessible :stripe_invoice_id, :description, :dispute

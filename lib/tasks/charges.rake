@@ -15,9 +15,9 @@ namespace :charges do
           :stripe_charge_id => stripe_charge.id,
           :created => stripe_charge.created,
           :livemode => stripe_charge.livemode,
-          :fee_amount => stripe_charge.fee,
-          :fee_description => stripe_charge.fee_details.to_s,
-          :stripe_invoice_id => stripe_charge.invoice,
+          :fee_amount => (stripe_charge.fee rescue nil),
+          :fee_description => (stripe_charge.fee_details.to_s rescue nil),
+          :stripe_invoice_token => stripe_charge.invoice,
           :description => stripe_charge.description,
           :dispute => stripe_charge.dispute,
           :refunded => stripe_charge.refunded,
@@ -26,9 +26,7 @@ namespace :charges do
           :amount_refunded => stripe_charge.amount_refunded,
           :card_last4 => stripe_charge.card.last4,
           :stripe_customer_token => stripe_charge.customer,
-        }         
-
-        charge.invoice_id = Invoice.find_by_stripe_invoice_id(stripe_charge.invoice).id rescue nil
+        }
 
         charge.save
       end # end of the subscription condition

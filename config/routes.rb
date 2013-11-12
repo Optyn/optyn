@@ -287,6 +287,7 @@ Optyn::Application.routes.draw do
     get "messages/" => "messages#types", as: 'campaign_types'
     resources :messages do
       collection do
+        get :select_survey
         get :types
         get :drafts
         get :trash
