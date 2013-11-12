@@ -6,30 +6,24 @@
       %h1 Sitemap
 
   .row-fluid
-    .span3
+    .span4
       %h4 Our Company
       = render 'layouts/links_company'
 
-    .span3
+    .span4
       %h4 For Merchants
       = render 'layouts/links_merchants'
 
-    .span3
+    .span4
       %h4 For Partners
       = render 'layouts/links_partner'
-
-    .span3
-      %h4 For Publishers
-      %ul
-        %li
-          %a( href='#' ) Nothing here
 
   .blank-space
 
   .row-fluid
-    .span3
+    .span4
       /Shop public Links
-      %h4 Shops
+      %h4 Customer Profiles
       %ul
         - @shops.each do |shop|
           %li
