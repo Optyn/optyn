@@ -1,0 +1,4 @@
+= form_tag("/new",method: "get") do
+ = label_tag(:list_survey,"Choose Survey You Want to Send")
+ = select_tag(:list_survey,@list_survey.map { |value| [ value, value ] })
+ = submit_tag("Choose")

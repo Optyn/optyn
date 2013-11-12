@@ -6,11 +6,19 @@ class Merchants::MessagesController < Merchants::BaseController
     #Do Nothing
   end
 
+  ##show just before calling sending of survey link 
+  ##so that user can select survey
+  def select_survey
+    binding.pry
+    @list_survey = Survey.where(:shop_id=>current_shop.id)
+  end
+
   def new
+    survey_id = params[:survey_id]
     @message = Message.new
     @message.manager_id = current_manager.id
     @shop = current_shop
-    @survey = current_shop.survey.first
+    @survey = current_shop.survey.first #FIXME
     # binding.pry
     #@message.build_message_image
   end
