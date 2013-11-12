@@ -384,13 +384,9 @@
     padding: 7% 0;
     font: normal 2rem/3rem $serif;
     text-align: center;
-    &:before, &:after {
-      content: '"';
-      color: $green;
-    }
-    @media ( max-width: $qvga-w ) {
+    @media ( max-width: $xga-h ) {
       font-size: 1.5rem;
-      line-height: 1.5rem;
+      line-height: 2.2rem;
     }
   }
 }

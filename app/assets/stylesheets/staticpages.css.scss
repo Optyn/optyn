@@ -94,14 +94,6 @@
     font-size: 1.3rem;
     line-height: 1.6rem;
     margin: 3% 0;
-    &:before {
-      content: '"';
-      margin-right: 5px;
-    }
-    &:after {
-      content: '"';
-      margin-left: 5px;
-    }
   }
   .t-coupons,
   .t-sales,
