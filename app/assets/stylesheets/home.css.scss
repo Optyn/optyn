@@ -293,7 +293,9 @@
 
   .m-i {  /* Merchant's index */
     background-color: $gray;
-    background-image: image-url( 'main1.jpg' );
+    @media ( min-width: 420px ) {
+      background-image: image-url( 'main1.jpg' );
+    }
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
