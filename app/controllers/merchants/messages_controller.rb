@@ -9,6 +9,9 @@ class Merchants::MessagesController < Merchants::BaseController
   def new
     @message = Message.new
     @message.manager_id = current_manager.id
+    @shop = current_shop
+    @survey = current_shop.survey.first
+    # binding.pry
     #@message.build_message_image
   end
 
