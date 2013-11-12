@@ -326,16 +326,10 @@
       }
     }
     .vid-lnk {
-      color: darken( $black, 50% );
       font-weight: 700;
       text-shadow: 1px 1px 0 #fff;
       margin-top: 330px;
-      @include transition( background-color 0.3s ease-out );
-      font-size: 16px;
-    }
-    .vid-lnk:hover {
-      text-decoration: none;
-      background-color: rgba( $white, 0.99 );
+      font-size: 1rem;
     }
   }  /* End .m-i */
 }
