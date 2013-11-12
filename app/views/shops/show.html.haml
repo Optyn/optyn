@@ -12,7 +12,11 @@
     .row-fluid.button
       .span12.text-center.optyn
         %strong
-          = pluralize(@shop.connections.active.count, "Subscribers")
+          Opt-in to receive exclusive specials, contests,
+          %br
+          announcements and more from #{@shop.name}.
+        %br
+        %br
         = form_tag("#{SiteConfig.app_base_url}#{subscribe_with_email_path}", method: :post) do
           %input{:type=>"text", :id=>"session_email", :name=>"user[email]" }
           %input{:type=>"hidden", :name=>"uuid", :value=>"#{@shop.uuid}"}
@@ -20,6 +24,9 @@
           %input{:type=>"hidden", :name=>"from", :value=>"public_page"}
           %input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token}
           %input.btn.btn-warning{:type=>"submit", :value=>"Subscribe"}
+        %strong
+          #{@shop.name} currently has over 
+          = pluralize(@shop.connections.active.count, "Subscribers")
     .row-fluid.mainbody
       .span8.offset2.details
         .title
