@@ -12,7 +12,7 @@
     .row-fluid.button
       .span12.text-center.optyn
         %strong
-          = pluralize(@shop.connections.active.count, "Optyn")
+          = pluralize(@shop.connections.active.count, "Subscribers")
         = form_tag("#{SiteConfig.app_base_url}#{subscribe_with_email_path}", method: :post) do
           %input{:type=>"text", :id=>"session_email", :name=>"user[email]" }
           %input{:type=>"hidden", :name=>"uuid", :value=>"#{@shop.uuid}"}
@@ -24,7 +24,7 @@
       .span8.offset2.details
         .title
           %h3
-            == #{@shop.name} Details
+            == #{@shop.name} Details:
         %table.table.table-striped
           %tbody
             - if @shop.businesses.present?
