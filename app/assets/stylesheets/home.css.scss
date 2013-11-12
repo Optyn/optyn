@@ -292,27 +292,31 @@
   }
 
 }
-
 .m-i {  /* Merchant's index */
-  background-color: $gray;
-  background-image: image-url( 'main1.jpg' );
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  padding: 2% 0;
-  text-align: left;
-  h1 {
-    font-weight: 700;
-    border: none;
-    > span {
-      background: rgba(0, 0, 0, 0.75);
-      color: $white;
-      padding:0 10px 3px 10px;
-      display: inline-block;
+    background-color: $gray;
+    @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
+      background-image: image-url( 'main-ag-m.jpg' );
     }
-    > span:first-child {
-      margin-bottom: 10px;
+    @media ( min-width: $wxga-w ) {
+      background-image: image-url( 'main-ag.jpg' );
+    }
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 2% 0;
+    text-align: left;
+    h1 {
+      font-weight: 700;
+      border: none;
+      > span {
+        background: rgba(0, 0, 0, 0.75);
+        color: $white;
+        padding:0 10px 3px 10px;
+        display: inline-block;
+      }
+      > span:first-child {
+        margin-bottom: 10px;
     }
   }
   .well {
@@ -437,7 +441,10 @@
 .lp-usp-3 {
   padding: 4% 0;
   background-attachment: fixed;
-  background-image: image-url( 'bg-landing-2.jpg' );
+  background-color: $light-gray;
+  @media ( min-width: $qvga-w + 100 ) {
+    background-image: image-url( 'bg-landing-2.jpg' );
+  }
   background-size: cover;
   .well {
     border: 0;
