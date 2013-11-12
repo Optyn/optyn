@@ -9,7 +9,6 @@ class Merchants::MessagesController < Merchants::BaseController
   ##show just before calling sending of survey link 
   ##so that user can select survey
   def select_survey
-    binding.pry
     @list_survey = Survey.where(:shop_id=>current_shop.id)
   end
 
