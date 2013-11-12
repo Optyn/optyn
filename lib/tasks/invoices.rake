@@ -16,7 +16,12 @@ namespace :invoices do
           :stripe_customer_token => stripe_invoice['customer'],
           :stripe_invoice_id => stripe_invoice['id'],
           :paid_status => stripe_invoice['paid'],
-          :amount => stripe_invoice['amount_due']
+          :amount => stripe_invoice['amount_due'],
+          :subtotal => stripe_invoice['subtotal'],
+          :total => stripe_invoice['total'],
+          :stripe_coupon_token => (stripe_token['discount']['coupon']['id'] rescue nil),
+          :stripe_coupon_percent_off => (stripe_token['discount']['coupon']['percent_off'] rescue nil),
+          :stripe_coupon_percent_off => (stripe_token['discount']['coupon']['amount_off'] rescue nil)
         }         
         invoice.save
       end # end of the subscription condition

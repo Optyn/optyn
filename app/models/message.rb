@@ -463,14 +463,14 @@ class Message < ActiveRecord::Base
   end
 
   def call_fb_api(link)
-    response = HTTParty.get("#{FACEBOOK_STAT_API}" + link)
-    # response = HTTParty.get("https://api.facebook.com/method/links.getStats?urls=https://development.optyn.com/music-store/campaigns/test-704253849d074870808f056c2db6992f&format=json")
+    response = HTTParty.get("#{FACEBOOK_STAT_API}" + link + "&format=json")
+    # response = HTTParty.get("https://api.facebook.com/method/links.getStats?urls=https://development.optyn.com/music-store/campaigns/testing-share-stat-ac49bdfcf8d345e1b2872505eea9e0f6&format=json")
     return response.parsed_response
   end
 
   def call_twitter_api(link)
     response = HTTParty.get("#{TWITTER_STAT_API}" + link)
-    # response = HTTParty.get("http://urls.api.twitter.com/1/urls/count.json?url=https://development.optyn.com/music-store/campaigns/test-704253849d074870808f056c2db6992f")
+    # response = HTTParty.get("http://urls.api.twitter.com/1/urls/count.json?url=https://development.optyn.com/music-store/campaigns/test-coupon-3141d0567770402b8e7084bc495018f4")
     return response.parsed_response
   end
 

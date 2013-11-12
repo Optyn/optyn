@@ -62,10 +62,12 @@
             %td #{@plan.min} - #{@plan.max} Customers
             %td 
               .btn
-                = link_to "View" , "/merchants/invoice/?id=#{charge.id}"
+                -# "/merchants/invoice/?id=#{charge.id}
+                = link_to "View", merchants_subsciption_invoice_path(id: charge.id) 
             %td 
               .btn
-                = link_to "Print" , "/merchants/invoice/print/?id=#{charge.id}"
+                -#"/merchants/invoice/print/?id=#{charge.id}"
+                = link_to "Print", merchants_invoice_print_path(id: charge.id)
 
 
 
