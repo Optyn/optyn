@@ -17,9 +17,13 @@
         = image_tag "menu_icon_campaigns.png", :alt => "Surveys"
         Customer Surveys
     %li
+      / FIXME
       / %a{:href =>  merchants_survey_survey_answers_path, :class => active_tab_class(['survey_answers'])}
       /   = image_tag "menu_icon_messages.png", :alt => "Segmentation"
       /   Survey Responses
+      %a{:href =>  "/merchants/segments/select_survey/?next=", :class => active_tab_class(['survey_answers'])}
+        = image_tag "menu_icon_messages.png", :alt => "Segmentation"
+        Survey Responses
     %li
       %a{:href => merchants_shop_path, :class => active_tab_class(['shops', 'subscriptions', 'registrations', 'merchant_managers', 'locations', 'social_profiles'])}
         = image_tag "merchant_menu_settings_icon.png", :alt => "Your Shop"
