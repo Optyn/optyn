@@ -293,8 +293,11 @@
 
   .m-i {  /* Merchant's index */
     background-color: $gray;
-    @media ( min-width: 420px ) {
-      background-image: image-url( 'main1.jpg' );
+    @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
+      background-image: image-url( 'main-ag-m.jpg' );
+    }
+    @media ( min-width: $wxga-w ) {
+      background-image: image-url( 'main-ag.jpg' );
     }
     background-position: center center;
     background-size: cover;
@@ -422,7 +425,10 @@
 .lp-usp-3 {
   padding: 4% 0;
   background-attachment: fixed;
-  background-image: image-url( 'bg-landing-2.jpg' );
+  background-color: $light-gray;
+  @media ( min-width: $qvga-w + 100 ) {
+    background-image: image-url( 'bg-landing-2.jpg' );
+  }
   background-size: cover;
   .well {
     border: 0;
