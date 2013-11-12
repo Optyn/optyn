@@ -1,4 +1,4 @@
-= form_tag("/new",method: "get") do
+= form_tag(new_merchants_message_path, method: "GET") do
  = label_tag(:survey_id,"Choose Survey You Want to Send")
  = select_tag :survey_id, options_from_collection_for_select(@list_survey, "id", "title")
  = submit_tag("Choose")
