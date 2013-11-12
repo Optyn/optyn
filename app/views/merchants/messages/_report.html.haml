@@ -46,7 +46,7 @@
           Facebook shares:
         .count
           = fb_body.first["share_count"]
-    - if ((twitter_body) and (twitter_body["count"]) and (not twitter_body["count"] == 0))
+    - if ((twitter_body) and (twitter_body["count"]))
       .span3.box
         .info
           Tweets:
