@@ -388,6 +388,10 @@
       content: '"';
       color: $green;
     }
+    @media ( max-width: $qvga-w ) {
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
   }
 }
 .lp-testimonial-by {
