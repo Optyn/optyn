@@ -9,7 +9,7 @@ class MainController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.xml {send_data('public/sitemap.xml.gz', filename: 'sitename.xml.gz', disposition: 'attachment', type: 'application/x-gzip')}
+      format.xml {send_file('public/sitemap.xml.gz', filename: 'sitemap.xml.gz')}
     end
   end
 
