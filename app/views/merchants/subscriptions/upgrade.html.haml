@@ -15,8 +15,8 @@
   .well.span3
     %h5 Last Payment:
     - if @strip_last_payment.present?
-      = number_to_currency(@stripe_last_payment.amount_in_dollars) 
-      on 
+      = number_to_currency(@stripe_last_payment.amount_in_dollars)
+      = "on" 
     - if !@stripe_last_payment.nil?
       = Time.at(@stripe_last_payment.created).strftime("%B %d, %Y")
 
@@ -28,11 +28,12 @@
       (pricing tier may change)
   .well.span3
     %h5 Credit Card on File:
-    %p ending in 
-    - if !@card_last4.nil?
-      #{@card_last4}
-    -else
-      "-"
+    %p 
+      ending in 
+      - if !@card_last4.nil?
+        #{@card_last4}
+      -else
+        \-
     %a.btn{ 'href' => '#get-payment-info', 'role' => 'button', 'data-toggle' => 'modal' } Update Card
 
 .blank-space
