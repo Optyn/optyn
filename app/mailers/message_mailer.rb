@@ -9,6 +9,7 @@ class MessageMailer < ActionMailer::Base
   def send_announcement(message, message_user)
     @message = message
     @message_user = message_user
+    @user = @mesage_user.user
     if @message.manager.present?
       @shop = @message.shop
       @shop_logo = true #flag set for displaying the shop logo or just the shop name
