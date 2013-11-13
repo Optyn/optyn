@@ -12,7 +12,7 @@
           = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "#{twitter_link}", :target => "_blank")
           - @user_email = @user_email ? @user_email : (@user ? @user.email : nil)
           - if optyn_user?(@user_email)
-            = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), "#{SiteConfig.app_base_url}/share_email/#{@message.id}", :target => "_blank")
+            = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), "#{SiteConfig.app_base_url}/share_email/#{@message.uuid}", :target => "_blank")
 
 %table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
   %tr

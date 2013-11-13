@@ -233,7 +233,7 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def send_shared_email
-    message = Message.find(params[:message_id])
+    message = Message.for_uuid(params[:message_id])
     @users = params[:To].split(",")
     @users.each do |user_email|
       ShareMailer.shared_email(user_email.strip, message).deliver
