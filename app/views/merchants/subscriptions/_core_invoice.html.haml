@@ -25,7 +25,7 @@
 			%td
 				%strong Subtotal
 			%td
-				%strong #{@subtotal}
+				%strong #{number_to_currency(@subtotal)}
 		%tr
 			%td
 				-if @invoice.present?
