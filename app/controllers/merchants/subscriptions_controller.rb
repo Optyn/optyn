@@ -69,7 +69,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
         send_file(file,:type => "application/pdf")
       else
         flash[:notice]= "Couldnt Create Invoice"
-        return
+        render :nothing => true  and return
       end
     end
   end
