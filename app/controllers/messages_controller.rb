@@ -29,6 +29,7 @@ class MessagesController < BaseController
   end
 
   def show
+    @user = current_user
     if !@message_user.blank? && !@message_user.is_read
       @flush = true
       @message_user.update_attribute(:is_read, true)
