@@ -1,26 +1,34 @@
-%table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"}
+%table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
   - if @message.present? and @message.make_public
+
     %tr
       %td
-        %div{:style => "height: 2px; width: 100%; background: #eee;"}
-        %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
+        %div{:style => "text-align:center;margin:20px auto;"}
+          - @user_email = @user_email ? @user_email : (@user ? @user.email : nil)
+          - btn_width = optyn_user?(@user_email) ? 'width: 33%;' : 'width: 50%;'
+          - btn_styles = 'display: block;float:left;color: #fff;height: 50px;padding-top:4px;' + btn_width
           - msg = "#{@message.name} #{@message.uuid}"
           - public_msg = "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}"
           - facebook_link = get_social_share_link("facebook", @message, public_msg)
-          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "#{facebook_link}", :target => "_blank")
+          %a{:href => "#{facebook_link}", :target => "_blank", style: 'background: #3a589b;' + btn_styles}
+            = image_tag("#{SiteConfig.app_base_url}/assets/icon-facebook.png")
+            SHARE
           - twitter_link = get_social_share_link("twitter", @message, public_msg)
-          = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "#{twitter_link}", :target => "_blank")
-          - @user_email = @user_email ? @user_email : (@user ? @user.email : nil)
+          %a{:href => "#{twitter_link}", :target => "_blank", style: 'background:#598dca;' + btn_styles}
+            = image_tag("#{SiteConfig.app_base_url}/assets/icon-twitter.png")
+            TWEET
           - if optyn_user?(@user_email)
-            = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), "#{SiteConfig.app_base_url}/share_email/#{@message.id}", :target => "_blank")
+            %a{:href => "#{SiteConfig.app_base_url}/share_email/#{@message.uuid}", :target => "_blank", style: 'height:50px;display:block;float:left;width:34%;padding-top:4px;background:#db4a39;color:#fff;'}
+              = image_tag("#{SiteConfig.app_base_url}/assets/icon-email.png")
+              EMAIL
+          %div{:style => "width:100%;height:1px;clear:both;float:none;"}
 
-%table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};", :align => "center"} 
+%table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
   %tr
     %td
     %td
       - if @shop.present? && @shop.social_profiles.present?
-        %div{:style => "height: 2px; width: 100%; background: #eee;"}
-        %div{:margin => "left:10px", :style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
+        %div{:style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
           %p{:font => "bold", :style => "font-size: 18px; line-height: 22px; margin: 0 20px 0 0; margin-bottom: 10px;"}
             Connect with us
           %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
@@ -29,7 +37,8 @@
               = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{sp.sp_link}")
                     
     %td
-- if @shop.present? &&  @shop.starter_plan?
+
+- if !@skip_free_message && @shop.present? &&  @shop.starter_plan?
   %table{:style => 'width:100%; color:#ccc; color: rgba(255,255,255,0.8);' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
     %tr
       %td{:style => "padding-left: 20px; max-height: 40px; padding-top: 15px; width: 100%;"}
@@ -47,8 +56,8 @@
         %a{:href => "#{SiteConfig.app_base_url}", :target => "_blank"}
           = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
 
-%div{ style: 'width: 100%; padding: 20px 0 0 0; text-align: center;'}
-  %p{:font => "bold", :style => "font-size: 13px; margin: 0px;"}
+%div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
+  %p{:style => "font-size: 11px;margin:0px;"}
     - if @message.present?  
       - if @message_user.present?
         = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}?tracker=#{@message_user.uuid}", style: 'color: #666;')
