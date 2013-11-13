@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   layout :switch_layout
 
+  around_filter :print_cookie
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to (:back), :alert => exception.message
   end
@@ -81,5 +83,12 @@ class ApplicationController < ActionController::Base
 
   def switch_layout
     user_signed_in? || manager_signed_in? ? 'base' : 'application'
+  end
+
+  def print_cookie
+    yield
+    Rails.logger.info "*" * 100
+    Rails.logger.info cookies.inspect
+    Rails.logger.info "-" * 100
   end
 end
