@@ -221,7 +221,7 @@ class Merchants::MessagesController < Merchants::BaseController
     fb_body = nil
     if message.make_public
       msg = "#{message.name} #{message.uuid}"
-      link = "#{SiteConfig.app_base_url}/#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
+      link = "#{SiteConfig.app_base_url}#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
       fb_body = message.call_fb_api(link)
       twitter_body = message.call_twitter_api(link)
     end
@@ -233,7 +233,7 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def send_shared_email
-    message = Message.find(params[:message_id])
+    message = Message.for_uuid(params[:message_id])
     @users = params[:To].split(",")
     @users.each do |user_email|
       ShareMailer.shared_email(user_email.strip, message).deliver

@@ -72,9 +72,9 @@ module Api
           if access_token
             access_token.revoked_at = Time.now
             access_token.save
-            render(status: :ok)
+            head :ok
           else
-            render(status: :unprocessable_entity)
+            head :unprocessable_entity
           end
         end
 

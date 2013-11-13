@@ -31,9 +31,9 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first rescue nil
     @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token).first rescue nil
 
-    @amount = @invoice.amount rescue nil
-    @subtotal = @invoice.subtotal rescue nil
-    @total = @invoice.total rescue nil
+    @amount = @invoice.amount.to_f / 100 rescue nil
+    @subtotal = @invoice.subtotal.to_f / 100 rescue nil
+    @total = @invoice.total.to_f / 100 rescue nil
     @discount_amount = @total - @subtotal rescue nil
     @card_last4= @charge.card_last4 rescue nil
 
@@ -51,9 +51,9 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first rescue nil
       @coupon = Coupon.where(:stripe_id => @invoice.stripe_coupon_token).first rescue nil
 
-      @amount = @invoice.amount rescue nil
-      @subtotal = @invoice.subtotal rescue nil
-      @total = @invoice.total rescue nil
+      @amount = @invoice.amount.to_f / 100 rescue nil
+      @subtotal = @invoice.subtotal.to_f / 100 rescue nil
+      @total = @invoice.total.to_f / 100 rescue nil
       @discount_amount = @total - @subtotal rescue nil
       @card_last4= @charge.card_last4 rescue nil
 
