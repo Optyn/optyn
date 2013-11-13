@@ -163,6 +163,7 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def public_view
+    @user = current_user if current_user.present?
     if params["message_name"]
       uuid = params["message_name"].split("-").last
       @message = Message.for_uuid(uuid)
