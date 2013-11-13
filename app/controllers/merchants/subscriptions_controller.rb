@@ -67,6 +67,10 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       file = kit.to_file(filename) rescue nil
       if !file.nil?
         send_file(file,:type => "application/pdf")
+      else
+        flash[:notice]= "Couldnt Create Invoice"
+        return
+      end
     end
   end
 
