@@ -10,7 +10,7 @@
           = link_to(image_tag("#{SiteConfig.app_base_url}/assets/facebook-share.png", style: 'height: 40px; margin-right: 20px;'), "#{facebook_link}", :target => "_blank")
           - twitter_link = get_social_share_link("twitter", @message, public_msg)
           = link_to(image_tag("#{SiteConfig.app_base_url}/assets/twitter-share.png", style: 'height: 40px; margin-right: 20px;'), "#{twitter_link}", :target => "_blank")
-          - @user_email = @user_email ? @user_email : (current_user ? current_user.email : nil)
+          - @user_email = @user_email ? @user_email : (@user ? @user.email : nil)
           - if optyn_user?(@user_email)
             = link_to(image_tag("#{SiteConfig.app_base_url}/assets/email-share.png", style: 'height: 40px; margin-right: 20px;'), "#{SiteConfig.app_base_url}/share_email/#{@message.id}", :target => "_blank")
 

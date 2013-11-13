@@ -52,7 +52,7 @@
 
   h2.navy {
     color: #fff;
-    font-family: 'Helvetica', sans-serif;
+    font-family: $sans-serif;
     font-weight: normal;
     padding: 0;
     margin: 0;
@@ -204,12 +204,7 @@
   }
 
   h2, h3 .has-heading::before {
-    font-family: 'Helvetica', sans-serif;
-  }
-
-  h3 {
-    font-size: 25px;
-    line-height: 30px;
+    font-family: $sans-serif;
   }
 
   .sign-up {
@@ -356,8 +351,11 @@
         text-align: center;
       }
     }
-    .well {
-      margin-top: 10px;
+    .vid-lnk {
+      font-weight: 700;
+      text-shadow: 1px 1px 0 #fff;
+      margin-top: 330px;
+      font-size: 1rem;
     }
   }
 }
@@ -405,9 +403,9 @@
     padding: 7% 0;
     font: normal 2rem/3rem $serif;
     text-align: center;
-    &:before, &:after {
-      content: '"';
-      color: $green;
+    @media ( max-width: $xga-h ) {
+      font-size: 1.5rem;
+      line-height: 2.2rem;
     }
   }
 }
@@ -436,7 +434,7 @@
   }
 }
 .lp-usp-2 {
-  padding: 2% 0;
+  padding: 7% 0;
 }
 .lp-usp-3 {
   padding: 4% 0;

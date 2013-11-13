@@ -81,17 +81,9 @@
 
 .testimonial_alley_gallery {
   blockquote {
-    font-size: 1.5em;
-    line-height: 1.5em;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
     margin: 3% 0;
-    &:before {
-      content: '"';
-      margin-right: 5px;
-    }
-    &:after {
-      content: '"';
-      margin-left: 5px;
-    }
   }
   .t-coupons,
   .t-sales,
@@ -146,10 +138,17 @@
     padding: 2%;
   }
 }
-@media ( max-width: 768px ) {
+@media ( max-width: $xga-h ) {
   .about_page .teammate {
     margin-bottom: 0;
     height: auto !important;
+  }
+  .alley-gallery { display: none !important; }
+  .testimonial_alley_gallery {
+    blockquote {
+      font-size: 1.1rem;
+      line-height: 1.5rem;
+    }
   }
 }
 

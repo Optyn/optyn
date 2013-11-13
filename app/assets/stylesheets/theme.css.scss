@@ -994,25 +994,58 @@ form {
 a, input {
   text-shadow: none;
 }
+h1, h2, h3 {
+  font-weight: 400;
+}
 h1 {
-  border-bottom: solid 1px #eee;
+  border-bottom: solid 1px $light-gray;
   line-height: 1.5em;
   margin-bottom: 2%;
   padding-bottom: 0.5em;
+  font-size: 2.2rem;
 }
 h1, h5 {
   font-weight: 300;
 }
-h5 {
-  font-size: 20px;
-  line-height: 25px;
+h2 {
+  font-size: 1.9rem;
+  line-height: 2rem;
+}
+h3 {
+  font-size: 1.6rem;
+  line-height: 1.7rem;
 }
 h4 {
   font-weight: normal;
   margin-bottom: 0;
   font-weight: 700;
-  font-size: 21px;
-  line-height: 26px;
+  font-size: 1.4rem;
+  line-height: 1.5rem;
+}
+h5 {
+  font-size: 20px;
+  line-height: 25px;
+}
+@media ( max-width: $xga-h ) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.3 rem;
+  }
+  h5 {
+    font-size: 1.2rem;
+  }
+  blockquote {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+  }
 }
 strong {
   font-weight: 700;
@@ -1078,6 +1111,9 @@ th {
 
 blockquote {
   font-family: $serif;
+  font-size: 1.3rem;
+  line-height: 1.7rem;
+  i { color: $medium-gray; }
 }
 
 .well {

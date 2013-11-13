@@ -16,7 +16,8 @@ SitemapGenerator::Sitemap.create do
     add '/privacy', :changefreq => 'weekly', :priority => 0.8
     add '/tour', :changefreq => 'weekly', :priority => 0.8
     add '/testimonials/alley-gallery', :changefreq => 'weekly', :priority => 0.8
-    #TODO add affiliates that exists in the develpment branch
+    add '/affiliates', :changefreq => 'weekly', :priority => 0.8
+    
 
     Shop.real.each do |shop|
       add "public/shop/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
