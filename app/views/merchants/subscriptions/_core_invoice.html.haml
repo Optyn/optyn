@@ -12,10 +12,10 @@
 		%tr
 			%td
 				Subscription to 
-				= @amount 
+				= number_to_currency(@amount) 
 				pm
 			%td
-				= @amount
+				= number_to_currency(@amount)
 		/ %tr
 		/ 	%td
 		/ 		Subscription to foobar
@@ -25,22 +25,24 @@
 			%td
 				%strong Subtotal
 			%td
-				%strong #{@subtotal}
+				%strong #{number_to_currency(@subtotal)}
 		%tr
 			%td
 				-if @invoice.present?
 					- if @invoice[:stripe_coupon_percent_off].present?
 						#{@invoice[:stripe_coupon_token]} (#{@invoice[:stripe_coupon_percent_off]}% off)
 					-elsif  @invoice[:stripe_coupon_amount_off].present?
-						#{@invoice[:stripe_coupon_token]} ($ #{@invoice[:stripe_coupon_amount_off]} off)
+						#{@invoice[:stripe_coupon_token]} ($ #{number_to_currency(@invoice[:stripe_coupon_amount_off])} off)
+					-else 
+						Discount
 
 			%td
-				= @discount_amount
+				= number_to_currency(@discount_amount)
 		%tr.info
 			%td
 				%strong Total
 			%td
-				%strong #{@total}
+				%strong #{number_to_currency(@total)}
 	%tfoot
 		%tr
 			%td( colspan='2' )
