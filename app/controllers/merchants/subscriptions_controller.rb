@@ -64,8 +64,13 @@ class Merchants::SubscriptionsController < Merchants::BaseController
                               :layout => false
       kit = PDFKit.new(html, :page_size => 'Letter')
       kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/invoice_pdf.css"
-      file = kit.to_file(filename)
-      send_file(file,:type => "application/pdf")
+      file = kit.to_file(filename) rescue nil
+      if !file.nil?
+        send_file(file,:type => "application/pdf")
+      else
+        flash[:notice]= "Couldnt Create Invoice"
+        render :nothing => true  and return
+      end
     end
   end
 
