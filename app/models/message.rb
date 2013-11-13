@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
   has_many :message_labels, dependent: :destroy
   has_many :labels, through: :message_labels
   has_many :message_users, dependent: :destroy
-  has_many :message_email_auditors, through: :message_users
+  has_many :message_email_auditors, dependent: :destroy
   belongs_to :survey
   has_many :message_visual_properties, dependent: :destroy
   has_one :message_image, dependent: :destroy

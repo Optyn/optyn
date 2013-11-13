@@ -237,7 +237,11 @@ class Merchants::MessagesController < Merchants::BaseController
     message = Message.for_uuid(params[:message_id])
     @users = params[:To].split(",")
     @users.each do |user_email|
-      ShareMailer.shared_email(user_email.strip, message).deliver
+      message_email_auditor = MessageEmailAuditor.new
+      message_email_auditor.message_id = message.id
+      message_email_auditor.delivered = false
+      message_email_auditor.save
+      Resque.enqueue(SharedForwarder, user_email.strip, message.id, message_email_auditor.id)
     end
     respond_to do |format|
       format.html { 

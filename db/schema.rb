@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108121628) do
+ActiveRecord::Schema.define(:version => 20131113121419) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20131108121628) do
     t.integer  "created"
     t.boolean  "livemode"
     t.integer  "fee_amount"
+    t.string   "stripe_invoice_id"
     t.text     "description"
     t.string   "dispute"
     t.boolean  "refunded"
@@ -87,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20131108121628) do
     t.text     "fee_description"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.string   "stripe_plan_token"
+    t.string   "stripe_plan_id"
     t.string   "stripe_invoice_token"
   end
 
@@ -244,8 +245,11 @@ ActiveRecord::Schema.define(:version => 20131108121628) do
     t.boolean  "bounced"
     t.boolean  "complaint"
     t.text     "body"
+    t.string   "email_to"
+    t.integer  "message_id"
   end
 
+  add_index "message_email_auditors", ["message_id"], :name => "index_message_email_auditors_on_message_id"
   add_index "message_email_auditors", ["message_user_id"], :name => "index_message_email_auditors_on_message_user_id"
   add_index "message_email_auditors", ["ses_message_id"], :name => "index_message_email_auditors_on_ses_message_id", :unique => true
 
@@ -511,12 +515,12 @@ ActiveRecord::Schema.define(:version => 20131108121628) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",               :default => ""
-    t.string   "header_background_color",    :default => "#1791C0"
-    t.datetime "deleted_at"
-    t.boolean  "pre_added",                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
     t.string   "footer_background_color",    :default => "#ffffff"
   end
 
