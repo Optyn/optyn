@@ -36,12 +36,24 @@ class Merchants::ConnectionsController < Merchants::BaseController
       @error_hash = []
   		flag = false
   		loop_size = total_users.size - 1
+      
   		(0..loop_size).each do |u|
         next if total_users[u].blank?
-  			name_email_arr = total_users[u].strip.split("(")
-  			name = name_email_arr[0].strip
-  			email = name_email_arr[1].gsub(")", " ").strip
+  			
+        if total_users[u].match(/(?<=\().*?(?=\))/)
+          name_email_arr = total_users[u].strip.split("(")
+    			name = name_email_arr[0].strip
+    			email = name_email_arr[1].scan(/.*?(?=\))/).first.strip
+        else
+          email = total_users[u].strip
+        end
+
+
+          
   			@user = User.new(:name => name, :email => email, :password => "test1234")
+        @user.skip_name = true
+        @user.shop_identifier = current_shop.id
+        @user.show_shop = true
   			if not @user.save
           flag = true
           if @user.errors.full_messages[0].include?("invalid")
