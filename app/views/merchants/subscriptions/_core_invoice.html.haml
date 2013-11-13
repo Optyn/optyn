@@ -33,6 +33,8 @@
 						#{@invoice[:stripe_coupon_token]} (#{@invoice[:stripe_coupon_percent_off]}% off)
 					-elsif  @invoice[:stripe_coupon_amount_off].present?
 						#{@invoice[:stripe_coupon_token]} ($ #{number_to_currency(@invoice[:stripe_coupon_amount_off])} off)
+					-else 
+						Discount
 
 			%td
 				= number_to_currency(@discount_amount)
