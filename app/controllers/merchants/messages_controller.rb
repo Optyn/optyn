@@ -240,6 +240,7 @@ class Merchants::MessagesController < Merchants::BaseController
       message_email_auditor = MessageEmailAuditor.new
       message_email_auditor.message_id = message.id
       message_email_auditor.delivered = false
+      message_email_auditor.email_to = user_email.strip
       message_email_auditor.save
       Resque.enqueue(SharedForwarder, user_email.strip, message.id, message_email_auditor.id)
     end
