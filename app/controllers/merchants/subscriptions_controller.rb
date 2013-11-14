@@ -10,7 +10,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @subscription = current_shop.subscription || @plan.subscriptions.build
     @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
     @amount = (current_charge.amount.to_f / 100 ) rescue nil #because its in cents
-    @stripe_last_payment = @list_charges.first.amount rescue nil
+    @stripe_last_payment = @list_charges.first rescue nil
     @card_last4 = @stripe_last_payment.card_last4 rescue nil
       
     ##this part calculates upcoming payment with following assumption
