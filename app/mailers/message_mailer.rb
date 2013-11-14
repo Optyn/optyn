@@ -32,5 +32,11 @@ class MessageMailer < ActionMailer::Base
     @shop = @message.shop
     @user_email = user_email
     mail(to: user_email, subject: "#{@message.name}")
+
+    mail(to: user_email, 
+      from: @message.from, 
+      subject: @message.personalized_subject(user_email),
+      reply_to: @message.manager_email
+      ) 
   end
 end
