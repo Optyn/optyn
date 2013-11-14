@@ -161,8 +161,8 @@ module StripeEventHandlers
     end
 
     Charge.create(
-        :created => params[:created]  ,
-        :livemode => params[:livemode]  ,
+        :created => params[:created],
+        :livemode => params[:livemode],
         :fee_amount => params[:data][:object][:fee] ,
         :stripe_invoice_token => stripe_invoice_token ,
         :description => params[:data][:object][:description] ,
@@ -174,7 +174,7 @@ module StripeEventHandlers
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
         :stripe_customer_token => params[:data][:object][:customer]  ,
         :fee_description => fee_description ,
-        :stripe_plan_token => stripe_plan_id
+        :stripe_plan_id => stripe_plan_id
       )
   end
 
