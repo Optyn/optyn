@@ -11,6 +11,16 @@ function Shop() {
             this.hookChosen();
             this.hookIdentifierKeyup();
         }
+
+        if($('#affiliate_tracking_frame').length){
+            $('#affiliate_tracking_frame').on('load', function(){
+                $.ajax({
+                    url: $('#update_affiliate_tracking_merchants_shop_path').val(),
+                    type: 'POST',
+                    data: {'_method' : 'put'}
+                })
+            });
+        }
     };
 
     this.setTimeZone = function(){
