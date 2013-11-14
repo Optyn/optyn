@@ -14,7 +14,8 @@ class Subscription < ActiveRecord::Base
 
   after_create :create_stripe_customer_with_email
 
-  def self.create_or_stripe_customer_card(subscription, params)
+  def self.create_stripe_customer_card(subscription, params)
+    binding.pry
     if subscription.stripe_customer_token
       stripe_customer = Stripe::Customer.retrieve(subscription.stripe_customer_token)
       stripe_customer.update_subscription(card: params['stripeToken'], plan: params['stripe_plan_id'])

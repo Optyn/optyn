@@ -101,7 +101,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       @subscription.attributes = params[:subscription]
 
       Subscription.transaction do
-        @customer = Subscription.create_or_stripe_customer_card(@subscription, params)
+        @customer = Subscription.create_stripe_customer_card(@subscription, params)
 
         @subscription.stripe_customer_token = @customer['id']
         if @subscription.save
