@@ -92,6 +92,8 @@ class Shop < ActiveRecord::Base
 
   after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
 
+  delegate :stripe_customer_token, to: :subscription
+
   set_callback :recover do
     self.deleted_at = nil
     self.time_zone = 
@@ -201,6 +203,10 @@ class Shop < ActiveRecord::Base
 
   def is_online?
     self.stype == 'online'
+  end
+
+  def customer_token_available?
+    subscription.stripe_customer_token.present?
   end
 
   def first_location_street_address

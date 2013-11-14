@@ -169,7 +169,6 @@ Optyn::Application.routes.draw do
             get :import_status
             get :active_connections
           end
-
         end
 
         resources :managers do
@@ -252,7 +251,9 @@ Optyn::Application.routes.draw do
     resource :shop do
       member do
         get :check_identifier
+        put :update_affiliate_tracking #put '/shop/:id/update_affiliate_tracking', to: 'shops#update_affiliate_tracking', as: :update_affiliate_tracking_shop
       end
+
     end
 
     

@@ -7,21 +7,31 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>You don't have permission to access this page. (403)</title>
   <style type="text/css">
-  body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-  div.dialog {
-    width: 25em;
-    padding: 0 4em;
-    margin: 4em auto 0 auto;
-    border: 1px solid #ccc;
-    border-right-color: #999;
-    border-bottom-color: #999;
+  body {
+    background-color: #fff; color: #4570a5; font-family: arial, sans-serif;
+    position: relative;
+    font-size: 20px;
   }
-  h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+  div.dialog {
+    width: 600px;
+    margin: 4em auto 0 auto;
+    text-align: center;
+  }
+  h1 { font-size: 2.5rem; line-height: 3rem; }
+  .stop {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  a { color: #1fa82c; }
   </style>
 </head>
 
 <body>
   <!-- This file lives in public/403.html -->
+  <a href="/">
+    <img src="/assets/logo-white.png" alt="Optyn logo" />
+  </a>
   <div class="dialog">
     <h1>You don't have permission to access this page.</h1>
     <p> Something wrong? Please submit a support request via <a href="http://support.optyn.com">http://support.optyn.com</a>.</p>
@@ -29,5 +39,6 @@
       <a href="http://www.optyn.com">Go back to Home page</a> or <a href="http://www.optyn.com/sitemap">View our Sitemap</a>
     </p>
   </div>
+  <img src="/images/stop-sign.jpg" alt='stop' class='stop' />
 </body>
 </html>
