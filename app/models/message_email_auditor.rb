@@ -2,7 +2,7 @@ class MessageEmailAuditor < ActiveRecord::Base
   belongs_to :message_user
   belongs_to :message
 
-  attr_accessible :message_user_id, :delivered, :ses_message_id
+  attr_accessible :message_user_id, :delivered, :ses_message_id, :message_id
 
   after_create :enqueue_message
 
