@@ -99,10 +99,11 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       params[:stripe_plan_id] = @plan.plan_id
       @subscription = current_shop.subscription || Subscription.new()
       @subscription.attributes = params[:subscription]
-
+      # binding.pry
       Subscription.transaction do
+        # binding.pry
         @customer = Subscription.create_stripe_customer_card(@subscription, params)
-
+        # binding.pry
         @subscription.stripe_customer_token = @customer['id']
         if @subscription.save
           @subscription.update_attribute(:active, true)
@@ -118,6 +119,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       end
 
     rescue Exception => e
+      # binding.pry
       if e.respond_to?(:code)
         @subscription.stripe_error = e.code.humanize
       else

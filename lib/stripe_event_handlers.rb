@@ -157,7 +157,7 @@ module StripeEventHandlers
     ##if plan.id is nil and invoice token is present
     if stripe_plan_id.nil? and stripe_invoice_token.present?
       reply = Stripe::Invoice.retrieve(stripe_invoice_token)
-      stripe_plan_id = reply[:lines][:data].first["plan"].id
+      stripe_plan_token = reply[:lines][:data].first["plan"].id
     end
 
     Charge.create(
@@ -174,7 +174,7 @@ module StripeEventHandlers
         :amount_refunded => params[:data][:object][:amount_refunded]  ,
         :stripe_customer_token => params[:data][:object][:customer]  ,
         :fee_description => fee_description ,
-        :stripe_plan_id => stripe_plan_id
+        :stripe_plan_token => stripe_plan_token
       )
   end
 

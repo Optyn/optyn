@@ -1,5 +1,8 @@
 class Charge < ActiveRecord::Base
 
+  ## anyvaraible that directly comes from stripe as in hash 
+  ## has stripe namespacing and token appended to it
+  ## ex stripe_invoice_token
   attr_accessible :created, :livemode, :fee_amount, :stripe_charge_id
   attr_accessible :stripe_invoice_id, :description, :dispute
   attr_accessible :refunded, :paid, :amount, :card_last4
