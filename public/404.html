@@ -34,6 +34,34 @@
     @media ( max-width: 455px ) {
       .bowl { display: none;}
     }
+    .redirect-cont {
+      text-align: center;
+      position: fixed;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+    }
+    .redirecting-msg {
+      margin: auto;
+      position: relative;
+      display: inline-block;
+      padding: 5px;
+      font-size: 0.8rem;
+      line-height: 1rem;
+      color: #000;
+      background: transparent;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+    }
+    #step {
+      background-color: #eee;
+      background-color: rgba(0,0,0,0.3);
+      width: 10%;
+      height: 100%;
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   </style>
 </head>
 
@@ -46,5 +74,37 @@
     <img src="/images/bowl.jpg" alt="" class="bowl" />
     <img src="/images/cat.jpg" alt="" class="cat" />
   </div>
+
+  <div class='redirect-cont'>
+    <div class='redirecting-msg'>
+      <div id='step'>&nbsp;</div>
+      Redirecting to home page ...
+    </div>
+  </div>
+
+  <script>
+    if(window.addEventListener){
+      window.addEventListener('load',redirectToHome,false); //W3C
+    }
+    else{
+      window.attachEvent('onload',redirectToHome); //IE
+    }
+    function redirectMsgAnimation() {
+      var count = 1;
+      var animationInterval = setInterval( function() {
+        if ( count <= 10 )
+          document.getElementById( 'step' ).style.width = count * 10 + '%';
+        count++;
+      }, 500 );
+    }
+
+    function redirectToHome() {
+      setTimeout( function() {
+        //console.log( 'redirect' );
+        window.location = 'http://optyn.com';
+      }, 5000 );
+      redirectMsgAnimation();
+    }
+  </script>
 </body>
 </html>
