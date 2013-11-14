@@ -3,27 +3,48 @@
 <head>
   <title>The page you were looking for doesn't exist (404)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
+    * {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+    body { color: #4570a5; font: normal 20px/25px 'Helvetica', sans-serif; }
+    .dialog {
+      width: 90%;
+      max-width: 800px;
+      padding: 0 10px;
       margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
+      position: relative;
+      height: 350px;
+      padding: 30px 270px 0 10px;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    .cat, .bowl { position: absolute; z-index: -1; }
+    .cat { top: 0; right: 0;}
+    .bowl { top: 215px; right: 270px; }
+    h1 { font-size: 3rem; line-height: 3.5rem; }
+    h2 { font-size: 2rem; line-height: 3rem; }
+    h1, h2 { margin: 0; }
+    a { color: #1fa82c; }
+    @media ( max-width: 768px ) {
+      .dialog {
+        height: 550px;
+        padding-right: 10px;
+        margin-top: 1em;
+        text-align: center;
+      }
+      .cat { top: auto; bottom: 0; }
+      .bowl { top: auto; left: 0; bottom: 0; }
+    }
+    @media ( max-width: 455px ) {
+      .bowl { display: none;}
+    }
   </style>
 </head>
 
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-    <p> Find what you are looking for here. You can also submit a support request via <a href="http://support.optyn.com">http://support.optyn.com</a>.
-      <a href="http://www.optyn.com">Go back to Home page</a> or <a href="http://www.optyn.com/sitemap">View our Sitemap</a>
-    </p>
+    <h1>Oops!</h1>
+    <h2>Someone ate the page!</h2>
+    <p>Please stay calm and go back to <a href="/">Main Page</a> or view our <a href="/sitemap">Site Map</a>.</p>
+    <img src="/images/bowl.jpg" alt="" class="bowl" />
+    <img src="/images/cat.jpg" alt="" class="cat" />
   </div>
 </body>
 </html>
