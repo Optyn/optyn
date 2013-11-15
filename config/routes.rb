@@ -131,6 +131,7 @@ Optyn::Application.routes.draw do
       put :move_to_saved
       put :move_to_inbox
       put :discard
+      get :offer_relevant
     end    
   end
 
