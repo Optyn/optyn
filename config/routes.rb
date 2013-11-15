@@ -42,6 +42,7 @@ Optyn::Application.routes.draw do
   match '/marketing/contests' => 'main#contests'
   match '/marketing/marketing-recommendation' => 'main#marketing_recommendation'
   match '/marketing/loyalty-marketing' => 'main#loyalty_marketing'
+  match '/marketing/customer-retention' => 'main#customer_retention'
   #subcategories for email marketing content
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
   match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data'
