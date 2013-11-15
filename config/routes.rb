@@ -35,6 +35,10 @@ Optyn::Application.routes.draw do
   match '/marketing/email-marketing' => 'main#email_marketing'
   match '/marketing/social-media-marketing' => 'main#social_media' 
   match '/marketing/marketing-automation' => 'main#marketing_automation'
+  match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
+
+  #resources pages for content pages
+  match '/resources/email-marketing' => 'main#resource_email_marketing'
 
   #named routes partner inquiry
   get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
