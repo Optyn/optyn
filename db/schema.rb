@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115053545) do
+ActiveRecord::Schema.define(:version => 20131115093707) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(:version => 20131115053545) do
     t.integer  "created"
     t.boolean  "livemode"
     t.integer  "fee_amount"
-    t.string   "stripe_invoice_id"
     t.text     "description"
     t.string   "dispute"
     t.boolean  "refunded"
@@ -88,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20131115053545) do
     t.text     "fee_description"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.string   "stripe_plan_id"
+    t.string   "stripe_plan_token"
     t.string   "stripe_invoice_token"
   end
 
@@ -167,9 +166,10 @@ ActiveRecord::Schema.define(:version => 20131115053545) do
   create_table "labels", :force => true do |t|
     t.integer  "shop_id"
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "active",     :default => true
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "active",           :default => true
+    t.integer  "survey_answer_id"
   end
 
   add_index "labels", ["shop_id", "active"], :name => "index_labels_on_shop_id_and_active"
@@ -564,6 +564,7 @@ ActiveRecord::Schema.define(:version => 20131115053545) do
     t.integer  "user_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "label_id"
   end
 
   add_index "survey_answers", ["created_at"], :name => "index_survey_answers_on_created_at"
