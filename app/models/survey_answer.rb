@@ -2,7 +2,7 @@ class SurveyAnswer < ActiveRecord::Base
   belongs_to :survey_question
   belongs_to :user
 
-  has_one :label #for task 59468940
+  has_many :label #for task 59468940d
 
   delegate :survey, to: :survey_question
 
