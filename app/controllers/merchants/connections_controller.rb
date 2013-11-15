@@ -54,27 +54,39 @@ class Merchants::ConnectionsController < Merchants::BaseController
         @user.skip_name = true
         @user.shop_identifier = current_shop.id
         @user.show_shop = true
+        conn = nil
+
   			if not @user.save
-          flag = true
           if @user.errors.full_messages[0].include?("invalid")
+            flag = true
             @error_hash.push("#{email} is invalid.")
-          else
-            @error_hash.push("#{email} has already been taken.")
-          end
-        else
-          @error_hash.push("#{email} was added successfully.")
-          params["To"] = total_users - total_users[u].split(",")
-          params["To"] = params["To"].join(",")
-          # params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
-          conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
-          if not params["label_ids"].nil?
-            total_labels_selected = params["label_ids"]
-            label_loop_size = total_labels_selected.size - 1
-            (0..label_loop_size).each do |l|
-              user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: total_labels_selected[l])
+            next
+          elsif @user.errors[:email] and @user.errors[:email].include?("has already been taken")
+            existing_user = User.find_by_email(email)
+            
+            if not Connection.where(:user_id => existing_user.id, :shop_id => current_shop.id).empty?
+              flag = true
+              @error_hash.push("#{email} has already been taken.")
+              next
+            else
+              @user = existing_user
             end
           end
         end
+        
+        @error_hash.push("#{email} was added successfully.")
+        params["To"] = total_users - total_users[u].split(",")
+        params["To"] = params["To"].join(",")
+        # params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
+        conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
+        if not params["label_ids"].nil?
+          total_labels_selected = params["label_ids"]
+          label_loop_size = total_labels_selected.size - 1
+          (0..label_loop_size).each do |l|
+            user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: total_labels_selected[l])
+          end
+        end
+        
   		end
 
   		if not flag
