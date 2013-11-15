@@ -50,6 +50,7 @@ Optyn::Application.routes.draw do
   match '/marketing/marketing-collaboration' => 'main#marketing_collaboration'
   match '/marketing/online-marketing' => 'main#online_marketing'
   match '/marketing/automated-marketing' => 'main#automated_marketing'
+  match '/marketing/multi-channel-marketing' => 'main#multi_channel_marketing'
   #subcategories for email marketing content
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
   match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data'
