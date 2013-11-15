@@ -151,15 +151,14 @@ module StripeEventHandlers
       fee_description = nil
     end
     # binding.pry
-    stripe_plan_id = params[:data][:object][:plan][:id] rescue nil
+    stripe_plan_token = params[:data][:object][:plan][:id] rescue nil
     stripe_invoice_token = params[:data][:object][:invoice] rescue nil
 
     ##if plan.id is nil and invoice token is present
-    if stripe_plan_id.nil? and stripe_invoice_token.present?
+    if stripe_plan_token.nil? and stripe_invoice_token.present?
       reply = Stripe::Invoice.retrieve(stripe_invoice_token)
       stripe_plan_token = reply[:lines][:data].first["plan"].id
     end
-
     Charge.create(
         :created => params[:created],
         :livemode => params[:livemode],
@@ -176,6 +175,7 @@ module StripeEventHandlers
         :fee_description => fee_description ,
         :stripe_plan_token => stripe_plan_token
       )
+
   end
 
   private
