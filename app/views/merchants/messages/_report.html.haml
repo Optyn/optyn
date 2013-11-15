@@ -1,56 +1,46 @@
-.modal-header
-  %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
-  %h3 
-    /= 'Message stats'
-    Campaign Stats for
-    %strong
-      = message.name
-.modal-body
-  .pull-right.text-success
-    Sent on
-    %strong
-      = formatted_message_form_datetime(message, timestamp_attr)
-  .clearfix
+%div{:id => "reportDialog", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
+  .modal-header
+    %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
+    %h3 
+      /= 'Message stats'
+      Campaign Stats for
+      %strong
+        = message.name
+  .modal-body
+    .pull-right.text-success
+      Sent on
+      %strong
+        = formatted_message_form_datetime(message, timestamp_attr)
+    .clearfix
 
-  .blank-space
+    .blank-space
 
-  .row-fluid.stats
-    .span3.box
-      .info
-        Email Sent to:
-      .count
-        = message.intended_recipients
-    .span3.box
-      .info
-        Email Received by:
-      .count
-        = message.actual_recipients
-    .span3.box
-      .info
-        Email Opened By:
-      .count
-        = message.opens_count
-    .span3.box
-      .info
-        Unsubscribes:
-      .count
-        = message.opt_outs
-  .clearfix
-
-  .blank-space
-
-  .row-fluid.stats
-    - if fb_body and fb_body.first and fb_body.first.include?('share_count')
+    .row-fluid.stats
       .span3.box
         .info
-          Facebook shares:
+          Email Sent to:
         .count
-          = fb_body.first["share_count"]
-    - if ((twitter_body) and (twitter_body["count"]))
+          = message.intended_recipients
       .span3.box
         .info
-          Tweets:
+          Email Received by:
         .count
-          = twitter_body["count"]
+          = message.actual_recipients
+      .span3.box
+        .info
+          Email Opened By:
+        .count
+          = message.opens_count
+      .span3.box
+        .info
+          Unsubscribes:
+        .count
+          = message.opt_outs
+    .clearfix
 
-  .blank-space
+    .blank-space
+
+    .row-fluid.stats
+      = hidden_field_tag "social_site_report_path", report_merchants_message_path(message.id)
+      %div{:id => "social_site_report"}
+ 

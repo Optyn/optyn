@@ -226,7 +226,7 @@ class Merchants::MessagesController < Merchants::BaseController
       fb_body = message.call_fb_api(link)
       twitter_body = message.call_twitter_api(link)
     end
-    render partial: 'merchants/messages/report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
+    render partial: 'merchants/messages/social_report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
   end
 
   def share_email
