@@ -32,6 +32,7 @@ Optyn::Application.routes.draw do
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view'
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
   match 'sitemap' => 'main#sitemap'
+  match '/marketing/email-marketing' => 'main#email_marketing'
 
   #named routes partner inquiry
   get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
