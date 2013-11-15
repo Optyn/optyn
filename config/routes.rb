@@ -36,6 +36,7 @@ Optyn::Application.routes.draw do
   match '/marketing/social-media-marketing' => 'main#social_media' 
   match '/marketing/marketing-automation' => 'main#marketing_automation'
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
+  match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data'
 
   #resources pages for content pages
   match '/resources/email-marketing' => 'main#resource_email_marketing'
