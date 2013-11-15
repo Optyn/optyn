@@ -33,6 +33,7 @@ Optyn::Application.routes.draw do
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
   match 'sitemap' => 'main#sitemap'
   #sell pages under marketing
+  match '/marketing' => 'main#marketing'
   match '/marketing/email-marketing' => 'main#email_marketing'
   match '/marketing/social-media-marketing' => 'main#social_media' 
   match '/marketing/marketing-automation' => 'main#marketing_automation'
@@ -57,6 +58,7 @@ Optyn::Application.routes.draw do
   match '/marketing/email-marketing/email-deliverability' => 'main#email_deliverability'
 
   #resources pages for content pages
+  match '/resources' => 'main#resources'
   match '/resources/email-marketing' => 'main#resources_email_marketing'
 
   #named routes partner inquiry
