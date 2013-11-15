@@ -37,6 +37,8 @@ Optyn::Application.routes.draw do
   match '/marketing/marketing-automation' => 'main#marketing_automation'
   match '/marketing/marketing-syndication' => 'main#marketing_syndication'
   match '/marketing/surveys' => 'main#surveys'
+  match '/marketing/coupons' => 'main#coupons'
+  match '/marketing/specials-and-sales' => 'main#specials'
   #subcategories for email marketing content
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
   match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data'
