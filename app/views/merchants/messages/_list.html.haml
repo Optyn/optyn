@@ -23,8 +23,9 @@
             = edit_merchants_message_path(message.uuid)
           %td
             - if message.sent?
-              %a{href: "#", class: "report_connection_link"} report
-              = hidden_field_tag "report_path_#{message.id}", report_merchants_message_path(message.id)
+              %a{:href => "#reportDialog_#{message.uuid}", "data-toggle" => "modal", "id" => "#{message.uuid}", "class" => "open-reports"} report
+              = render :partial => "report", :locals => {:message => message, :timestamp_attr => timestamp_attr}
+
             -else
               NA
             
@@ -32,7 +33,3 @@
       %tr
         %td{colspan: '5'}
           .text-center No messages
-%div{:id => "reportDialog", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
-  .modal-header
-    %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
-  Please wait.....

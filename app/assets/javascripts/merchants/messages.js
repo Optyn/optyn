@@ -341,5 +341,22 @@ function MerchantMessage() {
 $(document).ready(function(){
    $(".open-reports").click(function(){ 
      $('#reportDialog').modal('show');
+     getSocialSiteReport();
    });
 });
+
+function getSocialSiteReport() {
+	var link = $('#social_site_report_path');
+    var url = link.val();
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function (data) {
+        $('#social_site_report').html(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+        alert(errorThrown)
+      }
+    });
+}

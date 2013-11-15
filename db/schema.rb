@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131114081356) do
+ActiveRecord::Schema.define(:version => 20131115093707) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -166,9 +166,10 @@ ActiveRecord::Schema.define(:version => 20131114081356) do
   create_table "labels", :force => true do |t|
     t.integer  "shop_id"
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "active",     :default => true
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "active",           :default => true
+    t.integer  "survey_answer_id"
   end
 
   add_index "labels", ["shop_id", "active"], :name => "index_labels_on_shop_id_and_active"
@@ -286,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20131114081356) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.boolean  "opt_out"
+    t.boolean  "offer_relevant"
   end
 
   add_index "message_users", ["message_id", "added_individually"], :name => "index_message_users_on_message_id_and_added_individually"
@@ -514,12 +516,12 @@ ActiveRecord::Schema.define(:version => 20131114081356) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",               :default => ""
-    t.string   "header_background_color",    :default => "#1791C0"
-    t.datetime "deleted_at"
-    t.boolean  "pre_added",                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
   end
@@ -562,6 +564,7 @@ ActiveRecord::Schema.define(:version => 20131114081356) do
     t.integer  "user_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "label_id"
   end
 
   add_index "survey_answers", ["created_at"], :name => "index_survey_answers_on_created_at"

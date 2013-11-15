@@ -38,6 +38,15 @@ class MessagesController < BaseController
     @shop = @message.manager.shop
   end
 
+  def offer_relevant
+    @message_user = MessageUser.find(params[:message_user_id])
+    if !@message_user.blank?
+      @message_user.update_attribute(:offer_relevant, params[:offer_relevant])
+      @message_user.save
+    end
+    redirect_to message_path(@message_user.message.uuid)
+  end
+
   def move_to_inbox
     @messages = Message.for_uuids(uuids_from_message_ids)
     MessageUser.mark_inbox(@messages, [current_user])
