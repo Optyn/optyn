@@ -1,5 +1,6 @@
 class Label < ActiveRecord::Base
   belongs_to :shop
+  belongs_to :survey_answer
   has_many :user_labels, dependent: :destroy
   has_many :message_labels, dependent: :destroy
 
