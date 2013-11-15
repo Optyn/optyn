@@ -32,6 +32,7 @@ Optyn::Application.routes.draw do
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view'
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
   match 'sitemap' => 'main#sitemap'
+  
   #sell pages under marketing
   match '/marketing' => 'main#marketing'
   match '/marketing/email-marketing' => 'main#email_marketing'
@@ -56,7 +57,6 @@ Optyn::Application.routes.draw do
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
   match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data'
   match '/marketing/email-marketing/email-deliverability' => 'main#email_deliverability'
-
   #resources pages for content pages
   match '/resources' => 'main#resources'
   match '/resources/email-marketing' => 'main#resources_email_marketing'
