@@ -68,6 +68,7 @@ Optyn::Application.routes.draw do
   match '/resources/coupons' => 'main#resources_coupons'
   match '/resources/customer-retention' => 'main#resources_customer_retention'
   match '/resources/loyalty-marketing' => 'main#resources_loyalty_marketing'
+  match '/resources/surveys' => 'main#resources_surveys'
 
   #named routes partner inquiry
   get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
