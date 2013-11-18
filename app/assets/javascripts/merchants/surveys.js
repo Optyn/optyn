@@ -138,7 +138,7 @@ function MerchantSurvey() {
                 data: $('#survey_question_form').serializeArray(),
                 success: function () {
                     $modalBody.html("<strong>Please Wait...</strong>");
-                    console.log(request.responseText);
+                    // console.log(request.responseText);
                     current.loadQuestions();
                     $('#new_survey_questions_content').modal('hide');
                     $('#edit_survey_questions_content').modal('hide');
