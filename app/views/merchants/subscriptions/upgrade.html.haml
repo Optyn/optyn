@@ -37,14 +37,14 @@
 
 .blank-space
 
-.row-fluid.payment-errors.text-error
-  - if @subscription.errors.any? || @subscription.stripe_error
-    =@subscription.stripe_error
-    %ul
-      - @subscription.errors.full_messages.each do |error|
-        %li
-          = error
-  .blank-space
+/ .row-fluid.payment-errors.text-error
+/   - if @subscription.errors.any? || @subscription.stripe_error
+/     =@subscription.stripe_error
+/     %ul
+/       - @subscription.errors.full_messages.each do |error|
+/         %li
+/           = error
+/   .blank-space
 
 .row-fluid
   .span12
@@ -83,7 +83,14 @@
       %a.close.pull-right{ 'href' => '#', 'data-dismiss' => 'modal', 'data-target' => '#get-payment-info' } X
       .clearfix
     .modal-body
-      = flash['alert']
+      .row-fluid.payment-errors.text-error
+        - if @subscription.errors.any? || @subscription.stripe_error
+          =@subscription.stripe_error
+          %ul
+            - @subscription.errors.full_messages.each do |error|
+              %li
+                = error
+      .blank-space
       .form.row-fluid
 
         = f.hidden_field :plan_id, :value => @plan.id
