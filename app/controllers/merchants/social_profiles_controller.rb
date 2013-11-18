@@ -32,7 +32,7 @@ class Merchants::SocialProfilesController < Merchants::BaseController
     @social_profiles = current_shop.with_missing_profiles
     render partial: "merchants/social_profiles/list"
   rescue ActiveRecord::RecordInvalid => e
-    render action: 'edit', layout: false
+    render action: 'edit', layout: false, status: :unprocessable_entity
   end
 
   def destroy
