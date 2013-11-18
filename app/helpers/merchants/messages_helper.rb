@@ -192,4 +192,15 @@ module Merchants::MessagesHelper
       end
     end
   end
+
+  def get_offer_relevance_stat(message)
+    relevant = 0
+    non_relevant = 0
+    message.message_users.each do |mu|
+      if not mu.offer_relevant.nil?
+        mu.offer_relevant? ? relevant += 1 : non_relevant += 1
+      end
+    end
+    return relevant, non_relevant
+  end
 end

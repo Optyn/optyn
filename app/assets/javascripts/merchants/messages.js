@@ -340,19 +340,21 @@ function MerchantMessage() {
 
 $(document).ready(function(){
    $(".open-reports").click(function(){ 
+   	 msg_uuid = $(this).attr('id');
      $('#reportDialog').modal('show');
-     getSocialSiteReport();
+     getSocialSiteReport(msg_uuid);
    });
 });
 
-function getSocialSiteReport() {
-	var link = $('#social_site_report_path');
+function getSocialSiteReport(msg_uuid) {
+	var link = $('#social_site_report_path_' + msg_uuid);
     var url = link.val();
+   
     $.ajax({
       url: url,
       type: 'GET',
       success: function (data) {
-        $('#social_site_report').html(data);
+        $('#social_site_report_' + msg_uuid).html(data);
       },
       error: function (jqXHR, textStatus, errorThrown)
       {

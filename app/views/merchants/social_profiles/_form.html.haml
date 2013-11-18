@@ -6,13 +6,19 @@
           = error
 
 #profile_wrapper
-  - SocialProfile::SOCIAL_PROFILES.each do |type, val|
-    .control-group
-      .control-label
-        = label_tag "#{type}", "#{type.humanize.capitalize} link" 
-      .controls
-        - link = params[type] ? params[type] : get_social_links_for_shop(type)
-        = text_field_tag "#{type}", "#{link}", :placeholder => 'Enter link', class: 'span12'
-  .action-buttons
-    = f.submit 'Add / Update' , class: "btn btn-primary"
-    = link_to "Cancel", merchants_social_profile_path(current_shop.id), class: 'btn'
+  .control-group
+    = f.label :sp_type, 'Profile Type', class: 'control-label'
+    .controls
+      = SocialProfile::SOCIAL_PROFILES[@social_profile.sp_type].titleize
+      = f.hidden_field :sp_type
+
+  .control-group
+    = f.label :sp_link, 'Profile Link', class: 'control-label'
+    .controls
+      = f.text_field :sp_link
+
+
+  .actions
+    = f.submit 'Save' , class: "btn btn-primary"
+    = link_to "Cancel", "javascript:void(0)", {"aria-hidden" => "true", "data-dismiss" => "modal", type: "button", class: 'btn'}
+    .form-spinner{style: 'display: none;'} Please Wait...  
