@@ -251,6 +251,14 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def remove_message_image
+    @message = Message.for_uuid(params[:id])
+    message_image = @message.message_image
+    message_image.remove_image! if message_image
+    @message.message_image.destroy
+    message_redirection
+  end
+
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)

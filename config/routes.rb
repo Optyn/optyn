@@ -302,6 +302,7 @@ Optyn::Application.routes.draw do
         put :move_to_trash
         put :move_to_draft
         put :discard
+        get :remove_message_image
       end
 
       member do
