@@ -33,7 +33,7 @@
             Connect with us
           %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
             - @shop.social_profiles.each do |sp|
-              - name = SocialProfile::SOCIAL_PROFILES.find{|k, v| v == sp.sp_type}[0]
+              - name = SocialProfile::SOCIAL_PROFILES[sp_type]
               = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{sp.sp_link}")
                     
     %td
