@@ -29,15 +29,3 @@
         #message_preview.accordion-inner
           #preview_wrapper
             = render partial: "shared/messages/core_content", locals: {preview: true, customer_name: nil}
-
-    - if @message.make_public
-      #public-url.accordion-group
-        .accordion-heading
-          %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#public_url_preview"}
-            Link to make this message public
-        #public_url_preview.accordion-body.collapse
-          .accordion-inner
-            .blank-space
-            %strong
-              = link_to get_public_link(@message, @shop), get_public_link(@message, @shop), :target => "_blank"
-            .blank-space
