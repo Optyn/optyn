@@ -198,8 +198,10 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    messages = with_state([:queued]).only_parents.ready_messages
-    execute_send(messages)
+    if send_message?
+      messages = with_state([:queued]).only_parents.ready_messages
+      execute_send(messages)
+    end
   end
 
   def self.batch_send_responses
@@ -534,6 +536,10 @@ class Message < ActiveRecord::Base
         MESSAGE:'sending messages with ids #{messages.collect(&:id).join(', ')}'
         TIME:#{Time.now}
     }
+  end
+
+  def self.send_message?
+    return true if Rails.env.production? || Rails.env.development?
   end
 
   def build_new_message_labels(identifiers)
