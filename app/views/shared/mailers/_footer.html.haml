@@ -75,5 +75,5 @@
             = "Was this offer relevant to you?"
             = link_to('Yes', "#{SiteConfig.app_base_url}#{offer_relevant_messages_path(:offer_relevant => true, :message_user_id => @message_user.id, :id => @message.uuid)}", style: 'color: #666;')
             = link_to('No', "#{SiteConfig.app_base_url}#{offer_relevant_messages_path(:offer_relevant => false, :message_user_id => @message_user.id, :id => @message.uuid)}", style: 'color: #666;')
-      - elsif preview
+      - elsif (preview rescue false)
         = link_to('Unsubscribe', "javascript:void(0)", style: 'color: #666;')
