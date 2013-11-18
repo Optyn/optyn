@@ -3,31 +3,30 @@
 <head>
   <title>The change you wanted was rejected (422)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #4570a5; text-align: center; font: normal 20px/25px 'Helvetica', sans-serif; }
-    div.dialog {
-      width: 600px;
-      margin: 4em auto 0 auto;
-    }
-    h1 { font-size: 3rem; line-height: 3.5rem; }
-    img {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-    }
+    body { background-color: #fff; color: #4570a5; text-align: center; font: normal 18px/25px 'Ubuntu', 'Tahoma', 'Helvetica', Tahoma, sans-serif; margin-bottom: 0; }
+    .dialog { width: 100%; max-width: 600px; margin: 4em auto 0 auto; }
+    h1 { font-size: 2rem; line-height: 2.7rem; }
+    img { position: fixed; bottom: 0; right: 0; z-index: -1; }
     a { color: #1fa82c; }
+    .container { position: relative; }
+    @media ( max-width: 767px ) {
+      body { font-size: 15px; line-height: 20px; }
+      .dialog { margin-top: 1em; }
+      h1 { font-size: 1.5rem; line-height: 2.2rem; }
+      img { height: 200px; position: static; }
+    }
   </style>
 </head>
 
-<body>
-  <!-- This file lives in public/422.html -->
+<body>  <!-- This file lives in public/422.html -->
   <div class="dialog">
-    <h1>The change you wanted was rejected.</h1>
+    <h1>The change you wanted was rejected</h1>
     <p>Maybe you tried to change something you didn't have access to.</p>
-    <p>We have been notified by our system about this error and we will look at it shortly. You can also submit a support request via <a href="http://support.optyn.com">http://support.optyn.com</a>.</p>
+    <p>We have been notified by our system about this error and we will look at it shortly. You can also submit a support request via <a href="http://support.optyn.com">support.optyn.com</a>.</p>
     <p>
       <a href="http://www.optyn.com">Go back to Home page</a> or <a href="http://www.optyn.com/sitemap">View our Sitemap</a>
     </p>
-    <img src="/assets/confused-woman.jpg" alt="Your change was rejected for some reason." />
   </div>
+  <img src="/assets/confused-woman.jpg" alt="Your change was rejected for some reason." />
 </body>
 </html>
