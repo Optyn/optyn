@@ -1,6 +1,14 @@
 $(document).ready(function () {
     var myConsumerDetail = new MyConsumerDetail();
     myConsumerDetail.initialize();
+
+    // Hook the jquery exander.
+    $('div#merchants span.expandable').expander({
+    slicePoint:       50,  // default is 100
+    expandPrefix:     ' ', // default is '... '
+    expandText:       '[...]', // default is 'read more'
+    userCollapseText: '[^]'  // default is 'read less'
+  });
 });
 
 
@@ -88,6 +96,10 @@ function MyConsumerDetail() {
 
           //Hook the chosen behavior
           consumerInstance.hookModalBehavior();
+
+          setTimeout(function(){
+            $('#conusmer_connection_modal').modal('hide');
+          }, 1000);
         });
       }); 
     };

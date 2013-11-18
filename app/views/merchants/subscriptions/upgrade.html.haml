@@ -83,6 +83,7 @@
       %a.close.pull-right{ 'href' => '#', 'data-dismiss' => 'modal', 'data-target' => '#get-payment-info' } X
       .clearfix
     .modal-body
+      = flash['alert']
       .form.row-fluid
 
         = f.hidden_field :plan_id, :value => @plan.id
