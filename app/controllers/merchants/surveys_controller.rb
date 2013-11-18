@@ -46,11 +46,13 @@ class Merchants::SurveysController < Merchants::BaseController
 		question_attributes = current_survey.survey_questions.collect(&:attributes)
 		
 		question_attributes.each do |attr_hash|
-			attr_hash['edit_path'] = edit_merchants_survey_survey_question_path(attr_hash['id'])
-			attr_hash['delete_path'] = merchants_survey_survey_question_path(attr_hash['id'])
+			#attr_hash['edit_path'] = edit_merchants_survey_survey_question_path(attr_hash['id'])
+			#attr_hash['delete_path'] = merchants_survey_survey_question_path(attr_hash['id'])
+			attr_hash['edit_path'] = "/merchants/segments/#{attr_hash[:survey_id]}/segment_questions/#{attr_hash[:id]}/edit"
+			attr_hash['delete_path'] = "/merchants/segments/#{attr_hash[:survey_id]}/segment_questions/#{attr_hash[:id]}"
 			attr_hash['values'] = ["-"] if attr_hash['values'].blank?
 		end
-
+		# binding.pry
 		render json: question_attributes
 	end
 
