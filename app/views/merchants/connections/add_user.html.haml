@@ -2,7 +2,7 @@
 
 #merchants.pad3pc
   .container-fluid
-    - if @user.errors.any? or not @error_hash.blank?
+    - if @user.errors.any? || !@error_hash.blank?
       #error_explanation
         - if @error_hash.blank?
           %h2
@@ -14,7 +14,7 @@
                 = error
         - else
           %h2
-            = "Summary:"
+            = "Following errors prohibited user(s) from being saved:"
           %ul
             - @error_hash.each do |error|
               %li

@@ -149,6 +149,12 @@ function MerchantMessage() {
                 url: $('#message_meta_modal form').prop('action'),
                 type: 'POST',
                 data: $('#message_meta_modal').find('form').serialize(),
+                beforeSend: function(){
+                    var $modalBody = $('#message_meta_modal form').parents('.modal-body');
+                    var $modalFooter = $modalBody.next('.modal-footer');
+                    $modalFooter.find('.btn').hide();
+                    $modalFooter.find('.loading').show();
+                },
                 success: function (data) {
                     $('#message_meta_modal').modal('hide');
                     setTimeout(function () {
@@ -159,7 +165,6 @@ function MerchantMessage() {
                 },
                 error: function (data) {
                     var $modal = $('#message_meta_modal');
-                    $modal.modal('hide');
                     $modal.html($.parseJSON(data.responseText).message);
                     setTimeout(function () {
                         current.hookDateTimePicker();
@@ -167,8 +172,6 @@ function MerchantMessage() {
                         if(sendOnErrorMessage.length){
                             var $tempErr = $('<div />');
                             $tempErr.append("<span class='field-with-errors'><span class='help-inline error'>" + sendOnErrorMessage + "</span></span>");
-                            console.log("Error Message:", sendOnErrorMessage);
-                            console.log("html:", $tempErr.html());
                             $('#message_meta_modal #message_send_on_container').append($tempErr.html());
                         }
 
@@ -340,6 +343,25 @@ function MerchantMessage() {
 
 $(document).ready(function(){
    $(".open-reports").click(function(){ 
+   	 msg_uuid = $(this).attr('id');
      $('#reportDialog').modal('show');
+     getSocialSiteReport(msg_uuid);
    });
 });
+
+function getSocialSiteReport(msg_uuid) {
+	var link = $('#social_site_report_path_' + msg_uuid);
+    var url = link.val();
+   
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function (data) {
+        $('#social_site_report_' + msg_uuid).html(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+        alert(errorThrown)
+      }
+    });
+}
