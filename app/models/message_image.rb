@@ -1,7 +1,7 @@
 class MessageImage < ActiveRecord::Base
   belongs_to :message
 
-  attr_accessible :message_id, :title, :parent_id, :image, :size, :width, :height, :remote_image_url
+  attr_accessible :message_id, :title, :parent_id, :image, :size, :width, :height, :remote_image_url, :remove_image
 
   mount_uploader :image, MessageImageUploader
 
