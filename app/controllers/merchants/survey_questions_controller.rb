@@ -38,6 +38,7 @@ class Merchants::SurveyQuestionsController < Merchants::BaseController
   end
 
   def destroy
+    # binding.pry
     @survey_question = SurveyQuestion.find(params[:id])
     @survey_question.destroy
     head :ok

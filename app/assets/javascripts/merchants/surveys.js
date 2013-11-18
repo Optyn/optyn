@@ -106,11 +106,17 @@ function MerchantSurvey() {
 
     //Observer for the save changes button click
     this.hookSaveChanges = function () {
-        console.log("save changes");
         $('body').on('click', 'button.save_question_change', function () {
             console.log("clicked-save_question_change   ");
             $('#survey_question_form').submit();
         });
+
+        $("#save_question_change").click(
+            function(){ 
+                console.log("save changes");
+                $('#survey_question_form').submit();
+            }
+        );
     };
 
     //Form submission observer Add Question
@@ -127,18 +133,21 @@ function MerchantSurvey() {
                 beforeSend: function () {
                     $form.find('#form_container').hide();
                     $form.find('#please_wait').show();
+                    console.log("survey question hide : beforeSend");
                 },
                 data: $('#survey_question_form').serializeArray(),
                 success: function () {
                     $modalBody.html("<strong>Please Wait...</strong>");
-                    console.log(request.responseText);
+                    // console.log(request.responseText);
                     current.loadQuestions();
                     $('#new_survey_questions_content').modal('hide');
                     $('#edit_survey_questions_content').modal('hide');
+                    console.log("survey question hide : success");
                 },
                 error: function (request) {
-                    console.log(request.responseText);
-                    $modalBody.html(request.responseText);
+                    console.log("survey question hide : ERROR");
+                    // console.log(request.responseText);
+                    // $modalBody.html(request.responseText);
                 }
             });
         });
@@ -277,6 +286,7 @@ function MerchantSurvey() {
             var $this = $(this);
             var href = $this.attr('href');
             event.preventDefault();
+            console.log(href);
 
             if (confirm("Are you sure you want to you want to delete this question. The related answers if present will be deleted?")) {
                 $.ajax({
