@@ -111,6 +111,13 @@ function MerchantSurvey() {
             console.log("clicked-save_question_change   ");
             $('#survey_question_form').submit();
         });
+
+        $("#save_question_change").click(
+            function(){ 
+                console.log("asd");
+                $('#survey_question_form').submit();
+            }
+        );
     };
 
     //Form submission observer Add Question
