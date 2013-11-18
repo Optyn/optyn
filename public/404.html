@@ -4,7 +4,9 @@
   <title>The page you were looking for doesn't exist (404)</title>
   <style type="text/css">
     * {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
-    body { color: #4570a5; font: normal 20px/25px 'Helvetica', sans-serif; }
+    body { background-color: #fff; color: #4570a5; font: normal 18px/25px 'Ubuntu', 'Tahoma', 'Helvetica', Tahoma, sans-serif; margin-bottom: 0; }
+    ::selection { background: #fcc; background: rgba(255, 0, 0, 0.2); }
+    .logo { opacity: 0.5; }
     .dialog {
       width: 90%;
       max-width: 800px;
@@ -45,7 +47,7 @@
       margin: auto;
       position: relative;
       display: inline-block;
-      padding: 5px;
+      padding: 1px 5px;
       font-size: 0.8rem;
       line-height: 1rem;
       color: #000;
@@ -65,14 +67,16 @@
   </style>
 </head>
 
-<body>
-  <!-- This file lives in public/404.html -->
+<body> <!-- This file lives in public/404.html -->
+  <a href="/">
+    <img src="/assets/logo-black.png" alt="Optyn logo" class='logo' />
+  </a>
   <div class="dialog">
     <h1>Oops!</h1>
     <h2>Someone ate the page!</h2>
     <p>Please stay calm and go back to <a href="/">Main Page</a> or view our <a href="/sitemap">Site Map</a>.</p>
-    <img src="/images/bowl.jpg" alt="" class="bowl" />
-    <img src="/images/cat.jpg" alt="" class="cat" />
+    <img src="/assets/bowl.jpg" alt="" class="bowl" />
+    <img src="/assets/cat.jpg" alt="" class="cat" />
   </div>
 
   <div class='redirect-cont'>
@@ -92,10 +96,10 @@
     function redirectMsgAnimation() {
       var count = 1;
       var animationInterval = setInterval( function() {
-        if ( count <= 10 )
-          document.getElementById( 'step' ).style.width = count * 10 + '%';
+        if ( count <= 100 )
+          document.getElementById( 'step' ).style.width = count + '%';
         count++;
-      }, 500 );
+      }, 50 );
     }
 
     function redirectToHome() {

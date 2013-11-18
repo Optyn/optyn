@@ -3,30 +3,39 @@
 <head>
   <title>We're sorry, but something went wrong (500)</title>
   <style type="text/css">
-    body {
-      background-color: #fff; color: #4570a5; font-family: arial, sans-serif;
-      background-image: url( '/assets/broken-egg.jpg' );
-      background-size: cover;
-      font-size: 20px;
-      line-height: 25px;
-    }
-    div.dialog {
-      width: 600px;
-      margin: 4em 0 0 0;
-    }
-    h1 { font-size: 2.5rem; line-height: 3.5rem; }
+    body { background-color: #fff; color: #4570a5; font: normal 18px/25px 'Ubuntu', 'Tahoma', 'Helvetica', Tahoma, sans-serif; margin-bottom: 0; padding-bottom: 200px; }
+    ::selection { background: #fcc; background: rgba(255, 0, 0, 0.2); }
+    .dialog { width: 100%; max-width: 600px; margin: 4em auto 0 auto; text-align: center; }
+    .logo { opacity: 0.5; }
+    h1 { font-size: 1.6rem; line-height: 2.1rem; }
+    .img-cont { position: fixed; width: 100%; text-align: center; bottom: 0;  left: 0; z-index: -1 }
+    img { max-width: 100%; }
     a { color: #1fa82c; }
+    @media ( max-width: 767px ), ( max-height: 500px ) {
+      body { font-size: 15px; line-height: 20px; }
+      .dialog { margin-top: 1em; }
+      h1 { font-size: 1.3rem; line-height: 2rem; }
+      .img-cont { position: static; }
+    }
+    @media ( max-height: 500px ) {
+      body {padding-bottom: 0;}
+    }
   </style>
 </head>
 
-<body>
-  <!-- This file lives in public/500.html -->
+<body> <!-- This file lives in public/500.html -->
+  <a href="/">
+    <img src="/assets/logo-black.png" alt="Optyn logo" class='logo' />
+  </a>
   <div class="dialog">
     <h1>Something broke!</h1>
     <p> We have been notified by our system about this error and we will look at it shortly. You can also submit a support request via <a href="http://support.optyn.com">http://support.optyn.com</a>.</p>
     <p>
       <a href="http://www.optyn.com"><span></span>Go back to Home page</a> or <a href="http://www.optyn.com/sitemap">View our Sitemap</a>
     </p>
+  </div>
+  <div class='img-cont'>
+    <img src="/assets/broken-egg.jpg" alt="broken egg" class='egg' />
   </div>
 </body>
 </html>

@@ -41,8 +41,8 @@ module Messagecenter
     end
 
     def populate_datetimes
-      @message.beginning = Time.parse(params[:message][:beginning]) if params[:message][:beginning].present?
-      @message.ending = Time.parse(params[:message][:ending]) if params[:message][:ending].present?
+      @message.beginning = params[:message][:beginning].present? ? Time.parse(params[:message][:beginning]) : nil
+      @message.ending = params[:message][:ending].present? ? Time.parse(params[:message][:ending]) : nil
     end
 
     def show_my_messages_only
