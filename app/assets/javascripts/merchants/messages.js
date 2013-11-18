@@ -98,6 +98,7 @@ function MerchantMessage() {
         $('body').on('change', '#message_permanent_coupon', function(){
             if($(this).is(":checked")){
                 $('#message_ending').val('');
+                $('#message_ending_time').val('');
             }
         });
     };
@@ -106,6 +107,11 @@ function MerchantMessage() {
         if($('#message_permanent_coupon').length){
             window.setInterval(function(){
                 if($('#message_ending').val().length){
+                    $('#message_permanent_coupon').attr('checked', false);
+                }
+            }, 500);
+            window.setInterval(function(){
+                if($('#message_ending_time').val().length){
                     $('#message_permanent_coupon').attr('checked', false);
                 }
             }, 500);
