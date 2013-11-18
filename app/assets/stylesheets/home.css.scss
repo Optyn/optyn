@@ -231,62 +231,52 @@
     background: image-url( 'bg_hdg.png' );
     padding: 1% 0;
   }
-
-  footer {
-    background-color: $dark-blue;
-    color: #fff;
-    font-size: 13px;
-    line-height: 20px;
-    padding: 1% 0;
-    a {
-      color: #61abe6;
-    }
-    h4 {
-      color: $white;
-      color: rgba( $white, 0.8 );
-      font-weight: normal;
-      font-size: 18px;
-    }
-    .span2 {
-      text-align: left;
-    }
-    .span2:first-child {
-      padding-left: 2%;
-    }
-    ul {
-      margin-left: 0;
-    }
-    .span4 {
-      padding-top: 20px;
-      p {
-        opacity: 0.5;
-      }
-    }
-  }
-
-  .pg-twitter,
-  .pg-facebook {
-    background-image: image-url( 'sprite-landing.png' );
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 63px;
-    height: 50px;
-    text-indent: -999px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    @include transition( all 0.2s ease-out );
-    &:hover {
-      @include rotate( -6deg );
-    }
-  }
-  .pg-twitter {
-    background-position: 0 -3280px;
-  }
-  .pg-facebook {
-    background-position: 19px -2780px;
-  }
-
 }
+
+footer {
+  background-color: $dark-blue;
+  color: #fff;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 1% 0;
+  a {
+    color: #61abe6;
+    &:hover {
+      color: rgba( $white, 0.8 );
+    }
+  }
+  h4 {
+    color: $white;
+    color: rgba( $white, 0.8 );
+    font-weight: normal;
+    font-size: 18px;
+  }
+  .span2 {
+    text-align: left;
+  }
+  .span2:first-child {
+    padding-left: 2%;
+  }
+  ul {
+    margin-left: 0;
+  }
+  .span4 {
+    padding-top: 20px;
+    p {
+      opacity: 0.5;
+    }
+  }
+  .share {
+    position: absolute;
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    line-height: 50px;
+    top: -50px;
+    right: 0;
+  }
+}
+
 .m-i {  /* Merchant's index */
     background-color: $gray;
     @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
@@ -452,7 +442,7 @@
 
 #flat .sf-social {
   > a {
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 3rem;
     color: rgba( $white, 0.8 );
     margin-right: 5px;

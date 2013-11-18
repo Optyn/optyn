@@ -33,7 +33,7 @@ $(document).ready(function () {
     }
 
     if($('label.checkbox').length){
-      fixCheckboxLabel();  
+      fixCheckboxLabel();
     }
 });
 
@@ -44,8 +44,8 @@ function moveDatetimepickerErrorMessage() {
     var $newErrorMesageContainer = $('<span />');
     $newErrorMesageContainer.attr({
         'class': 'field-with-errors'
-    })
-    $newErrorMesageContainer.append($errorMessage)
+    });
+    $newErrorMesageContainer.append($errorMessage);
     $errorMessageGrandParent.append($newErrorMesageContainer);
 }
 

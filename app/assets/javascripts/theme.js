@@ -104,10 +104,20 @@ $(document).ready(function () {
     $( window ).resize( setModalHt );
 
 
+    // Show hide Follow/Like buttons in footer
+    var showHideSocialLoveButtons = function() {
+        $( '#social-love' ).mouseenter( function() {
+            // console.log('show');
+            $( '.love-controls' ).fadeIn();
+        });
+        $( 'footer' ).mouseleave( function() {
+            // console.log('hide');
+            $( '.love-controls' ).fadeOut();
+        });
+    }();
 });
 // Equalize div heights
 function equalizeDivHeights( targetElementSelector ) {
-    console.log( 'equalizeDivHeights', targetElementSelector );
     var setHt = function() {
         // This function sets width of the team member divs.
         var maxHt = 0;
