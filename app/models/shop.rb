@@ -448,6 +448,17 @@ class Shop < ActiveRecord::Base
     plan_amount.to_f / 100
   end
 
+  def with_missing_profiles
+    existing_profiles = social_profiles.all #calling all to get an array but relation
+    blank_profiles_map = SocialProfile.all_types_map(self.id)
+
+    existing_profiles.each do |profile|
+      blank_profiles_map.delete(profile.sp_type)
+    end
+
+    existing_profiles + blank_profiles_map.values
+  end
+
   private
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "").downcase

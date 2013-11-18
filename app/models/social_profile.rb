@@ -1,11 +1,19 @@
 class SocialProfile < ActiveRecord::Base
   belongs_to :shop
-  attr_accessible :sp_link, :sp_type
+  attr_accessible :sp_link, :sp_type, :shop_id
 
-  SOCIAL_PROFILES = {"facebook" => 1, "twitter" => 2, "linkedin" => 3}
-
-  validates_format_of :sp_link, :with => URI::regexp(%w(http https)), unless: Proc.new{|s| s.sp_link.blank?}
+  SOCIAL_PROFILES = {1 => "facebook", 2 => "twitter", 3 => "linkedin"}
   
-  validates_uniqueness_of :sp_link, :scope => [:shop_id], unless: Proc.new{|s| s.sp_link.blank?}
-  validates_uniqueness_of :sp_type, :scope => [:shop_id], unless: Proc.new{|s| s.sp_link.blank?}
-end
+  validates :sp_link, presence: true, uniqueness: {scope: :shop_id}, format: {with: URI::regexp(%w(http https))}
+  validates :sp_type, uniqueness: {scope: :shop_id}, unless: Proc.new{|s| s.sp_link.blank?}
+
+  def self.all_types_map(owner_shop_id=nil)
+    profiles = {}
+    
+    SOCIAL_PROFILES.each_pair do |key, value|
+      profiles[key] = new(sp_type: key, shop_id:  owner_shop_id)
+    end 
+
+    profiles
+  end
+end   
