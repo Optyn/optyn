@@ -125,7 +125,7 @@ class Message < ActiveRecord::Base
     end
 
 
-    after_transition any => :draft, :do => :replenish_draft_count
+    after_transition any => :draft, :do => :replenish_draft_and_queued_count
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
 
