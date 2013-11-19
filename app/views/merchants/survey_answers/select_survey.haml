@@ -8,7 +8,7 @@
         - @list_survey.each do |survey|
           %option{:value=>"/merchants/segments/#{survey.id}/answers"}
             -if survey.title.present?
-            	=survey.title
+              =survey.title
             -else
-            	"Untitled Survey"
+              "Untitled Survey"
       = submit_tag("Choose", class: 'btn btn-primary')
