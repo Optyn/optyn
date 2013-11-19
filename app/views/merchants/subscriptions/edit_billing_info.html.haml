@@ -8,12 +8,12 @@
           .head Update Payment Information 
           .payment-errors
             - if @subscription.errors.any? || @subscription.stripe_error
-              - Rails.logger.info("_______________________________________")
+              - Rails.logger.info("______________________________________________________")
               - Rails.logger.info(@subscription.stripe_error)
               - Rails.logger.info(@subscription.errors.full_messages)
               - Rails.logger.info(@subscription)
               - Rails.logger.info(@plan)
-              - Rails.logger.info("_______________________________________")
+              - Rails.logger.info("_______________________________________________________")
               =@subscription.stripe_error
               %ul
                 - @subscription.errors.full_messages.each do |error|
