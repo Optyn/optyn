@@ -2,6 +2,9 @@ class Merchants::MessagesController < Merchants::BaseController
   
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
+
+  LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
+
   def types
     #Do Nothing
   end
@@ -32,6 +35,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        flash.now[:error] = LAUNCH_FLASH_ERROR
         render "new"
       end
     end
@@ -56,6 +60,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        flash.now[:error] = LAUNCH_FLASH_ERROR
         render "edit"
       end
     end
@@ -108,9 +113,18 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def launch
     @message = Message.for_uuid(params[:id])
-    @message.launch
+    launched = @message.launch
     params[:choice] = "launch"
-    message_redirection
+
+    if launched
+      message_redirection
+    else
+      flash.now[:error] = LAUNCH_FLASH_ERROR
+      @message_type = @message.type.to_s.underscore
+      populate_labels
+      render action: 'edit'
+    end
+    
   end
 
   def trash
@@ -262,5 +276,9 @@ class Merchants::MessagesController < Merchants::BaseController
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
+  end
+
+  def choice_launch?
+    "launch" == params[:choice]
   end
 end

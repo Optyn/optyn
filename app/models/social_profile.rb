@@ -33,7 +33,7 @@ class SocialProfile < ActiveRecord::Base
 
     def add_http_if_missing
       existing_sp_link = URI.parse(self.sp_link).to_s
-      binding.pry
+
       if !existing_sp_link.include?('http://') && !existing_sp_link.include?('https://')
         self.sp_link = "http://" + existing_sp_link
         self.save

@@ -46,6 +46,7 @@ class Message < ActiveRecord::Base
   validate :send_on_greater_by_hour
   validate :validate_child_message
   validate :validate_button_url
+  validate :validate_recipient_count
 
   scope :only_parents, where(parent_id: nil)
 
@@ -125,7 +126,7 @@ class Message < ActiveRecord::Base
     end
 
 
-    after_transition any => :draft, :do => :replenish_draft_count
+    after_transition any => :draft, :do => :replenish_draft_and_queued_count
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
 
@@ -198,8 +199,10 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    messages = with_state([:queued]).only_parents.ready_messages
-    execute_send(messages)
+    if send_message?
+      messages = with_state([:queued]).only_parents.ready_messages
+      execute_send(messages)
+    end
   end
 
   def self.batch_send_responses
@@ -536,6 +539,10 @@ class Message < ActiveRecord::Base
     }
   end
 
+  def self.send_message?
+    return true if Rails.env.production? || Rails.env.development?
+  end
+
   def build_new_message_labels(identifiers)
     identifiers.each do |identifier|
       message_labels.build(label_id: identifier, shop_identifier: shop_id)
@@ -632,8 +639,8 @@ class Message < ActiveRecord::Base
 
     return shop.connections.active.collect(&:user_id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
 
-    label_user_ids = labels.collect(&:user_labels).flatten.collect(&:user_id)
-    Connection.for_users(label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
+    receiver_label_user_ids = label_user_ids
+    Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
   end
 
   def replenish_draft_count
@@ -671,6 +678,14 @@ class Message < ActiveRecord::Base
 
   def shop_virtual?
     self.manager.present? && self.shop.present? && self.shop.virtual
+  end
+
+  def validate_recipient_count
+    self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if label_user_ids.size <= 0
+  end
+
+  def label_user_ids
+    labels.collect(&:user_labels).flatten.collect(&:user_id)
   end
 
 end
