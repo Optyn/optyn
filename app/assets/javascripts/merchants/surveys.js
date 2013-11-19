@@ -11,7 +11,7 @@ function MerchantSurvey() {
     this.initialize = function () {
         addQuestionPath = this.getAddQuestionPath();
         loadQuestionsPath = this.getLoadQuestionsPath();
-
+        this.hookSelectSurvey();
         console.log("Add Question path"+addQuestionPath);
         if ($('#new_survey_questions_content').length) {
             this.loadQuestions();
@@ -307,6 +307,14 @@ function MerchantSurvey() {
                 });
             }
         });
+    };
+
+    this.hookSelectSurvey= function () {
+        console.log("ads");
+        $(document).on('submit','body.select_survey',function(){
+            console.log("asd");
+        });
+
     };
 
 }
