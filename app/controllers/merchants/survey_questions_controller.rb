@@ -1,9 +1,6 @@
 class Merchants::SurveyQuestionsController < Merchants::BaseController
-  include Merchants::SurveyChecker
 
   layout false
-
-  before_filter :check_for_survey
 
   def new
   	@survey_question = SurveyQuestion.new

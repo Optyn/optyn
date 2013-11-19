@@ -206,7 +206,7 @@ class Shop < ActiveRecord::Base
   end
 
   def customer_token_available?
-    subscription.stripe_customer_token.present?
+    subscription.present? && subscription.stripe_customer_token.present?
   end
 
   def first_location_street_address
