@@ -26,7 +26,7 @@
         .span6
           .span3
             - if @shop.logo_img.url.present?
-              = @shop.logo_img.url rescue nil
+              = image_tag @shop.logo_img.url, alt: @shop.name, title: @shop.name rescue nil
             - else
               = image_tag 'no_shop_logo.gif', alt: 'Shop logo not provided.'
           .span9.c-s-criterion
