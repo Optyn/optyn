@@ -102,19 +102,6 @@ $(document).ready(function () {
     };
     setModalHt();
     $( window ).resize( setModalHt );
-
-
-    // Show hide Follow/Like buttons in footer
-    var showHideSocialLoveButtons = function() {
-        $( '#social-love' ).mouseenter( function() {
-            // console.log('show');
-            $( '.love-controls' ).fadeIn();
-        });
-        $( 'footer' ).mouseleave( function() {
-            // console.log('hide');
-            $( '.love-controls' ).fadeOut();
-        });
-    }();
 });
 // Equalize div heights
 function equalizeDivHeights( targetElementSelector ) {
@@ -125,9 +112,9 @@ function equalizeDivHeights( targetElementSelector ) {
             $( this ).css( 'height', 'auto' );
         });
         $( targetElementSelector ).each( function() {
-        if ( parseInt($( this ).css( 'height' )) > maxHt ) {
-            maxHt = parseInt($( this ).css( 'height' ));
-        }
+            if ( parseInt($( this ).css( 'height' )) > maxHt ) {
+                maxHt = parseInt( $( this ).css( 'height' ));
+            }
         });
         $( targetElementSelector ).each( function() {
             $( this ).css( 'height', maxHt + 10 );

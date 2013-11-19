@@ -46,6 +46,7 @@ class Message < ActiveRecord::Base
   validate :send_on_greater_by_hour
   validate :validate_child_message
   validate :validate_button_url
+  validate :validate_recipient_count
 
   scope :only_parents, where(parent_id: nil)
 
@@ -122,6 +123,7 @@ class Message < ActiveRecord::Base
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      message.valid?
     end
 
 
@@ -613,7 +615,7 @@ class Message < ActiveRecord::Base
       begin
         Date.parse(self.send(attr_name.to_sym).to_s)
       rescue
-        errors.add(:base, "#{attr_name} is invalid")
+        errors.add(attr_name.to_s.to_sym, "#{attr_name} is invalid")
       end
     end
   end
@@ -636,10 +638,10 @@ class Message < ActiveRecord::Base
   def fetch_receiver_ids
     labels_for_message = labels
 
-    return shop.connections.active.collect(&:user_id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
+    return all_active_user_ids if label_select_all?(labels_for_message)
 
-    label_user_ids = labels.collect(&:user_labels).flatten.collect(&:user_id)
-    Connection.for_users(label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
+    receiver_label_user_ids = label_user_ids
+    Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
   end
 
   def replenish_draft_count
@@ -679,4 +681,20 @@ class Message < ActiveRecord::Base
     self.manager.present? && self.shop.present? && self.shop.virtual
   end
 
+  def validate_recipient_count
+    receiver_count = label_select_all?(labels) ? all_active_user_ids.size : label_ids.size
+    self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if receiver_count <= 0
+  end
+
+  def label_user_ids
+    labels.collect(&:user_labels).flatten.collect(&:user_id)
+  end
+
+  def label_select_all?(labels_for_message)
+    labels_for_message.size == 1 && labels_for_message.first.inactive?
+  end
+
+  def all_active_user_ids
+    shop.connections.active.collect(&:user_id) 
+  end  
 end

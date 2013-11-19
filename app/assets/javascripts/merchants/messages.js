@@ -17,6 +17,7 @@ function MerchantMessage() {
             this.clearDuplicateErrors();
             this.hookDiscountType();
             this.setDiscountTypeSelected();
+            this.removeDuplicateLabelIdsError();
         }
 
         if ($('#messages_collection_container').length) {
@@ -314,25 +315,24 @@ function MerchantMessage() {
 
     this.clearDuplicateErrors = function(){
         if($('#message_type_of_discount_percentage_off').next('.error').length){
-            alert('Test');
-            var error = true;
-            var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
-            $('#message_type_of_discount_percentage_off').next('.error').remove();
-            $('#message_type_of_discount_dollar_off').next('.error').remove();
-            $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
+            // var error = true;
+            // var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
+            // $('#message_type_of_discount_percentage_off').next('.error').remove();
+            // $('#message_type_of_discount_dollar_off').next('.error').remove();
+            // $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
         }
     };
 
     this.hookDiscountType = function(){
         $( '.disc .btn' ).click( function() {
             var value = $( this ).data( 'value' );
-            $( '#type_of_message_value' ).attr( 'value', value );
+            $( '#message_type_of_discount' ).attr( 'value', value );
         });
     };
 
     this.setDiscountTypeSelected = function(){
-        if($('#type_of_message_value').length){
-            var discountTypeVal = $('#type_of_message_value').val();
+        if($('#message_type_of_discount').length){
+            var discountTypeVal = $('#message_type_of_discount').val();
             var $discountContainer = $('#discount_type_container');
             if(discountTypeVal.length){
                $discountContainer.find('button').each(function(index, element){
@@ -344,6 +344,10 @@ function MerchantMessage() {
                });
             }
         }
+    };
+
+    this.removeDuplicateLabelIdsError = function(){
+        $('input[name*=label_ids][type=hidden]').next('span.error').remove();
     };
 }
 
