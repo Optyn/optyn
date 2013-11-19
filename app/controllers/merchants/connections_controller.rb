@@ -68,6 +68,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
               existing_connection = existing_connection.first
               if not existing_connection.active
                 conn = existing_connection
+                @user = existing_user
               else
                 flag = true
                 @error_hash.push("#{email} has already been taken.")
