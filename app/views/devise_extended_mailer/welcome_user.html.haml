@@ -7,9 +7,9 @@
     = content_for :header do
       Thank you for signing up!
 
-    %table{:style => 'width:100%; max-width: 600px; min-height:40px;' + "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}", :align => "center"}
+    %table{:style => 'width:100%; max-width: 600px; min-height:40px;', :align => "center"}
       %tr
-        %td
+        %td{:style => "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}"}
           %div{:style => "margin:0 auto;display:block;"}
             /#20A8DD for background - try it #0C9FD8
             %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
