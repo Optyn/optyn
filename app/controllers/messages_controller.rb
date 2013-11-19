@@ -39,7 +39,7 @@ class MessagesController < BaseController
   end
 
   def offer_relevant
-    @message_user = MessageUser.find(params[:message_user_id])
+    @message_user = MessageUser.for_uuid(params[:message_user_id])
     if !@message_user.blank?
       @message_user.update_attribute(:offer_relevant, params[:offer_relevant])
       @message_user.save
