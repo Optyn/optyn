@@ -22,7 +22,7 @@
       %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
       %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
 
-      = f.hidden_field :type_of_discount, :id => "type_of_message_value"
+      = f.text_field :type_of_discount
 
 .control-group
   = f.label :discount_amount, "How much?", class: 'control-label'

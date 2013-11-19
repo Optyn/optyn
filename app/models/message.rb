@@ -123,6 +123,7 @@ class Message < ActiveRecord::Base
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      message.valid?
     end
 
 
@@ -614,7 +615,7 @@ class Message < ActiveRecord::Base
       begin
         Date.parse(self.send(attr_name.to_sym).to_s)
       rescue
-        errors.add(:base, "#{attr_name} is invalid")
+        errors.add(attr_name.to_s.to_sym, "#{attr_name} is invalid")
       end
     end
   end
