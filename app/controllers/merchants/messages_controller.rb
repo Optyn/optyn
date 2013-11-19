@@ -103,12 +103,14 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
     @shop_logo = true
     @shop = @message.shop
+    @preview = true
   end
 
   def show
     @message = Message.for_uuid(params[:id])
     @shop = @message.shop
     @shop_logo = true
+    @preview = true
   end
 
   def launch

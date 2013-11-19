@@ -23,57 +23,20 @@
           /     EMAIL
           %div{:style => "width:100%;height:1px;clear:both;float:none;"}
 
-%table{:style => "width:100%;clear:both;text-align:center;height:60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
-  %tr
-    %td
-    %td
-      - if @shop.present? && @shop.social_profiles.present?
-        %div{:style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
-          %p{:font => "bold", :style => "font-size: 18px; line-height: 22px; margin: 0 20px 0 0; margin-bottom: 10px;"}
-            Connect with us
-          %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
-            - @shop.social_profiles.each do |profile|
-              - name = SocialProfile::SOCIAL_PROFILES[profile.sp_type]
-              = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{profile.sp_link}", :target => "_blank")
-                    
-    %td
+/Email Social Profiles
+= render partial: "shared/mailers/email_social_profiles"
 
-- if !@skip_free_message && @shop.present? &&  @shop.starter_plan?
-  %table{:style => 'width:100%; color:#ccc; color: rgba(255,255,255,0.8);' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
-    %tr
-      %td{:style => "padding-left: 20px; max-height: 40px; padding-top: 15px; width: 100%;"}
-        %p{:style => "font-weight: bold; margin: 0px;"}
-          = "Send Awesome E-Mails like these"
-      %td{:style => "font-size: 11px; margin: 0px; text-align:center"}
-        = "Sent via"
-    %tr
-      %td{:style => "padding-left: 20px; max-height: 40px; width: 100%;"}
-        %p{:style => "font-size: 11px; margin: 0px;"}
-          = "Your first 100 subscribers are free. Sign up today at optyn.com"
-
-          %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#fff; text-decoration: underline;"} Click here
-      %td{:style => "padding: 0 6px 6px 0;"}
-        %a{:href => "#{SiteConfig.app_base_url}", :target => "_blank"}
-          = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
+/Optyn Send Free emails add
+= render partial: "shared/mailers/optyn_advertisement"
 
 %div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
   %p{:style => "font-size: 11px;margin:0px;"}
     - if @message.present? 
-      - if @message_user.present?
-        %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-          = "This message was sent to #{@message_user.email} by #{@shop.name} using Optyn." 
-        %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-          - if @shop and @shop.locations.present?
-            = "#{@shop.name} | #{@shop.first_location_street_address} | #{@shop.first_location_city}, #{@shop.first_location_state_name} #{@shop.first_location_zip}"
-          - else
-            = "222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654"
-        %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-          = "If you do not want to continue receiving emails, click here to "
-          = link_to('Unsubscribe', "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}?tracker=#{@message_user.uuid}", style: 'color: #666;')
-        - if @message.type == "CouponMessage" and @message_user.offer_relevant.nil?
-          %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-            = "Was this offer relevant to you?"
-            = link_to('Yes', "#{SiteConfig.app_base_url}#{offer_relevant_messages_path(:offer_relevant => true, :message_user_id => @message_user.id, :id => @message.uuid)}", style: 'color: #666;')
-            = link_to('No', "#{SiteConfig.app_base_url}#{offer_relevant_messages_path(:offer_relevant => false, :message_user_id => @message_user.id, :id => @message.uuid)}", style: 'color: #666;')
-      - elsif (preview rescue false)
-        = link_to('Unsubscribe', "javascript:void(0)", style: 'color: #666;')
+      / Sent to information
+      = render partial: "shared/mailers/sent_to_address"
+      
+      / Render the unsubscribe link
+      = render partial: "shared/mailers/unsubscribe"
+
+      /Ask the user if this email was relevant
+      = render partial: "shared/mailers/relevance"
