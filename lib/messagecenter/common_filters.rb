@@ -9,8 +9,9 @@ module Messagecenter
         controller.before_filter(:populate_manager_folder_count)
         controller.before_filter(:merge_end_date_time, only: [:create, :update])
         controller.before_filter :merge_send_on, only: [:create, :update, :update_meta]
-        controller.before_filter(:register_close_message_action, :get_pagination_data, only: [:queued, :drafts, :sent, :trash, :inbox, :saved])
         controller.skip_before_filter :authenticate_user!, only: [:public_view]
+
+        controller.helper_method(:registered_action_location)
       end
     end
 
@@ -74,10 +75,6 @@ module Messagecenter
       @queued_count = Message.cached_queued_count(current_shop) if current_shop
     end
 
-    def register_close_message_action
-      session[:registered_action] = action_name
-    end
-
     def registered_action_location
       eval("#{registered_action}_merchants_messages_path(:page => #{@page || session[:page] || 1})")
     end
@@ -102,15 +99,6 @@ module Messagecenter
       if params[:message][:send_on_date].present? || params[:message][:send_on_time].present?
         params[:message][:send_on] = params[:message][:send_on_date].to_s + " " + params[:message][:send_on_time]
       end
-    end
-
-    def get_pagination_data
-      @page = session[:page] = [1, params[:page].to_i].max
-      @per_page = session[:per_page]
-    end
-
-    def registered_action
-      session[:registered_action] || "inbox"
     end
 
   end #end CommonFilter module
