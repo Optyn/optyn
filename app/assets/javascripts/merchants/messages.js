@@ -17,6 +17,7 @@ function MerchantMessage() {
             this.clearDuplicateErrors();
             this.hookDiscountType();
             this.setDiscountTypeSelected();
+            this.removeDuplicateLabelIdsError();
         }
 
         if ($('#messages_collection_container').length) {
@@ -344,6 +345,10 @@ function MerchantMessage() {
                });
             }
         }
+    };
+
+    this.removeDuplicateLabelIdsError = function(){
+        $('input[name*=label_ids][type=hidden]').next('span.error').remove();
     };
 }
 

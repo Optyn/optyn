@@ -35,6 +35,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        flash.now[:error] = LAUNCH_FLASH_ERROR
         render "new"
       end
     end
@@ -59,6 +60,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        flash.now[:error] = LAUNCH_FLASH_ERROR
         render "edit"
       end
     end
