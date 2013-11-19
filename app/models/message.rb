@@ -347,7 +347,7 @@ class Message < ActiveRecord::Base
     if user_name.present?
       self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
-      personal_subject = (self.subject.gsub(/{{Customer Name}}/i, "")).strip.capitalize
+      personal_subject = (self.subject.gsub(/{{Customer Name}},/i, "")).strip.capitalize
       personal_subject
     end
   rescue 
