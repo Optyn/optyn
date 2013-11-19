@@ -250,6 +250,7 @@ footer {
     color: rgba( $white, 0.8 );
     font-weight: normal;
     font-size: 18px;
+    margin-bottom: 10px;
   }
   .span2 {
     text-align: left;
@@ -260,8 +261,7 @@ footer {
   ul {
     margin-left: 0;
   }
-  .span4 {
-    padding-top: 20px;
+  .span2:last-child {
     p {
       opacity: 0.5;
     }

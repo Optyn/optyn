@@ -108,11 +108,11 @@ $(document).ready(function () {
     var showHideSocialLoveButtons = function() {
         $( '#social-love' ).mouseenter( function() {
             // console.log('show');
-            $( '.love-controls' ).fadeIn();
+            $( '.love-controls' ).slideDown()();
         });
         $( 'footer' ).mouseleave( function() {
             // console.log('hide');
-            $( '.love-controls' ).fadeOut();
+            $( '.love-controls' ).slideUp();
         });
     }();
 });
@@ -125,9 +125,9 @@ function equalizeDivHeights( targetElementSelector ) {
             $( this ).css( 'height', 'auto' );
         });
         $( targetElementSelector ).each( function() {
-        if ( parseInt($( this ).css( 'height' )) > maxHt ) {
-            maxHt = parseInt($( this ).css( 'height' ));
-        }
+            if ( parseInt($( this ).css( 'height' )) > maxHt ) {
+                maxHt = parseInt( $( this ).css( 'height' ));
+            }
         });
         $( targetElementSelector ).each( function() {
             $( this ).css( 'height', maxHt + 10 );
