@@ -157,7 +157,7 @@ class Shop < ActiveRecord::Base
   end
 
   def starter_plan?
-    plan.id = Plan.starter.id
+    plan.id == Plan.starter.id
   rescue
     false
   end
