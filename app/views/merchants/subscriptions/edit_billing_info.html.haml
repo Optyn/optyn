@@ -11,6 +11,8 @@
               - Rails.logger.info("_______________________________________")
               - Rails.logger.info(@subscription.stripe_error)
               - Rails.logger.info(@subscription.errors.full_messages)
+              - Rails.logger.info(@subscription)
+              - Rails.logger.info(@plan)
               - Rails.logger.info("_______________________________________")
               =@subscription.stripe_error
               %ul
