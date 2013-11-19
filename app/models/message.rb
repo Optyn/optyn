@@ -123,6 +123,7 @@ class Message < ActiveRecord::Base
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      message.valid?
     end
 
 
