@@ -1,18 +1,13 @@
 class Merchants::SurveyAnswersController < Merchants::BaseController
-  include Merchants::SurveyChecker
   include Merchants::LabelSetUpdate
 
-  before_filter :check_for_survey, only: [:index]
-
   def select_survey
-    @list_survey = Survey.where(:shop_id=>current_shop.id)
-  end
+    @list_survey = Survey.where(:shop_id => current_shop.id)
+  end 
 
   def index
-    # binding.pry
-    survey_id = current_survey.id
-    @paginated_users = SurveyAnswer.paginated_users(survey_id, params[:page])
-    @users_map = SurveyAnswer.answers_arranged_by_users(survey_id, @paginated_users.collect(&:user_id))
+    @paginated_users = SurveyAnswer.paginated_users(params[:survey_id], params[:page])
+    @users_map = SurveyAnswer.answers_arranged_by_users(params[:survey_id], @paginated_users.collect(&:user_id))
     populate_labels
   end
 
