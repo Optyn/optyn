@@ -1,7 +1,7 @@
 %h1{style: 'float:none;'} Select Survey
 .row-fluid
   .span12
-    = form_tag(new_merchants_message_path, method: "GET") do
+    = form_tag("asdsa", method: "GET") do
       = label_tag(:survey_id,"Choose Survey You Want to Send")
       = select_tag :survey_id, options_from_collection_for_select(@list_survey, "id", "title")
       = submit_tag("Choose", class: 'btn btn-primary')
