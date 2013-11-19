@@ -34,7 +34,8 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def update
-		@survey = current_survey
+		# binding.pry
+		@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
 		@survey.attributes = params[:survey]
 		@survey.save!
 		redirect_to update_dispatcher
@@ -43,10 +44,11 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def questions
-		current_survey = Survey.find(params[:id])
+		current_survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
 		question_attributes = current_survey.survey_questions.collect(&:attributes)
 		
 		question_attributes.each do |attr_hash|
+			##FIXME: replace with named routes
 			#attr_hash['edit_path'] = edit_merchants_survey_survey_question_path(attr_hash['id'])
 			#attr_hash['delete_path'] = merchants_survey_survey_question_path(attr_hash['id'])
 			attr_hash['edit_path'] = "/merchants/segments/#{attr_hash['survey_id']}/segment_questions/#{attr_hash['id']}/edit"
@@ -58,12 +60,13 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def preview
-		@survey = current_survey
+		# binding.pry
+		@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
 		@survey_questions = @survey.survey_questions
   end
 
   def launch
-    @survey = current_survey
+    @survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
     @survey.update_attribute(:ready, true)
     redirect_to preview_merchants_survey_path
   end
