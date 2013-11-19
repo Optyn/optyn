@@ -8,10 +8,11 @@
 			= builder.label :image, "Add an Image?", class: 'control-label'
 			.controls
 				= builder.file_field :image, 'data-toggle' => 'tooltip', title: 'Your image will be autmatically added under the details of your message if you upload it. It will be automatically resized so you dont have to worry about it.'
-		- if @message.message_image.present?
-			%div{style: 'margin: 20px'}
-				= link_to 'Remove current image', remove_message_image_merchants_messages_path(:id => @message.uuid), :confirm => "Are you sure?"
-				= image_tag(@message.message_image.image.to_s, title: "Current image", style: 'max-width: 570px;')
+				- if @message.message_image.present?
+					%div{style: 'margin: 20px'}
+						= link_to 'Remove current image', remove_message_image_merchants_messages_path(:id => @message.uuid), :confirm => "Are you sure?", :class => 'btn btn-small btn-danger'
+						.blank-space
+						= image_tag(@message.message_image.image.to_s, title: "Current image", style: 'max-width: 570px;')
     
 	.control-group
 		= f.label :button_url, "Url", class: 'control-label'
