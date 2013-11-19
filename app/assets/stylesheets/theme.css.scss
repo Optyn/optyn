@@ -859,7 +859,7 @@ form {
   }
   .btn {
     @include border-radius( 0 );
-    font: normal 16px/25px 'Open Sans', sans-serif;
+    font: normal 1rem/1.4rem $sans-serif;
     letter-spacing: 1px;
     border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
     @include transition( all 0.2s ease-out );
@@ -871,6 +871,18 @@ form {
       border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
       text-decoration: none;
       background-color: darken( $light-gray, 15% );
+    }
+    &.btn-small {
+      font-size: 0.9rem;
+      line-height: 1.35rem;
+    }
+    &.btn-mini {
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+    }
+    &.btn-large {
+      font-size: 1.2em;
+      line-height: 1.6em;
     }
   }
   .link.blue, .btn-primary {
@@ -927,11 +939,6 @@ form {
     &.active {
       background-color: darken( $red, 30% );
     }
-  }
-  .btn-large {
-    padding: 11px 19px;
-    font-size: 1.2em;
-    line-height: 1.4em;
   }
   .modal {
     @include border-radius( 0 );
