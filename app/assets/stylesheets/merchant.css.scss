@@ -5,7 +5,7 @@
     background-color: rgba(222,222,222,0.4);
     color: $black;
     line-height: 42px;
-    padding-top: 20px;
+    padding: 20px 0 10px 0;
     .copy a {
       padding: 0 10px;
       border-right: solid 1px $medium-gray;
@@ -18,6 +18,20 @@
       text-decoration: underline;
       color: $black;
     }
+    .social {
+      a {
+        text-decoration: none;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin-right: 10px;
+      }
+    }
+    i {
+      @include transition( all 0.3s ease );
+    }
+    .icon-facebook:hover { color: $fb-blue; }
+    .icon-twitter:hover { color: $twitter-blue; }
+    .icon-google-plus:hover { color: $google-plus-red; }
   }
   .stats {
     /* Styles for Consumer & Merchant dashboard statistics. */

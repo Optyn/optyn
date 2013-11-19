@@ -101,28 +101,6 @@
     background-position: 0 -1760px;
   }
 
-  .icon {
-    background-image: image-url( 'sprite-landing.png' );
-    display: inline-block;
-    width: 43px;
-    height: 42px;
-    text-indent: -999px;
-    overflow: hidden;
-    @include transition( all 0.2s ease-out );
-    &:hover {
-      @include rotate(4deg);
-    }
-  }
-  .icon.google {
-    background-position: 0 -3040px;
-  }
-  .icon.twitter {
-    background-position: 0 -3520px;
-  }
-  .icon.facebook {
-    background-position: 0 -2540px;
-  }
-
   .businesses {
     color: #fff;
     & > a {
