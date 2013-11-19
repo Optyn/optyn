@@ -43,6 +43,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def questions
+		current_survey = Survey.find(params[:id])
 		question_attributes = current_survey.survey_questions.collect(&:attributes)
 		
 		question_attributes.each do |attr_hash|

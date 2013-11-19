@@ -269,6 +269,7 @@ Optyn::Application.routes.draw do
     put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
     get '/edit_billing_info' => 'subscriptions#edit_billing_info'
     put '/update_billing_info' => 'subscriptions#update_billing_info'
+    match '/segments/select_survey' => 'survey_answers#select_survey'
 
     resources :surveys, only: [:new, :index, :show, :edit, :update], path: :segments do
       member do
@@ -278,13 +279,13 @@ Optyn::Application.routes.draw do
       end
 
       resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
-
       resources :survey_answers, path: "answers" do
         collection do
           post 'create_label'
           post 'update_labels'
         end
       end
+
     end
 
     resources :labels, except: [:show]
