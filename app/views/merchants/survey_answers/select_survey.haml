@@ -7,5 +7,8 @@
       %select#survey_drop_down
         - @list_survey.each do |survey|
           %option{:value=>"/merchants/segments/#{survey.id}/answers"}
-            =survey.title
+            -if survey.title.present?
+              =survey.title
+            -else
+              "Untitled Survey"
       = submit_tag("Choose", class: 'btn btn-primary')
