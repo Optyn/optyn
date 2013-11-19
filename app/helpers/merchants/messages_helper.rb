@@ -126,7 +126,7 @@ module Merchants::MessagesHelper
       return highlight_class
     end
 
-    return highlight_class if !["new", "edit", "create", "update", "types", "preview", "create_response_message"].include?(action_name) && registered_action == link_name.to_s.gsub("&nbsp;", "").strip.downcase
+    return highlight_class if !["new", "edit", "create", "update", "types", "preview", "create_response_message", "launch"].include?(action_name) && registered_action == link_name.to_s.gsub("&nbsp;", "").strip.downcase
   end
 
   def message_detail_date(message)
