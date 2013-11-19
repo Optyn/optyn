@@ -614,7 +614,7 @@ class Message < ActiveRecord::Base
       begin
         Date.parse(self.send(attr_name.to_sym).to_s)
       rescue
-        errors.add(:base, "#{attr_name} is invalid")
+        errors.add(attr_name.to_s.to_sym, "#{attr_name} is invalid")
       end
     end
   end
