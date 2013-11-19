@@ -1,7 +1,7 @@
 function stripeResponseHandler(status, response) {
   if (response.error) {
       console.log(response);
-      alert(response);
+      alert(response.error.code);
       $(".payment-errors").text(response.error.message);
   } 
   else {
