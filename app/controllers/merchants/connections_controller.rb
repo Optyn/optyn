@@ -63,11 +63,16 @@ class Merchants::ConnectionsController < Merchants::BaseController
             next
           elsif @user.errors[:email] and @user.errors[:email].include?("has already been taken")
             existing_user = User.find_by_email(email)
-            
-            if not Connection.where(:user_id => existing_user.id, :shop_id => current_shop.id).empty?
-              flag = true
-              @error_hash.push("#{email} has already been taken.")
-              next
+            existing_connection = Connection.where(:user_id => existing_user.id, :shop_id => current_shop.id)
+            if not existing_connection.empty?
+              existing_connection = existing_connection.first
+              if not existing_connection.active
+                conn = existing_connection
+              else
+                flag = true
+                @error_hash.push("#{email} has already been taken.")
+                next
+              end
             else
               @user = existing_user
             end
@@ -78,7 +83,12 @@ class Merchants::ConnectionsController < Merchants::BaseController
         params["To"] = total_users - total_users[u].split(",")
         params["To"] = params["To"].join(",")
         # params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
-        conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
+        if conn
+          conn.active = true
+          conn.save
+        else
+          conn = Connection.create(:user_id => @user.id, :shop_id => current_shop.id, :connected_via => "Website")
+        end
         if not params["label_ids"].nil?
           total_labels_selected = params["label_ids"]
           label_loop_size = total_labels_selected.size - 1
