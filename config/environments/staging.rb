@@ -83,6 +83,6 @@ Optyn::Application.configure do
     # config.root_url = "http://localhost" 
 
   end
-
-  GA.tracker = "UA-38362841-1"
 end
+
+GA.tracker = "UA-38362841-1"
