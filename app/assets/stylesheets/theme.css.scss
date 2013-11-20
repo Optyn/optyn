@@ -791,6 +791,11 @@ form {
       border-color: lighten( $red, 20% );
       background-color: lighten( $red, 35% );
       color: $red;
+      &:focus {
+        border-color: lighten( $red, 20% );
+        box-shadow: inset 1px 1px 5px rgba(0,0,0,0.2);
+        color: $black;
+      }
     }
   }
   .nav-pills > li > a { @include border-radius( 0 );padding: 10px 15px 10px;
