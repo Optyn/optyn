@@ -72,6 +72,6 @@ Optyn::Application.configure do
       :page_size => 'Legal',
       :print_media_type => true
     }
-end
+  end
 
 GA.tracker = "UA-38362841-1"
