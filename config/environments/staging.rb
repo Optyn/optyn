@@ -79,8 +79,11 @@ Optyn::Application.configure do
       :page_size => 'Legal',
       :print_media_type => true
     }
+<<<<<<< HEAD
     # Use only if your external hostname is unavailable on the server.
     # config.root_url = "http://localhost" 
+=======
+>>>>>>> 93e459400692439a50587793872b20ac80ef67c6
   end
 
   GA.tracker = "UA-38362841-1"
