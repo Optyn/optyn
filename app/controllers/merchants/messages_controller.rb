@@ -289,6 +289,6 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def populate_shop_surveys
     underscored_message_type = SurveyMessage.to_s.underscore
-    @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type) 
+    @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type rescue false) 
   end
 end
