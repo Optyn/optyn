@@ -57,6 +57,7 @@ after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "resque:restart"
+after "deploy:restart", "deploy:pdf:make_executable"
 after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
@@ -141,6 +142,12 @@ namespace :deploy do
 
     task :enable, :roles => :web, :except => { :no_release => true } do
       run "rm #{shared_path}/system/maintenance.html"
+    end
+  end
+
+  namespace :pdf do
+    task :make_executable, :roles => :web, :except => {:no_release => true} do
+      run "chmod +x #{current_path}/bin/wkhtmltopdf"
     end
   end
 

@@ -3,7 +3,7 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+  %body{:height => "100%" :style => "width: 100%;background:#eee;font-family: Helvetica;sans-serif; margin: 15px;"}
     = content_for :header do
       Thank you for signing up!
 
@@ -12,7 +12,7 @@
         %td{:style => "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}"}
           %div{:style => "margin:0 auto;display:block;"}
             /#20A8DD for background - try it #0C9FD8
-            %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
+            %table{:style => 'width:100%;background:' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
               %tr{:style => "width: 100%;"}
                 %td{:style => "padding-left: 10px; max-height: 60px; padding-top: 5px;"}
                   %h3{:style => "margin:0px;padding: 0px;font-size: 26px;color: #ffffff;weight:900;"}
@@ -22,7 +22,7 @@
                   %h6{:style => "margin:0px;padding: 0px;font-size: 16px;color: #ffffff;weight:900;"}
                     = yield :header
       %tr
-        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+        %td{:style => "background:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
           %div
             %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
               %tr
@@ -37,7 +37,7 @@
                     Cheers,
                     %br/
                     #{@shop.name}
-            
+
       %tr
         %td
           = render partial: "shared/mailers/footer"

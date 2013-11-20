@@ -72,7 +72,7 @@ $(document).ready(function () {
 
 
     // Ensure footer is stuck to bottom of window ..............................
-    var setMidContentHt = function ( headerSelector, contentSelector, footerSelector ) {
+    var setMidContentHt = function( headerSelector, contentSelector, footerSelector ) {
         var headerHt = parseInt( $( headerSelector ).css( 'height' ));
         var footerHt = parseInt( $( footerSelector ).css( 'height' ));
         var windowHt = $( window ).height();
@@ -102,6 +102,11 @@ $(document).ready(function () {
     };
     setModalHt();
     $( window ).resize( setModalHt );
+
+    // Call handleTabLayout() only when there's a h1 and tab pane beside it,
+    // like the one on campaign pages.
+    if ( $( 'h1' ).css( 'float' ) === 'left' && $( '.tab-pane' ).size())
+        handleTabLayout();
 });
 // Equalize div heights
 function equalizeDivHeights( targetElementSelector ) {
@@ -122,4 +127,30 @@ function equalizeDivHeights( targetElementSelector ) {
     };
     setTimeout( setHt, 100 );
     $( window ).resize( setHt );
+}
+
+
+// Handle tabs in various resolutions
+function handleTabLayout() {
+    var h1Width = parseInt( $( '.wid75pc h1:first' ).css( 'width' ));
+    var handleLayout = function() {
+        var tabsWidth = 0;
+        $( '.wid75pc .tab-pane a' ).each( function( index, value) {
+            tabsWidth += parseInt( $( this ).css( 'width' ));
+        });
+        //console.log( h1Width, tabsWidth, tabsWidth + h1Width > parseInt( $( '.wid75pc' ).css( 'width' )), parseInt( $( '.wid75pc' ).css( 'width' )));
+        if ( h1Width + tabsWidth > parseInt( $( '.wid75pc' ).css( 'width' ))) {
+            //console.log( 'hide some tabs' );
+            $( 'h1:first' ).css({
+                'float': 'none',
+                'margin-bottom': '0'
+            });
+        } else {
+            $( 'h1:first' ).css({
+                'float': 'left',
+            });
+        }
+    };
+    handleLayout();
+    $( window ).resize( handleLayout );
 }

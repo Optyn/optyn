@@ -28,8 +28,7 @@
         = image_tag "mc_events_icon.png", :alt => ''
         %span New Event
     .row-fluid
-      / %a.span4.type{:href => merchants_new_campaign_path(message_type: 'survey_message')}
-      %a.span4.type{:href => select_survey_merchants_messages_path(message_type: 'survey_message')}
+      %a.span4.type{:href => merchants_new_campaign_path(message_type: 'survey_message')}
         = image_tag "mc_survey_icon.png", :alt => ''
         %span Send a Survey
       %a.span4.type{:href => "#"}

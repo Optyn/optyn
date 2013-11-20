@@ -37,6 +37,9 @@ class SegmentsController < BaseController
     else
       render "thankyou", layout: "email_feedback"
     end
+  rescue 
+    flash[:error] = "Could not submit the survey. Please try again. If the problem still persists please send an email to support@optyn.com"
+    redirect_to segment_path(CGI::escape(params[:id]))
   end
 
   private
