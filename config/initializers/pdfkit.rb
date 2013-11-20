@@ -1,6 +1,6 @@
 PDFKit.configure do |config|
   # config.wkhtmltopdf = '/home/shashank/code/pdf/'
-  config.wkhtmltopdf = '/home/deploy/pdf/wkhtmltopdf'
+  config.wkhtmltopdf = Rails.root.join('bin','wkhtmltopdf')
   config.default_options = {
     :page_size => 'Legal',
     :print_media_type => true
