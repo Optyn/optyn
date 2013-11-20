@@ -6,8 +6,8 @@
     = builder.text_field :email, :placeholder => "Email", 'data-toggle' => 'tooltip', title: 'Email', 'data-tooltip-pos' => 'right'
 
     - unless @omniauth.present?
-      = builder.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password', 'data-tooltip-pos' => 'right'
-      = builder.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password', 'data-tooltip-pos' => 'right'
+      = builder.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password. Minimum 8 characters.', 'data-tooltip-pos' => 'right'
+      = builder.password_field :password_confirmation, :placeholder => "Confirm password by entering same as above.", 'data-toggle' => 'tooltip', title: 'Confirm password', 'data-tooltip-pos' => 'right'
 
     = hidden_field_tag :auth_id, nil, value: @omniauth[:uid] if @omniauth.present?
     = hidden_field_tag :auth_provider, nil, value: @omniauth[:provider] if @omniauth.present?
