@@ -30,7 +30,9 @@
 #box_sign form{
 	margin: 0px;
 }
-#box_sign .box .form input[type="text"], 
+#box_sign .box .form input[type="text"],
+#box_sign .box .form input[type="tel"],
+#box_sign .box .form input[type="email"],
 #box_sign .box .form input[type="password"] {
   margin-top: 15px;
   width: 100%;
