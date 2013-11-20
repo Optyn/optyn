@@ -3,11 +3,11 @@
   = f.fields_for :managers do |builder|
 
     = builder.text_field :name, :placeholder => "Name", 'data-toggle' => 'tooltip', title: 'Name', 'data-tooltip-pos' => 'right'
-    = builder.text_field :email, :placeholder => "Email", 'data-toggle' => 'tooltip', title: 'Email', 'data-tooltip-pos' => 'right'
+    = builder.text_field :email, :placeholder => "Email", 'data-toggle' => 'tooltip', title: 'Email', 'data-tooltip-pos' => 'right', :type => 'email', :class => 'input-block-level'
 
     - unless @omniauth.present?
-      = builder.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password', 'data-tooltip-pos' => 'right'
-      = builder.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password', 'data-tooltip-pos' => 'right'
+      = builder.password_field :password, :placeholder => "Password", 'data-toggle' => 'tooltip', title: 'Password. Minimum 8 characters.', 'data-tooltip-pos' => 'right'
+      = builder.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password by entering same as above.', 'data-tooltip-pos' => 'right'
 
     = hidden_field_tag :auth_id, nil, value: @omniauth[:uid] if @omniauth.present?
     = hidden_field_tag :auth_provider, nil, value: @omniauth[:provider] if @omniauth.present?

@@ -23,7 +23,8 @@ class Shop < ActiveRecord::Base
   belongs_to :partner
   has_many :social_profiles, dependent: :destroy
 
-  has_many :survey, dependent: :destroy #changing it to has_many
+  has_many :surveys, dependent: :destroy #changing it to has_many
+
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
@@ -471,14 +472,14 @@ class Shop < ActiveRecord::Base
 
   def create_dummy_survey
     unless self.virtual?
-      unless survey.present?
-        dummy_survey = self.survey.build
+      unless surveys.present?
+        dummy_survey = self.surveys.build
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)
         dummy_survey
       else
-        survey
+        surveys
       end
     end
   end
