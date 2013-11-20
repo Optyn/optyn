@@ -16,9 +16,9 @@
       /   = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
       /   Connections
     %li
-      / %a{:href => segments_path}
-      /   = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
-      /   Surveys
+      %a{:href => segments_path}
+        = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
+        Surveys
     %li
       %a{:href => profile_path}
         = image_tag "menu_icon_connections.png", :alt => "My Profile", :style => "padding-left: 2px; padding-right: 12px;"
