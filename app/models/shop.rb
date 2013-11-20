@@ -15,7 +15,6 @@ class Shop < ActiveRecord::Base
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :users, through: :connections
-  has_one :survey, dependent: :destroy
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
@@ -23,6 +22,8 @@ class Shop < ActiveRecord::Base
   belongs_to :coupon
   belongs_to :partner
   has_many :social_profiles, dependent: :destroy
+
+  has_many :survey, dependent: :destroy #changing it to has_many
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
@@ -81,11 +82,17 @@ class Shop < ActiveRecord::Base
 
   scope :by_manager_email, ->(manager_email) {joins(:managers).where(["managers.email LIKE LOWER(:manager_email)", {manager_email: manager_email}])}
 
+  scope :not_pre_added, where(pre_added: false)
+
+  scope :alphabetized, order("shops.name")
+
   before_validation :assign_identifier, :assign_partner_if, on: :create
 
   before_create :assign_identifier, :assign_partner_if, :assign_timezone_if, :assign_header_background_color, :assign_footer_background_color
 
   after_create :assign_uuid, :create_dummy_survey, :create_select_all_label, :create_default_subscription
+
+  delegate :stripe_customer_token, to: :subscription
 
   set_callback :recover do
     self.deleted_at = nil
@@ -149,6 +156,12 @@ class Shop < ActiveRecord::Base
     self
   end
 
+  def starter_plan?
+    plan.id == Plan.starter.id
+  rescue
+    false
+  end
+
 
   def update_with_existing_manager(attrs)
     Shop.transaction do
@@ -190,6 +203,10 @@ class Shop < ActiveRecord::Base
 
   def is_online?
     self.stype == 'online'
+  end
+
+  def customer_token_available?
+    subscription.present? && subscription.stripe_customer_token.present?
   end
 
   def first_location_street_address
@@ -386,6 +403,61 @@ class Shop < ActiveRecord::Base
     self.errors.full_messages
   end  
   
+  def meta_tag_title
+    content = "#{name}"
+
+    if first_location.present?
+      content << " in #{first_location_city}" if first_location_city.present?
+      content << ", #{first_location_state_name}" if first_location_state_name.present?
+    end
+    
+    content
+  end
+
+  def meta_tag_description
+    content = ""
+
+    if description.present?
+      content << description 
+    else
+      content << %{Check out what type of marketing Promotions are available for #{name}. #{name} uses Optyn to create Coupons, specials, sales, surveys, and much more. Follow #{name} on Optyn.com}
+    end
+
+    content
+  end
+
+  def meta_tag_keywords
+    content = []
+    content << name
+    content << meta_tag_title.gsub(/,/, " -")
+    content.join(", ")
+  end
+
+
+  def upcoming_payment_amount_in_dollars
+    plan_amount = plan.amount
+
+    if coupon.present? && coupon.applicable?
+      if coupon.percent_off.present?
+        plan_amount = plan_amount * (coupon.percent_off.to_f / 100)
+      else
+        plan_amount = plan_amount - coupon.amount_off
+      end 
+    end
+
+    plan_amount.to_f / 100
+  end
+
+  def with_missing_profiles
+    existing_profiles = social_profiles.all #calling all to get an array but relation
+    blank_profiles_map = SocialProfile.all_types_map(self.id)
+
+    existing_profiles.each do |profile|
+      blank_profiles_map.delete(profile.sp_type)
+    end
+
+    existing_profiles + blank_profiles_map.values
+  end
 
   private
   def self.sanitize_domain(domain_name)
@@ -400,7 +472,7 @@ class Shop < ActiveRecord::Base
   def create_dummy_survey
     unless self.virtual?
       unless survey.present?
-        dummy_survey = self.build_survey
+        dummy_survey = self.survey.build
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)

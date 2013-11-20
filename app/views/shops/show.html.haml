@@ -1,3 +1,6 @@
+= display_title @shop.meta_tag_title
+= display_meta_description @shop.meta_tag_description, @shop.meta_tag_keywords
+
 #merchant_page
   .container-fluid
     .row-fluid.titlebar
@@ -9,7 +12,11 @@
     .row-fluid.button
       .span12.text-center.optyn
         %strong
-          = pluralize(@shop.connections.active.count, "Optyn")
+          Opt-in to receive exclusive specials, contests,
+          %br
+          announcements and more from #{@shop.name}.
+        %br
+        %br
         = form_tag("#{SiteConfig.app_base_url}#{subscribe_with_email_path}", method: :post) do
           %input{:type=>"text", :id=>"session_email", :name=>"user[email]" }
           %input{:type=>"hidden", :name=>"uuid", :value=>"#{@shop.uuid}"}
@@ -17,11 +24,14 @@
           %input{:type=>"hidden", :name=>"from", :value=>"public_page"}
           %input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token}
           %input.btn.btn-warning{:type=>"submit", :value=>"Subscribe"}
+        %strong
+          #{@shop.name} currently has over 
+          = pluralize(@shop.connections.active.count, "Subscribers")
     .row-fluid.mainbody
       .span8.offset2.details
         .title
           %h3
-            == #{@shop.name} Details
+            == #{@shop.name} Details:
         %table.table.table-striped
           %tbody
             - if @shop.businesses.present?

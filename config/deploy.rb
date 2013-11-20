@@ -38,12 +38,6 @@ set :deploy_via, :remote_cache
 set :lock_file_path, "#{shared_path}/pids"
 set :lock_file_name, 'deployment.pid'
 
-if "production" == rails_env
-  set :workers, {"general_queue" => 1, "import_queue" => 1, "message_queue" => 2, "payment_queue" => 1}
-else
-  set :workers, {"*" => 1}
-end
-
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 #
@@ -184,3 +178,10 @@ namespace :deploy do
   end
 end
 
+namespace :robots do
+  desc "Generate an updated robots.txt on the server."
+  task :generate do
+    puts "Generating the updated robots.txt"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate" 
+  end
+end

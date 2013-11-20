@@ -77,7 +77,7 @@ module Optyn
       config.middleware.use Rack::SslEnforcer,
                             :except => [ %r{/$}, %r{/cache/flush$}, %r{/old_index$}, %r{/faq$}, %r{/pricing$}, %r{/merchant-features},
                                          %r{/consumer-features$}, %r{/contact$}, %r{/terms$}, %r{/privacy$}, %r{/danacafe$}, %r{/thankyou$},
-                                         %r{/old_index$}, %r{/about$}, %r{/shop/public/(.*)$}],
+                                         %r{/old_index$}, %r{/about$}, %r{/tour$}, %r{/testimonials/alley-gallery$}, %r{/shop/public/(.*)$}],
                             :ignore => %r{/assets},
                             :strict => true,
                             :except_environments => 'development'

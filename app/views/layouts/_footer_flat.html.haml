@@ -1,8 +1,12 @@
 %footer.container-fluid.inner
   .row-fluid.copyright
-    .span4
-      %a.icon.facebook{:href => "http://www.facebook.com/optyn", :target => "_blank"}
-      %a.icon.twitter{:href => "http://www.twitter.com/optyn", :target => "_blank"}
+    .span4.social
+      %a{:href => "http://www.facebook.com/optyn", :target => "_blank"}
+        %i.icon-facebook
+      %a{:href => "http://www.twitter.com/optyn", :target => "_blank"}
+        %i.icon-twitter
+      %a{:href => "https://plus.google.com/+OptynEmailMarketing", :target => "_blank"}
+        %i.icon-google-plus
     .span4.text-center
       .copy
         %a{ :href => blog_path } Blog

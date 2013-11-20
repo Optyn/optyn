@@ -1,6 +1,14 @@
 $(document).ready(function () {
     var myConsumerDetail = new MyConsumerDetail();
     myConsumerDetail.initialize();
+
+    // Hook the jquery exander.
+    $('div#merchants span.expandable').expander({
+    slicePoint:       50,  // default is 100
+    expandPrefix:     ' ', // default is '... '
+    expandText:       '[...]', // default is 'read more'
+    userCollapseText: '[^]'  // default is 'read less'
+  });
 });
 
 
@@ -21,6 +29,10 @@ function MyConsumerDetail() {
               keyboard: false,
               show: false
             });
+        }
+        if ($('#add_user .chzn-select').length) {
+          this.hookChosen();
+          this.hookCreateLabelOnly();
         }
     };
 
@@ -84,6 +96,10 @@ function MyConsumerDetail() {
 
           //Hook the chosen behavior
           consumerInstance.hookModalBehavior();
+
+          setTimeout(function(){
+            $('#conusmer_connection_modal').modal('hide');
+          }, 1000);
         });
       }); 
     };
@@ -138,4 +154,32 @@ function MyConsumerDetail() {
             });
         });
     };
+
+    this.hookCreateLabelOnly = function () {
+      $('body').on('keydown', '#add_user .search-field input', function (e) {
+        var $input = $(this);
+        var code = e.keycode || e.which;
+        if (code == 13) {
+          var inputVal = $input.val();
+          if (inputVal.length) {
+            var $currentLabel = $input.parents('.labels').first();
+            var $currentSelect = $currentLabel.find('select');
+            $.ajax({
+              url: $('#create_label_users_path').val(),
+              type: 'POST',
+              data: {label: inputVal},
+              success: function (data) {
+                $('.chzn-select').append(
+                  $('<option></option>').val(data.id).html(data.name)
+                );
+                $currentSelect.find('option[value="' + data.id + '"]').attr('selected', 'selected');
+                $('.chzn-select').trigger("liszt:updated");
+                $('#label_success').text("Label created successfully");
+                $('#label_success').show();
+              }
+            });
+          }
+        }
+      });
+  };
 }

@@ -7,10 +7,11 @@ class Message < ActiveRecord::Base
   has_many :message_labels, dependent: :destroy
   has_many :labels, through: :message_labels
   has_many :message_users, dependent: :destroy
-  has_many :message_email_auditors, through: :message_users
+  has_many :message_email_auditors, dependent: :destroy
   belongs_to :survey
   has_many :message_visual_properties, dependent: :destroy
   has_one :message_image, dependent: :destroy
+  has_many :redeem_coupons, dependent: :destroy
 
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
@@ -45,6 +46,7 @@ class Message < ActiveRecord::Base
   validate :send_on_greater_by_hour
   validate :validate_child_message
   validate :validate_button_url
+  validate :validate_recipient_count
 
   scope :only_parents, where(parent_id: nil)
 
@@ -59,6 +61,8 @@ class Message < ActiveRecord::Base
   scope :includes_message_users, includes(:message_users)
 
   scope :active_state, where("messages.state NOT IN ('delete', 'trash')")
+
+  scope :made_public, where(make_public: true)
 
   
   state_machine :state, :initial => :draft do
@@ -119,10 +123,11 @@ class Message < ActiveRecord::Base
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      message.valid?
     end
 
 
-    after_transition any => :draft, :do => :replenish_draft_count
+    after_transition any => :draft, :do => :replenish_draft_and_queued_count
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
 
@@ -195,8 +200,10 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    messages = with_state([:queued]).only_parents.ready_messages
-    execute_send(messages)
+    if send_message?
+      messages = with_state([:queued]).only_parents.ready_messages
+      execute_send(messages)
+    end
   end
 
   def self.batch_send_responses
@@ -336,11 +343,11 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    user_name = message_user.name.to_s
+    user_name = message_user.name.to_s if ((message_user) and (message_user.name))
     if user_name.present?
       self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
-      personal_subject = (self.subject.gsub(/{{Customer Name}}/i, "")).strip.capitalize
+      personal_subject = (self.subject.gsub(/{{Customer Name}},/i, "")).strip.capitalize
       personal_subject
     end
   rescue 
@@ -459,6 +466,18 @@ class Message < ActiveRecord::Base
     button_url
   end
 
+  def call_fb_api(link)
+    response = HTTParty.get("#{FACEBOOK_STAT_API}" + link + "&format=json")
+    # response = HTTParty.get("https://api.facebook.com/method/links.getStats?urls=https://development.optyn.com/music-store/campaigns/testing-share-stat-ac49bdfcf8d345e1b2872505eea9e0f6&format=json")
+    return response.parsed_response
+  end
+
+  def call_twitter_api(link)
+    response = HTTParty.get("#{TWITTER_STAT_API}" + link)
+    # response = HTTParty.get("http://urls.api.twitter.com/1/urls/count.json?url=https://development.optyn.com/music-store/campaigns/test-coupon-3141d0567770402b8e7084bc495018f4")
+    return response.parsed_response
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
@@ -519,6 +538,10 @@ class Message < ActiveRecord::Base
         MESSAGE:'sending messages with ids #{messages.collect(&:id).join(', ')}'
         TIME:#{Time.now}
     }
+  end
+
+  def self.send_message?
+    return true if Rails.env.production? || Rails.env.development?
   end
 
   def build_new_message_labels(identifiers)
@@ -592,7 +615,7 @@ class Message < ActiveRecord::Base
       begin
         Date.parse(self.send(attr_name.to_sym).to_s)
       rescue
-        errors.add(:base, "#{attr_name} is invalid")
+        errors.add(attr_name.to_s.to_sym, "#{attr_name} is invalid")
       end
     end
   end
@@ -615,10 +638,10 @@ class Message < ActiveRecord::Base
   def fetch_receiver_ids
     labels_for_message = labels
 
-    return shop.connections.active.collect(&:user_id) if labels_for_message.size == 1 && labels_for_message.first.inactive?
+    return all_active_user_ids if label_select_all?(labels_for_message)
 
-    label_user_ids = labels.collect(&:user_labels).flatten.collect(&:user_id)
-    Connection.for_users(label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
+    receiver_label_user_ids = label_user_ids
+    Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
   end
 
   def replenish_draft_count
@@ -657,4 +680,21 @@ class Message < ActiveRecord::Base
   def shop_virtual?
     self.manager.present? && self.shop.present? && self.shop.virtual
   end
+
+  def validate_recipient_count
+    receiver_count = label_select_all?(labels) ? all_active_user_ids.size : label_ids.size
+    self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if receiver_count <= 0
+  end
+
+  def label_user_ids
+    labels.collect(&:user_labels).flatten.collect(&:user_id)
+  end
+
+  def label_select_all?(labels_for_message)
+    labels_for_message.size == 1 && labels_for_message.first.inactive?
+  end
+
+  def all_active_user_ids
+    shop.connections.active.collect(&:user_id) 
+  end  
 end

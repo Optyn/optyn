@@ -2,10 +2,6 @@
 = render partial: "merchants/messages/message_menu"
 
 #merchants.pad3pc
-  / - if @message.make_public
-  /   = "Link to make this message public:"
-  /   %div
-  /     = link_to get_public_link(@message, @shop), get_public_link(@message, @shop), :target => "_blank"
   = render :partial => 'progress_bar'
 
   = render :partial => 'preview_wrapper'

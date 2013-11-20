@@ -56,18 +56,8 @@
   margin-right: 5px;
 }
 .about_page .twitter-follow-button {
-  background-image: url('/assets/sprite-landing.png');
-  background-repeat: no-repeat;
-  padding-left: 60px;
-  height: 43px;
   display: inline-block;
-  line-height: 43px;
-  background-position: 0 -3520px;
-  margin-top: 15px;
-  @include transition( all 0.2s ease-out );
-  &:hover {
-    background-position: 8px -3520px;
-  }
+  margin: 15px 0;
 }
 
 .main.tour {
@@ -91,17 +81,9 @@
 
 .testimonial_alley_gallery {
   blockquote {
-    font-size: 1.5em;
-    line-height: 1.5em;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
     margin: 3% 0;
-    &:before {
-      content: '"';
-      margin-right: 5px;
-    }
-    &:after {
-      content: '"';
-      margin-left: 5px;
-    }
   }
   .t-coupons,
   .t-sales,
@@ -156,9 +138,39 @@
     padding: 2%;
   }
 }
-@media ( max-width: 768px ) {
+@media ( max-width: $xga-h ) {
   .about_page .teammate {
     margin-bottom: 0;
     height: auto !important;
   }
+  .alley-gallery { display: none !important; }
+  .testimonial_alley_gallery {
+    blockquote {
+      font-size: 1.1rem;
+      line-height: 1.5rem;
+    }
+  }
 }
+
+
+/* Sitemap page ============================================================= */
+.op-sitemap {
+  h4 {
+    color: $green;
+    font-weight: 400;
+  }
+  ul {
+    margin: 0;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 2px 0;
+    @include transition( all 0.3s ease );
+    &:hover {
+      background: $light-gray;
+      padding-left: 10px;
+    }
+  }
+}
+

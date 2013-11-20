@@ -1,0 +1,5 @@
+- unless current_shop.affiliate_tracker_pinged
+  - if current_shop.customer_token_available?
+    - owner = current_shop.manager
+    %iframe{src: "https://optyn.salesgust.com:443/conversion?userId=#{owner.uuid}&email=#{owner.email}&billingSystem=Stripe&stripeCustomerId=#{current_shop.stripe_customer_token}", width: "0", height: "0", id: "affiliate_tracking_frame"}
+    = hidden_field_tag(:update_affiliate_tracking_merchants_shop_path, update_affiliate_tracking_merchants_shop_path)

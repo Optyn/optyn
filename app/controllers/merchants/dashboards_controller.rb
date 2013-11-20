@@ -48,7 +48,7 @@ class Merchants::DashboardsController < Merchants::BaseController
         type: 'New survey submission',
         time: Time.at(answer.last.to_i),
         user: answer.first,
-        action_url: merchants_survey_survey_answers_path
+        action_url: '' #merchants_survey_survey_answers_path
       })
     end
   end

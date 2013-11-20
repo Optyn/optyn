@@ -1,0 +1,15 @@
+- if @message_user.present? || @preview
+  - if @message.type == "CouponMessage" and ((@message_user.offer_relevant.nil? rescue false) || @preview)
+    %p{:style => "font-size: 11px;margin:0px;color: #666;"}
+      = "Was this offer relevant to you?"
+
+      - link_options = {style: 'color:#64aaef;background: #fff;padding:5px;'}
+      - link_options.merge!({onclick: 'alert("Not Available")'}) if @preview
+
+      - relevance_yes_link = @message_user.present? ? "#{SiteConfig.app_base_url}#{offer_relevant_messages_path(:offer_relevant => true, :message_user_id => @message_user.uuid, :id => @message.uuid)}"  : "javascript:void(0)"
+      
+      = link_to('Yes', relevance_yes_link, link_options)
+
+      - relevance_no_link = @message_user.present? ? "#{SiteConfig.app_base_url}#{offer_relevant_messages_path(:offer_relevant => false, :message_user_id => @message_user.uuid, :id => @message.uuid)}"  : "javascript:void(0)"
+
+      = link_to('No', relevance_no_link, link_options)

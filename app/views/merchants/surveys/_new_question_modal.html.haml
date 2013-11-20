@@ -4,6 +4,7 @@
     %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}
       ×
     %h3 Add a new question
+    %input{:type=>"hidden", :name=>"survey_id", :value=>"#{@survey.id}"}
 
   .modal-body
     Please Wait...

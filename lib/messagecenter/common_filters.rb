@@ -9,6 +9,7 @@ module Messagecenter
         controller.before_filter(:populate_manager_folder_count)
         controller.before_filter(:merge_end_date_time, only: [:create, :update])
         controller.before_filter :merge_send_on, only: [:create, :update, :update_meta]
+        controller.skip_before_filter :authenticate_user!, only: [:public_view]
 
         controller.helper_method(:registered_action_location)
       end
@@ -40,14 +41,14 @@ module Messagecenter
     end
 
     def populate_datetimes
-      @message.beginning = Time.parse(params[:message][:beginning]) if params[:message][:beginning].present?
-      @message.ending = Time.parse(params[:message][:ending]) if params[:message][:ending].present?
+      @message.beginning = params[:message][:beginning].present? ? Time.parse(params[:message][:beginning]) : nil
+      @message.ending = params[:message][:ending].present? ? Time.parse(params[:message][:ending]) : nil
     end
 
     def show_my_messages_only
       @message = Message.for_uuid(params[:id])
-      @message_manager = @message.manager(current_user)
-      if @message_manager != current_manager
+      @message_shop = @message.shop
+      if @message_shop != current_shop
         redirect_to(inbox_messages_path)
         return false
       end
@@ -57,7 +58,7 @@ module Messagecenter
     def message_editable?
       @message = Message.for_uuid(params[:id])
 
-      if !current_manager == @message.manager || !@message.editable_state?
+      if current_shop != @message.shop || !@message.editable_state?
         redirect_to merchants_message_path(@message.uuid)
       end
     end
@@ -70,8 +71,8 @@ module Messagecenter
     end
 
     def populate_manager_folder_count
-      @drafts_count = Message.cached_drafts_count(current_shop)
-      @queued_count = Message.cached_queued_count(current_shop)
+      @drafts_count = Message.cached_drafts_count(current_shop) if current_shop
+      @queued_count = Message.cached_queued_count(current_shop) if current_shop
     end
 
     def registered_action_location

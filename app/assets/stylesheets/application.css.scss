@@ -1,5 +1,4 @@
 //= require sliders
-@import "utilities/fonts.css.scss";
 @import "utilities/effects.css.scss";
 @import "utilities/variables.css.scss";
 @import "compass";
@@ -34,4 +33,7 @@
 @import "colorbox";
 @import "optyn_button";
 @import "email_feedback";
-@import "customer"
+@import "customer";
+@import "reseller";
+@import "social-share-button";
+@import "merchants/social_profiles"

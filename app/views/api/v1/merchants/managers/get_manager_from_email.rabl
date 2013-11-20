@@ -5,5 +5,5 @@ attributes :uuid, :email, :name, :owner
  end
 
 node :errors do |manager|
-  manager.error_messages
+  manager.error_messages rescue ["Manager not found"]
 end

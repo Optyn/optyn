@@ -1,4 +1,6 @@
-/* Variables */
+/* VARIABLES ============================================================
+   This file should be included at the beginning of application.css.scss.
+   Then variables in this file can be used in all .scss files. ======= */
 
 /* Colours ------------------------------------ */
 $dark-blue: #2e3e51;
@@ -12,5 +14,30 @@ $medium-gray: #ccc;
 $dark-gray: #666;
 $bluish-green: #4ac3d1;
 $red: #FF5338;
+$fb-blue: #3a589b;
+$google-plus-red: #d6492f;
+$linkedin-blue: #007ab9;
+$pinterest-red: #cb2027;
+$twitter-blue: #598dca;
+
+
+/* Fonts -------------------------------------- */
+/* Include fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
 $serif: 'Merriweather', serif;
-//$sans-serif: 'Open Sans', sans-serif;
+$sans-serif: 'Open Sans', sans-serif;
+
+
+/* Screen dimensions -------------------------- */
+$mobile-width: 320px;
+$qvga-w: 320px;
+$qvga-h: 240px;
+$vga-w:  640px;
+$vga-h:  480px;
+$xga-w:  1024px;
+$xga-h:  768px;
+$wxga-w: 1200px;
+$wxga-h: 800px;
+

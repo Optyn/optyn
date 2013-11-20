@@ -2,9 +2,12 @@ class SurveyAnswer < ActiveRecord::Base
   belongs_to :survey_question
   belongs_to :user
 
+  has_many :label #for task 59468940d
+
   delegate :survey, to: :survey_question
 
   attr_accessible :survey_question_id, :value, :user_id
+  attr_accessible :label_id
   serialize :value, Array
 
   PAGE = 1
