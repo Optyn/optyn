@@ -144,7 +144,9 @@ class MessageUser < ActiveRecord::Base
                                           :received_at => Time.now)
     end
 
-    MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
+    message = MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
+    message.message_id = message_instance_id
+    message.save
   end
 
   def self.coupon_messages_count(user_id, force = false)

@@ -101,28 +101,6 @@
     background-position: 0 -1760px;
   }
 
-  .icon {
-    background-image: image-url( 'sprite-landing.png' );
-    display: inline-block;
-    width: 43px;
-    height: 42px;
-    text-indent: -999px;
-    overflow: hidden;
-    @include transition( all 0.2s ease-out );
-    &:hover {
-      @include rotate(4deg);
-    }
-  }
-  .icon.google {
-    background-position: 0 -3040px;
-  }
-  .icon.twitter {
-    background-position: 0 -3520px;
-  }
-  .icon.facebook {
-    background-position: 0 -2540px;
-  }
-
   .businesses {
     color: #fff;
     & > a {
@@ -231,62 +209,53 @@
     background: image-url( 'bg_hdg.png' );
     padding: 1% 0;
   }
+}
 
-  footer {
-    background-color: $dark-blue;
-    color: #fff;
-    font-size: 13px;
-    line-height: 20px;
-    padding: 1% 0;
-    a {
-      color: #61abe6;
-    }
-    h4 {
-      color: $white;
-      color: rgba( $white, 0.8 );
-      font-weight: normal;
-      font-size: 18px;
-    }
-    .span2 {
-      text-align: left;
-    }
-    .span2:first-child {
-      padding-left: 2%;
-    }
-    ul {
-      margin-left: 0;
-    }
-    .span4 {
-      padding-top: 20px;
-      p {
-        opacity: 0.5;
-      }
-    }
-  }
-
-  .pg-twitter,
-  .pg-facebook {
-    background-image: image-url( 'sprite-landing.png' );
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 63px;
-    height: 50px;
-    text-indent: -999px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    @include transition( all 0.2s ease-out );
+footer {
+  background-color: $dark-blue;
+  color: #fff;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 1% 0;
+  a {
+    color: #61abe6;
     &:hover {
-      @include rotate( -6deg );
+      color: rgba( $white, 0.8 );
     }
   }
-  .pg-twitter {
-    background-position: 0 -3280px;
+  h4 {
+    color: $white;
+    color: rgba( $white, 0.8 );
+    font-weight: normal;
+    font-size: 18px;
+    margin-bottom: 10px;
   }
-  .pg-facebook {
-    background-position: 19px -2780px;
+  .span2 {
+    text-align: left;
   }
+  .span2:first-child {
+    padding-left: 2%;
+  }
+  ul {
+    margin-left: 0;
+  }
+  .span2:last-child {
+    p {
+      opacity: 0.5;
+    }
+  }
+  .share {
+    position: absolute;
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    line-height: 50px;
+    top: -50px;
+    right: 0;
+  }
+}
 
-  .m-i {  /* Merchant's index */
+.m-i {  /* Merchant's index */
     background-color: $gray;
     @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
       background-image: image-url( 'main-ag-m.jpg' );
@@ -311,18 +280,43 @@
       }
       > span:first-child {
         margin-bottom: 10px;
+    }
+  }
+  .well {
+    padding: 1%;
+    margin-bottom: 1%;
+    margin-top: 130px;
+  }
+  .signup {
+    input {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+  .vid-lnk {
+    color: darken( $black, 50% );
+    font-weight: 700;
+    text-shadow: 1px 1px 0 #fff;
+    margin-top: 290px;
+    @include transition( background-color 0.3s ease-out );
+    font-size: 16px;
+  }
+  .vid-lnk:hover {
+    text-decoration: none;
+    background-color: rgba( $white, 0.99 );
+  }
+}  /* End .m-i */
 
-      }
-    }
-    .well {
-      padding: 1%;
-      margin-bottom: 1%;
-      margin-top: 187px;
-    }
-    .signup {
-      input {
-        width: 100%;
-        margin-top: 20px;
+@media (max-width: $mobile-width + 100) {
+  .m-i {
+    background-image: none;
+    h1 {
+      text-align: center;
+      > span {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        background: transparent;
+        text-align: center;
       }
     }
     .vid-lnk {
@@ -331,9 +325,8 @@
       margin-top: 330px;
       font-size: 1rem;
     }
-  }  /* End .m-i */
+  }
 }
-
 
 .terms {
   /* Styles for Terms of Use page. */
@@ -427,7 +420,7 @@
 
 #flat .sf-social {
   > a {
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 3rem;
     color: rgba( $white, 0.8 );
     margin-right: 5px;

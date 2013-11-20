@@ -56,18 +56,8 @@
   margin-right: 5px;
 }
 .about_page .twitter-follow-button {
-  background-image: url('/assets/sprite-landing.png');
-  background-repeat: no-repeat;
-  padding-left: 60px;
-  height: 43px;
   display: inline-block;
-  line-height: 43px;
-  background-position: 0 -3520px;
-  margin-top: 15px;
-  @include transition( all 0.2s ease-out );
-  &:hover {
-    background-position: 8px -3520px;
-  }
+  margin: 15px 0;
 }
 
 .main.tour {

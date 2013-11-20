@@ -12,5 +12,5 @@
     %li{class: message_menu_highlight_class(["queued"], "Queued", "active")}
       = messages_menu_links(current_manager, queued_merchants_messages_path, "Queued", @queued_count, false, ["queued"])
 
-    %li{class: message_menu_highlight_class(["types", "new", "create", "edit", "update", "preview", "create_response_message"], "Create", "active")}
+    %li{class: message_menu_highlight_class(["types", "new", "create", "edit", "update", "preview", "create_response_message", "launch"], "Create", "active")}
       = messages_menu_links(current_manager, types_merchants_messages_path, "Create", "", false, ["types", "new", "create", "edit", "update", "preview"])

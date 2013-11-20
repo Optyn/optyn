@@ -126,7 +126,7 @@ module Merchants::MessagesHelper
       return highlight_class
     end
 
-    return highlight_class if !["new", "edit", "create", "update", "types", "preview", "create_response_message"].include?(action_name) && registered_action == link_name.to_s.gsub("&nbsp;", "").strip.downcase
+    return highlight_class if !["new", "edit", "create", "update", "types", "preview", "create_response_message", "launch"].include?(action_name) && registered_action == link_name.to_s.gsub("&nbsp;", "").strip.downcase
   end
 
   def message_detail_date(message)
@@ -169,6 +169,38 @@ module Merchants::MessagesHelper
 
   def get_public_link(message, shop)
     msg = "#{message.name} #{message.uuid}"
-    return "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+    return public_view_messages_path(shop.name.parameterize, msg.parameterize)
+  end
+
+  def get_social_share_link(type, message, public_msg_url)
+    case type
+    when "facebook"
+      return URI.parse(URI.encode("#{FACEBOOK_SHARE_API}?u=#{public_msg_url}"))
+    when "twitter"
+      return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.name}&url=#{public_msg_url}"))
+    end
+  end
+
+  def optyn_user?(email_of_recepient=nil)
+    return false if email_of_recepient.nil?
+    
+    if email_of_recepient
+      if User.find_by_email(email_of_recepient)
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+  def get_offer_relevance_stat(message)
+    relevant = 0
+    non_relevant = 0
+    message.message_users.each do |mu|
+      if not mu.offer_relevant.nil?
+        mu.offer_relevant? ? relevant += 1 : non_relevant += 1
+      end
+    end
+    return relevant, non_relevant
   end
 end

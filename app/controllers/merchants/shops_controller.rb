@@ -31,6 +31,13 @@ class Merchants::ShopsController < Merchants::BaseController
     head((shop.present?  ? :unprocessable_entity : :ok))
   end
 
+  def update_affiliate_tracking
+    current_shop.update_attribute(:affiliate_tracker_pinged, true)
+    head :ok
+  rescue ActiveRecord::RecordNotFound
+    head :unprocessible_entity
+  end
+
   private
   def check_for_blank_q
     if params[:q].blank?

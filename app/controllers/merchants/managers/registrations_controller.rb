@@ -1,6 +1,7 @@
 class Merchants::Managers::RegistrationsController < Devise::RegistrationsController
 
   before_filter :require_customer_logged_out
+  helper_method :current_shop
   
   def new
     session[:omniauth_manager] = true
@@ -38,4 +39,9 @@ class Merchants::Managers::RegistrationsController < Devise::RegistrationsContro
     end
 
   end
+
+  private
+  def current_shop
+    current_merchants_manager.shop if merchants_manager_signed_in?
+  end  
 end

@@ -2,8 +2,10 @@
 #flat {
   footer.inner {
     background-color: $light-gray;
-    color: $dark-gray;
+    background-color: rgba(222,222,222,0.4);
+    color: $black;
     line-height: 42px;
+    padding: 20px 0 10px 0;
     .copy a {
       padding: 0 10px;
       border-right: solid 1px $medium-gray;
@@ -14,8 +16,22 @@
     }
     a {
       text-decoration: underline;
-      color: $gray;
+      color: $black;
     }
+    .social {
+      a {
+        text-decoration: none;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin-right: 10px;
+      }
+    }
+    i {
+      @include transition( all 0.3s ease );
+    }
+    .icon-facebook:hover { color: $fb-blue; }
+    .icon-twitter:hover { color: $twitter-blue; }
+    .icon-google-plus:hover { color: $google-plus-red; }
   }
   .stats {
     /* Styles for Consumer & Merchant dashboard statistics. */
@@ -520,7 +536,6 @@
 #flat.m-app #dashboard #box_login .row-fluid { padding: 0 10px;}
 .payment-errors {
   padding: 10px;
-  color: red;
 }
 #survey_question_form .form-horizontal .close {
   display: inline-block;
@@ -543,3 +558,9 @@
 #flat.shops.show h1 {
   border-bottom: 0;
 }
+
+#c-sent-criteria h5 {
+  margin-top: 18px;
+}
+
+#message_meta_modal .field-with-errors { display: block; }

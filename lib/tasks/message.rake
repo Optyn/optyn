@@ -16,4 +16,14 @@ namespace :message do
       Connection.mark_inactive_bounce_or_complaint(audit_entry)
     end
   end
+
+  desc "Populate missing message_id for existing MessageEmailAuditor records"
+  task :populate_message_id_to_message_email_auditors => :environment do
+    MessageEmailAuditor.all.each do |message_email_audit|
+      if message_email_audit.message_id.nil? and message_email_audit.message_user
+        message_email_audit.message_id = message_email_audit.message_user.message.id
+        message_email_audit.save
+      end
+    end
+  end
 end

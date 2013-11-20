@@ -9,6 +9,7 @@ module Messagecenter
         controller.before_filter(:populate_manager_folder_count)
         controller.before_filter(:merge_end_date_time, only: [:create, :update])
         controller.before_filter :merge_send_on, only: [:create, :update, :update_meta]
+        controller.skip_before_filter :authenticate_user!, only: [:public_view]
 
         controller.helper_method(:registered_action_location)
       end
@@ -40,8 +41,8 @@ module Messagecenter
     end
 
     def populate_datetimes
-      @message.beginning = Time.parse(params[:message][:beginning]) if params[:message][:beginning].present?
-      @message.ending = Time.parse(params[:message][:ending]) if params[:message][:ending].present?
+      @message.beginning = params[:message][:beginning].present? ? Time.parse(params[:message][:beginning]) : nil
+      @message.ending = params[:message][:ending].present? ? Time.parse(params[:message][:ending]) : nil
     end
 
     def show_my_messages_only
@@ -70,8 +71,8 @@ module Messagecenter
     end
 
     def populate_manager_folder_count
-      @drafts_count = Message.cached_drafts_count(current_shop)
-      @queued_count = Message.cached_queued_count(current_shop)
+      @drafts_count = Message.cached_drafts_count(current_shop) if current_shop
+      @queued_count = Message.cached_queued_count(current_shop) if current_shop
     end
 
     def registered_action_location

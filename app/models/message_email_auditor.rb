@@ -1,7 +1,8 @@
 class MessageEmailAuditor < ActiveRecord::Base
   belongs_to :message_user
+  belongs_to :message
 
-  attr_accessible :message_user_id, :delivered, :ses_message_id
+  attr_accessible :message_user_id, :delivered, :ses_message_id, :message_id
 
   after_create :enqueue_message
 
@@ -46,6 +47,9 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   private
   def enqueue_message
-    Resque.enqueue(SesEmailSender, self.id)
+    #Conditon added as Optyn message receivers can email a received mesage in their inbox to a non Optyn user. 
+    if message_user_id.present?
+      Resque.enqueue(SesEmailSender, self.id)
+    end
   end
 end

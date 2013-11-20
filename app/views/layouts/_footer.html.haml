@@ -11,21 +11,25 @@
     %h4 For Partners
     = render 'layouts/links_partner'
     
-  .span4.offset2.text-center.sf-social
-    %div
-      .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false" }
-      &nbsp;
-      %a{ "href" => "https://twitter.com/share", "class" => "twitter-share-button", "data-url" => "http://optyn.com", "data-via" => "optyn", "data-related" => "optyn", "data-hashtags" => "marketing"} Tweet
-      :javascript
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  .span2.offset4.text-left.sf-social
+    #social-love
+      .love-controls
+        .text-left
+          .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false" }
 
-      .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100" }
-      :javascript
-        (function() {
-          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-          po.src = 'https://apis.google.com/js/plusone.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
+        .text-left
+          %a{ :href => "https://twitter.com/optyn", :class => "twitter-follow-button", "data-show-count" => "false"}Follow @optyn
+          :javascript
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+        .text-left
+          .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100" }
+          :javascript
+            (function() {
+              var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+              po.src = 'https://apis.google.com/js/plusone.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
     .blank-space
     %a{ href: 'http://www.facebook.com/optyn', target: '_blank', alt: 'Our Facebook page' }
       %i.icon-facebook
