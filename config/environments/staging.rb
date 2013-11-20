@@ -69,9 +69,9 @@ Optyn::Application.configure do
   PDFKit.configure do |config|
     config.wkhtmltopdf = "/home/deploy/pdf"
     config.default_options = {
-    :page_size => 'Legal',
-    :print_media_type => true
-  }
+      :page_size => 'Legal',
+      :print_media_type => true
+    }
 end
 
 GA.tracker = "UA-38362841-1"
