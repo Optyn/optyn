@@ -23,7 +23,8 @@ class Shop < ActiveRecord::Base
   belongs_to :partner
   has_many :social_profiles, dependent: :destroy
 
-  has_many :survey, dependent: :destroy #changing it to has_many
+  has_many :surveys, dependent: :destroy #changing it to has_many
+
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
