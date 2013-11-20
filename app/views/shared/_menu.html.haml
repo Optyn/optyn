@@ -12,9 +12,9 @@
         = image_tag "menu_icon_messages.png", :alt => "Messages"
         Marketing Inbox
     %li
-      / %a{:href => connections_path}
-      /   = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
-      /   Connections
+      %a{:href => connections_path}
+        = image_tag "menu_icon_shop_details.png", :alt => "My Connections"
+        Connections
     %li
       %a{:href => segments_path}
         = image_tag "menu_icon_campaigns.png", :alt => "My Surveys"
