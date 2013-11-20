@@ -151,21 +151,21 @@ class User < ActiveRecord::Base
   def dashboard_unanswered_surveys(limit_count = SiteConfig.dashboard_limit, force = false)
     cache_key = "dashboard-unanswered-surveys-user-#{self.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      shop_ids = fetch_uanswered_survey_shop_ids
-      Survey.for_shop_ids(shop_ids).active.includes_shop.limit(limit_count).all
+      unanswered_surveys.all
     end
   end
 
   def unanswered_surveys
-    shop_ids = fetch_uanswered_survey_shop_ids
-    Survey.for_shop_ids(shop_ids).active.includes_shop
+    taken_survey_ids = SurveyAnswer.taken_survey_ids(self.id)
+    connected_shop_ids = connections.active.collect(&:shop_id)
+
+    Survey.remaining_surveys(connected_shop_ids, taken_survey_ids)
   end
 
   def unanswered_surveys_count(force = false)
     cache_key = "unanswered-surveys-count-#{self.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      shop_ids = fetch_uanswered_survey_shop_ids
-      Survey.for_shop_ids(shop_ids).active.count
+      unanswered_surveys.count
     end
   end
 
@@ -290,11 +290,5 @@ class User < ActiveRecord::Base
       manager = Manager.find_by_email(self.email)
       self.errors.add(:email, "already taken") if manager.present?
     end
-  end
-
-  def fetch_uanswered_survey_shop_ids
-    connection_shop_ids = connections.active.collect(&:shop_id)
-    survey_shop_ids = SurveyAnswer.uniq_shop_ids(self.id)
-    connection_shop_ids - survey_shop_ids
   end
 end

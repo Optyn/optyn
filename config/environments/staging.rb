@@ -65,26 +65,6 @@ Optyn::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+end#end of optyn application
 
-#   PDFKit.configure do |config|
-#     config.wkhtmltopdf = "/home/deploy/pdf"
-#     config.default_options = {
-#       :page_size => 'Legal',
-#       :print_media_type => true
-#     }
-# end
-  PDFKit.configure do |config|
-    config.wkhtmltopdf = '/home/deploy/pdf'
-    config.default_options = {
-      :page_size => 'Legal',
-      :print_media_type => true
-    }
-<<<<<<< HEAD
-    # Use only if your external hostname is unavailable on the server.
-    # config.root_url = "http://localhost" 
-=======
->>>>>>> 93e459400692439a50587793872b20ac80ef67c6
-  end
-
-  GA.tracker = "UA-38362841-1"
-end
+GA.tracker = "UA-38362841-1"

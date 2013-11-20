@@ -1,5 +1,4 @@
 class Merchants::SurveysController < Merchants::BaseController
-	before_filter :current_survey
 	before_filter :survey_actually_created, only: [:show]
 
 
@@ -11,31 +10,20 @@ class Merchants::SurveysController < Merchants::BaseController
 
 
 	def show
-		begin
-			@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
-		rescue ActiveRecord::RecordNotFound
-			@survey = current_survey
-			flash.now[:alert] = "Record Not Found"
-		end#end of begin
+		@survey = current_shop.surveys.find(params[:id])
 	end#end of show
 
 	def index
-		@list_survey = current_shop.survey
+		@list_survey = current_shop.surveys
 	end
 
 	def edit
-		begin
-			@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
-		rescue ActiveRecord::RecordNotFound
-			@survey = current_survey
-			flash.now[:alert] = "Record Not Found"
-		end#end of begin
-    	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
+		@survey = current_shop.surveys.find(params[:id])
+  	flash.now[:alert] = "Please avoid major changes after publishing. Your customers who have already provided their response will not be prompted again."
 	end
 
 	def update
-		# binding.pry
-		@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
+		@survey = current_shop.surveys.find(params[:id])
 		@survey.attributes = params[:survey]
 		@survey.save!
 		redirect_to update_dispatcher
@@ -44,7 +32,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def questions
-		current_survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
+		current_survey = current_shop.surveys.find(params[:id])
 		question_attributes = current_survey.survey_questions.collect(&:attributes)
 		
 		question_attributes.each do |attr_hash|
@@ -60,7 +48,6 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def preview
-		# binding.pry
 		@survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
 		@survey_questions = @survey.survey_questions
   end
@@ -73,7 +60,8 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	private
 	def survey_actually_created
-		if current_survey.dummy?
+		@survey = current_shop.surveys.find(params[:id])
+		if @survey.dummy?
 			redirect_to edit_merchants_survey_path 
 			false
 		end

@@ -2,7 +2,7 @@ class Merchants::BaseController < ApplicationController
 
 	before_filter :authenticate_merchants_manager!, :set_time_zone, except: [:public_view, :generate_qr_code, :redeem, :share_email, :send_shared_email]
 	before_filter :check_connection_count, except: [:public_view, :generate_qr_code, :redeem, :share_email, :send_shared_email]
-	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_survey
+	helper_method :current_shop, :manager_signed_in?, :current_manager
 
 	private
 
@@ -26,15 +26,5 @@ class Merchants::BaseController < ApplicationController
 	
 	def current_shop
 		@_shop ||= current_merchants_manager.shop if merchants_manager_signed_in?
-	end
-
-	def current_survey
-		# @_survey = (current_shop.survey || current_shop.send(:create_dummy_survey))
-    if current_shop.survey.nil?
-      @_survey =  current_shop.send(:create_dummy_survey)
-    else
-      @_survey = current_shop.survey.first #hack
-    end
-    return @_survey
 	end
 end

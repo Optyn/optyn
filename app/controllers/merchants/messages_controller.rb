@@ -3,6 +3,8 @@ class Merchants::MessagesController < Merchants::BaseController
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
 
+  before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update]
+
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
 
   def types
@@ -20,7 +22,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.new
     @message.manager_id = current_manager.id
     @shop = current_shop
-    @survey = current_shop.survey.first #FIXME
+    #@survey = current_shop.survey.first #FIXME
     # binding.pry
     #@message.build_message_image
   end
@@ -43,6 +45,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def edit
     @message = Message.for_uuid(params[:id])
+    populate_shop_surveys
     @message_type = @message.type.underscore
     #@message.build_message_image if @message.message_image.blank?
   end
@@ -282,5 +285,10 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def choice_launch?
     "launch" == params[:choice]
+  end
+
+  def populate_shop_surveys
+    underscored_message_type = SurveyMessage.to_s.underscore
+    @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type) 
   end
 end
