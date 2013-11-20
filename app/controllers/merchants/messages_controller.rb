@@ -3,7 +3,7 @@ class Merchants::MessagesController < Merchants::BaseController
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
 
-  before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update]
+  before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update, :create_response_message]
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
 
@@ -85,20 +85,26 @@ class Merchants::MessagesController < Merchants::BaseController
   def create_response_message
      if "na" == params[:id]
        klass = params[:message_type].classify.constantize
-       @message = klass.new(params[:message])
+       @message = klass.new()
+
        @message.manager_id = current_manager.id
+       @message.attributes = params[:message]
        @message.save_draft
        params[:id] = @message.uuid
      end
 
      parent_message = create_child_message
-
+     @surveys = current_shop.surveys
      @message = parent_message
      @message_type = @message.type.underscore
-    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message})}
+     populate_manager_folder_count
+    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message}), 
+      message_menu: render_to_string(partial: "merchants/messages/message_menu")
+    }
   rescue => e
     puts e.message
     puts e.backtrace
+    @surveys = current_shop.surveys
     render json: {error_message: 'Could not create the response message. Please save your survey message and try again.'}, status: :unprocessable_entity
   end
 
