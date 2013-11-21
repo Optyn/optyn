@@ -34,8 +34,8 @@ Optyn::Application.routes.draw do
   match 'sitemap' => 'main#sitemap'
   
   #sell pages under marketing
-  match '/marketing' => 'main#marketing'
-  match '/marketing/email-marketing' => 'main#email_marketing'
+  match '/marketing' => 'main#marketing', :as => :marketing
+  match '/marketing/email-marketing' => 'main#email_marketing', :as => :email_marketing
   match '/marketing/social-media-marketing' => 'main#social_media' 
   match '/marketing/marketing-automation' => 'main#marketing_automation'
   match '/marketing/marketing-syndication' => 'main#marketing_syndication'
