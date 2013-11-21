@@ -71,8 +71,8 @@ module Api
 
         def launch
           @message = Message.for_uuid(params[:id])
-          @message.launch
-          render(template: individual_message_template_location)
+          launched = @message.launch
+          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity)
         end
 
         def trash
