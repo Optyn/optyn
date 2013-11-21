@@ -19,19 +19,36 @@
 
       %h4
         = @message.subject
-      %hr/
 
-      .row-fluid
+      .blank-space
+
+      .row-fluid#c-sent-criteria
         .span6
           .span3
-            = shop.logo_img.url rescue nil
-          .span9
-            ==  to: #{message_receiver_labels(@message.label_names)}
-            == (#{@message.connections_count} total)
+            - if @shop.logo_img.url.present?
+              = image_tag @shop.logo_img.url, alt: @shop.name, title: @shop.name rescue nil
+            - else
+              = image_tag 'no_shop_logo.gif', alt: 'Shop logo not provided.'
+          .span9.c-s-criterion
+            %h5
+              To:
+              %strong
+                == #{message_receiver_labels(@message.label_names)}
+              == (#{@message.connections_count} total)
 
-        .span6
-          = message_detail_date(@message)
+        .span6.c-s-criterion
+          %h5
+            Sent on:
+            %strong
+              = message_detail_date(@message)
 
           /reply all
 
+
+      .blank-space
+
       = render partial: "shared/messages/core_content", locals: {preview: false, customer_name: nil}
+
+
+:javascript
+  $( document ).ready( equalizeDivHeights( '#c-sent-criteria .well' ));

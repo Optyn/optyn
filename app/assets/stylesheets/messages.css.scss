@@ -9,6 +9,10 @@
 
 #message_preview_container .outer-table .outer-cell .inner-table{padding:15px; margin:0 auto; display:block;}
 
+#message_type_of_discount{display: none !important;}
+
+#message_type_of_discount + .error{font-size: 14px;}
+
 #message_preview_container {
 	strong {
 		font-size: 1em;

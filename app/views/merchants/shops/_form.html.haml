@@ -55,6 +55,12 @@
       = f.label :logo_img, "Logo"
     .controls
       = f.file_field :logo_img, 'data-toggle' => "tooltip", 'title' => 'Logo'
+      - if @shop.logo_img.present?
+        %div
+          = "Current logo:"
+        %div#current_logo
+          = show_logo(@shop)
+
 
   .control-group
     .controls{ 'data-toggle' => 'tooltip', :title => 'Business Category' }

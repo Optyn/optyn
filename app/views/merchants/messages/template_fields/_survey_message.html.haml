@@ -3,9 +3,7 @@
 .control-group
   = f.label :survey_id, "Embed Survey", class: 'control-label'
   .controls
-    = f.hidden_field :survey_id, value: current_shop.survey.id
-    %label.control-label
-      = current_shop.survey.title
+    = f.collection_select(:survey_id, @surveys, :id, :title, include_blank: "-- Select Survey --") rescue nil
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}    	
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106051839) do
+ActiveRecord::Schema.define(:version => 20131115093707) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -71,23 +71,24 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "charge", :force => true do |t|
+  create_table "charges", :force => true do |t|
+    t.string   "stripe_charge_id"
     t.integer  "created"
-    t.string   "live_mode"
+    t.boolean  "livemode"
     t.integer  "fee_amount"
-    t.string   "invoice"
-    t.string   "description"
+    t.text     "description"
     t.string   "dispute"
-    t.string   "refunded"
-    t.string   "paid"
+    t.boolean  "refunded"
+    t.boolean  "paid"
     t.integer  "amount"
     t.integer  "card_last4"
     t.integer  "amount_refunded"
-    t.string   "customer"
-    t.string   "fee_description"
-    t.integer  "invoice_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "stripe_customer_token"
+    t.text     "fee_description"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "stripe_plan_token"
+    t.string   "stripe_invoice_token"
   end
 
   create_table "connection_errors", :force => true do |t|
@@ -152,16 +153,23 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.string   "stripe_invoice_id"
     t.boolean  "paid_status"
     t.integer  "amount"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "stripe_coupon_token"
+    t.string   "stripe_plan_token"
+    t.integer  "subtotal"
+    t.integer  "total"
+    t.integer  "stripe_coupon_percent_off"
+    t.integer  "stripe_coupon_amount_off"
   end
 
   create_table "labels", :force => true do |t|
     t.integer  "shop_id"
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "active",     :default => true
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "active",           :default => true
+    t.integer  "survey_answer_id"
   end
 
   add_index "labels", ["shop_id", "active"], :name => "index_labels_on_shop_id_and_active"
@@ -237,8 +245,11 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.boolean  "bounced"
     t.boolean  "complaint"
     t.text     "body"
+    t.string   "email_to"
+    t.integer  "message_id"
   end
 
+  add_index "message_email_auditors", ["message_id"], :name => "index_message_email_auditors_on_message_id"
   add_index "message_email_auditors", ["message_user_id"], :name => "index_message_email_auditors_on_message_user_id"
   add_index "message_email_auditors", ["ses_message_id"], :name => "index_message_email_auditors_on_ses_message_id", :unique => true
 
@@ -276,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.boolean  "opt_out"
+    t.boolean  "offer_relevant"
   end
 
   add_index "message_users", ["message_id", "added_individually"], :name => "index_message_users_on_message_id_and_added_individually"
@@ -462,6 +474,13 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
+  create_table "redeem_coupons", :force => true do |t|
+    t.integer  "message_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -504,6 +523,7 @@ ActiveRecord::Schema.define(:version => 20131106051839) do
     t.integer  "partner_id"
     t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
+    t.boolean  "affiliate_tracker_pinged",   :default => false
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true

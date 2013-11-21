@@ -11,7 +11,8 @@
 #questions_list
   Please Wait...
 
-  = hidden_field_tag "new_merchants_survey_survey_question_path", new_merchants_survey_survey_question_path
+  / = hidden_field_tag "new_merchants_survey_survey_question_path", new_merchants_survey_survey_question_path
+  = hidden_field_tag "new_merchants_survey_survey_question_path", "/merchants/segments/#{@survey.id}/segment_questions/new"
   = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
 
 = render partial: "merchants/surveys/survey_questions_buttons"

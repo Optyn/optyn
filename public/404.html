@@ -3,24 +3,112 @@
 <head>
   <title>The page you were looking for doesn't exist (404)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
+    * {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+    body { background-color: #fff; color: #4570a5; font: normal 18px/25px 'Ubuntu', 'Tahoma', 'Helvetica', Tahoma, sans-serif; margin-bottom: 0; }
+    ::selection { background: #fcc; background: rgba(255, 0, 0, 0.2); }
+    .logo { opacity: 0.5; }
+    .dialog {
+      width: 90%;
+      max-width: 800px;
+      padding: 0 10px;
       margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
+      position: relative;
+      height: 350px;
+      padding: 30px 270px 0 10px;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    .cat, .bowl { position: absolute; z-index: -1; }
+    .cat { top: 0; right: 0;}
+    .bowl { top: 215px; right: 270px; }
+    h1 { font-size: 3rem; line-height: 3.5rem; }
+    h2 { font-size: 2rem; line-height: 3rem; }
+    h1, h2 { margin: 0; }
+    a { color: #1fa82c; }
+    @media ( max-width: 768px ) {
+      .dialog {
+        height: 550px;
+        padding-right: 10px;
+        margin-top: 1em;
+        text-align: center;
+      }
+      .cat { top: auto; bottom: 0; }
+      .bowl { top: auto; left: 0; bottom: 0; }
+    }
+    @media ( max-width: 455px ) {
+      .bowl { display: none;}
+    }
+    .redirect-cont {
+      text-align: center;
+      position: fixed;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+    }
+    .redirecting-msg {
+      margin: auto;
+      position: relative;
+      display: inline-block;
+      padding: 1px 5px;
+      font-size: 0.8rem;
+      line-height: 1rem;
+      color: #000;
+      background: transparent;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+    }
+    #step {
+      background-color: #eee;
+      background-color: rgba(0,0,0,0.3);
+      width: 10%;
+      height: 100%;
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   </style>
 </head>
 
-<body>
-  <!-- This file lives in public/404.html -->
+<body> <!-- This file lives in public/404.html -->
+  <a href="/">
+    <img src="/assets/logo-black.png" alt="Optyn logo" class='logo' />
+  </a>
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+    <h1>Oops!</h1>
+    <h2>Someone ate the page!</h2>
+    <p>Please stay calm and go back to <a href="/">Main Page</a> or view our <a href="/sitemap">Site Map</a>.</p>
+    <img src="/assets/bowl.jpg" alt="" class="bowl" />
+    <img src="/assets/cat.jpg" alt="" class="cat" />
   </div>
+
+  <div class='redirect-cont'>
+    <div class='redirecting-msg'>
+      <div id='step'>&nbsp;</div>
+      Redirecting to home page ...
+    </div>
+  </div>
+
+  <script>
+    if(window.addEventListener){
+      window.addEventListener('load',redirectToHome,false); //W3C
+    }
+    else{
+      window.attachEvent('onload',redirectToHome); //IE
+    }
+    function redirectMsgAnimation() {
+      var count = 1;
+      var animationInterval = setInterval( function() {
+        if ( count <= 100 )
+          document.getElementById( 'step' ).style.width = count + '%';
+        count++;
+      }, 50 );
+    }
+
+    function redirectToHome() {
+      setTimeout( function() {
+        //console.log( 'redirect' );
+        window.location = 'http://optyn.com';
+      }, 5000 );
+      redirectMsgAnimation();
+    }
+  </script>
 </body>
 </html>

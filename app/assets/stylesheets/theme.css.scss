@@ -791,21 +791,36 @@ form {
       border-color: lighten( $red, 20% );
       background-color: lighten( $red, 35% );
       color: $red;
+      &:focus {
+        border-color: darken( $red, 20% );
+        box-shadow: inset 1px 1px 5px rgba(0,0,0,0.2);
+        color: $black;
+      }
     }
   }
-  .nav-pills > li > a { @include border-radius( 0 ); }
+  .nav-pills > li > a { @include border-radius( 0 );padding: 10px 15px 10px;
+line-height: 14px; }
   i {
     margin-top: 4px;
   }
   input[type='text'],
+  input[type='password'],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
   input[type='number'],
   input[type='email'],
-  input[type='password'],
   input[type='url'],
+  input[type="search"],
+  input[type='tel'],
+  input[type="color"],
   textarea,
   select,
   .uneditable-input {
-    font-family: 'Open Sans', sans-serif;
+    font-family: $sans-serif;
     font-size: 17px;
     font-weight: 300;
     line-height: 20px;
@@ -816,22 +831,12 @@ form {
     background-color: lighten( $light-gray, 5% );
     box-shadow: none;
     color: $black;
+    min-height: 35px;
     @include transition( all 0.3s ease-out );
     &:focus {
-      border-color: $medium-gray;
+      border-color: $dark-gray;
       background-color: $white;
     }
-  }
-  select {
-    min-height: 35px;
-  }
-  input[type='text'],
-  input[type='number'],
-  input[type='email'],
-  input[type='password'],
-  input[type='url'],
-  .uneditable-input {
-    min-height: 35px;
   }
   .uneditable-input {
     background-color: $white;
@@ -840,7 +845,7 @@ form {
     height: 25px;
     line-height: 17px;
     font-size: 17px;
-    font-family: 'Open Sans';
+    font-family: $sans-serif;
     vertical-align: middle;
     box-shadow: none;
     &:active {
@@ -859,7 +864,7 @@ form {
   }
   .btn {
     @include border-radius( 0 );
-    font: normal 16px/25px 'Open Sans', sans-serif;
+    font: normal 1rem/1.4rem $sans-serif;
     letter-spacing: 1px;
     border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
     @include transition( all 0.2s ease-out );
@@ -871,6 +876,18 @@ form {
       border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
       text-decoration: none;
       background-color: darken( $light-gray, 15% );
+    }
+    &.btn-small {
+      font-size: 0.9rem;
+      line-height: 1.35rem;
+    }
+    &.btn-mini {
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+    }
+    &.btn-large {
+      font-size: 1.2em;
+      line-height: 1.6em;
     }
   }
   .link.blue, .btn-primary {
@@ -927,11 +944,6 @@ form {
     &.active {
       background-color: darken( $red, 30% );
     }
-  }
-  .btn-large {
-    padding: 11px 19px;
-    font-size: 1.2em;
-    line-height: 1.4em;
   }
   .modal {
     @include border-radius( 0 );
@@ -1130,3 +1142,10 @@ blockquote {
 .bullet-disc { list-style-type: disc; }
 .bullet-circle { list-style-type: circle; }
 .bullet-square { list-style-type: square; }
+
+.table-borderless td,
+.table-borderless th {
+    border: 0;
+}
+
+.field-with-errors .error { display: block; }

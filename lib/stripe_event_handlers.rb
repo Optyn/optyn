@@ -1,6 +1,7 @@
 module StripeEventHandlers
 
   def self.handle_customer_subscription_created(params)
+    # binding.pry
     @subscription=Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     @subscription.update_attributes(:active => true)
   end
@@ -8,7 +9,10 @@ module StripeEventHandlers
   def self.handle_customer_subscription_updated(params)
     @subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     status = params['data']['object']['status']
-    @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    if !@subscription.nil?
+      @subscription.update_attributes(:active => ((status == 'active' || status == 'trialing') ? true : false))
+    end
+    # binding.pry
   end
 
   def self.handle_customer_subscription_deleted(params)
@@ -34,7 +38,7 @@ module StripeEventHandlers
 
   def self.handle_plan_updated(params)
       @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
-      @plan=Plan.find_by_plan_id(params['data']['object']['id']) if @stripe_plan
+      @plan=Plan.find_or_initialize_by_plan_id(params['data']['object']['id']) if @stripe_plan
       @plan.update_attributes(:plan_id => @stripe_plan.id,
                               :name => @stripe_plan.name,
                               :interval => @stripe_plan.interval,
@@ -44,16 +48,23 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    evaluated_plan = Plan.which(subscription.shop)
-    subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
-    ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
+    # binding.pry
+    ##only start creating if subscription is not nil
+    if !subscription.nil?
+      evaluated_plan = Plan.which(subscription.shop)
+      subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
+      ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
+      create_invoice(subscription,params)
+    end
   end
 
   def self.handle_invoice_payment_succeeded(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     amount = params['data']['object']['total']
-    conn_count = subscription.shop.active_connection_count
+    conn_count = subscription.shop.active_connection_count rescue nil
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
+    # binding.pry
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_payment_failed(params)
@@ -62,18 +73,21 @@ module StripeEventHandlers
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'invoice_payment_failure', {shop_id: subscription.shop.id, amount: amount, connection_count: conn_count})
+    create_invoice(subscription,params)
   end
 
   def self.handle_invoice_updated(params)
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-      Invoice.create(
-          :subscription_id => subscription.id,
-          :stripe_customer_token => params['data']['object']['customer'],
-          :stripe_invoice_id => params['data']['object']['id'],
-          :paid_status => params['data']['object']['paid'],
-          :amount => params['data']['object']['total']
-      )
+      # binding.pry
+      update_invoice(subscription,params)
+      # Invoice.create(
+      #     :subscription_id => subscription.id,
+      #     :stripe_customer_token => params['data']['object']['customer'],
+      #     :stripe_invoice_id => params['data']['object']['id'],
+      #     :paid_status => params['data']['object']['paid'],
+      #     :amount => params['data']['object']['total']
+      # )
     end
   end
 
@@ -93,10 +107,17 @@ module StripeEventHandlers
   end
 
   def self.handle_customer_created(params)
+    # binding.pry
     discount_map = params['data']['object']["discount"]
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
+    @subscription = Subscription.create(
+                  :stripe_customer_token=>"cus_2twlS7khjVvdKT",
+                  :shop_id=>1,
+                  :plan_id=>1,
+                  :email=>params["event"]["data"]["object"]["email"]
+                  ) 
   end
 
   def self.handle_customer_updated(params)
@@ -107,10 +128,12 @@ module StripeEventHandlers
   end
 
   def self.handle_customer_discount_created(params)
+    # binding.pry
     manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
   def self.handle_customer_discount_updated(params)
+    # binding.pry
     manage_coupon(params['data']['object']['coupon']['id'], params['data']['object']['customer'])
   end
 
@@ -120,8 +143,44 @@ module StripeEventHandlers
     shop.save(validate: false)
   end
 
+  def self.handle_charge_succeeded(params)
+    # binding.pry
+    begin 
+      fee_description = params[:data][:object][:fee_details].first.description
+    rescue
+      fee_description = nil
+    end
+    # binding.pry
+    stripe_plan_token = params[:data][:object][:plan][:id] rescue nil
+    stripe_invoice_token = params[:data][:object][:invoice] rescue nil
+
+    ##if plan.id is nil and invoice token is present
+    if stripe_plan_token.nil? and stripe_invoice_token.present?
+      reply = Stripe::Invoice.retrieve(stripe_invoice_token)
+      stripe_plan_token = reply[:lines][:data].first["plan"].id
+    end
+    Charge.create(
+        :created => params[:created],
+        :livemode => params[:livemode],
+        :fee_amount => params[:data][:object][:fee] ,
+        :stripe_invoice_token => stripe_invoice_token ,
+        :description => params[:data][:object][:description] ,
+        :dispute => params[:data][:object][:dispute]  ,
+        :refunded => params[:data][:object][:refunded] ,
+        :paid => params[:data][:object][:paid] ,
+        :amount => params[:data][:object][:amount]  ,
+        :card_last4 => params[:data][:object][:card][:last4] ,
+        :amount_refunded => params[:data][:object][:amount_refunded]  ,
+        :stripe_customer_token => params[:data][:object][:customer]  ,
+        :fee_description => fee_description ,
+        :stripe_plan_token => stripe_plan_token
+      )
+
+  end
+
   private
   def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
+    #insert discount object into a monthly table
     coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
     shop.coupon_id = coupon.id
     shop.save(validate: false)
@@ -132,5 +191,52 @@ module StripeEventHandlers
     subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
     shop = subscription.shop
     [coupon, shop]
+  end
+
+  def self.create_invoice(subscription,params)
+    stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
+    stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
+    stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
+    stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
+    subtotal = params[:data][:object][:subtotal] rescue nil
+    total = params[:data][:object][:total]  rescue nil
+
+    Invoice.create(
+      :subscription_id => subscription.id,
+      :stripe_customer_token => params['data']['object']['customer'],
+      :stripe_invoice_id => params['data']['object']['id'],
+      :paid_status => params['data']['object']['paid'],
+      :amount => params['data']['object']['total'] ,
+      :stripe_coupon_token => stripe_coupon_token,
+      :stripe_coupon_percent_off => stripe_coupon_percent_off,
+      :stripe_coupon_amount_off => stripe_coupon_amount_off,
+      :subtotal => subtotal,
+      :total => total,
+      :stripe_plan_token => stripe_plan_token
+    )
+  end
+
+  def self.update_invoice(subscription,params)
+    # binding.pry
+    stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
+    stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
+    stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
+    stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
+     subtotal = params[:data][:object][:subtotal] rescue nil
+    total = params[:data][:object][:total]  rescue nil
+
+    Invoice.update(
+      :subscription_id => subscription.id,
+      :stripe_customer_token => params['data']['object']['customer'],
+      :stripe_invoice_id => params['data']['object']['id'],
+      :paid_status => params['data']['object']['paid'],
+      :amount => params['data']['object']['total'] ,
+      :stripe_coupon_token => stripe_coupon_token,
+      :stripe_coupon_percent_off => stripe_coupon_percent_off,
+      :stripe_coupon_amount_off => stripe_coupon_amount_off,
+      :subtotal => subtotal,
+      :total => total,
+      :stripe_plan_token => stripe_plan_token
+    )
   end
 end

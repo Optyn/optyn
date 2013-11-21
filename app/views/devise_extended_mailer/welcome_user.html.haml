@@ -3,54 +3,41 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+  %body{:height => "100%" :style => "width: 100%;background:#eee;font-family: Helvetica;sans-serif; margin: 15px;"}
     = content_for :header do
-      Welcome to Optyn
+      Thank you for signing up!
 
-    = render partial: "shared/mailers/banner"
-
-    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+    %table{:style => 'width:100%; max-width: 600px; min-height:40px;', :align => "center"}
       %tr
-        %td
-        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+        %td{:style => "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}"}
+          %div{:style => "margin:0 auto;display:block;"}
+            /#20A8DD for background - try it #0C9FD8
+            %table{:style => 'width:100%;background:' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
+              %tr{:style => "width: 100%;"}
+                %td{:style => "padding-left: 10px; max-height: 60px; padding-top: 5px;"}
+                  %h3{:style => "margin:0px;padding: 0px;font-size: 26px;color: #ffffff;weight:900;"}
+                    #{@shop.name}
+
+                %td{:style => "padding:10px; text-align: right;"}
+                  %h6{:style => "margin:0px;padding: 0px;font-size: 16px;color: #ffffff;weight:900;"}
+                    = yield :header
+      %tr
+        %td{:style => "background:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
           %div
             %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
               %tr
                 %td
                   %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
-                    Welcome #{@resource.name || @resource.email}!
-                  - if @shop.present?
-                    %h4 
-                      == #{@shop.name} added you to their customer list. 
-                      
-                  - if @password.present?
-                    %p 
-                      You can start using your Optyn account and manage your connections by logging in:
-                      %ul
-                        %li 
-                          == Your E-Mail is: #{@resource.email}
-                        %li 
-                          Your password is: 
-                          = @password
-
-                  %p We are so excited to have you and we want to make sure you have the full Optyn Experience.
-                  We work hard, day in and out, to create a wonderful experience for a product that makes your life easier.
-                  %p Keep in mind, Optyn is really easy to use and you can:
+                    Welcome #{@resource.name || @resource.email}, and thank you for subscribing to #{@shop.name}.
                   %p
-                    %ul
-                      %li Opt into any business online.
-                      %li Opt into any business with a physical location. (coming soon)
-                      %li With each business, you can control which information.
-                      %li We put you in control with the frequency of emails or types of emails you want to receive.
-                      %li Explore and find new places that you want to take for a test drive without ever compromising your information. (coming soon)
-                      %li and much more
-                  %p{:align => "center"}
-                    %a{:href => "http://www.optyn.com/consumerfeatures", :style => "color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 10px;text-decoration: none;cursor:pointer;"} Learn More about Optyn
-                  %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and your fellow Optyners, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
+                    You have signed up to receive promotion emails, exclusive specials, and much more from #{@shop.name}. 
+                  %p
+                    Keep in mind that you'll always have the ability to opt-out once you start receiving our marketing promotions. We encourage you to continue to support our business and we really appreciate your support and business.
                   %p
                     Cheers,
                     %br/
-                    The Optyn Team
-        %td
+                    #{@shop.name}
 
-    = render partial: "shared/mailers/footer"
+      %tr
+        %td
+          = render partial: "shared/mailers/footer"

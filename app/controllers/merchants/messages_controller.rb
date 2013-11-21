@@ -1,15 +1,29 @@
 class Merchants::MessagesController < Merchants::BaseController
+  
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
 
+  before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update, :create_response_message]
+
+  LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
 
   def types
     #Do Nothing
   end
 
+  ##show just before calling sending of survey link 
+  ##so that user can select survey
+  def select_survey
+    @list_survey = Survey.where(:shop_id=>current_shop.id)
+  end
+
   def new
+    survey_id = params[:survey_id]
     @message = Message.new
     @message.manager_id = current_manager.id
+    @shop = current_shop
+    #@survey = current_shop.survey.first #FIXME
+    # binding.pry
     #@message.build_message_image
   end
 
@@ -23,6 +37,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        flash.now[:error] = LAUNCH_FLASH_ERROR
         render "new"
       end
     end
@@ -30,6 +45,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def edit
     @message = Message.for_uuid(params[:id])
+    populate_shop_surveys
     @message_type = @message.type.underscore
     #@message.build_message_image if @message.message_image.blank?
   end
@@ -47,6 +63,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(params[:choice].to_sym)
         message_redirection
       else
+        flash.now[:error] = LAUNCH_FLASH_ERROR
         render "edit"
       end
     end
@@ -68,20 +85,26 @@ class Merchants::MessagesController < Merchants::BaseController
   def create_response_message
      if "na" == params[:id]
        klass = params[:message_type].classify.constantize
-       @message = klass.new(params[:message])
+       @message = klass.new()
+
        @message.manager_id = current_manager.id
+       @message.attributes = params[:message]
        @message.save_draft
        params[:id] = @message.uuid
      end
 
      parent_message = create_child_message
-
+     @surveys = current_shop.surveys
      @message = parent_message
      @message_type = @message.type.underscore
-    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message})}
+     populate_manager_folder_count
+    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message}), 
+      message_menu: render_to_string(partial: "merchants/messages/message_menu")
+    }
   rescue => e
     puts e.message
     puts e.backtrace
+    @surveys = current_shop.surveys
     render json: {error_message: 'Could not create the response message. Please save your survey message and try again.'}, status: :unprocessable_entity
   end
 
@@ -89,19 +112,30 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
     @shop_logo = true
     @shop = @message.shop
+    @preview = true
   end
 
   def show
     @message = Message.for_uuid(params[:id])
     @shop = @message.shop
     @shop_logo = true
+    @preview = true
   end
 
   def launch
     @message = Message.for_uuid(params[:id])
-    @message.launch
+    launched = @message.launch
     params[:choice] = "launch"
-    message_redirection
+
+    if launched
+      message_redirection
+    else
+      flash.now[:error] = LAUNCH_FLASH_ERROR
+      @message_type = @message.type.to_s.underscore
+      populate_labels
+      render action: 'edit'
+    end
+    
   end
 
   def trash
@@ -154,21 +188,113 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def public_view
+    @user = current_user if current_user.present?
     if params["message_name"]
       uuid = params["message_name"].split("-").last
       @message = Message.for_uuid(uuid)
       @shop_logo = true
       @shop = @message.shop
-
-      if @shop and @message
-        @msg = @message.make_public ? "" : "This message is not accessible"
-      else
-        @msg = "Incorrect link"
-      end
+      @inbox_count = populate_user_folder_count(true) if current_user.present?
       
-      respond_to do |format|
-        format.html {render :layout => false}
+      if @shop and @message
+        if @message.make_public
+          if not current_user.present?
+            respond_to do |format|
+              format.html {render :layout => false}
+            end
+          end
+        else
+          if current_user.present? #to check if the user is logged in or not
+            recipient = @message.message_user(current_user)
+            if not recipient
+              render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+            end
+          else
+            redirect_to new_user_session_path
+          end
+        end
       end
     end
+  end
+
+  def generate_qr_code 
+    @message = Message.find(params[:message_id])
+    link = @message.get_qr_code_link(current_user)
+    respond_to do |format|
+      format.html
+      format.svg  { render :qrcode => link, :level => :l, :unit => 10 }
+      format.png  { render :qrcode => link }
+      format.gif  { render :qrcode => link }
+      format.jpeg { render :qrcode => link }
+    end
+  end
+
+  def redeem
+    message_user = Encryptor.decrypt(params[:message_user]).split("--")
+    message_id = message_user[0] if message_user[0]
+    user_id = message_user[1] if message_user[1]
+    @message = Message.find(message_id)
+    rc = RedeemCoupon.new(:message_id => message_id)
+    rc.user_id = user_id if user_id
+    if not rc.save
+      @error_message = "Sorry, your coupon could not be redeemed."
+    end
+  end
+
+  def report
+    message = Message.find(params[:id])
+    timestamp_attr = 'updated_at'
+    fb_body = nil
+    if message.make_public
+      msg = "#{message.name} #{message.uuid}"
+      link = "#{SiteConfig.app_base_url}#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
+      fb_body = message.call_fb_api(link)
+      twitter_body = message.call_twitter_api(link)
+    end
+    render partial: 'merchants/messages/social_report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
+  end
+
+  def share_email
+
+  end
+
+  def send_shared_email
+    message = Message.for_uuid(params[:message_id])
+    @users = params[:To].split(",")
+    @users.each do |user_email|
+      message_email_auditor = MessageEmailAuditor.new
+      message_email_auditor.message_id = message.id
+      message_email_auditor.delivered = false
+      message_email_auditor.email_to = user_email.strip
+      message_email_auditor.save
+      Resque.enqueue(SharedForwarder, user_email.strip, message.id, message_email_auditor.id)
+    end
+    respond_to do |format|
+      format.html { 
+        redirect_to(root_path, notice: 'Email was successfully sent.') 
+      }
+    end
+  end
+
+  def remove_message_image
+    @message = Message.for_uuid(params[:id])
+    message_image = @message.message_image
+    message_image.remove_image! if message_image
+    @message.message_image.destroy
+    message_redirection
+  end
+
+  private
+  def populate_user_folder_count(force=false)
+    @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
+  end
+
+  def choice_launch?
+    "launch" == params[:choice]
+  end
+
+  def populate_shop_surveys
+    underscored_message_type = SurveyMessage.to_s.underscore
+    @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type rescue false) 
   end
 end

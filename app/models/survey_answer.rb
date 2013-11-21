@@ -2,9 +2,12 @@ class SurveyAnswer < ActiveRecord::Base
   belongs_to :survey_question
   belongs_to :user
 
+  has_many :label #for task 59468940d
+
   delegate :survey, to: :survey_question
 
   attr_accessible :survey_question_id, :value, :user_id
+  attr_accessible :label_id
   serialize :value, Array
 
   PAGE = 1
@@ -31,6 +34,8 @@ class SurveyAnswer < ActiveRecord::Base
   scope :uniq_users, ->(survey_id){for_survey(survey_id).pluck(:user_id).uniq}
 
   scope :group_by_user, group("survey_answers.user_id")
+
+  scope :distinct_survey_ids, select("DISTINCT(surveys.id)")
 
   def self.uniq_shop_ids(user_id)
     for_user(user_id).includes_surveys.collect(&:survey_question).collect(&:survey).collect(&:shop_id).uniq
@@ -71,6 +76,10 @@ class SurveyAnswer < ActiveRecord::Base
       answers = select("users.id, users.name AS user_name, AVG(EXTRACT(EPOCH FROM survey_answers.created_at)) as ts").group("users.id").for_survey_with_joins(survey_id).order("ts").joins_user.limit(limit_count).all
       answers.collect{|answer| [answer['user_name'], answer['ts']]}
     end
+  end
+
+  def self.taken_survey_ids(user_id)
+    distinct_survey_ids.joins_user.for_user(user_id).joins_surveys.collect{|answer| answer['id']}
   end
 
   def question

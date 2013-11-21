@@ -39,6 +39,9 @@
   .nav a {
     margin: 5px;
   }
+  .dropdown-menu > li > a {
+    width: auto;
+  }
   #flat.m-app {
     .navbar-fixed-top .navbar.inner {
       padding: 0;
@@ -110,7 +113,6 @@
     margin: 0;
     /*border-right: solid 2px darken( $blue, 10% );*/
     padding: 17px 0px 0px 20px;
-    width: 25%;
   }
 }
 

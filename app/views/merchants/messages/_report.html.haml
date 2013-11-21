@@ -36,5 +36,23 @@
           Unsubscribes:
         .count
           = message.opt_outs
+    .clearfix
 
     .blank-space
+
+    .row-fluid.stats
+      = hidden_field_tag "social_site_report_path_#{message.uuid}", report_merchants_message_path(message.id)
+      %div{:id => "social_site_report_#{message.uuid}"}
+      - if (message.type == "CouponMessage" and message.message_users)
+        - relevant, non_relevant = get_offer_relevance_stat(message)
+        .span3.box
+          .info
+            Offer relevance - Yes:
+          .count
+            = "#{relevant}"
+        .span3.box
+          .info
+            Offer relevance - No:
+          .count
+            = "#{non_relevant}"
+

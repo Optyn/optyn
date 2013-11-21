@@ -38,12 +38,6 @@ set :deploy_via, :remote_cache
 set :lock_file_path, "#{shared_path}/pids"
 set :lock_file_name, 'deployment.pid'
 
-if "production" == rails_env
-  set :workers, {"general_queue" => 1, "import_queue" => 1, "message_queue" => 2, "payment_queue" => 1}
-else
-  set :workers, {"*" => 1}
-end
-
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 #
@@ -63,6 +57,7 @@ after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "resque:restart"
+after "deploy:restart", "deploy:pdf:make_executable"
 after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
@@ -147,6 +142,12 @@ namespace :deploy do
 
     task :enable, :roles => :web, :except => { :no_release => true } do
       run "rm #{shared_path}/system/maintenance.html"
+    end
+  end
+
+  namespace :pdf do
+    task :make_executable, :roles => :web, :except => {:no_release => true} do
+      run "chmod +x #{current_path}/bin/wkhtmltopdf"
     end
   end
 

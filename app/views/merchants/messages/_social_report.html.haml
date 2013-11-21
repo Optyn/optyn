@@ -1,0 +1,12 @@
+- if fb_body and fb_body.first and fb_body.first.include?('share_count')
+  .span3.box
+    .info
+      Facebook shares:
+    .count
+      = fb_body.first["share_count"]
+- if ((twitter_body) and (twitter_body["count"]))
+  .span3.box
+    .info
+      Tweets:
+    .count
+      = twitter_body["count"]

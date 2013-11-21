@@ -17,6 +17,7 @@ function MerchantMessage() {
             this.clearDuplicateErrors();
             this.hookDiscountType();
             this.setDiscountTypeSelected();
+            this.removeDuplicateLabelIdsError();
         }
 
         if ($('#messages_collection_container').length) {
@@ -98,6 +99,7 @@ function MerchantMessage() {
         $('body').on('change', '#message_permanent_coupon', function(){
             if($(this).is(":checked")){
                 $('#message_ending').val('');
+                $('#message_ending_time').val('');
             }
         });
     };
@@ -106,6 +108,11 @@ function MerchantMessage() {
         if($('#message_permanent_coupon').length){
             window.setInterval(function(){
                 if($('#message_ending').val().length){
+                    $('#message_permanent_coupon').attr('checked', false);
+                }
+            }, 500);
+            window.setInterval(function(){
+                if($('#message_ending_time').val().length){
                     $('#message_permanent_coupon').attr('checked', false);
                 }
             }, 500);
@@ -149,6 +156,12 @@ function MerchantMessage() {
                 url: $('#message_meta_modal form').prop('action'),
                 type: 'POST',
                 data: $('#message_meta_modal').find('form').serialize(),
+                beforeSend: function(){
+                    var $modalBody = $('#message_meta_modal form').parents('.modal-body');
+                    var $modalFooter = $modalBody.next('.modal-footer');
+                    $modalFooter.find('.btn').hide();
+                    $modalFooter.find('.loading').show();
+                },
                 success: function (data) {
                     $('#message_meta_modal').modal('hide');
                     setTimeout(function () {
@@ -159,7 +172,6 @@ function MerchantMessage() {
                 },
                 error: function (data) {
                     var $modal = $('#message_meta_modal');
-                    $modal.modal('hide');
                     $modal.html($.parseJSON(data.responseText).message);
                     setTimeout(function () {
                         current.hookDateTimePicker();
@@ -167,8 +179,6 @@ function MerchantMessage() {
                         if(sendOnErrorMessage.length){
                             var $tempErr = $('<div />');
                             $tempErr.append("<span class='field-with-errors'><span class='help-inline error'>" + sendOnErrorMessage + "</span></span>");
-                            console.log("Error Message:", sendOnErrorMessage);
-                            console.log("html:", $tempErr.html());
                             $('#message_meta_modal #message_send_on_container').append($tempErr.html());
                         }
 
@@ -207,8 +217,10 @@ function MerchantMessage() {
                 },
                 success: function (data) {
                     $('#response_message_modal').modal('hide');
+                    alert('What can I say')
                     setTimeout(function () {
                         $('#message_fields_wrapper').html(data.response_message);
+                        $('#message_menu').replaceWith(data.message_menu)
                         current.hookChosen();
                     }, 500);
                 },
@@ -229,7 +241,7 @@ function MerchantMessage() {
                     data: [
                         {name: '_method', value: 'delete'}
                     ],
-                    beforeSend: function () {  s
+                    beforeSend: function () {  
                         $('#response_message_section .adjust-child-message-link').hide();
                         $('#response_message_section .adjust-child-message-loading').show();
                     },
@@ -305,25 +317,24 @@ function MerchantMessage() {
 
     this.clearDuplicateErrors = function(){
         if($('#message_type_of_discount_percentage_off').next('.error').length){
-            alert('Test');
-            var error = true;
-            var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
-            $('#message_type_of_discount_percentage_off').next('.error').remove();
-            $('#message_type_of_discount_dollar_off').next('.error').remove();
-            $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
+            // var error = true;
+            // var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
+            // $('#message_type_of_discount_percentage_off').next('.error').remove();
+            // $('#message_type_of_discount_dollar_off').next('.error').remove();
+            // $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
         }
     };
 
     this.hookDiscountType = function(){
         $( '.disc .btn' ).click( function() {
             var value = $( this ).data( 'value' );
-            $( '#type_of_message_value' ).attr( 'value', value );
+            $( '#message_type_of_discount' ).attr( 'value', value );
         });
     };
 
     this.setDiscountTypeSelected = function(){
-        if($('#type_of_message_value').length){
-            var discountTypeVal = $('#type_of_message_value').val();
+        if($('#message_type_of_discount').length){
+            var discountTypeVal = $('#message_type_of_discount').val();
             var $discountContainer = $('#discount_type_container');
             if(discountTypeVal.length){
                $discountContainer.find('button').each(function(index, element){
@@ -336,10 +347,33 @@ function MerchantMessage() {
             }
         }
     };
+
+    this.removeDuplicateLabelIdsError = function(){
+        $('input[name*=label_ids][type=hidden]').next('span.error').remove();
+    };
 }
 
 $(document).ready(function(){
    $(".open-reports").click(function(){ 
+   	 msg_uuid = $(this).attr('id');
      $('#reportDialog').modal('show');
+     getSocialSiteReport(msg_uuid);
    });
 });
+
+function getSocialSiteReport(msg_uuid) {
+	var link = $('#social_site_report_path_' + msg_uuid);
+    var url = link.val();
+   
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function (data) {
+        $('#social_site_report_' + msg_uuid).html(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+        alert(errorThrown)
+      }
+    });
+}

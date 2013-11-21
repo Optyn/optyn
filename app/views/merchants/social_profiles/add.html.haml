@@ -1,0 +1,9 @@
+#merchants.pad3pc
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+    %h3 Add your social profile
+
+  .modal-body  
+    .form
+      = form_for :social_profile, url: merchants_social_profiles_path, method: :post, html: {id: 'social_profile_form', class: 'form-horizontal'} do |f|
+        = render partial: 'merchants/social_profiles/form', :locals => {:f => f}

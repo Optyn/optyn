@@ -25,15 +25,21 @@ class SegmentsController < BaseController
     answer_elements = params[:survey][:survey_answers_attributes].sort.collect(&:last)
     dummy_survey.survey_answers_attributes = answer_elements
     answers = dummy_survey.survey_answers
-
     SurveyAnswer.persist(@user, answers)
-    Message.create_response_message(@user.id, params[:message_id])
+
+    if params[:message_id].present?
+      Message.create_response_message(@user.id, params[:message_id])
+    end
+
     if user_signed_in?
       @flush = true
       redirect_to segments_path, notice: "Successfully submitted your feedback"
     else
       render "thankyou", layout: "email_feedback"
     end
+  rescue 
+    flash[:error] = "Could not submit the survey. Please try again. If the problem still persists please send an email to support@optyn.com"
+    redirect_to segment_path(CGI::escape(params[:id]))
   end
 
   private
