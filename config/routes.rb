@@ -32,8 +32,7 @@ Optyn::Application.routes.draw do
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
   match 'sitemap' => 'main#sitemap'
-  
-  match '/marketing-new' => 'main#marketing_new'
+
   #sell pages under marketing
   match '/marketing' => 'main#marketing', :as => :marketing
   match '/marketing/email-marketing' => 'main#email_marketing', :as => :email_marketing
