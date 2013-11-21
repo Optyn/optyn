@@ -1003,6 +1003,11 @@ h1 {
   margin-bottom: 2%;
   padding-bottom: 0.5em;
   font-size: 2.2rem;
+  &.hdg-s {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    text-transform: uppercase;
+  }
 }
 h1, h5 {
   font-weight: 300;
@@ -1121,3 +1126,7 @@ blockquote {
   background-color: $white;
   background: rgba( $white, 0.8 );
 }
+
+.bullet-disc { list-style-type: disc; }
+.bullet-circle { list-style-type: circle; }
+.bullet-square { list-style-type: square; }
