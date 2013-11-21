@@ -1,15 +1,20 @@
 = display_title "Small Business Marketing"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 = render partial: 'marketing_breadcrumbs'
-.op-sitemap
+#main_sell_page.op-sitemap
   .row-fluid
     .span12
-      %h1 Small Business Marketing Resource Center
+      %h1.hd-main Small Business Marketing Resource Center
 
-  .row-fluid
-    .span4
-      %h4 E-Mail Marketing
-      %ul
+  .row-fluid.email_marketing
+    .span5.offset1
+      %h2 Learn about E-Mail Marketing
+      %p
+        Learn the ins and outs of email marketing and how you can grow your business while becoming a better marketer. 
+      %p
+        %strong
+          Learn about:
+        %ul
         %li
           %a{ :href => '/resources/email-marketing' } E-Mail Marketing
         %li
@@ -20,29 +25,62 @@
           %a{ :href => '#/resources/email-marketing/capturing-customer-data' } Capturing Customer Data
         %li
           %a{ :href => '/resources/email-marketing/evolution-of-email-marketing' } Evolution of E-Mail Marketing
-    .span4
-      %h4 Small Business Marketing
-      %ul
-        %li
-          %a{ :href => '/resources/social-media-marketing'} Social Media Marketing
-        %li
-          %a{ :href => '/resources/digital-marketing'} Digital Marketing
-        %li
-          %a{ :href => '/resources/online-marketing'} Online Marketing
-        %li
-          %a{ :href => '/resources/customer-retention' } Customer Retention
-        %li
-          %a{ :href => '/resources/loyalty-marketing'} Loyalty Marketing
-        %li
-          %a{ :href => '/resources/marketing-analytics'} Marketing Analytics
-    .span4
-      %h4 Running Marketing Promotions
-      %ul
-        %li
-          %a{ :href => '/resources/contests' } Contests
-        %li
-          %a{ :href => '/resources/coupons'} Coupons
-        %li
-          %a{ :href => '/resources/surveys'} Surveys 
 
+      %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path} Get Started for Free!
+    .span3.offset2
+      = image_tag( 'learn-about-email-marketing.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page' )
+
+  .row-fluid.smallbiz_marketing
+    .span3.offset2
+      = image_tag( 'small-business-marketing-resources.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page-left' )
+    .span5.offset1
+      %h2 Small Business Marketing
+      %p
+        Marketing is critical to your business. Online marketing is expanding and even though, it's becoming easier and harder at the same time. We want to help you understand how you can grow your business. We are building a resource library to help you reach your customers, and grow your business. 
+      %p
+        %strong
+          Learn about:
+      .span6
+        %ul
+          %li
+            %a{ :href => '/resources/social-media-marketing'} Social Media Marketing
+          %li
+            %a{ :href => '/resources/digital-marketing'} Digital Marketing
+          %li
+            %a{ :href => '/resources/online-marketing'} Online Marketing
+      .span5
+        %ul
+          %li
+            %a{ :href => '/resources/customer-retention' } Customer Retention
+          %li
+            %a{ :href => '/resources/loyalty-marketing'} Loyalty Marketing
+          %li
+            %a{ :href => '/resources/marketing-analytics'} Marketing Analytics
+  .row-fluid.email_marketing
+    .span5.offset1
+      %h2 Marketing Promotions
+      %p
+        Marketing promotions are a powerful way to increase and generate revenues and customer engagement. Below, we outline a few ways to educate you on how you can use certain promotions to accomplish specific business objectives. 
+        %ul
+          %li
+            %a{ :href => '/resources/contests' } Contests
+          %li
+            %a{ :href => '/resources/coupons'} Coupons
+          %li
+            %a{ :href => '/resources/surveys'} Surveys 
+    .span3.offset2
+      = image_tag( 'learn-about-marketing-promotion.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page' )
+  .row-fluid.smallbiz_marketing
+    .span3.offset2
+      = image_tag( 'coming-soon.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-resources' )
+    .span5.offset1
+      %h2 Coming Soon!
+      %p
+        We are launching the following education and resource sections to help you grow your business.
+        %ul
+          %li E-Mail Marketing School
+          %li Online Marketing Academy
+          %li Daily Small Biz Tips and more.
+      %p
+        Follow us on Twitter at @optyn and you won't miss a thing.
   .blank-space
