@@ -28,6 +28,7 @@ class Manager < ActiveRecord::Base
   accepts_nested_attributes_for :file_imports
 
   after_create :assign_uuid, :send_welcome_email
+  after_save :update_stripe_customer_email
 
   scope :owner, where(owner: true)
 
@@ -123,6 +124,19 @@ class Manager < ActiveRecord::Base
 
   def error_messages
     self.errors.full_messages
+  end
+
+  def update_stripe_customer_email
+    if not self.created_at_changed? #Check if an update call.
+      if self.email_changed?
+        subscription = Subscription.find(self.shop.subscription.id)
+        if subscription.stripe_customer_token.present?
+          stripe_customer = Stripe::Customer.retrieve(subscription.stripe_customer_token)
+          stripe_customer.email = self.email
+          stripe_customer.save
+        end
+      end
+    end
   end
 end
 
