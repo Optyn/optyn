@@ -47,7 +47,7 @@ class Shop < ActiveRecord::Base
   validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
-  validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}
+  validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}, numericality: { only_integer: true }
   validates :phone_number, :phony_plausible => true 
   # validates_uniqueness_of_without_deleted :name
   
