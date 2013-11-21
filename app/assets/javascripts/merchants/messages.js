@@ -217,7 +217,6 @@ function MerchantMessage() {
                 },
                 success: function (data) {
                     $('#response_message_modal').modal('hide');
-                    alert('What can I say')
                     setTimeout(function () {
                         $('#message_fields_wrapper').html(data.response_message);
                         $('#message_menu').replaceWith(data.message_menu)
