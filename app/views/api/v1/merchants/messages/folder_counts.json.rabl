@@ -8,4 +8,8 @@ object false
     node :select_list do
       {:labels => @labels}
     end
+
+    node :receivers do
+      {labels: current_shop.inactive_label, count: current_shop.active_connection_count}
+    end
   end

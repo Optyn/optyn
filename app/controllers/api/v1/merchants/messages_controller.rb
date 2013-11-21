@@ -139,6 +139,7 @@ module Api
 
         def folder_counts
           populate_labels
+          
        end
 
         private
@@ -157,6 +158,7 @@ module Api
             @message.message_image_attributes = params[:message][:message_image_attributes]
           end
         end
+
         def require_message_type
           if @message_type.blank?
             @message = Message.new
