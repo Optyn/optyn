@@ -10,13 +10,14 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @subscription = current_shop.subscription || @plan.subscriptions.build
     @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
     @amount = (current_charge.amount.to_f / 100 ) rescue nil #because its in cents
+    # binding.pry
     @stripe_last_payment = @list_charges.first rescue nil
     @card_last4 = @stripe_last_payment.card_last4 rescue nil
       
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed
-    if (@subscription.created_at.day < Time.now.day)
+    if (@subscription.created_at.day > Time.now.day)
       @stripe_upcoming_payment = "#{@subscription.created_at.day}/#{Time.now.month}/#{Time.now.year}"
     else
       next_month = Time.now.to_date >> 1 #shift one moth
@@ -110,6 +111,8 @@ class Merchants::SubscriptionsController < Merchants::BaseController
           @subscription.update_attribute(:active, true)
           amount = @customer.subscription.plan.amount
           conn_count = current_shop.active_connection_count
+          # binding.pry
+          ##TODO: fix last4
           last4 = @customer.active_card.last4 rescue nil
           Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop, amount: amount, conn_count: conn_count, last4: last4})
           flash[:notice]="Payment done successfully"
