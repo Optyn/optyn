@@ -47,7 +47,7 @@ class Shop < ActiveRecord::Base
   validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
-  validates :phone_number, presence: true, unless: :virtual
+  validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}, numericality: { only_integer: true }
   validates :phone_number, :phony_plausible => true 
   # validates_uniqueness_of_without_deleted :name
   
@@ -360,7 +360,7 @@ class Shop < ActiveRecord::Base
   end
 
   def check_subscription
-    if !self.virtual
+    if !self.virtual && self.partner.subscription_required?
       if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
         Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
       elsif !self.virtual && self.tier_change_required?
@@ -472,14 +472,14 @@ class Shop < ActiveRecord::Base
 
   def create_dummy_survey
     unless self.virtual?
-      unless survey.present?
-        dummy_survey = self.survey.build
+      unless surveys.present?
+        dummy_survey = self.surveys.build
         dummy_survey.shop_id = self.id
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)
         dummy_survey
       else
-        survey
+        surveys
       end
     end
   end

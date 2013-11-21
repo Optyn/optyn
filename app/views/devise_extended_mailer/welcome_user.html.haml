@@ -3,7 +3,7 @@
   %head
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body{:height => "100%" :style => "width: 100%;background:#eee;font-family: Helvetica;sans-serif; margin: 15px;"}
+  %body{:height => "100%", :style => "width: 100%;background:#eee;font-family: Helvetica;sans-serif; margin: 15px;"}
     = content_for :header do
       Thank you for signing up!
 
@@ -37,7 +37,7 @@
                     Cheers,
                     %br/
                     #{@shop.name}
-            
+
       %tr
         %td
           = render partial: "shared/mailers/footer"

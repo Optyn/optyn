@@ -30,7 +30,9 @@
 #box_sign form{
 	margin: 0px;
 }
-#box_sign .box .form input[type="text"], 
+#box_sign .box .form input[type="text"],
+#box_sign .box .form input[type="tel"],
+#box_sign .box .form input[type="email"],
 #box_sign .box .form input[type="password"] {
   margin-top: 15px;
   width: 100%;
@@ -108,4 +110,8 @@
 #new_user .field-with-errors {
   margin-bottom: 20px;
   display: inline-block;
+}
+
+form#form_forgot_password .field-with-errors {
+  display: inline;
 }

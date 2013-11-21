@@ -16,7 +16,7 @@ class Survey < ActiveRecord::Base
   scope :ids_not_in, ->(ids) { where(["surveys.id NOT IN(:ids)", {ids: ids}]) }
 
   def self.remaining_surveys(shop_ids, taken_survey_ids)
-    chained = for_shop_ids(shop_ids).includes_shop
+    chained = for_shop_ids(shop_ids).includes_shop.active
     unless taken_survey_ids.blank?
       puts "-- #{taken_survey_ids.inspect}"
       chained = chained.ids_not_in(taken_survey_ids)

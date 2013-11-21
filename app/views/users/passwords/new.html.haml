@@ -7,9 +7,11 @@
             %h4 Forgot your password?
         
         .form.row-fluid
-          = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post }) do |f|
+          = form_for(resource, :as => resource_name, :url => password_path(resource), :html => { :method => :post, :id => 'form_forgot_password' }) do |f|
 
-            = f.email_field :email, placeholder: "Email", autofocus: true, 'data-toggle' => 'tooltip', title: 'Email'
+            = f.email_field :email, placeholder: "Email", autofocus: true, 'data-toggle' => 'tooltip', title: 'Email', :class => 'input-block-level'
+
+            .blank-space
 
             = f.submit "Reset password", class: "btn btn-primary"
 

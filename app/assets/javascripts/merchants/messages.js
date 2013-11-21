@@ -219,6 +219,7 @@ function MerchantMessage() {
                     $('#response_message_modal').modal('hide');
                     setTimeout(function () {
                         $('#message_fields_wrapper').html(data.response_message);
+                        $('#message_menu').replaceWith(data.message_menu)
                         current.hookChosen();
                     }, 500);
                 },
@@ -239,7 +240,7 @@ function MerchantMessage() {
                     data: [
                         {name: '_method', value: 'delete'}
                     ],
-                    beforeSend: function () {  s
+                    beforeSend: function () {  
                         $('#response_message_section .adjust-child-message-link').hide();
                         $('#response_message_section .adjust-child-message-loading').show();
                     },

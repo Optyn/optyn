@@ -791,6 +791,11 @@ form {
       border-color: lighten( $red, 20% );
       background-color: lighten( $red, 35% );
       color: $red;
+      &:focus {
+        border-color: darken( $red, 20% );
+        box-shadow: inset 1px 1px 5px rgba(0,0,0,0.2);
+        color: $black;
+      }
     }
   }
   .nav-pills > li > a { @include border-radius( 0 );padding: 10px 15px 10px;
@@ -799,14 +804,23 @@ line-height: 14px; }
     margin-top: 4px;
   }
   input[type='text'],
+  input[type='password'],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
   input[type='number'],
   input[type='email'],
-  input[type='password'],
   input[type='url'],
+  input[type="search"],
+  input[type='tel'],
+  input[type="color"],
   textarea,
   select,
   .uneditable-input {
-    font-family: 'Open Sans', sans-serif;
+    font-family: $sans-serif;
     font-size: 17px;
     font-weight: 300;
     line-height: 20px;
@@ -817,22 +831,12 @@ line-height: 14px; }
     background-color: lighten( $light-gray, 5% );
     box-shadow: none;
     color: $black;
+    min-height: 35px;
     @include transition( all 0.3s ease-out );
     &:focus {
-      border-color: $medium-gray;
+      border-color: $dark-gray;
       background-color: $white;
     }
-  }
-  select {
-    min-height: 35px;
-  }
-  input[type='text'],
-  input[type='number'],
-  input[type='email'],
-  input[type='password'],
-  input[type='url'],
-  .uneditable-input {
-    min-height: 35px;
   }
   .uneditable-input {
     background-color: $white;
@@ -841,7 +845,7 @@ line-height: 14px; }
     height: 25px;
     line-height: 17px;
     font-size: 17px;
-    font-family: 'Open Sans';
+    font-family: $sans-serif;
     vertical-align: middle;
     box-shadow: none;
     &:active {
@@ -1134,3 +1138,5 @@ blockquote {
 .table-borderless th {
     border: 0;
 }
+
+.field-with-errors .error { display: block; }

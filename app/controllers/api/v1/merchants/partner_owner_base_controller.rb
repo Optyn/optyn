@@ -4,6 +4,8 @@ module Api
       class PartnerOwnerBaseController < ApplicationController
         doorkeeper_for :all
         respond_to :json
+        helper_method :current_shop, :current_manager
+
         private
         
         def current_partner

@@ -42,7 +42,7 @@ class Merchants::DashboardsController < Merchants::BaseController
   end
 
   def hasherize_surveys
-    @survey_users = SurveyAnswer.users(current_shop.id, current_shop.surveys.active.first.id)
+    @survey_users = SurveyAnswer.users(current_shop.id, (current_shop.surveys.active.first.id rescue nil))
     @survey_users.collect do |answer|
       HashWithIndifferentAccess.new({
         type: 'New survey submission',
