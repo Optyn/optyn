@@ -69,7 +69,7 @@ Optyn::Application.routes.draw do
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
   match '/resources/coupons' => 'main#resources_coupons', :as => :resources_contests
   match '/resources/specials-and-sales' => 'main#resources_specials_sales', :as => :resources_specials_sales
-  match '/resources/customer-retention' => 'main#resources_customer_retention' :as => :resources_customer_retention
+  match '/resources/customer-retention' => 'main#resources_customer_retention', :as => :resources_customer_retention
   match '/resources/loyalty-marketing' => 'main#resources_loyalty_marketing', :as => :resources_loyalty_marketing
   match '/resources/surveys' => 'main#resources_surveys', :as => :resources_surveys
   match '/resources/marketing-analytics' => 'main#resources_marketing_analytics', :as => :resources_marketing_analytics

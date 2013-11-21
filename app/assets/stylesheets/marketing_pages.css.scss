@@ -1,3 +1,29 @@
+.op-navbar {
+  background-color: #f1f1f1;
+  padding: 10px 10px 10px 10px;
+
+  h6 {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  ul {
+    // margin: 0;
+  }
+    li {
+      font-size: 13px;
+    } 
+  a {
+    font-color: black;
+    display: block;
+    text-decoration: none;
+    padding: 2px 0;
+    @include transition( all 0.3s ease );
+    &:hover {
+      background: $light-gray;
+      padding-left: 10px;
+    }
+  }
+}
 
 h1.hdg-s {
   font-size: 1.2rem;
