@@ -16,7 +16,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
     ##or same date this month if date hasnt passed
-    if (@subscription.created_at.day < Time.now.day)
+    if (@subscription.created_at.day > Time.now.day)
       @stripe_upcoming_payment = "#{@subscription.created_at.day}/#{Time.now.month}/#{Time.now.year}"
     else
       next_month = Time.now.to_date >> 1 #shift one moth
