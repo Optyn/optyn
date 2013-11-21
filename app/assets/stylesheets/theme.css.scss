@@ -1144,3 +1144,26 @@ blockquote {
 }
 
 .field-with-errors .error { display: block; }
+
+.breadcrumbs {
+  background: lighten( $dark-blue, 10% );
+    color: $white;
+    color: rgba( $white, 0.3 );
+  a {
+    color: $white;
+    color: rgba( $white, 0.7 );
+    font-size: 1rem;
+    line-height: 1.8rem;
+    display: inline-block;
+    @include transition( all 0.3s ease );
+    &:hover {
+      color: rgba( $white, 0.9 );
+      text-decoration: none;
+    }
+  }
+  i.icon-angle-right {
+    margin: 0 10px;
+    line-height: 1.8rem;
+    font-size: 1rem;
+  }
+}
