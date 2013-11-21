@@ -36,44 +36,44 @@ Optyn::Application.routes.draw do
   #sell pages under marketing
   match '/marketing' => 'main#marketing', :as => :marketing
   match '/marketing/email-marketing' => 'main#email_marketing', :as => :email_marketing
-  match '/marketing/social-media-marketing' => 'main#social_media' 
-  match '/marketing/marketing-automation' => 'main#marketing_automation'
-  match '/marketing/marketing-syndication' => 'main#marketing_syndication'
-  match '/marketing/surveys' => 'main#surveys'
-  match '/marketing/coupons' => 'main#coupons'
-  match '/marketing/specials-and-sales' => 'main#specials'
-  match '/marketing/contests' => 'main#contests'
-  match '/marketing/marketing-recommendation' => 'main#marketing_recommendation'
-  match '/marketing/loyalty-marketing' => 'main#loyalty_marketing'
-  match '/marketing/customer-retention' => 'main#customer_retention'
-  match '/marketing/marketing-analytics' => 'main#marketing_analytics'
-  match '/marketing/marketing-promotions' => 'main#marketing_promotions'
-  match '/marketing/digital-marketing' => 'main#digital_marketing'
-  match '/marketing/marketing-collaboration' => 'main#marketing_collaboration'
-  match '/marketing/online-marketing' => 'main#online_marketing'
-  match '/marketing/automated-marketing' => 'main#automated_marketing'
-  match '/marketing/multi-channel-marketing' => 'main#multi_channel_marketing'
+  match '/marketing/social-media-marketing' => 'main#social_media', :as => :social_media_marketing 
+  match '/marketing/marketing-automation' => 'main#marketing_automation', :as => :marketing_automation
+  match '/marketing/marketing-syndication' => 'main#marketing_syndication', :as => :marketing_syndication
+  match '/marketing/surveys' => 'main#surveys', :as => :surveys
+  match '/marketing/coupons' => 'main#coupons', :as => :coupons
+  match '/marketing/specials-and-sales' => 'main#specials', :as => :specials
+  match '/marketing/contests' => 'main#contests', :as => :contests
+  match '/marketing/marketing-recommendation' => 'main#marketing_recommendation', :as => :marketing_recommendation
+  match '/marketing/loyalty-marketing' => 'main#loyalty_marketing', :as => :loyalty_marketing
+  match '/marketing/customer-retention' => 'main#customer_retention', :as => :customer_retention
+  match '/marketing/marketing-analytics' => 'main#marketing_analytics', :as => :marketing_analytics
+  match '/marketing/marketing-promotions' => 'main#marketing_promotions', :as => :marketing_promotions 
+  match '/marketing/digital-marketing' => 'main#digital_marketing', :as => :digital_marketing
+  match '/marketing/marketing-collaboration' => 'main#marketing_collaboration', :as => :marketing_collaboration
+  match '/marketing/online-marketing' => 'main#online_marketing', :as => :online_marketing
+  match '/marketing/automated-marketing' => 'main#automated_marketing', :as => :automated_marketing
+  match '/marketing/multi-channel-marketing' => 'main#multi_channel_marketing', :as => :multi_channel_marketing
   #subcategories for email marketing content
-  match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive'
-  match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data'
-  match '/marketing/email-marketing/email-deliverability' => 'main#email_deliverability'
+  match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive', :as => :mobile_responsive
+  match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data', :as => :capturing_data
+  match '/marketing/email-marketing/email-deliverability' => 'main#email_deliverability', :as => :email_deliverability
   #resources pages for content pages
-  match '/resources' => 'main#resources'
-  match '/resources/email-marketing' => 'main#resources_email_marketing'
-  match '/resources/email-marketing/capturing-customer-emails' => 'main#resources_capturing_customer_emails'
-  match '/resources/email-marketing/capturing-customer-data' => 'main#resources_capturing_customer_data'
-  match '/resources/email-marketing/mobile-responsive-emails' => 'main#resources_mobile_responsive_emails'
-  match '/resources/email-marketing/evolution-of-email-marketing' => 'main#resources_evolution_email'
-  match '/resources/social-media-marketing' => 'main#resources_social_media'
-  match '/resources/digital-marketing' => 'main#resources_digital_marketing'
-  match '/resources/contests' => 'main#resources_contests'
-  match '/resources/coupons' => 'main#resources_coupons'
-  match '/resources/specials-and-sales' => 'main#resources_specials_sales'
-  match '/resources/customer-retention' => 'main#resources_customer_retention'
-  match '/resources/loyalty-marketing' => 'main#resources_loyalty_marketing'
-  match '/resources/surveys' => 'main#resources_surveys'
-  match '/resources/marketing-analytics' => 'main#resources_marketing_analytics'
-  match '/resources/online-marketing' => 'main#resources_online_marketing'
+  match '/resources' => 'main#resources', :as => :resources
+  match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
+  match '/resources/email-marketing/capturing-customer-emails' => 'main#resources_capturing_customer_emails', :as => :resources_capturing_customer_emails
+  match '/resources/email-marketing/capturing-customer-data' => 'main#resources_capturing_customer_data', :as => :resources_capturing_customer_data
+  match '/resources/email-marketing/mobile-responsive-emails' => 'main#resources_mobile_responsive_emails', :as => :resources_mobile_responsive_emails
+  match '/resources/email-marketing/evolution-of-email-marketing' => 'main#resources_evolution_email', :as => :resources_evolution_email
+  match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
+  match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
+  match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
+  match '/resources/coupons' => 'main#resources_coupons', :as => :resources_contests
+  match '/resources/specials-and-sales' => 'main#resources_specials_sales', :as => :resources_specials_sales
+  match '/resources/customer-retention' => 'main#resources_customer_retention' :as => :resources_customer_retention
+  match '/resources/loyalty-marketing' => 'main#resources_loyalty_marketing', :as => :resources_loyalty_marketing
+  match '/resources/surveys' => 'main#resources_surveys', :as => :resources_surveys
+  match '/resources/marketing-analytics' => 'main#resources_marketing_analytics', :as => :resources_marketing_analytics
+  match '/resources/online-marketing' => 'main#resources_online_marketing', :as => :resources_online_marketing
 
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'
