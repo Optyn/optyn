@@ -1146,7 +1146,7 @@ blockquote {
 .field-with-errors .error { display: block; }
 
 .breadcrumbs {
-  background: lighten( $dark-blue, 10% );
+  background: lighten( $dark-blue, 5% );
     color: $white;
     color: rgba( $white, 0.3 );
   a {
