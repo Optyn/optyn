@@ -194,7 +194,6 @@ module StripeEventHandlers
   end
 
   def self.create_invoice(subscription,params)
-    binding.pry
     stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
     stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
     stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
@@ -218,7 +217,6 @@ module StripeEventHandlers
   end
 
   def self.update_invoice(subscription,params)
-    # binding.pry
     stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
     stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
     stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
