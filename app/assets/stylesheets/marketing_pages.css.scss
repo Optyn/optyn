@@ -1,0 +1,74 @@
+.op-navbar {
+  background-color: #f1f1f1;
+  padding: 10px 10px 10px 10px;
+
+  h6 {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  ul {
+    // margin: 0;
+  }
+    li {
+      font-size: 13px;
+    } 
+  a {
+    font-color: black;
+    display: block;
+    text-decoration: none;
+    padding: 2px 0;
+    @include transition( all 0.3s ease );
+    &:hover {
+      background: $light-gray;
+      padding-left: 10px;
+    }
+  }
+}
+
+h1.hdg-s {
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  text-transform: uppercase;
+  border: 0;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+h1.hd-main {
+  font-size: 2.2rem;
+  line-height: 2.5rem;
+  border: 0;
+  padding: 0;
+}
+
+/* Marketing Sell Page */
+#main_sell_page {
+}
+  .img-marketing-page {
+    vertical-align: middle;
+    padding-right: 80px;
+    padding-top: 40px;
+  }
+  .img-marketing-page-left {
+    vertical-align: middle;
+    padding-right: 100px;
+    padding-top: 80px;
+  }
+  .img-marketing-resources {
+    vertical-align: middle;
+    padding-right: 100px;
+    padding-top: 20px;
+  }
+  .email_marketing {
+    width: 100%;
+    background-color: #eee;
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+  }
+  .smallbiz_marketing {
+    width: 100%;
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+

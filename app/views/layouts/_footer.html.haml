@@ -4,14 +4,52 @@
     = render 'layouts/links_company'
 
   .span2
-    %h4 For Merchants
+    %h4 Learn More
     = render 'layouts/links_merchants'
 
   .span2
-    %h4 For Partners
+    %h4 Partner Programs
     = render 'layouts/links_partner'
+
+  .span2
+    %a{:href => '/marketing'}
+      %h4 Marketing Software
+    %ul
+      %li
+        %a{ :href => email_marketing_path } E-Mail Marketing
+      %li
+        %a{ :href => '/marketing/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
+      %li
+        %a{ :href => '/marketing/social-media-marketing'} Social Media Marketing
+      %li
+        %a{ :href => '/marketing/marketing-promotions'} Marketing Promotions
+      %li
+        %a{ :href => '/marketing/marketing-automation' } Marketing Automation
+      %li  
+        %a{ :href => '/marketing/marketing-syndication'} Marketing Syndication
+      %li
+        %a{ :href => '/marketing/multi-channel-marketing'} Multi-channel Marketing
+
+  .span2
+    %a{:href => '/resources' }
+      %h4 Resources
+    %ul
+      %li
+        %a{ :href => '/resources/email-marketing' } E-Mail Marketing
+      %li
+        %a{ :href => '/resources/social-media-marketing'} Social Media Marketing
+      %li
+        %a{ :href => '/resources/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
+      %li
+        %a{ :href => '/resources/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
+      %li
+        %a{ :href => '/resources/digital-marketing'} Digital Marketing
+      %li
+        %a{ :href => '/resources/online-marketing'} Online Marketing
+      %li
+        %a{ :href => '/resources/customer-retention' } Customer Retention
     
-  .span2.offset4.text-left.sf-social
+  .span2.text-left.sf-social
     #social-love
       .love-controls
         .text-left

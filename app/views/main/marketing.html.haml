@@ -1,54 +1,61 @@
 = display_title "Marketing Software for Small Businesses"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 = render partial: 'marketing_breadcrumbs'
-.op-sitemap
+#main_sell_page.op-sitemap
   .row-fluid
     .span12
-      %h1 Marketing Products and Services
+      %h1.hd-main Marketing Products and Services
 
-  .row-fluid
-    .span3
-      %h4 E-Mail Marketing
-      %ul
-        %li
-          %a{ :href => '/marketing/email-marketing' } E-Mail Marketing
-        %li
-          %a{ :href => '/marketing/email-marketing' } Mobile Responsive E-Mails
-        %li
-          %a{ :href => '/marketing/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
-        %li
-          %a{ :href => '/marketing/email-marketing/email-deliverability' } E-Mail Deliverability
+  .row-fluid.email_marketing
+    .span5.offset1
+      %h2 E-Mail Marketing
+      %p
+        Harness the power of our automated email marketing software. 
+      %p
+        %strong
+          Our E-Mail Marketing services and products:
+        %ul
+          %li
+            %a{ :href => email_marketing_path } E-Mail Marketing
+          %li
+            %a{ :href => '/marketing/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
+          %li
+            %a{ :href => '/marketing/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
+          %li
+            %a{ :href => '/marketing/email-marketing/email-deliverability' } E-Mail Deliverability
+      %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path} Get Started for Free!
+    .span3.offset2
+      = image_tag( 'email_marketing_works.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page' )
 
-
-    .span3
-      %h4 Small Business Marketing
-      %ul
-        %li
-          %a{ :href => '/marketing/social-media-marketing'} Social Media Marketing
-        %li
-          %a{ :href => '/marketing/marketing-automation' } Marketing Automation
-        %li
-          %a{ :href => '/marketing/marketing-syndication'} Marketing Syndication
-        %li
-          %a{ :href => '/marketing/marketing-recommendation'} Marketing Recommendation
-        %li
-          %a{ :href => '/marketing/online-marketing'} Online Marketing
-        %li
-          %a{ :href => '/marketing/automated-marketing'} Automated Marketing
-        %li
-          %a{ :href => '/marketing/loyalty-marketing'} Loyalty Marketing
-        %li
-          %a{ :href => '/marketing/customer-retention'} Customer Retention
-        %li
-          %a{ :href => '/marketing/marketing-analytics'} Marketing Analytics 
-        %li
-          %a{ :href => '/marketing/digital-marketing'} Digital Marketing
-        %li
-          %a{ :href => '/marketing/marketing-collaboration'} Marketing Collaboration
-        %li
-          %a{ :href => '/marketing/multi-channel-marketing'} Multi-channel Marketing
-    .span3
-      %h4 Marketing Promotions
+  .row-fluid.smallbiz_marketing
+    .span3.offset2
+      = image_tag( 'small-business-marketing-solutions.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page-left' )
+    .span5.offset1
+      %h2 Small Business Marketing
+      %p
+        Optyn is perfect for the small business and the busy business owner. We help you automate your entire online marketing strategy, reach your customers, and grow your business. All without spending any extra time managing it.
+      %p
+        %strong
+          Learn about how our software can help you with:
+      .span6
+        %a{ :href => '/marketing/social-media-marketing'} Social Media Marketing
+        %a{ :href => '/marketing/marketing-automation' } Marketing Automation
+        %a{ :href => '/marketing/marketing-syndication'} Marketing Syndication
+        %a{ :href => '/marketing/marketing-recommendation'} Marketing Recommendation
+        %a{ :href => '/marketing/online-marketing'} Online Marketing
+        %a{ :href => '/marketing/automated-marketing'} Automated Marketing
+      .span5
+        %a{ :href => '/marketing/loyalty-marketing'} Loyalty Marketing
+        %a{ :href => '/marketing/customer-retention'} Customer Retention
+        %a{ :href => '/marketing/marketing-analytics'} Marketing Analytics 
+        %a{ :href => '/marketing/digital-marketing'} Digital Marketing
+        %a{ :href => '/marketing/marketing-collaboration'} Marketing Collaboration
+        %a{ :href => '/marketing/multi-channel-marketing'} Multi-channel Marketing
+  .row-fluid.email_marketing
+    .span5.offset1
+      %h2 Marketing Promotions
+      %p
+        Learn and see how Optyn can help you create powerful and effective marketing promotions that engage your customers and increase your Revenues.
       %ul
         %li
           %a{ :href => '/marketing/marketing-promotions'} Marketing Promotions
@@ -60,10 +67,16 @@
           %a{ :href => '/marketing/surveys'} Surveys
         %li
           %a{ :href => '/marketing/specials-and-sales'} Specials and Sales
-
-    .span3
-      %h4 Resource Center
+    .span3.offset2
+      = image_tag( 'effective-marketing-promotions.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page' )
+  .row-fluid.smallbiz_marketing
+    .span3.offset2
+      = image_tag( 'grow-your-business-now.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-resources' )
+    .span5.offset1
+      %h2 Grow your Business
+      %p
+        Check out Optyn's Resource Center which is catered to helping small businesses with marketing and taking advantage of the power of online marketing.
       %ul
         %li
-          %a{ :href => '/resources'} Check out our Resource Center for Small Businesses
+          %a{ :href => '/resources'} Resource Center >
   .blank-space
