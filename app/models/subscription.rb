@@ -25,6 +25,13 @@ class Subscription < ActiveRecord::Base
     Stripe::Customer.retrieve(subscription.stripe_customer_token)
   end
 
+  def self.get_stripe_customer_card(subscription,params)
+    if subscription.stripe_customer_token
+      stripe_customer = Stripe::Customer.retrieve(subscription.stripe_customer_token)
+    end
+    stripe_customer
+  end
+
   def update_plan(plan)
     self.update_attribute(:plan_id, plan.id)
     if self.stripe_customer_token.present?
