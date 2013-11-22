@@ -21,7 +21,6 @@ module Api
         def create
           
           Message.transaction do
-            #binding.pry
             klass = params[:message_type].classify.constantize
             #@message = klass.new(filter_time_params)
             @message = klass.new(filter_time_params.except(:image_params))
@@ -100,7 +99,6 @@ module Api
         def move_to_trash
           Message.move_to_trash(uuids_from_message_ids)
           drafts
-          #binding.pry
         end
 
         def move_to_draft
