@@ -1134,9 +1134,36 @@ blockquote {
   background: rgba( $white, 0.8 );
 }
 
+.bullet-disc { list-style-type: disc; }
+.bullet-circle { list-style-type: circle; }
+.bullet-square { list-style-type: square; }
+
 .table-borderless td,
 .table-borderless th {
     border: 0;
 }
 
 .field-with-errors .error { display: block; }
+
+.breadcrumbs {
+  background: lighten( $dark-blue, 5% );
+    color: $white;
+    color: rgba( $white, 0.3 );
+  a {
+    color: $white;
+    color: rgba( $white, 0.7 );
+    font-size: 1rem;
+    line-height: 1.8rem;
+    display: inline-block;
+    @include transition( all 0.3s ease );
+    &:hover {
+      color: rgba( $white, 0.9 );
+      text-decoration: none;
+    }
+  }
+  i.icon-angle-right {
+    margin: 0 10px;
+    line-height: 1.8rem;
+    font-size: 1rem;
+  }
+}

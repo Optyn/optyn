@@ -26,7 +26,7 @@ module Api
             #@message = klass.new(filter_time_params)
             @message = klass.new(filter_time_params.except(:image_params))
             @message.manager_id = current_manager.id
-            @message.label_ids = params[:message][:label_ids]  || []
+            @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
@@ -47,7 +47,7 @@ module Api
             @message.manager_id = current_manager.id
 
             @message.attributes = filter_time_params
-            @message.label_ids = params[:message][:label_ids]  || []
+            @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
