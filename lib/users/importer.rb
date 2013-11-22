@@ -92,7 +92,11 @@ module Users
 		end
 
     def validate_headers(headers)
-    	raise "Incorrect Headers. The file should have headers of 'Name', 'Email', 'Gender' and 'Birth Date'" if !headers.include?(:name) || !headers.include?(:email)
+      if headers and headers.empty?
+    	  raise "Empty file or file with wrong headers"
+      else
+        raise "Incorrect Headers. The file should have headers of 'Name', 'Email', 'Gender' and 'Birth Date'" if !headers.include?(:name) || !headers.include?(:email)
+      end
   	end
 
 	  def download_file_from_payload(payload)
