@@ -26,7 +26,7 @@ module Api
             #@message = klass.new(filter_time_params)
             @message = klass.new(filter_time_params.except(:image_params))
             @message.manager_id = current_manager.id
-            @message.label_ids = params[:message][:label_ids]  || []
+            @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
@@ -47,7 +47,7 @@ module Api
             @message.manager_id = current_manager.id
 
             @message.attributes = filter_time_params
-            @message.label_ids = params[:message][:label_ids]  || []
+            @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
@@ -71,8 +71,8 @@ module Api
 
         def launch
           @message = Message.for_uuid(params[:id])
-          @message.launch
-          render(template: individual_message_template_location)
+          launched = @message.launch
+          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity)
         end
 
         def trash
@@ -139,6 +139,7 @@ module Api
 
         def folder_counts
           populate_labels
+          
        end
 
         private
@@ -157,6 +158,7 @@ module Api
             @message.message_image_attributes = params[:message][:message_image_attributes]
           end
         end
+
         def require_message_type
           if @message_type.blank?
             @message = Message.new
