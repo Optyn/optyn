@@ -223,13 +223,12 @@ module StripeEventHandlers
     stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
     subtotal = params[:data][:object][:subtotal] rescue nil
     total = params[:data][:object][:total]  rescue nil
+    amount = params['data']['object']['total']  rescue nil
 
     invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first 
     invoice.update_attributes(
-      :subscription_id => subscription.id,
-      :stripe_customer_token => params['data']['object']['customer'],
       :paid_status => params['data']['object']['paid'],
-      :amount => params['data']['object']['total'] ,
+      :amount => amount,
       :stripe_coupon_token => stripe_coupon_token,
       :stripe_coupon_percent_off => stripe_coupon_percent_off,
       :stripe_coupon_amount_off => stripe_coupon_amount_off,
