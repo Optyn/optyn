@@ -18,38 +18,51 @@ module Shops
       counters[:shops_created] = 0
       counters[:existing_shops] = 0
       counters[:unparsed_rows] = 0
+      counter = 0
 
       csv_table.each do |row|
+        counter += 1
         status = nil
         output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
         
         begin
           shop_name = row[:shop_name]
+
+          puts "#{counter} Parsing Shop: #{shop_name}"
+
           Shop.transaction do
             # shop = for_name(shop_name) || Shop.new()
             manager = Manager.find_by_email(row[:manager_email]) || Manager.new
             shop = manager.new_record? ? Shop.new : manager.shop
             if shop.new_record?
               shop.name = shop_name
-              shop.phone_number = row[:shop_phone]
+              shop.phone_number = row[:shop_phone].to_s
+              shop.phone_number = "+1" + shop.phone_number
               shop.partner_id = payload.partner_id
               shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
-              ##part of the carrier wave magic
-              ##if you set this parameter carrier wave automatically downloads it
-              # binding.pry
-              shop.remote_logo_img_url = row[:shop_image_uri]
-
+              
+                
 
               manager = shop.managers.build
 
-              manager.email                  = row[:manager_email]
-              manager.name                   = row[:manager_name]
+              manager.email                  = row[:manager_email].to_s.strip
+              manager.name                   = row[:manager_name].to_s.strip
               manager.skip_name              = true
-              manager.password               = row[:manager_password]
-              manager.password_confirmation  = row[:manager_password]
+              manager.password               = row[:manager_password].to_s.strip
+              manager.password_confirmation  = row[:manager_password].to_s.strip
 
               shop.save!
               shop.update_manager
+
+              begin 
+                shop.reload
+                shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
+                shop.save!
+              rescue => e
+                puts "Failed Image #{shop_name}"
+                nil
+              end
+
               status = %{"New Shop"}
               output_row << status
               counters[:shops_created] += 1
