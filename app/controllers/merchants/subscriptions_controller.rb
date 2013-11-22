@@ -96,7 +96,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def subscribe
-    # binding.pry
     begin
       @plan = current_shop.subscription.plan
       params[:stripe_plan_id] = @plan.plan_id
