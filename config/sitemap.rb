@@ -45,6 +45,7 @@ SitemapGenerator::Sitemap.create do
     add '/resources/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/capturing-customer-data', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/evolution-of-email-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/email-marketing-best-practices', :changefreq => 'weekly', :priority => 0.8
     add '/resources/contests', :changefreq => 'weekly', :priority => 0.8
     add '/resources/coupons', :changefreq => 'weekly', :priority => 0.8
     add '/resources/surveys', :changefreq => 'weekly', :priority => 0.8
