@@ -56,7 +56,7 @@ namespace :partner do
   task :eatstreet_with_dummy_shop do
     puts "Adding the Eatstreet dummy shop"
     partner = Partner.find_by_organization("Eatstreet Inc.")
-    partner.shops.create(name: 'Optyn Eatstreet Test', stype: 'online', phone_number: '+3125233844', managers_attributes: {'0' => {name: "Gaurav Gaglani", email: 'eatstreet+test@optyn.com', password: 'test1234', password_confirmation: 'test1234'}})
+    partner.shops.create(name: 'Optyn Eatstreet Test', stype: 'online', phone_number: '+3125233844', managers_attributes: {'0' => {name: "Gaurav Gaglani", email: 'eatstreet+test@optyn.com', password: 'eatstreet', password_confirmation: 'eatstreet'}})
   end
 
   task :eatstreet_with_multiple_dummy_shops => :environment do
