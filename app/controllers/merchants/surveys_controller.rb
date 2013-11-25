@@ -23,7 +23,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def update
-		# binding.pry
+		binding.pry
 		survey_id = params[:id]
 		@survey = current_shop.surveys.find(survey_id)
 		if params[:choice]=="launch"
@@ -97,7 +97,7 @@ class Merchants::SurveysController < Merchants::BaseController
 		if survey.survey_questions.present?
 			flash[:error] = "No Question present so cant launch"
 			return false
-		elsif 				
+		# elsif 				
 		end#end of if
 	end#end of def
 
