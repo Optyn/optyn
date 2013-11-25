@@ -27,6 +27,7 @@ function MerchantSurvey() {
             this.toggleValues();
             this.assignSurveyState();
             this.hookDeleteQuestion();
+            this.hideButtonsInLaunchedSurvey();
         }
     };
 
@@ -273,9 +274,10 @@ function MerchantSurvey() {
         $('.submit_survey').click(function (e) {
             var thisName = $(this).attr('name');
             if (thisName.match('launch')) {
-                alert(thisName);
+                // alert(thisName);
                 $('#survey_ready').val('1');
             } else if (thisName.match('draft')) {
+                alert(thisName);
                 $('#survey_ready').val('0');
             }
 
@@ -315,7 +317,12 @@ function MerchantSurvey() {
         $(document).on('submit','body.select_survey',function(data){
             $('#select_survey').attr("action", $(this).find(":selected").val());
         });
+    };
 
+    //hooks for hiding buttons not needed in launched emssages
+    this.hideButtonsInLaunchedSurvey = function () {
+        // $("#draft").hide();
+        
     };
 
 }
