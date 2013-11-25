@@ -23,12 +23,13 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def update
-		binding.pry
+		# binding.pry
 		survey_id = params[:id]
 		@survey = current_shop.surveys.find(survey_id)
-		if @survey.survey_questions.present? and params[:choice]=="launch"
-			flash[:error] = "No Question present so cant launch"
-			return 
+		if params[:choice]=="launch"
+			if !is_launch_worthy(@survey)
+				return
+			end
 		end
 
 		@survey.attributes = params[:survey]
@@ -91,4 +92,13 @@ class Merchants::SurveysController < Merchants::BaseController
 			preview_merchants_survey_path
 		end 
 	end
+
+	def is_launch_worthy(survey)
+		if survey.survey_questions.present?
+			flash[:error] = "No Question present so cant launch"
+			return false
+		elsif 				
+		end#end of if
+	end#end of def
+
 end
