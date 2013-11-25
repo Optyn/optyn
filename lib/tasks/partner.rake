@@ -69,6 +69,24 @@ namespace :partner do
     end
   end
 
+  desc "Add the 'seed' from email addresses for each partner"
+  task :seed_verified_emails do
+    #Adding verified email for the Optyn partner
+    partner = Partner.for_organization('Optyn Inc.')
+    partner.from_email = 'email@optyn.com'
+    partner.save
+
+    #Adding verified email for the Optyn 1 partner
+    partner = Partner.for_organization('Optyn Partners')
+    partner.from_email = 'email@optyn.com'
+    partner.save
+
+    #Adding verified email for the Eatstreet partner
+    partner = Partner.for_organization('Eatstreet Inc.')
+    partner.from_email = 'specials@eatstreet.com'    
+    partner.save
+  end
+
   desc "Run all the tasks serially"
-  task :seed => [:create_optyn, :create_optyn_partner, :create_eatstreet_partner, :eatstreet_with_dummy_shop]
+  task :seed => [:create_optyn, :create_optyn_partner, :create_eatstreet_partner, :eatstreet_with_dummy_shop, :seed_verified_emails]
 end
