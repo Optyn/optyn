@@ -23,7 +23,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def update
-		binding.pry
+		# binding.pry
 		survey_id = params[:id]
 		@survey = current_shop.surveys.find(survey_id)
 		if !is_launch_worthy(@survey,params[:choice])

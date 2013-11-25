@@ -277,7 +277,7 @@ function MerchantSurvey() {
                 // alert(thisName);
                 $('#survey_ready').val('1');
             } else if (thisName.match('draft')) {
-                alert(thisName);
+                // alert(thisName);
                 $('#survey_ready').val('0');
             }
 
