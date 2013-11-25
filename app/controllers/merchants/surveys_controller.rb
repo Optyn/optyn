@@ -23,7 +23,14 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def update
-		@survey = current_shop.surveys.find(params[:id])
+		binding.pry
+		survey_id = params[:id]
+		@survey = current_shop.surveys.find(survey_id)
+		if @survey.survey_questions.present? and params[:choice]=="launch"
+			flash[:error] = "No Question present so cant launch"
+			return 
+		end
+
 		@survey.attributes = params[:survey]
 		@survey.save!
 		redirect_to update_dispatcher
@@ -53,9 +60,17 @@ class Merchants::SurveysController < Merchants::BaseController
   end
 
   def launch
-    @survey = Survey.scoped_by_shop_id(current_shop.id).find(params[:id])
-    @survey.update_attribute(:ready, true)
-    redirect_to preview_merchants_survey_path
+  	survey_id = params[:id]
+  	##final check befroe launching survey
+    @survey = Survey.scoped_by_shop_id(current_shop.id).find(survey_id)
+    survey_questions = @survey.survey_questions
+    if survey_questions.present?
+	    @survey.update_attribute(:ready, true)
+	    redirect_to preview_merchants_survey_path
+		else
+			flash[:alert] = "No Questions in this survey"
+			redirect_to :back
+		end
   end
 
 	private

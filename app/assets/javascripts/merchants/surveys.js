@@ -273,6 +273,7 @@ function MerchantSurvey() {
         $('.submit_survey').click(function (e) {
             var thisName = $(this).attr('name');
             if (thisName.match('launch')) {
+                alert(thisName);
                 $('#survey_ready').val('1');
             } else if (thisName.match('draft')) {
                 $('#survey_ready').val('0');

@@ -4,13 +4,11 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
   def upgrade
-    # binding.pry
-    ##FIXME:add a check for valid subscrition
     @plan = current_shop.plan
     @subscription = current_shop.subscription || @plan.subscriptions.build
     @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
     @amount = (current_charge.amount.to_f / 100 ) rescue nil #because its in cents
-    # binding.pry
+    ##TODO: customer needs to have a card object
     @stripe_last_payment = @list_charges.first rescue nil
     customer = Subscription.get_stripe_customer_card(@subscription,params)
     @card_last4 =  customer.active_card.last4 rescue nil
@@ -74,9 +72,9 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       else
         flash[:notice]= "Couldnt Create Invoice"
         render :nothing => true  and return
-      end
-    end
-  end
+      end#end of if
+    end#end of if on params.present
+  end#end of print
 
   def edit_billing_info
     @plan= current_shop.subscription.plan
