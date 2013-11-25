@@ -1,4 +1,4 @@
-%table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
+%table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
   - if @message.present? and @message.make_public
 
     %tr

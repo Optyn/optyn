@@ -1,5 +1,5 @@
 - if @message.present? && @shop.present? &&  @shop.starter_plan?
-  %table{:style => 'width:100%; color:#ccc; color: rgba(255,255,255,0.8);' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
+  %table{:style => 'width:100%;max-width:600px;margin:auto;color:#ccc;color:rgba(255,255,255,0.8);' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
     %tr
       %td{:style => "padding-left: 20px; max-height: 40px; padding-top: 15px; width: 100%;"}
         %p{:style => "font-weight: bold; margin: 0px;"}
