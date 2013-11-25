@@ -1147,19 +1147,50 @@ blockquote {
 
 .breadcrumbs {
   background: lighten( $dark-blue, 5% );
-    color: $white;
-    color: rgba( $white, 0.3 );
+  color: $white;
+  color: rgba( $white, 0.3 );
   a {
     color: $white;
     color: rgba( $white, 0.7 );
     font-size: 1rem;
     line-height: 1.8rem;
     display: inline-block;
-    @include transition( all 0.3s ease );
+    position: relative;
+    padding: 0 1.9rem;
+    display: inline-block;
+    margin-left: -3px;
+    z-index: 11;
+    & + a { z-index: 10;
+      & + a { z-index: 9;
+        & + a { z-index: 8;
+          & + a { z-index: 7;
+            & + a { z-index: 6; }}}}}
     &:hover {
-      color: rgba( $white, 0.9 );
       text-decoration: none;
+      color: rgba( $white, 0.9 );
+      background-color: lighten( $dark-blue, 10% );
+      > span {
+        background-color: lighten( $dark-blue, 10% );
+      }
     }
+    &.current {
+      background-color: $black;
+      span {
+        background-color: $black;
+      }
+    }
+  }
+  span {
+    position: absolute;
+    top: 3px;
+    right: -((1.8rem / sqrt(2)) / 2 );
+    display: inline-block;
+    width: 1.8rem / sqrt(2);
+    height: 1.8rem / sqrt(2);
+    border-top: solid 2px $black;
+    border-right: solid 2px $black;
+    @include rotate( 45deg );
+    background-color: lighten( $dark-blue, 5% );
   }
   i.icon-angle-right {
     margin: 0 10px;

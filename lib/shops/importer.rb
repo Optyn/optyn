@@ -37,10 +37,13 @@ module Shops
             if shop.new_record?
               shop.name = shop_name
               shop.phone_number = row[:shop_phone].to_s
-              shop.phone_number = "+1" + shop.phone_number
+              puts "--- #{shop.phone_number} | #{row[:shop_phone].to_s}"
+              # if !shop.phone_number.include?("+1") || !shop.phone_number.include?('001')
+              #   shop.phone_number = "+1" + shop.phone_number
+              # end
+
               shop.partner_id = payload.partner_id
               shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
-              
                 
 
               manager = shop.managers.build

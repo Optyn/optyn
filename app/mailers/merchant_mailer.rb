@@ -66,7 +66,7 @@ class MerchantMailer < ActionMailer::Base
     @file_import = file_import
     @manager = @file_import.manager
     @error = error
-    mail(to: "#{@manager.name} <#{@manager.email}>", subject: "An Error occured while importing users.")
+    mail(to: "#{@manager.name} <#{@manager.email}>", subject: "An Error occurred while importing users.")
   end
 
   private

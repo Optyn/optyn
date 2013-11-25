@@ -21,6 +21,6 @@ class ShopUserMailer < ActionMailer::Base
     @payload = payload
     @partner = @payload.partner
     @error = error
-    mail(to: "#{@partner.name} <#{@partner.email}>", subject: "An Error occured while importing users.")
+    mail(to: "#{@partner.name} <#{@partner.email}>", subject: "An Error occurred while importing users.")
   end
 end
