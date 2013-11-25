@@ -23,15 +23,14 @@ class Merchants::SurveysController < Merchants::BaseController
 	end
 
 	def update
-		binding.pry
 		survey_id = params[:id]
 		@survey = current_shop.surveys.find(survey_id)
 		if params[:choice]=="launch"
 			if !is_launch_worthy(@survey)
-				return
+				flash.now[:alert] = "This Survey can't be launched! No Questions in this survey"
+				render 'edit' and return 
 			end
 		end
-
 		@survey.attributes = params[:survey]
 		@survey.save!
 		redirect_to update_dispatcher
@@ -69,7 +68,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	    @survey.update_attribute(:ready, true)
 	    redirect_to preview_merchants_survey_path
 		else
-			flash[:alert] = "No Questions in this survey"
+			flash.now[:alert] = "Can't be launched!No Questions in this survey"
 			redirect_to :back
 		end
   end
