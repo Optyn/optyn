@@ -1,11 +1,12 @@
-%table{:style => "width: 100%; clear:both; text-align:center; height: 60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
+%table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
   - if @message.present? and @message.make_public
 
     %tr
       %td
         %div{:style => "text-align:center;margin:20px auto;"}
           - @user_email = @user_email ? @user_email : (@user ? @user.email : nil)
-          - btn_width = optyn_user?(@user_email) ? 'width: 33%;' : 'width: 50%;'
+          /- btn_width = optyn_user?(@user_email) ? 'width: 33%;' : 'width: 50%;'
+          - btn_width = 'width: 50%;'
           - btn_styles = 'float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;' + btn_width
           - msg = "#{@message.name} #{@message.uuid}"
           - public_msg = "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}"

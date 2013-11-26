@@ -2,6 +2,7 @@ $(document).ready(function () {
     var shop = new Shop();
     shop.initialize();
     shop.checkIdentifier($('#shop_identifier'))
+    $('#shop_name_phone_number').numeric({allow:"()-+ "});
 });
 
 function Shop() {
