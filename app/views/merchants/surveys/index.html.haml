@@ -15,7 +15,11 @@
       - @list_survey.each do |survey|
         %tr
           %td= survey.title
-          %td= survey.ready
+          %td
+            -if survey.ready == true
+              Yes
+            -else
+              No
           %td= survey.updated_at
           %td= link_to "Show" , merchants_survey_path(survey.id) ,:class=>"btn btn-info btn-mini"#{@survey.id} 
     - else
