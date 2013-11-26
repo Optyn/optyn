@@ -1,27 +1,82 @@
-(function() {
+(function($){
 
-var parts = document.location.search.slice( 1 ).split( "&" ),
-	length = parts.length,
-	scripts = document.getElementsByTagName("script"),
-	src = scripts[ scripts.length - 1].src,
-	i = 0,
-	current,
-	version = "1.9.0",
-	file = "http://code.jquery.com/jquery-git.js";
+	$.fn.alphanumeric = function(p) { 
 
-for ( ; i < length; i++ ) {
-	current = parts[ i ].split( "=" );
-	if ( current[ 0 ] === "jquery" ) {
-		version = current[ 1 ];
-		break;
-	}
-}
+		p = $.extend({
+			ichars: "!@#$%^&*()+=[]\\\';,/{}|\":<>?~`.- ",
+			nchars: "",
+			allow: ""
+		  }, p);	
 
-if (version != "git") {
-	file = src.replace(/jquery\.js$/, "jquery-" + version + ".js");
-}
+		return this.each
+			(
+				function() 
+				{
 
+					if (p.nocaps) p.nchars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+					if (p.allcaps) p.nchars += "abcdefghijklmnopqrstuvwxyz";
+					
+					s = p.allow.split('');
+					for ( i=0;i<s.length;i++) if (p.ichars.indexOf(s[i]) != -1) s[i] = "\\" + s[i];
+					p.allow = s.join('|');
+					
+					var reg = new RegExp(p.allow,'gi');
+					var ch = p.ichars + p.nchars;
+					ch = ch.replace(reg,'');
 
-document.write( "<script src='" + file + "'></script>" );
+					$(this).keypress
+						(
+							function (e)
+								{
+								
+									if (!e.charCode) k = String.fromCharCode(e.which);
+										else k = String.fromCharCode(e.charCode);
+										
+									if (ch.indexOf(k) != -1) e.preventDefault();
+									if (e.ctrlKey&&k=='v') e.preventDefault();
+									
+								}
+								
+						);
+						
+					$(this).bind('contextmenu',function () {return false});
+									
+				}
+			);
 
-})();
+	};
+
+	$.fn.numeric = function(p) {
+	
+		var az = "abcdefghijklmnopqrstuvwxyz";
+		az += az.toUpperCase();
+
+		p = $.extend({
+			nchars: az
+		  }, p);	
+		  	
+		return this.each (function()
+			{
+				$(this).alphanumeric(p);
+			}
+		);
+			
+	};
+	
+	$.fn.alpha = function(p) {
+
+		var nm = "1234567890";
+
+		p = $.extend({
+			nchars: nm
+		  }, p);	
+
+		return this.each (function()
+			{
+				$(this).alphanumeric(p);
+			}
+		);
+			
+	};	
+
+})(jQuery);
