@@ -1,13 +1,13 @@
 module Users
   module ShopUserImporter  
     def user_import(payload)
-      puts "Starting the download"
+      Rails.logger.info "Starting the download"
       content = download_user_import_csv_file(payload)
-      puts "Done downloading and cleaning the file"
+      Rails.logger.info "Done downloading and cleaning the file"
 
-      puts "Creating the table"
+      Rails.logger.info "Creating the table"
       csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
-      puts "Done loading the csv table"
+      Rails.logger.info "Done loading the csv table"
       headers = csv_table.headers
       validate_user_import_headers(headers)
 
@@ -38,7 +38,7 @@ module Users
             
 		        user = User.find_by_email(row[:email].to_s.downcase.strip) || User.new(email: row[:email].to_s.downcase.strip)
 
-            puts "Parsing row: #{counter}| Email: #{user.email}"
+            Rails.logger.info "Parsing row: #{counter}| Email: #{user.email}|"
             
             user.skip_name = true
             user.skip_welcome_email = true
