@@ -26,7 +26,7 @@ class Merchants::SurveysController < Merchants::BaseController
 		# binding.pry
 		survey_id = params[:id]
 		@survey = current_shop.surveys.find(survey_id)
-		if !is_launch_worthy(@survey,params[:choice])
+		if is_launch_worthy(@survey,params[:choice])
 			flash.now[:alert] = "This Survey can't be launched! No Questions in this survey"
 			render 'edit' and return 
 		end
@@ -40,14 +40,17 @@ class Merchants::SurveysController < Merchants::BaseController
 	def questions
 		current_survey = current_shop.surveys.find(params[:id])
 		question_attributes = current_survey.survey_questions.collect(&:attributes)
-		
 		question_attributes.each do |attr_hash|
 			##FIXME: replace with named routes
 			#attr_hash['edit_path'] = edit_merchants_survey_survey_question_path(attr_hash['id'])
 			#attr_hash['delete_path'] = merchants_survey_survey_question_path(attr_hash['id'])
-			attr_hash['edit_path'] = "/merchants/segments/#{attr_hash['survey_id']}/segment_questions/#{attr_hash['id']}/edit"
-			attr_hash['delete_path'] = "/merchants/segments/#{attr_hash['survey_id']}/segment_questions/#{attr_hash['id']}"
+			attr_hash['edit_path'] = "/merchants/segments/#{attr_hash['survey_id']}/segment_questions/#{attr_hash['id']}/edit"		
 			attr_hash['values'] = ["-"] if attr_hash['values'].blank?
+			if current_survey.ready == true
+				attr_hash['delete_path'] = ""
+			else
+				attr_hash['delete_path'] = "/merchants/segments/#{attr_hash['survey_id']}/segment_questions/#{attr_hash['id']}"
+			end
 		end
 		# binding.pry
 		render json: question_attributes
@@ -67,7 +70,7 @@ class Merchants::SurveysController < Merchants::BaseController
 	    @survey.update_attribute(:ready, true)
 	    redirect_to preview_merchants_survey_path
 		else
-			flash.now[:alert] = "Can't be launched!No Questions in this survey"
+			flash.now[:alert] = "This Survey can't be launched! No Questions in this survey"
 			redirect_to :back
 		end
   end
@@ -93,8 +96,7 @@ class Merchants::SurveysController < Merchants::BaseController
 
 	def is_launch_worthy(survey,choice)
 		if choice=="launch"
-			if survey.survey_questions.present?
-				flash[:error] = "No Question present so cant launch"
+			if !survey.survey_questions.present?
 				return false
 			end#end of if
 		end#enf of choice
