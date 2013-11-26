@@ -64,10 +64,11 @@ Optyn::Application.routes.draw do
   match '/resources/email-marketing/capturing-customer-data' => 'main#resources_capturing_customer_data', :as => :resources_capturing_customer_data
   match '/resources/email-marketing/mobile-responsive-emails' => 'main#resources_mobile_responsive_emails', :as => :resources_mobile_responsive_emails
   match '/resources/email-marketing/evolution-of-email-marketing' => 'main#resources_evolution_email', :as => :resources_evolution_email
+  match '/resources/email-marketing/email-marketing-best-practices' => 'main#resources_best_practices', :as => :resources_best_practices
   match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
   match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
-  match '/resources/coupons' => 'main#resources_coupons', :as => :resources_contests
+  match '/resources/coupons' => 'main#resources_coupons', :as => :resources_coupons
   match '/resources/specials-and-sales' => 'main#resources_specials_sales', :as => :resources_specials_sales
   match '/resources/customer-retention' => 'main#resources_customer_retention', :as => :resources_customer_retention
   match '/resources/loyalty-marketing' => 'main#resources_loyalty_marketing', :as => :resources_loyalty_marketing

@@ -17,7 +17,44 @@ SitemapGenerator::Sitemap.create do
     add '/tour', :changefreq => 'weekly', :priority => 0.8
     add '/testimonials/alley-gallery', :changefreq => 'weekly', :priority => 0.8
     add '/affiliates', :changefreq => 'weekly', :priority => 0.8
-    
+    add '/marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-marketing/email-deliverability', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-promotions', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/coupons', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/contests', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/surveys', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/specials-and-sales', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/social-media-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-automation', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-recommendation', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/online-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/automated-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/customer-retention', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/digital-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/capturing-customer-data', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/evolution-of-email-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/email-marketing-best-practices', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/contests', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/coupons', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/surveys', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/social-media-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/digital-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/online-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/customer-retention', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
       add "public/shop/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
