@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+    = content_for :header do
+      Import File Stats
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"} 
+                    Hi #{@partner.name},
+                  %p Your file import is complete.
+                  %p Below are the stats for the file.
+                  - @payload.stats.each do |shop_stat|
+                    %p
+                      - shop_stat.each_pair do |key, value|
+                        %p
+                          == #{key.to_s.humanize}: #{value}
+
+
+                  %p
+                    Cheers,
+                    %br/
+                    The Optyn Team
+        %td
+
+        = render partial: "shared/mailers/footer"
