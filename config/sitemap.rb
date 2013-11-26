@@ -4,7 +4,7 @@ require 'sitemap_generator'
 SitemapGenerator::Sitemap.default_host = 'http://www.optyn.com'
 SitemapGenerator::Sitemap.create do
   
-  if Rails.env.production?
+   if Rails.env.production?
     
     add '/', :changefreq => 'daily', :priority => 1.0  
     add '/features', :changefreq => 'weekly', :priority => 0.8 
@@ -57,7 +57,7 @@ SitemapGenerator::Sitemap.create do
     add '/resources/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
-      add "public/shop/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
+      add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
     end
 
     SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
