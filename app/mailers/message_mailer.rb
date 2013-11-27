@@ -15,6 +15,8 @@ class MessageMailer < ActionMailer::Base
       @shop_logo = true #flag set for displaying the shop logo or just the shop name
     end
 
+    @partner = @shop.partner
+
     mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>), 
       bcc: "gaurav@optyn.com", 
       from: @message.from, 
