@@ -20,13 +20,14 @@ module Shops
       counters[:unparsed_rows] = 0
       counter = 0
 
+      starting_time = Time.now.to_i
       csv_table.each do |row|
         counter += 1
         status = nil
         output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
-        
+
         begin
-          shop_name = row[:shop_name]
+          shop_name = row[:shop_name].to_s.strip
 
           puts "#{counter} Parsing Shop: #{shop_name}"
 
@@ -57,10 +58,12 @@ module Shops
               shop.save!
               shop.update_manager
 
-              begin 
+              begin
+                Rails.logger.info "--- Starting the #{shop_name} logo download...." 
                 shop.reload
                 shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
                 shop.save!
+                Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
               rescue => e
                 puts "Failed Image #{shop_name}"
                 nil
@@ -88,6 +91,12 @@ module Shops
       end
 
       unparsed = unparsed_rows.size > 1 ? unparsed_rows.join("\n") : "" 
+
+      ending_time = Time.now.to_i
+
+      time_in_seconds = ending_time - starting_time
+
+      Rails.logger.info "--- Time in minutes: #{time_in_seconds/60}"
 
       [[counters], output.join("\n"), unparsed]
     end
