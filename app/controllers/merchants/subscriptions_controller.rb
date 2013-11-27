@@ -26,7 +26,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   end
 
   def invoice
-    # binding.pry
     @charge = Charge.find(params[:id]) rescue nil
     @invoice = Invoice.where(:stripe_invoice_id=>@charge.stripe_invoice_token).first rescue nil
     @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first rescue nil
@@ -46,7 +45,6 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   def print
     #if invoice id present fetch it
     if params[:id].present?
-      # binding.pry
       @charge = Charge.find(params[:id]) rescue nil
       @invoice = Invoice.where(:stripe_invoice_id=>@charge.stripe_invoice_token).first rescue nil
       @plan = Plan.where(:plan_id => @invoice.stripe_plan_token).first rescue nil
