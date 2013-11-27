@@ -1,17 +1,18 @@
-- if @message.present? && @shop.present? &&  @shop.starter_plan?
-  %table{:style => 'width:100%;max-width:600px;margin:auto;color:#ccc;color:rgba(255,255,255,0.8);' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
-    %tr
-      %td{:style => "padding-left: 20px; max-height: 40px; padding-top: 15px; width: 100%;"}
-        %p{:style => "font-weight: bold; margin: 0px;"}
-          = "Send Awesome E-Mails like these"
-      %td{:style => "font-size: 11px; margin: 0px; text-align:center"}
-        = "Sent via"
-    %tr
-      %td{:style => "padding-left: 20px; max-height: 40px; width: 100%;"}
-        %p{:style => "font-size: 11px; margin: 0px;"}
-          = "Your first 100 subscribers are free. Sign up today at optyn.com"
+- if @message.present? && @partner.optyn?
+  - if  @shop.present? &&  @shop.starter_plan?
+    %table{:style => 'width:100%;max-width:600px;margin:auto;color:#ccc;color:rgba(255,255,255,0.8);' + message_header_background_color(@message)}
+      %tr
+        %td{:style => "padding-left: 20px; max-height: 40px; padding-top: 15px; width: 100%;"}
+          %p{:style => "font-weight: bold; margin: 0px;"}
+            = "Send Awesome E-Mails like these"
+        %td{:style => "font-size: 11px; margin: 0px; text-align:center"}
+          = "Sent via"
+      %tr
+        %td{:style => "padding-left: 20px; max-height: 40px; width: 100%;"}
+          %p{:style => "font-size: 11px; margin: 0px;"}
+            = "Your first 100 subscribers are free. Sign up today at optyn.com"
 
-          %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#fff; text-decoration: underline;"} Click here
-      %td{:style => "padding: 0 6px 6px 0;"}
-        %a{:href => "#{SiteConfig.app_base_url}", :target => "_blank"}
-          = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}
+            %a{:href => "#{SiteConfig.app_base_url}", :style => "font-size: 11px; color:#fff; text-decoration: underline;"} Click here
+        %td{:style => "padding: 0 6px 6px 0;"}
+          %a{:href => "#{SiteConfig.app_base_url}", :target => "_blank"}
+            = image_tag "#{SiteConfig.app_base_url}/assets/email_logo_white.png", {:style => 'max-width: 100px'}

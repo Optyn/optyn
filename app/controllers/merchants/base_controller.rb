@@ -2,7 +2,7 @@ class Merchants::BaseController < ApplicationController
 
 	before_filter :authenticate_merchants_manager!, :set_time_zone, except: [:public_view, :generate_qr_code, :redeem, :share_email, :send_shared_email]
 	before_filter :check_connection_count, except: [:public_view, :generate_qr_code, :redeem, :share_email, :send_shared_email]
-	helper_method :current_shop, :manager_signed_in?, :current_manager
+	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_partner
 
 	private
 
@@ -29,4 +29,8 @@ class Merchants::BaseController < ApplicationController
 	def current_shop
 		@_shop ||= current_merchants_manager.shop if merchants_manager_signed_in?
 	end
+
+  def current_partner
+    @_partner ||= current_shop.partner if merchants_manager_signed_in?
+  end
 end

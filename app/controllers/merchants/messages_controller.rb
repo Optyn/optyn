@@ -113,6 +113,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop_logo = true
     @shop = @message.shop
     @preview = true
+    @partner = current_partner
   end
 
   def show
@@ -120,6 +121,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @shop_logo = true
     @preview = true
+    @partner = @shop.partner
   end
 
   def launch

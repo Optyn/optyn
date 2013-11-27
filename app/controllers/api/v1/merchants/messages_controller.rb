@@ -117,9 +117,10 @@ module Api
           #output html encassed in json
           @message = Message.for_uuid(params[:id])
           @shop = @message.shop
+          @partner = @shop.partner
           @shop_logo = true
           @preview = true
-          
+
           @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
           render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl]
          return

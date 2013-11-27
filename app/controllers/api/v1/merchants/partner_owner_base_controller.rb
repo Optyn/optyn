@@ -27,6 +27,11 @@ module Api
         def current_shop
           current_manager.shop
         end
+
+        def current_partner
+          @_partner ||= current_shop.partner if current_manager.present?
+        end
+
       end
     end
   end
