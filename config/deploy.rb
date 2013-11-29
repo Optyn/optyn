@@ -68,8 +68,8 @@ after "deploy", "deploy:cleanup"
 
 namespace "whenever" do
   task :clear_crontab do
-    # run "cd #{fetch(:previous_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
-    # run "cd #{fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
+    run "cd #{fetch(:previous_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
+    run "cd #{fetch(:current_release)} && bundle exec whenever --clear-crontab --set environment=#{rails_env} --user #{user} #{application}"
   end
 
   task :update_crontab do
