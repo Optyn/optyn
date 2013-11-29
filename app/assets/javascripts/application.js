@@ -26,6 +26,7 @@
 //= require jquery.colorbox
 //= require_self
 //= require_tree
+//= require ckeditor/init
 
 $(document).ready(function () {
     if ($('.date-time-picker').length && $('.date-time-picker .error').length) {
