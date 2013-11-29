@@ -1,5 +1,7 @@
 Optyn::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   #Admin
   devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
