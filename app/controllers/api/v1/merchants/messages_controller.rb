@@ -28,8 +28,12 @@ module Api
             @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
             set_message_image
+
+            @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
+
             if @message.send(params[:choice].to_s.to_sym)
-              render(status: :created, template: individual_message_template_location)
+              send_for_curation
+              render(status: :created, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
             end
@@ -48,9 +52,13 @@ module Api
             @message.attributes = filter_time_params
             @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
+
+            @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
+
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
-              render(status: :ok, template: individual_message_template_location)
+              send_for_curation
+              render(status: :ok, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
             end
@@ -72,8 +80,10 @@ module Api
 
         def launch
           @message = Message.for_uuid(params[:id])
+          @needs_curation = @message.needs_curation(:queued)
           launched = @message.launch
-          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity)
+          send_for_curation
+          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
         end
 
         def trash
@@ -133,17 +143,17 @@ module Api
           @message = klass.for_uuid(params[:id])
           @message.subject = params[:message][:subject]
           @message.send_on = params[:message][:send_on]
+          @needs_curation = @message.needs_curation
           @message.save(validate: false)
 
-          render(template: individual_message_template_location, status: :ok)
+          render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
 
         rescue => e
-          render(template: individual_message_template_location, status: :unprocessable_entity)
+          render(template: individual_message_template_location, status: :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
         end
 
         def folder_counts
           populate_labels
-          
        end
 
         private
