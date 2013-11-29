@@ -29,7 +29,7 @@ module Api
         end
 
         def current_partner
-          @_partner ||= current_shop.partner if current_manager.present?
+          doorkeeper_token.application.owner
         end
 
       end
