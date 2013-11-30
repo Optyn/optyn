@@ -196,7 +196,7 @@ module Api
                               window.clearInterval(pollTimer);
                               var url =   win.location.toString();
                               acToken = url.split("?")[1].split("=")[1];
-                              $(win.document).find('body').html("<h1>Loading....</h1>")
+                              jQuery(win.document).find('body').html("<h1>Loading....</h1>")
                               //win.close();
                               validateToken(acToken, win);
                             }
@@ -207,7 +207,7 @@ module Api
 
                     function validateToken(token, win) {
                       param_obj = {'client_id': CLIENTID, 'client_secret': CLIENTSECRET, 'code': token, 'grant_type': 'authorization_code', 'redirect_uri': REDIRECT}
-                      jQuery.getJSON((VALIDURL + "?callback=?&" + $.param(param_obj)), function(data){
+                      jQuery.getJSON((VALIDURL + "?callback=?&" + jQuery.param(param_obj)), function(data){
                         win.location = '#{SiteConfig.app_base_url}#{api_connection_path}?access_token=' + data.access_token;
                         getUserInfo(data.access_token);
                         //win.close();
@@ -296,21 +296,21 @@ module Api
                 //Hook the form submission
                 jQuery('body').on('submit', '#optyn-email-form', function(event){
                   event.preventDefault();
-                  $.ajax({
-                    url: $(this).attr('action'),
+                  jQuery.ajax({
+                    url: jQuery(this).attr('action'),
                     type: 'GET',
-                    data: $(this).serialize(),
+                    data: jQuery(this).serialize(),
                     dataType: 'jsonp',
                     beforeSend: function(){
                       jQuery('#optyn-email-error').remove();
-                      $('input[type=submit]', this).attr('disabled', 'disabled');
+                      jQuery('input[type=submit]', this).attr('disabled', 'disabled');
                     },
                     success: function(respJson){
                       if(respJson.data.errors.length){
                         var $tempErr = jQuery('<div />');
                         $tempErr.append('<div id="optyn-email-error"><strong>Please check the email you entered.</strong></div>');  
-                        $('#optyn-first-container').append($tempErr.html());
-                        $('input[type=submit]', this).attr('disabled', '');
+                        jQuery('#optyn-first-container').append($tempErr.html());
+                        jQuery('input[type=submit]', this).attr('disabled', '');
                       }else{
                         replaceWithUserInfo();
                       }
@@ -330,7 +330,7 @@ module Api
                 //fetch the accessToken
                 function validateToken(token) {
                       param_obj = {'client_id': CLIENTID, 'client_secret': CLIENTSECRET, 'code': token, 'grant_type': 'authorization_code', 'redirect_uri': REDIRECT}
-                      jQuery.getJSON((VALIDURL + "?callback=?&" + $.param(param_obj)), function(data){
+                      jQuery.getJSON((VALIDURL + "?callback=?&" + jQuery.param(param_obj)), function(data){
                         getUserInfo(data.access_token);
                       });
                 }
@@ -393,7 +393,7 @@ module Api
 
       def part
         %Q(
-            var scriptElem = $("script[src='#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{@application.uid}']");
+            var scriptElem = jQuery("script[src='#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{@application.uid}']");
             jQuery(scriptElem).before(
               '<script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{@application.uid}"></script>' +
               '#{style}' +

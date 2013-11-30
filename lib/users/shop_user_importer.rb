@@ -1,9 +1,13 @@
 module Users
   module ShopUserImporter  
     def user_import(payload)
+      Rails.logger.info "Starting the download"
       content = download_user_import_csv_file(payload)
+      Rails.logger.info "Done downloading and cleaning the file"
 
+      Rails.logger.info "Creating the table"
       csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
+      Rails.logger.info "Done loading the csv table"
       headers = csv_table.headers
       validate_user_import_headers(headers)
 
@@ -18,29 +22,35 @@ module Users
       counters[:existing_users] = 0
       counters[:unparsed_rows] = 0
 
+      counter = 0
       csv_table.each do |row|
+        counter += 1
+
         status = nil
         output_row = [%{"#{row[:shop]}"},%{"#{row[:manager_email]}"}, %{"#{row[:email]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
-        
+
         begin
-          shop_name = row[:shop]
-          manager_email = row[:manager_email]
+          shop_name = row[:shop].to_s.strip
+          manager_email = row[:manager_email].to_s.strip
           Shop.transaction do
             
             shop = Shop.for_manager_email(manager_email)
             
-		        user = User.find_by_email(row[:email]) || User.new(email: row[:email])
+		        user = User.find_by_email(row[:email].to_s.downcase.strip) || User.new(email: row[:email].to_s.downcase.strip)
+
+            Rails.logger.info "Parsing row: #{counter}| Email: #{user.email}|"
+            
             user.skip_name = true
             user.skip_welcome_email = true
-            user.name = row[:name] unless user.name.present?
-            gender = if (gender_val = row[:gender].to_s.downcase).length == 1
+            user.name = row[:name].to_s.strip unless user.name.present?
+            gender = if (gender_val = row[:gender].to_s.strip.downcase).length == 1
                        gender_val
                      else
                         gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
                      end
             user.gender = gender
-            user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
-            #setting of shop
+            user.birth_date = (Date.parse(row[:birth_date].to_s.strip) rescue nil)
+            
             user.shops = [shop]
 
             if user.errors.include?(:email) || user.errors.include?(:name)
@@ -87,7 +97,6 @@ module Users
 
 
     def validate_user_import_headers(headers)
-      # binding.pry
       if !headers.include?(:shop) || !headers.include?(:name) || !headers.include?(:gender) || !headers.include?(:birth_date)
         raise "Incorrect Headers. The file should have headers of 'Shop','Name','Gender', 'Birth Date'" 
       end  
@@ -99,7 +108,7 @@ module Users
         :secret_access_key => SiteConfig.aws_secret_access_key)
       bucket = s3.buckets["optyn#{Rails.env}"]
       content = bucket.objects[CGI::unescape(payload.filepath)].read
-      csv_data = Iconv.iconv('utf-8', 'ISO_8859-1', content).to_s
+      csv_data = content.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
     end#end of function download_csv_file
   end # end of the shops importer module
 end #end of the shops module

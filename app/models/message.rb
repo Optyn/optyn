@@ -85,7 +85,6 @@ class Message < ActiveRecord::Base
 
     event :move_to_trash do
       transition [:draft, :queued, :sent, :trash] => :trash
-      #binding.pry
     end
 
     event :move_to_draft do
@@ -104,9 +103,13 @@ class Message < ActiveRecord::Base
       transition [:queued, :transit] => :sent
     end
 
+    event :reject do
+      transition [:queued] => :draft
+    end
+
     before_transition :draft => same do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
-      message.from = message.send(:canned_from)
+      message.from = message.send(:canned_from)      
     end
 
     before_transition :draft => :queued do |message|
@@ -271,6 +274,10 @@ class Message < ActiveRecord::Base
     shop.id
   end
 
+  def partner
+    shop.partner
+  end
+
   def message_user(user)
     message_users.find_by_user_id(user.id)
   end
@@ -347,7 +354,8 @@ class Message < ActiveRecord::Base
     if user_name.present?
       self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
-      personal_subject = (self.subject.gsub(/{{Customer Name}},/i, "")).strip.capitalize
+      regex = /{{Customer Name}},/ix #regex when the customer name is missing /eom
+      personal_subject = (self.subject.gsub(regex, "")).strip.capitalize
       personal_subject
     end
   rescue 
@@ -476,6 +484,22 @@ class Message < ActiveRecord::Base
     response = HTTParty.get("#{TWITTER_STAT_API}" + link)
     # response = HTTParty.get("http://urls.api.twitter.com/1/urls/count.json?url=https://development.optyn.com/music-store/campaigns/test-coupon-3141d0567770402b8e7084bc495018f4")
     return response.parsed_response
+  end
+
+  def needs_curation(change_state)
+    return true if (self.state.blank? || self.draft?) && :queued == change_state
+    if (self.queued?) && partner.eatstreet? && self.valid?
+      keys = changed_attributes.keys
+
+      ['content', 'subject', 'percent_off', 'amount_off'].each do |attr|
+        return true if keys.include?(attr)
+      end
+    end
+    false
+  end
+
+  def for_curation(html)
+    MessageChangeNotifier.create(message_id: self.id, content: html)
   end
 
   private

@@ -203,4 +203,12 @@ module Merchants::MessagesHelper
     end
     return relevant, non_relevant
   end
+
+  def message_header_background_color(message)
+    "#{message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"
+  end
+
+  def message_footer_background_color(message)
+    "#{message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"
+  end
 end

@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %p
+                    Hello Admin- A message was changed or updated by the shop:
+                    = @owner_shop.name
+                  %p  
+                    Here are some of the details of the message:
+                    %ul
+                      %li
+                        == Message Id: #{@actual_message.uuid}
+                      %li
+                        == Message Name: #{@actual_message.name}
+                      %li
+                        == Message Subject: #{@actual_message.subject} 
+                      %li
+                        == Message Manager Email: #{@actual_message.manager_email}
+                  %p  
+                    Below is the message preview:
+              %tr
+                %td
+                  %p
+                    = raw(@message_content)
+              %tr
+                %td{style: "text-align: center;"}
+                  = link_to "Reject", "#{SiteConfig.app_base_url}#{reject_merchants_message_path(Encryptor.encrypt_for_message(@actual_message.uuid, @message_change_notifier.uuid))}", target: '_blank', style: "text-decoration:none;color: white;background: #FF5338;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 5px 20px;display: inline-block;margin-top: 15px;"
+
+    = render partial: "shared/mailers/footer"

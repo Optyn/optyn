@@ -2,12 +2,14 @@ module Users
 	module Importer
 		def import(content, manager, label)
 	    shop = manager.shop
+      begin
+	     csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
+     rescue 
+      raise "Problems parsing the uploaded file. Please make sure the headers are not missing."
+     end
 
-	    csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
 	  	headers = csv_table.headers
-
-	    headers = csv_table.headers
-	    validate_headers(headers)
+      validate_headers(headers)
 
 	    output = []
 	    unparsed_rows = []
@@ -104,8 +106,9 @@ module Users
         :access_key_id => SiteConfig.aws_access_key_id,
         :secret_access_key => SiteConfig.aws_secret_access_key)
       bucket = s3.buckets["partner#{Rails.env}"]
-      content = bucket.objects[payload.filepath].read
-      csv_data = Iconv.iconv('utf-8', 'ISO_8859-1', content).to_s
+    
+      content = bucket.objects[CGI::unescape(payload.filepath)].read
+      csv_data = content.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
 	  end
 
 	end #end of the importer module

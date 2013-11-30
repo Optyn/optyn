@@ -1,6 +1,5 @@
-%table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + "#{@message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"}
-  - if @message.present? and @message.make_public
-
+- if @message.present? and @message.make_public
+  %table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + message_footer_background_color(@message)}
     %tr
       %td
         %div{:style => "text-align:center;margin:20px auto;"}
@@ -29,6 +28,10 @@
 
 /Optyn Send Free emails add
 = render partial: "shared/mailers/optyn_advertisement"
+
+/Powered By Eatstreet message
+= render partial: "shared/mailers/powered_by_eatstreet"
+
 
 %div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
   %p{:style => "font-size: 11px;margin:0px;"}
