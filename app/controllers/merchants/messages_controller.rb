@@ -199,6 +199,7 @@ class Merchants::MessagesController < Merchants::BaseController
       @message = Message.for_uuid(uuid)
       @shop_logo = true
       @shop = @message.shop
+      @partner = @shop.partner
       @inbox_count = populate_user_folder_count(true) if current_user.present?
       
       if @shop and @message
