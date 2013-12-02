@@ -365,7 +365,8 @@ class Shop < ActiveRecord::Base
     if !self.virtual && self.partner.subscription_required?
       if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
         Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
-      elsif !self.virtual && self.tier_change_required?
+      end
+      if self.tier_change_required?
         self.upgrade_plan
       end
     end

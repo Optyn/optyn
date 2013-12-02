@@ -109,13 +109,16 @@ module StripeEventHandlers
   def self.handle_customer_created(params)
     # binding.pry
     discount_map = params['data']['object']["discount"]
+    stripe_customer_token = params['data']['id'] rescue nil
+    plan_id = nil
+    shop_id = nil
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
     @subscription = Subscription.create(
-                  :stripe_customer_token=>"cus_2twlS7khjVvdKT",
-                  :shop_id=>1,
-                  :plan_id=>1,
+                  :stripe_customer_token=>stripe_customer_token,
+                  :shop_id=>shop_id,
+                  :plan_id=>plan_id,
                   :email=>params["event"]["data"]["object"]["email"]
                   ) 
   end
