@@ -86,7 +86,7 @@ module Shops
           Rails.logger.error e.message
           Rails.logger.error e.backtrace
           counters[:unparsed_rows] += 1
-          status = %{"Error: #{e.message}"}
+          status = %{"Error: System Error while parsing"}
           output_row << status
           unparsed_rows << output_row.join(",")
         end
@@ -104,7 +104,6 @@ module Shops
     end
 
     def validate_headers(headers)
-      # binding.pry
       if !headers.include?(:shop_name) || !headers.include?(:shop_phone) || !headers.include?(:manager_email) || !headers.include?(:manager_password)
         raise "Incorrect Headers. The file should have headers of 'Shop Name','Shop Phone','Shop Type', 'Manager Name', 'Manager Email' and 'Manager Password'" 
       end  
