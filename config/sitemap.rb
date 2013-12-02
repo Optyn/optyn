@@ -31,7 +31,7 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/social-media-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/marketing-automation', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-recommendation', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/marketing-ideas', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/online-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/automated-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
