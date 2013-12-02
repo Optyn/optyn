@@ -24,7 +24,7 @@ module Shops
       csv_table.each do |row|
         counter += 1
         status = nil
-        output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
+        output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_website]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
 
         begin
           shop_name = row[:shop_name].to_s.strip
@@ -37,15 +37,12 @@ module Shops
             
             shop.name = shop_name
             shop.phone_number = row[:shop_phone].to_s
-            puts "--- #{shop.phone_number} | #{row[:shop_phone].to_s}"
-            
             shop.partner_id = payload.partner_id
             shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
               
             manager_email = row[:manager_email].to_s.strip
 
             manager = shop.new_record? ? shop.managers.build : (shop.managers.find_by_email(manager_email) || shop.managers.build)
-            puts "Manager Id: #{manager.id}"
 
             manager.email                  = manager_email
             manager.name                   = row[:manager_name].to_s.strip
