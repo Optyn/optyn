@@ -70,16 +70,16 @@ module Shops
             end
 
             #download the logo.
-            # begin
-            #   Rails.logger.info "--- Starting the #{shop_name} logo download...." 
-            #   shop.reload
-            #   shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
-            #   shop.save!
-            #   Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
-            # rescue => e
-            #   puts "Failed Image #{shop_name}"
-            #   nil
-            # end              
+            begin
+              Rails.logger.info "--- Starting the #{shop_name} logo download...." 
+              shop.reload
+              shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
+              shop.save!
+              Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
+            rescue => e
+              puts "Failed Image #{shop_name}"
+              nil
+            end              
           
           end #end of the transaction
         rescue Exception => e    
