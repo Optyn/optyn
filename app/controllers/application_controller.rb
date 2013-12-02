@@ -16,6 +16,14 @@ class ApplicationController < ActionController::Base
   alias_method :current_partner, :current_reseller_partner
 
   helper_method :manager_signed_in?, :current_manager
+  after_filter :ckeditor_add_website_id
+
+  def ckeditor_add_website_id
+    if params[:controller] == 'ckeditor/pictures' && params[:action] == 'create'
+      @shop = Shop.find(params[:shop_id].to_i)
+      @picture.update_attributes(shop_id: @shop.id)
+    end
+  end
 
   private
   def require_manager_logged_out
@@ -81,5 +89,15 @@ class ApplicationController < ActionController::Base
 
   def switch_layout
     user_signed_in? || manager_signed_in? ? 'base' : 'application'
+  end
+
+  protected
+
+  def ckeditor_pictures_scope(options = { :shop_id => "#{current_manager.shop.id}" })
+    ckeditor_filebrowser_scope(options)
+  end
+
+  def ckeditor_attachment_files_scope(options = { :shop_id => "#{current_manager.shop.id}" })
+    ckeditor_filebrowser_scope(options)
   end
 end

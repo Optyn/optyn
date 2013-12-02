@@ -1,5 +1,4 @@
 .control-group
   = f.label :content, "Details", class: 'control-label'
   .controls
-    / = f.text_area :content, class: 'input-xxlarge details span12', rows: 8, cols: 10, 'data-toggle' => 'tooltip', title: 'Describe the details of the campaign. Make sure your customers know the details.'
-    = f.cktext_area :content, :id => "content", :toolbar => 'Custom'
+    = f.cktext_area :content, :id => "content", :toolbar => 'Custom', :ckeditor => {       filebrowserImageUploadUrl: "/ckeditor/pictures?shop_id=#{current_manager.shop.id}" }

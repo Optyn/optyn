@@ -4,4 +4,7 @@ class Ckeditor::Asset < ActiveRecord::Base
   delegate :url, :current_path, :content_type, :to => :data
   
   validates_presence_of :data
+  belongs_to :shop
+  attr_accessible :shop_id
+
 end
