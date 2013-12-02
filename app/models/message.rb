@@ -660,6 +660,12 @@ class Message < ActiveRecord::Base
     IdentifierAssigner.assign_random(self, 'uuid')
   end
 
+  def assign_coupon_code
+    if self.partner.eatstreet? && self.coupon_code.blank?
+      self.coupon_code = Devise.friendly_token.first(12)
+    end
+  end
+
   def fetch_receiver_ids
     labels_for_message = labels
 
