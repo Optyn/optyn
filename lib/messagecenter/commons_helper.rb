@@ -23,5 +23,9 @@ module Messagecenter
 
       params[:message_ids].split(",")
     end
+
+    def state_from_choice(choice)
+      return :queued if "queued" == choice
+    end
   end
 end

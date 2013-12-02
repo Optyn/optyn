@@ -101,5 +101,17 @@ module Messagecenter
       end
     end
 
+    def send_for_curation
+      if @needs_curation
+        @shop = @message.shop
+        @partner = @shop.partner
+        @shop_logo = true
+        @preview = true
+        message_content = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+
+        @message.for_curation(message_content)
+      end
+    end
+
   end #end CommonFilter module
 end #end of the Messagecenter module

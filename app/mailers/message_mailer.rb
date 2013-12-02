@@ -41,4 +41,33 @@ class MessageMailer < ActionMailer::Base
       reply_to: @message.manager_email
       ) 
   end
+
+  def send_change_notification(message_change_notifier)
+    @message_change_notifier = message_change_notifier
+    @message_content = @message_change_notifier.content
+    @actual_message = @message_change_notifier.message
+    @owner_shop = @actual_message.shop
+
+    mail(from: "services@optyn.com",
+      to: "office@eatstreet.com",
+      cc: ["gaurav@optyn.com", "alen@optyn.com"],
+      subject: "Message Curation: #{@owner_shop.name}",
+      reply_to: @actual_message.manager_email
+    )
+  end
+
+  def send_rejection_notification(message_change_notifier)
+    @message_change_notifier = message_change_notifier
+    @message_content = @message_change_notifier.content
+    @actual_message = @message_change_notifier.message
+    @owner_shop = @actual_message.shop
+
+    mail(
+      from: "office@eatstreet.com",
+      to: @actual_message.manager_email,
+      bcc: ["gaurav@optyn.com", "alen@optyn.com"],
+      subject: "Message Rejected: #{@actual_message.name}",
+      reply_to: "office@eatstreet.com"
+    )
+  end
 end

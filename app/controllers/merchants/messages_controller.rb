@@ -5,6 +5,9 @@ class Merchants::MessagesController < Merchants::BaseController
 
   before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update, :create_response_message]
 
+  skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject]
+  before_filter :check_validity_before_rejection, only: [:reject]
+
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
 
   def types
@@ -196,6 +199,7 @@ class Merchants::MessagesController < Merchants::BaseController
       @message = Message.for_uuid(uuid)
       @shop_logo = true
       @shop = @message.shop
+      @partner = @shop.partner
       @inbox_count = populate_user_folder_count(true) if current_user.present?
       
       if @shop and @message
@@ -286,17 +290,47 @@ class Merchants::MessagesController < Merchants::BaseController
     message_redirection
   end
 
+  def reject
+    if request.get?
+      render(layout: 'email_feedback')
+    elsif request.put?
+      @message_change_notifier = MessageChangeNotifier.find(@message_change_notifier.id)
+      @message_change_notifier.attributes = params[:message_change_notifier]
+      @message_change_notifier.save
+      @message.reject
+      Resque.enqueue(MessageRejectionWorker, @message_change_notifier.id)
+      render(layout: 'email_feedback')
+    end
+  end
+
   private
-  def populate_user_folder_count(force=false)
-    @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
-  end
+    def populate_user_folder_count(force=false)
+      @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
+    end
 
-  def choice_launch?
-    "launch" == params[:choice]
-  end
+    def choice_launch?
+      "launch" == params[:choice]
+    end
 
-  def populate_shop_surveys
-    underscored_message_type = SurveyMessage.to_s.underscore
-    @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type rescue false) 
-  end
+    def populate_shop_surveys
+      underscored_message_type = SurveyMessage.to_s.underscore
+      @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type rescue false) 
+    end
+
+    def check_validity_before_rejection
+      message_uuid, message_change_uuid = fetch_message_and_change_identifiers
+      @message_change_notifier = MessageChangeNotifier.for_message_id_and_message_change_id(message_uuid, message_change_uuid)
+      @message = (@message_change_notifier.message rescue nil)
+
+      unless @message_change_notifier.present?
+        flash[:notice] = "The link has expired. A moditfication to the message has been made. Please contact support@optyn.com if you are facing problems."
+        redirect_to root_path
+        false
+      end   
+    end
+
+    def fetch_message_and_change_identifiers
+      plain_text = Encryptor.decrypt(params[:id])
+      plain_text.split("--")
+    end
 end

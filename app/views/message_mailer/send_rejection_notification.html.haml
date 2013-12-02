@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+
+    = render partial: "shared/mailers/banner"
+
+    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+      %tr
+        %td
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %p
+                    Hello- A message has been rejected by the curator and is moved to your drafts:
+                    
+                  %p  
+                    Here are some of the details of the message:
+                    %ul
+                      %li
+                        == #{simple_format("Rejection Reason: #{@message_change_notifier.rejection_comment}")}
+                      %li
+                        == Message Id: #{@actual_message.uuid}
+                      %li
+                        == Message Name: #{@actual_message.name}
+                      %li
+                        == Message Subject: #{@actual_message.subject}
+                  %p  
+                    Below is the message preview:
+              %tr
+                %td
+                  %p
+                    = raw(@message_content)
+              
+    = render partial: "shared/mailers/footer"

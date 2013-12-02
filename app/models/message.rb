@@ -85,7 +85,6 @@ class Message < ActiveRecord::Base
 
     event :move_to_trash do
       transition [:draft, :queued, :sent, :trash] => :trash
-      #binding.pry
     end
 
     event :move_to_draft do
@@ -104,9 +103,13 @@ class Message < ActiveRecord::Base
       transition [:queued, :transit] => :sent
     end
 
+    event :reject do
+      transition [:queued] => :draft
+    end
+
     before_transition :draft => same do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
-      message.from = message.send(:canned_from)
+      message.from = message.send(:canned_from)      
     end
 
     before_transition :draft => :queued do |message|
@@ -271,6 +274,10 @@ class Message < ActiveRecord::Base
     shop.id
   end
 
+  def partner
+    shop.partner
+  end
+
   def message_user(user)
     message_users.find_by_user_id(user.id)
   end
@@ -330,6 +337,7 @@ class Message < ActiveRecord::Base
 
   def dispatch(creation_errors=[], process_manager=nil)
     receiver_ids = fetch_receiver_ids
+    receiver_ids = receiver_ids.compact
     message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
 
     if message_user_creations.blank?
@@ -347,7 +355,8 @@ class Message < ActiveRecord::Base
     if user_name.present?
       self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
-      personal_subject = (self.subject.gsub(/{{Customer Name}},/i, "")).strip.capitalize
+      regex = /{{Customer Name}},/ix #regex when the customer name is missing /eom
+      personal_subject = (self.subject.gsub(regex, "")).strip.capitalize
       personal_subject
     end
   rescue 
@@ -476,6 +485,22 @@ class Message < ActiveRecord::Base
     response = HTTParty.get("#{TWITTER_STAT_API}" + link)
     # response = HTTParty.get("http://urls.api.twitter.com/1/urls/count.json?url=https://development.optyn.com/music-store/campaigns/test-coupon-3141d0567770402b8e7084bc495018f4")
     return response.parsed_response
+  end
+
+  def needs_curation(change_state)
+    return true if (self.state.blank? || self.draft?) && :queued == change_state
+    if (self.queued?) && partner.eatstreet? && self.valid?
+      keys = changed_attributes.keys
+
+      ['content', 'subject', 'percent_off', 'amount_off'].each do |attr|
+        return true if keys.include?(attr)
+      end
+    end
+    false
+  end
+
+  def for_curation(html)
+    MessageChangeNotifier.create(message_id: self.id, content: html)
   end
 
   private
@@ -635,6 +660,12 @@ class Message < ActiveRecord::Base
     IdentifierAssigner.assign_random(self, 'uuid')
   end
 
+  def assign_coupon_code
+    if self.partner.eatstreet? && self.coupon_code.blank?
+      self.coupon_code = Devise.friendly_token.first(12)
+    end
+  end
+
   def fetch_receiver_ids
     labels_for_message = labels
 
@@ -660,6 +691,17 @@ class Message < ActiveRecord::Base
   def validate_child_message
     if self.first_response_child.present? && !(self.first_response_child.valid?)
       self.errors.add(:child_message, "Response message is yet to be completed")
+    end
+  end
+
+  def validate_discount_amount
+    return self.errors.add(:discount_amount, "Please add the discount amount") if discount_amount.blank?
+    numeric_amount = discount_amount.to_i
+
+    if percentage_off?
+      self.errors.add(:discount_amount, "Please add valid values between 0 - 100") if numeric_amount <= 0 || numeric_amount > 100
+    else
+      self.errors.add(:discount_amount, "Please make sure you add a numeric value") if numeric_amount <= 0
     end
   end
 
