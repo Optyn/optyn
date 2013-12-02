@@ -337,6 +337,7 @@ class Message < ActiveRecord::Base
 
   def dispatch(creation_errors=[], process_manager=nil)
     receiver_ids = fetch_receiver_ids
+    receiver_ids = receiver_ids.compact
     message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
 
     if message_user_creations.blank?
