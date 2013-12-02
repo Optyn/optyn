@@ -25,8 +25,8 @@
 //= require bootstrap-colorpicker
 //= require jquery.colorbox
 //= require_self
-//= require_tree
 //= require ckeditor/init
+//= require_tree
 
 $(document).ready(function () {
     if ($('.date-time-picker').length && $('.date-time-picker .error').length) {
