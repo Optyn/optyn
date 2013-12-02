@@ -10,7 +10,7 @@ module Shops
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop Name","Shop Phone","Shop Type","Manager Name","Manager Email","Manager Password","Status"}
+      output_headers = %{"Shop Name","Shop Phone","Shop Website","Shop Type","Manager Name","Manager Email","Manager Password","Status"}
       output << output_headers
       unparsed_rows << output_headers
       
@@ -36,9 +36,11 @@ module Shops
             shop = manager.new_record? ? Shop.new : manager.shop
             
             shop.name = shop_name
-            shop.phone_number = row[:shop_phone].to_s
-            shop.partner_id = payload.partner_id
+            shop.phone_number = row[:shop_phone].to_s.strip
+            shop.website = row[:shop_website].to_s.strip
             shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
+            shop.partner_id = payload.partner_id
+
               
             manager_email = row[:manager_email].to_s.strip
 
