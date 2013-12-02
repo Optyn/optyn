@@ -5,6 +5,7 @@ module Api
         doorkeeper_for :all
         respond_to :json
         helper_method :current_shop, :current_manager
+        before_filter :current_partner
 
         private
         
@@ -26,10 +27,6 @@ module Api
         
         def current_shop
           current_manager.shop
-        end
-
-        def current_partner
-          doorkeeper_token.application.owner
         end
 
       end
