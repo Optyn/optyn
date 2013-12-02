@@ -159,8 +159,15 @@ module StripeEventHandlers
 
     ##if plan.id is nil and invoice token is present
     if stripe_plan_token.nil? and stripe_invoice_token.present?
-      reply = Stripe::Invoice.retrieve(stripe_invoice_token)
-      stripe_plan_token = reply[:lines][:data].first["plan"].id
+      begin
+        reply = Stripe::Invoice.retrieve(stripe_invoice_token)
+      rescue Stripe::InvalidRequestError #handle 404 No such invoice
+        stripe_plan_token = nil
+        reply = nil
+      end
+      if !reply.nil?
+        stripe_plan_token = reply[:lines][:data].first["plan"].id
+      end
     end
     Charge.create(
         :created => params[:created],
