@@ -32,54 +32,57 @@ module Shops
           puts "#{counter} Parsing Shop: #{shop_name}"
 
           Shop.transaction do
-            # shop = for_name(shop_name) || Shop.new()
-            manager = Manager.find_by_email(row[:manager_email]) || Manager.new
+            manager = Manager.find_by_email(row[:manager_email].to_s.strip) || Manager.new
             shop = manager.new_record? ? Shop.new : manager.shop
-            if shop.new_record?
-              shop.name = shop_name
-              shop.phone_number = row[:shop_phone].to_s
-              puts "--- #{shop.phone_number} | #{row[:shop_phone].to_s}"
-              # if !shop.phone_number.include?("+1") || !shop.phone_number.include?('001')
-              #   shop.phone_number = "+1" + shop.phone_number
-              # end
+            
+            shop.name = shop_name
+            shop.phone_number = row[:shop_phone].to_s
+            puts "--- #{shop.phone_number} | #{row[:shop_phone].to_s}"
+            
+            shop.partner_id = payload.partner_id
+            shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
+              
+            manager_email = row[:manager_email].to_s.strip
 
-              shop.partner_id = payload.partner_id
-              shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
-                
+            manager = shop.new_record? ? shop.managers.build : (shop.managers.find_by_email(manager_email) || shop.managers.build)
+            puts "Manager Id: #{manager.id}"
 
-              manager = shop.managers.build
+            manager.email                  = manager_email
+            manager.name                   = row[:manager_name].to_s.strip
+            manager.skip_name              = true
+            manager.password               = row[:manager_password].to_s.strip
+            manager.password_confirmation  = row[:manager_password].to_s.strip
 
-              manager.email                  = row[:manager_email].to_s.strip
-              manager.name                   = row[:manager_name].to_s.strip
-              manager.skip_name              = true
-              manager.password               = row[:manager_password].to_s.strip
-              manager.password_confirmation  = row[:manager_password].to_s.strip
+            new_record  = shop.new_record?
+            shop.save!
+            shop.update_manager
 
-              shop.save!
-              shop.update_manager
-
-              begin
-                Rails.logger.info "--- Starting the #{shop_name} logo download...." 
-                shop.reload
-                shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
-                shop.save!
-                Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
-              rescue => e
-                puts "Failed Image #{shop_name}"
-                nil
-              end
-
+            #Update the stat before saving the record.
+            if new_record
               status = %{"New Shop"}
               output_row << status
               counters[:shops_created] += 1
               output << output_row.join(",")
             else
-              status = %{"Existing Shop"}
+              status = %{"Existing Shop Updated"}
               output_row << status
               counters[:existing_shops] += 1 
               output << output_row.join(",")
             end
-          end
+
+            #download the logo.
+            # begin
+            #   Rails.logger.info "--- Starting the #{shop_name} logo download...." 
+            #   shop.reload
+            #   shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
+            #   shop.save!
+            #   Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
+            # rescue => e
+            #   puts "Failed Image #{shop_name}"
+            #   nil
+            # end              
+          
+          end #end of the transaction
         rescue Exception => e    
           Rails.logger.error e.message
           Rails.logger.error e.backtrace
