@@ -1,0 +1,8 @@
+%div
+  %p
+    = render partial: "shared/messages/content"
+
+%div
+  - if @message.present? && @message_user.present?
+    %strong
+      = link_to("Don't receive any messages from this shop?", "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@message_user.email, @message.uuid))}")
