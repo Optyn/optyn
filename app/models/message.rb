@@ -337,6 +337,7 @@ class Message < ActiveRecord::Base
 
   def dispatch(creation_errors=[], process_manager=nil)
     receiver_ids = fetch_receiver_ids
+    receiver_ids = receiver_ids.compact
     message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
 
     if message_user_creations.blank?
@@ -659,6 +660,12 @@ class Message < ActiveRecord::Base
     IdentifierAssigner.assign_random(self, 'uuid')
   end
 
+  def assign_coupon_code
+    if self.partner.eatstreet? && self.coupon_code.blank?
+      self.coupon_code = Devise.friendly_token.first(12)
+    end
+  end
+
   def fetch_receiver_ids
     labels_for_message = labels
 
@@ -684,6 +691,17 @@ class Message < ActiveRecord::Base
   def validate_child_message
     if self.first_response_child.present? && !(self.first_response_child.valid?)
       self.errors.add(:child_message, "Response message is yet to be completed")
+    end
+  end
+
+  def validate_discount_amount
+    return self.errors.add(:discount_amount, "Please add the discount amount") if discount_amount.blank?
+    numeric_amount = discount_amount.to_i
+
+    if percentage_off?
+      self.errors.add(:discount_amount, "Please add valid values between 0 - 100") if numeric_amount <= 0 || numeric_amount > 100
+    else
+      self.errors.add(:discount_amount, "Please make sure you add a numeric value") if numeric_amount <= 0
     end
   end
 
