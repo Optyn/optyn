@@ -39,11 +39,13 @@ module StripeEventHandlers
   def self.handle_plan_updated(params)
       @stripe_plan = Stripe::Plan.retrieve(params['data']['object']['id'])
       @plan=Plan.find_or_initialize_by_plan_id(params['data']['object']['id']) if @stripe_plan
-      @plan.update_attributes(:plan_id => @stripe_plan.id,
+      @plan.update_attributes(
+                              :plan_id => @stripe_plan.id,
                               :name => @stripe_plan.name,
                               :interval => @stripe_plan.interval,
                               :amount => @stripe_plan.amount,
-                              :currency => @stripe_plan.currency)
+                              :currency => @stripe_plan.currency
+                              )
   end
 
   def self.handle_invoice_created(params)
@@ -79,15 +81,7 @@ module StripeEventHandlers
   def self.handle_invoice_updated(params)
     if params['data']['object']['closed']==true
       subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-      # binding.pry
       update_invoice(subscription,params)
-      # Invoice.create(
-      #     :subscription_id => subscription.id,
-      #     :stripe_customer_token => params['data']['object']['customer'],
-      #     :stripe_invoice_id => params['data']['object']['id'],
-      #     :paid_status => params['data']['object']['paid'],
-      #     :amount => params['data']['object']['total']
-      # )
     end
   end
 
@@ -108,10 +102,11 @@ module StripeEventHandlers
 
   def self.handle_customer_created(params)
     # binding.pry
-    discount_map = params['data']['object']["discount"]
-    stripe_customer_token = params['data']['id'] rescue nil
-    plan_id = nil
-    shop_id = nil
+    discount_map =params['data']['object']['discount'] rescue nil
+    stripe_customer_token =  params['data']['object']['id'] rescue nil
+    plan_id = Plan.starter.id #everybody starts with 
+    manager_email = params["event"]["data"]["object"]["email"]
+    shop_id = Manager.where(:email=>manager_email).shop.id rescue -1
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
@@ -119,7 +114,7 @@ module StripeEventHandlers
                   :stripe_customer_token=>stripe_customer_token,
                   :shop_id=>shop_id,
                   :plan_id=>plan_id,
-                  :email=>params["event"]["data"]["object"]["email"]
+                  :email=> manager_email
                   ) 
   end
 
