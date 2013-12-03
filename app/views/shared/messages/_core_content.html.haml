@@ -10,8 +10,6 @@
         %tr
           %td
           %td.outer-cell{ style: 'padding: 20px;'}
-            - if @message.instance_of?(CouponMessage) and @message.coupon_code.present?
-              = render partial: 'shared/#{message_partner_name(@shop)}/messages/qr_code'
             .message-content
               - if @message.show_greeting?
                 = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: preview, customer_name: customer_name}

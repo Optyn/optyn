@@ -16,8 +16,6 @@
               %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
                 %tr
                   %td
-                    - if @message.instance_of?(CouponMessage) and @message.coupon_code.present?
-                      = render partial: "shared/#{message_partner_name(@shop)}/messages/qr_code"
                     .message-content
                       = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer_name: @message_user.name}
 

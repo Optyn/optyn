@@ -1,3 +1,6 @@
+- if @message.instance_of?(CouponMessage) and @message.coupon_code.present?
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/qr_code"
+  
 %div
   %p
     == We are treating you with a #{message_discount_type_text(@message)} off coupon. 
