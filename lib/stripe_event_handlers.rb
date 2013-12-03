@@ -108,10 +108,10 @@ module StripeEventHandlers
 
   def self.handle_customer_created(params)
     # binding.pry
-    discount_map = params['data']['object']["discount"]
-    stripe_customer_token = params['data']['id'] rescue nil
-    plan_id = nil
-    shop_id = nil
+    discount_map =params['data']['object']['discount'] rescue nil
+    stripe_customer_token =  params['data']['object']['id'] rescue nil
+    plan_id = -1
+    shop_id = -1
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
