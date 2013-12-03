@@ -5,7 +5,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
 
-    = render partial: "shared/mailers/banner"
+    = render partial: "shared/system_emails/banner"
 
     %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
       %tr
@@ -36,4 +36,4 @@
                   %p
                     = raw(@message_content)
               
-    = render partial: "shared/mailers/footer"
+    = render partial: "shared/system_emails/footer"
