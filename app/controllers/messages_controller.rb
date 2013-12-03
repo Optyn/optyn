@@ -36,6 +36,7 @@ class MessagesController < BaseController
       populate_user_folder_count(true)
     end
     @shop = @message.manager.shop
+    @partner = @shop.partner
   end
 
   def offer_relevant

@@ -10,11 +10,11 @@
 
   %p
     %strong Details:
-    = render partial: "shared/messages/content"
+    = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
 
   %p
     %strong Fine Print:
-    = render partial: "shared/messages/fine_print"
+    = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
 
 
   /TODO QRCODE IMAGE WILL COME HERE LATER
@@ -23,4 +23,4 @@
     %em{style: 'font: bold 1em/1em sans-serif; background: #ddd; padding: 2px 10px; margin: 15px 0 0 0;'}
       = @message.coupon_code
 
-= render partial: "shared/messages/redemption"
+= render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"

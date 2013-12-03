@@ -4,22 +4,22 @@
   %tr{:style => "width:100%;"}
     %td{:style => "width:100%;background-color:#EEE;padding:20px;word-break:break-word;"}
       - if @message.show_banner?
-        = render partial: "shared/mailers/banner"
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
 
       %table.outer-table{:style => "background-color:white;width:100%;text-align:left;word-break:break-word;"}
         %tr
           %td
           %td.outer-cell{ style: 'padding: 20px;'}
             - if @message.instance_of?(CouponMessage) and @message.coupon_code.present?
-              = render partial: 'shared/messages/qr_code'
+              = render partial: 'shared/#{message_partner_name(@shop)}/messages/qr_code'
             .message-content
               - if @message.show_greeting?
-                = render partial: "shared/messages/greeting", locals: {preview: preview, customer_name: customer_name}
+                = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: preview, customer_name: customer_name}
 
               %p.core-content
-                = render partial: "shared/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
+                = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
 
-                = render partial: "shared/messages/bottom_image_and_button"
+                = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button"
                         
       - if @message.show_footer?
-        = render partial: "shared/mailers/footer", locals: {preview: preview}
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer", locals: {preview: preview}
