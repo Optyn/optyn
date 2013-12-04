@@ -10,7 +10,8 @@
     
 = render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"
 
-%div
-  %p
-    %strong Fine Print:
-    = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
+- if @message.fine_print.present?  
+  %div
+    %p
+      %strong Fine Print:
+      = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"

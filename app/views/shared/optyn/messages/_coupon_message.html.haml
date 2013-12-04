@@ -15,9 +15,10 @@
     %strong Details:
     = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
 
-  %p
-    %strong Fine Print:
-    = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
+  - if @message.fine_print.present?  
+    %p
+      %strong Fine Print:
+      = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
 
 
   /TODO QRCODE IMAGE WILL COME HERE LATER
