@@ -501,7 +501,7 @@ class Message < ActiveRecord::Base
   end
 
   def for_curation(html)
-    MessageChangeNotifier.create(message_id: self.id, content: html)
+    MessageChangeNotifier.create(message_id: self.id, content: html, subject: self.subject, send_on: self.send_on)
   end
 
   private
