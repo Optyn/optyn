@@ -17,7 +17,7 @@
                 %tr
                   %td
                     .message-content
-                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer_name: @message_user.name}
+                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer_name: @message_user.first_name}
 
                     %p.core-content
                       - @user = @message_user.user
