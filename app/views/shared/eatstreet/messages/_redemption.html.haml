@@ -1,7 +1,7 @@
 %div
   %strong How to Redeem:
   %p
-    == Just bring or show this email to #{@message.shop_name} (print out or show it on your iPhone) and bamm, you got yourself an awesome #{message_discount_type_text(@message)} off at #{@message.shop_name}.
-
+    It's Super Easy. Click on the Order Now Button or click here. There you can customize your order. You can enter the coupon code at the end.
   %p
-    == How awesome is that? Go ahead and hurry before it expires on #{formatted_message_form_datetime(@message, 'ending')}.
+    /Gaurav, we should only show this line if an expiration is present
+    ==Go ahead and hurry before this offer expires on #{formatted_message_form_datetime(@message, 'ending')}.
