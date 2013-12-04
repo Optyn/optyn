@@ -2,7 +2,7 @@
   %p
     == "We have a new product. Here are the details:"
 
-  = render partial: "shared/messages/content"
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
 
   - if @message.special_try
     %p

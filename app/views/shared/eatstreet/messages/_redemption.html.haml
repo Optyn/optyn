@@ -1,0 +1,7 @@
+%div
+  %strong How to Redeem:
+  %p
+    It's Super Easy. Click on the Order Now Button or click here.
+  %p
+    /Gaurav, we should only show this line if an expiration is present
+    = %{Go ahead and hurry#{" before it expires on #{formatted_message_form_datetime(@message, 'ending')}" if @message.ending.present?}.}

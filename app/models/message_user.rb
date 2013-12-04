@@ -14,6 +14,8 @@ class MessageUser < ActiveRecord::Base
 
   attr_accessible :message_id, :user_id, :message_folder_id, :is_read, :email_read, :is_forwarded, :received_at, :added_individually
 
+  delegate :name, :email, :first_name, to: :user
+
   scope :receivers_folder, ->(folder_id, user_id) { where(receivers_folder_conditions_hash(folder_id, user_id)) }
 
   scope :created_at_descending, :order => "message_users.created_at DESC"
@@ -186,14 +188,6 @@ class MessageUser < ActiveRecord::Base
 
   def shop
     message.manager.shop
-  end
-
-  def email
-    user.email
-  end
-
-  def name
-    user.name
   end
 
   def encode64_uuid

@@ -1,0 +1,24 @@
+/Render Shops Social links
+= render partial: "shared/#{message_partner_name(@shop)}/mailers/social_share"
+
+/Email Social Profiles
+= render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
+
+/Optyn Send Free emails add
+= render partial: "shared/#{message_partner_name(@shop)}/mailers/optyn_advertisement"
+
+/Powered By Eatstreet message
+= render partial: "shared/#{message_partner_name(@shop)}/mailers/powered_by_eatstreet"
+
+
+%div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
+  %p{:style => "font-size: 11px;margin:0px;"}
+    - if @message.present? 
+      / Sent to information
+      = render partial: "shared/#{message_partner_name(@shop)}/mailers/sent_to_address"
+      
+      / Render the unsubscribe link
+      = render partial: "shared/#{message_partner_name(@shop)}/mailers/unsubscribe"
+
+      /Ask the user if this email was relevant
+      = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance"

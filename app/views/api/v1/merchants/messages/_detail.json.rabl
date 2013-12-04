@@ -65,7 +65,7 @@ node :button_text do |message|
 end if locals[:message_instance].button_text.present?
 
 node :shop do |message|
-  {name: message.shop.name, logo: message.shop.logo_location}
+  {name: message.shop.name, logo: message.shop.logo_location, website: message.shop.website}
 end
 
 node :send_on do |message|

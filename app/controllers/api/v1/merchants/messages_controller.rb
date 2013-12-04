@@ -143,11 +143,10 @@ module Api
           @message = klass.for_uuid(params[:id])
           @message.subject = params[:message][:subject]
           @message.send_on = params[:message][:send_on]
-          @needs_curation = @message.needs_curation
+          @needs_curation = @message.needs_curation(@message.state)
           @message.save(validate: false)
 
           render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
-
         rescue => e
           render(template: individual_message_template_location, status: :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
         end

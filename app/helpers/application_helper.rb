@@ -169,4 +169,14 @@ module ApplicationHelper
       end
     end
   end
+
+  def message_partner_name(shop)
+    if shop.partner.eatstreet?
+      return "eatstreet"
+    elsif shop.partner.optyn?
+      return "optyn"
+    end
+  rescue
+    "optyn"
+  end
 end

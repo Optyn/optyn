@@ -22,7 +22,7 @@
       - else
         = render partial: "segments/actual_form"
 
-  = render partial: "shared/messages/fine_print"
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
 
   %div
     %p

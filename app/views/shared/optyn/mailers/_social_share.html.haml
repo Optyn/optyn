@@ -22,25 +22,3 @@
           /     = image_tag("#{SiteConfig.app_base_url}/assets/icon-email.png", :style => "vertical-align:middle;")
           /     EMAIL
           %div{:style => "width:100%;height:1px;clear:both;float:none;"}
-
-/Email Social Profiles
-= render partial: "shared/mailers/email_social_profiles"
-
-/Optyn Send Free emails add
-= render partial: "shared/mailers/optyn_advertisement"
-
-/Powered By Eatstreet message
-= render partial: "shared/mailers/powered_by_eatstreet"
-
-
-%div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
-  %p{:style => "font-size: 11px;margin:0px;"}
-    - if @message.present? 
-      / Sent to information
-      = render partial: "shared/mailers/sent_to_address"
-      
-      / Render the unsubscribe link
-      = render partial: "shared/mailers/unsubscribe"
-
-      /Ask the user if this email was relevant
-      = render partial: "shared/mailers/relevance"
