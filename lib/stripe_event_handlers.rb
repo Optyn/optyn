@@ -113,7 +113,6 @@ module StripeEventHandlers
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
-    #binding.pry
     subscription_count = Subscription.where(:stripe_customer_token=>stripe_customer_token).count
     if subscription_count == 0
       @subscription = Subscription.create(
