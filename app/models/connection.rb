@@ -139,6 +139,7 @@ class Connection < ActiveRecord::Base
   end
 
   def check_shop_tier
+    # binding.pry
     #the function thats calls check if plan change is requried after importing connections
     self.shop.check_subscription
   end

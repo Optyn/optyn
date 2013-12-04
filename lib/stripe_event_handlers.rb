@@ -50,7 +50,7 @@ module StripeEventHandlers
 
   def self.handle_invoice_created(params)
     subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
-    # binding.pry
+    binding.pry
     ##only start creating if subscription is not nil
     if !subscription.nil?
       evaluated_plan = Plan.which(subscription.shop)
@@ -106,7 +106,7 @@ module StripeEventHandlers
     stripe_customer_token =  params['data']['object']['id'] rescue nil
     plan_id = Plan.starter.id #everybody starts with 
     manager_email = params["event"]["data"]["object"]["email"]
-    shop_id = Manager.where(:email=>manager_email).shop.id rescue -1
+    shop_id = Manager.where(:email=>manager_email).first.shop.id rescue -1
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end

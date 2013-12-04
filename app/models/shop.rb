@@ -355,6 +355,7 @@ class Shop < ActiveRecord::Base
   def upgrade_plan
     #the function that actually does plan change
     new_plan = Plan.which(self)
+    binding.pry
     self.subscription.update_plan(new_plan)
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
     create_audit_entry("Subscription updated to plan #{new_plan.name}")
@@ -362,11 +363,14 @@ class Shop < ActiveRecord::Base
 
   def check_subscription
     #the function thats  checks if plan change is requried after importing connections
+    #Calls tier_change_upgrade_planrequired and upgrade_plan
+    #Called by Connection > check_shop_tier
     if !self.virtual && self.partner.subscription_required?
       if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
         Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
       end
       if self.tier_change_required?
+        binding.pry
         self.upgrade_plan
       end
     end
