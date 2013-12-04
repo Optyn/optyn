@@ -351,7 +351,8 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    user_name = message_user.name.to_s if ((message_user) and (message_user.name))
+    user_name = message_user.first_name.capitalize if message_user.present?
+
     if user_name.present?
       self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
