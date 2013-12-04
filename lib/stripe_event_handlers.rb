@@ -51,7 +51,7 @@ module StripeEventHandlers
   def self.handle_invoice_created(params)
     # subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     subscription = find_valid_subscription(params)
-    binding.pry
+    #binding.pry
     ##only start creating if subscription is not nil
     if !subscription.nil?
       evaluated_plan = Plan.which(subscription.shop)
@@ -113,7 +113,7 @@ module StripeEventHandlers
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
-    binding.pry
+    #binding.pry
     subscription_count = Subscription.where(:stripe_customer_token=>stripe_customer_token).count
     if subscription_count == 0
       @subscription = Subscription.create(
@@ -254,7 +254,12 @@ module StripeEventHandlers
 
   private
   def self.find_valid_subscription(params)
-    Subscription.where("stripe_customer_token = \'#{params['data']['object']['customer']}\' and shop_id != -1").first
+    begin
+      subscription = Subscription.where("stripe_customer_token = \'#{params['data']['object']['customer']}\' and shop_id != -1").first
+    rescue
+      subscription = nil
+    end
+    return subscription
   end
 
 end

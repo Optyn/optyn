@@ -355,7 +355,7 @@ class Shop < ActiveRecord::Base
   def upgrade_plan
     #the function that actually does plan change
     new_plan = Plan.which(self)
-    binding.pry
+    #binding.pry
     self.subscription.update_plan(new_plan)
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
     create_audit_entry("Subscription updated to plan #{new_plan.name}")
@@ -370,7 +370,7 @@ class Shop < ActiveRecord::Base
         Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
       end
       if self.tier_change_required?
-        binding.pry
+        #binding.pry
         self.upgrade_plan
       end
     end
