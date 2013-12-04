@@ -49,7 +49,8 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_created(params)
-    subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    # subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    subscription = find_valid_subscription(params)
     binding.pry
     ##only start creating if subscription is not nil
     if !subscription.nil?
@@ -61,7 +62,7 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_payment_succeeded(params)
-    subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    subscription = find_valid_subscription(params)
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
@@ -70,7 +71,8 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_payment_failed(params)
-    subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    # subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+    subscription = find_valid_subscription(params)
     subscription.update_attribute(:active, false)
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
@@ -80,7 +82,8 @@ module StripeEventHandlers
 
   def self.handle_invoice_updated(params)
     if params['data']['object']['closed']==true
-      subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+      # subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
+      subscription = find_valid_subscription(params)
       update_invoice(subscription,params)
     end
   end
@@ -110,12 +113,16 @@ module StripeEventHandlers
     if discount_map.present?
       manage_coupon(discount_map['coupon']['id'], params, params['data']['object']['id'])
     end
-    @subscription = Subscription.create(
-                  :stripe_customer_token=>stripe_customer_token,
-                  :shop_id=>shop_id,
-                  :plan_id=>plan_id,
-                  :email=> manager_email
-                  ) 
+    binding.pry
+    subscription_count = Subscription.where(:stripe_customer_token=>stripe_customer_token).count
+    if subscription_count == 0
+      @subscription = Subscription.create(
+                      :stripe_customer_token=>stripe_customer_token,
+                      :shop_id=>shop_id,
+                      :plan_id=>plan_id,
+                      :email=> manager_email
+                      )
+    end
   end
 
   def self.handle_customer_updated(params)
@@ -244,4 +251,10 @@ module StripeEventHandlers
       :stripe_plan_token => stripe_plan_token
     )
   end
+
+  private
+  def self.find_valid_subscription(params)
+    Subscription.where("stripe_customer_token = \'#{params['data']['object']['customer']}\' and shop_id != -1").first
+  end
+
 end

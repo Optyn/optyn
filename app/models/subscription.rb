@@ -33,7 +33,6 @@ class Subscription < ActiveRecord::Base
   end
 
   def update_plan(plan)
-    binding.pry
     self.update_attribute(:plan_id, plan.id)
     if self.stripe_customer_token.present?
       cu = Stripe::Customer.retrieve(self.stripe_customer_token)
