@@ -69,13 +69,13 @@ module Merchants::MessagesHelper
                         when message.instance_of?(CouponMessage)
                           "Great News"
                         when message.instance_of?(SpecialMessage)
-                          "Special News"
+                          "Great News"
                         when message.instance_of?(SaleMessage)
-                          "Sale News"
+                          "Hi"
                         when message.instance_of?(GeneralMessage)
                           "Hello"
                         when message.instance_of?(ProductMessage)
-                          "Product News"
+                          "Hi"
                         when message.instance_of?(EventMessage)
                           "Event News"
                         when message.instance_of?(SurveyMessage)
