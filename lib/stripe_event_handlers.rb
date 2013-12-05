@@ -251,6 +251,10 @@ module StripeEventHandlers
     )
   end
 
+  def self.handle_invoice_line_item_created(params)
+    Stripe::Invoice.create(:customer => "cus_33nFvHC9oJeiAp")
+  end
+
   private
   def self.find_valid_subscription(params)
     begin

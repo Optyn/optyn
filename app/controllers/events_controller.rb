@@ -49,6 +49,8 @@ class EventsController < ApplicationController
         StripeEventHandlers.handle_customer_discount_deleted(params)
       when 'charge.succeeded'
         StripeEventHandlers.handle_charge_succeeded(params)
+      when 'invoiceline.created'
+        StripeEventHandlers.handle_invoice_line_item_created(params)
       else
 
     end
