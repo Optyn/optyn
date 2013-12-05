@@ -174,7 +174,7 @@ module StripeEventHandlers
       end
     end
     Charge.create(
-        :stripe_charge_id: => stripe_charge_id,
+        :stripe_charge_id => stripe_charge_id,
         :created => params[:created],
         :livemode => params[:livemode],
         :fee_amount => params[:data][:object][:fee] ,
