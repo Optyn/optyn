@@ -63,21 +63,23 @@ module StripeEventHandlers
 
   def self.handle_invoice_payment_succeeded(params)
     subscription = find_valid_subscription(params)
+    # binding.pry
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
     Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
     # binding.pry
-    create_invoice(subscription,params)
+    update_invoice(subscription,params)
   end
 
   def self.handle_invoice_payment_failed(params)
     # subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     subscription = find_valid_subscription(params)
+    # binding.pry
     subscription.update_attribute(:active, false)
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count
     Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'invoice_payment_failure', {shop_id: subscription.shop.id, amount: amount, connection_count: conn_count})
-    create_invoice(subscription,params)
+    update_invoice(subscription,params)
   end
 
   def self.handle_invoice_updated(params)
@@ -206,7 +208,7 @@ module StripeEventHandlers
 
   def self.create_invoice(subscription,params)
     invoice_count = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).count
-
+    # binding.pry
     ##dont create invoice if its already created
     if invoice_count > 0
       Rails.logger.info '[Error]'+'~'*100
@@ -215,7 +217,6 @@ module StripeEventHandlers
       Rails.logger.info '~'*100
       return Invoice.where(:stripe_invoice_id=>params['data']['object']['id'])
     end
-
     stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
     stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
     stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
