@@ -7,6 +7,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     @current_plan = current_shop.plan
     @subscription = current_shop.subscription || @plan.subscriptions.build
     @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
+    binding.pry
     @amount = (current_charge.amount.to_f / 100 ) rescue nil #because its in cents
     ##TODO: customer needs to have a card object
     @stripe_last_payment = @list_charges.first rescue nil

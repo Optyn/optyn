@@ -8,6 +8,7 @@ class Charge < ActiveRecord::Base
   attr_accessible :refunded, :paid, :amount, :card_last4
   attr_accessible :card_last4, :amount_refunded, :stripe_customer_token
   attr_accessible :fee_description, :stripe_invoice_token, :stripe_plan_token
+  attr_accessible :stripe_charge_token
 
   scope :by_customer_tokens, ->(customer_token) { where(stripe_customer_token: customer_token) }
 
