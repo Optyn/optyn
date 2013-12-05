@@ -64,8 +64,12 @@
             %td 
               = Time.at(charge.created).strftime("%B %d, %Y")
             %td #{number_to_currency(charge.amount_in_dollars)}
-            - plan = get_plan_from_charge(charge.stripe_charge_id)
-            %td #{plan.min} - #{plan.max} Customers
+            - plan = get_plan_from_charge(charge)
+            %td
+            -if !plan.nil? 
+              #{plan.min} - #{plan.max} Customers
+            -else
+              N/A Customers
             %td 
               .btn
                 -# "/merchants/invoice/?id=#{charge.id}
