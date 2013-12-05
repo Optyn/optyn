@@ -167,7 +167,7 @@ module StripeEventHandlers
         reply = nil
       end
       if !reply.nil?
-        stripe_plan_token = reply[:lines][:data].first["plan"].id
+        stripe_plan_token = reply[:lines][:data].first["plan"].id rescue nil
       end
     end
     Charge.create(
@@ -236,7 +236,7 @@ module StripeEventHandlers
     total = params[:data][:object][:total]  rescue nil
     amount = params['data']['object']['total']  rescue nil
     paid_status = params['data']['object']['paid'] rescue nil
-    
+
     invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first
     invoice.update_attributes(
       :paid_status => paid_status,
@@ -297,7 +297,7 @@ module StripeEventHandlers
                                   :proration => proration ,
                                   :description => description , 
                                   :customer_stripe_token => stripe_customer_token ,
-                                  :stripe_invoice_token=stripe_invoice_token
+                                  :stripe_invoice_token=>stripe_invoice_token
                                   )
     begin
       Stripe::Invoice.create(:customer => stripe_customer_token)
