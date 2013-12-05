@@ -66,10 +66,10 @@
             %td #{number_to_currency(charge.amount_in_dollars)}
             - plan = get_plan_from_charge(charge)
             %td
-            -if !plan.nil? 
-              #{plan.min} - #{plan.max} Customers
-            -else
-              N/A Customers
+              -if !plan.nil? 
+                #{plan.min} - #{plan.max} Customers
+              -else
+                N/A Customers
             %td 
               .btn
                 -# "/merchants/invoice/?id=#{charge.id}
