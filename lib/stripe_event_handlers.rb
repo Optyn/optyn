@@ -252,16 +252,20 @@ module StripeEventHandlers
     paid_status = params['data']['object']['paid'] rescue nil
 
     invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first
-    invoice.update_attributes(
-      :paid_status => paid_status,
-      :amount => amount,
-      :stripe_coupon_token => stripe_coupon_token,
-      :stripe_coupon_percent_off => stripe_coupon_percent_off,
-      :stripe_coupon_amount_off => stripe_coupon_amount_off,
-      :subtotal => subtotal,
-      :total => total,
-      :stripe_plan_token => stripe_plan_token
-    )
+    begin
+      invoice.update_attributes(
+        :paid_status => paid_status,
+        :amount => amount,
+        :stripe_coupon_token => stripe_coupon_token,
+        :stripe_coupon_percent_off => stripe_coupon_percent_off,
+        :stripe_coupon_amount_off => stripe_coupon_amount_off,
+        :subtotal => subtotal,
+        :total => total,
+        :stripe_plan_token => stripe_plan_token
+      )
+    rescue
+      Rails.logger.info '[Error]Issue updating the invoice '+'~'*100
+    end
   end
 
   def self.handle_invoice_item_created(params)
@@ -285,6 +289,8 @@ module StripeEventHandlers
                       :stripe_invoice_token=> stripe_invoice_token
                       )
     ##Try creating a invoice
+    Rails.logger.info 'Try Create Invoice@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+    Rails.logger.info "Customer " + stripe_customer_token
     begin
       invoice = Stripe::Invoice.create(:customer => stripe_customer_token)
     rescue Stripe::InvalidRequestError  => e
@@ -295,6 +301,8 @@ module StripeEventHandlers
       Rails.logger.info '~'*100
     end
     #Try paying the same invoice
+    Rails.logger.info 'Try Paying@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+    Rails.logger.info "Customer " + stripe_customer_token
     begin
       invoice.pay if !invoice.nil?
     rescue Stripe::InvalidRequestError  => e
@@ -309,7 +317,6 @@ module StripeEventHandlers
   def self.handle_invoice_item_updated(params)
     #as per discussion with gaurva everytime a invoice line item is created
     #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
-    # customer_stripe_token = params['data']['object']['customer'] rescue nil
     invoice_item = InvoiceItem.where(:stripe_invoice_item_token=>params['data']['object']['id']).first
     amount = params['data']['object']['amount'] rescue nil
     livemode = params['data']['object']['livemode'] rescue nil
