@@ -50,7 +50,9 @@ class EventsController < ApplicationController
       when 'charge.succeeded'
         StripeEventHandlers.handle_charge_succeeded(params)
       when 'invoiceitem.created'
-        StripeEventHandlers.handle_invoice_line_item_created(params)
+        StripeEventHandlers.handle_invoice_item_created(params)
+      when 'invoiceitem.updated'
+        StripeEventHandlers.handle_invoice_item_updated(params)
       else
 
     end

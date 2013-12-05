@@ -250,7 +250,7 @@ module StripeEventHandlers
     )
   end
 
-  def self.handle_invoice_line_item_created(params)
+  def self.handle_invoice_item_created(params)
     #as per discussion with gaurva everytime a invoice line item is created
     #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
     customer_stripe_token = params['data']['object']['customer'] rescue nil
@@ -265,6 +265,20 @@ module StripeEventHandlers
     end
   end
 
+  def self.handle_invoice_item_updated(params)
+    #as per discussion with gaurva everytime a invoice line item is created
+    #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
+    # customer_stripe_token = params['data']['object']['customer'] rescue nil
+    begin
+      Stripe::Invoice.create(:customer => customer_stripe_token)
+    rescue Stripe::InvalidRequestError  => e
+      Rails.logger.info '[Error]'+'~'*100
+      Rails.logger.info e.to_s
+      Rails.logger.info "Customer " + customer_stripe_token
+      Rails.logger.info params.to_s
+      Rails.logger.info '~'*100
+    end
+  end
   private
   def self.find_valid_subscription(params)
     begin
