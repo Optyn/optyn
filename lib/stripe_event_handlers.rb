@@ -275,7 +275,7 @@ module StripeEventHandlers
     rescue Stripe::InvalidRequestError  => e
       Rails.logger.info '[Error]'+'~'*100
       Rails.logger.info e.to_s
-      Rails.logger.info "Customer " + customer_stripe_token
+      Rails.logger.info "Customer " + stripe_customer_token
       Rails.logger.info params.to_s
       Rails.logger.info '~'*100
     end
@@ -306,7 +306,7 @@ module StripeEventHandlers
     rescue Stripe::InvalidRequestError  => e
       Rails.logger.info '[Error]'+'~'*100
       Rails.logger.info e.to_s
-      Rails.logger.info "Customer " + customer_stripe_token
+      Rails.logger.info "Customer " + stripe_customer_token
       Rails.logger.info params.to_s
       Rails.logger.info '~'*100
     end
