@@ -252,6 +252,10 @@ module StripeEventHandlers
   end
 
   def self.handle_invoice_line_item_created(params)
+    #as per discussion with gaurva everytime a invoice line item is created
+    #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
+    binding.pry
+    customer_stripe_token = params['data']['customer'] rescue nil
     Stripe::Invoice.create(:customer => "cus_33nFvHC9oJeiAp")
   end
 
