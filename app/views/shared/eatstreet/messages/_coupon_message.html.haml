@@ -22,7 +22,6 @@
           - if @message.fine_print.present?  
             %p
               %strong Fine Print:
-              /Alen please use this partial it uses the simple_formet incase the fine prints goes in paragraphs
               = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
 
   %div{style: 'width: 220px; float:left;'}

@@ -1,7 +1,7 @@
 class MessageChangeNotifier < ActiveRecord::Base
   belongs_to :message
 
-  attr_accessible :message_id, :content, :rejection_comment
+  attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on
 
   after_create :enqueue_for_notification, :assign_uuid
 

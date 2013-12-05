@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128053803) do
+ActiveRecord::Schema.define(:version => 20131204124633) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -243,6 +243,8 @@ ActiveRecord::Schema.define(:version => 20131128053803) do
     t.text     "rejection_comment"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "subject"
+    t.datetime "send_on"
   end
 
   create_table "message_email_auditors", :force => true do |t|
@@ -526,12 +528,12 @@ ActiveRecord::Schema.define(:version => 20131128053803) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
   end
