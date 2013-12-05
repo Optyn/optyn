@@ -7,8 +7,8 @@
   .well.span3
     %h5 You Current Plan:
     %p
-      = "#{@plan.min} " " - "
-      = " #{@plan.max}" " Customers"
+      = "#{@current_plan.min} " " - "
+      = " #{@current_plan.max}" " Customers"
     %p
       = link_to "view plans","/pricing"
 
@@ -64,8 +64,8 @@
             %td 
               = Time.at(charge.created).strftime("%B %d, %Y")
             %td #{number_to_currency(charge.amount_in_dollars)}
-            - @plan = get_plan_from_charge(charge.stripe_charge_id)
-            %td #{@plan.min} - #{@plan.max} Customers
+            - plan = get_plan_from_charge(charge.stripe_charge_id)
+            %td #{plan.min} - #{plan.max} Customers
             %td 
               .btn
                 -# "/merchants/invoice/?id=#{charge.id}
