@@ -284,10 +284,21 @@ module StripeEventHandlers
                       :stripe_customer_token => stripe_customer_token ,
                       :stripe_invoice_token=> stripe_invoice_token
                       )
+    ##Try creating a invoice
     begin
-      Stripe::Invoice.create(:customer => stripe_customer_token)
+      invoice = Stripe::Invoice.create(:customer => stripe_customer_token)
     rescue Stripe::InvalidRequestError  => e
-      Rails.logger.info '[Error]'+'~'*100
+      Rails.logger.info '[Error]Tried Creating a Invoice'+'~'*100
+      Rails.logger.info e.to_s
+      Rails.logger.info "Customer " + stripe_customer_token
+      Rails.logger.info params.to_s
+      Rails.logger.info '~'*100
+    end
+    #Try paying the same invoice
+    begin
+      invoice.pay if !invoice.nil?
+    rescue Stripe::InvalidRequestError  => e
+      Rails.logger.info '[Error]Tried Paying the Invoice'+'~'*100
       Rails.logger.info e.to_s
       Rails.logger.info "Customer " + stripe_customer_token
       Rails.logger.info params.to_s
