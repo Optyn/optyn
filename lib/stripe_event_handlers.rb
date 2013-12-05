@@ -253,9 +253,23 @@ module StripeEventHandlers
   def self.handle_invoice_item_created(params)
     #as per discussion with gaurva everytime a invoice line item is created
     #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
-    customer_stripe_token = params['data']['object']['customer'] rescue nil
+    amount = params['data']['object']['amount'] rescue nil
+    livemode = params['data']['object']['livemode'] rescue nil
+    proration = params['data']['object']['proration'] rescue nil
+    description = params['data']['object']['description'] rescue nil
+    stripe_customer_token = params['data']['object']['customer'] rescue nil
+    stripe_invoice_token = params['data']['object']['invoice'] rescue nil
+    binding.pry
+    InvoiceItem.create(
+                      :amount => amount , 
+                      :livemode => livemode ,
+                      :proration => proration ,
+                      :description => description , 
+                      :customer_stripe_token => stripe_customer_token ,
+                      :stripe_invoice_token=> stripe_invoice_token
+                      )
     begin
-      Stripe::Invoice.create(:customer => customer_stripe_token)
+      Stripe::Invoice.create(:customer => stripe_customer_token)
     rescue Stripe::InvalidRequestError  => e
       Rails.logger.info '[Error]'+'~'*100
       Rails.logger.info e.to_s
@@ -269,8 +283,24 @@ module StripeEventHandlers
     #as per discussion with gaurva everytime a invoice line item is created
     #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
     # customer_stripe_token = params['data']['object']['customer'] rescue nil
+    invoice_item = InvoiceItem.where(params['data']['object']['id']).first
+    amount = params['data']['object']['amount'] rescue nil
+    livemode = params['data']['object']['livemode'] rescue nil
+    proration = params['data']['object']['proration'] rescue nil
+    description = params['data']['object']['description'] rescue nil
+    stripe_customer_token = params['data']['object']['customer'] rescue nil
+    stripe_invoice_token = params['data']['object']['invoice'] rescue nil
+    binding.pry
+    invoice_item.update_attributes(
+                                  :amount => amount , 
+                                  :livemode => livemode ,
+                                  :proration => proration ,
+                                  :description => description , 
+                                  :customer_stripe_token => stripe_customer_token ,
+                                  :stripe_invoice_token=stripe_invoice_token
+                                  )
     begin
-      Stripe::Invoice.create(:customer => customer_stripe_token)
+      Stripe::Invoice.create(:customer => stripe_customer_token)
     rescue Stripe::InvalidRequestError  => e
       Rails.logger.info '[Error]'+'~'*100
       Rails.logger.info e.to_s
