@@ -51,7 +51,7 @@ module StripeEventHandlers
   def self.handle_invoice_created(params)
     # subscription = Subscription.find_by_stripe_customer_token(params['data']['object']['customer'])
     subscription = find_valid_subscription(params)
-    #binding.pry
+    # binding.pry
     ##only start creating if subscription is not nil
     if !subscription.nil?
       evaluated_plan = Plan.which(subscription.shop)
@@ -205,6 +205,17 @@ module StripeEventHandlers
   end
 
   def self.create_invoice(subscription,params)
+    invoice_count = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).count
+
+    ##dont create invoice if its already created
+    if invoice_count > 0
+      Rails.logger.info '[Error]'+'~'*100
+      Rails.logger.info 'Invoice already exists'
+      Rails.logger.info params.to_s
+      Rails.logger.info '~'*100
+      return Invoice.where(:stripe_invoice_id=>params['data']['object']['id'])
+    end
+
     stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
     stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
     stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
