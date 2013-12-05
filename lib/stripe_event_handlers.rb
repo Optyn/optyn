@@ -236,7 +236,7 @@ module StripeEventHandlers
     total = params[:data][:object][:total]  rescue nil
     amount = params['data']['object']['total']  rescue nil
     paid_status = params['data']['object']['paid'] rescue nil
-
+    
     invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first
     invoice.update_attributes(
       :paid_status => paid_status,
@@ -259,7 +259,7 @@ module StripeEventHandlers
     description = params['data']['object']['description'] rescue nil
     stripe_customer_token = params['data']['object']['customer'] rescue nil
     stripe_invoice_token = params['data']['object']['invoice'] rescue nil
-    binding.pry
+    # binding.pry
     InvoiceItem.create(
                       :amount => amount , 
                       :livemode => livemode ,
@@ -290,7 +290,7 @@ module StripeEventHandlers
     description = params['data']['object']['description'] rescue nil
     stripe_customer_token = params['data']['object']['customer'] rescue nil
     stripe_invoice_token = params['data']['object']['invoice'] rescue nil
-    binding.pry
+    # binding.pry
     invoice_item.update_attributes(
                                   :amount => amount , 
                                   :livemode => livemode ,
