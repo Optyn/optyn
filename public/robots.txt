@@ -3,6 +3,8 @@
 
 User-agent: Googlebot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -25,6 +27,8 @@ Disallow: /register
 
 User-agent: baiduspider
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -47,6 +51,8 @@ Disallow: /register
 
 User-agent: msnbot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -69,6 +75,8 @@ Disallow: /register
 
 User-agent: naverbot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -91,6 +99,8 @@ Disallow: /register
 
 User-agent: seznambot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -113,6 +123,8 @@ Disallow: /register
 
 User-agent: Slurp
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -135,6 +147,8 @@ Disallow: /register
 
 User-agent: teoma
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -157,6 +171,8 @@ Disallow: /register
 
 User-agent: Yandex
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -179,6 +195,8 @@ Disallow: /register
 
 User-agent: CCBot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -201,6 +219,8 @@ Disallow: /register
 
 User-agent: Telefonica
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -223,6 +243,8 @@ Disallow: /register
 
 User-agent: SandDollar
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -245,6 +267,8 @@ Disallow: /register
 
 User-agent: dotbot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -267,6 +291,8 @@ Disallow: /register
 
 User-agent: rogerbot
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -289,6 +315,8 @@ Disallow: /register
 
 User-agent: IntuitGSACrawler
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
@@ -311,6 +339,8 @@ Disallow: /register
 
 User-agent: red-app-gsa-p-one
 Allow: /
+Allow: /marketing
+Allow: /resources
 Allow: /features
 Allow: /pricing
 Allow: /faq
