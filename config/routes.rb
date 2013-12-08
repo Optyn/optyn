@@ -70,7 +70,7 @@ Optyn::Application.routes.draw do
   match '/resources/email-marketing/email-marketing-measuring-success' => 'main#resources_measuring_success', :as => :resources_measuring_success
   match '/resources/email-marketing/email-marketing-getting-started' => 'main#resources_email_marketing_getting_started', :as => :resources_getting_started
   match '/resources/email-marketing/email-marketing-email-types' => 'main#resources_email_marketing_types', :as => :resources_email_marketing_types
-  match '/resources/email-marketing/email-deliverability' => 'main#resources_email_deliverability', :as => :resources_email_deliverability
+  match '/resources/email-marketing/email-marketing-tips' => 'main#resources_email_marketing_tips', :as => :resources_email_deliverability
   match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
   match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
