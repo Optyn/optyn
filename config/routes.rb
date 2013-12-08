@@ -70,6 +70,7 @@ Optyn::Application.routes.draw do
   match '/resources/email-marketing/email-marketing-measuring-success' => 'main#resources_measuring_success', :as => :resources_measuring_success
   match '/resources/email-marketing/email-marketing-getting-started' => 'main#resources_email_marketing_getting_started', :as => :resources_getting_started
   match '/resources/email-marketing/email-marketing-email-types' => 'main#resources_email_marketing_types', :as => :resources_email_marketing_types
+  match '/resources/email-marketing/email-deliverability' => 'main#resources_email_deliverability', :as => :resources_email_deliverability
   match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
   match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
@@ -81,7 +82,12 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-analytics' => 'main#resources_marketing_analytics', :as => :resources_marketing_analytics
   match '/resources/online-marketing' => 'main#resources_online_marketing', :as => :resources_online_marketing
   match '/resources/marketing-automation' => 'main#resources_marketing_automation', :as => :resources_marketing_automation
-
+  match '/resources/marketing-promotions' => 'main#resources_marketing_promotions', :as => :resources_marketing_promotions
+  match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
+  match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
+  match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
+  
+  #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'
   match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
