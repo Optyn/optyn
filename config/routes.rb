@@ -80,6 +80,7 @@ Optyn::Application.routes.draw do
   match '/resources/surveys' => 'main#resources_surveys', :as => :resources_surveys
   match '/resources/marketing-analytics' => 'main#resources_marketing_analytics', :as => :resources_marketing_analytics
   match '/resources/online-marketing' => 'main#resources_online_marketing', :as => :resources_online_marketing
+  match '/resources/marketing-automation' => 'main#resources_marketing_automation', :as => :resources_marketing_automation
 
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'

@@ -40,6 +40,7 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/digital-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/free-email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
@@ -55,6 +56,7 @@ SitemapGenerator::Sitemap.create do
     add '/resources/customer-retention', :changefreq => 'weekly', :priority => 0.8
     add '/resources/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/marketing-automation', :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
