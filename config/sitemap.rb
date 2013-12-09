@@ -40,6 +40,8 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/digital-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
+    #pages for keywords
     add '/marketing/free-email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/free-email-marketing-software', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/free-newsletter-software', :changefreq => 'weekly', :priority => 0.8
@@ -47,6 +49,7 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/email-marketing-programs', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-marketing-solutions', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-blast-software', :changefreq => 'weekly', :priority => 0.8
+    #resource pages
     add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8

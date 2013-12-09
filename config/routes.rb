@@ -53,6 +53,7 @@ Optyn::Application.routes.draw do
   match '/marketing/online-marketing' => 'main#online_marketing', :as => :online_marketing
   match '/marketing/automated-marketing' => 'main#automated_marketing', :as => :automated_marketing
   match '/marketing/multi-channel-marketing' => 'main#multi_channel_marketing', :as => :multi_channel_marketing
+  match '/marketing/integrated-marketing' => 'main#integrated_marketing', :as => :integrated_marketing
   #subcategories for email marketing content
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive', :as => :mobile_responsive
   match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data', :as => :capturing_data
