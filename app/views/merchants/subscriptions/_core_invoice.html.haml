@@ -11,9 +11,12 @@
 	%tbody
 		%tr
 			%td
-				Subscription to 
-				= number_to_currency(@amount) 
-				pm
+				-if @plan.nil?
+					After prorating
+				-else
+					Subscription to 
+					= number_to_currency(@amount) 
+					pm
 			%td
 				= number_to_currency(@amount)
 		/ %tr

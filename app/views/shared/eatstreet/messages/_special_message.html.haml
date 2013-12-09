@@ -1,17 +1,40 @@
-%div
-  - unless @message.discount_amount.present?
-    %p
-      == "We are having a special. Here are the details":
-  - else
-    %p
-      == We are offering a #{message_discount_type_text(@message)} off special.
-  
-  = render partial: "shared/#{message_partner_name(@shop)}/messages/content"      
-    
-= render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"
+%div{ style: 'padding:0!important; margin:0 auto; max-width:600px!important;'}
+  %div{ style: 'width: 280px; float:left;'}
+    %table{align: 'left', style: 'width: 100%'}
+      %tr
+        %td
+        - unless @message.discount_amount.present?
+          %p
+            == "We are having a special. Here are the details:":
+        - else
+          %p
+            == We are offering a #{message_discount_type_text(@message)} off special.
+          %p
+            %strong Promotion Name:
+            = @message.name
 
-- if @message.fine_print.present?  
-  %div
-    %p
-      %strong Fine Print:
-      = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
+          %p
+            %strong The Details:
+            /= render partial: "shared/#{message_partner_name(@shop)}/messages/content"
+            = @message.content
+
+  %div{style: 'width: 210px; float:left;'}
+    %table{align: 'left', style: 'width: 100%'}
+      %tr
+        %td
+          %p{style: 'text-align: center;font-size:30px;font-weight:900;'}
+            == #{message_discount_type_text(@message)} OFF
+          %div{style: 'text-align:center;'}
+            = message_bottom_image(@message)
+
+            - if @message.show_button?
+              /orange is #ff9c00 green is 63af31
+              = link_to @message.button_text, @message.display_button_link, target: '_blank', style: "width:94%;text-decoration:none;color: white;background: #63af31;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0; font-size: 22px; font-weight: bold; border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 20px 40px 20px 40px;display: inline-block;margin-top:5px;margin-bottom: 15px;"
+  - if @message.fine_print.present? 
+    %table{ style: 'width:100%;'}
+      %tr
+        %td
+          %p
+            %strong The Fine Print:
+            = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"
