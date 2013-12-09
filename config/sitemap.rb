@@ -80,6 +80,7 @@ SitemapGenerator::Sitemap.create do
     add resources_email_broadcast_path, :changefreq => 'weekly', :priority => 0.8
     add resources_cheap_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_top_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_bulk_email_software, :changefreq => 'weekly', :priority => 0.8
 
 
     Shop.real.each do |shop|
