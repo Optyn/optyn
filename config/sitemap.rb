@@ -68,9 +68,9 @@ SitemapGenerator::Sitemap.create do
     add '/resources/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
     add '/resources/marketing-automation', :changefreq => 'weekly', :priority => 0.8
     add '/resources/marketing-promotions', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/marketing-syndication', :changefreq => 'weekly', :priority => 0.
-    add '/resources/marketing-ideas', :changefreq => 'weekly', :priority => 0.
-    add '/resources/integrated-marketing', :changefreq => 'weekly', :priority => 0.
+    add '/resources/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/marketing-ideas', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
 
 
     Shop.real.each do |shop|
