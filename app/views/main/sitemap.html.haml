@@ -164,4 +164,9 @@
         - @shops.each do |shop|
           %li
             = link_to(shop.name, public_shop_path(shop.identifier))
+    .span4
+      %h4 Additional Resources
+      %ul
+        %li 
+          %a{:href => resources_email_broadcast_path} Email Broadcast
 .blank-space

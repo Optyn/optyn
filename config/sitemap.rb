@@ -76,7 +76,8 @@ SitemapGenerator::Sitemap.create do
     add '/resources/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
     add '/resources/marketing-ideas', :changefreq => 'weekly', :priority => 0.8
     add '/resources/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
-
+    #resource keyword pages
+    add resources_email_broadcast, :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8

@@ -98,7 +98,8 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
   match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
   match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
-  
+  #resource keyword specific pages
+  match '/resources/email-broadcast' => 'main#resources_email_broadcast', :as => :resources_email_broadcast
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'
