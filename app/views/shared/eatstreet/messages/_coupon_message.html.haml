@@ -16,10 +16,7 @@
 
           %p
             %strong The Details:
-            /@Alen Malkoc Uncommenting the previous code. Was there a specific reason for not using this partial?
-            / How do you plan to handle the multi paragraph scenario?
-            = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
-            /= @message.content
+            = raw(@message.content.gsub(/\n/, "<br />"))
 
           - if @message.fine_print.present?  
             %p
