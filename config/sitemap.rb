@@ -49,6 +49,9 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/email-marketing-programs', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-marketing-solutions', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-blast-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/bulk-email-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/newsletter-software', :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_agency_path, :changefreq => 'weekly', :priority => 0.8
     #resource pages
     add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
