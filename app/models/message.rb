@@ -531,7 +531,7 @@ class Message < ActiveRecord::Base
           #message.state = 'transit'
           #message.save(validate: false)
           unless message.shop.disabled?
-            dispatched_message = message.dispatch(creation_errors, process_manager)
+            dispatched_message = message.dispatch(creation_errors, process_manager) if message.partner.eatstreet?
 
             unless dispatched_message.blank?
               raise dispatched_message.inspect
@@ -567,7 +567,7 @@ class Message < ActiveRecord::Base
   end
 
   def self.send_message?
-    return true if Rails.env.production? || Rails.env.development?
+    return true if Rails.env.production? || Rails.env.development? || Rails.env.staging?
   end
 
   def build_new_message_labels(identifiers)
