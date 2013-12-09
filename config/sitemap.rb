@@ -40,12 +40,23 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/digital-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
+    #pages for keywords
+    add '/marketing/free-email-marketing', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/free-email-marketing-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/free-newsletter-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/mass-mail-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-marketing-programs', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-marketing-solutions', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/email-blast-software', :changefreq => 'weekly', :priority => 0.8
+    #resource pages
     add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/capturing-customer-data', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/evolution-of-email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/email-marketing-best-practices', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/email-marketing/email-marketing-tips', :changefreq => 'weekly', :priority => 0.8
     add '/resources/contests', :changefreq => 'weekly', :priority => 0.8
     add '/resources/coupons', :changefreq => 'weekly', :priority => 0.8
     add '/resources/surveys', :changefreq => 'weekly', :priority => 0.8
@@ -55,6 +66,12 @@ SitemapGenerator::Sitemap.create do
     add '/resources/customer-retention', :changefreq => 'weekly', :priority => 0.8
     add '/resources/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/marketing-automation', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/marketing-promotions', :changefreq => 'weekly', :priority => 0.8
+    add '/resources/marketing-syndication', :changefreq => 'weekly', :priority => 0.
+    add '/resources/marketing-ideas', :changefreq => 'weekly', :priority => 0.
+    add '/resources/integrated-marketing', :changefreq => 'weekly', :priority => 0.
+
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8

@@ -39,13 +39,6 @@
 
   .row-fluid
     .span4
-      %h4 Customer Profiles
-      %ul
-        - @shops.each do |shop|
-          %li
-            = link_to(shop.name, public_shop_path(shop.identifier))
-
-    .span4
       %h4 Marketing Software
       %ul
         %li
@@ -90,6 +83,8 @@
           %a{ :href => '/marketing/marketing-collaboration'} Marketing Collaboration
         %li
           %a{ :href => '/marketing/multi-channel-marketing'} Multi-channel Marketing
+        %li
+          %a{ :href => integrated_marketing_path} Integrated Marketing
     .span4
       %h4 Small Business Marketing Resources
       %ul.sidebar-nav
@@ -103,6 +98,8 @@
           %a{ :href => '#/resources/email-marketing/capturing-customer-data' } Capturing Customer Data
         %li
           %a{ :href => '/resources/email-marketing/evolution-of-email-marketing' } Evolution of E-Mail Marketing
+        %li
+          %a{ :href => '/resources/email-marketing/email-marketing-tips' } Email Marketing Tips
         %li
           %a{ :href => resources_best_practices_path } E-Mail Marketing Best Practices
         %li
@@ -123,4 +120,48 @@
           %a{ :href => '/resources/loyalty-marketing'} Loyalty Marketing
         %li
           %a{ :href => '/resources/marketing-analytics'} Marketing Analytics
+        %li
+          %a{ :href => resources_marketing_automation_path} Marketing Automation
+        %li
+          %a{ :href => '/resources/marketing-promotions'} Marketing Promotions
+        %li
+          %a{ :href => '/resources/marketing-syndication'} Marketing Syndication
+        %li
+          %a{ :href => '/resources/marketing-ideas'} Marketing Ideas
+        %li
+          %a{ :href => '/resources/integrated-marketing'} Integrated Marketing
+    .span4
+      %h4 Additional Services
+      %ul 
+        %li
+          %a{ :href => '#'} Email Marketing Software
+        %li
+          %a{ :href => free_email_marketing_path} Free Email Marketing
+        %li
+          %a{ :href => free_email_marketing_software_path} Free Email Marketing Software
+        %li
+          %a{ :href => email_blast_software_path} Email Blast Software
+        %li
+          %a{ :href => '#'} Bulk Email Software
+        %li
+          %a{ :href => email_marketing_solutions_path} Email Marketing Solutions
+        %li
+          %a{ :href => mass_mail_software_path} Mass Mail Software
+        %li
+          %a{ :href => '#'} Newsletter Software
+        %li
+          %a{ :href => free_newsletter_software_path} Free Newsletter Software
+        %li
+          %a{ :href => '#'} Free Email Marketing Software
+        %li
+          %a{ :href => '#'} Email Marketing Agency
+        %li
+          %a{ :href => email_marketing_programs_path} Email Marketing Programs
+  .row-fluid
+    .span4
+      %h4 Customer Profiles
+      %ul
+        - @shops.each do |shop|
+          %li
+            = link_to(shop.name, public_shop_path(shop.identifier))
 .blank-space

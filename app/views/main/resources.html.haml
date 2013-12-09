@@ -7,36 +7,42 @@
       %h1.hd-main Small Business Marketing Resource Center
 
   .row-fluid.email_marketing
-    .span5.offset1
+    .span8
       %h2 Learn about E-Mail Marketing
       %p
         Learn the ins and outs of email marketing and how you can grow your business while becoming a better marketer. 
       %p
         %strong
           Learn about:
-        %ul
-        %li
-          %a{ :href => '/resources/email-marketing' } E-Mail Marketing
-        %li
-          %a{ :href => '/resources/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
-        %li
-          %a{ :href => '/resources/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
-        %li
-          %a{ :href => '#/resources/email-marketing/capturing-customer-data' } Capturing Customer Data
-        %li
-          %a{ :href => '/resources/email-marketing/evolution-of-email-marketing' } Evolution of E-Mail Marketing
-        %li
-          %a{ :href => resources_best_practices_path } E-Mail Marketing Best Practices
-        %li
-          %a{ :href => resources_measuring_success_path } Measuring Success of Email Marketing
-        %li
-          %a{ :href => resources_getting_started_path } Getting Started with Email Marketing
-        %li
-          %a{ :href => resources_email_marketing_types_path } Different E-Mail Types
+        .span4
+          %ul
+            %li
+              %a{ :href => '/resources/email-marketing' } E-Mail Marketing
+            %li
+              %a{ :href => '/resources/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
+            %li
+              %a{ :href => '/resources/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
+            %li
+              %a{ :href => '#/resources/email-marketing/capturing-customer-data' } Capturing Customer Data
+            %li
+              %a{ :href => '/resources/email-marketing/evolution-of-email-marketing' } Evolution of E-Mail Marketing
+        .span5
+          %ul
+            %li
+              %a{ :href => '/resources/email-marketing/email-marketing-tips' } Email Marketing Tips
+            %li
+              %a{ :href => resources_best_practices_path } E-Mail Marketing Best Practices
+            %li
+              %a{ :href => resources_measuring_success_path } Measuring Success of Email Marketing
+            %li
+              %a{ :href => resources_getting_started_path } Getting Started with Email Marketing
+            %li
+              %a{ :href => resources_email_marketing_types_path } Different E-Mail Types
 
-      %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path} Get Started for Free!
-    .span3.offset2
+    .span3{style: 'text-align:center;'}
       = image_tag( 'learn-about-email-marketing.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page' )
+      .blank-space
+      %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path} Get Started for Free!
 
   .row-fluid.smallbiz_marketing
     .span3.offset2
@@ -56,6 +62,11 @@
             %a{ :href => '/resources/digital-marketing'} Digital Marketing
           %li
             %a{ :href => '/resources/online-marketing'} Online Marketing
+          %li
+            %a{ :href => resources_marketing_automation_path} Marketing Automation
+          %li
+            %a{ :href => '/resources/marketing-syndication'} Marketing Syndication
+        
       .span5
         %ul
           %li
@@ -64,12 +75,19 @@
             %a{ :href => '/resources/loyalty-marketing'} Loyalty Marketing
           %li
             %a{ :href => '/resources/marketing-analytics'} Marketing Analytics
+          %li
+            %a{ :href => '/resources/marketing-ideas'} Marketing Ideas
+          %li
+            %a{ :href => '/resources/integrated-marketing'} Integrated Marketing
+
   .row-fluid.email_marketing
     .span5.offset1
       %h2 Marketing Promotions
       %p
         Marketing promotions are a powerful way to increase and generate revenues and customer engagement. Below, we outline a few ways to educate you on how you can use certain promotions to accomplish specific business objectives. 
         %ul
+          %li
+            %a{ :href => '/resources/marketing-promotions'} Marketing Promotions
           %li
             %a{ :href => '/resources/contests' } Contests
           %li
