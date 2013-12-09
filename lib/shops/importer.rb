@@ -3,6 +3,8 @@ module Shops
     def import(payload)
       #binding.pry
       content = download_csv_file(payload)
+      partner = payload.partner
+      puts partner.inspect
 
       csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
       headers = csv_table.headers
@@ -10,7 +12,7 @@ module Shops
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop Name","Shop Phone","Shop Website","Shop Type","Manager Name","Manager Email","Manager Password","Status"}
+      output_headers = %{"Shop Name","Shop Phone","Shop Website","Shop Type","Shop Header Background Color","Manager Name","Manager Email","Manager Password","Status"}
       output << output_headers
       unparsed_rows << output_headers
       
@@ -24,7 +26,7 @@ module Shops
       csv_table.each do |row|
         counter += 1
         status = nil
-        output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_website]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
+        output_row = [%{"#{row[:shop_name]}"}, %{"#{row[:shop_phone]}"}, %{"#{row[:shop_website]}"}, %{"#{row[:shop_type]}"}, %{"#{row[:shop_header_background_color]}"}, %{"#{row[:manager_name]}"}, %{"#{row[:manager_email]}"}, %{"#{row[:manager_password]}"}]
 
         begin
           shop_name = row[:shop_name].to_s.strip
@@ -38,8 +40,10 @@ module Shops
             shop.name = shop_name
             shop.phone_number = row[:shop_phone].to_s.strip
             shop.website = row[:shop_website].to_s.strip
-            shop.stype = row[:shop_type].present? ? row[:shop_type] : "local"
+            shop.stype = row[:shop_type].present? ? row[:shop_type].to_s.strip : "local"
             shop.partner_id = payload.partner_id
+            puts "Color: #{row[:shop_header_background_color]}"
+            shop.header_background_color = row[:shop_header_background_color].to_s.blank? ? partner.header_background_color : row[:shop_header_background_color].to_s
 
               
             manager_email = row[:manager_email].to_s.strip
@@ -70,16 +74,16 @@ module Shops
             end
 
             #download the logo.
-            begin
-              Rails.logger.info "--- Starting the #{shop_name} logo download...." 
-              shop.reload
-              shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
-              shop.save!
-              Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
-            rescue => e
-              puts "Failed Image #{shop_name}"
-              nil
-            end              
+            # begin
+            #   Rails.logger.info "--- Starting the #{shop_name} logo download...." 
+            #   shop.reload
+            #   shop.remote_logo_img_url = row[:shop_image_uri].to_s.strip
+            #   shop.save!
+            #   Rails.logger.info "--- Done the #{shop_name}d ownloaded image...." 
+            # rescue => e
+            #   puts "Failed Image #{shop_name}"
+            #   nil
+            # end              
           
           end #end of the transaction
         rescue Exception => e    

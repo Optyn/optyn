@@ -523,7 +523,7 @@ class Shop < ActiveRecord::Base
   end
 
   def assign_header_background_color
-    self.header_background_color = partner.header_background_color
+    self.header_background_color = partner.header_background_color if self.header_background_color.blank?
   end
 
   def assign_footer_background_color
