@@ -6,11 +6,11 @@
   %ul.dropdown-menu
     %li
       %a.active{:href => merchants_root_path}
-        = image_tag "dropdown_dashicon.png"
+        = image_tag "dropdown_dashicon.png", :alt => "Dashboard"
         Dashboard
     %li
       %a{:href => merchants_messages_path}
-        = image_tag "merchant_menu_campaigncenter_icon.png"
+        = image_tag "merchant_menu_campaigncenter_icon.png", :alt => "Campaign Center"
         Campaign Center
     %li
       %a{:href => merchants_connections_path}
@@ -26,7 +26,7 @@
       /   Survey Responses
     %li
       %a{:href => merchants_shop_path, :class => 'hr'}
-        = image_tag "dropdown_settings.png"
+        = image_tag "dropdown_settings.png", :alt => "Manage Account"
         Manage Account
     %li
       %a{:href => merchants_app_path}
