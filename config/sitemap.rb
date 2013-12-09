@@ -41,6 +41,7 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_software_path, 
     #pages for keywords
     add '/marketing/free-email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/free-email-marketing-software', :changefreq => 'weekly', :priority => 0.8
