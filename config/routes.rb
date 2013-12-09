@@ -66,6 +66,7 @@ Optyn::Application.routes.draw do
   match '/marketing/email-marketing-programs' => 'main#email_marketing_programs', :as => :email_marketing_programs
   match '/marketing/email-marketing-solutions' => 'main#email_marketing_solutions', :as => :email_marketing_solutions
   match '/marketing/email-blast-software' => 'main#email_blast_software', :as => :email_blast_software
+  match '/marketing/bulk-email-software' => 'main#bulk_email_software', :as => :bulk_email_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
