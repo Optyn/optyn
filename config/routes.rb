@@ -60,6 +60,7 @@ Optyn::Application.routes.draw do
   #additional pages that are keyword focused
   match '/marketing/free-email-marketing' => 'main#free_email_marketing', :as => :free_email_marketing
   match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
+  match '/marketing/free-newsletter-software' => 'main#free_newsletter_software', :as => :free_newsletter_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
