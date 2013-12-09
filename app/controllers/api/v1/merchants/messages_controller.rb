@@ -8,6 +8,11 @@ module Api
         include Messagecenter::CommonsHelper
         include Messagecenter::CommonFilters
 
+        INCOMING_DATE_FORMAT = "%m-%d-%Y"
+        OUTGOING_DATE_FORMAT = "%Y-%m-%d"
+        INCOMING_TIME_FORMAT = "%I:%M %p"
+        OUTGOING_TIME_FORMAT = "%I:%M %p"
+
         skip_before_filter :message_showable?
         
         before_filter :require_message_type, only: [:new, :create, :edit, :update, :create_response_message]
@@ -221,6 +226,31 @@ module Api
         def message_list_template_location
           "api/v1/merchants/messages/list"
         end
+
+        def merge_end_date_time
+          ending_date = params[:message][:ending_date]
+          ending_time = params[:message][:ending_time]
+
+        if ending_date.present? || ending_time.present?
+          params[:message][:ending] = parsed_datetime_str(ending_date, ending_time)
+        end
+
+      end
+
+      def merge_send_on
+        send_date = params[:message][:send_on_date]
+        send_time = params[:message][:send_on_time]
+
+        if send_date.present? || send_time.present?
+          params[:message][:send_on] = parsed_datetime_str(send_date, send_time)
+        end
+      end
+
+      def parsed_datetime_str(date_str, time_str)
+        parsed_date_str = date_str.present? ? Date.strptime(date_str, INCOMING_DATE_FORMAT).strftime(OUTGOING_DATE_FORMAT) : Date.today.strftime(OUTGOING_DATE_FORMAT) 
+        parsed_time_str = time_str.present? ? Time.strptime(time_str, INCOMING_TIME_FORMAT).strftime(OUTGOING_TIME_FORMAT) : Time.now.end_of_day.strftime(OUTGOING_TIME_FORMAT) 
+        parsed_date_str + " " + parsed_time_str
+      end
 
       end #end of the MessagesController class
     end #end of Merchants module
