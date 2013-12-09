@@ -99,6 +99,7 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
   match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
   #resource keyword specific pages
+  match '/resources/cheap-email-marketing' => 'main#resources_cheap_email_marketing', :as => :resources_cheap_email_marketing
   match '/resources/top-email-marketing-software' => 'main#resources_top_email_marketing_software', :as => :resources_top_email_marketing_software
   match '/resources/email-broadcast' => 'main#resources_email_broadcast', :as => :resources_email_broadcast
   #share routes and QR Code
