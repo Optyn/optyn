@@ -22,11 +22,11 @@
                   %p We have not received your payment due to some reason. Here are the details:
                   %ul
                     %li
-                    Amount charged
-                    = number_to_currency(@amount, precision: 2)
+                      Amount charged
+                      = number_to_currency(@amount, precision: 2)
                     %li
-                    Connection count
-                    = @conn_count
+                      Connection count
+                      = @conn_count
                   %p Please login to your account to fix the issue. Feel free to contact us as well.
                   %p
                     %a.btn{:href => "http://www.optyn.com"} View your Account
