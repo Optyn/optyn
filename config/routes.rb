@@ -61,6 +61,7 @@ Optyn::Application.routes.draw do
   match '/marketing/free-email-marketing' => 'main#free_email_marketing', :as => :free_email_marketing
   match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
   match '/marketing/free-newsletter-software' => 'main#free_newsletter_software', :as => :free_newsletter_software
+  match '/marketing/mass-mail-software' => 'main#mass_mail_software', :as => :mass_mail_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
