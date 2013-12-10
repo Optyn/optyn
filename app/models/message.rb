@@ -325,7 +325,7 @@ class Message < ActiveRecord::Base
       label = Label.find(ids.first)
 
       if label.inactive?
-        return shop.users.count
+        return shop.connections.active.count
       end
     end
 
