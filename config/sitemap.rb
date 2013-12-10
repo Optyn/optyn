@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'sitemap_generator'
+require 'sitemap_url_helper'
 
 SitemapGenerator::Sitemap.default_host = 'http://www.optyn.com'
 SitemapGenerator::Sitemap.create do
-  
+
    if Rails.env.production?
     
     add '/', :changefreq => 'daily', :priority => 1.0  

@@ -349,7 +349,7 @@ class Shop < ActiveRecord::Base
   end
 
   def tier_change_required?
-    self.plan.max < self.active_connection_count
+    self.plan.max < self.active_connection_count || self.plan.min > self.active_connection_count
   end
 
   def upgrade_plan
