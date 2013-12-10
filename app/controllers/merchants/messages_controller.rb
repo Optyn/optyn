@@ -188,6 +188,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message.update_visuals(params[:message])
     @shop_logo = true
     @shop = @message.shop
+    @partner = @shop.partner
     
 
     render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
