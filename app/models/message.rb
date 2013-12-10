@@ -239,6 +239,20 @@ class Message < ActiveRecord::Base
 
   end
 
+  def update_meta!
+    valid?
+    non_meta_attrs = attributes.keys - ['subject', 'send_on']
+    non_meta_attrs.each do |attr|
+      errors.delete(attr.to_sym)
+    end
+
+    if self.errors.empty?
+      save(validate: false) 
+    else
+      raise ActiveRecord::RecordInvalid.new(self)
+    end  
+  end
+
   def manager_email
     manager.email
   end
