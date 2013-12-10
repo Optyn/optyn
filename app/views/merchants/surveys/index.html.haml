@@ -1,31 +1,31 @@
 = banner("#{current_shop.name} Surveys")
 .clearfix
-%br
-#questions_list
-%table{class: 'table table-hover table-striped'}
-  %thead
-    %tr
-      %th Survey
-      %th Ready
-      %th Last Updated At
-      %th Action
 
-  %tbody
-    - if @list_survey.present?
-      - @list_survey.each do |survey|
-        %tr
-          %td= survey.title
-          %td
-            -if survey.ready == true
-              Yes
-            -else
-              No
-          %td= survey.updated_at
-          %td= link_to "Show" , merchants_survey_path(survey.id) ,:class=>"btn btn-info btn-mini" 
-    - else
+#questions_list.pad3pc
+  %table{class: 'table table-hover table-striped'}
+    %thead
       %tr
-        %td{colspan: "4"} No Survey
+        %th Survey
+        %th Ready
+        %th Last Updated At
+        %th Action
 
-= link_to "New Survey",  new_merchants_survey_path , :class=>"btn btn-primary"
-/ = render partial: "merchants/surveys/new_question_modal"
-/ = render partial: "merchants/surveys/edit_question_modal"
+    %tbody
+      - if @list_survey.present?
+        - @list_survey.each do |survey|
+          %tr
+            %td= survey.title
+            %td
+              -if survey.ready == true
+                Yes
+              -else
+                No
+            %td= survey.updated_at
+            %td= link_to "Show" , merchants_survey_path(survey.id) ,:class=>"btn btn-info btn-mini" 
+      - else
+        %tr
+          %td{colspan: "4"} No Survey
+
+  = link_to "New Survey",  new_merchants_survey_path , :class=>"btn btn-primary"
+  / = render partial: "merchants/surveys/new_question_modal"
+  / = render partial: "merchants/surveys/edit_question_modal"
