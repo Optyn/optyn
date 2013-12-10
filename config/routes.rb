@@ -66,6 +66,11 @@ Optyn::Application.routes.draw do
   match '/marketing/email-marketing-programs' => 'main#email_marketing_programs', :as => :email_marketing_programs
   match '/marketing/email-marketing-solutions' => 'main#email_marketing_solutions', :as => :email_marketing_solutions
   match '/marketing/email-blast-software' => 'main#email_blast_software', :as => :email_blast_software
+  match '/marketing/bulk-email-software' => 'main#bulk_email_software', :as => :bulk_email_software
+  match '/marketing/newsletter-software' => 'main#newsletter_software', :as => :newsletter_software
+  match '/marketing/email-marketing-agency' => 'main#email_marketing_agency', :as => :email_marketing_agency
+  match '/marketing/email-marketing-software' => 'main#email_marketing_software', :as => :email_marketing_software
+  match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
@@ -93,7 +98,12 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
   match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
   match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
-  
+  #resource keyword specific pages
+  match '/resources/email-marketing-system' => 'main#resources_email_marketing_system', :as => :resources_email_marketing_system
+  match '/resources/cheap-email-marketing' => 'main#resources_cheap_email_marketing', :as => :resources_cheap_email_marketing
+  match '/resources/best-bulk-email-software' => 'main#resources_best_bulk_email_software', :as => :resources_best_bulk_email_software
+  match '/resources/top-email-marketing-software' => 'main#resources_top_email_marketing_software', :as => :resources_top_email_marketing_software
+  match '/resources/email-broadcast' => 'main#resources_email_broadcast', :as => :resources_email_broadcast
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'

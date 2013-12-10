@@ -49,6 +49,11 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/email-marketing-programs', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-marketing-solutions', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-blast-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/bulk-email-software', :changefreq => 'weekly', :priority => 0.8
+    add '/marketing/newsletter-software', :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_agency_path, :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
+    add free_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
     #resource pages
     add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
@@ -71,6 +76,12 @@ SitemapGenerator::Sitemap.create do
     add '/resources/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
     add '/resources/marketing-ideas', :changefreq => 'weekly', :priority => 0.8
     add '/resources/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
+    #resource keyword pages
+    add resources_email_broadcast_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_cheap_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_top_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_bulk_email_software, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_system_path, :changefreq => 'weekly', :priority => 0.8
 
 
     Shop.real.each do |shop|
