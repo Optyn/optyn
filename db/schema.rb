@@ -588,7 +588,6 @@ ActiveRecord::Schema.define(:version => 20131205084043) do
     t.integer  "user_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "label_id"
   end
 
   add_index "survey_answers", ["created_at"], :name => "index_survey_answers_on_created_at"
