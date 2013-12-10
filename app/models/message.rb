@@ -341,7 +341,7 @@ class Message < ActiveRecord::Base
   end
 
   def sanitized_discount_amount
-    discount_amount.gsub(/[^A-Za-z0-9]/, "")
+    discount_amount.to_s.gsub(/[^A-Za-z0-9]/, "")
   end
 
   def percentage_off?
