@@ -8,6 +8,11 @@ module Api
         include Messagecenter::CommonsHelper
         include Messagecenter::CommonFilters
 
+        INCOMING_DATE_FORMAT = "%m-%d-%Y"
+        OUTGOING_DATE_FORMAT = "%Y-%m-%d"
+        INCOMING_TIME_FORMAT = "%I:%M %p"
+        OUTGOING_TIME_FORMAT = "%I:%M %p"
+
         skip_before_filter :message_showable?
         
         before_filter :require_message_type, only: [:new, :create, :edit, :update, :create_response_message]
@@ -28,8 +33,12 @@ module Api
             @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
             set_message_image
+
+            @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
+
             if @message.send(params[:choice].to_s.to_sym)
-              render(status: :created, template: individual_message_template_location)
+              send_for_curation
+              render(status: :created, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
             end
@@ -48,9 +57,13 @@ module Api
             @message.attributes = filter_time_params
             @message.label_ids = [params[:message][:label_ids]]  || []
             populate_datetimes
+
+            @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
+
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
-              render(status: :ok, template: individual_message_template_location)
+              send_for_curation
+              render(status: :ok, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
             end
@@ -72,8 +85,10 @@ module Api
 
         def launch
           @message = Message.for_uuid(params[:id])
+          @needs_curation = @message.needs_curation(:queued)
           launched = @message.launch
-          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity)
+          send_for_curation
+          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
         end
 
         def trash
@@ -133,17 +148,16 @@ module Api
           @message = klass.for_uuid(params[:id])
           @message.subject = params[:message][:subject]
           @message.send_on = params[:message][:send_on]
+          @needs_curation = @message.needs_curation(@message.state)
           @message.save(validate: false)
 
-          render(template: individual_message_template_location, status: :ok)
-
+          render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
         rescue => e
-          render(template: individual_message_template_location, status: :unprocessable_entity)
+          render(template: individual_message_template_location, status: :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
         end
 
         def folder_counts
           populate_labels
-          
        end
 
         private
@@ -212,6 +226,31 @@ module Api
         def message_list_template_location
           "api/v1/merchants/messages/list"
         end
+
+        def merge_end_date_time
+          ending_date = params[:message][:ending_date]
+          ending_time = params[:message][:ending_time]
+
+        if ending_date.present? || ending_time.present?
+          params[:message][:ending] = parsed_datetime_str(ending_date, ending_time)
+        end
+
+      end
+
+      def merge_send_on
+        send_date = params[:message][:send_on_date]
+        send_time = params[:message][:send_on_time]
+
+        if send_date.present? || send_time.present?
+          params[:message][:send_on] = parsed_datetime_str(send_date, send_time)
+        end
+      end
+
+      def parsed_datetime_str(date_str, time_str)
+        parsed_date_str = date_str.present? ? Date.strptime(date_str, INCOMING_DATE_FORMAT).strftime(OUTGOING_DATE_FORMAT) : Date.today.strftime(OUTGOING_DATE_FORMAT) 
+        parsed_time_str = time_str.present? ? Time.strptime(time_str, INCOMING_TIME_FORMAT).strftime(OUTGOING_TIME_FORMAT) : Time.now.end_of_day.strftime(OUTGOING_TIME_FORMAT) 
+        parsed_date_str + " " + parsed_time_str
+      end
 
       end #end of the MessagesController class
     end #end of Merchants module

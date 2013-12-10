@@ -45,7 +45,7 @@ Optyn::Application.routes.draw do
   match '/marketing/coupons' => 'main#coupons', :as => :coupons
   match '/marketing/specials-and-sales' => 'main#specials', :as => :specials
   match '/marketing/contests' => 'main#contests', :as => :contests
-  match '/marketing/marketing-recommendation' => 'main#marketing_recommendation', :as => :marketing_recommendation
+  match '/marketing/marketing-ideas' => 'main#marketing_recommendation', :as => :marketing_recommendation
   match '/marketing/loyalty-marketing' => 'main#loyalty_marketing', :as => :loyalty_marketing
   match '/marketing/customer-retention' => 'main#customer_retention', :as => :customer_retention
   match '/marketing/marketing-analytics' => 'main#marketing_analytics', :as => :marketing_analytics
@@ -55,10 +55,24 @@ Optyn::Application.routes.draw do
   match '/marketing/online-marketing' => 'main#online_marketing', :as => :online_marketing
   match '/marketing/automated-marketing' => 'main#automated_marketing', :as => :automated_marketing
   match '/marketing/multi-channel-marketing' => 'main#multi_channel_marketing', :as => :multi_channel_marketing
+  match '/marketing/integrated-marketing' => 'main#integrated_marketing', :as => :integrated_marketing
   #subcategories for email marketing content
   match '/marketing/email-marketing/mobile-responsive-emails' => 'main#mobile_responsive', :as => :mobile_responsive
   match '/marketing/email-marketing/capturing-customer-emails' => 'main#capturing_data', :as => :capturing_data
   match '/marketing/email-marketing/email-deliverability' => 'main#email_deliverability', :as => :email_deliverability
+  #additional pages that are keyword focused
+  match '/marketing/free-email-marketing' => 'main#free_email_marketing', :as => :free_email_marketing
+  match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
+  match '/marketing/free-newsletter-software' => 'main#free_newsletter_software', :as => :free_newsletter_software
+  match '/marketing/mass-mail-software' => 'main#mass_mail_software', :as => :mass_mail_software
+  match '/marketing/email-marketing-programs' => 'main#email_marketing_programs', :as => :email_marketing_programs
+  match '/marketing/email-marketing-solutions' => 'main#email_marketing_solutions', :as => :email_marketing_solutions
+  match '/marketing/email-blast-software' => 'main#email_blast_software', :as => :email_blast_software
+  match '/marketing/bulk-email-software' => 'main#bulk_email_software', :as => :bulk_email_software
+  match '/marketing/newsletter-software' => 'main#newsletter_software', :as => :newsletter_software
+  match '/marketing/email-marketing-agency' => 'main#email_marketing_agency', :as => :email_marketing_agency
+  match '/marketing/email-marketing-software' => 'main#email_marketing_software', :as => :email_marketing_software
+  match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
@@ -67,6 +81,10 @@ Optyn::Application.routes.draw do
   match '/resources/email-marketing/mobile-responsive-emails' => 'main#resources_mobile_responsive_emails', :as => :resources_mobile_responsive_emails
   match '/resources/email-marketing/evolution-of-email-marketing' => 'main#resources_evolution_email', :as => :resources_evolution_email
   match '/resources/email-marketing/email-marketing-best-practices' => 'main#resources_best_practices', :as => :resources_best_practices
+  match '/resources/email-marketing/email-marketing-measuring-success' => 'main#resources_measuring_success', :as => :resources_measuring_success
+  match '/resources/email-marketing/email-marketing-getting-started' => 'main#resources_email_marketing_getting_started', :as => :resources_getting_started
+  match '/resources/email-marketing/email-marketing-email-types' => 'main#resources_email_marketing_types', :as => :resources_email_marketing_types
+  match '/resources/email-marketing/email-marketing-tips' => 'main#resources_email_marketing_tips', :as => :resources_email_deliverability
   match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
   match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
@@ -77,7 +95,18 @@ Optyn::Application.routes.draw do
   match '/resources/surveys' => 'main#resources_surveys', :as => :resources_surveys
   match '/resources/marketing-analytics' => 'main#resources_marketing_analytics', :as => :resources_marketing_analytics
   match '/resources/online-marketing' => 'main#resources_online_marketing', :as => :resources_online_marketing
-
+  match '/resources/marketing-automation' => 'main#resources_marketing_automation', :as => :resources_marketing_automation
+  match '/resources/marketing-promotions' => 'main#resources_marketing_promotions', :as => :resources_marketing_promotions
+  match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
+  match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
+  match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
+  #resource keyword specific pages
+  match '/resources/email-marketing-system' => 'main#resources_email_marketing_system', :as => :resources_email_marketing_system
+  match '/resources/cheap-email-marketing' => 'main#resources_cheap_email_marketing', :as => :resources_cheap_email_marketing
+  match '/resources/best-bulk-email-software' => 'main#resources_best_bulk_email_software', :as => :resources_best_bulk_email_software
+  match '/resources/top-email-marketing-software' => 'main#resources_top_email_marketing_software', :as => :resources_top_email_marketing_software
+  match '/resources/email-broadcast' => 'main#resources_email_broadcast', :as => :resources_email_broadcast
+  #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'
   match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
@@ -359,6 +388,8 @@ Optyn::Application.routes.draw do
         delete :discard_response_message
         get :report
         put :update_header
+        get :reject
+        put :reject
       end
     end
   end

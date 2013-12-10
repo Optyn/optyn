@@ -4,7 +4,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
   skip_before_filter :active_subscription?, :only => [:upgrade, :subscribe]
 
   def upgrade
-    @plan = current_shop.plan
+    @current_plan = current_shop.plan
     @subscription = current_shop.subscription || @plan.subscriptions.build
     @list_charges = Charge.for_customer(@subscription.stripe_customer_token)
     @amount = (current_charge.amount.to_f / 100 ) rescue nil #because its in cents

@@ -13,13 +13,15 @@ module Users
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop","Manager Email","Email","Name",Gender","Birth Date"}
+      output_headers = %{"Shop","Manager Email","Email","Name","Gender","Birth Date"}
       output << output_headers
       unparsed_rows << output_headers
       
       counters = ActiveSupport::OrderedHash.new()
       counters[:users_created] = 0
       counters[:existing_users] = 0
+      counters[:connection_creation] = 0
+      counters[:existing_connection]  = 0
       counters[:unparsed_rows] = 0
 
       counter = 0
@@ -50,8 +52,6 @@ module Users
                      end
             user.gender = gender
             user.birth_date = (Date.parse(row[:birth_date].to_s.strip) rescue nil)
-            
-            user.shops = [shop]
 
             if user.errors.include?(:email) || user.errors.include?(:name)
               counters[:unparsed_rows] += 1 
@@ -77,13 +77,24 @@ module Users
             end #end of user.new_record?
 
             user.save()
+
+          connection = Connection.find_by_shop_id_and_user_id(shop.id, user.id) || Connection.new(shop_id: shop.id, user_id: user.id)
+          if connection.new_record?
+            connection.active = true
+            connection.connected_via = Connection::CONNECTED_VIA_IMPORT
+            counters[:connection_creation] += 1
+          else
+            counters[:existing_connection] += 1
+          end
+          connection.save()
+
           end #end of transaction
 
         rescue Exception => e
           Rails.logger.error e.message
           Rails.logger.error e.backtrace
           counters[:unparsed_rows] += 1
-          status = %{"Error: #{e.message}"}
+          status = %{"Error: System Error while parsing"}
           output_row << status
           unparsed_rows << output_row.join(",")
         end #end of begin

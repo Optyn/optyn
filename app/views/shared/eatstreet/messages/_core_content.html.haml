@@ -1,0 +1,22 @@
+/ #message_preview_container{:style => "  width: 100%; "}
+
+%table#message_preview_container{:style => "width:100%;max-width:600px;margin:auto;font-family:sans-serif;"}
+  %tr{:style => "width:100%;"}
+    %td{:style => "width:100%;background-color:#EEE;padding:20px;word-break:break-word;"}
+      - if @message.show_banner?
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
+
+      %table.outer-table{:style => "background-color:white;width:100%;text-align:left;word-break:break-word;"}
+        %tr
+          %td
+          %td.outer-cell{ style: 'padding: 20px;'}
+            .message-content
+              - if @message.show_greeting?
+                = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: preview, customer_name: customer_name}
+            
+              = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
+
+              = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button"
+                      
+      - if @message.show_footer?
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer", locals: {preview: preview}

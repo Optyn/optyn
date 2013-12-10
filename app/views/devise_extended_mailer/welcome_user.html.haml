@@ -9,10 +9,10 @@
 
     %table{:style => 'width:100%; max-width: 600px; min-height:40px;', :align => "center"}
       %tr
-        %td{:style => "#{@message.header_background_color_css_val rescue ('background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR)}"}
+        %td{:style => 'background-color:' + Shop::DEFAULT_HEADER_BACKGROUND_COLOR}
           %div{:style => "margin:0 auto;display:block;"}
             /#20A8DD for background - try it #0C9FD8
-            %table{:style => 'width:100%;background:' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
+            %table{:style => 'width:100%;background:' +  Shop::DEFAULT_HEADER_BACKGROUND_COLOR}
               %tr{:style => "width: 100%;"}
                 %td{:style => "padding-left: 10px; max-height: 60px; padding-top: 5px;"}
                   %h3{:style => "margin:0px;padding: 0px;font-size: 26px;color: #ffffff;weight:900;"}
@@ -40,4 +40,4 @@
 
       %tr
         %td
-          = render partial: "shared/mailers/footer"
+          = render partial: "shared/system_emails/footer"

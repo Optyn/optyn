@@ -864,7 +864,7 @@ line-height: 14px; }
   }
   .btn {
     @include border-radius( 0 );
-    font: normal 1rem/1.4rem $sans-serif;
+    font: normal 1rem/1.6rem $sans-serif;
     letter-spacing: 1px;
     border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
     @include transition( all 0.2s ease-out );

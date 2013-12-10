@@ -1,0 +1,10 @@
+%div
+  %p
+    == "We have a new product. Here are the details:"
+
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
+
+  - if @message.special_try
+    %p
+      %strong
+        == P.S. You are one of the special few who are invited to try our new product.

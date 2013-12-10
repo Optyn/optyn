@@ -12,4 +12,8 @@ object false
     node :receivers do
       {labels: current_shop.inactive_label, count: current_shop.active_connection_count}
     end
+
+    node :shop do
+      {name: current_shop.name, logo: current_shop.logo_location, website: current_shop.website}
+    end
   end

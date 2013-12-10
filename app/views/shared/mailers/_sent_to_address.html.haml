@@ -1,8 +1,0 @@
-- if @message_user.present? || @preview
-  %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-    = "This message was sent to #{(@message_user.email rescue 'receiver@email.com')} by #{@shop.name} using Optyn." 
-  %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-    - if @shop and @shop.locations.present?
-      = "#{@shop.name} | #{@shop.first_location_street_address} | #{@shop.first_location_city}, #{@shop.first_location_state_name} #{@shop.first_location_zip}"
-    - else
-      = "222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654"

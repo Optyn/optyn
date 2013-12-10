@@ -1,0 +1,27 @@
+- if @message.queued?
+  = form_for :message_change_notifier, url: reject_merchants_message_path(CGI::escape(params[:id])), html:{method: :put, class: 'form-horizontal'} do |f|
+    %h1
+      Reject a message
+    .control-group
+      = f.label :rejection_comment, "Rejection Reason:", class: 'control-label'
+      .controls
+        = f.text_area :rejection_comment, class: 'input-large details span12', rows: 3, cols: 10
+
+    .control-group
+      = label_tag 'subject', "Subject:", class: "control-label"
+      .controls
+        = @message.subject
+    %h3
+      Message Perview:    
+    .container
+      = raw(@message_change_notifier.content)
+
+    %h5
+      Are you sure you want to reject this message?
+
+    .actions
+      = submit_tag "Reject", class: "btn btn-danger"
+      = link_to "Cancel", root_path, class: "btn"
+- else
+  %h1
+    Successfully rejected the message, and notified the manager.
