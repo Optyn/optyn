@@ -18,6 +18,8 @@
       = number_to_currency(@stripe_last_payment.amount_in_dollars)
       = "on" 
       = Time.at(@stripe_last_payment.created).strftime("%B %d, %Y")
+    - else
+      = "No payment has been made yet."
 
   .well.span3
     %h5 Upcoming Payment:
@@ -49,35 +51,37 @@
 .row-fluid
   .span12
     %h2 Your Payment History
-    %table.table.table-striped.table-hover
-      %thead
-        %tr
-          %td Date
-          %td Amount
-          %td Plan
-          %td View Invoice 
-          %td Print Invoice
-      %tbody
-      - if ! @list_charges.nil?
-        - @list_charges.each do |charge|
+    - if ! @list_charges.nil? and ! @list_charges.empty?
+      %table.table.table-striped.table-hover
+        %thead
           %tr
-            %td 
-              = Time.at(charge.created).strftime("%B %d, %Y")
-            %td #{number_to_currency(charge.amount_in_dollars)}
-            - plan = get_plan_from_charge(charge)
-            %td
-              -if !plan.nil? 
-                #{plan.min} - #{plan.max} Customers
-              -else
-                Pro-rated
-            %td 
-              .btn
-                -# "/merchants/invoice/?id=#{charge.id}
-                = link_to "View", merchants_subsciption_invoice_path(id: charge.id) 
-            %td 
-              .btn
-                -#"/merchants/invoice/print/?id=#{charge.id}"
-                = link_to "Print", merchants_invoice_print_path(id: charge.id)
+            %td Date
+            %td Amount
+            %td Plan
+            %td View Invoice 
+            %td Print Invoice
+        %tbody 
+          - @list_charges.each do |charge|
+            %tr
+              %td 
+                = Time.at(charge.created).strftime("%B %d, %Y")
+              %td #{number_to_currency(charge.amount_in_dollars)}
+              - plan = get_plan_from_charge(charge)
+              %td
+                -if !plan.nil? 
+                  #{plan.min} - #{plan.max} Customers
+                -else
+                  Pro-rated
+              %td 
+                .btn
+                  -# "/merchants/invoice/?id=#{charge.id}
+                  = link_to "View", merchants_subsciption_invoice_path(id: charge.id) 
+              %td 
+                .btn
+                  -#"/merchants/invoice/print/?id=#{charge.id}"
+                  = link_to "Print", merchants_invoice_print_path(id: charge.id)
+    - else
+      No payment has been made yet.
 
 
 
