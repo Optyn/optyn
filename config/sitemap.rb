@@ -42,7 +42,7 @@ SitemapGenerator::Sitemap.create do
     add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
-    #pages for keywords
+    # sell pages for keywords
     add '/marketing/free-email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/free-email-marketing-software', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/free-newsletter-software', :changefreq => 'weekly', :priority => 0.8
@@ -81,9 +81,13 @@ SitemapGenerator::Sitemap.create do
     add resources_email_broadcast_path, :changefreq => 'weekly', :priority => 0.8
     add resources_cheap_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_top_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
-    add resources_best_bulk_email_software, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_bulk_email_software_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_marketing_system_path, :changefreq => 'weekly', :priority => 0.8
-
+    add resources_best_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_newsletter_software_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_bulk_email_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_direct_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
