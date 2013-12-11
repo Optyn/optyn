@@ -111,7 +111,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
           last4 =  @customer.active_card.last4 rescue nil
           Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop, amount: amount, conn_count: conn_count, last4: last4})
           flash[:notice]="Payment done successfully"
-          redirect_to (session[:return_to] || root_path)
+          redirect_to '/merchants/upgrade'
         else
           render 'upgrade'
         end
