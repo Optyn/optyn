@@ -38,12 +38,12 @@ Optyn::Application.routes.draw do
   match '/marketing/email-marketing' => 'main#email_marketing', :as => :email_marketing
   match '/marketing/social-media-marketing' => 'main#social_media', :as => :social_media_marketing 
   match '/marketing/marketing-automation' => 'main#marketing_automation', :as => :marketing_automation
-  match '/marketing/marketing-ideas' => 'main#marketing_syndication', :as => :marketing_ideas
+  match '/marketing/marketing-syndication' => 'main#marketing_syndication', :as => :marketing_syndication
   match '/marketing/surveys' => 'main#surveys', :as => :surveys
   match '/marketing/coupons' => 'main#coupons', :as => :coupons
   match '/marketing/specials-and-sales' => 'main#specials', :as => :specials
   match '/marketing/contests' => 'main#contests', :as => :contests
-  match '/marketing/marketing-ideas' => 'main#marketing_recommendation', :as => :marketing_recommendation
+  match '/marketing/marketing-ideas' => 'main#marketing_recommendation', :as => :marketing_ideas
   match '/marketing/loyalty-marketing' => 'main#loyalty_marketing', :as => :loyalty_marketing
   match '/marketing/customer-retention' => 'main#customer_retention', :as => :customer_retention
   match '/marketing/marketing-analytics' => 'main#marketing_analytics', :as => :marketing_analytics

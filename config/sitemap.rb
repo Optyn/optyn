@@ -18,8 +18,8 @@ SitemapGenerator::Sitemap.create do
     add '/tour', :changefreq => 'weekly', :priority => 0.8
     add '/testimonials/alley-gallery', :changefreq => 'weekly', :priority => 0.8
     add '/affiliates', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources', :changefreq => 'weekly', :priority => 0.8
+    add marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_path, :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-marketing', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
     add '/marketing/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
