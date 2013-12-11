@@ -24,7 +24,10 @@
   .well.span3
     %h5 Upcoming Payment:
     %p
-      = "#{number_to_currency(current_shop.upcoming_payment_amount_in_dollars)} on  #{@stripe_upcoming_payment}"
+      - if @current_plan != Plan.starter
+        = "#{number_to_currency(current_shop.upcoming_payment_amount_in_dollars)} on  #{@stripe_upcoming_payment}"
+      - else
+        = "Starter plan"
     %p
       (pricing tier may change)
   .well.span3
