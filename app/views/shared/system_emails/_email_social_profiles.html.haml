@@ -1,5 +1,5 @@
 - if @shop.present? && @shop.social_profiles.present?
-  %table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + message_footer_background_color(@message)}
+  %table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + (message_footer_background_color(@message) rescue @shop.footer_background_color)}
     %tr
       %td
       %td
