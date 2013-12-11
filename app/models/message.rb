@@ -682,9 +682,7 @@ class Message < ActiveRecord::Base
   end
 
   def fetch_receiver_ids
-    labels_for_message = labels
-
-    return all_active_user_ids if label_select_all?(labels_for_message)
+    return all_active_user_ids if label_select_all?(self.label_ids)
 
     receiver_label_user_ids = label_user_ids
     Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
@@ -739,7 +737,8 @@ class Message < ActiveRecord::Base
   end
 
   def validate_recipient_count
-    receiver_count = label_select_all?(labels) ? all_active_user_ids.size : label_ids.size
+    binding.pry
+    receiver_count = label_select_all?(self.label_ids) ? all_active_user_ids.size : label_ids.size
     self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if receiver_count <= 0
   end
 
@@ -747,7 +746,8 @@ class Message < ActiveRecord::Base
     labels.collect(&:user_labels).flatten.collect(&:user_id)
   end
 
-  def label_select_all?(labels_for_message)
+  def label_select_all?(labels_ids_for_message)
+    labels_for_message = Label.where(id: label_ids)
     labels_for_message.size == 1 && labels_for_message.first.inactive?
   end
 
