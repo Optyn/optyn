@@ -104,6 +104,11 @@ Optyn::Application.routes.draw do
   match '/resources/best-bulk-email-software' => 'main#resources_best_bulk_email_software', :as => :resources_best_bulk_email_software
   match '/resources/top-email-marketing-software' => 'main#resources_top_email_marketing_software', :as => :resources_top_email_marketing_software
   match '/resources/email-broadcast' => 'main#resources_email_broadcast', :as => :resources_email_broadcast
+  match '/resources/best-email-marketing' => 'main#resources_best_email_marketing', :as => :resources_best_email_marketing
+  match '/resources/best-email-marketing-software' => 'main#resources_best_email_marketing_software', :as => :resources_best_email_marketing_software
+  match '/resources/best-newsletter-software' => 'main#resources_best_newsletter_software', :as => :resources_best_newsletter_software
+  match '/resources/bulk-email' => 'main#resources_bulk_email', :as => :resources_bulk_email
+  match '/resources/direct-email-marketing' => 'main#resources_direct_email_marketing', :as => :resources_direct_email_marketing
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'
