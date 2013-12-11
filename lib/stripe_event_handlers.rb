@@ -66,7 +66,10 @@ module StripeEventHandlers
     # binding.pry
     amount = params['data']['object']['total']
     conn_count = subscription.shop.active_connection_count rescue nil
-    Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
+    #Send Payment receieved mail only when plan is not starter.
+    if subscription.plan != Plan.starter
+      Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "invoice_payment_succeeded", {shop_id: subscription.shop.id, connection_count: conn_count, amount: amount})
+    end
     # binding.pry
     update_invoice(subscription,params)
   end
