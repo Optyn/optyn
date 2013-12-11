@@ -261,14 +261,16 @@ module StripeEventHandlers
                                   :stripe_customer_token => stripe_customer_token ,
                                   :stripe_invoice_token=>stripe_invoice_token
                                   )
-    begin
-      Stripe::Invoice.create(:customer => stripe_customer_token)
-    rescue Stripe::InvalidRequestError  => e
-      Rails.logger.info '[Error]'+'~'*100
-      Rails.logger.info e.to_s
-      Rails.logger.info "Customer " + stripe_customer_token
-      Rails.logger.info params.to_s
-      Rails.logger.info '~'*100
+    unless stripe_invoice_token.present?
+      begin
+        Stripe::Invoice.create(:customer => stripe_customer_token)
+      rescue Stripe::InvalidRequestError  => e
+        Rails.logger.info '[Error]'+'~'*100
+        Rails.logger.info e.to_s
+        Rails.logger.info "Customer " + stripe_customer_token
+        Rails.logger.info params.to_s
+        Rails.logger.info '~'*100
+      end
     end
   end
 
