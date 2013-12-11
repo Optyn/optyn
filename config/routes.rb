@@ -97,7 +97,7 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
   match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
   match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
-  #resource keyword specific pages
+  #resources keyword specific pages
   match '/resources/email-marketing-system' => 'main#resources_email_marketing_system', :as => :resources_email_marketing_system
   match '/resources/cheap-email-marketing' => 'main#resources_cheap_email_marketing', :as => :resources_cheap_email_marketing
   match '/resources/best-bulk-email-software' => 'main#resources_best_bulk_email_software', :as => :resources_best_bulk_email_software
@@ -108,6 +108,11 @@ Optyn::Application.routes.draw do
   match '/resources/best-newsletter-software' => 'main#resources_best_newsletter_software', :as => :resources_best_newsletter_software
   match '/resources/bulk-email' => 'main#resources_bulk_email', :as => :resources_bulk_email
   match '/resources/direct-email-marketing' => 'main#resources_direct_email_marketing', :as => :resources_direct_email_marketing
+  match '/resources/email-blast' => 'main#resources_email_blast', :as => :resources_email_blast
+  match '/resources/best-free-email-marketing' => 'main#resources_best_free_email_marketing', :as => :resources_best_free_email_marketing
+  match '/resources/email-advertising' => 'main#resources_email_advertising', :as => :resources_email_advertising
+  match '/resources/email-campaign' => 'main#resources_email_campaign', :as => :resources_email_campaign
+
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'

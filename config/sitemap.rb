@@ -92,6 +92,11 @@ SitemapGenerator::Sitemap.create do
     add resources_best_newsletter_software_path, :changefreq => 'weekly', :priority => 0.8
     add resources_bulk_email_path, :changefreq => 'weekly', :priority => 0.8
     add resources_direct_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_blast_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_free_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_advertising_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
+
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
