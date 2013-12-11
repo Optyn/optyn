@@ -11,7 +11,6 @@
     
     %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
       %tr
-        %td
         %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
           %div
             %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
@@ -34,6 +33,7 @@
                     Cheers,
                     %br/
                     The Optyn Team
-        %td
+      %tr
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
 
-    = render partial: "shared/system_emails/footer"
+          = render partial: "shared/system_emails/footer"
