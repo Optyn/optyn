@@ -111,7 +111,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
             amount = @customer.subscription.plan.amount
             conn_count = current_shop.active_connection_count
             last4 =  @customer.active_card.last4 rescue nil
-            Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop, amount: amount, conn_count: conn_count, last4: last4})
+            Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop.id, amount: amount, conn_count: conn_count, last4: last4})
           end
           flash[:notice]="Payment done successfully"
           redirect_to '/merchants/upgrade'
