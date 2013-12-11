@@ -737,7 +737,6 @@ class Message < ActiveRecord::Base
   end
 
   def validate_recipient_count
-    binding.pry
     receiver_count = label_select_all?(self.label_ids) ? all_active_user_ids.size : label_ids.size
     self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if receiver_count <= 0
   end
