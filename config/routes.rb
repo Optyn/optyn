@@ -112,6 +112,7 @@ Optyn::Application.routes.draw do
   match '/resources/best-free-email-marketing' => 'main#resources_best_free_email_marketing', :as => :resources_best_free_email_marketing
   match '/resources/email-advertising' => 'main#resources_email_advertising', :as => :resources_email_advertising
   match '/resources/email-campaign' => 'main#resources_email_campaign', :as => :resources_email_campaign
+  match '/resources/email-templates' => 'main#resources_email_templates', :as => :resources_email_campaign
 
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
