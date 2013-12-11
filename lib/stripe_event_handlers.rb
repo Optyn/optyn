@@ -162,7 +162,7 @@ module StripeEventHandlers
     # binding.pry
     stripe_plan_token = params[:data][:object][:plan][:id] rescue nil
     stripe_invoice_token = params[:data][:object][:invoice] rescue nil
-    stripe_charge_id = params[:data][:object][:invoice] rescue nil
+    stripe_charge_id = params[:data][:object][:id] rescue nil
 
     ##if plan.id is nil and invoice token is present
     if stripe_plan_token.nil? and stripe_invoice_token.present?
@@ -194,81 +194,6 @@ module StripeEventHandlers
         :stripe_plan_token => stripe_plan_token
       )
 
-  end
-
-  private
-  def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
-    #insert discount object into a monthly table
-    coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
-    shop.coupon_id = coupon.id
-    shop.save(validate: false)
-  end
-
-  def self.fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
-    coupon = (Coupon.find_by_stripe_id(coupon_stripe_id) rescue nil)
-    subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
-    shop = subscription.shop
-    [coupon, shop]
-  end
-
-  def self.create_invoice(subscription,params)
-    invoice_count = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).count
-    # binding.pry
-    ##dont create invoice if its already created
-    if invoice_count > 0
-      Rails.logger.info '[Error]'+'~'*100
-      Rails.logger.info 'Invoice already exists'
-      Rails.logger.info params.to_s
-      Rails.logger.info '~'*100
-      return Invoice.where(:stripe_invoice_id=>params['data']['object']['id'])
-    end
-    stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
-    stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
-    stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
-    stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
-    subtotal = params[:data][:object][:subtotal] rescue nil
-    total = params[:data][:object][:total]  rescue nil
-
-    Invoice.create(
-      :subscription_id => subscription.id,
-      :stripe_customer_token => params['data']['object']['customer'],
-      :stripe_invoice_id => params['data']['object']['id'],
-      :paid_status => params['data']['object']['paid'],
-      :amount => params['data']['object']['total'] ,
-      :stripe_coupon_token => stripe_coupon_token,
-      :stripe_coupon_percent_off => stripe_coupon_percent_off,
-      :stripe_coupon_amount_off => stripe_coupon_amount_off,
-      :subtotal => subtotal,
-      :total => total,
-      :stripe_plan_token => stripe_plan_token
-    )
-  end
-
-  def self.update_invoice(subscription,params)
-    stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
-    stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
-    stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
-    stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
-    subtotal = params[:data][:object][:subtotal] rescue nil
-    total = params[:data][:object][:total]  rescue nil
-    amount = params['data']['object']['total']  rescue nil
-    paid_status = params['data']['object']['paid'] rescue nil
-
-    invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first
-    begin
-      invoice.update_attributes(
-        :paid_status => paid_status,
-        :amount => amount,
-        :stripe_coupon_token => stripe_coupon_token,
-        :stripe_coupon_percent_off => stripe_coupon_percent_off,
-        :stripe_coupon_amount_off => stripe_coupon_amount_off,
-        :subtotal => subtotal,
-        :total => total,
-        :stripe_plan_token => stripe_plan_token
-      )
-    rescue
-      Rails.logger.info '[Error]Issue updating the invoice '+'~'*100
-    end
   end
 
   def self.handle_invoice_item_created(params)
@@ -346,7 +271,82 @@ module StripeEventHandlers
       Rails.logger.info '~'*100
     end
   end
+
   private
+  def self.manage_coupon(coupon_stripe_id, customer_stripe_key)
+    #insert discount object into a monthly table
+    coupon, shop = fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
+    shop.coupon_id = coupon.id
+    shop.save(validate: false)
+  end
+
+  def self.fetch_coupon_and_shop(coupon_stripe_id, customer_stripe_key)
+    coupon = (Coupon.find_by_stripe_id(coupon_stripe_id) rescue nil)
+    subscription = Subscription.find_by_stripe_customer_token(customer_stripe_key)
+    shop = subscription.shop
+    [coupon, shop]
+  end
+
+  def self.create_invoice(subscription,params)
+    invoice_count = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).count
+    # binding.pry
+    ##dont create invoice if its already created
+    if invoice_count > 0
+      Rails.logger.info '[Error]'+'~'*100
+      Rails.logger.info 'Invoice already exists'
+      Rails.logger.info params.to_s
+      Rails.logger.info '~'*100
+      return Invoice.where(:stripe_invoice_id=>params['data']['object']['id'])
+    end
+    stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
+    stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
+    stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
+    stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
+    subtotal = params[:data][:object][:subtotal] rescue nil
+    total = params[:data][:object][:total]  rescue nil
+
+    Invoice.create(
+      :subscription_id => subscription.id,
+      :stripe_customer_token => params['data']['object']['customer'],
+      :stripe_invoice_id => params['data']['object']['id'],
+      :paid_status => params['data']['object']['paid'],
+      :amount => params['data']['object']['total'] ,
+      :stripe_coupon_token => stripe_coupon_token,
+      :stripe_coupon_percent_off => stripe_coupon_percent_off,
+      :stripe_coupon_amount_off => stripe_coupon_amount_off,
+      :subtotal => subtotal,
+      :total => total,
+      :stripe_plan_token => stripe_plan_token
+    )
+  end
+
+  def self.update_invoice(subscription,params)
+    stripe_plan_token = params['data']['object']['lines']['data'].first['plan']['id']  rescue nil
+    stripe_coupon_token = params[:data][:object][:discount][:coupon][:id] rescue nil
+    stripe_coupon_percent_off = params[:data][:object][:discount][:coupon][:percent_off] rescue nil
+    stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
+    subtotal = params[:data][:object][:subtotal] rescue nil
+    total = params[:data][:object][:total]  rescue nil
+    amount = params['data']['object']['total']  rescue nil
+    paid_status = params['data']['object']['paid'] rescue nil
+
+    invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first
+    begin
+      invoice.update_attributes(
+        :paid_status => paid_status,
+        :amount => amount,
+        :stripe_coupon_token => stripe_coupon_token,
+        :stripe_coupon_percent_off => stripe_coupon_percent_off,
+        :stripe_coupon_amount_off => stripe_coupon_amount_off,
+        :subtotal => subtotal,
+        :total => total,
+        :stripe_plan_token => stripe_plan_token
+      )
+    rescue
+      Rails.logger.info '[Error]Issue updating the invoice '+'~'*100
+    end
+  end
+
   def self.find_valid_subscription(params)
     begin
       subscription = Subscription.where("stripe_customer_token = \'#{params['data']['object']['customer']}\' and shop_id != -1").first
