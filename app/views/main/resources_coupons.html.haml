@@ -1,6 +1,20 @@
 = display_title "Coupon Marketing - Increase sales through proper coupon promotion"
 = display_meta_description "Optyn's marketing experts show you how to utilize coupons to maximize ", "coupon marketing, marketing with coupons, coupons marketing, small business coupons , small business coupon, coupon promotion, coupon promotions email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_marketing_promotions_path )
+      Marketing Promotions
+      %span
+    %a.current( href = resources_coupons_path )
+      Marketing with Coupons
+      %span
 
 .row-fluid
   .span3

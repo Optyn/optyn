@@ -1,6 +1,20 @@
 = display_title "Specials and Sales Promotions for Small Businesses"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = marketing_promotions_path )
+      Marketing Promotions
+      %span
+    %a.current( href = specials_path)
+      Specials
+      %span
 
 .row-fluid
   .span3

@@ -1,6 +1,17 @@
 = display_title "Customer Retention for Small Businesses"
 = display_meta_description "Our small business experts share how you can improve your small business customer retention strategies!", "customer retention strategies, customer retention rate, customer retention techniques, customer retention strategy, increase customer retention, customer retention ideas. customer retention plan"
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = customer_retention_path)
+      Customer Retention
+      %span
 
 .row-fluid
   .span3

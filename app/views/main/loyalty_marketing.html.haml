@@ -1,6 +1,17 @@
 = display_title "Customer Loyalty Marketing for Small Businesses"
 = display_meta_description "Optyn help small business create a loyal customer base through the Campaign Center.", "online loyalty programs, best customer loyalty programs, building customer loyalty, loyalty program, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = loyalty_marketing_path)
+      Loyalty Marketing
+      %span
 
 .row-fluid
   .span3

@@ -1,6 +1,15 @@
 = display_title "E-Mail Marketing Sitemap for Optyn"
 = display_meta_description "Find any page that you need and all the resources around our email marketing and small business marketing", "email marketing, small business marketing, email marketing resources, email marketing services, optyn email marketing, optyn marketing sitemap, optyn sitemap, email marketing sitemap"
 
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a.current( href = website_sitemap_path )
+      Sitemap
+      %span
+
 .op-sitemap
   .row-fluid
     .span12
@@ -57,13 +66,15 @@
         %li
           %a{ :href => '/marketing/surveys'} Surveys
         %li
+          %a{ :href => resources_specials_sales_path} Specials and Sales
+        %li
           %a{ :href => '/marketing/specials-and-sales'} Specials and Sales
         %li
           %a{ :href => '/marketing/social-media-marketing'} Social Media Marketing
         %li
           %a{ :href => '/marketing/marketing-automation' } Marketing Automation
         %li
-          %a{ :href => '/marketing/marketing-syndication'} Marketing Syndication
+          %a{ :href => '/marketing/marketing-ideas'} Marketing Ideas
         %li
           %a{ :href => '/marketing/marketing-recommendation'} Marketing Recommendation
         %li

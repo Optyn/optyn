@@ -1,6 +1,17 @@
 = display_title "Multi Channel Marketing for Small Businesses - Unify your marketing into one channel!"
 = display_meta_description "Optyn helps you engage your customers by directly going where they are.", "multi channel marketing, multi channel marketing strategy, multi channel marketing campaigns, multi channel marketing software, multi channel marketing solutions, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = multi_channel_marketing_path)
+      Multi Channel Marketing
+      %span
 
 .row-fluid
   .span3

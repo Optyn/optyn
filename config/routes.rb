@@ -31,14 +31,14 @@ Optyn::Application.routes.draw do
   match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
   match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
-  match 'sitemap' => 'main#sitemap'
+  match 'sitemap' => 'main#sitemap', :as => :website_sitemap
 
   #sell pages under marketing
   match '/marketing' => 'main#marketing', :as => :marketing
   match '/marketing/email-marketing' => 'main#email_marketing', :as => :email_marketing
   match '/marketing/social-media-marketing' => 'main#social_media', :as => :social_media_marketing 
   match '/marketing/marketing-automation' => 'main#marketing_automation', :as => :marketing_automation
-  match '/marketing/marketing-syndication' => 'main#marketing_syndication', :as => :marketing_syndication
+  match '/marketing/marketing-ideas' => 'main#marketing_syndication', :as => :marketing_ideas
   match '/marketing/surveys' => 'main#surveys', :as => :surveys
   match '/marketing/coupons' => 'main#coupons', :as => :coupons
   match '/marketing/specials-and-sales' => 'main#specials', :as => :specials
@@ -70,7 +70,6 @@ Optyn::Application.routes.draw do
   match '/marketing/newsletter-software' => 'main#newsletter_software', :as => :newsletter_software
   match '/marketing/email-marketing-agency' => 'main#email_marketing_agency', :as => :email_marketing_agency
   match '/marketing/email-marketing-software' => 'main#email_marketing_software', :as => :email_marketing_software
-  match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
@@ -82,7 +81,7 @@ Optyn::Application.routes.draw do
   match '/resources/email-marketing/email-marketing-measuring-success' => 'main#resources_measuring_success', :as => :resources_measuring_success
   match '/resources/email-marketing/email-marketing-getting-started' => 'main#resources_email_marketing_getting_started', :as => :resources_getting_started
   match '/resources/email-marketing/email-marketing-email-types' => 'main#resources_email_marketing_types', :as => :resources_email_marketing_types
-  match '/resources/email-marketing/email-marketing-tips' => 'main#resources_email_marketing_tips', :as => :resources_email_deliverability
+  match '/resources/email-marketing/email-marketing-tips' => 'main#resources_email_marketing_tips', :as => :resources_email_marketing_tips
   match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
   match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
