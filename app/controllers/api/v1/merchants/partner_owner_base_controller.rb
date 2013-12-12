@@ -26,8 +26,7 @@ module Api
         end
 
         def set_time_zone
-          timezone = current_shop.present? && current_shop.time_zone.present? ? current_shop.time_zone : "Eastern Time (US & Canada)"
-          Time.zone = timezone
+          ShopTimezone.set_timezone(current_shop)
         end
 
       end

@@ -79,6 +79,8 @@ end
 
 gem 'jquery-rails'
 
+gem "breadcrumbs_on_rails"
+
 group :development do
   gem 'thin'
   gem 'sextant'

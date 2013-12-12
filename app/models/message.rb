@@ -203,10 +203,8 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    if send_message?
-      messages = with_state([:queued]).only_parents.ready_messages
-      execute_send(messages)
-    end
+    messages = with_state([:queued]).only_parents.ready_messages
+    execute_send(messages)
   end
 
   def self.batch_send_responses
@@ -365,12 +363,13 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    user_name = message_user.first_name.capitalize if message_user.present?
 
+    user_name = message_user.first_name.capitalize if message_user.present?
     if user_name.present?
-      self.subject.gsub(/{{Customer Name}}/i, user_name)
+      self.subject.gsub(/{{Customer Name}}/ix, user_name)
     else
-      regex = /{{Customer Name}},/ix #regex when the customer name is missing /eom
+      
+      regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
       personal_subject = (self.subject.gsub(regex, "")).strip.capitalize
       personal_subject
     end
@@ -518,6 +517,11 @@ class Message < ActiveRecord::Base
     MessageChangeNotifier.create(message_id: self.id, content: html, subject: self.subject, send_on: self.send_on)
   end
 
+  def message_send?
+    return true unless Rails.env.staging?
+    return true if Rails.env.staging? && (self.partner.eatstreet? || MessageStagingEmail.approved_emails.include?(self.manager.email))
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
@@ -544,8 +548,8 @@ class Message < ActiveRecord::Base
         messages.each do |message|
           #message.state = 'transit'
           #message.save(validate: false)
-          unless message.shop.disabled?
-            dispatched_message = message.dispatch(creation_errors, process_manager) if message.partner.eatstreet?
+          if !message.shop.disabled? && message.message_send?
+            dispatched_message = message.dispatch(creation_errors, process_manager)
 
             unless dispatched_message.blank?
               raise dispatched_message.inspect
@@ -578,10 +582,6 @@ class Message < ActiveRecord::Base
         MESSAGE:'sending messages with ids #{messages.collect(&:id).join(', ')}'
         TIME:#{Time.now}
     }
-  end
-
-  def self.send_message?
-    return true if Rails.env.production? || Rails.env.development? || Rails.env.staging?
   end
 
   def build_new_message_labels(identifiers)

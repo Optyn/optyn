@@ -14,6 +14,7 @@ class MessageMailer < ActionMailer::Base
       @shop = @message.shop
       @shop_logo = true #flag set for displaying the shop logo or just the shop name
     end
+    ShopTimezone.set_timezone(@shop)
 
     @partner = @shop.partner
 
@@ -32,6 +33,7 @@ class MessageMailer < ActionMailer::Base
   def shared_email(user_email, message)
     @message = message
     @shop = @message.shop
+    ShopTimezone.set_timezone(@shop)
     @user_email = user_email
     mail(to: user_email, subject: "#{@message.name}")
 
@@ -48,6 +50,8 @@ class MessageMailer < ActionMailer::Base
     @actual_message = @message_change_notifier.message
     @owner_shop = @actual_message.shop
 
+    ShopTimezone.set_timezone(@owner_shop)
+
     mail(from: "services@optyn.com",
       to: "office@eatstreet.com",
       cc: ["gaurav@optyn.com", "alen@optyn.com"],
@@ -61,7 +65,8 @@ class MessageMailer < ActionMailer::Base
     @message_content = @message_change_notifier.content
     @actual_message = @message_change_notifier.message
     @owner_shop = @actual_message.shop
-
+    ShopTimezone.set_timezone(@shop)
+    
     mail(
       from: "office@eatstreet.com",
       to: @actual_message.manager_email,
