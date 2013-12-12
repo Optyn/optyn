@@ -5,7 +5,7 @@ require 'sitemap_url_helper'
 SitemapGenerator::Sitemap.default_host = 'http://www.optyn.com'
 SitemapGenerator::Sitemap.create do
 
-   if Rails.env.production?
+   # if Rails.env.production?
     
     add '/', :changefreq => 'daily', :priority => 1.0  
     add '/features', :changefreq => 'weekly', :priority => 0.8 
@@ -38,7 +38,7 @@ SitemapGenerator::Sitemap.create do
     add loyalty_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add customer_retention_path, :changefreq => 'weekly', :priority => 0.8
     add marketing_analytics_path, :changefreq => 'weekly', :priority => 0.8
-    add ditgital_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add digital_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add marketing_collaboration_path, :changefreq => 'weekly', :priority => 0.8
     add multi_channel_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add integrated_marketing_path, :changefreq => 'weekly', :priority => 0.8
@@ -73,7 +73,7 @@ SitemapGenerator::Sitemap.create do
     add resources_social_media_path, :changefreq => 'weekly', :priority => 0.8
     add resources_digital_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_online_marketing_path, :changefreq => 'weekly', :priority => 0.8
-    add esources_customer_retention_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_customer_retention_path, :changefreq => 'weekly', :priority => 0.8
     add resources_loyalty_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_marketing_analytics_path, :changefreq => 'weekly', :priority => 0.8
     add resources_marketing_automation_path, :changefreq => 'weekly', :priority => 0.8
@@ -96,7 +96,7 @@ SitemapGenerator::Sitemap.create do
     add resources_best_free_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_advertising_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
-    add resources_email_templates_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_marketing_stats_path, :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
@@ -111,7 +111,7 @@ SitemapGenerator::Sitemap.create do
     SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
     add '/partner-with-us', :changefreq => 'weekly', :priority => 0.8
 
-  end
+  # end
 end
 
 if Rails.env.production?
