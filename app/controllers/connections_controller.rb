@@ -87,14 +87,14 @@ class ConnectionsController < BaseController
     if @message.present? && @user.present?
       @shop = @message.shop
       @message_user = @message.message_user(@user)
-      @connection = @message_user.user.connections.active.find_by_shop_id(@shop.id)
+      @connection = @message_user.user.connections.find_by_shop_id(@shop.id)
 
       @connection.update_attribute(:active, false)
       @message_user.update_attribute(:opt_out, true)
       @flush = true
 
-      return_path = user_logged_in? ? dropped_connections_path : root_path
-      return redirect_to(return_path, notice: "Connection with #{@shop.name} successfully deactivated.")
+      return_path = user_signed_in? ? dropped_connections_path : root_path
+      return redirect_to(return_path, notice: "Unsubscribe to #{@shop.name} successful.")
     end
 
     raise "User or message not found"
