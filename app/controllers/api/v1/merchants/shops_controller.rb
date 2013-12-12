@@ -2,6 +2,7 @@ module Api
   module V1
     module Merchants
       class ShopsController < PartnerOwnerBaseController
+        skip_before_filter :set_time_zone
 	      # doorkeeper_for :all
 	
         def index
