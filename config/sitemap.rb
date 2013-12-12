@@ -98,11 +98,11 @@ SitemapGenerator::Sitemap.create do
     add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_marketing_stats_path, :changefreq => 'weekly', :priority => 0.8
-    add resources_small_business_email_marketing_path
-    add resources_email_marketing_strategy_path
-    add resources_how_to_email_marketing_path
-    add resources_catchy_email_subject_lines_path
-    add resources_top_email_marketing_path
+    add resources_small_business_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_strategy_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_how_to_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_catchy_email_subject_lines_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_top_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8
