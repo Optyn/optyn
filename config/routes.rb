@@ -114,6 +114,12 @@ Optyn::Application.routes.draw do
   match '/resources/email-campaign' => 'main#resources_email_campaign', :as => :resources_email_campaign
   match '/resources/email-templates' => 'main#resources_email_templates', :as => :resources_email_templates
   match '/resources/email-marketing-stats' => 'main#resources_email_marketing_stats', :as => :resources_email_marketing_stats
+  #new pages to add
+  match '/resources/small-business-email-marketing' => 'main#resources_small_business_email_marketing', :as => :resources_small_business_email_marketing
+  match '/resources/email-marketing-strategy' => 'main#resources_email_marketing_strategy', :as => :resources_email_marketing_strategy
+  match '/resources/how-to-email-marketing' => 'main#resources_how_to_email_marketing', :as => :resources_how_to_email_marketing
+  match '/resources/catchy-email-subject-lines' => 'main#resources_catchy_email_subject_lines', :as => :resources_catchy_email_subject_lines
+  match '/resources/top-email-marketing' => 'main#resources_top_email_marketing', :as => :resources_top_email_marketing
 
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
