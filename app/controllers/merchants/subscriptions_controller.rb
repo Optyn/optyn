@@ -11,7 +11,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
     ##TODO: customer needs to have a card object
     @stripe_last_payment = @list_charges.first rescue nil
     customer = Subscription.get_stripe_customer_card(@subscription,params)
-    @card_last4 =  customer.active_card.last4 rescue nil
+    @card_last4 =  customer.cards.data.first.last4 rescue nil
       
     ##this part calculates upcoming payment with following assumption
     ##same date next month if date is already passed(date of creation of account)
@@ -22,7 +22,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       next_month = Time.now.to_date >> 1 #shift one moth
       @stripe_upcoming_payment = "#{next_month.month}/#{@subscription.created_at.day}/#{next_month.year}"
     end
-    flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans'
+    flash[:notice] = 'You will be charged based on the number of connections. For details, refer our pricing plans' if not flash[:notice].present?
   end
 
   def invoice
@@ -110,7 +110,7 @@ class Merchants::SubscriptionsController < Merchants::BaseController
           if @plan != Plan.starter
             amount = @customer.subscription.plan.amount
             conn_count = current_shop.active_connection_count
-            last4 =  @customer.active_card.last4 rescue nil
+            last4 =  @customer.cards.data.first.last4 rescue nil
             Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop.id, amount: amount, conn_count: conn_count, last4: last4})
           end
           flash[:notice]="Payment done successfully"
@@ -127,7 +127,8 @@ class Merchants::SubscriptionsController < Merchants::BaseController
       else
         @subscription.stripe_error = e.to_s
       end
-      render 'upgrade'
+      flash[:notice]=@subscription.stripe_error
+      redirect_to '/merchants/upgrade'
     end
 
 
