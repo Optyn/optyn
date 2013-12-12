@@ -5,7 +5,7 @@ require 'sitemap_url_helper'
 SitemapGenerator::Sitemap.default_host = 'http://www.optyn.com'
 SitemapGenerator::Sitemap.create do
 
-   # if Rails.env.production?
+   if Rails.env.production?
     
     add '/', :changefreq => 'daily', :priority => 1.0  
     add '/features', :changefreq => 'weekly', :priority => 0.8 
@@ -111,7 +111,7 @@ SitemapGenerator::Sitemap.create do
     SitemapGenerator::Sitemap.default_host = 'https://www.optyn.com'
     add '/partner-with-us', :changefreq => 'weekly', :priority => 0.8
 
-  # end
+  end
 end
 
 if Rails.env.production?
