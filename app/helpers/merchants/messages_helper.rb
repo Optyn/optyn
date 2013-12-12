@@ -17,7 +17,7 @@ module Merchants::MessagesHelper
   end
 
   def formatted_message_form_datetime(message, message_attr)
-    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p')
+    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p %Z')
   rescue
     ""
   end
