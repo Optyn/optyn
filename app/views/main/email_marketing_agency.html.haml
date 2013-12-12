@@ -1,14 +1,28 @@
 = display_title "E-Mail Marketing Agency"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_marketing_agency_path)
+      Email Marketing Agency
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL MARKETING AGENCY
+    %h1.hdg-s Email Marketing Agency
     %h2 The Email Marketing Agency for Small Businesses.
-    /= image_tag( 'email-marketing.jpg', alt: 'email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'email-marketing-agency.jpg', alt: 'email marketing agency', class: 'pull-right img-polaroid' )
     %p 
       We are email marketers by nature. We love what we do. While we are building some of the best email marketing software for the new generation of small businesses, we are also one of the top email marketing agencies in the U.S.
     %p

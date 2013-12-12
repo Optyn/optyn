@@ -1,12 +1,23 @@
 = display_title "Online Marketing for Small Businesses - Reach and grow your consumer base!"
 = display_meta_description "Optyn offers online marketing solutions and through our resources we offer online marketing strategies to help small business with online marketing!", "online marketing, local online marketing, online marketing services, online marketing solutions, online makreting strategies, small business online marketing, online marketing tools, online marketing plan, online marketing tips, online makreting campaign, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = online_marketing_path)
+      Online Marketing
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9    
-    %h1.hdg-s ONLINE MARKETING
+    %h1.hdg-s Online Marketing
     %h2 Small business now have an easy way to compete online! 
     = image_tag( 'online-marketing-for-small-businesses.jpg', alt: 'online marketing', class: 'pull-right img-polaroid' )
     %p 

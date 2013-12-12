@@ -1,12 +1,26 @@
 = display_title "Capture Customer E-Mails"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = capturing_data_path)
+      Capturing Customer Emails
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s CAPTURING CUSTOMER EMAILS
+    %h1.hdg-s Capturing Customer Emails
     %h2 Optyn is optimized to help you capture customer emails and vital marketing data.
     = image_tag( 'capturing-customer-data.jpg', alt: 'marketing automation', class: 'pull-right img-polaroid' )
     %p 

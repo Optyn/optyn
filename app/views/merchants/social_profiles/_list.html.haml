@@ -10,9 +10,10 @@
       %tr
         %td= index + 1
         %td
-          = SocialProfile::SOCIAL_PROFILES[profile.sp_type]
+          = SocialProfile::SOCIAL_PROFILES[profile.sp_type].capitalize
         %td
-          = profile.sp_link
+          %a{ href: profile.sp_link, target: 'blank' }
+            = profile.sp_link
         %td
           - if profile.new_record?
             = link_to "Add", add_merchants_social_profile_path(profile.sp_type), class: 'btn btn-info soical-profile-action-new'

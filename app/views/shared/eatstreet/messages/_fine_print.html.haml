@@ -1,1 +1,1 @@
-= simple_format(@message.fine_print)
+= raw(@message.fine_print.gsub("\n", "<br />"))

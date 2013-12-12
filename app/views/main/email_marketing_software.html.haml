@@ -1,12 +1,26 @@
 = display_title "E-Mail Marketing Software"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_marketing_software_path)
+      Email Marketing Software
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL MARKETING SOFTWARE
+    %h1.hdg-s Email Marketing Software
     %h2 Meet the perfect email marketing software for small businesses.
     /= image_tag( 'email-marketing.jpg', alt: 'email marketing', class: 'pull-right img-polaroid' )
     %p 

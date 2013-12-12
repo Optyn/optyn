@@ -239,6 +239,20 @@ class Message < ActiveRecord::Base
 
   end
 
+  def update_meta!
+    valid?
+    non_meta_attrs = attributes.keys - ['subject', 'send_on']
+    non_meta_attrs.each do |attr|
+      errors.delete(attr.to_sym)
+    end
+
+    if self.errors.empty?
+      save(validate: false) 
+    else
+      raise ActiveRecord::RecordInvalid.new(self)
+    end  
+  end
+
   def manager_email
     manager.email
   end
@@ -311,7 +325,7 @@ class Message < ActiveRecord::Base
       label = Label.find(ids.first)
 
       if label.inactive?
-        return shop.users.count
+        return shop.connections.active.count
       end
     end
 
@@ -327,7 +341,7 @@ class Message < ActiveRecord::Base
   end
 
   def sanitized_discount_amount
-    discount_amount.gsub(/[^A-Za-z0-9]/, "")
+    discount_amount.to_s.gsub(/[^A-Za-z0-9]/, "")
   end
 
   def percentage_off?
@@ -668,9 +682,7 @@ class Message < ActiveRecord::Base
   end
 
   def fetch_receiver_ids
-    labels_for_message = labels
-
-    return all_active_user_ids if label_select_all?(labels_for_message)
+    return all_active_user_ids if label_select_all?(self.label_ids)
 
     receiver_label_user_ids = label_user_ids
     Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
@@ -725,7 +737,7 @@ class Message < ActiveRecord::Base
   end
 
   def validate_recipient_count
-    receiver_count = label_select_all?(labels) ? all_active_user_ids.size : label_ids.size
+    receiver_count = label_select_all?(self.label_ids) ? all_active_user_ids.size : label_ids.size
     self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if receiver_count <= 0
   end
 
@@ -733,7 +745,8 @@ class Message < ActiveRecord::Base
     labels.collect(&:user_labels).flatten.collect(&:user_id)
   end
 
-  def label_select_all?(labels_for_message)
+  def label_select_all?(labels_ids_for_message)
+    labels_for_message = Label.where(id: label_ids)
     labels_for_message.size == 1 && labels_for_message.first.inactive?
   end
 

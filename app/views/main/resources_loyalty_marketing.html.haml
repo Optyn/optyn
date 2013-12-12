@@ -1,6 +1,17 @@
 = display_title "Customer Loyalty Marketing - How to keep customer from running to the competition."
 = display_meta_description "Customer loyalty values your best clients, and in return they become brand ambassadors. A few actions by you can drastically improve your business.", "customer loyalty, loyalty marketing, customer loyalty marketing, what is loyalty marketing, building customer loyalty, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a.current( href = resources_loyalty_marketing_path )
+      Loyalty Marketing
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +19,7 @@
   .span9
     %h1.hdg-s Loyalty Marketing
     %h2 Rewarding your best customers to be brand advocates
+    = image_tag( 'loyalty-marketing-resources.jpg', alt: 'loyalty marketing', class: 'pull-right img-polaroid' )
     %p 
       Although it varies by industry and merchant, as a general rule usually 12% to 15% of all its customers are loyal to that specific merchant.  That small group of shoppers, however, generate 55% to 70% of the business’ sales.
     %p

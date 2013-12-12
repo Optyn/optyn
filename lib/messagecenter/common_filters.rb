@@ -41,8 +41,12 @@ module Messagecenter
     end
 
     def populate_datetimes
-      @message.beginning = params[:message][:beginning].present? ? Time.parse(params[:message][:beginning]) : nil
-      @message.ending = params[:message][:ending].present? ? Time.parse(params[:message][:ending]) : nil
+      @message.beginning = params[:message][:beginning].present? ? Time.zone.parse(params[:message][:beginning]) : nil
+      @message.ending = params[:message][:ending].present? ? Time.zone.parse(params[:message][:ending]) : nil
+    end
+
+    def populate_send_on
+      @message.send_on = params[:message][:send_on].present? ? Time.zone.parse(params[:message][:send_on]) : nil
     end
 
     def show_my_messages_only

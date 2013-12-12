@@ -1,14 +1,28 @@
 = display_title "Newsletter Software"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = newsletter_software_path)
+      Newsletter Software
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s NEWSLETTER SOFTWARE
+    %h1.hdg-s Newsletter Software
     %h2 Newsletter Software that is built for Small Businesses.
-    /= image_tag( 'email-marketing.jpg', alt: 'free email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'newsletter-software.jpg', alt: 'newsletter-software', class: 'pull-right img-polaroid' )
     %p 
       Optyn is working on the next generation of marketing tools that includes the best email newsletter software that is built for small businesses and their busy business owners. We give our customers an easy way to create newsletters with our online newsletter software. We let you create newsletters in less than 2 minutes and so much more.
     %p

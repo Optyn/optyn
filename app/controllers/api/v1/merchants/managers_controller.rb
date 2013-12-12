@@ -4,6 +4,7 @@ module Api
       class ManagersController < PartnerOwnerBaseController
         doorkeeper_for :all
         before_filter :fetch_manager, :update_or_destroy_allowed?, only: [:update, :destroy]
+        skip_before_filter :set_time_zone, only: [:get_manager_from_email]
         #before filter to check update the manager self or not admin
         #before filter to check only a owner should be able to delete a manager
 
@@ -56,10 +57,6 @@ module Api
 
         def get_manager_from_email
           @manager = current_partner.managers.where(:email=>params[:email]).limit(1).first
-          Rails.logger.info "$" * 100
-          Rails.logger.info @manager.inspect
-          Rails.logger.info "#" * 100
-
 
           unless @manager
              render(status: :unprocessable_entity)

@@ -1,14 +1,28 @@
 = display_title "Bulk Email Software"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = bulk_email_software_path)
+      Bulk Email Software
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s BULK EMAIL SOFTWARE
+    %h1.hdg-s Bulk Email Software
     %h2 The only bulk email software that is built for you.
-    /= image_tag( 'email-marketing.jpg', alt: 'free email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'bulk-email-software.jpg', alt: 'bulk email software', class: 'pull-right img-polaroid' )
     %p 
       Optyn's new generation bulk email marketing software is built for small businesses and internet marketers. We know that your time is precious and we help you streamline your marketing efforts with our bulk email sender software.
     %p

@@ -106,12 +106,15 @@ class Merchants::SubscriptionsController < Merchants::BaseController
         @subscription.stripe_customer_token = @customer['id']
         if @subscription.save
           @subscription.update_attribute(:active, true)
-          amount = @customer.subscription.plan.amount
-          conn_count = current_shop.active_connection_count
-          last4 =  @customer.active_card.last4 rescue nil
-          Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop, amount: amount, conn_count: conn_count, last4: last4})
+          #Send Payment receieved mail only when plan is not starter.
+          if @plan != Plan.starter
+            amount = @customer.subscription.plan.amount
+            conn_count = current_shop.active_connection_count
+            last4 =  @customer.active_card.last4 rescue nil
+            Resque.enqueue(PaymentNotificationSender, 'MerchantMailer', 'payment_notification', {shop_id: current_shop.id, amount: amount, conn_count: conn_count, last4: last4})
+          end
           flash[:notice]="Payment done successfully"
-          redirect_to (session[:return_to] || root_path)
+          redirect_to '/merchants/upgrade'
         else
           render 'upgrade'
         end

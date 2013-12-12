@@ -1,14 +1,28 @@
 = display_title "Email Blast Software"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_blast_software_path)
+      Email Blast Software
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL BLAST SOFTWARE
+    %h1.hdg-s Email Blast Software
     %h2 Enjoy the benefits of Optyn's Email Blast Software.
-    /= image_tag( 'email-marketing.jpg', alt: 'free email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'email-blast-software.jpg', alt: 'email blast software', class: 'pull-right img-polaroid' )
     %p 
       Optyn offer email blast software that is reliable and fast. We offer you the ability to try it out with 100 of your customers before you buy it. Our e blast software allows you to quickly and easily get up and running and engage your audience in minutes. 
     %p
