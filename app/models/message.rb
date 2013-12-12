@@ -205,6 +205,7 @@ class Message < ActiveRecord::Base
   def self.batch_send
     if send_message?
       messages = with_state([:queued]).only_parents.ready_messages
+      puts messages.inspect
       execute_send(messages)
     end
   end
@@ -545,7 +546,7 @@ class Message < ActiveRecord::Base
           #message.state = 'transit'
           #message.save(validate: false)
           unless message.shop.disabled?
-            dispatched_message = message.dispatch(creation_errors, process_manager) if message.partner.eatstreet?
+            dispatched_message = message.dispatch(creation_errors, process_manager)
 
             unless dispatched_message.blank?
               raise dispatched_message.inspect
