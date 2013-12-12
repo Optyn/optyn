@@ -58,11 +58,11 @@ class Partner < ActiveRecord::Base
   end
 
   def optyn?
-    self.id == Partner.optyn_id
+    self.id == self.class.optyn_id
   end
 
   def eatstreet?
-    self.id == Partner.eatstreet_id
+    self.id == self.class.eatstreet_id
   end
 
   def subscription_required?
