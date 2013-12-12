@@ -366,12 +366,13 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    user_name = message_user.first_name.capitalize if message_user.present?
 
+    user_name = message_user.first_name.capitalize if message_user.present?
     if user_name.present?
-      self.subject.gsub(/{{Customer Name}}/i, user_name)
+      self.subject.gsub(/{{Customer Name}}/ix, user_name)
     else
-      regex = /{{Customer Name}},/ix #regex when the customer name is missing /eom
+      
+      regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
       personal_subject = (self.subject.gsub(regex, "")).strip.capitalize
       personal_subject
     end
