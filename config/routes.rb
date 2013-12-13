@@ -25,12 +25,12 @@ Optyn::Application.routes.draw do
   match 'cache/flush' => "cache#flush"
   match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
   match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
-  match 'tour' => 'main#tour'
+  match 'tour' => 'main#tour', :as => :tour_page
   match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
-  match 'testimonials' => 'main#testimonials'
+  # match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
-  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
+  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery', :as => :alley_gallery_testimonial
   match 'sitemap' => 'main#sitemap', :as => :website_sitemap
 
   #sell pages under marketing
