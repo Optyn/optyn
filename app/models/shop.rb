@@ -356,8 +356,14 @@ class Shop < ActiveRecord::Base
     #the function that actually does plan change
     new_plan = Plan.which(self)
     #binding.pry
+    plan_downgraded = self.plan_downgraded?
     self.subscription.update_plan(new_plan)
-    Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
+
+    #Send Plan upgrade mail, only when plan is upgraded.
+    if not plan_downgraded
+      Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
+    end
+
     create_audit_entry("Subscription updated to plan #{new_plan.name}")
   end
 
@@ -366,11 +372,13 @@ class Shop < ActiveRecord::Base
     #Calls tier_change_upgrade_planrequired and upgrade_plan
     #Called by Connection > check_shop_tier
     if !self.virtual && self.partner.subscription_required?
-      if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
-        Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
-      end
+
       if self.tier_change_required?
-        #binding.pry
+        
+        #Notify passing of free tier mail
+        if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
+          Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
+        end
         self.upgrade_plan
       end
     end
@@ -465,6 +473,14 @@ class Shop < ActiveRecord::Base
     end
 
     existing_profiles + blank_profiles_map.values
+  end
+
+  def plan_downgraded?
+    if self.plan.min > self.active_connection_count
+      return true
+    else
+      return false
+    end
   end
 
   private
