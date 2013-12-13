@@ -97,7 +97,7 @@ SitemapGenerator::Sitemap.create do
     add resources_best_free_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_advertising_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
-    add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_templates_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_marketing_stats_path, :changefreq => 'weekly', :priority => 0.8
     add resources_small_business_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_marketing_strategy_path, :changefreq => 'weekly', :priority => 0.8
