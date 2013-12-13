@@ -22,4 +22,10 @@ defaults:
     - optyn+107@idyllic-software.com
     - optyn+108@idyllic-software.com
     - optyn+109@idyllic-software.com
+    - success@simulator.amazonses.com
+    - bounce@simulator.amazonses.com
+    - ooto@simulator.amazonses.com
+    - complaint@simulator.amazonses.com
+    - suppressionlist@simulator.amazonses.com
+    - shashank@idyllic-software.com
 
