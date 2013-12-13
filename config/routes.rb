@@ -120,6 +120,13 @@ Optyn::Application.routes.draw do
   match '/resources/how-to-email-marketing' => 'main#resources_how_to_email_marketing', :as => :resources_how_to_email_marketing
   match '/resources/catchy-email-subject-lines' => 'main#resources_catchy_email_subject_lines', :as => :resources_catchy_email_subject_lines
   match '/resources/top-email-marketing' => 'main#resources_top_email_marketing', :as => :resources_top_email_marketing
+  match '/resources/email-marketing-online' => 'main#resources_email_marketing_online', :as => :resources_email_marketing_online
+  match '/resources/what-is-email-marketing' => 'main#resources_what_is_email_marketing', :as => :resources_what_is_email_marketing
+  match '/resources/follow-up-emails' => 'main#resources_follow_up_emails', :as => :resources_follow_up_emails
+  match '/resources/email-types' => 'main#resources_email_types', :as => :resources_email_types
+  match '/resources/email-newsletter' => 'main#resources_email_newsletter', :as => :resources_email_newsletter
+  match '/resources/mass-email' => 'main#resources_mass_email', :as => :resources_mass_email
+  match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
 
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
