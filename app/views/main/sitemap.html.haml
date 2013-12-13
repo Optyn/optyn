@@ -18,7 +18,24 @@
   .row-fluid
     .span4
       %h4 Our Company
-      = render 'layouts/links_company'
+      %ul
+        %li
+          %a{ :href => 'testimonials/alley-gallery' } Testimonials
+        %li
+          %a{ :href => about_path } About Us
+        %li
+          %a{ :href => 'http://www.angel.co/optyn/jobs', :target => "_blank"} Jobs
+        %li
+          %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } Email Marketing Blog
+        %li
+          %a{ :href => terms_path } Terms of Use
+        %li
+          %a{ :href => privacy_path } Privacy Policy
+        %li
+          %a{ :href => website_sitemap_path } Sitemap
+        %li
+          %a{ :href => profile_sitemap_path } Merchant Profiles
+
 
     .span4
       %h4 For Merchants

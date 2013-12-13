@@ -18,6 +18,7 @@ SitemapGenerator::Sitemap.create do
     add tour_page_path, :changefreq => 'weekly', :priority => 0.8
     add alley_gallery_testimonial_path, :changefreq => 'weekly', :priority => 0.8
     add '/affiliates', :changefreq => 'weekly', :priority => 0.8
+    add profile_sitemap, :changefreq => 'weekly', :priority => 0.8
     add marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_path, :changefreq => 'weekly', :priority => 0.8
     add email_marketing_path, :changefreq => 'weekly', :priority => 0.8
