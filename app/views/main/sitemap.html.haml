@@ -18,7 +18,24 @@
   .row-fluid
     .span4
       %h4 Our Company
-      = render 'layouts/links_company'
+      %ul
+        %li
+          %a{ :href => 'testimonials/alley-gallery' } Testimonials
+        %li
+          %a{ :href => about_path } About Us
+        %li
+          %a{ :href => 'http://www.angel.co/optyn/jobs', :target => "_blank"} Jobs
+        %li
+          %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } Email Marketing Blog
+        %li
+          %a{ :href => terms_path } Terms of Use
+        %li
+          %a{ :href => privacy_path } Privacy Policy
+        %li
+          %a{ :href => website_sitemap_path } Sitemap
+        %li
+          %a{ :href => profile_sitemap_path } Merchant Profiles
+
 
     .span4
       %h4 For Merchants
@@ -26,7 +43,7 @@
         %li
           %a{ :href => merchant_features_path } Features
         %li
-          %a{ :href => '/tour' } Quick Tour
+          %a{ :href => tour_page_path } Quick Tour
         %li
           %a{ :href => faq_path } FAQs
         %li
@@ -184,7 +201,7 @@
       %h4 Additional Resources
       %ul.bullet-disc
         %li 
-          %a{:href => resources_email_templates_path} Email Templates
+          %a{:href => resources_email_templates_path } Email Templates
         %li 
           %a{:href => resources_email_marketing_system_path} Email Marketing System
         %li 
@@ -215,5 +232,15 @@
           %a{:href => resources_email_campaign_path } Email Campaign
         %li 
           %a{:href => resources_email_marketing_stats_path } Email Marketing Stats
+        %li 
+          %a{:href => resources_small_business_email_marketing_path } Small Business Email Marketing
+        %li 
+          %a{:href => resources_email_marketing_strategy_path } Email Marketing Strategy
+        %li 
+          %a{:href => resources_how_to_email_marketing_path } How to Email Marketing
+        %li 
+          %a{:href => resources_catchy_email_subject_lines_path } Catchy Email Subject Lines
+        %li 
+          %a{:href => resources_top_email_marketing_path } Top Email Marketing
         
 .blank-space
