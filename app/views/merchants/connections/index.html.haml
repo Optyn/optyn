@@ -26,6 +26,7 @@
       - name_id = Permission.name_id
 
       - @connections.each_with_index do |connection, index|
+        - next if connection.user.nil?
         %tr
           %td= index + 1
           %td

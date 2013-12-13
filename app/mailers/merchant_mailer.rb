@@ -31,6 +31,15 @@ class MerchantMailer < ActionMailer::Base
     mail(:to => receivers, :subject => "Payment Successfull!")
   end
 
+  def invoice_amount_credited(options={})
+    options = options.symbolize_keys
+    receivers = fetch_payment_receivers(options)
+
+    @amount = ((options[:amount].to_f)/100)
+    @conn_count = options[:connection_count]
+    mail(:to => receivers, :subject => "Amount Credited")
+  end
+
   #manager
   def notify_passing_free_tier(options={})
     options = options.symbolize_keys
