@@ -25,13 +25,14 @@ Optyn::Application.routes.draw do
   match 'cache/flush' => "cache#flush"
   match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
   match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
-  match 'tour' => 'main#tour'
+  match 'tour' => 'main#tour', :as => :tour_page
   match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
-  match 'testimonials' => 'main#testimonials'
+  # match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
-  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
+  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery', :as => :alley_gallery_testimonial
   match 'sitemap' => 'main#sitemap', :as => :website_sitemap
+  match 'sitemap-customer-profiles' => 'main#sitemap_customer_profiles', :as => :profile_sitemap
 
   #sell pages under marketing
   match '/marketing' => 'main#marketing', :as => :marketing
@@ -112,8 +113,13 @@ Optyn::Application.routes.draw do
   match '/resources/best-free-email-marketing' => 'main#resources_best_free_email_marketing', :as => :resources_best_free_email_marketing
   match '/resources/email-advertising' => 'main#resources_email_advertising', :as => :resources_email_advertising
   match '/resources/email-campaign' => 'main#resources_email_campaign', :as => :resources_email_campaign
-  match '/resources/email-templates' => 'main#resources_email_templates', :as => :resources_email_campaign
+  match '/resources/email-templates' => 'main#resources_email_templates', :as => :resources_email_templates
   match '/resources/email-marketing-stats' => 'main#resources_email_marketing_stats', :as => :resources_email_marketing_stats
+  match '/resources/small-business-email-marketing' => 'main#resources_small_business_email_marketing', :as => :resources_small_business_email_marketing
+  match '/resources/email-marketing-strategy' => 'main#resources_email_marketing_strategy', :as => :resources_email_marketing_strategy
+  match '/resources/how-to-email-marketing' => 'main#resources_how_to_email_marketing', :as => :resources_how_to_email_marketing
+  match '/resources/catchy-email-subject-lines' => 'main#resources_catchy_email_subject_lines', :as => :resources_catchy_email_subject_lines
+  match '/resources/top-email-marketing' => 'main#resources_top_email_marketing', :as => :resources_top_email_marketing
 
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code

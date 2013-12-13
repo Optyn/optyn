@@ -420,7 +420,7 @@ class Shop < ActiveRecord::Base
   end  
   
   def meta_tag_title
-    content = "#{name}"
+    content = "#{name} - Visit & Get Info About #{name} Here"
 
     if first_location.present?
       content << " in #{first_location_city}" if first_location_city.present?
@@ -431,12 +431,12 @@ class Shop < ActiveRecord::Base
   end
 
   def meta_tag_description
-    content = ""
+    content = "Check out what type of marketing Promotions are available for #{name}, who uses Optyn to create coupons, specials, sales, surveys, and much more."
 
     if description.present?
       content << description 
     else
-      content << %{Check out what type of marketing Promotions are available for #{name}. #{name} uses Optyn to create Coupons, specials, sales, surveys, and much more. Follow #{name} on Optyn.com}
+      content << %{Check out what type of marketing Promotions are available for #{name}, who uses Optyn to create coupons, specials, sales, surveys, and much more.}
     end
 
     content
