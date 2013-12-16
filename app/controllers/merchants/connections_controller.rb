@@ -55,27 +55,41 @@ class Merchants::ConnectionsController < Merchants::BaseController
         @user.shop_identifier = current_shop.id
         @user.show_shop = true
         conn = nil
-
+  
   			if not @user.save
           if @user.errors.full_messages[0].include?("invalid")
             flag = true
             @error_hash.push("#{email} is invalid.")
             next
-          elsif @user.errors[:email] and @user.errors[:email].include?("has already been taken")
-            existing_user = User.find_by_email(email)
-            existing_connection = Connection.where(:user_id => existing_user.id, :shop_id => current_shop.id)
-            if not existing_connection.empty?
-              existing_connection = existing_connection.first
-              if not existing_connection.active
-                conn = existing_connection
-                @user = existing_user
+          elsif @user.errors[:email]
+            
+            #Email belongs to existing User.
+            if @user.errors[:email].include?("has already been taken")
+              existing_user = User.find_by_email(email)
+              existing_connection = Connection.where(:user_id => existing_user.id, :shop_id => current_shop.id)
+              #Connection with the shop, exists
+              if not existing_connection.empty?
+                existing_connection = existing_connection.first
+                #If connection is not active, make it active.
+                if not existing_connection.active
+                  conn = existing_connection
+                  @user = existing_user
+                #If connection is active, return.
+                else
+                  flag = true
+                  @error_hash.push("#{email} has already been taken.")
+                  next
+                end
+              #User exixts, but does not have connection with the current shop.
               else
-                flag = true
-                @error_hash.push("#{email} has already been taken.")
-                next
+                @user = existing_user
               end
-            else
-              @user = existing_user
+
+            #Email belongs to existing Manager.
+            elsif @user.errors[:email].include?("already taken")
+              flag = true
+              @error_hash.push("#{email} has already been taken.")
+              next
             end
           end
         end

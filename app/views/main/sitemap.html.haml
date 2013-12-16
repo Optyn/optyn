@@ -192,12 +192,6 @@
           %a{ :href => email_marketing_programs_path } Email Marketing Programs
   .row-fluid
     .span4
-      %h4 Customer Profiles
-      %ul
-        - @shops.each do |shop|
-          %li
-            = link_to(shop.name, public_shop_path(shop.identifier))
-    .span4
       %h4 Additional Resources
       %ul.bullet-disc
         %li 
@@ -242,5 +236,18 @@
           %a{:href => resources_catchy_email_subject_lines_path } Catchy Email Subject Lines
         %li 
           %a{:href => resources_top_email_marketing_path } Top Email Marketing
-        
+        %li 
+          %a{:href => resources_email_marketing_online_path } Email Marketing Online
+        %li 
+          %a{:href => resources_what_is_email_marketing_path } What is Email Marketing
+        %li 
+          %a{:href => resources_follow_up_emails_path } Follow Up Emails
+        %li 
+          %a{:href => resources_email_types_path } Email Types
+        %li 
+          %a{:href => resources_email_newsletter_path } Email Newsletter
+        %li 
+          %a{:href => resources_mass_email_path } Mass Email
+        %li 
+          %a{:href => resources_opt_in_email_marketing_path } Opt In Email Marketing
 .blank-space
