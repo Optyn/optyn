@@ -9,7 +9,7 @@ class MerchantMailer < ActionMailer::Base
     @amount = ((options[:amount].to_f)/100)
     @conn_count = options[:connection_count]
     @last4 = options[:last4]
-    mail(:to => receivers, :subject => "Payment Successfull!")
+    mail(:to => receivers, :subject => "Payment Successful!")
   end
 
   #manager, amount, connection_count
@@ -28,7 +28,7 @@ class MerchantMailer < ActionMailer::Base
 
     @amount = ((options[:amount].to_f)/100)
     @conn_count = options[:connection_count]
-    mail(:to => receivers, :subject => "Payment Successfull!")
+    mail(:to => receivers, :subject => "Payment Successful!")
   end
 
   def invoice_amount_credited(options={})
