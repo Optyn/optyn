@@ -6,7 +6,7 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   
-  process :resize_to_fit => [600, 400] , :if => :check_dimentions?
+  process :resize_to_fit => [600, 400] , :if => :check_dimensions?
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -52,16 +52,13 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   end
 
   protected
-  def check_dimentions?(file)
+  def check_dimensions?(file)
     img = ::Magick::Image::read(@file.file).first
     width = img.columns
     height = img.rows
-    if width.to_i > 600 && height.to_i > 400
-      return true
-    else
-      return false
-    end
+    width.to_i > 600 || height.to_i > 400
   end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
