@@ -204,23 +204,11 @@ module StripeEventHandlers
   def self.handle_invoice_item_created(params)
     #as per discussion with gaurva everytime a invoice line item is created
     #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
-    stripe_invoice_item_token = params['data']['object']['id'] rescue nil
-    amount = params['data']['object']['amount'] rescue nil
-    livemode = params['data']['object']['livemode'] rescue nil
-    proration = params['data']['object']['proration'] rescue nil
-    description = params['data']['object']['description'] rescue nil
+
+    create_or_update_invoice_item(params)
+
     stripe_customer_token = params['data']['object']['customer'] rescue nil
-    stripe_invoice_token = params['data']['object']['invoice'] rescue nil
     # binding.pry
-    InvoiceItem.create(
-                      :stripe_invoice_item_token => stripe_invoice_item_token,
-                      :amount => amount , 
-                      :livemode => livemode ,
-                      :proration => proration ,
-                      :description => description , 
-                      :stripe_customer_token => stripe_customer_token ,
-                      :stripe_invoice_token=> stripe_invoice_token
-                      )
     ##Try creating a invoice
     Rails.logger.info 'Try Create Invoice@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
     Rails.logger.info "Customer " + stripe_customer_token
@@ -250,22 +238,11 @@ module StripeEventHandlers
   def self.handle_invoice_item_updated(params)
     #as per discussion with gaurva everytime a invoice line item is created
     #we force stripe to make a invoice which absorbs that invpoice line item , making our view consistent
-    invoice_item = InvoiceItem.where(:stripe_invoice_item_token=>params['data']['object']['id']).first
-    amount = params['data']['object']['amount'] rescue nil
-    livemode = params['data']['object']['livemode'] rescue nil
-    proration = params['data']['object']['proration'] rescue nil
-    description = params['data']['object']['description'] rescue nil
+    create_or_update_invoice_item(params)
+    
     stripe_customer_token = params['data']['object']['customer'] rescue nil
     stripe_invoice_token = params['data']['object']['invoice'] rescue nil
     # binding.pry
-    invoice_item.update_attributes(
-                                  :amount => amount , 
-                                  :livemode => livemode ,
-                                  :proration => proration ,
-                                  :description => description , 
-                                  :stripe_customer_token => stripe_customer_token ,
-                                  :stripe_invoice_token=>stripe_invoice_token
-                                  )
     unless stripe_invoice_token.present?
       begin
         Stripe::Invoice.create(:customer => stripe_customer_token)
@@ -361,6 +338,31 @@ module StripeEventHandlers
       subscription = nil
     end
     return subscription
+  end
+
+  def self.create_or_update_invoice_item(params)
+    invoice_item = InvoiceItem.where(:stripe_invoice_item_token=>params['data']['object']['id']).first
+    
+    if invoice_item.nil? #create invoice item if not present
+      stripe_invoice_item_token = params['data']['object']['id'] rescue nil
+      invoice_item = InvoiceItem.create(
+                      :stripe_invoice_item_token => stripe_invoice_item_token)
+    end
+    amount = params['data']['object']['amount'] rescue nil
+    livemode = params['data']['object']['livemode'] rescue nil
+    proration = params['data']['object']['proration'] rescue nil
+    description = params['data']['object']['description'] rescue nil
+    stripe_customer_token = params['data']['object']['customer'] rescue nil
+    stripe_invoice_token = params['data']['object']['invoice'] rescue nil
+
+    invoice_item.update_attributes(
+                                  :amount => amount , 
+                                  :livemode => livemode ,
+                                  :proration => proration ,
+                                  :description => description , 
+                                  :stripe_customer_token => stripe_customer_token ,
+                                  :stripe_invoice_token=>stripe_invoice_token
+                                  )
   end
 
 end
