@@ -1,7 +1,7 @@
 %div
   %p
     - if @message.content.present?
-      = render partial: "merchants/shared/messages/content"
+      = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
     - else
       %p
         == We need your feedback. Help us out by filling out the survey below.
