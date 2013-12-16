@@ -288,6 +288,7 @@ module StripeEventHandlers
     stripe_coupon_amount_off = params[:data][:object][:discount][:coupon][:amount_off] rescue nil
     subtotal = params[:data][:object][:subtotal] rescue nil
     total = params[:data][:object][:total]  rescue nil
+    description = params['data']['object']['lines']['data'].first['description'] rescue nil
 
     Invoice.create(
       :subscription_id => subscription.id,
@@ -300,7 +301,8 @@ module StripeEventHandlers
       :stripe_coupon_amount_off => stripe_coupon_amount_off,
       :subtotal => subtotal,
       :total => total,
-      :stripe_plan_token => stripe_plan_token
+      :stripe_plan_token => stripe_plan_token,
+      :description => description
     )
   end
 
@@ -313,6 +315,7 @@ module StripeEventHandlers
     total = params[:data][:object][:total]  rescue nil
     amount = params['data']['object']['total']  rescue nil
     paid_status = params['data']['object']['paid'] rescue nil
+    description = params['data']['object']['lines']['data'].first['description'] rescue nil
 
     invoice = Invoice.where(:stripe_invoice_id=>params['data']['object']['id']).first
     begin
@@ -324,7 +327,8 @@ module StripeEventHandlers
         :stripe_coupon_amount_off => stripe_coupon_amount_off,
         :subtotal => subtotal,
         :total => total,
-        :stripe_plan_token => stripe_plan_token
+        :stripe_plan_token => stripe_plan_token,
+        :description => description
       )
     rescue
       Rails.logger.info '[Error]Issue updating the invoice '+'~'*100

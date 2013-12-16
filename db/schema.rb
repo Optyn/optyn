@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205084043) do
+ActiveRecord::Schema.define(:version => 20131216053927) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20131205084043) do
     t.integer  "total"
     t.integer  "stripe_coupon_percent_off"
     t.integer  "stripe_coupon_amount_off"
+    t.string   "description"
   end
 
   create_table "labels", :force => true do |t|
