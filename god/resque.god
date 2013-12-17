@@ -1,22 +1,19 @@
 rails_env   = ENV['RAILS_ENV']
+#rails_env = "staging"
 raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+num_workers = rails_env == 'production' ? 5 : 2
 
-# RESQUE_PROCESSORS = [
-#   [1, "foo,bar"],
-#   [2, "baz"],
-#   [3, "demo"]
-# ]
-
-RESQUE_PROCESSORS.each do |resque_id, resque_queues|
+puts ENV['RAILS_ENV']
+0.upto(num_workers) do |num|
   God.watch do |w|
     w.dir      = "#{rails_root}"
-    w.name     = "resque-#{resque_id}"
+    w.name     = "resque-#{num}"
     w.group    = 'resque'
     w.interval = 30.seconds
-    w.env      = {"QUEUES"=>resque_queues, "RAILS_ENV"=>rails_env, "BUNDLE_GEMFILE"=>"#{rails_root}/Gemfile"}
+    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env, "BUNDLE_GEMFILE"=>"#{rails_root}/Gemfile"}
     w.start    = "bundle exec rake -f #{rails_root}/Rakefile environment resque:work"
-    w.log      = "#{rails_root}/log/resque-#{resque_id}.log"
+    w.log      = "#{rails_root}/log/resque-#{num}.log"
 
     # restart if memory gets too high
     w.transition(:up, :restart) do |on|

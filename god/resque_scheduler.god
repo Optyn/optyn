@@ -1,6 +1,7 @@
 rails_env   = ENV['RAILS_ENV']
 raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+num_workers = rails_env == 'production' ? 5 : 2
 
 God.watch do |w|
   w.dir      = "#{rails_root}"

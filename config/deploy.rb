@@ -60,7 +60,7 @@ after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
-after "deploy:restart", "deploy:restart_god"
+# after "deploy:restart", "deploy:restart_god"
 # after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
 
@@ -88,7 +88,20 @@ namespace :deploy do
   end
 
   desc "Restart God gracefully"
-  task "restart_god", :roles => :app do
+
+  task :restart_sidekiq ,:roles => :app do
+    run "#{sudo} god restart resque"
+  end
+
+  task :stop_sidekiq ,:roles => :app do
+    run "#{sudo} god stop resque"
+  end
+
+  task :start_sidekiq ,:roles => :app do
+    run "#{sudo} god start resque"
+  end
+
+  task :restart_god , :roles => :app do
     god_config_path = File.join(release_path, 'config', 'resque.god')
     begin
       # Throws an exception if god is not running.
@@ -101,7 +114,7 @@ namespace :deploy do
       try_killing_resque_workers
 
       # Start god.
-      run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
+      run "cd #{release_path}; #{sudo} RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
     end
   end
   #end
