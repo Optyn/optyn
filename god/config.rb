@@ -1,0 +1,1 @@
+God.load "/home/dev/code/god/**/*.god"
