@@ -45,7 +45,6 @@ set :lock_file_name, 'deployment.pid'
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-# If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:update_code', 'deploy:messenger:lock'
@@ -56,13 +55,13 @@ after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
-# after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:pdf:make_executable"
 after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy:restart", "deploy:restart_god"
+# after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
 
 #after "deploy:create_symlink", "whenever"
