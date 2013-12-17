@@ -94,16 +94,16 @@ namespace :deploy do
   end
 
   desc "Start Resque"
-  task :start_reque ,:roles => :app do
+  task :start_resque ,:roles => :app do
     run "rvmsudo  god start resque"
   end
 
   desc "Restart God gracefully"
   task :restart_resque , :roles => :app do
-    god_config_path = File.join(release_path, 'config', 'resque.god')
+    god_config_path = File.join(current_path, 'config', 'resque.god')
     begin
       # Throws an exception if god is not running.
-      run "cd #{release_path}; bundle exec god status && RAILS_ENV=#{rails_env} RAILS_ROOT=#{release_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
+      run "cd #{current_path}; bundle exec god status && rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} RAILS_ROOT=#{current_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
 
       # Kill resque processes and have god restart them with the newly loaded config.
       try_killing_resque_workers
@@ -112,7 +112,7 @@ namespace :deploy do
       try_killing_resque_workers
 
       # Start god.
-      run "cd #{release_path}; rvmsudo RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
+      run "cd #{current_path}; rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
     end
   end
   #end
