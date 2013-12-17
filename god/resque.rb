@@ -9,6 +9,7 @@ God.watch do |w|
   w.start = "/usr/local/bin/rake resque:work"
   w.start_grace = 10.seconds
   w.log = File.expand_path(File.join(File.dirname(__FILE__), '..','log','resque-worker.log'))
+  
   # restart if memory gets too high
   w.transition(:up, :restart) do |on|
     on.condition(:memory_usage) do |c|
