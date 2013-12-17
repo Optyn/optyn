@@ -63,6 +63,8 @@ after "deploy:restart", "deploy:list:workers"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
+after "deploy:restart", "deploy:restart_god"
+
 #after "deploy:create_symlink", "whenever"
 
 
@@ -78,6 +80,32 @@ namespace "whenever" do
 end
 
 namespace :deploy do
+  def try_killing_resque_workers
+  run "pkill -3 -f resque"
+rescue
+  nil
+end
+
+desc "Restart God gracefully"
+#start
+task "restart_god", :roles => :app do
+  god_config_path = File.join(release_path, 'config', 'app.god')
+  begin
+    # Throws an exception if god is not running.
+    run "cd #{release_path}; bundle exec god status && RAILS_ENV=#{rails_env} RAILS_ROOT=#{release_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
+
+    # Kill resque processes and have god restart them with the newly loaded config.
+    try_killing_resque_workers
+  rescue => ex
+    # god is dead, workers should be as well, but who knows.
+    try_killing_resque_workers
+
+    # Start god.
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
+  end
+end
+#end
+
   desc "reload the database with seed data"
   task :seed do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
