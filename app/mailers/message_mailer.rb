@@ -53,8 +53,8 @@ class MessageMailer < ActionMailer::Base
     ShopTimezone.set_timezone(@owner_shop)
 
     mail(from: "services@optyn.com",
-      to: "office@eatstreet.com",
-      cc: ["gaurav@optyn.com", "alen@optyn.com"],
+      to: SiteConfig.eatstreet_curation_email,
+      cc: ["gaurav@optyn.com", "alen@optyn.com", "ian@eatstreet.com"],
       subject: "Message Curation: #{@owner_shop.name}",
       reply_to: @actual_message.manager_email
     )
@@ -68,9 +68,9 @@ class MessageMailer < ActionMailer::Base
     ShopTimezone.set_timezone(@shop)
     
     mail(
-      from: "office@eatstreet.com",
+      from: SiteConfig.eatstreet_curation_email,
       to: @actual_message.manager_email,
-      bcc: ["gaurav@optyn.com", "alen@optyn.com"],
+      bcc: ["gaurav@optyn.com", "alen@optyn.com", "ian@eatstreet.com"],
       subject: "Message Rejected: #{@actual_message.name}",
       reply_to: "office@eatstreet.com"
     )
