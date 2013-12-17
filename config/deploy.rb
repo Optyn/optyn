@@ -56,11 +56,11 @@ after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "deploy:pdf:make_executable"
-after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
-# after "deploy:restart", "deploy:restart_god"
+after "deploy:restart", "deploy:restart_god"
+after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
 
