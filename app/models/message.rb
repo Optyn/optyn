@@ -339,7 +339,7 @@ class Message < ActiveRecord::Base
   end
 
   def sanitized_discount_amount
-    discount_amount.to_s.gsub(/[^A-Za-z0-9]/, "")
+    discount_amount.to_s.gsub(/[^A-Za-z0-9]\./, "")
   end
 
   def percentage_off?
@@ -366,7 +366,7 @@ class Message < ActiveRecord::Base
 
     user_name = message_user.first_name.capitalize if message_user.present?
     if user_name.present?
-      self.subject.gsub(/{{Customer Name}}/ix, user_name)
+      self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
       
       regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
@@ -661,7 +661,7 @@ class Message < ActiveRecord::Base
   end
 
   def validate_button_url
-    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/i)
       self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   
       return
     end 
