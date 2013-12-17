@@ -149,6 +149,7 @@ module Api
           @message.subject = params[:message][:subject]
           populate_send_on
           @needs_curation = @message.needs_curation(@message.state)
+          @message.adjust_send_on
           @message.update_meta!
 
           render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])

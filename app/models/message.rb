@@ -17,7 +17,7 @@ class Message < ActiveRecord::Base
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
-  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
+  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time, :send_on_rounded
 
   attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public
  
@@ -115,17 +115,20 @@ class Message < ActiveRecord::Base
     before_transition :draft => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
-      unless message.is_child?
-        message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
-      else
-        message.send_on = nil
-      end
+      
       message.valid?
     end
 
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      
+      unless message.is_child?
+        message.adjust_send_on
+      else
+        message.send_on = nil
+      end
+
       message.valid?
     end
 
@@ -191,7 +194,6 @@ class Message < ActiveRecord::Base
 
   def self.move_to_trash(uuids)
     trigger_event(uuids, 'move_to_trash')
-    #binding.pry
   end
 
   def self.move_to_draft(uuids)
@@ -251,6 +253,15 @@ class Message < ActiveRecord::Base
     end  
   end
 
+  def adjust_send_on
+    if self.send_on.blank? || self.send_on < 1.hour.since
+      send_timestamp = Time.now + 1.hour
+      send_timestamp = send_timestamp.min >= 30 ? (send_timestamp.end_of_hour + 30.minutes) : (send_timestamp.end_of_hour)
+      self.send_on = send_timestamp 
+      self.send_on_rounded = true
+    end
+  end
+
   def manager_email
     manager.email
   end
@@ -288,6 +299,10 @@ class Message < ActiveRecord::Base
 
   def partner
     shop.partner
+  end
+
+  def partner_eatstreet?
+    partner.eatstreet?
   end
 
   def message_user(user)
@@ -339,7 +354,7 @@ class Message < ActiveRecord::Base
   end
 
   def sanitized_discount_amount
-    discount_amount.to_s.gsub(/[^A-Za-z0-9]/, "")
+    discount_amount.to_s.gsub(/[^A-Za-z0-9]\./, "")
   end
 
   def percentage_off?
@@ -366,7 +381,7 @@ class Message < ActiveRecord::Base
 
     user_name = message_user.first_name.capitalize if message_user.present?
     if user_name.present?
-      self.subject.gsub(/{{Customer Name}}/ix, user_name)
+      self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
       
       regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
@@ -661,7 +676,7 @@ class Message < ActiveRecord::Base
   end
 
   def validate_button_url
-    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/i)
       self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   
       return
     end 
