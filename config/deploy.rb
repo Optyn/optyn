@@ -90,12 +90,12 @@ namespace :deploy do
   desc "Stop Resque"
   task :stop_resque ,:roles => :app do
     try_killing_resque_workers
-    run "rvmsudo god stop resque"
+    run "rvmsudo -p '#{sudo_prompt}' god stop resque"
   end
 
   desc "Start Resque"
   task :start_resque ,:roles => :app do
-    run "rvmsudo  god start resque"
+    run "rvmsudo -p '#{sudo_prompt}'  god start resque"
   end
 
   desc "Restart God gracefully"

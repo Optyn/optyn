@@ -24,7 +24,7 @@ puts "and number of workers #{num_workers}"
     w.name     = "resque-#{num}"
     w.group    = 'resque'
     w.interval = 30.seconds
-    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env, "BUNDLE_GEMFILE"=>"#{rails_release_root}/Gemfile"}
+    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env, "BUNDLE_GEMFILE"=>"#{rails_release_root}/BUNDLE_GEMFILE"}
     w.start    = "bundle exec rake -f #{rails_release_root}/Rakefile environment resque:work"
     w.log      = "#{rails_root}/shared/log/resque-#{num}.log"
 
