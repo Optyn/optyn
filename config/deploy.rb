@@ -114,7 +114,7 @@ namespace :deploy do
       try_killing_resque_workers
 
       # Start god.
-      run "cd #{release_path}; #{sudo} RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
+      run "cd #{release_path}; rvmsudo RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
     end
   end
   #end
