@@ -10,6 +10,7 @@ raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..','..'))
 rails_release_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 num_workers = rails_env == 'production' ? 5 : 2
+memory_usage_max = rails_env == 'production' ? 350 : 350
 
 puts "God is starting with:"
 puts "RAILS_ENV = #{ENV['RAILS_ENV']}"
@@ -28,7 +29,7 @@ puts "and number of workers #{num_workers}"
     # restart if memory gets too high
     w.transition(:up, :restart) do |on|
       on.condition(:memory_usage) do |c|
-        c.above = 350.megabytes
+        c.above = memory_usage_max.megabytes
         c.times = 2
       end
     end
