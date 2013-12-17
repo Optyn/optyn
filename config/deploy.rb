@@ -87,17 +87,18 @@ namespace :deploy do
     nil
   end
 
-  desc "Restart God gracefully"
-
+  desc "Stop Resque"
   task :stop_resque ,:roles => :app do
     try_killing_resque_workers
     run "rvmsudo god stop resque"
   end
 
+  desc "Start Resque"
   task :start_reque ,:roles => :app do
     run "rvmsudo  god start resque"
   end
 
+  desc "Restart God gracefully"
   task :restart_resque , :roles => :app do
     god_config_path = File.join(release_path, 'config', 'resque.god')
     begin
