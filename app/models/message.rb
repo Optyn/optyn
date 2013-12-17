@@ -17,7 +17,7 @@ class Message < ActiveRecord::Base
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
-  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
+  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time, :send_on_rounded
 
   attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public
  
@@ -115,17 +115,23 @@ class Message < ActiveRecord::Base
     before_transition :draft => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
-      unless message.is_child?
-        message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
-      else
-        message.send_on = nil
-      end
+      
       message.valid?
     end
 
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      
+      unless message.is_child?
+        send_timestamp = Time.now + 1.hour
+        send_timestamp = send_timestamp.min >= 30 ? (send_timestamp.end_of_hour + 30.minutes) : (send_timestamp.end_of_hour)
+        message.send_on = send_timestamp if message.send_on.blank? || message.send_on < 1.hour.since
+        message.send_on_rounded = true
+      else
+        message.send_on = nil
+      end
+
       message.valid?
     end
 
