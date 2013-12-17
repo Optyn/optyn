@@ -124,10 +124,7 @@ class Message < ActiveRecord::Base
       message.from = message.send(:canned_from)
       
       unless message.is_child?
-        send_timestamp = Time.now + 1.hour
-        send_timestamp = send_timestamp.min >= 30 ? (send_timestamp.end_of_hour + 30.minutes) : (send_timestamp.end_of_hour)
-        message.send_on = send_timestamp if message.send_on.blank? || message.send_on < 1.hour.since
-        message.send_on_rounded = true
+        message.adjust_send_on
       else
         message.send_on = nil
       end
@@ -197,7 +194,6 @@ class Message < ActiveRecord::Base
 
   def self.move_to_trash(uuids)
     trigger_event(uuids, 'move_to_trash')
-    #binding.pry
   end
 
   def self.move_to_draft(uuids)
@@ -255,6 +251,15 @@ class Message < ActiveRecord::Base
     else
       raise ActiveRecord::RecordInvalid.new(self)
     end  
+  end
+
+  def adjust_send_on
+    if self.send_on.blank? || self.send_on < 1.hour.since
+      send_timestamp = Time.now + 1.hour
+      send_timestamp = send_timestamp.min >= 30 ? (send_timestamp.end_of_hour + 30.minutes) : (send_timestamp.end_of_hour)
+      self.send_on = send_timestamp 
+      self.send_on_rounded = true
+    end
   end
 
   def manager_email
