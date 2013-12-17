@@ -27,7 +27,7 @@ class MessageMailer < ActionMailer::Base
   end
 
   def error_notification(error_message)
-    mail(to: ["gaurav@optyn.com", "alen@optyn.com"], subject: "Error while sending the emal", body: error_message)
+    mail(to: ["gaurav@optyn.com", "alen@optyn.com"], subject: "Error while sending emails", body: error_message)
   end
 
   def shared_email(user_email, message)
