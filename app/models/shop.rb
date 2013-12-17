@@ -361,7 +361,8 @@ class Shop < ActiveRecord::Base
 
     #Send Plan upgrade mail, only when plan is upgraded.
     if not plan_downgraded
-      Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
+      conn_count = self.active_connection_count
+      Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id, active_connections: conn_count})
     end
 
     create_audit_entry("Subscription updated to plan #{new_plan.name}")

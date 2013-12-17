@@ -51,7 +51,7 @@ class MerchantMailer < ActionMailer::Base
   def notify_plan_upgrade(options={})
     options = options.symbolize_keys
     @manager = Manager.find(options[:manager_id])
-    @connections = @manager.shop.active_connections.count
+    @connections = options[:active_connections]
     mail(:to => @manager.email, :subject => "Congratulations!! You are growing.")
   end
 
