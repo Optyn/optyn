@@ -79,7 +79,7 @@ end
 
 gem 'jquery-rails'
 
-gem "breadcrumbs_on_rails"
+gem "gretel"
 
 group :development do
   gem 'thin'

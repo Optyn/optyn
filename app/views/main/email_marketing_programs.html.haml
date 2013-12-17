@@ -2,19 +2,7 @@
 = display_meta_description "We are taking a leap in building the ideal email marketing program for small businesses and marketers.", "email marketing programs, email marketing program, bulk email programs, mass email program, mass email programs, bulk email program, email newsletter programs, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = marketing_path )
-      Marketing Software
-      %span
-    %a( href = email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = email_marketing_programs_path)
-      Email Marketing Programs
-      %span
+  - breadcrumb :email_marketing_programs
 
 .row-fluid
   .span3

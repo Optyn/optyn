@@ -2,16 +2,7 @@
 = display_meta_description "Find any page that you need and all the resources around our email marketing and small business marketing", "email marketing, small business marketing, email marketing resources, email marketing services, optyn email marketing, optyn marketing sitemap, optyn sitemap, email marketing sitemap"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = website_sitemap_path )
-      Sitemap
-      %span
-    %a.current( href = profile_sitemap_path )
-      Merchant Profile Sitemap
-      %span
+  -  breadcrumb :profile_sitemap
 
 .op-sitemap
   .row-fluid
