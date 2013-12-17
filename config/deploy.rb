@@ -62,8 +62,8 @@ after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
-after "deploy", "deploy:cleanup"
 after "deploy:restart", "deploy:restart_god"
+after "deploy", "deploy:cleanup"
 
 #after "deploy:create_symlink", "whenever"
 
