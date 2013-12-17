@@ -9,7 +9,9 @@ rails_env = ENV['RAILS_ENV'] || "staging"
 raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..','..'))
 rails_release_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+#SET Maximum number of workers 
 num_workers = rails_env == 'production' ? 5 : 2
+#SET Maximum memory usage 
 memory_usage_max = rails_env == 'production' ? 350 : 350
 
 puts "God is starting with:"
@@ -31,6 +33,12 @@ puts "and number of workers #{num_workers}"
       on.condition(:memory_usage) do |c|
         c.above = memory_usage_max.megabytes
         c.times = 2
+      end
+      on.condition(:cpu_usage) do |c|
+        # Restart deamon if cpu usage goes
+        # above 90% at least five times
+        c.above = 90.percent
+        c.times = 5
       end
     end
 
