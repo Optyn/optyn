@@ -1,10 +1,11 @@
-rails_env   = ENV['RAILS_ENV']
-#rails_env = "staging"
+rails_env = ENV['RAILS_ENV'] || "staging"
 raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 num_workers = rails_env == 'production' ? 5 : 2
 
-puts ENV['RAILS_ENV']
+puts "God is starting with:"
+puts "RAILS_ENV = #{ENV['RAILS_ENV']}"
+
 0.upto(num_workers) do |num|
   God.watch do |w|
     w.dir      = "#{rails_root}"
