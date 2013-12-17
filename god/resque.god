@@ -1,3 +1,10 @@
+#Welcome to "Process" heaven
+#God rules here and it monitors all applcations irrespective of
+#of their states -> zombie, alive or orphan
+#In this "multithestic" universe of optyn , this god specifically looks
+#after Reque background processes.
+#Now only if I can start a cult around this one; I will end up super rich :P
+
 rails_env = ENV['RAILS_ENV'] || "staging"
 raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..','..'))
@@ -6,6 +13,7 @@ num_workers = rails_env == 'production' ? 5 : 2
 
 puts "God is starting with:"
 puts "RAILS_ENV = #{ENV['RAILS_ENV']}"
+puts "and number of workers #{num_workers}"
 
 0.upto(num_workers) do |num|
   God.watch do |w|
