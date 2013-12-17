@@ -89,19 +89,16 @@ namespace :deploy do
 
   desc "Restart God gracefully"
 
-  task :restart_sidekiq ,:roles => :app do
-    run "#{sudo} god restart resque"
+  task :stop_resque ,:roles => :app do
+    try_killing_resque_workers
+    run "rvmsudo god stop resque"
   end
 
-  task :stop_sidekiq ,:roles => :app do
-    run "#{sudo} god stop resque"
+  task :start_reque ,:roles => :app do
+    run "rvmsudo  god start resque"
   end
 
-  task :start_sidekiq ,:roles => :app do
-    run "#{sudo} god start resque"
-  end
-
-  task :restart_god , :roles => :app do
+  task :restart_resque , :roles => :app do
     god_config_path = File.join(release_path, 'config', 'resque.god')
     begin
       # Throws an exception if god is not running.
