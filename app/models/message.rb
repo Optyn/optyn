@@ -290,6 +290,10 @@ class Message < ActiveRecord::Base
     shop.partner
   end
 
+  def partner_eatstreet?
+    partner.eatstreet?
+  end
+
   def message_user(user)
     message_users.find_by_user_id(user.id)
   end
