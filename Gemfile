@@ -78,7 +78,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'god' #this doesnt give us permission
+gem 'god' 
 gem "breadcrumbs_on_rails"
 
 group :development do
