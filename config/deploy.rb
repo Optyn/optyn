@@ -100,7 +100,7 @@ namespace :deploy do
 
   desc "Restart God gracefully"
   task :restart_resque , :roles => :app do
-    god_config_path = File.join(current_path, 'config', 'resque.god')
+    god_config_path = File.join(current_path, 'god', 'resque.god')
     begin
       # Throws an exception if god is not running.
       run "cd #{current_path}; bundle exec god status && rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} RAILS_ROOT=#{current_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
