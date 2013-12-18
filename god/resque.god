@@ -7,16 +7,18 @@
 
 rails_env = ENV['RAILS_ENV'] || "staging"
 raise "Please specify RAILS_ENV." unless rails_env
+#rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..','..'))
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 rails_release_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 #SET Maximum number of workers 
-num_workers = rails_env == 'production' ? 5 : 2
+num_workers = rails_env == 'production' ? 5 : 0
 #SET Maximum memory usage 
 memory_usage_max = rails_env == 'production' ? 350 : 350
 
 puts "God is starting with:"
 puts "RAILS_ENV = #{ENV['RAILS_ENV']}"
-puts "and number of workers #{num_workers}"
+puts "and number of workers #{num_workers} + 1"
+puts "command to be execued QUEUES=* bundle exec rake -f ##{rails_root}/current/Rakefile environment resque:work"
 
 0.upto(num_workers) do |num|
   God.watch do |w|
@@ -24,8 +26,8 @@ puts "and number of workers #{num_workers}"
     w.name     = "resque-#{num}"
     w.group    = 'resque'
     w.interval = 30.seconds
-    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env, "BUNDLE_GEMFILE"=>"#{rails_release_root}/BUNDLE_GEMFILE"}
-    w.start    = "QUEUES=* bundle exec rake -f #{rails_release_root}/Rakefile environment resque:work"
+    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env}
+    w.start    = "QUEUES=* bundle exec rake -f ##{rails_root}/current/Rakefile environment resque:work"
     w.log      = "#{rails_root}/shared/log/resque-#{num}.log"
 
     # restart if memory gets too high
@@ -34,12 +36,12 @@ puts "and number of workers #{num_workers}"
         c.above = memory_usage_max.megabytes
         c.times = 2
       end
-      on.condition(:cpu_usage) do |c|
-        # Restart deamon if cpu usage goes
-        # above 90% at least five times
-        c.above = 90.percent
-        c.times = 5
-      end
+      # on.condition(:cpu_usage) do |c|
+      #   # Restart deamon if cpu usage goes
+      #   # above 90% at least five times
+      #   c.above = 95.percent
+      #   c.times = 5
+      # end
     end
 
     # determine the state on startup
