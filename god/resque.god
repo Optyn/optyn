@@ -22,7 +22,7 @@ puts "command to be execued QUEUES=* bundle exec rake -f #{rails_root}/current/R
 
 0.upto(num_workers) do |num|
   God.watch do |w|
-    w.dir      = "#{rails_release_root}"
+    w.dir      = "#{rails_root}/current/"
     w.name     = "resque-#{num}"
     w.group    = 'resque'
     w.interval = 30.seconds
