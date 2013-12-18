@@ -18,7 +18,7 @@ memory_usage_max = rails_env == 'production' ? 350 : 350
 puts "God is starting with:"
 puts "RAILS_ENV = #{ENV['RAILS_ENV']}"
 puts "and number of workers #{num_workers} + 1"
-puts "command to be execued QUEUES=* bundle exec rake -f ##{rails_root}/current/Rakefile environment resque:work"
+puts "command to be execued QUEUES=* bundle exec rake -f #{rails_root}/current/Rakefile environment resque:work"
 
 0.upto(num_workers) do |num|
   God.watch do |w|
@@ -27,7 +27,7 @@ puts "command to be execued QUEUES=* bundle exec rake -f ##{rails_root}/current/
     w.group    = 'resque'
     w.interval = 30.seconds
     w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env}
-    w.start    = "QUEUES=* bundle exec rake -f ##{rails_root}/current/Rakefile environment resque:work"
+    w.start    = "QUEUES=* bundle exec rake -f #{rails_root}/current/Rakefile environment resque:work"
     w.log      = "#{rails_root}/shared/log/resque-#{num}.log"
 
     # restart if memory gets too high
