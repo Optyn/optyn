@@ -26,7 +26,7 @@ puts "command to be execued QUEUES=* bundle exec rake -f #{rails_root}/current/R
     w.name     = "resque-#{num}"
     w.group    = 'resque'
     w.interval = 30.seconds
-    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env,'PIDFILE' => "#{shared_path}/pids/#{w.name}.pid"}
+    w.env      = {"QUEUES"=>"*", "RAILS_ENV"=>rails_env,'PIDFILE' => "#{shared_path}/pids/resque/#{w.name}.pid"}
     w.start    = "QUEUES=* bundle exec rake -f #{rails_root}/current/Rakefile environment resque:work"
     w.log      = "#{rails_root}/shared/log/resque-#{num}.log"
 

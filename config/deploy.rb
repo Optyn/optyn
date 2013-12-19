@@ -82,6 +82,8 @@ namespace :deploy do
   
   #start of GOD handling
   def try_killing_resque_workers
+    pidfile
+  begin
     run "pkill -3 -f resque"
   rescue
     nil
@@ -95,12 +97,14 @@ namespace :deploy do
 
   desc "Start Resque"
   task :start_resque ,:roles => :app do
+    run "mkdir -p #{shared_path}/pids/resque"
     run "god start resque"
   end
 
   desc "Restart God gracefully"
   task :restart_resque , :roles => :app do
     god_config_path = File.join(current_path, 'god', 'resque.god')
+    run "mkdir -p #{shared_path}/pids/resque"
     begin
       # Throws an exception if god is not running.
       # run "cd #{current_path}; bundle exec god status && rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} RAILS_ROOT=#{current_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
