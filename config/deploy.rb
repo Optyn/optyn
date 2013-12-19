@@ -82,9 +82,10 @@ namespace :deploy do
   
   #start of GOD handling
   def try_killing_resque_workers
-    pidfile
+    # pidfile
+    name = "resque"
   begin
-    run "pkill -3 -f resque"
+    run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs kill || echo 'no process with name #{name} found'"
   rescue
     nil
   end
