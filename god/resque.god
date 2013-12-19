@@ -11,7 +11,7 @@ raise "Please specify RAILS_ENV." unless rails_env
 rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 rails_release_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 #SET Maximum number of workers 
-num_workers = rails_env == 'production' ? 5 : 0
+num_workers = rails_env == 'production' ? 5 : 1
 #SET Maximum memory usage 
 memory_usage_max = rails_env == 'production' ? 350 : 350
 
