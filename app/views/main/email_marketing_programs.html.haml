@@ -1,14 +1,28 @@
-= display_title "Email Marketing Programs"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Email Marketing Programs - We Built the Perfect Email Marketing Solution!"
+= display_meta_description "We are taking a leap in building the ideal email marketing program for small businesses and marketers.", "email marketing programs, email marketing program, bulk email programs, mass email program, mass email programs, bulk email program, email newsletter programs, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_marketing_programs_path)
+      Email Marketing Programs
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL MARKETING PROGRAMS
+    %h1.hdg-s Email Marketing Programs
     %h2 The evolution of email marketing programs is here.
-    /= image_tag( 'email-marketing.jpg', alt: 'free email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'email-marketing-programs.jpg', alt: 'email marketing programs', class: 'pull-right img-polaroid' )
     %p 
       Optyn is at the forefront of email newsletter programs. We are building an email marketing program that is for the next generation of marketers and small businesses. 
     %p

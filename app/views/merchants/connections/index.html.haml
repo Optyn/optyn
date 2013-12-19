@@ -1,7 +1,7 @@
 = banner("#{current_shop.name} - Connections")
 
 #merchants.pad3pc
-  = link_to raw("<i class='icon-plus'></i> Add new user"), add_user_merchants_connections_path, :class => "btn btn-primary"
+  = link_to raw("<i class='icon-plus'></i> Add New User"), add_user_merchants_connections_path, :class => "btn btn-primary"
 
   .blank-space
 
@@ -26,13 +26,15 @@
       - name_id = Permission.name_id
 
       - @connections.each_with_index do |connection, index|
+        - next if connection.user.nil?
         %tr
           %td= index + 1
           %td
             = connection_user_display_name(connection, name_id, email_id)
           %td
             %span.expandable
-              = connection.user.user_labels.blank? ? "---" : connection.user.user_labels.map{|s| s.label.name}.join(", ")
+              - user_shop_labels = get_user_shop_labels(connection)
+              = user_shop_labels
               / please dont remove this comment
           %td
             - if connection.user.permissions_users.present?

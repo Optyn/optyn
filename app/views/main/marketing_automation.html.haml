@@ -1,12 +1,23 @@
 = display_title "Marketing Automation for Small Businesses"
 = display_meta_description "Marketing Automation software that was designed by small business owners for small business owners.", "marketing automation tools, marketing automation software, marketing automation platform, email marketing automationemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = marketing_automation_path)
+      Marketing Automation
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s MARKETING AUTOMATION
+    %h1.hdg-s Marketing Automation
     %h2 Automate every aspect of your marketing with Optyn's marketing automation software.
     = image_tag( 'marketing-automation.jpg', alt: 'marketing automation', class: 'pull-right img-polaroid' )
     %p 

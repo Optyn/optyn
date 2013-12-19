@@ -1,6 +1,17 @@
 = display_title "Marketing Automation"
 = display_meta_description "Are you using email marketing the right way? Our email marketing experts shared a few tips with you!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a.current( href = resources_marketing_automation_path )
+      Marketing Automation
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +19,7 @@
   .span9
     %h1.hdg-s Marketing Automation
     %h2 How marketing automation can make your life easier by saving time and money.
+    = image_tag( 'marketing-automation-resources.jpg', alt: 'marketing automation', class: 'pull-right img-polaroid' )
     %p 
       Marketing automation describes the use of software or the functionality of a marketing platform to help a business automate specific marketing processes.  The advantage is that time and resources no longer have to be spent on routine or repetitive functions.  In addition to saving time, marketing automation can be useful in helping to identify industry best practices or recommending the best of different alternatives.
     %p
@@ -29,10 +41,9 @@
           Pick the type of campaign you want to run and Optyn presents you with the appropriate data fields to complete.
         %li 
           %strong Mobile Responsive.
-          You don’t have to worry how your email will look on different devices.  Optyn has made sure that the email will be perfect whether it is opened on a laptop, tablet or smartphone.
-      
+          You don’t have to worry how your email will look on different devices. Optyn has made sure that the email will be perfect whether it is opened on a laptop, tablet or smartphone.
     %p
-      As you evaluate other programs, make sure as many processes are automated as possible.  You’ll be glad you did.
+      As you evaluate other programs, make sure as many processes are automated as possible. You’ll be glad you did.
     .blank-space
 
 

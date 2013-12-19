@@ -1,13 +1,28 @@
 = display_title "Running Specials and Sales"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_marketing_promotions_path )
+      Marketing Promotions
+      %span
+    %a.current( href = resources_specials_sales_path )
+      Running Specials and Sales
+      %span
 
 .row-fluid
   .span3
     = render partial: 'resources_nav'
   .span9
     %h5 Running Specials and Sales
-    %h2 Using social media and email to promote your special or sale
+    %h2 Using social media and email to promote your special or sale.
+    = image_tag( 'specials-and-sales.jpg', alt: 'running a specials', class: 'pull-right img-polaroid' )
     %p 
       As a business owner you know that running sales and specials are a great way to:
       %ul

@@ -1,15 +1,27 @@
 = display_title "Multi Channel Marketing for Small Businesses - Unify your marketing into one channel!"
+= display_title "Multi Channel Marketing for Small Businesses - Unify your marketing into one channel!"
 = display_meta_description "Optyn helps you engage your customers by directly going where they are.", "multi channel marketing, multi channel marketing strategy, multi channel marketing campaigns, multi channel marketing software, multi channel marketing solutions, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = multi_channel_marketing_path)
+      Multi Channel Marketing
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s MULTI CHANNEL MARKETING SOLUTIONS
+    %h1.hdg-s Multi Channel Marketing
     %h2 Let us help you identify where your customers are and then engage them.
     .blank-space
-    = image_tag( 'http://placehold.it/300x200', alt: 'multi channel marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'multi-channel-marketing.jpg', alt: 'multi channel marketing', class: 'pull-right img-polaroid' )
     %p 
       Optyn is your one stop shop for multi-channel Marketing. We know your customers are splattered across the web and across different channels but that shouldn’t keep you from reaching them. We help you identify where your customers and how you can engage them through our multi channel marketing software.
     %p

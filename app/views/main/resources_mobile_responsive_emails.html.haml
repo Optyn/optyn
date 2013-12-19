@@ -1,13 +1,28 @@
 = display_title "Importance of Mobile Responsive Emails"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = resources_mobile_responsive_emails_path )
+      Mobile Responsive Design
+      %span
 
 .row-fluid
   .span3
     = render partial: 'resources_nav'
   .span9
-    %h1.hdg-s Mobile Responsive Design
+    %h1.hdg-s Mobile Responsive Email Design
     %h2 Making sure your emails can be viewed on mobile devices.
+    = image_tag( 'mobile-responsive-email-design.jpg', alt: 'mobile-responsive-email-design', class: 'pull-right img-polaroid' )
     %p 
       As a business owner it is important for you to know about mobile responsiveness.  Let’s first start with what it is. Mobile responsiveness is a web design approach that adapts the layout of the viewing area to the device on which it is seen.  In that way, an an email viewed on a smartphone will look just as good as when it is viewed a computer.
     %p

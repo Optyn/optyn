@@ -1,0 +1,31 @@
+defaults:
+  approved_emails:
+    - supriya@idyllic-software.com
+    - supriya+100@idyllic-software.com
+    - supriya+101@idyllic-software.com
+    - supriya+102@idyllic-software.com
+    - supriya+103@idyllic-software.com
+    - supriya+104@idyllic-software.com
+    - supriya+105@idyllic-software.com
+    - supriya+106@idyllic-software.com
+    - supriya+107@idyllic-software.com
+    - supriya+108@idyllic-software.com
+    - supriya+109@idyllic-software.com
+    - optyn@idyllic-software.com
+    - optyn+100@idyllic-software.com
+    - optyn+101@idyllic-software.com
+    - optyn+102@idyllic-software.com
+    - optyn+103@idyllic-software.com
+    - optyn+104@idyllic-software.com
+    - optyn+105@idyllic-software.com
+    - optyn+106@idyllic-software.com
+    - optyn+107@idyllic-software.com
+    - optyn+108@idyllic-software.com
+    - optyn+109@idyllic-software.com
+    - success@simulator.amazonses.com
+    - bounce@simulator.amazonses.com
+    - ooto@simulator.amazonses.com
+    - complaint@simulator.amazonses.com
+    - suppressionlist@simulator.amazonses.com
+    - shashank@idyllic-software.com
+

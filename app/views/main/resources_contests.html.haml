@@ -1,6 +1,20 @@
 = display_title "Small Business Contest - How a contest can help a small business?"
 = display_meta_description "Contests can help small businesses in multitude on ways. However, a contest must be ran the right way to maximize its effectiveness.", "small business contest, small business contests, contests for small businesses, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_marketing_promotions_path )
+      Marketing Promotions
+      %span
+    %a.current( href = resources_contests_path )
+      Running Contests
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +22,7 @@
   .span9
     %h1.hdg-s Small Business Contests
     %h2 Contests are a great way to achieve business goals and engage customers.
+    = image_tag( 'contests-resources.jpg', alt: 'Run a contest', class: 'pull-right img-polaroid' )
     %p 
       Contests are a great way to achieve business goals such as:
       %ul.bullet-disc

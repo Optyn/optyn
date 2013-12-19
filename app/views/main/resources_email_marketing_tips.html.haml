@@ -1,6 +1,20 @@
-= display_title "Email Marketing Tips"
-= display_meta_description "Are you using email marketing the right way? Our email marketing experts shared a few tips with you!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
-= render partial: 'marketing_breadcrumbs'
+= display_title "Email Marketing Tips - Get your emails read!"
+= display_meta_description "Very few simple tips from our experts can help your emails get opened and read!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email marketing tips, email marketing blog, email branding, email marketing ideas, email marketing for dummies, email marketing forum, email marketing tips and tricks, advanced email marketing, successful email marketing, email marketing campaign tips, easy email marketing, email marketing dashboard, email marketing optimization, email marketing reporting, improve email marketing, email marketing tracking"
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = resources_email_marketing_tips_path )
+      Email Marketing Tips
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +22,7 @@
   .span9
     %h1.hdg-s E-mail Marketing Tips
     %h2 Basic email marketing tips to get your emails opened and read.
+    = image_tag( 'email-marketing-tips.jpg', alt: 'email marketing tips', class: 'pull-right img-polaroid' )
     %p 
       Every business is different but it's important to know of the basics of email marketing to get you off on the right foot. Below, you will see a few tips to getting your emails opened and read.
     %p
@@ -28,4 +43,8 @@
     %p
       %strong Test - Test - Test.
       As with all components of marketing, make sure you test different layouts, copy, subject lines and all the other variables in an email.  Over time you’ll understand what works for you.
+    %p
+      We hope you find thses simple email marketing tips useful. For more email marketing tips check out our 
+      %a{ :href => "http://blog.optyn.com" } email marketing blog 
+      where we provide you with some awesome in-depth email marketing ideas.
     .blank-space

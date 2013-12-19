@@ -1,6 +1,20 @@
 = display_title "Evolution of Email Marketing - The history of one of the most used forms of communication!"
 = display_meta_description "First commercial email was sent to 400 users in 1978. Do you know which company sent it? The face behind the first commercial email? It generated $13M in sales...", "evolution of email marketing, email marketing evolution, email marketing history, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = resources_evolution_email_path )
+      Evolution of Email Marketing
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +22,7 @@
   .span9
     %h5 E-Mail Marketing
     %h2 The Evolution of E-Mail Marketing
+    = image_tag( 'evolution-of-email-marketing.jpg', alt: 'evolution of email marketing', class: 'pull-right img-polaroid' )
     %p 
       Here's a brief history lesson on how the whole email marketing thing got started. Email has become such an integral part of our everyday lives it is easy to forget that it wasn’t so long ago that email didn’t exist.  We thought it would be interesting to trace the history of email from the beginning to today.
     %p

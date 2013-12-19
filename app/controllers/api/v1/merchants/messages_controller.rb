@@ -147,9 +147,10 @@ module Api
           klass = params[:message_type].classify.constantize
           @message = klass.for_uuid(params[:id])
           @message.subject = params[:message][:subject]
-          @message.send_on = params[:message][:send_on]
+          populate_send_on
           @needs_curation = @message.needs_curation(@message.state)
-          @message.save(validate: false)
+          @message.adjust_send_on
+          @message.update_meta!
 
           render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
         rescue => e
@@ -249,6 +250,7 @@ module Api
       def parsed_datetime_str(date_str, time_str)
         parsed_date_str = date_str.present? ? Date.strptime(date_str, INCOMING_DATE_FORMAT).strftime(OUTGOING_DATE_FORMAT) : Date.today.strftime(OUTGOING_DATE_FORMAT) 
         parsed_time_str = time_str.present? ? Time.strptime(time_str, INCOMING_TIME_FORMAT).strftime(OUTGOING_TIME_FORMAT) : Time.now.end_of_day.strftime(OUTGOING_TIME_FORMAT) 
+        puts "---- #{parsed_date_str + " " + parsed_time_str}"
         parsed_date_str + " " + parsed_time_str
       end
 

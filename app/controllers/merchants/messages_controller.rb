@@ -76,8 +76,9 @@ class Merchants::MessagesController < Merchants::BaseController
     klass = params[:message_type].classify.constantize
     @message = klass.for_uuid(params[:id])
     @message.subject = params[:message][:subject]
-    @message.send_on = params[:message][:send_on]
-    @message.save!
+    populate_send_on
+    
+    @message.update_meta!
 
     render json: {message: render_to_string(partial: "merchants/messages/preview_meta")}
 
@@ -187,6 +188,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message.update_visuals(params[:message])
     @shop_logo = true
     @shop = @message.shop
+    @partner = @shop.partner
     
 
     render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}

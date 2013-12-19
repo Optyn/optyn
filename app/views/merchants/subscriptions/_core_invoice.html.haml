@@ -11,6 +11,14 @@
 	%tbody
 		%tr
 			%td
+				Description
+			%td
+				- if @invoice.description and !@invoice.description.blank?
+					= @invoice.description
+				- else
+					= "---"
+		%tr
+			%td
 				-if @plan.nil?
 					After prorating
 				-else

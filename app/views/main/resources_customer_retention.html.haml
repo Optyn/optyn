@@ -1,6 +1,17 @@
 = display_title "Customer Retention - Do you know how to keep your customers coming back over and over again?"
 = display_meta_description "Customer retention is the keystone in growing your business, but the best part about it, it's very easy and simple to execute!", "improve customer retention, increase customer retention, customer loyalty, customer loyalty and retention, brand loyalty, client retention, building customer, loyalty, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a.current( href = resources_customer_retention_path )
+      Customer Retention
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +19,7 @@
   .span9
     %h1.hdg-s Customer Retention
     %h2 The importance of customer loyalty and retention to your business
+    = image_tag( 'customer-retention-resources.jpg', alt: 'Customer Retention', class: 'pull-right img-polaroid' )
     %p 
       Study after study highlight that it costs 5 to 7 times more to get a new customer than to keep an existing one.  In addition, as a general rule, 80% of your sales are going to come from 20% of your existing clients.  So with those statistics in mind it just makes good business sense that you should be spending time making sure your current customers are happy and that they keep coming back.
     %p

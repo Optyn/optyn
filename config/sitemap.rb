@@ -1,10 +1,11 @@
 require 'rubygems'
 require 'sitemap_generator'
+require 'sitemap_url_helper'
 
 SitemapGenerator::Sitemap.default_host = 'http://www.optyn.com'
 SitemapGenerator::Sitemap.create do
-  
-   if Rails.env.production?
+
+  if Rails.env.production?
     
     add '/', :changefreq => 'daily', :priority => 1.0  
     add '/features', :changefreq => 'weekly', :priority => 0.8 
@@ -14,75 +15,102 @@ SitemapGenerator::Sitemap.create do
     add '/contact', :changefreq => 'weekly', :priority => 0.8
     add '/terms', :changefreq => 'weekly', :priority => 0.8
     add '/privacy', :changefreq => 'weekly', :priority => 0.8
-    add '/tour', :changefreq => 'weekly', :priority => 0.8
-    add '/testimonials/alley-gallery', :changefreq => 'weekly', :priority => 0.8
+    add tour_page_path, :changefreq => 'weekly', :priority => 0.8
+    add alley_gallery_testimonial_path, :changefreq => 'weekly', :priority => 0.8
     add '/affiliates', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-marketing/email-deliverability', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-promotions', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/coupons', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/contests', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/surveys', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/specials-and-sales', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/social-media-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-automation', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-ideas', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/online-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/automated-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/customer-retention', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/digital-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/marketing-collaboration', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/multi-channel-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
-    #pages for keywords
-    add '/marketing/free-email-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/free-email-marketing-software', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/free-newsletter-software', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/mass-mail-software', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-marketing-programs', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-marketing-solutions', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/email-blast-software', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/bulk-email-software', :changefreq => 'weekly', :priority => 0.8
-    add '/marketing/newsletter-software', :changefreq => 'weekly', :priority => 0.8
+    add profile_sitemap_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_path, :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add mobile_responsive_path, :changefreq => 'weekly', :priority => 0.8
+    add capturing_data_path, :changefreq => 'weekly', :priority => 0.8
+    add email_deliverability_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_promotions_path, :changefreq => 'weekly', :priority => 0.8
+    add coupons_path, :changefreq => 'weekly', :priority => 0.8
+    add contests_path, :changefreq => 'weekly', :priority => 0.8
+    add surveys_path, :changefreq => 'weekly', :priority => 0.8
+    add specials_path, :changefreq => 'weekly', :priority => 0.8
+    add social_media_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_automation_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_syndication_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_ideas_path, :changefreq => 'weekly', :priority => 0.8
+    add online_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add automated_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add loyalty_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add customer_retention_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_analytics_path, :changefreq => 'weekly', :priority => 0.8
+    add digital_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add marketing_collaboration_path, :changefreq => 'weekly', :priority => 0.8
+    add multi_channel_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add integrated_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    # sell pages for keywords
+    add free_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add free_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
+    add free_newsletter_software_path, :changefreq => 'weekly', :priority => 0.8
+    add mass_mail_software_path, :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_programs_path, :changefreq => 'weekly', :priority => 0.8
+    add email_marketing_solutions_path, :changefreq => 'weekly', :priority => 0.8
+    add email_blast_software_path, :changefreq => 'weekly', :priority => 0.8
+    add bulk_email_software_path, :changefreq => 'weekly', :priority => 0.8
+    add newsletter_software_path, :changefreq => 'weekly', :priority => 0.8
     add email_marketing_agency_path, :changefreq => 'weekly', :priority => 0.8
     add email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
     add free_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
     #resource pages
-    add '/resources/email-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/email-marketing/mobile-responsive-emails', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/email-marketing/capturing-customer-emails', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/email-marketing/capturing-customer-data', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/email-marketing/evolution-of-email-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/email-marketing/email-marketing-best-practices', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/email-marketing/email-marketing-tips', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/contests', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/coupons', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/surveys', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/social-media-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/digital-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/online-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/customer-retention', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/loyalty-marketing', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/marketing-analytics', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/marketing-automation', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/marketing-promotions', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/marketing-syndication', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/marketing-ideas', :changefreq => 'weekly', :priority => 0.8
-    add '/resources/integrated-marketing', :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_mobile_responsive_emails_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_capturing_customer_emails_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_capturing_customer_data_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_evolution_email_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_practices_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_tips_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_getting_started_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_types_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_measuring_success_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_contests_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_coupons_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_surveys_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_specials_sales_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_social_media_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_digital_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_online_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_customer_retention_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_loyalty_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_marketing_analytics_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_marketing_automation_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_marketing_promotions_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_marketing_syndication_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_marketing_ideas_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_integrated_marketing_path, :changefreq => 'weekly', :priority => 0.8
     #resource keyword pages
     add resources_email_broadcast_path, :changefreq => 'weekly', :priority => 0.8
     add resources_cheap_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
     add resources_top_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
-    add resources_best_bulk_email_software, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_bulk_email_software_path, :changefreq => 'weekly', :priority => 0.8
     add resources_email_marketing_system_path, :changefreq => 'weekly', :priority => 0.8
-
+    add resources_best_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_email_marketing_software_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_newsletter_software_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_bulk_email_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_direct_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_blast_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_best_free_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_advertising_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_campaign_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_templates_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_stats_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_small_business_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_strategy_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_how_to_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_catchy_email_subject_lines_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_top_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_marketing_online_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_what_is_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_follow_up_emails_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_types_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_email_newsletter_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_mass_email_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_opt_in_email_marketing_path, :changefreq => 'weekly', :priority => 0.8
 
     Shop.real.each do |shop|
       add "/shop/public/#{shop.identifier}", :changefreq => 'weekly', :priority => 0.8

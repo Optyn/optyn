@@ -8,6 +8,7 @@ class Invoice < ActiveRecord::Base
 	attr_accessible :stripe_plan_token
 	attr_accessible :subtotal,:total
 	attr_accessible :created_at
+	attr_accessible :description
 
 	after_create :make_shop_audit_entry
 

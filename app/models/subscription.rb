@@ -36,9 +36,9 @@ class Subscription < ActiveRecord::Base
     self.update_attribute(:plan_id, plan.id)
     if self.stripe_customer_token.present?
       cu = Stripe::Customer.retrieve(self.stripe_customer_token)
-      # if cu['cards']['count'] > 0
-      cu.update_subscription(:plan => plan.plan_id, :prorate => true)
-      # end
+      if cu['cards']['count'] > 0
+        cu.update_subscription(:plan => plan.plan_id, :prorate => true)
+      end
     end
   end
 

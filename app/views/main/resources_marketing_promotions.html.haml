@@ -1,6 +1,17 @@
 = display_title "Marketing Promotions"
 = display_meta_description "Are you using email marketing the right way? Our email marketing experts shared a few tips with you!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a.current( href = resources_marketing_promotions_path )
+      Marketing Promotions
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +19,7 @@
   .span9
     %h1.hdg-s Marketing Promotions
     %h2 How to use marketing promotions to increase sales.
+    = image_tag( 'marketing-promotions-resources.jpg', alt: 'marketing promotions', class: 'pull-right img-polaroid' )
     %p 
       The term promotional marketing specifically refers to marketing messages that look to influence a target audience to take an action by offering an incentive.    Sometimes, however, the word promotion is used to refer to any campaign, whether an incentive is used or not.  In any event, the goal of any promotion is to get your customers and prospects to do something that will help your business.  The following article will offer some promotional marketing tips.
     %p

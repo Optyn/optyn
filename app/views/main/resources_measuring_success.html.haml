@@ -1,6 +1,20 @@
 = display_title "E-Mail Marketing Best Practices - Maximize effectiveness of your email marketing campaign!"
 = display_meta_description "Brief guidelines on how to improve the effectiveness of your email marketing campaigns through email campaign best practices!", "e-mail marketing best practices, email marketing best practices, opt-in email marketing, email marketing campaign, targeted email marketing, free email marketing, email marketing service, best practices for email marketing, effective email marketing, email marketing campaigns , email marketing statistics, email campaign best practices, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a( href = resources_email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = resources_measuring_success_path )
+      Measuring Success
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +22,7 @@
   .span9
     %h1.hdg-s Email Marketing - Measuring Success
     %h2 How to determine if your email marketing campaigns are working.
+    = image_tag( 'measuring-success-of-email-marketing.jpg', alt: 'measuring success of email marketing', class: 'pull-right img-polaroid' )
     %p 
       Anyone can run a marketing campaign - all it takes is time, money and expertise.  And, if you’ve done things correctly, you’ll see an increase in whatever it is you wanted to achieve.  But, here’s the question - how do you know the relative value of the increase.  In other words, let’s say you increased your sales by 5%.  Was that a great, good or poor result?  In this article, we are going to give you some insights into how to answer this question.
     %p
@@ -25,7 +40,7 @@
       %br
       Once you’ve run a campaign you now have a data point by which to compare the next one.  Remember though that campaigns can be affected by seasonality, type of offer and a long list of variables.  Over time, however, you will have gained enough experience and data to know when you’ve been successful or not.
     %p
-      One final point, make sure you measure all the campaign drivers not just the ones associated with your goals.  In this way you will have the data points ready when other objectives are established. 
+      One final point, make sure you measure all the campaign drivers not just the ones associated with your goals. In this way you will have the data points ready when other objectives are established. 
     .blank-space
 
 

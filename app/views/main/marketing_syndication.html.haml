@@ -1,12 +1,23 @@
-= display_title "Marketing Syndication for Small Businesses"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Marketing Syndication for Small Businesses - Distribute your marketing for free!"
+= display_meta_description "Optyn's marketing syndication allows yout to spread your marketing campaign all over the internet automatically! Plus, it is FREE!", "marketing syndication, syndicated marketing, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = marketing_syndication_path)
+      Marketing Syndication
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s MARKETING SYNDICATION
+    %h1.hdg-s Marketing Syndication
     %h2 Syndicate and spread your marketing campaigns across the web for free and automatically.
     = image_tag( 'marketing-syndication.jpg', alt: 'marketing syndication', class: 'pull-right img-polaroid' )
     %p 

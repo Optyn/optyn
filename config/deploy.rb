@@ -45,7 +45,6 @@ set :lock_file_name, 'deployment.pid'
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-# If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:update_code', 'deploy:messenger:lock'
@@ -56,13 +55,15 @@ after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
-after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:pdf:make_executable"
-after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
+after "deploy:restart", "deploy:restart_resque"
+after "deploy:restart", "deploy:list:workers"
+# after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
+
 #after "deploy:create_symlink", "whenever"
 
 
@@ -78,6 +79,46 @@ namespace "whenever" do
 end
 
 namespace :deploy do
+  
+  #start of GOD handling
+  def try_killing_resque_workers
+    run "pkill -3 -f resque"
+  rescue
+    nil
+  end
+
+  desc "Stop Resque"
+  task :stop_resque ,:roles => :app do
+    try_killing_resque_workers
+    run "god stop resque"
+  end
+
+  desc "Start Resque"
+  task :start_resque ,:roles => :app do
+    run "god start resque"
+  end
+
+  desc "Restart God gracefully"
+  task :restart_resque , :roles => :app do
+    god_config_path = File.join(current_path, 'god', 'resque.god')
+    begin
+      # Throws an exception if god is not running.
+      # run "cd #{current_path}; bundle exec god status && rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} RAILS_ROOT=#{current_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
+      run "cd #{current_path}; god status && god load #{god_config_path} && god start resque"
+
+      # Kill resque processes and have god restart them with the newly loaded config.
+      try_killing_resque_workers
+    rescue => ex
+      # god is dead, workers should be as well, but who knows.
+      try_killing_resque_workers
+
+      # Start god.
+      # run "cd #{current_path}; rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
+      run "cd #{current_path}; god -c #{god_config_path}"
+    end
+  end
+  #end
+
   desc "reload the database with seed data"
   task :seed do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"

@@ -1,6 +1,17 @@
 = display_title "E-Mail Marketing for Small Businesses - Best way to improve your ROI"
 = display_meta_description "Are you using email marketing the right way? Our email marketing experts shared a few tips with you!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = resources_path )
+      Marketing Resources
+      %span
+    %a.current( href = resources_email_marketing_path )
+      Email Marketing
+      %span
 
 .row-fluid
   .span3
@@ -8,6 +19,7 @@
   .span9
     %h1.hdg-s E-Mail Marketing
     %h2 Email marketing is popular for many good reasons.
+    = image_tag( 'email-marketing-resources.jpg', alt: 'best bulk email software', class: 'pull-right img-polaroid' )
     %p 
       Email marketing is very popular.  We have all been on the receiving end of marketing emails - some welcomed, others not so much. Regardless of how you feel about receiving them, the fact is that companies - including big national brands - use email marketing because it works. 
     %h4 Here are some reasons why you need to use email and email apps to deliver your message.

@@ -1,14 +1,28 @@
-= display_title "E-Mail Marketing Software"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "E-Mail Marketing Software - Easiest way to engage your customers!"
+= display_meta_description "At Optyn we have created the perfect email marketing software for small business and you can try it for FREE!", "email marketing software, email management software, email deployment software, email distribution software, email marketing software solution, email sending software, emailing marketing software, marketing email software, email mailing list software, email mailing software, email marketer software, email marketing director software, email marketing software express, software email marketing, email advertising software, email marketing mailing software, e-mail marketing software, email marketing software programs, marketing software email, software for email marketing, easy email marketing software, email marketing online software, email marketing software online, email marketing software solutions, email software marketing, buy email marketing software, email deliverability software, email marketing management software, email marketing software providers, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_marketing_software_path)
+      Email Marketing Software
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL MARKETING SOFTWARE
+    %h1.hdg-s Email Marketing Software
     %h2 Meet the perfect email marketing software for small businesses.
-    /= image_tag( 'email-marketing.jpg', alt: 'email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'email-marketing-software.jpg', alt: 'email marketing', class: 'pull-right img-polaroid' )
     %p 
       We know the hard aches of running a business. We know that marketing is tough and our email marketing software is built to help you grow your business. Current email sending software is just not built for the small business user. We know that time and money are big factors for you. In fact, the reasons why small businesses abandon existing marketing email software is because they aren’t built for them.
     %p

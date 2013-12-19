@@ -1,0 +1,38 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica;sans-serif; margin: 15px;"}
+    = content_for :header do
+      Amount credited
+    
+    = render partial: "shared/system_emails/banner"
+    
+    %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
+      %tr
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+          %div
+            %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
+              %tr
+                %td
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
+                  %p Since you have downgraded your plan, the balance amount has been credited to your account and will be used in future billing cycles. Here are the details:
+                  %ul
+                    %li
+                      Amount credited
+                      = number_to_currency(@amount.abs, precision: 2)
+                    %li
+                      Connection count
+                      = @conn_count
+                  %p
+                    %a.btn{:href => "http://www.optyn.com"} View your Account
+                  %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and your fellow Optyners, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
+                  %p
+                    Cheers,
+                    %br/
+                    The Optyn Team
+      %tr
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
+
+          = render partial: "shared/system_emails/footer"

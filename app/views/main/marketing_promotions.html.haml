@@ -1,12 +1,23 @@
-= display_title "Promtional Marketing for Small Business - Learn to maximize your return!"
+= display_title "Promotional Marketing for Small Business - Learn to maximize your return!"
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a.current( href = marketing_promotions_path)
+      Email Deliverability
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s PROMOTIONAL MARKETING
+    %h1.hdg-s Promotional Marketing
     %h2 Be proactive with Marketing and improve sales with Promotional Marketing.
     = image_tag( 'marketing-promotions.jpg', alt: 'marketing-promotions', class: 'pull-right img-polaroid' )
     %p 

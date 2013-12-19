@@ -27,4 +27,29 @@ namespace :invoices do
       end # end of the subscription condition
     end #end of the invoices loop
   end #end of the task
+
+  desc "Populate missing description for existing invoices"
+  task :populate_description_to_invoices => :environment do
+    require "stripe"
+    Stripe.api_key = SiteConfig.stripe_api_key
+    invoices = Invoice.all
+
+    invoices.each do |invoice|
+      begin
+        stripe_invoice = Stripe::Invoice.retrieve(invoice.stripe_invoice_id)
+      rescue Stripe::InvalidRequestError #handle 404 No such invoice
+        puts "No such invoice found"
+        stripe_invoice = nil
+      end
+
+      if !stripe_invoice.nil?
+        description = stripe_invoice[:lines][:data].first["description"] rescue nil
+        invoice.update_attributes(
+                                          :description => description
+                                        )
+        puts "Found invoice and updated description to #{invoice.description}"
+      end
+    end #end of the invoices loop
+  end #end of the task
+
 end #end of the namespace

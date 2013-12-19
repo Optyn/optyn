@@ -1,12 +1,26 @@
-= display_title "Specials and Sales Promotions for Small Businesses"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Small Business Contests - Create Buzz with Contests!"
+= display_meta_description "Contests can be a great way to generate buzz around your business. There are a few great ways to approach contests!", "contests, small business contest, marketing contest, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = marketing_promotions_path )
+      Marketing Promotions
+      %span
+    %a.current( href = contests_path)
+      Contest Marketing
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s CONTESTS
+    %h1.hdg-s Contests
     %h2 Create buzz with Contests, Sweepstakes, and Giveaways.
     = image_tag( 'contests.jpg', alt: 'contest marketing', class: 'pull-right img-polaroid' )
     %p 

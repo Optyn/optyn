@@ -1,12 +1,26 @@
-= display_title "Mobile Responsive E-Mail Templates"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Mobile Responsive E-Mail Templates - Simplified for any small business!"
+= display_meta_description "We designed email templates that are simplified and right for any business! Your customers will love their your emails!", "Mobile Responsive E-Mail Templates, responsive email templates, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = mobile_responsive_path)
+      Mobile Responsive Emails
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s MOBILE RESPONSIVE EMAILS
+    %h1.hdg-s Mobile Responsive Email Templates
     %h2 Create Mobile Responsive E-mails without doing anything. Built In Mobile Responsiveness. Why?
     = image_tag( 'mobile-responsive-emails.jpg', alt: 'Mobile Responsive emails', class: 'pull-right img-polaroid' )
     %p 

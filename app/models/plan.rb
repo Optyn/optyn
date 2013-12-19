@@ -11,7 +11,7 @@ class Plan < ActiveRecord::Base
     connection_count = shop.active_connection_count
     ##optmize this
     evaluated_plan = Plan.where(" (min <= ?) and (? <= max) ", connection_count, connection_count).first
-    return ((evaluated_plan.amount < current_plan.amount) and evaluated_plan == starter) ? current_plan : evaluated_plan
+    return evaluated_plan
   rescue Exception => e
     Rails.logger.error e
     current_plan

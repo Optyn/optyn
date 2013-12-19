@@ -1,14 +1,28 @@
-= display_title "Email Marketing Solutions"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Email Marketing Solutions - Try Optyn for FREE!"
+= display_meta_description "Tired of email marketing solutions that take forever to send out? With Optyn, it quick, simple, and easy!", "email marketing solutions, email marketing solution, campaign email marketing solution, direct email marketing solution, business email marketing solution, email marketing solution uk, online email marketing solution, web based email marketing solution, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_marketing_solutions_path)
+      Email Marketing Solutions
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL MARKETING SOLUTIONS
+    %h1.hdg-s Email Marketing Solutions
     %h2 The email marketing solutions provider that's right for you.
-    /= image_tag( 'email-marketing.jpg', alt: 'free email marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'email-marketing-solutions.jpg', alt: 'email marketing solutions', class: 'pull-right img-polaroid' )
     %p 
       Optyn offers an email marketing solution that is just right. We are working on building some of the best business email marketing solution that is out there. We want to help you grow your business and audience with our web based email marketing solution. 
     %p

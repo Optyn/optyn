@@ -17,7 +17,7 @@ module Merchants::MessagesHelper
   end
 
   def formatted_message_form_datetime(message, message_attr)
-    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p')
+    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p %Z')
   rescue
     ""
   end
@@ -95,7 +95,7 @@ module Merchants::MessagesHelper
 
   def message_discount_type_text(message)
     amount = message.sanitized_discount_amount
-    message.percentage_off? ? (amount.to_s + " %") : number_to_currency(amount, precision: 0) #pluralize(amount, "$")
+    message.percentage_off? ? (amount.to_s + " %") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
   end
 
   def message_content(message)

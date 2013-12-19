@@ -1,12 +1,26 @@
 = display_title "E-Mail Deliverability"
 = display_meta_description "Optyn's team will become your email deliverability consultant and help you improve your email deliverability.", "email deliverability, improve email deliverability, email marketing deliverability, email deliverability best practices, email deliverability consultant email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
-= render partial: 'marketing_breadcrumbs'
+
+.row-fluid.breadcrumbs
+  .span12
+    %a( href='/' )
+      %i.icon-home
+      %span
+    %a( href = marketing_path )
+      Marketing Software
+      %span
+    %a( href = email_marketing_path )
+      Email Marketing
+      %span
+    %a.current( href = email_deliverability_path)
+      Email Deliverability
+      %span
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s EMAIL DELIVERABILITY
+    %h1.hdg-s Email Deliverability
     %h2 We use the same partners and email deliverability best practices to ensure constant up-time and email deliverability!
     = image_tag( 'email-deliverability.jpg', alt: 'email deliverability', class: 'pull-right img-polaroid' )
     %p 

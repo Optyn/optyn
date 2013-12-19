@@ -5,7 +5,7 @@
     - if @user.errors.any? || !@error_hash.blank?
       #error_explanation
         - if @error_hash.blank?
-          %h2
+          %h6.text-error
             = "Following errors prohibited this user from being saved:"
           %ul
             - @user.errors.full_messages.each do |error|

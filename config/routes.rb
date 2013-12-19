@@ -27,13 +27,14 @@ Optyn::Application.routes.draw do
   match 'cache/flush' => "cache#flush"
   match '/shop/public/:identifier' =>"shops#show", :as => :public_shop
   match '/shop/subscribe_with_email' => 'shops#subscribe_with_email', :as=>:subscribe_with_email
-  match 'tour' => 'main#tour'
+  match 'tour' => 'main#tour', :as => :tour_page
   match 'affiliates' => 'main#affiliates'
   match 'product_announcement' => 'main#product_announcement'
-  match 'testimonials' => 'main#testimonials'
+  # match 'testimonials' => 'main#testimonials'
   match '/:shop/campaigns/:message_name' => 'merchants/messages#public_view', :as => :public_view_messages
-  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery'
-  match 'sitemap' => 'main#sitemap'
+  match 'testimonials/alley-gallery' => 'main#testimonial_alley_gallery', :as => :alley_gallery_testimonial
+  match 'sitemap' => 'main#sitemap', :as => :website_sitemap
+  match 'sitemap-customer-profiles' => 'main#sitemap_customer_profiles', :as => :profile_sitemap
 
   #sell pages under marketing
   match '/marketing' => 'main#marketing', :as => :marketing
@@ -45,7 +46,7 @@ Optyn::Application.routes.draw do
   match '/marketing/coupons' => 'main#coupons', :as => :coupons
   match '/marketing/specials-and-sales' => 'main#specials', :as => :specials
   match '/marketing/contests' => 'main#contests', :as => :contests
-  match '/marketing/marketing-ideas' => 'main#marketing_recommendation', :as => :marketing_recommendation
+  match '/marketing/marketing-ideas' => 'main#marketing_recommendation', :as => :marketing_ideas
   match '/marketing/loyalty-marketing' => 'main#loyalty_marketing', :as => :loyalty_marketing
   match '/marketing/customer-retention' => 'main#customer_retention', :as => :customer_retention
   match '/marketing/marketing-analytics' => 'main#marketing_analytics', :as => :marketing_analytics
@@ -72,7 +73,6 @@ Optyn::Application.routes.draw do
   match '/marketing/newsletter-software' => 'main#newsletter_software', :as => :newsletter_software
   match '/marketing/email-marketing-agency' => 'main#email_marketing_agency', :as => :email_marketing_agency
   match '/marketing/email-marketing-software' => 'main#email_marketing_software', :as => :email_marketing_software
-  match '/marketing/free-email-marketing-software' => 'main#free_email_marketing_software', :as => :free_email_marketing_software
   #resources pages for content pages
   match '/resources' => 'main#resources', :as => :resources
   match '/resources/email-marketing' => 'main#resources_email_marketing', :as => :resources_email_marketing
@@ -84,7 +84,7 @@ Optyn::Application.routes.draw do
   match '/resources/email-marketing/email-marketing-measuring-success' => 'main#resources_measuring_success', :as => :resources_measuring_success
   match '/resources/email-marketing/email-marketing-getting-started' => 'main#resources_email_marketing_getting_started', :as => :resources_getting_started
   match '/resources/email-marketing/email-marketing-email-types' => 'main#resources_email_marketing_types', :as => :resources_email_marketing_types
-  match '/resources/email-marketing/email-marketing-tips' => 'main#resources_email_marketing_tips', :as => :resources_email_deliverability
+  match '/resources/email-marketing/email-marketing-tips' => 'main#resources_email_marketing_tips', :as => :resources_email_marketing_tips
   match '/resources/social-media-marketing' => 'main#resources_social_media', :as => :resources_social_media
   match '/resources/digital-marketing' => 'main#resources_digital_marketing', :as => :resources_digital_marketing
   match '/resources/contests' => 'main#resources_contests', :as => :resources_contests
@@ -100,12 +100,36 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
   match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
   match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
-  #resource keyword specific pages
+  #resources keyword specific pages
   match '/resources/email-marketing-system' => 'main#resources_email_marketing_system', :as => :resources_email_marketing_system
   match '/resources/cheap-email-marketing' => 'main#resources_cheap_email_marketing', :as => :resources_cheap_email_marketing
   match '/resources/best-bulk-email-software' => 'main#resources_best_bulk_email_software', :as => :resources_best_bulk_email_software
   match '/resources/top-email-marketing-software' => 'main#resources_top_email_marketing_software', :as => :resources_top_email_marketing_software
   match '/resources/email-broadcast' => 'main#resources_email_broadcast', :as => :resources_email_broadcast
+  match '/resources/best-email-marketing' => 'main#resources_best_email_marketing', :as => :resources_best_email_marketing
+  match '/resources/best-email-marketing-software' => 'main#resources_best_email_marketing_software', :as => :resources_best_email_marketing_software
+  match '/resources/best-newsletter-software' => 'main#resources_best_newsletter_software', :as => :resources_best_newsletter_software
+  match '/resources/bulk-email' => 'main#resources_bulk_email', :as => :resources_bulk_email
+  match '/resources/direct-email-marketing' => 'main#resources_direct_email_marketing', :as => :resources_direct_email_marketing
+  match '/resources/email-blast' => 'main#resources_email_blast', :as => :resources_email_blast
+  match '/resources/best-free-email-marketing' => 'main#resources_best_free_email_marketing', :as => :resources_best_free_email_marketing
+  match '/resources/email-advertising' => 'main#resources_email_advertising', :as => :resources_email_advertising
+  match '/resources/email-campaign' => 'main#resources_email_campaign', :as => :resources_email_campaign
+  match '/resources/email-templates' => 'main#resources_email_templates', :as => :resources_email_templates
+  match '/resources/email-marketing-stats' => 'main#resources_email_marketing_stats', :as => :resources_email_marketing_stats
+  match '/resources/small-business-email-marketing' => 'main#resources_small_business_email_marketing', :as => :resources_small_business_email_marketing
+  match '/resources/email-marketing-strategy' => 'main#resources_email_marketing_strategy', :as => :resources_email_marketing_strategy
+  match '/resources/how-to-email-marketing' => 'main#resources_how_to_email_marketing', :as => :resources_how_to_email_marketing
+  match '/resources/catchy-email-subject-lines' => 'main#resources_catchy_email_subject_lines', :as => :resources_catchy_email_subject_lines
+  match '/resources/top-email-marketing' => 'main#resources_top_email_marketing', :as => :resources_top_email_marketing
+  match '/resources/email-marketing-online' => 'main#resources_email_marketing_online', :as => :resources_email_marketing_online
+  match '/resources/what-is-email-marketing' => 'main#resources_what_is_email_marketing', :as => :resources_what_is_email_marketing
+  match '/resources/follow-up-emails' => 'main#resources_follow_up_emails', :as => :resources_follow_up_emails
+  match '/resources/email-types' => 'main#resources_email_types', :as => :resources_email_types
+  match '/resources/email-newsletter' => 'main#resources_email_newsletter', :as => :resources_email_newsletter
+  match '/resources/mass-email' => 'main#resources_mass_email', :as => :resources_mass_email
+  match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
+
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'

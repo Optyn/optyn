@@ -5,15 +5,11 @@ module Api
         doorkeeper_for :all
         respond_to :json
         helper_method :current_shop, :current_manager
-        before_filter :current_partner
+        before_filter :set_time_zone, :current_partner
 
         private
         
         def current_partner
-          Rails.logger.info "=" * 100
-          Rails.logger.info doorkeeper_token.resource_owner_id.inspect
-          Rails.logger.info "&" * 100
-
           if doorkeeper_token
             @_current_partner = Partner.find(doorkeeper_token.resource_owner_id)
           end        
@@ -27,6 +23,10 @@ module Api
         
         def current_shop
           current_manager.shop
+        end
+
+        def set_time_zone
+          ShopTimezone.set_timezone(current_shop)
         end
 
       end
