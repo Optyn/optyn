@@ -84,10 +84,11 @@ namespace :deploy do
   def try_killing_resque_workers
     # pidfile
     name = "resque"
-  begin
-    run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs kill || echo 'no process with name #{name} found'"
-  rescue
-    nil
+    begin
+      run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs kill || echo 'no process with name #{name} found'"
+    rescue
+      nil
+    end
   end
 
   desc "Stop Resque"
