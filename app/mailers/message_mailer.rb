@@ -1,4 +1,6 @@
 class MessageMailer < ActionMailer::Base
+  include MailerFragmentCaching
+
   default from: '"Email" <email@optyn.com>',
           reply_to: "services@optyn.com"
           
@@ -18,6 +20,7 @@ class MessageMailer < ActionMailer::Base
 
     @partner = @shop.partner
 
+    #to: "success@simulator.amazonses.com",
     mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>), 
       bcc: "gaurav@optyn.com", 
       from: @message.from, 
