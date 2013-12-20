@@ -4,14 +4,6 @@
     = render 'layouts/links_company'
 
   .span2
-    %h4 Learn More
-    = render 'layouts/links_merchants'
-
-  .span2
-    %h4 Partner Programs
-    = render 'layouts/links_partner'
-
-  .span2
     %a{:href => '/marketing'}
       %h4 Marketing Software
     %ul
@@ -32,7 +24,7 @@
 
   .span2
     %a{:href => '/resources' }
-      %h4 Resources
+      %h4 Marketing Resources
     %ul
       %li
         %a{ :href => '/resources/email-marketing' } E-Mail Marketing
@@ -48,6 +40,14 @@
         %a{ :href => '/resources/online-marketing'} Online Marketing
       %li
         %a{ :href => '/resources/customer-retention' } Customer Retention
+
+  .span2
+    %h4 Learn More
+    = render 'layouts/links_merchants'
+
+  .span2
+    %h4 Partner Programs
+    = render 'layouts/links_partner'
     
   .span2.text-left.sf-social
     #social-love
