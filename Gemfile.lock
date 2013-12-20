@@ -67,6 +67,8 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
     choice (0.1.6)
     chosen-rails (0.9.15)
       coffee-rails (>= 3.2)
@@ -91,6 +93,7 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     config_reader (0.0.8)
+    connection_pool (1.2.0)
     countries (0.9.2)
       currencies (>= 0.4.0)
     currencies (0.4.2)
@@ -380,6 +383,12 @@ GEM
     sexp_processor (4.2.1)
     sextant (0.2.4)
       rails (>= 3.2)
+    sidekiq (2.14.0)
+      celluloid (>= 0.14.1)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0.4)
+      redis-namespace
     sinatra (1.4.3)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -408,6 +417,7 @@ GEM
       rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
+    timers (1.1.0)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -499,6 +509,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 3.2.3)
   sextant
+  sidekiq
   sitemap_generator
   social-share-button
   state_machine (~> 1.2.0)

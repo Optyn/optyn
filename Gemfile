@@ -80,6 +80,7 @@ end
 gem 'jquery-rails'
 gem 'god' 
 gem "breadcrumbs_on_rails"
+gem 'sidekiq'
 
 group :development do
   gem 'thin'
