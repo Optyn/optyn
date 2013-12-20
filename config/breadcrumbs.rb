@@ -297,6 +297,11 @@ crumb :resources_marketing_promotions do
   parent :resources
 end
 
+crumb :resources_reachable_audience do
+  link "Reachable Audience<span></span>".html_safe, resources_reachable_audience_path
+  parent :resources
+end
+
 crumb :resources_contests do
   link "Running Contests<span></span>".html_safe, resources_contests_path
   parent :resources_marketing_promotions
