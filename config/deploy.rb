@@ -110,13 +110,13 @@ namespace :deploy do
 
   desc "Start Sidekiq"
   task :stop_sidekiq ,:roles => :app do
-    run "bundle exec sidekiq stop"
+    # run "bundle exec sidekiq stop"
   end
 
   desc "Restart Sidekiq gracefully"
   task :restart_sidekiq ,:roles => :app do
-    run "bundle exec sidekiq stop"
-    run "bundle exec sidekiq start"
+    # run "bundle exec sidekiq stop"
+    # run "bundle exec sidekiq start"
   end
 
   desc "Restart resque gracefully"
