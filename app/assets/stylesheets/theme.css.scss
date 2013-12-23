@@ -1163,12 +1163,7 @@ blockquote {
     padding: 0 1.9rem;
     display: inline-block;
     margin-left: -3px;
-    z-index: 11;
-    & + a { z-index: 10;
-      & + a { z-index: 9;
-        & + a { z-index: 8;
-          & + a { z-index: 7;
-            & + a { z-index: 6; }}}}}
+   
     &:hover {
       text-decoration: none;
       color: rgba( $white, 0.9 );
@@ -1184,7 +1179,7 @@ blockquote {
       }
     }
   }
-  span {
+  span span{
     position: absolute;
     top: 4px;
     right: -((1.8rem / sqrt(2)) / 2 );
@@ -1196,6 +1191,15 @@ blockquote {
     @include rotate( 45deg );
     background-color: lighten( $dark-blue, 5% );
   }
+  > div{
+      float :left;
+ z-index: 11;
+    & + div, &+div span { z-index: 10;
+      & + div, &+div span { z-index: 9;
+        & + div, &+div span { z-index: 8;
+          & + div, &+div span { z-index: 7;
+        & + div, &+div span { z-index: 6; }}}}}
+     }
   i.icon-angle-right {
     margin: 0 10px;
     line-height: 1.8rem;

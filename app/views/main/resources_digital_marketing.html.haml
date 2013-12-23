@@ -2,16 +2,7 @@
 = display_meta_description "Digital marketings campaigns can be much simpler than you think! Our list of integrated digital marketing venues simplifies the process for you!", "digital marketing, What is Digital Marketing, digital marketing trends, automotive digital marketing, digital media marketing, digital marketing plan, digital marketing tools, integrated digital marketing, digital marketing campaigns, digital marketing ideas, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a.current( href = resources_digital_marketing_path )
-      Digital Marketing
-      %span
+  - breadcrumb :resources_digital_marketing
 
 .row-fluid
   .span3
@@ -64,4 +55,6 @@
       %strong
         Reputation Management. 
       Maintaining or improving a business's reputation in order to have a favorable opinion in the minds of consumers and remove any negative mentions.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

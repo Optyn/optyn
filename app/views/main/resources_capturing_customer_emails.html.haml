@@ -2,19 +2,8 @@
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_capturing_customer_emails_path )
-      How to capture customer emails.
-      %span
+  - breadcrumb :resources_capturing_customer_emails
+
 
 .row-fluid
   .span3
@@ -61,4 +50,6 @@
       Stick to whatever promises you make regarding when and to whom you will share or not share your customer’s email address.
     %p
       And finally, it is generally not a good idea to buy an email list.  The quality of these lists tend to be poor and if there are too many unsubscribes or undeliverables you could wind up in trouble with your ISP or email marketing company.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

@@ -2,16 +2,7 @@
 = display_meta_description "Are you using email marketing the right way? Our email marketing experts shared a few tips with you!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a.current( href = resources_marketing_promotions_path )
-      Marketing Promotions
-      %span
+  - breadcrumb :resources_marketing_promotions
 
 .row-fluid
   .span3
@@ -36,4 +27,6 @@
       Don’t just think of promotional marketing as a broad based strategy.  You may want to create a campaign that targets a specific segment of your base.  For example, if you have customers who haven’t purchased in a while, a special incentive just for them may help bring them back. 
     %p
       Give promotional marketing a try and watch how it helps your business.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

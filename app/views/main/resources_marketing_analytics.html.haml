@@ -2,16 +2,7 @@
 = display_meta_description "Marketing analytics can do wonders for a business! They are a guide on what what works and what does not!", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, digital marketing analytics, email marketing analytics, what is marketing analytics, web marketing analytics, online marketing analytics"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a.current( href = resources_marketing_analytics_path )
-      Marketing Analytics
-      %span
+  - breadcrumb :resources_marketing_analytics
 
 .row-fluid
   .span3
@@ -52,4 +43,6 @@
       Marketing analytics also go beyond the specific campaigns of your company.  For instance, it is always useful to note if a prospect contact you what prompted him or her to make the call.  The marketing activity of your competitors should also be monitored to see what channels they favor and the marketing approach they use.
     %p
       The key to remember is that marketing analytics is a tool to help you manage your campaigns so you can optimize your marketing dollars.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

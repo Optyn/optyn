@@ -2,19 +2,7 @@
 = display_meta_description "Make sure when you are choosing an email marketing provider because it is free, make sure that the free tier actually gives your marketing value!", "best free email marketing, best free bulk email software, best free email marketing software, best email marketing software free, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_best_free_email_marketing_path )
-      Best Free Email Marketing
-      %span
+  - breadcrumb :resources_best_free_email_marketing
 
 .row-fluid
   .span3
@@ -29,4 +17,6 @@
       If you a considering going with an email provider because of a free tier, you should also consider if the service being offered is suitable for your needs.  Can you, for example, quickly and easily create, schedule and send emails or does the program require expertise that you don’t possess?   Free isn’t a bargain if you can’t use the platform.  
     %p
       Programs like Optyn often offer the best free email marketing software solutions because not only do they have a free tier but because of their ease of use.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

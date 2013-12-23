@@ -2,19 +2,7 @@
 = display_meta_description "Find out the advantages of a business utilizing email newsletters to engage their audience.", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email newsletter, email newsletters, newsletter email, email marketing newsletter, email newsletter marketing, email marketing newsletters, newsletter email marketing, mass email newsletter"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_newsletter_path )
-      Email Newsletter
-      %span
+  - breadcrumb :resources_email_newsletter
 
 .row-fluid
   .span3
@@ -37,4 +25,6 @@
       Measurable - As with other forms of email marketing, you can track the performance of an email newsletter and rate its effectiveness,
     %p
       Newsletter email marketing can be a powerful marketing strategy. Learn more about it in our email marketing blog.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

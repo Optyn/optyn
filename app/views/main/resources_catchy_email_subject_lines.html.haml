@@ -2,19 +2,7 @@
 = display_meta_description "Subject lines are increadibly crucial when it comes to improving your open rates and conversions.", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, catchy email subject lines, email marketing subject lines, marketing email subject lines"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_catchy_email_subject_lines_path )
-      Catchy Email Subject Lines
-      %span
+  - breadcrumb :resources_catchy_email_subject_lines
 
 .row-fluid
   .span3
@@ -37,4 +25,6 @@
       Check out our 
       %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } email marketing blog 
       for more information on tips and tricks.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

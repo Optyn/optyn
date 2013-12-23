@@ -2,19 +2,7 @@
 = display_meta_description "How many email types are avilable? Email types can be segmented into numerous different categories. Do you know them?", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, benchmark email, contact email, marketing email, alternate email, custom email, personalized email, real estate email marketing, sales email, your email, targeted email marketing, video email marketing, sales emails, benchmark email marketing, email for, email opt in, open source email marketing, direct email, html email marketing, mobile email marketing, custom emails, targeted emails, batch email, email advertisement, email marketing for restaurants, email marketing infographic, email marketing lead, email marketing lead generation, email marketing mortgage lead, email sales, joomla email marketing, restaurant email marketing, targeted email, contact email marketing, ecommerce email marketing, advertising email, email marketing retail, mortgage email marketing, permission email marketing, personalized email marketing, retail email marketing, email marketing spam, intuit email marketing, lead generation email marketing, email marketing permission, email marketing real estate, automatic responder email marketing, email marketing html, email marketing open source, php email marketing, viral email marketing, lead nurturing emails"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_types_path )
-      Email Types
-      %span
+  - breadcrumb :resources_email_types
 
 .row-fluid
   .span3
@@ -34,4 +22,6 @@
         %li Informational emails
         %li Prospect acquisition emails
         %li Customer Engagement emails
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

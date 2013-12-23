@@ -2,16 +2,7 @@
 = display_meta_description "Take a tour of Optyn and all the tools it offers for email marketing! Most of all, you get to try it for FREE!", "local marketing tools, email marketing, email marketing for smbs, small businesses, small business marketing, customer engagement, customer acquisition, email marketing software, email marketing tips"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = marketing_path )
-      Marketing Software
-      %span
-    %a.current( href = tour_page_path)
-      Tour
-      %span
+  - breadcrumb :tour
 
 .row-fluid
   .span12{:align => "center"}

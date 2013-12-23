@@ -2,19 +2,7 @@
 = display_meta_description "Email campaigns can be an easy, cheap, yet it can easily turn prospects into life-long clients.", "email campaigns, email marketing campaign, email marketing campaigns, email campaign management, campaign email marketing, marketing email campaign, marketing email campaigns, successful email campaigns, successful email marketing campaigns, email advertising campaign, email advertising campaigns, mass email campaign, campaigner email marketing, email campaign marketing, targeted email campaigns, targeted email campaign, targeted email marketing campaign"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_campaign_path )
-      Email Campaign
-      %span
+  - breadcrumb :resources_email_campaign
 
 .row-fluid
   .span3
@@ -41,4 +29,6 @@
       Builds Relationships -Email campaigns can foster relationships by by encouraging a dialogue. There is a strong one-to-one relationship you can create with email that you don’t get with a lot of other advertising methods.
     %p
       Once you’ve decided to create an email campaign you should contact a company like Optyn who will help with the creation, scheduling and sending of emails, coordinate with social media and give you the analytics necessary to measure the effectiveness of each email campaign.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

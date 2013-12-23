@@ -2,19 +2,7 @@
 = display_meta_description "Our email marketing experts created a list of top email marketing strategies you need to consider.", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, , Top Email Marketing, top ten email marketing, best email marketing, best email marketing campaigns, best bulk email, the best email marketing, best email marketing templates, email marketing best"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_top_email_marketing_path )
-      Top Email Marketing
-      %span
+  - breadcrumb :resources_top_email_marketing
 
 .row-fluid
   .span3
@@ -48,4 +36,6 @@
       Also, our 
       %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } email marketing blog
       contains some of the best and top ten email marketing tips and solutions that you might find useful.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

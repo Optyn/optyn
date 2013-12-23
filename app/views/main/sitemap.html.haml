@@ -2,13 +2,7 @@
 = display_meta_description "Find any page that you need and all the resources around our email marketing and small business marketing", "email marketing, small business marketing, email marketing resources, email marketing services, optyn email marketing, optyn marketing sitemap, optyn sitemap, email marketing sitemap"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a.current( href = website_sitemap_path )
-      Sitemap
-      %span
+  - breadcrumb :sitemap
 
 .op-sitemap
   .row-fluid
@@ -20,7 +14,7 @@
       %h4 Our Company
       %ul
         %li
-          %a{ :href => 'testimonials/alley-gallery' } Testimonials
+          %a{ :href => alley_gallery_testimonial_path } Testimonials
         %li
           %a{ :href => about_path } About Us
         %li
@@ -133,6 +127,8 @@
           %a{ :href => resources_getting_started_path } Getting Started with Email Marketing
         %li
           %a{ :href => resources_email_marketing_types_path } Different E-Mail Types
+        %li
+          %a{ :href => resources_reachable_audience_path } Reachable Audience
         %li
           %a{ :href => resources_marketing_promotions_path } Marketing Promotions
         %li

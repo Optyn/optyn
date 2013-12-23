@@ -2,19 +2,7 @@
 = display_meta_description "Email marketing statistics can be vital to any marketing campaign. It is important to use email analytics as much as possible!", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email marketing statistics, effective email marketing, email marketing news, benefits of email marketing, business email marketing, email marketing metrics, email marketing roi, email metrics, email marketing analytics, email marketing benchmarks, does email marketing work, email marketing data, email marketing laws, email marketing rules, email marketing stats, cost of email marketing, email marketing articles, email marketing pricing, email marketing rates, email marketing reports, email marketing benchmarks by industry, email marketing benefits, email marketing books, email marketing costs, email marketing success, email stats, is email marketing effective, email marketing benchmark, email marketing book, email marketing ebook, email marketing features, email marketing prices, why use email marketing, email marketing results"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_marketing_stats_path )
-      Email Marketing Stats
-      %span
+  - breadcrumb :resources_email_marketing_stats
 
 .row-fluid
   .span3
@@ -42,4 +30,6 @@
         ROI is probably the most important measure of all because it answers the question - what did the campaign return on the investment that was made in the campaign?  Calculate ROI by dividing the return by the amount spent.  The higher the number the better.  Studies show that in general email marketing ROI is about 40x to 50x.  If you’re campaigns are getting less than that, work on improving the other factors mentioned here. 
     %p
       These statistic vary by industry, company, time and a host of other factors.  In order to ensure you are conducting effective email marketing campaigns, it is best to measure these statistics for each campaign and compare results over time.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

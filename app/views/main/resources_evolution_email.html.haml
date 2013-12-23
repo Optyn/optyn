@@ -2,19 +2,7 @@
 = display_meta_description "First commercial email was sent to 400 users in 1978. Do you know which company sent it? The face behind the first commercial email? It generated $13M in sales...", "evolution of email marketing, email marketing evolution, email marketing history, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_evolution_email_path )
-      Evolution of Email Marketing
-      %span
+  - breadcrumb :resources_evolution_email
 
 .row-fluid
   .span3
@@ -61,4 +49,6 @@
     %p
       %strong Today - 
       Email strategies have evolved from just a mass marketing strategy to ones focused on the specific requirements of each individual user. E-Mail is stronger than ever and companies including small businesses are spending over $24 billion in 2013 and 2014. 
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

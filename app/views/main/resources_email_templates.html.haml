@@ -1,21 +1,8 @@
 = display_title "Email Templates - Are you using the right ones?"
-= display_meta_description "Templates can be a vital part of any email marketing campaign. Our experts share their thoughts on email templates with you.", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email templates, email template, free email templates, business email etiquette, email marketing templates, business email template, email marketing template, free email marketing templates, email marketing examples, marketing email template, email marketing templates free, marketing email templates, mass email template, email marketing samples, email for marketing, email marketing script, best email marketing templates, email marketing sample, sample email marketing
-"
+= display_meta_description "Templates can be a vital part of any email marketing campaign. Our experts share their thoughts on email templates with you.", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email templates, email template, free email templates, business email etiquette, email marketing templates, business email template, email marketing template, free email marketing templates, email marketing examples, marketing email template, email marketing templates free, marketing email templates, mass email template, email marketing samples, email for marketing, email marketing script, best email marketing templates, email marketing sample, sample email marketing"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_templates_path )
-      Email Templates
-      %span
+  - breadcrumb :resources_email_templates
 
 .row-fluid
   .span3
@@ -53,4 +40,6 @@
       as we are teaching our customers and our followers many subjects including email marketing script, marketing email templates, business email etiquette, and much more.
     %p
       Ultimately, email templates have a big effect on your performance and how well your customers will convert. Email for marketing is not an easy task but with the right guidance, some patience, you can be successful.   
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

@@ -2,19 +2,7 @@
 = display_meta_description "Email Advertising or Email Marketing tends to be overlooked by small businesses. Do not make the same mistake!", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email advertising marketing, advertising email marketing online, targeted email advertising, direct email advertising, email marketing advertising"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_advertising_path )
-      Email Advertising
-      %span
+  - breadcrumb :resources_email_advertising
 
 .row-fluid
   .span3
@@ -31,4 +19,6 @@
       More recent studies show that email often delivers a significantly higher ROI than social media and email drives social engagement.
     %p
       If you’re considering marketing your business, be sure to include targeted email advertising. Just contact an email marketing advertising company like Optyn and see how easy it is to get started. All it takes is to register, upload your list and you’ll be creating and sending beautiful email advertising in no time.    
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space
