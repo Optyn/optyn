@@ -49,8 +49,8 @@ class MessageEmailAuditor < ActiveRecord::Base
   def enqueue_message
     #Conditon added as Optyn message receivers can email a received mesage in their inbox to a non Optyn user. 
     if message_user_id.present?
-      Resque.enqueue(SesEmailSender, self.id)
-      # SesApiWorker.perform_async(self.id)
+      #Resque.enqueue(SesEmailSender, self.id)
+      SesApiWorker.perform_async(self.id)
     end
   end
 end
