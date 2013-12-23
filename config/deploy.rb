@@ -113,7 +113,13 @@ namespace :deploy do
     run "bundle exec sidekiq stop"
   end
 
-  desc "Restart God gracefully"
+  desc "Restart Sidekiq gracefully"
+  task :restart_sidekiq ,:roles => :app do
+    run "bundle exec sidekiq stop"
+    run "bundle exec sidekiq start"
+  end
+
+  desc "Restart resque gracefully"
   task :restart_resque , :roles => :app do
     god_config_path = File.join(current_path, 'god', 'resque.god')
     begin
