@@ -124,17 +124,13 @@ namespace :deploy do
     god_config_path = File.join(current_path, 'god', 'resque.god')
     begin
       # Throws an exception if god is not running.
-      # run "cd #{current_path}; bundle exec god status && rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} RAILS_ROOT=#{current_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
       run "cd #{current_path}; bundle exec god status && bundle exec god load #{god_config_path} && bundle exec god start resque"
-
       # Kill resque processes and have god restart them with the newly loaded config.
       try_killing_resque_workers
     rescue => ex
       # god is dead, workers should be as well, but who knows.
       try_killing_resque_workers
-
       # Start god.
-      # run "cd #{current_path}; rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
       run "cd #{current_path}; bundle exec god -c #{god_config_path}"
     end
   end
