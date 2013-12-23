@@ -18,7 +18,15 @@ class SesEmailSender
     begin
       ses_message = MessageMailer.send_announcement(message, message_user).deliver
     rescue Exception => ex
-      puts ex
+      puts "+"*100
+      Rails.logger.warn "+"*100
+
+      puts ex.to_s
+      Rails.logger.warn ex.to_s
+
+      Rails.logger.warn "+"*100
+      puts "+"*100
+      return 
     end
     
     puts  "#{message_email_auditor_id} --> #{Time.now()}"

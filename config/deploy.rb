@@ -60,6 +60,7 @@ after "deploy:restart", "deploy:pdf:make_executable"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy:restart", "deploy:restart_resque"
+after "deploy:restart", "deploy:restart_sidekiq"
 after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
@@ -100,6 +101,16 @@ namespace :deploy do
   desc "Start Resque"
   task :start_resque ,:roles => :app do
     run "god start resque"
+  end
+
+  desc "Start Sidekiq"
+  task :start_sidekiq ,:roles => :app do
+    run "bundle exec sidekiq start"
+  end
+
+  desc "Start Sidekiq"
+  task :stop_sidekiq ,:roles => :app do
+    run "bundle exec sidekiq stop"
   end
 
   desc "Restart God gracefully"
