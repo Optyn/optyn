@@ -82,6 +82,7 @@ SitemapGenerator::Sitemap.create do
     add resources_marketing_syndication_path, :changefreq => 'weekly', :priority => 0.8
     add resources_marketing_ideas_path, :changefreq => 'weekly', :priority => 0.8
     add resources_integrated_marketing_path, :changefreq => 'weekly', :priority => 0.8
+    add resources_reachable_audience_path, :changefreq => 'weekly', :priority => 0.8
     #resource keyword pages
     add resources_email_broadcast_path, :changefreq => 'weekly', :priority => 0.8
     add resources_cheap_email_marketing_path, :changefreq => 'weekly', :priority => 0.8

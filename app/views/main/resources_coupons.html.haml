@@ -2,19 +2,7 @@
 = display_meta_description "Optyn's marketing experts show you how to utilize coupons to maximize ", "coupon marketing, marketing with coupons, coupons marketing, small business coupons , small business coupon, coupon promotion, coupon promotions email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_marketing_promotions_path )
-      Marketing Promotions
-      %span
-    %a.current( href = resources_coupons_path )
-      Marketing with Coupons
-      %span
+  - breadcrumb :resources_coupons
 
 .row-fluid
   .span3
@@ -57,6 +45,8 @@
       %strong
         8. Make the coupon code memorable.
       If the coupon code is not consumer specific for redemption security purposes, use a memorable term rather than a meaningless alphanumeric string.  For example, use “SAVE$50TODAY” rather than “SDK98KJW9”. This will let customers easily redeem and most importantly share it with their friends so you can attract new customers.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space
 
 

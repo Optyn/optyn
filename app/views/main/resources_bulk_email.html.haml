@@ -2,19 +2,7 @@
 = display_meta_description "Bulk email can be very crucial to your business and the how you convert prospects into customers.", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, bulk email, bulk email marketing, bulk email verifier, bulk emailer, bulk emails, send bulk email, sending bulk email, bulk email sending, bulk emailing, send bulk emails, bulk email addresses, sending bulk emails, bulk email marketing campaign, bulk email online marketing, targeted bulk email marketing, bulk email advertising, bulk email hosting, email bulk, what is bulk email, bulk email delivery, bulk email campaign, bulk email smtp"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_bulk_email_path )
-      Bulk Email
-      %span
+  - breadcrumb :resources_bulk_email
 
 .row-fluid
   .span3
@@ -29,4 +17,6 @@
       As a business owner marketing to your prospects and customers the best way to make sure your messages are not confused with spam is to send bulk emails only to individuals who have elected to receive email from you and never try to fool your audience with misleading subject lines or content.  One final point, personalize the message so the recipient knows it is from you.
     %p
       Not only does this ensure your email will not be considered spam, but it will increase the open rate.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

@@ -2,19 +2,7 @@
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_mobile_responsive_emails_path )
-      Mobile Responsive Design
-      %span
+  - breadcrumb :resources_mobile_responsive_emails
 
 .row-fluid
   .span3
@@ -43,4 +31,6 @@
         %li Animated GIFs won’t work on mobile device so replace these with static images.    
     %p
       There are many more rules your developer will have to follow when designing for mobile responsiveness, but this will give you enough ammunition to be able to start an intelligent conversation with him or her.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

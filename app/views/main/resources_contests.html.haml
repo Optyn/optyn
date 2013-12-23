@@ -2,19 +2,7 @@
 = display_meta_description "Contests can help small businesses in multitude on ways. However, a contest must be ran the right way to maximize its effectiveness.", "small business contest, small business contests, contests for small businesses, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_marketing_promotions_path )
-      Marketing Promotions
-      %span
-    %a.current( href = resources_contests_path )
-      Running Contests
-      %span
+  - breadcrumb :resources_contests
 
 .row-fluid
   .span3
@@ -66,4 +54,6 @@
       %strong
         7.  Don’t forget to do a review of the contest results after it ends.
       This is a great way to get insights into what went well and what needs to be improved upon.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

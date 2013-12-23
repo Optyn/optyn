@@ -15,7 +15,7 @@
     = yield :meta_description
 
     = analytics_init if Rails.env.production?
-
+    = breadcrumbs  :link_current =>  "True ", :separator =>  "", :semantic =>  "True"
 
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')

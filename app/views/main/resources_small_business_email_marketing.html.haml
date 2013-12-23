@@ -2,19 +2,7 @@
 = display_meta_description "We know that small business woners do not have much time to makret, so our exports gathered a few tips to help you out.", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, small business email marketing, white label email marketing, b2c email marketing, email marketing small business, email marketing for small businesses, business to business email marketing, email marketing business, enterprise email marketing, email marketing professional, professional email marketing"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_small_business_email_marketing_path )
-      Small Business Email Marketing
-      %span
+  - breadcrumb :resources_small_business_email_marketing
 
 .row-fluid
   .span3
@@ -40,4 +28,6 @@
       %li And much more
     %p
       So, if you’re interested in small business email marketing and/or a white label email marketing program, check out Optyn and see how easy it is to get started, run successful campaigns and increase sales, customer satisfaction and retention.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

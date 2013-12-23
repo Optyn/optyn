@@ -2,16 +2,7 @@
 = display_meta_description "Customer loyalty values your best clients, and in return they become brand ambassadors. A few actions by you can drastically improve your business.", "customer loyalty, loyalty marketing, customer loyalty marketing, what is loyalty marketing, building customer loyalty, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a.current( href = resources_loyalty_marketing_path )
-      Loyalty Marketing
-      %span
+  - breadcrumb :resources_loyalty_marketing
 
 .row-fluid
   .span3
@@ -42,10 +33,5 @@
     %p
       Whatever your business a loyalty program may be what you need to boost profits. Do not think twice about building customer loyalty!
     .blank-space
-
-
-
-
-
-
-
+    = render partial: 'get_started_banner'
+    .blank-space

@@ -100,6 +100,7 @@ Optyn::Application.routes.draw do
   match '/resources/marketing-syndication' => 'main#resources_marketing_syndication', :as => :resources_marketing_syndication
   match '/resources/marketing-ideas' => 'main#resources_marketing_ideas', :as => :resources_marketing_ideas
   match '/resources/integrated-marketing' => 'main#resources_integrated_marketing', :as => :resources_integrated_marketing
+  match '/resources/reachable-audience' => 'main#resources_reachable_audience', :as => :resources_reachable_audience
   #resources keyword specific pages
   match '/resources/email-marketing-system' => 'main#resources_email_marketing_system', :as => :resources_email_marketing_system
   match '/resources/cheap-email-marketing' => 'main#resources_cheap_email_marketing', :as => :resources_cheap_email_marketing

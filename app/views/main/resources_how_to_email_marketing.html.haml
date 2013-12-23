@@ -2,19 +2,7 @@
 = display_meta_description "Our experts give a quick introduction on how to approach small business marketing and how easy it is to get started!", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, how to write professional emails, how to send mass emails, how to send bulk email, how to do email marketing, how to mass email, how to send mass email, how to email marketing, how to send bulk emails, email marketing how to, how effective is email marketing, how to email marketing campaign, do it yourself email marketing, how to email market, how to design an email"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_how_to_email_marketing_path )
-      How to Email Marketing
-      %span
+  - breadcrumb :resources_how_to_email_marketing
 
 .row-fluid
   .span3
@@ -73,4 +61,6 @@
       For more how to do email marketing tips and tricks, please follow our 
       %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } email marketing blog 
       or check out our other email marketing and small business resources.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

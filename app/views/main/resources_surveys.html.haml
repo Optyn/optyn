@@ -1,20 +1,8 @@
-= display_title "Surveys "
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+= display_title "Surveys for small businesses"
+= display_meta_description "The importance of surveying your customers and how small businesses can benefit from surveys.", "surveys, customer surveys, survey software, how to survey, surveys for small businesses, small business surveys, surveys for small business, online survey software"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_marketing_promotions_path )
-      Marketing Promotions
-      %span
-    %a.current( href = resources_surveys_path )
-      Surveys
-      %span
+  - breadcrumb :resources_surveys
 
 .row-fluid
   .span3
@@ -60,6 +48,8 @@
       Keep in mind that respondents tend to avoid checking end boxes. When appropriate, include N/A (not applicable) options.
     %p
       Designing and writing effective and unbiased surveys is not an easy task.  The tips given above should get you on your way and help you avoid the big mistakes.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space
 
 

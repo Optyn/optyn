@@ -2,19 +2,7 @@
 = display_meta_description "Our experts introduce the difference between mass email and spam, and how mass email can help your business.", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, mass email marketing, send mass email, mass emailing, mass emails, sending mass emails, mass emailer, send mass emails, email mass marketing, email marketing mass, sending mass email, email mass mailing, mass email advertising, mass email send, mass email sending"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_mass_email_path )
-      Mass Email
-      %span
+  - breadcrumb :resources_mass_email
 
 .row-fluid
   .span3
@@ -29,4 +17,6 @@
       Keep in mind that just because you send mass email it does not mean that your campaign will be a success. Even if individuals have given permission for you to send them emails, if you have a boring subject line, or if the body of the email is poorly written, or if there is no call to action you will have a low response rate. It is far better to send out fewer emails with a high success rate than sending more emails with a fewer success rate.
     %p
       Mass emailing takes a lot of time and effort.  Finding a good mass emailer is hard and sending mass emails shouldn’t be your key focus. You should focus on building up your list and making its’ growth as natural as possible. 
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

@@ -2,16 +2,7 @@
 = display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a.current( href = resources_social_media_path )
-      Social Media Marketing
-      %span
+  - breadcrumb :resources_social_media
 
 .row-fluid
   .span3
@@ -42,4 +33,6 @@
     %p
       %strong YouTube 
       is the place to go to post videos relating to your business.  Make sure it is something a viewer would find interesting.  For example, if you’re a carpenter, create video on how to frame a door.  This will showcase your skills and may encourage someone to contact you for a remodeling job.  Added bonus - You Tube how-to videos have the added benefit of ranking on the video search results of Google.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

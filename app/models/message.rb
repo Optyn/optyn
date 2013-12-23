@@ -696,7 +696,9 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def fetch_receiver_ids
+  def fetch_receiver_ids    
+    return User.where(email: 'ian@eatstreet.com').pluck(:id) if Rails.env.staging? && partner.eatstreet?
+
     return all_active_user_ids if label_select_all?(self.label_ids)
 
     receiver_label_user_ids = label_user_ids

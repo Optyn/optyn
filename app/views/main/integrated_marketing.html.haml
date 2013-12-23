@@ -2,16 +2,7 @@
 = display_meta_description "Optyn's marketing software allows you to reach all of your customers at once. It's simple and easy!", "integrated marketing, integrated email marketing, integrated marketing software, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = marketing_path )
-      Marketing Software
-      %span
-    %a.current( href = integrated_marketing_path)
-      Integrated Marketing
-      %span
+  - breadcrumb :integrated_marketing
 
 .row-fluid
   .span3

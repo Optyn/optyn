@@ -2,19 +2,7 @@
 = display_meta_description "We provide you with a quick guide on how to find the best bulk email software solution for you! Tips from our experts!", "email apps, e-mail marketing, automated email marketing, affordable email marketing, email automation, crm email marketing, email marketing automation, managed email marketing, email based marketing, email deployment, email marketing crm, email marketing industry, email marketing information, emailing marketing, low cost email marketing, marketing by email, cpa email marketing, email marketing hosting, email marketing target, marketing with email, seo email marketing, emails marketing, send email marketing, based email marketing, interactive email marketing, unlimited email marketing, email marketing software wiki, email marketing software compare, email lead marketing, email marketing testing email marketing withemail marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_best_bulk_email_software_path )
-      Best Bulk Email Software
-      %span
+  - breadcrumb :resources_best_bulk_email_software
 
 .row-fluid
   .span3
@@ -35,4 +23,6 @@
         %br
     %p
       While it’s important to know that bulk email marketing software can be beneficial, it’s good to know what to look for. The most important part is to start and get going. 
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

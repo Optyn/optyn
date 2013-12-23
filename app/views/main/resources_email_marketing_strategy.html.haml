@@ -2,19 +2,7 @@
 = display_meta_description "Make sure that you approach your email marketing strategy with a right approach! Our experts share a few tips with you!", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, email marketing strategy, email marketing strategies, email marketing course, email marketing guide, email marketing resources, email marketing response rates, email marketing techniques, email marketing training, email marketing tutorial, email marketing guidelines, email marketing help"
 
 .row-fluid.breadcrumbs
-  .span12
-    %a( href='/' )
-      %i.icon-home
-      %span
-    %a( href = resources_path )
-      Marketing Resources
-      %span
-    %a( href = resources_email_marketing_path )
-      Email Marketing
-      %span
-    %a.current( href = resources_email_marketing_strategy_path )
-      Email Marketing Strategy
-      %span
+  - breadcrumb :resources_email_marketing_strategy
 
 .row-fluid
   .span3
@@ -62,4 +50,6 @@
       Use these email marketing strategies and you’ll see an improvement in your results. For more email marketing help and email marketing techniques, please visit our 
       %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } email marketing blog.
       fWe also have a full email marketing resource section.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space
