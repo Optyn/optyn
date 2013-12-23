@@ -21,11 +21,14 @@ class SesApiWorker
       ses_message = MessageMailer.send_announcement(message, message_user).deliver
     rescue Exception => ex
       puts ex
+      Rails.logger.info "~"*100
+      Rails.logger.info ex
+      Rails.logger.info "~"*100
+      return 
     end
 
     # puts  "#{message_email_auditor_id} --> #{Time.now()}"
     ses_message_time_end = Time.now().to_i
-
     message_email_auditor.update_attributes(delivered: true, ses_message_id: ses_message['message_id'].to_s.split(/@/).first)
     # puts  "#{message_email_auditor_id} --> #{Time.now().to_i}"
     message = message_email_auditor.message_user.message

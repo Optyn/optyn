@@ -60,6 +60,7 @@ after "deploy:restart", "deploy:pdf:make_executable"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy:restart", "deploy:restart_resque"
+after "deploy:restart", "deploy:restart_sidekiq"
 after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
@@ -102,7 +103,23 @@ namespace :deploy do
     run "god start resque"
   end
 
-  desc "Restart God gracefully"
+  desc "Start Sidekiq"
+  task :start_sidekiq ,:roles => :app do
+    run "bundle exec sidekiq start"
+  end
+
+  desc "Start Sidekiq"
+  task :stop_sidekiq ,:roles => :app do
+    run "bundle exec sidekiq stop"
+  end
+
+  desc "Restart Sidekiq gracefully"
+  task :restart_sidekiq ,:roles => :app do
+    run "bundle exec sidekiq stop"
+    run "bundle exec sidekiq start"
+  end
+
+  desc "Restart resque gracefully"
   task :restart_resque , :roles => :app do
     god_config_path = File.join(current_path, 'god', 'resque.god')
     begin
