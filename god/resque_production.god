@@ -7,10 +7,10 @@
 rails_env = "production"
 raise "Please specify RAILS_ENV." unless rails_env
 
-rails_release_root = ""
-rails_root = ""
-rails_shared_root = ""
-rails_current_root = ""
+rails_release_root = "/srv/apps/optyn/releases/"
+rails_root = "/srv/apps/optyn/"
+rails_shared_root = "/srv/apps/optyn/shared/"
+rails_current_root = "/srv/apps/optyn/current/"
 
 #SET Maximum number of workers 
 num_workers = 5
