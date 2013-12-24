@@ -4,6 +4,7 @@ Optyn::Application.routes.draw do
   devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+
   root to: 'main#index'
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
@@ -232,6 +233,10 @@ Optyn::Application.routes.draw do
     end    
   end
 
+  #Mount Sidekiq Web :)
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+  
   #Mount resque :)
   mount Resque::Server, :at => "/resque"
 
