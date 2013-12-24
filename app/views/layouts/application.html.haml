@@ -58,13 +58,13 @@
                   %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
                 %li
                   %a.btn.btn-primary{ :href => new_user_session_path } Log in
-      = breadcrumbs  :link_current =>  "True ", :separator =>  "", :semantic =>  "True"
 
     = display_flash_message
 
     .container-fluid
 
       .yield
+        = breadcrumbs  :link_current =>  "True ", :separator =>  "", :semantic =>  "True"
         = yield
 
       = render partial: "layouts/footer"
