@@ -19,7 +19,7 @@ class SesApiWorker
       Rails.logger.info "~"*100
       Rails.logger.info ex
       Rails.logger.info "~"*100
-      return 
+      raise ex #we need to raise the error so that airbrake gets it and job is retried
     end
 
     # puts  "#{message_email_auditor_id} --> #{Time.now()}"

@@ -7,8 +7,14 @@
 
 rails_env = ENV['RAILS_ENV'] || "staging"
 raise "Please specify RAILS_ENV." unless rails_env
-rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..','..'))
-#rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+
+if rails_env == "staging"
+  rails_root == ""
+elsif rails_env == "production"
+  rails_root == ""
+else
+  rails_root  = ENV['RAILS_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+end 
 rails_release_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 #SET Maximum number of workers 
 num_workers = rails_env == 'production' ? 5 : 1 

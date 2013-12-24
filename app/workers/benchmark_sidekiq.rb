@@ -4,7 +4,7 @@ class BenchmarkSidekiq
 
   def perform(message_email_auditor_id)
     benchmark.first_metric do
-      1000.times do 
+      2.times do 
         message_email_auditor = MessageEmailAuditor.find(message_email_auditor_id)
         message_user = message_email_auditor.message_user
         message = message_user.message
@@ -16,7 +16,7 @@ class BenchmarkSidekiq
           Rails.logger.info "~"*100
           Rails.logger.info ex
           Rails.logger.info "~"*100
-          return 
+          return false
         end
 
         ses_message_time_end = Time.now().to_i
@@ -27,7 +27,7 @@ class BenchmarkSidekiq
     end
 
     benchmark.second_metric do
-      10000.times do
+      2.times do
         message_email_auditor = MessageEmailAuditor.find(message_email_auditor_id)
         message_user = message_email_auditor.message_user
         message = message_user.message
