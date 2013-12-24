@@ -121,7 +121,12 @@ namespace :deploy do
 
   desc "Restart resque gracefully"
   task :restart_resque , :roles => :app do
-    god_config_path = File.join(current_path, 'god', 'resque.god')
+    if staging
+      god_config_path = File.join(current_path, 'god', 'resque_staging.god')
+    else production
+      god_config_path = File.join(current_path, 'god', 'resque_production.god')
+    end
+
     begin
       # Throws an exception if god is not running.
       run "cd #{current_path}; bundle exec god status && bundle exec god load #{god_config_path} && bundle exec god start resque"
