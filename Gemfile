@@ -81,6 +81,7 @@ gem 'jquery-rails'
 gem 'god' 
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sidekiq-benchmark'
 
 gem "gretel"
 
