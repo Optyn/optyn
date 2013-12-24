@@ -84,6 +84,9 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 
 gem "gretel"
 
+#for test only, remove it later
+gem "httplogger"
+
 group :development do
   gem 'thin'
   gem 'sextant'
