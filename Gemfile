@@ -30,7 +30,7 @@ gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.7.2'
 gem 'oauth2'
 gem 'carrierwave'
-#gem 'rmagick', '2.13.1'
+gem 'rmagick', '2.13.1'
 gem "fog"
 gem 'localtunnel'
 gem 'chosen-rails'
