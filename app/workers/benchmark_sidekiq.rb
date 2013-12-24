@@ -1,7 +1,7 @@
 class BenchmarkSidekiq
   include Sidekiq::Worker
   include Sidekiq::Benchmark::Worker
-
+  #INFO:this code is for benchmarking sidekiq only
   def perform(message_email_auditor_id)
     benchmark.first_metric do
       2.times do 
