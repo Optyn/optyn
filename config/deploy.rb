@@ -105,25 +105,27 @@ namespace :deploy do
 
   desc "Start Sidekiq"
   task :start_sidekiq ,:roles => :app do
-    run "bundle exec sidekiq start"
+    run "RAILS_ENV=#{rails_env} bundle exec sidekiq start"
   end
 
   desc "Start Sidekiq"
   task :stop_sidekiq ,:roles => :app do
-    run "bundle exec sidekiq stop"
+    run "RAILS_ENV=#{rails_env} bundle exec sidekiq stop"
   end
 
   desc "Restart Sidekiq gracefully"
   task :restart_sidekiq ,:roles => :app do
-    run "bundle exec sidekiq stop"
-    run "bundle exec sidekiq start"
+    run "RAILS_ENV=#{rails_env} bundle exec sidekiq stop"
+    run "RAILS_ENV=#{rails_env} bundle exec sidekiq start"
   end
 
   desc "Restart resque gracefully"
   task :restart_resque , :roles => :app do
-    if staging
+    #Chose the god file you want to fiddle with
+    #personally i think its bad idea to fiddle with "God" :P
+    if rails_env == "staging"
       god_config_path = File.join(current_path, 'god', 'resque_staging.god')
-    else production
+    else rails_env == "production"
       god_config_path = File.join(current_path, 'god', 'resque_production.god')
     end
 
