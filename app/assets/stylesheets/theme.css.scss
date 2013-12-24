@@ -1168,21 +1168,21 @@ blockquote {
       text-decoration: none;
       color: rgba( $white, 0.9 );
       background-color: lighten( $dark-blue, 10% );
-      > span {
+      > span > span {
         background-color: lighten( $dark-blue, 10% );
       }
     }
     &.current {
       background-color: $black;
-      span {
+      > span > span {
         background-color: $black;
       }
     }
   }
-  span span{
+  span > span{
     position: absolute;
     top: 4px;
-    right: -((1.8rem / sqrt(2)) / 2 );
+    right: -((1.8rem / sqrt(2)) / 2 ) + 0.1rem;
     display: inline-block;
     width: 1.8rem / sqrt(2);
     height: 1.8rem / sqrt(2);
@@ -1191,15 +1191,18 @@ blockquote {
     @include rotate( 45deg );
     background-color: lighten( $dark-blue, 5% );
   }
-  > div{
-      float :left;
- z-index: 11;
-    & + div, &+div span { z-index: 10;
-      & + div, &+div span { z-index: 9;
-        & + div, &+div span { z-index: 8;
-          & + div, &+div span { z-index: 7;
-        & + div, &+div span { z-index: 6; }}}}}
-     }
+  > div { float :left; }
+  > div:first-child   { z-index: 11; & span span { z-index: 11; }}
+  > div:nth-child(2)  { z-index: 10; & span span { z-index: 10; }}
+  > div:nth-child(3)  { z-index: 9;  & span span { z-index: 9; }}
+  > div:nth-child(4)  { z-index: 8;  & span span { z-index: 8; }}
+  > div:nth-child(5)  { z-index: 8;  & span span { z-index: 7; }}
+  > div:nth-child(6)  { z-index: 8;  & span span { z-index: 6; }}
+  > div:nth-child(7)  { z-index: 8;  & span span { z-index: 5; }}
+  > div:nth-child(8)  { z-index: 8;  & span span { z-index: 4; }}
+  > div:nth-child(9)  { z-index: 8;  & span span { z-index: 3; }}
+  > div:nth-child(10) { z-index: 8;  & span span { z-index: 2; }}
+  > div:nth-child(11) { z-index: 8;  & span span { z-index: 1; }}
   i.icon-angle-right {
     margin: 0 10px;
     line-height: 1.8rem;
