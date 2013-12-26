@@ -110,12 +110,12 @@ namespace :deploy do
 
   desc "Stop Sidekiq"
   task :stop_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d"
+    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
   end
 
   desc "Restart Sidekiq gracefully"
   task :restart_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d"
+    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
     run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
   end
 
