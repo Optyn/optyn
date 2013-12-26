@@ -30,10 +30,17 @@ class Merchants::MessagesController < Merchants::BaseController
     #@message.build_message_image
   end
 
+  def new_template
+    @message_type = "template_message"
+    @message = Message.new
+    @message.manager_id = current_manager.id
+    @shop = current_shop
+  end
+
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.new(params[:message].except(:label_ids).merge(manager_id: current_manager.id))
+      @message = klass.new(params[:message].except(:label_ids, :send_on_date, :send_on_time).merge(manager_id: current_manager.id))
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
@@ -46,11 +53,15 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def template
+    @system_templates = Template.system_generated
+    @message = Message.for_uuid(params[:id])  
+  end
+
   def edit
     @message = Message.for_uuid(params[:id])
     populate_shop_surveys
     @message_type = @message.type.underscore
-    #@message.build_message_image if @message.message_image.blank?
   end
 
   def update
@@ -70,6 +81,18 @@ class Merchants::MessagesController < Merchants::BaseController
         render "edit"
       end
     end
+  end
+
+  def update_template
+    @message = Message.for_uuid(params[:id])
+    @message.assign_template(params[:template_id])
+    render partial: 'editor_wrapper', layout: false
+  end
+
+  def editor
+    @message = Message.for_uuid(params[:id])
+    @addable_sections = Section.addable
+    render layout: 'email_template'
   end
 
   def update_meta

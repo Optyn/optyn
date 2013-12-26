@@ -1,0 +1,6 @@
+= raw(messages_section.content)
+= form_for messages_section, as: :messages_section, url: merchants_message_messages_section_path(id: messages_section.id, message_id: @message.uuid), html: {method: :put, class: 'hide template-section-form'} do |fields|  
+  = fields.hidden_field :id, class: 'section-id'
+  = fields.hidden_field :content, class: "hidden-content"
+
+  = hidden_field_tag :delete_section_location, merchants_message_messages_section_path(message_id: @message.uuid, id: messages_section.id), class: 'delete-section-location'

@@ -38,6 +38,8 @@ module Merchants::MessagesHelper
         "#{action_name.humanize} Special Announcement Campaign"
       when Message::SURVEY_FIELD_TEMPLATE_TYPE
         "#{action_name.humanize} Survey Campaign"
+      when Message::TEMPLATE_FIELD_TEMPLATE_TYPE
+        "#{action_name.humanize} Campaign".titleize
       else
         "#{action_name.humanize} Campaign"
     end
@@ -59,6 +61,8 @@ module Merchants::MessagesHelper
         "Special Announcement"
       when Message::SURVEY_FIELD_TEMPLATE_TYPE
         "Survey"
+      when Message::TEMPLATE_FIELD_TEMPLATE_TYPE
+        "Template"
       else
         "N/A"
     end

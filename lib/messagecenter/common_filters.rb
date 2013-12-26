@@ -2,9 +2,10 @@ module Messagecenter
   module CommonFilters
     def self.included(controller)
       controller.class_eval do
-        controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message])
+        controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message, :new_template])
         controller.before_filter(:show_my_messages_only, only: [:show])
         controller.before_filter(:message_editable?, only: [:edit, :update])
+        controller.before_filter(:show_template_chooser, only:[:edit])
         controller.before_filter(:message_showable?, only: [:show])
         controller.before_filter(:populate_manager_folder_count)
         controller.before_filter(:merge_end_date_time, only: [:create, :update])
@@ -36,7 +37,11 @@ module Messagecenter
       elsif "launch" == choice
         redirect_to queued_merchants_messages_path()
       else
-        redirect_to edit_merchants_message_path(@message.uuid)
+        if @message.instance_of?(TemplateMessage) && @message.template_id.blank?
+          redirect_to template_merchants_message_path(@message.uuid)
+        else
+          redirect_to edit_merchants_message_path(@message.uuid)
+        end
       end
     end
 
@@ -114,6 +119,15 @@ module Messagecenter
         message_content = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
 
         @message.for_curation(message_content)
+      end
+    end
+
+    def show_template_chooser
+      @message = Message.for_uuid(params[:id])
+      
+      if @message.instance_of?(TemplateMessage) && @message.template_id.blank?
+        redirect_to template_merchants_message_path(@message.uuid)
+        return false
       end
     end
 

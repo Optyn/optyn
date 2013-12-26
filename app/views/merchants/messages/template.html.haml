@@ -1,0 +1,18 @@
+= banner("Select your Template")
+
+= render partial: "merchants/messages/message_menu"
+
+#merchants.container-fluid.pad3pc
+  
+  #choose_message.pad3pc
+    = render :partial => 'progress_bar'
+
+    - if @message.template_id.present?
+      = render partial: "editor_wrapper"
+    - else
+      = render partial: "template_chooser"
+
+
+    #loading( style='display: none;' )
+      = image_tag 'ajax-loader.gif', alt: 'Page is loading ...'
+          

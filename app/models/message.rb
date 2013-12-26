@@ -12,6 +12,9 @@ class Message < ActiveRecord::Base
   has_many :message_visual_properties, dependent: :destroy
   has_one :message_image, dependent: :destroy
   has_many :redeem_coupons, dependent: :destroy
+  belongs_to :template
+  has_many :messages_sections, dependent: :destroy, order: 'messages_sections.position'
+  has_many :setions, through: :messages_sections
 
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
@@ -19,12 +22,13 @@ class Message < ActiveRecord::Base
 
   attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time, :send_on_rounded
 
-  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public
+  attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public, :template_id
  
   accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
   accepts_nested_attributes_for :message_image, allow_destroy: true
+  accepts_nested_attributes_for :messages_sections, allow_destroy: true
 
-  FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message"]
+  FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message", "template_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
   COUPON_FIELD_TEMPLATE_TYPE = "coupon_message"
   EVENT_FIELD_TEMPLATE_TYPE = "event_message"
@@ -32,6 +36,7 @@ class Message < ActiveRecord::Base
   SALE_FIELD_TEMPLATE_TYPE = "sale_message"
   SPECIAL_FIELD_TEMPLATE_TYPE = "special_message"
   SURVEY_FIELD_TEMPLATE_TYPE = "survey_message"
+  TEMPLATE_FIELD_TEMPLATE_TYPE = "template_message"
   PER_PAGE = 50
   PAGE = 1
   MESSAGE_BATCH_SEND_NAME = "message_batch_send.pid"
@@ -237,6 +242,19 @@ class Message < ActiveRecord::Base
       MessageUser.create_message_receiver_entries(individual_message, [user_id], [], nil)
     end
 
+  end
+
+  def assign_template(template_identifier)
+    unless self.template_id.present?
+      self.template_id = template_identifier
+
+      chosen_template = Template.find(template_identifier)
+      chosen_template.sections.each_with_index do |section, index|
+        self.messages_sections.build(section_id: section.id, content: section.content, position: index + 1)
+      end
+      
+      self.save(validate: false)
+    end
   end
 
   def update_meta!

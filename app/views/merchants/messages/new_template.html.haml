@@ -1,0 +1,14 @@
+= banner( message_form_title(@message_type) )
+
+#merchants
+  = render partial: "merchants/messages/message_menu"
+
+  #message_fields_wrapper.pad3pc
+
+    = render :partial => 'progress_bar'
+
+    = form_for :message, url: merchants_messages_path, method: :post, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
+      %fieldset
+        = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
+
+      = submit_tag "Next", name: 'save_draft', class: "btn btn-success"

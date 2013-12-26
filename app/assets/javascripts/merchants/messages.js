@@ -46,6 +46,10 @@ function MerchantMessage() {
             this.hookHeaderColorChange();
             this.hookHeaderSettingSubmission();
         }
+
+        if($('#template_chooser').length){
+            this.hookTemplateAssignment();            
+        }
     };
 
     this.hookChosen = function () {
@@ -349,6 +353,28 @@ function MerchantMessage() {
 
     this.removeDuplicateLabelIdsError = function(){
         $('input[name*=label_ids][type=hidden]').next('span.error').remove();
+    };
+
+    this.hookTemplateAssignment = function(){
+        $('body').on('click', '#template_chooser .template_type', function(event){
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'POST',
+                data: {'_method': 'PUT', 'template_id': $(this).attr('data-template-id')},
+                beforeSend: function(){
+                  $('#loading').show();
+                },
+                success: function(data){
+                  $('#loading').hide();
+                  $('#template_chooser').replaceWith(data)
+                },
+                error: function(){
+                  $('#loading').hide();
+                  alert("Could not choose a template. Please refresh your page and try again.")
+                }
+            });
+        });
     };
 }
 

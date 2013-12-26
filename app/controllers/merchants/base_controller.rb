@@ -1,5 +1,4 @@
 class Merchants::BaseController < ApplicationController
-
 	before_filter :authenticate_merchants_manager!, :set_time_zone, except: [:public_view, :generate_qr_code, :redeem, :share_email, :send_shared_email]
 	before_filter :check_connection_count, except: [:public_view, :generate_qr_code, :redeem, :share_email, :send_shared_email]
 	helper_method :current_shop, :manager_signed_in?, :current_manager, :current_partner

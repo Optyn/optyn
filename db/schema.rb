@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131216053927) do
+ActiveRecord::Schema.define(:version => 20131216144936) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -90,6 +90,24 @@ ActiveRecord::Schema.define(:version => 20131216053927) do
     t.string   "stripe_plan_token"
     t.string   "stripe_invoice_token"
   end
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "shop_id"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+  add_index "ckeditor_assets", ["shop_id"], :name => "index_ckeditor_assets_on_shop_id"
 
   create_table "connection_errors", :force => true do |t|
     t.integer  "user_id"
@@ -364,10 +382,22 @@ ActiveRecord::Schema.define(:version => 20131216053927) do
     t.string   "button_url",       :limit => 2303
     t.string   "button_text",      :limit => 1000
     t.boolean  "make_public"
+    t.integer  "template_id"
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
   add_index "messages", ["type", "uuid"], :name => "index_messages_on_type_and_uuid"
+
+  create_table "messages_sections", :force => true do |t|
+    t.integer  "message_id"
+    t.integer  "section_id"
+    t.integer  "position"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "messages_sections", ["message_id", "section_id"], :name => "index_messages_sections_on_message_id_and_section_id"
 
   create_table "oauth_access_grants", :force => true do |t|
     t.integer  "resource_owner_id", :null => false
@@ -506,6 +536,14 @@ ActiveRecord::Schema.define(:version => 20131216053927) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "sections", :force => true do |t|
+    t.string   "section_type"
+    t.text     "content"
+    t.boolean  "addable",      :default => true
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -541,12 +579,12 @@ ActiveRecord::Schema.define(:version => 20131216053927) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
   end
@@ -618,6 +656,24 @@ ActiveRecord::Schema.define(:version => 20131216053927) do
   end
 
   add_index "surveys", ["shop_id"], :name => "index_surveys_on_shop_id"
+
+  create_table "templates", :force => true do |t|
+    t.integer  "shop_id"
+    t.string   "name"
+    t.boolean  "system_generated", :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "templates_sections", :force => true do |t|
+    t.integer  "template_id"
+    t.integer  "section_id"
+    t.integer  "position"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "templates_sections", ["template_id", "section_id"], :name => "index_templates_sections_on_template_id_and_section_id"
 
   create_table "user_labels", :force => true do |t|
     t.integer  "user_id"
