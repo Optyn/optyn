@@ -105,7 +105,7 @@ namespace :deploy do
 
   desc "Start Sidekiq"
   task :start_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start"
+    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
   end
 
   desc "Stop Sidekiq"
@@ -116,7 +116,7 @@ namespace :deploy do
   desc "Restart Sidekiq gracefully"
   task :restart_sidekiq ,:roles => :app do
     run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop"
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start"
+    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
   end
 
   desc "Restart resque gracefully"
