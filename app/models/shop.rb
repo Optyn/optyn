@@ -421,7 +421,7 @@ class Shop < ActiveRecord::Base
   end  
   
   def meta_tag_title
-    content = "#{name} - Visit & Get Info About #{name} Here"
+    content = "Get Info About #{name} Here"
 
     if first_location.present?
       content << " in #{first_location_city}" if first_location_city.present?

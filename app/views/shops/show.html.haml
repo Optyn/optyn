@@ -6,7 +6,7 @@
     .row-fluid.titlebar
       .span12.logo.text-center
         .logo-cont
-          = shop_logo(@shop)
+          = image_tag @shop.logo_img.url, alt: @shop.name, title: @shop.name
         %h1
           = shop_name_with_city_state(@shop)
     .row-fluid.button
