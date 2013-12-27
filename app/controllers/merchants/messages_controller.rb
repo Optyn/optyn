@@ -37,7 +37,8 @@ class Merchants::MessagesController < Merchants::BaseController
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
-      if @message.send(params[:choice].to_sym)
+      message_method_call = check_subscription
+      if @message.send(message_method_call.to_sym)
         message_redirection
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
@@ -63,7 +64,8 @@ class Merchants::MessagesController < Merchants::BaseController
       @message.label_ids = params[:message][:label_ids]  || []
 
       populate_datetimes
-      if @message.send(params[:choice].to_sym)
+      message_method_call = check_subscription
+      if @message.send(message_method_call.to_sym)
         message_redirection
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
@@ -130,11 +132,17 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def launch
     @message = Message.for_uuid(params[:id])
-    launched = @message.launch
     params[:choice] = "launch"
 
-    if launched
+    message_method_call = check_subscription
+
+    launched = @message.send(message_method_call.to_sym)
+    
+
+    if launched && 'launch' == message_method_call
       message_redirection
+    elsif launched && 'save_draft' == message_method_call
+      render action: 'edit' 
     else
       flash.now[:error] = LAUNCH_FLASH_ERROR
       @message_type = @message.type.to_s.underscore
@@ -306,6 +314,15 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   private
+    def check_subscription
+      message_method_call = params[:choice]
+      if current_shop.disabled? && 'launch' == params[:choice].to_s
+        flash[:error] = "Please update your subscription before launching a message. We have saved your message in drafts."
+        message_method_call = 'save_draft'
+      end
+      message_method_call
+    end
+    
     def populate_user_folder_count(force=false)
       @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
     end
