@@ -34,7 +34,12 @@ module Messagecenter
       elsif "preview" == choice
         redirect_to preview_merchants_message_path(@message.uuid)
       elsif "launch" == choice
-        redirect_to queued_merchants_messages_path()
+        if current_shop.disabled?
+          redirect_to drafts_merchants_messages_path()
+        else
+          redirect_to queued_merchants_messages_path()
+        end
+        
       else
         redirect_to edit_merchants_message_path(@message.uuid)
       end

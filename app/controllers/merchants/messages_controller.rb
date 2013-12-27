@@ -317,7 +317,7 @@ class Merchants::MessagesController < Merchants::BaseController
     def check_subscription
       message_method_call = params[:choice]
       if current_shop.disabled? && 'launch' == params[:choice].to_s
-        flash[:error] = "Please update your subscription before launching a message. We have saved your message in drafts."
+        flash[:error] = "Please update your #{ActionController::Base.helpers.link_to 'subscription', merchants_upgrade_subscription_path} before launching a message. We have saved your message in drafts.".html_safe
         message_method_call = 'save_draft'
       end
       message_method_call
