@@ -36,8 +36,8 @@
             %span{ :class => 'icon-bar' }
             %span{ :class => 'icon-bar' }
             %span{ :class => 'icon-bar' }
-          %a.logo.pull-left{ :href => root_path }
-            = image_tag "logo.png", :alt => 'logo'
+          %a.logo.pull-left{ :href => root_path, :alt => 'Optyn Email Marketing', :title => 'Optyn Email Marketing' }
+            = image_tag "logo.png", :alt => 'Optyn Email Marketing', title: 'Optyn Email Marketing'
           - if user_signed_in? || manager_signed_in?
             - if user_signed_in?
               .pull-right
