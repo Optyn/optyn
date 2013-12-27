@@ -105,7 +105,7 @@ end
 
 
 crumb :marketing_promotions do
-  link "Email Deliverability<span></span>".html_safe, marketing_promotions_path
+  link "Marketing Promotions<span></span>".html_safe, marketing_promotions_path
   parent :marketing
 end
 
