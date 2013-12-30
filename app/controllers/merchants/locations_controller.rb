@@ -14,7 +14,7 @@ class Merchants::LocationsController < Merchants::BaseController
     @location = current_shop.locations.new(params[:location])
 
     if @location.save
-      Resque.enqueue(GeoFinder, @location.id)
+      GeoFinder.perform_async(@location.id)
       flash[:notice] = "Location added successfully"
       redirect_to merchants_locations_path
     else

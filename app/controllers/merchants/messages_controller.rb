@@ -283,7 +283,7 @@ class Merchants::MessagesController < Merchants::BaseController
       message_email_auditor.delivered = false
       message_email_auditor.email_to = user_email.strip
       message_email_auditor.save
-      Resque.enqueue(SharedForwarder, user_email.strip, message.id, message_email_auditor.id)
+      SharedForwarder.perform_async(user_email.strip, message.id, message_email_auditor.id)
     end
     respond_to do |format|
       format.html { 
@@ -308,7 +308,7 @@ class Merchants::MessagesController < Merchants::BaseController
       @message_change_notifier.attributes = params[:message_change_notifier]
       @message_change_notifier.save
       @message.reject
-      Resque.enqueue(MessageRejectionWorker, @message_change_notifier.id)
+      MessageRejectionWorker.perform_async(@message_change_notifier.id)
       render(layout: 'email_feedback')
     end
   end

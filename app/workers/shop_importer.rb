@@ -1,7 +1,8 @@
 class ShopImporter
+  include Sidekiq::Worker
   @queue = :import_queue
 
-  def self.perform(payload_id)
+  def perform(payload_id)
     payload = ApiRequestPayload.find(payload_id)
     begin
       if payload.present?

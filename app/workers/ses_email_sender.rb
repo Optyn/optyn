@@ -1,7 +1,7 @@
 class SesEmailSender
   @queue = :message_queue
 
-  def self.perform(message_email_auditor_id)
+  def perform(message_email_auditor_id)
     start_time = Time.now.to_i
     puts "~"*100
     puts  "#{message_email_auditor_id} --> #{Time.now().to_i}"

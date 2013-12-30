@@ -1,8 +1,9 @@
 class ShopUsersImporter
+  include Sidekiq::Worker
   ##Defination: Imports Merchants
   @queue = :import_queue
 
-  def self.perform(payload_id)
+  def perform(payload_id)
     payload = ApiRequestPayload.find(payload_id)
     # binding.pry
     begin

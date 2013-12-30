@@ -241,8 +241,6 @@ Optyn::Application.routes.draw do
     [user, password] == ["", "9p5yn123"]
   end
   
-  #Mount resque :)
-  mount Resque::Server, :at => "/resque"
 
   namespace :api  do
     scope module: :v1 do
