@@ -386,7 +386,11 @@ class Message < ActiveRecord::Base
       
       regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
       personal_subject = (self.subject.gsub(regex, "")).strip.capitalize
+      
+      regex = /{{Customer Name}}/i #regex when the customer name is missing /eom
+      personal_subject = (self.subject.gsub(regex, "")).strip.capitalize #incase customer name is used somewhere else.
       personal_subject
+
     end
   rescue 
     "A message from #{shop.name}"
