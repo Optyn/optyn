@@ -5,4 +5,8 @@ staging:
 production:
   :concurrency: 10
 :queues:
-  - default
+  -  [general_queue, 1]
+  -  [import_queue, 1]
+  -  [message_queue, 20]
+  -  [payment_queue, 1]
+  -  [default, 1]
