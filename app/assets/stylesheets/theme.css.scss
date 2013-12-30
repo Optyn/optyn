@@ -1146,10 +1146,9 @@ blockquote {
 .field-with-errors .error { display: block; }
 
 .breadcrumbs {
-  // position: fixed;
-  // top: 56px;
-  // left: 0;
-  // width: 100%;
+  float: none;
+  overflow: auto;
+  width: 100%;
   background: lighten( $dark-blue, 5% );
   color: $white;
   color: rgba( $white, 0.3 );
