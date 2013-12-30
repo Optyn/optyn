@@ -238,7 +238,7 @@ Optyn::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
-    [user, password] == ["sidekiqadmin", "p@ssw0rd"]
+    [user, password] == ["", "9p5yn123"]
   end
   
   #Mount resque :)
