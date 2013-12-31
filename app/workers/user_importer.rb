@@ -1,4 +1,5 @@
 class UserImporter
+  include Sidekiq::Worker
 	##Defination: Imports User By Merchant
 
   @queue = :import_queue

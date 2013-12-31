@@ -1,5 +1,5 @@
 class Merchants::FileImportsController < Merchants::BaseController
-include Sidekiq::Worker
+
 
   def index
     @file_imports = current_manager.file_imports.order("created_at DESC")
