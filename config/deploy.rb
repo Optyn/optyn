@@ -2,7 +2,6 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
-require "capistrano-resque"
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 require './config/boot'
@@ -59,10 +58,7 @@ after "deploy:restart", "deploy:pdf:make_executable"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
-after "deploy:restart", "deploy:restart_resque"
 after "deploy:restart", "deploy:restart_sidekiq"
-after "deploy:restart", "deploy:list:workers"
-# after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
 
 #after "deploy:create_symlink", "whenever"
@@ -80,28 +76,6 @@ namespace "whenever" do
 end
 
 namespace :deploy do
-  
-  #start of GOD handling
-  def try_killing_resque_workers
-    # pidfile
-    name = "resque"
-    begin
-      run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs kill || echo 'no process with name #{name} found'"
-    rescue
-      nil
-    end
-  end
-
-  desc "Stop Resque"
-  task :stop_resque ,:roles => :app do
-    try_killing_resque_workers
-    run "god stop resque"
-  end
-
-  desc "Start Resque"
-  task :start_resque ,:roles => :app do
-    run "god start resque"
-  end
 
   desc "Start Sidekiq"
   task :start_sidekiq ,:roles => :app do
@@ -118,30 +92,6 @@ namespace :deploy do
     run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
     run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
   end
-
-  desc "Restart resque gracefully"
-  task :restart_resque , :roles => :app do
-    #Chose the god file you want to fiddle with
-    #personally i think its bad idea to fiddle with "God" :P
-    if rails_env == "staging"
-      god_config_path = File.join(current_path, 'god', 'resque_staging.god')
-    else rails_env == "production"
-      god_config_path = File.join(current_path, 'god', 'resque_production.god')
-    end
-
-    begin
-      # Throws an exception if god is not running.
-      run "cd #{current_path}; bundle exec god status && bundle exec god load #{god_config_path} && bundle exec god start resque"
-      # Kill resque processes and have god restart them with the newly loaded config.
-      try_killing_resque_workers
-    rescue => ex
-      # god is dead, workers should be as well, but who knows.
-      try_killing_resque_workers
-      # Start god.
-      run "cd #{current_path}; bundle exec god -c #{god_config_path}"
-    end
-  end
-  #end
 
   desc "reload the database with seed data"
   task :seed do
@@ -238,14 +188,6 @@ namespace :deploy do
     #task delete lock file.
     task :unlock, :roles => :messenger, :only => {:primary => true} do
       run "rm #{shared_path}/pids/#{lock_file_name}"
-    end
-  end
-
-  namespace :list do
-    desc "List all the resque workers"
-    task :workers do
-      puts "* Listing all the resque workers"
-      run "ps aux |grep resque"
     end
   end
 end
