@@ -2,7 +2,7 @@
 :pidfile: tmp/pids/sidekiq.pid
 
 staging:
-  :concurrency: 25
+  :concurrency: 5
 integration:
   :concurrency: 25 
 
