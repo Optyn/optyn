@@ -1,12 +1,12 @@
-:concurrency: 5
+:concurrency: 25
 :pidfile: tmp/pids/sidekiq.pid
 staging:
-  :concurrency: 5
+  :concurrency: 25
 production:
-  :concurrency: 10
+  :concurrency: 25
 :queues:
   -  [general_queue, 1]
   -  [import_queue, 1]
-  -  [message_queue, 20]
+  -  [message_queue, 1]
   -  [payment_queue, 1]
   -  [default, 1]
