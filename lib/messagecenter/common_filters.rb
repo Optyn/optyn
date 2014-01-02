@@ -2,6 +2,7 @@ module Messagecenter
   module CommonFilters
     def self.included(controller)
       controller.class_eval do
+        controller.before_filter (:force_footer_caching_expire)
         controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message])
         controller.before_filter(:show_my_messages_only, only: [:show])
         controller.before_filter(:message_editable?, only: [:edit, :update])
@@ -120,6 +121,10 @@ module Messagecenter
 
         @message.for_curation(message_content)
       end
+    end
+
+    def force_footer_caching_expire
+      @force = true
     end
 
   end #end CommonFilter module

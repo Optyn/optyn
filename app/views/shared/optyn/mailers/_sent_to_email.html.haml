@@ -1,0 +1,3 @@
+- if @message_user.present? || @preview
+  %p{:style => "font-size: 11px;margin:0px;color: #666;"}
+    = "This message was sent to #{(@message_user.email rescue 'receiver@email.com')} by #{@shop.name}."
