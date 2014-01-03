@@ -1,6 +1,7 @@
 class MessageRejectionWorker
   include Sidekiq::Worker
-  @queue = :general_queue
+  sidekiq_options :queue => :general_queue
+  # @queue = :general_queue
 
   def perform(notifier_id)
     notification = MessageChangeNotifier.find(notifier_id)

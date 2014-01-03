@@ -72,11 +72,11 @@ class MessageMailer < ActionMailer::Base
     ShopTimezone.set_timezone(@shop)
     
     mail(
-      from: "office@eatstreet.com",
+      from: "specials@eatstreet.com",
       to: Rails.env.staging? ? SiteConfig.eatstreet_curation_email : @actual_message.manager_email,
       bcc: ["gaurav@optyn.com", "alen@optyn.com", "ian@eatstreet.com"],
       subject: "Message Rejected: #{@actual_message.name}",
-      reply_to: "office@eatstreet.com"
+      reply_to: "specials@eatstreet.com"
     )
   end
 end
