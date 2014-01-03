@@ -26,4 +26,9 @@ namespace :message do
       end
     end
   end
+
+  desc "Task to invoke the batch send of messages"
+  task :batch_send => :environment do
+    Message.batch_send
+  end
 end
