@@ -1,6 +1,7 @@
 class PartnerInquirySender
   include Sidekiq::Worker
-  @queue = :general_queue
+  sidekiq_options :queue => :general_queue
+  # @queue = :general_queue
 
   def perform(inquiry_id)
     GenericMailer.announce_partner_inquiry(inquiry_id).deliver
