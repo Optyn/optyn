@@ -12,6 +12,7 @@ defaults:
   ttls:
     message_folder: <%= 24.hours %>
     dashboard_count: <%= 1.minutes %>
+    email_footer: <%= 1.hour %>
   twitter_consumer_key: 'vJiyJWYJZ12Tstri6mixCA'
   twitter_consumer_secret: 'VXn4l4p84wVSp6RK6n2NAIpkBfTAxJOHemjvAiAzU'
   facebook_app_key: '585087778190652'

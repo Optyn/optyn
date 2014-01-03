@@ -1,12 +1,12 @@
-- Rails.cache.fetch("optyn_social_share_" + @message.id.to_s, force: @force) do
+- Rails.cache.fetch("optyn_social_share_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
   /Render Shops Social links
   = render partial: "shared/#{message_partner_name(@shop)}/mailers/social_share"
 
-- Rails.cache.fetch("optyn_email_social_profiles_" + @message.id.to_s, force: @force) do
+- Rails.cache.fetch("optyn_email_social_profiles_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
   /Email Social Profiles
   = render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
 
-- Rails.cache.fetch("optyn_advertisement_" + @message.id.to_s, force: @force) do
+- Rails.cache.fetch("optyn_advertisement_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
   /Optyn Send Free emails add
   = render partial: "shared/#{message_partner_name(@shop)}/mailers/optyn_advertisement"
 
@@ -17,7 +17,7 @@
       / Sent to email line
       = render partial: "shared/#{message_partner_name(@shop)}/mailers/sent_to_email"
 
-      - Rails.cache.fetch("optyn_sender_address_" + @message.id.to_s, force: @force) do
+      - Rails.cache.fetch("optyn_sender_address_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
         /Shop Address
         = render partial: "shared/#{message_partner_name(@shop)}/mailers/sender_address"
       
