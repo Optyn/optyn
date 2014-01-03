@@ -149,7 +149,7 @@ function MerchantSurvey() {
                 error: function (request) {
                     console.log("survey question hide : ERROR");
                     // console.log(request.responseText);
-                    // $modalBody.html(request.responseText);
+                    $modalBody.html(request.responseText);
                 }
             });
         });
