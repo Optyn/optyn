@@ -1,2 +1,2 @@
-- unless survey.ready
+- if survey.ready == false && !survey.survey_questions.blank?
   = link_to "Launch", launch_merchants_survey_path, class: 'btn btn-success'

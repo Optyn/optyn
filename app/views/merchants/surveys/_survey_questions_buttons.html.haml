@@ -7,7 +7,7 @@
 
 = submit_tag "Save and Preview", name: 'preview',class: "btn btn-primary submit_survey", title: 'Maintains the state of this survey only updating it'
 
-- if @survey.ready == false
+- if @survey.ready == false && !@survey.survey_questions.blank?
   = submit_tag "Launch", name: 'launch', class: "btn btn-success submit_survey", title: 'Launch this survey'  
 
 %br
