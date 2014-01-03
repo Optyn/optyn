@@ -6,6 +6,10 @@ staging:
   app_id: '624632634229184'
   secret_key: 'f1675b7e3b2027d69b14e8421e80ebaa'
   redirect_url: 'http://development.optyn.com'
+integration:
+  app_id: '624632634229184'
+  secret_key: 'f1675b7e3b2027d69b14e8421e80ebaa'
+  redirect_url: 'http://development.optyn.com'  
 production:
   app_id: '585087778190652'
   secret_key: '01b7451dffc56a99a02dee21fa0a2e1c'
