@@ -89,21 +89,21 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def create_response_message
-     if "na" == params[:id]
-       klass = params[:message_type].classify.constantize
-       @message = klass.new()
+    if "na" == params[:id]
+      klass = params[:message_type].classify.constantize
+      @message = klass.new()
 
-       @message.manager_id = current_manager.id
-       @message.attributes = params[:message]
-       @message.save_draft
-       params[:id] = @message.uuid
-     end
+      @message.manager_id = current_manager.id
+      @message.attributes = params[:message]
+      @message.save_draft
+      params[:id] = @message.uuid
+    end
 
-     parent_message = create_child_message
-     @surveys = current_shop.surveys
-     @message = parent_message
-     @message_type = @message.type.underscore
-     populate_manager_folder_count
+    parent_message = create_child_message
+    @surveys = current_shop.surveys
+    @message = parent_message
+    @message_type = @message.type.underscore
+    populate_manager_folder_count
     render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message}), 
       message_menu: render_to_string(partial: "merchants/messages/message_menu")
     }
@@ -138,15 +138,14 @@ class Merchants::MessagesController < Merchants::BaseController
 
     launched = @message.send(message_method_call.to_sym)
     
-
+    @message_type = @message.type.underscore
+    populate_labels
     if launched && 'launch' == message_method_call
       message_redirection
     elsif launched && 'save_draft' == message_method_call
       render action: 'edit' 
     else
       flash.now[:error] = LAUNCH_FLASH_ERROR
-      @message_type = @message.type.to_s.underscore
-      populate_labels
       render action: 'edit'
     end
     
@@ -314,42 +313,42 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   private
-    def check_subscription
-      message_method_call = params[:choice]
-      if current_shop.disabled? && 'launch' == params[:choice].to_s
-        flash[:error] = "Please update your #{ActionController::Base.helpers.link_to 'subscription', merchants_upgrade_subscription_path} before launching a message. We have saved your message in drafts.".html_safe
-        message_method_call = 'save_draft'
-      end
-      message_method_call
+  def check_subscription
+    message_method_call = params[:choice]
+    if current_shop.disabled? && 'launch' == params[:choice].to_s
+      flash[:error] = "Please update your #{ActionController::Base.helpers.link_to 'subscription', merchants_upgrade_subscription_path} before launching a message. We have saved your message in drafts.".html_safe
+      message_method_call = 'save_draft'
     end
+    message_method_call
+  end
     
-    def populate_user_folder_count(force=false)
-      @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
-    end
+  def populate_user_folder_count(force=false)
+    @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
+  end
 
-    def choice_launch?
-      "launch" == params[:choice]
-    end
+  def choice_launch?
+    "launch" == params[:choice]
+  end
 
-    def populate_shop_surveys
-      underscored_message_type = SurveyMessage.to_s.underscore
-      @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type rescue false) 
-    end
+  def populate_shop_surveys
+    underscored_message_type = SurveyMessage.to_s.underscore
+    @surveys = current_shop.surveys.active if (@message_type == underscored_message_type || @message.type.underscore == underscored_message_type rescue false)
+  end
 
-    def check_validity_before_rejection
-      message_uuid, message_change_uuid = fetch_message_and_change_identifiers
-      @message_change_notifier = MessageChangeNotifier.for_message_id_and_message_change_id(message_uuid, message_change_uuid)
-      @message = (@message_change_notifier.message rescue nil)
+  def check_validity_before_rejection
+    message_uuid, message_change_uuid = fetch_message_and_change_identifiers
+    @message_change_notifier = MessageChangeNotifier.for_message_id_and_message_change_id(message_uuid, message_change_uuid)
+    @message = (@message_change_notifier.message rescue nil)
 
-      unless @message_change_notifier.present?
-        flash[:notice] = "The link has expired. A moditfication to the message has been made. Please contact support@optyn.com if you are facing problems."
-        redirect_to root_path
-        false
-      end   
+    unless @message_change_notifier.present?
+      flash[:notice] = "The link has expired. A moditfication to the message has been made. Please contact support@optyn.com if you are facing problems."
+      redirect_to root_path
+      false
     end
+  end
 
-    def fetch_message_and_change_identifiers
-      plain_text = Encryptor.decrypt(params[:id])
-      plain_text.split("--")
-    end
+  def fetch_message_and_change_identifiers
+    plain_text = Encryptor.decrypt(params[:id])
+    plain_text.split("--")
+  end
 end
