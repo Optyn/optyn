@@ -1,6 +1,7 @@
 class SubscriptionBackgroundProcessor
   include Sidekiq::Worker
-  @queue = :payment_queue
+  sidekiq_options :queue => :payment_queue
+  # @queue = :payment_queue
 
   def perform(subscription_id)
     subscription = Subscription.find(subscription_id)
