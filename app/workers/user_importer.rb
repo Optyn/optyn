@@ -1,8 +1,8 @@
 class UserImporter
   include Sidekiq::Worker
+  sidekiq_options :queue => :import_queue
 	##Defination: Imports User By Merchant
-
-  @queue = :import_queue
+  # @queue = :import_queue
 
   def perform(file_import_id)
   	# binding.pry

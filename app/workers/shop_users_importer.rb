@@ -1,7 +1,8 @@
 class ShopUsersImporter
   include Sidekiq::Worker
+  sidekiq_options :queue => :import_queue
   ##Defination: Imports Merchants
-  @queue = :import_queue
+  # @queue = :import_queue
 
   def perform(payload_id)
     payload = ApiRequestPayload.find(payload_id)
