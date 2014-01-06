@@ -1,6 +1,6 @@
 class ShopUsersImporter
   include Sidekiq::Worker
-  sidekiq_options :queue => :import_queue
+  sidekiq_options :queue => :import_queue, :backtrace => true
   ##Defination: Imports Merchants
   # @queue = :import_queue
 

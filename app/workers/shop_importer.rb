@@ -1,6 +1,6 @@
 class ShopImporter
   include Sidekiq::Worker
-  sidekiq_options :queue => :import_queue
+  sidekiq_options :queue => :import_queue, :backtrace => true
   # @queue = :import_queue
 
   def perform(payload_id)

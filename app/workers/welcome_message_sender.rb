@@ -1,6 +1,6 @@
 class WelcomeMessageSender
   include Sidekiq::Worker
-  sidekiq_options :queue => :general_queue
+  sidekiq_options :queue => :general_queue, :backtrace => true
  # @queue = :general_queue
 
   def perform(account_type, account_id, password=nil, shop_id=nil)

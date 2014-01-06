@@ -1,6 +1,6 @@
 class SesApiWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :message_queue
+  sidekiq_options :queue => :message_queue, :backtrace => true
   # @queue = :message_queue
 
   def perform(message_email_auditor_id)

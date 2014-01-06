@@ -1,6 +1,6 @@
 class MessageRejectionWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :general_queue
+  sidekiq_options :queue => :general_queue, :backtrace => true
   # @queue = :general_queue
 
   def perform(notifier_id)
