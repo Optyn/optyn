@@ -11,14 +11,14 @@ class Template < ActiveRecord::Base
 
   scope :fetch_system_generated, where(system_generated: true)
 
-  scope :include_sections, includes(:sections)
-
   scope :for_shop, ->(shop_identifier) { where(shop_id: shop_identifier) }
 
   scope :for_name, ->(template_name) { where(name: template_name) }
 
+  PLACE_HOLDER_ELEM = "<placeholder></placeholder>"
+
   def self.system_generated 
-    fetch_system_generated.include_sections
+    fetch_system_generated
   end
 
   def self.basic
@@ -43,24 +43,46 @@ class Template < ActiveRecord::Base
             columns = []
             grid_child.css('columns').each do |columns_child|
               columns << HashWithIndifferentAccess.new(html: columns_child.children.to_s, type: columns_child['type'])
-              columns_child.parent.replace("<placeholder></placeholder>")
+              columns_child.parent.add_child(PLACE_HOLDER_ELEM) unless columns_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
+              columns_child.remove
+
+              # unless columns_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
+              #   columns_child.replace(PLACE_HOLDER_ELEM) 
+              # else
+              #   columns_child.remove
+              # end
             end
 
             grid = HashWithIndifferentAccess.new(columns: columns)
-            grid_child.parent.replace("<placeholder></placeholder>")
+            grid_parent = grid_child.parent
+            grid_child.remove
+            grid_parent.add_child(PLACE_HOLDER_ELEM) unless grid_parent.to_s.include?(PLACE_HOLDER_ELEM)
+            # unless grid_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
+            #   grid_child.replace(PLACE_HOLDER_ELEM)
+            # else
+            #   grid_child.remove
+            # end
+
+
             grid[:html] = grid_child.children.to_s
             grids << grid
           end
 
 
           row = HashWithIndifferentAccess.new(grids: grids)
-          row_child.parent.replace("<placeholder></placeholder>")
+          row_parent = row_child.parent
+          row_child.remove
+          row_parent.add_child(PLACE_HOLDER_ELEM) unless row_parent.to_s.include?(PLACE_HOLDER_ELEM)
+
           row[:html] = row_child.children.to_s
           rows << row
         end
 
         container = HashWithIndifferentAccess.new(rows: rows, type: container_child['type'])
-        container_child.parent.replace("<placeholder></placeholder>")
+        container_parent = container_child.parent
+        container_child.remove
+        container_parent.add_child(PLACE_HOLDER_ELEM) unless container_parent.parent.to_s.include?(PLACE_HOLDER_ELEM)
+
         container[:html] = container_child.children.to_s
         containers << container
         
