@@ -13,8 +13,6 @@ class Message < ActiveRecord::Base
   has_one :message_image, dependent: :destroy
   has_many :redeem_coupons, dependent: :destroy
   belongs_to :template
-  has_many :messages_sections, dependent: :destroy, order: 'messages_sections.position'
-  has_many :setions, through: :messages_sections
 
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy

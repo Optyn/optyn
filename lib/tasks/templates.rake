@@ -1,52 +1,29 @@
 namespace :templates do
   desc "Populate system generated templates"
-  task :populate_system_templates => :environment do
+  task :seed => :environment do
 
-    #Create a baisc template
-    puts "Adding the template Basic"
-    options = {shop_id: nil, system_generated: true, name: "Basic"}
-    template = Template.where(options).first || Template.new(options)
-    template.templates_sections.destroy_all
-    template.reload if template.id.present?
-    template.templates_sections.build(section_id: Section.header_id, position: 1)
-    template.templates_sections.build(section_id: Section.text_only_id, position: 2)
-    template.templates_sections.build(section_id: Section.footer_id, position: 3)
-    template.save
+    #Add the basic Template
+    puts "Adding the Basic Template"
+    template = Template.for_shop(nil).for_name('Basic').first || Template.new
+    template.attributes=({name: "Basic", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/basic.html", 'r'){|file| file.read}})
+    template.save!    
 
-    #Create a hero template
-    puts "Adding the template Hero"
-    options = {shop_id: nil, system_generated: true, name: "Hero"}
-    template = Template.where(options).first || Template.new(options)
-    template.templates_sections.destroy_all
-    template.reload if template.id.present?
-    template.templates_sections.build(section_id: Section.header_id, position: 1)
-    template.templates_sections.build(section_id: Section.text_with_full_image_id, position: 2)
-    template.templates_sections.build(section_id: Section.footer_id, position: 3)
-    template.save
+    #Adding the Hero Template
+    # puts "Adding the Hero Template"
+    # template = Template.for_shop(nil).for_name('Hero').first || Template.new
+    # template.attributes = ({name: "Hero", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/hero.html", 'r'){|file| file.read}})
+    # template.save!    
 
-    #Create a sidebar hero template
-    puts "Adding the template Hero Sidebar"
-    options = {shop_id: nil, system_generated: true, name: "Hero Sidebar"}
-    template = Template.where(options).first || Template.new(options)
-    template.templates_sections.destroy_all
-    template.reload if template.id.present?
-    template.templates_sections.build(section_id: Section.header_id, position: 1)
-    template.templates_sections.build(section_id: Section.text_with_full_image_id, position: 2)
-    template.templates_sections.build(section_id: Section.sidebar_id, position: 3)
-    template.templates_sections.build(section_id: Section.half_text_id, position: 4)
-    template.templates_sections.build(section_id: Section.footer_id, position: 5)
-    template.save
+    #Adding the Sidebar Template
+    # puts "Adding the Sidebar Template"
+    # template = Template.for_shop(nil).for_name('Sidebar').first || Template.new
+    # template.attributes = ({name: "Hero", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/sidebar.html", 'r'){|file| file.read}})
+    # template.save!
 
-    #Create a sidebar template
-    puts "Adding the template Sidebar"
-    options = {shop_id: nil, system_generated: true, name: "Sidebar"}
-    template = Template.where(options).first || Template.new(options)
-    template.templates_sections.destroy_all
-    template.reload if template.id.present?
-    template.templates_sections.build(section_id: Section.header_id, position: 1)
-    template.templates_sections.build(section_id: Section.half_text_id, position: 2)
-    template.templates_sections.build(section_id: Section.sidebar_id, position: 3)
-    template.templates_sections.build(section_id: Section.footer_id, position: 4)   
-    template.save
+    #Adding the Galleria Template
+    # puts "Adding the Galleria Template"
+    # template = Template.for_shop(nil).for_name('Galleria').first || Template.new
+    # template.attributes = ({name: "Hero", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/galleria.html", 'r'){|file| file.read}})
+    # template.save!    
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131216144936) do
+ActiveRecord::Schema.define(:version => 20131228084928) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -537,11 +537,12 @@ ActiveRecord::Schema.define(:version => 20131216144936) do
   end
 
   create_table "sections", :force => true do |t|
-    t.string   "section_type"
+    t.integer  "template_id"
+    t.string   "type"
     t.text     "content"
-    t.boolean  "addable",      :default => true
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.boolean  "addable",     :default => true
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -611,6 +612,14 @@ ActiveRecord::Schema.define(:version => 20131216144936) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "stylesheets", :force => true do |t|
+    t.integer  "template_id"
+    t.string   "name"
+    t.string   "location",    :limit => 1000
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
   create_table "subscriptions", :force => true do |t|
     t.string   "email"
     t.integer  "plan_id"
@@ -661,19 +670,11 @@ ActiveRecord::Schema.define(:version => 20131216144936) do
     t.integer  "shop_id"
     t.string   "name"
     t.boolean  "system_generated", :default => false
+    t.text     "html"
+    t.text     "structure"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
-
-  create_table "templates_sections", :force => true do |t|
-    t.integer  "template_id"
-    t.integer  "section_id"
-    t.integer  "position"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "templates_sections", ["template_id", "section_id"], :name => "index_templates_sections_on_template_id_and_section_id"
 
   create_table "user_labels", :force => true do |t|
     t.integer  "user_id"
