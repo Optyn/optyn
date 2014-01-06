@@ -1,6 +1,8 @@
 = display_title "E-Mail Marketing Sitemap for Optyn"
 = display_meta_description "Find any page that you need and all the resources around our email marketing and small business marketing", "email marketing, small business marketing, email marketing resources, email marketing services, optyn email marketing, optyn marketing sitemap, optyn sitemap, email marketing sitemap"
-/Links will be added here...
+
+.row-fluid.breadcrumbs
+  - breadcrumb :sitemap
 
 .op-sitemap
   .row-fluid
@@ -10,12 +12,44 @@
   .row-fluid
     .span4
       %h4 Our Company
-      = render 'layouts/links_company'
+      %ul
+        %li
+          %a{ :href => alley_gallery_testimonial_path } Testimonials
+        %li
+          %a{ :href => about_path } About Us
+        %li
+          %a{ :href => 'http://www.angel.co/optyn/jobs', :target => "_blank"} Jobs
+        %li
+          %a{ :href => 'http://blog.optyn.com', :alt => "email marketing blog" } Email Marketing Blog
+        %li
+          %a{ :href => terms_path } Terms of Use
+        %li
+          %a{ :href => privacy_path } Privacy Policy
+        %li
+          %a{ :href => website_sitemap_path } Sitemap
+        %li
+          %a{ :href => profile_sitemap_path } Merchant Profiles
+
 
     .span4
       %h4 For Merchants
-      = render 'layouts/links_merchants'
-
+      %ul
+        %li
+          %a{ :href => merchant_features_path } Features
+        %li
+          %a{ :href => tour_page_path } Quick Tour
+        %li
+          %a{ :href => faq_path } FAQs
+        %li
+          %a( href = pricing_path ) Pricing
+        %li
+          %a{ :href => support_path, :target => "_blank" } Customer Support
+        %li
+          %a{ :href => new_merchants_manager_registration_path } Get Started!
+        %li 
+          %a{:href => marketing_path } Marketing Software
+        %li
+          %a{:href => resources_path } Marketing Resources
     .span4
       %h4 For Partners
       = render 'layouts/links_partner'
@@ -24,14 +58,192 @@
 
   .row-fluid
     .span4
-      %h4 Customer Profiles
+      %h4 Marketing Software
       %ul
-        - @shops.each do |shop|
-          %li
-            = link_to(shop.name, public_shop_path(shop.identifier))
-
+        %li
+          %a{ :href => email_marketing_path } E-Mail Marketing
+        %li
+          %a{ :href => mobile_responsive_path } Mobile Responsive E-Mails
+        %li
+          %a{ :href => capturing_data_path } Capturing Customer E-Mails
+        %li
+          %a{ :href => email_deliverability_path } E-Mail Deliverability
+        %li 
+          %a{ :href => marketing_promotions_path } Marketing Promotions
+        %li
+          %a{ :href => coupons_path } Coupons
+        %li
+          %a{ :href => contests_path } Contests
+        %li
+          %a{ :href => surveys_path } Surveys
+        %li
+          %a{ :href => specials_path } Specials and Sales
+        %li
+          %a{ :href => social_media_marketing_path } Social Media Marketing
+        %li
+          %a{ :href => marketing_automation_path } Marketing Automation
+        %li
+          %a{ :href => marketing_syndication_path } Marketing Syndication
+        %li
+          %a{ :href => marketing_ideas_path } Marketing Ideas
+        %li
+          %a{ :href => online_marketing_path } Online Marketing
+        %li
+          %a{ :href => automated_marketing_path } Automated Marketing
+        %li
+          %a{ :href => loyalty_marketing_path } Loyalty Marketing
+        %li
+          %a{ :href => customer_retention_path } Customer Retention
+        %li
+          %a{ :href => marketing_analytics_path } Marketing Analytics 
+        %li
+          %a{ :href => digital_marketing_path } Digital Marketing
+        %li 
+          %a{ :href => marketing_collaboration_path } Marketing Collaboration
+        %li
+          %a{ :href => multi_channel_marketing_path } Multi-channel Marketing
+        %li
+          %a{ :href => integrated_marketing_path } Integrated Marketing
     .span4
-      %h4 Marketing
-      = render 'main/marketing_nav'
-
+      %h4 Small Business Marketing Resources
+      %ul.sidebar-nav
+        %li
+          %a{ :href => resources_email_marketing_path } E-Mail Marketing
+        %li
+          %a{ :href => resources_mobile_responsive_emails_path } Mobile Responsive E-Mails
+        %li
+          %a{ :href => resources_capturing_customer_emails_path } Capturing Customer E-Mails
+        %li
+          %a{ :href => resources_capturing_customer_data_path } Capturing Customer Data
+        %li
+          %a{ :href => resources_evolution_email_path } Evolution of E-Mail Marketing
+        %li
+          %a{ :href => resources_email_marketing_tips_path } Email Marketing Tips
+        %li
+          %a{ :href => resources_best_practices_path } E-Mail Marketing Best Practices
+        %li
+          %a{ :href => resources_measuring_success_path } Measuring Success of Email Marketing
+        %li
+          %a{ :href => resources_getting_started_path } Getting Started with Email Marketing
+        %li
+          %a{ :href => resources_email_marketing_types_path } Different E-Mail Types
+        %li
+          %a{ :href => resources_reachable_audience_path } Reachable Audience
+        %li
+          %a{ :href => resources_marketing_promotions_path } Marketing Promotions
+        %li
+          %a{ :href => resources_contests_path } Contests
+        %li
+          %a{ :href => resources_coupons_path } Coupons
+        %li
+          %a{ :href => resources_surveys_path } Surveys 
+        %li
+          %a{ :href => resources_specials_sales_path } Specials and Sales
+        %li
+          %a{ :href => resources_social_media_path } Social Media Marketing
+        %li
+          %a{ :href => resources_digital_marketing_path } Digital Marketing
+        %li
+          %a{ :href => resources_online_marketing_path } Online Marketing
+        %li
+          %a{ :href => resources_marketing_automation_path } Marketing Automation
+        %li
+          %a{ :href => resources_marketing_syndication_path } Marketing Syndication
+        %li
+          %a{ :href => resources_customer_retention_path } Customer Retention
+        %li
+          %a{ :href => resources_loyalty_marketing_path } Loyalty Marketing
+        %li
+          %a{ :href => resources_marketing_analytics_path } Marketing Analytics
+        %li
+          %a{ :href => resources_marketing_ideas_path } Marketing Ideas
+        %li
+          %a{ :href => resources_integrated_marketing_path } Integrated Marketing
+    .span4
+      %h4 Additional Services
+      %ul 
+        %li
+          %a{ :href => email_marketing_software_path } Email Marketing Software
+        %li
+          %a{ :href => free_email_marketing_path } Free Email Marketing
+        %li
+          %a{ :href => free_email_marketing_software_path } Free Email Marketing Software
+        %li
+          %a{ :href => email_blast_software_path } Email Blast Software
+        %li
+          %a{ :href => bulk_email_software_path } Bulk Email Software
+        %li
+          %a{ :href => email_marketing_solutions_path } Email Marketing Solutions
+        %li
+          %a{ :href => mass_mail_software_path } Mass Mail Software
+        %li
+          %a{ :href => newsletter_software_path } Newsletter Software
+        %li
+          %a{ :href => free_newsletter_software_path } Free Newsletter Software
+        %li
+          %a{ :href => free_email_marketing_software_path } Free Email Marketing Software
+        %li
+          %a{ :href => email_marketing_agency_path } Email Marketing Agency
+        %li
+          %a{ :href => email_marketing_programs_path } Email Marketing Programs
+  .row-fluid
+    .span4
+      %h4 Additional Resources
+      %ul.bullet-disc
+        %li 
+          %a{:href => resources_email_templates_path } Email Templates
+        %li 
+          %a{:href => resources_email_marketing_system_path} Email Marketing System
+        %li 
+          %a{:href => resources_best_email_marketing_path} Best Email Marketing
+        %li 
+          %a{:href => resources_best_newsletter_software_path} Best Newsletter Software
+        %li 
+          %a{:href => resources_direct_email_marketing_path} Direct Email Marketing
+        %li 
+          %a{:href => resources_bulk_email_path} Bulk Email
+        %li 
+          %a{:href => resources_best_email_marketing_software_path} Best Email Marketing Software
+        %li 
+          %a{:href => resources_best_bulk_email_software_path} Best Bulk Email Software
+        %li 
+          %a{:href => resources_cheap_email_marketing_path} Cheap Email Marketing
+        %li 
+          %a{:href => resources_top_email_marketing_software_path} Top Email Marketing Software
+        %li 
+          %a{:href => resources_email_broadcast_path} Email Broadcast
+        %li 
+          %a{:href => resources_email_blast_path} Email Blast
+        %li 
+          %a{:href => resources_best_free_email_marketing_path } Best Free Email Marketing
+        %li 
+          %a{:href => resources_email_advertising_path } Email Advertising
+        %li 
+          %a{:href => resources_email_campaign_path } Email Campaign
+        %li 
+          %a{:href => resources_email_marketing_stats_path } Email Marketing Stats
+        %li 
+          %a{:href => resources_small_business_email_marketing_path } Small Business Email Marketing
+        %li 
+          %a{:href => resources_email_marketing_strategy_path } Email Marketing Strategy
+        %li 
+          %a{:href => resources_how_to_email_marketing_path } How to Email Marketing
+        %li 
+          %a{:href => resources_catchy_email_subject_lines_path } Catchy Email Subject Lines
+        %li 
+          %a{:href => resources_top_email_marketing_path } Top Email Marketing
+        %li 
+          %a{:href => resources_email_marketing_online_path } Email Marketing Online
+        %li 
+          %a{:href => resources_what_is_email_marketing_path } What is Email Marketing
+        %li 
+          %a{:href => resources_follow_up_emails_path } Follow Up Emails
+        %li 
+          %a{:href => resources_email_types_path } Email Types
+        %li 
+          %a{:href => resources_email_newsletter_path } Email Newsletter
+        %li 
+          %a{:href => resources_mass_email_path } Mass Email
+        %li 
+          %a{:href => resources_opt_in_email_marketing_path } Opt In Email Marketing
 .blank-space

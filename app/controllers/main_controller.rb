@@ -5,7 +5,7 @@ class MainController < ApplicationController
   before_filter :skip_menu
 
   def sitemap
-    @shops = Shop.real.not_pre_added.alphabetized
+    populate_real_shops
 
     respond_to do |format|
       format.html 
@@ -13,7 +13,15 @@ class MainController < ApplicationController
     end
   end
 
+  def sitemap_customer_profiles
+    populate_real_shops
+  end
+
   private
+  def populate_real_shops
+    @shops = Shop.real.not_pre_added.alphabetized
+  end
+
   def skip_menu
     @skip_menu = true
   end

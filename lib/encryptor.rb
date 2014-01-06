@@ -28,4 +28,13 @@ class Encryptor
     cipher.iv = '9p5yn123'
     cipher
   end
+
+  def self.encrypt_for_message(message_uuid, message_change_notifier_uuid)
+    plain_text = "#{message_uuid}--#{message_change_notifier_uuid}"
+    cipher = configure
+    ciphertext = cipher.update(plain_text)
+    ciphertext.<<(cipher.final)
+    encoded_cipher_text = Base64.strict_encode64(ciphertext)
+    CGI.escape(encoded_cipher_text)
+  end
 end

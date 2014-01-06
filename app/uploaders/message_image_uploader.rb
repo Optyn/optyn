@@ -3,8 +3,10 @@
 class MessageImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
+  include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
+  
+  process :resize_to_fit => [600, 400] , :if => :check_dimensions?
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -20,6 +22,8 @@ class MessageImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     #'uploads/shop'
   end
+
+
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
@@ -45,6 +49,14 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  protected
+  def check_dimensions?(file)
+    img = ::Magick::Image::read(@file.file).first
+    width = img.columns
+    height = img.rows
+    width.to_i > 600 || height.to_i > 400
   end
 
   # Override the filename of the uploaded files:

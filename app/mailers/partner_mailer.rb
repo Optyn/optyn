@@ -14,13 +14,18 @@ class PartnerMailer < ActionMailer::Base
   		attachments['unparsed.csv'] = unparsed
   	end
 
-  	mail(:to => @partner.email, :subject => "Shop Import complete")
+  	mail(:to => @partner.email, :cc => fetch_copy_emails, :subject => "Shop Import complete")
   end
 
   def import_error(payload, error)
     @payload = payload
     @partner = @payload.partner
     @error = error
-    mail(to: "#{@partner.name} <#{@partner.email}>", subject: "An Error occured while importing shops.")
+    mail(to: "#{@partner.name} <#{@partner.email}>", :cc => fetch_copy_emails, subject: "An Error occured while importing shops.")
   end
+
+  private
+    def fetch_copy_emails
+      ["gaurav@optyn.com", "alen@optyn.com"]      
+    end
 end

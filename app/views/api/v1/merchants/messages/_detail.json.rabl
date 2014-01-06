@@ -65,12 +65,16 @@ node :button_text do |message|
 end if locals[:message_instance].button_text.present?
 
 node :shop do |message|
-  {name: message.shop.name, logo: message.shop.logo_location}
+  {name: message.shop.name, logo: message.shop.logo_location, website: message.shop.website}
 end
 
 node :send_on do |message|
   message.send_on
 end
+
+node :send_on_rounded do |message_receiver_labels|
+  true
+end if locals[:message_instance].send_on_rounded.present?
 
 node :editable do |message|
   message.editable_state?

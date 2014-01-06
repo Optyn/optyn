@@ -31,7 +31,7 @@
   a {
     display: block;
     line-height: 50px;
-    height: 50px;
+    min-height: 50px;
     border-bottom: solid 1px darken( $black, 20% );
     padding-left: 20px;
     color: darken( $white, 10% );

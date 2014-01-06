@@ -34,14 +34,10 @@ class EventsController < ApplicationController
       when 'coupon.deleted'
         StripeEventHandlers.handle_coupon_deleted(params)
       when 'customer.created'
-        # binding.pry
         StripeEventHandlers.handle_customer_created(params)
-        # binding.pry
       when 'customer.updated'
-        # binding.pry
         StripeEventHandlers.handle_customer_updated(params)
       when 'customer.discount.created'
-        # binding.pry
         StripeEventHandlers.handle_customer_discount_created(params)
       when 'customer.discount.updated'
         StripeEventHandlers.handle_customer_discount_updated(params)
@@ -49,6 +45,10 @@ class EventsController < ApplicationController
         StripeEventHandlers.handle_customer_discount_deleted(params)
       when 'charge.succeeded'
         StripeEventHandlers.handle_charge_succeeded(params)
+      when 'invoiceitem.created'
+        StripeEventHandlers.handle_invoice_item_created(params)
+      when 'invoiceitem.updated'
+        StripeEventHandlers.handle_invoice_item_updated(params)
       else
 
     end

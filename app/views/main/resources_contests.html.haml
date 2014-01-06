@@ -1,13 +1,16 @@
-= display_title "Contests and Small Businesses"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Small Business Contest - How a contest can help a small business?"
+= display_meta_description "Contests can help small businesses in multitude on ways. However, a contest must be ran the right way to maximize its effectiveness.", "small business contest, small business contests, contests for small businesses, email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz"
+
+.row-fluid.breadcrumbs
+  - breadcrumb :resources_contests
 
 .row-fluid
   .span3
-    = render partial: 'marketing_nav'
+    = render partial: 'resources_nav'
   .span9
-    %h1.hdg-s Contests
+    %h1.hdg-s Small Business Contests
     %h2 Contests are a great way to achieve business goals and engage customers.
+    = image_tag( 'contests-resources.jpg', alt: 'Run a contest', class: 'pull-right img-polaroid', title: 'Contests' )
     %p 
       Contests are a great way to achieve business goals such as:
       %ul.bullet-disc
@@ -21,7 +24,7 @@
     %p
       %strong
         1.  Determine what you are trying to achieve. 
-      Do you want more traffic to your site? Call attention to a new product? Whatever the objective, make sure you set clear goals so you can measure the successes and shortfalls.Website Design.
+      Do you want more traffic to your site? Call attention to a new product? Whatever the objective, make sure you set clear goals so you can measure the successes and shortfalls.
     %p
       %strong
         2.  Develop a strategy that supports the objectives.
@@ -29,7 +32,7 @@
     %p
       %strong
         3. Pay attention to potential legal issues.
-      Social media sites like Facebook and Twittercould have requirements regarding contests. In addition, there may be federal, state and local restriction on contests.
+      Social media sites like Facebook and Twitter could have requirements regarding contests. In addition, there may be federal, state and local restriction on contests.
     %p
       %strong
         4.  Make the contest interesting.
@@ -51,4 +54,6 @@
       %strong
         7.  Don’t forget to do a review of the contest results after it ends.
       This is a great way to get insights into what went well and what needs to be improved upon.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

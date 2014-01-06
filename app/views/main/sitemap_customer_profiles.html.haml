@@ -1,0 +1,15 @@
+= display_title "Marketing Profiles"
+= display_meta_description "Marketing profiles of small businesses that do marketing.", "marketing profiles, customer profiles, businesses that do marketing, small business marketing strategies, small businesses that do marketing, small businesses that do marketing well, smb marketing, businesses that do email marketing"
+
+.row-fluid.breadcrumbs
+  -  breadcrumb :profile_sitemap
+
+.op-sitemap
+  .row-fluid
+    .span4
+      %h4 Customer Profiles
+      %ul
+        - @shops.each do |shop|
+          %li
+            = link_to(shop.name, public_shop_path(shop.identifier))        
+.blank-space

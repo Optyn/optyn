@@ -246,6 +246,11 @@ class User < ActiveRecord::Base
     return user_ids
   end
 
+  #Gotcha:  if some one enters their <last_name> <first_name> while registering or something then the split is inappropriate
+  def first_name
+    name.to_s.split(/\s/).first.to_s.capitalize #to_s if the name is blank by chance
+  end
+
   private
   def self.persist_with_twitter_exception(user, provider)
     user.skip_password = true

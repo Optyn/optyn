@@ -1,6 +1,9 @@
 = display_title "Take the Optyn Email Marketing Tour"
 = display_meta_description "Take a tour of Optyn and all the tools it offers for email marketing! Most of all, you get to try it for FREE!", "local marketing tools, email marketing, email marketing for smbs, small businesses, small business marketing, customer engagement, customer acquisition, email marketing software, email marketing tips"
 
+.row-fluid.breadcrumbs
+  - breadcrumb :tour
+
 .row-fluid
   .span12{:align => "center"}
     %h1 We make Marketing for Small businesses EASY AND FUN!
@@ -16,14 +19,14 @@
 
     %a.btn.btn-large.btn-success( href = new_merchants_manager_registration_path ) Get started for FREE!
   .span6
-    %a#merchant-video{ href: 'https://www.youtube.com/embed/qeT4ss-mlS4?autoplay=1' }
-      = image_tag 'tour-video.png', alt: 'Video'
+    %a#merchant-video{ href: 'https://www.youtube.com/embed/qeT4ss-mlS4?autoplay=1', alt: 'Email Marketing Videos', title: 'Email Marketing Videos' }
+      = image_tag 'tour-video.png', alt: 'Email Marketing Video', title: 'Email Marketing Video'
 
 .separator-thin.large.light
 
 .row-fluid
   .span6
-    = image_tag 'screenshot-create-campaign.jpg', alt: 'Create campaign screenshot'
+    = image_tag 'screenshot-create-campaign.jpg', alt: 'Create Email Campaign', title: 'Create email Campaign'
   .span6
     %h3 Proven ways to engage your customers.
     %p We are not reinventing the wheel here. We are just putting on some super performance tires on your marketing efforts. We give you simple ways of engaging your customer base so that you can increase:
@@ -42,13 +45,13 @@
     %p Our platform focus on making things simpler and efficient for you. We give you the ability to take advantage of best practices that are already built in.
     %p Now you can create email marketing campaigns with Mobile Responsive emails, suggested subject lines, proven engagements, and so much more.
   .span6
-    = image_tag 'screenshot-dana-cafe.jpg', alt: 'Dana Cafe screenshot'
+    = image_tag 'screenshot-dana-cafe.jpg', alt: 'Marketing Automation', title: 'Marketing Automation'
 
 .separator-thin.large.light
 
 .row-fluid
   .span6
-    = image_tag 'screenshot-dashboard.jpg', alt: 'Optyn dashboard screenshot'
+    = image_tag 'screenshot-dashboard.jpg', alt: 'Marketing Dashboard', title: 'Marketing Dashboard'
   .span6
     %h3 Your Marketing Performance at your fingertips.
     %p Easily track your performance of specific campaigns and your overall customer base. We put all of your marketing efforts at your fingerprints.

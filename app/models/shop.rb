@@ -47,7 +47,7 @@ class Shop < ActiveRecord::Base
   validates :stype, presence: true, :inclusion => {:in => SHOP_TYPES, :message => "is Invalid"}
   validates :identifier, uniqueness: true, presence: true, unless: :new_record?
   validates :time_zone, presence: true, unless: :new_record?
-  validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}, numericality: { only_integer: true }
+  validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}
   validates :phone_number, :phony_plausible => true 
   # validates_uniqueness_of_without_deleted :name
   
@@ -349,21 +349,36 @@ class Shop < ActiveRecord::Base
   end
 
   def tier_change_required?
-    self.plan.max < self.active_connection_count
+    self.plan.max < self.active_connection_count || self.plan.min > self.active_connection_count
   end
 
   def upgrade_plan
+    #the function that actually does plan change
     new_plan = Plan.which(self)
+    #binding.pry
+    plan_downgraded = self.plan_downgraded?
     self.subscription.update_plan(new_plan)
-    Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
+
+    #Send Plan upgrade mail, only when plan is upgraded.
+    if not plan_downgraded
+      Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
+    end
+
     create_audit_entry("Subscription updated to plan #{new_plan.name}")
   end
 
   def check_subscription
+    #the function thats  checks if plan change is requried after importing connections
+    #Calls tier_change_upgrade_planrequired and upgrade_plan
+    #Called by Connection > check_shop_tier
     if !self.virtual && self.partner.subscription_required?
-      if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
-        Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
-      elsif !self.virtual && self.tier_change_required?
+
+      if self.tier_change_required?
+        
+        #Notify passing of free tier mail
+        if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
+          Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
+        end
         self.upgrade_plan
       end
     end
@@ -405,7 +420,7 @@ class Shop < ActiveRecord::Base
   end  
   
   def meta_tag_title
-    content = "#{name}"
+    content = "Get Info About #{name} Here"
 
     if first_location.present?
       content << " in #{first_location_city}" if first_location_city.present?
@@ -416,12 +431,12 @@ class Shop < ActiveRecord::Base
   end
 
   def meta_tag_description
-    content = ""
+    content = "Check out what type of marketing Promotions are available for #{name}, who uses Optyn to create coupons, specials, sales, surveys, and much more."
 
     if description.present?
       content << description 
     else
-      content << %{Check out what type of marketing Promotions are available for #{name}. #{name} uses Optyn to create Coupons, specials, sales, surveys, and much more. Follow #{name} on Optyn.com}
+      content << %{Check out what type of marketing Promotions are available for #{name}, who uses Optyn to create coupons, specials, sales, surveys, and much more.}
     end
 
     content
@@ -458,6 +473,14 @@ class Shop < ActiveRecord::Base
     end
 
     existing_profiles + blank_profiles_map.values
+  end
+
+  def plan_downgraded?
+    if self.plan.min > self.active_connection_count
+      return true
+    else
+      return false
+    end
   end
 
   private
@@ -516,7 +539,7 @@ class Shop < ActiveRecord::Base
   end
 
   def assign_header_background_color
-    self.header_background_color = partner.header_background_color
+    self.header_background_color = partner.header_background_color if self.header_background_color.blank?
   end
 
   def assign_footer_background_color

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115093707) do
+ActiveRecord::Schema.define(:version => 20131216053927) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -147,6 +147,18 @@ ActiveRecord::Schema.define(:version => 20131115093707) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "invoice_items", :force => true do |t|
+    t.string   "stripe_invoice_item_token"
+    t.integer  "amount"
+    t.string   "livemode"
+    t.string   "proration"
+    t.string   "stripe_customer_token"
+    t.string   "description"
+    t.string   "stripe_invoice_token"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "invoices", :force => true do |t|
     t.integer  "subscription_id"
     t.string   "stripe_customer_token"
@@ -161,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20131115093707) do
     t.integer  "total"
     t.integer  "stripe_coupon_percent_off"
     t.integer  "stripe_coupon_amount_off"
+    t.string   "description"
   end
 
   create_table "labels", :force => true do |t|
@@ -235,6 +248,17 @@ ActiveRecord::Schema.define(:version => 20131115093707) do
   end
 
   add_index "message_attachments", ["message_id"], :name => "index_message_attachments_on_message_id"
+
+  create_table "message_change_notifiers", :force => true do |t|
+    t.integer  "message_id"
+    t.string   "uuid"
+    t.text     "content"
+    t.text     "rejection_comment"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "subject"
+    t.datetime "send_on"
+  end
 
   create_table "message_email_auditors", :force => true do |t|
     t.integer  "message_user_id"
@@ -428,6 +452,7 @@ ActiveRecord::Schema.define(:version => 20131115093707) do
     t.boolean  "subscription_required",   :default => true
     t.string   "header_background_color"
     t.string   "footer_background_color"
+    t.string   "from_email"
   end
 
   add_index "partners", ["email"], :name => "index_partners_on_email", :unique => true
@@ -516,12 +541,12 @@ ActiveRecord::Schema.define(:version => 20131115093707) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",               :default => ""
-    t.string   "header_background_color",    :default => "#1791C0"
-    t.datetime "deleted_at"
-    t.boolean  "pre_added",                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
   end

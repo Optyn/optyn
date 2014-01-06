@@ -1,13 +1,16 @@
 = display_title "Importance of Mobile Responsive Emails"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_meta_description "Mobile Responsive Emails and Design is vital to email marketing. Learn why it's important to optimize your emails for mobile devices.", "mobile responsive, how to design mobile responsive emails, mobile responsive design, mobile responsive email marketing, mobile responsive email, designing mobile emails, mobile email design tips"
+
+.row-fluid.breadcrumbs
+  - breadcrumb :resources_mobile_responsive_emails
 
 .row-fluid
   .span3
-    = render partial: 'marketing_nav'
+    = render partial: 'resources_nav'
   .span9
-    %h1.hdg-s Mobile Responsive Design
+    %h1.hdg-s Mobile Responsive Email Design
     %h2 Making sure your emails can be viewed on mobile devices.
+    = image_tag( 'mobile-responsive-email-design.jpg', alt: 'mobile-responsive-email-design', class: 'pull-right img-polaroid', title: 'Mobile Responsive Email Design' )
     %p 
       As a business owner it is important for you to know about mobile responsiveness.  Let’s first start with what it is. Mobile responsiveness is a web design approach that adapts the layout of the viewing area to the device on which it is seen.  In that way, an an email viewed on a smartphone will look just as good as when it is viewed a computer.
     %p
@@ -28,4 +31,6 @@
         %li Animated GIFs won’t work on mobile device so replace these with static images.    
     %p
       There are many more rules your developer will have to follow when designing for mobile responsiveness, but this will give you enough ammunition to be able to start an intelligent conversation with him or her.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

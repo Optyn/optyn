@@ -1,13 +1,19 @@
-= display_title "Capturing Customer Data"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Capturing Customer Emails"
+= display_meta_description "The importance of capturing customer emails and why your business needs to follow these best practices.", "collect email addresses, collect emails, collection email sample, email collection, how to collect email addresses, collecting email addresses, collection email, collections email, collections email sample, collections email template, email collection form, how to collect emails, wordpress collect email addresses"
+
+.row-fluid.breadcrumbs
+  - breadcrumb :resources_capturing_customer_emails
+
 
 .row-fluid
   .span3
-    = render partial: 'marketing_nav'
+    = render partial: 'resources_nav'
   .span9
-    %h1.hdg-s GETTING EMAIL ADDRESSES
+    %h1.hdg-s Getting Email Addresses
     %h2 How to grow your email list.
+
+    = image_tag( 'getting-emails.jpg', alt: 'getting emails', class: 'pull-right img-polaroid', title: 'getting emails' )
+
     %p 
       Before you start an email campaign you need to have a list of email addresses - basic, right?  Otherwise, who is going to be on the receiving end of your brilliant campaign?
     %p
@@ -44,4 +50,6 @@
       Stick to whatever promises you make regarding when and to whom you will share or not share your customer’s email address.
     %p
       And finally, it is generally not a good idea to buy an email list.  The quality of these lists tend to be poor and if there are too many unsubscribes or undeliverables you could wind up in trouble with your ISP or email marketing company.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

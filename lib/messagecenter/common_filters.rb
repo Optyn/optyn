@@ -41,8 +41,12 @@ module Messagecenter
     end
 
     def populate_datetimes
-      @message.beginning = params[:message][:beginning].present? ? Time.parse(params[:message][:beginning]) : nil
-      @message.ending = params[:message][:ending].present? ? Time.parse(params[:message][:ending]) : nil
+      @message.beginning = params[:message][:beginning].present? ? Time.zone.parse(params[:message][:beginning]) : nil
+      @message.ending = params[:message][:ending].present? ? Time.zone.parse(params[:message][:ending]) : nil
+    end
+
+    def populate_send_on
+      @message.send_on = params[:message][:send_on].present? ? Time.zone.parse(params[:message][:send_on]) : nil
     end
 
     def show_my_messages_only
@@ -98,6 +102,18 @@ module Messagecenter
     def merge_send_on
       if params[:message][:send_on_date].present? || params[:message][:send_on_time].present?
         params[:message][:send_on] = params[:message][:send_on_date].to_s + " " + params[:message][:send_on_time]
+      end
+    end
+
+    def send_for_curation
+      if @needs_curation
+        @shop = @message.shop
+        @partner = @shop.partner
+        @shop_logo = true
+        @preview = true
+        message_content = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+
+        @message.for_curation(message_content)
       end
     end
 

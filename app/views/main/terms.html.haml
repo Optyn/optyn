@@ -1,6 +1,9 @@
 = display_title "Optyn Terms of Use"
 = display_meta_description "Please review Optyn's Terms of Use, last updated on May 17th. 2013.", "local marketing tools, email marketing, email marketing for smbs, small businesses, small business marketing, customer engagement, customer acquisition, email marketing software, email marketing tips, Optyn’s terms of use, terms of use"
 
+.row-fluid.breadcrumbs
+  -  breadcrumb :terms
+
 .row-fluid.content
   .span12
     %h1
@@ -152,8 +155,9 @@
       protections.
     %p
       For information on how we collect, use and disclose information pertaining to you privacy, please refer
-      to our Privacy Policy (http://www.optyn.com/privacy-policy).  The Privacy Policy forms part of our
-      agreement with you and is incorporated in this Agreement by reference.
+      to our 
+      %a{:href => privacy_path } Privacy Policy. 
+      The Privacy Policy forms part of our agreement with you and is incorporated in this Agreement by reference.
     %p
       We will consider any communications between you and Optyn in which you comment on or offer suggestions
       for improving or modifying our Services to be non-confidential and non-proprietary.  You also agree that
@@ -167,7 +171,8 @@
         LICENSORS WARRANT THAT USE OF THE SITE OR SERVICES WILL BE ERROR FREE, MERCHANTABLE, OF SATISFACTORY
         QUALITY, ACCURATE, TIMELY, FIT FOR A PARTICULAR PURPOSE OR NEED, OR NON-INFRINGING.
     %p
-      NO ORAL OR WRITTEN INFORMATION OR ADVICE GIVEN BY A REPRESENTATIVE OF OPTYN SHALL CREATE A WARRANTY.
+      %strong
+        NO ORAL OR WRITTEN INFORMATION OR ADVICE GIVEN BY A REPRESENTATIVE OF OPTYN SHALL CREATE A WARRANTY.
     %h4 Limitation of Liability
     %p
       %strong

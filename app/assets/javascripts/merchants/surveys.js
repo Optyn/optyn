@@ -27,6 +27,7 @@ function MerchantSurvey() {
             this.toggleValues();
             this.assignSurveyState();
             this.hookDeleteQuestion();
+            this.hideButtonsInLaunchedSurvey();
         }
     };
 
@@ -180,9 +181,16 @@ function MerchantSurvey() {
                     "<td>" + element.label + "</td>" +
                     "<td>" + element.position + "</td>" +
                     "<td>" + element.values.join("<br />") + "</td>" +
-                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>' +
-                        '<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger btn-mini">Delete</a>' + "</td>" +
-                    "</tr>";
+                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>';
+                if (element.delete_path == "")//dont show delete button if survey is launched
+                {    
+                    tableBody += "</td>";
+                }
+                else
+                {
+                    tableBody +='<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger btn-mini">Delete</a>' + "</td>";
+                }
+                tableBody +="</tr>";
             });
 
             $('#questions_list').html(tableHeader + tableBody + tableFooter)
@@ -273,8 +281,10 @@ function MerchantSurvey() {
         $('.submit_survey').click(function (e) {
             var thisName = $(this).attr('name');
             if (thisName.match('launch')) {
+                // alert(thisName);
                 $('#survey_ready').val('1');
             } else if (thisName.match('draft')) {
+                // alert(thisName);
                 $('#survey_ready').val('0');
             }
 
@@ -314,7 +324,12 @@ function MerchantSurvey() {
         $(document).on('submit','body.select_survey',function(data){
             $('#select_survey').attr("action", $(this).find(":selected").val());
         });
+    };
 
+    //hooks for hiding buttons not needed in launched emssages
+    this.hideButtonsInLaunchedSurvey = function () {
+        // $("#draft").hide();
+        
     };
 
 }

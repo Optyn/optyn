@@ -7,7 +7,7 @@
     = content_for :header do
       Tier limit exceeded
     
-    = render partial: "shared/mailers/banner"
+    = render partial: "shared/system_emails/banner"
 
     / BODY
     %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
@@ -30,4 +30,4 @@
                     The Optyn Team
         %td
     
-    = render partial: "shared/mailers/footer"
+    = render partial: "shared/system_emails/footer"

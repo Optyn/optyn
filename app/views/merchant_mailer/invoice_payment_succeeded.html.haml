@@ -7,11 +7,10 @@
     = content_for :header do
       Payment Successful
     
-    = render partial: "shared/mailers/banner"
+    = render partial: "shared/system_emails/banner"
     
     %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
       %tr
-        %td
         %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
           %div
             %table{:style => "padding:10px; max-width:580px; margin:0 auto; display:block;"}
@@ -22,11 +21,11 @@
                   %p We have received your payment. Here are the details:
                   %ul
                     %li
-                    Amount charged
-                    = number_to_currency(@amount, precision: 2)
+                      Amount charged
+                      = number_to_currency(@amount, precision: 2)
                     %li
-                    Connection count
-                    = @conn_count
+                      Connection count
+                      = @conn_count
                   %p
                     %a.btn{:href => "http://www.optyn.com"} View your Account
                   %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and your fellow Optyners, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
@@ -34,6 +33,7 @@
                     Cheers,
                     %br/
                     The Optyn Team
-        %td
+      %tr
+        %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;"}
 
-    = render partial: "shared/mailers/footer"
+          = render partial: "shared/system_emails/footer"

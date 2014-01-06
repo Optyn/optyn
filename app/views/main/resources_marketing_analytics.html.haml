@@ -1,13 +1,16 @@
-= display_title "Marketing Analytics"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Marketing Analytics - Determine success of your marketing!"
+= display_meta_description "Marketing analytics can do wonders for a business! They are a guide on what what works and what does not!", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz, digital marketing analytics, email marketing analytics, what is marketing analytics, web marketing analytics, online marketing analytics"
+
+.row-fluid.breadcrumbs
+  - breadcrumb :resources_marketing_analytics
 
 .row-fluid
   .span3
-    = render partial: 'marketing_nav'
+    = render partial: 'resources_nav'
   .span9
     %h1.hdg-s Marketing Analytics
     %h2 Use marketing analytics to determine if and why your campaigns are successful.
+    = image_tag( 'marketing-analytics-resources.jpg', alt: 'marketing analytics', class: 'pull-right img-polaroid', title: 'Marketing Analytics' )
     %p 
       Marketing analytics is the term used to describe the measurement of the efficiency and effectiveness of marketing campaigns.  Whether its an email or direct mail or radio campaign, marketing analytics will tell you what went right and what went wrong.
     %p
@@ -40,4 +43,6 @@
       Marketing analytics also go beyond the specific campaigns of your company.  For instance, it is always useful to note if a prospect contact you what prompted him or her to make the call.  The marketing activity of your competitors should also be monitored to see what channels they favor and the marketing approach they use.
     %p
       The key to remember is that marketing analytics is a tool to help you manage your campaigns so you can optimize your marketing dollars.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space

@@ -862,7 +862,7 @@ form {
   }
   .btn {
     @include border-radius( 0 );
-    font: normal 1rem/1.4rem $sans-serif;
+    font: normal 1rem/1.6rem $sans-serif;
     letter-spacing: 1px;
     border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
     @include transition( all 0.2s ease-out );
@@ -1144,21 +1144,62 @@ blockquote {
 .field-with-errors .error { display: block; }
 
 .breadcrumbs {
+  float: none;
+  overflow: auto;
+  width: 100%;
   background: lighten( $dark-blue, 5% );
-    color: $white;
-    color: rgba( $white, 0.3 );
+  color: $white;
+  color: rgba( $white, 0.3 );
   a {
     color: $white;
     color: rgba( $white, 0.7 );
     font-size: 1rem;
     line-height: 1.8rem;
     display: inline-block;
-    @include transition( all 0.3s ease );
+    position: relative;
+    padding: 0 1.9rem;
+    display: inline-block;
+    margin-left: -3px;
+   
     &:hover {
-      color: rgba( $white, 0.9 );
       text-decoration: none;
+      color: rgba( $white, 0.9 );
+      background-color: lighten( $dark-blue, 10% );
+      > span > span {
+        background-color: lighten( $dark-blue, 10% );
+      }
+    }
+    &.current {
+      background-color: $black;
+      > span > span {
+        background-color: $black;
+      }
     }
   }
+  span > span{
+    position: absolute;
+    top: 4px;
+    right: -((1.8rem / sqrt(2)) / 2 ) + 0.1rem;
+    display: inline-block;
+    width: 1.8rem / sqrt(2);
+    height: 1.8rem / sqrt(2);
+    border-top: solid 2px $black;
+    border-right: solid 2px $black;
+    @include rotate( 45deg );
+    background-color: lighten( $dark-blue, 5% );
+  }
+  > div { float :left; }
+  > div:first-child   { z-index: 11; & span span { z-index: 11; }}
+  > div:nth-child(2)  { z-index: 10; & span span { z-index: 10; }}
+  > div:nth-child(3)  { z-index: 9;  & span span { z-index: 9; }}
+  > div:nth-child(4)  { z-index: 8;  & span span { z-index: 8; }}
+  > div:nth-child(5)  { z-index: 8;  & span span { z-index: 7; }}
+  > div:nth-child(6)  { z-index: 8;  & span span { z-index: 6; }}
+  > div:nth-child(7)  { z-index: 8;  & span span { z-index: 5; }}
+  > div:nth-child(8)  { z-index: 8;  & span span { z-index: 4; }}
+  > div:nth-child(9)  { z-index: 8;  & span span { z-index: 3; }}
+  > div:nth-child(10) { z-index: 8;  & span span { z-index: 2; }}
+  > div:nth-child(11) { z-index: 8;  & span span { z-index: 1; }}
   i.icon-angle-right {
     margin: 0 10px;
     line-height: 1.8rem;

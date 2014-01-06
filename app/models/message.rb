@@ -17,7 +17,7 @@ class Message < ActiveRecord::Base
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
-  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time
+  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time, :send_on_rounded
 
   attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public
  
@@ -85,7 +85,6 @@ class Message < ActiveRecord::Base
 
     event :move_to_trash do
       transition [:draft, :queued, :sent, :trash] => :trash
-      #binding.pry
     end
 
     event :move_to_draft do
@@ -104,25 +103,32 @@ class Message < ActiveRecord::Base
       transition [:queued, :transit] => :sent
     end
 
+    event :reject do
+      transition [:queued] => :draft
+    end
+
     before_transition :draft => same do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
-      message.from = message.send(:canned_from)
+      message.from = message.send(:canned_from)      
     end
 
     before_transition :draft => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
-      unless message.is_child?
-        message.send_on = Time.parse(Date.tomorrow.to_s + " 7:30 AM CST") if message.send_on.blank? || message.send_on < 1.hour.since
-      else
-        message.send_on = nil
-      end
+      
       message.valid?
     end
 
     before_transition any => :queued do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)
+      
+      unless message.is_child?
+        message.adjust_send_on
+      else
+        message.send_on = nil
+      end
+
       message.valid?
     end
 
@@ -188,7 +194,6 @@ class Message < ActiveRecord::Base
 
   def self.move_to_trash(uuids)
     trigger_event(uuids, 'move_to_trash')
-    #binding.pry
   end
 
   def self.move_to_draft(uuids)
@@ -200,10 +205,8 @@ class Message < ActiveRecord::Base
   end
 
   def self.batch_send
-    if send_message?
-      messages = with_state([:queued]).only_parents.ready_messages
-      execute_send(messages)
-    end
+    messages = with_state([:queued]).only_parents.ready_messages
+    execute_send(messages)
   end
 
   def self.batch_send_responses
@@ -234,6 +237,29 @@ class Message < ActiveRecord::Base
       MessageUser.create_message_receiver_entries(individual_message, [user_id], [], nil)
     end
 
+  end
+
+  def update_meta!
+    valid?
+    non_meta_attrs = attributes.keys - ['subject', 'send_on']
+    non_meta_attrs.each do |attr|
+      errors.delete(attr.to_sym)
+    end
+
+    if self.errors.empty?
+      save(validate: false) 
+    else
+      raise ActiveRecord::RecordInvalid.new(self)
+    end  
+  end
+
+  def adjust_send_on
+    if self.send_on.blank? || self.send_on < 1.hour.since
+      send_timestamp = Time.now + 1.hour
+      send_timestamp = send_timestamp.min >= 30 ? (send_timestamp.end_of_hour + 30.minutes) : (send_timestamp.end_of_hour)
+      self.send_on = send_timestamp 
+      self.send_on_rounded = true
+    end
   end
 
   def manager_email
@@ -271,6 +297,14 @@ class Message < ActiveRecord::Base
     shop.id
   end
 
+  def partner
+    shop.partner
+  end
+
+  def partner_eatstreet?
+    partner.eatstreet?
+  end
+
   def message_user(user)
     message_users.find_by_user_id(user.id)
   end
@@ -304,7 +338,7 @@ class Message < ActiveRecord::Base
       label = Label.find(ids.first)
 
       if label.inactive?
-        return shop.users.count
+        return shop.connections.active.count
       end
     end
 
@@ -320,7 +354,7 @@ class Message < ActiveRecord::Base
   end
 
   def sanitized_discount_amount
-    discount_amount.gsub(/[^A-Za-z0-9]/, "")
+    discount_amount.to_s.gsub(/[^A-Za-z0-9]\./, "")
   end
 
   def percentage_off?
@@ -330,6 +364,7 @@ class Message < ActiveRecord::Base
 
   def dispatch(creation_errors=[], process_manager=nil)
     receiver_ids = fetch_receiver_ids
+    receiver_ids = receiver_ids.compact
     message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
 
     if message_user_creations.blank?
@@ -343,11 +378,14 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(message_user)
-    user_name = message_user.name.to_s if ((message_user) and (message_user.name))
+
+    user_name = message_user.first_name.capitalize if message_user.present?
     if user_name.present?
       self.subject.gsub(/{{Customer Name}}/i, user_name)
     else
-      personal_subject = (self.subject.gsub(/{{Customer Name}},/i, "")).strip.capitalize
+      
+      regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
+      personal_subject = (self.subject.gsub(regex, "")).strip.capitalize
       personal_subject
     end
   rescue 
@@ -478,6 +516,27 @@ class Message < ActiveRecord::Base
     return response.parsed_response
   end
 
+  def needs_curation(change_state)
+    return true if (self.state.blank? || self.draft?) && :queued == change_state
+    if (self.queued?) && partner.eatstreet? && self.valid?
+      keys = changed_attributes.keys
+
+      ['content', 'subject', 'percent_off', 'amount_off'].each do |attr|
+        return true if keys.include?(attr)
+      end
+    end
+    false
+  end
+
+  def for_curation(html)
+    MessageChangeNotifier.create(message_id: self.id, content: html, subject: self.subject, send_on: self.send_on)
+  end
+
+  def message_send?
+    return true unless Rails.env.staging?
+    return true if Rails.env.staging? && (self.partner.eatstreet? || MessageStagingEmail.approved_emails.include?(self.manager.email))
+  end
+
   private
   def self.trigger_event(uuids, event)
     messages = for_uuids(uuids)
@@ -504,7 +563,7 @@ class Message < ActiveRecord::Base
         messages.each do |message|
           #message.state = 'transit'
           #message.save(validate: false)
-          unless message.shop.disabled?
+          if !message.shop.disabled? && message.message_send?
             dispatched_message = message.dispatch(creation_errors, process_manager)
 
             unless dispatched_message.blank?
@@ -540,10 +599,6 @@ class Message < ActiveRecord::Base
     }
   end
 
-  def self.send_message?
-    return true if Rails.env.production? || Rails.env.development?
-  end
-
   def build_new_message_labels(identifiers)
     identifiers.each do |identifier|
       message_labels.build(label_id: identifier, shop_identifier: shop_id)
@@ -577,7 +632,7 @@ class Message < ActiveRecord::Base
 
   def canned_from
     #manager.email_like_from
-    %{"#{self.shop_name.titleize}" <email@optyn.com>}
+    %{"#{self.shop_name.titleize}" <#{shop.partner.from_email}>}
   end
 
   def canned_subject
@@ -621,7 +676,7 @@ class Message < ActiveRecord::Base
   end
 
   def validate_button_url
-    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+    if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/i)
       self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   
       return
     end 
@@ -635,10 +690,16 @@ class Message < ActiveRecord::Base
     IdentifierAssigner.assign_random(self, 'uuid')
   end
 
-  def fetch_receiver_ids
-    labels_for_message = labels
+  def assign_coupon_code
+    if self.partner.eatstreet? && self.coupon_code.blank?
+      self.coupon_code = Devise.friendly_token.first(12)
+    end
+  end
 
-    return all_active_user_ids if label_select_all?(labels_for_message)
+  def fetch_receiver_ids    
+    return User.where(email: 'ian@eatstreet.com').pluck(:id) if Rails.env.staging? && partner.eatstreet?
+
+    return all_active_user_ids if label_select_all?(self.label_ids)
 
     receiver_label_user_ids = label_user_ids
     Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
@@ -663,6 +724,17 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def validate_discount_amount
+    return self.errors.add(:discount_amount, "Please add the discount amount") if discount_amount.blank?
+    numeric_amount = discount_amount.to_i
+
+    if percentage_off?
+      self.errors.add(:discount_amount, "Please add valid values between 0 - 100") if numeric_amount <= 0 || numeric_amount > 100
+    else
+      self.errors.add(:discount_amount, "Please make sure you add a numeric value") if numeric_amount <= 0
+    end
+  end
+
   def transfer_child_state
     if self.instance_of?(SurveyMessage)
       if self.first_response_child.present?
@@ -682,7 +754,7 @@ class Message < ActiveRecord::Base
   end
 
   def validate_recipient_count
-    receiver_count = label_select_all?(labels) ? all_active_user_ids.size : label_ids.size
+    receiver_count = label_select_all?(self.label_ids) ? all_active_user_ids.size : label_ids.size
     self.errors.add(:label_ids, "No receivers for this campaign. Please select your labels appropriately or import your email list.") if receiver_count <= 0
   end
 
@@ -690,7 +762,8 @@ class Message < ActiveRecord::Base
     labels.collect(&:user_labels).flatten.collect(&:user_id)
   end
 
-  def label_select_all?(labels_for_message)
+  def label_select_all?(labels_ids_for_message)
+    labels_for_message = Label.where(id: label_ids)
     labels_for_message.size == 1 && labels_for_message.first.inactive?
   end
 

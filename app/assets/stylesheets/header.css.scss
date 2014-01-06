@@ -85,6 +85,7 @@
 #flat {
   .nav-collapse {
     background-color: $light-gray;
+    z-index: 9999;
   }
   .navbar.inner {
     background-color: $blue;

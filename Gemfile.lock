@@ -136,6 +136,8 @@ GEM
     fssm (0.2.10)
     geocoder (1.1.8)
     google-analytics-rails (0.0.4)
+    gretel (3.0.5)
+      rails (>= 3.2.0)
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -342,6 +344,7 @@ GEM
       actionmailer (>= 3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.1)
     rqrcode (0.4.2)
     rqrcode-rails3 (0.1.6)
       rqrcode (>= 0.4.2)
@@ -455,6 +458,7 @@ DEPENDENCIES
   fog
   geocoder
   google-analytics-rails
+  gretel
   haml
   haml-rails
   httparty
@@ -487,6 +491,7 @@ DEPENDENCIES
   redis-store
   resque
   resque_mailer
+  rmagick (= 2.13.1)
   rqrcode-rails3
   rspec
   rspec-rails

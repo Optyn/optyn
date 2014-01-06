@@ -17,7 +17,7 @@ module Merchants::MessagesHelper
   end
 
   def formatted_message_form_datetime(message, message_attr)
-    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p')
+    message.send(message_attr.to_s.to_sym).strftime('%Y-%m-%d %I:%M %p %Z')
   rescue
     ""
   end
@@ -69,13 +69,13 @@ module Merchants::MessagesHelper
                         when message.instance_of?(CouponMessage)
                           "Great News"
                         when message.instance_of?(SpecialMessage)
-                          "Special News"
+                          "Great News"
                         when message.instance_of?(SaleMessage)
-                          "Sale News"
+                          "Hi"
                         when message.instance_of?(GeneralMessage)
                           "Hello"
                         when message.instance_of?(ProductMessage)
-                          "Product News"
+                          "Hi"
                         when message.instance_of?(EventMessage)
                           "Event News"
                         when message.instance_of?(SurveyMessage)
@@ -95,7 +95,7 @@ module Merchants::MessagesHelper
 
   def message_discount_type_text(message)
     amount = message.sanitized_discount_amount
-    message.percentage_off? ? (amount.to_s + " percent") : pluralize(amount, "dollar")
+    message.percentage_off? ? (amount.to_s + " %") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
   end
 
   def message_content(message)
@@ -202,5 +202,13 @@ module Merchants::MessagesHelper
       end
     end
     return relevant, non_relevant
+  end
+
+  def message_header_background_color(message)
+    "#{message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"
+  end
+
+  def message_footer_background_color(message)
+    "#{message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"
   end
 end

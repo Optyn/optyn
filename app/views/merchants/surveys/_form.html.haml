@@ -1,4 +1,4 @@
-= render partial: "merchants/surveys/survey_questions_buttons"
+= render partial: "merchants/surveys/survey_questions_buttons", :locals => {f: f}
 .control-group
   = f.label :title, class: 'control-label'
   .controls
@@ -15,4 +15,4 @@
   = hidden_field_tag "new_merchants_survey_survey_question_path", "/merchants/segments/#{@survey.id}/segment_questions/new"
   = hidden_field_tag "questions_merchants_survey_path", questions_merchants_survey_path
 
-= render partial: "merchants/surveys/survey_questions_buttons"
+= render partial: "merchants/surveys/survey_questions_buttons", :locals => {f: f}

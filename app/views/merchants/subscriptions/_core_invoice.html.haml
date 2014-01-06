@@ -3,7 +3,7 @@
 		%h5 OPTYN.COM
 		www.optyn.com
 	.span6.text-right
-		= Time.now.strftime("%B %d,%Y")
+		= @invoice.created_at.strftime("%B %d,%Y")
 
 .blank-space
 
@@ -11,9 +11,20 @@
 	%tbody
 		%tr
 			%td
-				Subscription to 
-				= number_to_currency(@amount) 
-				pm
+				Description
+			%td
+				- if @invoice.description and !@invoice.description.blank?
+					= @invoice.description
+				- else
+					= "---"
+		%tr
+			%td
+				-if @plan.nil?
+					After prorating
+				-else
+					Subscription to 
+					= number_to_currency(@amount) 
+					pm
 			%td
 				= number_to_currency(@amount)
 		/ %tr

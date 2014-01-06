@@ -24,6 +24,9 @@
     }
   }
 }
+.img-polaroid {
+  margin-left: 10px;
+}
 
 h1.hdg-s {
   font-size: 1.2rem;
@@ -31,7 +34,7 @@ h1.hdg-s {
   text-transform: uppercase;
   border: 0;
   padding: 0;
-  margin: 0 0 15px 0;
+  margin: 20px 0 15px 0;
 }
 h1.hd-main {
   font-size: 2.2rem;
@@ -39,6 +42,43 @@ h1.hd-main {
   border: 0;
   padding: 0;
 }
+/* Banner Partial for Resources */
+.getstartedbanner {
+  background-color: #86c440;
+  padding: 20px;
+  height: 110px;
+}
+  a:hover{
+    text-decoration: none;
+    text-transform: none;
+  }
+  .getstartedbannertext {
+    padding-right: 25px;
+    padding-top: 10px;
+    font-size: 18px;
+    line-height: 22px;
+    color: white;
+    font-weight: 600;
+  }
+  .learnmorebutton {
+    background-color: white;
+    padding: 15px 25px 15px 25px;
+    font-size: 1.3em;
+    line-height: 1.6em;
+    color: #4384c3;
+    text-decoration: none;
+    font-weight: 900;
+  }
+  .getstartedbutton {
+    margin-left: 10px;
+    background-color: #4384c3;
+    padding: 15px 25px 15px 25px;
+    font-size: 1.3em;
+    line-height: 1.6em;
+    color: white;
+    text-decoration: none;
+    font-weight: 900;
+  }
 
 /* Marketing Sell Page */
 #main_sell_page {

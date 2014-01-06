@@ -1,14 +1,17 @@
 = display_title "Social Media Marketing for Small Businesses"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_meta_description "Optyn helps your business with social media marketing and syndicate your marketing content to various social media outlets.", "social media software, social media marketing, social media marketing software, social media automaiton, social media marketing automation, social media marketing sofware for small businesses, small busines social media marketing software"
+
+.row-fluid.breadcrumbs
+  - breadcrumb :social_media_marketing
+
 
 .row-fluid
   .span3
     = render partial: 'marketing_nav'
   .span9
-    %h1.hdg-s SOCIAL MEDIA MARKETING
+    %h1.hdg-s Social Media Marketing
     %h2 Find your customers and reach them through Social Media.
-    = image_tag( 'social-media-marketing.jpg', alt: 'social media marketing', class: 'pull-right img-polaroid' )
+    = image_tag( 'social-media-marketing.jpg', alt: 'social media marketing', class: 'pull-right img-polaroid', title: 'Social Media Marketing' )
     %p 
       Social Media is a growing piece of the marketing pie. Today, your customers are on Facebook, Twitter, Pinterest, and many more social accounts. But just because they are in different places, you shouldn’t have to worry about reaching and finding them.
     %p
@@ -22,8 +25,8 @@
         %li We auto-populate your email template with your social media accounts and icons so you don’t have to worry about adding it.
         %li All of your campaigns track social sharing and syndication.
         %li 
-          Optyn allows you to run Social Media Contests 
-          %a{:href => "#", :alt => "Social Media Contests"}
+          Optyn allows you to run 
+          %a{:href => contests_path, :alt => "Social Media Contests", title: 'Social Media Contests' }
             Social Media Contests
           and easily grow your social media and customer base. 
     %p

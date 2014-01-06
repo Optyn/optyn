@@ -4,15 +4,7 @@
     = render 'layouts/links_company'
 
   .span2
-    %h4 Learn More
-    = render 'layouts/links_merchants'
-
-  .span2
-    %h4 Partner Programs
-    = render 'layouts/links_partner'
-
-  .span2
-    %a{:href => '/marketing'}
+    %a{:href => marketing_path, title: 'Marketing Software', alt: 'Marketing Software'}
       %h4 Marketing Software
     %ul
       %li
@@ -32,7 +24,7 @@
 
   .span2
     %a{:href => '/resources' }
-      %h4 Resources
+      %h4 Marketing Resources
     %ul
       %li
         %a{ :href => '/resources/email-marketing' } E-Mail Marketing
@@ -48,20 +40,28 @@
         %a{ :href => '/resources/online-marketing'} Online Marketing
       %li
         %a{ :href => '/resources/customer-retention' } Customer Retention
+
+  .span2
+    %h4 Learn More
+    = render 'layouts/links_merchants'
+
+  .span2
+    %h4 Partner Programs
+    = render 'layouts/links_partner'
     
   .span2.text-left.sf-social
     #social-love
       .love-controls
         .text-left
-          .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false" }
+          .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false", "rel" => "nofollow" }
 
         .text-left
-          %a{ :href => "https://twitter.com/optyn", :class => "twitter-follow-button", "data-show-count" => "false"}Follow @optyn
+          %a{ :href => "https://twitter.com/optyn", :class => "twitter-follow-button", "data-show-count" => "false" , "rel" => "nofollow"}Follow @optyn
           :javascript
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
         .text-left
-          .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100" }
+          .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100", "rel" => "nofollow" }
           :javascript
             (function() {
               var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -69,11 +69,11 @@
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
             })();
     .blank-space
-    %a{ href: 'http://www.facebook.com/optyn', target: '_blank', alt: 'Our Facebook page' }
+    %a{ href: 'http://www.facebook.com/optyn', target: '_blank', alt: 'Optyn Facebook', :rel => "nofollow", title: 'Optyn Facebook' }
       %i.icon-facebook
-    %a{ href: 'http://www.twitter.com/optyn', target: '_blank', alt: 'Our Twitter page' }
+    %a{ href: 'http://www.twitter.com/optyn', target: '_blank', alt: 'Optyn Twitter ', :rel => "nofollow", title: 'Optyn Twitter' }
       %i.icon-twitter
-    %a{ href: 'https://plus.google.com/+OptynEmailMarketing', target: '_blank', alt: 'Google Plus E-Mail Marketing Page', rel: 'publisher' }
+    %a{ href: 'https://plus.google.com/+OptynEmailMarketing', target: '_blank', alt: 'Google Plus E-Mail Marketing Page', rel: 'publisher', :rel => "nofollow", style: 'Optyn Google Plus' }
       %i.icon-google-plus
     %p
       2013 &copy; Optyn, Inc.

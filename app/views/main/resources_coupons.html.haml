@@ -1,13 +1,16 @@
-= display_title "Marketing with Coupons"
-= display_meta_description "Create email marketing campaigns in 2 minutes or less with Optyn's email marketing software", "email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
-= render partial: 'marketing_breadcrumbs'
+= display_title "Coupon Marketing - Increase sales through proper coupon promotion"
+= display_meta_description "Optyn's marketing experts show you how to utilize coupons to maximize ", "coupon marketing, marketing with coupons, coupons marketing, small business coupons , small business coupon, coupon promotion, coupon promotions email marketing, email marketing software, email for small businesses, small business email marketing, email marketing for small biz."
+
+.row-fluid.breadcrumbs
+  - breadcrumb :resources_coupons
 
 .row-fluid
   .span3
-    = render partial: 'marketing_nav'
+    = render partial: 'resources_nav'
   .span9
     %h1.hdg-s Marketing with Coupons
     %h2 Tips for using coupons in your marketing mix.
+    = image_tag( 'coupons.jpg', alt: 'Benefits of Coupons', class: 'pull-right img-polaroid', title: 'Coupons' )
     %p 
       Coupons are still immensely popular with both consumers and marketers. If you’re considering using them for your business, here are some things you should consider.
     %p
@@ -17,11 +20,11 @@
     %p
       %strong
         2.  Generate a feeling of urgency by setting coupon expiration dates.
-      The shorter the period until the expiration date the more of a sense of urgency the consumer will have and the shorter the buying decision process.
+      The shorter the period until the expiration date the more of a sense of urgency the consumer will have and the shorter the buying decision process. Utilize holiday's to set the start and end dates for your coupon promotions.
     %p
       %strong
         3. Syndicate your offer.
-      There are many sites on the web that aggregate coupons. Many of these sites may be specific to the type of coupon you’re offering so search around. Suggested search terms - “coupon site” or “[the type of coupon you’re offering] coupons”). 
+      There are many sites on the web that aggregate small business coupons. Many of these sites may be specific to the type of coupon you’re offering so search around. Suggested search terms - “coupon site” or “[the type of coupon you’re offering] coupons”). If you become proactive and you establish your business through coupons marketing, customers will turn to you before they do to someone else who does not utilize coupons.
     %p
       %strong
         4. Let your affiliate network know about your coupon offer.
@@ -29,7 +32,7 @@
     %p
       %strong
         5. Decide if the coupon is to be immediately useable or if a subsequent visit is required.
-      As mentioned before, the advantage to an instantly redeemable coupon is immediate sales.  The advantage to a coupon that requires a subsequent visit is that you are incenting the consumer to visit again.
+      As mentioned before, the advantage to an instantly redeemable coupon is an immediate sale.  The advantage to a coupon that requires a subsequent visit is that you are incentivizing the consumer to visit again.
     %p
       %strong
         6. Coupons don’t always have to be “Money Off”
@@ -37,11 +40,13 @@
     %p
       %strong
         7. Post coupons in multiple locations.
-      To increase visibility, post coupons can be in ads, on web sites and anywhere else that gets consumer attention.
+      To increase visibility, post coupons can be in ads, social media networks, on web sites and anywhere else that gets attention from consumer who are and even who are not looking for a small business coupon.
     %p
       %strong
         8. Make the coupon code memorable.
       If the coupon code is not consumer specific for redemption security purposes, use a memorable term rather than a meaningless alphanumeric string.  For example, use “SAVE$50TODAY” rather than “SDK98KJW9”. This will let customers easily redeem and most importantly share it with their friends so you can attract new customers.
+    .blank-space
+    = render partial: 'get_started_banner'
     .blank-space
 
 
