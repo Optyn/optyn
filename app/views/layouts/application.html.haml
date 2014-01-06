@@ -49,14 +49,14 @@
           - else
             .nav-collapse.collapse
               %ul.pull-right.nav.nav-pills
-                %li
+                %li.current
                   %a{ :href => root_path } Home
                 %li
                   %a{ :href => merchant_features_path } Features
                 %li
                   %a{ :href => pricing_path } Pricing
                 %li
-                  %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
+                  %a.btn.btn-success{ :href => new_merchants_manager_registration_path } Sign up
                 %li
                   %a.btn.btn-primary{ :href => new_user_session_path } Log in
 

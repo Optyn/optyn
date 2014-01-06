@@ -25,6 +25,24 @@
   }
 }
 
+@media (min-width: 980px) {
+  .nav-pills {
+    > .current {
+      background-color: $blue;
+    }
+    > li {
+      margin-right: 10px;
+      height: 70px;
+      &:last-child { margin-right: 0; }
+    }
+  }
+  .nav-pills > li > a {
+    @include border-radius( 0 );
+    padding: 10px 15px 10px;
+    line-height: 14px;
+  }
+}
+
 @media (max-width: 979px) {
   header {
     text-align: center;
