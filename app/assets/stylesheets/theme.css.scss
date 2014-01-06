@@ -1160,6 +1160,7 @@ blockquote {
     padding: 0 1.9rem;
     display: inline-block;
     margin-left: -3px;
+    border-bottom: solid 2px #333;
     &:hover {
       text-decoration: none;
       color: rgba( $white, 0.9 );

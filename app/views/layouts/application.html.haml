@@ -40,11 +40,11 @@
             = image_tag "logo.png", :alt => 'Optyn Email Marketing', title: 'Optyn Email Marketing'
           - if user_signed_in? || manager_signed_in?
             - if user_signed_in?
-              .pull-right
+              %ul.nav.pull-right
                 = render partial: "layouts/consumer_dropdown"
             - if manager_signed_in?
               %ul.nav.pull-right.logged-in
-                = render partial: "layouts/merchant_dropdown"    
+                = render partial: "layouts/merchant_dropdown"
           - else
             .nav-collapse.collapse
               %ul.pull-right.nav.nav-pills

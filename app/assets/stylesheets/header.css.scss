@@ -17,7 +17,7 @@
   border: 0;
   background: transparent;
   padding: 10px;
-  margin-top: 7px;
+  margin-top: 18px;
   margin-right: 10px;
   &:hover {
     background-color: $gray;
@@ -86,6 +86,7 @@
   .nav-collapse {
     background-color: $light-gray;
     z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 10px 20px;
   }
   .navbar.inner {
     background-color: $blue;
