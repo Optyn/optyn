@@ -7,7 +7,6 @@ require "#{File.dirname(__FILE__)}/seed_data/message_folders.rb"
 require "#{File.dirname(__FILE__)}/seed_data/message_visual_sections.rb"
 require "#{File.dirname(__FILE__)}/seed_data/partners.rb"
 require "#{File.dirname(__FILE__)}/seed_data/oauths.rb"
-require "#{File.dirname(__FILE__)}/seed_data/sections.rb"
 require "#{File.dirname(__FILE__)}/seed_data/templates.rb"
 
 #Add some dummy data in the development mode.
