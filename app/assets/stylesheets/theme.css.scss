@@ -1145,7 +1145,7 @@ blockquote {
 
 .breadcrumbs {
   float: none;
-  overflow: auto;
+  overflow: hidden;
   width: 100%;
   background: lighten( $dark-blue, 5% );
   color: $white;
@@ -1160,7 +1160,6 @@ blockquote {
     padding: 0 1.9rem;
     display: inline-block;
     margin-left: -3px;
-   
     &:hover {
       text-decoration: none;
       color: rgba( $white, 0.9 );
