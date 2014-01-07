@@ -25,6 +25,15 @@ class Template < ActiveRecord::Base
     for_name("Basic")
   end
 
+  def fetch_content(message_content)
+    content = ""
+    if message_content.blank?
+      content = build_with_default_values
+    else
+    end
+    content
+  end
+
 
   private
     def create_structure
@@ -83,4 +92,59 @@ class Template < ActiveRecord::Base
       self.save
 
     end
+
+    def build_with_default_values
+      json_structure = self.structure
+      containers_html = default_containers_html(json_structure)
+      layout_html = json_structure.html
+
+      containers_html.each do |container_html|
+        layout_html = layout_html.sub(PLACE_HOLDER_ELEM, container_html)
+      end
+
+      layout_html
+    end
+
+    def default_containers_html(structure_hash)
+      html = []
+      structure_hash.containers.each do |container|
+        rows_html = default_rows_html(container)
+        container_html = container.html
+
+        rows_html.each do |row_html|
+          container_html = container_html.sub(PLACE_HOLDER_ELEM, row_html)
+        end
+
+        html << container_html
+      end
+
+      html
+    end
+
+    def default_rows_html(container)
+      html = []
+      container.rows.each do |row|
+        grids_html = default_grids_html(row)
+        row_html = row.html
+        grids_html.each do |grid_html|
+          row_html = row_html.sub(PLACE_HOLDER_ELEM, grid_html)
+        end
+
+        html << row_html
+      end
+
+      html
+    end
+
+    def default_grids_html(row)
+      html = []
+      row.grids.each do |grid|
+        html << grid.html.gsub(PLACE_HOLDER_ELEM, grid.divisions.first.html)
+      end
+      html  
+    end
+
+    def add_newline(html)
+      "\n" + html + "\n"
+    end  
 end
