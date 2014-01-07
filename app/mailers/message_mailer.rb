@@ -1,3 +1,6 @@
+require 'encryptor'
+require 'shop_timezone'
+
 class MessageMailer < ActionMailer::Base
   include MailerFragmentCaching
 
