@@ -15,7 +15,7 @@ class Template < ActiveRecord::Base
 
   scope :for_name, ->(template_name) { where(name: template_name) }
 
-  PLACE_HOLDER_ELEM = "<placeholder></placeholder>"
+  PLACE_HOLDER_ELEM = "<placeholder></placeholder>\n"
 
   def self.system_generated 
     fetch_system_generated
@@ -24,6 +24,7 @@ class Template < ActiveRecord::Base
   def self.basic
     for_name("Basic")
   end
+
 
   private
     def create_structure
@@ -43,17 +44,15 @@ class Template < ActiveRecord::Base
             divisions = []
             grid_child.css('division').each do |division_child|
               divisions << HashWithIndifferentAccess.new(html: division_child.children.to_s, type: division_child['type'])
-              division_child.parent.add_child(PLACE_HOLDER_ELEM) unless division_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
+              division_child.parent.add_child(add_newline(PLACE_HOLDER_ELEM)) unless division_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
               division_child.remove
             end
 
             grid = HashWithIndifferentAccess.new(divisions: divisions)
             grid_parent = grid_child.parent
-            grid_child.remove
-            grid_parent.add_child(PLACE_HOLDER_ELEM) unless row_child.to_s.include?(PLACE_HOLDER_ELEM)
+            grid_child.swap(add_newline(PLACE_HOLDER_ELEM))
+            # grid_parent.add_child(PLACE_HOLDER_ELEM) unless row_child.to_s.include?(PLACE_HOLDER_ELEM)
             
-
-
             grid[:html] = grid_child.children.to_s
             grids << grid
           end
@@ -61,8 +60,8 @@ class Template < ActiveRecord::Base
 
           row = HashWithIndifferentAccess.new(grids: grids)
           row_parent = row_child.parent
-          row_child.remove
-          row_parent.add_child(PLACE_HOLDER_ELEM) unless container_child.to_s.include?(PLACE_HOLDER_ELEM)
+          row_child.swap(add_newline(PLACE_HOLDER_ELEM))
+          # row_parent.add_child(PLACE_HOLDER_ELEM) unless _child.to_s.include?(PLACE_HOLDER_ELEM)
 
           row[:html] = row_child.children.to_s
           rows << row
@@ -70,8 +69,8 @@ class Template < ActiveRecord::Base
 
         container = HashWithIndifferentAccess.new(rows: rows, type: container_child['type'])
         container_parent = container_child.parent
-        container_child.remove
-        container_parent.add_child(PLACE_HOLDER_ELEM) unless container_parent.parent.to_s.include?(PLACE_HOLDER_ELEM)
+        container_child.swap(add_newline(PLACE_HOLDER_ELEM))
+        # container_parent.add_child(PLACE_HOLDER_ELEM) unless container_parent.parent.to_s.include?(PLACE_HOLDER_ELEM)
 
         container[:html] = container_child.children.to_s
         containers << container
