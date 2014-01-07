@@ -29,7 +29,7 @@ class Template < ActiveRecord::Base
     def create_structure
       content = Nokogiri::HTML(self.html)
       #start traversing the hierarchy goes as:
-      #containers => rows => grids => columns => editable content
+      #containers => rows => grids => divisions => editable content
       wrapper = HashWithIndifferentAccess.new(containers: [], html: "")
 
       containers = wrapper[:containers]
@@ -40,28 +40,18 @@ class Template < ActiveRecord::Base
 
           grids = []
           row_child.css('grid').each do |grid_child|
-            columns = []
-            grid_child.css('columns').each do |columns_child|
-              columns << HashWithIndifferentAccess.new(html: columns_child.children.to_s, type: columns_child['type'])
-              columns_child.parent.add_child(PLACE_HOLDER_ELEM) unless columns_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
-              columns_child.remove
-
-              # unless columns_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
-              #   columns_child.replace(PLACE_HOLDER_ELEM) 
-              # else
-              #   columns_child.remove
-              # end
+            divisions = []
+            grid_child.css('division').each do |division_child|
+              divisions << HashWithIndifferentAccess.new(html: division_child.children.to_s, type: division_child['type'])
+              division_child.parent.add_child(PLACE_HOLDER_ELEM) unless division_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
+              division_child.remove
             end
 
-            grid = HashWithIndifferentAccess.new(columns: columns)
+            grid = HashWithIndifferentAccess.new(divisions: divisions)
             grid_parent = grid_child.parent
             grid_child.remove
             grid_parent.add_child(PLACE_HOLDER_ELEM) unless grid_parent.to_s.include?(PLACE_HOLDER_ELEM)
-            # unless grid_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
-            #   grid_child.replace(PLACE_HOLDER_ELEM)
-            # else
-            #   grid_child.remove
-            # end
+            
 
 
             grid[:html] = grid_child.children.to_s
@@ -91,23 +81,7 @@ class Template < ActiveRecord::Base
       wrapper[:html] = content.to_s
 
       self.structure = wrapper
-      self.save      
-
-      # #populate the introduction section
-      # introduction = content.css('introduction').children.to_s
-      # self.sections.create_introduction!(introduction)
-
-      # #populate the conslusion section
-      # conclusion = content.css('conclusion').children.to_s
-      # self.sections.create_introduction!(conclusion) 
-
-      # #populate the wrapper => rows inside it
-      # wrapper = content.css('wrapper')
-      # rows = content.css('row')    
-      # rows.each do |row|
-      #   self.sections.create_row!(row)  
-      # end
-
+      self.save
 
     end
 end
