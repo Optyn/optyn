@@ -79,7 +79,7 @@ namespace :deploy do
 
   desc "Start Sidekiq"
   task :start_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
+    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -C ./config/sidekiq.yml -d -L log/sidekiq.log"
   end
 
   desc "Stop Sidekiq"
@@ -89,8 +89,10 @@ namespace :deploy do
 
   desc "Restart Sidekiq gracefully"
   task :restart_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
+    #    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
+    #    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
+    deploy.stop_sidekiq
+    deploy.start_sidekiq
   end
 
   desc "reload the database with seed data"
@@ -135,7 +137,7 @@ namespace :deploy do
 
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
-       run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+      run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
     end
   end
 
@@ -149,7 +151,7 @@ namespace :deploy do
       deadline = ENV['UNTIL']
 
       template = File.read(File.join(File.dirname(__FILE__), "deploy",
-                                     "maintenance.html.erb"))
+          "maintenance.html.erb"))
       result = ERB.new(template).result(binding)
 
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
