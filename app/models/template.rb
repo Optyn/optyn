@@ -50,7 +50,7 @@ class Template < ActiveRecord::Base
             grid = HashWithIndifferentAccess.new(divisions: divisions)
             grid_parent = grid_child.parent
             grid_child.remove
-            grid_parent.add_child(PLACE_HOLDER_ELEM) unless grid_parent.to_s.include?(PLACE_HOLDER_ELEM)
+            grid_parent.add_child(PLACE_HOLDER_ELEM) unless row_child.to_s.include?(PLACE_HOLDER_ELEM)
             
 
 
@@ -62,7 +62,7 @@ class Template < ActiveRecord::Base
           row = HashWithIndifferentAccess.new(grids: grids)
           row_parent = row_child.parent
           row_child.remove
-          row_parent.add_child(PLACE_HOLDER_ELEM) unless row_parent.to_s.include?(PLACE_HOLDER_ELEM)
+          row_parent.add_child(PLACE_HOLDER_ELEM) unless container_child.to_s.include?(PLACE_HOLDER_ELEM)
 
           row[:html] = row_child.children.to_s
           rows << row
