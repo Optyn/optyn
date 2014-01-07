@@ -2,6 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
+require 'sidekiq/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 require './config/boot'
@@ -55,10 +56,10 @@ after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "deploy:pdf:make_executable"
+after "deploy:restart", "sidekiq:restart"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
-after "deploy:restart", "deploy:restart_sidekiq"
 after "deploy", "deploy:cleanup"
 
 #after "deploy:create_symlink", "whenever"
@@ -76,24 +77,6 @@ namespace "whenever" do
 end
 
 namespace :deploy do
-
-  desc "Start Sidekiq"
-  task :start_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -C ./config/sidekiq.yml -d -L log/sidekiq.log"
-  end
-
-  desc "Stop Sidekiq"
-  task :stop_sidekiq ,:roles => :app do
-    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
-  end
-
-  desc "Restart Sidekiq gracefully"
-  task :restart_sidekiq ,:roles => :app do
-    #    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq stop -d -L log/sidekiq.log"
-    #    run "cd #{current_path};RAILS_ENV=#{rails_env} bundle exec sidekiq start -d -L log/sidekiq.log"
-    deploy.stop_sidekiq
-    deploy.start_sidekiq
-  end
 
   desc "reload the database with seed data"
   task :seed do
