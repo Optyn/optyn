@@ -13,7 +13,7 @@ $(document).ready(function () {
             $('.scrolltop').fadeIn();
         } else {
             $('.scrolltop').fadeOut();
-        }        
+        }
     });
 
     $('#myCarousel').carousel('cycle');
@@ -23,7 +23,7 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: 0 }, 700);
         return false;
     });
-    
+
     // scroll navigation functionality
     $('.scroller').click(function(){
     	var section = $($(this).data("section"));
@@ -107,6 +107,17 @@ $(document).ready(function () {
     // like the one on campaign pages.
     if ( $( 'h1' ).css( 'float' ) === 'left' && $( '.tab-pane' ).size())
         handleTabLayout();
+
+
+    // Dropdown for Features link in static pages header .......................
+    $( '#features-dd-toggle' ).click( function( event ) {
+        event.preventDefault();
+        $( '#header-static-features-dropdown' ).toggleClass( 'visible' );
+        $( '#header-static-features-dropdown' ).fadeToggle();
+        $( '.dark-overlay' ).fadeToggle();
+        //$( '.page-body' ).toggleClass( 'push-back' );
+        $( this ).find( 'i' ).toggleClass( 'icon-caret-down' ).toggleClass( 'icon-caret-up' );
+    });
 });
 // Equalize div heights
 function equalizeDivHeights( targetElementSelector ) {
@@ -147,7 +158,7 @@ function handleTabLayout() {
             });
         } else {
             $( 'h1:first' ).css({
-                'float': 'left',
+                'float': 'left'
             });
         }
     };

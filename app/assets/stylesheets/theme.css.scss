@@ -798,8 +798,6 @@ form {
       }
     }
   }
-  .nav-pills > li > a { @include border-radius( 0 );padding: 10px 15px 10px;
-line-height: 14px; }
   i {
     margin-top: 4px;
   }
@@ -1147,7 +1145,7 @@ blockquote {
 
 .breadcrumbs {
   float: none;
-  overflow: auto;
+  overflow: hidden;
   width: 100%;
   background: lighten( $dark-blue, 5% );
   color: $white;
@@ -1162,7 +1160,7 @@ blockquote {
     padding: 0 1.9rem;
     display: inline-block;
     margin-left: -3px;
-   
+    border-bottom: solid 2px #333;
     &:hover {
       text-decoration: none;
       color: rgba( $white, 0.9 );

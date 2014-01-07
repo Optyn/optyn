@@ -17,11 +17,29 @@
   border: 0;
   background: transparent;
   padding: 10px;
-  margin-top: 7px;
+  margin-top: 18px;
   margin-right: 10px;
   &:hover {
     background-color: $gray;
     border: 0;
+  }
+}
+
+@media (min-width: 980px) {
+  .nav-pills {
+    > .current {
+      background-color: $blue;
+    }
+    > li {
+      margin-right: 10px;
+      height: 70px;
+      &:last-child { margin-right: 0; }
+    }
+  }
+  .nav-pills > li > a {
+    @include border-radius( 0 );
+    padding: 10px 15px 10px;
+    line-height: 14px;
   }
 }
 
@@ -68,6 +86,7 @@
   .nav-collapse {
     background-color: $light-gray;
     z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 10px 20px;
   }
   .navbar.inner {
     background-color: $blue;
@@ -121,5 +140,55 @@ ul.logged-in {
   padding-top: 5px;
 }
 
-@media ( max-width: 768px ) {
+#header-static-features-dropdown {
+  display: none;
+  padding: 2%;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 1029;
+  @include transition( all 0.3s ease );
+  @include transformOrigin( top );
+  @include transform( perspective( 500px ) rotateX( -50deg ));
+  &.visible {
+    top: 70px;
+    @include transform( perspective( 500px ) rotateX( 0deg ));
+  }
+  h5 {
+    color: $green;
+  }
+  a {
+    display: block;
+    @include transition( padding 0.3s ease );
+    &:hover {
+      background: $light-gray;
+      padding-left: 5px;
+    }
+  }
+  ul {
+    margin: 0;
+  }
+}
+#features-dd-toggle > i {
+  position: relative;
+  opacity: 0.5;
+  padding: 2%;
+  margin: 0 0 0 3px !important;
+}
+.push-back {
+  @include transition( all 0.3s ease );
+  @include transform( perspective(500px) translateZ(-100px));
+}
+.dark-overlay {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1028;
+  background: rgba(0,0,0,0.5);
 }

@@ -40,28 +40,64 @@
             = image_tag "logo.png", :alt => 'Optyn Email Marketing', title: 'Optyn Email Marketing'
           - if user_signed_in? || manager_signed_in?
             - if user_signed_in?
-              .pull-right
+              %ul.nav.pull-right
                 = render partial: "layouts/consumer_dropdown"
             - if manager_signed_in?
               %ul.nav.pull-right.logged-in
-                = render partial: "layouts/merchant_dropdown"    
+                = render partial: "layouts/merchant_dropdown"
           - else
             .nav-collapse.collapse
               %ul.pull-right.nav.nav-pills
-                %li
+                %li.current
                   %a{ :href => root_path } Home
                 %li
-                  %a{ :href => merchant_features_path } Features
+                  %a#features-dd-toggle{ :href => merchant_features_path }
+                    Features
+                    %i.icon-caret-down
                 %li
                   %a{ :href => pricing_path } Pricing
                 %li
-                  %a.btn.btn-warning{ :href => new_merchants_manager_registration_path } Sign up
+                  %a.btn.btn-success{ :href => new_merchants_manager_registration_path } Sign up
                 %li
                   %a.btn.btn-primary{ :href => new_user_session_path } Log in
 
     = display_flash_message
 
-    .container-fluid
+    %nav#header-static-features-dropdown.row-fluid
+      .span2
+        %h5 Our Company
+        %ul
+          %li
+            %a( href = '#' ) foo
+          %li
+            %a( href = '#' ) foo
+      .span2
+        %h5 For Merchants
+        %ul
+          %li
+            %a( href = '#' ) foo
+          %li
+            %a( href = '#' ) foo
+      .span2
+        %h5 For Partners
+        %ul
+          %li
+            %a( href = '#' ) foo
+          %li
+            %a( href = '#' ) foo
+      .span2
+        %h5 For Publishers
+        %ul
+          %li
+            %a( href = '#' ) foo
+          %li
+            %a( href = '#' ) foo
+      .span4.text-center
+        %img{ src: "http://placehold.it/200x200", alt: "Placeholder image" }
+
+    .dark-overlay
+
+    .container-fluid.page-body
 
       .yield
         = breadcrumbs  :link_current =>  "True ", :separator =>  "", :semantic =>  "True"
