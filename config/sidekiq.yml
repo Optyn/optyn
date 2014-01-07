@@ -4,10 +4,10 @@
 staging:
   :concurrency: 5
 integration:
-  :concurrency: 25 
+  :concurrency: 35 
 
 production:
-  :concurrency: 25
+  :concurrency: 35
 :queues:
   -  [general_queue, 1]
   -  [import_queue, 1]
