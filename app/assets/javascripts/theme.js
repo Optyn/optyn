@@ -111,23 +111,17 @@ $(document).ready(function () {
 
     // Dropdown for Features link in static pages header .......................
     $( '#features-dd-toggle' ).mouseenter( function() {
-        //return();
         $( '#header-static-features-dropdown' ).fadeIn();
         $( '#header-static-features-dropdown' ).addClass( 'visible' );
         $( this ).addClass( 'current' );
-        //$( '.page-body' ).addClass( 'push-back' );
         $( '.dark-overlay' ).fadeIn();
-        //$( this ).find( 'i' ).removeClass( 'icon-caret-down' ).addClass( 'icon-caret-up' );
     });
-    var hideFeaturesDropdown = function() {
+    $( '.dark-overlay, .nav > li:not(#features-dd-toggle)' ).mouseenter( function() {
         $( '#header-static-features-dropdown' ).removeClass( 'visible' );
         $( '#features-dd-toggle' ).removeClass( 'current' );
-        //$( '.page-body' ).removeClass( 'push-back' );
         $( '#header-static-features-dropdown' ).fadeOut();
         $( '.dark-overlay' ).fadeOut();
-        //$( this ).find( 'i' ).removeClass( 'icon-caret-up' ).addClass( 'icon-caret-down' );
-    }
-    $( '.dark-overlay, .nav > li:not(#features-dd-toggle)' ).mouseenter( hideFeaturesDropdown );
+    });
 });
 // Equalize div heights
 function equalizeDivHeights( targetElementSelector ) {

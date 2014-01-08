@@ -171,12 +171,6 @@ ul.logged-in {
     margin: 0;
   }
 }
-#features-dd-toggle i {
-  position: relative;
-  opacity: 0.5;
-  padding: 2%;
-  margin: 0 0 0 3px;
-}
 .push-back {
   @include transition( all 0.7s ease );
   @include transform( perspective(500px) translateZ(-50px));
