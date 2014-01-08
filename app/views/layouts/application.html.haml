@@ -48,13 +48,13 @@
           - else
             .nav-collapse.collapse
               %ul.pull-right.nav.nav-pills
-                %li.current
+                %li.hover-applied
                   %a{ :href => root_path } Home
-                %li
-                  %a#features-dd-toggle{ :href => merchant_features_path }
+                %li#features-dd-toggle.hover-applied
+                  %a{ :href => merchant_features_path }
                     Features
-                    %i.icon-caret-down
-                %li
+                    /%i.icon-caret-down
+                %li.hover-applied
                   %a{ :href => pricing_path } Pricing
                 %li
                   %a.btn.btn-success{ :href => new_merchants_manager_registration_path } Sign up
