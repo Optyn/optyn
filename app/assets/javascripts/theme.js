@@ -111,14 +111,14 @@ $(document).ready(function () {
 
     // Dropdown for Features link in static pages header .......................
     $( '#features-dd-toggle' ).mouseenter( function() {
-        if ( $( 'body' ).width() < 980 ) return;
+        if ( window.innerWidth < 980 ) return;
         $( '#header-static-features-dropdown' ).fadeIn();
         $( '#header-static-features-dropdown' ).addClass( 'visible' );
         $( this ).addClass( 'current' );
         $( '.dark-overlay' ).fadeIn();
     });
     $( '.dark-overlay, .nav > li:not(#features-dd-toggle)' ).mouseenter( function() {
-        if ( $( 'body' ).width() < 980 ) return;
+        if ( window.innerWidth < 980 ) return;
         $( '#header-static-features-dropdown' ).removeClass( 'visible' );
         $( '#features-dd-toggle' ).removeClass( 'current' );
         $( '#header-static-features-dropdown' ).fadeOut();
