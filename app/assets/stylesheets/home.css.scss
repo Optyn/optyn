@@ -36,6 +36,7 @@
       }
       > li > a {
         color: $white;
+        @media (max-width: 980px) { color: $black; }
         font-weight: 400;
         font-size: 1.2rem;
         line-height: 1.8rem;
