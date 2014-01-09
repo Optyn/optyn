@@ -94,8 +94,9 @@
   $( function() {
     $("#m-feat-vid").colorbox({iframe:true, innerWidth:640, innerHeight:390});
 
-    $( '.lp-next-fold a' ).click( function() {
+    $( '.lp-next-fold a' ).click( function( event ) {
       // Scroll to next fold.
+      event.preventDefault();
       $.scrollTo( "[data-scrollTo = " + $( this ).attr( 'data-scrollTo' ) + "]", 300 );
     });
   });
