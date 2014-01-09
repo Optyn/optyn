@@ -56,11 +56,13 @@ after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "deploy:pdf:make_executable"
-after "deploy:restart", "sidekiq:restart"
+#after "deploy:restart", "sidekiq:restart"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
+before "deploy:update", "god:stop"
+after "deploy:update", "god:start"
 
 #after "deploy:create_symlink", "whenever"
 
@@ -80,7 +82,7 @@ namespace :deploy do
 
   desc "reload the database with seed data"
   task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+    run "cd #{release_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 
   desc "Make sure local git is in sync with remote."
@@ -184,3 +186,24 @@ namespace :robots do
     run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate" 
   end
 end
+
+
+namespace :god do
+
+  def god_command
+    "cd #{current_path}; bundle exec god"
+  end
+
+  desc "Stop god"
+  task :stop do
+    run "#{god_command} terminate"
+  end
+
+  desc "Start god"
+  task :start do
+    config_file = "#{current_path}/god/sidekiq_staging.god"
+    environment = { :RAILS_ENV => rails_env, :RAILS_ROOT => current_path }
+    run "#{god_command} -c #{config_file}", :env => environment
+  end
+end
+
