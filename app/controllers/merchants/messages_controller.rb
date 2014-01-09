@@ -5,7 +5,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update, :create_response_message]
 
-  skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject]
+  skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save]
   before_filter :check_validity_before_rejection, only: [:reject]
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
@@ -91,8 +91,16 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def editor
     @message = Message.for_uuid(params[:id])
-    @addable_sections = Section.addable
-    render layout: 'email_template'
+    @template = @message.template
+    render layout: false
+  end
+
+  def save
+    @message = Message.for_uuid(params[:id])
+    @message.save_template_content!(params[:message])
+    render json: {message: "Successfully Saved"}
+  rescue ActiveRecord::RecordInvalid => e
+    render json: {message: "Error while saving the content"}, status: :unprocessable_entity
   end
 
   def update_meta

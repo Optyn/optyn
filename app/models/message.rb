@@ -24,7 +24,6 @@ class Message < ActiveRecord::Base
  
   accepts_nested_attributes_for :message_visual_properties, allow_destroy: true
   accepts_nested_attributes_for :message_image, allow_destroy: true
-  accepts_nested_attributes_for :messages_sections, allow_destroy: true
 
   FIELD_TEMPLATE_TYPES = ["coupon_message", "event_message", "general_message", "product_message", "sale_message", "special_message", "survey_message", "template_message"]
   DEFAULT_FIELD_TEMPLATE_TYPE = "general_message"
@@ -244,13 +243,7 @@ class Message < ActiveRecord::Base
 
   def assign_template(template_identifier)
     unless self.template_id.present?
-      self.template_id = template_identifier
-
-      chosen_template = Template.find(template_identifier)
-      chosen_template.sections.each_with_index do |section, index|
-        self.messages_sections.build(section_id: section.id, content: section.content, position: index + 1)
-      end
-      
+      self.template_id = template_identifier      
       self.save(validate: false)
     end
   end
@@ -267,6 +260,19 @@ class Message < ActiveRecord::Base
     else
       raise ActiveRecord::RecordInvalid.new(self)
     end  
+  end
+
+  def save_template_content!(message_hash)
+    containers = message_hash[:containers]
+    layout_hash = HashWithIndifferentAccess.new(containers: [])
+    introduction_container = containers.detect{|container| "introduction" == container['type']}
+    content_container = containers.detect{|container| "content" == container['type']}  
+
+    layout_hash[:containers] << introduction_container if introduction_container.present?
+    layout_hash[:containers] << content_container if content_container.present?
+
+    self.content = layout_hash.to_json
+    self.save(validate: false)
   end
 
   def adjust_send_on

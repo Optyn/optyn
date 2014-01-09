@@ -419,6 +419,7 @@ Optyn::Application.routes.draw do
         get :template
         put :update_template
         get :editor
+        put :save
       end
 
       resources :messages_sections
