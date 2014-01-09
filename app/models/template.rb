@@ -1,4 +1,8 @@
 require 'nokogiri'
+require 'messagecenter/templates/markup_generator'
+require 'messagecenter/templates/existing_template'
+require 'messagecenter/templates/blank_template'
+
 class Template < ActiveRecord::Base
   attr_accessible :shop_id, :system_generated, :name, :structure, :html
 
@@ -27,13 +31,11 @@ class Template < ActiveRecord::Base
 
   def fetch_content(message_content)
     content = ""
-    if message_content.blank?
-      content = build_with_default_values
-    else
-    end
+    
+    content = Messagecenter::Templates::MarkupGenerator.generate(message_content, self)
+    
     content
   end
-
 
   private
     def create_structure
@@ -51,13 +53,15 @@ class Template < ActiveRecord::Base
           grids = []
           row_child.css('grid').each do |grid_child|
             divisions = []
+            data_model = build_data_model(grid_child.css('division'))
+
             grid_child.css('division').each do |division_child|
               divisions << HashWithIndifferentAccess.new(html: division_child.children.to_s, type: division_child['type'])
               division_child.parent.add_child(add_newline(PLACE_HOLDER_ELEM)) unless division_child.parent.to_s.include?(PLACE_HOLDER_ELEM)
               division_child.remove
             end
 
-            grid = HashWithIndifferentAccess.new(divisions: divisions)
+            grid = HashWithIndifferentAccess.new(divisions: divisions, data_model: data_model)
             grid_parent = grid_child.parent
             grid_child.swap(add_newline(PLACE_HOLDER_ELEM))
             # grid_parent.add_child(PLACE_HOLDER_ELEM) unless row_child.to_s.include?(PLACE_HOLDER_ELEM)
@@ -93,55 +97,18 @@ class Template < ActiveRecord::Base
 
     end
 
-    def build_with_default_values
-      json_structure = self.structure
-      containers_html = default_containers_html(json_structure)
-      layout_html = json_structure.html
+    #build the data model when parsing the divisions for each row => grid when building the structure
+    def build_data_model(divisions)
+      data_model = {}
 
-      containers_html.each do |container_html|
-        layout_html = layout_html.sub(PLACE_HOLDER_ELEM, container_html)
+      divisions.each do |division|
+        data_model[division['type']] = {}
+        div_hash = data_model[division['type']]
+        div_hash['title'] = division['type'].to_s.humanize
+        div_hash['content'] = division.children.to_s.squish
       end
 
-      layout_html
-    end
-
-    def default_containers_html(structure_hash)
-      html = []
-      structure_hash.containers.each do |container|
-        rows_html = default_rows_html(container)
-        container_html = container.html
-
-        rows_html.each do |row_html|
-          container_html = container_html.sub(PLACE_HOLDER_ELEM, row_html)
-        end
-
-        html << container_html
-      end
-
-      html
-    end
-
-    def default_rows_html(container)
-      html = []
-      container.rows.each do |row|
-        grids_html = default_grids_html(row)
-        row_html = row.html
-        grids_html.each do |grid_html|
-          row_html = row_html.sub(PLACE_HOLDER_ELEM, grid_html)
-        end
-
-        html << row_html
-      end
-
-      html
-    end
-
-    def default_grids_html(row)
-      html = []
-      row.grids.each do |grid|
-        html << grid.html.gsub(PLACE_HOLDER_ELEM, grid.divisions.first.html)
-      end
-      html  
+      data_model
     end
 
     def add_newline(html)
