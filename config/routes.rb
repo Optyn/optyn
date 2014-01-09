@@ -130,6 +130,7 @@ Optyn::Application.routes.draw do
   match '/resources/email-newsletter' => 'main#resources_email_newsletter', :as => :resources_email_newsletter
   match '/resources/mass-email' => 'main#resources_mass_email', :as => :resources_mass_email
   match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
+  match '/marketing-agency' => 'main#marketing_agency', :as => :marketing_agency
 
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code

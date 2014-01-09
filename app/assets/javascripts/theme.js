@@ -110,13 +110,19 @@ $(document).ready(function () {
 
 
     // Dropdown for Features link in static pages header .......................
-    $( '#features-dd-toggle' ).click( function( event ) {
-        event.preventDefault();
-        $( '#header-static-features-dropdown' ).toggleClass( 'visible' );
-        $( '#header-static-features-dropdown' ).fadeToggle();
-        $( '.dark-overlay' ).fadeToggle();
-        //$( '.page-body' ).toggleClass( 'push-back' );
-        $( this ).find( 'i' ).toggleClass( 'icon-caret-down' ).toggleClass( 'icon-caret-up' );
+    $( '#features-dd-toggle' ).mouseenter( function() {
+        if ( window.innerWidth < 980 ) return;
+        $( '#header-static-features-dropdown' ).fadeIn();
+        $( '#header-static-features-dropdown' ).addClass( 'visible' );
+        $( this ).addClass( 'current' );
+        $( '.dark-overlay' ).fadeIn();
+    });
+    $( '.dark-overlay, .nav > li:not(#features-dd-toggle)' ).mouseenter( function() {
+        if ( window.innerWidth < 980 ) return;
+        $( '#header-static-features-dropdown' ).removeClass( 'visible' );
+        $( '#features-dd-toggle' ).removeClass( 'current' );
+        $( '#header-static-features-dropdown' ).fadeOut();
+        $( '.dark-overlay' ).fadeOut();
     });
 });
 // Equalize div heights
@@ -149,9 +155,7 @@ function handleTabLayout() {
         $( '.wid75pc .tab-pane a' ).each( function( index, value) {
             tabsWidth += parseInt( $( this ).css( 'width' ));
         });
-        //console.log( h1Width, tabsWidth, tabsWidth + h1Width > parseInt( $( '.wid75pc' ).css( 'width' )), parseInt( $( '.wid75pc' ).css( 'width' )));
         if ( h1Width + tabsWidth > parseInt( $( '.wid75pc' ).css( 'width' ))) {
-            //console.log( 'hide some tabs' );
             $( 'h1:first' ).css({
                 'float': 'none',
                 'margin-bottom': '0'

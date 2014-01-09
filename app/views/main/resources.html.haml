@@ -10,10 +10,14 @@
       %h1.hd-main.text-center Small Business Marketing Resource Center
 
   .row-fluid.email_marketing
-    .span8
+    .span10.offset1
       %h2 Learn about E-Mail Marketing
+      .pull-right.text-center
+        = image_tag( 'learn-about-email-marketing.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'learn about email marketing' )
+        .blank-space
+        %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path } Get Started for Free!
       %p
-        Learn the ins and outs of email marketing and how you can grow your business while becoming a better marketer. 
+        Learn the ins and outs of email marketing and how you can grow your business while becoming a better marketer.
       %p
         %strong
           Learn about:
@@ -42,10 +46,6 @@
             %li
               %a{ :href => resources_email_marketing_types_path } Different E-Mail Types
 
-    .span3{style: 'text-align:center;'}
-      = image_tag( 'learn-about-email-marketing.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'learn about email marketing' )
-      .blank-space
-      %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path } Get Started for Free!
 
   .row-fluid.smallbiz_marketing
     .span3.offset2
@@ -84,8 +84,9 @@
             %a{ :href => resources_integrated_marketing_path} Integrated Marketing
 
   .row-fluid.email_marketing
-    .span5.offset1
+    .span10.offset1
       %h2 Marketing Promotions
+      = image_tag( 'learn-about-marketing-promotion.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Marketing Promotions' )
       %p
         Marketing promotions are a powerful way to increase and generate revenues and customer engagement. Below, we outline a few ways to educate you on how you can use certain promotions to accomplish specific business objectives.
         %ul.bullet-circle
@@ -99,8 +100,6 @@
             %a{ :href => resources_surveys_path } Surveys
           %li
             %a{ :href => resources_specials_sales_path} Specials and Sales
-    .span3.offset2
-      = image_tag( 'learn-about-marketing-promotion.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Marketing Promotions' )
   .row-fluid.smallbiz_marketing
     .span3.offset2
       = image_tag( 'coming-soon.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-resources', title: 'Marketing Resources Coming Soon' )
