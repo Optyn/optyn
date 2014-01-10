@@ -24,7 +24,12 @@ module Users
 	    counters[:existing_connection]  = 0
 	    counters[:unparsed_rows] = 0
 
+	    row_count = 0
+
+	    label_instance = Label.find_or_create_by_shop_id_and_name(shop.id, (label || FileImport::DEFAULT_LABEL_NAME))
 	    csv_table.each do |row|
+	    	row_count += 1
+	    	Rails.logger.info row_count
 	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
 
 	    	begin
@@ -77,7 +82,7 @@ module Users
 		      end
 		      connection.save()
 
-		      label_instance = Label.find_or_create_by_shop_id_and_name(shop.id, (label || FileImport::DEFAULT_LABEL_NAME))
+		      
 		      UserLabel.find_or_create_by_user_id_and_label_id(user.id, label_instance.id)
 
 		      output << output_row.join(",")
@@ -86,6 +91,8 @@ module Users
 		    	output_row << %{"Error: #{e.message}"} 
 		    	output << output_row.join(",")
 		    	unparsed_rows << output_row.join(",") 
+		    	Rails.logger.error e.message
+		    	Rails.logger.error e.backtrace
 	    	end
 	    end
 	    

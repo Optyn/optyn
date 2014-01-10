@@ -1093,6 +1093,7 @@ th {
   background-color: $medium-gray;
   margin: 20px 0;
   clear: both;
+  &.gray { background-color: $gray; }
   &.white {
     background-color: $white;
   }
