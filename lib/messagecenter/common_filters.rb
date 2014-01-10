@@ -2,6 +2,7 @@ module Messagecenter
   module CommonFilters
     def self.included(controller)
       controller.class_eval do
+        controller.before_filter (:force_footer_caching_expire)
         controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message, :new_template])
         controller.before_filter(:show_my_messages_only, only: [:show])
         controller.before_filter(:message_editable?, only: [:edit, :update])
@@ -35,7 +36,12 @@ module Messagecenter
       elsif "preview" == choice
         redirect_to preview_merchants_message_path(@message.uuid)
       elsif "launch" == choice
-        redirect_to queued_merchants_messages_path()
+        if current_shop.disabled?
+          redirect_to drafts_merchants_messages_path()
+        else
+          redirect_to queued_merchants_messages_path()
+        end
+        
       else
         if @message.instance_of?(TemplateMessage) && @message.template_id.blank?
           redirect_to template_merchants_message_path(@message.uuid)
@@ -122,6 +128,11 @@ module Messagecenter
       end
     end
 
+
+    def force_footer_caching_expire
+      @force = true
+    end
+
     def show_template_chooser
       @message = Message.for_uuid(params[:id])
       
@@ -129,7 +140,8 @@ module Messagecenter
         redirect_to template_merchants_message_path(@message.uuid)
         return false
       end
-    end
+    end  
+    
 
   end #end CommonFilter module
 end #end of the Messagecenter module

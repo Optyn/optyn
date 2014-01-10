@@ -1,4 +1,9 @@
+require 'encryptor'
+require 'shop_timezone'
+
 class MessageMailer < ActionMailer::Base
+  include MailerFragmentCaching
+
   default from: '"Email" <email@optyn.com>',
           reply_to: "services@optyn.com"
           
@@ -18,7 +23,8 @@ class MessageMailer < ActionMailer::Base
 
     @partner = @shop.partner
 
-    mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>), 
+    #to: "success@simulator.amazonses.com",
+    mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>),
       bcc: "gaurav@optyn.com", 
       from: @message.from, 
       subject: @message.personalized_subject(@message_user),
@@ -68,11 +74,11 @@ class MessageMailer < ActionMailer::Base
     ShopTimezone.set_timezone(@shop)
     
     mail(
-      from: "office@eatstreet.com",
+      from: "specials@eatstreet.com",
       to: Rails.env.staging? ? SiteConfig.eatstreet_curation_email : @actual_message.manager_email,
       bcc: ["gaurav@optyn.com", "alen@optyn.com", "ian@eatstreet.com"],
       subject: "Message Rejected: #{@actual_message.name}",
-      reply_to: "office@eatstreet.com"
+      reply_to: "specials@eatstreet.com"
     )
   end
 end

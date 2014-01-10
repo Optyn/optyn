@@ -1,7 +1,9 @@
 class SharedForwarder
-  @queue = :message_queue
+  include Sidekiq::Worker
+  sidekiq_options :queue => :message_queue, :backtrace => true
+  # @queue = :message_queue
 
-  def self.perform(user_email, message_id, message_email_auditor_id)
+  def perform(user_email, message_id, message_email_auditor_id)
   	message = Message.find(message_id)
     message_email_auditor = MessageEmailAuditor.find(message_email_auditor_id)
     msg = MessageMailer.shared_email(user_email, message).deliver

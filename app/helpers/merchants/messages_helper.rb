@@ -160,9 +160,9 @@ module Merchants::MessagesHelper
       website = message.shop.website
       if button_url.present? || website.present?
         href = button_url.present? ? button_url : website
-        link_to(image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 570px;').html_safe, href)
+        link_to(image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 100%;').html_safe, href)
       else
-        image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 570px;')
+        image_tag(message.message_image.image.to_s, title: message.subject, style: 'max-width: 100%;')
       end  
     end
   end

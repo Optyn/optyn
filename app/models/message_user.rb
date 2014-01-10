@@ -139,16 +139,18 @@ class MessageUser < ActiveRecord::Base
   end
 
   def self.create_individual_entry(inbox_folder_id, message_instance_id, receiver_identifier)
-    message_receiver = find_or_generate!(receiver_identifier, message_instance_id)
-    if message_receiver.message_folder_id.blank?
-      message_receiver.update_attributes!(:message_id => message_instance_id,
-                                          :message_folder_id => inbox_folder_id, :user_id => receiver_identifier,
-                                          :received_at => Time.now)
-    end
+    MessageUser.transaction do
+      message_receiver = find_or_generate!(receiver_identifier, message_instance_id)
+      if message_receiver.message_folder_id.blank?
+        message_receiver.update_attributes!(:message_id => message_instance_id,
+                                            :message_folder_id => inbox_folder_id, :user_id => receiver_identifier,
+                                            :received_at => Time.now)
+      end
 
-    message = MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
-    message.message_id = message_instance_id
-    message.save
+      message_audit = MessageEmailAuditor.find_or_create_by_message_user_id(:message_user_id => message_receiver.id, :delivered => false)
+      message_audit.message_id = message_instance_id
+      message_audit.save
+    end
   end
 
   def self.coupon_messages_count(user_id, force = false)

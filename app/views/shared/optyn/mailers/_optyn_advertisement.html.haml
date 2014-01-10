@@ -1,3 +1,6 @@
+- puts "*" * 100
+- puts "Not using cache in optyn_advertisement"
+- puts "-" * 100
 - if @message.present? && @partner.present? && @partner.optyn?
   - if  @shop.present? &&  @shop.starter_plan?
     %table{:style => 'width:100%;max-width:600px;margin:auto;color:#ccc;color:rgba(255,255,255,0.8);' + message_header_background_color(@message)}

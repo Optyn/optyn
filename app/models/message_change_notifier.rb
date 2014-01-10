@@ -23,7 +23,7 @@ class MessageChangeNotifier < ActiveRecord::Base
 
   private
     def enqueue_for_notification
-      Resque.enqueue(MessageChangeWorker, self.id)
+      MessageChangeWorker.perform_async(self.id)
     end
 
     def assign_uuid

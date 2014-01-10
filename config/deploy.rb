@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
-require "capistrano-resque"
+require 'sidekiq/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 require './config/boot'
@@ -56,12 +56,10 @@ after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
 after "deploy:restart", "deploy:pdf:make_executable"
+after "deploy:restart", "sidekiq:restart"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
-after "deploy:restart", "deploy:restart_resque"
-after "deploy:restart", "deploy:list:workers"
-# after "deploy:restart", "resque:restart"
 after "deploy", "deploy:cleanup"
 
 #after "deploy:create_symlink", "whenever"
@@ -79,45 +77,6 @@ namespace "whenever" do
 end
 
 namespace :deploy do
-  
-  #start of GOD handling
-  def try_killing_resque_workers
-    run "pkill -3 -f resque"
-  rescue
-    nil
-  end
-
-  desc "Stop Resque"
-  task :stop_resque ,:roles => :app do
-    try_killing_resque_workers
-    run "god stop resque"
-  end
-
-  desc "Start Resque"
-  task :start_resque ,:roles => :app do
-    run "god start resque"
-  end
-
-  desc "Restart God gracefully"
-  task :restart_resque , :roles => :app do
-    god_config_path = File.join(current_path, 'god', 'resque.god')
-    begin
-      # Throws an exception if god is not running.
-      # run "cd #{current_path}; bundle exec god status && rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} RAILS_ROOT=#{current_path} bundle exec god load #{god_config_path} && bundle exec god start resque"
-      run "cd #{current_path}; god status && god load #{god_config_path} && god start resque"
-
-      # Kill resque processes and have god restart them with the newly loaded config.
-      try_killing_resque_workers
-    rescue => ex
-      # god is dead, workers should be as well, but who knows.
-      try_killing_resque_workers
-
-      # Start god.
-      # run "cd #{current_path}; rvmsudo -p '#{sudo_prompt}' RAILS_ENV=#{rails_env} bundle exec god -c #{god_config_path}"
-      run "cd #{current_path}; god -c #{god_config_path}"
-    end
-  end
-  #end
 
   desc "reload the database with seed data"
   task :seed do
@@ -161,7 +120,7 @@ namespace :deploy do
 
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
-       run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+      run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
     end
   end
 
@@ -175,7 +134,7 @@ namespace :deploy do
       deadline = ENV['UNTIL']
 
       template = File.read(File.join(File.dirname(__FILE__), "deploy",
-                                     "maintenance.html.erb"))
+          "maintenance.html.erb"))
       result = ERB.new(template).result(binding)
 
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
@@ -216,20 +175,12 @@ namespace :deploy do
       run "rm #{shared_path}/pids/#{lock_file_name}"
     end
   end
-
-  namespace :list do
-    desc "List all the resque workers"
-    task :workers do
-      puts "* Listing all the resque workers"
-      run "ps aux |grep resque"
-    end
-  end
 end
 
 namespace :robots do
   desc "Generate an updated robots.txt on the server."
   task :generate do
     puts "Generating the updated robots.txt"
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate" 
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate"
   end
 end
