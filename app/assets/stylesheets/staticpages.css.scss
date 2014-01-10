@@ -153,14 +153,11 @@
 }
 
 
-/* Sitemap page ============================================================= */
+/* Sitemap page ============================================================ */
 .op-sitemap {
   h4 {
     color: $green;
     font-weight: 400;
-  }
-  ul {
-    // margin: 0;
   }
   a {
     display: block;
@@ -174,3 +171,32 @@
   }
 }
 
+
+/* Marketing Agency page =================================================== */
+.marketing-agency {
+  @media ( min-width: $xga-h ) {
+    background-image: image-url( 'bg-landing-2.jpg' );
+    background-size: cover;
+  }
+  .translucent-white {
+    background-color: #fff;
+    background-color: rgba(255,255,255,0.7);
+    padding: 2%;
+  }
+  .icon-facebook, .icon-twitter, .icon-envelope {
+    padding: 10px 0;
+    margin-right: 10px;
+    color: $white;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+  }
+  .icon-facebook { background: $fb-blue; }
+  .icon-twitter { background: $twitter-blue; }
+  .icon-envelope { background-color: $gray; margin-right: 0; }
+}
+#flat .marketing-agency {
+  input[type='text'] {
+    margin-top: 3%;
+  }
+}
