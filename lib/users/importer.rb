@@ -87,6 +87,8 @@ module Users
 		    	output_row << %{"Error: #{e.message}"} 
 		    	output << output_row.join(",")
 		    	unparsed_rows << output_row.join(",") 
+		    	Rails.logger.error e.message
+		    	Rails.logger.error e.backtrace
 	    	end
 	    end
 	    
