@@ -8,9 +8,9 @@ rails_env = "staging"
 raise "Please specify RAILS_ENV." unless rails_env
 
 rails_release_root = "/srv/apps/optyn/releases/"
-rails_root = "/srv/apps/optyn/"
-rails_shared_root = "/srv/apps/optyn/shared/"
-rails_current_root = "/srv/apps/optyn/current/"
+rails_root = "/srv/apps/optyn/current/"
+rails_shared_root = "/srv/apps/optyn/shared"
+rails_current_root = "/srv/apps/optyn/current"
 
 #SET Maximum number of workers
 #SET Maximum memory usage
@@ -25,12 +25,14 @@ God.watch do |w|
   w.name     = "sidekiq"
   w.group    = 'sidekiq_group'
   w.interval = 30.seconds
-  w.env      = {'PIDFILE' => "#{rails_shared_root}/pids/sidekiq.pid"}
+  w.env      = 'staging'
   w.start    = "bundle exec sidekiq start -C ./config/sidekiq.yml -d -L log/sidekiq.log"
   w.stop     = "bundle exec sidekiq stop -d -L log/sidekiq.log"
   w.log      = "#{rails_shared_root}/log/sidekiq.log"
-  w.start_grace = 20.seconds
-  w.restart_grace = 20.seconds
+  w.start_grace = 120.seconds
+  w.restart_grace = 120.seconds
+  w.pid_file = "#{rails_current_root}/tmp/pids/sidekiq.pid"
+  w.behavior(:clean_pid_file)
 
   # restart if memory gets too high
   w.transition(:up, :restart) do |on|
@@ -74,7 +76,7 @@ God.watch do |w|
     on.condition(:flapping) do |c|
       c.to_state = [:start, :restart] # If God tries to start or restart
       c.times = 5                     # five times
-      c.within = 5.minute             # within five minutes
+      c.within = 5.minutes            # within five minutes
       c.transition = :unmonitored     # we want to stop monitoring
       c.retry_in = 10.minutes         # for 10 minutes and monitor again
       c.retry_times = 5               # we'll loop over this five times
