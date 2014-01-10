@@ -12,7 +12,7 @@
 					%div{style: 'margin: 20px'}
 						= link_to 'Remove current image', remove_message_image_merchants_messages_path(:id => @message.uuid), :confirm => "Are you sure?", :class => 'btn btn-small btn-danger'
 						.blank-space
-						= image_tag(@message.message_image.image.to_s, title: "Current image", style: 'max-width: 570px;')
+						= image_tag(@message.message_image.image.to_s, title: "Current image", style: 'max-width: 100%;')
     
 	.control-group
 		= f.label :button_url, "Url", class: 'control-label'

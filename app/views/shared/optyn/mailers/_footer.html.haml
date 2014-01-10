@@ -1,24 +1,29 @@
-/Render Shops Social links
-= render partial: "shared/#{message_partner_name(@shop)}/mailers/social_share"
+- Rails.cache.fetch("optyn_social_share_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
+  /Render Shops Social links
+  = render partial: "shared/#{message_partner_name(@shop)}/mailers/social_share"
 
-/Email Social Profiles
-= render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
+- Rails.cache.fetch("optyn_email_social_profiles_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
+  /Email Social Profiles
+  = render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
 
-/Optyn Send Free emails add
-= render partial: "shared/#{message_partner_name(@shop)}/mailers/optyn_advertisement"
-
-/Powered By Eatstreet message
-= render partial: "shared/#{message_partner_name(@shop)}/mailers/powered_by_eatstreet"
+- Rails.cache.fetch("optyn_advertisement_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
+  /Optyn Send Free emails add
+  = render partial: "shared/#{message_partner_name(@shop)}/mailers/optyn_advertisement"
 
 
 %div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
-  %p{:style => "font-size: 11px;margin:0px;"}
+  %p{:style => "font-size: 11px;margin:0px;line-height: 14px;"}
     - if @message.present? 
-      / Sent to information
-      = render partial: "shared/#{message_partner_name(@shop)}/mailers/sent_to_address"
+      / Sent to email line
+      = render partial: "shared/#{message_partner_name(@shop)}/mailers/sent_to_email"
+
+      - Rails.cache.fetch("optyn_sender_address_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
+        /Shop Address
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/sender_address"
       
       / Render the unsubscribe link
       = render partial: "shared/#{message_partner_name(@shop)}/mailers/unsubscribe"
 
       /Ask the user if this email was relevant
-      = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance"
+      - if @message.instance_of?(CouponMessage)
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance"

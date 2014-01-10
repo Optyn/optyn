@@ -11,7 +11,7 @@ class Merchants::SurveyQuestionsController < Merchants::BaseController
     survey_id = params[:survey_id]
     survey = Survey.find(survey_id)
     @survey_question = survey.survey_questions.build(params[:survey_question])
-    @survey_question.values = (params[:survey_question][:values]).select(&:present?)
+    @survey_question.values = (params[:survey_question][:values]).select(&:present?) if !params[:survey_question][:values].blank?
     @survey_question.save!
     head :ok
   rescue ActiveRecord::RecordInvalid

@@ -33,21 +33,29 @@ class Partner < ActiveRecord::Base
   ORGANIZATION_OPTYN = 'Optyn Inc.'
   ORGANIZATION_EATSTREET = 'Eatstreet Inc.'
 
-  def self.optyn
-    find_by_organization(ORGANIZATION_OPTYN)
-  end
+  class << self
+    class_eval do
+      if Partner.table_exists?
+        #Adding methods optyn, optyn_id
+        optyn_org = Partner.find_by_organization(ORGANIZATION_OPTYN)
+        define_method(:optyn) do
+          eval("@@OPTYN ||= optyn_org")
+        end
+        define_method(:optyn_id) do
+          eval("@@OPTYN_ID ||= optyn_org.id")
+        end
 
-  def self.optyn_id
-    optyn.id
-  end
-
-  def self.eatstreet
-    find_by_organization(ORGANIZATION_EATSTREET)
-  end
-
-  def self.eatstreet_id
-    eatstreet.id
-  end
+        #Adding methods eatstreet, eatstreet_id
+        eatstreet_org = Partner.find_by_organization(ORGANIZATION_EATSTREET)
+        define_method(:eatstreet) do
+          eval("@@EATSTREET ||= eatstreet_org")
+        end
+        define_method(:eatstreet_id) do
+          eval("@@EATSTREET_ID ||= eatstreet_org.id")
+        end
+      end  
+    end
+  end #end of the self block
 
   def self.for_organization(org)
     lower_name(org.to_s).first

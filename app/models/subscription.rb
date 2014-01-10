@@ -44,6 +44,6 @@ class Subscription < ActiveRecord::Base
 
   private
   def create_stripe_customer_with_email
-    Resque.enqueue(SubscriptionBackgroundProcessor, self.id)
+    SubscriptionBackgroundProcessor.perform_async(self.id)
   end
 end

@@ -2,11 +2,12 @@ module Api
   module V1
     module Merchants
 			class UsersController < PartnerOwnerBaseController
+        include Sidekiq::Worker
 				def import
 					@payload = ApiRequestPayload.create(controller: controller_name, action: action_name, manager_id: current_manager.id,
                                               filepath: params[:filepath], status: 'Queued', label: params[:label])
 					payload_id = @payload.id
-					Resque.enqueue(PartnersUserImporter, payload_id)
+          PartnersUserImporter.perform_async(payload_id)
 				end
 
 				def import_status
