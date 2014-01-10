@@ -80,6 +80,7 @@ gem 'god'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'sidekiq-benchmark'
+gem 'sidekiq-limit_fetch'
 
 gem "gretel"
 

@@ -14,3 +14,10 @@ production:
   -  [message_queue, 1]
   -  [payment_queue, 1]
   -  [default, 1]
+
+:limits:
+  general_queue: 3
+  import_queue: 3
+  payment_queue: 3
+  message_queue: 35
+  default: 3
