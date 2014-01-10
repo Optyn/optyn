@@ -61,6 +61,8 @@ after "deploy:restart", "sidekiq:restart"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
+before "deploy:update", "god:stop"
+after "deploy:restart", "god:start"
 
 #after "deploy:create_symlink", "whenever"
 
@@ -74,6 +76,26 @@ namespace "whenever" do
   task :update_crontab do
     run "cd #{release_path} &&  bundle exec whenever --update-crontab --set environment=#{rails_env} #{application}"
   end
+end
+
+namespace :god do
+ 
+   def god_command
+     "cd #{current_path}; bundle exec god"
+   end
+ 
+   desc "Stop god"
+   task :stop do
+     sidekiq.stop 
+     run "#{god_command} terminate"
+   end
+ 
+   desc "Start god"
+   task :start do
+     config_file = "#{current_path}/god/sidekiq_staging.god"
+     environment = { :RAILS_ENV => rails_env, :RAILS_ROOT => current_path }
+     run "#{god_command} -c #{config_file}", :env => environment
+   end
 end
 
 namespace :deploy do
