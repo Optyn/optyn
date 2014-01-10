@@ -24,6 +24,7 @@ module Users
 	    counters[:existing_connection]  = 0
 	    counters[:unparsed_rows] = 0
 
+	    label_instance = Label.find_or_create_by_shop_id_and_name(shop.id, (label || FileImport::DEFAULT_LABEL_NAME))
 	    csv_table.each do |row|
 	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
 
@@ -77,7 +78,7 @@ module Users
 		      end
 		      connection.save()
 
-		      label_instance = Label.find_or_create_by_shop_id_and_name(shop.id, (label || FileImport::DEFAULT_LABEL_NAME))
+		      
 		      UserLabel.find_or_create_by_user_id_and_label_id(user.id, label_instance.id)
 
 		      output << output_row.join(",")
