@@ -131,6 +131,7 @@ class Template < ActiveRecord::Base
         data_model[division['type']] = {}
         div_hash = data_model[division['type']]
         div_hash['title'] = division['type'].to_s.humanize
+        sanitize_division(division)
         div_hash['content'] = division.children.to_s.squish
       end
 
