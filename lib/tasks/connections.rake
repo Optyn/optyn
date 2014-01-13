@@ -20,8 +20,8 @@ namespace :connections do
     end
   end
 
-  desc "Unsubscripe user from list."
-  task :unsubscripe  => :environment do
+  desc "unsubscribe user from list."
+  task :unsubscribe  => :environment do
     filepath = ENV["filepath"]
     manager = Manager.find_by_email(ENV["manager_email"])
     if !manager.blank?
