@@ -1,4 +1,5 @@
 .control-group
-  = f.label :name, "Name".html_safe, class: 'control-label'
+  .control-label
+    = label_tag "name"
   .controls
-    = f.text_field :name
+    = f.text_field :name, class: "span12"

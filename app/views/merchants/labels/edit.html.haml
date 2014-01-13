@@ -1,11 +1,11 @@
-%h1
-  Edit Label for
-  = current_shop.name
+= banner("  Edit Label for #{current_shop.name}")
+#merchants.pad3pc
+  .container-fluid
+    .form
+      = form_for :label, url: merchants_label_path(@label), :method => :put, :html => {class: 'form-horizontal'} do |f|
+        = render partial: 'form', locals: {f: f}
 
-= form_for :label, url: merchants_label_path(@label), :method => :put do |f|
-  = render partial: 'form', locals: {f: f}
-
-  .actions
-    = f.submit 'Update', class: 'btn btn-primary'
-    = link_to 'Back', merchants_labels_path, class: 'btn'
+        .actions
+          = f.submit 'Update', class: 'btn btn-primary'
+          = link_to 'Back', merchants_labels_path, class: 'btn'
 
