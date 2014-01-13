@@ -82,9 +82,16 @@ module Messagecenter
           grid['divisions'].each do |division_hash|
             template_div_html = template_grid.data_model[division_hash['type']].clone
             template_div_content = template_div_html['content']
+            division_node = Nokogiri::HTML(template_div_content)
+            headline = division_node.css('.optyn-headline').first()
+            headline.content = division_hash if headline.present?
+
+            paragraph = division_node.css('.optyn-paragraph').first()
+            paragraph.content = division_hash if paragraph.present?            
+
             #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
-            template_div_content = template_div_content.sub(/<headline>.*<\/headline>/, division_hash['headline'].to_s)
-            template_div_content = template_div_content.sub(/<paragraph>.*<\/paragraph>/, division_hash['paragraph'].to_s)
+            # template_div_content = template_div_content.sub(, division_hash['headline'].to_s)
+            # template_div_content = template_div_content.sub(/<paragraph>.*<\/paragraph>/, division_hash['paragraph'].to_s)
             html << template_div_content
           end
           html
