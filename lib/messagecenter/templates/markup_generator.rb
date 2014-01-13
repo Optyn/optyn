@@ -7,12 +7,12 @@ module Messagecenter
 
       attr_accessor :template
       def self.generate(content, template)
-        parsed_content = JSON.parse(content)
         markup = ""
         if content.blank?
           blank_template = BlankTemplate.new(template: template)
           markup = blank_template.build_markup
         else
+          parsed_content = JSON.parse(content)
           existing_template = ExistingTemplate.new(template: template, content: parsed_content)
           markup = existing_template.build_markup
         end  
