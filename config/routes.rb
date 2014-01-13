@@ -1,7 +1,5 @@
 Optyn::Application.routes.draw do
 
-  mount Ckeditor::Engine => '/ckeditor'
-
   #Admin
   devise_for :admins, :controllers => {:sessions => 'admin/sessions', :passwords => 'admin/passwords'}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -397,40 +395,34 @@ Optyn::Application.routes.draw do
 
       resources :labels, except: [:show]
 
-    get "messages/new/template_message" => "messages#new_template", as: 'new_template'
-    get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
-    get "messages/" => "messages#types", as: 'campaign_types'
-    resources :messages do
-      collection do
-        get :select_survey
-        get :types
-        get :drafts
-        get :trash
-        get :sent
-        get :queued
-        put :move_to_trash
-        put :move_to_draft
-        put :discard
-        get :remove_message_image
-      end
+      get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
+      get "messages/" => "messages#types", as: 'campaign_types'
+      resources :messages do
+        collection do
+          get :select_survey
+          get :types
+          get :drafts
+          get :trash
+          get :sent
+          get :queued
+          put :move_to_trash
+          put :move_to_draft
+          put :discard
+          get :remove_message_image
+        end
 
-      member do
-        get :preview
-        get :launch
-        put :update_meta
-        put :create_response_message
-        delete :discard_response_message
-        get :report
-        put :update_header
-        get :reject
-        put :reject
-        get :template
-        put :update_template
-        get :editor
-        put :save
+        member do
+          get :preview
+          get :launch
+          put :update_meta
+          put :create_response_message
+          delete :discard_response_message
+          get :report
+          put :update_header
+          get :reject
+          put :reject
+        end
       end
-
-      resources :messages_sections
     end
 
     match 'oauth/token', to: "oauth_tokens#create"
