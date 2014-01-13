@@ -395,6 +395,7 @@ Optyn::Application.routes.draw do
 
       resources :labels, except: [:show]
 
+      get "messages/new/template_message" => "messages#new_template", as: 'new_template'
       get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
       get "messages/" => "messages#types", as: 'campaign_types'
       resources :messages do
@@ -421,6 +422,10 @@ Optyn::Application.routes.draw do
           put :update_header
           get :reject
           put :reject
+          get :template
+          put :update_template
+          get :editor
+          put :save
         end
       end
     end
