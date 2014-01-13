@@ -66,17 +66,18 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.ink-action-edit', function(){
         var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
         var $editableElem = $section.find('.ink-editable');
-        OP.template.openCkeditor($editableElem);
+        var content = $(this).parents('td').find('.headline').html();
+        OP.template.openCkeditor($editableElem, content);
       });
     },
 
     //Code to open up the CKEditor
-    openCkeditor: function(editableElem){
-        console.log("Trying to open the CKEditor")
+    openCkeditor: function(editableElem, content){
+        console.log( "Trying to open the CKEditor", content );
         try{
-          if(CKEDITOR.instances.template_editable_content.length){
-            console.log("Destroying the God damn instance.");
-            CKEDITOR.instances.template_editable_content.destroy();  
+          if( CKEDITOR.instances.template_editable_content.length ) {
+            console.log( 'Destroying the God damn instance.' );
+            CKEDITOR.instances.template_editable_content.destroy();
           }
         }catch(err){}
 
@@ -87,6 +88,7 @@ OP = (function($, window, doucument, Optyn){
         $('#editor_area_modal').modal('show');    
 
         CKEDITOR.replace('template_editable_content');
+        CKEDITOR.instances.template_editable_content.setData(content);
         OP.selectedSection.setElem(editableElem);
     },
 
