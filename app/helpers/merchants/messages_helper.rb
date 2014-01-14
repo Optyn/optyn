@@ -95,7 +95,7 @@ module Merchants::MessagesHelper
 
   def message_discount_type_text(message)
     amount = message.sanitized_discount_amount
-    message.percentage_off? ? (amount.to_s + " %") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
+    message.percentage_off? ? (amount.to_s + "%") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
   end
 
   def message_content(message)
