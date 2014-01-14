@@ -48,14 +48,17 @@
           - else
             .nav-collapse.collapse
               %ul.pull-right.nav.nav-pills
-                %li.current
-                  %a{ :href => root_path } Home
-                %li
-                  %a#features-dd-toggle{ :href => merchant_features_path }
-                    Features
-                    %i.icon-caret-down
-                %li
-                  %a{ :href => pricing_path } Pricing
+                %li.hover-applied
+                  %a{ :href => root_path, :title => "Optyn Email Marketing", :alt => "Optyn Email Marketing" } Home
+                %li.hover-applied
+                  %a{ :href => marketing_path, :title => "Marketing Software", :alt => "Marketing Software" }
+                    Marketing Software
+                %li.hover-applied
+                  %a{ :href => email_marketing_path, :title => "E-mail Marketing", :alt => "E-Mail Marketing" } E-Mail Marketing
+                %li.hover-applied
+                  %a{ :href => marketing_agency_path, :title => "Email Marketing Agency", :alt => "Email Marketing Agency" } Marketing Agency
+                %li.hover-applied
+                  %a{ :href => resources_path, :title => "Marketing Resources", :alt => "Marketing Resources" } Resources
                 %li
                   %a.btn.btn-success{ :href => new_merchants_manager_registration_path } Sign up
                 %li

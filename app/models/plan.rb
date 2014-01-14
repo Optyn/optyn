@@ -5,6 +5,17 @@ class Plan < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   after_save :inform_admins
 
+  class << self
+    class_eval do
+      if Plan.table_exists?
+        starter_plan = Plan.where("plans.name ILIKE 'starter'").first
+        define_method(:starter) do
+          eval("@@STARTER ||= starter_plan")
+        end
+      end
+    end
+  end
+
   def self.which(shop)
     current_plan = shop.subscription.plan
     current_plan.amount
@@ -15,10 +26,6 @@ class Plan < ActiveRecord::Base
   rescue Exception => e
     Rails.logger.error e
     current_plan
-  end
-
-  def self.starter
-    Plan.where("plans.name ILIKE 'starter'").first
   end
 
 

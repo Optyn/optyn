@@ -8,19 +8,18 @@ class MessageVisualSection < ActiveRecord::Base
   HEADER_SECTION = "Header"
   FOOTER_SECTION = "Footer"
 
-  def self.header
-  	by_name(HEADER_SECTION).first
-  end
+  class << self
+    if MessageVisualSection.table_exists?
+      sections = MessageVisualSection.all
+      sections.each do |section|
+        define_method(section.name.underscore.to_sym) do
+          eval("@@#{section.name.upcase} ||= section")
+        end
 
-  def self.header_id
-  	header.id
-  end
-
-  def self.footer
-    by_name(FOOTER_SECTION).first
-  end
-
-  def self.footer_id
-    footer.id
-  end
+        define_method("#{section.name.underscore}_id") do
+          section.id
+        end
+      end
+    end
+  end #end of self block
 end

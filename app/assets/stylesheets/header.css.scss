@@ -146,15 +146,14 @@ ul.logged-in {
   position: fixed;
   width: 100%;
   left: 0;
-  top: 0px;
+  top: 70px;
   background: #fff;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   z-index: 1029;
-  @include transition( all 0.3s ease );
+  @include transition( all 0.5s ease );
   @include transformOrigin( top );
-  @include transform( perspective( 500px ) rotateX( -50deg ));
+  @include transform( perspective( 500px ) rotateX( -90deg ));
   &.visible {
-    top: 70px;
     @include transform( perspective( 500px ) rotateX( 0deg ));
   }
   h5 {
@@ -172,15 +171,9 @@ ul.logged-in {
     margin: 0;
   }
 }
-#features-dd-toggle > i {
-  position: relative;
-  opacity: 0.5;
-  padding: 2%;
-  margin: 0 0 0 3px !important;
-}
 .push-back {
-  @include transition( all 0.3s ease );
-  @include transform( perspective(500px) translateZ(-100px));
+  @include transition( all 0.7s ease );
+  @include transform( perspective(500px) translateZ(-50px));
 }
 .dark-overlay {
   display: none;

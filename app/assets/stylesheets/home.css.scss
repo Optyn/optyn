@@ -14,7 +14,7 @@
 
   header {
     background-color: $dark-blue;
-    border-bottom: solid 3px $blue;
+    /*border-bottom: solid 3px $blue;*/
     color: #fff;
     padding: 0 2%;
     margin: 0;
@@ -31,10 +31,14 @@
         margin: 0;
         &.tour { color: $white; }
       }
+      > .hover-applied:hover {
+        background: $blue;
+      }
       > li > a {
         color: $white;
+        @media (max-width: 979px) { color: $black; }
         font-weight: 400;
-        font-size: 1.2rem;
+        font-size: 1rem;
         line-height: 1.8rem;
         margin: 12px 0;
       }
@@ -524,8 +528,4 @@ footer {
   .logo {
     margin-left: 30px;
   }
-}
-
-.page-body {
-  @include transition( all 1s ease );
 }

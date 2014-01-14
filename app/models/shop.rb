@@ -361,7 +361,8 @@ class Shop < ActiveRecord::Base
 
     #Send Plan upgrade mail, only when plan is upgraded.
     if not plan_downgraded
-      Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id})
+      conn_count = self.active_connection_count
+      PaymentNotificationSender.perform_async("MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id, active_connections: conn_count})
     end
 
     create_audit_entry("Subscription updated to plan #{new_plan.name}")
@@ -377,7 +378,7 @@ class Shop < ActiveRecord::Base
         
         #Notify passing of free tier mail
         if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
-          Resque.enqueue(PaymentNotificationSender, "MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
+          PaymentNotificationSender.perform_async("MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
         end
         self.upgrade_plan
       end

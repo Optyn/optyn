@@ -23,9 +23,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'rails_admin'
-gem 'resque', :require => 'resque/server'
-gem "capistrano-resque", "~> 0.1.0"
-gem 'resque_mailer'
 gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.7.2'
 gem 'oauth2'
@@ -75,11 +72,20 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.3.1.2'
   gem 'awesome_print'
+  gem 'turbo-sprockets-rails3'
 end
 
 gem 'jquery-rails'
+gem 'god' 
+gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sidekiq-benchmark'
+gem 'sidekiq-limit_fetch'
 
 gem "gretel"
+
+#INFO:for test only, remove it later
+gem "http_logger"
 
 group :development do
   gem 'thin'

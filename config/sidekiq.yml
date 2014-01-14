@@ -1,0 +1,23 @@
+:concurrency: 25
+:pidfile: tmp/pids/sidekiq.pid
+
+staging:
+  :concurrency: 5
+integration:
+  :concurrency: 35 
+
+production:
+  :concurrency: 35
+:queues:
+  -  [general_queue, 1]
+  -  [import_queue, 1]
+  -  [message_queue, 1]
+  -  [payment_queue, 1]
+  -  [default, 1]
+
+:limits:
+  general_queue: 3
+  import_queue: 3
+  payment_queue: 3
+  message_queue: 35
+  default: 3

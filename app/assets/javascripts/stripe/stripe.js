@@ -17,7 +17,7 @@ $(document).ready(function() {
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
 
   $("#stripe-form").submit(function(event) {
-    $('.signup-button').attr("disabled", "disabled");
+    $('.pay-button').attr("disabled", "disabled");
 
     Stripe.createToken({
         number: $('.credit-number').val(),

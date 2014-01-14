@@ -287,7 +287,7 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     return if self.skip_welcome_email
-    Resque.enqueue(WelcomeMessageSender, :user, self.id, (show_password ? self.password : nil), (show_shop ? shop_identifier : nil))
+    WelcomeMessageSender.perform_async(:user, self.id, (show_password ? self.password : nil), (show_shop ? shop_identifier : nil))
   end
 
   def check_for_used_manager_email

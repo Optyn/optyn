@@ -118,7 +118,7 @@ function MerchantSurvey() {
                 console.log("save changes");
                 $('#survey_question_form').submit();
             }
-        );
+            );
     };
 
     //Form submission observer Add Question
@@ -140,6 +140,12 @@ function MerchantSurvey() {
                 data: $('#survey_question_form').serializeArray(),
                 success: function () {
                     $modalBody.html("<strong>Please Wait...</strong>");
+                    if ($(".launch_survey").length == 0){
+                        $(".preview_survey").after(' <input type="submit" value="Launch" title="Launch this survey" name="launch" class="btn btn-success submit_survey launch_survey ">');
+                    }
+                    else{
+                        $(".launch_survey").show();
+                    }
                     // console.log(request.responseText);
                     current.loadQuestions();
                     $('#new_survey_questions_content').modal('hide');
@@ -149,7 +155,7 @@ function MerchantSurvey() {
                 error: function (request) {
                     console.log("survey question hide : ERROR");
                     // console.log(request.responseText);
-                    // $modalBody.html(request.responseText);
+                    $modalBody.html(request.responseText);
                 }
             });
         });
@@ -159,29 +165,29 @@ function MerchantSurvey() {
     this.processQuestions = function (questions) {
         if (questions.length) {
             var tableHeader = '<table class="table table-hover table-striped">' +
-                '<thead>' +
-                '<tr>' +
-                '<th>Element Type</th>' +
-                '<th>Question</th>' +
-                '<th>Position</th>' +
-                '<th>Values</th>' +
-                '<th>Actions</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody>';
+            '<thead>' +
+            '<tr>' +
+            '<th>Element Type</th>' +
+            '<th>Question</th>' +
+            '<th>Position</th>' +
+            '<th>Values</th>' +
+            '<th>Actions</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody>';
 
             var tableBody = "";
 
             var tableFooter = '</tbody>' +
-                '</table>';
+            '</table>';
 
             $(questions).each(function (index, element) {
                 tableBody += "<tr class='row-container'>" +
-                    "<td>" + element.element_type + "</td>" +
-                    "<td>" + element.label + "</td>" +
-                    "<td>" + element.position + "</td>" +
-                    "<td>" + element.values.join("<br />") + "</td>" +
-                    "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>';
+                "<td>" + element.element_type + "</td>" +
+                "<td>" + element.label + "</td>" +
+                "<td>" + element.position + "</td>" +
+                "<td>" + element.values.join("<br />") + "</td>" +
+                "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>';
                 if (element.delete_path == "")//dont show delete button if survey is launched
                 {    
                     tableBody += "</td>";
@@ -303,7 +309,8 @@ function MerchantSurvey() {
                 $.ajax({
                     url: href,
                     type: 'POST',
-                    data: {authenticity_token: jQuery("[name='authenticity_token']").val(),
+                    data: {
+                        authenticity_token: jQuery("[name='authenticity_token']").val(),
                         _method: "delete"
                     },
                     beforeSend: function () {
@@ -311,6 +318,9 @@ function MerchantSurvey() {
                     },
                     success: function (data) {
                         $this.parents('.row-container').first().remove();
+                        if ($(".table-striped tbody tr").length == 0){
+                            $('.launch_survey').hide();
+                        }
                     },
                     error: function () {
                         alert('Could not delete your question. Please try again');
@@ -328,7 +338,7 @@ function MerchantSurvey() {
 
     //hooks for hiding buttons not needed in launched emssages
     this.hideButtonsInLaunchedSurvey = function () {
-        // $("#draft").hide();
+    // $("#draft").hide();
         
     };
 

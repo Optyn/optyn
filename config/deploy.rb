@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
-require "capistrano-resque"
+require 'sidekiq/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 require './config/boot'
@@ -45,7 +45,6 @@ set :lock_file_name, 'deployment.pid'
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-# If you are using Passenger mod_rails uncomment this:
 before "deploy", "deploy:check_revision"
 after "deploy:setup", "deploy:setup_nginx_config"
 before 'deploy:update_code', 'deploy:messenger:lock'
@@ -56,13 +55,14 @@ after "deploy:update_code", "deploy:cleanup"
 after "deploy:finalize_update", "deploy:web:disable"
 before "whenever:update_crontab", "whenever:clear_crontab"
 after 'deploy:restart', 'unicorn:stop','unicorn:start'
-after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:pdf:make_executable"
-after "deploy:restart", "deploy:list:workers"
 # after "deploy:restart", "deploy:maint:flush_cache"
 after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
+before "deploy:update", "god:stop"
+after "deploy:restart", "god:start"
+
 #after "deploy:create_symlink", "whenever"
 
 
@@ -77,7 +77,28 @@ namespace "whenever" do
   end
 end
 
+namespace :god do
+ 
+   def god_command
+     "cd #{current_path}; bundle exec god"
+   end
+ 
+   desc "Stop god"
+   task :stop do
+     sidekiq.stop 
+     run "#{god_command} terminate"
+   end
+ 
+   desc "Start god"
+   task :start do
+     config_file = "#{current_path}/god/sidekiq_staging.god"
+     environment = { :RAILS_ENV => rails_env, :RAILS_ROOT => current_path }
+     run "#{god_command} -c #{config_file}", :env => environment
+   end
+end
+
 namespace :deploy do
+
   desc "reload the database with seed data"
   task :seed do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
@@ -120,7 +141,7 @@ namespace :deploy do
 
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
-       run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
+      run %Q{cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace}
     end
   end
 
@@ -134,7 +155,7 @@ namespace :deploy do
       deadline = ENV['UNTIL']
 
       template = File.read(File.join(File.dirname(__FILE__), "deploy",
-                                     "maintenance.html.erb"))
+          "maintenance.html.erb"))
       result = ERB.new(template).result(binding)
 
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
@@ -175,20 +196,12 @@ namespace :deploy do
       run "rm #{shared_path}/pids/#{lock_file_name}"
     end
   end
-
-  namespace :list do
-    desc "List all the resque workers"
-    task :workers do
-      puts "* Listing all the resque workers"
-      run "ps aux |grep resque"
-    end
-  end
 end
 
 namespace :robots do
   desc "Generate an updated robots.txt on the server."
   task :generate do
     puts "Generating the updated robots.txt"
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate" 
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake robots:generate"
   end
 end
