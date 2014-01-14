@@ -68,10 +68,10 @@ module Messagecenter
             #build the datamodel span
             components_json = add_toolset_to_components(template_grid.data_model) 
             data_model_html = %{<span style="width:0px;height:0px;" class="data-components" data-components='#{components_json}'></span>}  
+            
             divisions_markup = build_division_markup(grid_hash, template_grid)
-            content = data_model_html + raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (static_toolset_markup(template_grid.data_model) + 
-              divisions_markup.join)))
-
+            
+            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n")))
             html << content
           end
 
@@ -83,17 +83,17 @@ module Messagecenter
           grid['divisions'].each do |division_hash|
             template_div_html = template_grid.data_model[division_hash['type']].clone
             template_div_content = template_div_html['content']
+
+            #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
             division_node = Nokogiri::XML(template_div_content)
+            
             headline = division_node.css('.optyn-headline').first()
             headline.inner_html = division_hash['headline'] if headline.present?
 
             paragraph = division_node.css('.optyn-paragraph').first()
-            paragraph.inner_html = division_hash['paragraph'] if paragraph.present?   
+            paragraph.inner_html = division_hash['paragraph'] if paragraph.present?
 
-            #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
-            # template_div_content = template_div_content.sub(, division_hash['headline'].to_s)
-            # template_div_content = template_div_content.sub(/<paragraph>.*<\/paragraph>/, division_hash['paragraph'].to_s)
-            html << division_node.children.to_s
+            html << (static_toolset_markup(template_grid.data_model) + division_node.children.to_s)
           end
           html
         end  
