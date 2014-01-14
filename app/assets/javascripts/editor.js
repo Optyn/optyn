@@ -1,3 +1,5 @@
+'use strict';
+
 //= require jquery
 //= require jquery_ujs
 //= jquery-migrate-1.2.1
@@ -10,7 +12,7 @@ OP = (function($, window, doucument, Optyn){
 
   //Define the template Object and behavior
   Optyn.template = {
-    
+
     initialize: function(){
       this.hookClearModalOnLoad();
       this.sprinkleToolsetOnLoad();
@@ -31,15 +33,15 @@ OP = (function($, window, doucument, Optyn){
 
     //Create the toolsets new, edit and delete html markup
     getToolSetMarkup: function(){
-      var dropdownLinks = "";
+      var dropdownLinks = '';
       $('.addable-section').each(function(){
-        dropdownLinks += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + $(this).attr('data-section-type') + '"' + '>' + '&nbsp;&nbsp;' + $(this).val() + '&nbsp;</a>' + '</li>'
+        dropdownLinks += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + $(this).attr('data-section-type') + '"' + '>' + '&nbsp;&nbsp;' + $(this).val() + '&nbsp;</a>' + '</li>';
       });
 
       var toolset = '<div class="row template-section-toolset">' +
       '<div class="btn-group pull-right">' +
       '<button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button>' +
-      '<button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button>' + 
+      '<button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button>' +
       '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
       '<i class="icon-plus icon-white">' +
       '&nbsp;' +
@@ -73,7 +75,7 @@ OP = (function($, window, doucument, Optyn){
 
     //Code to open up the CKEditor
     openCkeditor: function(editableElem, content){
-        console.log( "Trying to open the CKEditor", content );
+        console.log( 'Trying to open the CKEditor', content );
         try{
           if( CKEDITOR.instances.template_editable_content.length ) {
             console.log( 'Destroying the God damn instance.' );
@@ -81,11 +83,11 @@ OP = (function($, window, doucument, Optyn){
           }
         }catch(err){}
 
-        
+
         var contentlVal = $(editableElem).html();
-        var htmlVal = '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + contentlVal + '</textarea>'
+        var htmlVal = '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + contentlVal + '</textarea>';
         OP.template.populateModalCase(htmlVal);
-        $('#editor_area_modal').modal('show');    
+        $('#editor_area_modal').modal('show');
 
         CKEDITOR.replace('template_editable_content');
         CKEDITOR.instances.template_editable_content.setData(content);
@@ -116,12 +118,12 @@ OP = (function($, window, doucument, Optyn){
             'Contnet' +
           '</h3>' +
         '</div>' +
-        '<div class="modal-body">' + 
+        '<div class="modal-body">' +
           '<div class="row-fluid">' +
           htmlVal +
           '</div>' +
         '</div>' +
-        '<div class="modal-footer">' + 
+        '<div class="modal-footer">' +
           '<button class="btn" data-dismiss="modal">Close</button>' +
           '<button class="btn btn-primary" id="section_save_changes">Save changes</button>' +
         '</div>';
@@ -138,10 +140,10 @@ OP = (function($, window, doucument, Optyn){
       $form.find('.hidden-content').val($temp.html());
       $.ajax({
         url: $form.attr('action'),
-        type: "POST",
+        type: 'POST',
         data: $form.serialize(),
         error: function(){
-          alert("A problem occourred while updating the content. Please reload your page. We are sorry.");
+          alert('A problem occourred while updating the content. Please reload your page. We are sorry.');
         }
       });
     },
@@ -174,7 +176,7 @@ OP = (function($, window, doucument, Optyn){
           $currentSectionForm.after(toolset);
         },
         error: function(){
-          alert("A problem occourred while while adding a section. Please reload your page. We are sorry.");
+          alert('A problem occourred while while adding a section. Please reload your page. We are sorry.');
         },
         complete: function(){
           var $parentWindow = $(OP.template.getParentWindow());
@@ -204,17 +206,17 @@ OP = (function($, window, doucument, Optyn){
     //Ajax for remote delete of a section
     deleteRemoteSection: function(templateSectionForm){
       var url = $(templateSectionForm).find('.delete-section-location').val();
-      var authenticity_token = $(templateSectionForm).find('input[name=authenticity_token]').val()
+      var authenticity_token = $(templateSectionForm).find('input[name=authenticity_token]').val();
       console.log('Url', url);
       $.ajax({
         url: url,
-        type: "POST",
+        type: 'POST',
         data: {'_method': 'delete', 'authenticity_token': authenticity_token},
         success: function(){
 
         },
         error: function(){
-          alert("A problem occourred while deleting. Please reload your page. We are sorry.");
+          alert('A problem occourred while deleting. Please reload your page. We are sorry.');
         }
       });
     },
