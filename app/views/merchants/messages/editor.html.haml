@@ -5,9 +5,7 @@
 /   = hidden_field_tag section.section_type, section.section_type.titleize, class: 'addable-section', 'data-section-type' => section.section_type
 
 /= hidden_field_tag :add_new_section_location, merchants_message_messages_sections_path(message_id: @message.uuid)
-= stylesheet_link_tag "editor"
 = javascript_include_tag "editor"
-%link{href: "/ink.css", media: "all", rel: "stylesheet", type: "text/css"}
 %div{:id => 'editor_area_modal', :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
 
 = raw(@template.fetch_content(@message.content))
