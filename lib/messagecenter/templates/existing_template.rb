@@ -2,6 +2,7 @@ module Messagecenter
   module Templates
     class ExistingTemplate < MarkupGenerator
       attr_accessor :template, :content
+      include ERB::Util
       
       def initialize(options={})
         @template = options[:template]
@@ -82,10 +83,17 @@ module Messagecenter
           grid['divisions'].each do |division_hash|
             template_div_html = template_grid.data_model[division_hash['type']].clone
             template_div_content = template_div_html['content']
+            division_node = Nokogiri::XML(template_div_content)
+            headline = division_node.css('.optyn-headline').first()
+            headline.inner_html = division_hash['headline'] if headline.present?
+
+            paragraph = division_node.css('.optyn-paragraph').first()
+            paragraph.inner_html = division_hash['paragraph'] if paragraph.present?   
+
             #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
-            template_div_content = template_div_content.sub(/<headline>.*<\/headline>/, division_hash['headline'].to_s)
-            template_div_content = template_div_content.sub(/<paragraph>.*<\/paragraph>/, division_hash['paragraph'].to_s)
-            html << template_div_content
+            # template_div_content = template_div_content.sub(, division_hash['headline'].to_s)
+            # template_div_content = template_div_content.sub(/<paragraph>.*<\/paragraph>/, division_hash['paragraph'].to_s)
+            html << division_node.children.to_s
           end
           html
         end  

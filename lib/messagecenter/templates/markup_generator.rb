@@ -41,6 +41,22 @@ module Messagecenter
         '</ul></div></div>' 
       end
 
+      def self.add_component_class(component, component_parent)
+        node = nil
+        if component.child.present? && component.child.element?
+          node = component.child
+        else
+          node = component.add_child("<span></span>")
+        end
+
+        optyn_class = "optyn-#{component_parent}"
+        if node['class'].present?
+          node['class'] = node['class'] +  " " + optyn_class
+        else
+          node['class'] = optyn_class
+        end
+      end
+
     end #end of the MarkupGenerator class
   end #end of templates module.
 end #end of messagecenter module
