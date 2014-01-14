@@ -1,5 +1,3 @@
-'use strict';
-
 //= require jquery
 //= require jquery_ujs
 //= jquery-migrate-1.2.1
@@ -68,14 +66,15 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.ink-action-edit', function(){
         var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
         var $editableElem = $section.find('.ink-editable');
-        var content = $(this).parents('td').find('.headline').html();
-        OP.template.openCkeditor($editableElem, content);
+        var titleText = $(this).parents('td').find('.optyn-headline').html();
+        var paragraphText = $(this).parents('td').find('.optyn-paragraph').html();
+        OP.template.openCkeditor($editableElem, titleText, paragraphText);
       });
     },
 
     //Code to open up the CKEditor
-    openCkeditor: function(editableElem, content){
-        console.log( 'Trying to open the CKEditor', content );
+    openCkeditor: function(editableElem, titleText, paragraphText){
+        console.log( 'Trying to open the CKEditor', titleText );
         try{
           if( CKEDITOR.instances.template_editable_content.length ) {
             console.log( 'Destroying the God damn instance.' );
@@ -86,11 +85,11 @@ OP = (function($, window, doucument, Optyn){
 
         var contentlVal = $(editableElem).html();
         var htmlVal = '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + contentlVal + '</textarea>';
-        OP.template.populateModalCase(htmlVal);
+        OP.template.populateModalCase(htmlVal, titleText);
         $('#editor_area_modal').modal('show');
 
         CKEDITOR.replace('template_editable_content');
-        CKEDITOR.instances.template_editable_content.setData(content);
+        CKEDITOR.instances.template_editable_content.setData(paragraphText);
         OP.selectedSection.setElem(editableElem);
     },
 
@@ -112,13 +111,12 @@ OP = (function($, window, doucument, Optyn){
     },
 
     //poplate modal on open
-    populateModalCase: function(htmlVal){
+    populateModalCase: function(htmlVal, titleText){
       var caseHtml = '<div class="modal-header">' +
-          '<h3>' +
-            'Contnet' +
-          '</h3>' +
+          '<h3>Edit Content</h3>' +
         '</div>' +
         '<div class="modal-body">' +
+          '<input type="text" value="' + titleText + '">' +
           '<div class="row-fluid">' +
           htmlVal +
           '</div>' +
