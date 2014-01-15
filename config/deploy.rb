@@ -84,7 +84,6 @@ namespace :god do
  
    desc "Stop god"
    task :stop do
-     sidekiq.stop 
      run "#{god_command} terminate"
    end
  
