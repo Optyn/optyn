@@ -21,6 +21,10 @@ OP = (function($, window, doucument, Optyn){
       this.hookDeleteSection();
     },
 
+    sectionMarkupJSON: {
+      /* Dummy object. Work on this later. */
+    },
+
     //Add the toolsets new, edit and delete
     sprinkleToolsetOnLoad: function(){
       var toolset = OP.template.getToolSetMarkup();
@@ -149,6 +153,9 @@ OP = (function($, window, doucument, Optyn){
     //Add a new section observer
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function(){
+        var desiredGridType = $( this ).data( 'section-type' );
+        requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
+        console.log( requiredMarkup );
         OP.template.addRemoteSection($(this));
       });
     },
@@ -217,7 +224,7 @@ OP = (function($, window, doucument, Optyn){
           alert('A problem occourred while deleting. Please reload your page. We are sorry.');
         }
       });
-    },
+    }
 
   };
 
