@@ -178,6 +178,9 @@ body.marketing_agency {
     background-image: image-url( 'bg-landing-2.jpg' );
     background-size: cover;
   }
+  h1 {
+    border-bottom: solid 1px $gray;
+  }
 }
 .marketing-agency {
   .translucent-white {
