@@ -2,7 +2,6 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
-require 'sidekiq/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 require './config/boot'
@@ -61,7 +60,7 @@ after "deploy:restart", "deploy:web:enable"
 after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
 before "deploy:update", "god:stop"
-after "deploy:restart", "god:start"
+before "deploy:restart", "god:start"
 
 #after "deploy:create_symlink", "whenever"
 
@@ -85,13 +84,53 @@ namespace :god do
  
    desc "Stop god"
    task :stop do
-     sidekiq.stop 
-     run "#{god_command} terminate"
+    begin
+      puts "-- Removing Sidekiq from GOD"
+      run "cd #{current_path} && #{god_command} remove sidekiq_group"
+    rescue
+      puts "XX Rescuing..."
+    end
+
+    begin
+      puts "-- Terminating GOD"
+      run "cd #{current_path} && #{god_command} terminate"
+    rescue
+      puts "XX Rescuing..."
+    end
+
+    begin
+      puts "-- Stopping Sidekiq gracefully"
+      run "if [ -d #{current_path} ] && [ -f #{current_path}/tmp/pids/sidekiq.pid ] && kill -0 `cat #{current_path}/tmp/pids/sidekiq.pid`; then cd #{current_path} && bundle exec sidekiqctl stop #{current_path}/tmp/pids/sidekiq.pid 10 ; else echo 'Sidekiq is not running'; fi"
+    rescue
+      puts "XXX Rescuing..."
+    end
+
+    begin
+      puts "-- Killing any remaining processes"
+      run "cd #{current_path} && ps -ef | grep sidekiq | awk '{print $2}' | xargs kill -9" 
+    rescue 
+      puts "XXX Rescuing..."
+    end  
+
+    begin
+      puts "-- Sleeping 20 seconds"
+      sleep(20)
+    rescue
+      puts "XXX Rescuing..."
+    end
+    puts "-- Sidekiq Processes running are"
+    run "ps aux |grep sidekiq"
    end
  
    desc "Start god"
    task :start do
-     config_file = "#{current_path}/god/sidekiq_staging.god"
+    config_file = ""
+    if "production" == rails_env.to_s
+      config_file = "#{current_path}/god/sidekiq_production.god"
+    else
+      config_file = "#{current_path}/god/sidekiq_staging.god"
+    end
+
      environment = { :RAILS_ENV => rails_env, :RAILS_ROOT => current_path }
      run "#{god_command} -c #{config_file}", :env => environment
    end

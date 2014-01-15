@@ -18,7 +18,7 @@ memory_usage_max =  350
 
 puts "God is starting with:"
 puts "RAILS_ENV = #{rails_env}"
-puts "command to be execued cd #{rails_root}; bundle exec sidekiq start -C ./config/sidekiq.yml -d -L log/sidekiq.log"
+puts "command to be execued cd #{rails_root}; bundle exec sidekiq start -C #{rails_current_root}/config/sidekiq.yml -d -L #{rails_current_root}/log/sidekiq.log"
 
 God.watch do |w|
   w.dir      = "#{rails_current_root}"
@@ -26,9 +26,9 @@ God.watch do |w|
   w.group    = 'sidekiq_group'
   w.interval = 30.seconds
   w.env      = 'staging'
-  w.start    = "bundle exec sidekiq start -C ./config/sidekiq.yml -d -L log/sidekiq.log"
-  w.stop     = "bundle exec sidekiq stop -d -L log/sidekiq.log"
-  w.log      = "#{rails_shared_root}/log/sidekiq.log"
+  w.start    = "bundle exec sidekiq start -C #{rails_current_root}/config/sidekiq.yml -d -L #{rails_current_root}/log/sidekiq.log"
+  w.stop     = "bundle exec sidekiq stop -d -L #{rails_current_root}/log/sidekiq.log"
+  w.log      = "#{rails_current_root}/log/sidekiq.log"
   w.start_grace = 120.seconds
   w.restart_grace = 120.seconds
   w.pid_file = "#{rails_current_root}/tmp/pids/sidekiq.pid"
