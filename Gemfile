@@ -87,7 +87,7 @@ gem 'sidekiq-limit_fetch'
 gem "gretel"
 
 #INFO:for test only, remove it later
-gem "http_logger"
+# gem "http_logger"
 
 
 group :development do
