@@ -2,7 +2,6 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'rvm/capistrano'
 require 'capistrano-unicorn'
-require 'sidekiq/capistrano'
 require "#{File.dirname(__FILE__)}/../lib/recipes/redis"
 
 require './config/boot'
