@@ -106,21 +106,14 @@ namespace :god do
     end
 
     begin
-      puts "-- Sleeping 20 seconds"
-      sleep(20)
-    rescue
-      puts "XXX Rescuing..."
-    end
-
-    begin
       puts "-- Killing any remaining processes"
-      run "cd #{current_path} && killall -9 sidekiq" 
+      run "cd #{current_path} && ps -ef | grep sidekiq | awk '{print $2}' | xargs kill -9" 
     rescue 
       puts "XXX Rescuing..."
     end  
 
     begin
-      puts "-- Sleeping 20 more seconds"
+      puts "-- Sleeping 20 seconds"
       sleep(20)
     rescue
       puts "XXX Rescuing..."
