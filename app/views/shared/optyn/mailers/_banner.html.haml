@@ -5,7 +5,7 @@
         /#20A8DD for background - try it #0C9FD8
         %table{:style => 'width:100%;' + "#{@message.header_background_color_css_val rescue Shop::DEFAULT_HEADER_BACKGROUND_COLOR}"}
           %tr{:style => "width: 100%;"}
-            %td{:style => "max-height: 40px;"}
+            %td{:style => "max-height: 40px;", :align => "center"}
               - if @shop_logo
                 = email_body_shop_logo(@shop)
               - else

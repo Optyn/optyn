@@ -155,7 +155,6 @@ GEM
       haml (>= 4.0.0.rc.1)
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
-    http_logger (0.4.1)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -467,7 +466,6 @@ DEPENDENCIES
   gretel
   haml
   haml-rails
-  http_logger
   httparty
   jquery-rails
   kaminari
