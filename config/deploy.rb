@@ -84,8 +84,19 @@ namespace :god do
  
    desc "Stop god"
    task :stop do
-    puts "-- Terminating GOD"
-    run "cd #{current_path} && #{god_command} terminate" rescue nil
+    begin
+      puts "-- Removing Sidekiq from GOD"
+      run "cd #{current_path} && #{god_command} remove sidekiq_group"
+    rescue
+      puts "XX Rescuing..."
+    end
+
+    begin
+      puts "-- Terminating GOD"
+      run "cd #{current_path} && #{god_command} terminate"
+    rescue
+      puts "XX Rescuing..."
+    end
 
     begin
       puts "-- Stopping Sidekiq gracefully"
@@ -107,6 +118,13 @@ namespace :god do
     rescue 
       puts "XXX Rescuing..."
     end  
+
+    begin
+      puts "-- Sleeping 20 more seconds"
+      sleep(20)
+    rescue
+      puts "XXX Rescuing..."
+    end
     puts "-- Sidekiq Processes running are"
     run "ps aux |grep sidekiq"
    end
