@@ -22,7 +22,9 @@
           .control-group
             = f.label :label, "Label for import records", class: 'control-label'
             .controls.text-left
-              = f.text_field :label, value: (params[:file_import][:label] rescue FileImport::DEFAULT_LABEL_NAME)
+              = select_tag "label_ids[]", options_from_collection_for_select(@labels, :name, :name),
+                 { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
+
 
           .actions
             = f.submit "Import", class: "btn btn-primary"
@@ -64,6 +66,7 @@
 
 :javascript
   $( function() {
+    $('#message_label_ids').chosen();
     if ( $( '.import input[type=file]').val() == '' ) {
       $( 'input[name=commit]' ).addClass( 'disabled' )
         .attr( 'disabled', '' );
