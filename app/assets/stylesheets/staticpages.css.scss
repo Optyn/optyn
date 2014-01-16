@@ -196,7 +196,7 @@
   .icon-envelope { background-color: $gray; margin-right: 0; }
 }
 #flat .marketing-agency {
-  input[type='text'] {
+  input[type='text'], input[type='email'] {
     margin-top: 3%;
   }
 }
