@@ -156,15 +156,11 @@ OP = (function($, window, doucument, Optyn){
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
         console.log( requiredMarkup );
-        var $containerParent = $( '.optyn-container' ).first().parents( 'td' ).find( 'center' );
+        var $containerParent = $( this ).parents( '.optyn-grid' ).find( 'tbody' ).first();
         //console.log( 'containerParent:', $containerParent.find( 'center' ) );
-        requiredMarkup = '<table class="optyn-container"><tbody><tr><td>' +
-          '<table class="optyn-row"><tbody><tr><td class="wrapper last">' +
-          '<table class="twelve columns optyn-grid"><tbody><tr><td>' +
+        requiredMarkup = '<tr><td>' +
           requiredMarkup +
-          '</td></tr></tbody></table>' +
-          '</td></tr></tbody></table>' +
-          '</td></tr></tbody></table>';
+          '</td></tr>';
         $containerParent.append( requiredMarkup );
         OP.template.addRemoteSection($(this));
       });
