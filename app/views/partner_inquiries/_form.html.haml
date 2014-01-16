@@ -16,13 +16,8 @@
     .row-fluid.no-pad
       = f.text_area :comment, class: :span12, placeholder: 'Additional comments', rows: 3
       .blank-space
-    .row-fluid.text-center
-      .span6.offset3
-        %strong
-          Slide to unlock...so we know you are a human.
-          %i.icon-arrow-right
-        %br
-        #pin-not-bot
+    = render :partial => "shared/form_slider"
+
     .blank-space
     .text-center
       = submit_tag 'Submit Contact Form', class: 'btn btn-large btn-primary pin-submit', disabled: 'disabled'
