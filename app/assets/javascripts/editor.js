@@ -154,8 +154,18 @@ OP = (function($, window, doucument, Optyn){
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function(){
         var desiredGridType = $( this ).data( 'section-type' );
-        requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
+        var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
         console.log( requiredMarkup );
+        var $containerParent = $( '.optyn-container' ).first().parents( 'td' ).find( 'center' );
+        //console.log( 'containerParent:', $containerParent.find( 'center' ) );
+        requiredMarkup = '<table class="optyn-container"><tbody><tr><td>' +
+          '<table class="optyn-row"><tbody><tr><td class="wrapper last">' +
+          '<table class="twelve columns optyn-grid"><tbody><tr><td>' +
+          requiredMarkup +
+          '</td></tr></tbody></table>' +
+          '</td></tr></tbody></table>' +
+          '</td></tr></tbody></table>';
+        $containerParent.append( requiredMarkup );
         OP.template.addRemoteSection($(this));
       });
     },
@@ -242,7 +252,7 @@ OP = (function($, window, doucument, Optyn){
   };
 
   return Optyn;
-})(jQuery, this, this.document, OP)
+})(jQuery, this, this.document, OP);
 
 // initialize on document ready
 $(document).ready(function(){
