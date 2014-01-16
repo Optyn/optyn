@@ -155,7 +155,7 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.add-section-link', function(){
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
-        console.log( requiredMarkup );
+        //console.log( requiredMarkup );
         var $containerParent = $( this ).parents( '.optyn-grid' ).find( 'tbody' ).first();
         //console.log( 'containerParent:', $containerParent.find( 'center' ) );
         requiredMarkup = '<tr><td>' +
@@ -204,6 +204,10 @@ OP = (function($, window, doucument, Optyn){
     //Observe the delete section and clear the fields
     hookDeleteSection: function(){
       $('body').on('click', '.ink-action-delete', function(){
+        var $elementToRemove = $( this ).parents( 'td' ).first();
+        console.log( $elementToRemove );
+        $elementToRemove.slideUp( function() { $( this ).remove(); });
+        return;
         var $toolsetContainer = $(this).parents('.template-section-toolset').first();
         var $templateSection = $toolsetContainer.nextAll('.template-section').first();
         var $templateSectionForm = $templateSection.nextAll('.template-section-form');
@@ -224,7 +228,6 @@ OP = (function($, window, doucument, Optyn){
         type: 'POST',
         data: {'_method': 'delete', 'authenticity_token': authenticity_token},
         success: function(){
-
         },
         error: function(){
           alert('A problem occourred while deleting. Please reload your page. We are sorry.');
