@@ -21,6 +21,10 @@ OP = (function($, window, doucument, Optyn){
       this.hookDeleteSection();
     },
 
+    sectionMarkupJSON: {
+      /* Dummy object. Work on this later. */
+    },
+
     //Add the toolsets new, edit and delete
     sprinkleToolsetOnLoad: function(){
       var toolset = OP.template.getToolSetMarkup();
@@ -149,6 +153,15 @@ OP = (function($, window, doucument, Optyn){
     //Add a new section observer
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function(){
+        var desiredGridType = $( this ).data( 'section-type' );
+        var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
+        //console.log( requiredMarkup );
+        var $containerParent = $( this ).parents( '.optyn-grid' ).find( 'tbody' ).first();
+        //console.log( 'containerParent:', $containerParent.find( 'center' ) );
+        requiredMarkup = '<tr><td>' +
+          requiredMarkup +
+          '</td></tr>';
+        $containerParent.append( requiredMarkup );
         OP.template.addRemoteSection($(this));
       });
     },
@@ -191,6 +204,10 @@ OP = (function($, window, doucument, Optyn){
     //Observe the delete section and clear the fields
     hookDeleteSection: function(){
       $('body').on('click', '.ink-action-delete', function(){
+        var $elementToRemove = $( this ).parents( 'td' ).first();
+        console.log( $elementToRemove );
+        $elementToRemove.slideUp( function() { $( this ).remove(); });
+        return;
         var $toolsetContainer = $(this).parents('.template-section-toolset').first();
         var $templateSection = $toolsetContainer.nextAll('.template-section').first();
         var $templateSectionForm = $templateSection.nextAll('.template-section-form');
@@ -211,13 +228,12 @@ OP = (function($, window, doucument, Optyn){
         type: 'POST',
         data: {'_method': 'delete', 'authenticity_token': authenticity_token},
         success: function(){
-
         },
         error: function(){
           alert('A problem occourred while deleting. Please reload your page. We are sorry.');
         }
       });
-    },
+    }
 
   };
 
@@ -235,7 +251,7 @@ OP = (function($, window, doucument, Optyn){
   };
 
   return Optyn;
-})(jQuery, this, this.document, OP)
+})(jQuery, this, this.document, OP);
 
 // initialize on document ready
 $(document).ready(function(){
