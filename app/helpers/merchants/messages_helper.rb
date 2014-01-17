@@ -104,7 +104,7 @@ module Merchants::MessagesHelper
       return raw(display_content)
     end
 
-    simple_format(display_content)
+    diplay_content.include?("<div>") ? raw(display_content) : simple_format(display_content)
   end
 
   def message_receiver_labels(label_names)
