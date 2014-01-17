@@ -9,7 +9,7 @@
     .span12
       %h1.hd-main.text-center Marketing Products and Services
 
-  .row-fluid.email_marketing
+  .row-fluid.email-mktg
     .span10.offset1
       %h2 E-Mail Marketing
       = image_tag( 'email_marketing_works.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Email Marketing Works' )
@@ -69,8 +69,8 @@
           %li
             %a{ :href => multi_channel_marketing_path, :alt => "Multi Channel Marketing", :title => "Multi Channel Marketing" } Multi-channel Marketing
           %li
-            %a{ :href => integrated_marketing_path, :alt => "Integrated Marketing", :title => "Integrated Marketing" } Integrated Marketing
-  .row-fluid.email_marketing
+            %a{ :href => multi_channel_marketing_path} Multi-channel Marketing
+  .row-fluid.email-mktg
     .span10.offset1
       %h2 Marketing Promotions
       = image_tag( 'effective-marketing-promotions.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Effective Marketing Promotions' )
@@ -95,4 +95,39 @@
         Check out Optyn's Resource Center which is catered to helping small businesses with marketing and taking advantage of the power of online marketing.
       %ul.bullet-circle
         %li
-          %a{ :href => resources_path, :alt => "Small Business Marketing Resources", :title => "Small Business Marketing Resources" } Resource Center >
+          %a{ :href => resources_path } Resource Center >
+.row-fluid.email-mktg
+  %h4.text-center Additional E-Mail Marketing Services
+  .blank-space
+  .span3{style: 'width:20%;'}
+    %ul.bullet-circle
+      %li
+        %a{ :href => email_marketing_software_path} Email Marketing Software
+      %li
+        %a{ :href => free_email_marketing_path} Free Email Marketing
+      %li
+        %a{ :href => free_email_marketing_software_path} Free Email Marketing Software
+  .span3
+    %ul.bullet-circle
+      %li
+        %a{ :href => email_blast_software_path} Email Blast Software
+      %li
+        %a{ :href => bulk_email_software_path} Bulk Email Software
+      %li
+        %a{ :href => email_marketing_solutions_path} Email Marketing Solutions
+  .span3
+    %ul.bullet-circle
+      %li
+        %a{ :href => mass_mail_software_path} Mass Mail Software
+      %li
+        %a{ :href => newsletter_software_path} Newsletter Software
+      %li
+        %a{ :href => free_newsletter_software_path} Free Newsletter Software
+  .span3
+    %ul.bullet-circle
+      %li
+        %a{ :href => free_email_marketing_software_path} Free Email Marketing Software
+      %li
+        %a{ :href => email_marketing_agency_path} Email Marketing Agency
+      %li
+        %a{ :href => email_marketing_programs_path} Email Marketing Programs
