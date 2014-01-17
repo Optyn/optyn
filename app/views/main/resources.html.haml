@@ -9,7 +9,7 @@
     .span12
       %h1.hd-main.text-center Small Business Marketing Resource Center
 
-  .row-fluid.email_marketing
+  .row-fluid.email-mktg
     .span10.offset1
       %h2 Learn about E-Mail Marketing
       .pull-right.text-center
@@ -24,28 +24,25 @@
         .span4
           %ul.bullet-circle
             %li
-              %a{ :href => resources_email_marketing_path } E-Mail Marketing
+              %a{ :href => resources_email_marketing_path, :alt => "Learn about Email Marketing", :title => "learn about Email Marketing" } E-Mail Marketing
             %li
-              %a{ :href => resources_mobile_responsive_emails_path } Mobile Responsive E-Mails
+              %a{ :href => resources_mobile_responsive_emails_path, :alt => "Mobile Responsive Email Design", :title => "Mobile Responsive Email Design" } Mobile Responsive E-Mails
             %li
-              %a{ :href => resources_capturing_customer_emails_path } Capturing Customer E-Mails
+              %a{ :href => resources_capturing_customer_emails_path, :alt => "How to capture customer emails", :title => "How to capture customer emails" } Capturing Customer E-Mails
             %li
-              %a{ :href => resources_capturing_customer_data_path } Capturing Customer Data
+              %a{ :href => resources_capturing_customer_data_path, :alt => "How to capture customer data", :title => "How to capture customer data" } Capturing Customer Data
             %li
-              %a{ :href => resources_evolution_email_path } Evolution of E-Mail Marketing
+              %a{ :href => resources_evolution_email_path, :alt => "Evolution of Email Marketing", :title => "Evolution of Email Marketing" } Evolution of E-Mail Marketing
         .span5
           %ul.bullet-circle
             %li
-              %a{ :href => resources_email_marketing_tips_path } Email Marketing Tips
+              %a{ :href => resources_email_marketing_tips_path, :alt => "Email Marketing Tips", :title => "Email Marketing Tips" } Email Marketing Tips
             %li
-              %a{ :href => resources_best_practices_path } E-Mail Marketing Best Practices
+              %a{ :href => resources_best_practices_path, :alt => "Email marketing Best Practices", :title => "Email Marketing Best Practices" } E-Mail Marketing Best Practices
             %li
-              %a{ :href => resources_measuring_success_path } Measuring Success of Email Marketing
+              %a{ :href => resources_measuring_success_path, :alt => "Measuring Success of Email Marketing", :title => "Measuring Success of Email Marketing" } Measuring Success of Email Marketing
             %li
-              %a{ :href => resources_getting_started_path } Getting Started with Email Marketing
-            %li
-              %a{ :href => resources_email_marketing_types_path } Different E-Mail Types
-
+              %a{ :href => resources_getting_started_path, :alt => "Getting started with Email Marketing", :title => "Getting started with email marketing" } Getting Started with Email Marketing
 
   .row-fluid.smallbiz_marketing
     .span3.offset2
@@ -60,30 +57,30 @@
       .span6
         %ul.bullet-circle
           %li
-            %a{ :href => resources_social_media_path } Social Media Marketing
+            %a{ :href => resources_social_media_path, :alt => "Social Media Marketing for Small Business", :title => "Social Media Marketing for Small Business" } Social Media Marketing
           %li
-            %a{ :href => resources_digital_marketing_path } Digital Marketing
+            %a{ :href => resources_digital_marketing_path, :alt => "Digital Marketing", :title => "Digital Marketing" } Digital Marketing
           %li
-            %a{ :href => resources_online_marketing_path } Online Marketing
+            %a{ :href => resources_online_marketing_path, :alt => "Online Marketing", :title => "Online Marketing" } Online Marketing
           %li
-            %a{ :href => resources_marketing_automation_path} Marketing Automation
+            %a{ :href => resources_marketing_automation_path, :alt => "Marketing Automation", :title => "Marketing Automation" } Marketing Automation
           %li
-            %a{ :href => resources_marketing_syndication_path} Marketing Syndication
+            %a{ :href => resources_marketing_syndication_path, :alt => "Marketing Syndication", :title => "Marketing Syndication" } Marketing Syndication
 
       .span5
         %ul.bullet-circle
           %li
-            %a{ :href => resources_customer_retention_path } Customer Retention
+            %a{ :href => resources_customer_retention_path, :alt => "Customer Retention", :title => "Customer Retention" } Customer Retention
           %li
-            %a{ :href => resources_loyalty_marketing_path } Loyalty Marketing
+            %a{ :href => resources_loyalty_marketing_path, :alt => "Loyalty Marketing", :title => "Loyalty Marketing" } Loyalty Marketing
           %li
-            %a{ :href => resources_marketing_analytics_path } Marketing Analytics
+            %a{ :href => resources_marketing_analytics_path, :alt => "Marketing Analytics", :title => "Marketing Analytics" } Marketing Analytics
           %li
-            %a{ :href => resources_marketing_ideas_path } Marketing Ideas
+            %a{ :href => resources_marketing_ideas_path, :alt => "Marketing Ideas", :title => "Marketing Ideas" } Marketing Ideas
           %li
-            %a{ :href => resources_integrated_marketing_path} Integrated Marketing
+            %a{ :href => resources_integrated_marketing_path, :alt => "Integrated Marketing", :title => "Integrated Marketing" } Integrated Marketing
 
-  .row-fluid.email_marketing
+  .row-fluid.email-mktg
     .span10.offset1
       %h2 Marketing Promotions
       = image_tag( 'learn-about-marketing-promotion.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Marketing Promotions' )
@@ -91,15 +88,15 @@
         Marketing promotions are a powerful way to increase and generate revenues and customer engagement. Below, we outline a few ways to educate you on how you can use certain promotions to accomplish specific business objectives.
         %ul.bullet-circle
           %li
-            %a{ :href => resources_marketing_promotions_path } Marketing Promotions
+            %a{ :href => resources_marketing_promotions_path, :alt => "How to Run Marketing Promotions", :title => "How to Run Marketing Promotions" } Running Marketing Promotions
           %li
-            %a{ :href => resources_contests_path } Contests
+            %a{ :href => resources_contests_path, :alt => "How to run a Contest", :title => "How to Run a Contest" } Contests
           %li
-            %a{ :href => resources_coupons_path } Coupons
+            %a{ :href => resources_coupons_path, :alt => "Learn about Coupon Marketing", :title => "Learn About Coupon Marketing" } Coupons
           %li
-            %a{ :href => resources_surveys_path } Surveys
+            %a{ :href => resources_surveys_path, :alt => "Surveys", :title => "Surveys" } Surveys 
           %li
-            %a{ :href => resources_specials_sales_path} Specials and Sales
+            %a{ :href => resources_specials_sales_path, :alt => "Specials and Sales", :title => "Specials and Sales" } Specials and Sales
   .row-fluid.smallbiz_marketing
     .span3.offset2
       = image_tag( 'coming-soon.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-resources', title: 'Marketing Resources Coming Soon' )
@@ -109,6 +106,8 @@
         We are launching the following education and resource sections to help you grow your business.
         %ul.bullet-circle
           %li E-Mail Marketing School
+          %li
+            %a{ :href => "http://blog.optyn.com", :alt => "Email Marketing Blog", :title => "Email Marketing Blog"} Email Marketing Blog
           %li Online Marketing Academy
           %li Daily Small Biz Tips and more.
       %p
