@@ -226,6 +226,10 @@ class Shop < ActiveRecord::Base
     first_location.zip rescue ""
   end
 
+  def message_address
+    "#{name} | #{first_location_street_address} | #{first_location_city}, #{first_location_state_name} #{first_location_zip}"
+  end
+
   def button_display?
     [1, 2].include?(oauth_application.call_to_action.to_i) rescue false
   end

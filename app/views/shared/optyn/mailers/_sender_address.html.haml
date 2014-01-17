@@ -4,6 +4,6 @@
 
 %p{:style => "font-size: 11px;margin:0px;color: #666;"}
   - if @shop and @shop.locations.present?
-    = "#{@shop.name} | #{@shop.first_location_street_address} | #{@shop.first_location_city}, #{@shop.first_location_state_name} #{@shop.first_location_zip}"
+    = @shop.message_address
   - else
     = "222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654"
