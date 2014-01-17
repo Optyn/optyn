@@ -108,6 +108,8 @@ module Merchants::MessagesHelper
       return raw(display_content)
     end
 
+    # display_content.include?("<div>") ? raw(display_content) : simple_format(display_content)
+
     display_content.to_s.html_safe
   end
 

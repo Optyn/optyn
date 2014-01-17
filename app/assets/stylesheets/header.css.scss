@@ -31,10 +31,9 @@
       background-color: $blue;
     }
     > li {
-      margin-right: 10px;
       height: 70px;
-      &:last-child { margin-right: 0; }
     }
+    > .sign-up { margin: 0 10px; }
   }
   .nav-pills > li > a {
     @include border-radius( 0 );
