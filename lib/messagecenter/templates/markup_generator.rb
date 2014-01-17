@@ -50,11 +50,15 @@ module Messagecenter
         end
 
         optyn_class = "optyn-#{component_parent}"
+        optyn_class << " optyn-#{component['type']}" if "grid" == component.name
+
         if node['class'].present?
           node['class'] = node['class'] +  " " + optyn_class
         else
           node['class'] = optyn_class
         end
+
+
       end
 
     end #end of the MarkupGenerator class
