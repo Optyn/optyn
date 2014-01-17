@@ -9,7 +9,7 @@
     .span12
       %h1.hd-main.text-center Marketing Products and Services
 
-  .row-fluid.email_marketing
+  .row-fluid.email-mktg
     .span10.offset1
       %h2 E-Mail Marketing
       = image_tag( 'email_marketing_works.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Email Marketing Works' )
@@ -20,15 +20,15 @@
           Our E-Mail Marketing services and products:
         %ul.bullet-circle
           %li
-            %a{ :href => email_marketing_path } E-Mail Marketing
+            %a{ :href => email_marketing_path, :alt => "Email Marketing", :title => "Email Marketing" } E-Mail Marketing
           %li
-            %a{ :href => mobile_responsive_path } Mobile Responsive E-Mails
+            %a{ :href => mobile_responsive_path, :alt => "Mobile Responsive Emails", :title => "Mobile Responsive Emails" } Mobile Responsive E-Mails
           %li
-            %a{ :href => capturing_data_path } Capturing Customer E-Mails
+            %a{ :href => capturing_data_path, :alt => "Capturing Customer Emails", :title => "Capturing customer emails" } Capturing Customer E-Mails
           %li
-            %a{ :href => email_deliverability_path } E-Mail Deliverability
+            %a{ :href => email_deliverability_path, :alt => "Email Deliverability", :title => "Email Deliverability" } E-Mail Deliverability
       .span6
-        %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path} Get Started for Free!
+        %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path, :title => "Free Email Marketing Trial", :alt => "Free Email Marketing Trial"} Get Started for Free!
 
   .row-fluid.smallbiz_marketing
     .span10.offset1
@@ -44,49 +44,49 @@
             Learn about how our software can help you with:
         %ul.span6.bullet-circle
           %li
-            %a{ :href => social_media_marketing_path} Social Media Marketing
+            %a{ :href => social_media_marketing_path, :alt => "Social Media marketing", :title => "Social Media Marketing" } Social Media Marketing
           %li
-            %a{ :href => marketing_automation_path } Marketing Automation
+            %a{ :href => marketing_automation_path, :alt => "Marketing Automation", :title => "Marketing Automation" } Marketing Automation
           %li
-            %a{ :href => marketing_syndication_path } Marketing Syndication
+            %a{ :href => marketing_syndication_path, :alt => "Marketing Syndication", :title => "Marketing Syndication" } Marketing Syndication
           %li
-            %a{ :href => marketing_ideas_path } Marketing Ideas
+            %a{ :href => marketing_ideas_path, :alt => "Marketing Ideas", :title => "Marketing Ideas" } Marketing Ideas
           %li
-            %a{ :href => online_marketing_path } Online Marketing
+            %a{ :href => online_marketing_path, :alt => "Online Marketing for Small Business", :title => "Online Marketing for Small Business" } Online Marketing
           %li
-            %a{ :href => automated_marketing_path } Automated Marketing
-          %li
-            %a{ :href => integrated_marketing_path } Integrated Marketing
+            %a{ :href => automated_marketing_path, :alt => "Automated Marketing", :title => "Automated Marketing" } Automated Marketing
         %ul.span5.bullet-circle
           %li
-            %a{ :href => loyalty_marketing_path } Loyalty Marketing
+            %a{ :href => loyalty_marketing_path, :alt => "Loyalty Marketing", :title => "Loyalty Marketing" } Loyalty Marketing
           %li
-            %a{ :href => customer_retention_path } Customer Retention
+            %a{ :href => customer_retention_path, :alt => "Customer Retention", :title => "Customer Retention" } Customer Retention
           %li
-            %a{ :href => marketing_analytics_path } Marketing Analytics
+            %a{ :href => marketing_analytics_path, :alt => "Marketing Analytics", :title => "Marketing Analytics" } Marketing Analytics 
           %li
-            %a{ :href => digital_marketing_path } Digital Marketing
+            %a{ :href => digital_marketing_path, :alt => "Digital Marketing", :title => "Digital Marketing" } Digital Marketing
+          %li 
+            %a{ :href => marketing_collaboration_path, :alt => "Marketing Collaboration", :title => "Marketing Collaboration" } Marketing Collaboration
           %li
-            %a{ :href => marketing_collaboration_path } Marketing Collaboration
+            %a{ :href => multi_channel_marketing_path, :alt => "Multi Channel Marketing", :title => "Multi Channel Marketing" } Multi-channel Marketing
           %li
             %a{ :href => multi_channel_marketing_path} Multi-channel Marketing
-  .row-fluid.email_marketing
+  .row-fluid.email-mktg
     .span10.offset1
       %h2 Marketing Promotions
       = image_tag( 'effective-marketing-promotions.jpg', alt: 'email marketing works', class: 'pull-right img-marketing-page', title: 'Effective Marketing Promotions' )
       %p
         Learn and see how Optyn can help you create powerful and effective marketing promotions that engage your customers and increase your Revenues.
       %ul.bullet-circle
+        %li 
+          %a{ :href => marketing_promotions_path, :alt => "Marketing Promotions", :title => "Marketing Promotions" } Marketing Promotions
         %li
-          %a{ :href => marketing_promotions_path } Marketing Promotions
+          %a{ :href => coupons_path, :alt => "Coupon Marketing", :title => "Coupon Marketing" } Coupons
         %li
-          %a{ :href => coupons_path } Coupons
+          %a{ :href => contests_path, :alt => "Contest Marketing", :title => "Contest Marketing" } Contests
         %li
-          %a{ :href => contests_path } Contests
+          %a{ :href => surveys_path, :alt => "Survey Marketing", :title => "Survey Marketing" } Surveys
         %li
-          %a{ :href => surveys_path } Surveys
-        %li
-          %a{ :href => specials_path } Specials and Sales
+          %a{ :href => specials_path, :alt => "Specials and Sales", :title => "Specials and Sales" } Specials and Sales
   .row-fluid.smallbiz_marketing
     .span10.offset1
       = image_tag( 'grow-your-business-now.jpg', alt: 'email marketing works', class: 'pull-left img-marketing-resources', title: 'Grow your business' )
@@ -96,7 +96,7 @@
       %ul.bullet-circle
         %li
           %a{ :href => resources_path } Resource Center >
-.row-fluid.email_marketing
+.row-fluid.email-mktg
   %h4.text-center Additional E-Mail Marketing Services
   .blank-space
   .span3{style: 'width:20%;'}
