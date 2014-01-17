@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width"/>
-  <style>
+  <style type="text/css">
     /**********************************************
     * Ink v1.0.4 - Copyright 2013 ZURB Inc        *
     **********************************************/
@@ -561,6 +561,18 @@
       border-radius: 500px;
     }
 
+    .optyn-header{
+      background-color: #FFFFFF;
+    }
+
+    .optyn-core-content{
+      background-color: #000000;
+    }
+
+    .optyn-sidebar{
+      background-color: #000000;
+    }
+
     /* Outlook First */
 
     body.outlook p {
@@ -654,7 +666,7 @@
     }
 
       </style>
-      <style>
+      <style type="text/css">
         
         table.facebook td {
           background: #3b5998;
@@ -744,7 +756,7 @@
                       <table class="row">
                       <tr>
                         <td class="wrapper last"> 
-                          <grid>
+                          <grid type="introduction">
                             <table class="twelve columns">
                               <tr>
                                 <td class="">
@@ -779,7 +791,7 @@
                     <table class="row">
                       <tr>
                         <td class="wrapper last">
-                          <grid>
+                          <grid type="core-content">
                             <table class="twelve columns">
                               <tr>
                                 <td>
@@ -964,6 +976,44 @@
                 </td>
               </tr>
             </table> 
+          </container>
+          <container type="footer">
+            <table class="container">
+                <tr>
+                  <td class="wrapper last">
+                    <row>
+                      <table class="row">
+                      <tr>
+                        <td class="wrapper last"> 
+                          <grid type="footer">
+                            <table class="twelve columns">
+                              <tr>
+                                <td class="">
+                                  <division type="footer">
+                                    <table class="twelve columns">
+                                      <tr>
+                                        <td class="">
+                                          <center>
+                                            <permission>This message was sent to <receiver-email>receiver@exmaple.com</receiver-email> by <shop-name>Optyn Shop</shop-name></permission>
+                                            <address>222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</address>
+                                            <unsubscribe>If you do not want to continue receiving emails, click here to <u-link>Unsubscribe</u-link></unsubscribe>
+                                          </center>  
+                                        </td>
+                                        <td class="expander"></td>
+                                      </tr>
+                                    </table>
+                                  </division>
+                                </td>
+                              </tr>
+                            </table>
+                          </grid>
+                          </td>
+                        </tr>
+                      </table>
+                    </row>
+                  </td>
+                </tr>
+              </table>
           </container>
         </center>
       </td>
