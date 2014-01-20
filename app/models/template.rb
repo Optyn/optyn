@@ -8,6 +8,7 @@ require 'messagecenter/templates/structure_creator'
 class Template < ActiveRecord::Base
   include Messagecenter::Templates::SystemTemplatePersonalizer
   include Messagecenter::Templates::StructureCreator
+  include ShopLogo
 
   attr_accessor :parsed_html, :parsed_result, :pared_extends, :styles
 
