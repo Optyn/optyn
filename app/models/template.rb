@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'messagecenter/templates/markup_generator'
 require 'messagecenter/templates/existing_template'
 require 'messagecenter/templates/blank_template'
-require 'messagecenter/templates/sytem_template_personalizer'
+require 'messagecenter/templates/system_template_personalizer'
 require 'messagecenter/templates/structure_creator'
 
 class Template < ActiveRecord::Base
