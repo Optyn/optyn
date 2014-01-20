@@ -65,6 +65,18 @@ OP = (function($, window, doucument, Optyn){
       $('#editor_area_modal').html('');
     },
 
+    editFullText: function() {},
+
+    editTextWithFullImage: function() {},
+
+    editTwoColumns: function() {},
+
+    editTextWithLeftImage: function() {},
+
+    editTextWithRightImage: function() {},
+
+    editImageGaller: function() {},
+
     //fire up a modal when user edits a section
     hookEditTrigger: function(){
       $('body').on('click', '.ink-action-edit', function(){
@@ -72,6 +84,9 @@ OP = (function($, window, doucument, Optyn){
         var $editableElem = $section.find('.ink-editable');
         var titleText = $(this).parents('td').find('.optyn-headline').html();
         var paragraphText = $(this).parents('td').find('.optyn-paragraph').html();
+        var contentType = $( this ).parents('td').children();
+        contentType = $( contentType ).slice( 1, contentType.length );  // Exclude 1st element, which is toolset.
+        console.log(contentType);
         OP.template.openCkeditor($editableElem, titleText, paragraphText);
       });
     },
@@ -88,7 +103,7 @@ OP = (function($, window, doucument, Optyn){
 
 
         var contentlVal = $(editableElem).html();
-        var htmlVal = '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + contentlVal + '</textarea>';
+        var htmlVal = '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + paragraphText + '</textarea>';
         OP.template.populateModalCase(htmlVal, titleText);
         $('#editor_area_modal').modal('show');
 
