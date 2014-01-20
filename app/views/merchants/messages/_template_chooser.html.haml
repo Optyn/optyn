@@ -21,7 +21,14 @@
       
   .loading{style: 'display: none;'}
     %strong
-      Please Wait...    
+      Please Wait...
+
+  .row      
+    %p     
+      = link_to "Upload Template", "javascript:void(0)", class: 'btn btn-large btn-primary'  
+      OR
+      = link_to "System Layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+          
 
 #system_templates_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
   = render partial: "merchants/messages/system_layouts"
