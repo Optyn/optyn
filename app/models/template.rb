@@ -16,7 +16,7 @@ class Template < ActiveRecord::Base
 
   serialize :structure, Hash
 
-  has_many :messages
+  has_many :messages, dependent: :destroy
   has_many :stylesheets
   belongs_to :shop
 
