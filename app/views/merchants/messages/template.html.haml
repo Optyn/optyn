@@ -7,10 +7,11 @@
   #choose_message
     = render :partial => 'progress_bar'
 
-    - if @message.template_id.present?
-      = render partial: "editor_wrapper"
-    - else
-      = render partial: "template_chooser"
+    #template_wrapper
+      - if @message.template_id.present?
+        = render partial: "editor_wrapper"
+      - else
+        = render partial: "template_chooser"
 
 
     #loading( style='display: none;' )

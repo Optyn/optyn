@@ -25,9 +25,6 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.new
     @message.manager_id = current_manager.id
     @shop = current_shop
-    #@survey = current_shop.survey.first #FIXME
-    # binding.pry
-    #@message.build_message_image
   end
 
   def new_template
@@ -56,6 +53,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def template
     @system_templates = Template.system_generated
+    @templates = current_shop.templates
     @message = Message.for_uuid(params[:id])  
   end
 
@@ -85,7 +83,7 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
-  def update_template
+  def assign_template
     @message = Message.for_uuid(params[:id])
     @message.assign_template(params[:template_id])
     render partial: 'editor_wrapper', layout: false

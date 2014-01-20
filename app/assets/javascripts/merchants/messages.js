@@ -47,8 +47,12 @@ function MerchantMessage() {
             this.hookHeaderSettingSubmission();
         }
 
-        if($('#template_chooser').length){
+        if($('.template_chooser').length){
             this.hookTemplateAssignment();            
+        }
+
+        if($('#system_templates_modal').length){
+            this.hookTemplateChooserClick();
         }
     };
 
@@ -356,24 +360,34 @@ function MerchantMessage() {
     };
 
     this.hookTemplateAssignment = function(){
-        $('body').on('click', '#template_chooser .template_type', function(event){
+        $('body').on('click', '.template_type', function(event){
             event.preventDefault();
             $.ajax({
                 url: $(this).attr('href'),
                 type: 'POST',
                 data: {'_method': 'PUT', 'template_id': $(this).attr('data-template-id')},
                 beforeSend: function(){
-                  $('#loading').show();
+                  $('.loading').show();
+                  $('.btn-close').hide();
                 },
                 success: function(data){
-                  $('#loading').hide();
-                  $('#template_chooser').replaceWith(data)
+                  $('.loading').hide();
+
+                  $('#system_templates_modal').modal('hide');
+                  $('#template_wrapper').replaceWith(data);
                 },
                 error: function(){
-                  $('#loading').hide();
-                  alert("Could not choose a template. Please refresh your page and try again.")
+                  $('.loading').hide();
+                  alert("Could not choose a template. Please refresh your page and try again.");
+                  $('.btn-close').show();
                 }
             });
+        });
+    };
+
+    this.hookTemplateChooserClick = function(){
+        $('body').on('click', '#system_template_chooser_link', function(){
+            $('#system_templates_modal').modal('show');        
         });
     };
 }

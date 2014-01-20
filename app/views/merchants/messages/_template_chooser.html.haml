@@ -1,3 +1,27 @@
-#template_chooser.row-fluid
-  - @system_templates.each do |system_template|
-    = link_to(system_template.name, update_template_merchants_message_path(@message.uuid), 'data-template-id' => system_template.id, class: "span4 type template_type")
+- if @templates.blank?
+  #headline
+    %h2 Welcome to Optyn's templating. We are working on adding more features. But we would like to get you started. Please pick of the options below.
+
+  %p
+    = link_to "I would like to upload a template and use it", "javascript:void(0)", class: 'btn btn-large btn-primary'
+
+  %h3 OR
+
+  %p
+    = link_to "I don't care. I want to pick a available layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+
+- else
+  .row
+    %h2 
+      == Your #{"Template".pluralize(@templates.size)}
+
+  .template_chooser.row
+    - @templates.each do |template|
+      = link_to(template.name, assign_template_merchants_message_path(@message.uuid), 'data-template-id' => template.id, class: "span4 type template_type")      
+      
+  .loading{style: 'display: none;'}
+    %strong
+      Please Wait...    
+
+#system_templates_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+  = render partial: "merchants/messages/system_layouts"

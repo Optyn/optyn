@@ -217,4 +217,26 @@ module Merchants::MessagesHelper
   def message_footer_background_color(message)
     "#{message.footer_background_color_css_val rescue Shop::DEFAULT_FOOTER_BACKGROUND_COLOR};"
   end
+
+  def system_templates_link_caption(template)
+    content_tag(:span) do
+      template.name +
+      "<br />" + 
+      system_template_description(template.name)
+    end.html_safe
+  end
+
+  def system_template_description(template_name)
+    if "Basic" == template_name
+      "Singular ideas announcements."
+    elsif "Hero" == template_name
+      "Share some pointers in a left bar and main message to the core idea"
+    elsif "Sidebar" == template_name
+      "Make it easy with mutliple ideas or announcements with equal importance"
+    elsif "Galleria" == template_name
+      "Display intuitive images to bring more business from your customers"
+    else
+      ""
+    end
+  end
 end

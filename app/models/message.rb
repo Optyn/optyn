@@ -243,7 +243,9 @@ class Message < ActiveRecord::Base
 
   def assign_template(template_identifier)
     unless self.template_id.present?
-      self.template_id = template_identifier      
+      existing_template = Template.find(template_identifier)
+      self.template_id = existing_template.system_generated ? Template.copy(template_identifier, shop) : template_id_assigned = existing_template.id
+      
       self.save(validate: false)
     end
   end
