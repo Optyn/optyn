@@ -12,7 +12,7 @@ function FileImport() {
     };
 
     this.hookChosen = function () {
-        $('#message_label_ids').chosen();
+        $('#label_ids').chosen();
     };
 
     this.hookAddNewLabel = function () {
