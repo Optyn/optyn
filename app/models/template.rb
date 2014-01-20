@@ -42,6 +42,7 @@ class Template < ActiveRecord::Base
     new_template = Template.new(html: existing_template.html, name: "#{shop.name} #{existing_template.name}", shop_id: shop.id)
     new_template.personalize
     new_template.save
+    new_template.id
   end
 
   def fetch_content(message_content)
