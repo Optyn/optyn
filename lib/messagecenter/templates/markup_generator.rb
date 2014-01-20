@@ -50,7 +50,7 @@ module Messagecenter
         end
 
         optyn_class = "optyn-#{component_parent}"
-        optyn_class << " optyn-#{component['type']}" if "grid" == component.name
+        optyn_class << " optyn-#{component['type']}" if "grid" == component.name || "container" == component.name
 
         if node['class'].present?
           node['class'] = node['class'] +  " " + optyn_class
