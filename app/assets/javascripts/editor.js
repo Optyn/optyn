@@ -170,13 +170,20 @@ OP = (function($, window, doucument, Optyn){
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function(){
         var desiredGridType = $( this ).data( 'section-type' );
-        var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType]
+        var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType];
         //console.log( requiredMarkup );
-        var $containerParent = $( this ).parents( '.optyn-grid' ).find( 'tbody' ).first();
+        var $containerParent = $( this ).parents( '.body' ).first().find( 'center' );
         //console.log( 'containerParent:', $containerParent.find( 'center' ) );
         requiredMarkup = '<tr><td>' +
           requiredMarkup +
           '</td></tr>';
+        requiredMarkup = '<table class="optyn-container"><tbody><tr><td>' +
+          '<table class="optyn-row"><tbody><tr><td>' +
+          '<table class="columns optyn-grid"><tbody><tr><td>' +
+          requiredMarkup +
+          '</td></tr></tbody></table>' +
+          '</td></tr></tbody></table>' +
+          '</td></tr></tbody></table>';
         $containerParent.append( requiredMarkup );
         OP.template.addRemoteSection($(this));
       });
