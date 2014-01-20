@@ -41,19 +41,19 @@ module Messagecenter
           shop = self.shop
 
           #replace the background color
-          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-header"}
+          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction"}
           node.set_property('background-color', shop.header_background_color)
 
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
           introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
           introduction_division.css('img').each do |image|
-            shop.has_logo? ? image.swap(%{<img src="#{shop.logo_location}">}) : image.swap(%{<h3>#{shop.name}</h3>})
+            image.swap(email_body_shop_logo(shop))
           end
         end  
 
         def personalize_content
           #change the background color of the core content
-          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-core-content"}
+          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content"}
           node.set_property('background-color', '#FFFFFF')
 
           #change the background color of the sidebar
