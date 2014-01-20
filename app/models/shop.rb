@@ -24,6 +24,7 @@ class Shop < ActiveRecord::Base
   has_many :social_profiles, dependent: :destroy
 
   has_many :surveys, dependent: :destroy #changing it to has_many
+  has_many :templates, dependent: :destroy
 
 
   SHOP_TYPES=['local', 'online']
