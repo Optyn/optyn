@@ -75,13 +75,14 @@ OP = (function($, window, doucument, Optyn){
 
     editTextWithRightImage: function() {},
 
-    editImageGaller: function() {},
+    editImageGallery: function() {},
 
     //fire up a modal when user edits a section
     hookEditTrigger: function(){
       $('body').on('click', '.ink-action-edit', function(){
-        var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
-        var $editableElem = $section.find('.ink-editable');
+        //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
+        var $grid = $(this).parents('.optyn-grid');
+        var $editableElem = $grid.find('.columns');
         var titleText = $(this).parents('td').find('.optyn-headline').html();
         var paragraphText = $(this).parents('td').find('.optyn-paragraph').html();
         var contentType = $( this ).parents('td').children();
@@ -219,7 +220,7 @@ OP = (function($, window, doucument, Optyn){
     //Observe the delete section and clear the fields
     hookDeleteSection: function(){
       $('body').on('click', '.ink-action-delete', function(){
-        var $elementToRemove = $( this ).parents( 'td' ).first();
+        var $elementToRemove = $( this ).parents( 'td' ).first();  // Should we remove .optyn-grid over here?
         console.log( $elementToRemove );
         $elementToRemove.slideUp( function() { $( this ).remove(); });
         return;
@@ -261,8 +262,8 @@ OP = (function($, window, doucument, Optyn){
     },
 
     getElem: function(){
-      return SelectedElement;
-    },
+      return this.SelectedElement;
+    }
   };
 
   return Optyn;
