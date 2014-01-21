@@ -119,7 +119,7 @@ OP = (function($, window, doucument, Optyn){
         var selectedElem = OP.selectedSection.getElem();
         $(selectedElem).html(CKEDITOR.instances.template_editable_content.getData());
         $('#editor_area_modal').modal('hide');
-        OP.template.updateRemoteSection(selectedElem);
+        OP.template.saveSectionChanges();
       });
     },
 
@@ -185,7 +185,7 @@ OP = (function($, window, doucument, Optyn){
           '</td></tr></tbody></table>' +
           '</td></tr></tbody></table>';
         $containerParent.append( requiredMarkup );
-        OP.template.addRemoteSection($(this));
+        OP.template.saveSectionChanges();
       });
     },
 
@@ -234,7 +234,7 @@ OP = (function($, window, doucument, Optyn){
         var $toolsetContainer = $(this).parents('.template-section-toolset').first();
         var $templateSection = $toolsetContainer.nextAll('.template-section').first();
         var $templateSectionForm = $templateSection.nextAll('.template-section-form');
-        OP.template.deleteRemoteSection($templateSectionForm);
+        OP.template.saveSectionChanges();
         $toolsetContainer.remove();
         $templateSection.remove();
         $templateSectionForm.remove();
@@ -256,7 +256,23 @@ OP = (function($, window, doucument, Optyn){
           alert('A problem occourred while deleting. Please reload your page. We are sorry.');
         }
       });
-    }
+    },
+
+    saveSectionChanges: function(){
+      var uri = $('#save_merchants_message_location').val();
+      var messageWrapper = OP.MessageWrapper.fetch();
+      messageWrapper.authenticity_token = $('#authenticity_token').val();
+      messageWrapper._method = 'PUT'
+
+      $.ajax({
+        url: uri,
+        type: 'POST',
+        data: JSON.stringify(messageWrapper),
+        error: function(){
+          alert('We are sorry, a problem occourred while while saving your changes. Please reload your page. We are sorry.');
+        }
+      });
+    },
 
   };
 
@@ -270,7 +286,56 @@ OP = (function($, window, doucument, Optyn){
 
     getElem: function(){
       return this.SelectedElement;
-    }
+    },
+  };
+
+  //Define the Message json structure
+  Optyn.MessageWrapper = {
+      fetch: function(){
+        var messageWrapper = {'message': {'containers':[]}};
+        var containers = messageWrapper.message.containers
+
+        //iterate through the containers to get the rows
+        $('body').find('.optyn-container').each(function(container_index, jContainer){
+          var $container = $(jContainer);
+          var container = {'type': $container.attr('data-type'), 'rows': []};
+
+          var rows = container.rows;
+          //interate through the rows to get the grids
+          $container.find('.optyn-row').each(function(row_index, jRow){
+            var $row = $(jRow);
+            var row = {'grids': []};
+
+            var grids = row.grids;
+            //iterate through grids to get the various divisions
+            $row.find('.optyn-grid').each(function(grid_index, jGrid){
+              var $grid = $(jGrid);
+              var grid = {'divisions': []};
+
+              var divisions = grid.divisions;
+              //iterate through the divisions to get the divisions and the contnet of headline paragraph
+              //** TODO IMPLEMENT THE CHANGES FOR THE HEADER CONTENT AND IF THE HEADER CONTENT HAS JUST AN IMAGE
+              $grid.find('.optyn-division').each(function(division_index, jDivision){
+                var $division = $(jDivision);
+                var divisionWrapper = {'division': {}};
+                var division = divisionWrapper.division;
+
+                divisionWrapper.division.headline = $division.find('.optyn-headline').html(); 
+                divisionWrapper.division.paragraph =  $division.find('.optyn-paragraph').html();
+
+                divisions.push(divisionWrapper);
+              }); //end of each .optyn-division  
+
+              grids.push(grid);
+            }); //end of each .optyn-grid
+
+            rows.push(row);
+          }); //end of each .optyn-row
+
+          containers.push(container);
+        }); //end of each .optyn-container
+       return messageWrapper;
+      },
   };
 
   return Optyn;
