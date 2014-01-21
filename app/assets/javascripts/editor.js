@@ -173,10 +173,6 @@ OP = (function($, window, doucument, Optyn){
         var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType];
         //console.log( requiredMarkup );
         var $containerParent = $( this ).parents( '.optyn-content' ).first().find( 'td' ).first();
-        //console.log( 'containerParent:', $containerParent.find( 'center' ) );
-        requiredMarkup = '<tr><td>' +
-          requiredMarkup +
-          '</td></tr>';
         requiredMarkup = '<table class="optyn-row"><tbody><tr><td>' +
           '<table class="columns optyn-grid"><tbody><tr><td>' +
           requiredMarkup +
