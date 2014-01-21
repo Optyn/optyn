@@ -36,7 +36,7 @@ module Users
 	    csv_table.each do |row|
 	    	row_count += 1
 	    	Rails.logger.info row_count
-	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
+	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender].to_s.downcase}"}, %{"#{row[:birth_date]}"}]
 
 	    	begin
 	    		cell_email = row[:email].to_s.strip
