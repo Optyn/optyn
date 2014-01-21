@@ -90,7 +90,10 @@ OP = (function($, window, doucument, Optyn){
         if ( $grid.find('.optyn-paragraph').size()) {
           divisionContents.paragraph = $grid.find('.optyn-paragraph').html();
         }
-        //console.log( 'divisionContents:', divisionContents );
+        if ( $grid.find('img').size()) {
+          divisionContents.image = $grid.find( 'image' ).html();
+        }
+        console.log( Object.keys( divisionContents ), 'divisionContents:', divisionContents );
         var titleText = $grid.find('.optyn-headline').html();
         var paragraphText = $grid.find('.optyn-paragraph').html();
         OP.template.openCkeditor($editableElem, divisionContents, titleText, paragraphText);
@@ -115,6 +118,9 @@ OP = (function($, window, doucument, Optyn){
         }
         if ( 'paragraph' in divisionContents ) {
           htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + divisionContents.paragraph + '</textarea>';
+        }
+        if ( 'image' in divisionContents ) {
+          htmlVal += '<br /><br />Show image upload form. If image already present, show thumbnail and replace image button.';
         }
         //htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + paragraphText + '</textarea>';
         OP.template.populateModalCase(htmlVal);
