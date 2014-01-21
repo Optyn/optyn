@@ -46,7 +46,6 @@ module Messagecenter
           container['rows'].each_with_index do |row_hash, index|
             template_row = template_container.rows[index]
             
-
             grids_html_arr = build_grid_markup(row_hash, template_row)
             row_markup = template_row.html
             grids_html_arr.each do |grid_html|
@@ -61,7 +60,6 @@ module Messagecenter
 
         def build_grid_markup(row, template_row)
           html = []
-          
           row['grids'].each_with_index do |grid_hash, index|
 
             template_grid = template_row.grids[index]

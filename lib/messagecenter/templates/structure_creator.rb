@@ -18,7 +18,7 @@ module Messagecenter
               grids = []
               row_child.css('grid').each do |grid_child|
                 divisions = []
-                data_model = build_data_model(grid_child.css('division'))
+                data_model = build_data_model(grid_child.css('division'), container_child['type'])
 
                 grid_child.css('division').each do |division_child|
                   sanitize_division(division_child)
@@ -86,8 +86,10 @@ module Messagecenter
         end
 
         #build the data model when parsing the divisions for each row => grid when building the structure
-        def build_data_model(divisions)
+        def build_data_model(divisions, type)
           data_model = {}
+
+          data_model['type'] = type
 
           divisions.each do |division|
             data_model[division['type']] = {}

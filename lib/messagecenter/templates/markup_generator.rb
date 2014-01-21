@@ -6,6 +6,10 @@ module Messagecenter
       include ActionView::Helpers::OutputSafetyHelper
 
       attr_accessor :template
+
+      CONTENT_COMPONENT_TYPE = "content"
+      INTRODUCTION_COMPONENT_TYPE = "introduction"
+
       def self.generate(content, template)
         markup = ""
         if content.blank?
@@ -22,23 +26,33 @@ module Messagecenter
 
       def add_toolset_to_components(data_model)
         components_hash = data_model.clone
+        type = components_hash.delete('type')
         toolset_markup = static_toolset_markup(components_hash)
         components_hash.each_pair do |component_name, compoenent_content|
           components_hash[component_name] = toolset_markup + compoenent_content['content']
         end
-
+        
         components_hash.to_json
       end
 
       def static_toolset_markup(grid_data_model)
-        dropdown_links  = ""
-        grid_data_model.each_pair do |key, val|
-          dropdown_links += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + key + '"' + '>' + '&nbsp;&nbsp;' + val['title'] + '&nbsp;</a>' + '</li>'
-        end
+        data_model = grid_data_model.clone
+        if CONTENT_COMPONENT_TYPE == data_model['type']
+          dropdown_links  = ""
+          data_model.delete('type')
+          data_model.each_pair do |key, val|
+            dropdown_links += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + key + '"' + '>' + '&nbsp;&nbsp;' + val['title'] + '&nbsp;</a>' + '</li>'
+          end
 
-        '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button><button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a><ul class="dropdown-menu">' + 
-        dropdown_links +       
-        '</ul></div></div>' 
+          '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button><button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a><ul class="dropdown-menu">' + 
+          dropdown_links +       
+          '</ul></div></div>'
+        elsif INTRODUCTION_COMPONENT_TYPE == data_model['type']
+          data_model.delete('type')
+          '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button></div></div>'
+        else
+          ""
+        end   
       end
 
       def self.add_component_class(component, component_parent)
