@@ -26,12 +26,12 @@ module Messagecenter
 
       def add_toolset_to_components(data_model)
         components_hash = data_model.clone
-        type = components_hash.delete('type')
         toolset_markup = static_toolset_markup(components_hash)
+        type = components_hash.delete('type')
         components_hash.each_pair do |component_name, compoenent_content|
           components_hash[component_name] = toolset_markup + compoenent_content['content']
         end
-        
+
         components_hash.to_json
       end
 
