@@ -81,20 +81,25 @@ OP = (function($, window, doucument, Optyn){
     hookEditTrigger: function(){
       $('body').on('click', '.ink-action-edit', function(){
         //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
-        var $grid = $(this).parents('.optyn-grid');
+        var $grid = $(this).parents('.optyn-grid').first();
         var $editableElem = $grid.find('.columns');
-        var titleText = $(this).parents('td').find('.optyn-headline').html();
-        var paragraphText = $(this).parents('td').find('.optyn-paragraph').html();
-        var contentType = $( this ).parents('td').children();
-        contentType = $( contentType ).slice( 1, contentType.length );  // Exclude 1st element, which is toolset.
-        console.log(contentType);
-        OP.template.openCkeditor($editableElem, titleText, paragraphText);
+        var divisionContents = {};
+        if ( $grid.find('.optyn-headline').size()) {
+          divisionContents.headline = $(this).parents('td').find('.optyn-headline').html();
+        }
+        if ( $grid.find('.optyn-paragraph').size()) {
+          divisionContents.paragraph = $grid.find('.optyn-paragraph').html();
+        }
+        //console.log( 'divisionContents:', divisionContents );
+        var titleText = $grid.find('.optyn-headline').html();
+        var paragraphText = $grid.find('.optyn-paragraph').html();
+        OP.template.openCkeditor($editableElem, divisionContents, titleText, paragraphText);
       });
     },
 
     //Code to open up the CKEditor
-    openCkeditor: function(editableElem, titleText, paragraphText){
-        console.log( 'Trying to open the CKEditor', titleText );
+    openCkeditor: function(editableElem, divisionContents, titleText, paragraphText){
+        console.log( 'Trying to open the CKEditor' );
         try{
           if( CKEDITOR.instances.template_editable_content.length ) {
             console.log( 'Destroying the God damn instance.' );
@@ -104,12 +109,21 @@ OP = (function($, window, doucument, Optyn){
 
 
         var contentlVal = $(editableElem).html();
-        var htmlVal = '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + paragraphText + '</textarea>';
-        OP.template.populateModalCase(htmlVal, titleText);
+        var htmlVal = '';
+        if ( 'headline' in divisionContents ) {
+          htmlVal += '<input type="text" value="' + divisionContents.headline + '">';
+        }
+        if ( 'paragraph' in divisionContents ) {
+          htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + divisionContents.paragraph + '</textarea>';
+        }
+        //htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + paragraphText + '</textarea>';
+        OP.template.populateModalCase(htmlVal);
         $('#editor_area_modal').modal('show');
 
-        CKEDITOR.replace('template_editable_content');
-        CKEDITOR.instances.template_editable_content.setData(paragraphText);
+        if ( 'paragraph' in divisionContents ) {
+          CKEDITOR.replace('template_editable_content');
+          CKEDITOR.instances.template_editable_content.setData(divisionContents.paragraph);
+        }
         OP.selectedSection.setElem(editableElem);
     },
 
@@ -131,12 +145,11 @@ OP = (function($, window, doucument, Optyn){
     },
 
     //poplate modal on open
-    populateModalCase: function(htmlVal, titleText){
+    populateModalCase: function(htmlVal){
       var caseHtml = '<div class="modal-header">' +
           '<h3>Edit Content</h3>' +
         '</div>' +
         '<div class="modal-body">' +
-          '<input type="text" value="' + titleText + '">' +
           '<div class="row-fluid">' +
           htmlVal +
           '</div>' +
