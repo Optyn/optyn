@@ -7,6 +7,7 @@ module Messagecenter
       def initialize(options={})
         @template = options[:template]
         @content = options[:content]
+        @editable = options[:editable]
       end
 
       def build_markup
@@ -18,6 +19,9 @@ module Messagecenter
         end
 
         layout_markup
+      end
+
+      def build_markup
       end
 
       private
@@ -41,12 +45,18 @@ module Messagecenter
           html
         end
 
-        def build_row_markup(container, template_container)
+        def build_row_markup(container, template_container, editable=true)
           html = []
           container['rows'].each_with_index do |row_hash, index|
             template_row = template_container.rows[index]
             
-            grids_html_arr = build_grid_markup(row_hash, template_row)
+            grids_html_arr = []
+            unless @editable
+              grids_html_arr = build_grid_markup(row_hash, template_row)
+            else
+              grids_html_arr = build_editable_grid_markup(row_hash, template_row)
+            end
+
             row_markup = template_row.html
             grids_html_arr.each do |grid_html|
               row_markup = row_markup.sub(Template::PLACE_HOLDER_ELEM, grid_html)
@@ -59,6 +69,21 @@ module Messagecenter
         end
 
         def build_grid_markup(row, template_row)
+          html = []
+          row['grids'].each_with_index do |grid_hash, index|
+
+            template_grid = template_row.grids[index]
+            
+            divisions_markup = build_division_markup(grid_hash, template_grid)
+            
+            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n")))
+            html << content
+          end
+
+          html
+        end
+
+        def build_editable_grid_markup(row, template_row)
           html = []
           row['grids'].each_with_index do |grid_hash, index|
 
@@ -91,7 +116,9 @@ module Messagecenter
             paragraph = division_node.css('.optyn-paragraph').first()
             paragraph.inner_html = division_hash['paragraph'] if paragraph.present?
 
-            html << (static_toolset_markup(template_grid.data_model) + division_node.children.to_s)
+            toolset_markup = @eidtable ? static_toolset_markup(template_grid.data_model) : ""
+
+            html << toolset_markup + division_node.children.to_s # toolset_markup will be blank if @editable is false
           end
           html
         end  

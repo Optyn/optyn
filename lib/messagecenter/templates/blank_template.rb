@@ -5,6 +5,7 @@ module Messagecenter
 
       def initialize(options={})
         @template = options[:template]
+        @editable = options[:editable]
       end
 
       # When a template is selected for the first time and no content  is added.
@@ -41,7 +42,14 @@ module Messagecenter
         def default_rows_html(container)
           html = []
           container.rows.each do |row|
-            grids_html = default_grids_html(row)
+
+            grids_html = ""
+            unless @editable
+              grids_html = default_grids_html(row)
+            else
+              grids_html = default_editable_grids_html(row)
+            end
+
             row_html = row.html
             grids_html.each do |grid_html|
               row_html = row_html.sub(Template::PLACE_HOLDER_ELEM, grid_html)
@@ -54,6 +62,15 @@ module Messagecenter
         end
 
         def default_grids_html(row)
+          html = []
+          row.grids.each do |grid|
+            content = raw(grid.html.gsub(Template::PLACE_HOLDER_ELEM, grid.divisions.first.html))
+            html << content
+          end
+          html  
+        end
+
+        def default_editable_grids_html(row)
           html = []
           row.grids.each do |grid|
             components_json = add_toolset_to_components(grid.data_model) 
