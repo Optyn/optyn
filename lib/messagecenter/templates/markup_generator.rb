@@ -56,12 +56,7 @@ module Messagecenter
       end
 
       def self.add_component_class(component, component_parent)
-        node = nil
-        if component.child.present? && component.child.element?
-          node = component.child
-        else
-          node = component.add_child("<span></span>")
-        end
+        node = wrap_node_if_naked(component)  
 
         optyn_class = "optyn-#{component_parent}"
         optyn_class << " optyn-#{component['type']}" if "grid" == component.name || "container" == component.name
@@ -72,8 +67,25 @@ module Messagecenter
           node['class'] = optyn_class
         end
 
-
       end
+
+      def self.add_data_type_to_component(component)
+        node = wrap_node_if_naked(component)
+        if "container" == component.name
+          node['data-type'] = component['type']
+        end
+      end
+
+      private
+        def self.wrap_node_if_naked(component)
+          node = nil
+          if component.child.present? && component.child.element?
+            node = component.child
+          else
+            node = component.add_child("<span></span>")
+          end
+          node
+        end
 
     end #end of the MarkupGenerator class
   end #end of templates module.

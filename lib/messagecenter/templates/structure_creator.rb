@@ -56,6 +56,7 @@ module Messagecenter
             container_child.swap(add_newline(Template::PLACE_HOLDER_ELEM))
 
             Messagecenter::Templates::MarkupGenerator.add_component_class(container_child, 'container')
+            Messagecenter::Templates::MarkupGenerator.add_data_type_to_component(container_child)
             container[:html] = container_child.children.to_s
             
             containers << container
