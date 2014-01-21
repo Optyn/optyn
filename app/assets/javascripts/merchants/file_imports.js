@@ -35,10 +35,10 @@ function FileImport() {
                         success: function (data) {
                             $('.chzn-select').append(
                                 $('<option></option>')
-                                .val(data.id)
+                                .val(data.name)
                                 .html(data.name)
                                 );
-                            $currentSelect.find('option[value="' + data.id + '"]').attr('selected', 'selected');
+                            $currentSelect.find('option[value="' + data.name + '"]').attr('selected', 'selected');
                             $('.chzn-select').trigger("liszt:updated");
                         }
                     });
