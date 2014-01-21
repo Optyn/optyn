@@ -22,6 +22,7 @@ module Messagecenter
 
                 grid_child.css('division').each do |division_child|
                   sanitize_division(division_child)
+                  Messagecenter::Templates::MarkupGenerator.add_component_class(division_child, 'division')
                   divisions << HashWithIndifferentAccess.new(html: division_child.children.to_s, type: division_child['type'])
                   Messagecenter::Templates::MarkupGenerator.add_component_class(division_child, 'division')
                   division_child.parent.add_child(add_newline(Template::PLACE_HOLDER_ELEM)) unless division_child.parent.to_s.include?(Template::PLACE_HOLDER_ELEM)
