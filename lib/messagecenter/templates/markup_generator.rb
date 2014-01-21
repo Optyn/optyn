@@ -39,7 +39,7 @@ module Messagecenter
         data_model = grid_data_model.clone
         if CONTENT_COMPONENT_TYPE == data_model['type']
           dropdown_links  = ""
-          data_model.delete('type')
+          type = data_model.delete('type')
           data_model.each_pair do |key, val|
             dropdown_links += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + key + '"' + '>' + '&nbsp;&nbsp;' + val['title'] + '&nbsp;</a>' + '</li>'
           end
@@ -48,7 +48,7 @@ module Messagecenter
           dropdown_links +       
           '</ul></div></div>'
         elsif INTRODUCTION_COMPONENT_TYPE == data_model['type']
-          data_model.delete('type')
+          type = data_model.delete('type')
           '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button></div></div>'
         else
           ""
