@@ -257,15 +257,17 @@ OP = (function($, window, doucument, Optyn){
       var messageWrapper = OP.MessageWrapper.fetch();
       messageWrapper.authenticity_token = $('#authenticity_token').val();
       messageWrapper._method = 'PUT'
-
+      
       $.ajax({
         url: uri,
-        type: 'POST',
+        type: 'PUT',
         data: JSON.stringify(messageWrapper),
+        contentType: "application/json",
         error: function(){
           alert('We are sorry, a problem occourred while while saving your changes. Please reload your page. We are sorry.');
         }
       });
+      
     },
 
   };
