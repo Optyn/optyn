@@ -11,10 +11,10 @@ class MessageMailer < ActionMailer::Base
   helper "message_mailer_forgery"
   helper "application"
 
-  def send_announcement(message, message_user)
+  def send_announcement(message, receiver)
     @message = message
-    @message_user = message_user
-    @user = @message_user.user
+    @receiver = receiver
+    @shop = @message.shop
     if @message.manager.present?
       @shop = @message.shop
       @shop_logo = true #flag set for displaying the shop logo or just the shop name
@@ -24,10 +24,9 @@ class MessageMailer < ActionMailer::Base
     @partner = @shop.partner
 
     #to: "success@simulator.amazonses.com",
-    mail(to: %Q(#{'"' + @message_user.name + '"' + ' ' if @message_user.name}<#{@message_user.email}>),
-      bcc: "gaurav@optyn.com", 
+    mail(to: %Q(#{'"' + @receiver.name + '"' + ' ' if @receiver.name}<#{@receiver.email}>),
       from: @message.from, 
-      subject: @message.personalized_subject(@message_user),
+      subject: @message.personalized_subject(@receiver),
       reply_to: @message.manager_email
       ) 
   end

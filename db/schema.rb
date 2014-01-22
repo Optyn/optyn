@@ -536,15 +536,6 @@ ActiveRecord::Schema.define(:version => 20131228084928) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "sections", :force => true do |t|
-    t.integer  "template_id"
-    t.string   "type"
-    t.text     "content"
-    t.boolean  "addable",     :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"

@@ -3,7 +3,7 @@
     %tr
       %td
         %div{:style => "text-align:center;margin:20px auto;"}
-          - @user_email = @user_email ? @user_email : (@user ? @user.email : nil)
+          - @receiver_email = @receiver_email ? @receiver_email : (@receiver ? @receiver.email : nil)
           /- btn_width = optyn_user?(@user_email) ? 'width: 33%;' : 'width: 50%;'
           - btn_width = 'width: 50%;'
           - btn_styles = 'float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;' + btn_width
