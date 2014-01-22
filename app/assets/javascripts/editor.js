@@ -26,18 +26,6 @@ OP = (function($, window, doucument, Optyn){
       $('#editor_area_modal').html('');
     },
 
-    editFullText: function() {},
-
-    editTextWithFullImage: function() {},
-
-    editTwoColumns: function() {},
-
-    editTextWithLeftImage: function() {},
-
-    editTextWithRightImage: function() {},
-
-    editImageGallery: function() {},
-
     //fire up a modal when user edits a section
     hookEditTrigger: function(){
       $('body').on('click', '.ink-action-edit', function(){
@@ -46,7 +34,7 @@ OP = (function($, window, doucument, Optyn){
         var $editableElem = $grid.find('.columns');
         var divisionContents = {};
         if ( $grid.find('.optyn-headline').size()) {
-          divisionContents.headline = $(this).parents('td').find('.optyn-headline').html();
+          divisionContents.headline = $grid.find('.optyn-headline').html();
         }
         if ( $grid.find('.optyn-paragraph').size()) {
           divisionContents.paragraph = $grid.find('.optyn-paragraph').html();
@@ -55,14 +43,12 @@ OP = (function($, window, doucument, Optyn){
           divisionContents.image = $grid.find( 'image' ).html();
         }
         console.log( Object.keys( divisionContents ), 'divisionContents:', divisionContents );
-        var titleText = $grid.find('.optyn-headline').html();
-        var paragraphText = $grid.find('.optyn-paragraph').html();
-        OP.template.openCkeditor($editableElem, divisionContents, titleText, paragraphText);
+        OP.template.openCkeditor($editableElem, divisionContents);
       });
     },
 
     //Code to open up the CKEditor
-    openCkeditor: function(editableElem, divisionContents, titleText, paragraphText){
+    openCkeditor: function(editableElem, divisionContents){
         console.log( 'Trying to open the CKEditor' );
         try{
           if( CKEDITOR.instances.template_editable_content.length ) {
@@ -83,7 +69,6 @@ OP = (function($, window, doucument, Optyn){
         if ( 'image' in divisionContents ) {
           htmlVal += '<br /><br />Show image upload form. If image already present, show thumbnail and replace image button.';
         }
-        //htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + paragraphText + '</textarea>';
         OP.template.populateModalCase(htmlVal);
         $('#editor_area_modal').modal('show');
 
