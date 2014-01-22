@@ -15,13 +15,13 @@
       .row-fluid
         .span8.offset2.text-center
           .control-group
-            = f.label :csv_file, "Customer CSV file", class: 'control-label'
+            = f.label :csv_file, "Customer CSV file*", class: 'control-label'
             .controls.text-left
               = f.file_field :csv_file
 
           .control-group
-            = f.label :label, "Label for import records", class: 'control-label'
-            .controls.text-left
+            = f.label :label, "Label for import records*", class: 'control-label'
+            .controls.text-left.labels
               = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
               = select_tag "label_ids[]", options_from_collection_for_select(@labels, :name, :name),
                  { id: "label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}

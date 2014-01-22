@@ -8,6 +8,7 @@ function FileImport() {
             this.hookChosen();
             this.hookAddNewLabel();
             this.hookDisableSubmitTag();
+            this.hookChangeChosen();
         }
     };
 
@@ -39,7 +40,7 @@ function FileImport() {
                                 .html(data.name)
                                 );
                             $currentSelect.find('option[value="' + data.name + '"]').attr('selected', 'selected');
-                            $('.chzn-select').trigger("liszt:updated");
+                            $('#label_ids').trigger("liszt:updated");
                         }
                     });
                 }
@@ -52,10 +53,53 @@ function FileImport() {
             $( 'input[name=commit]' ).addClass( 'disabled' )
             .attr( 'disabled', '' );
         }
+        
         $('.import input[type=file]').change( function() {
-            $( 'input[name=commit]' ).tooltip( 'destroy' )
-            .removeAttr( 'disabled' )
-            .removeClass( 'disabled' );
+            if($('ul.chzn-choices li.search-choice').length == 0){
+                $( 'input[name=commit]' ).addClass( 'disabled' )
+                .attr( 'disabled', '' );
+            }
+            else{
+                $( 'input[name=commit]' ).tooltip( 'destroy' )
+                .removeAttr( 'disabled' )
+                .removeClass( 'disabled' );
+            }
+        });
+        
+        $('#label_ids').chosen().change(function(event) {
+            var  target = $(event.target);
+            currentDataSet = target.val();
+            if (currentDataSet === null){
+                $( 'input[name=commit]' ).addClass( 'disabled' )
+                .attr( 'disabled', '' );
+            }
+            else if  ($( '.import input[type=file]').val() == '' ){
+                $( 'input[name=commit]' ).addClass( 'disabled' )
+                .attr( 'disabled', '' );
+            }
+            else{
+                console.log("in else");
+                $( 'input[name=commit]' ).tooltip( 'destroy' )
+                .removeAttr( 'disabled' )
+                .removeClass( 'disabled' );
+                
+            }
+            
+        });
+    };
+
+    this.hookChangeChosen = function () {
+        $('#label_ids').chosen().change(function(){
+            var $select = $(this);
+
+            $.ajax({
+                url: $('#update_labels_merchants_survey_survey_answers_path').val(),
+                type: 'POST',
+                data: {
+                    user_id: $select.parent().find('.user_id').val(),
+                    label_ids: $select.val()
+                }
+            });
         });
     };
 }

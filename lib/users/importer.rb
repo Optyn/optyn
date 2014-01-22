@@ -27,9 +27,8 @@ module Users
 	    row_count = 0
       label_instances = []
       labels = label.split(",")
-      if labels.blank?
-        label_instances << Label.find_or_create_by_shop_id_and_name(shop.id, (FileImport::DEFAULT_LABEL_NAME))
-      else
+      label_instances << Label.find_or_create_by_shop_id_and_name(shop.id, (FileImport::DEFAULT_LABEL_NAME))
+      if !labels.blank?
         label_instances << Label.find_or_create_by_shop_id_and_name(shop.id, (label))
       end
 	    

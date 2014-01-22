@@ -9,7 +9,7 @@ class Merchants::FileImportsController < Merchants::BaseController
   def create
 
     @file_import = FileImport.new(params[:file_import])
-    @file_import.label = params[:label_ids].join(",")
+    @file_import.label = params[:label_ids].join(",") rescue ""
     @file_import.manager_id = current_manager.id
     if @file_import.save
       UserImporter.perform_async(@file_import.id)
