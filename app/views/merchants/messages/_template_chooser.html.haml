@@ -2,13 +2,16 @@
   #headline
     %h2 Welcome to Optyn's templating. We are working on adding more features. But we would like to get you started. Please pick of the options below.
 
-  %p
-    = link_to "I would like to upload a template and use it", "javascript:void(0)", class: 'btn btn-large btn-primary'
+  .blank-space
 
-  %h3 OR
+  .text-center
+    %p
+      = link_to "I would like to upload a template and use it", "javascript:void(0)", class: 'btn btn-large btn-primary'
 
-  %p
-    = link_to "I don't care. I want to pick a available layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+    %h3 OR
+
+    %p
+      = link_to "I don't care. I want to pick an available layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 
 - else
   %h2

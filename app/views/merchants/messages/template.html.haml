@@ -7,12 +7,14 @@
   #choose_message
     = render :partial => 'progress_bar'
 
-    .row
+    .row-fluid
       .pull-left
         = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn btn-primary'
 
       .pull-right
         = link_to "Preview", preview_template_merchants_message_path(@message.uuid), class: 'btn btn-success'  
+
+    .blank-space
 
     #template_wrapper
       - if @message.template_id.present?
