@@ -1,5 +1,5 @@
 class Merchants::MessagesController < Merchants::BaseController
-  
+
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
 
@@ -14,7 +14,7 @@ class Merchants::MessagesController < Merchants::BaseController
     #Do Nothing
   end
 
-  ##show just before calling sending of survey link 
+  ##show just before calling sending of survey link
   ##so that user can select survey
   def select_survey
     @list_survey = Survey.where(:shop_id=>current_shop.id)
@@ -61,7 +61,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def template
     @system_templates = Template.system_generated
     @templates = current_shop.templates
-    @message = Message.for_uuid(params[:id])  
+    @message = Message.for_uuid(params[:id])
   end
 
   def edit
@@ -116,7 +116,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = klass.for_uuid(params[:id])
     @message.subject = params[:message][:subject]
     populate_send_on
-    
+
     @message.update_meta!
 
     render json: {message: render_to_string(partial: "merchants/messages/preview_meta")}
@@ -141,7 +141,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = parent_message
     @message_type = @message.type.underscore
     populate_manager_folder_count
-    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message}), 
+    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message}),
       message_menu: render_to_string(partial: "merchants/messages/message_menu")
     }
   rescue => e
@@ -184,18 +184,18 @@ class Merchants::MessagesController < Merchants::BaseController
     message_method_call = check_subscription
 
     launched = @message.send(message_method_call.to_sym)
-    
+
     @message_type = @message.type.underscore
     populate_labels
     if launched && 'launch' == message_method_call
       message_redirection
     elsif launched && 'save_draft' == message_method_call
-      render action: 'edit' 
+      render action: 'edit'
     else
       flash.now[:error] = LAUNCH_FLASH_ERROR
       render action: 'edit'
     end
-    
+
   end
 
   def trash
@@ -243,7 +243,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop_logo = true
     @shop = @message.shop
     @partner = @shop.partner
-    
+
 
     render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
   end
@@ -257,7 +257,7 @@ class Merchants::MessagesController < Merchants::BaseController
       @shop = @message.shop
       @partner = @shop.partner
       @inbox_count = populate_user_folder_count(true) if current_user.present?
-      
+
       if @shop and @message
         if @message.make_public
           if not current_user.present?
@@ -279,7 +279,7 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
-  def generate_qr_code 
+  def generate_qr_code
     @message = Message.find(params[:message_id])
     link = @message.get_qr_code_link(current_user)
     respond_to do |format|
@@ -332,8 +332,8 @@ class Merchants::MessagesController < Merchants::BaseController
       SharedForwarder.perform_async(user_email.strip, message.id, message_email_auditor.id)
     end
     respond_to do |format|
-      format.html { 
-        redirect_to(root_path, notice: 'Email was successfully sent.') 
+      format.html {
+        redirect_to(root_path, notice: 'Email was successfully sent.')
       }
     end
   end
@@ -359,6 +359,9 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def upload_template
+  end
+
   private
   def check_subscription
     message_method_call = params[:choice]
@@ -368,7 +371,7 @@ class Merchants::MessagesController < Merchants::BaseController
     end
     message_method_call
   end
-    
+
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)
   end

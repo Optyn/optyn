@@ -245,212 +245,213 @@ Optyn::Application.routes.draw do
 
   namespace :api  do
     scope module: :v1 do
-        get '/me', to: 'credentials#me', as: :shop_details
-        get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
-        get 'shop/button_script.js', to: 'shops#button_script'
-        get 'shop/button_framework.js', to: 'shops#button_framework'
+      get '/me', to: 'credentials#me', as: :shop_details
+      get 'shop/:app_id/details', to: 'shops#details', as: :shop_details
+      get 'shop/button_script.js', to: 'shops#button_script'
+      get 'shop/button_framework.js', to: 'shops#button_framework'
 
-        post 'shop', to: 'shops#create'
-        get 'shop', to: 'shops#all'
+      post 'shop', to: 'shops#create'
+      get 'shop', to: 'shops#all'
 
-        match 'user', to: 'users#show', as: :user_profile
-        get 'user/check_connection.json', to: 'users#check_connection'
-        post 'user/create_connection.json', to: 'users#create_connection'
-        get 'user/create_error', to: 'users#create_error'
-        get 'user/alias', to: 'users#alias'
-        get '/login', to: 'optyn_button#login', as: :login
-        get '/connection', to: 'optyn_button#connection', as: :connection
-        put '/automatic_connection', to: 'optyn_button#automatic_connection', as: :automatic_connection
-        put '/update_permissions', to: 'optyn_button#update_permissions', as: :update_permissions
-        put '/connect_with_email', to: 'optyn_button#connect_via_email'
+      match 'user', to: 'users#show', as: :user_profile
+      get 'user/check_connection.json', to: 'users#check_connection'
+      post 'user/create_connection.json', to: 'users#create_connection'
+      get 'user/create_error', to: 'users#create_error'
+      get 'user/alias', to: 'users#alias'
+      get '/login', to: 'optyn_button#login', as: :login
+      get '/connection', to: 'optyn_button#connection', as: :connection
+      put '/automatic_connection', to: 'optyn_button#automatic_connection', as: :automatic_connection
+      put '/update_permissions', to: 'optyn_button#update_permissions', as: :update_permissions
+      put '/connect_with_email', to: 'optyn_button#connect_via_email'
 
-        namespace :merchants do
-          post 'messages/create_virtual', to: 'virtual_messages#create_virtual', as: :create_virtual
-          resources :shops do
-            collection do
-              get :import_list
-              get :import_user_list
-              post :import_user
-              post :import
-              get :import_status
-              get :active_connections
-            end
+      namespace :merchants do
+        post 'messages/create_virtual', to: 'virtual_messages#create_virtual', as: :create_virtual
+        resources :shops do
+          collection do
+            get :import_list
+            get :import_user_list
+            post :import_user
+            post :import
+            get :import_status
+            get :active_connections
           end
+        end
 
-          resources :managers do
-            collection do
-              get :get_manager_from_email
-              post :logout_manager
-            end
+        resources :managers do
+          collection do
+            get :get_manager_from_email
+            post :logout_manager
           end
+        end
         
-          resources :locations
-          resources :messages do
-            collection do
-              get :types
-              get :drafts
-              get :queued
-              get :sent
-              get :trash
-              put :move_to_trash
-              put :move_to_draft
-              put :discard
-              get :folder_counts
-            end
+        resources :locations
+        resources :messages do
+          collection do
+            get :types
+            get :drafts
+            get :queued
+            get :sent
+            get :trash
+            put :move_to_trash
+            put :move_to_draft
+            put :discard
+            get :folder_counts
+          end
 
-            member do
-              put :launch
-              get :preview
-              put :update_meta
-            end
-          end #end of messages resource
+          member do
+            put :launch
+            get :preview
+            put :update_meta
+          end
+        end #end of messages resource
 
-          resources :users do
-            collection do
-              post :import
-              get :import_list
-              get :import_status
-            end
-          end #end of consumers resources
-        end #end of the merchants namespace
+        resources :users do
+          collection do
+            post :import
+            get :import_list
+            get :import_status
+          end
+        end #end of consumers resources
+      end #end of the merchants namespace
 
-        namespace :partners do
-          get 'login', to: 'login#new'
-          post 'login', to: 'login#create'
-        end #end of the partners namespace
-      end #end of the scope v1
-    end #end of the api namespace
+      namespace :partners do
+        get 'login', to: 'login#new'
+        post 'login', to: 'login#create'
+      end #end of the partners namespace
+    end #end of the scope v1
+  end #end of the api namespace
 
-    namespace "merchants" do |merchant|
+  namespace "merchants" do |merchant|
 
-      devise_for :managers, :controllers => {
-        :registrations => 'merchants/managers/registrations',
-        :sessions => 'merchants/managers/sessions',
-        :passwords => 'merchants/managers/passwords',
-        :confirmations => 'merchants/managers/confirmations'
-      }
+    devise_for :managers, :controllers => {
+      :registrations => 'merchants/managers/registrations',
+      :sessions => 'merchants/managers/sessions',
+      :passwords => 'merchants/managers/passwords',
+      :confirmations => 'merchants/managers/confirmations'
+    }
 
-      devise_scope :managers do
-        get "show_managers" => "merchant_managers#show_managers", as: :managers_list
-        get '/add_manager' => 'merchant_managers#add_manager'
-        post '/create_new_manager' => 'merchant_managers#create_new_manager'
+    devise_scope :managers do
+      get "show_managers" => "merchant_managers#show_managers", as: :managers_list
+      get '/add_manager' => 'merchant_managers#add_manager'
+      post '/create_new_manager' => 'merchant_managers#create_new_manager'
+    end
+
+    resource :app
+    resources :connections do
+      collection do
+        match 'unsubscribe/:id', to: "connections#unsubscribe_user", as: :unsubscribe
+        match 'update_user/:id', to: "connections#update_user", as: :update_user
+        match 'add_user', to: "connections#add_user", as: :add_user
+        match 'create_user', to: "connections#create_user", as: :create_user
+        match 'edit_user/:id', to: "connections#edit", as: :edit_user
+        match 'search', to: "connections#search", as: :search
+        post 'create_label'
+        post 'update_labels'
+        post 'create_labels_for_user'
+      end
+    end
+    resources :locations
+    resources :social_profiles do
+      member do
+        get :add
+      end
+    end
+    resources :dashboards
+    resources :file_imports
+    resource :shop do
+      member do
+        get :check_identifier
+        put :update_affiliate_tracking #put '/shop/:id/update_affiliate_tracking', to: 'shops#update_affiliate_tracking', as: :update_affiliate_tracking_shop
       end
 
-      resource :app
-      resources :connections do
-        collection do
-          match 'unsubscribe/:id', to: "connections#unsubscribe_user", as: :unsubscribe
-          match 'update_user/:id', to: "connections#update_user", as: :update_user
-          match 'add_user', to: "connections#add_user", as: :add_user
-          match 'create_user', to: "connections#create_user", as: :create_user
-          match 'edit_user/:id', to: "connections#edit", as: :edit_user
-          match 'search', to: "connections#search", as: :search
-          post 'create_label'
-          post 'update_labels'
-          post 'create_labels_for_user'
-        end
-      end
-      resources :locations
-      resources :social_profiles do
-        member do
-          get :add
-        end
-      end
-      resources :dashboards
-      resources :file_imports
-      resource :shop do
-        member do
-          get :check_identifier
-          put :update_affiliate_tracking #put '/shop/:id/update_affiliate_tracking', to: 'shops#update_affiliate_tracking', as: :update_affiliate_tracking_shop
-        end
-
-      end
+    end
 
     
-      resource :subscription
-      get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
-      get '/invoice' => 'subscriptions#invoice', as: :subsciption_invoice
-      get '/invoice/print' => 'subscriptions#print', as: :invoice_print
-      put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
-      get '/edit_billing_info' => 'subscriptions#edit_billing_info'
-      put '/update_billing_info' => 'subscriptions#update_billing_info'
-      match '/segments/select_survey' => 'survey_answers#select_survey'
+    resource :subscription
+    get '/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
+    get '/invoice' => 'subscriptions#invoice', as: :subsciption_invoice
+    get '/invoice/print' => 'subscriptions#print', as: :invoice_print
+    put '/subscribe' => 'subscriptions#subscribe', as: :subscribe
+    get '/edit_billing_info' => 'subscriptions#edit_billing_info'
+    put '/update_billing_info' => 'subscriptions#update_billing_info'
+    match '/segments/select_survey' => 'survey_answers#select_survey'
 
-      resources :surveys, only: [:new, :index, :show, :edit, :update], path: :segments do
-        member do
-          get 'questions'
-          get 'preview'
-          get 'launch'
-        end
-
-        resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
-        resources :survey_answers, path: "answers" do
-          collection do
-            post 'create_label'
-            post 'update_labels'
-          end
-        end
-
+    resources :surveys, only: [:new, :index, :show, :edit, :update], path: :segments do
+      member do
+        get 'questions'
+        get 'preview'
+        get 'launch'
       end
 
-      resources :labels, except: [:show]
-
-      get "messages/new/template_message" => "messages#new_template", as: 'new_template'
-      get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
-      get "messages/" => "messages#types", as: 'campaign_types'
-      resources :messages do
+      resources :survey_questions, only: [:new, :edit, :create, :update, :destroy], path: "segment_questions"
+      resources :survey_answers, path: "answers" do
         collection do
-          get :select_survey
-          get :types
-          get :drafts
-          get :trash
-          get :sent
-          get :queued
-          put :move_to_trash
-          put :move_to_draft
-          put :discard
-          get :remove_message_image
-        end
-
-        member do
-          get :preview
-          get :launch
-          put :update_meta
-          put :create_response_message
-          delete :discard_response_message
-          get :report
-          put :update_header
-          get :reject
-          put :reject
-          get :edit_template
-          get :template
-          put :assign_template
-          get :preview_template
-          get :preview_template_content
-          get :editor
-          put :save
+          post 'create_label'
+          post 'update_labels'
         end
       end
+
     end
 
-    match 'oauth/token', to: "oauth_tokens#create"
-    use_doorkeeper do
-      controllers :authorizations => 'oauth_authorizations'
-      controllers :tokens => 'oauth_tokens'
-    end
+    resources :labels, except: [:show]
 
-    namespace :reseller do
-      devise_for :partners, :controllers => {
-        :registrations => 'reseller/partners/registrations',
-        :sessions => 'reseller/partners/sessions',
-        :passwords => 'reseller/partners/passwords',
-        :confirmations => 'reseller/partners/confirmations'
-      }
+    get "messages/new/template_message" => "messages#new_template", as: 'new_template'
+    get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
+    get "messages/" => "messages#types", as: 'campaign_types'
+    resources :messages do
+      collection do
+        get :select_survey
+        get :types
+        get :drafts
+        get :trash
+        get :sent
+        get :queued
+        put :move_to_trash
+        put :move_to_draft
+        put :discard
+        get :remove_message_image
+      end
 
-      # devise_scope :partner do
-      #   get '/api/partners/login', to: 'partners/sessions#new'
-      # end
-
-      get '/resellerjs' => 'dashboards#resellerjs'
+      member do
+        get :preview
+        get :launch
+        put :update_meta
+        put :create_response_message
+        delete :discard_response_message
+        get :report
+        put :update_header
+        get :reject
+        put :reject
+        get :edit_template
+        get :upload_template
+        get :template
+        put :assign_template
+        get :preview_template
+        get :preview_template_content
+        get :editor
+        put :save
+      end
     end
   end
+
+  match 'oauth/token', to: "oauth_tokens#create"
+  use_doorkeeper do
+    controllers :authorizations => 'oauth_authorizations'
+    controllers :tokens => 'oauth_tokens'
+  end
+
+  namespace :reseller do
+    devise_for :partners, :controllers => {
+      :registrations => 'reseller/partners/registrations',
+      :sessions => 'reseller/partners/sessions',
+      :passwords => 'reseller/partners/passwords',
+      :confirmations => 'reseller/partners/confirmations'
+    }
+
+    # devise_scope :partner do
+    #   get '/api/partners/login', to: 'partners/sessions#new'
+    # end
+
+    get '/resellerjs' => 'dashboards#resellerjs'
+  end
+end
