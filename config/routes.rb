@@ -422,8 +422,11 @@ Optyn::Application.routes.draw do
           put :update_header
           get :reject
           put :reject
+          get :edit_template
           get :template
           put :assign_template
+          get :preview_template
+          get :preview_template_content
           get :editor
           put :save
         end

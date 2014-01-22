@@ -21,42 +21,12 @@ OP = (function($, window, doucument, Optyn){
       this.hookDeleteSection();
     },
 
-    sectionMarkupJSON: {
-      /* Dummy object. Work on this later. */
-    },
-
     //Add the toolsets new, edit and delete
     sprinkleToolsetOnLoad: function(){
       var toolset = OP.template.getToolSetMarkup();
       $('.template-section').each(function(){
         $(this).before(toolset);
       });
-    },
-
-    //Create the toolsets new, edit and delete html markup
-    getToolSetMarkup: function(){
-      var dropdownLinks = '';
-      $('.addable-section').each(function(){
-        dropdownLinks += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + $(this).attr('data-section-type') + '"' + '>' + '&nbsp;&nbsp;' + $(this).val() + '&nbsp;</a>' + '</li>';
-      });
-
-      var toolset = '<div class="row template-section-toolset">' +
-      '<div class="btn-group pull-right">' +
-      '<button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button>' +
-      '<button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button>' +
-      '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
-      '<i class="icon-plus icon-white">' +
-      '&nbsp;' +
-      '<span class="caret">' +
-      '</span>' +
-      '</a>' +
-      '<ul class="dropdown-menu">' +
-        dropdownLinks +
-      '</ul>' +
-      '</div>' +
-      '</div>';
-
-      return toolset;
     },
 
     //clear the modal html on load
@@ -168,23 +138,6 @@ OP = (function($, window, doucument, Optyn){
       $('#editor_area_modal').html(caseHtml);
     },
 
-    //Ajax call to update the section on the server
-    updateRemoteSection: function(selectedElem){
-      var $form = $(selectedElem).parents('.template-section').next('.template-section-form').first();
-      var $temp = $('<div />');
-      $temp.append($(selectedElem).parents('.template-section').first().clone());
-
-      $form.find('.hidden-content').val($temp.html());
-      $.ajax({
-        url: $form.attr('action'),
-        type: 'POST',
-        data: $form.serialize(),
-        error: function(){
-          alert('A problem occourred while updating the content. Please reload your page. We are sorry.');
-        }
-      });
-    },
-
     //Add a new section observer
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function(){
@@ -199,36 +152,6 @@ OP = (function($, window, doucument, Optyn){
           '</td></tr></tbody></table>';
         $containerParent.append( requiredMarkup );
         OP.template.saveSectionChanges();
-      });
-    },
-
-    //Ajax to create a new section on the server
-    addRemoteSection: function(toAddElem){
-      var $linkElem = $(toAddElem);
-      var $toolset = $linkElem.parents('.template-section-toolset').first();
-      var $currentSectionForm = $toolset.nextAll('.template-section-form').first();
-      var $currentSectionPosition = $currentSectionForm.find('.section-id');
-
-      $.ajax({
-        url: $('#add_new_section_location').val(),
-        type: 'POST',
-        data: {'previous_id': $currentSectionPosition.val(), 'section_type': $linkElem.attr('data-section-type'), 'authenticity_token': $currentSectionForm.find('input[name=authenticity_token]').val()},
-        beforeSend: function(){
-          var $parentWindow = $(OP.template.getParentWindow());
-          $parentWindow.find('#loading').show();
-        },
-        success: function(data){
-          $currentSectionForm.after(data);
-          var toolset = OP.template.getToolSetMarkup();
-          $currentSectionForm.after(toolset);
-        },
-        error: function(){
-          alert('A problem occourred while while adding a section. Please reload your page. We are sorry.');
-        },
-        complete: function(){
-          var $parentWindow = $(OP.template.getParentWindow());
-          $parentWindow.find('#loading').hide();
-        }
       });
     },
 
@@ -251,23 +174,6 @@ OP = (function($, window, doucument, Optyn){
         $toolsetContainer.remove();
         $templateSection.remove();
         $templateSectionForm.remove();
-      });
-    },
-
-    //Ajax for remote delete of a section
-    deleteRemoteSection: function(templateSectionForm){
-      var url = $(templateSectionForm).find('.delete-section-location').val();
-      var authenticity_token = $(templateSectionForm).find('input[name=authenticity_token]').val();
-      console.log('Url', url);
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: {'_method': 'delete', 'authenticity_token': authenticity_token},
-        success: function(){
-        },
-        error: function(){
-          alert('A problem occourred while deleting. Please reload your page. We are sorry.');
-        }
       });
     },
 
