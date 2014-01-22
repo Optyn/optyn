@@ -122,8 +122,8 @@ OP = (function($, window, doucument, Optyn){
         var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
         //console.log( requiredMarkup );
         var $containerParent = $( this ).parents( '.optyn-content' ).first().find( 'td' ).first();
-        requiredMarkup = '<table class="optyn-row"><tbody><tr><td>' +
-          '<table class="columns optyn-grid"><tbody><tr><td>' +
+        requiredMarkup = '<table class="row optyn-row"><tbody><tr><td>' +
+          '<table class="twelve columns optyn-grid"><tbody><tr><td>' +
           requiredMarkup +
           '</td></tr></tbody></table>' +
           '</td></tr></tbody></table>';
