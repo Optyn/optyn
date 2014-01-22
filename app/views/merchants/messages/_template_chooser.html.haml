@@ -11,24 +11,26 @@
     = link_to "I don't care. I want to pick a available layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 
 - else
-  .row
-    %h2 
-      == Your #{"Template".pluralize(@templates.size)}
+  %h2
+    == Your #{"Template".pluralize(@templates.size)}
+  .clearfix
 
-  .template_chooser.row
+  .template_chooser
     - @templates.each do |template|
-      = link_to(template.name, assign_template_merchants_message_path(@message.uuid), 'data-template-id' => template.id, class: "span4 type template_type")      
-      
+      = link_to(template.name, assign_template_merchants_message_path(@message.uuid), 'data-template-id' => template.id, class: "span4 type template_type")
+
   .loading{style: 'display: none;'}
     %strong
       Please Wait...
 
-  .row      
-    %p     
-      = link_to "Upload Template", "javascript:void(0)", class: 'btn btn-large btn-primary'  
-      OR
-      = link_to "System Layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
-          
+  .clearfix
+  .blank-space
+
+  .text-center
+    = link_to "Upload Template", "javascript:void(0)", class: 'btn btn-large btn-primary'
+    OR
+    = link_to "System Layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+
 
 #system_templates_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
   = render partial: "merchants/messages/system_layouts"
