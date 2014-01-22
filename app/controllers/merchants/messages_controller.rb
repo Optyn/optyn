@@ -34,10 +34,17 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = current_shop
   end
 
+  def edit_template
+    @message = Message.for_uuid(params[:id])
+    @message_type = @message.type.underscore
+    @shop = current_shop
+  end
+
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
       @message = klass.new(params[:message].except(:label_ids, :send_on_date, :send_on_time).merge(manager_id: current_manager.id))
+      populate_send_on if @message.instance_of?(TemplateMessage)
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
@@ -69,6 +76,7 @@ class Merchants::MessagesController < Merchants::BaseController
       @message = klass.for_uuid(params[:id])
       @message.manager_id = current_manager.id
 
+      populate_send_on if @message.instance_of?(TemplateMessage)
       @message.attributes = params[:message].except(:label_ids)
       @message.label_ids = params[:message][:label_ids]  || []
 
@@ -149,6 +157,16 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @preview = true
     @partner = current_partner
+  end
+
+  def preview_template
+    @message = Message.for_uuid(params[:id])
+  end
+
+  def preview_template_content
+    @message = Message.for_uuid(params[:id])
+    @template = @message.template
+    render layout: false
   end
 
   def show
