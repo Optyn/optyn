@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Message", foreign_key: :parent_id
 
-  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time, :send_on_rounded
+  attr_accessor :unread, :ending_date, :ending_time, :send_date, :send_time, :send_on_date, :send_on_time, :send_on_rounded
 
   attr_accessible :label_ids, :name, :subject, :send_immediately, :send_on, :send_on_date, :send_on_time, :message_visual_properties_attributes, :button_url, :button_text, :message_image_attributes, :ending_date, :ending_time, :manager_id, :make_public, :template_id
  
