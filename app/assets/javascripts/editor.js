@@ -13,20 +13,11 @@ OP = (function($, window, doucument, Optyn){
 
     initialize: function(){
       this.hookClearModalOnLoad();
-      this.sprinkleToolsetOnLoad();
       this.hookUpdatingSection();
       this.hookModalHidden();
       this.hookEditTrigger();
       this.hookAddSection();
       this.hookDeleteSection();
-    },
-
-    //Add the toolsets new, edit and delete
-    sprinkleToolsetOnLoad: function(){
-      var toolset = OP.template.getToolSetMarkup();
-      $('.template-section').each(function(){
-        $(this).before(toolset);
-      });
     },
 
     //clear the modal html on load
