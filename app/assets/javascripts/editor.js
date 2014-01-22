@@ -40,7 +40,7 @@ OP = (function($, window, doucument, Optyn){
           divisionContents.paragraph = $grid.find('.optyn-paragraph').html();
         }
         if ( $grid.find('img').size()) {
-          divisionContents.image = $grid.find( 'image' ).html();
+          divisionContents.image = $grid.find( 'img' ).attr('src');
         }
         console.log( Object.keys( divisionContents ), 'divisionContents:', divisionContents );
         OP.template.openCkeditor($editableElem, divisionContents);
@@ -67,7 +67,10 @@ OP = (function($, window, doucument, Optyn){
           htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + divisionContents.paragraph + '</textarea>';
         }
         if ( 'image' in divisionContents ) {
-          htmlVal += '<br /><br />Show image upload form. If image already present, show thumbnail and replace image button.';
+          //htmlVal += '<br /><br />Show image upload form. If image already present, show thumbnail and replace image button.';
+          htmlVal += '<br /><br />Current image preview:<br />' +
+            '<img src="' + divisionContents.image + '" style="height:80px;" alt=""><br />' +
+            'Upload a new image: <input type="file" accept=".png,.PNG,.jpg,.JPG,.jpeg,.JPEG,.gif,.GIF" />';
         }
         OP.template.populateModalCase(htmlVal);
         $('#editor_area_modal').modal('show');
