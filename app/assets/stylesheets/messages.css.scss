@@ -155,3 +155,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 #template_pane {
 	text-align: center;
 }
+
+.template_chooser .span4:nth-child(3n + 1) {
+	margin-left: 0;
+}

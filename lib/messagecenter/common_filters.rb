@@ -3,7 +3,7 @@ module Messagecenter
     def self.included(controller)
       controller.class_eval do
         controller.before_filter (:force_footer_caching_expire)
-        controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message, :new_template])
+        controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message, :new_template, :edit_template])
         controller.before_filter(:show_my_messages_only, only: [:show])
         controller.before_filter(:message_editable?, only: [:edit, :update])
         controller.before_filter(:show_template_chooser, only:[:edit])
@@ -43,7 +43,7 @@ module Messagecenter
         end
         
       else
-        if @message.instance_of?(TemplateMessage) && @message.template_id.blank?
+        if @message.instance_of?(TemplateMessage)
           redirect_to template_merchants_message_path(@message.uuid)
         else
           redirect_to edit_merchants_message_path(@message.uuid)
