@@ -46,10 +46,18 @@ class Template < ActiveRecord::Base
     new_template.id
   end
 
+  def fetch_editable_content(message_content)
+    content = ""
+    
+    content = Messagecenter::Templates::MarkupGenerator.generate_editable_content(message_content, self)
+    
+    content
+  end
+
   def fetch_content(message_content)
     content = ""
     
-    content = Messagecenter::Templates::MarkupGenerator.generate(message_content, self)
+    content = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
     
     content
   end

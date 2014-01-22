@@ -1,0 +1,16 @@
+= banner( "Template Preview" )
+= render partial: "merchants/messages/message_menu"
+
+#merchants.pad3pc
+  = render :partial => 'progress_bar'
+
+  .row
+    .pull-left
+      = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn btn-info'
+      = link_to "Change Content", template_merchants_message_path(@message.uuid), class: 'btn btn-'
+
+    .pull-right
+      = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'  
+
+  .row
+    %iframe{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", :width => "800", :height => '600'}

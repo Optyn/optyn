@@ -10,14 +10,28 @@ module Messagecenter
       CONTENT_COMPONENT_TYPE = "content"
       INTRODUCTION_COMPONENT_TYPE = "introduction"
 
-      def self.generate(content, template)
+      def self.generate_editable_content(content, template)
         markup = ""
         if content.blank?
-          blank_template = BlankTemplate.new(template: template)
+          blank_template = BlankTemplate.new(template: template, editable: true)
           markup = blank_template.build_markup
         else
           parsed_content = JSON.parse(content)
-          existing_template = ExistingTemplate.new(template: template, content: parsed_content)
+          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: true)
+          markup = existing_template.build_markup
+        end  
+
+        markup
+      end
+
+      def self.generate_content(content, template)
+        markup = ""
+        if content.blank?
+          blank_template = BlankTemplate.new(template: template, editable: false)
+          markup = blank_template.build_markup
+        else
+          parsed_content = JSON.parse(content)
+          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: false)
           markup = existing_template.build_markup
         end  
 
