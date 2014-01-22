@@ -1,6 +1,7 @@
 namespace :partner do
   desc "Add the Optyn Partner Id if not present and then assign the shops partner ids where missing"
   task :create_optyn => :environment do
+    load "#{Rails.root}/app/models/partner.rb"
     partner = Partner.for_organization('Optyn Inc.') || Partner.new(first_name: "Gaurav", last_name: "Gaglani",
                                                                        phone: "3127722109",
                                                                        password: "9p5yn123",
@@ -22,6 +23,7 @@ namespace :partner do
 
   desc "Add the Partner: Optyn Partners if not present and then assign the client_id and client_secret"
   task :create_optyn_partner => :environment do
+    load "#{Rails.root}/app/models/partner.rb"
     partner = Partner.for_organization('Optyn Partners') || Partner.new(first_name: "Gaurav", last_name: "Gaglani",
                                                                        phone: "3127722109",
                                                                        password: "9p5yn123",
@@ -37,6 +39,7 @@ namespace :partner do
 
   desc "Add the Partner: Eatstreet Inc. if not present and then assign the client_id and client_secret"
   task :create_eatstreet_partner => :environment do
+    load "#{Rails.root}/app/models/partner.rb"
     #TODO PUT IN THE REAL EATSTREET VALUES.
     puts "Adding the Eatstreet partner"
     partner = Partner.for_organization('Eatstreet Inc.') || Partner.new(first_name: "Eric", last_name: "Martell",
@@ -54,12 +57,14 @@ namespace :partner do
 
   desc "Add the Partner: Eatstreet Inc. and a dummy shop with a manager"
   task :eatstreet_with_dummy_shop do
+    load "#{Rails.root}/app/models/partner.rb"
     puts "Adding the Eatstreet dummy shop"
     partner = Partner.find_by_organization("Eatstreet Inc.")
     partner.shops.create(name: 'Optyn Eatstreet Test', stype: 'online', phone_number: '+3125233844', managers_attributes: {'0' => {name: "Gaurav Gaglani", email: 'eatstreet+test@optyn.com', password: 'eatstreet', password_confirmation: 'eatstreet'}})
   end
 
   task :eatstreet_with_multiple_dummy_shops => :environment do
+    load "#{Rails.root}/app/models/partner.rb"
     if Rails.env.downcase == 'staging'
       puts "Adding the Eatstreet dummy shops only in #{Rails.env} env"
       partner = Partner.find_by_organization("Eatstreet Inc.")
@@ -71,6 +76,7 @@ namespace :partner do
 
   desc "Add the 'seed' from email addresses for each partner"
   task :seed_verified_emails do
+    load "#{Rails.root}/app/models/partner.rb"
     #Adding verified email for the Optyn partner
     partner = Partner.for_organization('Optyn Inc.')
     partner.from_email = 'email@optyn.com'
