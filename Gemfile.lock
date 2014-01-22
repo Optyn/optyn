@@ -336,7 +336,6 @@ GEM
     remotipart (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rmagick (2.13.1)
     rqrcode (0.4.2)
     rqrcode-rails3 (0.1.6)
       rqrcode (>= 0.4.2)
@@ -498,7 +497,6 @@ DEPENDENCIES
   redis
   redis-rails
   redis-store
-  rmagick (= 2.13.1)
   rqrcode-rails3
   rspec
   rspec-rails
