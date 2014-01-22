@@ -116,13 +116,14 @@ OP = (function($, window, doucument, Optyn){
 
     //Add a new section observer
     hookAddSection: function(){
-      $('body').on('click', '.add-section-link', function(){
+      $('body').on('click', '.add-section-link', function( event ) {
+        event.preventDefault();
         var desiredGridType = $( this ).data( 'section-type' );
-        var requiredMarkup = $( this ).parents( '.wrapper' ).find( '.data-components' ).data( 'components' )[desiredGridType];
+        var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
         //console.log( requiredMarkup );
         var $containerParent = $( this ).parents( '.optyn-content' ).first().find( 'td' ).first();
-        requiredMarkup = '<table class="optyn-row"><tbody><tr><td>' +
-          '<table class="columns optyn-grid"><tbody><tr><td>' +
+        requiredMarkup = '<table class="row optyn-row"><tbody><tr><td>' +
+          '<table class="twelve columns optyn-grid"><tbody><tr><td>' +
           requiredMarkup +
           '</td></tr></tbody></table>' +
           '</td></tr></tbody></table>';
