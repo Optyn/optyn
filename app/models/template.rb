@@ -57,8 +57,8 @@ class Template < ActiveRecord::Base
   def fetch_content(message_content)
     content = ""
     
-    content = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
-    
+    html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
+    content = InlineStyle.process(html)
     content
   end
 end
