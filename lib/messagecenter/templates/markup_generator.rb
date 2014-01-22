@@ -24,7 +24,7 @@ module Messagecenter
         markup
       end
 
-      def self.generate_content(content. template)
+      def self.generate_content(content, template)
         markup = ""
         if content.blank?
           blank_template = BlankTemplate.new(template: template, editable: false)
