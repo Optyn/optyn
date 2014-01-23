@@ -27,12 +27,37 @@ OP = (function($, window, doucument, Optyn){
     },
 
     //fire up a modal when user edits a section
-    hookEditTrigger: function(){
-      $('body').on('click', '.ink-action-edit', function(){
+    hookEditTrigger: function() {
+      $('body').on('click', '.ink-action-edit', function() {
         //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
-        var $grid = $(this).parents('.optyn-grid').first();
-        var $editableElem = $grid.find('.columns');
-        var divisionContents = {};
+        var $grid = $(this).parents('.optyn-grid').first(),
+          $editableElem = $grid.find('.columns'),
+          headlineTexts = [],
+          paragraphMarkups = [],
+          divisionContents = {};
+        divisionContents.imageURLs = [];
+        divisionContents.texts = [];
+
+        $grid.find( '.optyn-headline' ).each( function( index, value ) {
+          headlineTexts.push( $( this ).text());
+        });
+        $grid.find( '.optyn-paragraph' ).each( function( index, value ) {
+          paragraphMarkups.push( $( this ).html());
+        });
+        $grid.find( 'img' ).each( function( index, value ) {
+          divisionContents.imageURLs.push( $( this ).attr( 'src' ));
+        });
+        console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
+
+        // Forming pairs of headlines and paragraphs. Assuming each headline has
+        // an associated paragraph.
+        for ( var count = 0; count < headlineTexts.length; count++ ) {
+          divisionContents.texts.push({
+            heading: headlineTexts[ count ],
+            paragraph: paragraphMarkups[ count ]
+          });
+        }
+
         if ( $grid.find('.optyn-headline').size()) {
           divisionContents.headline = $grid.find('.optyn-headline').html();
         }
@@ -42,13 +67,14 @@ OP = (function($, window, doucument, Optyn){
         if ( $grid.find('img').size()) {
           divisionContents.image = $grid.find( 'img' ).attr('src');
         }
-        console.log( Object.keys( divisionContents ), 'divisionContents:', divisionContents );
+        console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
         OP.template.openCkeditor($editableElem, divisionContents);
       });
     },
 
     //Code to open up the CKEditor
     openCkeditor: function(editableElem, divisionContents){
+        // Add fields for editing headlines, images and paragraphs. Only paragraphs open in CKEditor.
         console.log( 'Trying to open the CKEditor' );
         try{
           if( CKEDITOR.instances.template_editable_content.length ) {
@@ -57,28 +83,37 @@ OP = (function($, window, doucument, Optyn){
           }
         }catch(err){}
 
-
         var contentlVal = $(editableElem).html();
         var htmlVal = '';
-        if ( 'headline' in divisionContents ) {
-          htmlVal += '<input type="text" value="' + divisionContents.headline + '">';
+
+        for ( var count = 0; count < divisionContents.texts.length; count++ ) {
+          htmlVal += '<input class="edit-headline" type="text" value="' + divisionContents.texts[0].heading + '">';
+          htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content-' + count + '" cols="20">' + divisionContents.paragraph + '</textarea>';
         }
-        if ( 'paragraph' in divisionContents ) {
-          htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + divisionContents.paragraph + '</textarea>';
-        }
-        if ( 'image' in divisionContents ) {
-          //htmlVal += '<br /><br />Show image upload form. If image already present, show thumbnail and replace image button.';
-          htmlVal += '<br /><br />Current image preview:<br />' +
-            '<img src="' + divisionContents.image + '" style="height:80px;" alt=""><br />' +
-            'Upload a new image: <input type="file" accept=".png,.PNG,.jpg,.JPG,.jpeg,.JPEG,.gif,.GIF" />';
-        }
+
+        // if ( 'headline' in divisionContents ) {
+        //   htmlVal += '<input class="edit-headline" type="text" value="' + divisionContents.headline + '">';
+        // }
+        // if ( 'paragraph' in divisionContents ) {
+        //   htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + divisionContents.paragraph + '</textarea>';
+        // }
+        // if ( 'image' in divisionContents ) {
+        //   htmlVal += '<br /><br /><div class="row-fluid"><div class="span4">Current image preview:<br />' +
+        //     '<img src="' + divisionContents.image + '" style="height:80px;" alt=""></div>' +
+        //     '<div class="span8">Upload a new image: <input type="file" accept=".png,.PNG,.jpg,.JPG,.jpeg,.JPEG,.gif,.GIF" />' +
+        //     '</div></div>';
+        // }
         OP.template.populateModalCase(htmlVal);
         $('#editor_area_modal').modal('show');
 
-        if ( 'paragraph' in divisionContents ) {
-          CKEDITOR.replace('template_editable_content');
-          CKEDITOR.instances.template_editable_content.setData(divisionContents.paragraph);
+        for ( var count = 0; count < divisionContents.texts.length; count++ ) {
+          CKEDITOR.replace( 'template_editable_content-' + count );
+          CKEDITOR.instances.template_editable_content.setData( divisionContents.texts[count].paragraph );
         }
+        // if ( 'paragraph' in divisionContents ) {
+        //   CKEDITOR.replace('template_editable_content');
+        //   CKEDITOR.instances.template_editable_content.setData(divisionContents.paragraph);
+        // }
         OP.selectedSection.setElem(editableElem);
     },
 
@@ -105,13 +140,13 @@ OP = (function($, window, doucument, Optyn){
           '<h3>Edit Content</h3>' +
         '</div>' +
         '<div class="modal-body">' +
-          '<div class="row-fluid">' +
+          '<div>' +
           htmlVal +
           '</div>' +
         '</div>' +
         '<div class="modal-footer">' +
-          '<button class="btn" data-dismiss="modal">Close</button>' +
-          '<button class="btn btn-primary" id="section_save_changes">Save changes</button>' +
+          '<button class="btn btn-small" data-dismiss="modal">Close</button>' +
+          '<button class="btn btn-small btn-primary" id="section_save_changes">Save changes</button>' +
         '</div>';
 
       $('#editor_area_modal').html(caseHtml);
