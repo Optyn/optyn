@@ -667,7 +667,7 @@ ActiveRecord::Schema.define(:version => 20140123071516) do
   add_index "surveys", ["shop_id"], :name => "index_surveys_on_shop_id"
 
   create_table "template_uploads", :force => true do |t|
-    t.string   "template_html_file"
+    t.text     "template_html_file"
     t.integer  "manager_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
