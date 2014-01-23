@@ -74,7 +74,6 @@ module Messagecenter
           ""
         end
 
-        binding.pry
         static_content   
       end
 
