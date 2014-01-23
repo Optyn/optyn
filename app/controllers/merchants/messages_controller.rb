@@ -360,6 +360,7 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def custom_template
+    @template_upload = TemplateUpload.new
   end
 
   def upload_template
