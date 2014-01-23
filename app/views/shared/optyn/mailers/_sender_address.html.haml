@@ -1,9 +1,5 @@
-- puts "*" * 100
-- puts "Not using cache in optyn_sender_address"
-- puts "-" * 100
-
 %p{:style => "font-size: 11px;margin:0px;color: #666;"}
-  - if @shop and @shop.locations.present?
+  - if @shop.present? && @shop.locations.present?
     = @shop.message_address
   - else
     = "222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654"
