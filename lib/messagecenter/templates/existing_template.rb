@@ -21,9 +21,6 @@ module Messagecenter
         layout_markup
       end
 
-      def build_markup
-      end
-
       private
         def build_container_markup
           html = []
@@ -45,13 +42,13 @@ module Messagecenter
           html
         end
 
-        def build_row_markup(container, template_container, editable=true)
+        def build_row_markup(container, template_container)
           html = []
           container['rows'].each_with_index do |row_hash, index|
             template_row = template_container.rows[index]
             
             grids_html_arr = []
-            unless @editable
+            if "false" == @editable.to_s
               grids_html_arr = build_grid_markup(row_hash, template_row)
             else
               grids_html_arr = build_editable_grid_markup(row_hash, template_row)
@@ -104,19 +101,24 @@ module Messagecenter
         def build_division_markup(grid, template_grid)
           html  = []
           grid['divisions'].each do |division_hash|
-            template_div_html = template_grid.data_model[division_hash['type']].clone
+            template_div_html = template_grid.data_model[division_hash['division']['type']].clone
             template_div_content = template_div_html['content']
-
             #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
             division_node = Nokogiri::XML(template_div_content)
-            
+
             headline = division_node.css('.optyn-headline').first()
-            headline.inner_html = division_hash['headline'] if headline.present?
+            headline.inner_html = division_hash['division']['headline'] if headline.present?
 
             paragraph = division_node.css('.optyn-paragraph').first()
-            paragraph.inner_html = division_hash['paragraph'] if paragraph.present?
+            paragraph.inner_html = division_hash['division']['paragraph'] if paragraph.present?
 
-            toolset_markup = @eidtable ? static_toolset_markup(template_grid.data_model) : ""
+            toolset_markup = ""
+            if  "true" == @editable.to_s
+              toolset_markup = static_toolset_markup(template_grid.data_model)
+            else
+              binding.pry
+              toolset_markup = ""
+            end
 
             html << toolset_markup + division_node.children.to_s # toolset_markup will be blank if @editable is false
           end

@@ -23,6 +23,8 @@ module Messagecenter
                 grid_child.css('division').each do |division_child|
                   sanitize_division(division_child)
                   Messagecenter::Templates::MarkupGenerator.add_component_class(division_child, 'division')
+                  Messagecenter::Templates::MarkupGenerator.add_data_type_to_component(division_child)  
+
                   divisions << HashWithIndifferentAccess.new(html: division_child.children.to_s, type: division_child['type'])
                   Messagecenter::Templates::MarkupGenerator.add_component_class(division_child, 'division')
                   division_child.parent.add_child(add_newline(Template::PLACE_HOLDER_ELEM)) unless division_child.parent.to_s.include?(Template::PLACE_HOLDER_ELEM)
@@ -73,7 +75,7 @@ module Messagecenter
         #Replace the <headline>, <paragraph>, <image>
         def sanitize_division(division_child)
           division_child.css('headline').each do |headline_child|
-            Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline')  
+            Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline') 
             headline_html = headline_child.children.to_s
             headline_child.swap(headline_html)
           end
@@ -98,7 +100,10 @@ module Messagecenter
             div_hash = data_model[division['type']]
             div_hash['title'] = division['type'].to_s.humanize
             sanitize_division(division)
+            Messagecenter::Templates::MarkupGenerator.add_component_class(division, 'division')
+            Messagecenter::Templates::MarkupGenerator.add_data_type_to_component(division)
             div_hash['content'] = division.children.to_s.squish
+            div_hash['type'] = division['type']
           end
 
           data_model

@@ -47,7 +47,9 @@ module Messagecenter
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
           introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
           introduction_division.css('img').each do |image|
-            image.swap(email_body_shop_logo(shop))
+            # image.swap(email_body_shop_logo(shop))
+            #TODO REPLACE LATER
+            image.swap(%{<span class="optyn-headline">#{email_body_shop_logo(shop)}</span>})
           end
         end  
 
