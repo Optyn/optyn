@@ -158,13 +158,8 @@ OP = (function($, window, doucument, Optyn){
         event.preventDefault();
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
-        //console.log( requiredMarkup );
-        var $containerParent = $( this ).parents( '.optyn-content' ).first().find( 'td' ).first();
-        requiredMarkup = '<table class="row optyn-row"><tbody><tr><td>' +
-          '<table class="twelve columns optyn-grid"><tbody><tr><td>' +
-          requiredMarkup +
-          '</td></tr></tbody></table>' +
-          '</td></tr></tbody></table>';
+        var $containerParent = $( this ).parents( '.optyn-grid' ).first();
+        console.log()
         $containerParent.append( requiredMarkup );
         OP.template.saveSectionChanges();
       });
@@ -256,8 +251,10 @@ OP = (function($, window, doucument, Optyn){
                 var divisionWrapper = {'division': {}};
                 var division = divisionWrapper.division;
 
+                divisionWrapper.division.type = $division.attr('data-type')
                 divisionWrapper.division.headline = $division.find('.optyn-headline').html(); 
                 divisionWrapper.division.paragraph =  $division.find('.optyn-paragraph').html();
+
 
                 divisions.push(divisionWrapper);
               }); //end of each .optyn-division  
