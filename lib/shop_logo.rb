@@ -14,13 +14,13 @@ module ShopLogo
     else
       if shop.website.present?
         content = <<-HTML
-          <a href="#{shop.website}" target="_blank">
+          <a href="#{shop.website}" target="_blank" style="color: white; font-weight: bold; text-decoration: none;">
             <h3>#{shop.name}</h3>
           </a>
         HTML
         content.to_s.html_safe
       else
-        %{<h3>#{shop.name}</h3>}
+        %{<h3>#{shop.name}</h3>}.html_safe
       end 
     end
   end

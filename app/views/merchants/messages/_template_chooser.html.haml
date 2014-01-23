@@ -6,7 +6,7 @@
 
   .text-center
     %p
-      = link_to "I would like to upload a template and use it", "javascript:void(0)", class: 'btn btn-large btn-primary'
+      = link_to "I would like to upload a template and use it", new_template_upload_path(:message_id => @message.uuid), class: 'btn btn-large btn-primary'
 
     %h3 OR
 
@@ -30,7 +30,7 @@
   .blank-space
 
   .text-center
-    = link_to "Upload Template", "javascript:void(0)", class: 'btn btn-large btn-primary'
+    = link_to "Upload Template", new_template_upload_path(:message_id => @message.uuid), class: 'btn btn-large btn-primary'
     OR
     = link_to "System Layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 

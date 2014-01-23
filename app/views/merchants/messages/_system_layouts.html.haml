@@ -4,12 +4,10 @@
 .modal-body
   .template_chooser.row-fluid
   - @system_templates.each do |system_template|
-    = link_to(system_templates_link_caption(system_template), assign_template_merchants_message_path(@message.uuid), 'data-template-id' => system_template.id, class: "span4 type template_type")  
+    = link_to(system_templates_link_caption(system_template), assign_template_merchants_message_path(@message.uuid), 'data-template-id' => system_template.id, class: "span4 type template_type")
 
 .modal-footer
   = link_to "Close", "#", class: 'btn btn-close', 'data-dismiss' => "modal"
   .loading{style: 'display: none;'}
     %strong
       Please Wait...
-
-
