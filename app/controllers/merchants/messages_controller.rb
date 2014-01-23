@@ -359,6 +359,9 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def custom_template
+  end
+
   def upload_template
   end
 
