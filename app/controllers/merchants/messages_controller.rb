@@ -364,6 +364,12 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def upload_template
+    @template_upload = TemplateUpload.new
+    @template_upload.manager_id = current_manager.id
+    @template_upload.template_html_file = params[:template_upload][:template_html_file].read
+    if @template_upload.save
+      @template_upload.save_content
+    end
   end
 
   private

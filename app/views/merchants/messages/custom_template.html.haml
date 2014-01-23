@@ -1,7 +1,7 @@
 = banner("Upload your template here")
 = render partial: "merchants/messages/message_menu"
 
-= form_for :template_file, :url => :upload_template_merchants_message, :method => :post, :multipart => true do |f|
+= form_for :template_upload, :url => :upload_template_merchants_message, :method => :post, :multipart => true do |f|
   = f.label :template_html_file
   = f.file_field :template_html_file
   = f.submit :upload
