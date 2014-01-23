@@ -44,7 +44,7 @@ module Messagecenter
           container.rows.each do |row|
 
             grids_html = ""
-            unless @editable
+            if "false" == @editable
               grids_html = default_grids_html(row)
             else
               grids_html = default_editable_grids_html(row)

@@ -13,11 +13,11 @@ module Messagecenter
       def self.generate_editable_content(content, template)
         markup = ""
         if content.blank?
-          blank_template = BlankTemplate.new(template: template, editable: true)
+          blank_template = BlankTemplate.new(template: template, editable: 'true')
           markup = blank_template.build_markup
         else
           parsed_content = JSON.parse(content)
-          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: true)
+          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: 'true')
           markup = existing_template.build_markup
         end  
 
@@ -27,11 +27,11 @@ module Messagecenter
       def self.generate_content(content, template)
         markup = ""
         if content.blank?
-          blank_template = BlankTemplate.new(template: template, editable: false)
+          blank_template = BlankTemplate.new(template: template, editable: 'false')
           markup = blank_template.build_markup
         else
           parsed_content = JSON.parse(content)
-          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: false)
+          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: 'false')
           markup = existing_template.build_markup
         end  
 
@@ -50,15 +50,19 @@ module Messagecenter
       end
 
       def static_toolset_markup(grid_data_model)
+        static_content = ""
         data_model = grid_data_model.clone
+
+        
         if CONTENT_COMPONENT_TYPE == data_model['type']
+          
           dropdown_links  = ""
           type = data_model.delete('type')
           data_model.each_pair do |key, val|
             dropdown_links += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + key + '"' + '>' + '&nbsp;&nbsp;' + val['title'] + '&nbsp;</a>' + '</li>'
           end
 
-          '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button><button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a><ul class="dropdown-menu">' + 
+          static_content = '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button><button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a><ul class="dropdown-menu">' + 
           dropdown_links +       
           '</ul></div></div>'
         elsif INTRODUCTION_COMPONENT_TYPE == data_model['type']
@@ -68,7 +72,10 @@ module Messagecenter
           ""
         else
           ""
-        end   
+        end
+
+        binding.pry
+        static_content   
       end
 
       def self.add_component_class(component, component_parent)
@@ -86,10 +93,11 @@ module Messagecenter
       end
 
       def self.add_data_type_to_component(component)
+
         node = wrap_node_if_naked(component)
-        if "container" == component.name
-          node['data-type'] = component['type']
-        end
+      
+        node['data-type'] = component['type']
+        
       end
 
       private
