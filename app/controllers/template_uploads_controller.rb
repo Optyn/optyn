@@ -12,5 +12,6 @@ class TemplateUploadsController < ApplicationController
     if @template_upload.save
       @template_upload.save_content
     end
+    redirect_to "/merchants/messages/#{params[:message_id]}/template"
   end
 end
