@@ -424,8 +424,6 @@ Optyn::Application.routes.draw do
         get :reject
         put :reject
         get :edit_template
-        get :custom_template
-        post :upload_template
         get :template
         put :assign_template
         get :preview_template

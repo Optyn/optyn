@@ -359,26 +359,6 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
-  def custom_template
-    @template_upload = TemplateUpload.new
-  end
-
-  def upload_template
-    @template_upload = TemplateUpload.new
-    @template_upload.manager_id = current_manager.id
-    @template_upload.template_html_file = params[:template_upload][:template_html_file].read
-    if @template_upload.save
-      @template_upload.save_content
-      @system_templates = Template.system_generated
-      @templates = current_shop.templates
-      @message = Message.for_uuid(params[:id])
-      render :template
-    else
-      @errors = @template_upload.errors.full_messages
-      render :custom_template
-    end
-  end
-
   private
   def check_subscription
     message_method_call = params[:choice]
