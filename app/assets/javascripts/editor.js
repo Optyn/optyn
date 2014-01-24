@@ -18,6 +18,7 @@ OP = (function($, window, doucument, Optyn){
       this.hookEditTrigger();
       this.hookAddSection();
       this.hookDeleteSection();
+      this.hookContentCreationOnLoad();
     },
 
     //clear the modal html on load
@@ -205,6 +206,12 @@ OP = (function($, window, doucument, Optyn){
       
     },
 
+    hookContentCreationOnLoad: function(){
+      if($('#content_entered').length && $('#content_entered').val().length <= 0){
+        OP.template.saveSectionChanges();
+      }
+    },
+
   };
 
   //Define the Selected Element
@@ -252,8 +259,20 @@ OP = (function($, window, doucument, Optyn){
                 var division = divisionWrapper.division;
 
                 divisionWrapper.division.type = $division.attr('data-type')
-                divisionWrapper.division.headline = $division.find('.optyn-headline').html(); 
-                divisionWrapper.division.paragraph =  $division.find('.optyn-paragraph').html();
+
+                //populate the headlines
+                divisionWrapper.division.headlines = []
+                headlines = divisionWrapper.division.headlines
+                $division.find('.optyn-headline').each(function(headline_index, headline){
+                  headlines.push($(headline).html());
+                });
+
+                //populate the paragraphs
+                divisionWrapper.division.paragraphs =  []
+                paragraphs = divisionWrapper.division.paragraphs
+                $division.find('.optyn-paragraph').each(function(paragraph_index, paragraph){
+                  paragraphs.push($(paragraph).html());
+                });
 
 
                 divisions.push(divisionWrapper);

@@ -91,7 +91,7 @@ module Messagecenter
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
             
-            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n")))
+            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n"))))
             html << content
           end
 
@@ -106,17 +106,24 @@ module Messagecenter
             #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
             division_node = Nokogiri::XML(template_div_content)
 
-            headline = division_node.css('.optyn-headline').first()
-            headline.inner_html = division_hash['division']['headline'] if headline.present?
+            #headlines added
+            (division_hash['division']['headlines'] || []).each_with_index do |headline_content, index|
+              headline = division_node.css('.optyn-headline')[index]
+              headline.inner_html = headline_content
+            end
 
-            paragraph = division_node.css('.optyn-paragraph').first()
-            paragraph.inner_html = division_hash['division']['paragraph'] if paragraph.present?
+            #paragraph added
+            # paragraph = division_node.css('.optyn-paragraph').first()
+            # paragraph.inner_html = division_hash['division']['paragraphs'].first if paragraph.present?
+            (division_hash['division']['paragraphs'] || []).each_with_index do |paragraph_content, index|
+              paragraph = division_node.css('.optyn-paragraph')[index]
+              paragraph.inner_html = paragraph_content
+            end
 
             toolset_markup = ""
             if  "true" == @editable.to_s
               toolset_markup = static_toolset_markup(template_grid.data_model)
             else
-              binding.pry
               toolset_markup = ""
             end
 
