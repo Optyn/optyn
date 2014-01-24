@@ -91,7 +91,7 @@ module Messagecenter
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
             
-            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n")))
+            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n"))))
             html << content
           end
 
@@ -107,10 +107,10 @@ module Messagecenter
             division_node = Nokogiri::XML(template_div_content)
 
             headline = division_node.css('.optyn-headline').first()
-            headline.inner_html = division_hash['division']['headline'] if headline.present?
+            headline.inner_html = division_hash['division']['headlines'].first if headline.present?
 
             paragraph = division_node.css('.optyn-paragraph').first()
-            paragraph.inner_html = division_hash['division']['paragraph'] if paragraph.present?
+            paragraph.inner_html = division_hash['division']['paragraphs'].first if paragraph.present?
 
             toolset_markup = ""
             if  "true" == @editable.to_s
