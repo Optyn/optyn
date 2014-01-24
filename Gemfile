@@ -34,6 +34,8 @@ gem 'kaminari'
 gem 'newrelic_rpm'
 gem 'geocoder'
 gem 'whenever'
+gem "imgkit", "~> 1.3.10"
+
 # gems for stripe payment
 gem 'stripe'
 gem 'chronic', :require => 'chronic'
@@ -66,15 +68,15 @@ gem 'inline-style'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  # gem 'therubyracer', :platforms => :ruby
-  # gem "less-rails"
-  gem 'compass-rails'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass', '~> 2.3.1.2'
-  gem 'awesome_print'
-  gem 'turbo-sprockets-rails3'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+# gem 'therubyracer', :platforms => :ruby
+# gem "less-rails"
+gem 'compass-rails'
+gem 'uglifier', '>= 1.0.3'
+gem 'bootstrap-sass', '~> 2.3.1.2'
+gem 'awesome_print'
+gem 'turbo-sprockets-rails3'
 end
 
 gem 'jquery-rails'
@@ -92,23 +94,23 @@ gem "gretel"
 
 
 group :development do
-  gem 'thin'
-  gem 'sextant'
-  gem 'pry'
-  gem 'debugger'
-  gem 'quiet_assets'
-  gem 'capistrano'
-  gem 'rvm-capistrano'
-  gem 'capistrano-unicorn', :require => false
-  gem 'rails-erd'
-  #gem "capistrano-resque", "~> 0.1.0"
-  gem "mailcatcher"
+gem 'thin'
+gem 'sextant'
+gem 'pry'
+gem 'debugger'
+gem 'quiet_assets'
+gem 'capistrano'
+gem 'rvm-capistrano'
+gem 'capistrano-unicorn', :require => false
+gem 'rails-erd'
+#gem "capistrano-resque", "~> 0.1.0"
+gem "mailcatcher"
 end
 
 group :development, :test do
-        gem 'rspec'
-        gem 'rspec-rails'
-  gem "erb2haml"
+gem 'rspec'
+gem 'rspec-rails'
+gem "erb2haml"
 end
 
 # To use ActiveModel has_secure_password
