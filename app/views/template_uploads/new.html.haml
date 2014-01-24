@@ -2,8 +2,11 @@
 = render partial: "merchants/messages/message_menu"
 
 .pad3pc
-  = form_for :template_upload, :url => :template_uploads, :method => :post, :multipart => true do |f|
-    = f.label :template_html_file
-    = f.file_field :template_html_file
-    = hidden_field_tag :message_id, @message.uuid
+  = form_for :template_upload, :url => :template_uploads, :method => :post, class: 'abcd', :multipart => true, :html => {:class => 'form-horizontal'} do |f|
+    .optional
+      .control-group.text-left
+        = f.label :template_html_file, 'HTML page', :class => 'control-label'
+        .controls
+          = f.file_field :template_html_file
+        = hidden_field_tag :message_id, @message.uuid
     = f.submit :upload, class: 'btn btn-success'
