@@ -299,6 +299,10 @@ class Shop < ActiveRecord::Base
     self.oauth_application.secret
   end
 
+  def redirect_uri_after_login
+    self.oauth_application.redirect_uri_after_login
+  end
+  
   def redirect_uri
     self.oauth_application.redirect_uri
   end
@@ -570,6 +574,7 @@ class Shop < ActiveRecord::Base
     app.custom_text = options[:custom_text]
     app.begin_state = options[:begin_state]
     app.background_color = options[:background_color]
+    app.redirect_uri_after_login = options[:redirect_uri_after_login]
   end
 
   def assign_embed_code(app)
