@@ -1,15 +1,9 @@
-/ - @message.messages_sections.each do |messages_section|
-/   = render partial: "merchants/messages_sections/individual_section", locals: {messages_section: messages_section}
-
-/ - @addable_sections.each do |section|
-/   = hidden_field_tag section.section_type, section.section_type.titleize, class: 'addable-section', 'data-section-type' => section.section_type
-
-/= hidden_field_tag :add_new_section_location, merchants_message_messages_sections_path(message_id: @message.uuid)
 = stylesheet_link_tag "editor"
 = javascript_include_tag "editor"
 %div{:id => 'editor_area_modal', :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
 = hidden_field_tag(:save_merchants_message_location, save_merchants_message_path(@message.uuid, format: :json))
 = hidden_field_tag :authenticity_token, form_authenticity_token
+= hidden_field_tag :content_entered, @message.content.present? ? "yes" : ""
 
 = raw(@template.fetch_editable_content(@message.content))
 
