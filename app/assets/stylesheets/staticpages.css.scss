@@ -173,11 +173,16 @@
 
 
 /* Marketing Agency page =================================================== */
-.marketing-agency {
+body.marketing_agency {
   @media ( min-width: $xga-h ) {
     background-image: image-url( 'bg-landing-2.jpg' );
     background-size: cover;
   }
+  h1 {
+    border-bottom: solid 1px $gray;
+  }
+}
+.marketing-agency {
   .translucent-white {
     background-color: #fff;
     background-color: rgba(255,255,255,0.7);
