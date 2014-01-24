@@ -27,7 +27,6 @@ gem 'client_side_validations'
 gem 'doorkeeper', '~> 0.7.2'
 gem 'oauth2'
 gem 'carrierwave'
-gem 'rmagick', '2.13.1'
 gem "fog"
 gem 'localtunnel'
 gem 'chosen-rails'
@@ -56,7 +55,7 @@ gem 'oj'
 
 gem 'pdfkit' #for pdf generation
 gem 'rqrcode-rails3' #for QR code
-gem 'mini_magick' #for QR code in PNG, JPEG or GIF 
+gem 'mini_magick' #for QR code in PNG, JPEG or GIF
 gem "koala", "~> 1.8.0rc1" #for Facebook integration
 gem 'social-share-button'
 gem 'httparty'
@@ -80,7 +79,7 @@ end
 
 gem 'jquery-rails'
 
-gem 'god' 
+gem 'god'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'sidekiq-benchmark'
@@ -107,8 +106,8 @@ group :development do
 end
 
 group :development, :test do
-	gem 'rspec'
-	gem 'rspec-rails'
+        gem 'rspec'
+        gem 'rspec-rails'
   gem "erb2haml"
 end
 
