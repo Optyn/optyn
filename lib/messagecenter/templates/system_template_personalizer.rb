@@ -69,14 +69,14 @@ module Messagecenter
           permission_node = footer_node.css('permission').first
           shop_name_node = permission_node.css('shop-name').first
           shop_name_node.swap(shop.name)
-          permission_node.swap("<p>#{permission_node.children.to_s}")
+          permission_node.swap(permission_node.children.to_s)
 
           #change the address node with shops address
           address_node = footer_node.css('address').first
           begin
-            address_node.swap("<p>#{shop.message_address}</p>")
+            address_node.swap(shop.message_address)
           rescue
-            address_node.swap("<p>#{address_node.children.to_s}</p>")
+            address_node.swap(address_node.children.to_s)
           end
         end
 
