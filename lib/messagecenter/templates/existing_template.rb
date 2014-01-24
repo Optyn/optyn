@@ -116,7 +116,6 @@ module Messagecenter
             if  "true" == @editable.to_s
               toolset_markup = static_toolset_markup(template_grid.data_model)
             else
-              binding.pry
               toolset_markup = ""
             end
 
