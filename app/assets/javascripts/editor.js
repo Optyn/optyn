@@ -264,7 +264,7 @@ OP = (function($, window, doucument, Optyn){
                 divisionWrapper.division.headlines = []
                 headlines = divisionWrapper.division.headlines
                 $division.find('.optyn-headline').each(function(headline_index, headline){
-                  headlines.push($(headline.html()));
+                  headlines.push($(headline).html());
                 });
 
                 //populate the paragraphs
