@@ -198,6 +198,12 @@ class Merchants::MessagesController < Merchants::BaseController
 
   end
 
+  def email_self
+    @message = Message.for_uuid(params[:id])
+    @message.email_self
+    head :ok
+  end
+
   def trash
     @messages = Message.paginated_trash(current_shop, params[:page])
   end
