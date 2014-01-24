@@ -6,6 +6,7 @@ Optyn::Application.routes.draw do
 
 
   root to: 'main#index'
+  resources :template_uploads
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
 
