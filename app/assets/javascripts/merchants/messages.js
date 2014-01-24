@@ -18,6 +18,7 @@ function MerchantMessage() {
             this.hookDiscountType();
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
+            this.hookSendSelfEmail();
         }
 
         if ($('#messages_collection_container').length) {
@@ -357,6 +358,22 @@ function MerchantMessage() {
 
     this.removeDuplicateLabelIdsError = function(){
         $('input[name*=label_ids][type=hidden]').next('span.error').remove();
+    };
+
+    this.hookSendSelfEmail = function(){
+        $('body').on('click', '#self_email', function(event){
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'GET',
+                success: function(){
+                    alert('Successfully sent and email to you. Please check the email in a minute or two.')
+                },
+                error: function(){ 
+                    alert('An Error occurred while sending you email. Please send an email to support@optyn.com for any issues.')
+                }    
+            });
+        });
     };
 
     this.hookTemplateAssignment = function(){

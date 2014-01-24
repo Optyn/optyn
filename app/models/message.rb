@@ -241,6 +241,10 @@ class Message < ActiveRecord::Base
 
   end
 
+  def email_self
+    SelfEmailSender.perform_async(self.id)
+  end
+
   def assign_template(template_identifier)
     unless self.template_id.present?
       existing_template = Template.find(template_identifier)

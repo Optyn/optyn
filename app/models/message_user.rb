@@ -102,6 +102,8 @@ class MessageUser < ActiveRecord::Base
     if message_user_entry.present?
       message_user_entry.update_attribute(:email_read, true)
     end
+  rescue ActiveRecord::RecordNotFound
+    Rails.logger.error "Woot! Woot! Could not find Message User entry with id: #{identifier}"
   end
 
   def self.create_message_receiver_entries(message_instance, receiver_ids, creation_errors, process_manager)
