@@ -272,10 +272,12 @@ class Message < ActiveRecord::Base
     containers = message_hash[:containers]
     layout_hash = HashWithIndifferentAccess.new(containers: [])
     introduction_container = containers.detect{|container| "introduction" == container['type']}
-    content_container = containers.detect{|container| "content" == container['type']}  
+    content_container = containers.detect{|container| "content" == container['type']}
+    footer_container = containers.detect{|container| "footer" == container['type']}  
 
     layout_hash[:containers] << introduction_container if introduction_container.present?
     layout_hash[:containers] << content_container if content_container.present?
+    layout_hash[:containers] << footer_container if footer_container.present?
 
     self.content = layout_hash.to_json
     self.save(validate: false)
