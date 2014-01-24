@@ -10,7 +10,11 @@ class SesApiWorker
 
     ses_message_time_start = Time.now().to_i
     begin
-      ses_message = MessageMailer.send_announcement(message, message_user).deliver
+      if message
+        ses_message = MessageMailer.send_template(message, message_user).deliver
+      else
+        ses_message = MessageMailer.send_announcement(message, message_user).deliver
+      end
     rescue Exception => ex
       puts ex
       Rails.logger.info "~"*100
