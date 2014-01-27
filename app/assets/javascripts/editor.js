@@ -94,7 +94,8 @@ OP = (function($, window, doucument, Optyn){
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
           htmlVal += '<div class="blank-space"></div><div class="row-fluid">' +
             '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" /></div>' +
-            '<div class="span8">Upload:<br /><input type="file" accept=".jpg,.png,.gif,.jpeg"></div></div>';
+            '<div class="span8">Upload:<br /><input type="file" accept=".jpg,.png,.gif,.jpeg"><br />' +
+            '<input type="button" value="Upload image" class="btn btn-success btn-small" /></div></div>';
         }
 
         OP.template.populateModalCase(htmlVal);
