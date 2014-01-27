@@ -31,21 +31,21 @@ OP = (function($, window, doucument, Optyn){
     hookEditTrigger: function() {
       $('body').on('click', '.ink-action-edit', function() {
         //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
-        var $grid = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
-          $editableElem = $grid.find('.columns'),
+        var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
+          $editableElem = $division.find('.optyn-division'),
           headlineTexts = [],
           paragraphMarkups = [],
           divisionContents = {};
         divisionContents.imageURLs = [];
         divisionContents.texts = [];
 
-        $grid.find( '.optyn-headline' ).each( function() {
+        $division.find( '.optyn-headline' ).each( function() {
           headlineTexts.push( $( this ).text());
         });
-        $grid.find( '.optyn-paragraph' ).each( function() {
+        $division.find( '.optyn-paragraph' ).each( function() {
           paragraphMarkups.push( $( this ).html());
         });
-        $grid.find( 'img' ).each( function() {
+        $division.find( 'img' ).each( function() {
           divisionContents.imageURLs.push( $( this ).attr( 'src' ));
         });
         //console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
@@ -59,22 +59,22 @@ OP = (function($, window, doucument, Optyn){
           });
         }
 
-        if ( $grid.find('.optyn-headline').size()) {
-          divisionContents.headline = $grid.find('.optyn-headline').html();
+        if ( $division.find('.optyn-headline').size()) {
+          divisionContents.headline = $division.find('.optyn-headline').html();
         }
-        if ( $grid.find('.optyn-paragraph').size()) {
-          divisionContents.paragraph = $grid.find('.optyn-paragraph').html();
+        if ( $division.find('.optyn-paragraph').size()) {
+          divisionContents.paragraph = $division.find('.optyn-paragraph').html();
         }
-        if ( $grid.find('img').size()) {
-          divisionContents.image = $grid.find( 'img' ).attr('src');
+        if ( $division.find('img').size()) {
+          divisionContents.image = $division.find( 'img' ).attr('src');
         }
         console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
-        OP.template.openCkeditor($editableElem, divisionContents);
+        OP.template.openCkeditor($division, divisionContents);
       });
     },
 
     //Code to open up the CKEditor
-    openCkeditor: function(editableElem, divisionContents){
+    openCkeditor: function(division, divisionContents){
         // Add fields for editing headlines, images and paragraphs. Only paragraphs open in CKEditor.
         console.log( 'Trying to open the CKEditor' );
         try{
@@ -84,7 +84,6 @@ OP = (function($, window, doucument, Optyn){
           }
         }catch(err){}
 
-        var contentlVal = $(editableElem).html();
         var htmlVal = '';
 
         for ( var count = 0; count < divisionContents.texts.length; count++ ) {
@@ -109,17 +108,28 @@ OP = (function($, window, doucument, Optyn){
           (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents.texts[count].paragraph );
         }
 
-        OP.selectedSection.setElem(editableElem);
+        OP.selectedSection.setElem(division);
     },
 
     //Update the section html for the updates made by user in CKEditor
     hookUpdatingSection: function(){
       $('body').on('click', '#section_save_changes', function(){
         var selectedElem = OP.selectedSection.getElem();
-        $(selectedElem).html(CKEDITOR.instances.template_editable_content.getData());
+        console.log( 'selectedElem: ', selectedElem );
+        $(selectedElem).find( '.optyn-headline').each( function( index, headlineElem ) {
+          var newHeadline = $($('#editor_area_modal').find( '.edit-headline')[index]).val();
+          $( headlineElem ).html( newHeadline );
+        });
+        $(selectedElem).find( '.optyn-paragraph').each( function( index, paragraphElem ) {
+          var newPara = CKEDITOR.instances['template_editable_content-' + index].getData();
+          $( paragraphElem ).html( newPara );
+        });
+        //$(selectedElem).html(CKEDITOR.instances.template_editable_content.getData());
         $('#editor_area_modal').modal('hide');
         OP.template.saveSectionChanges();
       });
+
+      // Get all field contents. Update template.
     },
 
     //Clear the modal html on its hidden event
@@ -153,9 +163,13 @@ OP = (function($, window, doucument, Optyn){
         event.preventDefault();
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
-        var $containerParent = $( this ).parents( '.optyn-grid' ).first();
-        console.log()
-        $containerParent.append( requiredMarkup );
+        if($( '.no-divisions-toolset' ).length){
+          $( '.no-divisions-toolset' ).replaceWith(requiredMarkup); 
+        }else{
+          var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
+          $currentDivision.after(requiredMarkup);
+        }
+
         OP.template.saveSectionChanges();
       });
     },
@@ -168,17 +182,25 @@ OP = (function($, window, doucument, Optyn){
     //Observe the delete section and clear the fields
     hookDeleteSection: function(){
       $('body').on('click', '.ink-action-delete', function(){
-        var $elementToRemove = $( this ).parents( 'td' ).first();  // Should we remove .optyn-grid over here?
-        console.log( $elementToRemove );
-        $elementToRemove.slideUp( function() { $( this ).remove(); });
-        return;
-        var $toolsetContainer = $(this).parents('.template-section-toolset').first();
-        var $templateSection = $toolsetContainer.nextAll('.template-section').first();
-        var $templateSectionForm = $templateSection.nextAll('.template-section-form');
-        OP.template.saveSectionChanges();
-        $toolsetContainer.remove();
-        $templateSection.remove();
-        $templateSectionForm.remove();
+        var divisionCount = $( this ).parents( '.optyn-grid' ).find( '.optyn-division' ).size();
+        var $temp = null;
+        if ( divisionCount == 1 ) {
+          console.log( divisionCount );
+          $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
+          $toolsetCloned.find('.ink-action-edit').remove();
+          $toolsetCloned.find('.ink-action-delete').remove();
+          $toolsetCloned.addClass( 'no-divisions-toolset' );
+          $temp = $('<div />').append( $toolsetCloned );
+        }
+        var $toolset = $(this).parents('.template-section-toolset').first();
+        var $toolsetParent = $toolset.parent();
+        var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
+        $toolset.slideUp( function() { $( this ).remove(); });
+        $division.slideUp( function() { $( this ).remove(); });
+        if($temp != null){
+          $toolsetParent.append( $temp.html());  
+        }
+        
       });
     },
 
@@ -213,7 +235,7 @@ OP = (function($, window, doucument, Optyn){
     SelectedElement: {},
 
     setElem: function(selectedElem){
-      SelectedElement = selectedElem;
+      this.SelectedElement = selectedElem;
     },
 
     getElem: function(){
