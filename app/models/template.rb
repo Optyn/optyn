@@ -19,6 +19,7 @@ class Template < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
   has_many :stylesheets
+  has_one :template_upload
   belongs_to :shop
 
   after_create :create_structure
