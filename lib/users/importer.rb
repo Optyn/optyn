@@ -37,7 +37,7 @@ module Users
 		      user = User.find_by_email(cell_email) || User.new(email: cell_email)
 		      user.skip_name = true
 		      user.skip_welcome_email = true
-		      user.name = row[:name].to_s.strip unless user.name.present?
+		      user.name = row[:name].to_s.strip
 		      gender = if (gender_val = row[:gender].to_s.downcase).length == 1
 		                 gender_val
 		               else
