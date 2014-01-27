@@ -151,11 +151,13 @@ OP = (function($, window, doucument, Optyn){
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function( event ) {
         event.preventDefault();
+        $( '.no-divisions-toolset' ).hide();
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
-        var $containerParent = $( this ).parents( '.optyn-grid' ).first();
-        console.log()
-        $containerParent.append( requiredMarkup );
+        //var $containerParent = $( this ).parents( '.optyn-grid' ).first();
+        var $currentDivision = $( this ).parents('.template-section-toolset').next('.optyn-division');
+        //$containerParent.append( requiredMarkup );
+        $currentDivision.after(requiredMarkup);
         OP.template.saveSectionChanges();
       });
     },
@@ -168,17 +170,22 @@ OP = (function($, window, doucument, Optyn){
     //Observe the delete section and clear the fields
     hookDeleteSection: function(){
       $('body').on('click', '.ink-action-delete', function(){
-        var $elementToRemove = $( this ).parents( 'td' ).first();  // Should we remove .optyn-grid over here?
-        console.log( $elementToRemove );
-        $elementToRemove.slideUp( function() { $( this ).remove(); });
-        return;
-        var $toolsetContainer = $(this).parents('.template-section-toolset').first();
-        var $templateSection = $toolsetContainer.nextAll('.template-section').first();
-        var $templateSectionForm = $templateSection.nextAll('.template-section-form');
-        OP.template.saveSectionChanges();
-        $toolsetContainer.remove();
-        $templateSection.remove();
-        $templateSectionForm.remove();
+        var divisionCount = $( this ).parents( '.optyn-grid' ).find( '.optyn-division' ).size();
+        var $temp = null;
+        if ( divisionCount === 1 ) {
+          console.log( divisionCount );
+          $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
+          $toolsetCloned.find('.ink-action-edit').remove();
+          $toolsetCloned.find('.ink-action-delete').remove();
+          $toolsetCloned.addClass( 'no-divisions-toolset' );
+          $temp = $('<div />').append( $toolsetCloned );
+        }
+        var $toolset = $(this).parents('.template-section-toolset').first();
+        var $toolsetParent = $toolset.parent();
+        var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
+        $toolset.slideUp( function() { $( this ).remove(); });
+        $division.slideUp( function() { $( this ).remove(); });
+        $toolsetParent.append( $temp.html());
       });
     },
 
