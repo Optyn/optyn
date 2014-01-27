@@ -31,7 +31,7 @@ OP = (function($, window, doucument, Optyn){
     hookEditTrigger: function() {
       $('body').on('click', '.ink-action-edit', function() {
         //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
-        var $grid = $(this).parents('.optyn-grid').first(),
+        var $grid = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
           $editableElem = $grid.find('.columns'),
           headlineTexts = [],
           paragraphMarkups = [],
@@ -39,16 +39,16 @@ OP = (function($, window, doucument, Optyn){
         divisionContents.imageURLs = [];
         divisionContents.texts = [];
 
-        $grid.find( '.optyn-headline' ).each( function( index, value ) {
+        $grid.find( '.optyn-headline' ).each( function() {
           headlineTexts.push( $( this ).text());
         });
-        $grid.find( '.optyn-paragraph' ).each( function( index, value ) {
+        $grid.find( '.optyn-paragraph' ).each( function() {
           paragraphMarkups.push( $( this ).html());
         });
-        $grid.find( 'img' ).each( function( index, value ) {
+        $grid.find( 'img' ).each( function() {
           divisionContents.imageURLs.push( $( this ).attr( 'src' ));
         });
-        console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
+        //console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
 
         // Forming pairs of headlines and paragraphs. Assuming each headline has
         // an associated paragraph.
@@ -91,19 +91,12 @@ OP = (function($, window, doucument, Optyn){
           htmlVal += '<input class="edit-headline" type="text" value="' + divisionContents.texts[0].heading + '">';
           htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content-' + count + '" cols="20">' + divisionContents.paragraph + '</textarea>';
         }
+        for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
+          htmlVal += '<div class="blank-space"></div><div class="row-fluid">' +
+            '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" /></div>' +
+            '<div class="span8">Upload:<br /><input type="file" accept=".jpg,.png,.gif,.jpeg"></div></div>';
+        }
 
-        // if ( 'headline' in divisionContents ) {
-        //   htmlVal += '<input class="edit-headline" type="text" value="' + divisionContents.headline + '">';
-        // }
-        // if ( 'paragraph' in divisionContents ) {
-        //   htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content" cols="20">' + divisionContents.paragraph + '</textarea>';
-        // }
-        // if ( 'image' in divisionContents ) {
-        //   htmlVal += '<br /><br /><div class="row-fluid"><div class="span4">Current image preview:<br />' +
-        //     '<img src="' + divisionContents.image + '" style="height:80px;" alt=""></div>' +
-        //     '<div class="span8">Upload a new image: <input type="file" accept=".png,.PNG,.jpg,.JPG,.jpeg,.JPEG,.gif,.GIF" />' +
-        //     '</div></div>';
-        // }
         OP.template.populateModalCase(htmlVal);
         $('#editor_area_modal').modal('show');
 
@@ -111,10 +104,7 @@ OP = (function($, window, doucument, Optyn){
           CKEDITOR.replace( 'template_editable_content-' + count );
           CKEDITOR.instances.template_editable_content.setData( divisionContents.texts[count].paragraph );
         }
-        // if ( 'paragraph' in divisionContents ) {
-        //   CKEDITOR.replace('template_editable_content');
-        //   CKEDITOR.instances.template_editable_content.setData(divisionContents.paragraph);
-        // }
+
         OP.selectedSection.setElem(editableElem);
     },
 
@@ -193,7 +183,7 @@ OP = (function($, window, doucument, Optyn){
       var messageWrapper = OP.MessageWrapper.fetch();
       messageWrapper.authenticity_token = $('#authenticity_token').val();
       messageWrapper._method = 'PUT'
-      
+
       $.ajax({
         url: uri,
         type: 'PUT',
@@ -203,7 +193,7 @@ OP = (function($, window, doucument, Optyn){
           alert('We are sorry, a problem occourred while while saving your changes. Please reload your page. We are sorry.');
         }
       });
-      
+
     },
 
     hookContentCreationOnLoad: function(){
@@ -276,7 +266,7 @@ OP = (function($, window, doucument, Optyn){
 
 
                 divisions.push(divisionWrapper);
-              }); //end of each .optyn-division  
+              }); //end of each .optyn-division
 
               grids.push(grid);
             }); //end of each .optyn-grid
