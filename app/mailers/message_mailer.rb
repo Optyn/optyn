@@ -31,6 +31,19 @@ class MessageMailer < ActionMailer::Base
       ) 
   end
 
+  def send_template(message, receiver)
+    ShopTimezone.set_timezone(message.shop)
+    unparsed_content = message.template.fetch_cached_content(message)
+    content = Template.sanitize_custom_tags(unparsed_content)
+    
+    mail(to: %Q(#{'"' + receiver.name + '"' + ' ' if receiver.name}<#{receiver.email}>),
+      from: message.from, 
+      subject: message.personalized_subject(receiver),
+      reply_to: message.manager_email,
+      body: content
+    ) 
+  end
+
   def error_notification(error_message)
     mail(to: ["gaurav@optyn.com", "alen@optyn.com"], subject: "Error while sending emails", body: error_message)
   end

@@ -6,7 +6,6 @@ Optyn::Application.routes.draw do
 
 
   root to: 'main#index'
-  resources :template_uploads
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
 
@@ -323,6 +322,7 @@ Optyn::Application.routes.draw do
     end #end of the api namespace
 
     namespace "merchants" do |merchant|
+    resources :template_uploads
 
       devise_for :managers, :controllers => {
         :registrations => 'merchants/managers/registrations',
