@@ -31,7 +31,7 @@ OP = (function($, window, doucument, Optyn){
     hookEditTrigger: function() {
       $('body').on('click', '.ink-action-edit', function() {
         //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
-        var $grid = $(this).parents('.optyn-grid').first(),
+        var $grid = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
           $editableElem = $grid.find('.columns'),
           headlineTexts = [],
           paragraphMarkups = [],
@@ -39,13 +39,13 @@ OP = (function($, window, doucument, Optyn){
         divisionContents.imageURLs = [];
         divisionContents.texts = [];
 
-        $grid.find( '.optyn-headline' ).each( function( index, value ) {
+        $grid.find( '.optyn-headline' ).each( function() {
           headlineTexts.push( $( this ).text());
         });
-        $grid.find( '.optyn-paragraph' ).each( function( index, value ) {
+        $grid.find( '.optyn-paragraph' ).each( function() {
           paragraphMarkups.push( $( this ).html());
         });
-        $grid.find( 'img' ).each( function( index, value ) {
+        $grid.find( 'img' ).each( function() {
           divisionContents.imageURLs.push( $( this ).attr( 'src' ));
         });
         console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
