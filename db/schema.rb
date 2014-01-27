@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140123071516) do
+ActiveRecord::Schema.define(:version => 20140127115430) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -658,8 +658,9 @@ ActiveRecord::Schema.define(:version => 20140123071516) do
   add_index "surveys", ["shop_id"], :name => "index_surveys_on_shop_id"
 
   create_table "template_uploads", :force => true do |t|
-    t.text     "template_html_file"
+    t.string   "template_html_file"
     t.integer  "manager_id"
+    t.integer  "template_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
@@ -672,6 +673,7 @@ ActiveRecord::Schema.define(:version => 20140123071516) do
     t.text     "structure"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.string   "thumbnail"
   end
 
   create_table "user_labels", :force => true do |t|

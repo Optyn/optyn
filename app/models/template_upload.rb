@@ -1,16 +1,18 @@
 class TemplateUpload < ActiveRecord::Base
   belongs_to :manager
-  attr_accessible :template_html_file
-  validates :template_html_file, presence: true
+  belongs_to :template
 
-  def save_content
+  attr_accessible :template_html_file
+
+  validates :template_html_file, presence: true
+  mount_uploader :template_html_file, TemplateUploader
+
+  def save_template
     template = Template.new
-    template.html = self.template_html_file
+    template.html = self.template_html_file.read
     template.system_generated = false
     template.shop_id = Manager.select("shop_id").find(self.manager_id).shop_id
-    if template.save
-      path = "public/template_#{template.id}.jpg"
-      IMGKit.new(template.html, quality: 50).to_file(path)
-    end
+    template.save
+    template
   end
 end

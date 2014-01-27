@@ -19,9 +19,11 @@ class Template < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
   has_many :stylesheets
+  has_one :template_upload
   belongs_to :shop
 
   after_create :create_structure
+  after_create :generate_thumbnail
 
   scope :fetch_system_generated, where(system_generated: true)
 
@@ -30,8 +32,9 @@ class Template < ActiveRecord::Base
   scope :for_name, ->(template_name) { where(name: template_name) }
 
   PLACE_HOLDER_ELEM = "<placeholder></placeholder>\n"
+  mount_uploader :thumbnail, TemplateThumbnailUploader
 
-  def self.system_generated 
+  def self.system_generated
     fetch_system_generated
   end
 
@@ -51,7 +54,7 @@ class Template < ActiveRecord::Base
     # Sanitaize the footer
     template_node = Nokogiri::XML(template_div_content)
     template_node.css('.optyn-footer').each do |footer_node|
-      
+
       #substitute the receiver email
       footer_node.css('receiver-email').each do |receiver_email_node|
         receiver_email_node.swap(receiver.email)
@@ -68,15 +71,15 @@ class Template < ActiveRecord::Base
 
   def fetch_editable_content(message_content)
     content = ""
-    
+
     content = Messagecenter::Templates::MarkupGenerator.generate_editable_content(message_content, self)
-    
+
     content
   end
 
   def fetch_content(message_content)
     content = ""
-    
+
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
     content = InlineStyle.process(html)
 
@@ -87,5 +90,17 @@ class Template < ActiveRecord::Base
     Rails.cache.fetch("template_message_#{message.uuid}", force: false, expires_in: SiteConfig.ttls.email_footer) do
       fetch_content(message.content)
     end
+  end
+
+  def generate_thumbnail
+    file = Tempfile.new(["template_#{self.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
+    file.write(IMGKit.new(self.html, quality: 50).to_jpg)
+    file.flush
+    self.thumbnail = file
+    self.save
+    p "*" * 25
+    p "ERRORS: #{self.errors.full_messages}"
+    p "*" * 25
+    file.unlink
   end
 end
