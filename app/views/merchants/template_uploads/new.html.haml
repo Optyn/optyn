@@ -1,8 +1,10 @@
 %h1.pull-left Upload your template here
 = render partial: "merchants/messages/message_menu"
 
+- if @template_upload.errors.any?
+  = @template_upload.errors.full_messages.join(', ')
 .pad3pc
-  = form_for :template_upload, :url => :template_uploads, :method => :post, class: 'abcd', :multipart => true, :html => {:class => 'form-horizontal'} do |f|
+  = form_for :merchants_template_upload, :url => :merchants_template_uploads, :method => :post, class: 'abcd', :multipart => true, :html => {:class => 'form-horizontal'} do |f|
     .optional
       .control-group.text-left
         = f.label :template_html_file, 'HTML page', :class => 'control-label'
