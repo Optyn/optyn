@@ -92,7 +92,6 @@ class Template < ActiveRecord::Base
     end
   end
 
-  private
   def generate_thumbnail
     file = Tempfile.new(["template_#{self.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
     file.write(IMGKit.new(self.html, quality: 50).to_jpg)
