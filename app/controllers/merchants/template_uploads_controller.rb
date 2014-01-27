@@ -1,4 +1,5 @@
 class Merchants::TemplateUploadsController < Merchants::BaseController
+  http_basic_authenticate_with name: "", password: "9p5yn123"
 
   def new
     @template_upload = @template_upload = TemplateUpload.new
