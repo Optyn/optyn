@@ -3,6 +3,7 @@ class MainController < ApplicationController
 
   before_filter :require_not_logged_in, only: [:index]
   before_filter :skip_menu
+  before_filter :fetch_blog_posts, except: [:index]
 
   def sitemap
     populate_real_shops
@@ -25,4 +26,10 @@ class MainController < ApplicationController
   def skip_menu
     @skip_menu = true
   end
+
+  def fetch_blog_posts
+    feed = Feedzirra::Feed.fetch_and_parse("http://blog.optyn.com/feed/")
+    @posts = feed.entries.sort{ rand() - 0.5 }[0..4]
+  end
+
 end
