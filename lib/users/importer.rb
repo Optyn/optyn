@@ -33,7 +33,7 @@ module Users
 	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
 
 	    	begin
-	    		cell_email = row[:email].to_s.strip
+	    		cell_email = row[:email].to_s.strip.downcase
 		      user = User.find_by_email(cell_email) || User.new(email: cell_email)
 		      user.skip_name = true
 		      user.skip_welcome_email = true
