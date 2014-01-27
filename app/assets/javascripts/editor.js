@@ -88,9 +88,10 @@ OP = (function($, window, doucument, Optyn){
         var htmlVal = '';
 
         for ( var count = 0; count < divisionContents.texts.length; count++ ) {
-          htmlVal += 'Title: <input class="edit-headline" type="text" value="' + divisionContents.texts[0].heading + '">';
+          // Markup for editing paragraph.
+          htmlVal += 'Title: <input class="edit-headline" type="text" value="' + divisionContents.texts[count].heading + '">';
           htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
-            count + '" cols="20">' + divisionContents.paragraph + '</textarea>' +
+            count + '" cols="20">' + divisionContents.texts[count].paragraph + '</textarea>' +
             '<div class="blank-space"></div>';
         }
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
@@ -105,7 +106,7 @@ OP = (function($, window, doucument, Optyn){
 
         for ( var count = 0; count < divisionContents.texts.length; count++ ) {
           CKEDITOR.replace( 'template_editable_content-' + count );
-          CKEDITOR.instances.template_editable_content.setData( divisionContents.texts[count].paragraph );
+          (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents.texts[count].paragraph );
         }
 
         OP.selectedSection.setElem(editableElem);
