@@ -7,9 +7,8 @@ class Merchants::TemplateUploadsController < Merchants::BaseController
   end
 
   def create
-    @template_upload = TemplateUpload.new
+    @template_upload = TemplateUpload.new(params[:merchants_template_upload])
     @template_upload.manager_id = current_manager.id
-    @template_upload.template_html_file = params[:merchants_template_upload][:template_html_file].read rescue nil
     @template_upload.template_id = @template_upload.save_template.id
     if @template_upload.save
       redirect_to "/merchants/messages/#{params[:message_id]}/template"
