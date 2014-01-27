@@ -8,9 +8,6 @@ class TemplateUpload < ActiveRecord::Base
     template.html = self.template_html_file
     template.system_generated = false
     template.shop_id = Manager.select("shop_id").find(self.manager_id).shop_id
-    if template.save
-      path = "public/template_#{template.id}.jpg"
-      IMGKit.new(template.html, quality: 50).to_file(path)
-    end
+    template.save
   end
 end

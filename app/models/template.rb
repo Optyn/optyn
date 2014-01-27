@@ -22,6 +22,7 @@ class Template < ActiveRecord::Base
   belongs_to :shop
 
   after_create :create_structure
+  after_create :generate_thumbnail
 
   scope :fetch_system_generated, where(system_generated: true)
 
@@ -87,5 +88,11 @@ class Template < ActiveRecord::Base
     Rails.cache.fetch("template_message_#{message.uuid}", force: false, expires_in: SiteConfig.ttls.email_footer) do
       fetch_content(message.content)
     end
+  end
+
+  private
+  def generate_thumbnail
+    path = "public/template_#{self.id}.jpg"
+    IMGKit.new(self.html, quality: 50).to_file(path)
   end
 end
