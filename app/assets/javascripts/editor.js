@@ -151,13 +151,15 @@ OP = (function($, window, doucument, Optyn){
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function( event ) {
         event.preventDefault();
-        $( '.no-divisions-toolset' ).hide();
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
-        //var $containerParent = $( this ).parents( '.optyn-grid' ).first();
-        var $currentDivision = $( this ).parents('.template-section-toolset').next('.optyn-division');
-        //$containerParent.append( requiredMarkup );
-        $currentDivision.after(requiredMarkup);
+        if($( '.no-divisions-toolset' ).length){
+          $( '.no-divisions-toolset' ).replaceWith(requiredMarkup); 
+        }else{
+          var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
+          $currentDivision.after(requiredMarkup);
+        }
+
         OP.template.saveSectionChanges();
       });
     },
@@ -172,7 +174,7 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.ink-action-delete', function(){
         var divisionCount = $( this ).parents( '.optyn-grid' ).find( '.optyn-division' ).size();
         var $temp = null;
-        if ( divisionCount === 1 ) {
+        if ( divisionCount == 1 ) {
           console.log( divisionCount );
           $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
           $toolsetCloned.find('.ink-action-edit').remove();
@@ -185,7 +187,10 @@ OP = (function($, window, doucument, Optyn){
         var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
         $toolset.slideUp( function() { $( this ).remove(); });
         $division.slideUp( function() { $( this ).remove(); });
-        $toolsetParent.append( $temp.html());
+        if($temp != null){
+          $toolsetParent.append( $temp.html());  
+        }
+        
       });
     },
 
