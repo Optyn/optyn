@@ -8,7 +8,6 @@ function FileImport() {
             this.hookChosen();
             this.hookAddNewLabel();
             this.hookDisableSubmitTag();
-            this.hookChangeChosen();
         }
     };
 
@@ -41,6 +40,12 @@ function FileImport() {
                                 );
                             $currentSelect.find('option[value="' + data.name + '"]').attr('selected', 'selected');
                             $('#label_ids').trigger("liszt:updated");
+                            if  ($( '.import input[type=file]').val() != '' ){
+                                $( 'input[name=commit]' ).tooltip( 'destroy' )
+                                .removeAttr( 'disabled' )
+                                .removeClass( 'disabled' );
+
+                            }
                         }
                     });
                 }
@@ -53,7 +58,7 @@ function FileImport() {
             $( 'input[name=commit]' ).addClass( 'disabled' )
             .attr( 'disabled', '' );
         }
-        
+
         $('.import input[type=file]').change( function() {
             if($('ul.chzn-choices li.search-choice').length == 0){
                 $( 'input[name=commit]' ).addClass( 'disabled' )
@@ -65,7 +70,7 @@ function FileImport() {
                 .removeClass( 'disabled' );
             }
         });
-        
+
         $('#label_ids').chosen().change(function(event) {
             var  target = $(event.target);
             currentDataSet = target.val();
@@ -82,24 +87,11 @@ function FileImport() {
                 $( 'input[name=commit]' ).tooltip( 'destroy' )
                 .removeAttr( 'disabled' )
                 .removeClass( 'disabled' );
-                
+
             }
-            
+
         });
     };
 
-    this.hookChangeChosen = function () {
-        $('#label_ids').chosen().change(function(){
-            var $select = $(this);
 
-            $.ajax({
-                url: $('#update_labels_merchants_survey_survey_answers_path').val(),
-                type: 'POST',
-                data: {
-                    user_id: $select.parent().find('.user_id').val(),
-                    label_ids: $select.val()
-                }
-            });
-        });
-    };
 }
