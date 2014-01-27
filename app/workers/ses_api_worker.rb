@@ -10,7 +10,7 @@ class SesApiWorker
 
     ses_message_time_start = Time.now().to_i
     begin
-      if message
+      if message.instance_of?(TemplateMessage)
         ses_message = MessageMailer.send_template(message, message_user).deliver
       else
         ses_message = MessageMailer.send_announcement(message, message_user).deliver
