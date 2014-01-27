@@ -88,8 +88,8 @@ OP = (function($, window, doucument, Optyn){
         var htmlVal = '';
 
         for ( var count = 0; count < divisionContents.texts.length; count++ ) {
-          htmlVal += '<input class="edit-headline" type="text" value="' + divisionContents.texts[0].heading + '">';
-          htmlVal += '<textarea rows="10" name="template_editable_content" id="template_editable_content-' + count + '" cols="20">' + divisionContents.paragraph + '</textarea>';
+          htmlVal += 'Title: <input class="edit-headline" type="text" value="' + divisionContents.texts[0].heading + '">';
+          htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' + count + '" cols="20">' + divisionContents.paragraph + '</textarea>';
         }
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
           htmlVal += '<div class="blank-space"></div><div class="row-fluid">' +
