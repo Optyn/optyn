@@ -162,7 +162,7 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.add-section-link', function( event ) {
         event.preventDefault();
         var desiredGridType = $( this ).data( 'section-type' );
-        var requiredMarkup = $( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
+        var requiredMarkup = $( this ).parents('.optyn-grid').first().find( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
         if($( '.no-divisions-toolset' ).length){
           $( '.no-divisions-toolset' ).replaceWith(requiredMarkup); 
         }else{
@@ -294,7 +294,7 @@ OP = (function($, window, doucument, Optyn){
                 
                 //populate the images
                 $division.find('.optyn-replaceable-image').each(function(image_index, image){
-                  
+
                 });
 
                 divisions.push(divisionWrapper);
