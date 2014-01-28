@@ -3,7 +3,7 @@ class MainController < ApplicationController
 
   before_filter :require_not_logged_in, only: [:index]
   before_filter :skip_menu
-  before_filter :fetch_blog_posts, except: [:index]
+  before_filter :fetch_blog_posts, only: [:resources_email_marketing, :email_marketing_agency]
 
   def sitemap
     populate_real_shops

@@ -1,3 +1,6 @@
+%p
+  %strong
+    Posts
 - @posts.each do |post|
-  = link_to post.title, post.url
+  %a{ :href => post.url, :alt => "Email Marketing", :title => post.title } #{post.title}
   %br/
