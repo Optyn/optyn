@@ -1,5 +1,5 @@
 %div{style: 'text-align:center;'}
-  = message_bottom_image(@message)
+  = message_bottom_image(@message, @message_user)
 
   - if @message.show_button?
     %br
