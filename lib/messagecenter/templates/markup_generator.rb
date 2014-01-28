@@ -78,7 +78,7 @@ module Messagecenter
       end
 
       def self.add_component_class(component, component_parent)
-        node = wrap_node_if_naked(component)  
+        node = add_node_if_none(component)  
 
         optyn_class = "optyn-#{component_parent}"
         optyn_class << " optyn-#{component['type']}" if "grid" == component.name || "container" == component.name
@@ -93,21 +93,31 @@ module Messagecenter
 
       def self.add_data_type_to_component(component)
 
-        node = wrap_node_if_naked(component)
+        node = add_node_if_none(component)
       
         node['data-type'] = component['type']
         
       end
 
-      def self.add_image_placeholder_url(image_component)
-        if image_component.child.present?
-          node = image_component.child
-          node['data-src-placeholder'] = node['src']
+      def self.add_image_placeholder_container(image_component)
+        if image_component.search('img').present?
+          image_component.search('img').wrap("<span></span>")
+          node = image_component.search('span').first()
+          img_node = image_component.search('img').first()
+          
+          
+          img_node.attributes.each_pair do |key, val|
+            if 'src' != key
+              node[key] = img_node[key]
+            else
+              node['data-src-placeholder'] = img_node['src']
+            end
+          end
         end
       end
 
       private
-        def self.wrap_node_if_naked(component)
+        def self.add_node_if_none(component)
           node = nil
           if component.child.present? && component.child.element?
             node = component.child

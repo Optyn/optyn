@@ -87,8 +87,9 @@ module Messagecenter
           end
 
           division_child.css('image').each do |image_child|
+            Messagecenter::Templates::MarkupGenerator.add_image_placeholder_container(image_child)
             Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')
-            Messagecenter::Templates::MarkupGenerator.add_image_placeholder_url(image_child)
+            image_child.search('img').remove()  
             image_html = image_child.children.to_s
             image_child.swap(image_html)
           end
