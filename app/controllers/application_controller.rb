@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :manager_signed_in?, :current_manager
   after_filter :ckeditor_add_website_id
+  protect_from_forgery
+  skip_before_filter :verify_authenticity_token, if: :json_request?
+
 
   def ckeditor_add_website_id
     if params[:controller] == 'ckeditor/pictures' && params[:action] == 'create'
@@ -99,5 +102,10 @@ class ApplicationController < ActionController::Base
 
   def ckeditor_attachment_files_scope(options = { :shop_id => "#{current_manager.shop.id}" })
     ckeditor_filebrowser_scope(options)
+  end
+
+
+  def json_request?
+    request.format.json?# or request.format.js?
   end
 end

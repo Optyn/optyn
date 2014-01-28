@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= jquery-migrate-1.2.1
 //= require jquery-ui-1.9.2.custom.min
 //= require bootstrap

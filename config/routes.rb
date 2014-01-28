@@ -241,6 +241,8 @@ Optyn::Application.routes.draw do
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
     [user, password] == ["", "9p5yn123"]
   end
+
+  mount Ckeditor::Engine => "/ckeditor"
   
 
   namespace :api  do
@@ -431,6 +433,7 @@ Optyn::Application.routes.draw do
           get :editor
           put :save
           get :email_self
+          post :template_upload_image
         end #end of member
       end #end of resources messages
     end #end of merchants namespace

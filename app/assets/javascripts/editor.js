@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= jquery-migrate-1.2.1
 //= require bootstrap
 //= require_self
@@ -75,6 +76,7 @@ OP = (function($, window, doucument, Optyn){
 
     //Code to open up the CKEditor
     openCkeditor: function(division, divisionContents){
+      
         // Add fields for editing headlines, images and paragraphs. Only paragraphs open in CKEditor.
         console.log( 'Trying to open the CKEditor' );
         try{
@@ -85,6 +87,7 @@ OP = (function($, window, doucument, Optyn){
         }catch(err){}
 
         var htmlVal = '';
+        var image_form_action = "/merchants/messages/" + $('#editor_area_modal').data('msg-id') + "/template_upload_image"
 
         for ( var count = 0; count < divisionContents.texts.length; count++ ) {
           // Markup for editing paragraph.
@@ -96,8 +99,10 @@ OP = (function($, window, doucument, Optyn){
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
           htmlVal += '<div class="blank-space"></div><div class="row-fluid">' +
             '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" /></div>' +
-            '<div class="span8">Upload:<br /><input type="file" accept=".jpg,.png,.gif,.jpeg"><br />' +
-            '<input type="button" value="Upload image" class="btn btn-success btn-small" /></div></div>';
+            '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
+            '<div class="span8">Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
+            '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div></div>' +
+            '</form></div>';
         }
 
         OP.template.populateModalCase(htmlVal);
@@ -109,6 +114,9 @@ OP = (function($, window, doucument, Optyn){
         }
 
         OP.selectedSection.setElem(division);
+    },
+
+    uploadImage: function() {
     },
 
     //Update the section html for the updates made by user in CKEditor

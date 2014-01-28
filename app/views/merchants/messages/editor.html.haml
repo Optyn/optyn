@@ -1,9 +1,8 @@
 = stylesheet_link_tag "editor"
 = javascript_include_tag "editor"
-%div{:id => 'editor_area_modal', :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
+%div{:id => 'editor_area_modal', :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true", :'data-msg-id' => @message.uuid}
 = hidden_field_tag(:save_merchants_message_location, save_merchants_message_path(@message.uuid, format: :json))
 = hidden_field_tag :authenticity_token, form_authenticity_token
 = hidden_field_tag :content_entered, @message.content.present? ? "yes" : ""
 
 = raw(@template.fetch_editable_content(@message.content))
-

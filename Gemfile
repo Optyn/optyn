@@ -36,6 +36,7 @@ gem 'newrelic_rpm'
 gem 'geocoder'
 gem 'whenever'
 gem "imgkit", "~> 1.3.10"
+gem 'remotipart', '~> 1.2'
 
 # gems for stripe payment
 gem 'stripe'

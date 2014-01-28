@@ -1,0 +1,5 @@
+<%if @message_image.errors.present?%>
+	alert('failure');
+<% else %>
+	alert('<%=@message_image.image%>');
+<% end %>

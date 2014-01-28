@@ -365,6 +365,12 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def template_upload_image
+    @message = Message.for_uuid(params[:id])
+    @message_image = MessageImage.new(:image => params[:imgfile], :message_id =>@message.id)
+    @message_image.save
+  end
+
   private
   def check_subscription
     message_method_call = params[:choice]
