@@ -20,7 +20,7 @@
 
   .template_chooser
     - @templates.each do |template|
-      %a.span4{href: assign_template_merchants_message_path(@message.uuid)}
+      %a{href: assign_template_merchants_message_path(@message.uuid), class: "span4 template_type", 'data-template-id' => template.id}
         = image_tag("#{template.thumbnail}")
   .loading{style: 'display: none;'}
     %strong
