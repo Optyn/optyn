@@ -94,16 +94,18 @@ class Template < ActiveRecord::Base
 
   def generate_thumbnail
     if self.html_changed? && self.reload
-      file = Tempfile.new(["template_#{self.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
-      file.write(IMGKit.new(self.html, quality: 50).to_jpg)
-      file.flush
       self.remove_thumbnail! if !self.thumbnail.to_s.blank?
+      file = html_to_thumbnail
       self.thumbnail = file
       self.save
-      p "*" * 25
-      p "ERRORS: #{self.errors.full_messages}"
-      p "*" * 25
       file.unlink
     end
+  end
+
+  def html_to_thumbnail
+    file = Tempfile.new(["template_#{self.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
+    file.write(IMGKit.new(self.html, quality: 50).to_jpg)
+    file.flush
+    file
   end
 end
