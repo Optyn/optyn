@@ -291,7 +291,11 @@ OP = (function($, window, doucument, Optyn){
                 $division.find('.optyn-paragraph').each(function(paragraph_index, paragraph){
                   paragraphs.push($(paragraph).html());
                 });
-
+                
+                //populate the images
+                $division.find('.optyn-replaceable-image').each(function(image_index, image){
+                  
+                });
 
                 divisions.push(divisionWrapper);
               }); //end of each .optyn-division

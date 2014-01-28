@@ -90,7 +90,6 @@ module Messagecenter
             data_model_html = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{template_grid.data_model['type']}" data-components='#{components_json}'></span>}  
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
-            
             content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n"))))
             html << content
           end
