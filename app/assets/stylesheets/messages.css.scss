@@ -156,6 +156,14 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	text-align: center;
 }
 
-.template_chooser .span4:nth-child(3n + 1) {
+.template_chooser .span4:nth-child( 3n + 1 ),
+.modal-body > .template_chooser > .span5:nth-child( 2n + 1 ) {
 	margin-left: 0;
+}
+.modal-body > .template_chooser > .span5 {
+	margin-bottom: 2%;
+	text-align: center;
+}
+.modal-body > .template_chooser > .span5 > img {
+	max-height: 150px;
 }
