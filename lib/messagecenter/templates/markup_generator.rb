@@ -99,6 +99,13 @@ module Messagecenter
         
       end
 
+      def self.add_image_placeholder_url(image_component)
+        if image_component.child.present?
+          node = image_component.child
+          node['data-src-placeholder'] = node['src']
+        end
+      end
+
       private
         def self.wrap_node_if_naked(component)
           node = nil
