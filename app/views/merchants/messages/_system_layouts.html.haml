@@ -3,8 +3,12 @@
   %h3 Layouts for your brand new Template
 .modal-body
   .template_chooser.row-fluid
-  - @system_templates.each do |system_template|
-    = link_to(system_templates_link_caption(system_template), assign_template_merchants_message_path(@message.uuid), 'data-template-id' => system_template.id, class: "span4 type template_type")
+    - @system_templates.each do |system_template|
+      / = link_to(system_templates_link_caption(system_template), assign_template_merchants_message_path(@message.uuid), 'data-template-id' => system_template.id, class: "span4 type template_type")
+      %a{href: assign_template_merchants_message_path(@message.uuid), class: "offset1 span5 template_type", 'data-template-id' => system_template.id}
+        = image_tag("#{system_template.thumbnail}", class: 'img-polaroid')
+        = system_templates_link_caption(system_template).html_safe
+
 
 .modal-footer
   = link_to "Close", "#", class: 'btn btn-close', 'data-dismiss' => "modal"
