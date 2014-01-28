@@ -196,11 +196,13 @@ OP = (function($, window, doucument, Optyn){
         var $toolsetParent = $toolset.parent();
         var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
         $toolset.slideUp( function() { $( this ).remove(); });
-        $division.slideUp( function() { $( this ).remove(); });
-        if($temp != null){
-          $toolsetParent.append( $temp.html());  
-        }
-        
+        $division.slideUp( function() { 
+          $( this ).remove(); 
+          if($temp != null){
+            $toolsetParent.append( $temp.html());  
+          }
+          OP.template.saveSectionChanges();
+        }); //end of slide up division
       });
     },
 
