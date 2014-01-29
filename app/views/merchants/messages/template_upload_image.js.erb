@@ -1,5 +1,5 @@
 <%if @message_image.errors.present?%>
-	alert('failure');
+	alert('Sorry.We could not upload the file. Please try again.');
 <% else %>
-	alert('<%=@message_image.image%>');
+	$('#editor_area_modal #<%= params[:imagerow]%> img').first().attr('src','<%=@message_image.image%>')
 <% end %>
