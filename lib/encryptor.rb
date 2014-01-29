@@ -37,4 +37,15 @@ class Encryptor
     encoded_cipher_text = Base64.strict_encode64(ciphertext)
     CGI.escape(encoded_cipher_text)
   end
+
+  def self.encrypt_for_template(data)
+    return nil if data.blank?
+    verifier = ActiveSupport::MessageVerifier.new(SiteConfig.template_encryption_secret)
+    verifier.generate(data.to_json)
+  end
+
+  def self.decrypt_for_template(token)
+    verifier = ActiveSupport::MessageVerifier.new(SiteConfig.template_encryption_secret)
+    JSON.parse(verifier.verify(token))
+  end
 end
