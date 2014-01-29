@@ -46,8 +46,8 @@ OP = (function($, window, doucument, Optyn){
         $division.find( '.optyn-paragraph' ).each( function() {
           paragraphMarkups.push( $( this ).html());
         });
-        $division.find( 'img' ).each( function() {
-          divisionContents.imageURLs.push( $( this ).attr( 'src' ));
+        $division.find( '.optyn-replaceable-image' ).each( function() {
+          divisionContents.imageURLs.push( $( this ).data( 'src-placeholder' ));
         });
         //console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
 
@@ -58,16 +58,6 @@ OP = (function($, window, doucument, Optyn){
             heading: headlineTexts[ count ],
             paragraph: paragraphMarkups[ count ]
           });
-        }
-
-        if ( $division.find('.optyn-headline').size()) {
-          divisionContents.headline = $division.find('.optyn-headline').html();
-        }
-        if ( $division.find('.optyn-paragraph').size()) {
-          divisionContents.paragraph = $division.find('.optyn-paragraph').html();
-        }
-        if ( $division.find('img').size()) {
-          divisionContents.image = $division.find( 'img' ).attr('src');
         }
         console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
         OP.template.openCkeditor($division, divisionContents);
