@@ -112,12 +112,17 @@ module Messagecenter
             end
 
             #paragraph added
-            # paragraph = division_node.css('.optyn-paragraph').first()
-            # paragraph.inner_html = division_hash['division']['paragraphs'].first if paragraph.present?
             (division_hash['division']['paragraphs'] || []).each_with_index do |paragraph_content, index|
               paragraph = division_node.css('.optyn-paragraph')[index]
               paragraph.inner_html = paragraph_content
             end
+
+            #images added
+            (division_hash['division']['images'] || []).each_with_index do |image_content, index|
+              image_container = division_node.css('.optyn-replaceable-image')[index]
+              img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" />}
+              image_container.inner_html = img_elem
+            end            
 
             toolset_markup = ""
             if  "true" == @editable.to_s
