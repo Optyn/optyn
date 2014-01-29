@@ -46,8 +46,8 @@ OP = (function($, window, doucument, Optyn){
         $division.find( '.optyn-paragraph' ).each( function() {
           paragraphMarkups.push( $( this ).html());
         });
-        $division.find( 'img' ).each( function() {
-          divisionContents.imageURLs.push( $( this ).attr( 'src' ));
+        $division.find( '.optyn-replaceable-image' ).each( function() {
+          divisionContents.imageURLs.push( $( this ).data( 'src-placeholder' ));
         });
         //console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
 
@@ -58,16 +58,6 @@ OP = (function($, window, doucument, Optyn){
             heading: headlineTexts[ count ],
             paragraph: paragraphMarkups[ count ]
           });
-        }
-
-        if ( $division.find('.optyn-headline').size()) {
-          divisionContents.headline = $division.find('.optyn-headline').html();
-        }
-        if ( $division.find('.optyn-paragraph').size()) {
-          divisionContents.paragraph = $division.find('.optyn-paragraph').html();
-        }
-        if ( $division.find('img').size()) {
-          divisionContents.image = $division.find( 'img' ).attr('src');
         }
         console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
         OP.template.openCkeditor($division, divisionContents);
@@ -97,9 +87,12 @@ OP = (function($, window, doucument, Optyn){
             '<div class="blank-space"></div>';
         }
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
-          htmlVal += '<div class="blank-space"></div><div class="row-fluid">' +
+          row_id = 'imagerow-' + count;
+          htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
             '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" /></div>' +
             '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
+            '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
+            '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
             '<div class="span8">Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
             '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div></div>' +
             '</form></div>';

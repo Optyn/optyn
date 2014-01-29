@@ -17,8 +17,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :manager_signed_in?, :current_manager
   after_filter :ckeditor_add_website_id
-  protect_from_forgery
-  skip_before_filter :verify_authenticity_token, if: :json_request?
+  
 
 
   def ckeditor_add_website_id
