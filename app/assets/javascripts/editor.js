@@ -68,7 +68,7 @@ OP = (function($, window, doucument, Optyn){
             paragraph: paragraphMarkups[ count ]
           });
         }
-        console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
+        //console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
         OP.template.openCkeditor($division, divisionContents);
       });
     },
