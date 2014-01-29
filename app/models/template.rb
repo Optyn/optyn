@@ -50,9 +50,9 @@ class Template < ActiveRecord::Base
     new_template.id
   end
 
-  def self.sanitize_custom_tags(content, message, receiver)
+  def personalize_body(content, message, receiver)
     # Sanitaize the footer
-    template_node = Nokogiri::XML(template_div_content)
+    template_node = Nokogiri::XML(content)
     template_node.css('.optyn-footer').each do |footer_node|
 
       #substitute the receiver email
@@ -65,6 +65,9 @@ class Template < ActiveRecord::Base
         unsubscribe_node.swap(%{<a href="#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(receiver.email, message.uuid))}?tracker=#{receiver.uuid}">Unsubscribe</a>})
       end
     end
+
+    body_node = template_node.css('body').first
+    body_node.add_child(%{<img src="#{SiteConfig.app_base_url}#{email_read_logger_path(receiver.encode64_uuid)}?tracker=#{receiver.uuid}">})
 
     template_node.to_s
   end
