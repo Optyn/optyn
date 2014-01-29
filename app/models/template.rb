@@ -84,8 +84,8 @@ class Template < ActiveRecord::Base
     content = ""
 
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
-    content = InlineStyle.process(html)
-
+    premailer = Premailer.new(html, with_html_string: true)
+    content = premailer.to_inline_css
     content
   end
 

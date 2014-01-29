@@ -64,8 +64,7 @@ gem "koala", "~> 1.8.0rc1" #for Facebook integration
 gem 'social-share-button'
 gem 'httparty'
 gem "ckeditor"
-
-gem 'inline-style'
+gem 'premailer'
 
 # Gems used only for assets and not required
 # in production environments by default.

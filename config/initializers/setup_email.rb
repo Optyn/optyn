@@ -16,7 +16,3 @@
 ActionMailer::Base.add_delivery_method :ses, AWS::SES::Base,
    :access_key_id     => 'AKIAJO7WB66NE2EDUV2Q',
    :secret_access_key => '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'
-
-
-ActionMailer::Base.register_interceptor \
-  InlineStyle::Mail::Interceptor.new(:stylesheets_path => 'public')
