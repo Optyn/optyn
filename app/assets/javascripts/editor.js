@@ -43,9 +43,11 @@ OP = (function($, window, doucument, Optyn){
         $division.find( '.optyn-headline' ).each( function() {
           headlineTexts.push( $( this ).text());
         });
+
         $division.find( '.optyn-paragraph' ).each( function() {
           paragraphMarkups.push( $( this ).html());
         });
+
         $division.find( '.optyn-replaceable-image' ).each( function() {
           var placeholderSrc = null;
           var $image = $(this).find('img');
@@ -58,17 +60,24 @@ OP = (function($, window, doucument, Optyn){
 
           divisionContents.imageURLs.push(placeholderSrc);
         });
-        //console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
 
         // Forming pairs of headlines and paragraphs. Assuming each headline has
         // an associated paragraph.
-        for ( var count = 0; count < headlineTexts.length; count++ ) {
-          divisionContents.texts.push({
-            heading: headlineTexts[ count ],
-            paragraph: paragraphMarkups[ count ]
-          });
+        var textsLength = headlineTexts.length >= paragraphMarkups.length ? headlineTexts.length : paragraphMarkups.length;
+        for ( var count = 0; count < textsLength; count++ ) {
+          var couple = {};
+
+          if(headlineTexts[count] != undefined){
+            couple.heading = headlineTexts[count];
+          }
+
+          if(paragraphMarkups[count] != undefined){
+            couple.paragraph = paragraphMarkups[count];  
+          }
+
+          divisionContents.texts.push(couple);
         }
-        //console.log( 'divisionContents keys:', Object.keys( divisionContents ), divisionContents );
+
         OP.template.openCkeditor($division, divisionContents);
       });
     },
@@ -90,11 +99,18 @@ OP = (function($, window, doucument, Optyn){
 
         for ( var count = 0; count < divisionContents.texts.length; count++ ) {
           // Markup for editing paragraph.
-          htmlVal += 'Title: <input class="edit-headline" type="text" value="' + divisionContents.texts[count].heading + '">';
-          htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
-            count + '" cols="20">' + divisionContents.texts[count].paragraph + '</textarea>' +
-            '<div class="blank-space"></div>';
+          if(divisionContents.texts[count].heading != undefined){
+            htmlVal += 'Title: <input class="edit-headline" type="text" value="' + divisionContents.texts[count].heading + '">';
+          }
+          
+          if(divisionContents.texts[count].paragraph != undefined){
+            htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
+              count + '" cols="20">' + divisionContents.texts[count].paragraph + '</textarea>' +
+              '<div class="blank-space"></div>';
+          }
         }
+
+
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
           row_id = 'imagerow-' + count;
           htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
