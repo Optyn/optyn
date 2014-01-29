@@ -47,7 +47,16 @@ OP = (function($, window, doucument, Optyn){
           paragraphMarkups.push( $( this ).html());
         });
         $division.find( '.optyn-replaceable-image' ).each( function() {
-          divisionContents.imageURLs.push( $( this ).data( 'src-placeholder' ));
+          var placeholderSrc = null;
+          var $image = $(this).find('img');
+          
+          if($image.length){
+            placeholderSrc = $image.attr('src');
+          }else{
+            placeholderSrc =  $( this ).data( 'src-placeholder' );
+          }
+
+          divisionContents.imageURLs.push(placeholderSrc);
         });
         //console.log( headlineTexts, paragraphMarkups, divisionContents.imageURLs );
 
