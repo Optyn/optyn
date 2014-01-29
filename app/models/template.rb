@@ -23,7 +23,7 @@ class Template < ActiveRecord::Base
   belongs_to :shop
 
   after_create :create_structure
-  after_save :generate_thumbnail
+  after_save :thumbnail_generator, if: :html_changed?
 
   scope :fetch_system_generated, where(system_generated: true)
 
@@ -92,19 +92,23 @@ class Template < ActiveRecord::Base
     end
   end
 
-  def generate_thumbnail
-    if self.html_changed? && self.reload
-      self.remove_thumbnail! if !self.thumbnail.to_s.blank?
-      file = html_to_thumbnail
-      self.thumbnail = file
-      self.save
-      file.unlink
-    end
+  def thumbnail_generator
+    ThumbnailGenerationWorker.perform_async(self.id)
   end
 
-  def html_to_thumbnail
-    file = Tempfile.new(["template_#{self.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
-    file.write(IMGKit.new(self.html, quality: 50).to_jpg)
+  def self.generate_thumbnail(template_id)
+    template = Template.find(template_id)
+    template.remove_thumbnail! if !template.thumbnail.to_s.blank?
+    file = html_to_thumbnail(template)
+    template.thumbnail = file
+    template.save
+    file.unlink
+  end
+
+  private
+  def self.html_to_thumbnail(template)
+    file = Tempfile.new(["template_#{template.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
+    file.write(IMGKit.new(template.html, quality: 50).to_jpg)
     file.flush
     file
   end
