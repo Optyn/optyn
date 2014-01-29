@@ -89,7 +89,7 @@ OP = (function($, window, doucument, Optyn){
         for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
           row_id = 'imagerow-' + count;
           htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
-            '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" /></div>' +
+            '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" class="uploaded-image" /></div>' +
             '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
             '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
             '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
@@ -116,21 +116,42 @@ OP = (function($, window, doucument, Optyn){
     hookUpdatingSection: function(){
       $('body').on('click', '#section_save_changes', function(){
         var selectedElem = OP.selectedSection.getElem();
-        console.log( 'selectedElem: ', selectedElem );
         $(selectedElem).find( '.optyn-headline').each( function( index, headlineElem ) {
           var newHeadline = $($('#editor_area_modal').find( '.edit-headline')[index]).val();
           $( headlineElem ).html( newHeadline );
         });
+
         $(selectedElem).find( '.optyn-paragraph').each( function( index, paragraphElem ) {
           var newPara = CKEDITOR.instances['template_editable_content-' + index].getData();
           $( paragraphElem ).html( newPara );
         });
-        //$(selectedElem).html(CKEDITOR.instances.template_editable_content.getData());
+        
+        //Add appropriate Image
+        $(selectedElem).find( '.optyn-replaceable-image').each( function( index, imageElem ) {
+          
+          var $imageContainer = $(imageElem);
+          var placeholderSrc = $imageContainer.data('src-placeholder');
+          var $uploadedImage = $($('#editor_area_modal' + " " + ".uploaded-image")[index])
+
+          if($uploadedImage != null && $uploadedImage != undefined && placeholderSrc != $uploadedImage.attr('src')){
+            var $temp = $("<div />");
+            var $img = $('<img />');
+            
+            $img.attr({
+              src: $uploadedImage.attr('src'),
+              height: $imageContainer.attr('height'),
+              width: $imageContainer.attr('width')
+            });
+            $temp.append($img);
+
+            $imageContainer.html($temp.html());
+          }
+        });
+
         $('#editor_area_modal').modal('hide');
+
         OP.template.saveSectionChanges();
       });
-
-      // Get all field contents. Update template.
     },
 
     //Clear the modal html on its hidden event
@@ -294,8 +315,13 @@ OP = (function($, window, doucument, Optyn){
                 });
                 
                 //populate the images
-                $division.find('.optyn-replaceable-image').each(function(image_index, image){
-
+                divisionWrapper.division.images =  []
+                images = divisionWrapper.division.images
+                $division.find('.optyn-replaceable-image').each(function(image_index, imageContainer){
+                  var $imageElem = $(imageContainer).find('img');
+                  if($imageElem.length){
+                    images.push({'url': $imageElem.attr('src')});
+                  }
                 });
 
                 divisions.push(divisionWrapper);
