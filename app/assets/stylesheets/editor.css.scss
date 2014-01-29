@@ -7,3 +7,13 @@
 
 table.body table.row{margin-left: 0px;}
 #editor_area_modal .modal-body .edit-headline { width: 100%; margin-bottom: 10px; }
+
+.msg_img_upload {
+	position: relative;
+	.loading {
+		display: none;
+		position: absolute;
+		top: 25px;
+		right: 70px;
+	}
+}
