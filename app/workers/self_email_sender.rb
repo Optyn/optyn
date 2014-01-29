@@ -5,7 +5,11 @@ class SelfEmailSender
   def perform(message_id)
     message = Message.find(message_id)
     manager = Manager.find(message.manager_id)
-    MessageMailer.send_announcement(message, manager).deliver
+    if message.instance_of?(TemplateMessage)
+      MessageMailer.send_template(message, manager).deliver
+    else
+      MessageMailer.send_announcement(message, manager).deliver
+    end
   end
 
 end

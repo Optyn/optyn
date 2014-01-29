@@ -33,13 +33,15 @@ class MessageMailer < ActionMailer::Base
 
   def send_template(message, receiver)
     ShopTimezone.set_timezone(message.shop)
-    unparsed_content = message.template.fetch_cached_content(message)
-    content = Template.sanitize_custom_tags(unparsed_content)
-    
+    template = message.template
+    unparsed_content = template.fetch_cached_content(message)
+    content = template.personalize_body(unparsed_content, message, receiver)
+
     mail(to: %Q(#{'"' + receiver.name + '"' + ' ' if receiver.name}<#{receiver.email}>),
       from: message.from, 
       subject: message.personalized_subject(receiver),
       reply_to: message.manager_email,
+      content_type: 'text/html',
       body: content
     ) 
   end
