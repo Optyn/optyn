@@ -1,5 +1,6 @@
 class EmailTracking < ActiveRecord::Base
   attr_accessible :data, :manager
+  serialize :data, Hash
 
   def initialize(data, manager_id)
     @data ||= decrypt(data)
