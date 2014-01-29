@@ -91,6 +91,7 @@ OP = (function($, window, doucument, Optyn){
           htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
             '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" /></div>' +
             '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
+            '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
             '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
             '<div class="span8">Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
             '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div></div>' +
