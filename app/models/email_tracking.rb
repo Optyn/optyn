@@ -7,8 +7,7 @@ class EmailTracking < ActiveRecord::Base
       data: data,
       manager_id: manager_id
     }
-    et = EmailTracking.new(track_hash)
-    et.save
+    EmailTracking.create!(track_hash)
     rescue Exception => e
     p "ERROR ==> #{e.message}"
     p "ERROR ==> #{e.backtrace}"
