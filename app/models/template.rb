@@ -56,12 +56,12 @@ class Template < ActiveRecord::Base
     template_node.css('.optyn-footer').each do |footer_node|
 
       #substitute the receiver email
-      footer_node.css('receiver-email').each do |receiver_email_node|
+      footer_node.css('.optyn-receiver-email').each do |receiver_email_node|
         receiver_email_node.swap(receiver.email)
       end
 
       #substitute the unsubscribe link
-      footer_node.css('unsubscribe').each do |unsubscribe_node|
+      footer_node.css('.optyn-unsubscribe').each do |unsubscribe_node|
         unsubscribe_node.swap(%{<a href="#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(receiver.email, message.uuid))}?tracker=#{receiver.uuid}">Unsubscribe</a>})
       end
     end
