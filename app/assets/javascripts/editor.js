@@ -34,49 +34,33 @@ OP = (function($, window, doucument, Optyn){
         //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
         var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
           $editableElem = $division.find('.optyn-division'),
-          headlineTexts = [],
-          paragraphMarkups = [],
-          divisionContents = {};
-        divisionContents.imageURLs = [];
-        divisionContents.texts = [];
+          divisionContents = [];
 
-        $division.find( '.optyn-headline' ).each( function() {
-          headlineTexts.push( $( this ).text());
-        });
+        $division.find('.optyn-headline, .optyn-paragraph, .optyn-replaceable-image').each(function(index, updateableElement){
+          var $updateableElement = $(updateableElement);
+          var artifact = null;
 
-        $division.find( '.optyn-paragraph' ).each( function() {
-          paragraphMarkups.push( $( this ).html());
-        });
+          if($updateableElement.hasClass('optyn-headline')){
+            artifact = {type: 'headline', content: $updateableElement.text()};
+          }else if($updateableElement.hasClass('optyn-paragraph')){
+            artifact = {type: 'paragraph', content: $updateableElement.html()};
+          }else if($updateableElement.hasClass('optyn-replaceable-image')){
+            var placeholderSrc = null;
+            var $image = $updateableElement.find('img');
+            
+            if($image.length){
+              placeholderSrc = $image.attr('src');
+            }else{
+              placeholderSrc =  $updateableElement.data( 'src-placeholder' );
+            }
 
-        $division.find( '.optyn-replaceable-image' ).each( function() {
-          var placeholderSrc = null;
-          var $image = $(this).find('img');
-          
-          if($image.length){
-            placeholderSrc = $image.attr('src');
-          }else{
-            placeholderSrc =  $( this ).data( 'src-placeholder' );
+            artifact = {type: 'image', content: placeholderSrc}; 
           }
 
-          divisionContents.imageURLs.push(placeholderSrc);
+          divisionContents.push(artifact);
         });
 
-        // Forming pairs of headlines and paragraphs. Assuming each headline has
-        // an associated paragraph.
-        var textsLength = headlineTexts.length >= paragraphMarkups.length ? headlineTexts.length : paragraphMarkups.length;
-        for ( var count = 0; count < textsLength; count++ ) {
-          var couple = {};
-
-          if(headlineTexts[count] != undefined){
-            couple.heading = headlineTexts[count];
-          }
-
-          if(paragraphMarkups[count] != undefined){
-            couple.paragraph = paragraphMarkups[count];  
-          }
-
-          divisionContents.texts.push(couple);
-        }
+        console.log("Division Contents", divisionContents)
 
         OP.template.openCkeditor($division, divisionContents);
       });
@@ -96,39 +80,42 @@ OP = (function($, window, doucument, Optyn){
 
         var htmlVal = '';
         var image_form_action = "/merchants/messages/" + $('#editor_area_modal').data('msg-id') + "/template_upload_image"
+        var paragraphIndex = 0
+        var imageIndex = 0
 
-        for ( var count = 0; count < divisionContents.texts.length; count++ ) {
-          // Markup for editing paragraph.
-          if(divisionContents.texts[count].heading != undefined){
-            htmlVal += 'Title: <input class="edit-headline" type="text" value="' + divisionContents.texts[count].heading + '">';
-          }
-          
-          if(divisionContents.texts[count].paragraph != undefined){
+        for( var index = 0; index < divisionContents.length; index++) { 
+          var currentArtifact = divisionContents[index];
+          var $this = $(currentArtifact);
+
+          if('headline' == currentArtifact.type){
+            htmlVal += 'Title: <input class="edit-headline" type="text" value="' + currentArtifact.content + '">';
+          }else if('paragraph' == currentArtifact.type){
             htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
-              count + '" cols="20">' + divisionContents.texts[count].paragraph + '</textarea>' +
+              paragraphIndex.toString() + '" cols="20">' + currentArtifact.content + '</textarea>' +
               '<div class="blank-space"></div>';
-          }
-        }
 
-
-        for ( var count = 0; count < divisionContents.imageURLs.length; count++ ) {
-          row_id = 'imagerow-' + count;
-          htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
-            '<div class="span4">Preview:<br /><img src="' + divisionContents.imageURLs[count] + '" class="uploaded-image" /></div>' +
+              paragraphIndex += 1;
+          }else if('image' == currentArtifact.type){
+            row_id = 'imagerow-' + imageIndex;
+            htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
+            '<div class="span4">Preview:<br /><img src="' + currentArtifact.content + '" class="uploaded-image" /></div>' +
             '<div class="span8"><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
             '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
             '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
             '<div class="span8">Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
             '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div>' +
             '<img class="loading" src="/assets/ajax-loader.gif"/></form></div></div>';
+
+            imageIndex += 1;
+          }
         }
 
         OP.template.populateModalCase(htmlVal);
         $('#editor_area_modal').modal('show');
 
-        for ( var count = 0; count < divisionContents.texts.length; count++ ) {
+        for ( var count = 0; count < paragraphIndex; count++ ) {
           CKEDITOR.replace( 'template_editable_content-' + count );
-          (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents.texts[count].paragraph );
+          (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents );
         }
 
         OP.selectedSection.setElem(division);
