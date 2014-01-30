@@ -134,7 +134,7 @@ OP = (function($, window, doucument, Optyn){
         OP.selectedSection.setElem(division);
 
         $('.upload-img-btn').click(function(e){
-          $('.upload-img-btn').parents('.msg_img_upload').first().find('.loading').first().show();
+          $(this).parents('.msg_img_upload').first().find('.loading').first().show();
         });
     },
 
