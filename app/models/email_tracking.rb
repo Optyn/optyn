@@ -5,7 +5,7 @@ class EmailTracking < ActiveRecord::Base
   def track(data)
     track_hash = {
       data: data,
-      manager_id: data[manager_id]
+      manager_id: data[:manager_id]
     }
     EmailTracking.create!(track_hash)
     rescue Exception => e
