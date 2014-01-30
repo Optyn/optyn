@@ -43,10 +43,18 @@ class Encryptor
     return ['Data must be a hash object'] if !data.instance_of(Hash)
     verifier = ActiveSupport::MessageVerifier.new(SiteConfig.template_encryption_secret)
     verifier.generate(data.to_json)
+    rescue Exception => e
+    p "ERROR ==> #{e.message}"
+    p "ERROR ==> #{e.backtrace}"
+    return false
   end
 
   def self.decrypt_for_template(token)
     verifier = ActiveSupport::MessageVerifier.new(SiteConfig.template_encryption_secret)
     JSON.parse(verifier.verify(token))
+    rescue Exception => e
+    p "ERROR ==> #{e.message}"
+    p "ERROR ==> #{e.backtrace}"
+    return false
   end
 end
