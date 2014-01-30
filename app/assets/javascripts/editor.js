@@ -47,20 +47,20 @@ OP = (function($, window, doucument, Optyn){
           }else if($updateableElement.hasClass('optyn-replaceable-image')){
             var placeholderSrc = null;
             var $image = $updateableElement.find('img');
-            
+
             if($image.length){
               placeholderSrc = $image.attr('src');
             }else{
               placeholderSrc =  $updateableElement.data( 'src-placeholder' );
             }
 
-            artifact = {type: 'image', content: placeholderSrc}; 
+            artifact = {type: 'image', content: placeholderSrc};
           }
 
           divisionContents.push(artifact);
         });
 
-        console.log("Division Contents", divisionContents)
+        // console.log("Division Contents", divisionContents)
 
         OP.template.openCkeditor($division, divisionContents);
       });
@@ -68,9 +68,9 @@ OP = (function($, window, doucument, Optyn){
 
     //Code to open up the CKEditor
     openCkeditor: function(division, divisionContents){
-      
+
         // Add fields for editing headlines, images and paragraphs. Only paragraphs open in CKEditor.
-        console.log( 'Trying to open the CKEditor' );
+        // console.log( 'Trying to open the CKEditor' );
         try{
           if( CKEDITOR.instances.template_editable_content.length ) {
             console.log( 'Destroying the God damn instance.' );
@@ -83,7 +83,7 @@ OP = (function($, window, doucument, Optyn){
         var paragraphIndex = 0
         var imageIndex = 0
 
-        for( var index = 0; index < divisionContents.length; index++) { 
+        for( var index = 0; index < divisionContents.length; index++) {
           var currentArtifact = divisionContents[index];
           var $this = $(currentArtifact);
 
@@ -125,7 +125,7 @@ OP = (function($, window, doucument, Optyn){
         });
     },
 
-    
+
 
     //Update the section html for the updates made by user in CKEditor
     hookUpdatingSection: function(){
@@ -140,10 +140,10 @@ OP = (function($, window, doucument, Optyn){
           var newPara = CKEDITOR.instances['template_editable_content-' + index].getData();
           $( paragraphElem ).html( newPara );
         });
-        
+
         //Add appropriate Image
         $(selectedElem).find( '.optyn-replaceable-image').each( function( index, imageElem ) {
-          
+
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
           var $uploadedImage = $($('#editor_area_modal' + " " + ".uploaded-image")[index])
@@ -151,7 +151,7 @@ OP = (function($, window, doucument, Optyn){
           if($uploadedImage != null && $uploadedImage != undefined && placeholderSrc != $uploadedImage.attr('src')){
             var $temp = $("<div />");
             var $img = $('<img />');
-            
+
             $img.attr({
               src: $uploadedImage.attr('src'),
               height: $imageContainer.attr('height'),
@@ -201,7 +201,7 @@ OP = (function($, window, doucument, Optyn){
         var desiredGridType = $( this ).data( 'section-type' );
         var requiredMarkup = $( this ).parents('.optyn-grid').first().find( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
         if($( '.no-divisions-toolset' ).length){
-          $( '.no-divisions-toolset' ).replaceWith(requiredMarkup); 
+          $( '.no-divisions-toolset' ).replaceWith(requiredMarkup);
         }else{
           var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
           $currentDivision.after(requiredMarkup);
@@ -233,10 +233,10 @@ OP = (function($, window, doucument, Optyn){
         var $toolsetParent = $toolset.parent();
         var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
         $toolset.slideUp( function() { $( this ).remove(); });
-        $division.slideUp( function() { 
-          $( this ).remove(); 
+        $division.slideUp( function() {
+          $( this ).remove();
           if($temp != null){
-            $toolsetParent.append( $temp.html());  
+            $toolsetParent.append( $temp.html());
           }
           OP.template.saveSectionChanges();
         }); //end of slide up division
@@ -328,7 +328,7 @@ OP = (function($, window, doucument, Optyn){
                 $division.find('.optyn-paragraph').each(function(paragraph_index, paragraph){
                   paragraphs.push($(paragraph).html());
                 });
-                
+
                 //populate the images
                 divisionWrapper.division.images =  []
                 images = divisionWrapper.division.images
