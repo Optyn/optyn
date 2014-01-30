@@ -40,6 +40,7 @@ class Encryptor
 
   def self.encrypt_for_template(data)
     return nil if data.blank?
+    return ['Data must be a hash object'] if !data.instance_of(Hash)
     verifier = ActiveSupport::MessageVerifier.new(SiteConfig.template_encryption_secret)
     verifier.generate(data.to_json)
   end
