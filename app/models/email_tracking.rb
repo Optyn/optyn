@@ -1,5 +1,5 @@
 class EmailTracking < ActiveRecord::Base
-  attr_accessible :data, :manager
+  attr_accessible :data, :manager_id
   serialize :data, Hash
 
   def track(data, manager_id)
