@@ -98,10 +98,11 @@ module Messagecenter
 
       def self.add_image_placeholder_container(image_component)
         if image_component.search('img').present?
-          image_component.search('img').wrap("<span></span>")
-          node = image_component.search('span').first()
+          image_component.search('img').wrap("<div></div>")
+          node = image_component.search('div').first()
           img_node = image_component.search('img').first()
           
+          node['style'] = image_component['style'] if image_component.attributes.has_key?('style')
           
           img_node.attributes.each_pair do |key, val|
             if 'src' != key
