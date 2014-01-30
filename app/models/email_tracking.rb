@@ -2,8 +2,7 @@ class EmailTracking < ActiveRecord::Base
   attr_accessible :data, :manager
   serialize :data, Hash
 
-  def track(token, manager_id)
-    data = decrypt(token)
+  def track(data, manager_id)
     track_hash = {
       data: data,
       manager_id: manager_id
@@ -14,14 +13,5 @@ class EmailTracking < ActiveRecord::Base
     p "ERROR ==> #{e.message}"
     p "ERROR ==> #{e.backtrace}"
     return false
-  end
-
-  private
-  def decrypt(token)
-    Encryptor.decrypt_for_template(token)
-    rescue Exception => e
-    p "ERROR ==> #{e.message}"
-    p "ERROR ==> #{e.backtrace}"
-    return token
   end
 end
