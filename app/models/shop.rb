@@ -18,7 +18,6 @@ class Shop < ActiveRecord::Base
   has_many :interests, :as => :holder
   has_many :businesses, :through => :interests
   has_many :labels, dependent: :destroy
-  has_many :shop_audits
   belongs_to :coupon
   belongs_to :partner
   has_many :social_profiles, dependent: :destroy
@@ -369,7 +368,7 @@ class Shop < ActiveRecord::Base
       PaymentNotificationSender.perform_async("MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id, active_connections: conn_count})
     end
 
-    create_audit_entry("Subscription updated to plan #{new_plan.name}")
+    
   end
 
   def check_subscription
@@ -397,10 +396,6 @@ class Shop < ActiveRecord::Base
     return false if self.coupon.present? && self.coupon.free_forever?
     return false if !self.partner.subscription_required?
     (Plan.which(self) != Plan.starter and !self.subscription.active) # rescue false
-  end
-
-  def create_audit_entry(message)
-    self.shop_audits.create(:description => message)
   end
 
   def manager
@@ -589,7 +584,6 @@ class Shop < ActiveRecord::Base
           shop_subscription.attributes = {:plan_id => Plan.starter.id, :active => false, :email => self.manager.email}
         end
         shop_subscription.save
-        create_audit_entry('subscribed to default/starter plan')
       end
     end
   end
