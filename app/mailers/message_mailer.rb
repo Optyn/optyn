@@ -36,7 +36,7 @@ class MessageMailer < ActionMailer::Base
     template = message.template
     unparsed_content = template.fetch_cached_content(message)
     content = template.personalize_body(unparsed_content, message, receiver)
-
+    content = template.process_urls(content, message, receiver)
     mail(to: %Q(#{'"' + receiver.name + '"' + ' ' if receiver.name}<#{receiver.email}>),
       from: message.from, 
       subject: message.personalized_subject(receiver),

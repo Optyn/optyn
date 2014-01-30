@@ -108,6 +108,30 @@ class Template < ActiveRecord::Base
     file.unlink
   end
 
+  def process_urls(content, message, receiver)
+    user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :email => receiver.email, :manager_id => current_manager.id})
+    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    html = Nokogiri::HTML(content)
+
+    #replace urls in a tags
+    html.xpath("//a").each do |link|
+      original_href = link['href']
+      link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
+    end
+
+    # #replace urls in img tags
+    # html.xpath("//img").each do |image|
+    #   original_src = image['src']
+    #   image['src'] = "#{optyn_url}&redirect_url=#{original_src}"
+    # end
+    return html.to_s
+  rescue e
+    Rails.logger.info '-!'*80
+    Rails.logger.info 'Error in processing urls in email'
+    Rails.logger.error e
+    return content
+  end
+
   private
   def self.html_to_thumbnail(template)
     file = Tempfile.new(["template_#{template.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
