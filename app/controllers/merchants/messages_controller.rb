@@ -190,10 +190,18 @@ class Merchants::MessagesController < Merchants::BaseController
     if launched && 'launch' == message_method_call
       message_redirection
     elsif launched && 'save_draft' == message_method_call
-      render action: 'edit'
+      if @message.instance_of?(TemplateMessage)
+        render action: 'edit_template'
+      else
+        render action: 'edit'
+      end
     else
       flash.now[:error] = LAUNCH_FLASH_ERROR
-      render action: 'edit'
+      if @message.instance_of?(TemplateMessage)
+        render action: 'edit_template'
+      else
+        render action: 'edit'
+      end
     end
 
   end
