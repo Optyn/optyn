@@ -2,10 +2,10 @@ class EmailTracking < ActiveRecord::Base
   attr_accessible :data, :manager_id
   serialize :data, Hash
 
-  def track(data, manager_id)
+  def track(data)
     track_hash = {
       data: data,
-      manager_id: manager_id
+      manager_id: data[manager_id]
     }
     EmailTracking.create!(track_hash)
     rescue Exception => e
