@@ -6,7 +6,7 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   
-  process :resize_to_fit => [600, 400] , :if => :check_dimensions?
+  process :resize_to_fit => [575, 383] , :if => :check_dimensions?
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
