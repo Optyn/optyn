@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140129105335) do
+ActiveRecord::Schema.define(:version => 20140129100440) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -670,13 +670,6 @@ ActiveRecord::Schema.define(:version => 20140129105335) do
     t.integer  "template_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-  end
-
-  create_table "template_urls", :force => true do |t|
-    t.text     "orginal_url"
-    t.text     "optyn_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "templates", :force => true do |t|
