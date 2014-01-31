@@ -3,7 +3,7 @@ namespace :change_state do
   task :state  => :environment do
     locations = Location.all
     locations.each do |location|
-      location.update_attributes("state_name" => location.state.name)
+      location.update_attributes("state_name" => location.state.name) if !location.state.blank?
     end
   end
 end
