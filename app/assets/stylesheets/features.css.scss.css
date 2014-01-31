@@ -78,6 +78,10 @@
 	}
 }
 
+.merchantfeatures .bottom {
+	padding: 6% 0;
+}
+
 @media ( max-width: 767px ) {
 	#flat.consumerfeatures.main,
 	#flat.merchantfeatures.main {
