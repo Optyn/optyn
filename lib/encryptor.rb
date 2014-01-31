@@ -39,13 +39,9 @@ class Encryptor
   end
 
   def self.encrypt_for_template(data)
-    return nil if(data.blank? || !data.instance_of?(Hash))
+    raise "Invalid data object. Please pass in a hash" if(data.blank? || !data.instance_of?(Hash))
     verifier = ActiveSupport::MessageVerifier.new(SiteConfig.template_encryption_secret)
     verifier.generate(data.to_json)
-    rescue Exception => e
-    p "ERROR ==> #{e.message}"
-    p "ERROR ==> #{e.backtrace}"
-    return false
   end
 
   def self.decrypt_for_template(token)
