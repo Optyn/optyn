@@ -1,4 +1,5 @@
 defaults:
+  sudo_auth_password: '9p5yn123'
   resque_auth_password: '9p5yn123'
   cache_auth_username: 'optyn'
   cache_auth_password: '9p5yn123'

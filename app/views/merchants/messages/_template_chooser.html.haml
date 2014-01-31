@@ -21,7 +21,15 @@
   .template_chooser
     - @templates.each do |template|
       %a{href: assign_template_merchants_message_path(@message.uuid), class: "span4 template_type", 'data-template-id' => template.id}
-        = image_tag("#{template.thumbnail}")
+        = template.name
+        %br/
+        - if template.thumbnail.present?
+          = image_tag("#{template.thumbnail}")
+        - else
+          #template_image_preview_block
+            Generating Preview...
+
+
   .loading{style: 'display: none;'}
     %strong
       Please Wait...
