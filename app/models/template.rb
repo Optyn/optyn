@@ -109,7 +109,7 @@ class Template < ActiveRecord::Base
   end
 
   def process_urls(content, message, receiver)
-    user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :email => receiver.email, :manager_id => current_manager.id})
+    user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :email => receiver.email, :manager_id => message.manager_id})
     optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
     html = Nokogiri::HTML(content)
 
@@ -118,16 +118,10 @@ class Template < ActiveRecord::Base
       original_href = link['href']
       link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
     end
-
-    # #replace urls in img tags
-    # html.xpath("//img").each do |image|
-    #   original_src = image['src']
-    #   image['src'] = "#{optyn_url}&redirect_url=#{original_src}"
-    # end
     return html.to_s
-  rescue e
+  rescue Exception => e
     Rails.logger.info '-!'*80
-    Rails.logger.info 'Error in processing urls in email'
+    Rails.logger.info 'Error in processing urls in message with id: ' + message.id.to_s
     Rails.logger.error e
     return content
   end
