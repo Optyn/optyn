@@ -2,7 +2,7 @@ class EmailTrackingsController < ApplicationController
   def index
     begin
       # uit is user_info_token
-      data = Encryptor.decrypt_for_template(params[:uit]) if !params[:uit].present?
+      data = Encryptor.decrypt_for_template(params[:uit]) if params[:uit].present?
       if data
         data.merge!(:redirect_url => params[:redirect_url])
         EmailTracking.new.track(data)
