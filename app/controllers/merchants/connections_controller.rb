@@ -34,17 +34,20 @@ class Merchants::ConnectionsController < Merchants::BaseController
 
   def create_user
     @error_hash = []
-    @user = User.new
+    
     if params["To"].blank? && params["label_ids"].nil?
+      @user = User.new
       @error_hash.push("Please enter email and name ")
       @error_hash.push("Please enter labels")
       populate_labels
       render 'add_user'
     elsif params["To"].nil?
+      @user = User.new
       @error_hash.push("Please enter email and name ")
       populate_labels
       render 'add_user'	
     elsif params["label_ids"].nil?
+      @user = User.new
       @error_hash.push("Please enter labels")
       populate_labels
       render 'add_user'
