@@ -71,6 +71,9 @@ module Messagecenter
                     <button class="btn ink-action-delete">
                       <i class="icon-trash icon-white action-delete"></i>
                     </button>
+                    <button class="btn ink-action-dragndrop">
+                      <i class="icon-move icon-white action-move"></i>
+                    </button>
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a>
                     <ul class="dropdown-menu">
                       #{dropdown_links}
