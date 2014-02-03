@@ -62,11 +62,33 @@ module Messagecenter
             dropdown_links += '<li>' + '<a class="add-section-link" href="#"' + ' data-section-type= ' + '"' + key + '"' + '>' + '&nbsp;&nbsp;' + val['title'] + '&nbsp;</a>' + '</li>'
           end
 
-          static_content = '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button><button class="btn ink-action-delete"><i class="icon-trash icon-white action-delete"></i></button><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a><ul class="dropdown-menu">' + 
-          dropdown_links +       
-          '</ul></div></div>'
+          static_content = <<-HTML
+                <div class="row template-section-toolset">
+                  <div class="btn-group pull-right">
+                    <button class="btn ink-action-edit">
+                      <i class="icon-edit icon-white"></i>
+                    </button>
+                    <button class="btn ink-action-delete">
+                      <i class="icon-trash icon-white action-delete"></i>
+                    </button>
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a>
+                    <ul class="dropdown-menu">
+                      #{dropdown_links}
+                    </ul>
+                  </div>
+                </div>
+              HTML
+
         elsif INTRODUCTION_COMPONENT_TYPE == data_model['type']
-          static_content = '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button></div></div>'
+          static_content = <<-HTML
+            <div class="row template-section-toolset">
+              <div class="btn-group pull-right">
+                <button class="btn ink-action-edit">
+                <i class="icon-edit icon-white"></i>
+                </button>
+              </div>
+            </div>
+          HTML
         else
           ""
         end
