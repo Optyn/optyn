@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20140131083113) do
 
   create_table "admins", :force => true do |t|
@@ -146,6 +147,13 @@ ActiveRecord::Schema.define(:version => 20140131083113) do
   end
 
   add_index "coupons", ["stripe_id"], :name => "index_coupons_on_stripe_id", :unique => true
+
+  create_table "email_trackings", :force => true do |t|
+    t.text     "data"
+    t.integer  "manager_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "file_imports", :force => true do |t|
     t.string   "csv_file"

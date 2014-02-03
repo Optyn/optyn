@@ -30,4 +30,4 @@
 
       = image_tag "#{SiteConfig.app_base_url}#{email_read_logger_path(@receiver.encode64_uuid)}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
 - else
-  = message_content(@message)
+  = message_content(@message, @receiver)

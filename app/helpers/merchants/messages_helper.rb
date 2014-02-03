@@ -102,15 +102,31 @@ module Merchants::MessagesHelper
     message.percentage_off? ? (amount.to_s + "%") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
   end
 
-  def message_content(message)
+  def message_content(message, receiver=nil)
     display_content = message.content.blank? ? "-" : message.content
     if message.instance_of?(VirtualMessage)
       return raw(display_content)
     end
 
     display_content.include?("<div>") ? raw(display_content) : simple_format(display_content)
-
+    display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
+  end
+
+  def process_urls(display_content, message, receiver)
+    user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :manager_id => message.manager_id,  :email => (receiver.email rescue '')})
+    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    html = Nokogiri::HTML(display_content)
+
+    #replace urls in a tags
+    html.xpath("//a").each do |link|
+      original_href = link['href']
+      link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
+    end
+    return html.to_s
+  rescue => e
+    Rails.logger.error e
+    return display_content
   end
 
   def message_receiver_labels(label_names)
@@ -240,4 +256,6 @@ module Merchants::MessagesHelper
       ""
     end
   end
+
+  
 end
