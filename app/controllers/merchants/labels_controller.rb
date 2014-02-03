@@ -2,7 +2,7 @@ class Merchants::LabelsController < Merchants::BaseController
   # GET /merchants/labels
   # GET /merchants/labels.json
   def index
-    @labels = current_shop.labels.all
+    @labels = current_shop.labels.active
 
     respond_to do |format|
       format.html # index.html.erb

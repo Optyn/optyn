@@ -66,10 +66,7 @@ module Messagecenter
           dropdown_links +       
           '</ul></div></div>'
         elsif INTRODUCTION_COMPONENT_TYPE == data_model['type']
-          # COMMENT IT OUT FOR THE TIME BEING
-          # type = data_model.delete('type')
-          # '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button></div></div>'
-          ""
+          static_content = '<div class="row template-section-toolset"><div class="btn-group pull-right"><button class="btn ink-action-edit"><i class="icon-edit icon-white"></i></button></div></div>'
         else
           ""
         end
@@ -101,10 +98,11 @@ module Messagecenter
 
       def self.add_image_placeholder_container(image_component)
         if image_component.search('img').present?
-          image_component.search('img').wrap("<span></span>")
-          node = image_component.search('span').first()
+          image_component.search('img').wrap("<div></div>")
+          node = image_component.search('div').first()
           img_node = image_component.search('img').first()
           
+          node['style'] = image_component['style'] if image_component.attributes.has_key?('style')
           
           img_node.attributes.each_pair do |key, val|
             if 'src' != key

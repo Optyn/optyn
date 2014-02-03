@@ -47,9 +47,13 @@ module Messagecenter
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
           introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
           introduction_division.css('img').each do |image|
-            # image.swap(email_body_shop_logo(shop))
-            #TODO REPLACE LATER
-            image.swap(%{<span class="optyn-headline">#{email_body_shop_logo(shop)}</span>})
+            shop_logo = email_body_shop_logo(shop)
+            shop_logo_node = Nokogiri::XML(shop_logo)
+            if shop_logo_node.css('img').present?
+              image.swap(%{<span class="optyn-replaceable-image">#{shop_logo}</span>})
+            else
+              image.swap(%{<h2><span class="optyn-headline">#{shop_logo}</span></h2>})
+            end
           end
         end  
 

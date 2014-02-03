@@ -251,6 +251,12 @@ class User < ActiveRecord::Base
     name.to_s.split(/\s/).first.to_s.capitalize #to_s if the name is blank by chance
   end
 
+  def destroy_all_user_labels
+    if !self.user_labels.blank?
+      self.user_labels.destroy_all
+    end
+  end
+
   private
   def self.persist_with_twitter_exception(user, provider)
     user.skip_password = true

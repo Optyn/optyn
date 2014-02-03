@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width"/>
-  <link rel="stylesheet" href="https://www.optyn.com/ink.css">
   <style type="text/css">
     /**********************************************
     * Ink v1.0.4 - Copyright 2013 ZURB Inc        *
@@ -746,6 +745,14 @@
     <style type="text/css" media="screen">
       /* Custom styles */
       h2 { font-size: 20px; }
+      .body > tbody > tr > td { padding: 2%; }
+      [data-type="footer"] .optyn-pargraph {
+        text-align: center;
+        font-size: 11px;
+        color: #555;
+        padding: 0;
+      }
+      .optyn-replaceable-image { display: table-cell; }
     </style>
 </head>
 <body id="flat">
@@ -764,7 +771,7 @@
                           <grid type="introduction">
                             <table class="twelve columns">
                               <tr>
-                                <td class="">
+                                <td class="center">
                                   <division type="introduction">
                                     <table class="twelve columns">
                                       <tr>
@@ -891,15 +898,12 @@
                                             <division type="text_with_left_image">
                                               <table class="six columns">
                                                 <tr>
-                                                  <td class="three sub-columns text-pad-left">
-                                                    <image>
+                                                  <td>
+                                                    <image style="width:145px; float:left; margin:0 10px 10px 0;">
                                                       <img width="580" height="300" src="http://placehold.it/580x300">
                                                     </image>
                                                   </td>
-                                                  <td class="three sub-columns last text-pad-right">
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
+                                                  <td class="three sub-columns last right-text-pad">
                                                     <paragraph>
                                                       <p>A distinct piece of writing.</p>
                                                     </paragraph>
@@ -912,18 +916,13 @@
                                             <division type="text_with_right_image">
                                               <table class="six columns">
                                                 <tr>
-                                                  <td class="three sub-columns text-pad-left">
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
+                                                  <td>
+                                                    <image style="width:145px; float:right; margin:0 0 10px 10px;">
+                                                      <img width="580" height="300" src="http://placehold.it/580x300">
+                                                    </image>
                                                     <paragraph>
                                                       <p>A distinct piece of writing.</p>
                                                     </paragraph>
-                                                  </td>
-                                                  <td class="three sub-columns last text-pad-right">
-                                                    <image>
-                                                      <img width="580" height="300" src="http://placehold.it/580x300">
-                                                    </image>
                                                   </td>
                                                   <td class="expander"></td>
                                                 </tr>
@@ -936,7 +935,7 @@
                                                   <td class="wrapper">
                                                     <table class="six columns">
                                                       <tr>
-                                                        <td class="text-pad-right" colspan="3">
+                                                        <td class="right-text-pad" colspan="3">
                                                           <headline>
                                                             <h2 class="headline">Image Gallery</h2>
                                                           </headline>
@@ -951,7 +950,7 @@
                                                             </image>
                                                           </paragraph>
                                                         </td>
-                                                        <td class="three sub-columns last text-pad-right">
+                                                        <td class="three sub-columns last right-text-pad">
                                                           <paragraph>
                                                             <p>Gallery description goes here.</p>
                                                             <image>
@@ -1045,11 +1044,10 @@
                                       <tr>
                                         <td class="">
                                           <center>
-                                            <permission><p class="optyn-pargraph">This message was sent to <receiver-email>receiver@exmaple.com</receiver-email> by <shop-name>Optyn Shop</shop-name></p>
+                                            <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
                                             </permission>
                                             <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                            <unsubscribe><p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <a href="javascript:void(0)">Unsubscribe</a>   </p>
-                                            </unsubscribe>
+                                            <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
                                           </center>
                                         </td>
                                         <td class="expander"></td>

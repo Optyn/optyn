@@ -1,0 +1,13 @@
+= form_for :marketing_agency_inquiry, url: marketing_agencies_path, html: {method: :post, id: :marketing_agency_form, :class => "row-fluid"} do |f|
+  = f.text_field :name, class: :span12, placeholder: 'Your name *', "data-toggle" => 'tooltip', "title" => 'Your name (required)', maxlength: '50', required: ''
+  = f.text_field :company_name, class: :span12, placeholder: 'Your company', "data-toggle" => 'tooltip', "title" => 'Your company', maxlength: '100'
+  = f.text_field :phone_number, class: :span12, placeholder: 'Your phone number', "data-toggle" => 'tooltip', "title" => 'Your phone number', maxlength: '20'
+  = f.email_field :email, class: :span12, placeholder: 'Your email address *', "data-toggle" => 'tooltip', "title" => 'Your email address', maxlength: '150', required: ''
+  .blank-space
+  = render :partial => "shared/form_slider"
+  .blank-space
+  .row-fluid
+    .span5
+      = submit_tag 'Submit', class: 'btn-block btn btn-primary btn-large pin-submit', disabled: 'disabled'
+    .span7
+      %small We'll get back in touch with you in 24 hours or less.

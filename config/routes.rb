@@ -129,7 +129,7 @@ Optyn::Application.routes.draw do
   match '/resources/email-newsletter' => 'main#resources_email_newsletter', :as => :resources_email_newsletter
   match '/resources/mass-email' => 'main#resources_mass_email', :as => :resources_mass_email
   match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
-  match '/marketing-agency' => 'main#marketing_agency', :as => :marketing_agency
+  
 
   #share routes and QR Code
   match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
@@ -142,6 +142,11 @@ Optyn::Application.routes.draw do
   #named routes partner inquiry
   get "/partner-with-us", to: 'partner_inquiries#new', as: :new_partner_inquiry
   post "/partner-with-us", to: 'partner_inquiries#create', as: :partner_inquiries
+  
+  #named routes partner inquiry
+  get "/marketing-agency", to: 'marketing_agencies#new', as: :new_marketing_agencies
+  post "/marketing-agency", to: 'marketing_agencies#create', as: :marketing_agencies
+  match 'marketing-agency/thank-you' => "marketing_agencies#thank_you", :as => "marketing_agencies_thank_you"
 
 
   # Blog Redirect
@@ -197,6 +202,7 @@ Optyn::Application.routes.draw do
 
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
+  
   resources :connections do
     collection do
       post 'add_connection'

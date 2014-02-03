@@ -284,6 +284,7 @@ module Api
                 var CLIENTID    =   '#{@shop.app_id}';
                 var CLIENTSECRET =  '#{@shop.secret}'
                 var REDIRECT    =   '#{@shop.redirect_uri}';
+                var REDIRECT_URI    =   '#{@shop.redirect_uri_after_login}';
                 var TYPE        =   'code';
 
                 var _url = OAUTHURL  + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE + '&scope=' + SCOPE;
@@ -312,7 +313,13 @@ module Api
                         jQuery('#optyn-first-container').append($tempErr.html());
                         jQuery('input[type=submit]', this).attr('disabled', '');
                       }else{
-                        replaceWithUserInfo();
+                        if(REDIRECT_URI == ''){
+                          replaceWithUserInfo();
+                          }
+                        else{
+                          window.location = REDIRECT_URI;
+                        }
+                        
                       }
                     }
                   });

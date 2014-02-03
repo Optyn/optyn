@@ -2,7 +2,7 @@
 = f.text_field :street_address2, :placeholder => 'Street Address 2', 'data-toggle' => 'tooltip', title: 'Street Address 2'
 = f.text_field :city, :placeholder => 'City', 'data-toggle' => 'tooltip', title: 'City'
 /%label.text-left State
-= f.collection_select :state_id, @states, :id, :name, include_blank: "-- Select State --"
+= f.text_field :state_name, :placeholder => 'State', 'data-toggle' => 'tooltip', title: 'State'
 /%label.pull-left
 = f.text_field :zip, :placeholder => 'Zip Code', 'data-toggle' => 'tooltip', title: 'Zip Code'
 
