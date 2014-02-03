@@ -23,11 +23,7 @@ module Messagecenter
     end
 
     def populate_labels
-#      @labels = current_shop.labels
-      select_all_label = current_shop.labels.find_by_name("Select All")
-      label_ids = current_shop.users.collect(&:user_labels).flatten.collect(&:label_id)
-      label_ids << select_all_label.id
-      @labels = Label.where("id IN (?)", label_ids)
+     @labels = Label.labels_with_customers(current_shop.id)
     end
 
     def message_redirection
