@@ -53,7 +53,7 @@ gem 'rack-ssl-enforcer'
 gem 'sitemap_generator'
 gem 'phony_rails'
 gem "acts_as_paranoid", "~>0.4.0"
-
+gem 'feedzirra'
 gem 'rabl'
 gem 'oj'
 

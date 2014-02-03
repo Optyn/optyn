@@ -5,14 +5,14 @@ $(document).ready(function(){
 
   function PartnerInquiry(){
     this.initialize = function(){
-      if($('#partner_inquiry_wrapper').length){
+      if($('#marketing_inquiry_wrapper').length){
         this.hookFormSubmission();
         this.initSlider();
       }
     };
 
     this.hookFormSubmission = function(){
-      var formId = '#partner_inquiry_form';
+      var formId = '#marketing_agency_form';
       $('body').on('submit', formId, function(event){
         event.preventDefault();
 
@@ -28,15 +28,15 @@ $(document).ready(function(){
               $form.find('#loading').show();
             },
             success: function(){
-              $('#partner_inquiry_wrapper').html('<strong>Thank you very much for your inquiry. We will be in touch within 24 hours or less.</strong>');
+               window.location = "/marketing-agency/thank-you";
             },
             error: function(data){
-              $('#partner_inquiry_wrapper').html(data.responseText);
+              $('#marketing_inquiry_wrapper').html(data.responseText);
               partnerInquiry.initSlider();
             },
             complete: function(){
               $("html, body").animate({ scrollTop: 0 }, "slow");
-            } 
+            }
           });
         }
         else {

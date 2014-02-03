@@ -51,7 +51,11 @@
       Use Custom Optyn Text
 
     = f.text_area(:custom_text, rows: 3, :placeholder => "Enter your custom tag line here. Be creative or use ours.")
-
+  .option
+    %label
+      Redirect URL
+  .custom
+    = f.text_field :redirect_uri_after_login, placeholder: 'Redirect Url', 'data-toggle' => 'tooltip', title: 'Enter your Redirect Url'
     - unless @application.new_record?
       .refresh
         %a.btn.btn-primary.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save
