@@ -8,9 +8,20 @@ class Label < ActiveRecord::Base
   attr_accessible :shop_id, :name, :survey_answer_id
 
   scope :active, where(active: true)
+  
   scope :inactive, where(active: false)
 
+  scope :for_shop, ->(shop_identifier) { where(shop_id: shop_identifier) }
+
+  scope :right_join_user_labels, joins("RIGHT JOIN user_labels ON labels.id = user_labels.label_id")
+
+  scope :group_on_id, group("labels.id")
+
   SELECT_ALL_NAME = 'Select All'
+
+  def self.labels_with_customers(shop_identifier)
+    for_shop(shop_identifier).right_join_user_labels.group_on_id
+  end
 
   def users_count
     user_labels.count
