@@ -37,28 +37,7 @@ module Messagecenter
           #TODO Check for social media links
         end
 
-        def personalize_header
-          shop = self.shop
-
-          #replace the background color
-          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction"}
-          node.set_property('background-color', shop.header_background_color)
-
-          #replace the palceholder image tag with shop image or name based om if a shop has a logo
-          introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
-          introduction_division.css('img').each do |image|
-            shop_logo = email_body_shop_logo(shop)
-            shop_logo_node = Nokogiri::XML(shop_logo)
-            if shop_logo_node.css('img').present?
-              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo}</span>})
-            else
-              logo_content = Nokogiri::XML(shop_logo)
-              header = logo_content.children.first
-              header['class'] = header['class'].present? ? " center" : "center"
-              image.swap(%{<h2><span class="optyn-headline">#{logo_content.children.to_s}</span></h2>})
-            end
-          end
-        end  
+          
 
         def personalize_content
           #change the background color of the core content
