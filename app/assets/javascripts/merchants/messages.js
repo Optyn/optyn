@@ -212,7 +212,10 @@ function MerchantMessage() {
             }
 
             serializedData = serializedData.concat([
-                {name: '_method', value: 'put'}
+            {
+                name: '_method',
+                value: 'put'
+            }
             ]);
 
             $.ajax({
@@ -247,7 +250,10 @@ function MerchantMessage() {
                     url: $(this).prop('href'),
                     type: 'POST',
                     data: [
-                        {name: '_method', value: 'delete'}
+                    {
+                        name: '_method',
+                        value: 'delete'
+                    }
                     ],
                     beforeSend: function () {  
                         $('#response_message_section .adjust-child-message-link').hide();
@@ -274,7 +280,9 @@ function MerchantMessage() {
     };
 
     this.hookHeaderColorPicker = function(){
-        $('#header_background').colorpicker({format: 'hex'});
+        $('#header_background').colorpicker({
+            format: 'hex'
+        });
     };
 
     this.hookHeaderColorChange = function(){
@@ -284,12 +292,12 @@ function MerchantMessage() {
     };
 
     this.hookColorPickerChange = function(){
-      $('#header_background').colorpicker().on('changeColor', function(event){
-        var hexVal = event.color.toHex();
-        $('.message-visual-property-value').val('background-color: ' + hexVal);
-        $('#header_background_color').val(hexVal);
+        $('#header_background').colorpicker().on('changeColor', function(event){
+            var hexVal = event.color.toHex();
+            $('.message-visual-property-value').val('background-color: ' + hexVal);
+            $('#header_background_color').val(hexVal);
 
-      });      
+        });
     };
 
     this.hookHeaderSettingSubmission = function(){
@@ -307,11 +315,11 @@ function MerchantMessage() {
             url: $headerForm.attr('action'),
             data: $headerForm.serialize(),
             beforeSend: function(){
-              $('#preview-meta-data-view').hide();
-              $('.loading').show();      
+                $('#preview-meta-data-view').hide();
+                $('.loading').show();
             },
             success: function(data){
-               $('#message_fields_wrapper').replaceWith(data);
+                $('#message_fields_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
                 current.hookColorPickerChange();
             },
@@ -325,12 +333,12 @@ function MerchantMessage() {
 
     this.clearDuplicateErrors = function(){
         if($('#message_type_of_discount_percentage_off').next('.error').length){
-            // var error = true;
-            // var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
-            // $('#message_type_of_discount_percentage_off').next('.error').remove();
-            // $('#message_type_of_discount_dollar_off').next('.error').remove();
-            // $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
-        }
+    // var error = true;
+    // var $container = $('#message_type_of_discount_percentage_off').parents('.radio').first().parent();
+    // $('#message_type_of_discount_percentage_off').next('.error').remove();
+    // $('#message_type_of_discount_dollar_off').next('.error').remove();
+    // $container.append("<div class='field-with-errors'><span class='help-inline error'>can't be blank</span></div>");
+    }
     };
 
     this.hookDiscountType = function(){
@@ -345,13 +353,13 @@ function MerchantMessage() {
             var discountTypeVal = $('#message_type_of_discount').val();
             var $discountContainer = $('#discount_type_container');
             if(discountTypeVal.length){
-               $discountContainer.find('button').each(function(index, element){
-                if($(element).attr('data-value') === discountTypeVal){
-                    $(element).addClass('active');
-                }else{
-                    $(element).removeClass('active');
-                }
-               });
+                $discountContainer.find('button').each(function(index, element){
+                    if($(element).attr('data-value') === discountTypeVal){
+                        $(element).addClass('active');
+                    }else{
+                        $(element).removeClass('active');
+                    }
+                });
             }
         }
     };
@@ -379,24 +387,29 @@ function MerchantMessage() {
     this.hookTemplateAssignment = function(){
         $('body').on('click', '.template_type', function(event){
             event.preventDefault();
+            var uuid = $(this).attr('href').split('/')[3];
             $.ajax({
                 url: $(this).attr('href'),
                 type: 'POST',
-                data: {'_method': 'PUT', 'template_id': $(this).attr('data-template-id')},
+                data: {
+                    '_method': 'PUT',
+                    'template_id': $(this).attr('data-template-id')
+                    },
                 beforeSend: function(){
-                  $('.loading').show();
-                  $('.btn-close').hide();
+                    $('.loading').show();
+                    $('.btn-close').hide();
                 },
                 success: function(data){
-                  $('.loading').hide();
-
-                  $('#system_templates_modal').modal('hide');
-                  $('#template_wrapper').replaceWith(data);
+                    $('.loading').hide();
+                    $('#system_templates_modal').modal('hide');
+                    $('#template_wrapper').replaceWith(data);
+                    $('#choose_message .pull-right').append('<a class="btn btn-success" href="/merchants/messages/'+ uuid +'/preview_template">Preview</a>');
+                  
                 },
                 error: function(){
-                  $('.loading').hide();
-                  alert("Could not choose a template. Please refresh your page and try again.");
-                  $('.btn-close').show();
+                    $('.loading').hide();
+                    alert("Could not choose a template. Please refresh your page and try again.");
+                    $('.btn-close').show();
                 }
             });
         });
@@ -410,26 +423,26 @@ function MerchantMessage() {
 }
 
 $(document).ready(function(){
-   $(".open-reports").click(function(){ 
-   	 msg_uuid = $(this).attr('id');
-     $('#reportDialog').modal('show');
-     getSocialSiteReport(msg_uuid);
-   });
+    $(".open-reports").click(function(){
+        msg_uuid = $(this).attr('id');
+        $('#reportDialog').modal('show');
+        getSocialSiteReport(msg_uuid);
+    });
 });
 
 function getSocialSiteReport(msg_uuid) {
-	var link = $('#social_site_report_path_' + msg_uuid);
+    var link = $('#social_site_report_path_' + msg_uuid);
     var url = link.val();
    
     $.ajax({
-      url: url,
-      type: 'GET',
-      success: function (data) {
-        $('#social_site_report_' + msg_uuid).html(data);
-      },
-      error: function (jqXHR, textStatus, errorThrown)
-      {
-        alert(errorThrown)
-      }
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            $('#social_site_report_' + msg_uuid).html(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert(errorThrown)
+        }
     });
 }
