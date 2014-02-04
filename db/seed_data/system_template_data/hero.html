@@ -753,16 +753,13 @@
         padding: 0;
       }
       .optyn-replaceable-image { display: table-cell; }
-      .optyn-sidebar {
-        margin: 0 !important;
-        font-size: 13px;
-      }
+      .optyn-sidebar .optyn-paragraph { font-size: 13px; }
       .optyn-sidebar h2 {
         font-size: 16px;
       }
       [data-type="introduction"] .wrapper,
       [data-type="content"] .outermost-container { padding-top: 0; }
-      .sidebar-container-bg { background: #c9c9c9; }
+      .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
       [data-type="footer"] .footer-container { background: #eee; }
     </style>
 </head>
@@ -816,7 +813,7 @@
                         <td class="wrapper last outermost-container">
                            <table class="twelve columns">
                                 <tr>
-                                  <td class="wrapper sidebar-container-bg">
+                                  <td class="wrapper sidebar-container">
                                     <grid type="sidebar">
                                       <table class="four columns">
                                         <tr>

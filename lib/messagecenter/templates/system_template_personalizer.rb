@@ -50,9 +50,9 @@ module Messagecenter
             shop_logo = email_body_shop_logo(shop)
             shop_logo_node = Nokogiri::XML(shop_logo)
             if shop_logo_node.css('img').present?
-              image.swap(%{<span class="optyn-replaceable-image">#{shop_logo}</span>})
+              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo}</span>})
             else
-              image.swap(%{<h2><span class="optyn-headline">#{shop_logo}</span></h2>})
+              image.swap(%{<span class="optyn-headline center">#{shop_logo}</span>})
             end
           end
         end  
@@ -64,7 +64,7 @@ module Messagecenter
 
           #change the background color of the sidebar
           node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
-          node.set_property('background-color', '#C0C0C0')
+          node.set_property('background-color', '#C9C9C9')
         end
 
         def personalize_footer
