@@ -52,7 +52,10 @@ module Messagecenter
             if shop_logo_node.css('img').present?
               image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo}</span>})
             else
-              image.swap(%{<span class="optyn-headline center">#{shop_logo}</span>})
+              logo_content = Nokogiri::XML(shop_logo)
+              header = logo_content.children.first
+              header['class'] = header['class'].present? ? " center" : "center"
+              image.swap(%{<h2><span class="optyn-headline">#{logo_content.children.to_s}</span></h2>})
             end
           end
         end  
