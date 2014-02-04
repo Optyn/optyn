@@ -365,7 +365,10 @@ OP = (function($, window, doucument, Optyn){
                                 var $imageElem = $(imageContainer).find('img');
                                 if($imageElem.length){
                                     images.push({
-                                        'url': $imageElem.attr('src')
+                                        'url': $imageElem.attr('src'),
+                                        'height': $imageElem.attr('height'),
+                                        'width': $imageElem.attr('width'),
+                                        'style': $imageElem.attr('style')
                                     });
                                 }
                             });
