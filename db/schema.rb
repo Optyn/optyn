@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20140131083113) do
 
   create_table "admins", :force => true do |t|
@@ -226,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20140131083113) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "uuid"
+    t.string   "state_name"
   end
 
   add_index "locations", ["uuid"], :name => "index_locations_on_uuid", :unique => true
@@ -259,6 +259,15 @@ ActiveRecord::Schema.define(:version => 20140131083113) do
   add_index "managers", ["email"], :name => "index_managers_on_email", :unique => true
   add_index "managers", ["reset_password_token"], :name => "index_managers_on_reset_password_token", :unique => true
   add_index "managers", ["uuid"], :name => "index_managers_on_uuid", :unique => true
+
+  create_table "marketing_agency_inquiries", :force => true do |t|
+    t.string   "name"
+    t.string   "company_name"
+    t.string   "phone_number"
+    t.string   "email"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "merchant_apps", :force => true do |t|
     t.string   "name"
@@ -436,22 +445,23 @@ ActiveRecord::Schema.define(:version => 20140131083113) do
   add_index "oauth_access_tokens", ["token"], :name => "index_oauth_access_tokens_on_token", :unique => true
 
   create_table "oauth_applications", :force => true do |t|
-    t.string   "name",                                           :null => false
-    t.string   "uid",                                            :null => false
-    t.string   "secret",                                         :null => false
-    t.string   "redirect_uri",                                   :null => false
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.string   "name",                                            :null => false
+    t.string   "uid",                                             :null => false
+    t.string   "secret",                                          :null => false
+    t.string   "redirect_uri",                                    :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.integer  "owner_id"
     t.string   "owner_type"
     t.text     "embed_code"
-    t.boolean  "checkmark_icon",          :default => true
-    t.boolean  "show_default_optyn_text", :default => true
+    t.boolean  "checkmark_icon",           :default => true
+    t.boolean  "show_default_optyn_text",  :default => true
     t.text     "custom_text"
-    t.integer  "render_choice",           :default => 2
-    t.integer  "call_to_action",          :default => 2
-    t.integer  "begin_state",             :default => 1
-    t.string   "background_color",        :default => "#046D95"
+    t.integer  "render_choice",            :default => 2
+    t.integer  "call_to_action",           :default => 2
+    t.integer  "begin_state",              :default => 1
+    t.string   "background_color",         :default => "#046D95"
+    t.string   "redirect_uri_after_login"
   end
 
   add_index "oauth_applications", ["owner_id", "owner_type"], :name => "index_oauth_applications_on_owner_id_and_owner_type"

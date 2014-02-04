@@ -120,7 +120,7 @@ module Messagecenter
             #images added
             (division_hash['division']['images'] || []).each_with_index do |image_content, index|
               image_container = division_node.css('.optyn-replaceable-image')[index]
-              img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" />}
+              img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" />}
               image_container.inner_html = img_elem
             end            
 

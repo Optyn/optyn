@@ -48,18 +48,23 @@ module Messagecenter
           introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
           introduction_division.css('img').each do |image|
             shop_logo = email_body_shop_logo(shop)
-            shop_logo_node = Nokogiri::XML(shop_logo)
+            shop_logo_node = Nokogiri::HTML(shop_logo).css('body').first
+          
             if shop_logo_node.css('img').present?
-              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo}</span>})
+              image_node = shop_logo_node.css('img').first
+              style_attr = image_node['style']
+              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none;" :  "margin:auto;float:none;"
+
+              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo_node.children.to_s}</span>})
             else
-              logo_content = Nokogiri::XML(shop_logo)
-              header = logo_content.children.first
-              header['class'] = header['class'].present? ? " center" : "center"
-              image.swap(%{<h2><span class="optyn-headline">#{logo_content.children.to_s}</span></h2>})
+              header_node = shop_logo_node.css('h3').first
+              class_attr = header_node['class']
+              header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
+              image.swap(%{<h2><span class="optyn-headline">#{shop_logo_node.children.to_s}</span></h2>})
             end
           end
-        end  
-
+        end
+        
         def personalize_content
           #change the background color of the core content
           node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content"}

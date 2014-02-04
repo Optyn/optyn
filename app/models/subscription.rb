@@ -10,7 +10,7 @@ class Subscription < ActiveRecord::Base
   validates :email, presence: true, unless: :new_record?
   validates :plan_id, presence: true
   validates :stripe_customer_token, presence: true, unless: :new_record?
-  validates :shop_id, presence: true
+  validates :shop_id, presence: true, uniqueness: true
 
   after_create :create_stripe_customer_with_email
 
