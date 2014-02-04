@@ -13,4 +13,4 @@
       = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'  
 
   .row
-    %iframe{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", :width => "800", :height => '600'}
+    %iframe{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", :width => "100%", :height => '100%', style: "width: 100%; height:100%;"}
