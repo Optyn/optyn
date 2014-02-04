@@ -126,6 +126,34 @@ class Template < ActiveRecord::Base
     return content
   end
 
+  def personalize_header
+          shop = self.shop
+
+          #replace the background color
+          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction"}
+          node.set_property('background-color', shop.header_background_color)
+
+          #replace the palceholder image tag with shop image or name based om if a shop has a logo
+          introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
+          introduction_division.css('img').each do |image|
+            shop_logo = email_body_shop_logo(shop)
+            shop_logo_node = Nokogiri::HTML(shop_logo).css('body').first
+          
+            if shop_logo_node.css('img').present?
+              image_node = shop_logo_node.css('img').first
+              style_attr = image_node['style']
+              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none;" :  "margin:auto;float:none;"
+
+              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo_node.children.to_s}</span>})
+            else
+              header_node = shop_logo_node.css('h3').first
+              class_attr = header_node['class']
+              header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
+              image.swap(%{<h2><span class="optyn-headline">#{shop_logo_node.children.to_s}</span></h2>})
+            end
+          end
+        end
+
   private
   def self.html_to_thumbnail(template)
     file = Tempfile.new(["template_#{template.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
