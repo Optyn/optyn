@@ -379,6 +379,12 @@ class Merchants::MessagesController < Merchants::BaseController
     @message_image.save
   end
 
+  def destroy_template
+    @template = Template.for_uuid(params[:id])
+    @template.destroy
+    head :ok
+  end
+
   private
   def check_subscription
     message_method_call = params[:choice]

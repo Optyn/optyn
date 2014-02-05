@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131083113) do
+ActiveRecord::Schema.define(:version => 20140205104110) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -693,7 +693,11 @@ ActiveRecord::Schema.define(:version => 20140131083113) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.string   "thumbnail"
+    t.string   "uuid"
+    t.datetime "deleted_at"
   end
+
+  add_index "templates", ["uuid"], :name => "index_templates_on_uuid", :unique => true
 
   create_table "user_labels", :force => true do |t|
     t.integer  "user_id"
