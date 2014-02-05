@@ -156,7 +156,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	text-align: center;
 }
 
-.template_chooser .template_type:nth-child( 3n + 1 ),
+.template_chooser > .span4:nth-child( 3n + 1 ),
 .modal-body > .template_chooser > .span5:nth-child( 2n + 1 ) {
 	margin-left: 0;
 }
@@ -167,7 +167,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 .modal-body > .template_chooser > .span5 > img {
 	max-height: 150px;
 }
-.template_chooser > .template_type {
+//.template_chooser .template_type {
+.template_chooser > .span4 {
 	margin-bottom: 3%;
 	position: relative;
 	box-shadow: inset transparent 0px 0px 0px 0px;
@@ -176,12 +177,17 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		box-shadow: inset #555 0px 0px 0px 7px;
 	}
 }
-.template_chooser > .template_type > .tmpl-bg {
-	background-size: cover;
+.template_chooser .template_type {
+	display: block;
 	height: 300px;
 }
-.template_chooser > .template_type > img { max-height: 300px; }
-.template_chooser .template_type h6 {
+.template_chooser .template_type > .tmpl-bg {
+//.template_chooser > .span4 > .tmpl-bg {
+	background-size: cover;
+	height: 100%;
+}
+.template_chooser .template_type > img { max-height: 300px; }
+.template_chooser .template_type > h6 {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -192,5 +198,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	margin: 0;
 	padding: 10px 0;
 	line-height: 1.6rem;
+	padding-right: 50px;
 }
-.template_chooser .delete-btn { margin-right: 10px; }
+.template_chooser .delete-btn {
+	margin-right: 10px;
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+}

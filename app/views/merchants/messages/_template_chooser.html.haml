@@ -24,7 +24,7 @@
         %a{href: assign_template_merchants_message_path(@message.uuid), class: "template_type", 'data-template-id' => template.id}
           %h6
             = template.name
-            
+
           - if template.thumbnail.present?
             /= image_tag("#{template.thumbnail}")
             .tmpl-bg{style: "background-image:url(#{template.thumbnail});"}
