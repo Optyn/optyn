@@ -173,7 +173,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	position: relative;
 	box-shadow: inset transparent 0px 0px 0px 0px;
 	@include transition( box-shadow 0.3s ease );
-	&:hover > .tmpl-bg {
+	&:hover .tmpl-bg {
 		box-shadow: inset #555 0px 0px 0px 7px;
 	}
 }
