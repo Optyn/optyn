@@ -441,6 +441,7 @@ Optyn::Application.routes.draw do
         get :email_self
         post :template_upload_image
         delete :destroy_template
+        get :click_report
       end #end of member
     end #end of resources messages
   end #end of merchants namespace

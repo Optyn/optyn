@@ -330,6 +330,12 @@ class Merchants::MessagesController < Merchants::BaseController
     render partial: 'merchants/messages/social_report', locals: {message: message, timestamp_attr: timestamp_attr, fb_body: fb_body, twitter_body: twitter_body}
   end
 
+  def click_report
+    message = Message.find(params[:id])
+    report_data = EmailTracking.get_message_click_report(message.id)
+    render partial: 'merchants/messages/email_tracking_data', locals: {message: message, report_data: report_data}
+  end
+
   def share_email
 
   end

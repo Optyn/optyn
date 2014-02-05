@@ -1,0 +1,13 @@
+%div{:id => "clickReportDialog_#{message.uuid}", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "myModalLabel", :'aria-hidden' => "true"}
+  .modal-header
+    %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
+    %h3
+
+  .modal-body
+    .clearfix
+
+    .blank-space
+
+    .row-fluid.stats
+      = hidden_field_tag "click_report_path_#{message.uuid}", click_report_merchants_message_path(message.id)
+      %div{:id => "click_report_#{message.uuid}"}

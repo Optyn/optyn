@@ -478,9 +478,15 @@ function MerchantMessage() {
 
 $(document).ready(function(){
     $(".open-reports").click(function(){
-        msg_uuid = $(this).attr('id');
+        msg_uuid = $(this).attr('data-id');
         $('#reportDialog').modal('show');
         getSocialSiteReport(msg_uuid);
+    });
+
+    $(".click-reports").click(function(){
+        msg_uuid = $(this).attr('data-uuid').substr(3);
+        $('#clickReportDialog').modal('show');
+        getClicksReport(msg_uuid);
     });
 });
 
@@ -493,6 +499,23 @@ function getSocialSiteReport(msg_uuid) {
         type: 'GET',
         success: function (data) {
             $('#social_site_report_' + msg_uuid).html(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert(errorThrown)
+        }
+    });
+}
+
+function getClicksReport(msg_uuid){
+    var link = $('#click_report_path_' + msg_uuid);
+    var url = link.val();
+   
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            $('#click_report_' + msg_uuid).html(data);
         },
         error: function (jqXHR, textStatus, errorThrown)
         {

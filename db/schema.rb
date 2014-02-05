@@ -150,8 +150,11 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
   create_table "email_trackings", :force => true do |t|
     t.text     "data"
     t.integer  "manager_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "message_id"
+    t.string   "redirect_url"
+    t.string   "user_email"
   end
 
   create_table "file_imports", :force => true do |t|
@@ -682,6 +685,13 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "name"
+  end
+
+  create_table "template_urls", :force => true do |t|
+    t.text     "orginal_url"
+    t.text     "optyn_url"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "templates", :force => true do |t|
