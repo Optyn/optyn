@@ -8,23 +8,6 @@ function MerchantMessage() {
     var current = this;
 
     this.initialize = function () {
-        this.addOverlay = function(elementToAppendTo) {
-            $('#overlay').remove();
-            var overlay = $('<div id="overlay" style="position: absolute; text-align: center; width: 100%; height: 100%; left: 0; top: 0; background-color: white; opacity: 0.8;"><img src="/assets/ajax-loader.gif"></div>');
-            $(elementToAppendTo).css({ position: 'relative'});
-            $(elementToAppendTo).append(overlay);
-        };
-
-        this.removeOverlay = function() {
-            $('#overlay').remove();
-        };
-
-        this.loadSpinnerForIframe = function() {
-            var _this = this;
-            $('#customHtmlTemplate').load(function(){
-                _this.removeOverlay();
-            });
-        };
 
         // Checking if iframe exists
         /*
@@ -32,8 +15,8 @@ function MerchantMessage() {
          *  if it does add overlay and then
          *  remove the overlay when iframe is done loading
          */
-        if ( $('#customHtmlTemplate').length > 0 ) {
-            this.addOverlay('#template_wrapper');
+        if ( $('#template_pane').length) {
+            OP.overlay.addOverlay('#template_wrapper');
             this.loadSpinnerForIframe();
         }
 
@@ -85,6 +68,14 @@ function MerchantMessage() {
         if($('#system_templates_modal').length){
             this.hookTemplateChooserClick();
         }
+    };
+
+    this.loadSpinnerForIframe = function() {
+      $('#customHtmlTemplate').load(function(){
+         setTimeout(function(){
+            OP.overlay.removeOverlay();
+          }, 100)  
+      });
     };
 
     this.hookChosen = function () {
@@ -427,7 +418,7 @@ function MerchantMessage() {
                     'template_id': $(this).attr('data-template-id')
                     },
                 beforeSend: function(){
-                    _this.addOverlay('#template_wrapper');
+                    OP.overlay.addOverlay('#template_wrapper');
                     _this.loadSpinnerForIframe();
                     $('.loading').show();
                     $('.btn-close').hide();
