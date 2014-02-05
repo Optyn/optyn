@@ -236,20 +236,26 @@ module Merchants::MessagesHelper
   end
 
   def system_templates_link_caption(template)
-      "#{template.name}
-      <br />
-      #{system_template_description(template.name)}".html_safe
+    content = <<-HTML
+      <div>
+        <span class="system-template-name">#{template.name}</span>
+        <br />
+        <span class="help-inline"><em>#{system_template_description(template.name)}</em><span>
+      </div>
+    HTML
+
+    content.html_safe
   end
 
   def system_template_description(template_name)
     if "Basic" == template_name
-      "Singular ideas announcements."
+      "Extremely good, for conversing with your customers, very singular like, google.com is for just search."
     elsif "Hero" == template_name
-      "Share some pointers in a left bar and main message to the core idea"
+      "Very suitable, when sharing thoughts on the left and conversing with customers on the right."
     elsif "Sidebar" == template_name
-      "Make it easy with mutliple ideas or announcements with equal importance"
+      "Awesome, when you want to converse on multiple thoughts with your customers."
     elsif "Galleria" == template_name
-      "Display intuitive images to bring more business from your customers"
+      "Excellent, when you want to converse with your customers through pictures."
     else
       ""
     end

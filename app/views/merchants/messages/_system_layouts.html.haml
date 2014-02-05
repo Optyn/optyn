@@ -8,7 +8,7 @@
       %a{href: assign_template_merchants_message_path(@message.uuid), class: "offset1 span5 template_type", 'data-template-id' => system_template.id}
         - if system_template.thumbnail.present?
           = image_tag("#{system_template.thumbnail}", class: 'img-polaroid')
-        
+        %br/
         = system_templates_link_caption(system_template)
 
 
