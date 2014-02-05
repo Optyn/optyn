@@ -236,11 +236,9 @@ module Merchants::MessagesHelper
   end
 
   def system_templates_link_caption(template)
-    content_tag(:article) do
-      template.name +
-      "<br />" +
-      system_template_description(template.name)
-    end.html_safe
+      "#{template.name}
+      <br />
+      #{system_template_description(template.name)}".html_safe
   end
 
   def system_template_description(template_name)
