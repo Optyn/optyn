@@ -206,3 +206,24 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	right: 0;
 	bottom: 10px;
 }
+.modal-body .template_type {
+	position: relative;
+	height: 170px;
+	@include transition( background 0.3s ease );
+	&:hover {
+		background: $light-gray;
+	}
+}
+.modal-body .template_type img {
+	position: absolute;
+	left: 0;
+	top: 10px;
+}
+.template-description {
+	position: absolute;
+	left: 150px;
+	top: 10px;
+	text-align: left;
+	color: $gray;
+	line-height: 1.2rem;
+}

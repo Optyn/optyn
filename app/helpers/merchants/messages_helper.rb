@@ -237,10 +237,10 @@ module Merchants::MessagesHelper
 
   def system_templates_link_caption(template)
     content = <<-HTML
-      <div>
-        <span class="system-template-name">#{template.name}</span>
+      <div class="template-description">
+        <span class="system-template-name"><strong>#{template.name}</strong></span>
         <br />
-        <span class="help-inline"><em>#{system_template_description(template.name)}</em><span>
+        <span><small>#{system_template_description(template.name)}</small><span>
       </div>
     HTML
 
