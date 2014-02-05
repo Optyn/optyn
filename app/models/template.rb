@@ -6,6 +6,7 @@ require 'messagecenter/templates/system_template_personalizer'
 require 'messagecenter/templates/structure_creator'
 
 class Template < ActiveRecord::Base
+  include UuidFinder
   include Messagecenter::Templates::SystemTemplatePersonalizer
   include Messagecenter::Templates::StructureCreator
   include ShopLogo
@@ -17,13 +18,16 @@ class Template < ActiveRecord::Base
 
   serialize :structure, Hash
 
-  has_many :messages, dependent: :destroy
+  has_many :messages #, dependent: :destroy
   has_many :stylesheets
-  has_one :template_upload, dependent: :destroy
+  has_one :template_upload #, dependent: :destroy
   belongs_to :shop
 
-  after_create :create_structure
+  after_create :assign_uuid, :create_structure
+
   after_save :thumbnail_generator, if: :html_changed?
+
+  acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
   scope :fetch_system_generated, where(system_generated: true)
 
@@ -32,6 +36,7 @@ class Template < ActiveRecord::Base
   scope :for_name, ->(template_name) { where(name: template_name) }
 
   PLACE_HOLDER_ELEM = "<placeholder></placeholder>\n"
+
   mount_uploader :thumbnail, TemplateThumbnailUploader
 
   def self.system_generated
@@ -132,5 +137,10 @@ class Template < ActiveRecord::Base
     file.write(IMGKit.new(template.html, quality: 50).to_jpg)
     file.flush
     file
+  end
+
+  def assign_uuid
+    IdentifierAssigner.assign_random(self, 'uuid')
+    self.save(validate: false)
   end
 end

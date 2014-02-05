@@ -32,7 +32,7 @@
             #template_image_preview_block
               Generating Preview...
 
-        %button.btn.btn-small.pull-right.delete-btn
+        %button.btn.btn-small.pull-right.delete-btn.template-delete-btn{'data-delete-template-path' => destroy_template_merchants_message_path(template.uuid), 'data-template-name' => template.name}
           %i.icon-trash
 
   .loading{style: 'display: none;'}

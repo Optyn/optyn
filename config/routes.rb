@@ -440,6 +440,7 @@ Optyn::Application.routes.draw do
         put :save
         get :email_self
         post :template_upload_image
+        delete :destroy_template
       end #end of member
     end #end of resources messages
   end #end of merchants namespace

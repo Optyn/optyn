@@ -1,7 +1,14 @@
 namespace :templates do
   desc "Populate system generated templates"
   task :seed => :environment do
-    Template.destroy_all
+    Template.all.each do |template| 
+      begin
+        template.destroy 
+        template.destroy
+      rescue 
+        
+      end
+    end
 
     #Add the basic Template
     puts "Adding the Basic Template"

@@ -68,6 +68,10 @@ function MerchantMessage() {
         if($('#system_templates_modal').length){
             this.hookTemplateChooserClick();
         }
+
+        if($('.template-delete-btn').length){
+          this.hookTemplateDelete();        
+        }
     };
 
     this.loadSpinnerForIframe = function() {
@@ -443,6 +447,31 @@ function MerchantMessage() {
         $('body').on('click', '#system_template_chooser_link', function(){
             $('#system_templates_modal').modal('show');        
         });
+    };
+
+    this.hookTemplateDelete = function(){
+      $('body').on('click', '.template-delete-btn', function(event){
+        event.preventDefault();
+        if(confirm('Are you sure you want to delete: ' + $(this).data('template-name') + "? Once deleted you will not be able to get it back.")){
+          $.ajax({
+            url: $(this).data('delete-template-path'),
+            type: 'POST',
+            data: {
+              '_method': 'DELETE'
+            },
+            beforeSend: function(){
+              OP.overlay.addOverlay('body');
+            },
+            success: function(data){
+              window.location = window.location.toString();
+            },
+            error: function(){
+              OP.overlay.removeOverlay();
+              alert("Could not delete your template. Please refresh your page and try again.");
+            }
+          });
+        }
+      });  
     };
 
 }

@@ -12,7 +12,7 @@ class Message < ActiveRecord::Base
   has_many :message_visual_properties, dependent: :destroy
   has_one :message_image, dependent: :destroy
   has_many :redeem_coupons, dependent: :destroy
-  belongs_to :template
+  belongs_to :template, :class_name => "Template", :with_deleted => true
 
 
   has_many :children, class_name: "Message", foreign_key: :parent_id, dependent: :destroy
