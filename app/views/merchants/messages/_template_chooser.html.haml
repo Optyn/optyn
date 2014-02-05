@@ -24,7 +24,8 @@
         %h6
           = template.name
         - if template.thumbnail.present?
-          = image_tag("#{template.thumbnail}")
+          /= image_tag("#{template.thumbnail}")
+          .tmpl-bg{style: "background-image:url(#{template.thumbnail});"}
         - else
           #template_image_preview_block
             Generating Preview...

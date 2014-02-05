@@ -170,6 +170,16 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 .template_chooser > .span4 {
 	margin-bottom: 3%;
 	position: relative;
+	border: 10px transparent solid;
+	@include transition( border 0.3s ease );
+	&:hover {
+		border: 10px rgba(0,0,0,0.7) solid;
+		box-sizing: border-box;
+	}
+}
+.template_chooser > .span4 > .tmpl-bg {
+	background-size: cover;
+	height: 300px;
 }
 .template_chooser > .span4 > img { max-height: 300px; }
 .template_chooser h6 {
