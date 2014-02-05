@@ -17,7 +17,8 @@ CKEDITOR.editorConfig = function( config ) {
     { name: 'basicstyles', items : [ 'Bold','Italic','Underline', '-', 'TextColor'] },
     { name: 'paragraph', items : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
                                  'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat'] },
-    { name: 'insert', items : [ 'Link' ] }
+    { name: 'insert', items : [ 'Link' ] },
+    { name: 'form', items: [ 'Button' ]}
   ];
 
 
