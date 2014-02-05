@@ -8,10 +8,6 @@ function MerchantMessage() {
     var current = this;
 
     this.initialize = function () {
-
-
-
-
         this.addOverlay = function(elementToAppendTo) {
             $('#overlay').remove();
             var overlay = $('<div id="overlay" style="position: absolute; text-align: center; width: 100%; height: 100%; left: 0; top: 0; background-color: white; opacity: 0.8;"><img src="/assets/ajax-loader.gif"></div>');
@@ -433,7 +429,7 @@ function MerchantMessage() {
                 beforeSend: function(){
                     _this.addOverlay('#template_wrapper');
                     _this.loadSpinnerForIframe();
-                    // $('.loading').show();
+                    $('.loading').show();
                     $('.btn-close').hide();
                 },
                 success: function(data){
