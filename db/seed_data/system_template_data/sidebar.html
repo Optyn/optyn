@@ -756,16 +756,25 @@
       .optyn-sidebar .optyn-paragraph { font-size: 13px; }
       .optyn-sidebar h2 {
         font-size: 16px;
-        font-weight: bold;
-      }
-      .optyn-sidebar h3 {
-        font-size: 14px;
-        font-weight: bold;
       }
       [data-type="introduction"] .wrapper,
       [data-type="content"] .outermost-container { padding-top: 0; }
       .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
       [data-type="footer"] .footer-container { background: #eee; }
+      [data-type="text_with_left_image"] .twelve .optyn-replaceable-image,
+      [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
+        width: 100%;
+        max-width:290px;
+        @media only screen and (max-width: 600px) { max-width: 100%; }
+      }
+      [data-type="text_with_left_image"] .twelve .optyn-replaceable-image {
+        float: left;
+        margin: 0 10px 10px 0;
+      }
+      [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
+        float: right;
+        margin: 0 0 10px 10px;
+      }
     </style>
 </head>
 <body id="flat">
