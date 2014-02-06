@@ -1224,3 +1224,11 @@ blockquote {
     margin-top: 35px;
   }
 }
+
+#flat.m-app .nav-tabs a > span,
+.count-indicator {
+  border-radius: 100px;
+  padding: 0 5px;
+  background-color: $medium-gray;
+  color: $white;
+}

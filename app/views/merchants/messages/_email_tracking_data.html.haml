@@ -1,19 +1,20 @@
 -if report_data.present?
-  .span12.accordion{id: "data_accordion_#{message.uuid}"}
+  .accordion{id: "data_accordion_#{message.uuid}"}
     - counter = 0
     - report_data.each do |key, value|
       - counter = counter + 1
       .accordion-group
         .accordion-heading
           %a{:href=>"##{counter}_#{message.uuid}", 'data-toggle'=>'collapse', 'data-parent'=>"#data_accordion_#{message.uuid}", :class=>'accordion-toggle'}
-          = truncate(key)
-          = "(#{value['count']})"
+            = truncate(key)
+            .count-indicator.pull-right
+              = value['count']
         .accordion-body.collapse{id: "#{counter}_#{message.uuid}"}
           .accordion-inner
-            %ul
+            %ul.bullet-disc
               -value['emails'].each do |email|
                 %li
                   = email
 -else
-  .span12
+  .text-error
     Sorry. There is no data available for this report
