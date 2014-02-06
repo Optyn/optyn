@@ -23,6 +23,7 @@
 //= require shCore.js
 //= require shLegacy.js
 //= require shBrushXml.js
+//= require ckeditor_fix
 //= require bootstrap-colorpicker
 //= require jquery.colorbox
 //= require_self

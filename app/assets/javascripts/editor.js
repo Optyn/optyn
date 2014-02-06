@@ -3,8 +3,10 @@
 //= require jquery.remotipart
 //= jquery-migrate-1.2.1
 //= require bootstrap
-//= require_self
+//= require ckeditor_fix
 //= require ckeditor/init
+//= require_self
+
 
 var OP = OP || {};
 OP = (function($, window, doucument, Optyn){
