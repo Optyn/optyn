@@ -6,7 +6,7 @@
       .accordion-group
         .accordion-heading
           %a{:href=>"##{counter}_#{message.uuid}", 'data-toggle'=>'collapse', 'data-parent'=>"#data_accordion_#{message.uuid}", :class=>'accordion-toggle'}
-            = truncate(key)
+            = truncate(key, length: 80)
             .count-indicator.pull-right
               = value['count']
         .accordion-body.collapse{id: "#{counter}_#{message.uuid}"}
