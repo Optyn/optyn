@@ -69,7 +69,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
         end
 
 
-          
+        @user = User.new
   			@user.name = name
         @user.email = email
         @user.password = "test1234"
