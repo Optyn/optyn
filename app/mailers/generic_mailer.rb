@@ -20,4 +20,11 @@ class GenericMailer < ActionMailer::Base
     mail(to: ["Alen Malkoc <alen@optyn.com>"],
       subject: "A new partner inquiry has come in (Company: #{@inquiry.company_name}, Id: #{@inquiry.id})")
   end
+  
+  def announce_marketing_agency_inquiry(inquiry_id)
+    @inquiry = MarketingAgencyInquiry.find(inquiry_id)
+
+    mail(to: ["Alen Malkoc <alen@optyn.com>"],
+      subject: "A new marketing agency inquiry has come in (Company: #{@inquiry.company_name}, Id: #{@inquiry.id})")
+  end
 end

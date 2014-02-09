@@ -22,7 +22,7 @@ module Messagecenter
     end
 
     def populate_labels
-      @labels = current_shop.labels
+     @labels = Label.labels_with_customers(current_shop.id)
     end
 
     def message_redirection

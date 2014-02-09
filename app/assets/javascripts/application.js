@@ -33,8 +33,9 @@ $(document).ready(function () {
     }
 
     if($('label.checkbox').length){
-      fixCheckboxLabel();
-    }
+        fixCheckboxLabel();
+    }    
+
 });
 
 function moveDatetimepickerErrorMessage() {

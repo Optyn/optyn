@@ -12,8 +12,11 @@
 
   %p.pull-left
     Here's a list of all your connections. Click on name of customer to learn more.
-    
-  %a.btn.btn-primary{:href => merchants_file_imports_path, :style => "float: right"} Import Customers
+  .pull-right
+    %a.btn.btn-primary{:href => merchants_file_imports_path} Import Customers
+    %a.btn.btn-primary.btn-success{:href => merchants_labels_path} View by labels
+  
+
   %table.table.table-striped
     %thead
       %tr

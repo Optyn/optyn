@@ -105,7 +105,7 @@ function MyConsumerDetail() {
     };
 
     this.hookChosen = function () {
-        $('.chzn-select').chosen();
+        $('.chzn-select').chosen({allow_single_deselect: false});
     };
 
     this.hookAddNewLabel = function () {

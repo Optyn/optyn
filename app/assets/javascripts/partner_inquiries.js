@@ -28,7 +28,7 @@ $(document).ready(function(){
               $form.find('#loading').show();
             },
             success: function(){
-              $('#partner_inquiry_wrapper').html('<strong>Thank you ver much for your inquiry. We will be in touch within 24 hours or less.</strong>');
+              $('#partner_inquiry_wrapper').html('<strong>Thank you very much for your inquiry. We will be in touch within 24 hours or less.</strong>');
             },
             error: function(data){
               $('#partner_inquiry_wrapper').html(data.responseText);

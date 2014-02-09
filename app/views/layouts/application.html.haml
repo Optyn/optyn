@@ -16,6 +16,8 @@
 
     = analytics_init if Rails.env.production?
 
+    = render(partial: "layouts/pingdom_rum") if Rails.env.production?
+
   - cssClasses = params[:action].gsub(/\//, '-') + ' ' + params[:controller].gsub(/\//, '-')
   - ( cssClasses += ' m-app' if params[:controller] != 'main' && params[:controller] != 'users/sessions' && ( params[:controller] != 'users/registrations' && params[:action] != 'new' ) && ( params[:controller] != 'shop' && params[:action] != 'show' ) && params[:controller] != 'merchants/managers/registrations')
   %body#flat.a-layout{:class => cssClasses }
@@ -56,9 +58,11 @@
                 %li.hover-applied
                   %a{ :href => email_marketing_path, :title => "E-mail Marketing", :alt => "E-Mail Marketing" } E-Mail Marketing
                 %li.hover-applied
-                  %a{ :href => marketing_agency_path, :title => "Email Marketing Agency", :alt => "Email Marketing Agency" } Marketing Agency
+                  %a{ :href => new_marketing_agencies_path, :title => "Email Marketing Agency", :alt => "Email Marketing Agency" } Marketing Agency
                 %li.hover-applied
                   %a{ :href => resources_path, :title => "Marketing Resources", :alt => "Marketing Resources" } Resources
+                %li.hover-applied
+                  %a{ :href => pricing_path, :title => "Pricing", :alt => "Pricing" } Pricing
                 %li.sign-up
                   %a.btn.btn-success{ :href => new_merchants_manager_registration_path } Sign up
                 %li
@@ -96,7 +100,6 @@
           %li
             %a( href = '#' ) foo
       .span4.text-center
-        %img{ src: "http://placehold.it/200x200", alt: "Placeholder image" }
 
     .dark-overlay
 

@@ -1,0 +1,6 @@
+%p
+  %h6 Read our Best Blog Posts
+  %ul
+  - @posts.each do |post|
+    %li.bullet-disc
+      %a{ :href => post.url, :alt => post.title, :title => post.title } #{post.title}

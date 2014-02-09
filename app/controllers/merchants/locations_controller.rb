@@ -12,7 +12,6 @@ class Merchants::LocationsController < Merchants::BaseController
 
   def create
     @location = current_shop.locations.new(params[:location])
-
     if @location.save
       GeoFinder.perform_async(@location.id)
       flash[:notice] = "Location added successfully"

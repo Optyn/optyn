@@ -9,6 +9,8 @@ class Merchants::ConnectionsController < Merchants::BaseController
   def unsubscribe_user
     shop_id = current_shop.id
   	connection = Connection.where(user_id:"#{params[:id]}", :shop_id => shop_id).first
+    user = User.find(params[:id])
+    user.destroy_all_user_labels
   	if connection
   		connection.active = "false"
   		connection.save
@@ -31,9 +33,27 @@ class Merchants::ConnectionsController < Merchants::BaseController
   end
 
   def create_user
-  	if not params["To"].blank?
+    @error_hash = []
+    
+    if params["To"].blank? && params["label_ids"].nil?
+      @user = User.new
+      @error_hash.push("Please enter email and name ")
+      @error_hash.push("Please enter labels")
+      populate_labels
+      render 'add_user'
+    elsif params["To"].nil?
+      @user = User.new
+      @error_hash.push("Please enter email and name ")
+      populate_labels
+      render 'add_user'	
+    elsif params["label_ids"].nil?
+      @user = User.new
+      @error_hash.push("Please enter labels")
+      populate_labels
+      render 'add_user'
+    elsif not params["To"].blank?
   		total_users = params["To"].split(",")
-      @error_hash = []
+      
   		flag = false
   		loop_size = total_users.size - 1
       
@@ -49,8 +69,10 @@ class Merchants::ConnectionsController < Merchants::BaseController
         end
 
 
-          
-  			@user = User.new(:name => name, :email => email, :password => "test1234")
+        @user = User.new
+  			@user.name = name
+        @user.email = email
+        @user.password = "test1234"
         @user.skip_name = true
         @user.shop_identifier = current_shop.id
         @user.show_shop = true
@@ -74,18 +96,18 @@ class Merchants::ConnectionsController < Merchants::BaseController
                 if not existing_connection.active
                   conn = existing_connection
                   @user = existing_user
-                #If connection is active, return.
+                  #If connection is active, return.
                 else
                   flag = true
                   @error_hash.push("#{email} has already been taken.")
                   next
                 end
-              #User exixts, but does not have connection with the current shop.
+                #User exixts, but does not have connection with the current shop.
               else
                 @user = existing_user
               end
 
-            #Email belongs to existing Manager.
+              #Email belongs to existing Manager.
             elsif @user.errors[:email].include?("already taken")
               flag = true
               @error_hash.push("#{email} has already been taken.")

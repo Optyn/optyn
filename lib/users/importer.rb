@@ -3,10 +3,10 @@ module Users
 		def import(content, manager, label)
 	    shop = manager.shop
       begin
-	     csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
-     rescue 
-      raise "Problems parsing the uploaded file. Please make sure the headers are not missing."
-     end
+        csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
+      rescue
+        raise "Problems parsing the uploaded file. Please make sure the headers are not missing."
+      end
 
 	  	headers = csv_table.headers
       validate_headers(headers)
@@ -25,24 +25,29 @@ module Users
 	    counters[:unparsed_rows] = 0
 
 	    row_count = 0
-
-	    label_instance = Label.find_or_create_by_shop_id_and_name(shop.id, (label || FileImport::DEFAULT_LABEL_NAME))
+      label_instances = []
+      labels = label.split(",")
+      label_instances << Label.find_or_create_by_shop_id_and_name(shop.id, (FileImport::DEFAULT_LABEL_NAME))
+      if !labels.blank?
+        label_instances << Label.find_or_create_by_shop_id_and_name(shop.id, (label))
+      end
+	    
 	    csv_table.each do |row|
 	    	row_count += 1
 	    	Rails.logger.info row_count
-	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
+	    	output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender].to_s.downcase}"}, %{"#{row[:birth_date]}"}]
 
 	    	begin
-	    		cell_email = row[:email].to_s.strip
+	    		cell_email = row[:email].to_s.strip.downcase
 		      user = User.find_by_email(cell_email) || User.new(email: cell_email)
 		      user.skip_name = true
 		      user.skip_welcome_email = true
-		      user.name = row[:name].to_s.strip unless user.name.present?
+		      user.name = row[:name].to_s.strip
 		      gender = if (gender_val = row[:gender].to_s.downcase).length == 1
-		                 gender_val
-		               else
-		                  gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
-		               end
+            gender_val
+          else
+            gender_val == "male" ? "m" : (gender_val == "female" ? "f" : nil)
+          end
 		      user.gender = gender
 		      user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
 		      user.valid?
@@ -82,8 +87,9 @@ module Users
 		      end
 		      connection.save()
 
-		      
-		      UserLabel.find_or_create_by_user_id_and_label_id(user.id, label_instance.id)
+		      label_instances.each do |label_instance|
+            UserLabel.find_or_create_by_user_id_and_label_id(user.id, label_instance.id)
+          end
 
 		      output << output_row.join(",")
 		    rescue Exception => e

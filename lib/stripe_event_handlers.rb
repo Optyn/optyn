@@ -56,7 +56,6 @@ module StripeEventHandlers
     if !subscription.nil?
       evaluated_plan = Plan.which(subscription.shop)
       subscription.update_plan(evaluated_plan) if evaluated_plan != subscription.plan
-      ShopAudit.create(shop_id: subscription.shop.id, description: "Test Invoice Created")
       create_invoice(subscription,params)
     end
   end
