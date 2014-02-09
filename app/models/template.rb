@@ -37,7 +37,28 @@ class Template < ActiveRecord::Base
 
   PLACE_HOLDER_ELEM = "<placeholder></placeholder>\n"
 
+  LAYOUT_BACKGROUND_COLOR = '#d4d4d4'
+  HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Arial, sans-serif}, %{"ProximaNova", Helvetica, Arial, sans-serif}, %{Verdana, Arial, sans-serif}, %{'Courier New', Courier, Arial, sans-serif}]
+  HEADER_BACKGROUND_COLOR = Shop::DEFAULT_HEADER_BACKGROUND_COLOR
+  CONTENT_BACKGROUND_COLOR = '#FFFFFF'
+  CONTENT_TITLE_COLOR = '#000000'
+  CONTENT_PARAGRAPH_COLOR = '#000000'
+  CONTENT_LINK_COLOR = '#000000'
+
   mount_uploader :thumbnail, TemplateThumbnailUploader
+
+  def self.with_default_settable_properties(template_id, shop)
+   existing_template = Template.find(template_id) 
+   update_settable_properties(template_id, shop, existing_template.default_selectable_properties) 
+  end
+
+  def self.update_settable_properties(template_id, shop, selectable_properties)
+    existing_template = Template.find(template_id)
+    new_template = Template.new(html: existing_template.html, shop_id: shop.id)
+    new_template.add_markup_classes
+    new_template.convert_system_template(selectable_properties)
+    new_template.html
+  end
 
   def self.system_generated
     fetch_system_generated
@@ -47,14 +68,23 @@ class Template < ActiveRecord::Base
     for_name("Basic").first
   end
 
-  def self.copy(template_id, shop)
+  def self.copy(template_id, shop, settable_properties)
     existing_template = Template.find(template_id)
     new_template = Template.new(html: existing_template.html, name: "#{shop.name} #{existing_template.name}", shop_id: shop.id)
-    new_template.personalize
+    new_template.convert_system_template(settable_properties)
     new_template.save
     new_template.id
   end
 
+  
+
+
+
+
+
+
+
+  public
   def personalize_body(content, message, receiver)
     # Sanitaize the footer
     template_node = Nokogiri::XML(content)

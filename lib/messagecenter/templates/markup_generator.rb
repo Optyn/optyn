@@ -99,13 +99,14 @@ module Messagecenter
       def self.add_component_class(component, component_parent)
         node = add_node_if_none(component)  
 
-        optyn_class = "optyn-#{component_parent}"
-        optyn_class << " optyn-#{component['type']}" if "grid" == component.name || "container" == component.name
+        optyn_class = ["optyn-#{component_parent}"]
+        optyn_class << "optyn-#{component['type']}" if "grid" == component.name || "container" == component.name
 
-        if node['class'].present?
-          node['class'] = node['class'] +  " " + optyn_class
+        if node['class'].present? 
+          class_str = optyn_class.join(" ")
+          node['class'] = node['class'] +  " " + class_str unless node['class'].include?(class_str)
         else
-          node['class'] = optyn_class
+          node['class'] = optyn_class.join(" ")
         end
 
       end

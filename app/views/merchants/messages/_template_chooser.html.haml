@@ -11,7 +11,7 @@
     %h3 OR
 
     %p
-      = link_to "I don't care. I want to pick an available layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+      = link_to "I don't care. I want to pick an available layout", system_layouts_merchants_message_path(@message.uuid), class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 
 - else
   %h2
@@ -21,7 +21,7 @@
   .template_chooser
     - @templates.each do |template|
       .span4
-        %a{href: assign_template_merchants_message_path(@message.uuid), class: "template_type", 'data-template-id' => template.id}
+        %a{href: assign_template_merchants_message_path(@message.uuid), class: "template_type", 'data-template-id' => template.uuid}
           %h6
             = template.name
 
@@ -46,9 +46,6 @@
     %a.btn.btn-primary.btn-large{"data-toggle" => "modal", href: "#template_upload_modal", role: "button"} Upload Template
 
     OR
-    = link_to "System Layout", "javascript:void(0)", class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+    = link_to "System Layout", system_layouts_merchants_message_path(@message.uuid), class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 
-
-#system_templates_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
-  = render partial: "merchants/messages/system_layouts"
 = render partial: 'merchants/messages/template_upload_modal'

@@ -1,3 +1,4 @@
+var props = null;
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();
@@ -72,13 +73,30 @@ function MerchantMessage() {
         if($('.template-delete-btn').length){
           this.hookTemplateDelete();        
         }
+
+        if($('#template_properties_tab').length){
+          this.hookTemplatePropertyTab();
+          this.hookTemplatePropertyNavigation();
+          this.hookTemplatePropertySubmit();
+          setTimeout(function(){
+            $('#template_properties_tab a:last').trigger('click');
+          }, 100);
+
+          this.hookReplaceMerchantMenuOnLoad();
+          this.hookShowMessageMenuClick();
+          this.hookShowTemplateMenuClick();
+          this.hookPopulateTemplateSettableProperties();
+          this.hookTemplateMenuColorPicker();
+          this.hookTemplateMenuColorPickerChange();
+          this.refreshTemplatePropertiesView();
+        }
     };
 
     this.loadSpinnerForIframe = function() {
       $('#customHtmlTemplate').load(function(){
          setTimeout(function(){
             OP.overlay.removeOverlay();
-          }, 100)  
+          }, 100);  
       });
     };
 
@@ -474,6 +492,145 @@ function MerchantMessage() {
       });  
     };
 
+    this.hookTemplatePropertyTab = function(){
+      $('body').on('click', '.template-property-tab', function(event){
+        event.preventDefault();
+        $(this).tab('show');
+      });  
+    };
+
+    this.hookTemplatePropertyNavigation = function(){
+      $('body').on('click', '.template-property-action', function(event){
+        var tabId = $(this).data('tab');
+        var jTabId = "#" + tabId;
+        $('a[href=' + jTabId + ']').trigger('click');
+      });
+    };
+
+    this.hookTemplatePropertySubmit = function(){
+      $('body').on('click', '.template-property-submit', function(event){
+        $(this).parents('form').first().submit();     
+      });  
+    };
+
+    this.hookReplaceMerchantMenuOnLoad = function(){
+      var templateMessage = this;
+      var $merchantMenu = $('.merchant-menu');
+      var $menuParent = $merchantMenu.parent();
+      var $templateMenu = $('.template-property-menu');
+
+      var $tempForMerchantMenu = $('<div />');
+      $tempForMerchantMenu.append('<li><a class="show-template-menu" href="javascript:void(0)"><em>Show Template Menu</em></a></li>')
+      $merchantMenu.append($tempForMerchantMenu.html());
+
+      var $tempForTemplateMenu = $('<div />');
+      $tempForTemplateMenu.append('<li><a class="show-message-menu" href="javascript:void(0)"><em>Show Main Menu</em></a></li>')
+      $templateMenu.append($tempForTemplateMenu.html());
+
+      $tempForTemplateMenu = $('<div />');
+      $tempForTemplateMenu.append($templateMenu);
+      $menuParent.append($tempForTemplateMenu.html());
+
+      templateMessage.renderTemplateMenu();
+    };
+
+    this.hookShowMessageMenuClick = function(){
+      var templateMessage = this;
+      $('body').on('click', '.show-message-menu', function(){
+        templateMessage.renderMerchantMenu();
+      }); 
+    };
+
+    this.hookShowTemplateMenuClick = function(){
+      var templateMessage = this;
+      $('body').on('click', '.show-template-menu', function(){
+        templateMessage.renderTemplateMenu();
+      }); 
+    };    
+
+    this.renderMerchantMenu = function(){
+      var $merchantMenu = $('.merchant-menu');
+      var $templateMenu = $('.template-property-menu');
+
+      $templateMenu.slideUp(function(){
+        $(this).hide();
+        
+        $merchantMenu.slideDown(function(){
+          $(this).show();
+        });
+      });
+    } ;
+
+    this.renderTemplateMenu = function(){
+      var $merchantMenu = $('.merchant-menu');
+      var $templateMenu = $('.template-property-menu');
+
+      $merchantMenu.slideUp(function(){
+        $(this).hide();
+        
+        $templateMenu.slideDown(function(){
+          $(this).show();
+        });
+      });
+    };
+
+    this.hookPopulateTemplateSettableProperties = function(){
+        var properties = $('.template-selectable-properties').data('selectable-properties').properties;
+        props = properties;
+        var elements =  $('#template_properties_form').find('input[type=text], select');
+        for(var i = 0; i < elements.length; i++){
+          var $element = $(elements[i]);
+          var eval_str = $element.attr('id').replace(/_/g, '.');
+          eval_arr = eval_str.split(".")
+          var attr = eval_arr.pop();
+          eval_str = eval_arr.join(".")
+          eval_str = eval_str + '[' + "'" + attr + "'" + "]"
+          var value = eval(eval_str)
+          $element.val(value);
+
+          if(attr.match('color')){
+            var $colorSpan = $element.parents('.color').first();
+            $colorSpan.attr('data-color', value);
+
+            var $addon = $element.next('.add-on')
+            $colorSpan.attr('background-color', value);            
+          }
+        }
+    };
+
+    this.hookTemplateMenuColorPicker = function(){
+      $('.template-color-field').colorpicker({
+            format: 'hex'
+      });
+    };
+
+    this.hookTemplateMenuColorPickerChange = function(){
+      var templateMessage = this;
+      $('.template-color-field').colorpicker().on('hide', function(){
+        templateMessage.reloadTemplateSelectorIframe();
+      });
+    };
+
+    this.refreshTemplatePropertiesView = function(){
+      var templateMessage = this;
+      $('body').on('change', '.template-property-menu input[type=text], .template-property-menu select', function(){
+        templateMessage.reloadTemplateSelectorIframe();          
+      });
+    };
+
+    this.reloadTemplateSelectorIframe = function(){
+      $.ajax({
+        url: $('#merchants_selectable_properties_preview_path').val(),
+        type: "POST",
+        data: $('#template_properties_form').serialize(),
+        success: function(data){
+          $('iframe#customHtmlTemplate').contents().find('html').html(data);
+        },
+        error: function(){
+          $('iframe#customHtmlTemplate').contents().html('<strong>An error occurred while setting your properties. Please select the template again</strong>');
+        }
+      });        
+    };
 }
 
 $(document).ready(function(){

@@ -3,8 +3,7 @@ namespace :templates do
   task :seed => :environment do
     Template.all.each do |template| 
       begin
-        template.destroy 
-        template.destroy
+        template.destroy!
       rescue 
         
       end

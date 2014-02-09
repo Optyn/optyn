@@ -27,6 +27,22 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = current_shop
   end
 
+  def default_settable_properties_preview
+    @message = Message.for_uuid(params[:id])
+    @template = Template.for_uuid(params[:template_id])
+    @html = Template.with_default_settable_properties(@template.id, current_shop)
+
+    render action: 'settable_properties_preview', layout: false
+  end
+
+  def settable_properties_preview
+    @message = Message.for_uuid(params[:id])
+    @template = Template.for_uuid(params[:template_id])
+    @html = Template.update_settable_properties(@template.id, current_shop, {properties: params[:properties]})
+
+    render layout: false
+  end 
+
   def new_template
     @message_type = "template_message"
     @message = Message.new
@@ -38,6 +54,18 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
     @message_type = @message.type.underscore
     @shop = current_shop
+  end
+
+  def system_layouts
+    @message = Message.for_uuid(params[:id])
+    @system_layouts = Template.system_generated
+  end
+
+  def system_layout_properties
+    @message = Message.for_uuid(params[:id])
+    @template = Template.for_uuid(params[:template_id])
+    @properties = @template.default_selectable_properties
+    @header_font_families = Template::HEADER_FONT_FAMILIES
   end
 
   def create
@@ -59,7 +87,6 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def template
-    @system_templates = Template.system_generated
     @templates = current_shop.templates
     @message = Message.for_uuid(params[:id])
   end
@@ -93,7 +120,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def assign_template
     @message = Message.for_uuid(params[:id])
-    @message.assign_template(params[:template_id])
+    @message.assign_template(params[:template_id], params[:properties])
     render partial: 'editor_wrapper', layout: false
   end
 

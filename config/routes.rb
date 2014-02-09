@@ -407,6 +407,9 @@ Optyn::Application.routes.draw do
     get "messages/new/template_message" => "messages#new_template", as: 'new_template'
     get "messages/new/:message_type" => 'messages#new', as: 'new_campaign'
     get "messages/" => "messages#types", as: 'campaign_types'
+    get 'messages/:id/system_layout_properties/:template_id', to: 'messages#system_layout_properties', as: 'system_layout_properties'
+    put 'messages/:id/settable_properties_preview/:template_id', to: 'messages#settable_properties_preview', as: 'selectable_properties_preview'
+    get 'messages/:id/default_settable_properties_preview/:template_id', to: 'messages#default_settable_properties_preview', as: 'default_settable_properties_preview'
     resources :messages do
       collection do
         get :select_survey
@@ -442,6 +445,7 @@ Optyn::Application.routes.draw do
         post :template_upload_image
         delete :destroy_template
         get :click_report
+        get :system_layouts
       end #end of member
     end #end of resources messages
   end #end of merchants namespace
