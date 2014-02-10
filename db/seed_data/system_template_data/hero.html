@@ -755,21 +755,24 @@
       img { max-width: 100%; }
       h2 { font-size: 16px; font-weight: bold; }
       .body > tbody > tr > td { padding: 2%; }
-      [data-type="footer"] .optyn-pargraph {
-        text-align: center;
-        font-size: 11px;
-        color: #555;
-        padding: 0;
-      }
       .optyn-replaceable-image { display: table-cell; }
-      .optyn-sidebar .optyn-paragraph { font-size: 13px; }
-      .optyn-sidebar h2 {
-        font-size: 16px;
+      .sidebar-container .optyn-paragraph { font-size: 13px; }
+      .sidebar-container h2 { font-size: 16px; }
+      .sidebar-container h3 {
+        font-size: 14px;
+        font-weight: bold;
       }
       [data-type="introduction"] .wrapper,
       [data-type="content"] .outermost-container { padding-top: 0; }
       .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
-      [data-type="footer"] .footer-container { background: #eee; }
+      .optyn-footer .optyn-pargraph {
+        text-align: center;
+        font-size: 11px;
+        color: #555;
+        color: rgba(0,0,0,0.5);
+        padding: 0;
+      }
+      .optyn-footer .optyn-pargraph a { text-decoration: underline; }
       [data-type="text_with_left_image"] .twelve .optyn-replaceable-image,
       [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
         width: 100%;
