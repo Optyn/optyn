@@ -1,17 +1,17 @@
 - if @templates.blank?
   #headline
-    %h2 Welcome to Optyn's templating. We are working on adding more features. But we would like to get you started. Please pick of the options below.
+    %h2 Add your first template
 
   .blank-space
 
+  #tagline  
+    Use our template builder to create your first email template.
+    %br
+    If you already have a template designed, simply email it to us. We will upload it for you.
+    %br
+    
   .text-center
-    %p
-      %a.btn{"data-toggle" => "modal", href: "#template_upload_modal", role: "button"} I would like to upload a template and use it
-
-    %h3 OR
-
-    %p
-      = link_to "I don't care. I want to pick an available layout", system_layouts_merchants_message_path(@message.uuid), class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+    = link_to "Get started", system_layouts_merchants_message_path(@message.uuid), class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 
 - else
   %h2

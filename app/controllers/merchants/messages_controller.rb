@@ -68,6 +68,12 @@ class Merchants::MessagesController < Merchants::BaseController
     @header_font_families = Template::HEADER_FONT_FAMILIES
   end
 
+  def template_name
+  end
+
+  def assign_template_name
+  end
+
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
