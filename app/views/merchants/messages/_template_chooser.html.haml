@@ -43,9 +43,11 @@
   .blank-space
 
   .text-center
-    %a.btn.btn-primary.btn-large{"data-toggle" => "modal", href: "#template_upload_modal", role: "button"} Upload Template
+    = link_to "Goto template builder", system_layouts_merchants_message_path(@message.uuid), class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
 
     OR
-    = link_to "System Layout", system_layouts_merchants_message_path(@message.uuid), class: 'btn btn-large btn-success', id: 'system_template_chooser_link'
+
+    %a.btn.btn-success.btn-large{"data-toggle" => "modal", href: "#template_upload_modal", role: "button"} Upload yours?
+    
 
 = render partial: 'merchants/messages/template_upload_modal'
