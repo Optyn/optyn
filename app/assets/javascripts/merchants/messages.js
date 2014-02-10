@@ -77,7 +77,8 @@ function MerchantMessage() {
         if($('#template_properties_tab').length){
           this.hookTemplatePropertyTab();
           this.hookTemplatePropertyNavigation();
-          this.hookTemplatePropertySubmit();
+          this.hookTemplatePropertiesSubmit();
+          this.hookAssginTemplateAssignName();
           setTimeout(function(){
             $('#template_properties_tab a:last').trigger('click');
           }, 100);
@@ -467,6 +468,28 @@ function MerchantMessage() {
         });
     };
 
+    this.hookTemplatePropertiesSubmit = function(){
+      $('body').on('click', '#assign_template_name', function(){
+        var $templateField = $('#template_name_field');
+        if(undefined != $templateField && $templateField.val() != undefined && $templateField.val().trim() != ""){
+          var $form = $('#template_properties_form');
+          
+          $form.submit();
+        }else{
+          $templateField.jrumble({
+            x:50,
+            y:0,
+            rotate: 4
+          });
+          $templateField.trigger('startRumble');
+
+          setTimeout(function(){
+            $templateField.trigger('stopRumble');            
+          }, 2000)
+        }
+      })
+    };
+
     this.hookTemplateDelete = function(){
       $('body').on('click', '.template-delete-btn', function(event){
         event.preventDefault();
@@ -507,10 +530,10 @@ function MerchantMessage() {
       });
     };
 
-    this.hookTemplatePropertySubmit = function(){
-      $('body').on('click', '.template-property-submit', function(event){
-        $(this).parents('form').first().submit();     
-      });  
+    this.hookAssginTemplateAssignName = function(){
+      $('body').on('click', '.template-property-submit', function(){
+        $('#template_name').modal('show');      
+      });
     };
 
     this.hookReplaceMerchantMenuOnLoad = function(){
@@ -577,7 +600,7 @@ function MerchantMessage() {
     this.hookPopulateTemplateSettableProperties = function(){
         var properties = $('.template-selectable-properties').data('selectable-properties').properties;
         props = properties;
-        var elements =  $('#template_properties_form').find('input[type=text], select');
+        var elements =  $('#template_properties_form .tab-content-pane').find('input[type=text], select');
         for(var i = 0; i < elements.length; i++){
           var $element = $(elements[i]);
           var eval_str = $element.attr('id').replace(/_/g, '.');
@@ -631,6 +654,8 @@ function MerchantMessage() {
         }
       });        
     };
+
+
 }
 
 $(document).ready(function(){

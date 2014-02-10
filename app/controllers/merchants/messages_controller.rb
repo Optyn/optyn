@@ -68,12 +68,6 @@ class Merchants::MessagesController < Merchants::BaseController
     @header_font_families = Template::HEADER_FONT_FAMILIES
   end
 
-  def template_name
-  end
-
-  def assign_template_name
-  end
-
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
@@ -126,7 +120,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def assign_template
     @message = Message.for_uuid(params[:id])
-    @message.assign_template(params[:template_id], {properties: params[:properties]})
+    @message.assign_template(params[:template_id], params[:name], {properties: params[:properties]})
 
     if request.xhr?
       render partial: 'editor_wrapper', layout: false

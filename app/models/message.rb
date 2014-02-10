@@ -245,10 +245,10 @@ class Message < ActiveRecord::Base
     SelfEmailSender.perform_async(self.id)
   end
 
-  def assign_template(template_identifier, properties={})
+  def assign_template(template_identifier, name=nil, properties={})
     unless self.template_id.present?
       existing_template = Template.for_uuid(template_identifier)
-      self.template_id = existing_template.system_generated ? Template.copy(existing_template.id, shop, properties) : template_id_assigned = existing_template.id
+      self.template_id = existing_template.system_generated ? Template.copy(existing_template.id, name, shop, properties) : template_id_assigned = existing_template.id
       
       self.save(validate: false)
     end

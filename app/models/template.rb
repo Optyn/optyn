@@ -68,9 +68,9 @@ class Template < ActiveRecord::Base
     for_name("Basic").first
   end
 
-  def self.copy(template_id, shop, settable_properties)
+  def self.copy(template_id, name, shop, settable_properties)
     existing_template = Template.find(template_id)
-    new_template = Template.new(html: existing_template.html, shop_id: shop.id)
+    new_template = Template.new(html: existing_template.html, name: name, shop_id: shop.id)
     new_template.add_markup_classes
     new_template.convert_system_template(settable_properties)
     new_template.save
