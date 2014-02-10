@@ -22,7 +22,7 @@ OP = (function($, window, doucument, Optyn){
             this.hookAddSection();
             this.hookDeleteSection();
             this.hookContentCreationOnLoad();
-            this.setIframeWidthHeight();
+            this.setIframeHeight();
         },
 
         //clear the modal html on load
@@ -281,8 +281,7 @@ OP = (function($, window, doucument, Optyn){
             }
         },
 
-        setIframeWidthHeight: function(){
-            $('#customHtmlTemplate').css('width', $('#choose_message').css('width'));
+        setIframeHeight: function(){
             $('#customHtmlTemplate').css({'height': $('iframe').contents().find('html').height()});
         }
     };
