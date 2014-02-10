@@ -120,7 +120,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def assign_template
     @message = Message.for_uuid(params[:id])
-    @message.assign_template(params[:template_id], params[:properties])
+    @message.assign_template(params[:template_id], {properties: params[:properties]})
 
     if request.xhr?
       render partial: 'editor_wrapper', layout: false

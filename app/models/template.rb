@@ -71,20 +71,13 @@ class Template < ActiveRecord::Base
   def self.copy(template_id, shop, settable_properties)
     existing_template = Template.find(template_id)
     new_template = Template.new(html: existing_template.html, name: "#{shop.name} #{existing_template.name}", shop_id: shop.id)
+    new_template.add_markup_classes
     new_template.convert_system_template(settable_properties)
     new_template.save
     new_template.id
   end
 
-  
 
-
-
-
-
-
-
-  public
   def personalize_body(content, message, receiver)
     # Sanitaize the footer
     template_node = Nokogiri::XML(content)
