@@ -68,14 +68,18 @@ class MerchantMailer < ActionMailer::Base
       attachments['unparsed.csv'] = unparsed
     end
 
-    mail(to: "#{@manager.name} <#{@manager.email}>", subject: "Import user task is complete!")
+    mail(to: "#{@manager.name} <#{@manager.email}>",
+      bcc: ["gaurav@optyn.com", "alen@optyn.com"],
+      subject: "Import user task is complete!")
   end
 
   def import_error(file_import, error)
     @file_import = file_import
     @manager = @file_import.manager
     @error = error
-    mail(to: "#{@manager.name} <#{@manager.email}>", subject: "An Error occurred while importing users.")
+    mail(to: "#{@manager.name} <#{@manager.email}>",
+      bcc: ["gaurav@optyn.com", "alen@optyn.com"],
+      subject: "An Error occurred while importing users.")
   end
 
   private
