@@ -249,13 +249,13 @@ module Merchants::MessagesHelper
 
   def system_template_description(template_name)
     if "Basic" == template_name
-      "A perfect way to strike a conversation with your customer. This template is more content driven."
+      "Full width - 1 column. A perfect way to strike a conversation with your customer. This template is more content driven."
     elsif "Hero" == template_name
       "Includes a left bar for creating just the right context for your information."
     elsif "Sidebar" == template_name
       "Awesome, when you want to converse on multiple thoughts with your customers."
     elsif "Galleria" == template_name
-      "Excellent way to communicate pictorially with with your customers."
+      "Excellent way to communicate visually with with your customers."
     else
       ""
     end

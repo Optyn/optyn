@@ -11,6 +11,12 @@
         = link_to "Sample File", "/user_import_stub.csv"
         by
         = link_to "clicking here.", "/user_import_stub.csv"
+      %li
+        If you want us to do it or have any issues, please email us with your subscriber lists at 
+        %a{href: "mailto:support@optyn.com"} support@optyn.com
+        and we'll take care of it all.
+      %li
+        You can label your import with multiple labels / lists.
     = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
       .row-fluid
         .span8.offset2.text-center

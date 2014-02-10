@@ -1,7 +1,7 @@
-= banner("#{current_shop.name} - Connections")
+= banner("#{current_shop.name} Subscribers")
 
 #merchants.pad3pc
-  = link_to raw("<i class='icon-plus'></i> Add New User"), add_user_merchants_connections_path, :class => "btn btn-primary"
+  = link_to raw("<i class='icon-plus'></i> Add New Subscriber"), add_user_merchants_connections_path, :class => "btn btn-primary"
 
   .blank-space
 
@@ -11,10 +11,10 @@
   .separator-thin
 
   %p.pull-left
-    Here's a list of all your connections. Click on name of customer to learn more.
+    Here's a list of all your subscribers. Click on name of customer to learn more.
   .pull-right
     %a.btn.btn-primary{:href => merchants_file_imports_path} Import Customers
-    %a.btn.btn-primary.btn-success{:href => merchants_labels_path} View by labels
+    %a.btn.btn-primary.btn-success{:href => merchants_labels_path} View by lists
   
 
   %table.table.table-striped

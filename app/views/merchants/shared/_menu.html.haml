@@ -11,11 +11,11 @@
     %li
       %a{:href => merchants_connections_path, :class => active_tab_class(['connections'])}
         = image_tag "menu_icon_connections.png", :alt => "Connections", :style => "padding-left: 5px;"
-        My Customers
+        Subscribers + Lists
     %li
       %a{:href => merchants_surveys_path, :class => active_tab_class(['surveys'])}
         = image_tag "menu_icon_campaigns.png", :alt => "Surveys"
-        Customer Surveys
+        Create a Survey
     %li
       / FIXME
       / %a{:href =>  merchants_survey_survey_answers_path, :class => active_tab_class(['survey_answers'])}
@@ -31,11 +31,15 @@
     %li
       %a{:href => merchants_app_path, :class => active_tab_class(['apps'])}
         = image_tag "merchant_menu_button_icon.png", :alt => "Your API Button"
-        Grow your Customer Base
+        Opt-in Email Form
     %li
       %a{:href => merchants_file_imports_path, :class => active_tab_class(['file_imports'])}
         = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
-        Import Customers
+        Import Subscribers
+    %li
+      %a{:href => merchants_shop_path, :class => active_tab_class(['shops', 'subscriptions', 'registrations', 'merchant_managers', 'locations', 'social_profiles'])}
+        = image_tag "merchant_menu_settings_icon.png", :alt => "Your Shop"
+        Manage / Setup your Account
     %li
       = link_to(raw( "#{image_tag "merchant_menu_logout_icon.png"} Logout" ),  destroy_merchants_manager_session_path, :method => :delete, :class => 'logout')
 

@@ -10,7 +10,7 @@
     = f.text_field :subject, class: 'input-xlarge span12'
 
 .control-group
-  = f.label :send_on, "Send Date Time", class: "control-label"
+  = f.label :send_on, "Send Date & Time", class: "control-label"
   #message_send_on_container.controls
     .input-append.date-picker
       = f.text_field :send_on_date, value: formatted_message_form_date(@message, :send_on), id: 'message_send_on_date', class: "input-medium", 'data-format' => "yyyy-MM-dd", readonly: true

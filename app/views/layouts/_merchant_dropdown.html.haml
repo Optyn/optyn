@@ -17,7 +17,7 @@
     %li
       %a{:href => merchants_connections_path}
         = image_tag "menu_icon_connections.png", :alt => "Connections"
-        My Customers
+        Subscribers + Lists
     %li
       / %a{:href => merchants_survey_path}
       /   = image_tag "dropdown_surveys.png"
@@ -29,15 +29,15 @@
     %li
       %a{:href => merchants_shop_path, :class => 'hr'}
         = image_tag "dropdown_settings.png", :alt => "Manage Account"
-        Manage Account
+        Manage / Setup Account
     %li
       %a{:href => merchants_app_path}
         = image_tag "merchant_menu_button_icon.png", :alt => "Your API Button"
-        Grow Customer Base
+        Opt-in Email Form
     %li
       %a{:href => merchants_file_imports_path}
         = image_tag "merchant_menu_import_icon.png", :alt => "Customer Import"
-        Import Customers
+        Import Subscribers
       .separator-thin.small
     %li
       = link_to("Logout", destroy_merchants_manager_session_path, :method => :delete)
