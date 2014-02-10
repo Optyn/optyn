@@ -157,7 +157,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 }
 
 .template_chooser > .span4:nth-child( 3n + 1 ),
-.modal-body > .template_chooser > .span5:nth-child( 2n + 1 ) {
+.template_chooser > .span5:nth-child( 2n + 1 ) {
 	margin-left: 0;
 }
 .modal-body > .template_chooser > .span5 {
@@ -206,7 +206,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	right: 0;
 	bottom: 10px;
 }
-.modal-body .template_type {
+.template_chooser .span5 {
 	position: relative;
 	height: 170px;
 	@include transition( background 0.3s ease );
@@ -214,7 +214,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		background: $light-gray;
 	}
 }
-.modal-body .template_type img {
+.template_chooser .span5 img {
 	position: absolute;
 	left: 0;
 	top: 10px;
