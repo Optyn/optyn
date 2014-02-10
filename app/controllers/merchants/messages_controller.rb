@@ -121,7 +121,12 @@ class Merchants::MessagesController < Merchants::BaseController
   def assign_template
     @message = Message.for_uuid(params[:id])
     @message.assign_template(params[:template_id], params[:properties])
-    render partial: 'editor_wrapper', layout: false
+
+    if request.xhr?
+      render partial: 'editor_wrapper', layout: false
+    else
+      redirect_to template_merchants_message_path()
+    end
   end
 
   def editor

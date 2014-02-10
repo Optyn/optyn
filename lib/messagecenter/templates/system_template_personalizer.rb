@@ -30,37 +30,37 @@ module Messagecenter
           properties:{
             layout: {
               css: {
-                :"background-color" => LAYOUT_BACKGROUND_COLOR
+                :"background-color" => Template::LAYOUT_BACKGROUND_COLOR
               }
             },
 
             header: {
               css: {
-                :"font-family" => HEADER_FONT_FAMILIES,
-                :'background-color' => HEADER_BACKGROUND_COLOR
+                :"font-family" => Template::HEADER_FONT_FAMILIES,
+                :'background-color' => Template::HEADER_BACKGROUND_COLOR
               }
             },
 
             content:{
               css: {
-                :'background-color' => CONTENT_BACKGROUND_COLOR,
+                :'background-color' => Template::CONTENT_BACKGROUND_COLOR,
               }, 
 
               headline: {
                 css: {
-                  color: CONTENT_TITLE_COLOR
+                  color: Template::CONTENT_TITLE_COLOR
                 }  
               },
 
               paragraph: {
                 css: {
-                  color: CONTENT_PARAGRAPH_COLOR
+                  color: Template::CONTENT_PARAGRAPH_COLOR
                 }
               },
 
               link: {
                 css: {
-                  color: CONTENT_LINK_COLOR
+                  color: Template::CONTENT_LINK_COLOR
                 }
               }
             }

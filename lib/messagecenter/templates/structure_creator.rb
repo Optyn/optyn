@@ -59,7 +59,7 @@ module Messagecenter
 
             Messagecenter::Templates::MarkupGenerator.add_component_class(container_child, 'container')
             Messagecenter::Templates::MarkupGenerator.add_data_type_to_component(container_child)
-            container_child[:html] = container_child.children.to_s
+            container[:html] = container_child.children.to_s
             
             containers << container
             
