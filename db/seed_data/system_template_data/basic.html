@@ -764,6 +764,7 @@
       }
       [data-type="introduction"] .wrapper,
       [data-type="content"] .outermost-container { padding-top: 0; }
+      [data-type="introduction"] { padding-top: 10px; }
       .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
       .optyn-footer .optyn-pargraph {
         text-align: center;
@@ -805,19 +806,15 @@
                           <grid type="introduction">
                             <table class="twelve columns">
                               <tr>
-                                <td class="">
+                                <td class="center">
                                   <division type="introduction">
-                                    <table class="twelve columns">
-                                      <tr>
-                                        <td class="center">
-                                          <center>
-                                            <img src="http://placehold.it/200x50">
-                                          </center>
-                                        </td>
-                                        <td class="expander"></td>
-                                      </tr>
-                                    </table>
+                                    <div>
+                                      <center>
+                                        <img src="http://placehold.it/200x50">
+                                      </center>
+                                    </div>
                                   </division>
+                                  <td class="expander"></td>
                                 </td>
                               </tr>
                             </table>
@@ -867,7 +864,7 @@
                           <division type="text_with_full_image">
                             <table class="row">
                               <tr>
-                                <td class="wrapper">
+                                <td class="wrapper last">
                                   <table class="twelve columns">
                                     <tr>
                                       <td class="text-pad">
@@ -879,7 +876,7 @@
                                             Image caption here.
                                           </div>
                                           <image>
-                                            <img width="580" height="300" src="http://placehold.it/580x300">
+                                            <img src="http://placehold.it/580x300" style="width: 100%;" />
                                           </image>
                                         </paragraph>
                                       </td>
@@ -933,17 +930,17 @@
                           <division type="text_with_left_image">
                             <table class="row">
                               <tr>
-                                <td class="text-pad">
-                                  <headline>
-                                    <h2 class="headline">Text with Left Image</h2>
-                                  </headline>
-                                </td>
-                              </tr>
-                              <tr>
                                 <td class="wrapper last">
                                   <table class="twelve columns">
                                     <tr>
-                                      <td class="center text-pad">
+                                      <td class="text-pad">
+                                        <headline>
+                                          <h2 class="headline">Text with Left Image</h2>
+                                        </headline>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-pad">
                                         <image>
                                           <img src="http://placehold.it/200x150">
                                         </image>
@@ -964,15 +961,15 @@
                           <division type="text_with_right_image">
                             <table class="row">
                               <tr>
-                                <td class="text-pad">
-                                  <headline>
-                                    <h2 class="headline">Text with Right Image</h2>
-                                  </headline>
-                                </td>
-                              </tr>
-                              <tr>
                                 <td class="wrapper last">
                                   <table class="twelve columns">
+                                    <tr>
+                                      <td class="text-pad">
+                                        <headline>
+                                          <h2 class="headline">Text with Right Image</h2>
+                                        </headline>
+                                      </td>
+                                    </tr>
                                     <tr>
                                       <td class="text-pad">
                                         <image class="optyn-image">
