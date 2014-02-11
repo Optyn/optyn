@@ -53,7 +53,7 @@ CKEDITOR.editorConfig = function( config ) {
 
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
-  config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
+  config.filebrowserBrowseUrl = "";
 
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Flash dialog.
   config.filebrowserFlashBrowseUrl = "/ckeditor/attachment_files";
@@ -133,7 +133,7 @@ CKEDITOR.editorConfig = function( config ) {
       // Remove unnecessary widgets from the 'Link Info' tab.
       infoTab.remove( 'linkType');
       infoTab.remove( 'protocol');
-      infoTab.remove( 'browseServer');
+      infoTab.remove( 'filebrowser');
     }
     if (CKEDITOR.tools.indexOf(['link', 'image', 'attachment', 'flash'], dialogName) > -1) {
       content = (dialogDefinition.getContents('Upload') || dialogDefinition.getContents('upload'));
