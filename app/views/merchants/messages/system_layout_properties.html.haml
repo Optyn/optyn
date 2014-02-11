@@ -7,7 +7,7 @@
 
   %ul.template-property-menu
     %li
-      #template_properties_container.row-fluid
+      #template_properties_container.row-fluid.no-pad
         = form_tag assign_template_merchants_message_path(@message.uuid), method: :put, class: '', id: 'template_properties_form' do
           .modal.hide.fade#template_name
             .modal-header
@@ -22,7 +22,7 @@
             .modal-footer
               %a#assign_template_name.btn.btn-success{href: "javascript:void(0)"} Save Changes
               %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"}Make changes
-              
+
           .tab-content-pane
             = hidden_field_tag :merchants_selectable_properties_preview_path, merchants_selectable_properties_preview_path(@message.uuid, @template.uuid)
             = hidden_field_tag :template_id, @template.uuid
@@ -31,13 +31,13 @@
 
             %ul#template_properties_tab.nav.nav-tabs
               %li
-                %a{href: "#template_content", class: 'template-property-tab'} Content  
+                %a{href: "#template_content", class: 'template-property-tab'} Content
               %li
                 %a{href: "#template_header", class: 'template-property-tab'} Header
               %li
-                %a{href: "#template_layout", class: 'template-property-tab'} Layout  
-              
-            .tab-content
+                %a{href: "#template_layout", class: 'template-property-tab'} Layout
+
+            .tab-content.pad3pc
               #template_content.tab-pane
                 .control-group
                   = label_tag "background_color", "Background Color", class: 'control-label'
@@ -83,11 +83,11 @@
                   .pull-left
                     %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => 'template_header'}
                       %i{class: "icon-arrow-left"}
-                      
+
                   .pull-right
                     %a{href: "javascript:void(0)", class: "btn btn-success template-property-submit"}
                       Go
-                      %i{class: "icon-thumbs-up"}    
+                      %i{class: "icon-thumbs-up"}
 
               #template_header.tab-pane
                 .control-group
@@ -110,7 +110,7 @@
                   .pull-left
                     %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => 'template_layout'}
                       %i{class: "icon-arrow-left"}
-                      
+
                   .pull-right
                     %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_content'}
                       %i{class: "icon-arrow-right"}
@@ -128,7 +128,7 @@
                 .actions
                   .pull-left
                     %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_header'}
-                      %i{class: "icon-arrow-right"}      
+                      %i{class: "icon-arrow-right"}
 
   #template_pane
     %iframe#customHtmlTemplate{:src => merchants_default_settable_properties_preview_path(@message.uuid, @template.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; height:100%; min-height: 600px;"}
