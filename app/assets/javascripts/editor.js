@@ -150,12 +150,12 @@ OP = (function($, window, doucument, Optyn){
           {
             name: 'document',
             groups: [ 'mode', 'document' ]
-          },			// Displays document group with its two subgroups.
+          },            // Displays document group with its two subgroups.
           {
             name: 'clipboard',
             groups: [ 'clipboard', 'undo' ]
-          },			// Group's name will be used to create voice label.
-          '/',																// Line break - next group will be placed in new line.
+          },            // Group's name will be used to create voice label.
+          '/',                                                              // Line break - next group will be placed in new line.
           {
             name: 'basicstyles',
             groups: [ 'basicstyles', 'cleanup' ]
@@ -172,6 +172,8 @@ OP = (function($, window, doucument, Optyn){
       $('.upload-img-btn').click(function(e){
         $(this).parents('.msg_img_upload').first().find('.loading').first().show();
       });
+
+        var parentDoc = OP.template.getParentWindow();      
     },
 
 
