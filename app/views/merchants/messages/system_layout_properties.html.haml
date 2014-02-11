@@ -75,7 +75,7 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[content][paragraph][css][color]", class: 'color template-color-field'
+                          = text_field_tag "properties[content][paragraph][css][color]", class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
 
@@ -122,7 +122,7 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[layout][css][background-color]", class: 'color template-color-field'
+                          = text_field_tag "properties[layout][css][background-color]", '', class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
                 .actions
