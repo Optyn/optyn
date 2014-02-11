@@ -30,6 +30,7 @@
 .template_chooser .template_type > .tmpl-bg {
 //.template_chooser > .span4 > .tmpl-bg {
   background-size: cover;
+  background-position: top center;
   height: 100%;
 }
 .template_chooser .template_type > img { max-height: 300px; }
@@ -77,9 +78,13 @@
 }
 .template-property-menu {
   margin: 0;
-  color: #eee;
+  color: $light-gray;
+  @media ( max-width: 769px ) { background: $black; }
   .show-message-menu {
-    color: #eee;
+    color: $light-gray;
     padding: 3%;
   }
+}
+template_name {
+  color: $black;
 }

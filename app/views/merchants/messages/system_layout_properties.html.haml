@@ -45,7 +45,7 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[content][css][background-color]"
+                          = text_field_tag "properties[content][css][background-color]", '', class: 'input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
 
@@ -55,7 +55,7 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[content][headline][css][color]", class: 'color template-color-field'
+                          = text_field_tag "properties[content][headline][css][color]", "", class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
 
@@ -65,7 +65,7 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[content][link][css][color]", class: 'color template-color-field'
+                          = text_field_tag "properties[content][link][css][color]", "", class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
 
@@ -75,7 +75,7 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[content][paragraph][css][color]", class: 'color template-color-field'
+                          = text_field_tag "properties[content][paragraph][css][color]", "", class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
 
@@ -96,14 +96,14 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[header][css][background-color]", class: 'color template-color-field'
+                          = text_field_tag "properties[header][css][background-color]", "", class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
 
                 .control-group
                   = label_tag "font_family", "Font Family", class: 'control-label'
                   .controls
-                  = select_tag "properties[header][css][font-family]", options_for_select(@header_font_families)
+                  = select_tag "properties[header][css][font-family]", options_for_select(@header_font_families), class: 'input-medium'
 
                 /Header Logo or Header Name
                 .actions
@@ -122,11 +122,11 @@
                     %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
                       .btn-group
                         %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                          = text_field_tag "properties[layout][css][background-color]", class: 'color template-color-field'
+                          = text_field_tag "properties[layout][css][background-color]", "", class: 'template-color-field input-medium'
                           %span.add-on
                             %i{:style => "background-color: ''"}
                 .actions
-                  .pull-left
+                  .pull-right
                     %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_header'}
                       %i{class: "icon-arrow-right"}
 
