@@ -3,6 +3,7 @@ namespace :templates do
   task :seed => :environment do
     Template.all.each do |template| 
       begin
+        template.destroy
         template.destroy!
       rescue 
         
@@ -16,10 +17,16 @@ namespace :templates do
     template.save!
     sleep(10)
 
-    #Adding the Sidebar Template
-    puts "Adding the Sidebar Template"
-    template = Template.for_shop(nil).for_name('Sidebar').first || Template.new
-    template.attributes = ({name: "Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/sidebar.html", 'r'){|file| file.read}})
+    #Adding the Left Sidebar Template
+    puts "Adding the Left Sidebar Template"
+    template = Template.for_shop(nil).for_name('Left Sidebar').first || Template.new
+    template.attributes = ({name: "Left Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/left_sidebar.html", 'r'){|file| file.read}})
+    template.save!
+    sleep(10)
+
+    puts "Adding the Right Sidebar Template"
+    template = Template.for_shop(nil).for_name('Right Sidebar').first || Template.new
+    template.attributes = ({name: "Right Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/right_sidebar.html", 'r'){|file| file.read}})
     template.save!
     sleep(10)
 
