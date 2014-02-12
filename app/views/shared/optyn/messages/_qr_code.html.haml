@@ -1,2 +1,3 @@
-- qr_code_location = "#{SiteConfig.app_base_url}/g/#{@message.uuid}.svg"
+
+- qr_code_location = "#{SiteConfig.app_base_url}/generate_qr_code/#{@message.id}.png"
 = image_tag "#{qr_code_location}", :width => 150, :height => 150, :style => "float: right"
