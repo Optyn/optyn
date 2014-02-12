@@ -135,74 +135,79 @@ OP = (function($, window, doucument, Optyn){
           '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
           '<div class="span8">Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
           '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div>' +
-          '<img class="loading" src="/assets/ajax-loader.gif"/></form></div></div>';
+          '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form></div></div>';
 
           imageIndex += 1;
         }
       }
 
-      OP.template.populateModalCase(htmlVal);
-      $('#editor_area_modal').modal('show');
+      // OP.template.populateModalCase(htmlVal);
+      // $('#editor_area_modal').modal('show');
 
-      for ( var count = 0; count < paragraphIndex; count++ ) {
-        CKEDITOR.replace( 'template_editable_content-' + count, {
-          toolbarGroups: [
-          {
-            name: 'document',
-            groups: [ 'mode', 'document' ]
-          },			// Displays document group with its two subgroups.
-          {
-            name: 'clipboard',
-            groups: [ 'clipboard', 'undo' ]
-          },			// Group's name will be used to create voice label.
-          '/',																// Line break - next group will be placed in new line.
-          {
-            name: 'basicstyles',
-            groups: [ 'basicstyles', 'cleanup' ]
-          },
-          {
-            name: 'links'
-          }]
-        });
-      //                (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents );
-      }
+      // for ( var count = 0; count < paragraphIndex; count++ ) {
+      //   CKEDITOR.replace( 'template_editable_content-' + count, {
+      //     toolbarGroups: [
+      //     {
+      //       name: 'document',
+      //       groups: [ 'mode', 'document' ]
+      //     },            // Displays document group with its two subgroups.
+      //     {
+      //       name: 'clipboard',
+      //       groups: [ 'clipboard', 'undo' ]
+      //     },            // Group's name will be used to create voice label.
+      //     '/',                                                              // Line break - next group will be placed in new line.
+      //     {
+      //       name: 'basicstyles',
+      //       groups: [ 'basicstyles', 'cleanup' ]
+      //     },
+      //     {
+      //       name: 'links'
+      //     }]
+      //   });
+      // //                (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents );
+      // }
 
       OP.selectedSection.setElem(division);
 
-      $('.upload-img-btn').click(function(e){
-        $(this).parents('.msg_img_upload').first().find('.loading').first().show();
-      });
+      
+      window.parent.$('#template_editable_content').val(htmlVal);
+      window.parent.$('#template_editable_content').trigger('change');     
     },
 
 
 
     //Update the section html for the updates made by user in CKEditor
     hookUpdatingSection: function(){
-      $('body').on('click', '#section_save_changes', function(){
+      $('body').on('change', '#editor_changed_content', function(){
+        var properties = JSON.parse($(this).val());
+
         var selectedElem = OP.selectedSection.getElem();
+        
+        var headlines = properties.headlines;
         $(selectedElem).find( '.optyn-headline').each( function( index, headlineElem ) {
-          var newHeadline = $($('#editor_area_modal').find( '.edit-headline')[index]).val();
-          $( headlineElem ).html( newHeadline );
+          $( headlineElem ).html( headlines[index] );
         });
 
+        var paragraphs = properties.paragraphs;
         $(selectedElem).find( '.optyn-paragraph').each( function( index, paragraphElem ) {
-          var newPara = CKEDITOR.instances['template_editable_content-' + index].getData();
-          $( paragraphElem ).html( newPara );
+          $( paragraphElem ).html( paragraphs[index] );
         });
 
         //Add appropriate Image
-        $(selectedElem).find( '.optyn-replaceable-image').each( function( index, imageElem ) {
+        var images = properties.images;
+        console.log('Images', images);
+        $(selectedElem).find('.optyn-replaceable-image').each( function( index, imageElem ) {
 
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
-          var $uploadedImage = $($('#editor_area_modal' + " " + ".uploaded-image")[index])
+          var uploadedImageSrc = images[index];
 
-          if($uploadedImage != null && $uploadedImage != undefined && placeholderSrc != $uploadedImage.attr('src')){
+          if(placeholderSrc != uploadedImageSrc){
             var $temp = $("<div />");
             var $img = $('<img />');
 
             $img.attr({
-              src: $uploadedImage.attr('src'),
+              src: uploadedImageSrc,
               height: $imageContainer.attr('height'),
               width: $imageContainer.attr('width')
             });
