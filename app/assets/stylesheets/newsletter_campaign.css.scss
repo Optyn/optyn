@@ -84,3 +84,7 @@
 #template_name {
   color: $black;
 }
+.template-editor-container {
+  margin: 5px;
+  @media ( max-width: 769px ) { background: $black; }
+}
