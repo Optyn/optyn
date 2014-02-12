@@ -1105,6 +1105,15 @@ th {
     background-color: $light-gray
   }
 }
+[class^="separator-micro"] {
+  height: 1px;
+  background-color: $medium-gray;
+  margin: 10px 0;
+  clear: both;
+}
+.separator-micro-dark {
+  background-color: $gray;
+}
 .no-pad {
   padding: 0;
 }

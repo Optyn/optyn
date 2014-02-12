@@ -85,6 +85,8 @@
   color: $black;
 }
 .template-editor-container {
-  margin: 5px;
+  margin: 0;
+  padding: 5px;
+  color: $light-gray;
   @media ( max-width: 769px ) { background: $black; }
 }
