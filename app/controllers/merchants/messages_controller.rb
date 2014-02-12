@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'rqrcode'
+require 'rqrcode/export/png'
+
 class Merchants::MessagesController < Merchants::BaseController
   
   include Messagecenter::CommonsHelper
@@ -235,13 +239,9 @@ class Merchants::MessagesController < Merchants::BaseController
   def generate_qr_code 
     @message = Message.find(params[:message_id])
     link = @message.get_qr_code_link(current_user)
-    respond_to do |format|
-      format.html
-      format.svg  { render :qrcode => link, :level => :l, :unit => 10 }
-      format.png  { render :qrcode => link }
-      format.gif  { render :qrcode => link }
-      format.jpeg { render :qrcode => link }
-    end
+    qr_code_image  = RQRCode::QRCode.new(link).as_png
+    # qr_code_image = qr_code.to_img
+    send_data qr_code_image, :type => 'image/png',:disposition => 'inline'    
   end
 
   def redeem
