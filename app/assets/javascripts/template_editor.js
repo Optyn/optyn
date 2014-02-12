@@ -11,6 +11,13 @@ OP = (function($, window, doucument, Optyn){
     setUpSidebarEditing: function(){
       $('body').on('change', '#template_editable_content', function(){
         var $merchantMenu = $('.merchant-menu');
+
+        if($('.template-editor-container').length){
+          $('.template-editor-container').remove();
+          $merchantMenu.slideDown();
+        }
+
+        var $merchantMenu = $('.merchant-menu');
         var $sidebar = $merchantMenu.parent();
 
         var sideBarContent = '<ul class="template-editor-container"><li class="template-editor-section"></li></ul>';
