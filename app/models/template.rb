@@ -154,6 +154,10 @@ class Template < ActiveRecord::Base
     return content
   end
 
+  def process_content(content, receiver)
+    content.gsub(/{{Customer Name}}/i, receiver.first_name.capitalize)
+  end
+
   private
   def self.html_to_thumbnail(template)
     file = Tempfile.new(["template_#{template.id.to_s}", 'jpg'], 'tmp', :encoding => 'ascii-8bit')
