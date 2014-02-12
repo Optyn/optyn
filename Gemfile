@@ -59,6 +59,7 @@ gem 'oj'
 
 gem 'pdfkit' #for pdf generation
 gem 'rqrcode-with-patches' #for QR code
+gem 'mini_magick'
 gem "koala", "~> 1.8.0rc1" #for Facebook integration
 gem 'social-share-button'
 gem 'httparty'

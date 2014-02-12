@@ -212,6 +212,8 @@ GEM
       thin (~> 1.5.0)
     method_source (0.8.1)
     mime-types (1.25.1)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
     mini_portile (0.5.2)
     multi_json (1.8.4)
     multi_xml (0.5.5)
@@ -420,6 +422,7 @@ GEM
     stripe (1.8.3)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    subexec (0.2.3)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -490,6 +493,7 @@ DEPENDENCIES
   koala (~> 1.8.0rc1)
   localtunnel
   mailcatcher
+  mini_magick
   newrelic_rpm
   oauth2
   oj
