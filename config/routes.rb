@@ -132,7 +132,7 @@ Optyn::Application.routes.draw do
   
 
   #share routes and QR Code
-  match 'generate_qr_code/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
+  match 'g/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   match 'redeem/:message_user' => 'merchants/messages#redeem'
   match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
   match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
