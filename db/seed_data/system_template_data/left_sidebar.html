@@ -782,15 +782,20 @@
       [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
         width: 49%;
         max-width:290px;
-        /*@media only screen and (max-width: 600px) { max-width: 100%; }*/
       }
       [data-type="text_with_left_image"] .twelve .optyn-replaceable-image {
         float: left;
-        margin: 0 10px 10px 0;
+        margin: 0 1% 10px 0;
       }
       [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
         float: right;
-        margin: 0 0 10px 10px;
+        margin: 0 0 10px 1%;
+      }
+      [data-type="text_with_left_image"].eight .optyn-replaceable-image {
+        width:49%; float:left; margin:0 1% 10px 0;
+      }
+      [data-type="text_with_right_image"].eight .optyn-replaceable-image {
+        width:49%; float:left; margin:0 0 10px 1%;
       }
     </style>
 </head>
@@ -966,7 +971,7 @@
                                                 </tr>
                                                 <tr>
                                                   <td>
-                                                    <image style="width:193px; float:left; margin:0 10px 10px 0;">
+                                                    <image>
                                                       <img src="http://placehold.it/580x300">
                                                     </image>
                                                     <paragraph>
