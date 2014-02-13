@@ -780,18 +780,24 @@
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
       [data-type="text_with_left_image"] .twelve .optyn-replaceable-image,
       [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
-        width: 100%;
+        width: 49%;
         max-width:290px;
-        /*@media only screen and (max-width: 600px) { max-width: 100%; }*/
       }
       [data-type="text_with_left_image"] .twelve .optyn-replaceable-image {
         float: left;
-        margin: 0 10px 10px 0;
+        margin: 0 1% 10px 0;
       }
       [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
         float: right;
-        margin: 0 0 10px 10px;
+        margin: 0 0 10px 1%;
       }
+      [data-type="text_with_left_image"].eight .optyn-replaceable-image {
+        width:49%; float:left; margin:0 1% 10px 0;
+      }
+      [data-type="text_with_right_image"].eight .optyn-replaceable-image {
+        width:49%; float:left; margin:0 0 10px 1%;
+      }
+      .optyn-sidebar img { max-height: 150px; }
     </style>
 </head>
 <body id="flat">
@@ -817,7 +823,6 @@
                                         <td class="">
                                           <img src="http://placehold.it/200x50">
                                         </td>
-                                        <td class="expander"></td>
                                       </tr>
                                     </table>
                                   </division>
@@ -854,7 +859,7 @@
                                                 <tr>
                                                   <td>
                                                     <headline>
-                                                      <h2 class="headline">Hello World!</h2>
+                                                      <h3 class="headline">Hello World!</h3>
                                                     </headline>
                                                     <paragraph>
                                                       <div class="paragraph">
@@ -871,7 +876,7 @@
                                                 <tr>
                                                   <td>
                                                     <headline>
-                                                      <h2 class="headline">Text with Full Image</h2>
+                                                      <h3 class="headline">Text with Full Image</h3>
                                                     </headline>
                                                     <paragraph>
                                                       <div class="paragraph">
@@ -909,7 +914,6 @@
                                                       </div>
                                                     </paragraph>
                                                   </td>
-                                                  <td class="expander"></td>
                                                 </tr>
                                               </table>
                                             </division>
@@ -930,7 +934,6 @@
                                                       </image>
                                                     </paragraph>
                                                   </td>
-                                                  <td class="expander"></td>
                                                 </tr>
                                               </table>
                                             </division>
@@ -954,7 +957,6 @@
                                                       <div>A distinct piece of writing.</div>
                                                     </paragraph>
                                                   </td>
-                                                  <td class="expander"></td>
                                                 </tr>
                                               </table>
                                             </division>
@@ -970,14 +972,13 @@
                                                 </tr>
                                                 <tr>
                                                   <td>
-                                                    <image style="width:193px; float:left; margin:0 10px 10px 0;">
+                                                    <image>
                                                       <img src="http://placehold.it/580x300">
                                                     </image>
                                                     <paragraph>
                                                       <div>A distinct piece of writing.</div>
                                                     </paragraph>
                                                   </td>
-                                                  <td class="expander"></td>
                                                 </tr>
                                               </table>
                                             </division>
@@ -1000,7 +1001,6 @@
                                                       <div>A distinct piece of writing.</div>
                                                     </paragraph>
                                                   </td>
-                                                  <td class="expander"></td>
                                                 </tr>
                                               </table>
                                             </division>
@@ -1034,11 +1034,9 @@
                                                             <div>Gallery description goes here.</div>
                                                           </paragraph>
                                                         </td>
-                                                        <td class="expander"></td>
                                                       </tr>
                                                     </table>
                                                   </td>
-                                                  <td class="expander"></td>
                                                 </tr>
                                               </table>
                                             </division>
@@ -1082,7 +1080,6 @@
                                             <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
                                           </center>
                                         </td>
-                                        <td class="expander"></td>
                                       </tr>
                                     </table>
                                   </division>
