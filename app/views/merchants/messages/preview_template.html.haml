@@ -9,6 +9,9 @@
       = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn'
       = link_to "Change Content", template_merchants_message_path(@message.uuid), class: 'btn btn-'
       = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'
+      = link_to raw( "<i class='icon-envelope icon-white'></i> Send Me a Test Email" ), email_self_merchants_message_path(@message.uuid), class: "btn btn-info", id: "self_email"
+
+    = render partial: "merchants/messages/preview_meta"
 
   .blank-space
 
