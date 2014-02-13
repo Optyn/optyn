@@ -119,23 +119,25 @@ OP = (function($, window, doucument, Optyn){
         var $this = $(currentArtifact);
 
         if('headline' == currentArtifact.type){
-          htmlVal += 'Title: <input class="edit-headline" type="text" value="' + currentArtifact.content + '">';
+          htmlVal += 'Title: <input class="edit-headline" type="text" value="' + currentArtifact.content + '">' +
+          '<div class="separator-micro-dark"></div>';
         }else if('paragraph' == currentArtifact.type){
           htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
           paragraphIndex.toString() + '" cols="20">' + currentArtifact.content + '</textarea>' +
-          '<div class="blank-space"></div>';
+          '<div class="separator-micro-dark"></div>';
 
           paragraphIndex += 1;
         }else if('image' == currentArtifact.type){
           row_id = 'imagerow-' + imageIndex;
-          htmlVal += '<div class="blank-space"></div><div class="row-fluid" id="' + row_id + '">' +
-          '<div class="span4">Preview:<br /><img src="' + currentArtifact.content + '" class="uploaded-image" /></div>' +
-          '<div class="span8"><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
+          htmlVal += '</div><div id="' + row_id + '">' +
+          '<div>Preview:<br /><img src="' + currentArtifact.content + '" class="uploaded-image" /></div>' +
+          '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
           '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
           '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
-          '<div class="span8">Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
+          '<div>Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
           '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div>' +
-          '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form></div></div>';
+          '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form></div></div>' +
+          '<div class="separator-micro-dark"></div>';
 
           imageIndex += 1;
         }

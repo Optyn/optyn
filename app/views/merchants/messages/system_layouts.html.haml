@@ -10,7 +10,7 @@
     - @system_layouts.each do |system_template|
       %a{href: merchants_system_layout_properties_path(@message.uuid, system_template.uuid), class: "offset1 span5", 'data-template-id' => system_template.id}
         - if system_template.thumbnail.present?
-          - img_url = 'st-th-' + system_template.name.parameterize + '.png'
+          - img_url = 'system-thumb-' + system_template.name.parameterize + '.png'
           = image_tag(img_url, class: 'img-polaroid')
         = system_templates_link_caption(system_template)
 

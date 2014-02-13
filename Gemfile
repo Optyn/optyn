@@ -58,8 +58,8 @@ gem 'rabl'
 gem 'oj'
 
 gem 'pdfkit' #for pdf generation
-gem 'rqrcode-rails3' #for QR code
-gem 'mini_magick' #for QR code in PNG, JPEG or GIF
+gem 'rqrcode-with-patches' #for QR code
+gem 'mini_magick'
 gem "koala", "~> 1.8.0rc1" #for Facebook integration
 gem 'social-share-button'
 gem 'httparty'
