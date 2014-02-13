@@ -21,7 +21,9 @@ function MerchantMessage() {
             this.loadSpinnerForIframe();
         }
 
-
+        /*
+            Hooks for preview page for messages except templates
+        */ 
         if ($('#message_fields_wrapper').length) {
             this.hookChosen();
             this.hookActionEvent();
@@ -32,6 +34,12 @@ function MerchantMessage() {
             this.hookDiscountType();
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
+            this.hookSendSelfEmail();
+        }
+        /*
+            Hook for preview page for template messages only
+        */
+        if ($('#merchants').length) {
             this.hookSendSelfEmail();
         }
 
