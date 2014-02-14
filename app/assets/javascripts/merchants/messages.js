@@ -34,12 +34,9 @@ function MerchantMessage() {
             this.hookDiscountType();
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
-            this.hookSendSelfEmail();
         }
-        /*
-            Hook for preview page for template messages only
-        */
-        if ($('#merchants').length) {
+
+        if ($('#message_fields_wrapper').length || $('#customHtmlTemplate').length) {
             this.hookSendSelfEmail();
         }
 
