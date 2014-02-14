@@ -9,6 +9,8 @@ class Label < ActiveRecord::Base
 
   attr_accessible :shop_id, :name, :survey_answer_id
 
+  SELECT_ALL_NAME = 'Select All'
+
   scope :active, where(active: true)
   
   scope :inactive, where(active: false)
@@ -19,10 +21,14 @@ class Label < ActiveRecord::Base
 
   scope :group_on_id, group("labels.id")
 
-  SELECT_ALL_NAME = 'Select All'
+  scope :select_all_instance, ->(shop_identifier) { for_shop(shop_identifier).where(name: SELECT_ALL_NAME).inactive}
 
   def self.labels_with_customers(shop_identifier)
     for_shop(shop_identifier).right_join_user_labels.group_on_id
+  end
+
+  def self.defult_message_label(shop_instance)
+    select_all_instance(shop_instance.id).first
   end
 
   def users_count
