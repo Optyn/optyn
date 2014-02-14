@@ -1,38 +1,44 @@
 /* All Merchant Account Pages CSS is here */
-#flat {
-  footer.inner {
-    background-color: $light-gray;
-    background-color: rgba(222,222,222,0.4);
-    color: $black;
-    line-height: 42px;
-    padding: 20px 0 10px 0;
-    .copy a {
-      padding: 0 10px;
-      border-right: solid 1px $medium-gray;
-      text-decoration: none;
-      &:last-child {
-        border: 0;
-      }
+.footer-inner {
+  background-color: $light-gray;
+  background-color: rgba(222,222,222,0.4);
+  color: $black;
+  line-height: 42px;
+  padding: 20px 0 10px 0;
+  .copy a {
+    padding: 0 10px;
+    border-right: solid 1px $medium-gray;
+    text-decoration: none;
+    &:last-child {
+      border: 0;
     }
-    a {
-      text-decoration: underline;
-      color: $black;
-    }
-    .social {
-      a {
-        text-decoration: none;
-        font-size: 1rem;
-        line-height: 1.5rem;
-        margin-right: 20px;
-      }
-    }
-    i {
-      @include transition( all 0.3s ease );
-    }
-    .icon-facebook:hover { color: $fb-blue; }
-    .icon-twitter:hover { color: $twitter-blue; }
-    .icon-google-plus:hover { color: $google-plus-red; }
   }
+  a {
+    text-decoration: underline;
+    color: $black;
+  }
+  .social {
+    a {
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-right: 20px;
+    }
+  }
+  i {
+    @include transition( all 0.3s ease );
+  }
+  .icon-facebook:hover { color: $fb-blue; }
+  .icon-twitter:hover { color: $twitter-blue; }
+  .icon-google-plus:hover { color: $google-plus-red; }
+  @media( max-width: 768px ) {
+    > .copyright,
+    > .copyright > .text-right {
+      text-align: center;
+    }
+  }
+}  /* End .footer-inner */
+#flat {
   .stats {
     /* Styles for Consumer & Merchant dashboard statistics. */
     .span3 {
@@ -175,7 +181,7 @@
     float: none;
     padding-bottom: 0;
   }
-}
+}  /* End media query. */
 
 .merchants-connections.index #merchants > p {
   line-height: 30px;
