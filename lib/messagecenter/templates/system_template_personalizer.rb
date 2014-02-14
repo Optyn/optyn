@@ -4,14 +4,6 @@ require 'sass'
 module Messagecenter
   module Templates
     module SystemTemplatePersonalizer
-      # LAYOUT_BACKGROUND_COLOR = '#EEEEEE'
-      # HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Arial, sans-serif}, %{"ProximaNova", Helvetica, Arial, sans-serif}, %{Verdana, Arial, sans-serif}, %{'Courier New', Courier, Arial, sans-serif}]
-      # HEADER_BACKGROUND_COLOR = Shop::DEFAULT_HEADER_BACKGROUND_COLOR
-      # CONTENT_BACKGROUND_COLOR = '#FFFFFF'
-      # CONTENT_TITLE_COLOR = '#000000'
-      # CONTENT_PARAGRAPH_COLOR = '#000000'
-      # CONTENT_LINK_COLOR = '#000000'
-
       class Sass::Tree::RuleNode
         def set_property(property, value)
           prop = self.children.find{|child| child.class.name == 'Sass::Tree::PropNode' && child.instance_variable_get(:@resolved_name) == property }
