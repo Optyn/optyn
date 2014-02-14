@@ -12,6 +12,8 @@ CKEDITOR.editorConfig = function( config ) {
 
   config.toolbar = 'Custom';
 
+  config.height = '170px';
+
   config.toolbar_Custom =
   [
   {
