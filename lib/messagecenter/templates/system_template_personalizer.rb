@@ -154,7 +154,8 @@ module Messagecenter
               header_node = shop_logo_node.css('h3').first
               class_attr = header_node['class']
               header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
-              image.swap(%{<headline>#{shop_logo_node.children.to_s}</headline>})
+              header_node.swap("<headline>#{header_node.to_s}</headline>")
+              image.swap(%{#{shop_logo_node.children.to_s}})
             end
           end
 
