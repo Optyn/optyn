@@ -4,14 +4,6 @@ require 'sass'
 module Messagecenter
   module Templates
     module SystemTemplatePersonalizer
-      # LAYOUT_BACKGROUND_COLOR = '#EEEEEE'
-      # HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Arial, sans-serif}, %{"ProximaNova", Helvetica, Arial, sans-serif}, %{Verdana, Arial, sans-serif}, %{'Courier New', Courier, Arial, sans-serif}]
-      # HEADER_BACKGROUND_COLOR = Shop::DEFAULT_HEADER_BACKGROUND_COLOR
-      # CONTENT_BACKGROUND_COLOR = '#FFFFFF'
-      # CONTENT_TITLE_COLOR = '#000000'
-      # CONTENT_PARAGRAPH_COLOR = '#000000'
-      # CONTENT_LINK_COLOR = '#000000'
-
       class Sass::Tree::RuleNode
         def set_property(property, value)
           prop = self.children.find{|child| child.class.name == 'Sass::Tree::PropNode' && child.instance_variable_get(:@resolved_name) == property }
@@ -25,7 +17,7 @@ module Messagecenter
       end
 
 
-      def default_selectable_properties
+      def default_selectable_properties(current_shop)
         {
           properties:{
             layout: {
@@ -37,7 +29,7 @@ module Messagecenter
             header: {
               css: {
                 :"font-family" => Template::HEADER_FONT_FAMILIES,
-                :'background-color' => Template::HEADER_BACKGROUND_COLOR
+                :'background-color' => current_shop.header_background_color
               }
             },
 
@@ -155,16 +147,17 @@ module Messagecenter
             if shop_logo_node.css('img').present?
               image_node = shop_logo_node.css('img').first
               style_attr = image_node['style']
-              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none;" :  "margin:auto;float:none;"
-
-              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo_node.children.to_s}</span>})
+              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
+              image_node.swap(%{<image>#{image_node.to_s}</image>})
+              image.swap(%{<span class="center">#{shop_logo_node.children.to_s}</span>})
             else
               header_node = shop_logo_node.css('h3').first
               class_attr = header_node['class']
               header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
-              image.swap(%{<h2><span class="optyn-headline">#{shop_logo_node.children.to_s}</span></h2>})
+              image.swap(%{<headline>#{shop_logo_node.children.to_s}</headline>})
             end
           end
+
         end
         
         def convert_content(content_properties)

@@ -4,7 +4,7 @@ module ShopLogo
       if shop.website.present?
         content = <<-HTML
           <a here="#{shop.logo_location}" href="#{shop.website}" target="_blank">
-            <img src="#{shop.logo_location}" title="#{shop.name}" style="margin:5px;"
+            <img src="#{shop.logo_location}" title="#{shop.name}" style="margin:5px;" />
           </a>
         HTML
         content.to_s.html_safe

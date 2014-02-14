@@ -15,9 +15,7 @@ OP = (function($, window, doucument, Optyn){
   Optyn.template = {
 
     initialize: function(){
-      this.hookClearModalOnLoad();
       this.hookUpdatingSection();
-      this.hookModalHidden();
       this.hookEditTrigger();
       this.hookAddSection();
       this.hookDeleteSection();
@@ -44,16 +42,10 @@ OP = (function($, window, doucument, Optyn){
         })
       };
     },
-    //clear the modal html on load
-    hookClearModalOnLoad: function(){
-      $('#editor_area_modal').toggleClass('hide');
-      $('#editor_area_modal').html('');
-    },
 
-    //fire up a modal when user edits a section
+    //fire up a editing of the section when user edits a section
     hookEditTrigger: function() {
       $('body').on('click', '.ink-action-edit', function() {
-        //var $section = $(this).parents('.template-section-toolset').first().next('.template-section');
         var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
         $editableElem = $division.find('.optyn-division'),
         divisionContents = [];
@@ -91,8 +83,6 @@ OP = (function($, window, doucument, Optyn){
           divisionContents.push(artifact);
         });
 
-        // console.log("Division Contents", divisionContents)
-
         OP.template.openCkeditor($division, divisionContents);
       });
     },
@@ -101,18 +91,16 @@ OP = (function($, window, doucument, Optyn){
     openCkeditor: function(division, divisionContents){
 
       // Add fields for editing headlines, images and paragraphs. Only paragraphs open in CKEditor.
-      // console.log( 'Trying to open the CKEditor' );
       try{
         if( CKEDITOR.instances.template_editable_content.length ) {
-          console.log( 'Destroying the God damn instance.' );
           CKEDITOR.instances.template_editable_content.destroy();
         }
       }catch(err){}
 
       var htmlVal = '';
-      var image_form_action = "/merchants/messages/" + $('#editor_area_modal').data('msg-id') + "/template_upload_image"
-      var paragraphIndex = 0
-      var imageIndex = 0
+      var image_form_action = "/merchants/messages/" + $('#editor_area_modal').data('msg-id') + "/template_upload_image";
+      var paragraphIndex = 0;
+      var imageIndex = 0;
 
       for( var index = 0; index < divisionContents.length; index++) {
         var currentArtifact = divisionContents[index];
@@ -142,32 +130,6 @@ OP = (function($, window, doucument, Optyn){
           imageIndex += 1;
         }
       }
-
-      // OP.template.populateModalCase(htmlVal);
-      // $('#editor_area_modal').modal('show');
-
-      // for ( var count = 0; count < paragraphIndex; count++ ) {
-      //   CKEDITOR.replace( 'template_editable_content-' + count, {
-      //     toolbarGroups: [
-      //     {
-      //       name: 'document',
-      //       groups: [ 'mode', 'document' ]
-      //     },            // Displays document group with its two subgroups.
-      //     {
-      //       name: 'clipboard',
-      //       groups: [ 'clipboard', 'undo' ]
-      //     },            // Group's name will be used to create voice label.
-      //     '/',                                                              // Line break - next group will be placed in new line.
-      //     {
-      //       name: 'basicstyles',
-      //       groups: [ 'basicstyles', 'cleanup' ]
-      //     },
-      //     {
-      //       name: 'links'
-      //     }]
-      //   });
-      // //                (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents );
-      // }
 
       OP.selectedSection.setElem(division);
 
@@ -211,7 +173,8 @@ OP = (function($, window, doucument, Optyn){
             $img.attr({
               src: uploadedImageSrc,
               height: $imageContainer.attr('height'),
-              width: $imageContainer.attr('width')
+              width: $imageContainer.attr('width'),
+              style: $imageContainer.attr('style')
             });
             $temp.append($img);
 
@@ -219,35 +182,8 @@ OP = (function($, window, doucument, Optyn){
           }
         });
 
-        $('#editor_area_modal').modal('hide');
-
         OP.template.saveSectionChanges();
       });
-    },
-
-    //Clear the modal html on its hidden event
-    hookModalHidden: function(){
-      $('#editor_area_modal').on('hidden', function(){
-        $('#editor_area_modal').html('');
-      });
-    },
-
-    //poplate modal on open
-    populateModalCase: function(htmlVal){
-      var caseHtml = '<div class="modal-header">' +
-      '<h3>Edit Content</h3>' +
-      '</div>' +
-      '<div class="modal-body">' +
-      '<div>' +
-      htmlVal +
-      '</div>' +
-      '</div>' +
-      '<div class="modal-footer">' +
-      '<button class="btn btn-small" data-dismiss="modal">Close</button>' +
-      '<button class="btn btn-small btn-primary" id="section_save_changes">Save changes</button>' +
-      '</div>';
-
-      $('#editor_area_modal').html(caseHtml);
     },
 
     //Add a new section observer
