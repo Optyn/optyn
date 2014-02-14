@@ -91,8 +91,6 @@ OP = (function($, window, doucument, Optyn){
           divisionContents.push(artifact);
         });
 
-        // console.log("Division Contents", divisionContents)
-
         OP.template.openCkeditor($division, divisionContents);
       });
     },
@@ -142,33 +140,7 @@ OP = (function($, window, doucument, Optyn){
           imageIndex += 1;
         }
       }
-
-      // OP.template.populateModalCase(htmlVal);
-      // $('#editor_area_modal').modal('show');
-
-      // for ( var count = 0; count < paragraphIndex; count++ ) {
-      //   CKEDITOR.replace( 'template_editable_content-' + count, {
-      //     toolbarGroups: [
-      //     {
-      //       name: 'document',
-      //       groups: [ 'mode', 'document' ]
-      //     },            // Displays document group with its two subgroups.
-      //     {
-      //       name: 'clipboard',
-      //       groups: [ 'clipboard', 'undo' ]
-      //     },            // Group's name will be used to create voice label.
-      //     '/',                                                              // Line break - next group will be placed in new line.
-      //     {
-      //       name: 'basicstyles',
-      //       groups: [ 'basicstyles', 'cleanup' ]
-      //     },
-      //     {
-      //       name: 'links'
-      //     }]
-      //   });
-      // //                (CKEDITOR.instances['template_editable_content-' + count]).setData( divisionContents );
-      // }
-
+      
       OP.selectedSection.setElem(division);
 
       
