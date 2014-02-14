@@ -211,7 +211,8 @@ OP = (function($, window, doucument, Optyn){
             $img.attr({
               src: uploadedImageSrc,
               height: $imageContainer.attr('height'),
-              width: $imageContainer.attr('width')
+              width: $imageContainer.attr('width'),
+              style: $imageContainer.attr('style')
             });
             $temp.append($img);
 
