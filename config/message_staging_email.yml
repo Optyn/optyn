@@ -28,4 +28,8 @@ defaults:
     - complaint@simulator.amazonses.com
     - suppressionlist@simulator.amazonses.com
     - shashank@idyllic-software.com
+    - gaurav+campaign@optyn.com
+    - alen+campaign@optyn.com
+    - amer+campaign@optyn.com
+    - lou+campaign@optyn.com
 
