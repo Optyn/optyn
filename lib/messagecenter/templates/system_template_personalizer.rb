@@ -155,16 +155,17 @@ module Messagecenter
             if shop_logo_node.css('img').present?
               image_node = shop_logo_node.css('img').first
               style_attr = image_node['style']
-              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none;" :  "margin:auto;float:none;"
-
-              image.swap(%{<span class="optyn-replaceable-image center">#{shop_logo_node.children.to_s}</span>})
+              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
+              image_node.swap(%{<image>#{image_node.to_s}</image>})
+              image.swap(%{<span class="center">#{shop_logo_node.children.to_s}</span>})
             else
               header_node = shop_logo_node.css('h3').first
               class_attr = header_node['class']
               header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
-              image.swap(%{<h2><span class="optyn-headline">#{shop_logo_node.children.to_s}</span></h2>})
+              image.swap(%{<headline>#{shop_logo_node.children.to_s}</headline>})
             end
           end
+
         end
         
         def convert_content(content_properties)
