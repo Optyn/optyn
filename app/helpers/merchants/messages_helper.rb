@@ -68,7 +68,7 @@ module Merchants::MessagesHelper
     end
   end
 
-  def message_greeting(message, preview = false, customer_name = nil)
+  def message_greeting(message, preview = false, receiver = nil)
     greeting_prefix = case
                         when message.instance_of?(CouponMessage)
                           "Great News"
@@ -88,7 +88,7 @@ module Merchants::MessagesHelper
                           "Hello"
                       end
 
-    greeting_suffix = message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : customer_name
+    greeting_suffix = (receiver.first_name rescue "{{Customer Name}}") #message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : (receiver.first_name )
 
     "#{greeting_prefix}#{(" " + greeting_suffix) if greeting_suffix.present?},"
   end
@@ -103,12 +103,12 @@ module Merchants::MessagesHelper
   end
 
   def message_content(message, receiver=nil)
-    display_content = message.content.blank? ? "-" : message.content
     if message.instance_of?(VirtualMessage)
       return raw(display_content)
     end
 
-    display_content.include?("<div>") ? raw(display_content) : simple_format(display_content)
+    display_content = message.content.blank? ? "-" : message.personalized_content(receiver)
+    display_content.include?("<html>") ? raw(display_content) : simple_format(display_content)
     display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
   end

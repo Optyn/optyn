@@ -17,7 +17,7 @@
                 %tr
                   %td
                     .message-content
-                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer_name: @receiver.first_name}
+                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
                     %p.core-content
                       - @target_blank = true
