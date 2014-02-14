@@ -25,7 +25,7 @@ module Messagecenter
       end
 
 
-      def default_selectable_properties
+      def default_selectable_properties(current_shop)
         {
           properties:{
             layout: {
@@ -37,7 +37,7 @@ module Messagecenter
             header: {
               css: {
                 :"font-family" => Template::HEADER_FONT_FAMILIES,
-                :'background-color' => Template::HEADER_BACKGROUND_COLOR
+                :'background-color' => current_shop.header_background_color
               }
             },
 

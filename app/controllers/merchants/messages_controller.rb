@@ -68,7 +68,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def system_layout_properties
     @message = Message.for_uuid(params[:id])
     @template = Template.for_uuid(params[:template_id])
-    @properties = @template.default_selectable_properties
+    @properties = @template.default_selectable_properties(current_shop)
     @header_font_families = Template::HEADER_FONT_FAMILIES
   end
 

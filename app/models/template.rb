@@ -49,7 +49,7 @@ class Template < ActiveRecord::Base
 
   def self.with_default_settable_properties(template_id, shop)
    existing_template = Template.find(template_id) 
-   update_settable_properties(template_id, shop, existing_template.default_selectable_properties) 
+   update_settable_properties(template_id, shop, existing_template.default_selectable_properties(shop)) 
   end
 
   def self.update_settable_properties(template_id, shop, selectable_properties)
