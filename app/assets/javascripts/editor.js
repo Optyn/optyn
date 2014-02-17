@@ -20,8 +20,10 @@ OP = (function($, window, doucument, Optyn){
       this.hookAddSection();
       this.hookDeleteSection();
       this.hookContentCreationOnLoad();
-      this.setIframeHeight();
       this.fixCkEditorModalIssue();
+      setTimeout( function() {
+        OP.setParentIframeHeight();
+      }, 3000);  // Find a better alternative for this setTimeout.
     },
 
 
@@ -199,6 +201,8 @@ OP = (function($, window, doucument, Optyn){
           $currentDivision.after(requiredMarkup);
         }
 
+        OP.setParentIframeHeight();
+
         OP.template.saveSectionChanges();
       });
     },
@@ -232,6 +236,7 @@ OP = (function($, window, doucument, Optyn){
           if($temp != null){
             $toolsetParent.append( $temp.html());
           }
+          OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
         }); //end of slide up division
       });
@@ -259,13 +264,8 @@ OP = (function($, window, doucument, Optyn){
       if($('#content_entered').length && $('#content_entered').val().length <= 0){
         OP.template.saveSectionChanges();
       }
-    },
-
-    setIframeHeight: function(){
-      $('#customHtmlTemplate').css({
-        'height': $('iframe').contents().find('html').height()
-      });
     }
+
   };
 
   //Define the Selected Element
@@ -370,6 +370,11 @@ OP = (function($, window, doucument, Optyn){
       return messageWrapper;
     }
 
+  };
+
+  Optyn.setParentIframeHeight = function() {
+    console.log( 'setParentIframeHeight' );
+    $( window.parent.document.body ).find( 'iframe' ).css( 'height', parseInt($( '.body > tbody > tr > .center > center' ).css( 'height' )) + 100 + 'px' );
   };
 
   return Optyn;
