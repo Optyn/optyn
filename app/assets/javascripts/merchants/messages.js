@@ -35,6 +35,10 @@ function MerchantMessage() {
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
         }
+        if ( $('#message_send_on_container').length ) {
+            // For Date/Time picker on preview Newsletter page.
+            this.hookDateTimePicker();
+        }
 
         if ($('#message_fields_wrapper').length || $('#customHtmlTemplate').length) {
             this.hookSendSelfEmail();

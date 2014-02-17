@@ -4,9 +4,7 @@
 .modal-body
   = form_for :message, url: update_meta_merchants_message_path(message.uuid), :method => :put, :html => {id: "message_meta_data", class: 'form-horizontal'} do |f|
     = hidden_field_tag :message_type, message.type.underscore
-    %br
-    %br
-    %br
+    .blank-space
     .control-group
       = f.label :subject, class: "control-label"
       .controls
@@ -14,7 +12,7 @@
     - unless message.is_child?
       .control-group
         = f.label :send_on, "Send Date & Time", class: "control-label"
-        #message_send_on_container.controls
+        #message_send_on_container.controls.text-left
           .input-append.date-picker
             = f.text_field :send_on_date, value: formatted_message_form_date(@message, :send_on), id: 'message_send_on_date', class: "input-medium", 'data-format' => "yyyy-MM-dd"
             %span.add-on
