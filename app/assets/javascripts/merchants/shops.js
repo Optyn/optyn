@@ -73,18 +73,18 @@ function Shop() {
                 type: 'GET',
                 data: {q: $input.val()},
                 beforeSend: function () {
-                    $('#loading').show();
-                    $('#loading').removeClass('success');
-                    $('#loading').removeClass('error');
-                    $('#loading .text').text('Loading...');
+                    $('#loading-id-status').show();
+                    $('#loading-id-status').removeClass('success');
+                    $('#loading-id-status').removeClass('error');
+                    $('#loading-id-status .text').text('Loading...');
                 },
                 success: function (data) {
-                    $('#loading').addClass('success');
-                    $('#loading .text').text('Your ID is Available');
+                    $('#loading-id-status').addClass('success');
+                    $('#loading-id-status .text').text('Your ID is Available');
                 },
                 error: function () {
-                    $('#loading').addClass('error');
-                    $('#loading .text').text('Your ID is Unavailable. Please choose another.');
+                    $('#loading-id-status').addClass('error');
+                    $('#loading-id-status.text').text('Your ID is Unavailable. Please choose another.');
                 }
             });
         }
