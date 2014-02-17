@@ -16,6 +16,7 @@
   a {
     text-decoration: underline;
     color: $black;
+    &:hover { color: #000; }
   }
   .social {
     a {
@@ -323,6 +324,9 @@
   background-repeat: repeat-y;
   padding-bottom: 50px;
   margin: 0px;
+  @media( max-width: 768px ) {
+    padding-bottom: 0;
+  }
 }
 #dashboard .header .new {
   float: right;
