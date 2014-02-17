@@ -33,33 +33,15 @@ class Merchants::ConnectionsController < Merchants::BaseController
   end
 
   def create_user
-    @error_hash = []
-    
-    if params["To"].blank? && params["label_ids"].nil?
-      @user = User.new
-      @error_hash.push("Please enter email and name ")
-      @error_hash.push("Please enter labels")
-      populate_labels
-      render 'add_user'
-    elsif params["To"].nil?
-      @user = User.new
-      @error_hash.push("Please enter email and name ")
-      populate_labels
-      render 'add_user'	
-    elsif params["label_ids"].nil?
-      @user = User.new
-      @error_hash.push("Please enter labels")
-      populate_labels
-      render 'add_user'
-    elsif not params["To"].blank?
+  	if not params["To"].blank?
   		total_users = params["To"].split(",")
-      
+      @error_hash = []
   		flag = false
   		loop_size = total_users.size - 1
-      
+
   		(0..loop_size).each do |u|
         next if total_users[u].blank?
-  			
+
         if total_users[u].match(/(?<=\().*?(?=\))/)
           name_email_arr = total_users[u].strip.split("(")
     			name = name_email_arr[0].strip
@@ -69,22 +51,20 @@ class Merchants::ConnectionsController < Merchants::BaseController
         end
 
 
-        @user = User.new
-  			@user.name = name
-        @user.email = email
-        @user.password = "test1234"
+
+  			@user = User.new(:name => name, :email => email, :password => "test1234")
         @user.skip_name = true
         @user.shop_identifier = current_shop.id
         @user.show_shop = true
         conn = nil
-  
+
   			if not @user.save
           if @user.errors.full_messages[0].include?("invalid")
             flag = true
             @error_hash.push("#{email} is invalid.")
             next
           elsif @user.errors[:email]
-            
+
             #Email belongs to existing User.
             if @user.errors[:email].include?("has already been taken")
               existing_user = User.find_by_email(email)
@@ -115,7 +95,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
             end
           end
         end
-        
+
         @error_hash.push("#{email} was added successfully.")
         params["To"] = total_users - total_users[u].split(",")
         params["To"] = params["To"].join(",")
@@ -132,47 +112,50 @@ class Merchants::ConnectionsController < Merchants::BaseController
           (0..label_loop_size).each do |l|
             user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: total_labels_selected[l])
           end
+        else
+          label_id = current_shop.labels.find_by_name("Select All").id
+          user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: label_id)
         end
-        
-  		end
 
-  		if not flag
-	  		redirect_to merchants_connections_path, :notice => "User(s) added successfully."
-	  	else
+      end
+
+      if not flag
+        redirect_to merchants_connections_path, :notice => "User(s) added successfully."
+      else
         populate_labels
-	  		render 'add_user'	
-	  	end
-  	else
-  		populate_labels
+        render 'add_user'
+      end
+    else
+      populate_labels
       @user = User.new(:name => params["To"])
       @user.save
       render 'add_user'
-  	end
+    end
   end
 
   def create_labels_for_user
-  	existing_label = current_shop.labels.find_by_name(params[:label].strip)
+    existing_label = current_shop.labels.find_by_name(params[:label].strip)
     label = current_shop.labels.create(name: params[:label].strip) unless existing_label.present?
 
     render json: (label.attributes.except('shop_id', 'created_at', 'updated_at') rescue []).to_json
   end
 
   def edit
-  	@user = User.find(params[:id])
-  	populate_labels
+    @user = User.find(params[:id])
+    populate_labels
     respond_to do |format|
       format.html { render :layout => false}
     end
   end
 
   def update_user
-  	@user = User.find(params[:id])
+    @user = User.find(params[:id])
  		
-	  if @user.update_attributes(name: "#{params[:name]}", email: "#{params[:email]}")
-	    @success_hash  = "User updated successfully."
-	  else
-	  	populate_labels
-	  end
+    if @user.update_attributes(name: "#{params[:name]}", email: "#{params[:email]}")
+      @success_hash  = "User updated successfully."
+    else
+      populate_labels
+    end
     render 'edit', :layout => false
   end
 
