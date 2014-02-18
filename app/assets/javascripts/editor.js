@@ -373,7 +373,6 @@ OP = (function($, window, doucument, Optyn){
   };
 
   Optyn.setParentIframeHeight = function() {
-    console.log( 'setParentIframeHeight' );
     $( window.parent.document.body ).find( 'iframe' ).css( 'height', parseInt($( '.body > tbody > tr > .center > center' ).css( 'height' )) + 100 + 'px' );
   };
 

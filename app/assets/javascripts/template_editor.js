@@ -139,4 +139,9 @@ $(document).ready(function(){
   if($('#template_editable_content').length){
     OP.templateEditor.initialize();
   }
+  if($('#customHtmlTemplate').length){
+    $( '#customHtmlTemplate' ).load( function() {
+      $( this ).css( 'height', $('#customHtmlTemplate').contents().find('body').css('height') );
+    });
+  }
 });
