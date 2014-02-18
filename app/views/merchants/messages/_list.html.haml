@@ -27,15 +27,25 @@
 
           %td
             - if message.sent?
-              %a{:href => "#reportDialog_#{message.uuid}", "data-toggle" => "modal", "data-id" => "#{message.uuid}", "class" => "open-reports"} report
-              = render :partial => "report", :locals => {:message => message, :timestamp_attr => timestamp_attr}
-              %a{:href => "#clickReportDialog_#{message.uuid}", "data-toggle" => "modal", "data-uuid" => "cr-#{message.uuid}", "class" => "click-reports"} Click report
-              = render :partial => "click_report", :locals => {:message => message}
+              %a{:href => "#report_dialog", "data-toggle" => "modal", "data-id" => "#{message.uuid}", "class" => "open-reports", 'data-location' => report_merchants_message_path(message.uuid)} report
+
+              - content = (render :partial => "report", :locals => {:message => message, :timestamp_attr => timestamp_attr})
+              %span{'data-content' => content.html_safe, class: 'report-content', style: 'height:0px; width: 0px', id: "report_#{message.uuid}"}
+
+              - content = render :partial => "click_report", :locals => {:message => message}
+              %span{'data-content' => content.html_safe, class: 'link-report-content', style: 'height:0px; width: 0px', id: "click_report_#{message.uuid}"}
 
             -else
               NA
-            
+                        
     - else
       %tr
         %td{colspan: '5'}
           .text-center No messages
+
+#report_dialog{:class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "Report", :'aria-hidden' => "true"}
+  .modal-body
+    %strong
+      Please wait...
+
+

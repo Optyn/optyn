@@ -100,6 +100,13 @@ function MerchantMessage() {
           this.hookTemplateMenuColorPickerChange();
           this.refreshTemplatePropertiesView();
         }
+
+        if($('.open-reports').length){
+          this.hookReport();
+          this.hookOpenLinkClickReport();
+          this.hookClearReportModal();
+          this.backToMainReport();
+        }
     };
 
     this.loadSpinnerForIframe = function() {
@@ -664,53 +671,84 @@ function MerchantMessage() {
       });        
     };
 
+    this.hookReport = function(){
+      var _this = this;
+      $('body').on('click', '.open-reports', function(){
+        _this.populateMainReport(this);
+      });
+    };
 
-}
+    this.hookOpenLinkClickReport = function(){
+      $('body').on('click', '.link-click-report-link', function(){
+        var id = $(this).data('id');
+        var content = $('#click_report_' + id).data('content');
+        $('#report_dialog').html(content);
 
-$(document).ready(function(){
-    $(".open-reports").click(function(){
-        msg_uuid = $(this).attr('data-id');
-        $('#reportDialog').modal('show');
-        getSocialSiteReport(msg_uuid);
-    });
+        var link = $('#click_report_path_' + id);
+        var url = link.val();
+       
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data) {
+                $('#report_dialog .modal-body').html(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert(errorThrown)
+            }
+        });
+      });
+    };
 
-    $(".click-reports").click(function(){
-        msg_uuid = $(this).attr('data-uuid').substr(3);
-        $('#clickReportDialog').modal('show');
-        getClicksReport(msg_uuid);
-    });
-});
+    this.hookClearReportModal = function(){
+      $('#report_dialog').on('hide', function(){
+        $('#report_dialog').html('<div class="modal-body"><strong>Plase Wait...</strong></div>');
+      });
+    };
 
-function getSocialSiteReport(msg_uuid) {
-    var link = $('#social_site_report_path_' + msg_uuid);
-    var url = link.val();
-   
-    $.ajax({
-        url: url,
-        type: 'GET',
-        success: function (data) {
-            $('#social_site_report_' + msg_uuid).html(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert(errorThrown)
-        }
-    });
-}
+    this.backToMainReport = function(){
+      var _this = this;
+      $('body').on('click', '.back-to-main-report', function(){
+        _this.populateMainReport(this);
+      });
+    };
 
-function getClicksReport(msg_uuid){
-    var link = $('#click_report_path_' + msg_uuid);
-    var url = link.val();
-   
-    $.ajax({
-        url: url,
-        type: 'GET',
-        success: function (data) {
-            $('#click_report_' + msg_uuid).html(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert(errorThrown)
-        }
-    });
+    this.populateMainReport = function(clickedElem){
+      var _this = this;
+      var id = $(clickedElem).data('id');
+        var content = $('#report_' + id).data('content');
+        $('#report_dialog').html(content);
+
+        var url = $(clickedElem).data('location');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data) {
+              $('#report_dialog').html(data);
+              _this.populateSocialSiteReport(id);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+              alert(errorThrown)
+            }
+        });
+    };
+
+    this.populateSocialSiteReport = function(msg_uuid){
+      var link = $('#social_site_report_path_' + msg_uuid);
+      var url = link.val();
+     
+      $.ajax({
+          url: url,
+          type: 'GET',
+          success: function (data) {
+              $('#social_site_report_' + msg_uuid).html(data);
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert(errorThrown)
+          }
+      });
+    };
 }

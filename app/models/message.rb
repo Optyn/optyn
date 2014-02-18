@@ -465,6 +465,10 @@ class Message < ActiveRecord::Base
     message_users.where('opt_out is true').count
   end
 
+  def link_click_count
+    EmailTracking.consolidated_count(self.id)
+  end
+
 
   def error_messages
     self.errors.full_messages
@@ -728,7 +732,11 @@ class Message < ActiveRecord::Base
   end
 
   def fetch_receiver_ids    
-    # return User.where(email: 'ian@eatstreet.com').pluck(:id) if Rails.env.staging? && partner.eatstreet?
+    if Rails.env.staging? && partner.eatstreet?
+      ids = User.where(email: 'ian@eatstreet.com').pluck(:id) 
+      ids += User.where(email: 'gaurav+eatstreet@optyn.com').pluck(:id)
+      return ids
+    end
 
     return all_active_user_ids if label_select_all?(self.label_ids)
 
