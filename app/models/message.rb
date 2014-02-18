@@ -112,7 +112,6 @@ class Message < ActiveRecord::Base
     before_transition :draft => same do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
       message.from = message.send(:canned_from)      
-      message.valid?
     end
 
     before_transition :draft => :queued do |message|
