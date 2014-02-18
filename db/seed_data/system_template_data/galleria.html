@@ -754,6 +754,8 @@
       /* Custom styles */
       img { max-width: 100%; }
       h2 { font-size: 16px; font-weight: bold; }
+      .float-left { float: left; }
+      .float-right { float: right; }
       .text-pad-10 { padding: 0 10px; }
       .body > tbody > tr > td { padding: 2%; }
       .optyn-replaceable-image { display: table-cell; }
@@ -792,7 +794,20 @@
         float: right;
         margin: 0 0 10px 10px;
       }
-      .optyn-sidebar img { max-height: 200px; }
+      .eight [data-type="text_with_left_image"] .optyn-replaceable-image {
+        width:48%; float:left; margin:0 2% 10px 0;
+      }
+      .eight [data-type="text_with_right_image"] .optyn-replaceable-image {
+        width:48%; float:right; margin:0 0 10px 2%;
+      }
+      .o-column { width: 48%; }
+      .optyn-division { margin: 5px 0; }
+      @media only screen and (max-width: 600px) {
+        .optyn-sidebar img { max-height: 200px; }
+        .float-left,
+        .float-right { float: none !important; }
+        .o-column { width: 100% !important; }
+      }
     </style>
 </head>
 <body id="flat">
@@ -801,25 +816,21 @@
       <td class="center" align="center" valign="top" style="padding: 2%;">
         <center>
           <container type="introduction">
-              <table class="container">
-                <tr>
-                  <td>
-                    <row>
-                      <table class="row">
+            <table class="container">
+              <tr>
+                <td>
+                  <row>
+                    <table class="row">
                       <tr>
                         <td class="wrapper last">
                           <grid type="introduction">
                             <table class="twelve columns">
                               <tr>
-                                <td class="">
+                                <td class="text-pad center">
                                   <division type="introduction">
-                                    <table class="twelve columns">
-                                      <tr>
-                                        <td class="center">
-                                          <img src="http://placehold.it/200x50">
-                                        </td>
-                                      </tr>
-                                    </table>
+                                    <div>
+                                      <img src="http://placehold.it/200x50">
+                                    </div>
                                   </division>
                                 </td>
                               </tr>

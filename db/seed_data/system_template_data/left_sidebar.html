@@ -728,10 +728,6 @@
           table[class="body"] .left-text-pad {
             padding-right: 10px !important;
           }
-
-          .optyn-sidebar img { max-height: 200px; }
-          .float-left,
-          .float-right { float: none !important; }
         }
     </style>
     <style type="text/css" media="screen">
@@ -806,6 +802,12 @@
       }
       .o-column { width: 48%; }
       .optyn-division { margin: 5px 0; }
+      @media only screen and (max-width: 600px) {
+        .optyn-sidebar img { max-height: 200px; }
+        .float-left,
+        .float-right { float: none !important; }
+        .o-column { width: 100% !important; }
+      }
     </style>
 </head>
 <body id="flat">
