@@ -350,7 +350,12 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def report
-    message = Message.find(params[:id])
+    @message = Message.for_uuid(params[:id])
+    render partial: 'merchants/messages/report_data', locals: {message: @message, timestamp_attr: 'updated_at'}
+  end
+
+  def social_report
+    message = Message.for_uuid(params[:id])
     timestamp_attr = 'updated_at'
     fb_body = nil
     if message.make_public
