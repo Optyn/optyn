@@ -781,32 +781,19 @@
         color: rgba(0,0,0,0.5);
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
-      [data-type="text_with_left_image"] .twelve .optyn-replaceable-image,
-      [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
-        width: 49%;
-        max-width:290px;
+      [data-type="text_with_left_image"] .optyn-replaceable-image {
+        width:48%; margin:0 2% 10px 0; float:left;
       }
-      [data-type="text_with_left_image"] .twelve .optyn-replaceable-image {
-        float: left;
-        margin: 0 10px 10px 0;
-      }
-      [data-type="text_with_right_image"] .twelve .optyn-replaceable-image {
-        float: right;
-        margin: 0 0 10px 10px;
-      }
-      .eight [data-type="text_with_left_image"] .optyn-replaceable-image {
-        width:48%; float:left; margin:0 2% 10px 0;
-      }
-      .eight [data-type="text_with_right_image"] .optyn-replaceable-image {
-        width:48%; float:right; margin:0 0 10px 2%;
+      [data-type="text_with_right_image"] .optyn-replaceable-image {
+        width:48%; margin:0 0 10px 2%; float:right;
       }
       .o-column { width: 48%; }
       .optyn-division { margin: 5px 0; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
-        .float-left,
-        .float-right { float: none !important; }
-        .o-column { width: 100% !important; }
+        body .float-left,
+        body .float-right { float: none; }
+        body .o-column { width: 100%; }
       }
     </style>
 </head>
@@ -982,7 +969,7 @@
                                         <tr>
                                           <td class="four sub-columns">
                                             <image>
-                                              <img src="http://placehold.it/580x300">
+                                              <img src="http://placehold.it/190x130">
                                             </image>
                                             <paragraph>
                                               <div>Gallery description goes here.</div>
@@ -990,7 +977,7 @@
                                           </td>
                                           <td class="four sub-columns right-text-pad">
                                             <image>
-                                              <img src="http://placehold.it/580x300">
+                                              <img src="http://placehold.it/190x130">
                                             </image>
                                             <paragraph>
                                               <div>Gallery description goes here.</div>
