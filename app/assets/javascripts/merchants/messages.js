@@ -466,7 +466,6 @@ function MerchantMessage() {
                     $('.loading').hide();
                     $('#system_templates_modal').modal('hide');
                     $('#template_wrapper').replaceWith(data);
-                    $('#choose_message .pull-right').append('<a class="btn btn-success" href="/merchants/messages/'+ uuid +'/preview_template">Preview</a>');
                   
                 },
                 error: function(){

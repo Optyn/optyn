@@ -789,7 +789,10 @@
       }
       .o-column { width: 48%; }
       .optyn-division { margin: 8px 0; }
-      [data-type="image_gallery"] .optyn-paragraph { font-size: 13px; }
+      [data-type="image_gallery"] .optyn-paragraph,
+      [data-type="three_columns"] .optyn-paragraph
+      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
+      .optyn-division { float: none; clear: both; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         body .float-left,
@@ -821,13 +824,9 @@
                               <tr>
                                 <td class="text-pad center">
                                   <division type="introduction">
-                                    <table class="twelve columns">
-                                      <tr>
-                                        <td class="">
-                                          <img src="http://placehold.it/200x50">
-                                        </td>
-                                      </tr>
-                                    </table>
+                                    <div>
+                                      <img src="http://placehold.it/200x50">
+                                    </div>
                                   </division>
                                 </td>
                               </tr>
@@ -845,219 +844,166 @@
           <container type="content">
             <table class="container">
               <tr>
-                <td>
+                <td class="outermost-container">
                   <row>
                     <table class="row">
                       <tr>
-                        <td class="wrapper last outermost-container">
-                           <table class="twelve columns">
-                                <tr>
-                                  <td class="wrapper last">
-                                    <grid type="content">
-                                      <table class="eight columns">
+                        <td class="wrapper">
+                          <grid type="content">
+                            <table class="eight columns">
+                              <tr>
+                                <td class="text-pad">
+                                  <division type="full_text">
+                                    <div>
+                                      <headline>
+                                        <h2 class="headline">Hello World!</h2>
+                                      </headline>
+                                      <paragraph>
+                                        <div class="paragraph">
+                                          A distinct piece of writing.
+                                        </div>
+                                      </paragraph>
+                                    </div>
+                                  </division>
+
+                                  <division type="text_with_full_image">
+                                    <div>
+                                      <headline>
+                                        <h2 class="headline">Hello World!</h2>
+                                      </headline>
+                                      <paragraph>
+                                        <div class="paragraph">
+                                          A distinct piece of writing.
+                                        </div>
+                                        <image>
+                                          <img src="http://placehold.it/580x350">
+                                        </image>
+                                      </paragraph>
+                                    </div>
+                                  </division>
+
+                                  <division type="two_columns">
+                                    <div>
+                                      <div class="float-left o-column">
+                                        <headline>
+                                          <h2 class="headline">Hello World!</h2>
+                                        </headline>
+                                        <paragraph>
+                                          <div>A distinct piece of writing.</div>
+                                        </paragraph>
+                                      </div>
+                                      <div class="float-right o-column">
+                                        <headline>
+                                          <h2 class="headline">Hello World!</h2>
+                                        </headline>
+                                        <paragraph>
+                                          <div>A distinct piece of writing.</div>
+                                        </paragraph>
+                                      </div>
+                                    </div>
+                                  </division>
+
+                                  <division type="text_with_left_image">
+                                    <div>
+                                      <headline>
+                                        <h2>Text with Left Image</h2>
+                                      </headline>
+                                      <image>
+                                        <img src="http://placehold.it/580x350">
+                                      </image>
+                                      <paragraph>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, ipsa iusto voluptatibus ducimus quis suscipit non distinctio commodi a temporibus accusantium doloremque vitae est asperiores aspernatur tempora dolore maiores quos.</div>
+                                      </paragraph>
+                                    </div>
+                                  </division>
+
+                                  <division type="text_with_right_image">
+                                    <div>
+                                      <headline>
+                                        <h2>Text with Right Image</h2>
+                                      </headline>
+                                      <image>
+                                        <img src="http://placehold.it/580x350">
+                                      </image>
+                                      <paragraph>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, ipsa iusto voluptatibus ducimus quis suscipit non distinctio commodi a temporibus accusantium doloremque vitae est asperiores aspernatur tempora dolore maiores quos.</div>
+                                      </paragraph>
+                                    </div>
+                                  </division>
+
+                                  <division type="image_gallery">
+                                    <div>
+                                      <headline>
+                                        <h2 class="headline">Image Gallery</h2>
+                                      </headline>
+                                      <table class="row">
                                         <tr>
-                                          <td>
-                                            <division type="full_text">
-                                              <table class="eight columns">
-                                                <tr>
-                                                  <td>
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
-                                                    <paragraph>
-                                                      <div class="paragraph">
-                                                        A distinct piece of writing.
-                                                      </div>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-
-                                            <division type="text_with_full_image">
-                                              <table class="eight columns">
-                                                <tr>
-                                                  <td>
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
-                                                    <paragraph>
-                                                      <div class="paragraph">
-                                                        A distinct piece of writing.
-                                                      </div>
-                                                      <image>
-                                                        <img src="http://placehold.it/580x300">
-                                                      </image>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-
-                                            <division type="two_columns">
-                                              <table class="eight columns">
-                                                <tr>
-                                                  <td class="four sub-columns">
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
-                                                    <paragraph>
-                                                      <div>A distinct piece of writing.</div>
-                                                    </paragraph>
-                                                  </td>
-                                                  <td class="four sub-columns last">
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
-                                                    <paragraph>
-                                                      <div>A distinct piece of writing.</div>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-
-                                            <division type="text_with_left_image">
-                                              <table class="eight columns">
-                                                <tr>
-                                                  <td>
-                                                    <headline>
-                                                      <h2>Text with Left Image</h2>
-                                                    </headline>
-                                                  </td>
-                                                </tr>
-                                                <tr>
-                                                  <td>
-                                                    <image style="width:193px; float:left; margin:0 10px 10px 0;">
-                                                      <img src="http://placehold.it/580x300">
-                                                    </image>
-                                                    <paragraph>
-                                                      <div>A distinct piece of writing.</div>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-
-                                            <division type="text_with_right_image">
-                                              <table class="eight columns">
-                                                <tr>
-                                                  <td>
-                                                    <headline>
-                                                      <h2>Text with Right Image</h2>
-                                                    </headline>
-                                                  </td>
-                                                </tr>
-                                                <tr>
-                                                  <td>
-                                                    <image style="width:193px; float:right; margin:0 0 10px 10px;">
-                                                      <img src="http://placehold.it/580x300">
-                                                    </image>
-                                                    <paragraph>
-                                                      <div>A distinct piece of writing.</div>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-
-                                            <division type="image_gallery">
-                                              <table class="row">
-                                                <tr>
-                                                  <td class="wrapper">
-                                                    <table class="eight columns">
-                                                      <tr>
-                                                        <td class="right-text-pad" colspan="3">
-                                                          <headline>
-                                                            <h2 class="headline">Image Gallery</h2>
-                                                          </headline>
-                                                        </td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td class="four sub-columns">
-                                                          <image>
-                                                            <img src="http://placehold.it/580x300">
-                                                          </image>
-                                                          <paragraph>
-                                                            <div>Gallery description goes here.</div>
-                                                          </paragraph>
-                                                        </td>
-                                                        <td class="four sub-columns last right-text-pad">
-                                                          <image>
-                                                            <img src="http://placehold.it/580x300">
-                                                          </image>
-                                                          <paragraph>
-                                                            <div>Gallery description goes here.</div>
-                                                          </paragraph>
-                                                        </td>
-                                                      </tr>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
+                                          <td class="four sub-columns">
+                                            <image>
+                                              <img src="http://placehold.it/190x130">
+                                            </image>
+                                            <paragraph>
+                                              <div>Gallery description goes here.</div>
+                                            </paragraph>
+                                          </td>
+                                          <td class="four sub-columns right-text-pad">
+                                            <image>
+                                              <img src="http://placehold.it/190x130">
+                                            </image>
+                                            <paragraph>
+                                              <div>Gallery description goes here.</div>
+                                            </paragraph>
                                           </td>
                                         </tr>
                                       </table>
-                                    </grid>
-                                  </td>
+                                    </div>
+                                  </division>
+                                </td>
+                              </tr>
+                            </table>
+                          </grid>
+                        </td>
+                        <td class="wrapper last sidebar-container">
+                          <grid type="sidebar">
+                            <table class="four columns">
+                              <tr>
+                                <td class="text-pad">
+                                  <division type="full_text">
+                                    <div>
+                                      <headline>
+                                        <h3 class="headline">Hello World!</h3>
+                                      </headline>
+                                      <paragraph>
+                                        <div class="paragraph">
+                                          A distinct piece of writing.
+                                        </div>
+                                      </paragraph>
+                                    </div>
+                                  </division>
 
-                                  <td class="wrapper sidebar-container">
-                                    <grid type="sidebar">
-                                      <table class="four columns">
-                                        <tr>
-                                          <td>
-                                            <division type="full_text">
-                                              <table class="four columns">
-                                                <tr>
-                                                  <td>
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
-                                                    <paragraph>
-                                                      <div class="paragraph">
-                                                        A distinct piece of writing.
-                                                      </div>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-
-                                            <division type="text_with_full_image">
-                                              <table class="four columns">
-                                                <tr>
-                                                  <td>
-                                                    <headline>
-                                                      <h2 class="headline">Hello World!</h2>
-                                                    </headline>
-                                                    <paragraph>
-                                                      <div class="paragraph">
-                                                        A distinct piece of writing.
-                                                      </div>
-                                                      <image>
-                                                        <img src="http://placehold.it/145x75">
-                                                      </image>
-                                                    </paragraph>
-                                                  </td>
-                                                </tr>
-                                              </table>
-                                            </division>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </grid>
-                                  </td>
-
-
-                                </tr>
-                              </table>
+                                  <division type="text_with_full_image">
+                                    <div>
+                                      <headline>
+                                        <h3 class="headline">Text with Full Image</h3>
+                                      </headline>
+                                      <paragraph>
+                                        <div class="paragraph">
+                                          Image caption here.
+                                        </div>
+                                        <image>
+                                          <img src="http://placehold.it/145x75">
+                                        </image>
+                                      </paragraph>
+                                    </div>
+                                  </division>
+                                </td>
+                              </tr>
+                            </table>
+                          </grid>
                         </td>
                       </tr>
                     </table>
                   </row>
-
-
                 </td>
               </tr>
             </table>

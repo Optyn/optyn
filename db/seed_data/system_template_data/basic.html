@@ -789,7 +789,10 @@
       }
       .o-column { width: 48%; }
       .optyn-division { margin: 8px 0; }
-      [data-type="image_gallery"] .optyn-paragraph { font-size: 13px; }
+      [data-type="image_gallery"] .optyn-paragraph,
+      [data-type="three_columns"] .optyn-paragraph
+      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
+      .optyn-division { float: none; clear: both; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         body .float-left,
@@ -992,6 +995,8 @@
                           </division>
 
                           <division type="image_gallery">
+                            <div>
+                            </div>
                             <table class="row">
                               <tr>
                                 <td class="wrapper last">

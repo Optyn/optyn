@@ -12,16 +12,16 @@
           .modal.hide.fade#template_name
             .modal-header
               %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
-              %h3
-                = 'Template Name'
+              %h3 Set Template Name
             .modal-body
               .control-group
                 = label_tag(:name, "Template Name", class: 'control-label')
                 .controls
-                  = text_field_tag :name, nil, id: 'template_name_field'
+                  = text_field_tag :name, nil, id: 'template_name_field', class: 'span12'
+                  %small Required field.
             .modal-footer
               %a#assign_template_name.btn.btn-success{href: "javascript:void(0)"} Save Changes
-              %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"}Make changes
+              %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
 
           .tab-content-pane
             = hidden_field_tag :merchants_selectable_properties_preview_path, merchants_selectable_properties_preview_path(@message.uuid, @template.uuid)

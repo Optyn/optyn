@@ -789,7 +789,10 @@
       }
       .o-column { width: 48%; }
       .optyn-division { margin: 8px 0; }
-      [data-type="image_gallery"] .optyn-paragraph { font-size: 13px; }
+      [data-type="image_gallery"] .optyn-paragraph,
+      [data-type="three_columns"] .optyn-paragraph
+      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
+      .optyn-division { float: none; clear: both; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         body .float-left,
@@ -884,7 +887,7 @@
                                             A distinct piece of writing.
                                           </div>
                                           <image>
-                                            <img src="http://placehold.it/580x300">
+                                            <img src="http://placehold.it/580x350">
                                           </image>
                                         </paragraph>
                                       </td>
@@ -910,7 +913,7 @@
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td>
-                                  <td class="six sub-columns right-text-pad">
+                                  <td class="six sub-columns">
                                     <image>
                                       <img src="http://placehold.it/290x150">
                                     </image>
@@ -946,7 +949,7 @@
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td>
-                                  <td class="four sub-columns right-text-pad">
+                                  <td class="four sub-columns">
                                     <image>
                                       <img src="http://placehold.it/190x100">
                                     </image>
@@ -990,7 +993,7 @@
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td>
-                                  <td class="four sub-columns right-text-pad">
+                                  <td class="three sub-columns">
                                     <image>
                                       <img src="http://placehold.it/145x75">
                                     </image>
@@ -1008,14 +1011,10 @@
                   </row>
                 </td>
               </tr>
-
-
-
-
-
             </table>
-
           </container>
+
+
           <container type="footer">
             <table class="container">
                 <tr>

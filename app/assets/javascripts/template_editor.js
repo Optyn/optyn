@@ -10,6 +10,7 @@ OP = (function($, window, doucument, Optyn){
 
     setUpSidebarEditing: function(){
       $('body').on('change', '#template_editable_content', function(){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
         var $merchantMenu = $('.merchant-menu');
 
         if($('.template-editor-container').length){

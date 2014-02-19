@@ -789,7 +789,10 @@
       }
       .o-column { width: 48%; }
       .optyn-division { margin: 8px 0; }
-      [data-type="image_gallery"] .optyn-paragraph { font-size: 13px; }
+      [data-type="image_gallery"] .optyn-paragraph,
+      [data-type="three_columns"] .optyn-paragraph
+      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
+      .optyn-division { float: none; clear: both; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         body .float-left,
@@ -911,7 +914,7 @@
                                           A distinct piece of writing.
                                         </div>
                                         <image>
-                                          <img src="http://placehold.it/380x250">
+                                          <img src="http://placehold.it/580x350">
                                         </image>
                                       </paragraph>
                                     </div>
@@ -944,7 +947,7 @@
                                         <h2>Text with Left Image</h2>
                                       </headline>
                                       <image>
-                                        <img src="http://placehold.it/190x130">
+                                        <img src="http://placehold.it/580x350">
                                       </image>
                                       <paragraph>
                                         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, ipsa iusto voluptatibus ducimus quis suscipit non distinctio commodi a temporibus accusantium doloremque vitae est asperiores aspernatur tempora dolore maiores quos.</div>
@@ -958,7 +961,7 @@
                                         <h2>Text with Right Image</h2>
                                       </headline>
                                       <image>
-                                        <img src="http://placehold.it/190x130">
+                                        <img src="http://placehold.it/580x350">
                                       </image>
                                       <paragraph>
                                         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, ipsa iusto voluptatibus ducimus quis suscipit non distinctio commodi a temporibus accusantium doloremque vitae est asperiores aspernatur tempora dolore maiores quos.</div>
@@ -1001,8 +1004,6 @@
                       </tr>
                     </table>
                   </row>
-
-
                 </td>
               </tr>
             </table>

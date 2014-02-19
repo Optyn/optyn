@@ -7,14 +7,13 @@
   #choose_message
     = render :partial => 'progress_bar'
 
-    - if @message.template_id.present?
-      .row-fluid
-        .pull-left
-          = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn btn-primary'
+    - display_val = @message.template_id.present? ? 'block' : 'none'
+    .row-fluid.template-edit-actions{style: "display: #{display_val};"}
+      .pull-left
+        = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn btn-primary'
 
-        .pull-right
-          - if @message.template_id.present?
-            = link_to "Preview", preview_template_merchants_message_path(@message.uuid), class: 'btn btn-success'
+      .pull-right
+        = link_to "Preview", preview_template_merchants_message_path(@message.uuid), class: 'btn btn-success'
 
     .blank-space
 
