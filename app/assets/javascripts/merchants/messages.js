@@ -435,7 +435,7 @@ function MerchantMessage() {
                 url: $(this).attr('href'),
                 type: 'GET',
                 success: function(){
-                    alert('Successfully sent and email to you. Please check the email in a minute or two.')
+                    alert('Successfully sent an email to you. Please check the email in a minute or two.')
                 },
                 error: function(){ 
                     alert('An Error occurred while sending you email. Please send an email to support@optyn.com for any issues.')

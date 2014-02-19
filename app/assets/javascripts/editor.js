@@ -199,11 +199,14 @@ OP = (function($, window, doucument, Optyn){
         }else{
           var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
           $currentDivision.after(requiredMarkup);
+          $currentDivision.next().next().addClass( 'recently-added-division' );
+          setTimeout( function () {
+            $currentDivision.next().next().removeClass( 'recently-added-division' );
+            OP.template.saveSectionChanges();
+          }, 2000 );
         }
 
         OP.setParentIframeHeight();
-
-        OP.template.saveSectionChanges();
       });
     },
 
@@ -218,7 +221,6 @@ OP = (function($, window, doucument, Optyn){
         var divisionCount = $( this ).parents( '.optyn-grid' ).find( '.optyn-division' ).size();
         var $temp = null;
         if ( divisionCount == 1 ) {
-          console.log( divisionCount );
           $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
           $toolsetCloned.find('.ink-action-edit').remove();
           $toolsetCloned.find('.ink-action-delete').remove();
