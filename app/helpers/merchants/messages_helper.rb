@@ -108,25 +108,31 @@ module Merchants::MessagesHelper
     end
 
     display_content = message.content.blank? ? "-" : message.personalized_content(receiver)
-    display_content.include?("<html>") ? raw(display_content) : simple_format(display_content)
+    display_content.include?("<p>") ? raw(display_content) : simple_format(display_content)
     display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
   end
 
   def process_urls(display_content, message, receiver)
-    user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :manager_id => message.manager_id,  :email => (receiver.email rescue '')})
-    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
-    html = Nokogiri::HTML(display_content)
+    html = Nokogiri::XML(display_content)
 
     #replace urls in a tags
     html.xpath("//a").each do |link|
       original_href = link['href']
-      link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
+      link['href'] = optyn_tracking_url(message, receiver, original_href)
     end
-    return html.to_s
+    
+    return html.children.to_s
   rescue => e
     Rails.logger.error e
     return display_content
+  end
+
+  def optyn_tracking_url(message, receiver, original_href)
+    user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :manager_id => message.manager_id,  :email => (receiver.email rescue '')})
+    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    optyn_url = "#{optyn_url}&redirect_url=#{original_href}"
+    optyn_url
   end
 
   def message_receiver_labels(label_names)
@@ -177,12 +183,16 @@ module Merchants::MessagesHelper
       button_url = message.button_url
       subject = message.personalized_subject(message_user)
       website = message.shop.website
+
       if button_url.present? || website.present?
         href = button_url.present? ? button_url : website
-        link_to(image_tag(message.message_image.image.to_s, title: subject, style: 'max-width: 100%;').html_safe, href)
+        content = link_to(image_tag(message.message_image.image.to_s, title: subject, style: 'max-width: 100%;').html_safe, href)
+        content = process_urls(content, message, message_user)
+        content.html_safe
       else
         image_tag(message.message_image.image.to_s, title: subject, style: 'max-width: 100%;')
       end  
+
     end
   end
 
