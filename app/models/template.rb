@@ -80,7 +80,7 @@ class Template < ActiveRecord::Base
 
   def personalize_body(content, message, receiver)
     # Sanitaize the footer
-    template_node = Nokogiri::XML(content)
+    template_node = Nokogiri::HTML(content)
     template_node.css('.optyn-footer').each do |footer_node|
 
       #substitute the receiver email
