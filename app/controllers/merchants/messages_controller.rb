@@ -95,6 +95,11 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
   end
 
+  def show_template
+    @templates = current_shop.templates
+    @message = Message.for_uuid(params[:id])
+  end
+
   def edit
     @message = Message.for_uuid(params[:id])
     populate_shop_surveys

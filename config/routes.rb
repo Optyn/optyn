@@ -438,6 +438,7 @@ Optyn::Application.routes.draw do
         get :edit_template
         get :template
         put :assign_template
+        get :show_template
         get :preview_template
         get :preview_template_content
         get :editor
