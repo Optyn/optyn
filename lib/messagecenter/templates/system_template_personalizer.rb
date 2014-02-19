@@ -142,7 +142,7 @@ module Messagecenter
           introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
           introduction_division.css('img').each do |image|
             shop_logo = email_body_shop_logo(shop)
-            shop_logo_node = Nokogiri::HTML(shop_logo).css('body').first
+            shop_logo_node = Nokogiri::HTML::fragment(shop_logo)
           
             if shop_logo_node.css('img').present?
               image_node = shop_logo_node.css('img').first
