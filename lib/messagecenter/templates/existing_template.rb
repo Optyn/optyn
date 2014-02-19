@@ -102,8 +102,7 @@ module Messagecenter
           grid['divisions'].each do |division_hash|
             template_div_html = template_grid.data_model[division_hash['division']['type']].clone
             template_div_content = template_div_html['content']
-            #TODO HANDLE MULTIPLE HEADLINES AND PARAGRAPHS
-            division_node = Nokogiri::XML(template_div_content)
+            division_node = Nokogiri::HTML::fragment(template_div_content)
 
             #headlines added
             (division_hash['division']['headlines'] || []).each_with_index do |headline_content, index|
@@ -131,7 +130,7 @@ module Messagecenter
               toolset_markup = ""
             end
 
-            html << toolset_markup + division_node.children.to_s # toolset_markup will be blank if @editable is false
+            html << toolset_markup + division_node.to_s # toolset_markup will be blank if @editable is false
           end
           html
         end  
