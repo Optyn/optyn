@@ -35,6 +35,9 @@ module Messagecenter
       elsif "save_and_navigate_parent" == choice
         redirect_to edit_merchants_message_path(@message.parent.uuid)
       elsif "preview" == choice
+        if @message.instance_of?(TemplateMessage)
+          return redirect_to(params[:change_details].present? ? template_merchants_message_path(@message.uuid) : preview_template_merchants_message_path(@message.uuid))
+        end
         redirect_to preview_merchants_message_path(@message.uuid)
       elsif "launch" == choice
         if current_shop.disabled?

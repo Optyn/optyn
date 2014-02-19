@@ -49,7 +49,7 @@ module Messagecenter
         components_hash.to_json
       end
 
-      def static_toolset_markup(grid_data_model)
+      def static_toolset_markup(grid_data_model, only_add = false)
         static_content = ""
         data_model = grid_data_model.clone
 
@@ -63,14 +63,18 @@ module Messagecenter
           end
 
           static_content = <<-HTML
-                <div class="row template-section-toolset">
+                <div class="row template-section-toolset #{ "no-divisions-toolset" if only_add}">
                   <div class="btn-group pull-right">
-                    <button class="btn ink-action-edit">
-                      <i class="icon-edit icon-white"></i>
-                    </button>
-                    <button class="btn ink-action-delete">
-                      <i class="icon-trash icon-white action-delete"></i>
-                    </button>
+                    #{
+                      %{
+                        <button class="btn ink-action-edit">
+                          <i class="icon-edit icon-white"></i>
+                        </button>
+                        <button class="btn ink-action-delete">
+                          <i class="icon-trash icon-white action-delete"></i>
+                        </button>
+                      } unless only_add
+                    }
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white">&nbsp;<span class="caret"></span></i></a>
                     <ul class="dropdown-menu">
                       #{dropdown_links}
