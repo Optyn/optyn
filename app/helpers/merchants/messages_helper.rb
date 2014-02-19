@@ -114,15 +114,14 @@ module Merchants::MessagesHelper
   end
 
   def process_urls(display_content, message, receiver)
-    html = Nokogiri::XML(display_content)
+    html = Nokogiri::HTML::fragment(display_content)
 
     #replace urls in a tags
-    html.xpath("//a").each do |link|
+    html.css('a').each do |link|
       original_href = link['href']
       link['href'] = optyn_tracking_url(message, receiver, original_href)
     end
-    
-    return html.children.to_s
+    return html.to_s
   rescue => e
     Rails.logger.error e
     return display_content
