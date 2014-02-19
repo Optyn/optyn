@@ -10,5 +10,12 @@
     = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
       %fieldset
         = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
+        = hidden_field_tag :change_details, true
 
-      = submit_tag "Next", name: 'save_draft', class: "btn btn-success"
+      - if @message.editable_state?
+        = submit_tag "Update Content", name: 'preview', class: "btn btn-info"
+
+      = submit_tag("Launch", name: "launch", class: 'btn btn-success') unless current_shop.disabled? || @message.queued?  
+
+
+        

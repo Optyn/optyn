@@ -12,7 +12,7 @@ class Merchants::MessagesController < Merchants::BaseController
   skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save]
   before_filter :check_validity_before_rejection, only: [:reject]
 
-  LAUNCH_FLASH_ERROR = "Could not queue the message for sending."
+  LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
 
   def types
     #Do Nothing
@@ -21,7 +21,7 @@ class Merchants::MessagesController < Merchants::BaseController
   ##show just before calling sending of survey link
   ##so that user can select survey
   def select_survey
-    @list_survey = Survey.where(:shop_id=>current_shop.id)
+    @list_survey = Survey.where(:shop_id => current_shop.id)
   end
 
   def new
@@ -85,7 +85,7 @@ class Merchants::MessagesController < Merchants::BaseController
         message_redirection
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
-        render "new"
+        create_failure_action
       end
     end
   end
@@ -117,7 +117,7 @@ class Merchants::MessagesController < Merchants::BaseController
         message_redirection
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
-        render "edit"
+        update_failure_action
       end
     end
   end
@@ -467,4 +467,17 @@ class Merchants::MessagesController < Merchants::BaseController
     plain_text = Encryptor.decrypt(params[:id])
     plain_text.split("--")
   end
+
+  def create_failure_action
+    return render(action: 'new_template') if @message.instance_of?(TemplateMessage)
+
+    render action: 'new'
+  end
+
+  def update_failure_action
+    return render(action: 'edit_template') if @message.instance_of?(TemplateMessage)
+
+    render action: 'edit'
+  end
+
 end

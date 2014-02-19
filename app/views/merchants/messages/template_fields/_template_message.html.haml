@@ -2,6 +2,7 @@
 = hidden_field_tag :choice, @message.queued? ? 'launch' : 'save_draft'
 = f.hidden_field :template_id
 
+
 = render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
 
 .control-group
