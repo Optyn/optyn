@@ -792,6 +792,7 @@
       [data-type="image_gallery"] .optyn-paragraph,
       [data-type="three_columns"] .optyn-paragraph
       [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
+      .optyn-division { float: none; clear: both; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         body .float-left,
@@ -841,14 +842,14 @@
           <container type="content">
             <table class="container">
               <tr>
-                <td>
+                <td class="outermost-container">
                   <row>
                     <table class="row">
                       <tr>
-                        <td class="wrapper last outermost-container">
-                          <table class="twelve columns">
+                        <td class="sidebar-container wrapper">
+                          <table class="three columns">
                             <tr>
-                              <td class="three sub-columns sidebar-container text-pad">
+                              <td class="text-pad">
                                 <grid type="sidebar">
                                   <div>
                                     <division type="full_text">
@@ -882,8 +883,13 @@
                                   </div>
                                 </grid>
                               </td>
-
-                              <td class="six sub-columns text-pad">
+                            </tr>
+                          </table>
+                        </td>
+                        <td class="wrapper">
+                          <table class="six columns text-pad">
+                            <tr>
+                              <td class="text-pad">
                                 <grid type="content">
                                   <div>
                                     <division type="full_text">
@@ -924,7 +930,7 @@
                                           <img src="http://placehold.it/580x300">
                                         </image>
                                         <paragraph>
-                                          <div>A distinct piece of writing.</div>
+                                          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, et id cupiditate earum error enim quae vitae vero aperiam. Repudiandae, illum, quaerat ea recusandae est maxime obcaecati sint tempore quo?</div>
                                         </paragraph>
                                       </div>
                                     </division>
@@ -938,7 +944,7 @@
                                           <img src="http://placehold.it/580x300">
                                         </image>
                                         <paragraph>
-                                          <div>A distinct piece of writing.</div>
+                                          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, et id cupiditate earum error enim quae vitae vero aperiam. Repudiandae, illum, quaerat ea recusandae est maxime obcaecati sint tempore quo?</div>
                                         </paragraph>
                                       </div>
                                     </division>
@@ -971,8 +977,13 @@
                                   </div>
                                 </grid>
                               </td>
-
-                              <td class="three sub-columns last sidebar-container text-pad">
+                            </tr>
+                          </table>
+                        </td>
+                        <td class="wrapper last sidebar-container">
+                          <table class="three columns last">
+                            <tr>
+                              <td class="text-pad">
                                 <grid type="sidebar">
                                   <div>
                                     <division type="full_text">
