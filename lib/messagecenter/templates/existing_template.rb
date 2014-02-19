@@ -134,7 +134,7 @@ module Messagecenter
               html << toolset_markup + division_node.to_s # toolset_markup will be blank if @editable is false
             end
           else
-            html << static_toolset_markup(template_grid.data_model, true)
+            html << ("true" == @editable.to_s ? static_toolset_markup(template_grid.data_model, true) : "")
           end
           html
         end  
