@@ -139,14 +139,14 @@ class Template < ActiveRecord::Base
   def process_urls(content, message, receiver)
     user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :email => receiver.email, :manager_id => message.manager_id})
     optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
-    html = Nokogiri::HTML(content)
+    body = Nokogiri::HTML(content)
 
     #replace urls in a tags
-    html.xpath("//a").each do |link|
+    body.css('.optyn-introduction a, .optyn-content a').each do |link|
       original_href = link['href']
       link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
     end
-    return html.to_s
+    return body.to_s
   rescue Exception => e
     Rails.logger.info '-!'*80
     Rails.logger.info 'Error in processing urls in message with id: ' + message.id.to_s
