@@ -793,6 +793,15 @@
       [data-type="three_columns"] .optyn-paragraph
       [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
       .optyn-division { float: none; clear: both; }
+      .optyn-division {
+        -webkit-transition: all 1s ease;
+           -moz-transition: all 1s ease;
+             -o-transition: all 1s ease;
+                transition: all 1s ease;
+      }
+      .recently-added-division {
+        background: #ff9;
+      }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         body .float-left,
