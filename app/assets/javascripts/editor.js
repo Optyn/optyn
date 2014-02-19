@@ -218,7 +218,6 @@ OP = (function($, window, doucument, Optyn){
         var divisionCount = $( this ).parents( '.optyn-grid' ).find( '.optyn-division' ).size();
         var $temp = null;
         if ( divisionCount == 1 ) {
-          console.log( divisionCount );
           $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
           $toolsetCloned.find('.ink-action-edit').remove();
           $toolsetCloned.find('.ink-action-delete').remove();
