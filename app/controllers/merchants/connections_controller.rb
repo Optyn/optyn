@@ -112,9 +112,6 @@ class Merchants::ConnectionsController < Merchants::BaseController
           (0..label_loop_size).each do |l|
             user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: total_labels_selected[l])
           end
-        else
-          label_id = current_shop.labels.find_by_name("Select All").id
-          user_label = UserLabel.find_or_create_by_user_id_and_label_id(user_id: @user.id, label_id: label_id)
         end
 
       end
