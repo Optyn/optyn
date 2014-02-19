@@ -199,11 +199,14 @@ OP = (function($, window, doucument, Optyn){
         }else{
           var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
           $currentDivision.after(requiredMarkup);
+          $currentDivision.next().next().addClass( 'recently-added-division' );
+          setTimeout( function () {
+            $currentDivision.next().next().removeClass( 'recently-added-division' );
+            OP.template.saveSectionChanges();
+          }, 2000 );
         }
 
         OP.setParentIframeHeight();
-
-        OP.template.saveSectionChanges();
       });
     },
 
