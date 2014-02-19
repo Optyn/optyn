@@ -253,6 +253,9 @@ OP = (function($, window, doucument, Optyn){
         type: 'PUT',
         data: JSON.stringify(messageWrapper),
         contentType: "application/json",
+        success: function(){
+          window.parent.$('.template-edit-actions').show();
+        },
         error: function(){
           alert('We are sorry, a problem occourred while while saving your changes. Please reload your page. We are sorry.');
         }
