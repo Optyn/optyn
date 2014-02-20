@@ -28,8 +28,13 @@ module Messagecenter
 
             header: {
               css: {
-                :"font-family" => Template::HEADER_FONT_FAMILIES,
                 :'background-color' => current_shop.header_background_color
+              },
+              
+              headline: {
+                css: {
+                  :"font-family" => Template::HEADER_FONT_FAMILIES
+                }  
               }
             },
 
@@ -136,6 +141,15 @@ module Messagecenter
                 node.set_property(css_key.to_s, css_value)
               end
             end
+
+            if header_properties[:headline].present? && header_properties[:headline][:css].present?
+              node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction .optyn-headline"}
+              if node.present?
+                header_properties[:headline][:css].each_pair do |css_key, css_value|
+                  node.set_property(css_key.to_s, css_value)
+                end
+              end
+            end
           end
 
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
@@ -159,6 +173,9 @@ module Messagecenter
             end
           end
 
+          @parsed_html.css('headline').each do |headline_child|
+            Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline') 
+          end
         end
         
         def convert_content(content_properties)
