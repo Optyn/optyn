@@ -123,6 +123,10 @@ class Template < ActiveRecord::Base
     end
   end
 
+  def delete_cached_content(message_uuid)
+    Rails.cache.delete("template_message_#{message_uuid}")
+  end
+
   def thumbnail_generator
     ThumbnailGenerationWorker.perform_async(self.id)
   end

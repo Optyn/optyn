@@ -242,6 +242,8 @@ class Message < ActiveRecord::Base
   end
 
   def email_self
+    clear_cached_template #clear the template cache
+
     SelfEmailSender.perform_async(self.id)
   end
 
@@ -393,6 +395,7 @@ class Message < ActiveRecord::Base
   end
 
   def dispatch(creation_errors=[], process_manager=nil)
+    clear_cached_template
     receiver_ids = fetch_receiver_ids
     receiver_ids = receiver_ids.compact
     message_user_creations = MessageUser.create_message_receiver_entries(self, receiver_ids, creation_errors, process_manager)
@@ -599,6 +602,7 @@ class Message < ActiveRecord::Base
           #message.state = 'transit'
           #message.save(validate: false)
           if !message.shop.disabled? && message.message_send?
+
             dispatched_message = message.dispatch(creation_errors, process_manager)
 
             unless dispatched_message.blank?
@@ -824,5 +828,9 @@ class Message < ActiveRecord::Base
       personalized_article
 
     end
+  end
+
+  def clear_cached_template
+    self.template.delete_cached_content(self.uuid) if self.template_id.present?
   end
 end
