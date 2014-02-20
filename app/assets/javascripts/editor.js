@@ -176,7 +176,8 @@ OP = (function($, window, doucument, Optyn){
               src: uploadedImageSrc,
               height: $imageContainer.attr('height'),
               width: $imageContainer.attr('width'),
-              style: $imageContainer.attr('style')
+              style: $imageContainer.attr('style'),
+              'class': $imageContainer.attr('class').replace(/optyn-replaceable-image/)
             });
             $temp.append($img);
 
