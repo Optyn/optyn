@@ -203,10 +203,13 @@ OP = (function($, window, doucument, Optyn){
           $currentDivision.next().next().addClass( 'recently-added-division' );
           setTimeout( function () {
             $currentDivision.next().next().removeClass( 'recently-added-division' );
-            OP.template.saveSectionChanges();
           }, 2000 );
         }
 
+        setTimeout(function(){
+          OP.template.saveSectionChanges();
+        }, 100);
+        
         OP.setParentIframeHeight();
       });
     },
