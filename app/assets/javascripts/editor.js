@@ -193,19 +193,23 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.add-section-link', function( event ) {
         event.preventDefault();
         var desiredGridType = $( this ).data( 'section-type' );
-        var requiredMarkup = $( this ).parents('.optyn-grid').first().find( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
-        if($( '.no-divisions-toolset' ).length){
-          $( '.no-divisions-toolset' ).replaceWith(requiredMarkup);
+        var $currentGrid = $( this ).parents('.optyn-grid').first();
+        var requiredMarkup = $currentGrid.find( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
+        if($currentGrid.find( '.no-divisions-toolset' ).length){
+          $( this ).parents('.no-divisions-toolset').first().replaceWith(requiredMarkup);
         }else{
           var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
           $currentDivision.after(requiredMarkup);
           $currentDivision.next().next().addClass( 'recently-added-division' );
           setTimeout( function () {
             $currentDivision.next().next().removeClass( 'recently-added-division' );
-            OP.template.saveSectionChanges();
           }, 2000 );
         }
 
+        setTimeout(function(){
+          OP.template.saveSectionChanges();
+        }, 100);
+        
         OP.setParentIframeHeight();
       });
     },
