@@ -360,7 +360,8 @@ OP = (function($, window, doucument, Optyn){
                     'url': $imageElem.attr('src'),
                     'height': $imageElem.attr('height'),
                     'width': $imageElem.attr('width'),
-                    'style': $imageElem.attr('style')
+                    'style': $imageElem.attr('style'),
+                    'class': $imageElem.attr('class')
                   });
                 }
               });
