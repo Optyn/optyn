@@ -822,8 +822,8 @@
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         .body .float-left,
-        .body .float-right { float: none; }
-        .body .o-column { width: 100%; }
+        .body .float-right { float: none !important; }
+        .body .o-column { width: 100% !important; }
         .optyn-replaceable-image {
           width: 100% !important;
           float: none !important;
@@ -983,11 +983,9 @@
                                         <headline>
                                           <h2>Text with Left Image</h2>
                                         </headline>
-                                        <div style="width:45%; float:left; margin:0 5% 10px 0;">
-                                          <image>
-                                            <img src="http://placehold.it/300x200" alt="" class="w120">
-                                          </image>
-                                        </div>
+                                        <image>
+                                          <img src="http://placehold.it/300x200" alt="" class="w120">
+                                        </image>
                                         <paragraph>
                                           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, et id cupiditate earum error enim quae vitae vero aperiam. Repudiandae, illum, quaerat ea recusandae est maxime obcaecati sint tempore quo?</div>
                                         </paragraph>
@@ -999,11 +997,9 @@
                                         <headline>
                                           <h2>Text with Right Image</h2>
                                         </headline>
-                                        <div style="width:45%; float:right; margin:0 0 10px 5%;">
-                                          <image>
-                                            <img src="http://placehold.it/300x200" alt="" class="w120">
-                                          </image>
-                                        </div>
+                                        <image>
+                                          <img src="http://placehold.it/300x200" alt="" class="w120">
+                                        </image>
                                         <paragraph>
                                           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, et id cupiditate earum error enim quae vitae vero aperiam. Repudiandae, illum, quaerat ea recusandae est maxime obcaecati sint tempore quo?</div>
                                         </paragraph>

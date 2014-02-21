@@ -739,7 +739,7 @@
       .optyn-introduction .optyn-headline{
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       }
-      
+
       .optyn-content{
         background-color: #fff;
       }
@@ -810,10 +810,9 @@
       }
       [data-type="introduction"] img { max-width: 560px; }
       .three img { max-width: 110px; }
-      .six [data-type="text_with_full_image"] img { max-width: 260px; }
-      .six [data-type="text_with_left_image"] img,
-      .six [data-type="text_with_right_image"] img { max-width: 120px; }
-      .six [data-type="image_gallery"] img { max-width: 130px; }
+      .w260 { max-width: 260px; }
+      .w130 { max-width: 130px; }
+      .w120 { max-width: 120px; }
       .eight [data-type="image_gallery"] img { max-width: 170px; }
       .eight [data-type="text_with_left_image"] img,
       .eight [data-type="text_with_right_image"] img { max-width: 170px; }
@@ -822,9 +821,9 @@
       table.body { min-width: 320px; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
-        body .float-left,
-        body .float-right { float: none; }
-        body .o-column { width: 100%; }
+        .body .float-left,
+        .body .float-right { float: none !important; }
+        .body .o-column { width: 100% !important; }
         .optyn-replaceable-image {
           width: 100% !important;
           float: none !important;
@@ -832,16 +831,15 @@
         }
         .body [data-type="introduction"] img { max-width: 300px !important; }
         .three img { max-width: 300px; }
-        .six [data-type="text_with_full_image"] img { max-width: 300px; }
-        .six [data-type="text_with_left_image"] img,
-        .six [data-type="text_with_right_image"] img { max-width: 300px; }
-        .six [data-type="image_gallery"] img { max-width: 300px; }
+        .body .container .w260,
+        .body .container .w130,
+        .body .container .w120 { max-width: 300px !important; }
         .four img { max-width: 300px; }
         .eight [data-type="text_with_left_image"] img,
         .eight [data-type="text_with_right_image"] img { max-width: 300px; }
         .eight [data-type="image_gallery"] img { max-width: 300px; }
         .eight [data-type="text_with_full_image"] img { max-width: 300px; }
-      }
+      }  /* End media query. */
     </style>
 </head>
 <body id="flat">
