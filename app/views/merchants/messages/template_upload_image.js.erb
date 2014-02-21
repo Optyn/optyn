@@ -1,7 +1,9 @@
 <%if @message_image.errors.present?%>
 	$('.template-editor-container .loading').hide();
+	$('.template-editor-container .upload-img-btn').show();
 	alert('Sorry.We could not upload the file. Please try again.');
 <% else %>
 	$('.template-editor-container #<%= params[:imagerow]%> img').first().attr('src','<%=@message_image.image%>')
 	$('.template-editor-container .loading').hide();
+	$('.template-editor-container .upload-img-btn').show();
 <% end %>
