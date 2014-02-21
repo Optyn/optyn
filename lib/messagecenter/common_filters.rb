@@ -4,7 +4,7 @@ module Messagecenter
       controller.class_eval do
         controller.before_filter (:force_footer_caching_expire)
         controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message, :new_template, :edit_template])
-        controller.before_filter(:show_my_messages_only, only: [:show])
+        controller.before_filter(:show_my_messages_only, only: [:show, :show_template])
         controller.before_filter(:message_editable?, only: [:edit, :update, :template, :edit_template])
         controller.before_filter(:show_template_chooser, only:[:edit])
         controller.before_filter(:message_showable?, only: [:show])
@@ -90,7 +90,11 @@ module Messagecenter
     def message_showable?
       @message = Message.for_uuid(params[:id])
       unless @message.showable?
-        redirect_to edit_merchants_message_path(params[:id])
+        if @message.instance_of?(TemplateMessage)
+          edit_template_merchants_message_path(params[:id])
+        else
+          redirect_to edit_merchants_message_path(params[:id])
+        end
       end
     end
 
