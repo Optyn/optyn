@@ -5,7 +5,7 @@ module Messagecenter
         controller.before_filter (:force_footer_caching_expire)
         controller.before_filter(:populate_message_type, :populate_labels, only: [:new, :create, :edit, :update, :create_response_message, :new_template, :edit_template])
         controller.before_filter(:show_my_messages_only, only: [:show])
-        controller.before_filter(:message_editable?, only: [:edit, :update])
+        controller.before_filter(:message_editable?, only: [:edit, :update, :template, :edit_template])
         controller.before_filter(:show_template_chooser, only:[:edit])
         controller.before_filter(:message_showable?, only: [:show])
         controller.before_filter(:populate_manager_folder_count)
@@ -78,7 +78,12 @@ module Messagecenter
       @message = Message.for_uuid(params[:id])
 
       if current_shop != @message.shop || !@message.editable_state?
+        if @message.instance_of?(TemplateMessage)
+          return redirect_to show_template_merchants_message_path(@message.uuid) && false
+        end
+        
         redirect_to merchants_message_path(@message.uuid)
+
       end
     end
 
