@@ -42,6 +42,7 @@ OP = (function($, window, doucument, Optyn){
 
         $('.upload-img-btn').click(function(e){
           $(this).parents('.msg_img_upload').first().find('.loading').first().show();
+          $(this).hide();
         });
 
 

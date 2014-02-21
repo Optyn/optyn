@@ -810,10 +810,9 @@
       }
       [data-type="introduction"] img { max-width: 560px; }
       .three img { max-width: 110px; }
-      .six [data-type="text_with_full_image"] img { max-width: 260px; }
-      .six [data-type="text_with_left_image"] img,
-      .six [data-type="text_with_right_image"] img { max-width: 120px; }
-      .six [data-type="image_gallery"] img { max-width: 130px; }
+      .w260 { max-width: 260px; }
+      .w130 { max-width: 130px; }
+      .w120 { max-width: 120px; }
       .eight [data-type="image_gallery"] img { max-width: 170px; }
       .eight [data-type="text_with_left_image"] img,
       .eight [data-type="text_with_right_image"] img { max-width: 170px; }
@@ -822,9 +821,9 @@
       table.body { min-width: 320px; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
-        body .float-left,
-        body .float-right { float: none; }
-        body .o-column { width: 100%; }
+        .body .float-left,
+        .body .float-right { float: none; }
+        .body .o-column { width: 100%; }
         .optyn-replaceable-image {
           width: 100% !important;
           float: none !important;
@@ -832,16 +831,15 @@
         }
         .body [data-type="introduction"] img { max-width: 300px !important; }
         .three img { max-width: 300px; }
-        .six [data-type="text_with_full_image"] img { max-width: 300px; }
-        .six [data-type="text_with_left_image"] img,
-        .six [data-type="text_with_right_image"] img { max-width: 300px; }
-        .six [data-type="image_gallery"] img { max-width: 300px; }
+        .body .container .w260,
+        .body .container .w130,
+        .body .container .w120 { max-width: 300px !important; }
         .four img { max-width: 300px; }
         .eight [data-type="text_with_left_image"] img,
         .eight [data-type="text_with_right_image"] img { max-width: 300px; }
         .eight [data-type="image_gallery"] img { max-width: 300px; }
         .eight [data-type="text_with_full_image"] img { max-width: 300px; }
-      }
+      }  /* End media query. */
     </style>
 </head>
 <body id="flat">
@@ -953,9 +951,30 @@
                                             A distinct piece of writing.
                                           </div>
                                           <image>
-                                            <img src="http://placehold.it/260x200">
+                                            <img src="http://placehold.it/300x200" alt="" class="w260">
                                           </image>
                                         </paragraph>
+                                      </div>
+                                    </division>
+
+                                    <division type="two_columns">
+                                      <div>
+                                        <div class="float-left o-column">
+                                          <headline>
+                                            <h2 class="headline">Two Columns</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div>A distinct piece of writing.</div>
+                                          </paragraph>
+                                        </div>
+                                        <div class="float-right o-column">
+                                          <headline>
+                                            <h2 class="headline">Hello World!</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div>A distinct piece of writing.</div>
+                                          </paragraph>
+                                        </div>
                                       </div>
                                     </division>
 
@@ -965,7 +984,7 @@
                                           <h2>Text with Left Image</h2>
                                         </headline>
                                         <image style="width:45%; float:left; margin:0 5% 10px 0;">
-                                          <img src="http://placehold.it/120x80">
+                                          <img src="http://placehold.it/300x200" alt="" class="w120">
                                         </image>
                                         <paragraph>
                                           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, et id cupiditate earum error enim quae vitae vero aperiam. Repudiandae, illum, quaerat ea recusandae est maxime obcaecati sint tempore quo?</div>
@@ -979,7 +998,7 @@
                                           <h2>Text with Right Image</h2>
                                         </headline>
                                         <image style="width:45%; float:right; margin:0 0 10px 5%;">
-                                          <img src="http://placehold.it/120x80">
+                                          <img src="http://placehold.it/300x200" alt="" class="w120">
                                         </image>
                                         <paragraph>
                                           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, et id cupiditate earum error enim quae vitae vero aperiam. Repudiandae, illum, quaerat ea recusandae est maxime obcaecati sint tempore quo?</div>
@@ -994,7 +1013,7 @@
                                         </headline>
                                         <div class="o-column float-left">
                                           <image>
-                                            <img src="http://placehold.it/120x80">
+                                            <img src="http://placehold.it/300x200" alt="" class="w130">
                                           </image>
                                           <paragraph>
                                             <div>Image caption goes here.</div>
@@ -1002,7 +1021,7 @@
                                         </div>
                                         <div class="o-column float-right">
                                           <image>
-                                            <img src="http://placehold.it/120x80">
+                                            <img src="http://placehold.it/300x200" alt="" class="w130">
                                           </image>
                                           <paragraph>
                                             <div>Image caption goes here.</div>
