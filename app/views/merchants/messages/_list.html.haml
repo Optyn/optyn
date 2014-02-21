@@ -21,7 +21,7 @@
             = formatted_message_form_datetime(message, timestamp_attr)
           %td.show-link-address.display-none
             - if message.instance_of?(TemplateMessage)
-              - if message.state == "queued" and message.queued_editable?
+              - if message.editable_state?
                 = template_merchants_message_path(message.uuid)
               - else
                 = show_template_merchants_message_path(message.uuid)
