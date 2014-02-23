@@ -4,7 +4,6 @@ namespace :templates do
     Template.all.each do |template| 
       begin
         template.destroy
-        template.destroy!
       rescue 
         
       end
