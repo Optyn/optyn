@@ -31,7 +31,6 @@ function MerchantSurvey() {
 
     //hook the modal for adding questions
     this.hookNewQuestionModal = function () {
-        console.log("New Question");
         $('#new_survey_questions_content').modal({
             keyboard: false,
             show: false
@@ -48,18 +47,15 @@ function MerchantSurvey() {
 
     //Add a question to the survey
     this.hookAddQuestion = function () {
-        console.log("Add question");
         var current = this;
         $('button.add_question_button').click(function (e) {
 
             $('#new_survey_questions_content .modal-footer').hide();
 
             $('#new_survey_questions_content').modal('show');
-            console.log(addQuestionPath);
             jQuery.ajax({
                 url: addQuestionPath,
                 success: function (data) {
-                    // console.log(data);
                     $('#new_survey_questions_content .modal-body').html(data);
                     $('#new_survey_questions_content  .values-container').hide();
                 },
@@ -107,13 +103,11 @@ function MerchantSurvey() {
     //Observer for the save changes button click
     this.hookSaveChanges = function () {
         $('body').on('click', 'button.save_question_change', function () {
-            console.log("clicked-save_question_change   ");
             $('#survey_question_form').submit();
         });
 
         $("#save_question_change").click(
             function(){ 
-                console.log("save changes");
                 $('#survey_question_form').submit();
             }
             );
@@ -121,7 +115,6 @@ function MerchantSurvey() {
 
     //Form submission observer Add Question
     this.hookSurveyQuestionFormSubmission = function () {
-        console.log("hookSurveyQuestionFormSubmission");
         var current = this;
         $('body').on('submit', '#survey_question_form', function (event) {
             var $form = $('#survey_question_form');
@@ -133,7 +126,6 @@ function MerchantSurvey() {
                 beforeSend: function () {
                     $form.find('#form_container').hide();
                     $form.find('#please_wait').show();
-                    console.log("survey question hide : beforeSend");
                 },
                 data: $('#survey_question_form').serializeArray(),
                 success: function () {
@@ -144,15 +136,11 @@ function MerchantSurvey() {
                     else{
                         $(".launch_survey").show();
                     }
-                    // console.log(request.responseText);
                     current.loadQuestions();
                     $('#new_survey_questions_content').modal('hide');
                     $('#edit_survey_questions_content').modal('hide');
-                    console.log("survey question hide : success");
                 },
                 error: function (request) {
-                    console.log("survey question hide : ERROR");
-                    // console.log(request.responseText);
                     $modalBody.html(request.responseText);
                 }
             });
@@ -301,7 +289,6 @@ function MerchantSurvey() {
             var $this = $(this);
             var href = $this.attr('href');
             event.preventDefault();
-            console.log(href);
 
             if (confirm("Are you sure you want to you want to delete this question. The related answers if present will be deleted?")) {
                 $.ajax({

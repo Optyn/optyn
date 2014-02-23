@@ -19,13 +19,11 @@ function Apps() {
         }
 
         if ($('.app-container').length) {
-            console.log( $('.app-container').length );
             this.hookCopyButtonEmbedCode();
         }
     };
 
     this.hookCopyButtonEmbedCode = function () {
-        console.log( 'hookCopyButtonEmbedCode' );
         $('a#copy_description').zclip('remove');
         $('a#copy_description').zclip({
             path: '/ZeroClipboard.swf',

@@ -83,7 +83,6 @@ function FileImport() {
                 .attr( 'disabled', '' );
             }
             else{
-                console.log("in else");
                 $( 'input[name=commit]' ).tooltip( 'destroy' )
                 .removeAttr( 'disabled' )
                 .removeClass( 'disabled' );

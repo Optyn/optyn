@@ -57,8 +57,6 @@ $( function() {
       case ((customerCount >= 20001) && (customerCount <= 25000)):
         highlightPlan( 2, 7 );
         break;
-      default:
-        console.log( 'value out of range' );
     }  // end of switch
   }  // /suggestPlan()
 

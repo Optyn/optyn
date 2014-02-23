@@ -161,7 +161,6 @@ OP = (function($, window, doucument, Optyn){
 
         //Add appropriate Image
         var images = properties.images;
-        console.log('Images', images);
         $(selectedElem).find('.optyn-replaceable-image').each( function( index, imageElem ) {
 
           var $imageContainer = $(imageElem);
