@@ -1,12 +1,10 @@
 class Location < ActiveRecord::Base
   include UuidFinder
 
-  attr_accessor :state_abbr
-  attr_accessible :city, :zip, :shop_id, :state_id, :street_address1, :street_address2, :longitude, :latitude, :state_abbr, :state_name
+  attr_accessible :city, :zip, :shop_id, :street_address1, :street_address2, :longitude, :latitude, :state_name
 
 
   belongs_to :shop
-  belongs_to :state
 
   before_validation :assign_uuid, on: :create
 
@@ -19,10 +17,6 @@ class Location < ActiveRecord::Base
   #validates :longitude, :presence=>true
   #validates :latitude, :presence=>true
 
-
-  def state_abbr
-    self.state.abbreviation rescue nil
-  end
 
   def error_messages
     self.errors.full_messages
