@@ -4,6 +4,7 @@ require 'messagecenter/templates/existing_template'
 require 'messagecenter/templates/blank_template'
 require 'messagecenter/templates/system_template_personalizer'
 require 'messagecenter/templates/structure_creator'
+require 'iconv'
 
 class Template < ActiveRecord::Base
   include UuidFinder
@@ -114,7 +115,8 @@ class Template < ActiveRecord::Base
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
     premailer = Premailer.new(html, with_html_string: true)
     content = premailer.to_inline_css
-    content
+    binding.pry
+    content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
   end
 
   def fetch_cached_content(message, force=false)
