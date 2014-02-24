@@ -91,3 +91,7 @@
   color: $light-gray;
   @media ( max-width: 769px ) { background: $black; }
 }
+
+.msg_img_upload [type="file"]{
+  width: 100%;
+}
