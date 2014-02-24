@@ -115,7 +115,6 @@ class Template < ActiveRecord::Base
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
     premailer = Premailer.new(html, with_html_string: true)
     content = premailer.to_inline_css
-    binding.pry
     content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
   end
 
