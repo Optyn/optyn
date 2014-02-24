@@ -1,7 +1,7 @@
 class Merchants::AppsController < Merchants::BaseController
   helper_method :current_shop
 
-  REDIRECTION_URI_FLASH = "You have an incorrect redirection url. Are you possibly missing the protocol http:// or https://?"
+  REDIRECTION_URI_FLASH = "Please make sure that your url includes http:// or https://. For example, it should be http://www.my-website.com."
 
   before_filter :set_report_content
 
