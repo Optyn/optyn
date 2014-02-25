@@ -4,12 +4,12 @@ module ShopLogo
       if shop.website.present?
         content = <<-HTML
           <a here="#{shop.logo_location}" href="#{shop.website}" target="_blank">
-            <img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}" style="margin:5px;" />
+            <img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}" style="margin:5px;max-width:550px;" />
           </a>
         HTML
         content.to_s.html_safe
       else
-        %{<img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}", style="margin:5px;max-height:150px; max-width:100%;" class="nl-width-580" />}.html_safe
+        %{<img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}", style="margin:5px;max-height:150px;max-width:580px;" class="nl-width-580" />}.html_safe
       end
     else
       if shop.website.present?
