@@ -145,6 +145,8 @@ class Message < ActiveRecord::Base
 
     after_transition any => any, :do => :transfer_child_state
 
+    after_transition any => :sent, :do => :adjust_shop_credits #Adjust Eatstreets shop credits
+
     state :draft, :trash, :delete do
       def save(options={})
         super(validate: false)

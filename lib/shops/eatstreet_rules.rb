@@ -13,6 +13,15 @@ module Shops
       shop_credits.fetch_credit(Time.now.beginning_of_month.beginning_of_day, Time.now.end_of_month.end_of_day)
     end
 
+    private
+      def adjust_shop_credits
+        if partner_eatstreet?
+          current_credit = fetch_credit
+          current_credit.decrement
+        end
+      end
+
+    public
     module ClassMethods
     end
   end #end of the EatstretRules module
