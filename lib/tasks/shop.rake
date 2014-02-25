@@ -116,4 +116,33 @@ namespace :shop do
       end
     end
   end
+
+  desc "Verify shop email address with SES server, and update shop verified email"
+  task :verify_shop_email_ses, [:manager_email, :verified_email] => :environment do |t, args|
+    ses = AWS::SimpleEmailService.new(
+        :access_key_id => SiteConfig.aws_access_key_id,
+        :secret_access_key => SiteConfig.aws_secret_access_key)
+
+    manager = Manager.where(:email => args[:manager_email]).last
+    if manager.present?
+      manager.shop.update_attributes(:verified_email, args[:verified_email])
+      identity = ses.identities.verify(args[:verified_email])
+    end
+  end
+
+  desc "Check whether email address is verified with SES server or not, then update shop"
+  task :check_ses_verified => :environment do
+    ses = AWS::SimpleEmailService.new(
+        :access_key_id => SiteConfig.aws_access_key_id,
+        :secret_access_key => SiteConfig.aws_secret_access_key)
+
+    identities = ses.identities.map(&:identity)
+    shop_emails = identities & Shop.where(:ses_verified => false).collect(&:verified_email)
+    shop_emails.each do |email|
+      shop = Shop.where(:verified_email => email).last
+      shop.update_attributes(:ses_verified, ses.identities[email].verified?) if shop.present?
+    end
+  end
+
+
 end

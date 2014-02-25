@@ -33,6 +33,11 @@ every :day, :at => "2:15am" do
   rake "sitemap:refresh"	
 end
 
+# run to check whether shop email address is verified with SES server or not, then update shop
+every :day, :at => "2:30am" do
+  rake "shop:check_ses_verified"	
+end
+
 #run nightly jobs
 every :day, :at => "3:00am" do
   runner "Util.nightly_jobs"
