@@ -30,7 +30,7 @@ RailsAdmin.config do |config|
   # config.excluded_models = ['Admin', 'Authentication', 'Business', 'Connection', 'Interest', 'Label', 'Location', 'Manager', 'Permission', 'PermissionsUser', 'Plan', 'Shop', 'State', 'Subscription', 'Survey', 'SurveyAnswer', 'SurveyQuestion', 'User', 'UserLabel']
 
   # Include specific models (exclude the others):
-  config.included_models = ['Admin', 'State', 'Shop', 'Connection', 'Shop', 'Manager', 'Business', 'Label', 'Location', 'Survey', 'SurveyQuestion', 'SurveyAnswer', 'Message', 'MessageLabel', 'MessageEmailAuditor', 'MessageUser', 'MessageFolder', 'FileImport',  'User', 'Authentication', 'PermissionUser', "Permission", 'UserLabel', 'Plan', "AppSetting","Partner"]
+  config.included_models = ['Admin', 'Shop', 'Connection', 'Shop', 'Manager', 'Business', 'Label', 'Location', 'Survey', 'SurveyQuestion', 'SurveyAnswer', 'Message', 'MessageLabel', 'MessageEmailAuditor', 'MessageUser', 'MessageFolder', 'FileImport',  'User', 'Authentication', 'PermissionUser', "Permission", 'UserLabel', 'Plan', "AppSetting","Partner"]
   # Label methods for model instances:
   # config.label_methods << :description # Default is [:name, :title]
 
