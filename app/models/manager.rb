@@ -18,7 +18,6 @@ class Manager < ActiveRecord::Base
   mount_uploader :picture, ImageUploader
 
   validates :name, :presence => true, unless: :skip_name
-  validate :check_for_used_user_email
   #validates_presence_of :shop_id, :message=>"^ Business details cant be blank"
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner, :confirmed_at, :picture, :skip_email, :skip_name
@@ -105,13 +104,6 @@ class Manager < ActiveRecord::Base
   def send_welcome_email
     return if self.shop.virtual || self.skip_email || !(self.partner_optyn?)
     WelcomeMessageSender.perform_async(:manager, self.id)
-  end
-
-  def check_for_used_user_email
-    unless self.errors.include?(:email)
-      user = User.find_by_email(self.email)
-      self.errors.add(:email, "already taken") if user.present?
-    end
   end
 
   def partner_eatstreet?
