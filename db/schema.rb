@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205104110) do
+ActiveRecord::Schema.define(:version => 20140225065640) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -567,12 +567,16 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "shop_audits", :force => true do |t|
+  create_table "shop_credits", :force => true do |t|
     t.integer  "shop_id"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "remaining_count"
+    t.datetime "begins"
+    t.datetime "ends"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
+
+  add_index "shop_credits", ["shop_id", "begins", "ends"], :name => "index_shop_credits_on_shop_id_and_begins_and_ends", :unique => true
 
   create_table "shops", :force => true do |t|
     t.string   "name"
@@ -616,13 +620,6 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
   end
 
   add_index "social_profiles", ["shop_id"], :name => "index_social_profiles_on_shop_id"
-
-  create_table "states", :force => true do |t|
-    t.string   "name"
-    t.string   "abbreviation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
 
   create_table "stylesheets", :force => true do |t|
     t.integer  "template_id"
@@ -685,13 +682,6 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "name"
-  end
-
-  create_table "template_urls", :force => true do |t|
-    t.text     "orginal_url"
-    t.text     "optyn_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "templates", :force => true do |t|

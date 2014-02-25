@@ -1,9 +1,11 @@
 require 'embed_code_generator'
 require 'shops/importer'
+require 'shops/eatstreet_rules'
 
 class Shop < ActiveRecord::Base
   include UuidFinder
   extend Shops::Importer
+  include Shops::EatstreetRules
 
   acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
@@ -24,6 +26,7 @@ class Shop < ActiveRecord::Base
 
   has_many :surveys, dependent: :destroy #changing it to has_many
   has_many :templates, dependent: :destroy
+  has_many :shop_credits
 
 
   SHOP_TYPES=['local', 'online']
