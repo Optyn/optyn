@@ -15,7 +15,7 @@ module Users
 
 	    output = []
 	    unparsed_rows = []
-	    output_headers = %{"Name","Email","Gender","Birth Date","Status"}
+	    output_headers = %{"First name","Last name","Email","Gender","Birth Date","Status"}
 	    output << output_headers
 	    unparsed_rows << output_headers
 
@@ -29,7 +29,7 @@ module Users
 	    row_count = 0
       label_instances = []
       labels = label.split(",")
-
+      
       label_instances << Label.find_or_create_by_shop_id_and_name(shop.id, (FileImport::DEFAULT_LABEL_NAME))
       if !labels.blank?
         labels.each do |new_label|
@@ -39,14 +39,15 @@ module Users
       csv_table.each do |row|
         row_count += 1
         Rails.logger.info row_count
-        output_row = [%{"#{row[:name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender].to_s.downcase}"}, %{"#{row[:birth_date]}"}]
+        output_row = [%{"#{row[:first_name]}"}, %{"#{row[:last_name]}"}, %{"#{row[:email]}"}, %{"#{row[:gender].to_s.downcase}"}, %{"#{row[:birth_date]}"}]
 
         begin
           cell_email = row[:email].to_s.strip.downcase
           user = User.find_by_email(cell_email) || User.new(email: cell_email)
           user.skip_name = true
           user.skip_welcome_email = true
-          user.name = row[:name].to_s.strip
+          user.first_name = row[:first_name].to_s.strip
+          user.last_name = row[:last_name].to_s.strip
           gender = if (gender_val = row[:gender].to_s.downcase).length == 1
             gender_val
           else
@@ -56,7 +57,7 @@ module Users
           user.birth_date = (Date.parse(row[:birth_date]) rescue nil)
           user.valid?
 
-          if user.errors.include?(:email) || user.errors.include?(:name)
+          if user.errors.include?(:email) || user.errors.include?(:first_name) || user.errors.include?(:last_name)
             counters[:unparsed_rows] += 1
             error_str = %{"Error: #{user.errors.full_messages.first}"}
             output_row << error_str
@@ -115,7 +116,7 @@ module Users
       if headers and headers.empty?
         raise "Empty file or file with wrong headers"
       else
-        raise "Incorrect Headers. The file should have headers of 'Name', 'Email', 'Gender' and 'Birth Date'" if !headers.include?(:name) || !headers.include?(:email)
+        raise "Incorrect Headers. The file should have headers of 'First Name', 'Last Name', 'Email', 'Gender' and 'Birth Date'" if !headers.include?(:first_name) || !headers.include?(:last_name) || !headers.include?(:email)
       end
     end
 

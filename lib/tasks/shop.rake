@@ -138,7 +138,7 @@ namespace :shop do
 
     identities = ses.identities.map(&:identity)
     shop_emails = identities & Shop.where(:ses_verified => false).collect(&:verified_email)
-    shop_emails.each do |email|
+    shop_emails.compact.each do |email|
       shop = Shop.where(:verified_email => email).last
       shop.update_attributes(:ses_verified, ses.identities[email].verified?) if shop.present?
     end

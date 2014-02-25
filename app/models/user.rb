@@ -25,11 +25,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :presence => true, unless: :skip_name
+  validates :first_name, :presence => true, unless: :skip_name
+  validates :last_name, :presence => true, unless: :skip_name
+
   validate :check_for_used_manager_email
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture
+                  :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture,
+                  :first_name, :last_name
 
   attr_accessor :show_password, :skip_password,:skip_name, :show_shop, :shop_identifier, :skip_welcome_email
 

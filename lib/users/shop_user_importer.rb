@@ -13,7 +13,7 @@ module Users
 
       output = []
       unparsed_rows = []
-      output_headers = %{"Shop","Manager Email","Email","Name","Gender","Birth Date"}
+      output_headers = %{"Shop","Manager Email","Email","First Name","Last Name","Gender","Birth Date"}
       output << output_headers
       unparsed_rows << output_headers
       
@@ -29,7 +29,7 @@ module Users
         counter += 1
 
         status = nil
-        output_row = [%{"#{row[:shop]}"},%{"#{row[:manager_email]}"}, %{"#{row[:email]}"}, %{"#{row[:name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
+        output_row = [%{"#{row[:shop]}"},%{"#{row[:manager_email]}"}, %{"#{row[:email]}"}, %{"#{row[:first_name]}"}, %{"#{row[:last_name]}"}, %{"#{row[:gender]}"}, %{"#{row[:birth_date]}"}]
 
         begin
           shop_name = row[:shop].to_s.strip
@@ -44,7 +44,8 @@ module Users
             
             user.skip_name = true
             user.skip_welcome_email = true
-            user.name = row[:name].to_s.strip unless user.name.present?
+            user.first_name = row[:first_name].to_s.strip unless user.first_name.present?
+            user.last_name = row[:last_name].to_s.strip unless user.last_name.present?
             gender = if (gender_val = row[:gender].to_s.strip.downcase).length == 1
                        gender_val
                      else
@@ -53,7 +54,7 @@ module Users
             user.gender = gender
             user.birth_date = (Date.parse(row[:birth_date].to_s.strip) rescue nil)
 
-            if user.errors.include?(:email) || user.errors.include?(:name)
+            if user.errors.include?(:email) || user.errors.include?(:first_name) || user.errors.include?(:last_name)
               counters[:unparsed_rows] += 1 
               error_str = %{"Error: #{user.errors.full_messages.first}"}   
               output_row << error_str
@@ -108,8 +109,8 @@ module Users
 
 
     def validate_user_import_headers(headers)
-      if !headers.include?(:shop) || !headers.include?(:name) || !headers.include?(:gender) || !headers.include?(:birth_date)
-        raise "Incorrect Headers. The file should have headers of 'Shop','Name','Gender', 'Birth Date'" 
+      if !headers.include?(:shop) || !headers.include?(:first_name) || !headers.include?(:last_name) || !headers.include?(:gender) || !headers.include?(:birth_date)
+        raise "Incorrect Headers. The file should have headers of 'Shop','First Name','Last Name','Gender', 'Birth Date'" 
       end  
     end
 
