@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :presence => true, unless: :skip_name
-  validate :check_for_used_manager_email
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation,
@@ -294,12 +293,5 @@ class User < ActiveRecord::Base
   def send_welcome_email
     return if self.skip_welcome_email
     WelcomeMessageSender.perform_async(:user, self.id, (show_password ? self.password : nil), (show_shop ? shop_identifier : nil))
-  end
-
-  def check_for_used_manager_email
-    unless self.errors.include?(:email)
-      manager = Manager.find_by_email(self.email)
-      self.errors.add(:email, "already taken") if manager.present?
-    end
   end
 end
