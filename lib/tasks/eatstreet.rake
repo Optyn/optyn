@@ -6,9 +6,9 @@ namespace :eatstreet do
       shops = partner.shops
       shops.each do |shop|
         ShopTimezone.set_timezone(shop)
-        current_credit = shop.fetch_current_credit
         beginning_this_month_day = Time.now.beginning_of_month.beginning_of_day
         end_this_month_day = Time.now.end_of_month.end_of_day
+        current_credit = shop.fetch_current_credit(beginning_this_month_day, end_this_month_day)
         if current_credit.blank?
           shop.shop_credits.create(remaining_count: ShopCredit::EATSTREET_MAX_CREDITS_COUNT, begins: beginning_this_month_day, ends: end_this_month_day)
         end
