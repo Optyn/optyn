@@ -300,7 +300,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @partner = @shop.partner
 
 
-    render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer_name: nil}
+    render partial: "merchants/messages/preview_wrapper", locals: {preview: true, customer: nil}
   end
 
   def public_view
