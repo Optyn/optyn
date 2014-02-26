@@ -41,16 +41,16 @@ module Shops
       end
 
       def credits_not_available?
-        available_credits = shop.remaining_credits
-        queued_messages = Message.queued_in_time_span(current_months_beginning..current_months_ending, shop.id).not_for_ids([self.id])
+        available_credits = shop.remaining_credits(sendon_months_beginning, sendon_months_ending)
+        queued_messages = Message.queued_in_time_span(sendon_months_beginning..sendon_months_beginning, shop.id).not_for_ids([self.id])
         ((available_credits - queued_messages.size) - 1) < 0 
       end
 
-      def current_months_beginning
+      def sendon_months_beginning
         send_on.beginning_of_month.to_date
       end
 
-      def current_months_ending
+      def sendon_months_ending
         send_on.end_of_month.to_date
       end
 
