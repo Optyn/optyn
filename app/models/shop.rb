@@ -5,7 +5,6 @@ require 'shops/eatstreet_rules'
 class Shop < ActiveRecord::Base
   include UuidFinder
   extend Shops::Importer
-  include Shops::EatstreetRules
 
   acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
@@ -489,6 +488,10 @@ class Shop < ActiveRecord::Base
     else
       return false
     end
+  end
+
+  def fetch_current_credit
+    shop_credits.fetch_credit(Time.now.beginning_of_month.beginning_of_day, Time.now.end_of_month.end_of_day)
   end
 
   private
