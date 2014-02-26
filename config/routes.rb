@@ -282,6 +282,7 @@ Optyn::Application.routes.draw do
             post :import
             get :import_status
             get :active_connections
+            get :credits
           end
         end
 

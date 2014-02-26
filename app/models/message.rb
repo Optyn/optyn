@@ -2,6 +2,7 @@ require 'messagecenter/process_manager'
 
 class Message < ActiveRecord::Base
   include UuidFinder
+  include Shops::EatstreetRules
   
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
@@ -66,7 +67,10 @@ class Message < ActiveRecord::Base
 
   scope :made_public, where(make_public: true)
 
-  
+  scope :scheduled_inrange, ->(range) { where(send_on: range) }
+
+  scope :not_for_ids, ->(ids) { where(["messages.id NOT IN (:ids)", {ids: ids}]) }
+
   state_machine :state, :initial => :draft do
 
     event :save_draft do
@@ -111,7 +115,12 @@ class Message < ActiveRecord::Base
 
     before_transition :draft => same do |message|
       message.subject = message.send(:canned_subject) if message.subject.blank?
-      message.from = message.send(:canned_from)      
+      message.from = message.send(:canned_from)    
+      unless message.is_child?
+        message.adjust_send_on
+      else
+        message.send_on = nil
+      end  
     end
 
     before_transition :draft => :queued do |message|
@@ -144,6 +153,8 @@ class Message < ActiveRecord::Base
     after_transition any => :trash, :do => :replenish_draft_and_queued_count
 
     after_transition any => any, :do => :transfer_child_state
+
+    after_transition any => :sent, :do => :adjust_shop_credits #Adjust Eatstreets shop credits
 
     state :draft, :trash, :delete do
       def save(options={})

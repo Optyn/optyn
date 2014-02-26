@@ -19,6 +19,10 @@ child :data do
     node :receivers do
         {labels: message_receiver_labels(@message.label_names),count:@message.connections_count}
     end
+
+    node :errors do
+      @message.errors.full_messages
+    end
   end
 end
 
