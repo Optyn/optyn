@@ -8,14 +8,7 @@ module Shops
       end
     end
 
-    def remaining_credits
-      current_credit = fetch_current_credit
-      current_credit.remaining_count if current_credit.present?
-    end
-
-    def fetch_current_credit
-      shop.shop_credits.fetch_credit(current_months_beginning, current_months_ending)
-    end
+    
 
     private
       def adjust_shop_credits
@@ -48,7 +41,7 @@ module Shops
       end
 
       def credits_not_available?
-        available_credits = remaining_credits
+        available_credits = shop.remaining_credits
         queued_messages = Message.queued_in_time_span(current_months_beginning..current_months_ending, shop.id).not_for_ids([self.id])
         ((available_credits - queued_messages.size) - 1) < 0 
       end

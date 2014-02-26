@@ -491,7 +491,12 @@ class Shop < ActiveRecord::Base
   end
 
   def fetch_current_credit
-    shop_credits.fetch_credit(Time.now.beginning_of_month.beginning_of_day, Time.now.end_of_month.end_of_day)
+    shop_credits.fetch_credit(current_months_beginning, current_months_ending)
+  end
+
+  def remaining_credits
+    current_credit = fetch_current_credit
+    current_credit.remaining_count if current_credit.present?
   end
 
   private
@@ -597,5 +602,13 @@ class Shop < ActiveRecord::Base
         shop_subscription.save
       end
     end
+  end
+
+  def current_months_beginning
+    Time.now.beginning_of_month.to_date
+  end
+
+  def current_months_ending
+    Time.now.end_of_month.to_date
   end
 end #end of class Shop
