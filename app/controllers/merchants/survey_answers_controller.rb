@@ -6,7 +6,7 @@ class Merchants::SurveyAnswersController < Merchants::BaseController
   end 
 
   def index
-    @servay = Survey.find(params[:survey_id])
+    @survey = Survey.find(params[:survey_id])
     @paginated_users = SurveyAnswer.paginated_users(params[:survey_id], params[:page])
     @users_map = SurveyAnswer.answers_arranged_by_users(params[:survey_id], @paginated_users.collect(&:user_id))
     populate_labels
