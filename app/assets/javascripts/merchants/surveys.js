@@ -9,10 +9,10 @@ function MerchantSurvey() {
     var elementTypePreviousValue = null;
 
     this.initialize = function () {
+        this.hookSelectSurvey();
         if ($('#new_survey_questions_content').length) {
             addQuestionPath = this.getAddQuestionPath();
             loadQuestionsPath = this.getLoadQuestionsPath();
-            this.hookSelectSurvey();
             this.loadQuestions();
             this.hookNewQuestionModal();
             this.hookEditQuestionModal();
