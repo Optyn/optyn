@@ -43,6 +43,12 @@ class Label < ActiveRecord::Base
     inactive? && SELECT_ALL_NAME == name
   end
 
+  def is_destroyable?
+    linked_message_ids = self.message_labels.collect(&:message_id)
+    has_queued_message = Message.where(id: linked_message_ids).pluck(:state).include? 'queued'
+    !has_queued_message
+  end
+
   private
     def bulk_delete_user_lables
       UserLabel.where(label_id: self.id).delete_all
