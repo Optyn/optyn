@@ -781,12 +781,17 @@ table.facebook td {
         color: rgba(0,0,0,0.5);
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
-      .basic .optyn-replaceable-image {
+      
+      .optyn-replaceable-image img{max-width: none;  float: none;}
+
+      .basic .optyn-replaceable-image,  {
         width: 560px;
       }
-      .basic .full-image .optyn-replaceable-image {
+
+      .basic .full-image .optyn-replaceable-image,  .basic .full-image .optyn-replaceable-image img{
         width: 560px;
       }
+
       .basic .half-left-image .optyn-replaceable-image, .basic .half-right-image .optyn-replaceable-image {
         width:280px; 
       }
@@ -821,7 +826,7 @@ table.facebook td {
         background: #ff9;
       }
      
-      @media only screen and (max-width: 600px) and (max-device-width: 480px){
+      @media only screen and (max-width: 600px){
         .body .float-left,
         .body .float-right { float: none !important; }
         .body .o-column { width: 100% !important; }
@@ -831,7 +836,13 @@ table.facebook td {
           margin: 0 0 5px 0 !important;
         }
         [data-type="introduction"] { min-width: 87vw; }
+
+        .basic .full-image .optyn-replaceable-image,  .basic .full-image .optyn-replaceable-image img{
+            width: 280px !important;
+          }
+
       }  /* End media query. */
+
     </style>
 </head>
 <body id="flat" class="basic">
@@ -913,10 +924,20 @@ table.facebook td {
                                           <div class="paragraph">
                                             Image caption here.
                                           </div>
-                                          <image>
-                                            <img width="580" src="http://placehold.it/580x350" alt="" />
-                                          </image>
                                         </paragraph>
+
+                                        <table width="560" cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr>
+                                              <td class="w580" width="560">
+                                                <image>
+                                                   <img width="560" src="http://placehold.it/1000x100" alt="" />
+                                                </image>
+                                              </td>
+                                            </tr>
+                                        </tbody>
+                                      </table>
+
                                       </td>
                                     </tr>
                                   </table>
