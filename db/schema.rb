@@ -567,6 +567,13 @@ ActiveRecord::Schema.define(:version => 20140225080608) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "shop_audits", :force => true do |t|
+    t.integer  "shop_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "shop_credits", :force => true do |t|
     t.integer  "shop_id"
     t.integer  "remaining_count"
@@ -596,12 +603,12 @@ ActiveRecord::Schema.define(:version => 20140225080608) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
     t.string   "verified_email"
@@ -622,6 +629,13 @@ ActiveRecord::Schema.define(:version => 20140225080608) do
   end
 
   add_index "social_profiles", ["shop_id"], :name => "index_social_profiles_on_shop_id"
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "stylesheets", :force => true do |t|
     t.integer  "template_id"
@@ -684,6 +698,13 @@ ActiveRecord::Schema.define(:version => 20140225080608) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "name"
+  end
+
+  create_table "template_urls", :force => true do |t|
+    t.text     "orginal_url"
+    t.text     "optyn_url"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "templates", :force => true do |t|
