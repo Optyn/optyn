@@ -2,7 +2,7 @@ require 'messagecenter/process_manager'
 
 class Message < ActiveRecord::Base
   include UuidFinder
-  include Shops::EatstreetRules
+  # include Shops::EatstreetRules
   
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
