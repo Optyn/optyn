@@ -375,17 +375,8 @@ class Message < ActiveRecord::Base
   end
 
   def connections_count
-    ids = self.label_ids
-
-    if 1 == ids.size
-      label = Label.find(ids.first)
-
-      if label.inactive?
-        return shop.connections.active.count
-      end
-    end
-
-    fetch_labeled_users(ids)
+    return shop.connections.active.count if self.labels.pluck(:name).include? Label::SELECT_ALL_NAME #return active count if select all is selected
+    fetch_labeled_users(self.label_ids)
   end
 
   def in_preview_mode?(preview=true)
