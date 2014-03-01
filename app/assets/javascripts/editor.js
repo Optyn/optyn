@@ -243,7 +243,7 @@ OP = (function($, window, doucument, Optyn){
           $currentDivision.next().next().addClass( 'recently-added-division' );
           setTimeout( function () {
             $currentDivision.next().next().removeClass( 'recently-added-division' );
-          }, 2000 );
+          }, 1200 );
         }
 
         setTimeout(function(){
