@@ -9,6 +9,10 @@ class Label < ActiveRecord::Base
 
   SELECT_ALL_NAME = 'Select All'
 
+  validates :name, :presence => true
+  validates_uniqueness_of :name, :scope => [:shop_id]
+
+
   scope :active, where(active: true)
   
   scope :inactive, where(active: false)
