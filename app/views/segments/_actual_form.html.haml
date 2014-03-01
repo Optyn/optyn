@@ -1,4 +1,8 @@
-= form_tag("#{SiteConfig.app_base_url}#{save_answers_segment_path(Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id), email_survey: @email_survey, message_id: (@message.uuid rescue nil))}", :target => @target_blank ? "_blank" : nil) do
+- if  @user.class.to_s == "Manager"
+  - path = ""
+- else
+  - path = "#{SiteConfig.app_base_url}#{save_answers_segment_path(Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id), email_survey: @email_survey, message_id: (@message.uuid rescue nil))}"
+= form_tag(path, :target => @target_blank ? "_blank" : nil) do
 
   = render partial: "shared/surveys/markup", locals: {preview: false}
 
