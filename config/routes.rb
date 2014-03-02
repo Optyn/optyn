@@ -19,6 +19,7 @@ Optyn::Application.routes.draw do
   match 'consumer-features' => 'main#consumerfeatures', :as => :consumer_features
   match 'contact' => 'main#contact', :as => :contact
   match 'terms' => 'main#terms', :as => :terms
+  match 'anti-spam-policy' => 'main#anti_spam_policy', :as => :anti_spam_policy
   match 'privacy' => 'main#privacy', :as => :privacy
   match 'danacafe' => 'main#danacafe'
   match 'thankyou' => 'main#thankyou'

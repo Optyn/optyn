@@ -18,6 +18,11 @@ crumb :terms do
   parent :root
 end
 
+crumb :anti_spam_policy do
+  link "Anti Spam Policy<span></span>".html_safe, terms_path
+  parent :root
+end
+
 crumb :privacy_policy do
   link "Privacy Policy<span></span>".html_safe, privacy_path
   parent :root
