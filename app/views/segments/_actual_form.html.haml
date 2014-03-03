@@ -7,4 +7,5 @@
   = render partial: "shared/surveys/markup", locals: {preview: false}
 
   = submit_tag "Submit Feedback", class: "btn btn-primary"
-  = link_to "Cancel", "#{SiteConfig.app_base_url}#{segments_path(@shop_identifier)}", class: "btn"
+  - if @show_cancel_link != false &&  @user.class.to_s != "Manager"
+    = link_to "Cancel", "#{SiteConfig.app_base_url}#{segments_path(@shop_identifier)}", class: "btn"

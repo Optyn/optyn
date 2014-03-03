@@ -14,6 +14,7 @@ class MessageMailer < ActionMailer::Base
   def send_announcement(message, receiver)
     @message = message
     @receiver = receiver
+    @show_cancel_link = false
     @user = @receiver #for survey emails
     @shop = @message.shop
     if @message.manager.present?
