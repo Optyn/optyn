@@ -92,6 +92,12 @@ $(document).ready(function () {
     });
 
 
+    // Ensuring footer is stuck to the bottom in email_feedback layout .........
+    setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
+    $( window ).resize( function() {
+        setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
+    });
+
     // Setting height of modal .................................................
     var setModalHt = function() {
         $( '.modal-body' ).each( function( index, value ) {
