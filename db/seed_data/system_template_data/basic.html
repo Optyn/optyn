@@ -756,9 +756,10 @@ table.facebook td {
       }
 
       /* Custom styles */
+      .body { min-width: 300px; }
+      .body > tbody > tr > td { padding: 2%; }
       h2 { font-size: 16px; font-weight: bold; }
       .text-pad-10 { padding: 0 10px; }
-      .body > tbody > tr > td { padding: 2%; }
       .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
       .sidebar-container h2 { font-size: 16px; }
@@ -784,15 +785,17 @@ table.facebook td {
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
 
-      .optyn-replaceable-image img{/*max-width: none;*/  float: none;}
-
+      .optyn-replaceable-image img { float: none; }
+      .optyn-intro { width: 560px; }
+      .optyn-intro .optyn-replaceable-image { display: table; }
+      .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .basic .full-image .optyn-replaceable-image img{
-        width: 560px;
+        max-width: 560px;
       }
 
       .basic .half-left-image .optyn-replaceable-image img,
       .basic .half-right-image .optyn-replaceable-image img {
-        width:260px;
+        max-width:260px;
       }
 
       .basic .half-left-image .optyn-replaceable-image img{
@@ -805,8 +808,9 @@ table.facebook td {
         margin:0 0 10px 2%;
       }
 
+      .basic td.third-image,
       .basic .third-image .optyn-replaceable-image img{
-        width:165px;
+        max-width:165px;
       }
 
       .o-column { width: 48%; }
@@ -825,32 +829,18 @@ table.facebook td {
       .recently-added-division {
         background: #ff9;
       }
-      .optyn-intro { width: 550px; }
 
       @media only screen and (max-width: 600px) {
+        .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
         .body .o-column { width: 100% !important; }
-        .optyn-replaceable-image {
-          width: 100% !important;
-          float: none !important;
-          margin: 0 0 5px 0 !important;
-        }
         .optyn-intro { width: 100% !important; min-width: 87vw; }
-
-        .basic .full-image .optyn-replaceable-image img{
-            max-width: 85vw !important;
-        }
-
+        .basic .full-image .optyn-replaceable-image img { max-width: 85vw !important; }
         .basic .half-left-image .optyn-replaceable-image img,
-        .basic .half-right-image .optyn-replaceable-image img {
-            max-width: 40vw !important;
-        }
-
-        .basic .third-image .optyn-replaceable-image img {
-          max-width: 24vw !important;
-        }
-
+        .basic .half-right-image .optyn-replaceable-image img { max-width: 40vw !important; }
+        .basic .third-image .optyn-replaceable-image img { max-width: 24vw !important; }
+        .basic .optyn-introduction .optyn-replaceable-image img { max-width: 280px !important; }
       }  /* End media query. */
 
     </style>
@@ -953,58 +943,45 @@ table.facebook td {
                           </division>
 
                           <division type="text_with_left_image">
-                            <table class="block-grid">
-                              <tr>
-                                <td class="text-pad">
-                                  <headline>
-                                    <h2 class="headline">Text with Left Image</h2>
-                                  </headline>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="text-pad half-left-image">
-                                  <image>
-                                    <img src="http://placehold.it/580x250" alt=""  width="260" />
-                                  </image>
-                                  <paragraph>
-                                    <div>
-                                      Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!
-                                    </div>
-                                  </paragraph>
-                                </td>
-                              </tr>
-                            </table>
+                            <div class="text-pad-10">
+                              <headline>
+                                <h2 class="headline">Text with Left Image</h2>
+                              </headline>
+                              <table class="block-grid">
+                                <tr>
+                                  <td class="half-left-image">
+                                    <image>
+                                      <img src="http://placehold.it/580x250" alt=""  width="260" />
+                                    </image>
+                                    <paragraph>
+                                      <div>
+                                        Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!
+                                      </div>
+                                    </paragraph>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </division>
 
                           <division type="text_with_right_image">
-                            <table class="row">
-                              <tr>
-                                <td class="wrapper last">
-                                  <table class="block-grid">
-                                    <tr>
-                                      <td class="text-pad">
-                                        <headline>
-                                          <h2 class="headline">Text with Right Image</h2>
-                                        </headline>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-pad half-right-image">
-
-                                        <image class="optyn-image">
-                                          <img src="http://placehold.it/580x250" alt=""  width="260" />
-                                        </image>
-                                        <paragraph>
-                                          <div>
-                                            Text with Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque cupiditate in sunt eius asperiores optio earum numquam animi fugiat exercitationem! Ex, veritatis vel quas beatae dignissimos dolore doloremque sequi ipsam?
-                                          </div>
-                                        </paragraph>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </table>
+                            <div class="text-pad-10">
+                              <headline>
+                                <h2 class="headline">Text with Right Image</h2>
+                              </headline>
+                              <table class="block-grid">
+                                <tr>
+                                  <td class="half-right-image">
+                                    <image class="optyn-image">
+                                      <img src="http://placehold.it/580x250" alt=""  width="260" />
+                                    </image>
+                                    <paragraph>
+                                      <div>Text with Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque cupiditate in sunt eius asperiores optio earum numquam animi fugiat exercitationem! Ex, veritatis vel quas beatae dignissimos dolore doloremque sequi ipsam?</div>
+                                    </paragraph>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </division>
 
                           <division type="image_gallery">
@@ -1017,21 +994,21 @@ table.facebook td {
                                   <tr>
                                     <td class="third-image">
                                       <image>
-                                        <img src="http://placehold.it/180x100" width="170" alt="" />
+                                        <img src="http://placehold.it/180x100" width="160" alt="" />
                                       </image>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
                                       </paragraph>
                                     </td><td class="third-image">
                                       <image>
-                                        <img src="http://placehold.it/180x100" width="170" alt="" />
+                                        <img src="http://placehold.it/180x100" width="160" alt="" />
                                       </image>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
                                       </paragraph>
                                     </td><td class="third-image">
                                       <image>
-                                        <img src="http://placehold.it/180x100" width="170" alt="" />
+                                        <img src="http://placehold.it/180x100" width="160" alt="" />
                                       </image>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
@@ -1051,42 +1028,30 @@ table.facebook td {
             </table>
           </container>
           <container type="footer">
-            <table class="container">
-                <tr>
-                  <td class="wrapper last">
-                    <row>
-                      <table class="row">
-                      <tr>
-                        <td class="wrapper last footer-container">
-                          <grid type="footer">
-                            <table class="twelve columns">
-                              <tr>
-                                <td class="">
-                                  <division type="footer">
-                                    <table class="twelve columns">
-                                      <tr>
-                                        <td class="">
-                                          <center>
-                                            <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                            </permission>
-                                            <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                            <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                                          </center>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                          </td>
-                        </tr>
-                      </table>
-                    </row>
-                  </td>
-                </tr>
-              </table>
+            <div>
+              <row>
+                <div class="footer-container">
+                  <grid type="footer">
+                    <div>
+                      <division type="footer">
+                        <table class="block-grid">
+                          <tr>
+                            <td>
+                              <center>
+                                <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                </permission>
+                                <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                              </center>
+                            </td>
+                          </tr>
+                        </table>
+                      </division>
+                    </div>
+                  </grid>
+                </div>
+              </row>
+            </div>
           </container>
         </center>
       </td>
