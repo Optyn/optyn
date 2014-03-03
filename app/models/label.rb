@@ -25,6 +25,10 @@ class Label < ActiveRecord::Base
 
   scope :select_all_instance, ->(shop_identifier) { for_shop(shop_identifier).where(name: SELECT_ALL_NAME).inactive}
 
+  def self.import_labels(shop_instance)
+    active.all << defult_message_label(shop_instance)
+  end
+
   def self.labels_with_customers(shop_identifier)
     for_shop(shop_identifier).right_join_user_labels.group_on_id
   end

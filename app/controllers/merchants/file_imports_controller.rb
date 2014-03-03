@@ -1,7 +1,7 @@
 class Merchants::FileImportsController < Merchants::BaseController
 
   def index
-    @labels = current_shop.labels
+    @labels = current_shop.labels.import_labels(current_shop)
     @file_imports = current_manager.file_imports.order("created_at DESC")
     @file_import = FileImport.new
   end
