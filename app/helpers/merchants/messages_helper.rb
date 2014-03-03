@@ -108,7 +108,7 @@ module Merchants::MessagesHelper
     end
 
     display_content = message.content.blank? ? "-" : message.personalized_content(receiver)
-    display_content.include?("<p>") ? raw(display_content) : simple_format(display_content)
+    display_content.match(/<p>.*<\/p>/) ? raw(display_content) : simple_format(display_content)
     display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
   end
