@@ -30,7 +30,7 @@ class Label < ActiveRecord::Base
   end
 
   def self.labels_with_customers(shop_identifier)
-    for_shop(shop_identifier).right_join_user_labels.group_on_id
+    active.for_shop(shop_identifier).right_join_user_labels.group_on_id
   end
 
   def self.defult_message_label(shop_instance)

@@ -318,7 +318,7 @@ class Shop < ActiveRecord::Base
   end
 
   def inactive_label
-    labels.inactive(self).first
+    labels.defult_message_label(self)
   end
 
   def get_connection_for_user(user)

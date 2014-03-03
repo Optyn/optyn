@@ -8,6 +8,8 @@ class UserLabel < ActiveRecord::Base
 
   scope :pluck_user_id, pluck(:user_id)
 
+  scope :active_labels, joins(:label).where("labels.active = true")
+
   def self.fetch_user_count(label_ids)
     for_label_ids(label_ids).collect(&:user_id).uniq.size
   end
