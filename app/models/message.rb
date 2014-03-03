@@ -168,7 +168,7 @@ class Message < ActiveRecord::Base
   end
 
   def self.fetch_human_non_survey_template_names
-    (FIELD_TEMPLATE_TYPES - [SURVEY_FIELD_TEMPLATE_TYPE]).collect { |message| message.gsub('_message', '').titleize }
+    (FIELD_TEMPLATE_TYPES - [SURVEY_FIELD_TEMPLATE_TYPE, TEMPLATE_FIELD_TEMPLATE_TYPE]).collect { |message| message.gsub('_message', '').titleize }
   end
 
   def self.type_from_human(type_name)
