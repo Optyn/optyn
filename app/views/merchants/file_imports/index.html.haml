@@ -11,12 +11,13 @@
         = link_to "Sample File", "/user_import_stub.csv"
         by
         = link_to "clicking here.", "/user_import_stub.csv"
+        The fields "Name" and "Email" are required. "Gender" and "DOB" are not required.
       %li
         If you want us to do it or have any issues, please email us with your subscriber lists at 
         %a{href: "mailto:support@optyn.com"} support@optyn.com
         and we'll take care of it all.
       %li
-        You can label your import with multiple labels / lists.
+        You can create a new list or choose an existing list for every one of your imports.
     = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
       .row-fluid
         .span8.offset2.text-center
@@ -68,5 +69,5 @@
         - else
           %tr
             %td{colspan: 6}
-              No files uploaded yet for imports.
+              No file imports yet.
 
