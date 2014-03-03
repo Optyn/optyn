@@ -5,7 +5,7 @@ class Label < ActiveRecord::Base
   has_many :user_labels #, dependent: :delete
   has_many :message_labels #, dependent: :delete
 
-  attr_accessible :shop_id, :name, :survey_answer_id
+  attr_accessible :shop_id, :name, :survey_answer_id, :active
 
   SELECT_ALL_NAME = 'Select All'
 
@@ -25,6 +25,10 @@ class Label < ActiveRecord::Base
 
   scope :select_all_instance, ->(shop_identifier) { for_shop(shop_identifier).where(name: SELECT_ALL_NAME).inactive}
 
+  def self.import_labels(shop_instance)
+    active.all << defult_message_label(shop_instance)
+  end
+
   def self.labels_with_customers(shop_identifier)
     for_shop(shop_identifier).right_join_user_labels.group_on_id
   end
@@ -35,6 +39,18 @@ class Label < ActiveRecord::Base
 
   def users_count
     user_labels.count
+  end
+
+  def delete_instance
+    if self.user_labels.blank?
+      self.destroy
+    else
+      self.mark_as_inactive
+    end
+  end
+
+  def mark_as_inactive
+    self.update_attributes(:active => false)
   end
 
   def inactive?
