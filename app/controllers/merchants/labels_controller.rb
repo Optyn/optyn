@@ -62,8 +62,7 @@ class Merchants::LabelsController < Merchants::BaseController
   # DELETE /merchants/labels/1.json
   def destroy
     @label = current_shop.labels.find(params[:id])
-    @label.destroy
-
+    @label.delete_instance
     respond_to do |format|
       format.html { redirect_to merchants_labels_path }
       format.json { head :no_content }
