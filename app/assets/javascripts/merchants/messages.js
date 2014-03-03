@@ -296,6 +296,9 @@ function MerchantMessage() {
                     }, 500);
                 },
                 error: function (data) {
+                    var $footer = $('#response_message_modal .modal-footer');
+                    $footer.find('.actions').show();
+                    $footer.find('.loading').hide();
                     alert('An error occoured while creating the response message. Please refresh your page and try again.');
                 }
             });
