@@ -65,6 +65,46 @@ module Messagecenter
         }
       end
 
+      def replace_custom_tags
+         #get the containers optyn classes
+        @parsed_html.css('container').each do |container_child|
+          container_child.swap(container_child.children.to_s)
+        end
+
+        #get the row optyn classes
+        @parsed_html.css('row').each do |row_child|
+          row_child.swap(row_child.children.to_s)
+        end
+
+        #get the grid optyn classes
+        @parsed_html.css('grid').each do |grid_child|
+          grid_child.swap(grid_child.children.to_s)
+        end    
+
+        #get the division optyn classes
+        @parsed_html.css('division').each do |division_child|
+          division_child.swap(division_child.children.to_s)
+        end
+
+        #get the headline optyn classes
+        @parsed_html.css('headline').each do |headline_child|
+          headline_child.swap(headline_child.children.to_s)
+        end
+
+        #get the paragraph optyn classes
+        @parsed_html.css('paragraph').each do |paragraph_child|
+          paragraph_child.swap(paragraph_child.children.to_s)
+        end
+
+        @parsed_html.css('image').each do |image_child|
+          Messagecenter::Templates::MarkupGenerator.add_image_placeholder_container(image_child)
+          Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')  
+          image_child.swap(image_child.children.to_s)
+        end
+
+        self.html = @parsed_html.to_s
+      end
+
       def add_markup_classes
         set_parsed_html
         #get the containers optyn classes

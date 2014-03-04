@@ -60,6 +60,7 @@ class Template < ActiveRecord::Base
     new_template = Template.new(html: existing_template.html, shop_id: shop.id)
     new_template.add_markup_classes
     new_template.convert_system_template(selectable_properties)
+    new_template.replace_custom_tags
     new_template.html
   end
 
