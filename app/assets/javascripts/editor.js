@@ -68,17 +68,25 @@ OP = (function($, window, doucument, Optyn){
             };
           }else if($updateableElement.hasClass('optyn-replaceable-image')){
             var placeholderSrc = null;
+            var href = null;
             var $image = $updateableElement.find('img');
 
             if($image.length){
               placeholderSrc = $image.attr('src');
+              console.log($image.closest('a'));
+              if ($image.closest('a').length){
+                href = $image.closest('a').attr("href");
+              }
+              else{
+                href = "";
+              }
             }else{
               placeholderSrc =  $updateableElement.data( 'src-placeholder' );
             }
 
             artifact = {
               type: 'image',
-              content: placeholderSrc
+              content: [placeholderSrc, href]
             };
           }
 
@@ -119,25 +127,47 @@ OP = (function($, window, doucument, Optyn){
           paragraphIndex += 1;
         }else if('image' == currentArtifact.type){
           row_id = 'imagerow-' + imageIndex;
-          htmlVal += '</div><div id="' + row_id + '">' +
-          '<div>Preview:<br /><img src="' + currentArtifact.content + '" class="uploaded-image" /></div>' +
+          var display = null;
+
+          if(currentArtifact.content[0].indexOf("placehold.it") == -1){
+               display = "block"
+          }
+          else{
+           display = "none"
+          }
+          var links = '<div style="display: '+ display +'" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">Add Link</a> | <a id="edit_image">Edit Image</a></div></div></div>' ;
+          htmlVal += '</div><div class="nl-image-form" id="' + row_id + '">' +
+          '<div>Preview:<br /> <img src="' + currentArtifact.content[0] + '" class="uploaded-image" data-href="' + currentArtifact.content[1] + '" /></div>' +
           '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
           '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
           '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
-          '<div>Upload:<br /><input type="file" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
+          '<input type="hidden" data-link-href-id="AddLink'+ row_id+'" name="href" data-populate-image-link="AddLink'+ row_id+'"/>' +
+          '<div>Upload:<br /><input type="file"  class="browsBtn" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
           '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div>' +
-          '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form></div></div>' +
-          '<div class="separator-micro-dark"></div>';
+          '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form>' +
+          links +
+          '<div class="separator-micro-dark"></div>'+
+          '<div  id="AddLink'+ row_id+'" class="modal hide fade">'+
+          '<div class="modal-header">' +
+          '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+          '<h3>Add Link</h3></div>' +
+          '<div class="modal-body">' +
+          '<p><input type="url" name="link"></p></div>' +
+          '<div class="modal-footer">' +
+          '<input type="submit" value="Save changes" class="btn btn-primary saveLinkUrl" data-dismiss="modal" data-image-link-url="AddLink'+ row_id+'" id="populateLink'+ row_id+'"/></div></div>';
+
 
           imageIndex += 1;
         }
       }
 
+
+
       OP.selectedSection.setElem(division);
 
       
       window.parent.$('#template_editable_content').val(htmlVal);
-      window.parent.$('#template_editable_content').trigger('change');     
+      window.parent.$('#template_editable_content').trigger('change');
     },
 
 
@@ -165,12 +195,18 @@ OP = (function($, window, doucument, Optyn){
 
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
-          var uploadedImageSrc = images[index];
+          var uploadedImageSrc = images[index][0];
+          console.log(placeholderSrc);
+          console.log(uploadedImageSrc);
 
           if(placeholderSrc != uploadedImageSrc){
             var $temp = $("<div />");
             var $img = $('<img />');
-
+             var $a = $('<a />');
+             $a.attr("href", images[index][1]);
+             if(images[index][1].length > 0){
+             $a.append($img); 
+             }
             $img.attr({
               src: uploadedImageSrc,
               height: $imageContainer.attr('height'),
@@ -178,8 +214,12 @@ OP = (function($, window, doucument, Optyn){
               style: $imageContainer.attr('style'),
               'class': $imageContainer.attr('class').replace(/optyn-replaceable-image/, "")
             });
-            $temp.append($img);
-
+            if(images[index][1].length > 0){
+            $temp.append($a);
+            }
+            else{
+             $temp.append($img);
+            }
             $imageContainer.html($temp.html());
           }
         });
@@ -203,7 +243,7 @@ OP = (function($, window, doucument, Optyn){
           $currentDivision.next().next().addClass( 'recently-added-division' );
           setTimeout( function () {
             $currentDivision.next().next().removeClass( 'recently-added-division' );
-          }, 2000 );
+          }, 1200 );
         }
 
         setTimeout(function(){
@@ -356,12 +396,14 @@ OP = (function($, window, doucument, Optyn){
               $division.find('.optyn-replaceable-image').each(function(image_index, imageContainer){
                 var $imageElem = $(imageContainer).find('img');
                 if($imageElem.length){
+                  console.log($imageElem.attr('data-href'));
                   images.push({
                     'url': $imageElem.attr('src'),
                     'height': $imageElem.attr('height'),
                     'width': $imageElem.attr('width'),
                     'style': $imageElem.attr('style'),
-                    'class': $imageElem.attr('class')
+                    'class': $imageElem.attr('class'),
+                    'href': $imageElem.closest('a').attr("href")
                   });
                 }
               });

@@ -1,6 +1,14 @@
-= form_tag("#{SiteConfig.app_base_url}#{save_answers_segment_path(Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id), email_survey: @email_survey, message_id: (@message.uuid rescue nil))}", :target => @target_blank ? "_blank" : nil) do
+- if  @user.class.to_s == "Manager"
+  - path = ""
+- else
+  - path = "#{SiteConfig.app_base_url}#{save_answers_segment_path(Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id), email_survey: @email_survey, message_id: (@message.uuid rescue nil))}"
+= form_tag(path, :target => @target_blank ? "_blank" : nil) do
 
   = render partial: "shared/surveys/markup", locals: {preview: false}
 
-  = submit_tag "Submit Feeback", class: "btn btn-primary"
-  = link_to "Cancel", segments_path, class: "btn"
+  - if @message.present? || params[:message_id].present?
+    = hidden_field_tag :message_id, (@message.uuid rescue params[:message_id])
+
+  = submit_tag "Submit Feedback", class: "btn btn-primary"
+  - if @show_cancel_link != false &&  @user.class.to_s != "Manager"
+    = link_to "Cancel", "#{SiteConfig.app_base_url}#{segments_path(@shop_identifier)}", class: "btn"

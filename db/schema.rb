@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205104110) do
+ActiveRecord::Schema.define(:version => 20140225080608) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -574,6 +574,17 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "shop_credits", :force => true do |t|
+    t.integer  "shop_id"
+    t.integer  "remaining_count"
+    t.datetime "begins"
+    t.datetime "ends"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "shop_credits", ["shop_id", "begins", "ends"], :name => "index_shop_credits_on_shop_id_and_begins_and_ends", :unique => true
+
   create_table "shops", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                                        :null => false
@@ -600,6 +611,8 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
     t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
+    t.string   "verified_email"
+    t.boolean  "ses_verified",               :default => false
   end
 
   add_index "shops", ["identifier"], :name => "index_shops_on_identifier", :unique => true
@@ -736,6 +749,8 @@ ActiveRecord::Schema.define(:version => 20140205104110) do
     t.date     "birth_date"
     t.string   "picture"
     t.string   "alias"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["alias"], :name => "index_users_on_alias", :unique => true

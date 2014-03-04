@@ -3,11 +3,11 @@
     =button_tag "Add Question", type: :button, class: 'btn add_question_button'
 
 - if @survey.ready == false #not yet launched
-  = submit_tag "Save as Draft", name: 'draft', class: "btn btn-info submit_survey", title: 'Saves this survey as draft mode'
+  =# submit_tag "Save as Draft", name: 'draft', class: "btn btn-info submit_survey", title: 'Saves this survey as draft mode'
 
 = submit_tag "Save and Preview", name: 'preview',class: "btn btn-primary submit_survey preview_survey", title: 'Maintains the state of this survey only updating it'
 
-- if @survey.ready == false && !@survey.survey_questions.blank?
+- if !@survey.ready && !@survey.survey_questions.blank?
   = submit_tag "Launch", name: 'launch', class: "btn btn-success submit_survey launch_survey ", title: 'Launch this survey'
 
 %br

@@ -47,7 +47,8 @@ class SegmentsController < BaseController
     token = params[:id]
     plain_text = Encryptor.decrypt(token)
     email, survey_id = plain_text.split("--")
-    @user = User.find_by_email(email)
+    user = User.find_by_email(email)
+    @user = user.blank? ?  Manager.find_by_email(email) : user
     @survey = Survey.find(survey_id)
   end
 

@@ -87,8 +87,21 @@ module Api
           @message = Message.for_uuid(params[:id])
           @needs_curation = @message.needs_curation(:queued)
           launched = @message.launch
-          send_for_curation
-          render(template: individual_message_template_location, status: launched ? :ok : :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
+          
+          if launched
+            send_for_curation 
+          else
+            @shop = @message.shop
+            @partner = @shop.partner
+            @shop_logo = true
+            @preview = true
+
+            @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+            render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl], status: :unprocessable_entity
+           return 
+          end
+
+          render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
         end
 
         def trash
@@ -154,6 +167,8 @@ module Api
 
           render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
         rescue => e
+          puts e.message
+          puts e.backtrace
           render(template: individual_message_template_location, status: :unprocessable_entity, layout: false, formats: [:json], handlers: [:rabl])
         end
 

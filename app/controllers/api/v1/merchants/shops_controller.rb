@@ -1,9 +1,12 @@
+require 'shops/eatstreet_rules_helper'
+
 module Api
   module V1
     module Merchants
       class ShopsController < PartnerOwnerBaseController
         skip_before_filter :set_time_zone
 	      # doorkeeper_for :all
+        include Shops::EatstreetRulesHelper
 	
         def index
           @shops = current_partner.shops.real.includes_managers

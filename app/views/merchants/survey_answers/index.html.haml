@@ -1,5 +1,8 @@
-= banner("Your Segmentation Responses")
+= banner("#{@survey.title.capitalize rescue ""}")
+
+
 #merchants.pad3pc
+  = link_to raw( "<i class='icon-white'></i> Back" ), merchants_segments_select_survey_path, class: "btn btn-primary"
   = hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_survey_survey_answers_path
   = hidden_field_tag "update_labels_merchants_survey_survey_answers_path", update_labels_merchants_survey_survey_answers_path
 
