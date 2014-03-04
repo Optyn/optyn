@@ -36,6 +36,8 @@ class Template < ActiveRecord::Base
 
   scope :for_name, ->(template_name) { where(name: template_name) }
 
+  scope :priority_position, order(:position)
+
   PLACE_HOLDER_ELEM = "<placeholder></placeholder>\n"
   FB_PLACE_HOLDER_ELEM = "<fbplaceholder></fbplaceholder>"
   TW_PLACE_HOLDER_ELEM = "<twplaceholder></twplaceholder>"
@@ -65,7 +67,7 @@ class Template < ActiveRecord::Base
   end
 
   def self.system_generated
-    fetch_system_generated
+    fetch_system_generated.priority_position
   end
 
   def self.basic
