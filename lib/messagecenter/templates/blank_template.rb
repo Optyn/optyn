@@ -17,7 +17,7 @@ module Messagecenter
         containers_html.each do |container_html|
           layout_html = layout_html.sub(Template::PLACE_HOLDER_ELEM, container_html)
         end
-
+        layout_html = build_social_sharing_options(json_structure,layout_html)
         layout_html
       end
 
@@ -32,7 +32,7 @@ module Messagecenter
             rows_html.each do |row_html|
               container_html = container_html.sub(Template::PLACE_HOLDER_ELEM, row_html)
             end
-
+            container_html = build_social_sharing_options(container,container_html)
             html << container_html
           end
 
@@ -54,7 +54,8 @@ module Messagecenter
             grids_html.each do |grid_html|
               row_html = row_html.sub(Template::PLACE_HOLDER_ELEM, grid_html)
             end
-
+            #replace the social tags row_html
+            row_html = build_social_sharing_options(row,row_html)
             html << row_html
           end
 
@@ -65,6 +66,9 @@ module Messagecenter
           html = []
           row.grids.each do |grid|
             content = raw(grid.html.gsub(Template::PLACE_HOLDER_ELEM, grid.divisions.first.html))
+            #replace the social tags
+            content = build_social_sharing_options(grid,content)
+            content = build_social_sharing_options(grid.divisions.first,content)
             html << content
           end
           html  
@@ -76,8 +80,12 @@ module Messagecenter
             components_json = add_toolset_to_components(grid.data_model) 
             data_model = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{grid.data_model['type']}" data-components='#{components_json.gsub("'", "\\'")}''></span>}  
             content =  raw(grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model + static_toolset_markup(grid.data_model) + grid.divisions.first.html)))
+            #replace the social tags
+            content = build_social_sharing_options(grid.divisions.first,content)
+            content = build_social_sharing_options(grid,content)
             html << content
           end
+          
           html  
         end
     end #end of BlankMarkup class
