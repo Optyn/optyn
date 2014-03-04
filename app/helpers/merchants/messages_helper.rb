@@ -204,12 +204,34 @@ module Merchants::MessagesHelper
     return public_view_messages_path(shop.name.parameterize, msg.parameterize)
   end
 
-  def get_social_share_link(type, message, public_msg_url)
+  def get_social_share_link(type, message, public_msg_url, options = {})
+    message = (message.is_a? Message) ? message.name : message
     case type
     when "facebook"
       return URI.parse(URI.encode("#{FACEBOOK_SHARE_API}?u=#{public_msg_url}"))
     when "twitter"
-      return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.name}&url=#{public_msg_url}"))
+      params = options['via'].present? ? "&via=#{options['via']}" : ""
+      return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message}&url=#{public_msg_url}#{params}"))
+    end
+  end
+
+
+  def get_default_html(type)
+    case type
+    when "facebook"
+      return "<div style='text-align:center;margin:20px auto;'>
+                <a href=#{get_social_share_link('facebook','', 'http://optyn.com')} style='background: #3a589b;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target='_blank' class='optyn-fbshare'>
+                  <img alt='Icon-facebook' src='http://localhost:3000/assets/icon-facebook.png' style='vertical-align:middle;'>
+                </a>
+                <div style='width:100%;height:1px;clear:both;float:none;'>
+              </div>"
+    when "twitter"
+      return "<div style='text-align:center;margin:20px auto;'>
+                <a href = #{get_social_share_link('twitter', 'optyn', 'http://optyn.com')} style='background:#598dca;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank' class = 'optyn-twittershare'>
+                  <img alt='Icon-twitter' src='http://localhost:3000/assets/icon-twitter.png' style='vertical-align:middle;'>
+                </a>
+                <div style='width:100%;height:1px;clear:both;float:none;'>
+              </div>"
     end
   end
 

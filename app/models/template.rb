@@ -37,6 +37,8 @@ class Template < ActiveRecord::Base
   scope :for_name, ->(template_name) { where(name: template_name) }
 
   PLACE_HOLDER_ELEM = "<placeholder></placeholder>\n"
+  FB_PLACE_HOLDER_ELEM = "<fbplaceholder></fbplaceholder>"
+  TW_PLACE_HOLDER_ELEM = "<twplaceholder></twplaceholder>"
 
   LAYOUT_BACKGROUND_COLOR = '#d4d4d4'
   HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Arial, sans-serif}, %{Verdana, Arial, sans-serif}, %{'Courier New', Courier, Arial, sans-serif}]
