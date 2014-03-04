@@ -759,6 +759,7 @@ table.facebook td {
       .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
       h2 { font-size: 16px; font-weight: bold; }
+      img { height: auto; }
       .text-pad-10 { padding: 0 10px; }
       .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
@@ -785,7 +786,7 @@ table.facebook td {
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .basic .full-image .optyn-replaceable-image img{
-        max-width: 560px;
+        width: 560px;
       }
       .basic .half-left-image,
       .basic .half-right-image {
@@ -793,7 +794,7 @@ table.facebook td {
       }
       .basic .half-left-image .optyn-replaceable-image img,
       .basic .half-right-image .optyn-replaceable-image img {
-        max-width:260px;
+        width:260px;
       }
       .basic .half-left-image .optyn-replaceable-image img{
         float: left;
@@ -805,7 +806,7 @@ table.facebook td {
       }
       .basic td.third-image,
       .basic .third-image .optyn-replaceable-image img{
-        max-width:165px;
+        width:160px;
       }
       .o-column { width: 48%; }
       [data-type="image_gallery"] .optyn-paragraph,
@@ -825,15 +826,18 @@ table.facebook td {
       }
 
       @media only screen and (max-width: 600px) {
+        table[class="container"] .block-grid td {
+          width: 100% !important;
+        }
         .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic .full-image .optyn-replaceable-image img { max-width: 80vw !important; }
+        .basic .full-image .optyn-replaceable-image img { width: 100% !important; }
         .basic .half-left-image .optyn-replaceable-image img,
-        .basic .half-right-image .optyn-replaceable-image img { max-width: 40vw !important; }
-        .basic .third-image .optyn-replaceable-image img { max-width: 24vw !important; }
+        .basic .half-right-image .optyn-replaceable-image img { width: 40% !important; }
+        .basic .third-image .optyn-replaceable-image img { width: 100% !important; }
         .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
       }  /* End media query. */
 
