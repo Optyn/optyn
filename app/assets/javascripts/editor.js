@@ -152,7 +152,7 @@ OP = (function($, window, doucument, Optyn){
           '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
           '<h3>Add Link</h3></div>' +
           '<div class="modal-body">' +
-          '<p><input type="url" name="link"></p></div>' +
+          '<p><input type="url" name="link" value="'+ currentArtifact.content[1] +'" id="imageLinkModel'+ row_id+'"></p></div>' +
           '<div class="modal-footer">' +
           '<input type="submit" value="Save changes" class="btn btn-primary saveLinkUrl" data-dismiss="modal" data-image-link-url="AddLink'+ row_id+'" id="populateLink'+ row_id+'"/></div></div>';
 
