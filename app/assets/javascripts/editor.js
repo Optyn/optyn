@@ -425,7 +425,11 @@ OP = (function($, window, doucument, Optyn){
   };
 
   Optyn.setParentIframeHeight = function() {
-    $( window.parent.document.body ).find( 'iframe' ).css( 'height', parseInt($( '.body > tbody > tr > .center > center' ).css( 'height' )) + 100 + 'px' );
+    var resize = function() {
+      $( window.parent.document.body ).find( 'iframe' ).css( 'height', parseInt($( '.body > tbody > tr > .center > center' ).css( 'height' )) + 100 + 'px' );
+    };
+    resize();
+    $( window ).resize( resize );
   };
 
   return Optyn;
