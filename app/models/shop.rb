@@ -5,6 +5,7 @@ require 'shops/eatstreet_rules'
 class Shop < ActiveRecord::Base
   include UuidFinder
   extend Shops::Importer
+  include Shops::ShopCreditor
 
   acts_as_paranoid({column: 'deleted_at', column_type: 'time'})
 
@@ -25,7 +26,6 @@ class Shop < ActiveRecord::Base
 
   has_many :surveys, dependent: :destroy #changing it to has_many
   has_many :templates, dependent: :destroy
-  has_many :shop_credits
 
 
   SHOP_TYPES=['local', 'online']
@@ -488,15 +488,6 @@ class Shop < ActiveRecord::Base
     else
       return false
     end
-  end
-
-  def fetch_current_credit(begin_stamp, ending_stamp)
-    shop_credits.fetch_credit(begin_stamp, ending_stamp)
-  end
-
-  def remaining_credits(begin_timestamp=Time.now.beginning_of_month.beginning_of_day, ending_timestamp=Time.now.end_of_month.end_of_day)
-    current_credit = fetch_current_credit(begin_timestamp, ending_timestamp)
-    current_credit.remaining_count if current_credit.present?
   end
 
   private

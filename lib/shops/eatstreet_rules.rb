@@ -13,7 +13,7 @@ module Shops
     private
       def adjust_shop_credits
         if partner_eatstreet?
-          current_credit = fetch_credit
+          current_credit = shop.fetch_credit
           current_credit.decrement
         end
       end
