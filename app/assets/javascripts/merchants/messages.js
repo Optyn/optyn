@@ -665,7 +665,10 @@ function MerchantMessage() {
         type: "POST",
         data: $('#template_properties_form').serialize(),
         success: function(data){
-          $('iframe#customHtmlTemplate').contents().find('html').html(data);
+          // $('iframe#customHtmlTemplate').contents().find('html').replaceWith(data);
+          iframe = document.getElementById('customHtmlTemplate');
+          iframe.contentWindow.document.open()
+          iframe.contentWindow.document.write(data);
         },
         error: function(){
           $('iframe#customHtmlTemplate').contents().html('<strong>An error occurred while setting your properties. Please select the template again</strong>');

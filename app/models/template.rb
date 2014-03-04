@@ -60,6 +60,7 @@ class Template < ActiveRecord::Base
     new_template = Template.new(html: existing_template.html, shop_id: shop.id)
     new_template.add_markup_classes
     new_template.convert_system_template(selectable_properties)
+    new_template.replace_custom_tags
     new_template.html
   end
 
@@ -117,7 +118,7 @@ class Template < ActiveRecord::Base
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
     premailer = Premailer.new(html, with_html_string: true)
     content = premailer.to_inline_css
-    content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
+    content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "").squish
   end
 
   def fetch_cached_content(message, force=false)
