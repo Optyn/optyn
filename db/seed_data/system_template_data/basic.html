@@ -761,6 +761,7 @@ table.facebook td {
       h2 { font-size: 16px; font-weight: bold; }
       img { height: auto; }
       .text-pad-10 { padding: 0 10px; }
+      .optyn-headline { margin: 7px 0; }
       .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
       .sidebar-container h2 { font-size: 16px; }
@@ -792,15 +793,19 @@ table.facebook td {
       .basic .half-right-image {
         padding: 0;
       }
-      .basic .half-left-image .optyn-replaceable-image img,
-      .basic .half-right-image .optyn-replaceable-image img {
+      .basic .half-left-image .optyn-replaceable-image,
+      .basic .half-right-image .optyn-replaceable-image {
         width: 48%;
       }
-      .basic .half-left-image .optyn-replaceable-image img{
+      .basic .half-left-image .optyn-replaceable-image img,
+      .basic .half-right-image .optyn-replaceable-image img {
+        width: 100%;
+      }
+      .basic .half-left-image .optyn-replaceable-image {
         float: left;
         margin:0 2% 10px 0;
       }
-      .basic .half-right-image .optyn-replaceable-image img{
+      .basic .half-right-image .optyn-replaceable-image {
         float: right;
         margin:0 0 10px 2%;
       }
@@ -835,8 +840,8 @@ table.facebook td {
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
         .basic .full-image .optyn-replaceable-image img { width: 100% !important; }
-        .basic .half-left-image .optyn-replaceable-image img,
-        .basic .half-right-image .optyn-replaceable-image img { width: 40% !important; }
+        .basic .half-left-image .optyn-replaceable-image,
+        .basic .half-right-image .optyn-replaceable-image { width: 100%; float: none; margin: 0 0 10px 0; }
         .basic .third-image .optyn-replaceable-image img { width: 100% !important; }
         .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
       }  /* End media query. */
