@@ -515,6 +515,7 @@ class Shop < ActiveRecord::Base
         dummy_survey = self.surveys.build
         dummy_survey.shop_id = self.id
         dummy_survey.ready = false
+        dummy_survey.title = "Default Survey"
         dummy_survey.add_canned_questions
         dummy_survey.save(validate: false)
         dummy_survey

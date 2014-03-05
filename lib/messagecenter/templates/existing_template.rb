@@ -17,7 +17,7 @@ module Messagecenter
         containers_html_arr.each do |container_html|
           layout_markup = layout_markup.sub(Template::PLACE_HOLDER_ELEM, container_html)
         end
-
+        layout_markup = build_social_sharing_options(template_structure,layout_markup)
         layout_markup
       end
 
@@ -26,16 +26,14 @@ module Messagecenter
           html = []
 
           template_containers = template.structure.containers
-
           content['containers'].each_with_index do |container_hash|
             template_container = template_containers.detect{|template_container| container_hash['type'] == template_container.type}
-            
             rows_html_arr = build_row_markup(container_hash, template_container)
             container_markup = template_container.html
             rows_html_arr.each do |row_html|
               container_markup = container_markup.sub(Template::PLACE_HOLDER_ELEM, row_html)
             end
-
+            container_markup = build_social_sharing_options(template_container,container_markup)
             html << container_markup
           end
 
@@ -58,7 +56,7 @@ module Messagecenter
             grids_html_arr.each do |grid_html|
               row_markup = row_markup.sub(Template::PLACE_HOLDER_ELEM, grid_html)
             end
-            
+            row_markup = build_social_sharing_options(template_row,row_markup)
             html << row_markup
           end
 
@@ -68,12 +66,12 @@ module Messagecenter
         def build_grid_markup(row, template_row)
           html = []
           row['grids'].each_with_index do |grid_hash, index|
-
             template_grid = template_row.grids[index]
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
             
             content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n")))
+            content = build_social_sharing_options(template_grid,content)
             html << content
           end
 
@@ -91,6 +89,7 @@ module Messagecenter
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
             content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n"))))
+            content = build_social_sharing_options(template_grid,content)
             html << content
           end
 
@@ -103,7 +102,9 @@ module Messagecenter
             grid['divisions'].each do |division_hash|
               template_div_html = template_grid.data_model[division_hash['division']['type']].clone
               template_div_content = template_div_html['content']
+              template_div_content = build_social_sharing_options(template_div_html,template_div_content)
               division_node = Nokogiri::HTML::fragment(template_div_content)
+              
 
               #headlines added
               (division_hash['division']['headlines'] || []).each_with_index do |headline_content, index|
