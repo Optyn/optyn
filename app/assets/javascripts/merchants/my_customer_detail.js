@@ -99,6 +99,7 @@ function MyConsumerDetail() {
 
           setTimeout(function(){
             $('#conusmer_connection_modal').modal('hide');
+            window.location = "/merchants/connections";
           }, 1000);
         });
       }); 

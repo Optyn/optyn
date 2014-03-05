@@ -147,7 +147,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
 
   def update_user
     @user = User.find(params[:id])
- 		
+ 		@user.skip_name = true
     if @user.update_attributes(name: "#{params[:name]}", email: "#{params[:email]}")
       @success_hash  = "User updated successfully."
     else
