@@ -13,7 +13,7 @@ module Shops
     private
       def adjust_shop_credits
         if partner_eatstreet?
-          current_credit = shop.fetch_credit
+          current_credit = shop.fetch_current_credit(sendon_months_beginning, sendon_months_ending)
           current_credit.decrement
         end
       end
@@ -47,11 +47,11 @@ module Shops
       end
 
       def sendon_months_beginning
-        send_on.beginning_of_month.to_date
+        send_on.beginning_of_month.to_datetime
       end
 
       def sendon_months_ending
-        send_on.end_of_month.to_date
+        send_on.end_of_month.to_date.to_datetime
       end
 
     public
