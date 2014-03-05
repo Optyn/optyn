@@ -120,7 +120,10 @@ class Template < ActiveRecord::Base
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
     premailer = Premailer.new(html, with_html_string: true)
     content = premailer.to_inline_css
-    content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "").squish
+    content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
+    content = content.to_s.squish
+    content = content.gsub(/<\/td>\s?<td/ixm, "</td><td")
+    content
   end
 
   def fetch_cached_content(message, force=false)
