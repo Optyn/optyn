@@ -788,7 +788,7 @@
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .basic .full-image .optyn-replaceable-image img{
-        width: 99%;
+        width: 100%;
       }
       .basic .half-left-image,
       .basic .half-right-image {
@@ -815,9 +815,6 @@
         width:160px;
       }
       .o-column { width: 48%; }
-      [data-type="image_gallery"] .optyn-paragraph,
-      [data-type="three_columns"] .optyn-paragraph
-      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
       .optyn-division {
         padding-top: 5px;
         float: none;
@@ -830,9 +827,10 @@
       .recently-added-division {
         background: #ff9;
       }
+      .four-columns img { width: 125px; }
 
       @media only screen and (max-width: 600px) {
-        table[class="container"] .block-grid td {
+        table.container .block-grid td {
           width: 100% !important;
         }
         .body { width: 310px; }
@@ -841,17 +839,18 @@
         .optyn-sidebar img { max-height: 200px; }
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic .full-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic .full-image .optyn-replaceable-image img { width: 95% !important; }
         .basic .half-left-image .optyn-replaceable-image,
         .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
         .basic .third-image .optyn-replaceable-image{ width: auto !important; }
-        .basic .third-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic .third-image .optyn-replaceable-image img { width: 95% !important; }
         .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
         .basic .three-up td{width: 94% !important;}
+        .galleria .four-columns img { width: 60px !important; }
       }  /* End media query. */
     </style>
 </head>
-<body id="flat">
+<body id="flat" class="galleria">
   <table class="body">
     <tr>
       <td class="center" align="center" valign="top" style="padding: 10px;">
@@ -1005,7 +1004,7 @@
                             </div>
                           </division>
 
-                          <division type="four_columns">
+                          <division type="four_columns" class="four-columns">
                             <div>
                               <headline>
                                 <h2 class="headline text-pad-10">Four Columns</h2>
