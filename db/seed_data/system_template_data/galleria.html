@@ -808,9 +808,9 @@
       .recently-added-division {
         background: #ff9;
       }
-      [data-type="introduction"] img { max-width: 560px; }
+      .optyn-introduction img { max-width: 560px; }
       .three img { max-width: 110px; }
-      .w560 { max-width: 560px; }
+      .w560 { max-width: 560px; width:100% !important; height:auto; }
       .w260 { max-width: 260px; }
       .w360 { max-width: 360px; }
       .w170 { max-width: 170px; }
@@ -823,6 +823,7 @@
       .eight [data-type="text_with_full_image"] img { max-width: 360px; }
       .four img { max-width: 160px; }
       table.body { min-width: 320px; }
+      .footer .optyn-pargraph { text-align: center; }
       @media only screen and (max-width: 600px) {
         .optyn-sidebar img { max-height: 200px; }
         .body .float-left,
@@ -833,14 +834,14 @@
           float: none !important;
           margin: 0 0 5px 0 !important;
         }
-        [data-type="introduction"] { min-width: 87vw; }
-        .body [data-type="introduction"] img { max-width: 270px !important; }
+        .optyn-introduction { min-width: 87vw; }
+        .body .optyn-introduction img { max-width: 270px !important; width: 100% !important; }
         .three img { max-width: 270px; }
         .body .container .w560,
         .body .container .w360,
         .body .container .w260,
         .body .container .w130,
-        .body .container .w120 { max-width: 270px !important; }
+        .body .container .w120 { width: 100% !important; }
         .body .container .three.sub-columns .w120 { max-width: 80px !important; }
         .body .container .four.sub-columns .w180 { max-width: 80px !important; }
         .body .container .six.sub-columns .w260 { max-width: 150px !important; }
@@ -872,7 +873,7 @@
                             <table class="twelve columns">
                               <tr>
                                 <td class="text-pad center">
-                                  <division type="introduction">
+                                  <division type="introduction" class="optyn-introduction">
                                     <div>
                                       <img src="http://placehold.it/200x50">
                                     </div>
@@ -934,7 +935,7 @@
                                             A distinct piece of writing.
                                           </div>
                                           <image>
-                                            <img src="http://placehold.it/580x350" alt="" class="w560" />
+                                            <img src="http://placehold.it/580x350" alt="" width="560" class="w560" />
                                           </image>
                                         </paragraph>
                                       </td>
@@ -1075,18 +1076,10 @@
                               <tr>
                                 <td>
                                   <division type="footer">
-                                    <table class="twelve columns">
-                                      <tr>
-                                        <td class="">
-                                          <center>
-                                            <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                            </permission>
-                                            <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                            <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                                          </center>
-                                        </td>
-                                      </tr>
-                                    </table>
+                                    <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                    </permission>
+                                    <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                    <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
                                   </division>
                                 </td>
                               </tr>
