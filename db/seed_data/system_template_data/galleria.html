@@ -827,7 +827,6 @@
       .recently-added-division {
         background: #ff9;
       }
-      .four-columns img { width: 125px; }
 
       @media only screen and (max-width: 600px) {
         table.container .block-grid td {
@@ -839,12 +838,15 @@
         .optyn-sidebar img { max-height: 200px; }
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic .full-image .optyn-replaceable-image img { width: 95% !important; }
+        .full-image .optyn-replaceable-image img { width: 95% !important; }
         .basic .half-left-image .optyn-replaceable-image,
         .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
         .basic .third-image .optyn-replaceable-image{ width: auto !important; }
-        .basic .third-image .optyn-replaceable-image img { width: 95% !important; }
-        .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
+        .basic .third-image .optyn-replaceable-image img,
+        .four-img-columns
+        .three-img-columns
+        .two-img-columns { width: 95% !important; }
+        .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
         .basic .three-up td{width: 94% !important;}
         .galleria .four-columns img { width: 60px !important; }
       }  /* End media query. */
@@ -917,7 +919,7 @@
                                     </div>
                                   </paragraph>
                                   <image>
-                                     <img width="300" src="http://placehold.it/1000x250" alt="" />
+                                     <img width="300" src="http://placehold.it/560x250" alt="" />
                                   </image>
                                 </td>
                               </tr>
@@ -925,7 +927,7 @@
                           </division>
 
                           <division type="two_columns">
-                            <table class="block-grid two-up">
+                            <table class="block-grid two-up two-img-columns">
                               <tr>
                                 <td>
                                   <image>
@@ -949,68 +951,68 @@
                           <division type="three_columns">
                             <div>
                               <headline>
-                                <h2 class="headline text-pad-10">Three columns</h2>
+                                <h2 class="headline text-pad-10 three-img-columns">Three columns</h2>
                               </headline>
                               <table class="block-grid three-up">
                                 <tr>
                                   <td>
                                     <image>
-                                      <img src="http://placehold.it/190x100" alt="" class="w180" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td>
                                     <image>
-                                      <img src="http://placehold.it/190x100" alt="" class="w180" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td>
                                     <image>
-                                      <img src="http://placehold.it/190x100" alt="" class="w180" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td>
                                 </tr>
-                                </table>
+                              </table>
                             </div>
                           </division>
 
-                          <division type="four_columns" class="four-columns">
+                          <division type="four_columns">
                             <div>
                               <headline>
-                                <h2 class="headline text-pad-10">Four Columns</h2>
+                                <h2 class="headline text-pad-10 four-img-columns">Four Columns</h2>
                               </headline>
                               <table class="block-grid four-up">
                                 <tr>
                                   <td>
                                     <image>
-                                      <img src="http://placehold.it/145x75" alt="" class="w120" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td>
                                     <image>
-                                      <img src="http://placehold.it/145x75" alt="" class="w120" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td>
                                     <image>
-                                      <img src="http://placehold.it/145x75" alt="" class="w120" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td>
                                     <image>
-                                      <img src="http://placehold.it/145x75" alt="" class="w120" />
+                                      <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
@@ -1032,34 +1034,29 @@
 
           <container type="footer">
             <table class="container">
+              <row>
                 <tr>
-                  <td class="wrapper last">
-                    <row>
-                      <table class="row">
-                      <tr>
-                        <td class="wrapper last footer-container">
-                          <grid type="footer">
-                            <table class="twelve columns">
-                              <tr>
-                                <td>
-                                  <division type="footer">
-                                    <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                    </permission>
-                                    <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                    <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                                  </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                          </td>
-                        </tr>
-                      </table>
-                    </row>
-
-                  </td>
+                  <grid type="footer">
+                    <td class="footer-container">
+                      <division type="footer">
+                        <table class="block-grid">
+                          <tr>
+                            <td>
+                              <center>
+                                <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                </permission>
+                                <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                              </center>
+                            </td>
+                          </tr>
+                        </table>
+                      </division>
+                    </td>
+                  </grid>
                 </tr>
-              </table>
+              </row>
+            </table>
           </container>
         </center>
       </td>
