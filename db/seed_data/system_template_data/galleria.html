@@ -757,22 +757,19 @@
       }
 
       /* Custom styles */
-      img { max-width: 100%; }
-      h2 { font-size: 16px; font-weight: bold; }
-      .float-left { float: left; }
-      .float-right { float: right; }
-      .text-pad-10 { padding: 0 10px; }
+      .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
-      .optyn-replaceable-image { display: table-cell; }
+      h2 { font-size: 16px; font-weight: bold; }
+      img { height: auto; }
+      .text-pad-10 { padding: 0 10px; }
+      .optyn-headline { margin: 7px 0; }
+      .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
       .sidebar-container h2 { font-size: 16px; }
       .sidebar-container h3 {
         font-size: 14px;
         font-weight: bold;
       }
-      [data-type="introduction"] .wrapper,
-      [data-type="content"] .outermost-container { padding-top: 0; }
-      [data-type="introduction"] { padding-top: 10px; }
       .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
       .optyn-footer .optyn-pargraph {
         text-align: center;
@@ -786,18 +783,43 @@
         color: rgba(0,0,0,0.5);
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
-      [data-type="text_with_left_image"] .optyn-replaceable-image {
-        width:48%; margin:0 2% 10px 0; float:left;
+      .optyn-replaceable-image img { float: none; }
+      .optyn-intro { width: 560px; }
+      .optyn-intro .optyn-replaceable-image { display: table; }
+      .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
+      .basic .full-image .optyn-replaceable-image img{
+        width: 99%;
       }
-      [data-type="text_with_right_image"] .optyn-replaceable-image {
-        width:48%; margin:0 0 10px 2%; float:right;
+      .basic .half-left-image,
+      .basic .half-right-image {
+        padding: 0;
+      }
+      .basic .half-left-image .optyn-replaceable-image,
+      .basic .half-right-image .optyn-replaceable-image {
+        width: 48%;
+      }
+      .basic .half-left-image .optyn-replaceable-image img,
+      .basic .half-right-image .optyn-replaceable-image img {
+        width: 100%;
+      }
+      .basic .half-left-image .optyn-replaceable-image {
+        float: left;
+        margin:0 2% 10px 0;
+      }
+      .basic .half-right-image .optyn-replaceable-image {
+        float: right;
+        margin:0 0 10px 2%;
+      }
+      .basic td.third-image,
+      .basic .third-image .optyn-replaceable-image img{
+        width:160px;
       }
       .o-column { width: 48%; }
       [data-type="image_gallery"] .optyn-paragraph,
       [data-type="three_columns"] .optyn-paragraph
       [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
       .optyn-division {
-        padding-top: 15px;
+        padding-top: 5px;
         float: none;
         clear: both;
         -webkit-transition: all 1s ease;
@@ -808,58 +830,31 @@
       .recently-added-division {
         background: #ff9;
       }
-      .optyn-introduction img { max-width: 560px; }
-      .three img { max-width: 110px; }
-      .w560 { max-width: 560px; width:100% !important; height:auto; }
-      .w260 { max-width: 260px; }
-      .w360 { max-width: 360px; }
-      .w170 { max-width: 170px; }
-      .w180 { max-width: 180px; }
-      .w130 { max-width: 130px; }
-      .w120 { max-width: 120px; }
-      .eight [data-type="image_gallery"] img { max-width: 170px; }
-      .eight [data-type="text_with_left_image"] img,
-      .eight [data-type="text_with_right_image"] img { max-width: 170px; }
-      .eight [data-type="text_with_full_image"] img { max-width: 360px; }
-      .four img { max-width: 160px; }
-      table.body { min-width: 320px; }
-      .footer .optyn-pargraph { text-align: center; }
+
       @media only screen and (max-width: 600px) {
-        .optyn-sidebar img { max-height: 200px; }
+        table[class="container"] .block-grid td {
+          width: 100% !important;
+        }
+        .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
+        .optyn-sidebar img { max-height: 200px; }
         .body .o-column { width: 100% !important; }
-        .optyn-replaceable-image {
-          width: 100% !important;
-          float: none !important;
-          margin: 0 0 5px 0 !important;
-        }
-        .optyn-introduction { min-width: 87vw; }
-        .body .optyn-introduction img { max-width: 270px !important; width: 100% !important; }
-        .three img { max-width: 270px; }
-        .body .container .w560,
-        .body .container .w360,
-        .body .container .w260,
-        .body .container .w130,
-        .body .container .w120 { width: 100% !important; }
-        .body .container .three.sub-columns .w120 { max-width: 80px !important; }
-        .body .container .four.sub-columns .w180 { max-width: 80px !important; }
-        .body .container .six.sub-columns .w260 { max-width: 150px !important; }
-        .four img { max-width: 270px; }
-        .three.sub-columns img { max-width: 100px !important; }
-        .four.sub-columns img { max-width: 100px !important; }
-        .six.sub-columns img { max-width: 150px !important; }
-        .eight [data-type="text_with_left_image"] img,
-        .eight [data-type="text_with_right_image"] img { max-width: 270px; }
-        .eight [data-type="image_gallery"] img { max-width: 270px; }
-        .eight [data-type="text_with_full_image"] img { max-width: 270px; }
+        .optyn-intro { width: 100% !important; min-width: 83vw; }
+        .basic .full-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic .half-left-image .optyn-replaceable-image,
+        .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
+        .basic .third-image .optyn-replaceable-image{ width: auto !important; }
+        .basic .third-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
+        .basic .three-up td{width: 94% !important;}
       }  /* End media query. */
     </style>
 </head>
 <body id="flat">
   <table class="body">
     <tr>
-      <td class="center" align="center" valign="top" style="padding: 2%;">
+      <td class="center" align="center" valign="top" style="padding: 10px;">
         <center>
           <container type="introduction">
             <table class="container">
