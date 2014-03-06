@@ -787,7 +787,7 @@ table.facebook td {
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .basic .full-image .optyn-replaceable-image img{
-        width: 99%;
+        width: 100%;
       }
       .basic .half-left-image,
       .basic .half-right-image {
@@ -831,7 +831,7 @@ table.facebook td {
       }
 
       @media only screen and (max-width: 600px) {
-        table[class="container"] .block-grid td {
+        table.container .block-grid td {
           width: 100% !important;
         }
         .body { width: 310px; }
@@ -839,11 +839,11 @@ table.facebook td {
         .body .float-right { float: none !important; }
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic .full-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic .full-image .optyn-replaceable-image img { width: 95% !important; }
         .basic .half-left-image .optyn-replaceable-image,
         .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
         .basic .third-image .optyn-replaceable-image{ width: auto !important; }
-        .basic .third-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic .third-image .optyn-replaceable-image img { width: 95% !important; }
         .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
         .basic .three-up td{width: 94% !important;}
       }  /* End media query. */
@@ -999,21 +999,21 @@ table.facebook td {
                                   <tr>
                                     <td class="third-image">
                                       <image>
-                                        <img src="http://placehold.it/180x100" width="160" alt="" />
+                                        <img src="http://placehold.it/300x150" width="160" alt="" />
                                       </image>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
                                       </paragraph>
                                     </td><td class="third-image">
                                       <image>
-                                        <img src="http://placehold.it/180x100" width="160" alt="" />
+                                        <img src="http://placehold.it/300x150" width="160" alt="" />
                                       </image>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
                                       </paragraph>
                                     </td><td class="third-image">
                                       <image>
-                                        <img src="http://placehold.it/180x100" width="160" alt="" />
+                                        <img src="http://placehold.it/300x150" width="160" alt="" />
                                       </image>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
@@ -1033,11 +1033,11 @@ table.facebook td {
             </table>
           </container>
           <container type="footer">
-            <div>
+            <table class="container">
               <row>
-                <div class="footer-container">
+                <tr>
                   <grid type="footer">
-                    <div>
+                    <td class="footer-container">
                       <division type="footer">
                         <table class="block-grid">
                           <tr>
@@ -1052,11 +1052,11 @@ table.facebook td {
                           </tr>
                         </table>
                       </division>
-                    </div>
+                    </td>
                   </grid>
-                </div>
+                </tr>
               </row>
-            </div>
+            </table>
           </container>
         </center>
       </td>
