@@ -860,25 +860,21 @@
               <tr>
                 <td>
                   <row>
-                    <table class="row">
-                      <tr>
-                        <td class="wrapper last">
-                          <grid type="introduction">
-                            <table class="twelve columns">
-                              <tr>
-                                <td class="text-pad center">
-                                  <division type="introduction" class="optyn-introduction">
-                                    <div>
-                                      <img src="http://placehold.it/200x50">
-                                    </div>
-                                  </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                          </td>
-                        </tr>
-                      </table>
+                    <div>
+                      <grid type="introduction">
+                        <table class="block-grid">
+                          <tr>
+                            <td class="text-pad center optyn-intro-cont">
+                              <division type="introduction">
+                                <div class="optyn-intro">
+                                  <img width="560" src="http://placehold.it/560x100" alt="" />
+                                </div>
+                              </division>
+                            </td>
+                          </tr>
+                        </table>
+                      </grid>
+                    </div>
                     </row>
                   </td>
                 </tr>
@@ -894,78 +890,60 @@
                       <grid type="content">
                         <div>
                           <division type="full_text">
-                            <table class="row">
+                            <table class="block-grid">
                               <tr>
-                                <td class="wrapper last outermost-container">
-                                  <table class="twelve columns">
-                                    <tr>
-                                      <td class="text-pad">
-                                        <headline>
-                                        <h2 class="headline">Hello World!</h2>
-                                        </headline>
-                                        <paragraph>
-                                        <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, similique, ad quam voluptates eos accusamus dolorum ab totam quis qui fugiat laboriosam eaque in labore odio delectus atque sequi excepturi.</div>
-                                        </paragraph>
-                                      </td>
-                                    </tr>
-                                  </table>
+                                <td class="text-pad">
+                                  <headline>
+                                    <h2 class="headline">A Division of Text</h2>
+                                  </headline>
+                                  <paragraph>
+                                    <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, similique, ad quam voluptates eos accusamus dolorum ab totam quis qui fugiat laboriosam eaque in labore odio delectus atque sequi excepturi.</div>
+                                  </paragraph>
                                 </td>
                               </tr>
                             </table>
                           </division>
 
-                          <division type="text_with_full_image">
-                            <table class="row">
+                          <division type="text_with_full_image" class="full-image">
+                            <table class="block-grid">
                               <tr>
-                                <td class="wrapper last outermost-container">
-                                  <table class="twelve columns">
-                                    <tr>
-                                      <td class="text-pad">
-                                        <headline>
-                                          <h2 class="headline">Text with Full Image</h2>
-                                        </headline>
-                                        <paragraph>
-                                          <div class="paragraph">
-                                            A distinct piece of writing.
-                                          </div>
-                                          <image>
-                                            <img src="http://placehold.it/580x350" alt="" width="560" class="w560" />
-                                          </image>
-                                        </paragraph>
-                                      </td>
-                                    </tr>
-                                  </table>
+                                <td class="full-image">
+                                  <headline>
+                                    <h2 class="headline">Text With Full Width Image</h2>
+                                  </headline>
+                                  <paragraph>
+                                    <div class="paragraph">
+                                      Image caption here.
+                                    </div>
+                                  </paragraph>
+                                  <image>
+                                     <img width="300" src="http://placehold.it/1000x250" alt="" />
+                                  </image>
                                 </td>
                               </tr>
                             </table>
                           </division>
 
                           <division type="two_columns">
-                            <div>
-                              <headline>
-                                <h2 class="headline text-pad-10">Two Columns</h2>
-                              </headline>
-                              <table class="twelve columns">
-                                <tr>
-                                  <td class="six sub-columns text-pad-left">
-                                    <image>
-                                      <img src="http://placehold.it/290x150" alt="" class="w260" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td>
-                                  <td class="six sub-columns">
-                                    <image>
-                                      <img src="http://placehold.it/290x150" alt="" class="w260" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
+                            <table class="block-grid two-up">
+                              <tr>
+                                <td>
+                                  <image>
+                                    <img src="http://placehold.it/290x150" alt="" class="w260" />
+                                  </image>
+                                  <paragraph>
+                                    <div>A distinct piece of writing.</div>
+                                  </paragraph>
+                                </td><td>
+                                  <image>
+                                    <img src="http://placehold.it/290x150" alt="" class="w260" />
+                                  </image>
+                                  <paragraph>
+                                    <div>A distinct piece of writing.</div>
+                                  </paragraph>
+                                </td>
+                              </tr>
+                            </table>
                           </division>
 
                           <division type="three_columns">
@@ -973,25 +951,23 @@
                               <headline>
                                 <h2 class="headline text-pad-10">Three columns</h2>
                               </headline>
-                              <table class="twelve columns">
+                              <table class="block-grid three-up">
                                 <tr>
-                                  <td class="four sub-columns text-pad-left">
+                                  <td>
                                     <image>
                                       <img src="http://placehold.it/190x100" alt="" class="w180" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td>
-                                  <td class="four sub-columns">
+                                  </td><td>
                                     <image>
                                       <img src="http://placehold.it/190x100" alt="" class="w180" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td>
-                                  <td class="four sub-columns">
+                                  </td><td>
                                     <image>
                                       <img src="http://placehold.it/190x100" alt="" class="w180" />
                                     </image>
@@ -1000,7 +976,7 @@
                                     </paragraph>
                                   </td>
                                 </tr>
-                              </table>
+                                </table>
                             </div>
                           </division>
 
@@ -1009,33 +985,30 @@
                               <headline>
                                 <h2 class="headline text-pad-10">Four Columns</h2>
                               </headline>
-                              <table class="twelve columns">
+                              <table class="block-grid four-up">
                                 <tr>
-                                  <td class="three sub-columns text-pad-left">
+                                  <td>
                                     <image>
                                       <img src="http://placehold.it/145x75" alt="" class="w120" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td>
-                                  <td class="three sub-columns">
+                                  </td><td>
                                     <image>
                                       <img src="http://placehold.it/145x75" alt="" class="w120" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td>
-                                  <td class="three sub-columns">
+                                  </td><td>
                                     <image>
                                       <img src="http://placehold.it/145x75" alt="" class="w120" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td>
-                                  <td class="three sub-columns">
+                                  </td><td>
                                     <image>
                                       <img src="http://placehold.it/145x75" alt="" class="w120" />
                                     </image>
