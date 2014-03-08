@@ -791,8 +791,9 @@ table.facebook td {
       }
       .basic .half-left-image,
       .basic .half-right-image {
-        padding: 0;
+        padding-left: 10px;
       }
+
       .basic .half-left-image .optyn-replaceable-image,
       .basic .half-right-image .optyn-replaceable-image {
         width: 48%;
@@ -832,7 +833,7 @@ table.facebook td {
 
       @media only screen and (max-width: 600px) {
         table.container .block-grid td {
-          width: 100% !important;
+          width: 95% !important;
         }
         .body { width: 310px; }
         .body .float-left,
@@ -948,12 +949,15 @@ table.facebook td {
                           </division>
 
                           <division type="text_with_left_image">
-                            <div class="text-pad-10">
-                              <headline>
-                                <h2 class="headline">Text with Left Image</h2>
-                              </headline>
-                              <table class="block-grid">
+                            <table class="block-grid">
                                 <tr>
+                                  <td>
+                                    <headline>
+                                      <h2 class="headline">Text with Left Image</h2>
+                                    </headline>
+                                  </td>
+                                </tr>
+                                <tr>  
                                   <td class="half-left-image">
                                     <image>
                                       <img src="http://placehold.it/580x250" alt=""  width="260" />
@@ -970,11 +974,14 @@ table.facebook td {
                           </division>
 
                           <division type="text_with_right_image">
-                            <div class="text-pad-10">
-                              <headline>
-                                <h2 class="headline">Text with Right Image</h2>
-                              </headline>
-                              <table class="block-grid">
+                            <table class="block-grid">
+                                <tr>
+                                  <td>
+                                    <headline>
+                                      <h2 class="headline">Text with Right Image</h2>
+                                    </headline>
+                                  </td>
+                                </tr>
                                 <tr>
                                   <td class="half-right-image">
                                     <image class="optyn-image">
@@ -986,43 +993,42 @@ table.facebook td {
                                   </td>
                                 </tr>
                               </table>
-                            </div>
                           </division>
 
                           <division type="image_gallery">
-                            <div>
-                              <div class="text-pad-10">
-                                <headline>
-                                  <h2 class="headline">Image Gallery</h2>
-                                </headline>
-                                <table class="block-grid three-up">
-                                  <tr>
-                                    <td class="third-image">
-                                      <image>
-                                        <img src="http://placehold.it/300x150" width="160" alt="" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Image caption goes here.</div>
-                                      </paragraph>
-                                    </td><td class="third-image">
-                                      <image>
-                                        <img src="http://placehold.it/300x150" width="160" alt="" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Image caption goes here.</div>
-                                      </paragraph>
-                                    </td><td class="third-image">
-                                      <image>
-                                        <img src="http://placehold.it/300x150" width="160" alt="" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Image caption goes here.</div>
-                                      </paragraph>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </div>
-                            </div>
+                            <table class="block-grid">
+                              <tr>
+                                <td>
+                                  <headline>
+                                    <h2 class="headline">Text with Right Image</h2>
+                                  </headline>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="third-image">
+                                  <image>
+                                    <img src="http://placehold.it/300x150" width="160" alt="" />
+                                  </image>
+                                  <paragraph>
+                                    <div>Image caption goes here.</div>
+                                  </paragraph>
+                                </td><td class="third-image">
+                                  <image>
+                                    <img src="http://placehold.it/300x150" width="160" alt="" />
+                                  </image>
+                                  <paragraph>
+                                    <div>Image caption goes here.</div>
+                                  </paragraph>
+                                </td><td class="third-image">
+                                  <image>
+                                    <img src="http://placehold.it/300x150" width="160" alt="" />
+                                  </image>
+                                  <paragraph>
+                                    <div>Image caption goes here.</div>
+                                  </paragraph>
+                                </td>
+                              </tr>
+                            </table>
                           </division>
                         </div>
                       </grid>
