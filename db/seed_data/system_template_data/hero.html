@@ -731,8 +731,16 @@
         }
     </style>
     <style type="text/css" media="screen">
+      /* Specific style for adjusting the padding of wrapper class */
+      .main-content td{padding-right: 10px !important;}
+
       .hero-main-content td{
-        width: 230px;
+        width: 260px;
+        padding: 5px !important;
+      }
+
+      .hero-main-content .two-up td{
+        width: 102px;
       }
 
       /* Theme styles */
@@ -774,7 +782,11 @@
         font-size: 14px;
         font-weight: bold;
       }
-      .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
+      .sidebar-container { background: #c9c9c9; padding-bottom: 0; padding-right: 5px !important;}
+
+      /* There are 2 block grids in sidebar for the wrapper and division */
+      .sidebar-container .block-grid td, .sidebar-main-content td{ padding-left: 5px !important; padding-right: 10px !important; }
+
       .optyn-footer .optyn-pargraph {
         text-align: center;
         font-size: 11px;
@@ -812,11 +824,11 @@
       }
       .hero .half-right-image .optyn-replaceable-image {
         float: right;
-        margin:0 0 10px 2%;
+        margin:0 5px 10px 2%;
       }
       .hero td.third-image,
       .hero .third-image .optyn-replaceable-image img{
-        width:80px;
+        width:120px;
       }
       .o-column { width: 48%; }
       [data-type="image_gallery"] .optyn-paragraph,
@@ -889,7 +901,7 @@
           <container type="content">
             <table class="container">
               <tr>
-                <td class="outermost-container">
+                <td class="outermost-container main-content">
                   <row>
                     <table class="row">
                       <tr>
@@ -936,7 +948,7 @@
                             </table>
                           </grid>
                         </td>
-                        <td class="wrapper">
+                        <td class="wrapper central-content">
                           <div>
                             <grid type="content">
                               <table class="block-grid hero-main-content">
@@ -999,7 +1011,7 @@
                                           </td>
                                         </tr>
                                       </table>
-                                    </division>
+                                  </division>
 
                                     <division type="text_with_left_image">
                                       <div class="text-pad-10">
@@ -1044,33 +1056,33 @@
                                     </division>
 
                                     <division type="image_gallery">
-                                      <div>
-                                        <div class="text-pad-10">
-                                          <headline>
-                                            <h2 class="headline">Image Gallery</h2>
-                                          </headline>
-                                          <table class="block-grid two-up">
-                                            <tr>
-                                              <td class="third-image">
-                                                <image>
-                                                  <img src="http://placehold.it/190x130" width="130" alt="" />
-                                                </image>
-                                                <paragraph>
-                                                  <div>Image caption goes here.</div>
-                                                </paragraph>
-                                              </td><td class="third-image">
-                                                <image>
-                                                  <img src="http://placehold.it/190x130" width="130" alt="" />
-                                                </image>
-                                                <paragraph>
-                                                  <div>Image caption goes here.</div>
-                                                </paragraph>
-                                              </td>
-                                            </tr>
-                                          </table>
-                                        </div>
-                                      </div>
-                                    </division>
+                                      <table class="block-grid">
+                                        <tr>
+                                          <td>
+                                            <headline>
+                                              <h2 class="headline">Text with Right Image</h2>
+                                            </headline>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td class="third-image">
+                                            <image>
+                                              <img src="http://placehold.it/300x150" width="175" alt="" />
+                                            </image>
+                                            <paragraph>
+                                              <div>Image caption goes here.</div>
+                                            </paragraph>
+                                          </td><td class="third-image">
+                                            <image>
+                                              <img src="http://placehold.it/300x150" width="175" alt="" />
+                                            </image>
+                                            <paragraph>
+                                              <div>Image caption goes here.</div>
+                                            </paragraph>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                  </division>
                                   </td>
                                 </tr>
                               </table>
