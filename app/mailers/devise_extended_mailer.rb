@@ -10,7 +10,7 @@ class DeviseExtendedMailer < Devise::Mailer
     @password = password
     @shop = Shop.find_by_id(shop_id)
     @skip_free_message = true
-    mail(to: %Q(#{@user.name} <#{@user.email}>), subject: "Thank you for subscribing.")
+    mail(to: %Q(#{@user.full_name} <#{@user.email}>), subject: "Thank you for subscribing.")
   end
 
   def welcome_manager(manager)

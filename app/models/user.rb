@@ -205,6 +205,10 @@ class User < ActiveRecord::Base
      permission_name || permission_email || "Optyn User"
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def display_fullname
     display_name
   end
