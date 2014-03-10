@@ -4,7 +4,7 @@ module Messagecenter
       include ActionView::Helpers::TagHelper
       include ERB::Util
       include ActionView::Helpers::OutputSafetyHelper
-
+      include Merchants::MessagesHelper
       attr_accessor :template
 
       CONTENT_COMPONENT_TYPE = "content"
@@ -42,11 +42,42 @@ module Messagecenter
         components_hash = data_model.clone
         toolset_markup = static_toolset_markup(components_hash)
         type = components_hash.delete('type')
-        components_hash.each_pair do |component_name, compoenent_content|
+        components_hash.each_pair do |component_name, compoenent_content|          
           components_hash[component_name] = toolset_markup + compoenent_content['content']
         end
 
         components_hash.to_json
+      end
+
+
+      def build_social_sharing_options(component,container_template)
+        if component.has_key? :social_sharing
+          social_sharing = component.social_sharing
+                    
+          if social_sharing.has_key? :fb_sharing
+            facebook = social_sharing.fb_sharing
+            fb_html = if facebook.html.present? 
+                        "<a href = #{get_social_share_link('facebook',facebook.text, facebook.url)} style= 'background: #3a589b;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank' class = 'optyn-fbshare'> #{facebook.html}
+                        </a><div style='width:100%;height:1px;clear:both;float:none;'>" 
+                      else
+                        get_default_html("facebook")
+                      end
+            container_template = container_template.sub(Template::FB_PLACE_HOLDER_ELEM, fb_html)
+          end
+
+          #twitter
+          if component.social_sharing.has_key? :twitter_sharing
+            twitter = social_sharing.twitter_sharing
+            twitter_html = if twitter.html.present?
+                            "<a href = #{get_social_share_link('twitter', twitter.text, twitter.url)} style= 'background:#598dca;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank' class = 'optyn-twittershare'>#{twitter.html}
+                            </a><div style='width:100%;height:1px;clear:both;float:none;'>"
+                          else
+                            get_default_html("twitter")
+                          end
+            container_template = container_template.sub(Template::TW_PLACE_HOLDER_ELEM, twitter_html)
+          end
+        end
+        container_template
       end
 
       def static_toolset_markup(grid_data_model, only_add = false)

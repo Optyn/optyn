@@ -731,6 +731,17 @@
         }
     </style>
     <style type="text/css" media="screen">
+    /* Specific style for adjusting the padding of wrapper class */
+      .main-content td{padding-right: 6px !important;}
+
+      .sidebar-main-content td{
+        width: 366px;
+      }
+
+      .sidebar-main-content .two-up td{
+        width: 165px;
+      }
+
       /* Theme styles */
       .optyn-introduction{
         background-color: #399;
@@ -757,23 +768,24 @@
       }
 
       /* Custom styles */
-      img { max-width: 100%; }
-      h2 { font-size: 16px; font-weight: bold; }
-      .float-left { float: left; }
-      .float-right { float: right; }
-      .text-pad-10 { padding: 0 10px; }
+      .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
-      .optyn-replaceable-image { display: table-cell; }
+      h2 { font-size: 16px; font-weight: bold; }
+      img { height: auto; }
+      .text-pad-10 { padding: 0 10px; }
+      .optyn-headline { margin: 7px 0; }
+      .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
       .sidebar-container h2 { font-size: 16px; }
       .sidebar-container h3 {
         font-size: 14px;
         font-weight: bold;
       }
-      [data-type="introduction"] .wrapper,
-      [data-type="content"] .outermost-container { padding-top: 0; }
-      [data-type="introduction"] { padding-top: 10px; }
-      .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
+      .sidebar-container { background: #c9c9c9; padding-bottom: 0; padding-right: 5px !important;}
+
+      /* There are 2 block grids in sidebar for the wrapper and division */
+      .sidebar-container .block-grid td, .sidebar-main-content td{ padding-left: 5px !important; padding-right: 10px !important; }
+
       .optyn-footer .optyn-pargraph {
         text-align: center;
         font-size: 11px;
@@ -786,18 +798,46 @@
         color: rgba(0,0,0,0.5);
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
-      [data-type="text_with_left_image"] .optyn-replaceable-image {
-        width:48%; margin:0 2% 10px 0; float:left;
+      .optyn-replaceable-image img { float: none; }
+      .optyn-intro { width: 560px; }
+      .optyn-intro .optyn-replaceable-image { display: table; }
+      .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
+      .with-sidebar .full-image .optyn-replaceable-image img{
+        width: 100%;
       }
-      [data-type="text_with_right_image"] .optyn-replaceable-image {
-        width:48%; margin:0 0 10px 2%; float:right;
+      .with-sidebar .half-left-image,
+      .with-sidebar .half-right-image {
+        padding-left: 10px;
       }
+      .with-sidebar .half-left-image .optyn-replaceable-image,
+      .with-sidebar .half-right-image .optyn-replaceable-image {
+        width: 48%;
+      }
+      .with-sidebar .half-left-image .optyn-replaceable-image img,
+      .with-sidebar .half-right-image .optyn-replaceable-image img {
+        width: 100%;
+      }
+      .with-sidebar .half-left-image .optyn-replaceable-image {
+        float: left;
+        margin:0 2% 10px 0;
+      }
+      .with-sidebar .half-right-image .optyn-replaceable-image {
+        float: right;
+        margin:0 0 10px 2%;
+      }
+      .with-sidebar td.third-image,
+      .with-sidebar .third-image .optyn-replaceable-image img{
+        width: 165px;
+        max-width: none !important;
+      }
+
+
       .o-column { width: 48%; }
       [data-type="image_gallery"] .optyn-paragraph,
       [data-type="three_columns"] .optyn-paragraph
       [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
       .optyn-division {
-        padding-top: 15px;
+        padding-top: 5px;
         float: none;
         clear: both;
         -webkit-transition: all 1s ease;
@@ -808,54 +848,32 @@
       .recently-added-division {
         background: #ff9;
       }
-      [data-type="introduction"] img { max-width: 560px; }
-      .three img { max-width: 110px; }
-      .w560 { max-width: 560px; }
-      .w260 { max-width: 260px; }
-      .w360 { max-width: 360px; }
-      .w170 { max-width: 170px; }
-      .w180 { max-width: 180px; }
-      .w130 { max-width: 130px; }
-      .w120 { max-width: 120px; }
-      .eight [data-type="image_gallery"] img { max-width: 170px; }
-      .eight [data-type="text_with_left_image"] img,
-      .eight [data-type="text_with_right_image"] img { max-width: 170px; }
-      .eight [data-type="text_with_full_image"] img { max-width: 360px; }
-      .four img { max-width: 160px; }
-      table.body { min-width: 320px; }
+
       @media only screen and (max-width: 600px) {
-        .optyn-sidebar img { max-height: 200px; }
+        table.container .block-grid td {
+          width: 95% !important;
+        }
+        .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
         .body .o-column { width: 100% !important; }
-        .optyn-replaceable-image {
-          width: 100% !important;
-          float: none !important;
-          margin: 0 0 5px 0 !important;
+        .optyn-intro { width: 100% !important; min-width: 83vw; }
+        .with-sidebar .full-image .optyn-replaceable-image img { width: 90% !important; }
+        .with-sidebar .half-left-image .optyn-replaceable-image,
+        .with-sidebar .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
+        .with-sidebar .half-left-image .optyn-replaceable-image img,
+        .with-sidebar .half-right-image .optyn-replaceable-image img{
+          width: 95% !important;
         }
-        [data-type="introduction"] { min-width: 87vw; }
-        .body [data-type="introduction"] img { max-width: 270px !important; }
-        .three img { max-width: 270px; }
-        .body .container .w560,
-        .body .container .w360,
-        .body .container .w260,
-        .body .container .w130,
-        .body .container .w120 { max-width: 270px !important; }
-        .body .container .three.sub-columns .w120 { max-width: 80px !important; }
-        .body .container .four.sub-columns .w180 { max-width: 80px !important; }
-        .body .container .six.sub-columns .w260 { max-width: 150px !important; }
-        .four img { max-width: 270px; }
-        .three.sub-columns img { max-width: 100px !important; }
-        .four.sub-columns img { max-width: 100px !important; }
-        .six.sub-columns img { max-width: 150px !important; }
-        .eight [data-type="text_with_left_image"] img,
-        .eight [data-type="text_with_right_image"] img { max-width: 270px; }
-        .eight [data-type="image_gallery"] img { max-width: 270px; }
-        .eight [data-type="text_with_full_image"] img { max-width: 270px; }
+        .with-sidebar .third-image .optyn-replaceable-image{ width: auto !important; }
+        .with-sidebar .third-image .optyn-replaceable-image img { width: 90% !important; }
+        .with-sidebar .optyn-introduction .optyn-replaceable-image img { max-width: 145px !important; }
+        .with-sidebar .two-up td{width: 94% !important;}
       }  /* End media query. */
+
     </style>
 </head>
-<body id="flat">
+<body id="flat" class="with-sidebar">
   <table class="body">
     <tr>
       <td class="center" align="center" valign="top" style="padding: 2%;">
@@ -865,25 +883,21 @@
               <tr>
                 <td>
                   <row>
-                    <table class="row">
-                      <tr>
-                        <td class="wrapper last">
-                          <grid type="introduction">
-                            <table class="twelve columns">
-                              <tr>
-                                <td class="text-pad center">
-                                  <division type="introduction">
-                                    <div>
-                                      <img src="http://placehold.it/200x50">
-                                    </div>
-                                  </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                          </td>
-                        </tr>
-                      </table>
+                    <div>
+                      <grid type="introduction">
+                        <table class="block-grid">
+                          <tr>
+                            <td class="text-pad center optyn-intro-cont">
+                              <division type="introduction">
+                                <div class="optyn-intro">
+                                  <img width="560" src="http://placehold.it/560x100" alt="" />
+                                </div>
+                              </division>
+                            </td>
+                          </tr>
+                        </table>
+                      </grid>
+                    </div>
                     </row>
                   </td>
                 </tr>
@@ -893,190 +907,145 @@
           <container type="content">
             <table class="container">
               <tr>
-                <td class="outermost-container">
+                <td class="outermost-container main-content">
                   <row>
                     <table class="row">
                       <tr>
                         <td class="wrapper">
                           <grid type="content">
-                            <table class="eight columns">
+                            <table class="block-grid sidebar-main-content">
                               <tr>
                                 <td class="text-pad">
                                   <division type="full_text">
-                                    <div>
-                                      <headline>
-                                        <h2 class="headline">Hello World!</h2>
-                                      </headline>
-                                      <paragraph>
-                                        <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, voluptatibus, laudantium totam vero quia aliquid iure earum repellat. Veniam incidunt sed debitis aut itaque suscipit atque nihil voluptates nam eius.</div>
-                                      </paragraph>
-                                    </div>
+                                    <table class="block-grid">
+                                      <tr>
+                                        <td class="text-pad">
+                                          <headline>
+                                            <h2 class="headline">A Division of Text</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div class="paragraph">
+                                              A distinct piece of writing.
+                                            </div>
+                                          </paragraph>
+                                        </td>
+                                      </tr>
+                                    </table>
                                   </division>
 
-                                  <division type="text_with_full_image">
-                                    <div>
-                                      <headline>
-                                        <h2 class="headline">Text with Full Image</h2>
-                                      </headline>
-                                      <paragraph>
-                                        <div class="paragraph">
-                                          A distinct piece of writing.
-                                        </div>
-                                        <image>
-                                          <img src="http://placehold.it/580x350" alt="" class="w360" />
-                                        </image>
-                                      </paragraph>
-                                    </div>
+                                  <division type="text_with_full_image" class="full-image">
+                                    <table class="block-grid">
+                                      <tr>
+                                        <td class="full-image">
+                                          <headline>
+                                            <h2 class="headline">Text With Full Width Image</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div class="paragraph">
+                                              Image caption here.
+                                            </div>
+                                          </paragraph>
+                                          <image>
+                                             <img width="306" src="http://placehold.it/580x350" alt="" />
+                                          </image>
+                                        </td>
+                                      </tr>
+                                    </table>
                                   </division>
 
                                   <division type="two_columns">
-                                    <div>
-                                      <div class="float-left o-column">
-                                        <headline>
-                                          <h2 class="headline">Two Columns</h2>
-                                        </headline>
-                                        <paragraph>
-                                          <div>A distinct piece of writing.</div>
-                                        </paragraph>
-                                      </div>
-                                      <div class="float-right o-column">
-                                        <headline>
-                                          <h2 class="headline">Hello World!</h2>
-                                        </headline>
-                                        <paragraph>
-                                          <div>A distinct piece of writing.</div>
-                                        </paragraph>
-                                      </div>
-                                    </div>
+                                    <table class="block-grid two-up">
+                                      <tr>
+                                        <td>
+                                          <headline>
+                                            <h2 class="headline">Column 1 Heading</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div>Column 1 description</div>
+                                          </paragraph>
+                                        </td><td>
+                                          <headline>
+                                            <h2 class="headline">Column 2 Heading</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div>Column 2 description</div>
+                                          </paragraph>
+                                        </td>
+                                      </tr>
+                                    </table>
                                   </division>
 
                                   <division type="text_with_left_image">
-                                    <div>
-                                      <headline>
-                                        <h2>Text with Left Image</h2>
-                                      </headline>
-                                      <image>
-                                        <img src="http://placehold.it/580x350" alt="" class="w170" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, ipsa iusto voluptatibus ducimus quis suscipit non distinctio commodi a temporibus accusantium doloremque vitae est asperiores aspernatur tempora dolore maiores quos.</div>
-                                      </paragraph>
-                                    </div>
-                                  </division>
-
-                                  <division type="text_with_right_image">
-                                    <div>
-                                      <headline>
-                                        <h2>Text with Right Image</h2>
-                                      </headline>
-                                      <image>
-                                        <img src="http://placehold.it/580x350" alt="" class="w170" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, ipsa iusto voluptatibus ducimus quis suscipit non distinctio commodi a temporibus accusantium doloremque vitae est asperiores aspernatur tempora dolore maiores quos.</div>
-                                      </paragraph>
-                                    </div>
-                                  </division>
-
-                                  <division type="image_gallery">
-                                    <div>
-                                      <headline>
-                                        <h2 class="headline">Image Gallery</h2>
-                                      </headline>
-                                      <table class="row">
+                                    <table class="block-grid">
                                         <tr>
-                                          <td class="six sub-columns">
-                                            <image>
-                                              <img src="http://placehold.it/190x130" alt="" class="w170" />
-                                            </image>
-                                            <paragraph>
-                                              <div>Image caption goes here.</div>
-                                            </paragraph>
+                                          <td>
+                                            <headline>
+                                              <h2 class="headline">Text with Left Image</h2>
+                                            </headline>
                                           </td>
-                                          <td class="six sub-columns right-text-pad">
+                                        </tr>
+                                        <tr>  
+                                          <td class="half-left-image">
                                             <image>
-                                              <img src="http://placehold.it/190x130" alt="" class="w170" />
+                                              <img src="http://placehold.it/580x250" alt=""  width="150" />
                                             </image>
                                             <paragraph>
-                                              <div>Image caption goes here.</div>
+                                              <div>
+                                                Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!
+                                              </div>
                                             </paragraph>
                                           </td>
                                         </tr>
                                       </table>
                                     </div>
                                   </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                        </td>
-                        <td class="wrapper last sidebar-container">
-                          <grid type="sidebar">
-                            <table class="four columns">
-                              <tr>
-                                <td class="text-pad">
-                                  <division type="full_text">
-                                    <div>
-                                      <headline>
-                                        <h3 class="headline">Hello World!</h3>
-                                      </headline>
-                                      <paragraph>
-                                        <div class="paragraph">
-                                          A distinct piece of writing.
-                                        </div>
-                                      </paragraph>
-                                    </div>
+
+                                  <division type="text_with_right_image">
+                                    <table class="block-grid">
+                                        <tr>
+                                          <td>
+                                            <headline>
+                                              <h2 class="headline">Text with Right Image</h2>
+                                            </headline>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td class="half-right-image">
+                                            <image class="optyn-image">
+                                              <img src="http://placehold.it/580x250" alt=""  width="150" />
+                                            </image>
+                                            <paragraph>
+                                              <div>Text with Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque cupiditate in sunt eius asperiores optio earum numquam animi fugiat exercitationem! Ex, veritatis vel quas beatae dignissimos dolore doloremque sequi ipsam?</div>
+                                            </paragraph>
+                                          </td>
+                                        </tr>
+                                      </table>
                                   </division>
 
-                                  <division type="text_with_full_image">
-                                    <div>
-                                      <headline>
-                                        <h3 class="headline">Text with Full Image</h3>
-                                      </headline>
-                                      <paragraph>
-                                        <div class="paragraph">
-                                          Image caption here.
-                                        </div>
-                                        <image>
-                                          <img src="http://placehold.it/145x75" alt="" class="w130" />
-                                        </image>
-                                      </paragraph>
-                                    </div>
-                                  </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                        </td>
-                      </tr>
-                    </table>
-                  </row>
-                </td>
-              </tr>
-            </table>
-          </container>
-          <container type="footer">
-            <table class="container">
-                <tr>
-                  <td class="wrapper last footer-container">
-                    <row>
-                      <table class="row">
-                      <tr>
-                        <td class="wrapper last">
-                          <grid type="footer">
-                            <table class="twelve columns">
-                              <tr>
-                                <td class="">
-                                  <division type="footer">
-                                    <table class="twelve columns">
+                                  <division type="image_gallery">
+                                    <table class="block-grid">
                                       <tr>
-                                        <td class="">
-                                          <center>
-                                            <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                            </permission>
-                                            <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                            <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                                          </center>
+                                        <td>
+                                          <headline>
+                                            <h2 class="headline">Text with Right Image</h2>
+                                          </headline>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="third-image">
+                                          <image>
+                                            <img src="http://placehold.it/300x150" width="175" alt="" />
+                                          </image>
+                                          <paragraph>
+                                            <div>Image caption goes here.</div>
+                                          </paragraph>
+                                        </td><td class="third-image">
+                                          <image>
+                                            <img src="http://placehold.it/300x150" width="175" alt="" />
+                                          </image>
+                                          <paragraph>
+                                            <div>Image caption goes here.</div>
+                                          </paragraph>
                                         </td>
                                       </tr>
                                     </table>
@@ -1085,13 +1054,87 @@
                               </tr>
                             </table>
                           </grid>
-                          </td>
-                        </tr>
-                      </table>
-                    </row>
-                  </td>
-                </tr>
-              </table>
+                        </td>
+
+                        <td class="wrapper sidebar-container last">
+                          <grid type="sidebar">
+                            <table class="block-grid three-up">
+                              <tr>
+                                <td class="text-pad">
+                                  <division type="full_text">
+                                    <table class="block-grid">
+                                      <tr>
+                                        <td class="text-pad">
+                                          <headline>
+                                            <h2 class="headline">A Division of Text</h2>
+                                          </headline>
+                                          <paragraph>
+                                            <div class="paragraph">
+                                              A distinct piece of writing.
+                                            </div>
+                                          </paragraph>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </division>
+
+                                  <division type="text_with_full_image">
+                                    <table class="block-grid">
+                                      <tr>
+                                        <td class="full-image">
+                                          <headline>
+                                            <h3 class="headline">Text with Full Image</h3>
+                                          </headline>
+                                          <paragraph>
+                                            <div class="paragraph">
+                                              Image caption here.
+                                            </div>
+                                            <image>
+                                              <img src="http://placehold.it/180x100" width="300" />
+                                            </image>
+                                          </paragraph>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </division>
+                                </td>
+                              </tr>
+                            </table>
+                          </grid>
+                        </td>
+                        
+                      </tr>
+                    </table>
+                  </row>
+                </td>
+              </tr>
+            </table>
+          </container>
+          <container type="footer">
+            <div>
+              <row>
+                <div class="footer-container">
+                  <grid type="footer">
+                    <div>
+                      <division type="footer">
+                        <table class="block-grid">
+                          <tr>
+                            <td>
+                              <center>
+                                <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                </permission>
+                                <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                              </center>
+                            </td>
+                          </tr>
+                        </table>
+                      </division>
+                    </div>
+                  </grid>
+                </div>
+              </row>
+            </div>
           </container>
         </center>
       </td>
