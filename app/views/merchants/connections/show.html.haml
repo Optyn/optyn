@@ -6,7 +6,7 @@
     - name_id = Permission.name_id
     %strong
       = connection_user_display_name(@connection, name_id, email_id)
-    - if not (@user.name.blank? or @user.name.nil?)
+    - if !@user.full_name.blank?
       %br
       = "#{@user.email}"
     %br

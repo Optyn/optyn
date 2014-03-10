@@ -26,7 +26,7 @@ class MessageMailer < ActionMailer::Base
     @partner = @shop.partner
 
     #to: "success@simulator.amazonses.com",
-    mail(to: %Q(#{'"' + @receiver.name + '"' + ' ' if @receiver.name}<#{@receiver.email}>),
+    mail(to: %Q(#{'"' + @receiver.full_name + '"' + ' ' if @receiver.full_name}<#{@receiver.email}>),
       from: @message.from, 
       subject: @message.personalized_subject(@receiver),
       reply_to: @message.manager_email
