@@ -168,7 +168,7 @@ class Template < ActiveRecord::Base
   end
 
   def process_content(content, receiver)
-    content.gsub(/{{Customer Name}}/i, "#{receiver.first_name.capitalize}")
+    content.gsub(/{{Customer Name}}/i, "#{receiver.first_name.capitalize if receiver.first_name}")
   end
 
   private
