@@ -821,7 +821,7 @@ class Message < ActiveRecord::Base
   end  
 
   def replace_customer_name(receiver, article)
-    user_name = "#{receiver.full_name.capitalize}" if receiver.present?
+    user_name = "#{receiver.first_name.capitalize}" if receiver.present?
     if user_name.present?
       article.gsub(/{{Customer Name}}/i, user_name)
     else
