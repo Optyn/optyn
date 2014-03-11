@@ -731,6 +731,7 @@
         }
     </style>
     <style type="text/css" media="screen">
+      .main-content .two-up td{width: 265px;}
       /* Theme styles */
       .optyn-introduction{
         background-color: #399;
@@ -790,31 +791,41 @@
       .basic .full-image .optyn-replaceable-image img{
         width: 100%;
       }
-      .basic .half-left-image,
-      .basic .half-right-image {
-        padding: 0;
+      .galleria .half-left-image,
+      .galleria .half-right-image {
+        padding-left: 10px;
       }
-      .basic .half-left-image .optyn-replaceable-image,
-      .basic .half-right-image .optyn-replaceable-image {
+
+      .galleria .half-left-image .optyn-replaceable-image,
+      .galleria .half-right-image .optyn-replaceable-image {
         width: 48%;
       }
-      .basic .half-left-image .optyn-replaceable-image img,
-      .basic .half-right-image .optyn-replaceable-image img {
+      .galleria .half-left-image .optyn-replaceable-image img,
+      .galleria .half-right-image .optyn-replaceable-image img {
         width: 100%;
       }
-      .basic .half-left-image .optyn-replaceable-image {
+      .galleria .half-left-image .optyn-replaceable-image {
         float: left;
         margin:0 2% 10px 0;
       }
-      .basic .half-right-image .optyn-replaceable-image {
+      .galleria .half-right-image .optyn-replaceable-image {
         float: right;
         margin:0 0 10px 2%;
       }
-      .basic td.third-image,
-      .basic .third-image .optyn-replaceable-image img{
+      .galleria td.third-image,
+      .galleria .third-image .optyn-replaceable-image img{
         width:160px;
       }
+
+      .galleria td.fourth-image,
+      .galleria .fourth-image .optyn-replaceable-image img{
+        width:120px;
+      }
+
       .o-column { width: 48%; }
+      [data-type="image_gallery"] .optyn-paragraph,
+      [data-type="three_columns"] .optyn-paragraph
+      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
       .optyn-division {
         padding-top: 5px;
         float: none;
@@ -830,26 +841,22 @@
 
       @media only screen and (max-width: 600px) {
         table.container .block-grid td {
-          width: 100% !important;
+          width: 95% !important;
         }
         .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
-        .optyn-sidebar img { max-height: 200px; }
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .full-image .optyn-replaceable-image img { width: 95% !important; }
-        .basic .half-left-image .optyn-replaceable-image,
-        .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
-        .basic .third-image .optyn-replaceable-image{ width: auto !important; }
-        .basic .third-image .optyn-replaceable-image img,
-        .four-img-columns
-        .three-img-columns
-        .two-img-columns { width: 95% !important; }
-        .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
-        .basic .three-up td{width: 94% !important;}
-        .galleria .four-columns img { width: 60px !important; }
+        .galleria .full-image .optyn-replaceable-image img { width: 95% !important; }
+        .galleria .half-left-image .optyn-replaceable-image,
+        .galleria .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
+        .galleria .third-image .optyn-replaceable-image{ width: auto !important; }
+        .galleria .third-image .optyn-replaceable-image img { width: 95% !important; }
+        .galleria .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
+        .galleria .three-up td{width: 94% !important;}
       }  /* End media query. */
+
     </style>
 </head>
 <body id="flat" class="galleria">
@@ -886,7 +893,7 @@
           <container type="content">
             <table class="container">
               <tr>
-                <td>
+                <td class="main-content">
                   <row>
                     <div>
                       <grid type="content">
@@ -955,21 +962,21 @@
                               </headline>
                               <table class="block-grid three-up">
                                 <tr>
-                                  <td>
+                                  <td class="third-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td>
+                                  </td><td class="third-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td>
+                                  </td><td class="third-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
@@ -989,28 +996,28 @@
                               </headline>
                               <table class="block-grid four-up">
                                 <tr>
-                                  <td>
+                                  <td class="fourth-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td>
+                                  </td><td class="fourth-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td>
+                                  </td><td class="fourth-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td>
+                                  </td><td class="fourth-image">
                                     <image>
                                       <img src="http://placehold.it/300x200" alt="" />
                                     </image>
