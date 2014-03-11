@@ -155,3 +155,19 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 .link-click-report-link{
 	cursor: pointer;
 }
+
+#preview_wrapper ul{
+  list-style: disc;
+}
+
+#preview_wrapper ul li ul{
+	list-style: circle;
+}
+
+#preview_wrapper ul li ul li ul{
+	list-style: square;
+}
+
+#preview_wrapper ol{
+       list-style: decimal !important;
+}
