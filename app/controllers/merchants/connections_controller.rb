@@ -153,7 +153,6 @@ class Merchants::ConnectionsController < Merchants::BaseController
     else
       populate_labels
     end
-    binding.pry
     render 'edit', :layout => false
   end
 
