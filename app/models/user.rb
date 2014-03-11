@@ -205,6 +205,10 @@ class User < ActiveRecord::Base
      permission_name || permission_email || "Optyn User"
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def display_fullname
     display_name
   end
@@ -248,11 +252,6 @@ class User < ActiveRecord::Base
     end
     
     return user_ids
-  end
-
-  #Gotcha:  if some one enters their <last_name> <first_name> while registering or something then the split is inappropriate
-  def first_name
-    name.to_s.split(/\s/).first.to_s.capitalize #to_s if the name is blank by chance
   end
 
   def destroy_all_user_labels
