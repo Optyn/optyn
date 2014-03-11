@@ -11,10 +11,16 @@
           #update_shop_wrapper
             .control-group
               .control-label
-                = f.label :name
+                = f.label :first_name
               .controls
-                .labels{'data-toggle' => 'tooltip', title: 'Enter user name'}
-                  = f.text_field :name, :placeholder => 'Enter user name', class: 'span12'
+                .labels{'data-toggle' => 'tooltip', title: 'Enter first name'}
+                  = f.text_field :first_name, :placeholder => 'Enter first name', class: 'span12'
+            .control-group
+              .control-label
+                = f.label :last_name
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'Enter last name'}
+                  = f.text_field :last_name, :placeholder => 'Enter last name', class: 'span12'
             .control-group
               .control-label
                 = f.label :email
