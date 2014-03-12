@@ -6,12 +6,15 @@ require 'messagecenter/templates/system_template_personalizer'
 require 'messagecenter/templates/structure_creator'
 require 'iconv'
 
+
 class Template < ActiveRecord::Base
   include UuidFinder
   include Messagecenter::Templates::SystemTemplatePersonalizer
   include Messagecenter::Templates::StructureCreator
   include ShopLogo
   include Rails.application.routes.url_helpers
+  include ERB::Util
+  include ActionView::Helpers::OutputSafetyHelper
 
   attr_accessor :parsed_html, :parsed_result, :pared_extends, :styles
 
@@ -49,6 +52,8 @@ class Template < ActiveRecord::Base
   CONTENT_TITLE_COLOR = '#000000'
   CONTENT_PARAGRAPH_COLOR = '#000000'
   CONTENT_LINK_COLOR = '#000000'
+
+  OPTYN_SPACE_PLACEHOLDER = "--insert--optyn-space--"
 
   mount_uploader :thumbnail, TemplateThumbnailUploader
 
@@ -110,6 +115,7 @@ class Template < ActiveRecord::Base
     content = ""
 
     content = Messagecenter::Templates::MarkupGenerator.generate_editable_content(message_content, self)
+    content = content.gsub(OPTYN_SPACE_PLACEHOLDER, "&nbsp;")
 
     content
   end
@@ -121,6 +127,7 @@ class Template < ActiveRecord::Base
     premailer = Premailer.new(html, with_html_string: true)
     content = premailer.to_inline_css
     content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
+    content = content.gsub(OPTYN_SPACE_PLACEHOLDER, "&nbsp;")
     content = content.to_s.squish
     content = content.gsub(/<\/td>\s?<td/ixm, "</td><td")
     content
