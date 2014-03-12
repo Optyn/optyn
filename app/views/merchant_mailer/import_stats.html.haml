@@ -24,7 +24,7 @@
                   - @counters.each_pair do |key, value|
                     %p
                       - if ![:existing_user, :connection_creation].include?(key)
-                        == #{stats_chage[key]} = #{value}
+                        == #{stats_change[key]} = #{value}
 
                   %p
                     Cheers,
