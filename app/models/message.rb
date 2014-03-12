@@ -413,13 +413,13 @@ class Message < ActiveRecord::Base
   end
 
   def personalized_subject(receiver)
-    replace_customer_name(receiver, self.subject).capitalize
+    replace_customer_name(receiver, self.subject)
   rescue 
     "A message from #{shop.name}"
   end
 
   def personalized_greeting(receiver)
-    replace_customer_name(receiver, self.subject).capitalize
+    replace_customer_name(receiver, self.subject)
   end
 
   def personalized_content(receiver)
@@ -821,7 +821,7 @@ class Message < ActiveRecord::Base
   end  
 
   def replace_customer_name(receiver, article)
-    user_name = "#{receiver.first_name.capitalize}" if receiver.present?
+    user_name = "#{receiver.first_name.titleize}" if receiver.present?
     if user_name.present?
       article.gsub(/{{Customer Name}}/i, user_name)
     else
