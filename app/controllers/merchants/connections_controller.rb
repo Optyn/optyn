@@ -44,7 +44,9 @@ class Merchants::ConnectionsController < Merchants::BaseController
 
         if total_users[u].match(/(?<=\().*?(?=\))/)
           name_email_arr = total_users[u].strip.split("(")
-    			name = name_email_arr[0].strip
+    			name = name_email_arr[0].split(" ")
+          first_name = name[0] if  !name[0].blank?
+          last_name = name[1] if  !name[1].blank?
     			email = name_email_arr[1].scan(/.*?(?=\))/).first.strip
         else
           email = total_users[u].strip
@@ -52,7 +54,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
 
 
 
-  			@user = User.new(:name => name, :email => email, :password => "test1234")
+  			@user = User.new(:name => name, :first_name => first_name, :last_name => last_name, :email => email, :password => "test1234")
         @user.skip_name = true
         @user.shop_identifier = current_shop.id
         @user.show_shop = true
