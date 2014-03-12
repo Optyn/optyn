@@ -150,7 +150,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
   def update_user
     @user = User.find(params[:id])
  		@user.skip_name = true
-    if @user.update_attributes(first_name: "#{params[:first_name]}",last_name: "#{params[:last_name]}", email: "#{params[:email]}")
+    if @user.update_attributes(first_name: "#{params[:first_name]}",last_name: "#{params[:last_name]}", email: "#{params[:email]}", :gender => "#{params[:gender]}", :birth_date => "#{params[:birth_date]}")
       @success_hash  = "User updated successfully."
     else
       populate_labels

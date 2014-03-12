@@ -27,7 +27,21 @@
               .controls
                 .labels{'data-toggle' => 'tooltip', title: 'Enter user email'}
                   = f.text_field :email, :placeholder => 'Enter user email', class: 'span12'
-            
+            .control-group
+              .control-label
+                = f.label :birth_date
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'Enter birth date'}
+                  = f.text_field :birth_date, :placeholder => 'Enter birth date', class: 'span12'
+            .control-group
+              .control-label
+                = f.label :gender
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'gender'}
+                  = f.radio_button :gender, 'm', :checked => check_gender(@user.gender, "m"), :class => "userGender"
+                  = "Male"
+                  = f.radio_button :gender, 'F', :checked => check_gender(@user.gender, "f"), :class => "userGender"
+                  = "Female"
             .control-group
               = hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_connections_path
               = hidden_field_tag "update_labels_merchants_survey_survey_answers_path", update_labels_merchants_connections_path

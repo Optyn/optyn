@@ -87,12 +87,14 @@ function MyConsumerDetail() {
       var consumerInstance = this;
       $('.consumer_update_link').on('click', function(){
         var $link = $(this);
-        selected_first_name = $("#user_first_name").val()
-        selected_last_name = $("#user_last_name").val()
-        selected_email = $("#user_email").val()
+        selected_first_name = $("#user_first_name").val();
+        selected_last_name = $("#user_last_name").val();
+        selected_email = $("#user_email").val();
+        selected_gender = $(".userGender:checked").val();
+        selected_birth_date = $("#user_birth_date").val();
         
         $('#conusmer_connection_modal').html('Please Wait...');
-        $.post($link.next('input[type="hidden"]').val(), {first_name: selected_first_name, last_name: selected_last_name, email: selected_email}, function(data ) {
+        $.post($link.next('input[type="hidden"]').val(), {first_name: selected_first_name, last_name: selected_last_name, email: selected_email, gender: selected_gender, birth_date: selected_birth_date}, function(data ) {
           $('#conusmer_connection_modal').html(data);
 
           //Hook the chosen behavior

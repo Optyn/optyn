@@ -209,6 +209,14 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def display_gender
+    if !gender.blank?
+      return gender == "f" ?  "Female" : "male"
+    else
+      return ""
+    end
+  end
+
   def display_fullname
     display_name
   end

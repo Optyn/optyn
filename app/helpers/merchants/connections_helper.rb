@@ -9,4 +9,8 @@ module Merchants::ConnectionsHelper
     end
     return user_shop_labels
 	end
+
+  def check_gender(user_gender, current_gender)
+    return user_gender == current_gender ?  true : false
+  end
 end
