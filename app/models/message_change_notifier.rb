@@ -1,7 +1,7 @@
 class MessageChangeNotifier < ActiveRecord::Base
   belongs_to :message
 
-  attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on
+  attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on,:access_token
 
   after_create :enqueue_for_notification, :assign_uuid
 
@@ -23,7 +23,7 @@ class MessageChangeNotifier < ActiveRecord::Base
 
   private
     def enqueue_for_notification
-      MessageChangeWorker.perform_async(self.id)
+      MessageChangeWorker.perform_async(self.id) if self.message.approve?
     end
 
     def assign_uuid

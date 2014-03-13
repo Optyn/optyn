@@ -9,8 +9,8 @@ class Merchants::MessagesController < Merchants::BaseController
 
   before_filter :populate_shop_surveys, only: [:new, :create, :edit, :update, :create_response_message]
 
-  skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save]
-  before_filter :check_validity_before_rejection, only: [:reject]
+  skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save, :approve]
+  before_filter :check_validity_before_rejection, only: [:reject,:approve]
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
 
@@ -359,6 +359,14 @@ class Merchants::MessagesController < Merchants::BaseController
     render partial: 'merchants/messages/report_data', locals: {message: @message, timestamp_attr: 'updated_at'}
   end
 
+  def validate
+    @manager = Manager.where(uuid: params[:manager_uuid]).first
+    @message = Message.for_uuid(params[:message_uuid])
+    success = (@manager.present? && @message.present?) ? true :false
+    message = (@manager.present? || @message.present?) ? "" : "You dont have permission or the link has expired" 
+    render json: {success: success, message: message}
+  end
+
   def social_report
     message = Message.for_uuid(params[:id])
     timestamp_attr = 'updated_at'
@@ -421,6 +429,18 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def approve
+    if request.get?
+      render(layout: 'email_feedback')
+    elsif request.put?
+      @message_change_notifier = MessageChangeNotifier.find(@message_change_notifier.id)
+      @message_change_notifier.attributes = params[:message_change_notifier]
+      @message_change_notifier.save
+      @message.approve
+      render(layout: 'email_feedback')
+    end
+  end
+
   def template_upload_image
     @message = Message.for_uuid(params[:id])
     @message_image = MessageImage.new(:image => params[:imgfile], :message_id =>@message.id)
@@ -457,8 +477,8 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def check_validity_before_rejection
-    message_uuid, message_change_uuid = fetch_message_and_change_identifiers
-    @message_change_notifier = MessageChangeNotifier.for_message_id_and_message_change_id(message_uuid, message_change_uuid)
+    @access_token, @manager_uuid , @message_uuid, @message_change_uuid = fetch_message_and_change_identifiers
+    @message_change_notifier = MessageChangeNotifier.for_message_id_and_message_change_id(@message_uuid, @message_change_uuid)
     @message = (@message_change_notifier.message rescue nil)
 
     unless @message_change_notifier.present?

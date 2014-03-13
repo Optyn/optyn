@@ -37,7 +37,7 @@ module Api
             @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
 
             if @message.send(params[:choice].to_s.to_sym)
-              send_for_curation
+              send_for_curation(params[:access_token])
               render(status: :created, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
@@ -62,7 +62,7 @@ module Api
 
             set_message_image
             if @message.send(params[:choice].to_s.to_sym)
-              send_for_curation
+              send_for_curation(params[:access_token])
               render(status: :ok, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
               render(status: :unprocessable_entity, template: individual_message_template_location)
@@ -85,11 +85,12 @@ module Api
 
         def launch
           @message = Message.for_uuid(params[:id])
-          @needs_curation = @message.needs_curation(:queued)
-          launched = @message.launch
+          choice = get_choice(@message)
           
-          if launched
-            send_for_curation 
+          @needs_curation = @message.needs_curation(choice)
+          launched = @message.send((choice == :approve) ? :send_for_approval : choice)
+          if launched && @message.approve?
+            send_for_curation(params[:access_token]) 
           else
             @shop = @message.shop
             @partner = @shop.partner
@@ -113,6 +114,11 @@ module Api
 
         def drafts
           @messages = Message.paginated_drafts(current_shop, params[:page])
+          render(template: message_list_template_location)
+        end
+
+        def waiting_for_approval
+          @messages = Message.paginated_approves(current_shop, params[:page])
           render(template: message_list_template_location)
         end
 
@@ -177,6 +183,12 @@ module Api
        end
 
         private
+        
+        def get_choice(message)
+          return :approve if message.partner_eatstreet? && ["draft","queued","approve"].include?(message.state)
+          :launch
+        end
+
         def set_message_image
           
            if params[:message][:message_image_attributes] && params[:message][:message_image_attributes][:image] 

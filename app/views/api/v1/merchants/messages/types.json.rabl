@@ -6,7 +6,7 @@ object false
     end
 
     node :folder_counts do
-      {:drafts => @drafts_count, :queued => @queued_count}
+      {:drafts => @drafts_count, :queued => @queued_count, :waiting_for_approval => @approves_count}
     end
 
     node :shop do

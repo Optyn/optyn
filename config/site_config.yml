@@ -72,6 +72,7 @@ development:
   optyn_partner_redirect_uri: 'http://localhost:3001/partners/auth/optyn/callback'
   robots_redirect_uri: 'http://localhost:3000/robots.txt'
   template_encryption_secret: "9p5yn1231391000158"
+  app_reseller_url: "http://localhost:3002"
 
 production:
   #change in the live mode
