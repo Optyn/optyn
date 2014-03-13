@@ -3,7 +3,7 @@ class MessageChangeNotifier < ActiveRecord::Base
 
   attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on,:access_token
 
-  after_create :enqueue_for_notification, :assign_uuid
+  after_create :assign_uuid, :enqueue_for_notification
 
   scope :for_message_id, ->(message_identifier) { where(message_id: message_identifier) }
 

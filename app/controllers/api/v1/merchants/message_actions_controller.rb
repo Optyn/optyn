@@ -64,8 +64,33 @@ module Api
 
           true
         end
-      end
-    end
-  end
-end
+
+        def reject
+          if request.get?
+            render(layout: 'email_feedback')
+          elsif request.put?
+            @message_change_notifier = MessageChangeNotifier.find(@message_change_notifier.id)
+            @message_change_notifier.attributes = params[:message_change_notifier]
+            @message_change_notifier.save
+            @message.reject
+            MessageRejectionWorker.perform_async(@message_change_notifier.id)
+            render(layout: 'email_feedback')
+          end
+        end
+
+        def approve
+          if request.get?
+            render(layout: 'email_feedback')
+          elsif request.put?
+            @message_change_notifier = MessageChangeNotifier.find(@message_change_notifier.id)
+            @message_change_notifier.attributes = params[:message_change_notifier]
+            @message_change_notifier.save
+            @message.approve
+            render(layout: 'email_feedback')
+          end
+        end
+      end #end of MessageActionsController
+    end #end of Merchants module
+  end #end of V1 module
+end #end of Api module
 

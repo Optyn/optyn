@@ -138,7 +138,7 @@ module Messagecenter
         @preview = true
         message_content = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
 
-        @message.for_curation(message_content,access_token)
+        @message.for_curation(message_content, access_token)
       end
     end
 
