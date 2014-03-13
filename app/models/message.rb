@@ -345,7 +345,7 @@ class Message < ActiveRecord::Base
 
   def editable_state?
     return true if is_child?
-    draft? || queued_editable? || approve?
+    draft? || queued_editable?
   end
 
   def queued_editable?
