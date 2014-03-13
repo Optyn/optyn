@@ -82,15 +82,15 @@ class Message < ActiveRecord::Base
     end
 
     event :preview do
-      transition :draft => same, :queued => same, :approve => same
+      transition :draft => same, :queued => same, :pending_approval => same
     end
 
     event :launch do
-      transition [:approve, :draft, :queued] => :queued
+      transition [:pending_approval, :draft, :queued] => :queued
     end
 
     event :move_to_trash do
-      transition [:approve, :draft, :queued, :sent, :trash] => :trash
+      transition [:pending_approval, :draft, :queued, :sent, :trash] => :trash
     end
 
     event :move_to_draft do
@@ -113,12 +113,8 @@ class Message < ActiveRecord::Base
       transition [:queued] => :draft
     end
 
-    # event :approve do
-    #   transition [:approve] => :queued
-    # end
-
     event :send_for_approval do
-      transition [:approve,:queued,:draft] => :approve
+      transition [:pending_approval,:queued,:draft] => :pending_approval
     end
 
     before_transition :draft => same do |message|
@@ -151,7 +147,7 @@ class Message < ActiveRecord::Base
       message.valid?
     end
 
-    before_transition any => :approve do |message|
+    before_transition any => :pending_approval do |message|
       if message.partner_eatstreet?
         message.subject = message.send(:canned_subject) if message.subject.blank?
         message.from = message.send(:canned_from)
@@ -203,7 +199,7 @@ class Message < ActiveRecord::Base
   end
 
   def self.paginated_approves(shop, page_number=PAGE, per_page=PER_PAGE)
-    for_state_and_shop(:approve, shop.id).latest.page(page_number).per(per_page)
+    for_state_and_shop(:pending_approval, shop.id).latest.page(page_number).per(per_page)
   end
 
   def self.paginated_trash(shop, page_number=PAGE, per_page=PER_PAGE)
@@ -235,7 +231,7 @@ class Message < ActiveRecord::Base
   def self.cached_approves_count(shop, force=false)
     cache_key = "approves-count-manager-#{shop.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.message_folder) do
-      for_state_and_shop(:approve, shop.id).count
+      for_state_and_shop(:pending_approval, shop.id).count
     end
   end
 
@@ -591,7 +587,7 @@ class Message < ActiveRecord::Base
   end
 
   def needs_curation(change_state)
-    return true if (self.state.blank? || self.draft? || self.approve?) && (:queued == change_state || :approve == change_state)
+    return true if (self.state.blank? || self.draft? || self.pending_approval?) && (:queued == change_state || :pending_approval == change_state)
     if (self.queued?) && partner.eatstreet? && self.valid?
       keys = changed_attributes.keys
 
