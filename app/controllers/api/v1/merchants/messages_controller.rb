@@ -185,7 +185,7 @@ module Api
         private
         
         def get_choice(message)
-          return :approve if message.partner_eatstreet? && ["draft","queued","approve"].include?(message.state)
+          return :approve if message.partner_eatstreet? && ["draft","queued","pending_approval"].include?(message.state)
           :launch
         end
 

@@ -4,6 +4,7 @@ module Api
       class MessageActionsController < PartnerOwnerBaseController
         rescue_from ActiveModel::MassAssignmentSecurity::Error, with: :handle_assignment_exception
         rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
+        skip_before_filter :message_showable?
 
         include Messagecenter::CommonsHelper
         include Messagecenter::CommonFilters        
@@ -24,10 +25,9 @@ module Api
             @message.label_ids = [params[:message][:label_ids]] || []
             populate_datetimes
 
-            @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
-
+            @needs_curation = @message.needs_curation(params[:choice])
             set_message_image
-            if @message.send(params[:choice].to_s.to_sym)
+            if @message.send(:preview)
               send_for_curation(params[:access_token])
               render(status: :ok, template: individual_message_template_location, layout: false, formats: [:json], handlers: [:rabl])
             else
@@ -45,10 +45,6 @@ module Api
 
         def individual_message_template_location
           "api/v1/merchants/messages/message"
-        end
-
-        def message_list_template_location
-          "api/v1/merchants/messages/list"
         end
 
         def handle_assignment_exception
