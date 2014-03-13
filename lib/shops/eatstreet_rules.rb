@@ -8,7 +8,22 @@ module Shops
       end
     end
 
-    
+    def needs_curation(change_state)
+      binding.pry
+      return true if (self.state.blank? || self.draft? || self.pending_approval?) && (:pending_approval == change_state)
+      if (self.queued?) && partner.eatstreet? && self.valid?
+        keys = changed_attributes.keys
+
+        ['content', 'subject', 'percent_off', 'amount_off'].each do |attr|
+          return true if keys.include?(attr)
+        end
+      end
+      false
+    end
+
+    def for_curation(html, access_token=nil)
+      MessageChangeNotifier.create(message_id: self.id, content: html, subject: self.subject, send_on: self.send_on, access_token: access_token)
+    end
 
     private
       def adjust_shop_credits
