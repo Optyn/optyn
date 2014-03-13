@@ -89,8 +89,8 @@ module Api
           
           @needs_curation = @message.needs_curation(:launch)
           launched = @message.send(:launch)
-          if launched && @message.pending_approval?
-            send_for_curation(params[:access_token]) 
+          if launched && @message.queued?
+            #send_for_curation(params[:access_token]) 
           else
             @shop = @message.shop
             @partner = @shop.partner
@@ -109,7 +109,7 @@ module Api
           @message = Message.for_uuid(params[:id])
           choice = get_choice(@message)
           
-          @needs_curation = @message.needs_curation(:send_for_approval)
+          @needs_curation = @message.needs_curation(:pending_approval)
           launched = @message.send(:send_for_approval)
           if launched && @message.pending_approval?
             send_for_curation(params[:access_token]) 
