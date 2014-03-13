@@ -87,8 +87,30 @@ module Api
           @message = Message.for_uuid(params[:id])
           choice = get_choice(@message)
           
-          @needs_curation = @message.needs_curation(choice)
-          launched = @message.send((choice == :approve) ? :send_for_approval : choice)
+          @needs_curation = @message.needs_curation(:launch)
+          launched = @message.send(:launch)
+          if launched && @message.pending_approval?
+            send_for_curation(params[:access_token]) 
+          else
+            @shop = @message.shop
+            @partner = @shop.partner
+            @shop_logo = true
+            @preview = true
+
+            @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
+            render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl], status: :unprocessable_entity
+           return 
+          end
+
+          render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
+        end
+
+        def send_for_approval
+          @message = Message.for_uuid(params[:id])
+          choice = get_choice(@message)
+          
+          @needs_curation = @message.needs_curation(:send_for_approval)
+          launched = @message.send(:send_for_approval)
           if launched && @message.pending_approval?
             send_for_curation(params[:access_token]) 
           else
