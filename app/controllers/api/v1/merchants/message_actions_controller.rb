@@ -14,15 +14,14 @@ module Api
           @msg = (current_manager.present? || @message.present?) ? "" : "You dont have permission or the link has expired" 
         end
 
-
-        def update
+        def update        	
           Message.transaction do
             klass = params[:message_type].classify.constantize
             @message = klass.for_uuid(params[:id])
             @message.manager_id = current_manager.id
 
             @message.attributes = filter_time_params
-            @message.label_ids = [params[:message][:label_ids]]  || []
+            @message.label_ids = [params[:message][:label_ids]] || []
             populate_datetimes
 
             @needs_curation = @message.needs_curation(state_from_choice(params[:choice]))
@@ -40,6 +39,35 @@ module Api
           render(status: :unprocessable_entity, template: individual_message_template_location)
         end
 
+        def filter_time_params
+          params[:message].except(:label_ids, :ending_date, :ending_time, :send_on_date, :send_on_time)
+        end
+
+        def individual_message_template_location
+          "api/v1/merchants/messages/message"
+        end
+
+        def message_list_template_location
+          "api/v1/merchants/messages/list"
+        end
+
+        def handle_assignment_exception
+          @message = Message.new
+          @message.manager_id = current_manager.id
+          @message.errors.add(:base, "You were assigning attributes that are not allowed.")
+          render(template: individual_message_template_location, status: :unprocessable_entity)
+          
+          true
+        end
+
+        def handle_record_not_found
+          @message = Message.new
+          @message.manager_id = current_manager.id
+          @message.errors.add(:base, "Sorry, Record you are looking are not found.")
+          render(template: individual_message_template_location, status: :unprocessable_entity)
+
+          true
+        end
       end
     end
   end

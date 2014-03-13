@@ -23,7 +23,7 @@ class MessageChangeNotifier < ActiveRecord::Base
 
   private
     def enqueue_for_notification
-      MessageChangeWorker.perform_async(self.id) if self.message.approve?
+      MessageChangeWorker.perform_async(self.id) if self.message.pending_approval?
     end
 
     def assign_uuid
