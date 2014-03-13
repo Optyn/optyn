@@ -38,6 +38,17 @@ OP = (function($, window, doucument, Optyn){
           $templateContainer.slideDown(function(){
             $(this).show();
           });
+          var submitButton = $('[id^=populateLink]')
+
+          $(submitButton).on('click', function() {
+            var link = $('[id^=imageLinkModel]').val()
+            alert(link);
+            if(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(link)) {
+            } else {
+              alert("invalid url");
+              return false;
+            }
+          });
 
         });
 

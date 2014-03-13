@@ -759,7 +759,9 @@ table.facebook td {
       .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
       h2 { font-size: 16px; font-weight: bold; }
+      img { height: auto; }
       .text-pad-10 { padding: 0 10px; }
+      .optyn-headline { margin: 7px 0; }
       .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
       .sidebar-container h2 { font-size: 16px; }
@@ -767,10 +769,6 @@ table.facebook td {
         font-size: 14px;
         font-weight: bold;
       }
-      /*.optyn-introduction .optyn-intro-cont { padding: 10px 0; }*/
-      [data-type="introduction"] .wrapper,
-      [data-type="content"] .outermost-container { padding-top: 0; }
-      [data-type="introduction"] { padding-top: 10px; }
       .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
       .optyn-footer .optyn-pargraph {
         text-align: center;
@@ -787,29 +785,34 @@ table.facebook td {
       .optyn-replaceable-image img { float: none; }
       .optyn-intro { width: 560px; }
       .optyn-intro .optyn-replaceable-image { display: table; }
-      .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
+      .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .basic .full-image .optyn-replaceable-image img{
-        max-width: 560px;
+        width: 100%;
       }
       .basic .half-left-image,
       .basic .half-right-image {
-        padding: 0;
+        padding-left: 10px;
+      }
+
+      .basic .half-left-image .optyn-replaceable-image,
+      .basic .half-right-image .optyn-replaceable-image {
+        width: 48%;
       }
       .basic .half-left-image .optyn-replaceable-image img,
       .basic .half-right-image .optyn-replaceable-image img {
-        max-width:260px;
+        width: 100%;
       }
-      .basic .half-left-image .optyn-replaceable-image img{
+      .basic .half-left-image .optyn-replaceable-image {
         float: left;
         margin:0 2% 10px 0;
       }
-      .basic .half-right-image .optyn-replaceable-image img{
+      .basic .half-right-image .optyn-replaceable-image {
         float: right;
         margin:0 0 10px 2%;
       }
       .basic td.third-image,
       .basic .third-image .optyn-replaceable-image img{
-        max-width:165px;
+        width:160px;
       }
       .o-column { width: 48%; }
       [data-type="image_gallery"] .optyn-paragraph,
@@ -829,16 +832,21 @@ table.facebook td {
       }
 
       @media only screen and (max-width: 600px) {
+        table.container .block-grid td {
+          width: 95% !important;
+        }
         .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
         .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic .full-image .optyn-replaceable-image img { max-width: 80vw !important; }
-        .basic .half-left-image .optyn-replaceable-image img,
-        .basic .half-right-image .optyn-replaceable-image img { max-width: 40vw !important; }
-        .basic .third-image .optyn-replaceable-image img { max-width: 24vw !important; }
+        .basic .full-image .optyn-replaceable-image img { width: 95% !important; }
+        .basic .half-left-image .optyn-replaceable-image,
+        .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
+        .basic .third-image .optyn-replaceable-image{ width: auto !important; }
+        .basic .third-image .optyn-replaceable-image img { width: 95% !important; }
         .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
+        .basic .three-up td{width: 94% !important;}
       }  /* End media query. */
 
     </style>
@@ -860,7 +868,7 @@ table.facebook td {
                             <td class="text-pad center optyn-intro-cont">
                               <division type="introduction">
                                 <div class="optyn-intro">
-                                  <img height="50" width="200" src="http://placehold.it/200x50" alt="" />
+                                  <img width="560" src="http://placehold.it/560x100" alt="" />
                                 </div>
                               </division>
                             </td>
@@ -876,7 +884,7 @@ table.facebook td {
           <container type="content">
             <table class="container">
               <tr>
-                <td class="outermost-content">
+                <td>
                   <row>
                     <div>
                       <grid type="content">
@@ -911,7 +919,7 @@ table.facebook td {
                                     </div>
                                   </paragraph>
                                   <image>
-                                     <img width="300" src="http://placehold.it/580x250" alt="" />
+                                     <img width="530" src="http://placehold.it/580x350" alt="" />
                                   </image>
                                 </td>
                               </tr>
@@ -941,12 +949,15 @@ table.facebook td {
                           </division>
 
                           <division type="text_with_left_image">
-                            <div class="text-pad-10">
-                              <headline>
-                                <h2 class="headline">Text with Left Image</h2>
-                              </headline>
-                              <table class="block-grid">
+                            <table class="block-grid">
                                 <tr>
+                                  <td>
+                                    <headline>
+                                      <h2 class="headline">Text with Left Image</h2>
+                                    </headline>
+                                  </td>
+                                </tr>
+                                <tr>  
                                   <td class="half-left-image">
                                     <image>
                                       <img src="http://placehold.it/580x250" alt=""  width="260" />
@@ -963,11 +974,14 @@ table.facebook td {
                           </division>
 
                           <division type="text_with_right_image">
-                            <div class="text-pad-10">
-                              <headline>
-                                <h2 class="headline">Text with Right Image</h2>
-                              </headline>
-                              <table class="block-grid">
+                            <table class="block-grid">
+                                <tr>
+                                  <td>
+                                    <headline>
+                                      <h2 class="headline">Text with Right Image</h2>
+                                    </headline>
+                                  </td>
+                                </tr>
                                 <tr>
                                   <td class="half-right-image">
                                     <image class="optyn-image">
@@ -979,43 +993,42 @@ table.facebook td {
                                   </td>
                                 </tr>
                               </table>
-                            </div>
                           </division>
 
                           <division type="image_gallery">
-                            <div>
-                              <div class="text-pad-10">
-                                <headline>
-                                  <h2 class="headline">Image Gallery</h2>
-                                </headline>
-                                <table class="block-grid three-up">
-                                  <tr>
-                                    <td class="third-image">
-                                      <image>
-                                        <img src="http://placehold.it/180x100" width="160" alt="" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Image caption goes here.</div>
-                                      </paragraph>
-                                    </td><td class="third-image">
-                                      <image>
-                                        <img src="http://placehold.it/180x100" width="160" alt="" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Image caption goes here.</div>
-                                      </paragraph>
-                                    </td><td class="third-image">
-                                      <image>
-                                        <img src="http://placehold.it/180x100" width="160" alt="" />
-                                      </image>
-                                      <paragraph>
-                                        <div>Image caption goes here.</div>
-                                      </paragraph>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </div>
-                            </div>
+                            <table class="block-grid">
+                              <tr>
+                                <td>
+                                  <headline>
+                                    <h2 class="headline">Text with Right Image</h2>
+                                  </headline>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="third-image">
+                                  <image>
+                                    <img src="http://placehold.it/300x150" width="160" alt="" />
+                                  </image>
+                                  <paragraph>
+                                    <div>Image caption goes here.</div>
+                                  </paragraph>
+                                </td><td class="third-image">
+                                  <image>
+                                    <img src="http://placehold.it/300x150" width="160" alt="" />
+                                  </image>
+                                  <paragraph>
+                                    <div>Image caption goes here.</div>
+                                  </paragraph>
+                                </td><td class="third-image">
+                                  <image>
+                                    <img src="http://placehold.it/300x150" width="160" alt="" />
+                                  </image>
+                                  <paragraph>
+                                    <div>Image caption goes here.</div>
+                                  </paragraph>
+                                </td>
+                              </tr>
+                            </table>
                           </division>
                         </div>
                       </grid>
@@ -1026,11 +1039,11 @@ table.facebook td {
             </table>
           </container>
           <container type="footer">
-            <div>
+            <table class="container">
               <row>
-                <div class="footer-container">
+                <tr>
                   <grid type="footer">
-                    <div>
+                    <td class="footer-container">
                       <division type="footer">
                         <table class="block-grid">
                           <tr>
@@ -1045,11 +1058,11 @@ table.facebook td {
                           </tr>
                         </table>
                       </division>
-                    </div>
+                    </td>
                   </grid>
-                </div>
+                </tr>
               </row>
-            </div>
+            </table>
           </container>
         </center>
       </td>

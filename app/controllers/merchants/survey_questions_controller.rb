@@ -14,7 +14,8 @@ class Merchants::SurveyQuestionsController < Merchants::BaseController
     @survey_question.values = (params[:survey_question][:values]).select(&:present?) if !params[:survey_question][:values].blank?
     @survey_question.save!
     head :ok
-  rescue ActiveRecord::RecordInvalid
+    rescue ActiveRecord::RecordInvalid => e
+    @survey_question.values = [""]
     render 'new', status: :unprocessable_entity
   end
 

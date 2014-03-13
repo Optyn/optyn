@@ -568,13 +568,6 @@ ActiveRecord::Schema.define(:version => 20140313074016) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "shop_audits", :force => true do |t|
-    t.integer  "shop_id"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "shop_credits", :force => true do |t|
     t.integer  "shop_id"
     t.integer  "remaining_count"
@@ -630,13 +623,6 @@ ActiveRecord::Schema.define(:version => 20140313074016) do
   end
 
   add_index "social_profiles", ["shop_id"], :name => "index_social_profiles_on_shop_id"
-
-  create_table "states", :force => true do |t|
-    t.string   "name"
-    t.string   "abbreviation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
 
   create_table "stylesheets", :force => true do |t|
     t.integer  "template_id"
