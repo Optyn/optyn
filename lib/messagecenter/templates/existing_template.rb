@@ -70,7 +70,7 @@ module Messagecenter
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
             
-            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n")))
+            content = template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, divisions_markup.join("\n"))
             content = build_social_sharing_options(template_grid,content)
             html << content
           end
@@ -88,7 +88,7 @@ module Messagecenter
             data_model_html = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{template_grid.data_model['type']}" data-components='#{components_json.gsub("'", "\\'")}'></span>}  
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
-            content = raw(template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n"))))
+            content = template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n")))
             content = build_social_sharing_options(template_grid,content)
             html << content
           end
@@ -115,18 +115,22 @@ module Messagecenter
               #paragraph added
               (division_hash['division']['paragraphs'] || []).each_with_index do |paragraph_content, index|
                 paragraph = division_node.css('.optyn-paragraph')[index]
-                paragraph.inner_html = paragraph_content
+                paragraph.inner_html = paragraph_content.gsub(/&nbsp;/, Template::OPTYN_SPACE_PLACEHOLDER)
               end
 
               #images added
               (division_hash['division']['images'] || []).each_with_index do |image_content, index|
                 image_container = division_node.css('.optyn-replaceable-image')[index]
-                if image_content['href'].blank?
-                  img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" />}
-                else
-                  img_elem = %{<a href="#{image_content['href']}" target="_blank"><img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" /></a>}
+                begin
+                  if image_content['href'].blank?
+                    img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" />}
+                  else
+                    img_elem = %{<a href="#{image_content['href']}" target="_blank"><img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" /></a>}
+                  end
+                  image_container.inner_html = img_elem
+                rescue
+                  ""
                 end
-                image_container.inner_html = img_elem
               end            
 
               toolset_markup = ""

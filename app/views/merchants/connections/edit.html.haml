@@ -11,17 +11,37 @@
           #update_shop_wrapper
             .control-group
               .control-label
-                = f.label :name
+                = f.label :first_name
               .controls
-                .labels{'data-toggle' => 'tooltip', title: 'Enter user name'}
-                  = f.text_field :name, :placeholder => 'Enter user name', class: 'span12'
+                .labels{'data-toggle' => 'tooltip', title: 'Enter first name'}
+                  = f.text_field :first_name, :placeholder => 'Enter first name', class: 'span12'
+            .control-group
+              .control-label
+                = f.label :last_name
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'Enter last name'}
+                  = f.text_field :last_name, :placeholder => 'Enter last name', class: 'span12'
             .control-group
               .control-label
                 = f.label :email
               .controls
                 .labels{'data-toggle' => 'tooltip', title: 'Enter user email'}
                   = f.text_field :email, :placeholder => 'Enter user email', class: 'span12'
-            
+            .control-group
+              .control-label
+                = f.label :birth_date
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'Enter birth date'}
+                  = f.text_field :birth_date, :placeholder => 'Enter birth date', class: 'span12'
+            .control-group
+              .control-label
+                = f.label :gender
+              .controls
+                .labels{'data-toggle' => 'tooltip', title: 'gender'}
+                  = f.radio_button :gender, 'm', :checked => check_gender(@user.gender, "m"), :class => "userGender"
+                  = "Male"
+                  = f.radio_button :gender, 'F', :checked => check_gender(@user.gender, "f"), :class => "userGender"
+                  = "Female"
             .control-group
               = hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_connections_path
               = hidden_field_tag "update_labels_merchants_survey_survey_answers_path", update_labels_merchants_connections_path

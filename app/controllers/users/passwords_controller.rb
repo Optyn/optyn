@@ -31,7 +31,7 @@ class Users::PasswordsController < Devise::PasswordsController
   def populate_user_and_manager
     @user = User.find_by_email(resource_params[:email])
     @manager = Manager.find_by_email(resource_params[:email])
-    @klass = @user.present? ? User : (@manager.present? ? Manager : User)
+    @klass = @manager.present? ? Manager : (@user.present? ? User : Manager)
   end
 
   def user_logged_in_through_social

@@ -20,19 +20,23 @@ module ConnectionsHelper
     user = connection.user
     connection.user.permissions_users.each do |permission_user|
       if permission_user.permission_id == name_id  && permission_user.action
-        return user.name if not user.name.blank? or not user.name.nil?
+        if user.full_name.present?
+          return user.full_name
+        else
+          next
+        end
       end
 
-      if (permission_user.permission_id == email_id && permission_user.action) or (user.name.blank? or user.name.nil?)
+      if (permission_user.permission_id == email_id && permission_user.action)
         return user.email
       else
-        return "Optyn User #{connection_user.user.id}"
+        return "Optyn User #{connection.user.id}"
       end
     end 
   end
 
   def connection_user_name(permission_user, user, name_id)
-    permission_user.permission_id == name_id && permission_user.action ? user.name : "-"
+    permission_user.permission_id == name_id && permission_user.action ? user.full_name : "-"
   end
 
   def connection_user_email(permission_user, user, email_id)

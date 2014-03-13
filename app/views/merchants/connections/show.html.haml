@@ -1,4 +1,4 @@
-.modal-header
+.modal-header{:style => "height : 200px;"}
   %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
   = link_to image_tag('avatar_large.png'), 'http://www.google.com'
   %span{:style => "float: right; position: absolute; padding-left: 15px;"}
@@ -6,7 +6,7 @@
     - name_id = Permission.name_id
     %strong
       = connection_user_display_name(@connection, name_id, email_id)
-    - if not (@user.name.blank? or @user.name.nil?)
+    - if !@user.full_name.blank?
       %br
       = "#{@user.email}"
     %br
@@ -15,9 +15,13 @@
     - status = @connection.active ? "Active" : "Inactive"
     = "Status: #{status}"
     %br
-    = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(@user.id), :confirm => "Are you sure you want to unsubscribe this user?", :class => "btn btn-primary"
-    %a.btn.btn-primary{:href => "#", "data-toggle" => "modal", "id" => "#{@user.id}", "class" => "consumer_edit_link"}Edit user
-    = hidden_field_tag "edit_path_#{@user.id}", edit_user_merchants_connections_path(@user.id)
+    = "Gender: #{@user.display_gender}"
+    %br
+    = "BirthDate: #{@user.birth_date.strftime('%d/%m/%y') rescue ""}"
+    %div
+      = link_to 'Unsubscribe User', unsubscribe_merchants_connections_path(@user.id), :confirm => "Are you sure you want to unsubscribe this user?", :class => "btn btn-primary"
+      %a.btn.btn-primary{:href => "#", "data-toggle" => "modal", "id" => "#{@user.id}", "class" => "consumer_edit_link"}Edit user
+      = hidden_field_tag "edit_path_#{@user.id}", edit_user_merchants_connections_path(@user.id)
 
 .modal-body{:style => "height:500px"}
   %h3 Customer Tags

@@ -5,7 +5,7 @@
 <% else %>
 	$('.template-editor-container #<%= params[:imagerow]%> img').first().attr('src','<%=@message_image.image%>')
 	$('.template-editor-container .loading').hide();
-  $('.template-editor-container .upload-img-btn').hide();
-  $('.template-editor-container .browsBtn').hide();
-	$('.template-editor-container .add-img-link-option').show();
+  $('.template-editor-container #<%= params[:imagerow]%> .upload-img-btn').hide();
+  $('.template-editor-container #<%= params[:imagerow]%> .browsBtn').hide();
+	$('.template-editor-container #<%= params[:imagerow]%>').find(".add-img-link-option").show();
 <% end %>

@@ -87,9 +87,11 @@ module Merchants::MessagesHelper
                         else
                           "Hello"
                       end
-
-    greeting_suffix = (receiver.first_name rescue "{{Customer Name}}") #message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : (receiver.first_name )
-
+    if @message_name.blank?
+      greeting_suffix = (receiver.first_name rescue "{{Customer Name}}") #message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : (receiver.first_name )
+    else
+      greeting_suffix = ""
+    end
     "#{greeting_prefix}#{(" " + greeting_suffix) if greeting_suffix.present?},"
   end
 
@@ -108,7 +110,7 @@ module Merchants::MessagesHelper
     end
 
     display_content = message.content.blank? ? "-" : message.personalized_content(receiver)
-    display_content.match(/<p>.*<\/p>/) ? raw(display_content) : simple_format(display_content)
+    display_content.match(/<p>.*<\/p>/ixm) ? raw(display_content) : simple_format(display_content)
     display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
   end

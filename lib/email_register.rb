@@ -2,6 +2,7 @@ module EmailRegister
 	private
 		def sudo_registration(params)
 		    @user = User.new(params[:user])
+		     @user.skip_name = true
 		    passwd = Devise.friendly_token.first(8)
 		    @user.password = passwd
 		    @user.password_confirmation = passwd

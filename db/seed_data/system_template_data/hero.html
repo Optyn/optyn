@@ -744,6 +744,10 @@
       }
 
       /* Theme styles */
+      .hero table.body, p{
+        line-height: normal;
+      }
+
       .optyn-introduction{
         background-color: #399;
       }
@@ -809,6 +813,7 @@
       .hero .half-left-image,
       .hero .half-right-image {
         padding: 0;
+        width: 95%;
       }
       .hero .half-left-image .optyn-replaceable-image,
       .hero .half-right-image .optyn-replaceable-image {
@@ -829,6 +834,7 @@
       .hero td.third-image,
       .hero .third-image .optyn-replaceable-image img{
         width:120px;
+        max-width: 120px;
       }
       .o-column { width: 48%; }
       [data-type="image_gallery"] .optyn-paragraph,
@@ -849,7 +855,7 @@
 
       @media only screen and (max-width: 600px) {
         table.container .block-grid td {
-          width: 100% !important;
+          width: 95% !important;
         }
         .body { width: 310px; }
         .body .float-left,
@@ -1060,7 +1066,7 @@
                                         <tr>
                                           <td>
                                             <headline>
-                                              <h2 class="headline">Text with Right Image</h2>
+                                              <h2 class="headline">Image Gallery</h2>
                                             </headline>
                                           </td>
                                         </tr>

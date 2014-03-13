@@ -136,6 +136,14 @@ class Manager < ActiveRecord::Base
     name.to_s.split(/\s/).first.to_s.capitalize #to_s if the name is blank by chance
   end
 
+  def last_name
+    name.to_s.split(/\s/).last.to_s.capitalize #to_s if the name is blank by chance
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def encode64_uuid
     Base64.urlsafe_encode64(self.uuid)
   end

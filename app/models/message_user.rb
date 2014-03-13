@@ -14,7 +14,7 @@ class MessageUser < ActiveRecord::Base
 
   attr_accessible :message_id, :user_id, :message_folder_id, :is_read, :email_read, :is_forwarded, :received_at, :added_individually
 
-  delegate :name, :email, :first_name, to: :user
+  delegate :email, :full_name, :first_name, to: :user
 
   scope :receivers_folder, ->(folder_id, user_id) { where(receivers_folder_conditions_hash(folder_id, user_id)) }
 

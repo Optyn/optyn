@@ -20,10 +20,11 @@
                   %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"} 
                     Hi #{@manager.name},
                   %p Your file import is complete.
-                  %p Below are the stats for the file.
+                  %p Below are the stats for the file imported.
                   - @counters.each_pair do |key, value|
                     %p
-                      == #{key.to_s.humanize.pluralize} = #{value}
+                      - if ![:existing_user, :connection_creation].include?(key)
+                        == #{stats_change[key]} = #{value}
 
                   %p
                     Cheers,

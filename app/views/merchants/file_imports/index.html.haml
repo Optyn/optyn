@@ -60,8 +60,9 @@
               %td
                 - if import.stats.present?
                   - import.stats.each_pair do |key, value|
-                    == #{key.to_s.humanize.pluralize} = #{value}
-                    %br
+                    - if ![:existing_user, :connection_creation].include?(key)
+                      == #{stats_change[key]} = #{value}
+                      %br
                 - else
                   N/A
               %td
