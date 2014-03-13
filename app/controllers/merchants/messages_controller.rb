@@ -316,8 +316,13 @@ class Merchants::MessagesController < Merchants::BaseController
       if @shop and @message
         if @message.make_public
           if not current_user.present?
-            respond_to do |format|
-              format.html {render :layout => false}
+            if @message.type.to_s.underscore == Message::SURVEY_FIELD_TEMPLATE_TYPE
+              flash[:notice] = "Sorry, This survey is not for public view."
+                redirect_to new_user_session_path 
+            else
+              respond_to do |format|
+                format.html {render :layout => false}
+              end
             end
           end
         else
