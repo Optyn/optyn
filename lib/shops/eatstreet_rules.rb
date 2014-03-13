@@ -9,7 +9,6 @@ module Shops
     end
 
     def needs_curation(change_state)
-      binding.pry
       return true if (self.state.blank? || self.draft? || self.pending_approval?) && (:pending_approval == change_state)
       if (self.queued?) && partner.eatstreet? && self.valid?
         keys = changed_attributes.keys
