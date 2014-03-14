@@ -1,4 +1,8 @@
 class PartnerMailer < ActionMailer::Base
+    include SendGrid
+
+  sendgrid_enable :opentrack
+  
   default from: "Optyn.com <services@optyn.com>",
           reply_to: "services@optyn.com"
 

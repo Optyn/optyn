@@ -1,5 +1,10 @@
 class ShareMailer < ActionMailer::Base
+  include SendGrid
+
+  sendgrid_enable :opentrack
+
   helper Merchants::MessagesHelper
+
   default from: "Optyn <services@optyn.com>"
 
   def shared_email(user_email, message)

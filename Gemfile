@@ -47,8 +47,14 @@ gem "uuidtools"
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
+
+#email sending and accessing web api
 gem 'aws-ses', :require => 'aws/ses'
 gem 'aws-sdk'
+
+#email sending and accessing web api
+gem 'sendgrid'
+
 gem 'rack-ssl-enforcer'
 gem 'sitemap_generator'
 gem 'phony_rails'
