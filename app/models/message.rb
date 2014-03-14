@@ -344,6 +344,11 @@ class Message < ActiveRecord::Base
     draft? || queued_editable? || pending_approval?
   end
 
+  def editable_state_for_manager?
+    return true if is_child?
+    draft? || queued_editable?
+  end
+
   def queued_editable?
     queued? && send_on > 1.hour.since
   end

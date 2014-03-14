@@ -12,7 +12,7 @@
         = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
         = hidden_field_tag :change_details, true
 
-      - if @message.editable_state?
+      - if @message.editable?
         = submit_tag "Update Content", name: 'preview', class: "btn btn-info"
 
       = submit_tag("Launch", name: "launch", class: 'btn btn-success') unless current_shop.disabled? || @message.queued?  
