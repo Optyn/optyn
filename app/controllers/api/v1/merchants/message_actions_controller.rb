@@ -37,33 +37,7 @@ module Api
         rescue ActiveRecord::RecordInvalid => e
           @message.errors.add(:base, e.message)
           render(status: :unprocessable_entity, template: individual_message_template_location)
-        end
-
-        def filter_time_params
-          params[:message].except(:label_ids, :ending_date, :ending_time, :send_on_date, :send_on_time)
-        end
-
-        def individual_message_template_location
-          "api/v1/merchants/messages/message"
-        end
-
-        def handle_assignment_exception
-          @message = Message.new
-          @message.manager_id = current_manager.id
-          @message.errors.add(:base, "You were assigning attributes that are not allowed.")
-          render(template: individual_message_template_location, status: :unprocessable_entity)
-          
-          true
-        end
-
-        def handle_record_not_found
-          @message = Message.new
-          @message.manager_id = current_manager.id
-          @message.errors.add(:base, "Sorry, Record you are looking are not found.")
-          render(template: individual_message_template_location, status: :unprocessable_entity)
-
-          true
-        end
+        end        
 
         def reject
           if request.get?
@@ -88,6 +62,34 @@ module Api
             @message.approve
             render(layout: 'email_feedback')
           end
+        end
+
+        private
+        
+        def filter_time_params
+          params[:message].except(:label_ids, :ending_date, :ending_time, :send_on_date, :send_on_time)
+        end
+
+        def individual_message_template_location
+          "api/v1/merchants/messages/message"
+        end
+
+        def handle_assignment_exception
+          @message = Message.new
+          @message.manager_id = current_manager.id
+          @message.errors.add(:base, "You were assigning attributes that are not allowed.")
+          render(template: individual_message_template_location, status: :unprocessable_entity)
+          
+          true
+        end
+
+        def handle_record_not_found
+          @message = Message.new
+          @message.manager_id = current_manager.id
+          @message.errors.add(:base, "Sorry, Record you are looking are not found.")
+          render(template: individual_message_template_location, status: :unprocessable_entity)
+
+          true
         end
       end #end of MessageActionsController
     end #end of Merchants module
