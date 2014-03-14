@@ -111,7 +111,7 @@ module Api
           
           @needs_curation = @message.needs_curation(:pending_approval)
           launched = @message.send(:send_for_approval)
-          if launched && @message.pending_approval?
+          if launched
             send_for_curation(params[:access_token]) 
           else
             @shop = @message.shop

@@ -110,7 +110,7 @@ class Message < ActiveRecord::Base
     end
 
     event :reject do
-      transition [:queued] => :draft
+      transition [:pending_approval,:queued] => :draft
     end
 
     event :send_for_approval do
@@ -341,7 +341,7 @@ class Message < ActiveRecord::Base
 
   def editable_state?
     return true if is_child?
-    draft? || queued_editable?
+    draft? || queued_editable? || pending_approval?
   end
 
   def queued_editable?
