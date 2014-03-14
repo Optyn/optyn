@@ -297,6 +297,8 @@ Optyn::Application.routes.draw do
         resources :message_actions do
           member do
             get :validate
+            put :approve
+            put :reject
           end
         end
         

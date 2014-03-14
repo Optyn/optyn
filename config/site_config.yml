@@ -32,7 +32,7 @@ defaults:
   eatstreet_curation_email: 'office@eatstreet.com'
   template_encryption_secret: "9p5yn1231391000158"
   app_reseller_url: 'http://localhost:3002'
-  reseller_edit_location: 'message_actions/edit_message'
+  reseller_edit_location: 'message_actions/:placeholder/edit'
   reseller_reject_location: 'message_actions/:placeholder/reject'
   reseller_approve_location: 'message_actions/:placeholder/approve'
 
