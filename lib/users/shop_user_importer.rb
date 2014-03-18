@@ -110,7 +110,7 @@ module Users
 
     def validate_user_import_headers(headers)
       if !headers.include?(:shop) || !headers.include?(:first_name) || !headers.include?(:last_name) || !headers.include?(:gender) || !headers.include?(:birth_date)
-        raise "Incorrect Headers. The file should have headers of 'Shop','First Name','Last Name','Gender', 'Birth Date'" 
+        raise "Incorrect Headers. The file should have headers of 'Shop', 'Manager Email', 'Email', 'First Name','Last Name','Gender', 'Birth Date'" 
       end  
     end
 
