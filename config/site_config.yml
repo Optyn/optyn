@@ -31,6 +31,8 @@ defaults:
   robots_redirect_uri: 'https://www.optyn.com/robots.txt'
   eatstreet_curation_email: 'office@eatstreet.com'
   template_encryption_secret: "9p5yn1231391000158"
+  send_grid_username: 'alenmalkoc'
+  send_grid_password: '77cd5a95aa'
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'

@@ -1,8 +1,10 @@
 class MerchantMailer < ActionMailer::Base
+
   default from: "Optyn.com <services@optyn.com>",
           reply_to: "services@optyn.com"
 
  helper "merchants/file_imports"
+ 
   #shop_id, amount, connection_count, card_ending
   def payment_notification(options={})
     options = options.symbolize_keys

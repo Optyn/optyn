@@ -1,5 +1,6 @@
 class ShareMailer < ActionMailer::Base
   helper Merchants::MessagesHelper
+
   default from: "Optyn <services@optyn.com>"
 
   def shared_email(user_email, message)
