@@ -54,6 +54,7 @@ gem 'aws-sdk'
 
 #email sending and accessing web api
 gem 'sendgrid'
+gem 'sendgrid_toolkit', '>= 1.1.1'
 
 gem 'rack-ssl-enforcer'
 gem 'sitemap_generator'
