@@ -2,6 +2,7 @@ class DeviseExtendedMailer < Devise::Mailer
   helper :application
   helper "merchants/messages"
 
+
   default from: 'Optyn.com <services@optyn.com>',
           reply_to: "services@optyn.com"
 

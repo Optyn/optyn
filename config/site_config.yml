@@ -35,6 +35,10 @@ defaults:
   reseller_edit_location: 'message_actions/:placeholder/edit'
   reseller_reject_location: 'message_actions/:placeholder/reject'
   reseller_approve_location: 'message_actions/:placeholder/approve'
+=======
+  send_grid_username: 'alenmalkoc'
+  send_grid_password: '77cd5a95aa'
+>>>>>>> master
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'

@@ -3,8 +3,7 @@ require 'shop_timezone'
 
 class MessageMailer < ActionMailer::Base
   include MailerFragmentCaching
-
-  default from: '"Email" <email@optyn.com>',
+  default from: 'Email <email@optyn.com>',
           reply_to: "services@optyn.com"
           
   helper "merchants/messages"
@@ -26,7 +25,7 @@ class MessageMailer < ActionMailer::Base
     @partner = @shop.partner
 
     #to: "success@simulator.amazonses.com",
-    mail(to: %Q(#{'"' + @receiver.full_name + '"' + ' ' if @receiver.full_name}<#{@receiver.email}>),
+    mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>),
       from: @message.from, 
       subject: @message.personalized_subject(@receiver),
       reply_to: @message.manager_email
@@ -40,7 +39,7 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
-    mail(to: %Q(#{'"' + receiver.full_name + '"' + ' ' if receiver.full_name}<#{receiver.email}>),
+    mail(to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
       from: message.from, 
       subject: message.personalized_subject(receiver),
       reply_to: message.manager_email,
