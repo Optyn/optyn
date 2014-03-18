@@ -3,10 +3,6 @@ require 'shop_timezone'
 
 class MessageMailer < ActionMailer::Base
   include MailerFragmentCaching
-  include SendGrid
-
-  sendgrid_disable :opentrack
-
   default from: 'Email <email@optyn.com>',
           reply_to: "services@optyn.com"
           
