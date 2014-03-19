@@ -53,6 +53,7 @@ module Shops
             manager.email                  = manager_email
             manager.name                   = row[:manager_name].to_s.strip
             manager.skip_name              = true
+            manager.skip_email             = true
             manager.password               = row[:manager_password].to_s.strip
             manager.password_confirmation  = row[:manager_password].to_s.strip
 
