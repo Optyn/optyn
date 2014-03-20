@@ -39,6 +39,8 @@ class Message < ActiveRecord::Base
   PAGE = 1
   MESSAGE_BATCH_SEND_NAME = "message_batch_send.pid"
   FORWARD_MESSAGE_BATCH_SEND_NAME = "forward_message_batch_send.pid"
+  SIDEBAR_TEMPLATS = ["Left Sidebar", "Right Sidebar"] 
+  HERO_TEMPLAT = ["Hero"]
 
   before_create :assign_uuid
 

@@ -125,7 +125,7 @@ module Messagecenter
                   if image_content['href'].blank?
                     img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" />}
                   else
-                    img_elem = %{<a href="#{image_content['href']}" target="_blank"><img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" /></a>}
+                    img_elem = %{<a href="#{image_content['href']}" target="_blank" class="imageLink"><img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" /></a>}
                   end
                   image_container.inner_html = img_elem
                 rescue

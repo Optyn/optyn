@@ -40,6 +40,7 @@ class Shop < ActiveRecord::Base
   attr_accessible :header_background_color, :phone_number, :remote_logo_img_url 
   #attr_accessible :uploaded_directly, :upload_location,
   attr_accessible :footer_background_color
+  attr_accessor :skip_payment_email 
 
 
   mount_uploader :logo_img, ShopImageUploader
@@ -370,7 +371,7 @@ class Shop < ActiveRecord::Base
     self.subscription.update_plan(new_plan)
 
     #Send Plan upgrade mail, only when plan is upgraded.
-    if not plan_downgraded
+    if !self.skip_payment_email && !plan_downgraded
       conn_count = self.active_connection_count
       PaymentNotificationSender.perform_async("MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id, active_connections: conn_count})
     end
@@ -387,7 +388,7 @@ class Shop < ActiveRecord::Base
       if self.tier_change_required?
         
         #Notify passing of free tier mail
-        if self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
+        if !self.skip_payment_email && self.active_connection_count == (Plan.starter.max + 1) && self.is_subscription_active?
           PaymentNotificationSender.perform_async("MerchantMailer", "notify_passing_free_tier", {manager_id: self.manager.id})
         end
         self.upgrade_plan

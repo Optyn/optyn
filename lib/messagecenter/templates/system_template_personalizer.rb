@@ -60,8 +60,77 @@ module Messagecenter
                   color: Template::CONTENT_LINK_COLOR
                 }
               }
+            },
+            sidebar:{
+              css: {
+                :'background-color' => Template::SIDEBAR_BACKGROUND_COLOR,
+              }, 
+
+              headline: {
+                css: {
+                  color: Template::CONTENT_TITLE_COLOR
+                }  
+              },
+
+              paragraph: {
+                css: {
+                  color: Template::CONTENT_PARAGRAPH_COLOR
+                }
+              },
+
+              link: {
+                css: {
+                  color: Template::CONTENT_LINK_COLOR
+                }
+              }
+            },
+            rightSidebar:{
+              css: {
+                :'background-color' => Template::SIDEBAR_BACKGROUND_COLOR,
+              }, 
+
+              headline: {
+                css: {
+                  color: Template::CONTENT_TITLE_COLOR
+                }  
+              },
+
+              paragraph: {
+                css: {
+                  color: Template::CONTENT_PARAGRAPH_COLOR
+                }
+              },
+
+              link: {
+                css: {
+                  color: Template::CONTENT_LINK_COLOR
+                }
+              }
+            },
+            leftSidebar:{
+              css: {
+                :'background-color' => Template::SIDEBAR_BACKGROUND_COLOR,
+              }, 
+
+              headline: {
+                css: {
+                  color: Template::CONTENT_TITLE_COLOR
+                }  
+              },
+
+              paragraph: {
+                css: {
+                  color: Template::CONTENT_PARAGRAPH_COLOR
+                }
+              },
+
+              link: {
+                css: {
+                  color: Template::CONTENT_LINK_COLOR
+                }
+              }
             }
-          }    
+          }
         }
       end
 
@@ -150,6 +219,12 @@ module Messagecenter
         convert_layout((selectable_properties[:properties][:layout] rescue {}))
         convert_header((selectable_properties[:properties][:header] rescue {}))
         convert_content((selectable_properties[:properties][:content] rescue {}))
+        sidebar_properties = selectable_properties[:properties][:sidebar]
+        left_sidebar_properties = selectable_properties[:properties][:leftSidebar]
+        right_sidebar_properties = selectable_properties[:properties][:rightSidebar]
+        convert_sidebar((selectable_properties[:properties][:sidebar] rescue {}), ".sidebar-container .optyn-sidebar") if sidebar_properties.present?
+        convert_sidebar((selectable_properties[:properties][:leftSidebar] rescue {}), ".left-sidebar .optyn-sidebar") if left_sidebar_properties.present?
+        convert_sidebar((selectable_properties[:properties][:rightSidebar] rescue {}), ".right-sidebar .optyn-sidebar") if right_sidebar_properties.present?
         convert_footer
         replace_styles
         self.html = @parsed_html.to_s
@@ -261,9 +336,59 @@ module Messagecenter
           end       
 
           #change the background color of the sidebar
-          node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
-          node.set_property('background-color', '#C9C9C9')
+          #node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
+          #node.set_property('background-color', '#C9C9C9')
         end
+
+        def convert_sidebar(sidebar_properties, sidebar_classname)
+          background_class = sidebar_classname.split(/\s/).first
+          if sidebar_properties[:css].present?
+            #change the background color of the core content
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{background_class}"}
+            puts node
+            if node.present?
+              node.set_property('background-color', sidebar_properties[:css][:'background-color'])
+            end
+          end
+
+          if sidebar_properties[:headline].present?
+            #change the css properties of the headline
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-headline"}
+            if node.present?
+              headline_style_properties = sidebar_properties[:headline][:css]
+              headline_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
+          end
+
+          if sidebar_properties[:paragraph].present?
+            #change the css properties of the paragraph
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-paragraph"}
+            if node.present?
+              paragraph_style_properties = sidebar_properties[:paragraph][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
+          end
+
+          if sidebar_properties[:link].present?
+            #change the css properties of links
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-link"}
+            if node.present?
+              paragraph_style_properties = sidebar_properties[:link][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end             
+            end
+          end       
+
+          #change the background color of the sidebar
+          # node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
+          # node.set_property('background-color', '#C9C9C9')
+        end
+
 
         def convert_footer
           #change the permission

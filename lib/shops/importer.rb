@@ -40,7 +40,7 @@ module Shops
             shop.name = shop_name
             shop.phone_number = row[:shop_phone].to_s.strip
             shop.website = row[:shop_website].to_s.strip
-            shop.stype = row[:shop_type].present? ? row[:shop_type].to_s.strip : "local"
+            shop.stype = row[:shop_type].present? ? row[:shop_type].downcase.to_s.strip : "local"
             shop.partner_id = payload.partner_id
             puts "Color: #{row[:shop_header_background_color]}"
             shop.header_background_color = row[:shop_header_background_color].to_s.blank? ? partner.header_background_color : row[:shop_header_background_color].to_s
@@ -53,6 +53,7 @@ module Shops
             manager.email                  = manager_email
             manager.name                   = row[:manager_name].to_s.strip
             manager.skip_name              = true
+            manager.skip_email             = true
             manager.password               = row[:manager_password].to_s.strip
             manager.password_confirmation  = row[:manager_password].to_s.strip
 
