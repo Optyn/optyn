@@ -167,6 +167,8 @@ class Message < ActiveRecord::Base
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
 
+    after_transition any => :pending_approval, :do => :replenish_draft_and_queued_count
+
     after_transition any => :delete, :do => :replenish_draft_and_queued_count
 
     after_transition any => :trash, :do => :replenish_draft_and_queued_count
@@ -780,6 +782,7 @@ class Message < ActiveRecord::Base
   def replenish_draft_and_queued_count
     Message.cached_drafts_count(shop, true)
     Message.cached_queued_count(shop, true)
+    Message.cached_approves_count(shop, true)
   end
 
   def send_on_greater_by_hour
