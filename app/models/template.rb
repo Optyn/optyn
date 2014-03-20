@@ -49,6 +49,7 @@ class Template < ActiveRecord::Base
   HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Arial, sans-serif}, %{Verdana, Arial, sans-serif}, %{'Courier New', Courier, Arial, sans-serif}]
   HEADER_BACKGROUND_COLOR = Shop::DEFAULT_HEADER_BACKGROUND_COLOR
   CONTENT_BACKGROUND_COLOR = '#FFFFFF'
+  SIDEBAR_BACKGROUND_COLOR = '#C9C9C9'
   CONTENT_TITLE_COLOR = '#000000'
   CONTENT_PARAGRAPH_COLOR = '#000000'
   CONTENT_LINK_COLOR = '#000000'
