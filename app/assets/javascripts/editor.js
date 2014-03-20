@@ -21,8 +21,10 @@ OP = (function($, window, doucument, Optyn){
       this.hookDeleteSection();
       this.hookContentCreationOnLoad();
       this.fixCkEditorModalIssue();
+      this.hookImageClick();
       setTimeout( function() {
         OP.setParentIframeHeight();
+        OP.setImageLinkTarget();
       }, 3000);  // Find a better alternative for this setTimeout.
     },
 
@@ -176,6 +178,7 @@ OP = (function($, window, doucument, Optyn){
     },
 
 
+  
 
     //Update the section html for the updates made by user in CKEditor
     hookUpdatingSection: function(){
@@ -201,14 +204,13 @@ OP = (function($, window, doucument, Optyn){
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
           var uploadedImageSrc = images[index][0];
-          console.log(placeholderSrc);
-          console.log(uploadedImageSrc);
 
           if(placeholderSrc != uploadedImageSrc){
             var $temp = $("<div />");
             var $img = $('<img />');
              var $a = $('<a />');
              $a.attr("href", images[index][1]);
+             $a.attr("class", "imageLink");
              if(images[index][1].length > 0){
              $a.append($img); 
              }
@@ -233,6 +235,14 @@ OP = (function($, window, doucument, Optyn){
       });
     },
 
+    hookImageClick: function(){
+      $('body').on('click', '.imageLink', function() {
+        var location = $(this).attr('href');
+        console.log(location);
+        window.open(location,'_blank','width=800, height=900');
+        return false;
+      });
+    },
     //Add a new section observer
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function( event ) {
@@ -256,6 +266,7 @@ OP = (function($, window, doucument, Optyn){
         }, 100);
         
         OP.setParentIframeHeight();
+        OP.setImageLinkTarget();
       });
     },
 
@@ -289,6 +300,7 @@ OP = (function($, window, doucument, Optyn){
           }
           OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
+          OP.template.setImageLinkTarget();
         }); //end of slide up division
       });
     },
@@ -435,6 +447,15 @@ OP = (function($, window, doucument, Optyn){
     };
     resize();
     $( window ).resize( resize );
+  };
+
+  Optyn.setImageLinkTarget = function() {
+    $('.imageLink').click(function() {
+        var location = $(this).attr('href');
+        console.log(location);
+        window.open(location,'_blank','width=800, height=900');
+        return false;
+      });
   };
 
   return Optyn;
