@@ -41,7 +41,8 @@ OP = (function($, window, doucument, Optyn){
           var submitButton = $('[id^=populateLink]')
 
           $(submitButton).on('click', function() {
-            var link = $('[id^=imageLinkModel]').val()
+            var link = $(this).parent().siblings(".modal-body").find('input[type="url"]').val();
+            console.log(link);
             if(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(link)) {
             } else {
               alert("invalid url");
@@ -55,10 +56,16 @@ OP = (function($, window, doucument, Optyn){
           $(this).parents('.msg_img_upload').first().find('.loading').first().show();
           $(this).hide();
         });
-        $("#edit_image").click(function(){
-          $('.template-editor-container .upload-img-btn').show();
-          $('.template-editor-container .browsBtn').show();
-          $('.template-editor-container .add-img-link-option').hide();
+         $(".show_link").click(function(){
+          $(this).parents().siblings(".add-img-link-option").show();
+          $(this).parents().siblings("form").hide();
+          $(this).parents(".show-img-link-option").hide();
+        });
+        $(".edit_image").click(function(){
+          $(this).parents().siblings("form").show();
+          $(this).parents().siblings("form").find(".upload-img-btn").show();
+          $(this).parents().siblings(".show-img-link-option").show();
+          $(this).parents(".add-img-link-option").hide();
         });
 
         OP.templateEditor.openCKEditor($templateContainer);

@@ -290,5 +290,23 @@ module Merchants::MessagesHelper
     end
   end
 
+  def is_sidebar_template(template_name)
+    Message::SIDEBAR_TEMPLATS.include?(template_name) ? true : false
+  end
+  
+  def is_hero_template(template_name)
+    Message::HERO_TEMPLAT.include?(template_name) ? true : false
+  end
+
+  def next_tab(old_tab, template_name)
+    if Message::SIDEBAR_TEMPLATS.include?(template_name)
+       "template_sidebar"
+     elsif Message::HERO_TEMPLAT.include?(template_name)
+      "template_sidebar"
+    else
+      old_tab
+    end
+  end
+
   
 end
