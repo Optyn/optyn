@@ -21,8 +21,10 @@ OP = (function($, window, doucument, Optyn){
       this.hookDeleteSection();
       this.hookContentCreationOnLoad();
       this.fixCkEditorModalIssue();
+      this.hookImageClick();
       setTimeout( function() {
         OP.setParentIframeHeight();
+        OP.setImageLinkTarget();
       }, 3000);  // Find a better alternative for this setTimeout.
     },
 
@@ -130,12 +132,15 @@ OP = (function($, window, doucument, Optyn){
           var display = null;
 
           if(currentArtifact.content[0].indexOf("placehold.it") == -1){
-               display = "block"
+               display = "none";
+               show_link_diaplay = "block";
           }
           else{
-           display = "none"
+           display = "none";
+           show_link_diaplay = "none"
           }
-          var links = '<div style="display: '+ display +'" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">Add Link</a> | <a id="edit_image">Edit Image</a></div></div></div>' ;
+          var show_link = '<div style="display: '+ show_link_diaplay +'; cursor: pointer" class="show-img-link-option" >  <a  class="show_link">Show links</a></div>' ;
+          var links = '<div style="display: '+ display +'; cursor: pointer" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">Add Link</a> | <a class="edit_image">Edit Image</a></div>' ;
           htmlVal += '</div><div class="nl-image-form" id="' + row_id + '">' +
           '<div>Preview:<br /> <img src="' + currentArtifact.content[0] + '" class="uploaded-image" data-href="' + currentArtifact.content[1] + '" /></div>' +
           '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
@@ -146,11 +151,13 @@ OP = (function($, window, doucument, Optyn){
           '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div>' +
           '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form>' +
           links +
+          show_link +
+          '</div></div>'+
           '<div class="separator-micro-dark"></div>'+
           '<div  id="AddLink'+ row_id+'" class="modal hide fade">'+
           '<div class="modal-header">' +
           '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-          '<h3>Add Link</h3></div>' +
+          '<h3 style="color: black;">Add Link</h3></div>' +
           '<div class="modal-body">' +
           '<p><input type="url" name="link" value="'+ currentArtifact.content[1] +'" id="imageLinkModel'+ row_id+'"></p></div>' +
           '<div class="modal-footer">' +
@@ -171,6 +178,7 @@ OP = (function($, window, doucument, Optyn){
     },
 
 
+  
 
     //Update the section html for the updates made by user in CKEditor
     hookUpdatingSection: function(){
@@ -196,14 +204,13 @@ OP = (function($, window, doucument, Optyn){
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
           var uploadedImageSrc = images[index][0];
-          console.log(placeholderSrc);
-          console.log(uploadedImageSrc);
 
           if(placeholderSrc != uploadedImageSrc){
             var $temp = $("<div />");
             var $img = $('<img />');
              var $a = $('<a />');
              $a.attr("href", images[index][1]);
+             $a.attr("class", "imageLink");
              if(images[index][1].length > 0){
              $a.append($img); 
              }
@@ -228,6 +235,14 @@ OP = (function($, window, doucument, Optyn){
       });
     },
 
+    hookImageClick: function(){
+      $('body').on('click', '.imageLink', function() {
+        var location = $(this).attr('href');
+        console.log(location);
+        window.open(location,'_blank','width=800, height=900');
+        return false;
+      });
+    },
     //Add a new section observer
     hookAddSection: function(){
       $('body').on('click', '.add-section-link', function( event ) {
@@ -251,6 +266,7 @@ OP = (function($, window, doucument, Optyn){
         }, 100);
         
         OP.setParentIframeHeight();
+        OP.setImageLinkTarget();
       });
     },
 
@@ -284,6 +300,7 @@ OP = (function($, window, doucument, Optyn){
           }
           OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
+          OP.template.setImageLinkTarget();
         }); //end of slide up division
       });
     },
@@ -430,6 +447,15 @@ OP = (function($, window, doucument, Optyn){
     };
     resize();
     $( window ).resize( resize );
+  };
+
+  Optyn.setImageLinkTarget = function() {
+    $('.imageLink').click(function() {
+        var location = $(this).attr('href');
+        console.log(location);
+        window.open(location,'_blank','width=800, height=900');
+        return false;
+      });
   };
 
   return Optyn;

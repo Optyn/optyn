@@ -12,6 +12,8 @@ class Connection < ActiveRecord::Base
 
   attr_accessible :user_id, :shop_id, :active, :connected_via, :disconnect_event
 
+  attr_accessor :skip_payment_email
+
   after_save :check_shop_tier
 
   scope :active, where(active: true)
@@ -138,9 +140,9 @@ class Connection < ActiveRecord::Base
   end
 
   def check_shop_tier
-    # binding.pry
-    #the function thats calls check if plan change is requried after importing connections
-    self.shop.check_subscription
+    owner_shop = self.shop
+    owner_shop.skip_payment_email = self.skip_payment_email if self.skip_payment_email
+    owner_shop.check_subscription
   end
 
 

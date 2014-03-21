@@ -37,6 +37,7 @@ module Users
           Shop.transaction do
             
             shop = Shop.for_manager_email(manager_email)
+            shop.skip_payment_email = true if shop.present?
             
 		        user = User.find_by_email(row[:email].to_s.downcase.strip) || User.new(email: row[:email].to_s.downcase.strip)
 
@@ -87,7 +88,8 @@ module Users
           else
             counters[:existing_connection] += 1
           end
-          connection.save()
+          connection.skip_payment_email = true
+          connection.save
 
           end #end of transaction
 
