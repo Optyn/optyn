@@ -46,18 +46,21 @@ module Shops
 
       def messages_in_past?
         messages = Message.queued_in_time_span((self.send_on - 3.days).beginning_of_day..self.send_on.end_of_day, shop.id).not_for_ids([self.id])
-        messages.present?
+        pending_messages = Message.pending_approvals_in_time_span((self.send_on - 3.days).beginning_of_day..self.send_on.end_of_day, shop.id).not_for_ids([self.id])
+        messages.present? || pending_messages.present?
       end
 
       def messages_in_future?
         messages = Message.queued_in_time_span((self.send_on.beginning_of_day..(self.send_on.beginning_of_day + 3.days).end_of_day), shop.id).not_for_ids([self.id])
-        messages.present?
+        pending_messages = Message.pending_approvals_in_time_span((self.send_on - 3.days).beginning_of_day..self.send_on.end_of_day, shop.id).not_for_ids([self.id])
+        messages.present? || pending_messages.present?
       end
 
       def credits_not_available?
         available_credits = shop.remaining_credits(sendon_months_beginning, sendon_months_ending)
         queued_messages = Message.queued_in_time_span(sendon_months_beginning..sendon_months_beginning, shop.id).not_for_ids([self.id])
-        ((available_credits - queued_messages.size) - 1) < 0 
+        pending_messages = Message.pending_approvals_in_time_span(sendon_months_beginning..sendon_months_beginning, shop.id).not_for_ids([self.id])
+        ((available_credits - (queued_messages.size + pending_messages.size)) - 1) < 0 
       end
 
       def sendon_months_beginning
@@ -72,6 +75,10 @@ module Shops
     module ClassMethods
       def queued_in_time_span(range, shop_id)
         for_state_and_shop(:queued, shop_id).scheduled_inrange(range)
+      end
+
+      def pending_approvals_in_time_span(range, shop_id)
+        for_state_and_shop(:pending_approval, shop_id).scheduled_inrange(range)
       end
     end
   end #end of the EatstretRules module

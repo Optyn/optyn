@@ -60,6 +60,7 @@ module Api
             MessageRejectionWorker.perform_async(@message_change_notifier.id)
             @success = true
           else
+            @error = "#{@message.errors.first.first.to_s.humanize} #{@message.errors.first.last}"
             @success = false
           end
         end
