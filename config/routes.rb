@@ -446,10 +446,6 @@ Optyn::Application.routes.draw do
         get :report
         get :social_report
         put :update_header
-        get :reject
-        put :reject
-        get :approve
-        put :approve
         get :edit_template
         get :template
         put :assign_template

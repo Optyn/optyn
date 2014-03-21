@@ -66,9 +66,11 @@ module Api
         end
 
         def approve
+          binding.pry
           @message = Message.for_uuid(params[:message_uuid])
           launched = @message.send(:launch)
-          @message_change_notifier = MessageChangeNotifier.find(params[:message_change_uuid])
+          @message_change_notifier = MessageChangeNotifier.for_uuid(params[:message_change_uuid])
+          
           if launched
             @success = true
           else

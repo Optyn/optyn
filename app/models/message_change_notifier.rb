@@ -1,4 +1,6 @@
 class MessageChangeNotifier < ActiveRecord::Base
+  include UuidFinder
+
   belongs_to :message
 
   attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on,:access_token
