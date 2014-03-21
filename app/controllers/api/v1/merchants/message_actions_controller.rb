@@ -68,16 +68,12 @@ module Api
         def approve
           @message = Message.for_uuid(params[:message_uuid])
           launched = @message.send(:launch)
+          @message_change_notifier = MessageChangeNotifier.find(params[:message_change_uuid])
           if launched
-            render(template: individual_message_template_location, status: :ok, layout: false, formats: [:json], handlers: [:rabl])
+            @success = true
           else
-            @shop = @message.shop
-            @partner = @shop.partner
-            @shop_logo = true
-            @preview = true
-
-            @rendered_string = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
-            render  :template => 'api/v1/merchants/messages/show',:layout => false, :formats=>[:json],:handlers=>[:rabl], status: :unprocessable_entity   
+            @error = "#{@message.errors.first.first.to_s.humanize} #{@message.errors.first.last}"
+            @success = false
           end          
         end
 
