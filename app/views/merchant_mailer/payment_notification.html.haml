@@ -21,17 +21,17 @@
                   %p We have received your payment. Here are the details:
                   %ul
                     %li
-                      Amount charged
+                      Amount charged:
                       = number_to_currency(@amount, precision: 2)
                     %li
-                      Card used
+                      Card used:
                       = 'xxxx xxxx xxxx ' + @last4
                     %li
-                      Connection count
+                      Connection count:
                       = @conn_count
                   %p
                     %a.btn{:href => "http://www.optyn.com"} View your Account
-                  %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and your fellow Optyners, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
+                  %p If you have any questions or feedback, we are always willing to listen. The better we can make your experience and the experience of subscribers, the more everyone will benefit. So feel free to tweet us, post on our facebook page or email us at support@optyn.com.
                   %p
                     Cheers,
                     %br/
