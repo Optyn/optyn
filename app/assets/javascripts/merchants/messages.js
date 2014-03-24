@@ -104,7 +104,7 @@ function MerchantMessage() {
         if($('.open-reports').length){
           this.hookReport();
           this.hookOpenLinkClickReport();
-          this.hookClearReportModal();
+          // this.hookClearReportModal();
           this.backToMainReport();
         }
     };
@@ -708,7 +708,7 @@ function MerchantMessage() {
 
     this.hookClearReportModal = function(){
       $('#report_dialog').on('hide', function(){
-        $('#report_dialog').html('<div class="modal-body"><strong>Plase Wait...</strong></div>');
+        $('#report_dialog').html('<div class="modal-body"><strong>Please Wait...</strong></div>');
       });
     };
 

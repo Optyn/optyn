@@ -459,9 +459,7 @@ class Message < ActiveRecord::Base
   end
 
   def actual_recipients
-    message_user_ids = message_users.collect(&:id)
-    undelivered_msgs = MessageEmailAuditor.where("delivered is true AND message_user_id in (?)", message_user_ids)
-    undelivered_msgs.count
+    message_email_auditors.delivered.count
   end
 
   def opens_count
@@ -469,7 +467,23 @@ class Message < ActiveRecord::Base
   end
 
   def opt_outs
-    message_users.where('opt_out is true').count
+    message_users.opt_outs.count
+  end
+
+  def bounced
+    message_email_auditors.bounced.count
+  end
+
+  def complaints
+    message_email_auditors.complaints.count
+  end
+
+  def relevance_count
+    message_users.coupon_relevance.count
+  end
+
+  def irrelavance_count
+    message_users.coupon_irrelevance.count
   end
 
   def link_click_count
