@@ -8,6 +8,8 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   scope :undelivered, where(delivered: false)
 
+  scope :delivered, where(delivered: true)
+
   scope :bounced, where(bounced: true)
 
   scope :complaints, where(complaint: true)

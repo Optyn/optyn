@@ -52,7 +52,7 @@
       .info
         Bounces:
       .count
-        = message.bounces
+        = message.bounced
 
     .span3.box
       .info
@@ -67,8 +67,10 @@
   .row-fluid.stats
     = hidden_field_tag "social_site_report_path_#{message.uuid}", social_report_merchants_message_path(message.uuid)
     .social-site-report{:id => "social_site_report_#{message.uuid}"}
-    - if (message.type == "CouponMessage" and message.message_users)
-      - relevant, non_relevant = get_offer_relevance_stat(message)
+    - if (message.type == "CouponMessage" and message.message_users.count > 0)
+      - relevant = message.relevance_count
+      - non_relevant = message.irrelavance_count
+      
       .span3.box
         .info
           Offer relevance - Yes:
