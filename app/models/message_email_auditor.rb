@@ -8,6 +8,10 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   scope :undelivered, where(delivered: false)
 
+  scope :bounced, where(bounced: true)
+
+  scope :complaints, where(complaint: true)
+
   scope :bounced_or_complains, where("message_email_auditors.bounced = true OR message_email_auditors.complaint = true")
 
   BOUNCED = "arn:aws:sqs:us-east-1:946687270082:ses-bounces-queue"

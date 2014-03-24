@@ -472,6 +472,14 @@ class Message < ActiveRecord::Base
     message_users.where('opt_out is true').count
   end
 
+  def bounces
+    message_email_auditors.bounced.count
+  end
+
+  def complaints
+    message_email_auditors.complaints.count
+  end
+
   def link_click_count
     EmailTracking.consolidated_count(self.id)
   end
