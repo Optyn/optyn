@@ -49,7 +49,7 @@
         Click Me!  
 
     = hidden_field_tag "social_site_report_path_#{message.uuid}", social_report_merchants_message_path(message.uuid)
-    %div{:id => "social_site_report_#{message.uuid}"}
+    .social-site-report{:id => "social_site_report_#{message.uuid}"}
     - if (message.type == "CouponMessage" and message.message_users)
       - relevant, non_relevant = get_offer_relevance_stat(message)
       .span3.box
