@@ -24,6 +24,8 @@ class MessageUser < ActiveRecord::Base
 
   scope :include_user, includes(:user)
 
+  scope :include_message_email_auditor, includes(:message_email_auditor)
+
   scope :for_message_ids, ->(message_ids) { where(message_id: message_ids) }
 
   scope :for_user_ids, ->(user_ids) { where(user_id: user_ids) }
@@ -42,6 +44,14 @@ class MessageUser < ActiveRecord::Base
   scope :for_message_owner, ->(owner_id) { joins_message
   .where(["messages.manager_id = :owner_id", {owner_id: owner_id}])
   }
+
+  scope :opt_outs, where(opt_out: true)
+
+  scope :coupon_relevance, select("DISTINCT(message_users.id) AS message_users_id, 
+    CASE WHEN message_users.offer_relevant = true THEN SUM(1) END AS relevant_offer_count, 
+    CASE WHEN message_users.offer_relevant = false THEN SUM(1) END AS irrelevant_offer_count")
+                           .group("message_users.id")
+                           .limit(1)
 
   def self.inbox_messages(user, page_number=1, per_page=Message::PER_PAGE)
     receivers_folder(MessageFolder.inbox_id, user.id).created_at_descending.include_message.page(page_number).per(per_page)
@@ -188,6 +198,14 @@ class MessageUser < ActiveRecord::Base
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
       MessageUser.for_message_owner(manager_id).any_read.count
     end
+  end
+
+  def self.coupon_relevance
+    where(offer_relevant: true)
+  end
+
+  def self.coupon_irrelevance
+    where(offer_relevant: false)
   end
 
   def shop
