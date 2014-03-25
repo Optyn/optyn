@@ -2,9 +2,9 @@ class MessagesController < BaseController
   include Messagecenter::CommonsHelper
   include DashboardCleaner
 
-  before_filter :populate_user_folder_count
+  before_filter :populate_user_folder_count, :except => [:offer_relevant]
 
-  before_filter :show_my_messages_only, :only => [:show]
+  before_filter :show_my_messages_only, :only => [:show], :except => [:offer_relevant]
 
   around_filter :flush_message_latest_messages_and_counts, except: [:inbox, :saved, :trash]
 
@@ -45,7 +45,7 @@ class MessagesController < BaseController
       @message_user.update_attribute(:offer_relevant, params[:offer_relevant])
       @message_user.save
     end
-    redirect_to message_path(@message_user.message.uuid)
+    render "thankyou", layout: "email_feedback"
   end
 
   def move_to_inbox
