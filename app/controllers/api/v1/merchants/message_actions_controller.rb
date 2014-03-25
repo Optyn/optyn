@@ -12,19 +12,13 @@ module Api
         OUTGOING_TIME_FORMAT = "%I:%M %p"
 
         include Messagecenter::CommonsHelper
-        include Messagecenter::CommonFilters        
-
-        def validate
-          @message = Message.for_uuid(params[:message_uuid])
-          @success = (current_manager.present? && @message.present?) ? true :false
-          @msg = (current_manager.present? || @message.present?) ? "" : "The link has expired" 
-        end
+        include Messagecenter::CommonFilters
 
         def get_message
           @message_change_notifier = MessageChangeNotifier.for_message_id_and_message_change_id(params[:message_uuid], params[:message_change_uuid])
           @message = (@message_change_notifier.message rescue nil)
           @success = @message_change_notifier.present? ? true : false
-          @msg =@message_change_notifier.present? ? "" : "The link has expired. A moditfication to the message has been made. Please contact support@optyn.com if you are facing problems."
+          @msg =(current_manager.present? && @message_change_notifier.present?) ? "" : "The link has expired. A moditfication to the message has been made. Please contact support@optyn.com if you are facing problems."
         end
 
         def update  	
@@ -66,12 +60,15 @@ module Api
         end
 
         def approve
-          @message = Message.for_uuid(params[:message_uuid])
+          @message = Message.for_uuid(params[:message_uuid])          
+          @needs_curation = @message.needs_curation(:launch)
           launched = @message.send(:launch)
           @message_change_notifier = MessageChangeNotifier.for_uuid(params[:message_change_uuid])
           
           if launched
+            send_for_curation(params[:access_token])
             @success = true
+            render(template: "/api/v1/merchants/message_actions/approve", status: :ok, layout: false, formats: [:json], handlers: [:rabl])
           else
             @error = "#{@message.errors.first.first.to_s.humanize} #{@message.errors.first.last}"
             @success = false
