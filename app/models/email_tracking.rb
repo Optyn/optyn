@@ -3,7 +3,7 @@ class EmailTracking < ActiveRecord::Base
   serialize :data, Hash
 
   scope :for_message, ->(message_identifier) { where(message_id: message_identifier) }
-
+ # To be refactored needs to be done with querery
   def self.get_message_click_report(message_id)
     all_entries = for_message(message_id)
     result = {}
@@ -24,14 +24,17 @@ class EmailTracking < ActiveRecord::Base
 
 
   def track(data)
-    track_hash = {
-      data: data,
-      manager_id: data['manager_id'],
-      message_id: data['message_id'],
-      redirect_url: data[:redirect_url],
-      user_email: data['email']
-    }
+    email_tracking = EmailTracking.where("message_id = ? and user_email = ? and redirect_url = ? ", data['message_id'], data['email'], data[:redirect_url])
+    if !email_tracking.present?
+      track_hash = {
+        data: data,
+        manager_id: data['manager_id'],
+        message_id: data['message_id'],
+        redirect_url: data[:redirect_url],
+        user_email: data['email']
+      }
     EmailTracking.create!(track_hash)
+  end
   rescue Exception => e
     p "ERROR ==> #{e.message}"
     p "ERROR ==> #{e.backtrace}"
