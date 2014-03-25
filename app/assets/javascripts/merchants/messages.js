@@ -667,8 +667,9 @@ function MerchantMessage() {
         success: function(data){
           // $('iframe#customHtmlTemplate').contents().find('html').replaceWith(data);
           iframe = document.getElementById('customHtmlTemplate');
-          iframe.contentWindow.document.open()
+          iframe.contentWindow.document.open();
           iframe.contentWindow.document.write(data);
+          iframe.contentWindow.document.close();
         },
         error: function(){
           $('iframe#customHtmlTemplate').contents().html('<strong>An error occurred while setting your properties. Please select the template again</strong>');
