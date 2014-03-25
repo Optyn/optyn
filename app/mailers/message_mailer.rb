@@ -15,6 +15,7 @@ class MessageMailer < ActionMailer::Base
     @receiver = receiver
     @show_cancel_link = false
     @user = @receiver #for survey emails
+    @message_user = @receiver
     @shop = @message.shop
     if @message.manager.present?
       @shop = @message.shop
