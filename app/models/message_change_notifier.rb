@@ -1,9 +1,11 @@
 class MessageChangeNotifier < ActiveRecord::Base
+  include UuidFinder
+
   belongs_to :message
 
-  attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on
+  attr_accessible :message_id, :content, :rejection_comment, :subject, :send_on,:access_token
 
-  after_create :enqueue_for_notification, :assign_uuid
+  after_create :assign_uuid, :enqueue_for_notification
 
   scope :for_message_id, ->(message_identifier) { where(message_id: message_identifier) }
 
@@ -23,7 +25,7 @@ class MessageChangeNotifier < ActiveRecord::Base
 
   private
     def enqueue_for_notification
-      MessageChangeWorker.perform_async(self.id)
+      MessageChangeWorker.perform_async(self.id) if self.message.pending_approval?
     end
 
     def assign_uuid

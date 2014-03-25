@@ -59,8 +59,8 @@ class MessageMailer < ActionMailer::Base
     @user_email = user_email
     mail(to: user_email, subject: "#{@message.name}")
 
-    mail(to: user_email, 
-      from: @message.from, 
+    mail(to: user_email,
+      from: @message.from,
       subject: @message.personalized_subject(user_email),
       reply_to: @message.manager_email
       ) 
@@ -71,6 +71,7 @@ class MessageMailer < ActionMailer::Base
     @message_content = @message_change_notifier.content
     @actual_message = @message_change_notifier.message
     @owner_shop = @actual_message.shop
+    @access_token = @message_change_notifier.access_token
 
     ShopTimezone.set_timezone(@owner_shop)
 

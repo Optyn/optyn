@@ -293,13 +293,23 @@ Optyn::Application.routes.draw do
             post :logout_manager
           end
         end
+
+        resources :message_actions do
+          member do
+            get :validate
+            get :get_message
+            put :approve
+            put :reject
+          end
+        end
         
         resources :locations
         resources :messages do
           collection do
             get :types
-            get :drafts
+            get :drafts                    
             get :queued
+            get :waiting_for_approval
             get :sent
             get :trash
             put :move_to_trash
@@ -312,6 +322,7 @@ Optyn::Application.routes.draw do
             put :launch
             get :preview
             put :update_meta
+            put :send_for_approval
           end
         end #end of messages resource
 
@@ -435,8 +446,6 @@ Optyn::Application.routes.draw do
         get :report
         get :social_report
         put :update_header
-        get :reject
-        put :reject
         get :edit_template
         get :template
         put :assign_template
