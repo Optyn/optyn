@@ -90,7 +90,7 @@ module Api
           @needs_curation = @message.needs_curation(:launch)
           launched = @message.send(:launch)
           if launched && @message.queued?
-            #send_for_curation(params[:access_token]) 
+            send_for_curation(params[:access_token]) 
           else
             @shop = @message.shop
             @partner = @shop.partner
