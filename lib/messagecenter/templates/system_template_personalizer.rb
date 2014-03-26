@@ -207,6 +207,14 @@ module Messagecenter
           Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'paragraph') 
         end
 
+        @parsed_html.css('fbshare').each do |paragraph_child|
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'fbshare') 
+        end
+
+        @parsed_html.css('twittershare').each do |paragraph_child|
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'twittershare') 
+        end
+
         # Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')  
 
         self.html = @parsed_html.to_s        
@@ -267,6 +275,18 @@ module Messagecenter
             end
           end
 
+          if header_properties['twitter'].present?
+            css_style = header_properties['twitter']['show'] == "0" ? "display:none" : "display:block"
+            tw_style = @parsed_html.css(".optyn-twittershare").first.attribute('style').value
+            @parsed_html.css(".optyn-twittershare").first.attribute('style').value = tw_style + css_style
+          end
+
+          if header_properties['facebook'].present?
+            css_style = header_properties['facebook']['show'] == "0" ? "display:none" : "display:block"
+            tw_style = @parsed_html.css(".optyn-fbshare").first.attribute('style').value
+            @parsed_html.css(".optyn-fbshare").first.attribute('style').value = tw_style + css_style
+          end
+          
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
           introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
           introduction_division.css('img').each do |image|

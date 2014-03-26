@@ -1,8 +1,13 @@
 var props = null;
+var facebookHtml,twitterHtml;
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
-    merchantMessage.initialize();
+    merchantMessage.initialize();  
 
+    //loading social sharing options checkboxes
+    $('#customHtmlTemplate').load(function(){ 
+      merchantMessage.socialSharing(); 
+    });
 });
 
 function MerchantMessage() {
@@ -20,7 +25,7 @@ function MerchantMessage() {
             OP.overlay.addOverlay('#template_wrapper');
             this.loadSpinnerForIframe();
         }
-
+        
         /*
             Hooks for preview page for messages except templates
         */ 
@@ -755,5 +760,32 @@ function MerchantMessage() {
               alert(errorThrown)
           }
       });
+    };
+
+    // manage social sharing icons visibility
+    this.socialSharing = function(){      
+      twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
+      facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
+      
+      if(twitter.css("display") == "none")
+        $("#twitter-setting").prop('checked', false);
+      else
+        $("#twitter-setting").prop('checked', true);
+
+      if(facebook.css("display") == "none")
+        $("#facebook-setting").prop('checked',false)
+      else
+        $("#facebook-setting").prop('checked',true)
+
+      var templateMessage = this;
+
+      $("#facebook-setting,#twitter-setting").on('change',function(){
+        if($(this).is(":checked"))
+          { facebook.css("display","block");}
+        else        
+          facebook.css("display","none");
+        templateMessage.reloadTemplateSelectorIframe();
+      });
+
     };
 }

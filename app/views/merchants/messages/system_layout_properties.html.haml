@@ -175,6 +175,16 @@
                   .controls
                   = select_tag "properties[header][headline][css][font-family]", options_for_select(@header_font_families), class: 'input-medium'
 
+                .control-group
+                  = label_tag "social_sharing", "Social Sharing:", class: 'control-label'
+                  .controls
+                  
+                    = check_box "properties[header][facebook]", "show",id: "facebook-setting"
+                    = "Facebook"
+                    
+                    = check_box "properties[header][twitter]","show", id: "twitter-setting"
+                    = "Twitter"
+
                 /Header Logo or Header Name
                 .actions
                   .pull-left
@@ -201,7 +211,7 @@
                       %i{class: "icon-arrow-right"}
 
   #template_pane
-    %iframe#customHtmlTemplate{:src => merchants_default_settable_properties_preview_path(@message.uuid, @template.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; height:100%; min-height: 600px;"}
+    %iframe#customHtmlTemplate{:src => merchants_default_settable_properties_preview_path(@message.uuid, @template.uuid), :frameborder => 0, :scrolling => "yes", style: "width: 100%; height:100%; min-height: 600px;"}
       %html
         %body
           %strong
