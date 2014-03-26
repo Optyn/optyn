@@ -1,12 +1,18 @@
 var props = null;
 var facebookHtml,twitterHtml;
+var socialurl = false;
+var socialCheck = false;
+
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();  
 
     //loading social sharing options checkboxes
     $('#customHtmlTemplate').load(function(){ 
-      merchantMessage.socialSharing(); 
+      if(socialCheck == false)
+        {merchantMessage.socialSharing();
+          socialCheck = true;
+        }
     });
 });
 
@@ -764,29 +770,45 @@ function MerchantMessage() {
     };
 
     // manage social sharing icons visibility
-    this.socialSharing = function(){      
+    this.socialSharing = function(){          
       twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
       facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
-      
-      if(twitter.css("display") == "none")
-        $("#twitter-setting").prop('checked', false);
+      twitterCustom = $("#customHtmlTemplate").contents().find("twittershare")
+      fbCustom = $("#customHtmlTemplate").contents().find("fbshare")
+
+      if((twitter.length>0) || (facebook.length>0) || (fbCustom.length>0) || (twitterCustom.length>0))
+      { 
+        if(twitter.css("display") == "none")
+          $("#twitter-setting").prop('checked', false);
+        else
+          $("#twitter-setting").prop('checked', true);
+
+        if(facebook.css("display") == "none")
+          $("#facebook-setting").prop('checked',false)
+        else
+          $("#facebook-setting").prop('checked',true)
+        this.setSocialShareUrl();
+        var templateMessage = this;
+
+        $("#facebook-setting, #twitter-setting").on('change',function(){          
+          templateMessage.reloadTemplateSelectorIframe();
+        });
+      }
       else
-        $("#twitter-setting").prop('checked', true);
+        {$(".control-group.social-share").remove()}
 
-      if(facebook.css("display") == "none")
-        $("#facebook-setting").prop('checked',false)
-      else
-        $("#facebook-setting").prop('checked',true)
+    };
 
-      var templateMessage = this;
-
-      $("#facebook-setting,#twitter-setting").on('change',function(){
-        if($(this).is(":checked"))
-          { facebook.css("display","block");}
-        else        
-          facebook.css("display","none");
-        templateMessage.reloadTemplateSelectorIframe();
-      });
+    this.setSocialShareUrl = function(shareurl, text){
+      if(socialurl == false)
+        {
+          var templateMessage = this;
+          twitter = $("#customHtmlTemplate").contents().find("twittershare");
+          facebook = $("#customHtmlTemplate").contents().find("fbshare");
+          if((twitter.length>0) || (facebook.length>0))
+            templateMessage.reloadTemplateSelectorIframe();
+          socialurl = true;
+        }
 
     };
 }

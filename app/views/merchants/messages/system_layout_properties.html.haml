@@ -175,7 +175,7 @@
                   .controls
                   = select_tag "properties[header][headline][css][font-family]", options_for_select(@header_font_families), class: 'input-medium'
 
-                .control-group
+                .control-group.social-share
                   = label_tag "social_sharing", "Social Sharing:", class: 'control-label'
                   .controls
                   
@@ -184,6 +184,9 @@
                     
                     = check_box "properties[header][twitter]","show", id: "twitter-setting"
                     = "Twitter"
+
+                    = hidden_field_tag "properties[header][shareurl]", @public_msg
+                    = hidden_field_tag "properties[header][text]", @msg
 
                 /Header Logo or Header Name
                 .actions
@@ -216,3 +219,4 @@
         %body
           %strong
             Loading...
+           

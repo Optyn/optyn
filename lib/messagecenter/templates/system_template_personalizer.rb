@@ -281,6 +281,12 @@ module Messagecenter
             @parsed_html.css(".optyn-twittershare").first.attribute('style').value = tw_style + css_style
           end
 
+          if ((@parsed_html.css("fbshare").size()>0) || (@parsed_html.css("twittershare").size()>0) ) && header_properties['shareurl'].present?
+            @parsed_html.css("twittershare").first.attribute('shareurl').value = header_properties['shareurl']
+            @parsed_html.css("fbshare").first.attribute('shareurl').value = header_properties['shareurl']
+            @parsed_html.css("twittershare").first.attribute('text').value = header_properties['text']
+          end
+
           if header_properties['facebook'].present?
             css_style = header_properties['facebook']['show'] == "0" ? "display:none" : "display:block"
             tw_style = @parsed_html.css(".optyn-fbshare").first.attribute('style').value

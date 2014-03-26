@@ -69,6 +69,8 @@ class Merchants::MessagesController < Merchants::BaseController
     @template = Template.for_uuid(params[:template_id])
     @properties = @template.default_selectable_properties(current_shop)
     @header_font_families = Template::HEADER_FONT_FAMILIES
+    @msg = "#{@message.name} #{@message.uuid}"
+    @public_msg = "#{SiteConfig.app_base_url}/#{current_shop.name.parameterize}/campaigns/#{@msg.parameterize}"
   end
 
   def create
