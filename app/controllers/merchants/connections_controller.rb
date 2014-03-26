@@ -127,6 +127,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
     else
       populate_labels
       @user = User.new(:name => params["To"])
+      @user.skip_name = true
       @user.save
       render 'add_user'
     end
