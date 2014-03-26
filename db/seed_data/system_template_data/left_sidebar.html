@@ -843,10 +843,6 @@
       }
 
 
-      .o-column { width: 48%; }
-      [data-type="image_gallery"] .optyn-paragraph,
-      [data-type="three_columns"] .optyn-paragraph
-      [data-type="four_columns"] .optyn-paragraph { font-size: 13px; }
       .optyn-division {
         padding-top: 5px;
         float: none;
@@ -867,7 +863,6 @@
         .body { width: 310px; }
         .body .float-left,
         .body .float-right { float: none !important; }
-        .body .o-column { width: 100% !important; }
         .optyn-intro { width: 100% !important; min-width: 83vw; }
         .with-sidebar .full-image .optyn-replaceable-image img { width: 90% !important; }
         .with-sidebar .half-left-image .optyn-replaceable-image,
@@ -1092,32 +1087,30 @@
                                   </division>
 
                                   <division type="image_gallery">
-                                    <table class="block-grid">
-                                      <tr>
-                                        <td>
-                                          <headline>
-                                            <h2 class="headline">Image Gallery</h2>
-                                          </headline>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="third-image">
-                                          <image>
-                                            <img src="http://placehold.it/300x150" width="175" alt="" />
-                                          </image>
-                                          <paragraph>
-                                            <div>Image caption goes here.</div>
-                                          </paragraph>
-                                        </td><td class="third-image">
-                                          <image>
-                                            <img src="http://placehold.it/300x150" width="175" alt="" />
-                                          </image>
-                                          <paragraph>
-                                            <div>Image caption goes here.</div>
-                                          </paragraph>
-                                        </td>
-                                      </tr>
-                                    </table>
+                                    <div>
+                                      <headline>
+                                        <h2 class="headline">Image Gallery</h2>
+                                      </headline>
+                                      <table class="block-grid">
+                                        <tr>
+                                          <td class="third-image">
+                                            <image>
+                                              <img src="http://placehold.it/300x150" width="175" alt="" />
+                                            </image>
+                                            <paragraph>
+                                              <div>Image caption goes here.</div>
+                                            </paragraph>
+                                          </td><td class="third-image">
+                                            <image>
+                                              <img src="http://placehold.it/300x150" width="175" alt="" />
+                                            </image>
+                                            <paragraph>
+                                              <div>Image caption goes here.</div>
+                                            </paragraph>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </div>
                                   </division>
                                 </td>
                               </tr>
