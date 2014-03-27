@@ -1,6 +1,5 @@
 class EmailTracking < ActiveRecord::Base
-  attr_accessible :data, :manager_id, :message_id, :redirect_url, :user_email
-  serialize :data, Hash
+  attr_accessible  :manager_id, :message_id, :redirect_url, :user_email
 
   scope :for_message, ->(message_identifier) { where(message_id: message_identifier) }
  # To be refactored needs to be done with querery
@@ -27,7 +26,6 @@ class EmailTracking < ActiveRecord::Base
     email_tracking = EmailTracking.where("message_id = ? and user_email = ? and redirect_url = ? ", data['message_id'], data['email'], data[:redirect_url])
     if !email_tracking.present?
       track_hash = {
-        data: data,
         manager_id: data['manager_id'],
         message_id: data['message_id'],
         redirect_url: data[:redirect_url],
