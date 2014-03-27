@@ -85,7 +85,7 @@ module Messagecenter
             template_grid = template_row.grids[index]
             #build the datamodel span
             components_json = add_toolset_to_components(template_grid.data_model) 
-            data_model_html = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{template_grid.data_model['type']}" data-components='#{components_json.gsub("'", "\\'")}'></span>}  
+            data_model_html = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{template_grid.data_model['type']}" data-components='#{components_json.gsub("'", "&apos;")}'></span>}  
             
             divisions_markup = build_division_markup(grid_hash, template_grid)
             content = template_grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model_html + divisions_markup.join("\n")))
