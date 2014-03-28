@@ -35,7 +35,7 @@ module ShopLogo
         HTML
         content.to_s.html_safe
       else
-        %{<img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}", style="margin:5px;max-height:150px;max-width:580px;" class="nl-width-580" />}.html_safe
+        %{<img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}", style="margin:5px;max-height:250px;max-width:580px;" class="nl-width-580" />}.html_safe
       end
     else
       if shop.website.present?
