@@ -141,8 +141,8 @@ CKEDITOR.plugins.add( 'simpleLink',
 					// In case the "newPage" checkbox was checked, set target=_blank for the link element.
 					if ( data.newPage )
 						link.setAttribute( 'target', '_blank' );
-					link.setAttribute( 'class', 'buttonLink' );
-					link.setAttribute("style", 'border-radius: 0;background: #64aaef;padding: 2px 10px;text-decoration: none;display: inline-block;');
+					link.setAttribute( 'class', 'optyn-button-link' );
+					link.setAttribute("style", OP.ckeditorButton.getStyle());
 
 					// Set the style selected for the link, if applied.
 					// http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.dom.element.html#setStyle

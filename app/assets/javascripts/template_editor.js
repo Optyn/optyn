@@ -139,8 +139,11 @@ OP = (function($, window, doucument, Optyn){
           $temp.append(data);
           var $links = $temp.find('a');
           $links.each(function(){
-            if(!$(this).is("[class]")){
-              $(this).addClass('optyn-link');
+            var $this = $(this);
+            if(!$this.is("[class]")){
+              $this.addClass('optyn-link');
+            }else if($this.hasClass('optyn-button-link')){
+              $this.attr('style', '');
             }
           });
 
