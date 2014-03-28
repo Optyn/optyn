@@ -133,7 +133,18 @@ OP = (function($, window, doucument, Optyn){
 
         var paragraphs = properties.paragraphs;
         $templateContainer.find('textarea').each(function(index, elem){
-          paragraphs.push(CKEDITOR.instances['template_editable_content-' + index].getData());
+          //manipulate the links before adding the paragraphs
+          var data = CKEDITOR.instances['template_editable_content-' + index].getData();
+          var $temp = $('<div />');
+          $temp.append(data);
+          var $links = $temp.find('a');
+          $links.each(function(){
+            if(!$(this).is("[class]")){
+              $(this).addClass('optyn-link');
+            }
+          });
+
+          paragraphs.push($temp.html());
         });
 
         var images = properties.images;
