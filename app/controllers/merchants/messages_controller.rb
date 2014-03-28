@@ -431,13 +431,14 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def upload_template_image
     @template = Template.for_uuid(params[:template_uuid])
-
-    if @template.template_image.present?
-      @template_image = @template.template_image
-      @template_image.update_attributes(:image => params[:imgfile])
-    else
-      @template_image = TemplateImage.new(:image => params[:imgfile], :template_id =>@template.id)
-      @template_image.save
+    @template_image = @template.template_image
+    if params[:imgfile].present?
+      if @template_image.present?        
+        @template_image.update_attributes(:image => params[:imgfile])
+      else
+        @template_image = TemplateImage.new(:image => params[:imgfile], :template_id =>@template.id)
+        @template_image.save
+      end
     end
     
   end

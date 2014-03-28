@@ -1,4 +1,4 @@
-<%if @template_image.errors.present?%>
+<%if !params[:imgfile].present? || @template_image.errors.present?%>
 	$('.loading').hide();
 	$('.upload-img-btn').show();
 	alert('Sorry.We could not upload the file. Please try again.');
