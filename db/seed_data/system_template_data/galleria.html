@@ -757,8 +757,55 @@
       .optyn-content .optyn-headline{
         color: #000;
       }
-      .optyn-content .optyn-link{
-        color: #000;
+      
+      .optyn-content a.optyn-link {
+        color: #2ba6cb; 
+        text-decoration: none;
+      }
+
+      .optyn-content a.optyn-link:hover { 
+        color: #2795b6 !important;
+      }
+
+      .optyn-content a.optyn-link:active { 
+        color: #2795b6 !important;
+      }
+
+      .optyn-content a.optyn-link:visited { 
+        color: #2ba6cb !important;
+      }
+
+      .optyn-content a.optyn-button-link{
+        text-decoration:none;
+        color: white;
+        background-color: #64aaef;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;border-radius: 0;
+        font: normal 16px/25px 'Open Sans', sans-serif;
+        letter-spacing: 1px;
+        border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+        -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        padding: 3px 10px;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      .optyn-content a.optyn-button-link:hover{
+        color: white;
+        background-color: #64aaef;
+      }
+
+      .optyn-content a.optyn-button-link:visited{
+        color: white;
+        background-color: #64aaef;
+      }
+
+      .optyn-content a.optyn-button-link:active{
+        color: white;
+        background-color: #64aaef;
       }
 
       /* Custom styles */
@@ -767,6 +814,7 @@
       h2 { font-size: 16px; font-weight: bold; }
       img { height: auto; }
       .text-pad-10 { padding: 0 10px; }
+      .no-pad { padding: 0 !important; }
       .optyn-headline { margin: 7px 0; }
       .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
@@ -891,7 +939,7 @@
                             </twittershare>
                           </tr>
                           <tr>
-                            <td class="text-pad center optyn-intro-cont">
+                            <td class="no-pad center optyn-intro-cont">
                               <division type="introduction">
                                 <div class="optyn-intro">
                                   <img width="560" src="http://placehold.it/560x100" alt="" />
