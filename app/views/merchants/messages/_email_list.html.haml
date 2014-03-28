@@ -1,0 +1,17 @@
+-if report_data.present?
+  .accordion{id: "data_accordion_#{message.uuid}"}
+    - counter = 0
+    - report_data.each do |email|
+      - counter = counter + 1
+      %ul.bullet-disc
+        %li
+          = email
+
+-else
+  .text-error
+    Sorry. There is no data available for this report
+
+.pull-center
+  %a{:href => "javascript:void(0)",  "data-id" => "#{message.uuid}", "class" => "btn btn-success back-to-main-report", :'data-dismiss' => "modal", :'aria-hidden' => "true"}
+    %i.icon-arrow-left 
+    Main Report    

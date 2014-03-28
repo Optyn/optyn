@@ -1,11 +1,10 @@
 .modal-header
-  %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
   %h3 
     /= 'Message stats'
     Campaign Stats for
     %strong
       = message.name
-.modal-body
+#report_details
   .pull-right.text-success
     Sent on
     %strong
@@ -25,12 +24,12 @@
         Email Received by:
       .count
         = message.actual_recipients
-    .span3.box
+    .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "open_emails")}
       .info
         Email Opened By:
       .count
         = message.opens_count
-    .span3.box
+    .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "unsubscribes_emails")}
       .info
         Unsubscribes:
       .count
@@ -40,7 +39,7 @@
   .blank-space
 
   .row-fluid.stats
-    .span3.box.link-click-report-link{'data-id' => message.uuid, 'data-location' => click_report_merchants_message_path(message.uuid)}
+    .span3.box.link-click-report-link{'data-id' => message.uuid, 'data-location' =>click_report_merchants_message_path(message.uuid)}
       .info
         Clicks:
       .count
@@ -48,19 +47,35 @@
       %span.inline-help
         Click Me!
 
-    .span3.box
+    .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "bounced_emails")}
       .info
         Bounces:
       .count
         = message.bounced
 
-    .span3.box
+    .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "complaint_emails")}
+      .info
       .info
         Marked as Spam:
       .count
         = message.complaints
 
   .clearfix
+  - if @message.sent?
+    - content = (render :partial => "report", :locals => {:message => @message, :timestamp_attr => timestamp_attr})
+    %span{'data-content' => content.html_safe, class: 'report-content', style: 'height:0px; width: 0px', id: "report_#{@message.uuid}"}
+
+    - content = render :partial => "click_report", :locals => {:message => @message}
+    %span{'data-content' => content.html_safe, class: 'link-report-content', style: 'height:0px; width: 0px', id: "click_report_#{@message.uuid}"}
+
+    - content = render :partial => "email_report", :locals => {:message => @message}
+    %span{'data-content' => content.html_safe, class: 'link-report-content', style: 'height:0px; width: 0px', id: "email_report_#{@message.uuid}"}
+    #report_dialog{:class => "modal fade", :tabindex => "-1", :role => "dialog", :'aria-labelledby' => "Report", :'aria-hidden' => "true"}
+      .modal-body
+        %strong
+          Please wait...
+  -else
+    NA
 
   .blank-space
 
@@ -71,12 +86,12 @@
       - relevant = message.relevance_count
       - non_relevant = message.irrelavance_count
       
-      .span3.box
+      .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "relevance_emails")}
         .info
           Offer relevance - Yes:
         .count
           = "#{relevant}"
-      .span3.box
+      .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "irrelavance_email")}
         .info
           Offer relevance - No:
         .count
