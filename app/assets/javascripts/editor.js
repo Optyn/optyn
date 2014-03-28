@@ -4,6 +4,7 @@
 //= jquery-migrate-1.2.1
 //= require bootstrap
 //= require ckeditor_fix
+//= require ckeditor_button
 //= require ckeditor/init
 //= require_self
 
@@ -64,6 +65,12 @@ OP = (function($, window, doucument, Optyn){
               content: $updateableElement.text()
             };
           }else if($updateableElement.hasClass('optyn-paragraph')){
+
+            //Add the style tag to the button to show properly in ckEditor
+            $updateableElement.find('a.optyn-button-link').each(function(){
+              $(this).attr('style', OP.ckeditorButton.getStyle());
+            })
+
             artifact = {
               type: 'paragraph',
               content: $updateableElement.html()

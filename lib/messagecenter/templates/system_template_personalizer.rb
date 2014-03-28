@@ -59,6 +59,13 @@ module Messagecenter
                 css: {
                   color: Template::CONTENT_LINK_COLOR
                 }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
+                }
               }
             },
             sidebar:{
@@ -82,7 +89,15 @@ module Messagecenter
                 css: {
                   color: Template::CONTENT_LINK_COLOR
                 }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
+                }
               }
+
             },
             rightSidebar:{
               css: {
@@ -104,6 +119,13 @@ module Messagecenter
               link: {
                 css: {
                   color: Template::CONTENT_LINK_COLOR
+                }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
                 }
               }
             },
@@ -127,6 +149,13 @@ module Messagecenter
               link: {
                 css: {
                   color: Template::CONTENT_LINK_COLOR
+                }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
                 }
               }
             }
@@ -343,6 +372,26 @@ module Messagecenter
             convert_links_color(content_properties, node)
           end       
 
+
+          if content_properties[:button].present?
+            #change the css properties of links
+            #find the usual element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link"}
+            convert_button_styles(content_properties, node)
+
+            #find the hover element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:hover"}
+            convert_button_styles(content_properties, node)
+
+            #find the active element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:active"}
+            convert_button_styles(content_properties, node)
+
+            #find the visited element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:visited"}
+            convert_button_styles(content_properties, node)
+          end
+
           #change the background color of the sidebar
           #node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
           #node.set_property('background-color', '#C9C9C9')
@@ -397,6 +446,24 @@ module Messagecenter
             #fix for active
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:active"}
             convert_links_color(sidebar_properties, node)
+          end
+
+          if sidebar_properties[:button].present?
+            #change the css properties of links
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link"}
+            convert_button_styles(sidebar_properties, node)
+
+            #fix for hover
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:hover"}
+            convert_button_styles(sidebar_properties, node)
+
+            #fix for visited
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:visited"}
+            convert_button_styles(sidebar_properties, node)
+
+            #fix for active
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:active"}
+            convert_button_styles(sidebar_properties, node)
           end       
 
           #change the background color of the sidebar
@@ -457,6 +524,15 @@ module Messagecenter
         def convert_links_color(content_properties, node)
           if node.present?
             paragraph_style_properties = content_properties[:link][:css]
+            paragraph_style_properties.each_pair do |css_key, css_value|
+              node.set_property(css_key.to_s, "#{css_value} !important")          
+            end             
+          end
+        end
+
+        def convert_button_styles(content_properties, node)
+          if node.present?
+            paragraph_style_properties = content_properties[:button][:css]
             paragraph_style_properties.each_pair do |css_key, css_value|
               node.set_property(css_key.to_s, "#{css_value} !important")          
             end             
