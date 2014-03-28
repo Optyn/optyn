@@ -77,6 +77,7 @@ OP = (function($, window, doucument, Optyn){
       var textareas = $templateContainer.find('textarea');
       for ( var count = 0; count < textareas.length; count++ ) {
         CKEDITOR.replace( 'template_editable_content-' + count, {
+          extraPlugins : 'simpleLink',
           toolbarGroups: [
           {
             name: 'document',
@@ -93,7 +94,17 @@ OP = (function($, window, doucument, Optyn){
           },
           {
             name: 'links'
-          }]
+          },
+          {
+            name: 'SimpleLink'
+          }],
+      toolbar :
+      [
+        ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
+        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-', 'Link'],
+        ['SimpleLink']
+      ]
         });
       }
     },
@@ -131,7 +142,6 @@ OP = (function($, window, doucument, Optyn){
           var $uploadedImage = $(this);
           images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href")]);
         });
-        
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');

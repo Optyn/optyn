@@ -10,9 +10,15 @@ CKEDITOR.editorConfig = function( config ) {
 
   // The toolbar groups arrangement, optimized for two toolbar rows.
 
+CKEDITOR.plugins.addExternal('insert_blank','http://localhost:3000/assets/ckeditor/plugins/simpleLink/', 'plugin.js');
+
   config.toolbar = 'Custom';
 
   config.height = '170px';
+
+  config.extraPlugins = 'simpleLink';
+  CKEDITOR.config.allowedContent = true;
+  // config.toolbar_Full =  [['Styles', 'Bold', 'Italic', 'Underline', 'SpellChecker', 'Scayt', '-', 'NumberedList', 'BulletedList'],['Link', 'Unlink'], ['Undo', 'Redo', '-', 'SelectAll', 'linkbutton']];
 
   config.toolbar_Custom =
   [
@@ -32,6 +38,10 @@ CKEDITOR.editorConfig = function( config ) {
   {
     name: 'links',
     items : [ 'Link' ]
+  },
+  {
+    name: 'simpleLink',
+    items: ['simpleLinkDialog']
   }
   ];
 

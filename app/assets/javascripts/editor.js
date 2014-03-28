@@ -94,7 +94,6 @@ OP = (function($, window, doucument, Optyn){
 
           divisionContents.push(artifact);
         });
-
         OP.template.openCkeditor($division, divisionContents);
       });
     },
@@ -125,7 +124,6 @@ OP = (function($, window, doucument, Optyn){
           htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
           paragraphIndex.toString() + '" cols="20">' + currentArtifact.content + '</textarea>' +
           '<div class="separator-micro-dark"></div>';
-
           paragraphIndex += 1;
         }else if('image' == currentArtifact.type){
           row_id = 'imagerow-' + imageIndex;
