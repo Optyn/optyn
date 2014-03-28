@@ -1,0 +1,13 @@
+<%if @template_image.errors.present?%>
+	$('.loading').hide();
+	$('.upload-img-btn').show();
+	alert('Sorry.We could not upload the file. Please try again.');
+<% else params[:logo].present? %>
+	$('#imgfile').hide();
+	$('.save_image').hide();
+	$('.change_image').show();
+	$('.loading').hide();
+	$("#customHtmlTemplate").contents().find('.optyn-intro.optyn-division .optyn-replaceable-image img').first().attr('src','<%=@template_image.image%>')
+	var merchantMessage = new MerchantMessage();
+	merchantMessage.reloadTemplateSelectorIframe();
+<% end %>

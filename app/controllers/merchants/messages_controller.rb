@@ -429,6 +429,19 @@ class Merchants::MessagesController < Merchants::BaseController
     @message_image.save
   end
 
+  def upload_template_image
+    @template = Template.for_uuid(params[:template_uuid])
+
+    if @template.template_image.present?
+      @template_image = @template.template_image
+      @template_image.update_attributes(:image => params[:imgfile])
+    else
+      @template_image = TemplateImage.new(:image => params[:imgfile], :template_id =>@template.id)
+      @template_image.save
+    end
+    
+  end
+
   def destroy_template
     @template = Template.for_uuid(params[:id])
     @template.destroy

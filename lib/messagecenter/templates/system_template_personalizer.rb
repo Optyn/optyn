@@ -294,26 +294,27 @@ module Messagecenter
           end
           
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
-          introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
-          introduction_division.css('img').each do |image|
-            shop_logo = email_body_shop_logo(shop)
-            shop_logo_node = Nokogiri::HTML::fragment(shop_logo)
-          
-            if shop_logo_node.css('img').present?
-              image_node = shop_logo_node.css('img').first
-              style_attr = image_node['style']
-              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
-              image_node.swap(%{<image>#{image_node.to_s}</image>})
-              image.swap(%{<span class="center">#{shop_logo_node.children.to_s}</span>})
-            else
-              header_node = shop_logo_node.css('h3').first
-              class_attr = header_node['class']
-              header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
-              header_node.swap("<headline>#{header_node.to_s}</headline>")
-              image.swap(%{#{shop_logo_node.children.to_s}})
+          if header_properties['logo'].present? 
+            introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
+            introduction_division.css('img').each do |image|
+              msg_logo = email_body_message_logo(shop,header_properties['message_uuid'],header_properties['template_uuid'],header_properties['logo'],header_properties['logo_text'])
+              msg_logo_node = Nokogiri::HTML::fragment(msg_logo)
+            
+              if msg_logo_node.css('img').present?
+                image_node = msg_logo_node.css('img').first
+                style_attr = image_node['style']
+                image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
+                image_node.swap(%{<image>#{image_node.to_s}</image>})
+                image.swap(%{<span class="center">#{msg_logo_node.children.to_s}</span>})
+              else
+                header_node = msg_logo_node.css('h3').first
+                class_attr = header_node['class']
+                header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
+                header_node.swap("<headline>#{header_node.to_s}</headline>")
+                image.swap(%{#{msg_logo_node.children.to_s}})
+              end
             end
           end
-
           @parsed_html.css('headline').each do |headline_child|
             Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline') 
           end

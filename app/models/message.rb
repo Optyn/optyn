@@ -186,6 +186,11 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def message_url(shop)
+    msg = "#{self.name} #{self.uuid}"
+    "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+  end
+
   def self.fetch_template_name(params_type)
     FIELD_TEMPLATE_TYPES.include?(params_type.to_s) ? params_type : DEFAULT_FIELD_TEMPLATE_TYPE
   end

@@ -10,7 +10,9 @@ $(document).ready(function () {
     //loading social sharing options checkboxes
     $('#customHtmlTemplate').load(function(){ 
       if(socialCheck == false)
-        {merchantMessage.socialSharing();
+        {
+          merchantMessage.socialSharing();
+          merchantMessage.manageLogo();
           socialCheck = true;
         }
     });
@@ -811,4 +813,54 @@ function MerchantMessage() {
         }
 
     };
+
+
+    this.manageLogo = function(){
+      var templateMessage = this;
+      $('.logo_text').val("").hide();
+      
+      // radio button for logo text or image
+      $("#properties_header_logo_image, #properties_header_logo_text").change(function(){
+        if($(this).val()=="image")
+        {
+          $('.logo_text').hide();
+          $('#imgfile').show();
+          $('.save_image').show();          
+          }
+        else
+        {
+          $('#imgfile').hide();
+          $('.logo_text').show();
+          $('.save_image').hide();
+          $('.change_image').hide();          
+        }
+        templateMessage.reloadTemplateSelectorIframe();
+      });
+
+      $('#properties_header_logo_image').attr('checked', 'checked');
+
+      // show/hide file form based on tab
+      $("#template_properties_tab.nav.nav-tabs li a").click(function(){
+        if($(this).attr('href')== "#template_header")
+          $("#logo_form").css("display","block");
+        else
+          $("#logo_form").css("display","none");
+      });
+
+      // change uploaded image
+      $('.change_image').click(function(e){
+        e.preventDefault();
+        $('#imgfile').show();
+        $('.change_image').hide();
+        $('.save_image').show();
+      });
+
+      // on logo form submit
+      $('.save_image').on('click',function(e){
+        e.preventDefault();
+        $('.loading').show();
+        $("#logo_form").submit();
+      });
+    };
+
 }
