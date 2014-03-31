@@ -241,7 +241,8 @@ class User < ActiveRecord::Base
       users = User.where('name ilike ? and email = ?', "%#{params[:name].strip}%", "#{params[:email].strip}")
     elsif not params["name"].blank?
       users = User.arel_table
-      users = User.where(users[:name].matches("%#{params[:name]}%"))
+      users = User.where(users[:first_name].matches("%#{params[:name]}%")) + User.where(users[:last_name].matches("%#{params[:name]}%"))
+      users.uniq
     elsif not params["email"].blank?
       users = User.where(:email => params["email"].strip)
     end
