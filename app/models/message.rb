@@ -785,6 +785,7 @@ class Message < ActiveRecord::Base
     if Rails.env.staging? && partner.eatstreet?
       ids = User.where(email: 'ian@eatstreet.com').pluck(:id) 
       ids += User.where(email: 'gaurav+eatstreet@optyn.com').pluck(:id)
+      ids += User.where(email: 'alen@optyn.com').pluck(:id)
       return ids
     end
 
