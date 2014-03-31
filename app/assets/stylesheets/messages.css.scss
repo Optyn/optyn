@@ -86,9 +86,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	font-size: 1.2em;
 	z-index: 2;
 	text-decoration: none;
+	@media ( max-width: 767px ) {
+		height: 100px;
+	}
 	&:hover {
 		background-color: $green;
 		color: $white;
+		aside { color: $light-gray; }
 	}
 	&:hover:before {
 		top: 0;
@@ -103,13 +107,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	> span {
 		position: absolute;
 		top: 36%;
-		left: 100px;
+		left: 80px;
 	}
 	> aside {
 		font-size: 0.8em;
 		color: $orange;
 		position: absolute;
-		left: 100px;
+		left: 80px;
 		bottom: 10px;
 	}
 }
@@ -153,6 +157,10 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 }
 
 .link-click-report-link{
+	cursor: pointer;
+}
+
+.email-report-report-link{
 	cursor: pointer;
 }
 

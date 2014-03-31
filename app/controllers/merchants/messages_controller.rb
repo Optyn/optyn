@@ -363,7 +363,6 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def report
     @message = Message.for_uuid(params[:id])
-    render partial: 'merchants/messages/report_data', locals: {message: @message, timestamp_attr: 'updated_at'}
   end
 
   def validate
@@ -391,6 +390,12 @@ class Merchants::MessagesController < Merchants::BaseController
     message = Message.find(params[:id])
     report_data = EmailTracking.get_message_click_report(message.id)
     render partial: 'merchants/messages/email_tracking_data', locals: {message: message, report_data: report_data}
+  end
+
+  def email_report
+    message = Message.find_by_uuid(params["id"])
+    open_email_user = message.send(params[:report_type])
+    render partial: 'merchants/messages/email_list', locals: {message: message, report_data: open_email_user}
   end
 
   def share_email

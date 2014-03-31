@@ -459,6 +459,7 @@ Optyn::Application.routes.draw do
         post :upload_template_image
         delete :destroy_template
         get :click_report
+        get :email_report
         get :system_layouts
       end #end of member
     end #end of resources messages

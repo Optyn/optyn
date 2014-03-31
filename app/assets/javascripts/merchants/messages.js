@@ -113,10 +113,11 @@ function MerchantMessage() {
           this.hookTemplateMenuColorPickerChange();
           this.refreshTemplatePropertiesView();
         }
-
+        this.hookOpenLinkClickReport();
+        this.hookEmailReport();
         if($('.open-reports').length){
           this.hookReport();
-          this.hookOpenLinkClickReport();
+          
           // this.hookClearReportModal();
           this.backToMainReport();
         }
@@ -711,6 +712,7 @@ function MerchantMessage() {
             type: 'GET',
             success: function (data) {
                 $('#report_dialog .modal-body').html(data);
+                $('#report_dialog').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -720,9 +722,31 @@ function MerchantMessage() {
       });
     };
 
+    this.hookEmailReport = function(){
+          $('body').on('click', '.email-report-report-link', function(){
+            var id = $(this).data('id');
+            var content = $('#email_report_' + id).data('content');
+            $('#report_dialog').html(content);
+
+            var url = $(this).data('location');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $('#report_dialog .modal-body').html(data);
+                    $('#report_dialog').modal('show');
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert(errorThrown)
+                }
+            });
+          });
+        };
+
     this.hookClearReportModal = function(){
-      $('#report_dialog').on('hide', function(){
-        $('#report_dialog').html('<div class="modal-body"><strong>Please Wait...</strong></div>');
+      $('#report_details').on('hide', function(){
+        $('#report_details').html('<div class="modal-body"><strong>Please Wait...</strong></div>');
       });
     };
 

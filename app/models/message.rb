@@ -504,16 +504,32 @@ class Message < ActiveRecord::Base
     message_email_auditors.delivered.count
   end
 
+  def open_emails
+    message_users.any_read.include_user.collect(&:email)
+  end
+
   def opens_count
     message_users.any_read.count
+  end
+
+  def unsubscribes_emails
+    message_users.opt_outs.include_user.collect(&:email)
   end
 
   def opt_outs
     message_users.opt_outs.count
   end
 
+  def bounced_emails
+    message_email_auditors.bounced.includes_user.collect(&:email)
+  end
+
   def bounced
     message_email_auditors.bounced.count
+  end
+
+  def complaint_emails
+  message_email_auditors.complaints.includes_user.collect(&:email)
   end
 
   def complaints
@@ -524,8 +540,16 @@ class Message < ActiveRecord::Base
     message_users.coupon_relevance.count
   end
 
+  def relevance_emails
+    message_users.coupon_relevance.include_user.collect(&:email)
+  end
+
   def irrelavance_count
     message_users.coupon_irrelevance.count
+  end
+
+  def irrelavance_email
+    message_users.coupon_irrelevance.include_user.collect(&:email)
   end
 
   def link_click_count
@@ -787,6 +811,7 @@ class Message < ActiveRecord::Base
     if Rails.env.staging? && partner.eatstreet?
       ids = User.where(email: 'ian@eatstreet.com').pluck(:id) 
       ids += User.where(email: 'gaurav+eatstreet@optyn.com').pluck(:id)
+      ids += User.where(email: 'alen@optyn.com').pluck(:id)
       return ids
     end
 
