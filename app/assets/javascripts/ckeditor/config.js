@@ -24,24 +24,21 @@ CKEDITOR.plugins.addExternal('insert_blank','http://localhost:3000/assets/ckedit
   [
   {
     name: 'styles',
-    items : [ 'Font', 'FontSize' ]
+    groups : [ 'Font', 'FontSize' ]
   },
   {
     name: 'basicstyles',
-    items : [ 'Bold','Italic','Underline', '-', 'TextColor']
+    groups : [ 'Bold','Italic','Underline', '-', 'TextColor']
   },
   {
     name: 'paragraph',
-    items : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+    groups : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
     'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat']
   },
+  '/',
   {
     name: 'links',
-    items : [ 'Link' ]
-  },
-  {
-    name: 'simpleLink',
-    items: ['simpleLinkDialog']
+    groups : [ 'Link', 'simpleLinkDialog' ]
   }
   ];
 
