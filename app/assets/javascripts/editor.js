@@ -82,7 +82,6 @@ OP = (function($, window, doucument, Optyn){
 
             if($image.length){
               placeholderSrc = $image.attr('src');
-              console.log($image.closest('a'));
               if ($image.closest('a').length){
                 href = $image.closest('a').attr("href");
               }
@@ -243,7 +242,6 @@ OP = (function($, window, doucument, Optyn){
     hookImageClick: function(){
       $('body').on('click', '.imageLink', function() {
         var location = $(this).attr('href');
-        console.log(location);
         window.open(location,'_blank','width=800, height=900');
         return false;
       });
@@ -418,7 +416,6 @@ OP = (function($, window, doucument, Optyn){
               $division.find('.optyn-replaceable-image').each(function(image_index, imageContainer){
                 var $imageElem = $(imageContainer).find('img');
                 if($imageElem.length){
-                  console.log($imageElem.attr('data-href'));
                   images.push({
                     'url': $imageElem.attr('src'),
                     'height': $imageElem.attr('height'),
@@ -457,7 +454,6 @@ OP = (function($, window, doucument, Optyn){
   Optyn.setImageLinkTarget = function() {
     $('.imageLink').click(function() {
         var location = $(this).attr('href');
-        console.log(location);
         window.open(location,'_blank','width=800, height=900');
         return false;
       });

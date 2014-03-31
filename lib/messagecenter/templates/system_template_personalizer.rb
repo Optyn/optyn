@@ -378,6 +378,15 @@ module Messagecenter
                 node.set_property(css_key.to_s, css_value)          
               end
             end
+
+            #change the css properties of the paragraph
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content .optyn-paragraph p"}
+            if node.present?
+              paragraph_style_properties = content_properties[:paragraph][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
           end
 
           if content_properties[:link].present?
@@ -449,6 +458,14 @@ module Messagecenter
           if sidebar_properties[:paragraph].present?
             #change the css properties of the paragraph
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-paragraph"}
+            if node.present?
+              paragraph_style_properties = sidebar_properties[:paragraph][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-paragraph p"}
             if node.present?
               paragraph_style_properties = sidebar_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
