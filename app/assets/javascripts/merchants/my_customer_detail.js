@@ -99,11 +99,12 @@ function MyConsumerDetail() {
 
           //Hook the chosen behavior
           consumerInstance.hookModalBehavior();
-
-          setTimeout(function(){
-            $('#conusmer_connection_modal').modal('hide');
-            window.location = "/merchants/connections";
-          }, 1000);
+          if ($(data).find(".error").length == 0){
+            setTimeout(function(){
+              $('#conusmer_connection_modal').modal('hide');
+              window.location = "/merchants/connections";
+            }, 1000);
+          }
         });
       }); 
     };
