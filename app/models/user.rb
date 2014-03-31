@@ -211,7 +211,7 @@ class User < ActiveRecord::Base
 
   def display_gender
     if !gender.blank?
-      return gender == "f" ?  "Female" : "male"
+      return gender == "f" ?  "Female" : "Male"
     else
       return ""
     end
