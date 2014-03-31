@@ -92,6 +92,7 @@ OP = (function($, window, doucument, Optyn){
             name: 'basicstyles',
             groups: [ 'basicstyles', 'cleanup' ]
           },
+          '/',
           {
             name: 'links'
           },
@@ -102,10 +103,12 @@ OP = (function($, window, doucument, Optyn){
       [
         ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
-    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-', 'Link'],
-        ['SimpleLink']
+    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-'],
+        ['Link', 'SimpleLink']
       ]
         });
+
+
       }
     },
 
