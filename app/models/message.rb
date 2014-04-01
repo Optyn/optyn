@@ -479,7 +479,7 @@ class Message < ActiveRecord::Base
   end
 
   def bounced_emails
-    message_email_auditors.bounced.includes_user.collect(&:email)
+    message_email_auditors.bounced.includes_user.collect(&:user).collect(&:email)
   end
 
   def bounced
@@ -487,7 +487,7 @@ class Message < ActiveRecord::Base
   end
 
   def complaint_emails
-  message_email_auditors.complaints.includes_user.collect(&:email)
+    message_email_auditors.complaints.includes_user.collect(&:user).collect(&:email)
   end
 
   def complaints
