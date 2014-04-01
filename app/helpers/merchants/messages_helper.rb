@@ -183,7 +183,7 @@ module Merchants::MessagesHelper
     if message.show_image?
       button_url = message.button_url
       subject = message.personalized_subject(message_user)
-      website = message.shop.website
+      website = message.shop.display_website
 
       if button_url.present? || website.present?
         href = button_url.present? ? button_url : website

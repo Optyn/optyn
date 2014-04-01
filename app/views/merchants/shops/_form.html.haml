@@ -26,9 +26,9 @@
       .input-prepend
         %span.add-on
           %i.icon-globe
-        = f.url_field :website, 'data-toggle' => "tooltip", 'title' => 'URL of the website', :placeholder => :website, class: 'span12'
+        = f.text_field :website, 'data-toggle' => "tooltip", 'title' => 'URL of the website', :placeholder => :website, class: 'span12'
         .help-block
-          %em Example: http://www.example.com
+          %em Example: www.example.com
 
   .control-group
     .control-label
