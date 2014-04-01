@@ -101,6 +101,18 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
   end
 
+  def copy
+    @message = Message.for_uuid(params[:id])
+    @new_message = @message.copy_message
+    if @new_message.errors.any? && @new_message.new_record?
+      flash[:error] = "Could not copy message."
+      redirect_to preview_template_merchants_message_path(@message.uuid)
+    else
+      flash[:notice] = "Message copied successfully."
+      redirect_to template_merchants_message_path(@new_message.uuid)
+    end
+  end
+
   def show_template
     @templates = current_shop.templates
     @message = Message.for_uuid(params[:id])
