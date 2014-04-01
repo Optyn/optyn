@@ -386,7 +386,9 @@ class Merchants::MessagesController < Merchants::BaseController
   def email_report
     message = Message.find_by_uuid(params["id"])
     open_email_user = message.send(params[:report_type])
-    render partial: 'merchants/messages/email_list', locals: {message: message, report_data: open_email_user}
+    populate_report_title
+    @emails = render_to_string(partial: 'merchants/messages/email_list', locals: {message: message, report_data: open_email_user})
+    render(json: {emails: @emails, report_title: @report_title})
   end
 
   def share_email
@@ -494,6 +496,21 @@ class Merchants::MessagesController < Merchants::BaseController
     return render(action: 'edit_template') if @message.instance_of?(TemplateMessage)
 
     render action: 'edit'
+  end
+
+  def populate_report_title
+    @report_title = case params[:report_type]
+    when "open_emails"
+      "Emails Opened"
+    when "unsubscribes_emails"
+      "Emails Unsubscribed"
+    when "bounced_emails" 
+      "Emails Bounced" 
+    when "complaint_emails"  
+      "Emails Marked Spam"
+    else
+      "Email Report"
+    end
   end
 
 end
