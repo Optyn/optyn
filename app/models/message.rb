@@ -260,6 +260,16 @@ class Message < ActiveRecord::Base
     SelfEmailSender.perform_async(self.id)
   end
 
+  def copy_message
+    message = self.class.new
+    self.attributes.except('updated_at','created_at','id','uuid').each do |key, value|
+      message.send("#{key}=", self.send(key.to_sym))
+    end
+    message.send("state=", "draft")
+    message.save
+    message
+  end
+
   def assign_template(template_identifier, name=nil, properties={})
     unless self.template_id.present?
       existing_template = Template.for_uuid(template_identifier)
