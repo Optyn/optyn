@@ -740,7 +740,7 @@
       }
 
       .sidebar-main-content .two-up td{
-        width: 165px;
+        width: 183px;
       }
 
       /* Theme styles */
@@ -884,6 +884,7 @@
       /* Custom styles */
       .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
+      .sidebar-main-content { width: 410px; }
       h2 { font-size: 16px; font-weight: bold; }
       img { height: auto; }
       .text-pad-10 { padding: 0 10px; }
@@ -943,9 +944,10 @@
       .with-sidebar .third-image .optyn-replaceable-image img { margin-bottom: 10px; }
       .with-sidebar td.third-image,
       .with-sidebar .third-image .optyn-replaceable-image img{
-        width: 185px;
+        width: 183px;
         max-width: none !important;
       }
+      .with-sidebar .sidebar-container .optyn-replaceable-image { margin: 5px 0; }
       .optyn-division {
         padding-top: 5px;
         float: none;
@@ -960,34 +962,35 @@
       }
 
       @media only screen and (max-width: 600px) {
-        table.container .block-grid td {
+        table[class="body"] table.container .block-grid td {
           /*width: 95% !important; this is ink default */
           width: 280px !important;
         }
-        table.body table.container {
+        table[class="body"] table.container {
           width: 300px !important;
         }
-        table.body table.container .wrapper { width: 280px; }
-        table.body table.container .sidebar-container { padding: 10px !important; }
-        .optyn-intro { width: 100% !important; }
-        .with-sidebar .full-image,
-        .with-sidebar .sidebar-container .optyn-replaceable-image,
-        .with-sidebar .sidebar-container .optyn-replaceable-image img,
-        .with-sidebar .full-image .optyn-replaceable-image img { width: 280px !important; }
-        .with-sidebar .half-left-image .optyn-replaceable-image,
-        .with-sidebar .half-right-image .optyn-replaceable-image {
+        table[class="body"] table.container .wrapper { width: 280px; }
+        table[class="body"] table.container .sidebar-container { padding: 10px !important; }
+        table[class="body"] .sidebar-main-content { width: 300px !important; }
+        table[class="body"] .optyn-intro { width: 100% !important; }
+        .with-sidebar table[class="body"] .full-image,
+        .with-sidebar table[class="body"] .sidebar-container .optyn-replaceable-image,
+        .with-sidebar table[class="body"] .sidebar-container .optyn-replaceable-image img,
+        .with-sidebar table[class="body"] .full-image .optyn-replaceable-image img { width: 280px !important; }
+        .with-sidebar table[class="body"] .half-left-image .optyn-replaceable-image,
+        .with-sidebar table[class="body"] .half-right-image .optyn-replaceable-image {
           width: 280px !important;
           float: none !important;
           margin: 0 0 10px 0 !important;
         }
-        .with-sidebar .half-left-image .optyn-replaceable-image img,
-        .with-sidebar .half-right-image .optyn-replaceable-image img {
+        .with-sidebar table[class="body"] .half-left-image .optyn-replaceable-image img,
+        .with-sidebar table[class="body"] .half-right-image .optyn-replaceable-image img {
           width: 280px !important;
         }
-        .with-sidebar .third-image .optyn-replaceable-image{ width: auto !important; }
-        .with-sidebar .third-image .optyn-replaceable-image img { width: 280px !important; }
-        .with-sidebar .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
-        .with-sidebar td.wrapper.last { padding: 0; }
+        .with-sidebar table[class="body"] .third-image .optyn-replaceable-image{ width: auto !important; }
+        .with-sidebar table[class="body"] .third-image .optyn-replaceable-image img { width: 280px !important; }
+        .with-sidebar table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
+        .with-sidebar table[class="body"] td.wrapper.last { padding: 0; }
       }  /* End media query. */
 
     </style>

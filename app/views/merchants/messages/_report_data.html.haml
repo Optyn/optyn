@@ -29,11 +29,15 @@
         Email Opened By:
       .count
         = message.opens_count
+      %span.inline-help
+        Click Me!  
     .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "unsubscribes_emails")}
       .info
         Unsubscribes:
       .count
         = message.opt_outs
+      %span.inline-help
+        Click Me!  
   .clearfix
 
   .blank-space
@@ -52,6 +56,8 @@
         Bounces:
       .count
         = message.bounced
+      %span.inline-help
+        Click Me!  
 
     .span3.box.email-report-report-link{'data-id' => message.uuid, 'data-location' =>email_report_merchants_message_path(:id => message.uuid, :report_type => "complaint_emails")}
       .info
@@ -59,6 +65,8 @@
         Marked as Spam:
       .count
         = message.complaints
+      %span.inline-help
+        Click Me!  
 
   .clearfix
   - if @message.sent?

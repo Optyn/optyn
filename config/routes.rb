@@ -434,7 +434,7 @@ Optyn::Application.routes.draw do
         put :move_to_trash
         put :move_to_draft
         put :discard
-        get :remove_message_image
+        get :remove_message_image        
       end
 
       member do
@@ -461,6 +461,7 @@ Optyn::Application.routes.draw do
         get :click_report
         get :email_report
         get :system_layouts
+        get :copy
       end #end of member
     end #end of resources messages
   end #end of merchants namespace

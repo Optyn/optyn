@@ -733,7 +733,8 @@ function MerchantMessage() {
                 url: url,
                 type: 'GET',
                 success: function (data) {
-                    $('#report_dialog .modal-body').html(data);
+                    $('#report_dialog .modal-body').html(data.emails);
+                    $('#report_dialog .modal-header h3').html(data.report_title);
                     $('#report_dialog').modal('show');
                 },
                 error: function (jqXHR, textStatus, errorThrown)

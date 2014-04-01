@@ -297,6 +297,16 @@ class Message < ActiveRecord::Base
     SelfEmailSender.perform_async(self.id)
   end
 
+  def copy_message
+    message = self.class.new
+    self.attributes.except('updated_at','created_at','id','uuid').each do |key, value|
+      message.send("#{key}=", self.send(key.to_sym))
+    end
+    message.send("state=", "draft")
+    message.save
+    message
+  end
+
   def assign_template(template_identifier, name=nil, properties={})
     unless self.template_id.present?
       existing_template = Template.for_uuid(template_identifier)
@@ -521,7 +531,7 @@ class Message < ActiveRecord::Base
   end
 
   def bounced_emails
-    message_email_auditors.bounced.includes_user.collect(&:email)
+    message_email_auditors.bounced.includes_user.collect(&:user).collect(&:email)
   end
 
   def bounced
@@ -529,7 +539,7 @@ class Message < ActiveRecord::Base
   end
 
   def complaint_emails
-  message_email_auditors.complaints.includes_user.collect(&:email)
+    message_email_auditors.complaints.includes_user.collect(&:user).collect(&:email)
   end
 
   def complaints

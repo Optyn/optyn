@@ -213,7 +213,7 @@ OP = (function($, window, doucument, Optyn){
             var $temp = $("<div />");
             var $img = $('<img />');
              var $a = $('<a />');
-             $a.attr("href", images[index][1]);
+             $a.attr("href", "http://" + images[index][1]);
              $a.attr("class", "imageLink");
              if(images[index][1].length > 0){
              $a.append($img); 

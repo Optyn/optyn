@@ -8,7 +8,7 @@ module Merchants::ShopsHelper
   end
 
   def show_website(shop)
-    shop.website.present? ? link_to(shop.website, shop.website) : "Please enter your business website"
+    shop.website.present? ? link_to(shop.display_website, shop.website) : "Please enter your business website"
   end
 
   def show_description(shop)
