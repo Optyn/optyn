@@ -238,7 +238,7 @@ class User < ActiveRecord::Base
 
   def self.search_user(params)
     if not params["name"].blank? and not params["email"].blank?
-      users = User.where('name ilike ? and email = ?', "%#{params[:name].strip}%", "#{params[:email].strip}")
+      users = User.where('(name ilike ? or name ilike ?) and email = ?', "%#{params[:name].strip}%","%#{params[:name].strip}%", "#{params[:email].strip}")
     elsif not params["name"].blank?
       users = User.arel_table
       users = User.where(users[:first_name].matches("%#{params[:name]}%")) + User.where(users[:last_name].matches("%#{params[:name]}%"))
@@ -255,7 +255,7 @@ class User < ActiveRecord::Base
     elsif not params["label_ids"].blank? #searches on the basis of label only
       user_ids = UserLabel.where(:label_id => params["label_ids"]).map{|x| x.user_id}
     else #searches when everything is blank
-      users_with_name_or_email_blank = User.where('name is NULL or email is NULL').map{|x| x.id}
+      users_with_name_or_email_blank = User.where('(last_name is NULL and first_name is NULL) or email is NULL').map{|x| x.id}
       users_with_label_blank = UserLabel.where('label_id is NULL or label_id = 0').map{|x| x.user_id}
       user_ids = users_with_name_or_email_blank | users_with_label_blank
     end
@@ -277,7 +277,7 @@ class User < ActiveRecord::Base
   end
 
   def permission_name
-    self.name if permissions_users.permission_visible?(Permission.name_id)
+    self.full_name if permissions_users.permission_visible?(Permission.name_id)
   end
 
   def permission_email

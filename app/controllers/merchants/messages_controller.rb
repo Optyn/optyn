@@ -14,6 +14,9 @@ class Merchants::MessagesController < Merchants::BaseController
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
 
+  NON_TEMPLATE_BUTTON_STYLE = "text-decoration:none;color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 15px;"
+  NON_TEMPLATE_CKEDITOR_BUTTON_STYLE = 'border-radius: 0;background: #D4D4D4; padding: 2px 10px;text-decoration: none;display: inline-block;'
+
   def types
     #Do Nothing
   end
@@ -81,6 +84,9 @@ class Merchants::MessagesController < Merchants::BaseController
       populate_datetimes
 
       message_method_call = check_subscription
+
+      update_button_styles
+
       if @message.send(message_method_call.to_sym)
         message_redirection
       else
@@ -103,6 +109,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def edit
     @message = Message.for_uuid(params[:id])
     populate_shop_surveys
+    update_button_for_ckeditor
     @message_type = @message.type.underscore
   end
 
@@ -118,6 +125,9 @@ class Merchants::MessagesController < Merchants::BaseController
 
       populate_datetimes
       message_method_call = check_subscription
+      
+      update_button_styles
+
       if @message.send(message_method_call.to_sym)
         message_redirection
       else
@@ -386,7 +396,9 @@ class Merchants::MessagesController < Merchants::BaseController
   def email_report
     message = Message.find_by_uuid(params["id"])
     open_email_user = message.send(params[:report_type])
-    render partial: 'merchants/messages/email_list', locals: {message: message, report_data: open_email_user}
+    populate_report_title
+    @emails = render_to_string(partial: 'merchants/messages/email_list', locals: {message: message, report_data: open_email_user})
+    render(json: {emails: @emails, report_title: @report_title})
   end
 
   def share_email
@@ -494,6 +506,21 @@ class Merchants::MessagesController < Merchants::BaseController
     return render(action: 'edit_template') if @message.instance_of?(TemplateMessage)
 
     render action: 'edit'
+  end
+
+  def populate_report_title
+    @report_title = case params[:report_type]
+    when "open_emails"
+      "Emails Opened"
+    when "unsubscribes_emails"
+      "Emails Unsubscribed"
+    when "bounced_emails" 
+      "Emails Bounced" 
+    when "complaint_emails"  
+      "Emails Marked Spam"
+    else
+      "Email Report"
+    end
   end
 
 end

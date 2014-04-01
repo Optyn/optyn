@@ -479,7 +479,7 @@ class Message < ActiveRecord::Base
   end
 
   def bounced_emails
-    message_email_auditors.bounced.includes_user.collect(&:email)
+    message_email_auditors.bounced.includes_user.collect(&:user).collect(&:email)
   end
 
   def bounced
@@ -487,7 +487,7 @@ class Message < ActiveRecord::Base
   end
 
   def complaint_emails
-  message_email_auditors.complaints.includes_user.collect(&:email)
+    message_email_auditors.complaints.includes_user.collect(&:user).collect(&:email)
   end
 
   def complaints
@@ -714,9 +714,9 @@ class Message < ActiveRecord::Base
   def canned_from
     #manager.email_like_from
     if shop.verified_email.present? && shop.ses_verified?
-      %{"#{self.shop_name.titleize}" <#{shop.verified_email}>}  
+      %{"#{self.shop_name}" <#{shop.verified_email}>}  
     else
-      %{"#{self.shop_name.titleize}" <#{shop.partner.from_email}>}
+      %{"#{self.shop_name}" <#{shop.partner.from_email}>}
     end
   end
 

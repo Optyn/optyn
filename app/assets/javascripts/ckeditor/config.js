@@ -35,13 +35,10 @@ CKEDITOR.plugins.addExternal('insert_blank','http://localhost:3000/assets/ckedit
     items : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
     'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat']
   },
+  '/',
   {
     name: 'links',
-    items : [ 'Link' ]
-  },
-  {
-    name: 'simpleLink',
-    items: ['simpleLinkDialog']
+    items : [ 'Link', 'SimpleLink' ]
   }
   ];
 

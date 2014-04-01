@@ -1,5 +1,6 @@
 module Users		
 	module Importer
+    include Merchants::FileImportsHelper
 		def import(content, manager, label)
 
 
@@ -74,10 +75,10 @@ module Users
             user.show_shop = true
             user.shop_identifier = shop.id
             counters[:user_creation] += 1
-            output_row << %{"Created a New User"}
+            output_row << %{"#{stats_change[:user_creation]}"}
           else
             counters[:existing_user] += 1
-            output_row << %{"User exists"}
+            output_row << %{"#{stats_change[:existing_connection]}"}
           end
           user.save()
 

@@ -731,7 +731,6 @@
         }
     </style>
     <style type="text/css" media="screen">
-      .main-content .two-up td{width: 265px;}
       /* Theme styles */
       .galleria table.body, p{
         line-height: normal;
@@ -754,6 +753,11 @@
       .optyn-content .optyn-paragraph{
         color: #000;
       }
+
+      .optyn-content .optyn-paragraph p{
+        color: #000;
+      }
+
       .optyn-content .optyn-headline{
         color: #000;
       }
@@ -843,7 +847,7 @@
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
       .optyn-replaceable-image img { float: none; }
-      .optyn-intro { width: 560px; }
+      .optyn-intro { width: 560px; padding-top: 0px !important; }
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .galleria .full-image .optyn-replaceable-image img{
@@ -870,14 +874,12 @@
         float: right;
         margin:0 0 10px 2%;
       }
-      .galleria td.third-image,
       .galleria .third-image .optyn-replaceable-image img{
-        width:160px;
+        width:173px;
       }
 
-      .galleria td.fourth-image,
       .galleria .fourth-image .optyn-replaceable-image img{
-        width:120px;
+        width:125px;
       }
       .optyn-division {
         padding-top: 5px;
@@ -902,6 +904,7 @@
         .galleria .half-left-image .optyn-replaceable-image,
         .galleria .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
         .galleria .third-image .optyn-replaceable-image{ width: auto !important; }
+        .galleria .two-img-columns .optyn-replaceable-image,
         .galleria .third-image .optyn-replaceable-image img { width: 95% !important; }
         .galleria .fourth-image .optyn-replaceable-image{ width: auto !important; }
         .galleria .fourth-image .optyn-replaceable-image img { width: 95% !important; }
@@ -921,26 +924,24 @@
               <tr>
                 <td>
                   <row>
-                    <div>
+                    <table class="block-grid">
                       <grid type="introduction">
-                        <table class="block-grid">
-                          <tr>
-                            <td class="no-pad center optyn-intro-cont">
-                              <division type="introduction">
-                                <div class="optyn-intro">
-                                  <img width="560" src="http://placehold.it/560x100" alt="" />
-                                </div>
-                              </division>
-                            </td>
-                          </tr>
-                        </table>
+                        <tr>
+                          <td class="no-pad center optyn-intro-cont">
+                            <division type="introduction">
+                              <div class="optyn-intro">
+                                <img width="560" src="http://placehold.it/560x100" alt="" />
+                              </div>
+                            </division>
+                          </td>
+                        </tr>
                       </grid>
-                    </div>
-                    </row>
-                  </td>
-                </tr>
-              </table>
-            </container>
+                    </table>
+                  </row>
+                </td>
+              </tr>
+            </table>
+          </container>
 
           <container type="content">
             <table class="container">
@@ -953,7 +954,7 @@
                           <division type="full_text">
                             <table class="block-grid">
                               <tr>
-                                <td class="text-pad">
+                                <td>
                                   <headline>
                                     <h2 class="headline">A Division of Text</h2>
                                   </headline>
@@ -978,7 +979,7 @@
                                     </div>
                                   </paragraph>
                                   <image>
-                                     <img width="300" src="http://placehold.it/560x250" alt="" />
+                                     <img width="560" src="http://placehold.it/560x250" alt="" />
                                   </image>
                                 </td>
                               </tr>
@@ -986,51 +987,56 @@
                           </division>
 
                           <division type="two_columns">
-                            <table class="block-grid two-up two-img-columns">
-                              <tr>
-                                <td>
-                                  <image>
-                                    <img src="http://placehold.it/290x150" alt="" class="w260" />
-                                  </image>
-                                  <paragraph>
-                                    <div>A distinct piece of writing.</div>
-                                  </paragraph>
-                                </td><td>
-                                  <image>
-                                    <img src="http://placehold.it/290x150" alt="" class="w260" />
-                                  </image>
-                                  <paragraph>
-                                    <div>A distinct piece of writing.</div>
-                                  </paragraph>
-                                </td>
-                              </tr>
-                            </table>
+                            <div class="two-img-columns">
+                              <headline>
+                                <h2 class="headline text-pad-10 three-img-columns">Two Columns</h2>
+                              </headline>
+                              <table class="block-grid two-up">
+                                <tr>
+                                  <td>
+                                    <image>
+                                      <img width="270" src="http://placehold.it/290x150" alt="" />
+                                    </image>
+                                    <paragraph>
+                                      <div>A distinct piece of writing.</div>
+                                    </paragraph>
+                                  </td><td>
+                                    <image>
+                                      <img width="270" src="http://placehold.it/290x150" alt="" />
+                                    </image>
+                                    <paragraph>
+                                      <div>A distinct piece of writing.</div>
+                                    </paragraph>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </division>
 
                           <division type="three_columns">
                             <div>
                               <headline>
-                                <h2 class="headline text-pad-10 three-img-columns">Three columns</h2>
+                                <h2 class="headline text-pad-10 three-img-columns">Three Columns</h2>
                               </headline>
                               <table class="block-grid three-up">
                                 <tr>
                                   <td class="third-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="173" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td class="third-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="173" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td class="third-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="173" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
@@ -1050,28 +1056,28 @@
                                 <tr>
                                   <td class="fourth-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="125" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td class="fourth-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="125" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td class="fourth-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="125" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
                                   </td><td class="fourth-image">
                                     <image>
-                                      <img src="http://placehold.it/300x200" alt="" />
+                                      <img width="125" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
