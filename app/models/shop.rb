@@ -52,6 +52,8 @@ class Shop < ActiveRecord::Base
   validates :time_zone, presence: true, unless: :new_record?
   validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}
   validates :phone_number, :phony_plausible => true 
+  validate :validate_website
+  # validates :website, :presence => true, :format => {:with => %r(^\S(([^\s\!\*\'\(\)\;\:\@\&\=\+\$\,\/\?\%\#\[\]]+\.)+.[a-zA-Z]{1,})$), :message => "Invalid website"}
   # validates_uniqueness_of_without_deleted :name
   
 
@@ -110,6 +112,13 @@ class Shop < ActiveRecord::Base
   end
 
 
+  def validate_website
+    if website.present? && !website.match(%r(^\S(([^\s\!\*\'\(\)\;\:\@\&\=\+\$\,\/\?\%\#\[\]]+\.)+.[a-zA-Z]{1,})$))
+      self.errors.add(:website, "is invalid. Here is an example: //example.com")
+      return
+    end
+  end
+
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
 
   def self.for_name(shop_name)
@@ -146,6 +155,12 @@ class Shop < ActiveRecord::Base
     end
 
     shop
+  end
+
+  def display_website
+    unless self.website[/\Ahttp:\/\//] || self.website[/\Ahttps:\/\//]
+      self.website = "http://#{self.website}"
+    end
   end
 
   def self.optyn_magic
