@@ -29,7 +29,8 @@ CKEDITOR.plugins.add( 'simpleLink',
       if ( !element.isReadOnly() ) {
         if (element.is('a') && element.hasClass('optyn-button-link')){
           evt.data.dialog = 'simpleLinkDialog'
-					editor.getSelection().selectElement( element );
+					var selection = editor.getSelection();
+					selection.selectElement(element);
           //return false; //Stop the doubleclick propagation
         }
       }
@@ -97,6 +98,10 @@ CKEDITOR.plugins.add( 'simpleLink',
 								label : 'URL',
 								validate : CKEDITOR.dialog.validate.notEmpty( 'The link must have a URL.' ),
 								required : true,
+								setup : function( element )
+								{
+									this.setValue( element.getAttribute('href') );
+								},
 								commit : function( data )
 								{
 									data.url = this.getValue();
@@ -108,7 +113,7 @@ CKEDITOR.plugins.add( 'simpleLink',
 				onShow : function()
 				{
 					var selection = editor.getSelection();
-				  var selectedElement = selection.getSelectedElement();
+				  var selectedElement = selection.getStartElement();
 					// Get the element selected in the editor.
 					// http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.editor.html#getSelection
 					// var sel = editor.getSelection(),
@@ -117,8 +122,8 @@ CKEDITOR.plugins.add( 'simpleLink',
 						// element = sel.getStartElement();
 					
 					// Get the <abbr> element closest to the selection.
-					if ( selectedElement )
-						element = element.getAscendant( 'a', true );
+					// if ( selectedElement )
+					// 	element = element.getAscendant( 'a', true );
 					
 					// Create a new <abbr> element if it does not exist.
 					// http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.dom.document.html#createElement
@@ -152,7 +157,12 @@ CKEDITOR.plugins.add( 'simpleLink',
 
 					// Set the URL (href attribute) of the link element.
 					// http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.dom.element.html#setAttribute
-					link.setAttribute( 'href', data.url );
+					var url = data.url
+					if(!url.match(/^https?:\/\//)){
+						url = "http://" + url;
+					}
+
+					link.setAttribute( 'href',  url);
 
 					// In case the "newPage" checkbox was checked, set target=_blank for the link element.
 					if ( data.newPage )
