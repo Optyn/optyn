@@ -27,5 +27,33 @@ module Messagecenter
     def state_from_choice(choice)
       return :queued if "queued" == choice
     end
+
+    def update_button_styles
+      unless @message.instance_of?(TemplateMessage)
+        if @message.content.match(/<p>.*<\/p>/ixm)
+          content_node = Nokogiri::HTML::fragment(@message.content)
+          links = content_node.css('a.optyn-button-link')
+          links.each do |link|
+            link['style'] = Merchants::MessagesController::NON_TEMPLATE_BUTTON_STYLE
+          end
+
+          @message.content = content_node.to_s
+        end
+      end
+    end
+
+    def update_button_for_ckeditor
+      unless @message.instance_of?(TemplateMessage)
+        if @message.content.match(/<p>.*<\/p>/ixm)
+          content_node = Nokogiri::HTML::fragment(@message.content)
+          links = content_node.css('a.optyn-button-link')
+          links.each do |link|
+            link['style'] = Merchants::MessagesController::NON_TEMPLATE_CKEDITOR_BUTTON_STYLE
+          end
+
+          @message.content = content_node.to_s
+        end
+      end
+    end
   end
 end
