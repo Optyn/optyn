@@ -50,4 +50,62 @@ namespace :templates do
       puts "DONE generating thumbnail for #{template.id}"
     end
   end
+
+  task :add_missing_optyn_button_link => :environment do
+    button_style = <<-STYLE
+    <style type="text/css">  
+      .optyn-content a.optyn-button-link{
+        text-decoration:none;
+        color: #FFF !important;
+        background-color: #64aaef;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;border-radius: 0;
+        font: normal 16px/25px 'Open Sans', sans-serif;
+        letter-spacing: 1px;
+        border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+        -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        padding: 3px 10px;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      .optyn-content a.optyn-button-link:hover{
+        color: #FFF !important;
+        background-color: #64aaef;
+      }
+
+      .optyn-content a.optyn-button-link:visited{
+        color: #FFF !important;
+        background-color: #64aaef;
+      }
+
+      .optyn-content a.optyn-button-link:active{
+        color: #FFF !important;
+        background-color: #64aaef;
+      }
+      </style>
+    STYLE
+
+    templates = Template.where("shop_id IS NOT NULL")
+    templates.each do |template|
+      html = template.html
+      if html.present?
+        layout_node = Nokogiri::HTML(html)
+        style_node = layout_node.css('style').last  
+        unless style_node.to_s.include?('optyn-button-link')
+          style_node.after(button_style)
+
+          template.html = layout_node.to_s
+          template.send(:create_structure)
+
+          Rails.logger.info %{-- Updating Template: #{template.name} and the Shop Name: #{template.shop.name}}
+        else
+          Rails.logger.info %{xx Updating Template: #{template.name} and the Shop Name: #{template.shop.name}}
+        end
+      end
+    end
+  end
 end
