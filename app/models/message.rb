@@ -262,10 +262,11 @@ class Message < ActiveRecord::Base
 
   def copy_message
     message = self.class.new
-    self.attributes.except('updated_at','created_at','id','uuid').each do |key, value|
+    self.attributes.except('updated_at','created_at','id','uuid','send_on','name').each do |key, value|
       message.send("#{key}=", self.send(key.to_sym))
     end
     message.send("state=", "draft")
+    message.send("name=", "#{name} (copy #{Date.today})")
     message.save
     message
   end
