@@ -813,6 +813,14 @@
       }
 
       /* Custom styles */
+      body, table.body, h1, h2, h3, h4, h5, h6, p,
+      table.button td a,
+      table.tiny-button td a,
+      table.small-button td a,
+      table.medium-button td a,
+      table.large-button td a {
+        font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Ubuntu", "Arial", sans-serif;;
+      }
       .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
       h2 { font-size: 16px; font-weight: bold; }
@@ -874,12 +882,18 @@
         float: right;
         margin:0 0 10px 2%;
       }
+      .galleria .third-image,
       .galleria .third-image .optyn-replaceable-image img{
-        width:173px;
+        width:170px;
       }
-
+      .galleria .two-up td { width: 268px; }
+      .galleria td.fourth-image { width: 122px; }
+      .galleria .full_image .optyn-replaceable-image,
+      .galleria .two-up .optyn-replaceable-image,
+      .galleria .third-image .optyn-replaceable-image,
+      .galleria .fourth-image .optyn-replaceable-image { margin-bottom: 10px; }
       .galleria .fourth-image .optyn-replaceable-image img{
-        width:125px;
+        width:122px;
       }
       .optyn-division {
         padding-top: 5px;
@@ -895,21 +909,27 @@
       }
 
       @media only screen and (max-width: 600px) {
-        table.container .block-grid td {
-          width: 95% !important;
+        table[class="body"] table.container .block-grid td {
+          /*width: 95% !important; this is ink default */
+          width: 280px !important;
         }
-        .body { width: 310px; }
-        .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .galleria .full-image .optyn-replaceable-image img { width: 95% !important; }
-        .galleria .half-left-image .optyn-replaceable-image,
-        .galleria .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
-        .galleria .third-image .optyn-replaceable-image{ width: auto !important; }
-        .galleria .two-img-columns .optyn-replaceable-image,
-        .galleria .third-image .optyn-replaceable-image img { width: 95% !important; }
-        .galleria .fourth-image .optyn-replaceable-image{ width: auto !important; }
-        .galleria .fourth-image .optyn-replaceable-image img { width: 95% !important; }
-        .galleria .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
-        .galleria .three-up td{width: 94% !important;}
+        table[class="body"] table.container {
+          width: 300px !important;
+        }
+        table[class="body"] .optyn-intro-cont,
+        table[class="body"] .optyn-intro { width: 300px !important; }
+        .galleria table[class="body"] .half-left-image .optyn-replaceable-image,
+        .galleria table[class="body"] .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
+        .galleria table[class="body"] .full-image .optyn-replaceable-image img,
+        .galleria table[class="body"] .two-up { width: 268px; }
+        .galleria table[class="body"] .two-img-columns .optyn-replaceable-image,
+        .galleria table[class="body"] .two-img-columns .optyn-replaceable-image img,
+        .galleria table[class="body"] .third-image .optyn-replaceable-image,
+        .galleria table[class="body"] .third-image .optyn-replaceable-image img,
+        .galleria table[class="body"] .fourth-image .optyn-replaceable-image,
+        .galleria table[class="body"] .fourth-image .optyn-replaceable-image img { width: 280px !important; }
+        .galleria table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
+        .galleria table[class="body"] .three-up td{width: 94% !important;}
         table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
       }  /* End media query. */
 
@@ -994,16 +1014,16 @@
                               </headline>
                               <table class="block-grid two-up">
                                 <tr>
-                                  <td>
+                                  <td width="268">
                                     <image>
-                                      <img width="270" src="http://placehold.it/290x150" alt="" />
+                                      <img width="268" src="http://placehold.it/290x150" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td>
+                                  </td><td width="268">
                                     <image>
-                                      <img width="270" src="http://placehold.it/290x150" alt="" />
+                                      <img width="268" src="http://placehold.it/290x150" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
@@ -1021,23 +1041,23 @@
                               </headline>
                               <table class="block-grid three-up">
                                 <tr>
-                                  <td class="third-image">
+                                  <td class="third-image" width="170">
                                     <image>
-                                      <img width="173" src="http://placehold.it/300x200" alt="" />
+                                      <img width="170" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td class="third-image">
+                                  </td><td class="third-image" width="170">
                                     <image>
-                                      <img width="173" src="http://placehold.it/300x200" alt="" />
+                                      <img width="170" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td class="third-image">
+                                  </td><td class="third-image" width="170">
                                     <image>
-                                      <img width="173" src="http://placehold.it/300x200" alt="" />
+                                      <img width="170" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
@@ -1055,30 +1075,30 @@
                               </headline>
                               <table class="block-grid four-up">
                                 <tr>
-                                  <td class="fourth-image">
+                                  <td class="fourth-image" width="122">
                                     <image>
-                                      <img width="125" src="http://placehold.it/300x200" alt="" />
+                                      <img width="122" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td class="fourth-image">
+                                  </td><td class="fourth-image" width="122">
                                     <image>
-                                      <img width="125" src="http://placehold.it/300x200" alt="" />
+                                      <img width="122" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td class="fourth-image">
+                                  </td><td class="fourth-image" width="122">
                                     <image>
-                                      <img width="125" src="http://placehold.it/300x200" alt="" />
+                                      <img width="122" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>
                                     </paragraph>
-                                  </td><td class="fourth-image">
+                                  </td><td class="fourth-image" width="122">
                                     <image>
-                                      <img width="125" src="http://placehold.it/300x200" alt="" />
+                                      <img width="122" src="http://placehold.it/300x200" alt="" />
                                     </image>
                                     <paragraph>
                                       <div>A distinct piece of writing.</div>

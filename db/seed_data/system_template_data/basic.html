@@ -888,21 +888,21 @@ table.facebook td {
       }
 
       @media only screen and (max-width: 600px) {
-        table.container .block-grid td {
+        table[class="body"] table.container .block-grid td {
           width: 95% !important;
         }
-        .body { width: 310px; }
-        .body .float-left,
-        .body .float-right { float: none !important; }
-        .body .o-column { width: 100% !important; }
-        .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic .full-image .optyn-replaceable-image img { width: 100% !important; }
-        .basic .half-left-image .optyn-replaceable-image,
-        .basic .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0 !important; }
-        .basic .third-image .optyn-replaceable-image{ width: auto !important; }
-        .basic .third-image .optyn-replaceable-image img { width: auto !important; }
-        .basic .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
-        .basic .three-up td{width: 94% !important;}
+        table[class="body"] { width: 310px; }
+        table[class="body"] .float-left,
+        table[class="body"] .float-right { float: none !important; }
+        table[class="body"] .o-column { width: 100% !important; }
+        table[class="body"] .optyn-intro { width: 100% !important; min-width: 83vw; }
+        .basic table[class="body"] .full-image .optyn-replaceable-image img { width: 100% !important; }
+        .basic table[class="body"] .half-left-image .optyn-replaceable-image,
+        .basic table[class="body"] .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0 !important; }
+        .basic table[class="body"] .third-image .optyn-replaceable-image{ width: auto !important; }
+        .basic table[class="body"] .third-image .optyn-replaceable-image img { width: auto !important; }
+        .basic table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
+        .basic table[class="body"] .three-up td{width: 94% !important;}
         table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
       }  /* End media query. */
 
