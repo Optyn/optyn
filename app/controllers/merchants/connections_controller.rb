@@ -54,6 +54,7 @@ class Merchants::ConnectionsController < Merchants::BaseController
   			@user = User.new(:name => values["name"], :first_name => first_name, :last_name => last_name, :email => email, :password => "test1234")
         @user.skip_name = true
         @user.shop_identifier = current_shop.id
+        @user.skip_welcome_email = true
         @user.show_shop = true
         conn = nil
 
