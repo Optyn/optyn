@@ -8,7 +8,7 @@
           %h6.text-error
             = "Following errors prohibited this user from being saved:"
           %ul
-            - @user.errors.full_messages.each do |error|
+            - @user.errors.uniq.full_messages.each do |error|
               - next if error.include?('Password')
               %li
                 = error
@@ -16,7 +16,7 @@
           %h2
             = "Following errors prohibited user(s) from being saved:"
           %ul
-            - @error_hash.each do |error|
+            - @error_hash.uniq.each do |error|
               %li
                 = error
     .form
