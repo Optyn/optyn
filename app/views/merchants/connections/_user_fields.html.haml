@@ -1,0 +1,10 @@
+.controls{:id => "newUser_#{count}"}
+  .input-append
+    .labels{'data-toggle' => 'tooltip', title: 'Please enter name. Ex: Jane Smith'}
+      = text_field_tag "user[#{count}][name]", "#{params[:To]}", :placeholder => 'Name (optional)'
+  .input-append
+    .labels{'data-toggle' => 'tooltip', title: 'Please enter email address'}
+      = text_field_tag "user[#{count}][email]", "#{params[:To]}", :placeholder => 'Email (required)'
+  - if count.present? && count > 0
+    .input-append
+      = link_to (raw "<i class='icon-trash'></i>"), "#",:class => "btn btn-warning remove_user", "data-id" => "newUser_#{count}", 'data-toggle' => 'tooltip', title: 'Remove User'

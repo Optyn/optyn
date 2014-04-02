@@ -370,6 +370,7 @@ Optyn::Application.routes.draw do
         post 'create_label'
         post 'update_labels'
         post 'create_labels_for_user'
+        get "add_more_user"
       end
     end
     resources :locations

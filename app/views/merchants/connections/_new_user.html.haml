@@ -1,0 +1,5 @@
+-if @user_count.present?
+  - @user_count.times do |count|
+    = render :partial => "user_fields", :locals => {:count => count}
+- else
+  = render :partial => "user_fields", :locals => {:count => count}

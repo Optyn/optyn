@@ -737,7 +737,7 @@
       }
 
       .hero-main-content .two-up td{
-        width: 115px;
+        width: 110px;
       }
       .hero .central-content { padding: 10px 10px 0 10px; }
 
@@ -948,6 +948,14 @@
       }
 
       /* Custom styles */
+      body, table.body, h1, h2, h3, h4, h5, h6, p,
+      table.button td a,
+      table.tiny-button td a,
+      table.small-button td a,
+      table.medium-button td a,
+      table.large-button td a {
+        font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Ubuntu", "Arial", sans-serif;;
+      }
       .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
       h2 { font-size: 16px; font-weight: bold; }
@@ -985,16 +993,22 @@
       .optyn-intro { width: 560px; padding-top: 0 !important; }
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
-      .hero .full-image .optyn-replaceable-image img{
+      .hero .full-image .optyn-replaceable-image img,
+      .hero .optyn-headline,
+      .hero .optyn-paragraph {
         width: 250px;
       }
+      .hero .optyn-sidebar .full-image .optyn-replaceable-image { margin-top: 10px; }
       .hero .optyn-sidebar .full-image .optyn-replaceable-image img {
         width: 125px;
       }
+      .hero .optyn-sidebar .optyn-headline,
+      .hero .optyn-sidebar .optyn-paragraph { width :120px; }
       .hero .half-left-image .optyn-replaceable-image,
       .hero .half-right-image .optyn-replaceable-image {
         width: 48%;
       }
+      .hero .optyn-sidebar .full-image .optyn-replaceable-image { margin: 5px 0 0 0 !important; }
       .hero .half-left-image .optyn-replaceable-image img,
       .hero .half-right-image .optyn-replaceable-image img {
         width: 100%;
@@ -1008,9 +1022,14 @@
         margin:0 5px 10px 2%;
       }
       .hero td.third-image,
-      .hero .third-image .optyn-replaceable-image img{
+      .hero .third-image .optyn-replaceable-image img,
+      .hero .two-up .optyn-headline,
+      .hero .two-up .optyn-paragraph,
+      .hero .third-image .optyn-headline,
+      .hero .third-image .optyn-paragraph {
         width:110px;
       }
+      .hero .third-image .optyn-replaceable-image { margin-bottom: 10px; }
       .optyn-division {
         padding-top: 5px;
         float: none;
@@ -1025,23 +1044,28 @@
       }
 
       @media only screen and (max-width: 600px) {
-        table.container .block-grid td {
+        table[class="body"] table.container .block-grid td {
           /*width: 95% !important; this is ink default */
           width: 280px !important;
         }
-        table.body table.container {
+        table[class="body"] table.container {
           width: 300px !important;
         }
-        .optyn-intro-cont,
-        .optyn-intro { width: 300px !important; }
-        .hero .optyn-sidebar .full-image .optyn-replaceable-image img { width: 280px !important; }
-        .hero .full-image .optyn-replaceable-image img { width: 260px !important; }
-        .hero .half-left-image .optyn-replaceable-image,
-        .hero .half-right-image .optyn-replaceable-image{ width: 260px !important; float: none; margin: 0 0 10px 0 !important; }
-        .hero .third-image .optyn-replaceable-image{ width: 260px !important; }
-        .hero .third-image .optyn-replaceable-image img { width: 260px !important; }
-        .hero .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
-        .hero .three-up td {width: 260px !important;}
+        table[class="body"] .optyn-intro-cont,
+        table[class="body"] .optyn-intro { width: 300px !important; }
+        .hero table[class="body"] .optyn-sidebar .full-image .optyn-replaceable-image img { width: 280px !important; }
+        .hero table[class="body"] .full-image .optyn-replaceable-image img { width: 260px !important; }
+        .hero table[class="body"] .half-left-image .optyn-replaceable-image,
+        .hero table[class="body"] .half-right-image .optyn-replaceable-image{ width: 260px !important; float: none; margin: 0 0 10px 0 !important; }
+        .hero table[class="body"] .third-image .optyn-replaceable-image{ width: 260px !important; margin: 0 0 10px 0 !important; }
+        .hero table[class="body"] .third-image .optyn-replaceable-image img { width: 260px !important; }
+        .hero table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
+        .hero table[class="body"] .three-up td {width: 260px !important;}
+        .hero table[class="body"] .optyn-headline,
+        .hero table[class="body"] .optyn-paragraph,
+        .hero table[class="body"] .optyn-sidebar .optyn-headline,
+        .hero table[class="body"] .optyn-sidebar .optyn-paragraph { width: 260px !important; }
+        table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
       }  /* End media query. */
 
     </style>
@@ -1127,7 +1151,7 @@
                                               Image caption here.
                                             </div>
                                             <image>
-                                              <img src="http://placehold.it/180x100/aaa/555" width="300" />
+                                              <img src="http://placehold.it/180x100/aaa/555" width="125" />
                                             </image>
                                           </paragraph>
                                         </td>
@@ -1210,7 +1234,7 @@
                                           <h2 class="headline">Text with Left Image</h2>
                                         </headline>
                                         <image>
-                                          <img src="http://placehold.it/580x250" alt=""  width="260" />
+                                          <img src="http://placehold.it/580x250" alt=""  width="120" />
                                         </image>
                                         <paragraph>
                                           <div>Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
@@ -1224,7 +1248,7 @@
                                           <h2 class="headline">Text with Right Image</h2>
                                         </headline>
                                         <image class="optyn-image">
-                                          <img src="http://placehold.it/580x250" alt=""  width="260" />
+                                          <img src="http://placehold.it/580x250" alt=""  width="120" />
                                         </image>
                                         <paragraph>
                                           <div>Text with Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque cupiditate in sunt eius asperiores optio earum numquam animi fugiat exercitationem! Ex, veritatis vel quas beatae dignissimos dolore doloremque sequi ipsam?</div>
@@ -1241,14 +1265,14 @@
                                           <tr>
                                             <td class="third-image">
                                               <image>
-                                                <img src="http://placehold.it/300x150" width="175" alt="" />
+                                                <img src="http://placehold.it/300x150" width="110" alt="" />
                                               </image>
                                               <paragraph>
                                                 <div>Image caption goes here.</div>
                                               </paragraph>
                                             </td><td class="third-image">
                                               <image>
-                                                <img src="http://placehold.it/300x150" width="175" alt="" />
+                                                <img src="http://placehold.it/300x150" width="110" alt="" />
                                               </image>
                                               <paragraph>
                                                 <div>Image caption goes here.</div>
@@ -1294,7 +1318,7 @@
                                               Image caption here.
                                             </div>
                                             <image>
-                                              <img src="http://placehold.it/180x100/aaa/555" width="300" />
+                                              <img src="http://placehold.it/180x100/aaa/555" width="125" />
                                             </image>
                                           </paragraph>
                                         </td>

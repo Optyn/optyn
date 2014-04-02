@@ -1,0 +1,8 @@
+$('.more_user').append("<%= j render(:partial => 'user_fields', :locals => {:count => @count}) %>");
+$(".addMoreUser a").attr("href", "<%= add_more_user_merchants_connections_path(:user_count => @count)%>");
+$(".remove_user").click(function(){
+  var id = $(this).data("id");
+  $("#" + id).remove();
+});
+$("[data-toggle]").tooltip();
+
