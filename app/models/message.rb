@@ -266,7 +266,7 @@ class Message < ActiveRecord::Base
       message.send("#{key}=", self.send(key.to_sym))
     end
     message.send("state=", "draft")
-    message.send("name=", "#{name} (copy #{Date.today})")
+    message.send("name=", "#{name} (copy #{Date.today.strftime("%m/%d/%Y")})")
     message.save
     message
   end
