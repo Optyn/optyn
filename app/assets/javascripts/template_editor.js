@@ -78,7 +78,8 @@ OP = (function($, window, doucument, Optyn){
       var textareas = $templateContainer.find('textarea');
       for ( var count = 0; count < textareas.length; count++ ) {
         CKEDITOR.replace( 'template_editable_content-' + count, {
-          extraPlugins : 'simpleLink',
+          extraPlugins : 'simpleLink,mediaembed',
+          
           toolbarGroups: [
           {
             name: 'document',
@@ -104,7 +105,7 @@ OP = (function($, window, doucument, Optyn){
       [
         ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
-    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-'],
+    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-', 'MediaEmbed'],
         ['Link', 'SimpleLink']
       ]
         });
