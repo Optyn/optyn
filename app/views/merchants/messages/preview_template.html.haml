@@ -9,7 +9,7 @@
       - if @message.editable_state?
         = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn'
         = link_to "Change Content", template_merchants_message_path(@message.uuid), class: 'btn btn-'
-        = link_to "Copy Message", copy_merchants_message_path(@message.uuid), class: 'btn btn-'
+        = link_to "Copy Campaign", copy_merchants_message_path(@message.uuid), class: 'btn btn-'
       - if !@message.queued? && !current_shop.disabled?   
         = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'
         

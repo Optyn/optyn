@@ -40,6 +40,9 @@
 
             -else
               NA
+            - if defined? sent_page
+              = "| "
+              = link_to "Copy Campaign", copy_merchants_message_path(message.uuid)
                         
     - else
       %tr

@@ -196,6 +196,8 @@ OP = (function($, window, doucument, Optyn){
         var containerId = $(".remove_link_from_image").attr("href");
         var imageLink = $(".remove_link_from_image").attr("data-link");
         $(containerId).find("[data-href='" + imageLink + "']").attr("data-href", "");
+        var modelInput = "#imageLinkModel"+ containerId.replace("#", "");
+        $(modelInput).val("");
         $(this).hide();
 
       });
