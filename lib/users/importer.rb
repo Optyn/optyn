@@ -74,11 +74,9 @@ module Users
             user.show_password = true
             user.show_shop = true
             user.shop_identifier = shop.id
-            counters[:user_creation] += 1
-            output_row << %{"#{stats_change[:user_creation]}"}
+            counters[:user_creation] += 1            
           else
-            counters[:existing_user] += 1
-            output_row << %{"#{stats_change[:existing_connection]}"}
+            counters[:existing_user] += 1            
           end
           user.save()
 
@@ -88,8 +86,10 @@ module Users
             connection.active = true
             connection.connected_via = Connection::CONNECTED_VIA_IMPORT
             counters[:connection_creation] += 1
+            output_row << %{"#{stats_change[:connection_creation]}"}
           else
             counters[:existing_connection] += 1
+            output_row << %{"#{stats_change[:existing_connection]}"}
           end
           connection.save()
 
@@ -107,7 +107,6 @@ module Users
           Rails.logger.error e.backtrace
         end
       end
-	    
       unparsed = unparsed_rows.length > 0 ? unparsed_rows.join("\n") : ""
 
       [counters, output.join("\n"), unparsed]
