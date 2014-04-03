@@ -7,6 +7,7 @@ OP = (function($, window, doucument, Optyn){
       this.cancelTemplateEditorAction();
       this.saveTemplateEditorAction();
       this.addImageLinkURL();
+      this.RemoveImageLinkURL();
     },
 
     setUpSidebarEditing: function(){
@@ -77,7 +78,8 @@ OP = (function($, window, doucument, Optyn){
       var textareas = $templateContainer.find('textarea');
       for ( var count = 0; count < textareas.length; count++ ) {
         CKEDITOR.replace( 'template_editable_content-' + count, {
-          extraPlugins : 'simpleLink',
+          extraPlugins : 'simpleLink,mediaembed',
+          
           toolbarGroups: [
           {
             name: 'document',
@@ -103,7 +105,7 @@ OP = (function($, window, doucument, Optyn){
       [
         ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
-    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-'],
+    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-', 'MediaEmbed'],
         ['Link', 'SimpleLink']
       ]
         });
@@ -187,7 +189,18 @@ OP = (function($, window, doucument, Optyn){
       $(document).on('click', '.saveLinkUrl', function () {
         $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', $( this ).parents('.modal').find('input[type="url"]').val());
       });
+    },
+
+    RemoveImageLinkURL: function() {
+      $(document).on('click', '.remove_link_from_image', function () {
+        var containerId = $(".remove_link_from_image").attr("href");
+        var imageLink = $(".remove_link_from_image").attr("data-link");
+        $(containerId).find("[data-href='" + imageLink + "']").attr("data-href", "");
+        $(this).hide();
+
+      });
     }
+
   };
 
     return Optyn;
