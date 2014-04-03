@@ -859,7 +859,7 @@
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .galleria .full-image .optyn-replaceable-image img{
-        width: 100%;
+        width: 560px;
       }
       .galleria .half-left-image,
       .galleria .half-right-image {
@@ -886,8 +886,12 @@
       .galleria .third-image .optyn-replaceable-image img{
         width:170px;
       }
-      .galleria .two-up td { width: 268px; }
-      .galleria td.fourth-image { width: 122px; }
+      .two-up td,
+      .two-up .optyn-replaceable-image img {
+        width:268px;
+      }
+      td.fourth-image,
+      td.fourth-image .optyn-replaceable-image img { width: 122px; }
       .galleria .full_image .optyn-replaceable-image,
       .galleria .two-up .optyn-replaceable-image,
       .galleria .third-image .optyn-replaceable-image,
@@ -921,7 +925,7 @@
         .galleria table[class="body"] .half-left-image .optyn-replaceable-image,
         .galleria table[class="body"] .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
         .galleria table[class="body"] .full-image .optyn-replaceable-image img,
-        .galleria table[class="body"] .two-up { width: 268px; }
+        .galleria table[class="body"] .two-up,
         .galleria table[class="body"] .two-img-columns .optyn-replaceable-image,
         .galleria table[class="body"] .two-img-columns .optyn-replaceable-image img,
         .galleria table[class="body"] .third-image .optyn-replaceable-image,
