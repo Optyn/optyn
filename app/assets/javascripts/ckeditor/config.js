@@ -13,7 +13,7 @@ CKEDITOR.editorConfig = function( config ) {
 
   config.height = '170px';
 
-  config.extraPlugins = 'simpleLink,mediaembed';
+  config.extraPlugins = 'simpleLink';
   
 
   CKEDITOR.config.allowedContent = true;
