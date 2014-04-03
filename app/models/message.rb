@@ -267,6 +267,13 @@ class Message < ActiveRecord::Base
     end
     message.send("name=", "#{name} (copy #{Date.today.strftime("%m/%d/%Y")})")
     message.save_draft
+
+    ##using same labels for new messsage
+    self.label_ids.each do |label_id|
+      message.message_labels.build(label_id: label_id, shop_identifier: self.shop_id)
+    end
+    
+    message.save
     message
   end
 
