@@ -861,20 +861,13 @@ table.facebook td {
 
       .basic .half-left-image .optyn-replaceable-image,
       .basic .half-right-image .optyn-replaceable-image {
-        width: 48%;
+        width: 260px;
       }
       .basic .half-left-image .optyn-replaceable-image img,
       .basic .half-right-image .optyn-replaceable-image img {
         width: 100%;
       }
-      .basic .half-left-image .optyn-replaceable-image {
-        float: left;
-        margin:0 2% 10px 0;
-      }
-      .basic .half-right-image .optyn-replaceable-image {
-        float: right;
-        margin:0 0 10px 2%;
-      }
+      
       .basic td.third-image,
       .basic .third-image .optyn-replaceable-image img{
         width:173px;
@@ -1022,9 +1015,16 @@ table.facebook td {
                                 </tr>
                                 <tr>  
                                   <td class="half-left-image">
-                                    <image>
-                                      <img src="http://placehold.it/580x250" alt=""  width="260" />
-                                    </image>
+                                    <table cellspacing="0" cellpadding="0" align="left" width="270">
+                                      <tr>
+                                        <td>
+                                          <image>
+                                            <img src="http://placehold.it/580x250" alt=""  width="260" />
+                                          </image>
+                                        </td>
+                                        <td width="10"></td>
+                                      </tr>
+                                    </table>
                                     <paragraph>
                                       <div>
                                         Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!
