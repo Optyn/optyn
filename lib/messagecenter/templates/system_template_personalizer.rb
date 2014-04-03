@@ -59,6 +59,13 @@ module Messagecenter
                 css: {
                   color: Template::CONTENT_LINK_COLOR
                 }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
+                }
               }
             },
             sidebar:{
@@ -82,7 +89,15 @@ module Messagecenter
                 css: {
                   color: Template::CONTENT_LINK_COLOR
                 }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
+                }
               }
+
             },
             rightSidebar:{
               css: {
@@ -104,6 +119,13 @@ module Messagecenter
               link: {
                 css: {
                   color: Template::CONTENT_LINK_COLOR
+                }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
                 }
               }
             },
@@ -127,6 +149,13 @@ module Messagecenter
               link: {
                 css: {
                   color: Template::CONTENT_LINK_COLOR
+                }
+              },
+
+              button: {
+                css: {
+                  color: Template::CONTENT_BUTTON_COLOR,
+                  :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
                 }
               }
             }
@@ -207,6 +236,14 @@ module Messagecenter
           Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'paragraph') 
         end
 
+        @parsed_html.css('fbshare').each do |paragraph_child|
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'fbshare') 
+        end
+
+        @parsed_html.css('twittershare').each do |paragraph_child|
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'twittershare') 
+        end
+
         # Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')  
 
         self.html = @parsed_html.to_s        
@@ -267,27 +304,46 @@ module Messagecenter
             end
           end
 
-          #replace the palceholder image tag with shop image or name based om if a shop has a logo
-          introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
-          introduction_division.css('img').each do |image|
-            shop_logo = email_body_shop_logo(shop)
-            shop_logo_node = Nokogiri::HTML::fragment(shop_logo)
-          
-            if shop_logo_node.css('img').present?
-              image_node = shop_logo_node.css('img').first
-              style_attr = image_node['style']
-              image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
-              image_node.swap(%{<image>#{image_node.to_s}</image>})
-              image.swap(%{<span class="center">#{shop_logo_node.children.to_s}</span>})
-            else
-              header_node = shop_logo_node.css('h3').first
-              class_attr = header_node['class']
-              header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
-              header_node.swap("<headline>#{header_node.to_s}</headline>")
-              image.swap(%{#{shop_logo_node.children.to_s}})
-            end
+          if header_properties['twitter'].present?
+            css_style = header_properties['twitter']['show'] == "0" ? "display:none" : "display:block"
+            tw_style = @parsed_html.css(".optyn-twittershare").first.attribute('style').value
+            @parsed_html.css(".optyn-twittershare").first.attribute('style').value = tw_style + css_style
           end
 
+          if ((@parsed_html.css("fbshare").size()>0) || (@parsed_html.css("twittershare").size()>0) ) && header_properties['shareurl'].present?
+            @parsed_html.css("twittershare").first.attribute('shareurl').value = header_properties['shareurl']
+            @parsed_html.css("fbshare").first.attribute('shareurl').value = header_properties['shareurl']
+            @parsed_html.css("twittershare").first.attribute('text').value = header_properties['text']
+          end
+
+          if header_properties['facebook'].present?
+            css_style = header_properties['facebook']['show'] == "0" ? "display:none" : "display:block"
+            tw_style = @parsed_html.css(".optyn-fbshare").first.attribute('style').value
+            @parsed_html.css(".optyn-fbshare").first.attribute('style').value = tw_style + css_style
+          end
+          
+          #replace the palceholder image tag with shop image or name based om if a shop has a logo
+          if header_properties['logo'].present? 
+            introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
+            introduction_division.css('img').each do |image|
+              msg_logo = email_body_message_logo(shop,header_properties['message_uuid'],header_properties['template_uuid'],header_properties['logo'],header_properties['logo_text'])
+              msg_logo_node = Nokogiri::HTML::fragment(msg_logo)
+            
+              if msg_logo_node.css('img').present?
+                image_node = msg_logo_node.css('img').first
+                style_attr = image_node['style']
+                image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
+                image_node.swap(%{<image>#{image_node.to_s}</image>})
+                image.swap(%{<span class="center">#{msg_logo_node.children.to_s}</span>})
+              else
+                header_node = msg_logo_node.css('h3').first
+                class_attr = header_node['class']
+                header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
+                header_node.swap("<headline>#{header_node.to_s}</headline>")
+                image.swap(%{#{msg_logo_node.children.to_s}})
+              end
+            end
+          end
           @parsed_html.css('headline').each do |headline_child|
             Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline') 
           end
@@ -322,18 +378,55 @@ module Messagecenter
                 node.set_property(css_key.to_s, css_value)          
               end
             end
+
+            #change the css properties of the paragraph
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content .optyn-paragraph p"}
+            if node.present?
+              paragraph_style_properties = content_properties[:paragraph][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
           end
 
           if content_properties[:link].present?
             #change the css properties of links
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content .optyn-link"}
-            if node.present?
-              paragraph_style_properties = content_properties[:link][:css]
-              paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
-              end             
-            end
+            #find the usual element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link"}
+            convert_links_color(content_properties, node)
+
+            #find the hover element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:hover"}
+            convert_links_color(content_properties, node)
+
+            #find the active element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:active"}
+            convert_links_color(content_properties, node)
+
+            #find the visited element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:visited"}
+            convert_links_color(content_properties, node)
           end       
+
+
+          if content_properties[:button].present?
+            #change the css properties of links
+            #find the usual element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link"}
+            convert_button_styles(content_properties, node)
+
+            #find the hover element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:hover"}
+            convert_button_styles(content_properties, node)
+
+            #find the active element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:active"}
+            convert_button_styles(content_properties, node)
+
+            #find the visited element
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:visited"}
+            convert_button_styles(content_properties, node)
+          end
 
           #change the background color of the sidebar
           #node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
@@ -371,17 +464,50 @@ module Messagecenter
                 node.set_property(css_key.to_s, css_value)          
               end
             end
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-paragraph p"}
+            if node.present?
+              paragraph_style_properties = sidebar_properties[:paragraph][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
           end
 
           if sidebar_properties[:link].present?
             #change the css properties of links
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-link"}
-            if node.present?
-              paragraph_style_properties = sidebar_properties[:link][:css]
-              paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
-              end             
-            end
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link"}
+            convert_links_color(sidebar_properties, node)
+
+            #fix for hover
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:hover"}
+            convert_links_color(sidebar_properties, node)
+
+            #fix for visited
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:visited"}
+            convert_links_color(sidebar_properties, node)
+
+            #fix for active
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:active"}
+            convert_links_color(sidebar_properties, node)
+          end
+
+          if sidebar_properties[:button].present?
+            #change the css properties of links
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link"}
+            convert_button_styles(sidebar_properties, node)
+
+            #fix for hover
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:hover"}
+            convert_button_styles(sidebar_properties, node)
+
+            #fix for visited
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:visited"}
+            convert_button_styles(sidebar_properties, node)
+
+            #fix for active
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:active"}
+            convert_button_styles(sidebar_properties, node)
           end       
 
           #change the background color of the sidebar
@@ -437,6 +563,24 @@ module Messagecenter
           header = @parsed_html.css('style').first.parent
           @parsed_html.css('style').remove
           header.add_child(%{<style type="text/css">#{@parsed_result.to_s}</style>})
+        end
+
+        def convert_links_color(content_properties, node)
+          if node.present?
+            paragraph_style_properties = content_properties[:link][:css]
+            paragraph_style_properties.each_pair do |css_key, css_value|
+              node.set_property(css_key.to_s, "#{css_value} !important")          
+            end             
+          end
+        end
+
+        def convert_button_styles(content_properties, node)
+          if node.present?
+            paragraph_style_properties = content_properties[:button][:css]
+            paragraph_style_properties.each_pair do |css_key, css_value|
+              node.set_property(css_key.to_s, "#{css_value} !important")          
+            end             
+          end
         end
     end #end of the SystemTemplateParser module
   end #end of the Templates module

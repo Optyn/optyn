@@ -186,6 +186,11 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def message_url(shop)
+    msg = "#{self.name} #{self.uuid}"
+    "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+  end
+
   def self.fetch_template_name(params_type)
     FIELD_TEMPLATE_TYPES.include?(params_type.to_s) ? params_type : DEFAULT_FIELD_TEMPLATE_TYPE
   end
@@ -290,6 +295,16 @@ class Message < ActiveRecord::Base
     clear_cached_template #clear the template cache
 
     SelfEmailSender.perform_async(self.id)
+  end
+
+  def copy_message
+    message = self.class.new
+    self.attributes.except('updated_at','created_at','id','uuid','send_on','name','state').each do |key, value|
+      message.send("#{key}=", self.send(key.to_sym))
+    end
+    message.send("name=", "#{name} (copy #{Date.today.strftime("%m/%d/%Y")})")
+    message.save_draft
+    message
   end
 
   def assign_template(template_identifier, name=nil, properties={})
@@ -499,16 +514,32 @@ class Message < ActiveRecord::Base
     message_email_auditors.delivered.count
   end
 
+  def open_emails
+    message_users.any_read.include_user.collect(&:email)
+  end
+
   def opens_count
     message_users.any_read.count
+  end
+
+  def unsubscribes_emails
+    message_users.opt_outs.include_user.collect(&:email)
   end
 
   def opt_outs
     message_users.opt_outs.count
   end
 
+  def bounced_emails
+    message_email_auditors.bounced.includes_user.collect(&:user).collect(&:email)
+  end
+
   def bounced
     message_email_auditors.bounced.count
+  end
+
+  def complaint_emails
+    message_email_auditors.complaints.includes_user.collect(&:user).collect(&:email)
   end
 
   def complaints
@@ -519,8 +550,16 @@ class Message < ActiveRecord::Base
     message_users.coupon_relevance.count
   end
 
+  def relevance_emails
+    message_users.coupon_relevance.include_user.collect(&:email)
+  end
+
   def irrelavance_count
     message_users.coupon_irrelevance.count
+  end
+
+  def irrelavance_email
+    message_users.coupon_irrelevance.include_user.collect(&:email)
   end
 
   def link_click_count
@@ -711,9 +750,9 @@ class Message < ActiveRecord::Base
   def canned_from
     #manager.email_like_from
     if shop.verified_email.present? && shop.ses_verified?
-      %{"#{self.shop_name.titleize}" <#{shop.verified_email}>}  
+      %{"#{self.shop_name}" <#{shop.verified_email}>}  
     else
-      %{"#{self.shop_name.titleize}" <#{shop.partner.from_email}>}
+      %{"#{self.shop_name}" <#{shop.partner.from_email}>}
     end
   end
 
@@ -782,6 +821,7 @@ class Message < ActiveRecord::Base
     if Rails.env.staging? && partner.eatstreet?
       ids = User.where(email: 'ian@eatstreet.com').pluck(:id) 
       ids += User.where(email: 'gaurav+eatstreet@optyn.com').pluck(:id)
+      ids += User.where(email: 'alen@optyn.com').pluck(:id)
       return ids
     end
 

@@ -1,0 +1,12 @@
+.modal-header
+  %button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}X
+  %h3 Email tracking report
+
+.modal-body
+  .clearfix
+    %strong
+      Please wait...
+  .blank-space
+
+  / = hidden_field_tag "click_report_path_#{message.uuid}", click_report_merchants_message_path(message.id)
+  %div{:id => "email_report_#{message.uuid}"}

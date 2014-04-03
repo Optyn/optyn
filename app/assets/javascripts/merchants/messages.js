@@ -1,8 +1,21 @@
 var props = null;
+var facebookHtml,twitterHtml;
+var socialurl = false;
+var socialCheck = false;
+
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
-    merchantMessage.initialize();
+    merchantMessage.initialize();  
 
+    //loading social sharing options checkboxes
+    $('#customHtmlTemplate').load(function(){ 
+      if(socialCheck == false)
+        {
+          merchantMessage.socialSharing();
+          merchantMessage.manageLogo();
+          socialCheck = true;
+        }
+    });
 });
 
 function MerchantMessage() {
@@ -20,7 +33,7 @@ function MerchantMessage() {
             OP.overlay.addOverlay('#template_wrapper');
             this.loadSpinnerForIframe();
         }
-
+        
         /*
             Hooks for preview page for messages except templates
         */ 
@@ -100,10 +113,11 @@ function MerchantMessage() {
           this.hookTemplateMenuColorPickerChange();
           this.refreshTemplatePropertiesView();
         }
-
+        this.hookOpenLinkClickReport();
+        this.hookEmailReport();
         if($('.open-reports').length){
           this.hookReport();
-          this.hookOpenLinkClickReport();
+          
           // this.hookClearReportModal();
           this.backToMainReport();
         }
@@ -667,8 +681,9 @@ function MerchantMessage() {
         success: function(data){
           // $('iframe#customHtmlTemplate').contents().find('html').replaceWith(data);
           iframe = document.getElementById('customHtmlTemplate');
-          iframe.contentWindow.document.open()
+          iframe.contentWindow.document.open();
           iframe.contentWindow.document.write(data);
+          iframe.contentWindow.document.close();
         },
         error: function(){
           $('iframe#customHtmlTemplate').contents().html('<strong>An error occurred while setting your properties. Please select the template again</strong>');
@@ -697,6 +712,7 @@ function MerchantMessage() {
             type: 'GET',
             success: function (data) {
                 $('#report_dialog .modal-body').html(data);
+                $('#report_dialog').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -706,9 +722,32 @@ function MerchantMessage() {
       });
     };
 
+    this.hookEmailReport = function(){
+          $('body').on('click', '.email-report-report-link', function(){
+            var id = $(this).data('id');
+            var content = $('#email_report_' + id).data('content');
+            $('#report_dialog').html(content);
+
+            var url = $(this).data('location');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $('#report_dialog .modal-body').html(data.emails);
+                    $('#report_dialog .modal-header h3').html(data.report_title);
+                    $('#report_dialog').modal('show');
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert(errorThrown)
+                }
+            });
+          });
+        };
+
     this.hookClearReportModal = function(){
-      $('#report_dialog').on('hide', function(){
-        $('#report_dialog').html('<div class="modal-body"><strong>Please Wait...</strong></div>');
+      $('#report_details').on('hide', function(){
+        $('#report_details').html('<div class="modal-body"><strong>Please Wait...</strong></div>');
       });
     };
 
@@ -756,4 +795,97 @@ function MerchantMessage() {
           }
       });
     };
+
+    // manage social sharing icons visibility
+    this.socialSharing = function(){          
+      twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
+      facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
+      twitterCustom = $("#customHtmlTemplate").contents().find("twittershare")
+      fbCustom = $("#customHtmlTemplate").contents().find("fbshare")
+
+      if((twitter.length>0) || (facebook.length>0) || (fbCustom.length>0) || (twitterCustom.length>0))
+      { 
+        if(twitter.css("display") == "none")
+          $("#twitter-setting").prop('checked', false);
+        else
+          $("#twitter-setting").prop('checked', true);
+
+        if(facebook.css("display") == "none")
+          $("#facebook-setting").prop('checked',false)
+        else
+          $("#facebook-setting").prop('checked',true)
+        this.setSocialShareUrl();
+        var templateMessage = this;
+
+        $("#facebook-setting, #twitter-setting").on('change',function(){          
+          templateMessage.reloadTemplateSelectorIframe();
+        });
+      }
+      else
+        {$(".control-group.social-share").remove()}
+
+    };
+
+    this.setSocialShareUrl = function(shareurl, text){
+      if(socialurl == false)
+        {
+          var templateMessage = this;
+          twitter = $("#customHtmlTemplate").contents().find("twittershare");
+          facebook = $("#customHtmlTemplate").contents().find("fbshare");
+          if((twitter.length>0) || (facebook.length>0))
+            templateMessage.reloadTemplateSelectorIframe();
+          socialurl = true;
+        }
+
+    };
+
+
+    this.manageLogo = function(){
+      var templateMessage = this;
+      $('.logo_text').val("").hide();
+      
+      // radio button for logo text or image
+      $("#properties_header_logo_image, #properties_header_logo_text").change(function(){
+        if($(this).val()=="image")
+        {
+          $('.logo_text').hide();
+          $('#imgfile').show();
+          $('.save_image').show();          
+          }
+        else
+        {
+          $('#imgfile').hide();
+          $('.logo_text').show();
+          $('.save_image').hide();
+          $('.change_image').hide();          
+        }
+        templateMessage.reloadTemplateSelectorIframe();
+      });
+
+      $('#properties_header_logo_image').attr('checked', 'checked');
+
+      // show/hide file form based on tab
+      $("#template_properties_tab.nav.nav-tabs li a").click(function(){
+        if($(this).attr('href')== "#template_header")
+          $("#logo_form").css("display","block");
+        else
+          $("#logo_form").css("display","none");
+      });
+
+      // change uploaded image
+      $('.change_image').click(function(e){
+        e.preventDefault();
+        $('#imgfile').show();
+        $('.change_image').hide();
+        $('.save_image').show();
+      });
+
+      // on logo form submit
+      $('.save_image').on('click',function(e){
+        e.preventDefault();
+        $('.loading').show();
+        $("#logo_form").submit();
+      });
+    };
+
 }

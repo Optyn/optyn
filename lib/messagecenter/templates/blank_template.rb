@@ -78,7 +78,7 @@ module Messagecenter
           html = []
           row.grids.each do |grid|
             components_json = add_toolset_to_components(grid.data_model) 
-            data_model = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{grid.data_model['type']}" data-components='#{components_json.gsub("'", "\\'")}''></span>}  
+            data_model = %{<span style="width:0px;height:0px;" class="data-components" data-component-type="#{grid.data_model['type']}" data-components='#{components_json.gsub("'", "&apos;")}''></span>}  
             content =  grid.html.gsub(Template::PLACE_HOLDER_ELEM, (data_model + static_toolset_markup(grid.data_model) + grid.divisions.first.html))
             #replace the social tags
             content = build_social_sharing_options(grid.divisions.first,content)

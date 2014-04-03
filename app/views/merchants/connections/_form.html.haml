@@ -1,10 +1,9 @@
 #add_user_wrapper
   .control-group
-    .control-label
-      = label_tag :To
-    .controls
-      .labels{'data-toggle' => 'tooltip', title: 'Enter user names in format like Alein Dsouza (abc@test.com)'}
-        = text_field_tag 'To', "#{params[:To]}", :placeholder => 'Enter user names', class: 'span12'
+    = render :partial => "new_user", :locals => {:count => @user_count}
+    .more_user
+    .addMoreUser
+      = link_to "Add more ", add_more_user_merchants_connections_path(:user_count => @user_count), :remote => true
   
   .control-group
     = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
@@ -12,12 +11,12 @@
       ascsdfsdf
     #add_user
       .control-label
-        = label_tag "Labels"
+        = label_tag "Select or Create a list*"
       .controls
-        .labels{'data-toggle' => 'tooltip', title: 'Segment your customers by entering a label for them and press "enter" to add one'}
+        .labels{'data-toggle' => 'tooltip', title: 'Create a new list or choose an existing list'}
           - selected = params['label_ids'].nil? ? '' : params['label_ids'].map{|x| x}
-          = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Segment your customers by entering a label for them and press "enter" to add one'}
+          = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Create a new list or choose an existing list'}
   
   .action-buttons
-    = f.submit "Create" , class: "btn btn-primary"
+    = f.submit "Add New Subscribers" , class: "btn btn-primary"
     = link_to "Cancel", merchants_connections_path, class: 'btn'

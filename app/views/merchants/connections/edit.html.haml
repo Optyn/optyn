@@ -40,7 +40,7 @@
                 .labels{'data-toggle' => 'tooltip', title: 'gender'}
                   = f.radio_button :gender, 'm', :checked => check_gender(@user.gender, "m"), :class => "userGender"
                   = "Male"
-                  = f.radio_button :gender, 'F', :checked => check_gender(@user.gender, "f"), :class => "userGender"
+                  = f.radio_button :gender, 'f', :checked => check_gender(@user.gender, "f"), :class => "userGender"
                   = "Female"
             .control-group
               = hidden_field_tag "create_label_merchants_survey_survey_answers_path", create_label_merchants_connections_path

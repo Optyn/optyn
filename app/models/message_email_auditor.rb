@@ -6,6 +6,8 @@ class MessageEmailAuditor < ActiveRecord::Base
 
   after_create :enqueue_message
 
+  scope :includes_user , includes(:message_user  => :user)
+
   scope :undelivered, where(delivered: false)
 
   scope :delivered, where(delivered: true)

@@ -43,7 +43,7 @@ OP = (function($, window, doucument, Optyn){
           $(submitButton).on('click', function() {
             var link = $(this).parent().siblings(".modal-body").find('input[type="url"]').val();
             console.log(link);
-            if(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(link)) {
+            if(/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(link)) {
             } else {
               alert("invalid url");
               return false;
@@ -77,6 +77,7 @@ OP = (function($, window, doucument, Optyn){
       var textareas = $templateContainer.find('textarea');
       for ( var count = 0; count < textareas.length; count++ ) {
         CKEDITOR.replace( 'template_editable_content-' + count, {
+          extraPlugins : 'simpleLink',
           toolbarGroups: [
           {
             name: 'document',
@@ -91,10 +92,23 @@ OP = (function($, window, doucument, Optyn){
             name: 'basicstyles',
             groups: [ 'basicstyles', 'cleanup' ]
           },
+          '/',
           {
             name: 'links'
-          }]
+          },
+          {
+            name: 'SimpleLink'
+          }],
+      toolbar :
+      [
+        ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
+        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-'],
+        ['Link', 'SimpleLink']
+      ]
         });
+
+
       }
     },
 
@@ -122,7 +136,21 @@ OP = (function($, window, doucument, Optyn){
 
         var paragraphs = properties.paragraphs;
         $templateContainer.find('textarea').each(function(index, elem){
-          paragraphs.push(CKEDITOR.instances['template_editable_content-' + index].getData());
+          //manipulate the links before adding the paragraphs
+          var data = CKEDITOR.instances['template_editable_content-' + index].getData();
+          var $temp = $('<div />');
+          $temp.append(data);
+          var $links = $temp.find('a');
+          $links.each(function(){
+            var $this = $(this);
+            if(!$this.is("[class]")){
+              $this.addClass('optyn-link');
+            }else if($this.hasClass('optyn-button-link')){
+              $this.attr('style', '');
+            }
+          });
+
+          paragraphs.push($temp.html());
         });
 
         var images = properties.images;
@@ -131,7 +159,6 @@ OP = (function($, window, doucument, Optyn){
           var $uploadedImage = $(this);
           images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href")]);
         });
-        
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');

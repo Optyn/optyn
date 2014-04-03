@@ -31,7 +31,7 @@
             .controls.text-left.labels
               = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
               = select_tag "label_ids[]", options_from_collection_for_select(@labels, :name, :name),
-                 { id: "label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Create a new List or choose a list for import'}
+                 { id: "label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Create a new list or choose a list for import'}
 
           .actions
             = f.submit "Import", class: "btn btn-primary"

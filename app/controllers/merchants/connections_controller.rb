@@ -28,35 +28,33 @@ class Merchants::ConnectionsController < Merchants::BaseController
   end
 
   def add_user
+    @user_count = 1
   	@user = User.new
   	populate_labels
   end
 
+  def add_more_user
+    @count = params[:user_count].to_i + 1
+  end
+
   def create_user
-  	if not params["To"].blank?
-  		total_users = params["To"].split(",")
+    users = params["user"]
+  	if not users.blank?
+      @total_users = users.size
+  		@user_count = users.size
       @error_hash = []
   		flag = false
-  		loop_size = total_users.size - 1
+  		# loop_size = total_users.size - 1
 
-  		(0..loop_size).each do |u|
-        next if total_users[u].blank?
-
-        if total_users[u].match(/(?<=\().*?(?=\))/)
-          name_email_arr = total_users[u].strip.split("(")
-    			name = name_email_arr[0].split(" ")
-          first_name = name[0] if  !name[0].blank?
-          last_name = name[1] if  !name[1].blank?
-    			email = name_email_arr[1].scan(/.*?(?=\))/).first.strip
-        else
-          email = total_users[u].strip
-        end
-
-
-
-  			@user = User.new(:name => name, :first_name => first_name, :last_name => last_name, :email => email, :password => "test1234")
+  		users.each do |key, values|
+        split_name = values["name"].split(" ")
+        first_name = split_name.first
+        last_name = split_name.last if split_name.size > 1
+        email = values["email"].present? ? values["email"] : nil
+  			@user = User.new(:name => values["name"], :first_name => first_name, :last_name => last_name, :email => email, :password => "test1234")
         @user.skip_name = true
         @user.shop_identifier = current_shop.id
+        @user.skip_welcome_email = true
         @user.show_shop = true
         conn = nil
 
@@ -94,13 +92,17 @@ class Merchants::ConnectionsController < Merchants::BaseController
               flag = true
               @error_hash.push("#{email} has already been taken.")
               next
+            elsif @user.errors[:email].include?("can't be blank")
+              flag = true
+              @error_hash.push("Email can't be blank")
+              next
             end
           end
         end
 
         @error_hash.push("#{email} was added successfully.")
-        params["To"] = total_users - total_users[u].split(",")
-        params["To"] = params["To"].join(",")
+        # params["To"] = total_users - total_users[u].split(",")
+        # params["To"] = params["To"].join(",")
         # params["To"] = params["To"].gsub(name, "").gsub(email, "").gsub("(),", "").gsub("()", "")
         if conn
           conn.active = true
@@ -125,8 +127,10 @@ class Merchants::ConnectionsController < Merchants::BaseController
         render 'add_user'
       end
     else
+
       populate_labels
       @user = User.new(:name => params["To"])
+      @user.skip_name = true
       @user.save
       render 'add_user'
     end

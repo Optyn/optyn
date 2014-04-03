@@ -4,6 +4,7 @@
 //= jquery-migrate-1.2.1
 //= require bootstrap
 //= require ckeditor_fix
+//= require ckeditor_button
 //= require ckeditor/init
 //= require_self
 
@@ -64,6 +65,12 @@ OP = (function($, window, doucument, Optyn){
               content: $updateableElement.text()
             };
           }else if($updateableElement.hasClass('optyn-paragraph')){
+
+            //Add the style tag to the button to show properly in ckEditor
+            $updateableElement.find('a.optyn-button-link').each(function(){
+              $(this).attr('style', OP.ckeditorButton.getStyle());
+            })
+
             artifact = {
               type: 'paragraph',
               content: $updateableElement.html()
@@ -75,7 +82,6 @@ OP = (function($, window, doucument, Optyn){
 
             if($image.length){
               placeholderSrc = $image.attr('src');
-              console.log($image.closest('a'));
               if ($image.closest('a').length){
                 href = $image.closest('a').attr("href");
               }
@@ -94,7 +100,6 @@ OP = (function($, window, doucument, Optyn){
 
           divisionContents.push(artifact);
         });
-
         OP.template.openCkeditor($division, divisionContents);
       });
     },
@@ -125,7 +130,6 @@ OP = (function($, window, doucument, Optyn){
           htmlVal += 'Description: <textarea rows="10" name="template_editable_content" id="template_editable_content-' +
           paragraphIndex.toString() + '" cols="20">' + currentArtifact.content + '</textarea>' +
           '<div class="separator-micro-dark"></div>';
-
           paragraphIndex += 1;
         }else if('image' == currentArtifact.type){
           row_id = 'imagerow-' + imageIndex;
@@ -209,7 +213,7 @@ OP = (function($, window, doucument, Optyn){
             var $temp = $("<div />");
             var $img = $('<img />');
              var $a = $('<a />');
-             $a.attr("href", images[index][1]);
+             $a.attr("href", "http://" + images[index][1]);
              $a.attr("class", "imageLink");
              if(images[index][1].length > 0){
              $a.append($img); 
@@ -238,7 +242,6 @@ OP = (function($, window, doucument, Optyn){
     hookImageClick: function(){
       $('body').on('click', '.imageLink', function() {
         var location = $(this).attr('href');
-        console.log(location);
         window.open(location,'_blank','width=800, height=900');
         return false;
       });
@@ -413,7 +416,6 @@ OP = (function($, window, doucument, Optyn){
               $division.find('.optyn-replaceable-image').each(function(image_index, imageContainer){
                 var $imageElem = $(imageContainer).find('img');
                 if($imageElem.length){
-                  console.log($imageElem.attr('data-href'));
                   images.push({
                     'url': $imageElem.attr('src'),
                     'height': $imageElem.attr('height'),
@@ -452,7 +454,6 @@ OP = (function($, window, doucument, Optyn){
   Optyn.setImageLinkTarget = function() {
     $('.imageLink').click(function() {
         var location = $(this).attr('href');
-        console.log(location);
         window.open(location,'_blank','width=800, height=900');
         return false;
       });

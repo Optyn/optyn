@@ -13,6 +13,9 @@ class Merchants::MessagesController < Merchants::BaseController
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
 
+  NON_TEMPLATE_BUTTON_STYLE = "text-decoration:none;color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 15px;"
+  NON_TEMPLATE_CKEDITOR_BUTTON_STYLE = 'border-radius: 0;background: #D4D4D4; padding: 2px 10px;text-decoration: none;display: inline-block;'
+
   def types
     #Do Nothing
   end
@@ -69,6 +72,8 @@ class Merchants::MessagesController < Merchants::BaseController
     @template = Template.for_uuid(params[:template_id])
     @properties = @template.default_selectable_properties(current_shop)
     @header_font_families = Template::HEADER_FONT_FAMILIES
+    @msg = "#{@message.name} #{@message.uuid}"
+    @public_msg = "#{SiteConfig.app_base_url}/#{current_shop.name.parameterize}/campaigns/#{@msg.parameterize}"
   end
 
   def create
@@ -80,6 +85,9 @@ class Merchants::MessagesController < Merchants::BaseController
       populate_datetimes
 
       message_method_call = check_subscription
+
+      update_button_styles
+
       if @message.send(message_method_call.to_sym)
         message_redirection
       else
@@ -94,6 +102,18 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
   end
 
+  def copy
+    @message = Message.for_uuid(params[:id])
+    @new_message = @message.copy_message
+    if @new_message.errors.any? && @new_message.new_record?
+      flash[:error] = "Could not copy message."
+      redirect_to preview_template_merchants_message_path(@message.uuid)
+    else
+      flash[:notice] = "Message copied successfully."
+      redirect_to template_merchants_message_path(@new_message.uuid)
+    end
+  end
+
   def show_template
     @templates = current_shop.templates
     @message = Message.for_uuid(params[:id])
@@ -102,6 +122,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def edit
     @message = Message.for_uuid(params[:id])
     populate_shop_surveys
+    update_button_for_ckeditor
     @message_type = @message.type.underscore
   end
 
@@ -117,6 +138,9 @@ class Merchants::MessagesController < Merchants::BaseController
 
       populate_datetimes
       message_method_call = check_subscription
+      
+      update_button_styles
+
       if @message.send(message_method_call.to_sym)
         message_redirection
       else
@@ -361,7 +385,6 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def report
     @message = Message.for_uuid(params[:id])
-    render partial: 'merchants/messages/report_data', locals: {message: @message, timestamp_attr: 'updated_at'}
   end
 
   def validate
@@ -389,6 +412,14 @@ class Merchants::MessagesController < Merchants::BaseController
     message = Message.find(params[:id])
     report_data = EmailTracking.get_message_click_report(message.id)
     render partial: 'merchants/messages/email_tracking_data', locals: {message: message, report_data: report_data}
+  end
+
+  def email_report
+    message = Message.find_by_uuid(params["id"])
+    open_email_user = message.send(params[:report_type])
+    populate_report_title
+    @emails = render_to_string(partial: 'merchants/messages/email_list', locals: {message: message, report_data: open_email_user})
+    render(json: {emails: @emails, report_title: @report_title})
   end
 
   def share_email
@@ -425,6 +456,20 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = Message.for_uuid(params[:id])
     @message_image = MessageImage.new(:image => params[:imgfile], :message_id =>@message.id)
     @message_image.save
+  end
+
+  def upload_template_image
+    @template = Template.for_uuid(params[:template_uuid])
+    @template_image = @template.template_image
+    if params[:imgfile].present?
+      if @template_image.present?        
+        @template_image.update_attributes(:image => params[:imgfile])
+      else
+        @template_image = TemplateImage.new(:image => params[:imgfile], :template_id =>@template.id)
+        @template_image.save
+      end
+    end
+    
   end
 
   def destroy_template
@@ -471,6 +516,21 @@ class Merchants::MessagesController < Merchants::BaseController
     return render(action: 'edit_template') if @message.instance_of?(TemplateMessage)
 
     render action: 'edit'
+  end
+
+  def populate_report_title
+    @report_title = case params[:report_type]
+    when "open_emails"
+      "Emails Opened"
+    when "unsubscribes_emails"
+      "Emails Unsubscribed"
+    when "bounced_emails" 
+      "Emails Bounced" 
+    when "complaint_emails"  
+      "Emails Marked Spam"
+    else
+      "Email Report"
+    end
   end
 
 end

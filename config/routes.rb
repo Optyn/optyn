@@ -370,6 +370,7 @@ Optyn::Application.routes.draw do
         post 'create_label'
         post 'update_labels'
         post 'create_labels_for_user'
+        get "add_more_user"
       end
     end
     resources :locations
@@ -434,7 +435,7 @@ Optyn::Application.routes.draw do
         put :move_to_trash
         put :move_to_draft
         put :discard
-        get :remove_message_image
+        get :remove_message_image        
       end
 
       member do
@@ -456,9 +457,12 @@ Optyn::Application.routes.draw do
         put :save
         get :email_self
         post :template_upload_image
+        post :upload_template_image
         delete :destroy_template
         get :click_report
+        get :email_report
         get :system_layouts
+        get :copy
       end #end of member
     end #end of resources messages
   end #end of merchants namespace

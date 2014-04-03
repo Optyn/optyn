@@ -1,0 +1,12 @@
+-if report_data.present?
+  .accordion{id: "data_accordion_#{message.uuid}"}
+    - counter = 0
+    - report_data.each do |email|
+      - counter = counter + 1
+      %ul.bullet-disc
+        %li
+          = email
+
+-else
+  .text-error
+    Sorry. There is no data available for this report
