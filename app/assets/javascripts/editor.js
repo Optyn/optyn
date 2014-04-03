@@ -144,16 +144,18 @@ OP = (function($, window, doucument, Optyn){
            show_link_diaplay = "none";
           }
           var remove_link = null;
-          console.log(currentArtifact.content[1]);
+          var link_text = null;
           if (currentArtifact.content[1].length != 0){
-            remove_link = '<div style="display: '+ display +'; cursor: pointer" class="add-img-link-option"> <a class="remove_link_from_image" href="#'+ row_id+'" role="button" data-link = "'+ currentArtifact.content[1]+'">Remove Link</a></div>' ;
+            remove_link = '<div style="display: '+ display +'; cursor: pointer" class="add-img-link-option"> | <a class="remove_link_from_image" href="#'+ row_id+'" role="button" data-link = "'+ currentArtifact.content[1]+'">Remove Link</a></div>' ;
+            link_text = "Edit Link"
           }
           else{
             remove_link = "";
+            link_text = "Add Link"
           }
           var show_link = '<div style="display: '+ show_link_diaplay +'; cursor: pointer" class="show-img-link-option" >  <a  class="show_link">Show links</a></div>' ;
 
-          var links = '<div style="display: '+ display +'; cursor: pointer" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">Add Link</a> | <a class="edit_image">Edit Image</a></div>' ;
+          var links = '<div style="display: '+ display +'; cursor: pointer; float:left;" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">'+ link_text + '</a> | <a class="edit_image">Edit Image</a></div>' ;
           var image_link = currentArtifact.content[1].replace(/^https?\:\/\//i, "")
           htmlVal += '</div><div class="nl-image-form" id="' + row_id + '">' +
           '<div>Preview:<br /> <img src="' + currentArtifact.content[0] + '" class="uploaded-image" data-href="' + currentArtifact.content[1] + '" /></div>' +

@@ -66,7 +66,7 @@ OP = (function($, window, doucument, Optyn){
           $(this).parents().siblings("form").show();
           $(this).parents().siblings("form").find(".upload-img-btn").show();
           $(this).parents().siblings(".show-img-link-option").show();
-          $(this).parents(".add-img-link-option").hide();
+          $(this).parents().find(".add-img-link-option").hide();
         });
 
         OP.templateEditor.openCKEditor($templateContainer);
@@ -78,7 +78,7 @@ OP = (function($, window, doucument, Optyn){
       var textareas = $templateContainer.find('textarea');
       for ( var count = 0; count < textareas.length; count++ ) {
         CKEDITOR.replace( 'template_editable_content-' + count, {
-          extraPlugins : 'simpleLink,mediaembed',
+          extraPlugins : 'simpleLink',
           
           toolbarGroups: [
           {
@@ -105,7 +105,7 @@ OP = (function($, window, doucument, Optyn){
       [
         ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
-    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-', 'MediaEmbed'],
+    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-'],
         ['Link', 'SimpleLink']
       ]
         });
@@ -187,18 +187,27 @@ OP = (function($, window, doucument, Optyn){
 
     addImageLinkURL: function() {
       $(document).on('click', '.saveLinkUrl', function () {
-        $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', $( this ).parents('.modal').find('input[type="url"]').val());
+        var link_href = $(this).attr('data-image-link-url');
+        var container = link_href.replace("AddLink", "");
+        var link = $("#"+container).find("a[href='#" + link_href + "']");
+        link.text("Edit Link");
+        var link_value = $( this ).parents('.modal').find('input[type="url"]').val()
+        $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', link_value);
+        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
       });
     },
 
     RemoveImageLinkURL: function() {
       $(document).on('click', '.remove_link_from_image', function () {
         var containerId = $(".remove_link_from_image").attr("href");
+        console.log(containerId);
+        var link = $(containerId).find("a[href='#AddLink" + containerId.replace("#", "") + "']");
+        link.text("Add Link");
         var imageLink = $(".remove_link_from_image").attr("data-link");
         $(containerId).find("[data-href='" + imageLink + "']").attr("data-href", "");
         var modelInput = "#imageLinkModel"+ containerId.replace("#", "");
         $(modelInput).val("");
-        $(this).hide();
+        $(this).parent().hide();
 
       });
     }
