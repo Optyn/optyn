@@ -10,7 +10,8 @@ CKEDITOR.editorConfig = function( config ) {
 
   // The toolbar groups arrangement, optimized for two toolbar rows.
 
-
+  config.toolbar = 'Custom';
+  
   config.height = '170px';
 
   config.extraPlugins = 'simpleLink';
@@ -23,7 +24,7 @@ CKEDITOR.editorConfig = function( config ) {
   CKEDITOR.config.allowedContent = true;
   // config.toolbar_Full =  [['Styles', 'Bold', 'Italic', 'Underline', 'SpellChecker', 'Scayt', '-', 'NumberedList', 'BulletedList'],['Link', 'Unlink'], ['Undo', 'Redo', '-', 'SelectAll', 'linkbutton']];
 
-  config.toolbar_Custom =
+   config.toolbar_Custom =
   [
   {
     name: 'styles',
@@ -38,10 +39,9 @@ CKEDITOR.editorConfig = function( config ) {
     items : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
     'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat']
   },
-  '/',
   {
     name: 'links',
-    items : [ 'Link', 'SimpleLink']
+    items : [ 'Link', 'SimpleLink' ]
   }
   ];
 
