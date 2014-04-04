@@ -14,7 +14,11 @@ CKEDITOR.editorConfig = function( config ) {
   config.height = '170px';
 
   config.extraPlugins = 'simpleLink';
-  
+  config.pasteFromWordPromptCleanup = true;
+  config.pasteFromWordRemoveFontStyles = true;
+  config.forcePasteAsPlainText = true;
+  config.ignoreEmptyParagraph = true;
+  config.removeFormatAttributes = true;
 
   CKEDITOR.config.allowedContent = true;
   // config.toolbar_Full =  [['Styles', 'Bold', 'Italic', 'Underline', 'SpellChecker', 'Scayt', '-', 'NumberedList', 'BulletedList'],['Link', 'Unlink'], ['Undo', 'Redo', '-', 'SelectAll', 'linkbutton']];
