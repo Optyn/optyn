@@ -847,7 +847,7 @@ table.facebook td {
       }
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
       .optyn-replaceable-image img { float: none; }
-      .optyn-intro { width: 560px; }
+      .optyn-intro { width: 560px; padding-top: 0px !important; }
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .basic .full-image .optyn-replaceable-image img{
@@ -861,25 +861,18 @@ table.facebook td {
 
       .basic .half-left-image .optyn-replaceable-image,
       .basic .half-right-image .optyn-replaceable-image {
-        width: 48%;
+        width: 260px;
       }
       .basic .half-left-image .optyn-replaceable-image img,
       .basic .half-right-image .optyn-replaceable-image img {
         width: 100%;
       }
-      .basic .half-left-image .optyn-replaceable-image {
-        float: left;
-        margin:0 2% 10px 0;
-      }
-      .basic .half-right-image .optyn-replaceable-image {
-        float: right;
-        margin:0 0 10px 2%;
-      }
+      
       .basic td.third-image,
       .basic .third-image .optyn-replaceable-image img{
-        width:173px;
+        width:170px;
       }
-      .o-column { width: 48%; }
+      .third-image .optyn-replaceable-image { margin-bottom: 10px; }
       .optyn-division {
         padding-top: 5px;
         float: none;
@@ -895,20 +888,21 @@ table.facebook td {
 
       @media only screen and (max-width: 600px) {
         table[class="body"] table.container .block-grid td {
-          width: 95% !important;
+          /*width: 95% !important; this is ink default */
+          width: 280px !important;
         }
-        table[class="body"] { width: 310px; }
-        table[class="body"] .float-left,
-        table[class="body"] .float-right { float: none !important; }
-        table[class="body"] .o-column { width: 100% !important; }
-        table[class="body"] .optyn-intro { width: 100% !important; min-width: 83vw; }
-        .basic table[class="body"] .full-image .optyn-replaceable-image img { width: 100% !important; }
+        table[class="body"] table.container {
+          width: 300px !important;
+        }
+        table[class="body"] table.container .optyn-intro-cont,
+        table[class="body"] .optyn-intro { width: 300px !important; }
+        .basic table[class="body"] .full-image .optyn-replaceable-image img { width: 280px !important; }
         .basic table[class="body"] .half-left-image .optyn-replaceable-image,
-        .basic table[class="body"] .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0 !important; }
-        .basic table[class="body"] .third-image .optyn-replaceable-image{ width: auto !important; }
-        .basic table[class="body"] .third-image .optyn-replaceable-image img { width: auto !important; }
-        .basic table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 245px !important; }
-        .basic table[class="body"] .three-up td{width: 94% !important;}
+        .basic table[class="body"] .half-right-image .optyn-replaceable-image{ width: 280px !important; float: none; margin: 0 0 10px 0 !important; }
+        .basic table[class="body"] .third-image .optyn-replaceable-image{ width: 280px !important; }
+        .basic table[class="body"] .third-image .optyn-replaceable-image img { width: 280px !important; }
+        .basic table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
+        .basic table[class="body"] .three-up td{width: 280px !important;}
         table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
       }  /* End media query. */
 
@@ -1022,9 +1016,16 @@ table.facebook td {
                                 </tr>
                                 <tr>  
                                   <td class="half-left-image">
-                                    <image>
-                                      <img src="http://placehold.it/580x250" alt=""  width="260" />
-                                    </image>
+                                    <table cellspacing="0" cellpadding="0" align="left" width="270">
+                                      <tr>
+                                        <td>
+                                          <image>
+                                            <img src="http://placehold.it/580x250" alt=""  width="260" />
+                                          </image>
+                                        </td>
+                                        <td width="10"></td>
+                                      </tr>
+                                    </table>
                                     <paragraph>
                                       <div>
                                         Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!

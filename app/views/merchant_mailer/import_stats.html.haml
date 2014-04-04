@@ -23,7 +23,7 @@
                   %p Below are the stats for the file imported.
                   - @counters.each_pair do |key, value|
                     %p
-                      - if ![:existing_user, :connection_creation].include?(key)
+                      - if [:existing_connection, :connection_creation,:unparsed_rows].include?(key)
                         == #{stats_change[key]} = #{value}
 
                   %p
