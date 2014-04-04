@@ -475,7 +475,7 @@ class Message < ActiveRecord::Base
 
   def personalized_subject(receiver)
     replace_customer_name(receiver, self.subject)
-  rescue 
+  rescue => e
     "A message from #{shop.name}"
   end
 
@@ -906,7 +906,7 @@ class Message < ActiveRecord::Base
   end  
 
   def replace_customer_name(receiver, article)
-    user_name = "#{receiver.first_name.titleize}" if receiver.present?
+    user_name = "#{(receiver.first_name.titleize rescue nil)}" if receiver.present?
     if user_name.present?
       article.gsub(/{{Customer Name}}/i, user_name)
     else
@@ -916,8 +916,8 @@ class Message < ActiveRecord::Base
       
       regex = /{{Customer Name}}/i #regex when the customer name is missing /eom
       personalized_article = (personalized_article.gsub(regex, "")).strip #incase customer name is used somewhere else.
+      personalized_article[0] = personalized_article.first.capitalize[0]
       personalized_article
-
     end
   end
 
