@@ -14,6 +14,7 @@ $(document).ready(function () {
           merchantMessage.socialSharing();
           merchantMessage.manageLogo();
           socialCheck = true;
+          merchantMessage.reloadTemplateSelectorIframe();
         }
     });
 });
@@ -885,6 +886,12 @@ function MerchantMessage() {
         e.preventDefault();
         $('.loading').show();
         $("#logo_form").submit();
+      });
+
+      // alignment
+      $('.left-align, .center-align, .right-align').click(function(e){       
+        $("#logo_align").val($(this).attr("data-align"));
+        templateMessage.reloadTemplateSelectorIframe();
       });
     };
 

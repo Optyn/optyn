@@ -33,7 +33,9 @@ module Messagecenter
               
               headline: {
                 css: {
-                  :"font-family" => Template::HEADER_FONT_FAMILIES
+                  :"font-family" => Template::HEADER_FONT_FAMILIES,
+                  :"color" => "#000",
+                  :"text-align" => 'center'
                 }  
               }
             },
@@ -284,7 +286,7 @@ module Messagecenter
 
         def convert_header(header_properties)
           shop = self.shop
-
+          logo_align = nil
           if header_properties[:css].present?
             #replace the background color
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction"}
@@ -301,8 +303,9 @@ module Messagecenter
                   node.set_property(css_key.to_s, css_value)
                 end
               end
+              logo_align = header_properties[:headline][:css]["text-align"]
             end
-          end
+          end              
 
           if header_properties['twitter'].present?
             css_style = header_properties['twitter']['show'] == "0" ? "display:none" : "display:block"
@@ -328,13 +331,12 @@ module Messagecenter
             introduction_division.css('img').each do |image|
               msg_logo = email_body_message_logo(shop,header_properties['message_uuid'],header_properties['template_uuid'],header_properties['logo'],header_properties['logo_text'])
               msg_logo_node = Nokogiri::HTML::fragment(msg_logo)
-            
               if msg_logo_node.css('img').present?
                 image_node = msg_logo_node.css('img').first
                 style_attr = image_node['style']
                 image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
                 image_node.swap(%{<image>#{image_node.to_s}</image>})
-                image.swap(%{<span class="center">#{msg_logo_node.children.to_s}</span>})
+                image.swap(%{<span class=center style="text-align: #{logo_align.present? ? logo_align : 'center'}">#{msg_logo_node.children.to_s}</span>})
               else
                 header_node = msg_logo_node.css('h3').first
                 class_attr = header_node['class']
