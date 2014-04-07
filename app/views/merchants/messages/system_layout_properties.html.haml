@@ -227,6 +227,20 @@
                             %i{:style => "background-color: ''"}
 
                 .control-group
+                  = label_tag "logo_align", "Align:", class: 'control-label'
+                  .controls
+                    = #select_tag "properties[header][headline][css][text-align]", options_for_select(logo_align_options), class: 'input-medium'
+                    = hidden_field_tag "properties[header][headline][css][text-align]","",id: "logo_align"
+                    .btn-group{"data-toggle" => "buttons-radio"}
+                      %button.btn.btn-primary.left-align{type: "button", "data-align" => "left"}
+                        %span.icon-align-left
+                      %button.btn.btn-primary.center-align{type: "button", "data-align" => "center"}
+                        %span.icon-align-center
+                      %button.btn.btn-primary.right-align{type: "button", "data-align" => "right"}  
+                        %span.icon-align-right
+
+
+                .control-group
                   = label_tag "logo", "Logo", class: 'control-label'
                   .controls
                     = radio_button_tag "properties[header][logo]", "image"
@@ -284,7 +298,7 @@
           %strong
             Loading...
 
-= form_tag(upload_template_image_merchants_message_path(@message.uuid), method: :post,class: "hide image_form", id: 'logo_form', enctype: "multipart/form-data", "data-remote" => true, style: "position: relative; left: -310px;top: -1130px;color:white")  do
+= form_tag(upload_template_image_merchants_message_path(@message.uuid), method: :post,class: "hide image_form", id: 'logo_form', enctype: "multipart/form-data", "data-remote" => true, style: "position: relative; left: -310px;top: -1055px;color:white")  do
   = hidden_field_tag "logo",true
   = hidden_field_tag :template_uuid, @template.uuid
   = link_to "Change Image" , "#", class: "change_image btn btn-success hide"

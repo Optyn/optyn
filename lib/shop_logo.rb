@@ -14,13 +14,13 @@ module ShopLogo
         HTML
         content.to_s.html_safe
       else
-        %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" class="nl-width-580" />}.html_safe
+        %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" />}.html_safe
       end
     when "text"
       template.update_attributes(title: logo_text)
       %{<h3>#{template.title.to_s}</h3>}.html_safe
     else
-      %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:180px;max-width:580px;" class="nl-width-580" />}.html_safe
+      %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:180px;max-width:580px;" />}.html_safe
     end
 
   end
