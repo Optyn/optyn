@@ -109,7 +109,7 @@ class Merchants::MessagesController < Merchants::BaseController
       redirect_to preview_template_merchants_message_path(@message.uuid)
     else
       flash[:notice] = "Message copied successfully."
-      redirect_to template_merchants_message_path(@new_message.uuid)
+      redirect_to preview_template_merchants_message_path(@new_message.uuid)
     end
   end
 
