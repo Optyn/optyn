@@ -921,8 +921,8 @@
       .optyn-footer .optyn-pargraph a { text-decoration: underline; }
       .optyn-replaceable-image img { float: none; }
       .body .optyn-intro { width: 580px; padding: 0; }
-      .header-social td { width: 560px; line-height: 25px; }
-      .header-social img { width: 25px !important; height: 25px !important; }
+      .header-social td { line-height: 25px; }
+      .header-social img { width: 25px !important; height: 25px !important; padding-right: 5px; }
       .optyn-intro .optyn-replaceable-image { display: table; }
       .body .optyn-introduction .optyn-replaceable-image img { max-width: 580px; }
       .with-sidebar .text-pad-10 { padding: 0 10px !important; }
@@ -1009,17 +1009,25 @@
                 <table class="block-grid header-social">
                   <tr>
                     <td align="right">
-                      <fbshare shareurl = "http://www.optyn.com/">
-                        <div style='display:inline;'>
-                          <img alt="Icon-facebook" width="25" height="25" src="http://localhost:3000/assets/icon-facebook.png" style="vertical-align:middle;"> &nbsp;Share
-                        </div>
-                      </fbshare>
-                      <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
-                        <div style='display:inline;'>
-                          <img alt="Icon-twitter" width="25" height="25" src="http://localhost:3000/assets/icon-twitter.png" style="vertical-align:middle;"> &nbsp;Tweet &nbsp;
-                        </div>
-                      </twittershare>
-                      &nbsp; &nbsp;
+                      <table width="560" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td class="no-pad" align="right" width="400"></td>
+                          <td class="no-pad" align="right" width="80">
+                            <fbshare shareurl = "http://www.optyn.com/">
+                              <div style="">
+                                <img alt="Icon-facebook" width="25" height="25" src="http://localhost:3000/assets/icon-facebook.png" style="vertical-align:middle;"> Share
+                              </div>
+                            </fbshare>
+                          </td>
+                          <td class="no-pad" align="right" width="80">
+                            <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
+                              <div style="">
+                                <img alt="Icon-twitter" width="25" height="25" src="http://localhost:3000/assets/icon-twitter.png" style="vertical-align:middle;"> Tweet
+                              </div>
+                            </twittershare>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
