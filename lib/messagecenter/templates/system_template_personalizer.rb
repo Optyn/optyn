@@ -30,25 +30,25 @@ module Messagecenter
               css: {
                 :'background-color' => current_shop.header_background_color
               },
-              
+
               headline: {
                 css: {
                   :"font-family" => Template::HEADER_FONT_FAMILIES,
                   :"color" => "#000",
                   :"text-align" => 'center'
-                }  
+                }
               }
             },
 
             content:{
               css: {
                 :'background-color' => Template::CONTENT_BACKGROUND_COLOR,
-              }, 
+              },
 
               headline: {
                 css: {
                   color: Template::CONTENT_TITLE_COLOR
-                }  
+                }
               },
 
               paragraph: {
@@ -73,12 +73,12 @@ module Messagecenter
             sidebar:{
               css: {
                 :'background-color' => Template::SIDEBAR_BACKGROUND_COLOR,
-              }, 
+              },
 
               headline: {
                 css: {
                   color: Template::CONTENT_TITLE_COLOR
-                }  
+                }
               },
 
               paragraph: {
@@ -104,12 +104,12 @@ module Messagecenter
             rightSidebar:{
               css: {
                 :'background-color' => Template::SIDEBAR_BACKGROUND_COLOR,
-              }, 
+              },
 
               headline: {
                 css: {
                   color: Template::CONTENT_TITLE_COLOR
-                }  
+                }
               },
 
               paragraph: {
@@ -134,12 +134,12 @@ module Messagecenter
             leftSidebar:{
               css: {
                 :'background-color' => Template::SIDEBAR_BACKGROUND_COLOR,
-              }, 
+              },
 
               headline: {
                 css: {
                   color: Template::CONTENT_TITLE_COLOR
-                }  
+                }
               },
 
               paragraph: {
@@ -179,7 +179,7 @@ module Messagecenter
         #get the grid optyn classes
         @parsed_html.css('grid').each do |grid_child|
           grid_child.swap(grid_child.children.to_s)
-        end    
+        end
 
         #get the division optyn classes
         @parsed_html.css('division').each do |division_child|
@@ -198,7 +198,7 @@ module Messagecenter
 
         @parsed_html.css('image').each do |image_child|
           Messagecenter::Templates::MarkupGenerator.add_image_placeholder_container(image_child)
-          Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')  
+          Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')
           image_child.swap(image_child.children.to_s)
         end
 
@@ -215,13 +215,13 @@ module Messagecenter
 
         #get the row optyn classes
         @parsed_html.css('row').each do |row_child|
-          Messagecenter::Templates::MarkupGenerator.add_component_class(row_child, 'row')    
+          Messagecenter::Templates::MarkupGenerator.add_component_class(row_child, 'row')
         end
 
         #get the grid optyn classes
         @parsed_html.css('grid').each do |grid_child|
           Messagecenter::Templates::MarkupGenerator.add_component_class(grid_child, 'grid')
-        end    
+        end
 
         #get the division optyn classes
         @parsed_html.css('division').each do |division_child|
@@ -230,25 +230,25 @@ module Messagecenter
 
         #get the headline optyn classes
         @parsed_html.css('headline').each do |headline_child|
-          Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline') 
+          Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline')
         end
 
         #get the paragraph optyn classes
         @parsed_html.css('paragraph').each do |paragraph_child|
-          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'paragraph') 
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'paragraph')
         end
 
         @parsed_html.css('fbshare').each do |paragraph_child|
-          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'fbshare') 
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'fbshare')
         end
 
         @parsed_html.css('twittershare').each do |paragraph_child|
-          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'twittershare') 
+          Messagecenter::Templates::MarkupGenerator.add_component_class(paragraph_child, 'twittershare')
         end
 
-        # Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')  
+        # Messagecenter::Templates::MarkupGenerator.add_component_class(image_child, 'replaceable-image')
 
-        self.html = @parsed_html.to_s        
+        self.html = @parsed_html.to_s
       end
 
       def convert_system_template(selectable_properties)
@@ -305,10 +305,10 @@ module Messagecenter
               end
               logo_align = header_properties[:headline][:css]["text-align"]
             end
-          end              
+          end
 
           if header_properties['twitter'].present?
-            css_style = header_properties['twitter']['show'] == "0" ? "display:none" : "display:block"
+            css_style = header_properties['twitter']['show'] == "0" ? "display:none" : "display:inline"
             tw_style = @parsed_html.css(".optyn-twittershare").first.attribute('style').value
             @parsed_html.css(".optyn-twittershare").first.attribute('style').value = tw_style + css_style
           end
@@ -320,13 +320,13 @@ module Messagecenter
           end
 
           if header_properties['facebook'].present?
-            css_style = header_properties['facebook']['show'] == "0" ? "display:none" : "display:block"
+            css_style = header_properties['facebook']['show'] == "0" ? "display:none" : "display:inline"
             tw_style = @parsed_html.css(".optyn-fbshare").first.attribute('style').value
             @parsed_html.css(".optyn-fbshare").first.attribute('style').value = tw_style + css_style
           end
-          
+
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
-          if header_properties['logo'].present? 
+          if header_properties['logo'].present?
             introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
             introduction_division.css('img').each do |image|
               msg_logo = email_body_message_logo(shop,header_properties['message_uuid'],header_properties['template_uuid'],header_properties['logo'],header_properties['logo_text'])
@@ -347,10 +347,10 @@ module Messagecenter
             end
           end
           @parsed_html.css('headline').each do |headline_child|
-            Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline') 
+            Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline')
           end
         end
-        
+
         def convert_content(content_properties)
           if content_properties[:css].present?
             #change the background color of the core content
@@ -366,7 +366,7 @@ module Messagecenter
             if node.present?
               headline_style_properties = content_properties[:headline][:css]
               headline_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
+                node.set_property(css_key.to_s, css_value)
               end
             end
           end
@@ -377,7 +377,7 @@ module Messagecenter
             if node.present?
               paragraph_style_properties = content_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
+                node.set_property(css_key.to_s, css_value)
               end
             end
 
@@ -386,7 +386,7 @@ module Messagecenter
             if node.present?
               paragraph_style_properties = content_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
+                node.set_property(css_key.to_s, css_value)
               end
             end
           end
@@ -408,7 +408,7 @@ module Messagecenter
             #find the visited element
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:visited"}
             convert_links_color(content_properties, node)
-          end       
+          end
 
 
           if content_properties[:button].present?
@@ -452,7 +452,7 @@ module Messagecenter
             if node.present?
               headline_style_properties = sidebar_properties[:headline][:css]
               headline_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
+                node.set_property(css_key.to_s, css_value)
               end
             end
           end
@@ -463,7 +463,7 @@ module Messagecenter
             if node.present?
               paragraph_style_properties = sidebar_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
+                node.set_property(css_key.to_s, css_value)
               end
             end
 
@@ -471,7 +471,7 @@ module Messagecenter
             if node.present?
               paragraph_style_properties = sidebar_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
+                node.set_property(css_key.to_s, css_value)
               end
             end
           end
@@ -510,7 +510,7 @@ module Messagecenter
             #fix for active
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:active"}
             convert_button_styles(sidebar_properties, node)
-          end       
+          end
 
           #change the background color of the sidebar
           # node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-sidebar"}
@@ -571,8 +571,8 @@ module Messagecenter
           if node.present?
             paragraph_style_properties = content_properties[:link][:css]
             paragraph_style_properties.each_pair do |css_key, css_value|
-              node.set_property(css_key.to_s, "#{css_value} !important")          
-            end             
+              node.set_property(css_key.to_s, "#{css_value} !important")
+            end
           end
         end
 
@@ -580,8 +580,8 @@ module Messagecenter
           if node.present?
             paragraph_style_properties = content_properties[:button][:css]
             paragraph_style_properties.each_pair do |css_key, css_value|
-              node.set_property(css_key.to_s, "#{css_value} !important")          
-            end             
+              node.set_property(css_key.to_s, "#{css_value} !important")
+            end
           end
         end
     end #end of the SystemTemplateParser module
