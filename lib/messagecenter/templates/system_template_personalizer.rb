@@ -158,6 +158,13 @@ module Messagecenter
                   :"background-color" => Template::CONTENT_BUTTON_BACKGROUND_COLOR
                 }
               }
+            },
+            footer: {
+               paragraph: {
+                css: {
+                  color: Template::CONTENT_PARAGRAPH_COLOR
+                }
+              }
             }
           }
         }
@@ -254,7 +261,7 @@ module Messagecenter
         convert_sidebar((selectable_properties[:properties][:sidebar] rescue {}), ".sidebar-container .optyn-sidebar") if sidebar_properties.present?
         convert_sidebar((selectable_properties[:properties][:leftSidebar] rescue {}), ".left-sidebar .optyn-sidebar") if left_sidebar_properties.present?
         convert_sidebar((selectable_properties[:properties][:rightSidebar] rescue {}), ".right-sidebar .optyn-sidebar") if right_sidebar_properties.present?
-        convert_footer
+        convert_footer((selectable_properties[:properties][:footer] rescue {}))
         replace_styles
         self.html = @parsed_html.to_s
       end
@@ -489,8 +496,20 @@ module Messagecenter
         end
 
 
-        def convert_footer
+        def convert_footer(footer_properties)
           #change the permission
+          
+          if footer_properties[:paragraph].present?
+            #change the css properties of the paragraph
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph"}
+
+            if node.present?
+              paragraph_style_properties = footer_properties[:paragraph][:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
+          end
           footer_node = @parsed_html.css('container[type=footer]').first.css('division[type=footer]').first
           permission_node = footer_node.css('permission').first
           shop_name_node = permission_node.css('shop-name').first
