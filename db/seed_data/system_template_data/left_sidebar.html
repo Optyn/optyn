@@ -916,7 +916,7 @@ body.outlook p {
   </style>
   <style type="text/css">
     /* Custom styles for the template */
-    .body .block-grid td{display: table-cell !important;}
+    .body .container .block-grid td{display: table-cell;}
     td.sidebar{ width: 193px;}
     td.main-area{width: 387px;}
     .w387{width: 387px;}
@@ -924,7 +924,10 @@ body.outlook p {
     .w193{width: 193px;}
     .w173{width: 173px;}
     .w580{width: 580px;}
+    .w168{width: 168px;}
     .w10{width: 10px;}
+
+    .h10{height: 10px;}
     td.optyn-introduction{width: 580px;}
     .no-pad{padding: 0 !important;}
     img{height: auto;}
@@ -966,7 +969,8 @@ body.outlook p {
           width: 300px !important;
         }
         table[class="body"] .optyn-introduction .optyn-replaceable-image img {
-          width: 300px !important;
+          width: auto !important;
+          max-width: 300px !important;
           height: auto;
         }
         table[class="body"] table.container td.w10 { width: 10px !important; }
@@ -984,10 +988,23 @@ body.outlook p {
         table[class="body"] .w367,
         table[class="body"] table.container .block-grid td.w173,
         table[class="body"] table.container .block-grid td.w367{ width: 280px !important; }
+
+        table[class="body"] table.container .block-grid td.w168{width: 280px !important; padding: 0 10px !important; display: block !important;}
+
+        table[class="body"] .two-column-content{width: 300px !important; display:block !important;}
+        table[class="body"] .two-column-content .w168 {display: block !important; }
+        table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
+        table[class="body"] .two-column-content .w10 {display: none !important;}
+        table[class="body"] .footer-text-td div { padding: 0 10px !important;}
       }  /* End media query. */
 
   </style>
 
+  <!--[if gte mso 9]>
+  <style>
+    .h10{height: 10px !important;}
+  </style>
+  <![endif]-->
     
 </head>
 <body id="flat">
@@ -1028,7 +1045,7 @@ body.outlook p {
                             <division type="full_text">
                               <table class="block-grid">
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1043,14 +1060,14 @@ body.outlook p {
                                   <td width="10" class="w10 no-pad"></td>
                                 </tr>
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
                             </division>
                             <division type="text_with_full_image">
                               <table class="block-grid">
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1071,7 +1088,7 @@ body.outlook p {
                                   <td width="10" class="w10 no-pad"></td>
                                 </tr>
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
                             </division>
@@ -1082,7 +1099,7 @@ body.outlook p {
                             <division type="full_text">
                               <table class="block-grid">
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1097,7 +1114,7 @@ body.outlook p {
                                   <td width="10" class="w10 no-pad"></td>
                                 </tr>
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
                             </division>
@@ -1119,8 +1136,41 @@ body.outlook p {
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
                                 </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
                               </table>
                             </division>
+
+                            <division type="two_columns">
+                              <table class="block-grid two-column-content">
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="168" class="w168 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 1 Heading</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div>Column 1 description</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="168" class="w168 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 2 Heading</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div>Column 2 description</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
                           </td>
                         </grid>
                       </tr>
@@ -1137,20 +1187,22 @@ body.outlook p {
                             <division type="footer">
                               <table class="block-grid">
                                 <tr>
-                                  <td height="10" class="no-pad"></td>
+                                  <td height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
-                                  <td class="no-pad">
-                                    <center>
-                                      <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                      </permission>
-                                      <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                      <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                                    </center>
+                                  <td class="no-pad footer-text-td">
+                                    <div>
+                                      <center>
+                                        <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                        </permission>
+                                        <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                        <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                                      </center>
+                                    </div>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td colspan="3" height="10" class="no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
                             </division>
