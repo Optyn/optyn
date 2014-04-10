@@ -926,6 +926,7 @@ body.outlook p {
     .w183{width: 183px;}
     .w580{width: 580px;}
     .w168{width: 168px;}
+    .w178{width: 178px;}
     .w10{width: 10px;}
 
     .h10{height: 10px;}
@@ -979,25 +980,35 @@ body.outlook p {
         table[class="body"] table.container td.w10 { width: 10px !important; }
         table[class="body"] td.sidebar,
         table[class="body"] td.main-area,
-        table[class="body"] table.container, 
+        table[class="body"] table.container,
         table[class="body"] .w580,
-        table[class="body"] .w193, 
+        table[class="body"] .w193,
         table[class="body"] .w387{ width: 300px !important; }
         table[class="body"] td.sidebar,
         table[class="body"] td.main-area,
         table[class="body"] table.container { display: block !important; }
 
         table[class="body"] .w173,
+        table[class="body"] .two-column-content .w168,
+        table[class="body"] table.container .block-grid td.w173,
+        table[class="body"] table.container .block-grid .w178,
         table[class="body"] table.container .block-grid .w183,
         table[class="body"] .w193,
         table[class="body"] .w367,
-        table[class="body"] table.container .block-grid td.w173,
         table[class="body"] table.container .block-grid td.w367{ width: 280px !important; }
 
-        table[class="body"] table.container .block-grid td.w168{width: 280px !important; padding: 0 10px !important; display: block !important;}
+        table[class="body"] table.container .block-grid.img-gallery-content .optyn-replaceable-image {
+          width: 280px !important;
+          padding: 0 0 10px 0 !important;
+          display: block !important;
+        }
+        table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 10px 10px !important;}
+        table[class="body"] table.container .block-grid td.w168 {width: 280px !important; padding: 0 10px !important; display: block !important;}
 
-        table[class="body"] .two-column-content{width: 300px !important; display:block !important;}
-        table[class="body"] .two-column-content .w168 {display: block !important; }
+        table[class="body"] .two-column-content,
+        table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
+        table[class="body"] .two-column-content .w168,
+        table[class="body"] table.container .optyn-container .block-grid.img-gallery-content td {display: inline-block !important; }
         table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
         table[class="body"] .two-column-content .w10 {display: none !important;}
         table[class="body"] .footer-text-td div { padding: 0 10px !important;}
@@ -1141,7 +1152,7 @@ body.outlook p {
                                     </paragraph>
                                     <div class="separator"></div>
                                     <image>
-                                       <img width="367" class="w367" src="http://placehold.it/580x350" alt="" />
+                                       <img width="367" class="w367" src="http://placehold.it/367x200" alt="" />
                                     </image>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1155,7 +1166,7 @@ body.outlook p {
                             <division type="two_columns">
                               <table class="block-grid two-column-content">
                                 <tr>
-                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1179,7 +1190,7 @@ body.outlook p {
                                   <td width="10" class="w10 no-pad"></td>
                                 </tr>
                                 <tr>
-                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
                             </division>
@@ -1252,6 +1263,51 @@ body.outlook p {
                                   <td height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
+                            </division>
+
+                            <division type="image_gallery">
+                              <div>
+                                <table class="block-grid img-gallery-content">
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w367 no-pad" width="367">
+                                      <headline>
+                                        <h2 class="headline">Image Gallery</h2>
+                                      </headline>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                </table>
+                                <table class="block-grid img-gallery-content">
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w178 third-image no-pad" width="178">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w178" width="178" alt="" />
+                                      </image>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w178 third-image no-pad rpad10l" width="178">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w178" width="178" alt="" />
+                                      </image>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                </table>
+                              </div>
                             </division>
 
                           </td>
