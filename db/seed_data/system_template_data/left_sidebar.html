@@ -775,68 +775,486 @@ body.outlook p {
     }
 
   </style>
+  <style type="text/css">
+    /* Theme styles Settable at the backend*/
+    .optyn-introduction{
+      background-color: #399;
+    }
+
+    .optyn-introduction .optyn-headline{
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .optyn-content{
+      background-color: #fff;
+    }
+    .optyn-content .sidebar-container{
+      background-color: #C9C9C9;
+    }
+    .optyn-content .sidebar-container .optyn-sidebar .optyn-paragraph{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar .optyn-paragraph p{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar .optyn-headline{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:hover{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:active{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:visited{
+      color: #000;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link{
+      text-decoration:none;
+      color: white;
+      background-color: #64aaef;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;border-radius: 0;
+      font: normal 16px/25px 'Open Sans', sans-serif;
+      letter-spacing: 1px;
+      border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+      -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      padding: 3px 10px;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:hover{
+      color: white;
+      background-color: #64aaef;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:active{
+      color: white;
+      background-color: #64aaef;
+    }
+
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:visited{
+      color: white;
+      background-color: #64aaef;
+    }
+
+    .optyn-content .optyn-paragraph{
+      color: #000;
+    }
+
+    .optyn-content .optyn-paragraph p{
+      color: #000;
+    }
+
+    .optyn-content .optyn-headline{
+      color: #000;
+    }
+    
+    .optyn-content a.optyn-link {
+      color: #2ba6cb; 
+      text-decoration: none;
+    }
+
+    .optyn-content a.optyn-link:hover { 
+      color: #2795b6 !important;
+    }
+
+    .optyn-content a.optyn-link:active { 
+      color: #2795b6 !important;
+    }
+
+    .optyn-content a.optyn-link:visited { 
+      color: #2ba6cb !important;
+    }
+
+    .optyn-content a.optyn-button-link{
+      text-decoration:none;
+      color: white;
+      background-color: #64aaef;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;border-radius: 0;
+      font: normal 16px/25px 'Open Sans', sans-serif;
+      letter-spacing: 1px;
+      border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+      -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      padding: 3px 10px;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .optyn-content a.optyn-button-link:hover{
+      color: white;
+      background-color: #64aaef;
+    }
+
+    .optyn-content a.optyn-button-link:visited{
+      color: white;
+      background-color: #64aaef;
+    }
+
+    .optyn-content a.optyn-button-link:active{
+      color: white;
+      background-color: #64aaef;
+    }
+  </style>
+  <style type="text/css">
+    /* Custom styles for the template */
+    .body .container .block-grid td{display: table-cell;}
+    td.sidebar{ width: 193px;}
+    td.main-area{width: 387px;}
+    .w387{width: 387px;}
+    .w367{width: 367px;}
+    .w193{width: 193px;}
+    .w173{width: 173px;}
+    .w183{width: 183px;}
+    .w580{width: 580px;}
+    .w168{width: 168px;}
+    .w10{width: 10px;}
+
+    .h10{height: 10px;}
+    td.optyn-introduction{width: 580px;}
+    .no-pad{padding: 0 !important;}
+    img{height: auto;}
+    .text-pad-10{padding: 10px;}
+    h2 { font-size: 16px; font-weight: bold; }
+    blockquote,
+    blockquote p { font-style: italic; font-size: 16px; }
+    .sidebar-container .optyn-paragraph { font-size: 13px; }
+    .sidebar-container h2 { font-size: 16px; }
+    .sidebar-container h3 {
+      font-size: 14px;
+      font-weight: bold;
+    }    
+    .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
+    .optyn-footer {
+      background: transparent;
+      background: rgba(255,255,255,0.3);
+    }
+    .optyn-footer .optyn-paragraph {
+      text-align: center;
+      font-size: 11px;
+      line-height: 18px;
+      color: #333;
+      color: rgba(0,0,0,0.7);
+      padding: 0;
+    }
+    .optyn-footer a {
+      color: #555;
+      color: rgba(0,0,0,0.5);
+    }
+    .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+
+    div.separator {line-height: 5px !important; font-size: 5px; height: 5px;}
+
+    @media only screen and (max-width: 600px) {
+      /*table[class="body"] .block-grid td{display: block !important;}*/
+
+        table[class="body"] table.container .block-grid td {
+          width: 300px !important;
+        }
+        table[class="body"] .optyn-introduction .optyn-replaceable-image img {
+          width: auto !important;
+          max-width: 300px !important;
+          height: auto;
+        }
+        table[class="body"] table.container td.w10 { width: 10px !important; }
+        table[class="body"] td.sidebar,
+        table[class="body"] td.main-area,
+        table[class="body"] table.container, 
+        table[class="body"] .w580,
+        table[class="body"] .w193, 
+        table[class="body"] .w387{ width: 300px !important; }
+        table[class="body"] td.sidebar,
+        table[class="body"] td.main-area,
+        table[class="body"] table.container { display: block !important; }
+
+        table[class="body"] .w173,
+        table[class="body"] .w183,
+        table[class="body"] .w367,
+        table[class="body"] table.container .block-grid td.w173,
+        table[class="body"] table.container .block-grid td.w367{ width: 280px !important; }
+
+        table[class="body"] table.container .block-grid td.w168{width: 280px !important; padding: 0 10px !important; display: block !important;}
+
+        table[class="body"] .two-column-content{width: 300px !important; display:block !important;}
+        table[class="body"] .two-column-content .w168 {display: block !important; }
+        table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
+        table[class="body"] .two-column-content .w10 {display: none !important;}
+        table[class="body"] .footer-text-td div { padding: 0 10px !important;}
+      }  /* End media query. */
+
+  </style>
+
+  <!--[if gte mso 9]>
+  <style>
+    .h10{height: 10px !important;}
+  </style>
+  <![endif]-->
     
 </head>
-<body id="flat" class="with-sidebar">
+<body id="flat">
   <table class="body">
     <tr>
-      <td class="center" align="center" valign="top" style="padding: 2%;">
+      <td class="center text-pad-10" align="center" valign="top">
         <center>
-          <container type="introduction">
-            <table class="container">
-              <tr>
-                <td>
-                  <row>
-                    <div>
-                      <grid type="introduction">
-                        <table class="block-grid">
-                          <tr>
-                            <td class="text-pad center optyn-intro-cont">
+          <table class="container" width="580">
+            <tr>
+              <td width="580" class="w580">
+                <container type="introduction">
+                  <table class="block-grid w580" width="580">
+                    <row>
+                      <tr>  
+                        <grid type="introduction">
+                            <td width="580" class="w580 no-pad center">
                               <division type="introduction">
-                                <div class="optyn-intro">
-                                  <img width="560" src="http://placehold.it/560x100" alt="" />
+                                <div>
+                                  <img width="580" src="http://placehold.it/580x100" alt="" />
                                 </div>
                               </division>
                             </td>
-                          </tr>
-                        </table>
-                      </grid>
-                    </div>
-                    </row>
-                  </td>
-                </tr>
-              </table>
-            </container>
+                          </grid>
+                        </tr>
+                      </row>
+                    </table>
+                </container>
 
-          <container type="content">
-            
-          </container>
-          <container type="footer">
-            <div>
-              <row>
-                <div class="footer-container">
-                  <grid type="footer">
-                    <div>
-                      <division type="footer">
-                        <table class="block-grid">
-                          <tr>
-                            <td>
-                              <center>
-                                <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                </permission>
-                                <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                              </center>
-                            </td>
-                          </tr>
-                        </table>
-                      </division>
-                    </div>
-                  </grid>
-                </div>
-              </row>
-            </div>
-          </container>
+
+
+
+                <container type="content">
+                  <table>
+                    <row>
+                      <tr>
+                        <grid type="sidebar">
+                          <td width="193" class="w193 sidebar sidebar-container">
+                            <division type="full_text">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="173" class="w173 no-pad">
+                                    <headline>
+                                      <h2 class="headline">A Division of Text</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                            <division type="text_with_full_image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="173" class="w173 full-image no-pad">
+                                    <headline>
+                                      <h3 class="headline">Text with Full Image</h3>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">
+                                        Image caption here.
+                                      </div>
+                                      <div class="separator"></div>
+                                      <image>
+                                        <img src="http://placehold.it/300x300/aaa/555" width="173" class="w173" />
+                                      </image>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                          </td>
+                        </grid>
+                        <grid type="content">
+                          <td width="387" class="w387 main-area sidebar-main-content">
+                            <division type="full_text">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="367" class="w367 no-pad">
+                                    <headline>
+                                      <h2 class="headline">A Division of Text</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                            <division type="text_with_full_image" class="full-image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="367" class="w367 full-image">
+                                    <headline>
+                                      <h2 class="headline">Text With Full Width Image</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">Image caption here.</div>
+                                    </paragraph>
+                                    <div class="separator"></div>
+                                    <image>
+                                       <img width="367" class="w367" src="http://placehold.it/580x350" alt="" />
+                                    </image>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="two_columns">
+                              <table class="block-grid two-column-content">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="168" class="w168 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 1 Heading</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div>Column 1 description</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="168" class="w168 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 2 Heading</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div>Column 2 description</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_left_image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="367" class="w367">
+                                    <headline>
+                                      <h2 class="headline">Text with Left Image</h2>
+                                    </headline>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="half-left-image" width="367" class="w367">
+                                    <table class="w193" cellspacing="0" cellpadding="0" align="left" width="193">
+                                      <tr>
+                                        <td class="w183 no-pad" width="183">
+                                          <image>
+                                            <img src="http://placehold.it/300x200" alt="" class="w183" width="183" />
+                                          </image>
+                                        </td>
+                                        <td class="w10 no-pad" width="10"></td>
+                                      </tr>
+                                    </table>
+                                    <paragraph>
+                                      <div align="left">Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                    </paragraph>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                          </td>
+                        </grid>
+                      </tr>
+                    </row>
+                  </table>
+                </container>
+
+                <container type="footer">
+                  <div>
+                    <row>
+                      <div class="footer-container">
+                        <grid type="footer">
+                          <div>
+                            <division type="footer">
+                              <table class="block-grid">
+                                <tr>
+                                  <td height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="no-pad footer-text-td">
+                                    <div>
+                                      <center>
+                                        <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                        </permission>
+                                        <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                        <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                                      </center>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                          </div>
+                        </grid>
+                      </div>
+                    </row>
+                  </div>
+                </container>
+              </td>
+            </tr>
+          </table>
         </center>
       </td>
     </tr>
