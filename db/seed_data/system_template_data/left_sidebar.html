@@ -960,6 +960,8 @@ body.outlook p {
       color: rgba(0,0,0,0.5);
     }
     .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+    .half-left-image > table { float: left; }
+    .half-right-image > table { float: right; }
 
     div.separator {line-height: 5px !important; font-size: 5px; height: 5px;}
 
@@ -986,7 +988,8 @@ body.outlook p {
         table[class="body"] table.container { display: block !important; }
 
         table[class="body"] .w173,
-        table[class="body"] .w183,
+        table[class="body"] table.container .block-grid .w183,
+        table[class="body"] .w193,
         table[class="body"] .w367,
         table[class="body"] table.container .block-grid td.w173,
         table[class="body"] table.container .block-grid td.w367{ width: 280px !important; }
@@ -998,6 +1001,11 @@ body.outlook p {
         table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
         table[class="body"] .two-column-content .w10 {display: none !important;}
         table[class="body"] .footer-text-td div { padding: 0 10px !important;}
+
+        table[class="body"] .half-left-image .optyn-replaceable-image img,
+        table[class="body"] .half-right-image .optyn-replaceable-image img { padding-bottom: 10px !important;}
+        table[class="body"] .half-left-image > table { float: none !important; }
+        table[class="body"] .half-right-image > table { float: none !important; }
       }  /* End media query. */
 
   </style>
