@@ -18,4 +18,7 @@
 
           = f.password_field :password_confirmation, :placeholder => "Confirm Password", 'data-toggle' => 'tooltip', title: 'Confirm password'
 
+          = check_box_tag(:send_password, '1', false, class: 'real')
+          Send Password
+
           = f.submit "Submit", :class => 'btn btn-success btn-block'
