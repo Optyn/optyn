@@ -930,6 +930,16 @@ body.outlook p {
     .w10{width: 10px;}
 
     .h10{height: 10px;}
+
+    .optyn-division {
+      float: none;
+      clear: both;
+      -webkit-transition: background 1s ease;
+         -moz-transition: background 1s ease;
+           -o-transition: background 1s ease;
+              transition: background 1s ease;
+    }
+    .recently-added-division { background: #ff9; }
     td.optyn-introduction{width: 580px;}
     .no-pad{padding: 0 !important;}
     img{height: auto;}
@@ -961,10 +971,14 @@ body.outlook p {
       color: rgba(0,0,0,0.5);
     }
     .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+    .block-grid.optyn-division .half-left-image,
+    .block-grid.optyn-division .half-right-image { padding-top: 0; }
     .half-left-image > table { float: left; }
     .half-right-image > table { float: right; }
 
     div.separator {line-height: 5px !important; font-size: 5px; height: 5px;}
+    div.separator-10px {line-height: 10px !important; font-size: 10px; height: 10px;}
+    .img-gallery-content img { float: none; }
 
     @media only screen and (max-width: 600px) {
       /*table[class="body"] .block-grid td{display: block !important;}*/
@@ -1002,7 +1016,7 @@ body.outlook p {
           padding: 0 0 10px 0 !important;
           display: block !important;
         }
-        table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 10px 10px !important;}
+        table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 0 10px !important;}
         table[class="body"] table.container .block-grid td.w168 {width: 280px !important; padding: 0 10px !important; display: block !important;}
 
         table[class="body"] .two-column-content,
@@ -1072,7 +1086,7 @@ body.outlook p {
                                   <td width="10" class="w10 no-pad"></td>
                                   <td width="173" class="w173 no-pad">
                                     <headline>
-                                      <h2 class="headline">A Division of Text</h2>
+                                      <h3 class="headline">A Division of Text</h3>
                                     </headline>
                                     <paragraph>
                                       <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
@@ -1128,6 +1142,7 @@ body.outlook p {
                                     <headline>
                                       <h2 class="headline">A Division of Text</h2>
                                     </headline>
+                                    <div class="separator-10px"></div>
                                     <paragraph>
                                       <div class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
                                     </paragraph>
@@ -1147,6 +1162,7 @@ body.outlook p {
                                     <headline>
                                       <h2 class="headline">Text With Full Width Image</h2>
                                     </headline>
+                                    <div class="separator-10px"></div>
                                     <paragraph>
                                       <div class="paragraph">Image caption here.</div>
                                     </paragraph>
@@ -1174,6 +1190,7 @@ body.outlook p {
                                     <headline>
                                       <h2 class="headline">Column 1 Heading</h2>
                                     </headline>
+                                    <div class="separator-10px"></div>
                                     <paragraph>
                                       <div>Column 1 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dolorum ea excepturi consectetur omnis qui labore a accusantium aspernatur vel. Repellendus, natus, iste maxime eveniet at vero mollitia quia exercitationem!</div>
                                     </paragraph>
@@ -1183,6 +1200,7 @@ body.outlook p {
                                     <headline>
                                       <h2 class="headline">Column 2 Heading</h2>
                                     </headline>
+                                    <div class="separator-10px"></div>
                                     <paragraph>
                                       <div>Column 2 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, non vero iusto natus ipsum assumenda corporis harum. Reiciendis, eum, facilis odit laborum natus vel voluptate totam iusto. Nihil, assumenda, corrupti!</div>
                                     </paragraph>
@@ -1268,6 +1286,9 @@ body.outlook p {
                             <division type="image_gallery">
                               <div>
                                 <table class="block-grid img-gallery-content">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
                                   <tr>
                                     <td class="w10 no-pad" width="10"></td>
                                     <td class="w367 no-pad" width="367">
@@ -1288,6 +1309,7 @@ body.outlook p {
                                       <image>
                                         <img src="http://placehold.it/300x150" class="w178" width="178" alt="" />
                                       </image>
+                                      <div class="separator"></div>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
                                       </paragraph>
@@ -1297,6 +1319,7 @@ body.outlook p {
                                       <image>
                                         <img src="http://placehold.it/300x150" class="w178" width="178" alt="" />
                                       </image>
+                                      <div class="separator"></div>
                                       <paragraph>
                                         <div>Image caption goes here.</div>
                                       </paragraph>
