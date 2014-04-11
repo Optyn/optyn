@@ -56,7 +56,7 @@
               %td
                 = import.status.humanize rescue "-"
                 - if import.error.present?
-                  %a#popover{"style" => "color:red","data-content" => "#{import.error}", "data-toggle" => "popover","data-trigger"=>"hover", href: "#", title: ""} <i class="icon-question-sign"></i>
+                  %a.error-popover{"style" => "color:red","data-content" => "#{import.error}", "data-toggle" => "popover","data-trigger"=>"hover", href: "#", title: ""} <i class="icon-question-sign"></i>
               %td
                 = import.label
               %td
@@ -76,6 +76,6 @@
 
 :javascript
   $( function() {
-    $("#popover").popover();
+    $(".error-popover").popover();
   });
 
