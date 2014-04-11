@@ -34,6 +34,8 @@ class FileImport < ActiveRecord::Base
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
       assign_error_status
+      self.error = e.message
+      self.save(validate: false)
       MerchantMailer.import_error(self, e.message).deliver
     end
   end

@@ -1,17 +1,28 @@
 module Users		
 	module Importer
     include Merchants::FileImportsHelper
+
+    HEADERS = {
+                "last" => "last_name",
+                "first" => "first_name",
+                "email_address" => "email" 
+              }
+
+    def convert_header(h)
+      changed_header = h.to_s.downcase.gsub('-', '').gsub(' ','_')
+      (HEADERS[changed_header].present? ? HEADERS[changed_header] : changed_header).intern
+    end               
+
 		def import(content, manager, label)
-
-
 	    shop = manager.shop
       begin
-        csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol })
+        csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: lambda { |h| convert_header(h)}} )
       rescue
         raise "Problems parsing the uploaded file. Please make sure the headers are not missing."
       end
 
 	  	headers = csv_table.headers
+
       validate_headers(headers)
 
 	    output = []

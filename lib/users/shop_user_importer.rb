@@ -1,12 +1,23 @@
 module Users
-  module ShopUserImporter  
+  module ShopUserImporter
+    HEADERS = {
+                "last" => "last_name",
+                "first" => "first_name",
+                "email_address" => "email"                      
+              }
+
+    def convert_header(h)
+      changed_header = h.to_s.downcase.gsub('-', '').gsub(' ','_')
+      (HEADERS[changed_header].present? ? HEADERS[changed_header] : changed_header).intern
+    end
+
     def user_import(payload)
       Rails.logger.info "Starting the download"
       content = download_user_import_csv_file(payload)
       Rails.logger.info "Done downloading and cleaning the file"
 
       Rails.logger.info "Creating the table"
-      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
+      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: lambda { |h| convert_header(h)}})
       Rails.logger.info "Done loading the csv table"
       headers = csv_table.headers
       validate_user_import_headers(headers)
