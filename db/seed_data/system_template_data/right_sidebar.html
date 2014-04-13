@@ -941,7 +941,7 @@ body.outlook p {
     }
     .recently-added-division { background: #ff9; }
     td.optyn-introduction{width: 580px;}
-    .no-pad{padding: 0 !important;}
+    .no-pad {padding: 0 !important;}
     img{height: auto;}
     .text-pad-10{padding: 10px;}
     h2 { font-size: 16px; font-weight: bold; }
@@ -973,8 +973,8 @@ body.outlook p {
     .optyn-footer .optyn-paragraph a { text-decoration: underline; }
     .block-grid.optyn-division .half-left-image,
     .block-grid.optyn-division .half-right-image { padding-top: 0; }
-    .half-left-image > table { float: left; }
-    .half-right-image > table { float: right; }
+    .half-left-image > .w193 { float: left; }
+    .half-right-image > .w193 { float: right; }
 
     div.separator {line-height: 5px !important; font-size: 5px; height: 5px;}
     div.separator-10px {line-height: 10px !important; font-size: 10px; height: 10px;}
@@ -1029,8 +1029,10 @@ body.outlook p {
 
         table[class="body"] .half-left-image .optyn-replaceable-image img,
         table[class="body"] .half-right-image .optyn-replaceable-image img { padding-bottom: 10px !important;}
-        table[class="body"] .half-left-image > table { float: none !important; }
-        table[class="body"] .half-right-image > table { float: none !important; }
+        table[class="body"] .container .block-grid .half-left-image,
+        table[class="body"] .container .block-grid .half-right-image { width: 280px !important; }
+        table[class="body"] .half-left-image .w193,
+        table[class="body"] .half-right-image .w193 { float: none !important; }
       }  /* End media query. */
 
   </style>
@@ -1166,12 +1168,15 @@ body.outlook p {
                                 </tr>
                                 <tr>
                                   <td class="w10 no-pad" width="10"></td>
-                                  <td width="367" class="w367">
+                                  <td width="367" class="w367 no-pad">
                                     <headline>
                                       <h2 class="headline">Text with Left Image</h2>
                                     </headline>
                                   </td>
                                   <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td class="w10 no-pad" width="10"></td>
@@ -1205,12 +1210,15 @@ body.outlook p {
                                 </tr>
                                 <tr>
                                   <td class="w10 no-pad" width="10"></td>
-                                  <td width="367 no-pad" class="w367">
+                                  <td width="367" class="w367 no-pad">
                                     <headline>
                                       <h2 class="headline">Text with Right Image</h2>
                                     </headline>
                                   </td>
                                   <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td class="w10 no-pad" width="10"></td>
@@ -1345,7 +1353,6 @@ body.outlook p {
                             </division>
                           </td>
                         </grid>
-
                       </tr>
                     </row>
                   </table>
