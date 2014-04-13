@@ -8,7 +8,7 @@
       %a{:href => marketing_path, title: 'Marketing Software', alt: 'Marketing Software'}
         %h4 Marketing Software
       %ul
-        %li
+        %l.offset2i
           %a{ :href => email_marketing_path } E-Mail Marketing
         %li
           %a{ :href => '/marketing/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
@@ -27,7 +27,7 @@
       %a{:href => '/resources' }
         %h4 Marketing Resources
       %ul
-        %li
+        %l.offset2i
           %a{ :href => '/resources/email-marketing' } E-Mail Marketing
         %li
           %a{ :href => '/resources/social-media-marketing'} Social Media Marketing
@@ -49,6 +49,8 @@
     .span2
       %h4 Partner Programs
       = render 'layouts/links_partner'
+
+    .span2
       %h4 Follow Us
       .sf-social
         .blank-space

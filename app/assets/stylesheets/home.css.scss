@@ -260,13 +260,14 @@ footer {
 }
 
 .m-i {  /* Merchant's index */
-    background-color: $gray;
-    @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
-      background-image: image-url( 'main-ag-m.jpg' );
-    }
-    @media ( min-width: $wxga-w ) {
-      background-image: image-url( 'main-ag.jpg' );
-    }
+    background-color: $dark-blue;
+    color: $white;
+    // @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
+    //   background-image: image-url( 'main-ag-m.jpg' );
+    // }
+    // @media ( min-width: $wxga-w ) {
+    //   background-image: image-url( 'main-ag.jpg' );
+    // }
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -274,17 +275,7 @@ footer {
     padding: 2% 0;
     text-align: left;
     h1 {
-      font-weight: 700;
       border: none;
-      > span {
-        background: rgba(0, 0, 0, 0.75);
-        color: $white;
-        padding:0 10px 3px 10px;
-        display: inline-block;
-      }
-      > span:first-child {
-        margin-bottom: 10px;
-    }
   }
   .well {
     padding: 1%;
