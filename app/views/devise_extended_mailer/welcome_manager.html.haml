@@ -22,6 +22,8 @@
                   %h5 Here are some awesome things that Optyn can do for you:
                   %p
                     %ul
+                      - if @resource.show_password.present?
+                        %li You can login to your account using #{@resource.show_password} password.
                       %li 
                         Import your customers. 
                         = link_to "Click here.", "#{SiteConfig.app_base_url}#{merchants_file_imports_path}"

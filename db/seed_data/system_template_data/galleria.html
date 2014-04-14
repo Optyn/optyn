@@ -819,7 +819,7 @@
       table.small-button td a,
       table.medium-button td a,
       table.large-button td a {
-        font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Ubuntu", "Arial", sans-serif;;
+        font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Ubuntu", "Arial", sans-serif;
       }
       .body { min-width: 300px; }
       .body > tbody > tr > td { padding: 2%; }
@@ -828,6 +828,8 @@
       .text-pad-10 { padding: 0 10px; }
       .no-pad { padding: 0 !important; }
       .optyn-headline { margin: 7px 0; }
+      blockquote,
+      blockquote p { font-style: italic; font-size: 16px; }
       .optyn-replaceable-image { border: 0; }
       .sidebar-container .optyn-paragraph { font-size: 13px; }
       .sidebar-container h2 { font-size: 16px; }
@@ -841,11 +843,10 @@
         background: transparent;
         background: rgba(255,255,255,0.3);
       }
-      .optyn-footer .optyn-pargraph {
+      .optyn-footer .optyn-paragraph {
         text-align: center;
         font-size: 11px;
         line-height: 18px;
-        color: #333;
         color: rgba(0,0,0,0.7);
         padding: 0;
       }
@@ -853,13 +854,11 @@
         color: #555;
         color: rgba(0,0,0,0.5);
       }
-      .optyn-footer .optyn-pargraph a { text-decoration: underline; }
+      .optyn-footer .optyn-paragraph a { text-decoration: underline; }
       .optyn-replaceable-image img { float: none; }
-      .optyn-intro { width: 580px; padding-top: 0px !important; }
+      .optyn-intro { width: 560px; padding-top: 0px !important; }
       .optyn-intro .optyn-replaceable-image { display: table; }
-      .body .optyn-introduction .optyn-replaceable-image img { max-width: 580px; }
-      .header-social td { line-height: 25px; }
-      .header-social img { width: 25px !important; height: 25px !important; padding-right: 5px; }
+      .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
       .galleria .full-image .optyn-replaceable-image img{
         width: 560px;
       }
@@ -924,8 +923,6 @@
         }
         table[class="body"] .optyn-intro-cont,
         table[class="body"] .optyn-intro { width: 300px !important; }
-        table[class="body"] .block-grid.header-social td.empty { width: 120px !important; }
-        table[class="body"] .block-grid.header-social td.link { width: 80px !important; }
         .galleria table[class="body"] .half-left-image .optyn-replaceable-image,
         .galleria table[class="body"] .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
         .galleria table[class="body"] .full-image .optyn-replaceable-image img,
@@ -940,6 +937,7 @@
         .galleria table[class="body"] .three-up td{width: 94% !important;}
         table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
       }  /* End media query. */
+
     </style>
 </head>
 <body id="flat" class="galleria">
@@ -947,6 +945,7 @@
     <tr>
       <td class="center" align="center" valign="top" style="padding: 10px;">
         <center>
+
           <table class="container">
             <tr>
               <td class="no-pad">
@@ -978,6 +977,7 @@
               </td>
             </tr>
           </table>
+          
           <container type="introduction">
             <table class="container">
               <tr>
@@ -989,7 +989,7 @@
                           <td class="no-pad center optyn-intro-cont">
                             <division type="introduction">
                               <div class="optyn-intro">
-                                <img width="580" src="http://placehold.it/580x100" alt="" />
+                                <img width="560" src="http://placehold.it/560x100" alt="" />
                               </div>
                             </division>
                           </td>
@@ -1167,10 +1167,10 @@
                           <tr>
                             <td class="no-pad">
                               <center>
-                                <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@example.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
                                 </permission>
-                                <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                                <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
                               </center>
                             </td>
                           </tr>

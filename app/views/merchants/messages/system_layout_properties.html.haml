@@ -32,6 +32,8 @@
 
             %ul#template_properties_tab.nav.nav-tabs
               %li
+                %a{href: "#template_footer", class: 'template-property-tab'} Footer
+              %li
                 %a{href: "#template_content", class: 'template-property-tab'} Content
               - if is_sidebar_template(@template.name)
                 %li
@@ -112,9 +114,8 @@
                       %i{class: "icon-arrow-left"}
 
                   .pull-right
-                    %a{href: "javascript:void(0)", class: "btn btn-success template-property-submit"}
-                      Go
-                      %i{class: "icon-thumbs-up"}
+                    %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_footer'}
+                      %i{class: "icon-arrow-right"}
                       
               - if is_sidebar_template(@template.name)
                 #template_sidebar.tab-pane
@@ -275,6 +276,26 @@
                   .pull-right
                     %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => "#{next_tab("template_content", @template.name)}"}
                       %i{class: "icon-arrow-right"}
+
+              #template_footer.tab-pane
+                .control-group
+                  = label_tag "background_color", "Background Color", class: 'control-label'
+                  .controls
+                    %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+                      .btn-group
+                        %a.dropdown-toggle{"data-toggle" => "dropdown"}
+                          = text_field_tag "properties[footer][paragraph][css][color]", "", class: 'template-color-field input-medium'
+                          %span.add-on
+                            %i{:style => "background-color: ''"}
+                .actions
+                  .pull-left
+                    %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => "template_content"}
+                      %i{class: "icon-arrow-left"}
+
+                  .pull-right
+                    %a{href: "javascript:void(0)", class: "btn btn-success template-property-submit"}
+                      Go
+                      %i{class: "icon-thumbs-up"}
 
               #template_layout.tab-pane
                 .control-group

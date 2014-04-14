@@ -22,7 +22,7 @@ class Manager < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :shop_id, :parent_id, :owner, :confirmed_at, :picture, :skip_email, :skip_name
 
-  attr_accessor :skip_password, :skip_email, :skip_name
+  attr_accessor :skip_password, :skip_email, :skip_name, :show_password
 
   accepts_nested_attributes_for :file_imports
 
@@ -103,7 +103,7 @@ class Manager < ActiveRecord::Base
 
   def send_welcome_email
     return if self.shop.virtual || self.skip_email || !(self.partner_optyn?)
-    WelcomeMessageSender.perform_async(:manager, self.id)
+    WelcomeMessageSender.perform_async(:manager, self.id, nil, nil, self.show_password)
   end
 
   def partner_eatstreet?

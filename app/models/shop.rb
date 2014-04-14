@@ -158,8 +158,10 @@ class Shop < ActiveRecord::Base
   end
 
   def display_website
-    unless self.website[/\Ahttp:\/\//] || self.website[/\Ahttps:\/\//]
-      self.website = "http://#{self.website}"
+    if self.website.present?
+      unless self.website[/\Ahttp:\/\//] || self.website[/\Ahttps:\/\//]
+        self.website = "http://#{self.website}"
+      end
     end
   end
 
