@@ -20,7 +20,6 @@ module Users
       rescue
         raise "Problems parsing the uploaded file. Please make sure the headers are not missing."
       end
-
 	  	headers = csv_table.headers
 
       validate_headers(headers)
@@ -109,6 +108,21 @@ module Users
           end
 
           output << output_row.join(",")
+        rescue ActiveRecord::StatementInvalid => e
+          begin
+            counters[:unparsed_rows] += 1
+            output_row << %{"Error: #{e.message}"}
+            output << output_row.join(",")
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error e.message
+            Rails.logger.error e.backtrace
+          rescue Encoding::CompatibilityError => error
+            output_row.pop
+            output_row << %{"Error: Encoding::CompatibilityError: incompatible character encodings"}
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error error.message
+            Rails.logger.error error.backtrace
+          end
         rescue Exception => e
           counters[:unparsed_rows] += 1
           output_row << %{"Error: #{e.message}"}
