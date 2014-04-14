@@ -103,7 +103,21 @@ module Users
           connection.save
 
           end #end of transaction
-
+        rescue ActiveRecord::StatementInvalid => e
+          begin
+            counters[:unparsed_rows] += 1
+            output_row << %{"Error: #{e.message}"}
+            output << output_row.join(",")
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error e.message
+            Rails.logger.error e.backtrace
+          rescue Encoding::CompatibilityError => error
+            output_row.pop
+            output_row << %{"Error: Encoding::CompatibilityError: incompatible character encodings"}
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error error.message
+            Rails.logger.error error.backtrace
+          end
         rescue Exception => e
           Rails.logger.error e.message
           Rails.logger.error e.backtrace
