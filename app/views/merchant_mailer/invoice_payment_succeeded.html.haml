@@ -21,10 +21,10 @@
                   %p We have received your payment. Here are the details:
                   %ul
                     %li
-                      Amount charged
+                      Amount charged: 
                       = number_to_currency(@amount, precision: 2)
                     %li
-                      Connection count
+                      Total Subscribers:
                       = @conn_count
                   %p
                     %a.btn{:href => "http://www.optyn.com"} View your Account
