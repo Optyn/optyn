@@ -34,9 +34,9 @@ module Shops
 
       def allowed_to_queue
         if time_gap_not_met?
-          self.errors.add(:base, "You need to have a gap of atleast 3 days between sending out campaigns")
+          self.errors.add(:base, "You need to have a gap of at least 3 days between sending out campaigns.")
         elsif credits_not_available?
-          self.errors.add(:base, "Sorry, you are allowed 4 campaigns a month and this campaign will the limit")
+          self.errors.add(:base, "Sorry, you are allowed 4 campaigns a month and this campaign has reached the limit.")
         end
       end
 
