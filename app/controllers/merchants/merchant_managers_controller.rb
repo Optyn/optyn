@@ -10,7 +10,7 @@ class Merchants::MerchantManagersController < Merchants::BaseController
 
   def create_new_manager
     @manager = Manager.new(params[:manager])
-
+    @manager.show_password = params[:send_password].to_i != 1 ? nil : params[:manager][:password]
     if @manager.save
       flash[:notice] = "New manager added successfully"
       redirect_to merchants_managers_list_path
