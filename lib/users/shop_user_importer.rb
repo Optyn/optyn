@@ -1,14 +1,10 @@
 module Users
   module ShopUserImporter
-    HEADERS = {
-                "last" => "last_name",
-                "first" => "first_name",
-                "email_address" => "email"                      
-              }
 
+    ## fetching common header for different variations
     def convert_header(h)
       changed_header = h.to_s.downcase.gsub('-', '').gsub(' ','_')
-      (HEADERS[changed_header].present? ? HEADERS[changed_header] : changed_header).intern
+      (User::HEADERS[changed_header].present? ? User::HEADERS[changed_header] : changed_header).intern
     end
 
     def user_import(payload)
