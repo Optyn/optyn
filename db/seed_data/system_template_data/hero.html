@@ -982,12 +982,16 @@
       font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Ubuntu", "Arial", sans-serif;
     }
     .body .container .block-grid td{display: table-cell;}
+    .w130{width: 130px;}
     .w387{width: 387px;}
     .w367{width: 367px;}
+    .w125{width: 125px;}
+    .w140{width: 140px;}
     .w145{width: 145px;}
     .w193{width: 193px;}
     .w173{width: 173px;}
     .w183{width: 183px;}
+    .w270{width: 270px;}
     .w290{width: 290px;}
     .w580{width: 580px;}
     .w168{width: 168px;}
@@ -1038,8 +1042,8 @@
     .optyn-footer .optyn-paragraph a { text-decoration: underline; }
     .block-grid.optyn-division .half-left-image,
     .block-grid.optyn-division .half-right-image { padding-top: 0; }
-    .half-left-image > .w193 { float: left; }
-    .half-right-image > .w193 { float: right; }
+    .half-left-image > .w140 { float: left; }
+    .half-right-image > .w140 { float: right; }
 
     div.separator {line-height: 5px !important; font-size: 5px; height: 5px;}
     div.separator-10px {line-height: 10px !important; font-size: 10px; height: 10px;}
@@ -1070,26 +1074,45 @@
 
       table[class="body"] .w173,
       table[class="body"] .two-column-content .w168,
+      table[class="body"] .two-column-content .w130,
+      table[class="body"] table.container .block-grid .w125,
+      table[class="body"] table.container .block-grid .w125.optyn-replaceable-image img,
       table[class="body"] table.container .block-grid td.w145,
+      table[class="body"] table.container .block-grid .w130,
       table[class="body"] table.container .block-grid td.w173,
       table[class="body"] table.container .block-grid .w178,
       table[class="body"] table.container .block-grid .w183,
       table[class="body"] .w193,
+      table[class="body"] table.container .block-grid .w270,
+      table[class="body"] table.container .block-grid .w270.optyn-replaceable-image img,
       table[class="body"] table.container .block-grid .w290,
       table[class="body"] .w367,
       table[class="body"] table.container .block-grid td.w367{ width: 280px !important; }
+
+      table[class="body"] table.container .block-grid.w145,
+      table[class="body"] table.container .block-grid.w290 { width: 300px !important; }
 
       table[class="body"] table.container .block-grid.img-gallery-content .optyn-replaceable-image {
         width: 280px !important;
         padding: 0 0 10px 0 !important;
         display: block !important;
       }
-      table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 0 10px !important;}
-      table[class="body"] table.container .block-grid td.w168 {width: 280px !important; padding: 0 10px !important; display: block !important;}
+      table[class="body"] table.container .block-grid.two-column-content .w130.no-pad.lpad10l {
+        padding: 0 0 0 10px !important;
+      }
+      table[class="body"] table.container .block-grid.img-gallery-content .w130.no-pad.rpad10l {
+        padding: 0 0 0 10px !important;
+      }
+      table[class="body"] table.container .block-grid td.w168 {
+        width: 280px !important;
+        padding: 0 10px !important;
+        display: block !important;
+      }
 
       table[class="body"] .two-column-content,
       table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
       table[class="body"] .two-column-content .w168,
+      table[class="body"] .two-column-content .w130,
       table[class="body"] table.container .optyn-container .block-grid.img-gallery-content td {display: inline-block !important; }
       table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
       table[class="body"] .two-column-content .w10 {display: none !important;}
@@ -1099,8 +1122,8 @@
       table[class="body"] .half-right-image .optyn-replaceable-image img { padding-bottom: 10px !important;}
       table[class="body"] .container .block-grid .half-left-image,
       table[class="body"] .container .block-grid .half-right-image { width: 280px !important; }
-      table[class="body"] .half-left-image .w193,
-      table[class="body"] .half-right-image .w193 { float: none !important; }
+      table[class="body"] .half-left-image .w140,
+      table[class="body"] .half-right-image .w140 { float: none !important; }
     }  /* End media query. */
   </style>
 </head>
@@ -1163,15 +1186,15 @@
                     <row>
                       <tr>
                         <grid type="sidebar">
-                          <td width="145" class="w145 sidebar sidebar-container">
+                          <td width="145" class="w145 sidebar sidebar-container no-pad">
                             <division type="full_text">
-                              <table class="block-grid">
+                              <table width="145" class="w145 block-grid">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
-                                  <td width="145" class="w145 no-pad">
+                                  <td width="125" class="w125 no-pad">
                                     <headline>
                                       <h3 class="headline">A Division of Text</h3>
                                     </headline>
@@ -1186,25 +1209,54 @@
                                 </tr>
                               </table>
                             </division>
-                          </td>
-                        </grid>
 
-                        <grid type="content">
-                          <td width="290" class="w290 main-area hero-main-content">
-                            <division type="full_text">
-                              <table class="block-grid">
+                            <division type="text_with_full_image">
+                              <table width="145" class="w145 block-grid">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
-                                  <td width="290" class="w290 no-pad">
+                                  <td width="125" class="w125 full-image no-pad">
+                                    <headline>
+                                      <h3 class="headline">Text with Full Image</h3>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">
+                                        Image caption here.
+                                      </div>
+                                      <div class="separator"></div>
+                                      <image>
+                                        <img src="http://placehold.it/300x300/aaa/555" width="125" class="w125" />
+                                      </image>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                          </td>
+                        </grid>
+
+                        <grid type="content">
+                          <td width="290" class="w290 main-area hero-main-content no-pad">
+                            <division type="full_text">
+                              <table width="290" class="w290 block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="270" class="w270 no-pad">
                                     <headline>
                                       <h2 class="headline">A Division of Text</h2>
                                     </headline>
                                     <div class="separator-10px"></div>
                                     <paragraph>
-                                      <div class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                                      <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, eligendi sunt voluptate pariatur iusto sapiente harum quisquam perspiciatis quis laborum necessitatibus quo iste atque dignissimos aperiam labore officia! Maxime, placeat?</div>
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1215,24 +1267,251 @@
                               </table>
                             </division>
 
-                          </td>
-                        </grid>
-
-                        <grid type="sidebar">
-                          <td width="145" class="w145 sidebar sidebar-container">
-                            <division type="full_text">
-                              <table class="block-grid">
+                            <division type="text_with_full_image">
+                              <table width="290" class="w290 block-grid">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
-                                  <td width="145" class="w145 no-pad">
+                                  <td width="270" class="w270 full-image no-pad">
+                                    <headline>
+                                      <h2 class="headline">Text with Full Image</h2>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">
+                                        Image caption here.
+                                      </div>
+                                      <div class="separator"></div>
+                                      <image>
+                                        <img src="http://placehold.it/300x300" width="270" class="w270" />
+                                      </image>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="two_columns">
+                              <table width="290" class="w290 block-grid two-column-content">
+                                <tr>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="130" class="w130 no-pad lpad10l">
+                                    <headline>
+                                      <h2 class="headline">Column 1 Heading</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div>Column 1 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dolorum ea excepturi consectetur omnis qui labore a accusantium aspernatur vel. Repellendus, natus, iste maxime eveniet at vero mollitia quia exercitationem!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="130" class="w130 no-pad lpad10l">
+                                    <headline>
+                                      <h2 class="headline">Column 2 Heading</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div>Column 2 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, non vero iusto natus ipsum assumenda corporis harum. Reiciendis, eum, facilis odit laborum natus vel voluptate totam iusto. Nihil, assumenda, corrupti!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_left_image">
+                              <table width="290" class="w290 block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td width="270" class="w270 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Text with Left Image</h2>
+                                    </headline>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td class="half-left-image no-pad" width="270" class="w367">
+                                    <table class="w140" cellspacing="0" cellpadding="0" align="left" width="140">
+                                      <tr>
+                                        <td class="w130 no-pad" width="130">
+                                          <image>
+                                            <img src="http://placehold.it/300x200" alt="" class="w130" width="130" />
+                                          </image>
+                                        </td>
+                                        <td class="w10 no-pad" width="10"></td>
+                                      </tr>
+                                    </table>
+                                    <paragraph>
+                                      <div align="left">Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_right_image">
+                              <table width="290" class="w290 block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td width="270" class="w270 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Text with Right Image</h2>
+                                    </headline>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td class="half-right-image no-pad" width="270" class="w367">
+                                    <table class="w140" cellspacing="0" cellpadding="0" align="right" width="140">
+                                      <tr>
+                                        <td class="w10 no-pad" width="10"></td>
+                                        <td class="w130 no-pad" width="130">
+                                          <image>
+                                            <img src="http://placehold.it/300x200" alt="" class="w130" width="130" />
+                                          </image>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <paragraph>
+                                      <div align="left">Text With Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+
+                            <division type="image_gallery">
+                              <div>
+                                <table width="290" class="w290 block-grid img-gallery-content">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w367 no-pad" width="270">
+                                      <headline>
+                                        <h2 class="headline">Image Gallery</h2>
+                                      </headline>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                </table>
+                                <table width="290" class="w290 block-grid img-gallery-content">
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w130 third-image no-pad" width="130">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w130" width="130" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w130 third-image no-pad rpad10l" width="130">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w130" width="130" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </division>
+
+                          </td>
+                        </grid>
+
+                        <grid type="sidebar">
+                          <td width="145" class="w145 sidebar sidebar-container no-pad">
+                            <division type="full_text">
+                              <table width="145" class="w145 block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="125" class="w125 no-pad">
                                     <headline>
                                       <h3 class="headline">A Division of Text</h3>
                                     </headline>
                                     <paragraph>
                                       <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ipsa excepturi repellendus beatae consequatur optio quas adipisci deleniti qui aliquam error non rerum harum voluptas sapiente nisi corrupti unde ipsum?</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_full_image">
+                              <table width="145" class="w145 block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="125" class="w125 full-image no-pad">
+                                    <headline>
+                                      <h3 class="headline">Text with Full Image</h3>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">
+                                        Image caption here.
+                                      </div>
+                                      <div class="separator"></div>
+                                      <image>
+                                        <img src="http://placehold.it/300x300/aaa/555" width="125" class="w125" />
+                                      </image>
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
