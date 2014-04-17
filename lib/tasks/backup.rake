@@ -7,18 +7,21 @@ namespace :pg do
       #stamp the filename
       datestamp = Time.now.strftime("%Y-%m-%d_%H-%M-%S")
 
-      #drop it in the db/backups directory temporarily
-      backup_file_name = "#{Rails.root}/db/optyn_#{Rails.env}_#{datestamp}_dump.sql"
+      #drop it in the /mnt/backups/db directory temporarily
+      backup_file_name = "/mnt/backups/db/optyn_#{Rails.env}_#{datestamp}.sql"
       compressed_backup_file_name = "#{backup_file_name.gsub(".sql", "")}.tar.gz"
 
       username, database = fetch_username_and_database
 
       #dump the backup and zip it up
-      #Addd the ~/.pgpass with the deploy user and chmod 600 on it.
+      #Added the ~/.pgpass with the deploy user and chmod 600 on it.
+      puts "Dumping the database"
       sh "pg_dump -U #{username} -h localhost #{database} -f #{backup_file_name}"
+      puts "Compressing the database"
       sh "tar czf #{compressed_backup_file_name} #{backup_file_name}"
 
-      send_to_amazon compressed_backup_file_name
+      puts "Sending to Amazon"
+      send_to_amazon(compressed_backup_file_name)
 
       #remove the file on completion so we don't clog up our app
       File.delete backup_file_name
