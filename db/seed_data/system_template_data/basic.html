@@ -849,6 +849,7 @@ table.facebook td {
       .w193{width: 193px;}
       .w173{width: 173px;}
       .w183{width: 183px;}
+      .w225{width: 225px;}
       .w560{width: 560px;}
       .w580{width: 580px;}
       .w168{width: 168px;}
@@ -934,7 +935,12 @@ table.facebook td {
           display: block !important;
         }
         table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 0 10px !important;}
-        table[class="body"] table.container .block-grid td.w168 {width: 280px !important; padding: 0 10px !important; display: block !important;}
+        table[class="body"] table.container .block-grid td.w168,
+        table[class="body"] table.container .block-grid .w225 {
+          width: 280px !important;
+          padding: 0 10px !important;
+          display: inline-block !important;
+        }
 
         table[class="body"] .two-column-content,
         table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
@@ -1031,6 +1037,40 @@ table.facebook td {
                                 </tr>
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="two_columns">
+                              <table class="block-grid two-column-content">
+                                <tr>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="225" class="w225 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 1 Heading</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div>Column 1 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dolorum ea excepturi consectetur omnis qui labore a accusantium aspernatur vel. Repellendus, natus, iste maxime eveniet at vero mollitia quia exercitationem!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="225" class="w225 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 2 Heading</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div>Column 2 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, non vero iusto natus ipsum assumenda corporis harum. Reiciendis, eum, facilis odit laborum natus vel voluptate totam iusto. Nihil, assumenda, corrupti!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
                             </division>
