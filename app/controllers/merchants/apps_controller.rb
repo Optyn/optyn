@@ -6,9 +6,10 @@ class Merchants::AppsController < Merchants::BaseController
   before_filter :set_report_content
 
   def create
+    params[:oauth_application][:label_ids] = params[:oauth_application][:label_ids].reject! { |l| l.empty? }.join(",")
     current_shop.generate_oauth_token(params[:oauth_application])
     @application = current_shop.oauth_application
-
+    binding.pry
     render json: {preview_content: render_to_string(partial: "merchants/apps/preview"),
                   form_content: render_to_string(partial: 'merchants/apps/edit'),
                   advanced_content: render_to_string(partial: 'merchants/apps/advanced')
@@ -19,9 +20,12 @@ class Merchants::AppsController < Merchants::BaseController
 
   def show
     @application = current_shop.oauth_application.blank? ? current_shop.build_oauth_application : current_shop.oauth_application
+    @labels = current_shop.labels.active
+
   end
 
   def update
+    params[:oauth_application][:label_ids] = params[:oauth_application][:label_ids].reject! { |l| l.empty? }.join(",")
     current_shop.generate_oauth_token(params[:oauth_application], "true" == params[:reset])
     @application = current_shop.oauth_application
     render json: {preview_content: render_to_string(partial: "merchants/apps/preview"),
@@ -29,6 +33,7 @@ class Merchants::AppsController < Merchants::BaseController
                   advanced_content: render_to_string(partial: 'merchants/apps/advanced')
     }
   rescue
+    binding.pry
     render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
   end
 
@@ -45,6 +50,7 @@ class Merchants::AppsController < Merchants::BaseController
     @email_box_clicks = current_shop.email_box_click_count.to_i
     @email_box_opt_ins = current_shop.opt_ins_via_email_box
     @email_box_conversion_percent = current_shop.email_box_conversion_percent
+    @labels = current_shop.labels.active
   end
 
 end

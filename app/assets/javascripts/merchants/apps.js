@@ -16,6 +16,7 @@ function Apps() {
             this.hookSaveAndResetButton();
             this.hookOptynButtonTextToggle();
             this.hookTooltip();
+            this.hookChangeChosen();
         }
 
         if ($('.app-container').length) {
@@ -135,4 +136,15 @@ function Apps() {
     this.hookTooltip = function(){
         $('.tip').tooltip()
     };
+  this.hookChangeChosen = function () {
+    $('.chzn-select').chosen().change(function(){
+        var $select = $(this);
+
+        $.ajax({
+           url: $('#update_labels_merchants_survey_survey_answers_path').val(),
+           type: 'POST',
+           data: {user_id: $select.parent().find('.user_id').val(), label_ids: $select.val()}
+        });
+    });
+};
 }

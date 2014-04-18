@@ -5,7 +5,7 @@ class MerchantApp < ActiveRecord::Base
 
   attr_accessor :redirect_uri
 
-  attr_accessible :name, :redirect_uri, :redirect_uri_after_login
+  attr_accessible :name, :redirect_uri, :redirect_uri_after_login, :custom_css, :label_ids, :show_name
 
   has_one :oauth_application, class_name: 'Doorkeeper::Application', as: :owner, dependent: :destroy
 

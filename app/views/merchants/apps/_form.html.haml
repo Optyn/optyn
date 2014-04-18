@@ -36,6 +36,11 @@
 
   .option
     %label.checkbox
+      = f.check_box(:show_name)
+      Show Name
+
+  .option
+    %label.checkbox
       = f.check_box(:show_default_optyn_text, class: 'optyn-text-preference')
       Use Optyn Text
 
@@ -50,12 +55,24 @@
       = check_box_tag(:show_custom_optyn_text, '1', false,  class: 'optyn-text-preference')
       Use Custom Optyn Text
 
-    = f.text_area(:custom_text, rows: 3, :placeholder => "Enter your custom tag line here. Be creative or use ours.")
+    = f.text_area(:custom_text, rows: 3, :class =>"input-xxlarge", :placeholder => "Enter your custom tag line here. Be creative or use ours.")
   .option
     %label
       Redirect URL
   .custom
-    = f.text_field :redirect_uri_after_login, placeholder: 'Redirect Url', 'data-toggle' => 'tooltip', title: 'Enter your Redirect Url'
+    = f.text_field :redirect_uri_after_login, placeholder: 'custom css', 'data-toggle' => 'tooltip', title: 'Enter your Redirect Url'
+  .option
+    %label
+      Labels
+  .custom
+    = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name),
+        {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
+
+  .option
+    %label
+      Custom Css
+  .custom
+    = f.text_area :custom_css, placeholder: 'Redirect Url', 'data-toggle' => 'tooltip', title: 'Custom Css'
     - unless @application.new_record?
       .refresh
         %a.btn.btn-primary.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save

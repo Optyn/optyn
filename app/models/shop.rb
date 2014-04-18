@@ -595,6 +595,9 @@ class Shop < ActiveRecord::Base
     app.begin_state = options[:begin_state]
     app.background_color = options[:background_color]
     app.redirect_uri_after_login = options[:redirect_uri_after_login]
+    app.custom_css = options[:custom_css]
+    app.label_ids = options[:label_ids]
+    app.show_name = options[:show_name]
   end
 
   def assign_embed_code(app)
