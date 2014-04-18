@@ -849,7 +849,8 @@ table.facebook td {
       .w193{width: 193px;}
       .w173{width: 173px;}
       .w183{width: 183px;}
-      .w225{width: 225px;}
+      .w275{width: 275px;}
+      .w285{width: 285px;}
       .w560{width: 560px;}
       .w580{width: 580px;}
       .w168{width: 168px;}
@@ -898,6 +899,8 @@ table.facebook td {
       .recently-added-division { background: #ffff99; }
       .main-content { width: 560px; }
       td.optyn-introduction{width: 580px;}
+      .block-grid .half-left-image table.w285 { float: left; }
+      .block-grid .half-right-image table.w285 { float: right; }
 
       @media only screen and (max-width: 600px) {
         table[class="body"] table.container .block-grid td {
@@ -936,11 +939,27 @@ table.facebook td {
         }
         table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 0 10px !important;}
         table[class="body"] table.container .block-grid td.w168,
-        table[class="body"] table.container .block-grid .w225 {
+        table[class="body"] table.container .block-grid .w275,
+        table[class="body"] table.container .block-grid .w285 {
           width: 280px !important;
+        }
+        table[class="body"] table.container .block-grid td.w275,
+        table[class="body"] table.container .block-grid td.w285 {
           padding: 0 10px !important;
           display: inline-block !important;
         }
+        table[class="body"] table.container .block-grid .half-left-image,
+        table[class="body"] table.container .block-grid .half-left-image .w285,
+        table[class="body"] table.container .block-grid .half-right-image,
+        table[class="body"] table.container .block-grid .half-right-image .w285 { padding: 0 !important; }
+
+        table[class="body"] table.container .block-grid .half-left-image .optyn-paragraph,
+        table[class="body"] table.container .block-grid .half-right-image .optyn-paragraph,
+        table[class="body"] table.container .block-grid.twli .optyn-headline,
+        table[class="body"] table.container .block-grid.twri .optyn-headline { padding: 0 10px !important; }
+
+        table[class="body"] table.container .block-grid .half-left-image table.w285,
+        table[class="body"] table.container .block-grid .half-right-image table.w285 { float: none !important; }
 
         table[class="body"] .two-column-content,
         table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
@@ -1042,13 +1061,13 @@ table.facebook td {
                             </division>
 
                             <division type="two_columns">
-                              <table class="block-grid two-column-content">
+                              <table width="580" class="w580 block-grid two-column-content">
                                 <tr>
                                   <td colspan="5" height="10" class="h10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td width="10" class="w10 no-pad"></td>
-                                  <td width="225" class="w225 no-pad">
+                                  <td width="275" class="w275 no-pad">
                                     <headline>
                                       <h2 class="headline">Column 1 Heading</h2>
                                     </headline>
@@ -1058,7 +1077,7 @@ table.facebook td {
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
-                                  <td width="225" class="w225 no-pad">
+                                  <td width="275" class="w275 no-pad">
                                     <headline>
                                       <h2 class="headline">Column 2 Heading</h2>
                                     </headline>
@@ -1074,6 +1093,50 @@ table.facebook td {
                                 </tr>
                               </table>
                             </division>
+
+                            <division type="text_with_left_image">
+                              <table width="580" class="w580 block-grid twli">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td width="560" class="w560 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Text with Left Image</h2>
+                                    </headline>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td class="half-left-image no-pad" width="560" class="w560">
+                                    <table class="w285" cellspacing="0" cellpadding="0" align="left" width="285">
+                                      <tr>
+                                        <td class="w275 no-pad" width="275">
+                                          <image>
+                                            <img src="http://placehold.it/300x200" alt="" class="w275" width="275" />
+                                          </image>
+                                        </td>
+                                        <td class="w10 no-pad" width="10"></td>
+                                      </tr>
+                                    </table>
+                                    <paragraph>
+                                      <div align="left">Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+
                           </td>
                         </grid>
                       </tr>
