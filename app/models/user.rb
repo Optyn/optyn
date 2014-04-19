@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :interests, dependent: :destroy, as: :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
+  has_many :labels, through: :user_labels
   has_many :permissions_users, dependent: :destroy
   has_many :permissions, :through => :permissions_users
   has_many :redeem_coupons, dependent: :destroy
