@@ -6,12 +6,32 @@ class User < ActiveRecord::Base
   extend Users::Importer
   extend Users::ShopUserImporter
 
+
+  ## header variations required for import subscribers
+  HEADERS = {
+            "last" => "last_name",
+            "lname" => "last_name",
+            "l_name" => "last_name",
+            "lastname" => "last_name",
+            "first" => "first_name",
+            "f_name" => "first_name",
+            "fname" => "first_name",
+            "firstname" => "first_name",
+            "customer_name" => "first_name",
+            "email_address" => "email",
+            "customer_email" => "email",
+            "customer_email_address" => "email",
+            "user_email" => "email",
+            "user_email_address" => "email"
+          }
+
   has_many :authentications, :as => :account, dependent: :destroy
   has_many :connections, class_name: "Connection", dependent: :destroy
   has_many :shops, through: :connections
   has_many :interests, dependent: :destroy, as: :holder
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
+  has_many :labels, through: :user_labels
   has_many :permissions_users, dependent: :destroy
   has_many :permissions, :through => :permissions_users
   has_many :redeem_coupons, dependent: :destroy

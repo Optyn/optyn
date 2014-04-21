@@ -52,4 +52,13 @@ class Encryptor
     p "ERROR ==> #{e.backtrace}"
     return false
   end
+
+  def self.encrypt_for_edit_message(access_token, manager_uuid, message_uuid, message_change_notifier_uuid)
+    plain_text = "#{access_token}--#{manager_uuid}--#{message_uuid}--#{message_change_notifier_uuid}"
+    cipher = configure
+    ciphertext = cipher.update(plain_text)
+    ciphertext.<<(cipher.final)
+    encoded_cipher_text = Base64.strict_encode64(ciphertext)
+    CGI.escape(encoded_cipher_text)
+  end
 end

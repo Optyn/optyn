@@ -101,6 +101,7 @@ module Messagecenter
     def populate_manager_folder_count
       @drafts_count = Message.cached_drafts_count(current_shop) if current_shop
       @queued_count = Message.cached_queued_count(current_shop) if current_shop
+      @approves_count = Message.cached_approves_count(current_shop) if current_shop
     end
 
     def registered_action_location
@@ -129,7 +130,7 @@ module Messagecenter
       end
     end
 
-    def send_for_curation
+    def send_for_curation(access_token = nil)
       if @needs_curation
         @shop = @message.shop
         @partner = @shop.partner
@@ -137,7 +138,7 @@ module Messagecenter
         @preview = true
         message_content = render_to_string(:template => 'api/v1/merchants/messages/preview_email', :layout => false, :formats=>[:html],:handlers=>[:haml])
 
-        @message.for_curation(message_content)
+        @message.for_curation(message_content, access_token)
       end
     end
 

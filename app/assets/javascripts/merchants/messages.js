@@ -1,8 +1,22 @@
 var props = null;
+var facebookHtml,twitterHtml;
+var socialurl = false;
+var socialCheck = false;
+
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
-    merchantMessage.initialize();
+    merchantMessage.initialize();  
 
+    //loading social sharing options checkboxes
+    $('#customHtmlTemplate').load(function(){ 
+      if(socialCheck == false)
+        {
+          merchantMessage.socialSharing();
+          merchantMessage.manageLogo();
+          socialCheck = true;
+          merchantMessage.reloadTemplateSelectorIframe();
+        }
+    });
 });
 
 function MerchantMessage() {
@@ -20,7 +34,7 @@ function MerchantMessage() {
             OP.overlay.addOverlay('#template_wrapper');
             this.loadSpinnerForIframe();
         }
-
+        
         /*
             Hooks for preview page for messages except templates
         */ 
@@ -782,4 +796,103 @@ function MerchantMessage() {
           }
       });
     };
+
+    // manage social sharing icons visibility
+    this.socialSharing = function(){          
+      twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
+      facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
+      twitterCustom = $("#customHtmlTemplate").contents().find("twittershare")
+      fbCustom = $("#customHtmlTemplate").contents().find("fbshare")
+
+      if((twitter.length>0) || (facebook.length>0) || (fbCustom.length>0) || (twitterCustom.length>0))
+      { 
+        if(twitter.css("display") == "none")
+          $("#twitter-setting").prop('checked', false);
+        else
+          $("#twitter-setting").prop('checked', true);
+
+        if(facebook.css("display") == "none")
+          $("#facebook-setting").prop('checked',false)
+        else
+          $("#facebook-setting").prop('checked',true)
+        this.setSocialShareUrl();
+        var templateMessage = this;
+
+        $("#facebook-setting, #twitter-setting").on('change',function(){          
+          templateMessage.reloadTemplateSelectorIframe();
+        });
+      }
+      else
+        {$(".control-group.social-share").remove()}
+
+    };
+
+    this.setSocialShareUrl = function(shareurl, text){
+      if(socialurl == false)
+        {
+          var templateMessage = this;
+          twitter = $("#customHtmlTemplate").contents().find("twittershare");
+          facebook = $("#customHtmlTemplate").contents().find("fbshare");
+          if((twitter.length>0) || (facebook.length>0))
+            templateMessage.reloadTemplateSelectorIframe();
+          socialurl = true;
+        }
+
+    };
+
+
+    this.manageLogo = function(){
+      var templateMessage = this;
+      $('.logo_text').val("").hide();
+      
+      // radio button for logo text or image
+      $("#properties_header_logo_image, #properties_header_logo_text").change(function(){
+        if($(this).val()=="image")
+        {
+          $('.logo_text').hide();
+          $('#imgfile').show();
+          $('.save_image').show();          
+          }
+        else
+        {
+          $('#imgfile').hide();
+          $('.logo_text').show();
+          $('.save_image').hide();
+          $('.change_image').hide();          
+        }
+        templateMessage.reloadTemplateSelectorIframe();
+      });
+
+      $('#properties_header_logo_image').attr('checked', 'checked');
+
+      // show/hide file form based on tab
+      $("#template_properties_tab.nav.nav-tabs li a").click(function(){
+        if($(this).attr('href')== "#template_header")
+          $("#logo_form").css("display","block");
+        else
+          $("#logo_form").css("display","none");
+      });
+
+      // change uploaded image
+      $('.change_image').click(function(e){
+        e.preventDefault();
+        $('#imgfile').show();
+        $('.change_image').hide();
+        $('.save_image').show();
+      });
+
+      // on logo form submit
+      $('.save_image').on('click',function(e){
+        e.preventDefault();
+        $('.loading').show();
+        $("#logo_form").submit();
+      });
+
+      // alignment
+      $('.left-align, .center-align, .right-align').click(function(e){       
+        $("#logo_align").val($(this).attr("data-align"));
+        templateMessage.reloadTemplateSelectorIframe();
+      });
+    };
+
 }

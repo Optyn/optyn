@@ -1,12 +1,19 @@
 module Users
-  module ShopUserImporter  
+  module ShopUserImporter
+
+    ## fetching common header for different variations
+    def convert_header(h)
+      changed_header = h.to_s.downcase.gsub('-', '').gsub(' ','_')
+      (User::HEADERS[changed_header].present? ? User::HEADERS[changed_header] : changed_header).intern
+    end
+
     def user_import(payload)
       Rails.logger.info "Starting the download"
       content = download_user_import_csv_file(payload)
       Rails.logger.info "Done downloading and cleaning the file"
 
       Rails.logger.info "Creating the table"
-      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: :symbol})
+      csv_table = CSV.parse(content, { headers: true, converters: :numeric, header_converters: lambda { |h| convert_header(h)}})
       Rails.logger.info "Done loading the csv table"
       headers = csv_table.headers
       validate_user_import_headers(headers)
@@ -92,7 +99,21 @@ module Users
           connection.save
 
           end #end of transaction
-
+        rescue ActiveRecord::StatementInvalid => e
+          begin
+            counters[:unparsed_rows] += 1
+            output_row << %{"Error: #{e.message}"}
+            output << output_row.join(",")
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error e.message
+            Rails.logger.error e.backtrace
+          rescue Encoding::CompatibilityError => error
+            output_row.pop
+            output_row << %{"Error: Encoding::CompatibilityError: incompatible character encodings"}
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error error.message
+            Rails.logger.error error.backtrace
+          end
         rescue Exception => e
           Rails.logger.error e.message
           Rails.logger.error e.backtrace
