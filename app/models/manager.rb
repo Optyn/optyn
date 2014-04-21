@@ -103,7 +103,7 @@ class Manager < ActiveRecord::Base
 
   def send_welcome_email
     return if self.shop.virtual || self.skip_email || !(self.partner_optyn?)
-    WelcomeMessageSender.perform_async(:manager, self.id, nil, nil, self.show_password)
+    WelcomeMessageSender.perform_async(:manager, self.id, nil, nil, (self.show_password || self.password))
   end
 
   def partner_eatstreet?
