@@ -8,6 +8,7 @@ class Merchants::ShopsController < Merchants::BaseController
 
 	def edit
 		@shop = current_shop
+    @shop.website = @shop.website.to_s.gsub(/https?:\/\//, "") if @shop.website.present?
 	end
 
 	def update
