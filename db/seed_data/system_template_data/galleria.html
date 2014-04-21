@@ -911,7 +911,8 @@
     td.optyn-introduction{width: 580px;}
     .block-grid .half-left-image table.w285 { float: left; }
     .block-grid .half-right-image table.w285 { float: right; }
-    .img-gallery-content img { float: none; }
+    .img-gallery-content img,
+    .two-column-content img { float: none; }
 
     @media only screen and (max-width: 600px) {
       table[class="body"] table.container .block-grid td {
@@ -1085,6 +1086,7 @@
                                     <paragraph>
                                       <div class="paragraph">Image caption here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, impedit enim voluptas quidem reiciendis eaque provident ad recusandae placeat aut earum illo veniam. Fuga, consequatur architecto molestiae magni possimus expedita!</div>
                                     </paragraph>
+                                    <div class="separator"></div>
                                     <image>
                                        <img width="560" class="w560" src="http://placehold.it/560x300" alt="" />
                                     </image>
@@ -1097,6 +1099,56 @@
                               </table>
                             </division>
 
+                            <division type="two_columns">
+                              <div>
+                                <table width="580" class="w580 block-grid">
+                                  <tr>
+                                    <td colspan="3" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w560 no-pad" width="560">
+                                      <headline>
+                                        <h2 class="headline">Two Columns</h2>
+                                      </headline>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                </table>
+                                <table width="580" class="w580 block-grid two-column-content">
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="10" class="w10 no-pad"></td>
+                                    <td width="275" class="w275 no-pad">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w275" width="275" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td width="10" class="w10 no-pad"></td>
+                                    <td width="275" class="w275 no-pad">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w275" width="275" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td width="10" class="w10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </division>
+
                             <division type="three_columns">
                               <div>
                                 <table width="580" class="w580 block-grid img-gallery-content">
@@ -1107,7 +1159,7 @@
                                     <td class="w10 no-pad" width="10"></td>
                                     <td class="w560 no-pad" width="560">
                                       <headline>
-                                        <h2 class="headline">Image Gallery</h2>
+                                        <h2 class="headline">Three Columns</h2>
                                       </headline>
                                     </td>
                                     <td class="w10 no-pad" width="10"></td>
