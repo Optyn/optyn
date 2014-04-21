@@ -852,19 +852,26 @@
     }
 
     /* Custom styles */
-    body, table.body, h1, h2, h3, h4, h5, h6, p,
-    table.button td a,
-    table.tiny-button td a,
-    table.small-button td a,
-    table.medium-button td a,
-    table.large-button td a {
-      font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Ubuntu", "Arial", sans-serif;
-    }
-    .body { min-width: 300px; }
-    .body > tbody > tr > td { padding: 2%; }
+    .body .container .block-grid td{display: table-cell;}
+    .w387{width: 387px;}
+    .w367{width: 367px;}
+    .w180{width: 180px;}
+    .w193{width: 193px;}
+    .w173{width: 173px;}
+    .w183{width: 183px;}
+    .w275{width: 275px;}
+    .w285{width: 285px;}
+    .w560{width: 560px;}
+    .w580{width: 580px;}
+    .w168{width: 168px;}
+    .w178{width: 178px;}
+    .w10{width: 10px;}
+    .h10{height: 10px;}
     h2 { font-size: 16px; font-weight: bold; }
     img { height: auto; }
-    .text-pad-10 { padding: 0 10px; }
+    .text-pad-10 { padding: 10px; }
+    div.separator { height: 5px; }
+    div.separator-10px { height: 10px; }
     .no-pad { padding: 0 !important; }
     .optyn-headline { margin: 7px 0; }
     blockquote,
@@ -872,13 +879,9 @@
     .optyn-replaceable-image { border: 0; }
     .sidebar-container .optyn-paragraph { font-size: 13px; }
     .sidebar-container h2 { font-size: 16px; }
-    .sidebar-container h3 {
-      font-size: 14px;
-      font-weight: bold;
-    }
+    .sidebar-container h3 { font-size: 14px; font-weight: bold; }
     .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
     .optyn-footer {
-      padding: 15px 0;
       background: transparent;
       background: rgba(255,255,255,0.3);
     }
@@ -894,51 +897,6 @@
       color: rgba(0,0,0,0.5);
     }
     .optyn-footer .optyn-paragraph a { text-decoration: underline; }
-    .optyn-replaceable-image img { float: none; }
-    .optyn-intro { width: 560px; padding-top: 0px !important; }
-    .optyn-intro .optyn-replaceable-image { display: table; }
-    .body .optyn-introduction .optyn-replaceable-image img { max-width: 560px; }
-    .galleria .full-image .optyn-replaceable-image img{
-      width: 560px;
-    }
-    .galleria .half-left-image,
-    .galleria .half-right-image {
-      padding-left: 10px;
-    }
-
-    .galleria .half-left-image .optyn-replaceable-image,
-    .galleria .half-right-image .optyn-replaceable-image {
-      width: 48%;
-    }
-    .galleria .half-left-image .optyn-replaceable-image img,
-    .galleria .half-right-image .optyn-replaceable-image img {
-      width: 100%;
-    }
-    .galleria .half-left-image .optyn-replaceable-image {
-      float: left;
-      margin:0 2% 10px 0;
-    }
-    .galleria .half-right-image .optyn-replaceable-image {
-      float: right;
-      margin:0 0 10px 2%;
-    }
-    .galleria .third-image,
-    .galleria .third-image .optyn-replaceable-image img{
-      width:170px;
-    }
-    .two-up td,
-    .two-up .optyn-replaceable-image img {
-      width:268px;
-    }
-    td.fourth-image,
-    td.fourth-image .optyn-replaceable-image img { width: 122px; }
-    .galleria .full_image .optyn-replaceable-image,
-    .galleria .two-up .optyn-replaceable-image,
-    .galleria .third-image .optyn-replaceable-image,
-    .galleria .fourth-image .optyn-replaceable-image { margin-bottom: 10px; }
-    .galleria .fourth-image .optyn-replaceable-image img{
-      width:122px;
-    }
     .optyn-division {
       padding-top: 5px;
       float: none;
@@ -948,46 +906,98 @@
            -o-transition: all 1s ease;
               transition: all 1s ease;
     }
-    .recently-added-division {
-      background: #ff9;
-    }
+    .recently-added-division { background: #ffff99; }
+    .main-content { width: 560px; }
+    td.optyn-introduction{width: 580px;}
+    .block-grid .half-left-image table.w285 { float: left; }
+    .block-grid .half-right-image table.w285 { float: right; }
+    .img-gallery-content img { float: none; }
 
     @media only screen and (max-width: 600px) {
       table[class="body"] table.container .block-grid td {
-        /*width: 95% !important; this is ink default */
-        width: 280px !important;
-      }
-      table[class="body"] table.container {
         width: 300px !important;
       }
-      table[class="body"] .optyn-intro-cont,
-      table[class="body"] .optyn-intro { width: 300px !important; }
-      .galleria table[class="body"] .half-left-image .optyn-replaceable-image,
-      .galleria table[class="body"] .half-right-image .optyn-replaceable-image{ width: auto !important; float: none; margin: 0 0 10px 0; }
-      .galleria table[class="body"] .full-image .optyn-replaceable-image img,
-      .galleria table[class="body"] .two-up,
-      .galleria table[class="body"] .two-img-columns .optyn-replaceable-image,
-      .galleria table[class="body"] .two-img-columns .optyn-replaceable-image img,
-      .galleria table[class="body"] .third-image .optyn-replaceable-image,
-      .galleria table[class="body"] .third-image .optyn-replaceable-image img,
-      .galleria table[class="body"] .fourth-image .optyn-replaceable-image,
-      .galleria table[class="body"] .fourth-image .optyn-replaceable-image img { width: 280px !important; }
-      .galleria table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
-      .galleria table[class="body"] .three-up td{width: 94% !important;}
-      table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
-    }  /* End media query. */
+      table[class="body"] .optyn-introduction .optyn-replaceable-image img {
+        width: auto !important;
+        max-width: 300px !important;
+        height: auto;
+      }
+      table[class="body"] table.container td.w10 { width: 10px !important; }
+      table[class="body"] td.sidebar,
+      table[class="body"] td.main-area,
+      table[class="body"] table.container,
+      table[class="body"] .w580,
+      table[class="body"] .w193,
+      table[class="body"] .w387{ width: 300px !important; }
+      table[class="body"] td.sidebar,
+      table[class="body"] td.main-area,
+      table[class="body"] table.container { display: block !important; }
 
+      table[class="body"] .w173,
+      table[class="body"] .two-column-content .w168,
+      table[class="body"] table.container .block-grid td.w173,
+      table[class="body"] table.container .block-grid .w178,
+      table[class="body"] table.container .block-grid .w180,
+      table[class="body"] table.container .block-grid .w183,
+      table[class="body"] .w193,
+      table[class="body"] .w367,
+      table[class="body"] table.container .block-grid td.w367,
+      table[class="body"] table.container .block-grid .w560 { width: 280px !important; }
+
+      table[class="body"] table.container .block-grid.img-gallery-content .optyn-replaceable-image {
+        width: 280px !important;
+        padding: 0 0 10px 0 !important;
+        display: block !important;
+      }
+      table[class="body"] table.container .block-grid.img-gallery-content .w180.no-pad.lpad10l { padding: 0 0 0 10px !important;}
+      table[class="body"] table.container .block-grid td.w168,
+      table[class="body"] table.container .block-grid .w275,
+      table[class="body"] table.container .block-grid .w285 {
+        width: 280px !important;
+      }
+      table[class="body"] table.container .block-grid td.w275,
+      table[class="body"] table.container .block-grid td.w285 {
+        padding: 0 10px !important;
+        display: inline-block !important;
+      }
+      table[class="body"] table.container .block-grid .half-left-image,
+      table[class="body"] table.container .block-grid .half-left-image .w285,
+      table[class="body"] table.container .block-grid .half-right-image,
+      table[class="body"] table.container .block-grid .half-right-image .w285 { padding: 0 !important; }
+
+      table[class="body"] table.container .block-grid .half-left-image .optyn-paragraph,
+      table[class="body"] table.container .block-grid .half-right-image .optyn-paragraph,
+      table[class="body"] table.container .block-grid.twli .optyn-headline,
+      table[class="body"] table.container .block-grid.twri .optyn-headline { padding: 0 10px !important; }
+
+      table[class="body"] table.container .block-grid .half-left-image table.w285,
+      table[class="body"] table.container .block-grid .half-right-image table.w285 { float: none !important; }
+
+      table[class="body"] .two-column-content,
+      table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
+      table[class="body"] .two-column-content .w168,
+      table[class="body"] table.container .optyn-container .block-grid.img-gallery-content td {display: inline-block !important; }
+      table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
+      table[class="body"] .two-column-content .w10 {display: none !important;}
+      table[class="body"] .footer-text-td div { padding: 0 10px !important;}
+
+      table[class="body"] .half-left-image .optyn-replaceable-image img,
+      table[class="body"] .half-right-image .optyn-replaceable-image img { padding-bottom: 10px !important;}
+      table[class="body"] .container .block-grid .half-left-image,
+      table[class="body"] .container .block-grid .half-right-image { width: 280px !important; }
+      table[class="body"] .half-left-image .w193,
+      table[class="body"] .half-right-image .w193 { float: none !important; }
+    }  /* End media query. */
   </style>
 </head>
 <body id="flat" class="galleria">
   <table class="body">
     <tr>
-      <td class="center" align="center" valign="top" style="padding: 10px;">
+      <td class="center text-pad-10" align="center" valign="top">
         <center>
-
-          <table class="container">
+          <table class="container" width="580">
             <tr>
-              <td class="no-pad">
+              <td width="580" class="w580">
                 <table class="block-grid header-social">
                   <tr>
                     <td align="right">
@@ -1013,214 +1023,184 @@
                     </td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-          </table>
 
-          <container type="introduction">
-            <table class="container">
-              <tr>
-                <td>
-                  <row>
-                    <table class="block-grid">
-                      <grid type="introduction">
-                        <tr>
-                          <td class="no-pad center optyn-intro-cont">
+                <container type="introduction">
+                  <table class="block-grid w580" width="580">
+                    <row>
+                      <tr>
+                        <grid type="introduction">
+                          <td width="580" class="w580 no-pad center">
                             <division type="introduction">
-                              <div class="optyn-intro">
-                                <img width="560" src="http://placehold.it/560x100" alt="" />
+                              <div>
+                                <img width="580" class="w580" src="http://placehold.it/580x100" alt="" />
                               </div>
                             </division>
                           </td>
-                        </tr>
-                      </grid>
-                    </table>
-                  </row>
-                </td>
-              </tr>
-            </table>
-          </container>
+                        </grid>
+                      </tr>
+                    </row>
+                  </table>
+                </container>
 
-          <container type="content">
-            <table class="container">
-              <tr>
-                <td class="main-content">
-                  <row>
-                    <div>
-                      <grid type="content">
-                        <div>
-                          <division type="full_text">
-                            <table class="block-grid">
-                              <tr>
-                                <td>
-                                  <headline>
-                                    <h2 class="headline">A Division of Text</h2>
-                                  </headline>
-                                  <paragraph>
-                                    <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, similique, ad quam voluptates eos accusamus dolorum ab totam quis qui fugiat laboriosam eaque in labore odio delectus atque sequi excepturi.</div>
-                                  </paragraph>
-                                </td>
-                              </tr>
-                            </table>
-                          </division>
 
-                          <division type="text_with_full_image" class="full-image">
-                            <table class="block-grid">
-                              <tr>
-                                <td class="full-image">
-                                  <headline>
-                                    <h2 class="headline">Text With Full Width Image</h2>
-                                  </headline>
-                                  <paragraph>
-                                    <div class="paragraph">
-                                      Image caption here.
+                <container type="content">
+                  <table>
+                    <row>
+                      <tr>
+                        <grid>
+                          <td width="580" class="w580">
+                            <division type="full_text">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="560" class="w560 no-pad">
+                                    <headline>
+                                      <h2 class="headline">A Division of Text</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, deserunt, suscipit, non, beatae voluptatem eos optio quo esse facere dolorum magnam expedita labore pariatur quia cumque tempore debitis error deleniti!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_full_image" class="full-image">
+                              <table width="580" class="w580 block-grid">
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="560" class="w560 full-image">
+                                    <headline>
+                                      <h2 class="headline">Text With Full Width Image</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div class="paragraph">Image caption here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, impedit enim voluptas quidem reiciendis eaque provident ad recusandae placeat aut earum illo veniam. Fuga, consequatur architecto molestiae magni possimus expedita!</div>
+                                    </paragraph>
+                                    <image>
+                                       <img width="560" class="w560" src="http://placehold.it/560x300" alt="" />
+                                    </image>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="three_columns">
+                              <div>
+                                <table width="580" class="w580 block-grid img-gallery-content">
+                                  <tr>
+                                    <td colspan="3" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w560 no-pad" width="560">
+                                      <headline>
+                                        <h2 class="headline">Image Gallery</h2>
+                                      </headline>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                </table>
+                                <table width="580" class="w580 block-grid img-gallery-content">
+                                  <tr>
+                                    <td colspan="7" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w180 third-image no-pad" width="180">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w180" width="180" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w180 third-image no-pad lpad10l" width="180">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w180" width="180" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w180 third-image no-pad lpad10l" width="180">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w180" width="180" alt="" />
+                                      </image>
+                                      <div class="separator"></div>
+                                      <paragraph>
+                                        <div>Image caption goes here.</div>
+                                      </paragraph>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="7" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </division>
+
+                          </td>
+                        </grid>
+                      </tr>
+                    </row>
+                  </table>
+                </container>
+
+                <container type="footer">
+                  <div class="w580">
+                    <row>
+                      <div class="footer-container">
+                        <grid type="footer">
+                          <div>
+                            <division type="footer">
+                              <table class="block-grid">
+                                <tr>
+                                  <td height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="no-pad footer-text-td">
+                                    <div>
+                                      <center>
+                                        <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                        </permission>
+                                        <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                        <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                                      </center>
                                     </div>
-                                  </paragraph>
-                                  <image>
-                                     <img width="560" src="http://placehold.it/560x250" alt="" />
-                                  </image>
-                                </td>
-                              </tr>
-                            </table>
-                          </division>
-
-                          <division type="two_columns">
-                            <div class="two-img-columns">
-                              <headline>
-                                <h2 class="headline text-pad-10 three-img-columns">Two Columns</h2>
-                              </headline>
-                              <table class="block-grid two-up">
-                                <tr>
-                                  <td width="268">
-                                    <image>
-                                      <img width="268" src="http://placehold.it/290x150" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td><td width="268">
-                                    <image>
-                                      <img width="268" src="http://placehold.it/290x150" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
                                   </td>
                                 </tr>
-                              </table>
-                            </div>
-                          </division>
-
-                          <division type="three_columns">
-                            <div>
-                              <headline>
-                                <h2 class="headline text-pad-10 three-img-columns">Three Columns</h2>
-                              </headline>
-                              <table class="block-grid three-up">
                                 <tr>
-                                  <td class="third-image" width="170">
-                                    <image>
-                                      <img width="170" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td><td class="third-image" width="170">
-                                    <image>
-                                      <img width="170" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td><td class="third-image" width="170">
-                                    <image>
-                                      <img width="170" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
                               </table>
-                            </div>
-                          </division>
-
-                          <division type="four_columns">
-                            <div>
-                              <headline>
-                                <h2 class="headline text-pad-10 four-img-columns">Four Columns</h2>
-                              </headline>
-                              <table class="block-grid four-up">
-                                <tr>
-                                  <td class="fourth-image" width="122">
-                                    <image>
-                                      <img width="122" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td><td class="fourth-image" width="122">
-                                    <image>
-                                      <img width="122" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td><td class="fourth-image" width="122">
-                                    <image>
-                                      <img width="122" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td><td class="fourth-image" width="122">
-                                    <image>
-                                      <img width="122" src="http://placehold.it/300x200" alt="" />
-                                    </image>
-                                    <paragraph>
-                                      <div>A distinct piece of writing.</div>
-                                    </paragraph>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
-                          </division>
-                        </div>
-                      </grid>
-                    </div>
-                  </row>
-                </td>
-              </tr>
-            </table>
-          </container>
-
-
-          <container type="footer">
-            <table class="container">
-              <row>
-                <tr class="footer-container">
-                  <grid type="footer">
-                    <td>
-                      <division type="footer">
-                        <table class="block-grid footer">
-                          <tr>
-                            <td class="no-pad">
-                              <center>
-                                <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                </permission>
-                                <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                              </center>
-                            </td>
-                          </tr>
-                        </table>
-                      </division>
-                    </td>
-                  </grid>
-                </tr>
-              </row>
-            </table>
-          </container>
+                            </division>
+                          </div>
+                        </grid>
+                      </div>
+                    </row>
+                  </div>
+                </container>
+              </td>
+            </tr>
+          </table>
         </center>
       </td>
     </tr>
