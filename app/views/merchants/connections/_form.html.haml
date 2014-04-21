@@ -2,7 +2,7 @@
   .control-group
     = render :partial => "new_user", :locals => {:count => @user_count}
     .more_user
-    .addMoreUser
+    .addMoreUser.controls
       = link_to "Add more ", add_more_user_merchants_connections_path(:user_count => @user_count), :remote => true
   
   .control-group

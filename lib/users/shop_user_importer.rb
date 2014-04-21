@@ -1,14 +1,10 @@
 module Users
   module ShopUserImporter
-    HEADERS = {
-                "last" => "last_name",
-                "first" => "first_name",
-                "email_address" => "email"                      
-              }
 
+    ## fetching common header for different variations
     def convert_header(h)
       changed_header = h.to_s.downcase.gsub('-', '').gsub(' ','_')
-      (HEADERS[changed_header].present? ? HEADERS[changed_header] : changed_header).intern
+      (User::HEADERS[changed_header].present? ? User::HEADERS[changed_header] : changed_header).intern
     end
 
     def user_import(payload)
@@ -103,7 +99,21 @@ module Users
           connection.save
 
           end #end of transaction
-
+        rescue ActiveRecord::StatementInvalid => e
+          begin
+            counters[:unparsed_rows] += 1
+            output_row << %{"Error: #{e.message}"}
+            output << output_row.join(",")
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error e.message
+            Rails.logger.error e.backtrace
+          rescue Encoding::CompatibilityError => error
+            output_row.pop
+            output_row << %{"Error: Encoding::CompatibilityError: incompatible character encodings"}
+            unparsed_rows << output_row.join(",")
+            Rails.logger.error error.message
+            Rails.logger.error error.backtrace
+          end
         rescue Exception => e
           Rails.logger.error e.message
           Rails.logger.error e.backtrace

@@ -73,7 +73,7 @@ module Surveys
         id='#{options[:id]}'
         name='#{element_name(options)}'
         class='#{options[:class]}'
-          value='#{options[:value]}'
+          value="#{options[:value].gsub('"', '&quot;')}"
           />
           &nbsp;#{options[:value] if options[:type] != 'input'}
           #{wrapper_close})
