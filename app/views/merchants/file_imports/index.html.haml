@@ -55,6 +55,8 @@
                 = File.basename(import.csv_file.to_s)
               %td
                 = import.status.humanize rescue "-"
+                - if import.error.present?
+                  %a.error-popover{"style" => "color:red","data-content" => "#{import.error}", "data-toggle" => "popover","data-trigger"=>"hover", href: "#", title: ""} <i class="icon-question-sign"></i>
               %td
                 = import.label
               %td
@@ -71,4 +73,9 @@
           %tr
             %td{colspan: 6}
               No file imports yet.
+
+:javascript
+  $( function() {
+    $(".error-popover").popover();
+  });
 

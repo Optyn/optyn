@@ -18,7 +18,7 @@ class Template < ActiveRecord::Base
 
   attr_accessor :parsed_html, :parsed_result, :pared_extends, :styles
 
-  attr_accessible :shop_id, :system_generated, :name, :structure, :html
+  attr_accessible :title,:logo, :shop_id, :system_generated, :name, :structure, :html
 
   serialize :structure, Hash
 
@@ -26,6 +26,7 @@ class Template < ActiveRecord::Base
   has_many :stylesheets
   has_one :template_upload #, dependent: :destroy
   belongs_to :shop
+  has_one :template_image, dependent: :destroy
 
   after_create :assign_uuid, :create_structure
 
@@ -73,6 +74,17 @@ class Template < ActiveRecord::Base
     new_template.replace_custom_tags
     new_template.html
   end
+
+  def show_image?
+    template_image.present?    
+  end
+
+  def image_location
+    if show_image?
+      template_image.image.url
+    end
+  end
+
 
   def self.system_generated
     fetch_system_generated.priority_position

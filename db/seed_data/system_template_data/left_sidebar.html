@@ -3,1217 +3,1424 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width"/>
-  <style type="text/css">
-    /**********************************************
-    * Ink v1.0.4 - Copyright 2013 ZURB Inc        *
-    **********************************************/
+  <style>
+/**********************************************
+* Ink v1.0.5 - Copyright 2013 ZURB Inc        *
+**********************************************/
 
-    /* Client-specific Styles & Reset */
+/* Client-specific Styles & Reset */
 
-    #outlook a {
-      padding:0;
+#outlook a {
+  padding:0;
+}
+
+body{
+  width:100% !important;
+  min-width: 100%;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  margin:0;
+  padding:0;
+}
+
+.ExternalClass {
+  width:100%;
+}
+
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+  line-height: 100%;
+}
+
+#backgroundTable {
+  margin:0;
+  padding:0;
+  width:100% !important;
+  line-height: 100% !important;
+}
+
+img {
+  outline:none;
+  text-decoration:none;
+  -ms-interpolation-mode: bicubic;
+  width: auto;
+  max-width: 100%;
+  float: left;
+  clear: both;
+  display: block;
+}
+
+center {
+  width: 100%;
+  min-width: 580px;
+}
+
+a img {
+  border: none;
+}
+
+p {
+  margin: 0 0 0 10px;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  border-collapse: collapse !important;
+}
+
+table, tr, td {
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+hr {
+  color: #d9d9d9;
+  background-color: #d9d9d9;
+  height: 1px;
+  border: none;
+}
+
+/* Responsive Grid */
+
+table.body {
+  height: 100%;
+  width: 100%;
+}
+
+table.container {
+  width: 580px;
+  margin: 0 auto;
+  text-align: inherit;
+}
+
+table.row {
+  padding: 0px;
+  width: 100%;
+  position: relative;
+}
+
+table.container table.row {
+  display: block;
+}
+
+td.wrapper {
+  padding: 10px 20px 0px 0px;
+  position: relative;
+}
+
+table.columns,
+table.column {
+  margin: 0 auto;
+}
+
+table.columns td,
+table.column td {
+  padding: 0px 0px 10px;
+}
+
+table.columns td.sub-columns,
+table.column td.sub-columns,
+table.columns td.sub-column,
+table.column td.sub-column {
+  padding-right: 10px;
+}
+
+td.sub-column, td.sub-columns {
+  min-width: 0px;
+}
+
+table.row td.last,
+table.container td.last {
+  padding-right: 0px;
+}
+
+table.one { width: 30px; }
+table.two { width: 80px; }
+table.three { width: 130px; }
+table.four { width: 180px; }
+table.five { width: 230px; }
+table.six { width: 280px; }
+table.seven { width: 330px; }
+table.eight { width: 380px; }
+table.nine { width: 430px; }
+table.ten { width: 480px; }
+table.eleven { width: 530px; }
+table.twelve { width: 580px; }
+
+table.one center { min-width: 30px; }
+table.two center { min-width: 80px; }
+table.three center { min-width: 130px; }
+table.four center { min-width: 180px; }
+table.five center { min-width: 230px; }
+table.six center { min-width: 280px; }
+table.seven center { min-width: 330px; }
+table.eight center { min-width: 380px; }
+table.nine center { min-width: 430px; }
+table.ten center { min-width: 480px; }
+table.eleven center { min-width: 530px; }
+table.twelve center { min-width: 580px; }
+
+table.one .panel center { min-width: 10px; }
+table.two .panel center { min-width: 60px; }
+table.three .panel center { min-width: 110px; }
+table.four .panel center { min-width: 160px; }
+table.five .panel center { min-width: 210px; }
+table.six .panel center { min-width: 260px; }
+table.seven .panel center { min-width: 310px; }
+table.eight .panel center { min-width: 360px; }
+table.nine .panel center { min-width: 410px; }
+table.ten .panel center { min-width: 460px; }
+table.eleven .panel center { min-width: 510px; }
+table.twelve .panel center { min-width: 560px; }
+
+.body .columns td.one,
+.body .column td.one { width: 8.333333%; }
+.body .columns td.two,
+.body .column td.two { width: 16.666666%; }
+.body .columns td.three,
+.body .column td.three { width: 25%; }
+.body .columns td.four,
+.body .column td.four { width: 33.333333%; }
+.body .columns td.five,
+.body .column td.five { width: 41.666666%; }
+.body .columns td.six,
+.body .column td.six { width: 50%; }
+.body .columns td.seven,
+.body .column td.seven { width: 58.333333%; }
+.body .columns td.eight,
+.body .column td.eight { width: 66.666666%; }
+.body .columns td.nine,
+.body .column td.nine { width: 75%; }
+.body .columns td.ten,
+.body .column td.ten { width: 83.333333%; }
+.body .columns td.eleven,
+.body .column td.eleven { width: 91.666666%; }
+.body .columns td.twelve,
+.body .column td.twelve { width: 100%; }
+
+td.offset-by-one { padding-left: 50px; }
+td.offset-by-two { padding-left: 100px; }
+td.offset-by-three { padding-left: 150px; }
+td.offset-by-four { padding-left: 200px; }
+td.offset-by-five { padding-left: 250px; }
+td.offset-by-six { padding-left: 300px; }
+td.offset-by-seven { padding-left: 350px; }
+td.offset-by-eight { padding-left: 400px; }
+td.offset-by-nine { padding-left: 450px; }
+td.offset-by-ten { padding-left: 500px; }
+td.offset-by-eleven { padding-left: 550px; }
+
+td.expander {
+  visibility: hidden;
+  width: 0px;
+  padding: 0 !important;
+}
+
+table.columns .text-pad,
+table.column .text-pad {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table.columns .left-text-pad,
+table.columns .text-pad-left,
+table.column .left-text-pad,
+table.column .text-pad-left {
+  padding-left: 10px;
+}
+
+table.columns .right-text-pad,
+table.columns .text-pad-right,
+table.column .right-text-pad,
+table.column .text-pad-right {
+  padding-right: 10px;
+}
+
+/* Block Grid */
+
+.block-grid {
+  width: 100%;
+  max-width: 580px;
+}
+
+.block-grid td {
+  display: inline-block;
+  padding:10px;
+}
+
+.two-up td {
+  width:270px;
+}
+
+.three-up td {
+  width:173px;
+}
+
+.four-up td {
+  width:125px;
+}
+
+.five-up td {
+  width:96px;
+}
+
+.six-up td {
+  width:76px;
+}
+
+.seven-up td {
+  width:62px;
+}
+
+.eight-up td {
+  width:52px;
+}
+
+/* Alignment & Visibility Classes */
+
+table.center, td.center {
+  text-align: center;
+}
+
+h1.center,
+h2.center,
+h3.center,
+h4.center,
+h5.center,
+h6.center {
+  text-align: center;
+}
+
+span.center {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+img.center {
+  margin: 0 auto;
+  float: none;
+}
+
+.show-for-small,
+.hide-for-desktop {
+  display: none;
+}
+
+/* Typography */
+
+body, table.body, h1, h2, h3, h4, h5, h6, p, td {
+  color: #222222;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: normal;
+  padding:0;
+  margin: 0;
+  text-align: left;
+  line-height: 1.3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  word-break: normal;
+}
+
+h1 {font-size: 40px;}
+h2 {font-size: 36px;}
+h3 {font-size: 32px;}
+h4 {font-size: 28px;}
+h5 {font-size: 24px;}
+h6 {font-size: 20px;}
+body, table.body, p, td {font-size: 14px;line-height:19px;}
+
+p.lead, p.lede, p.leed {
+  font-size: 18px;
+  line-height:21px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+small {
+  font-size: 10px;
+}
+
+a {
+  color: #2ba6cb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2795b6 !important;
+}
+
+a:active {
+  color: #2795b6 !important;
+}
+
+a:visited {
+  color: #2ba6cb !important;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #2ba6cb;
+}
+
+h1 a:active,
+h2 a:active,
+h3 a:active,
+h4 a:active,
+h5 a:active,
+h6 a:active {
+  color: #2ba6cb !important;
+}
+
+h1 a:visited,
+h2 a:visited,
+h3 a:visited,
+h4 a:visited,
+h5 a:visited,
+h6 a:visited {
+  color: #2ba6cb !important;
+}
+
+/* Panels */
+
+.panel {
+  background: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  padding: 10px !important;
+}
+
+.sub-grid table {
+  width: 100%;
+}
+
+.sub-grid td.sub-columns {
+  padding-bottom: 0;
+}
+
+/* Buttons */
+
+table.button,
+table.tiny-button,
+table.small-button,
+table.medium-button,
+table.large-button {
+  width: 100%;
+  overflow: hidden;
+}
+
+table.button td,
+table.tiny-button td,
+table.small-button td,
+table.medium-button td,
+table.large-button td {
+  display: block;
+  width: auto !important;
+  text-align: center;
+  background: #2ba6cb;
+  border: 1px solid #2284a1;
+  color: #ffffff;
+  padding: 8px 0;
+}
+
+table.tiny-button td {
+  padding: 5px 0 4px;
+}
+
+table.small-button td {
+  padding: 8px 0 7px;
+}
+
+table.medium-button td {
+  padding: 12px 0 10px;
+}
+
+table.large-button td {
+  padding: 21px 0 18px;
+}
+
+table.button td a,
+table.tiny-button td a,
+table.small-button td a,
+table.medium-button td a,
+table.large-button td a {
+  font-weight: bold;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+table.tiny-button td a {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+table.small-button td a {
+  font-size: 16px;
+}
+
+table.medium-button td a {
+  font-size: 20px;
+}
+
+table.large-button td a {
+  font-size: 24px;
+}
+
+table.button:hover td,
+table.button:visited td,
+table.button:active td {
+  background: #2795b6 !important;
+}
+
+table.button:hover td a,
+table.button:visited td a,
+table.button:active td a {
+  color: #fff !important;
+}
+
+table.button:hover td,
+table.tiny-button:hover td,
+table.small-button:hover td,
+table.medium-button:hover td,
+table.large-button:hover td {
+  background: #2795b6 !important;
+}
+
+table.button:hover td a,
+table.button:active td a,
+table.button td a:visited,
+table.tiny-button:hover td a,
+table.tiny-button:active td a,
+table.tiny-button td a:visited,
+table.small-button:hover td a,
+table.small-button:active td a,
+table.small-button td a:visited,
+table.medium-button:hover td a,
+table.medium-button:active td a,
+table.medium-button td a:visited,
+table.large-button:hover td a,
+table.large-button:active td a,
+table.large-button td a:visited {
+  color: #ffffff !important;
+}
+
+table.secondary td {
+  background: #e9e9e9;
+  border-color: #d0d0d0;
+  color: #555;
+}
+
+table.secondary td a {
+  color: #555;
+}
+
+table.secondary:hover td {
+  background: #d0d0d0 !important;
+  color: #555;
+}
+
+table.secondary:hover td a,
+table.secondary td a:visited,
+table.secondary:active td a {
+  color: #555 !important;
+}
+
+table.success td {
+  background: #5da423;
+  border-color: #457a1a;
+}
+
+table.success:hover td {
+  background: #457a1a !important;
+}
+
+table.alert td {
+  background: #c60f13;
+  border-color: #970b0e;
+}
+
+table.alert:hover td {
+  background: #970b0e !important;
+}
+
+table.radius td {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+table.round td {
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+}
+
+/* Outlook First */
+
+body.outlook p {
+  display: inline !important;
+}
+
+/*  Media Queries */
+
+@media only screen and (max-width: 600px) {
+
+  table[class="body"] img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  table[class="body"] center {
+    min-width: 0 !important;
+  }
+
+  table[class="body"] .container {
+    width: 95% !important;
+  }
+
+  table[class="body"] .row {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper {
+    display: block !important;
+    padding-right: 0 !important;
+  }
+
+  table[class="body"] .columns,
+  table[class="body"] .column {
+    table-layout: fixed !important;
+    float: none !important;
+    width: 100% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper.first .columns,
+  table[class="body"] .wrapper.first .column {
+    display: table !important;
+  }
+
+  table[class="body"] table.columns td,
+  table[class="body"] table.column td {
+    width: 100% !important;
+  }
+
+  table[class="body"] .columns td.one,
+  table[class="body"] .column td.one { width: 8.333333% !important; }
+  table[class="body"] .columns td.two,
+  table[class="body"] .column td.two { width: 16.666666% !important; }
+  table[class="body"] .columns td.three,
+  table[class="body"] .column td.three { width: 25% !important; }
+  table[class="body"] .columns td.four,
+  table[class="body"] .column td.four { width: 33.333333% !important; }
+  table[class="body"] .columns td.five,
+  table[class="body"] .column td.five { width: 41.666666% !important; }
+  table[class="body"] .columns td.six,
+  table[class="body"] .column td.six { width: 50% !important; }
+  table[class="body"] .columns td.seven,
+  table[class="body"] .column td.seven { width: 58.333333% !important; }
+  table[class="body"] .columns td.eight,
+  table[class="body"] .column td.eight { width: 66.666666% !important; }
+  table[class="body"] .columns td.nine,
+  table[class="body"] .column td.nine { width: 75% !important; }
+  table[class="body"] .columns td.ten,
+  table[class="body"] .column td.ten { width: 83.333333% !important; }
+  table[class="body"] .columns td.eleven,
+  table[class="body"] .column td.eleven { width: 91.666666% !important; }
+  table[class="body"] .columns td.twelve,
+  table[class="body"] .column td.twelve { width: 100% !important; }
+
+  table[class="body"] td.offset-by-one,
+  table[class="body"] td.offset-by-two,
+  table[class="body"] td.offset-by-three,
+  table[class="body"] td.offset-by-four,
+  table[class="body"] td.offset-by-five,
+  table[class="body"] td.offset-by-six,
+  table[class="body"] td.offset-by-seven,
+  table[class="body"] td.offset-by-eight,
+  table[class="body"] td.offset-by-nine,
+  table[class="body"] td.offset-by-ten,
+  table[class="body"] td.offset-by-eleven {
+    padding-left: 0 !important;
+  }
+
+  table[class="body"] table.columns td.expander {
+    width: 1px !important;
+  }
+
+  table[class="body"] .right-text-pad,
+  table[class="body"] .text-pad-right {
+    padding-left: 10px !important;
+  }
+
+  table[class="body"] .left-text-pad,
+  table[class="body"] .text-pad-left {
+    padding-right: 10px !important;
+  }
+
+  table[class="body"] .hide-for-small,
+  table[class="body"] .show-for-desktop {
+    display: none !important;
+  }
+
+  table[class="body"] .show-for-small,
+  table[class="body"] .hide-for-desktop {
+    display: inherit !important;
+  }
+}
+
+  </style>
+  <style>
+
+    table.facebook td {
+      background: #3b5998;
+      border-color: #2d4473;
     }
 
-    body{
-      width:100% !important;
-      -webkit-text-size-adjust:100%;
-      -ms-text-size-adjust:100%;
-      margin:0;
-      padding:0;
+    table.facebook:hover td {
+      background: #2d4473 !important;
     }
 
-    .ExternalClass {
-      width:100%;
+    table.twitter td {
+      background: #00acee;
+      border-color: #0087bb;
     }
 
-    .ExternalClass,
-    .ExternalClass p,
-    .ExternalClass span,
-    .ExternalClass font,
-    .ExternalClass td,
-    .ExternalClass div {
-      line-height: 100%;
+    table.twitter:hover td {
+      background: #0087bb !important;
     }
 
-    #backgroundTable {
-      margin:0;
-      padding:0;
-      width:100% !important;
-      line-height: 100% !important;
+    table.google-plus td {
+      background-color: #DB4A39;
+      border-color: #CC0000;
     }
 
-    img {
-      outline:none;
-      text-decoration:none;
-      -ms-interpolation-mode: bicubic;
-      width: auto;
-      max-width: 100%;
-      float: left;
-      clear: both;
-      display: block;
+    table.google-plus:hover td {
+      background: #CC0000 !important;
     }
 
-    center {
-      width: 100%;
-      min-width: 580px;
+    .template-label {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 11px;
     }
 
-    a img {
-      border: none;
+    .callout .wrapper {
+      padding-bottom: 20px;
     }
 
-    p {
-      margin: 0 0 0 10px;
+    .callout .panel {
+      background: #ECF8FF;
+      border-color: #b9e5ff;
     }
 
-    table {
-      border-spacing: 0;
-      border-collapse: collapse;
+    .header {
+      background: #999999;
     }
 
-    td {
-      word-break: break-word;
-      -webkit-hyphens: auto;
-      -moz-hyphens: auto;
-      hyphens: auto;
-      border-collapse: collapse !important;
+    .footer .wrapper {
+      background: #ebebeb;
     }
 
-    table, tr, td {
-      padding: 0;
-      vertical-align: top;
-      text-align: left;
-    }
-
-    hr {
-      color: #d9d9d9;
-      background-color: #d9d9d9;
-      height: 1px;
-      border: none;
-    }
-
-    /* Responsive Grid */
-
-    table.body {
-      height: 100%;
-      width: 100%;
-    }
-
-    table.container {
-      width: 580px;
-      margin: 0 auto;
-      text-align: inherit;
-    }
-
-    table.row {
-      padding: 0px;
-      width: 100%;
-      position: relative;
-    }
-
-    table.container table.row {
-      display: block;
-    }
-
-    td.wrapper {
-      padding: 10px 20px 0px 0px;
-      position: relative;
-    }
-
-    table.columns,
-    table.column {
-      margin: 0 auto;
-    }
-
-    table.columns td,
-    table.column td {
-      padding: 0px 0px 10px;
-    }
-
-    table.columns td.sub-columns,
-    table.column td.sub-columns,
-    table.columns td.sub-column,
-    table.column td.sub-column {
-      padding-right: 10px;
-    }
-
-    td.sub-column, td.sub-columns {
-      min-width: 0px;
-    }
-
-    table.row td.last,
-    table.container td.last {
-      padding-right: 0px;
-    }
-
-    table.one { width: 30px; }
-    table.two { width: 80px; }
-    table.three { width: 130px; }
-    table.four { width: 180px; }
-    table.five { width: 230px; }
-    table.six { width: 280px; }
-    table.seven { width: 330px; }
-    table.eight { width: 380px; }
-    table.nine { width: 430px; }
-    table.ten { width: 480px; }
-    table.eleven { width: 530px; }
-    table.twelve { width: 580px; }
-
-    table.one center { min-width: 30px; }
-    table.two center { min-width: 80px; }
-    table.three center { min-width: 130px; }
-    table.four center { min-width: 180px; }
-    table.five center { min-width: 230px; }
-    table.six center { min-width: 280px; }
-    table.seven center { min-width: 330px; }
-    table.eight center { min-width: 380px; }
-    table.nine center { min-width: 430px; }
-    table.ten center { min-width: 480px; }
-    table.eleven center { min-width: 530px; }
-    table.twelve center { min-width: 580px; }
-
-    .body .columns td.one,
-    .body .column td.one, { width: 8.333333% !important; }
-    .body .columns td.two,
-    .body .column td.two { width: 16.666666% !important; }
-    .body .columns td.three,
-    .body .column td.three { width: 25% !important; }
-    .body .columns td.four,
-    .body .column td.four { width: 33.333333% !important; }
-    .body .columns td.five,
-    .body .column td.five { width: 41.666666% !important; }
-    .body .columns td.six,
-    .body .column td.six { width: 50% !important; }
-    .body .columns td.seven,
-    .body .column td.seven { width: 58.333333% !important; }
-    .body .columns td.eight,
-    .body .column td.eight { width: 66.666666% !important; }
-    .body .columns td.nine,
-    .body .column td.nine { width: 75% !important; }
-    .body .columns td.ten,
-    .body .column td.ten { width: 83.333333% !important; }
-    .body .columns td.eleven,
-    .body .column td.eleven { width: 91.666666% !important; }
-    .body .columns td.twelve,
-    .body .column td.twelve { width: 100% !important; }
-
-    td.offset-by-one { padding-left: 50px; }
-    td.offset-by-two { padding-left: 100px; }
-    td.offset-by-three { padding-left: 150px; }
-    td.offset-by-four { padding-left: 200px; }
-    td.offset-by-five { padding-left: 250px; }
-    td.offset-by-six { padding-left: 300px; }
-    td.offset-by-seven { padding-left: 350px; }
-    td.offset-by-eight { padding-left: 400px; }
-    td.offset-by-nine { padding-left: 450px; }
-    td.offset-by-ten { padding-left: 500px; }
-    td.offset-by-eleven { padding-left: 550px; }
-
-    td.sub-offset-by-one { padding-left: 5.172413% !important; }
-    td.sub-offset-by-two { padding-left: 13.793102% !important; }
-    td.sub-offset-by-three { padding-left: 22.413791% !important; }
-    td.sub-offset-by-four { padding-left: 31.034480% !important; }
-    td.sub-offset-by-five { padding-left: 39.655169% !important; }
-    td.sub-offset-by-six { padding-left: 48.275858% !important; }
-    td.sub-offset-by-seven { padding-left: 56.896547% !important; }
-    td.sub-offset-by-eight { padding-left: 65.517236% !important; }
-    td.sub-offset-by-nine { padding-left: 74.137925% !important; }
-    td.sub-offset-by-ten { padding-left: 82.758614% !important; }
-    td.sub-offset-by-eleven { padding-left: 91.379303% !important; }
-
-    td.expander {
-      visibility: hidden;
-      width: 0px;
-      padding: 0 !important;
-    }
-
-    table.columns .text-pad,
-    table.column .text-pad {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-
-    table.columns .left-text-pad,
-    table.columns .text-pad-left,
-    table.column .left-text-pad,
-    table.column .text-pad-left {
-      padding-left: 10px;
-    }
-
-    table.columns .right-text-pad,
-    table.columns .text-pad-right,
-    table.column .right-text-pad,
-    table.column .text-pad-right {
-      padding-right: 10px;
-    }
-
-    /* Block Grid */
-
-    .block-grid {
-      width: 100%;
-      max-width: 580px;
-    }
-
-    .block-grid td {
-      display: inline-block;
-      padding:10px;
-    }
-
-    .two-up td {
-      width:270px;
-    }
-
-    .three-up td {
-      width:173px;
-    }
-
-    .four-up td {
-      width:125px;
-    }
-
-    .five-up td {
-      width:96px;
-    }
-
-    .six-up td {
-      width:76px;
-    }
-
-    .seven-up td {
-      width:62px;
-    }
-
-    .eight-up td {
-      width:52px;
-    }
-
-    /* Alignment & Visibility Classes */
-
-    table.center, td.center {
-      text-align: center;
-    }
-
-    h1.center,
-    h2.center,
-    h3.center,
-    h4.center,
-    h5.center,
-    h6.center {
-      text-align: center;
-    }
-
-    span.center {
-      display: block;
-      width: 100%;
-      text-align: center;
-    }
-
-    img.center {
-      margin: 0 auto;
-      float: none;
-    }
-
-    .show-for-small,
-    .hide-for-desktop {
-      display: none;
-    }
-
-    /* Typography */
-
-    body, table.body, h1, h2, h3, h4, h5, h6, p {
-      color: #222222;
-      font-family: "Helvetica", "Arial", sans-serif;
-      font-weight: normal;
-      padding:0;
-      margin: 0;
-      text-align: left;
-      line-height: 1.3;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      word-break: normal;
-    }
-
-    h1 {font-size: 40px;}
-    h2 {font-size: 36px;}
-    h3 {font-size: 32px;}
-    h4 {font-size: 28px;}
-    h5 {font-size: 24px;}
-    h6 {font-size: 20px;}
-    body, table.body, p {font-size: 14px;line-height:19px;}
-
-    p {
+    .footer h5 {
       padding-bottom: 10px;
     }
 
-    small {
-      font-size: 10px;
+    table.columns .text-pad {
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
-    a {
-      color: #2ba6cb;
-      text-decoration: none;
+    table.columns .left-text-pad {
+      padding-left: 10px;
     }
 
-    a:hover {
-      color: #2795b6 !important;
+    table.columns .right-text-pad {
+      padding-right: 10px;
     }
-
-    a:active {
-      color: #2795b6 !important;
-    }
-
-    a:visited {
-      color: #2ba6cb !important;
-    }
-
-    h1 a,
-    h2 a,
-    h3 a,
-    h4 a,
-    h5 a,
-    h6 a {
-      color: #2ba6cb;
-    }
-
-    h1 a:active,
-    h2 a:active,
-    h3 a:active,
-    h4 a:active,
-    h5 a:active,
-    h6 a:active {
-      color: #2ba6cb !important;
-    }
-
-    h1 a:visited,
-    h2 a:visited,
-    h3 a:visited,
-    h4 a:visited,
-    h5 a:visited,
-    h6 a:visited {
-      color: #2ba6cb !important;
-    }
-
-    /* Panels */
-
-    td.panel {
-      background: #f2f2f2;
-      border: 1px solid #d9d9d9;
-      padding: 10px !important;
-    }
-
-    /* Buttons */
-
-    table.button,
-    table.tiny-button,
-    table.small-button,
-    table.medium-button,
-    table.large-button {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    table.button td,
-    table.tiny-button td,
-    table.small-button td,
-    table.medium-button td,
-    table.large-button td {
-      display: block;
-      width: auto !important;
-      text-align: center;
-      background: #2ba6cb;
-      border: 1px solid #2284a1;
-      color: #ffffff;
-      padding: 8px 0;
-    }
-
-    table.tiny-button td {
-      padding: 5px 0 4px;
-    }
-
-    table.small-button td {
-      padding: 8px 0 7px;
-    }
-
-    table.medium-button td {
-      padding: 12px 0 10px;
-    }
-
-    table.large-button td {
-      padding: 21px 0 18px;
-    }
-
-    table.button td a,
-    table.tiny-button td a,
-    table.small-button td a,
-    table.medium-button td a,
-    table.large-button td a {
-      font-weight: bold;
-      text-decoration: none;
-      font-family: Helvetica, Arial, sans-serif;
-      color: #ffffff;
-      font-size: 16px;
-    }
-
-    table.tiny-button td a {
-      font-size: 12px;
-      font-weight: normal;
-    }
-
-    table.small-button td a {
-      font-size: 16px;
-    }
-
-    table.medium-button td a {
-      font-size: 20px;
-    }
-
-    table.large-button td a {
-      font-size: 24px;
-    }
-
-    table.button:hover td,
-    table.button:visited td,
-    table.button:active td {
-      background: #2795b6 !important;
-    }
-
-    table.button:hover td a,
-    table.button:visited td a,
-    table.button:active td a {
-      color: #fff !important;
-    }
-
-    table.button:hover td,
-    table.tiny-button:hover td,
-    table.small-button:hover td,
-    table.medium-button:hover td,
-    table.large-button:hover td {
-      background: #2795b6 !important;
-    }
-
-    table.button:hover td a,
-    table.button:active td a,
-    table.button td a:visited,
-    table.tiny-button:hover td a,
-    table.tiny-button:active td a,
-    table.tiny-button td a:visited,
-    table.small-button:hover td a,
-    table.small-button:active td a,
-    table.small-button td a:visited,
-    table.medium-button:hover td a,
-    table.medium-button:active td a,
-    table.medium-button td a:visited,
-    table.large-button:hover td a,
-    table.large-button:active td a,
-    table.large-button td a:visited {
-      color: #ffffff !important;
-    }
-
-    table.secondary td {
-      background: #e9e9e9;
-      border-color: #d0d0d0;
-      color: #555;
-    }
-
-    table.secondary td a {
-      color: #555;
-    }
-
-    table.secondary:hover td {
-      background: #d0d0d0 !important;
-      color: #555;
-    }
-
-    table.secondary:hover td a,
-    table.secondary td a:visited,
-    table.secondary:active td a {
-      color: #555 !important;
-    }
-
-    table.success td {
-      background: #5da423;
-      border-color: #457a1a;
-    }
-
-    table.success:hover td {
-      background: #457a1a !important;
-    }
-
-    table.alert td {
-      background: #c60f13;
-      border-color: #970b0e;
-    }
-
-    table.alert:hover td {
-      background: #970b0e !important;
-    }
-
-    table.radius td {
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      border-radius: 3px;
-    }
-
-    table.round td {
-      -webkit-border-radius: 500px;
-      -moz-border-radius: 500px;
-      border-radius: 500px;
-    }
-
-    /* Outlook First */
-
-    body.outlook p {
-      display: inline !important;
-    }
-
-    /*  Media Queries */
 
     @media only screen and (max-width: 600px) {
 
-      table[class="body"] img {
-        width: auto !important;
-        height: auto !important;
-      }
-
-      table[class="body"] center {
-        min-width: 0 !important;
-      }
-
-      table[class="body"] .container {
-        width: 95% !important;
-      }
-
-      table[class="body"] .row {
-        width: 100% !important;
-        display: block !important;
-      }
-
-      table[class="body"] .wrapper {
-        display: block !important;
-        padding-right: 0 !important;
-      }
-
-      table[class="body"] .columns,
-      table[class="body"] .column {
-        table-layout: fixed !important;
-        float: none !important;
-        width: 100% !important;
-        padding-right: 0px !important;
-        padding-left: 0px !important;
-        display: block !important;
-      }
-
-      table[class="body"] .wrapper.first .columns,
-      table[class="body"] .wrapper.first .column {
-        display: table !important;
-      }
-
-      table[class="body"] table.columns td,
-      table[class="body"] table.column td {
-        width: 100% !important;
-      }
-
-      table[class="body"] td.offset-by-one,
-      table[class="body"] td.offset-by-two,
-      table[class="body"] td.offset-by-three,
-      table[class="body"] td.offset-by-four,
-      table[class="body"] td.offset-by-five,
-      table[class="body"] td.offset-by-six,
-      table[class="body"] td.offset-by-seven,
-      table[class="body"] td.offset-by-eight,
-      table[class="body"] td.offset-by-nine,
-      table[class="body"] td.offset-by-ten,
-      table[class="body"] td.offset-by-eleven {
-        padding-left: 0 !important;
-      }
-
-      table[class="body"] .expander {
-        width: 9999px !important;
-      }
-
-      table[class="body"] .right-text-pad,
-      table[class="body"] .text-pad-right {
+      table[class="body"] .right-text-pad {
         padding-left: 10px !important;
       }
 
-      table[class="body"] .left-text-pad,
-      table[class="body"] .text-pad-left {
+      table[class="body"] .left-text-pad {
         padding-right: 10px !important;
-      }
-
-      table[class="body"] .hide-for-small,
-      table[class="body"] .show-for-desktop {
-        display: none !important;
-      }
-
-      table[class="body"] .show-for-small,
-      table[class="body"] .hide-for-desktop {
-        display: inherit !important;
       }
     }
 
-      </style>
-      <style type="text/css">
+  </style>
+  <style type="text/css">
+    /* Theme styles Settable at the backend*/
+    .optyn-introduction{
+      background-color: #399;
+    }
 
-        table.facebook td {
-          background: #3b5998;
-          border-color: #2d4473;
-        }
+    .optyn-introduction .optyn-headline{
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
 
-        table.facebook:hover td {
-          background: #2d4473 !important;
-        }
+    .optyn-content{
+      background-color: #fff;
+    }
+    .optyn-content .sidebar-container{
+      background-color: #C9C9C9;
+    }
+    .optyn-content .sidebar-container .optyn-sidebar .optyn-paragraph{
+      color: #000;
+    }
 
-        table.twitter td {
-          background: #00acee;
-          border-color: #0087bb;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar .optyn-paragraph p{
+      color: #000;
+    }
 
-        table.twitter:hover td {
-          background: #0087bb !important;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar .optyn-headline{
+      color: #000;
+    }
 
-        table.google-plus td {
-          background-color: #DB4A39;
-          border-color: #CC0000;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link{
+      color: #000;
+    }
 
-        table.google-plus:hover td {
-          background: #CC0000 !important;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:hover{
+      color: #000;
+    }
 
-        .template-label {
-          color: #ffffff;
-          font-weight: bold;
-          font-size: 11px;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:active{
+      color: #000;
+    }
 
-        .callout .panel {
-          background: #ECF8FF;
-          border-color: #b9e5ff;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:visited{
+      color: #000;
+    }
 
-        .header {
-          background: #999999;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link{
+      text-decoration:none;
+      color: white;
+      background-color: #64aaef;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;border-radius: 0;
+      font: normal 16px/25px 'Open Sans', sans-serif;
+      letter-spacing: 1px;
+      border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+      -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      padding: 3px 10px;
+      display: inline-block;
+      margin-top: 15px;
+    }
 
-        .footer .wrapper {
-          background: #ebebeb;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:hover{
+      color: white;
+      background-color: #64aaef;
+    }
 
-        .footer h5 {
-          padding-bottom: 10px;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:active{
+      color: white;
+      background-color: #64aaef;
+    }
 
-        table.columns .text-pad {
-          padding-left: 10px;
-          padding-right: 10px;
-        }
+    .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:visited{
+      color: white;
+      background-color: #64aaef;
+    }
 
-        table.columns .left-text-pad {
-          padding-left: 10px;
-        }
+    .optyn-content .optyn-paragraph{
+      color: #000;
+    }
 
-        table.columns .right-text-pad {
-          padding-right: 10px;
-        }
+    .optyn-content .optyn-paragraph p{
+      color: #000;
+    }
 
-        @media only screen and (max-width: 600px) {
+    .optyn-content .optyn-headline{
+      color: #000;
+    }
 
-          table[class="body"] .right-text-pad {
-            padding-left: 10px !important;
-          }
+    .optyn-content a.optyn-link {
+      color: #2ba6cb;
+      text-decoration: none;
+    }
 
-          table[class="body"] .left-text-pad {
-            padding-right: 10px !important;
-          }
-        }
-    </style>
-    <style type="text/css" media="screen">
-      .with-sidebar table.body, p{
-        line-height: normal;
-      }
+    .optyn-content a.optyn-link:hover {
+      color: #2795b6 !important;
+    }
 
-      .sidebar-main-content td{
-        width: 410px;
-      }
+    .optyn-content a.optyn-link:active {
+      color: #2795b6 !important;
+    }
 
-      .sidebar-main-content .two-up td{
-        width: 183px;
-      }
+    .optyn-content a.optyn-link:visited {
+      color: #2ba6cb !important;
+    }
 
-      /* Theme styles */
-      .optyn-introduction{
-        background-color: #399;
-      }
+    .optyn-content a.optyn-button-link{
+      text-decoration:none;
+      color: white;
+      background-color: #64aaef;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;border-radius: 0;
+      font: normal 16px/25px 'Open Sans', sans-serif;
+      letter-spacing: 1px;
+      border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+      -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      padding: 3px 10px;
+      display: inline-block;
+      margin-top: 15px;
+    }
 
-      .optyn-introduction .optyn-headline{
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      }
+    .optyn-content a.optyn-button-link:hover{
+      color: white;
+      background-color: #64aaef;
+    }
 
-      .optyn-content{
-        background-color: #fff;
-      }
-      .optyn-content .sidebar-container{
-        background-color: #C9C9C9;
-      }
-      .optyn-content .sidebar-container .optyn-sidebar .optyn-paragraph{
-        color: #000;
-      }
+    .optyn-content a.optyn-button-link:visited{
+      color: white;
+      background-color: #64aaef;
+    }
 
-      .optyn-content .sidebar-container .optyn-sidebar .optyn-paragraph p{
-        color: #000;
-      }
+    .optyn-content a.optyn-button-link:active{
+      color: white;
+      background-color: #64aaef;
+    }
+  </style>
+  <style type="text/css">
+    /* Custom styles for the template */
+    .body .container .block-grid td{display: table-cell;}
+    td.sidebar{ width: 193px;}
+    td.main-area{width: 387px;}
+    .w387{width: 387px;}
+    .w367{width: 367px;}
+    .w193{width: 193px;}
+    .w173{width: 173px;}
+    .w183{width: 183px;}
+    .w580{width: 580px;}
+    .w168{width: 168px;}
+    .w178{width: 178px;}
+    .w10{width: 10px;}
 
-      .optyn-content .sidebar-container .optyn-sidebar .optyn-headline{
-        color: #000;
-      }
+    .h10{height: 10px;}
 
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-link{
-        color: #000;
-      }
+    .optyn-division {
+      float: none;
+      clear: both;
+      -webkit-transition: background 1s ease;
+         -moz-transition: background 1s ease;
+           -o-transition: background 1s ease;
+              transition: background 1s ease;
+    }
+    .recently-added-division { background: #ff9; }
+    td.optyn-introduction{width: 580px;}
+    .no-pad {padding: 0 !important;}
+    img{height: auto;}
+    .text-pad-10{padding: 10px;}
+    h2 { font-size: 16px; font-weight: bold; }
+    blockquote,
+    blockquote p { font-style: italic; font-size: 16px; }
+    .sidebar-container .optyn-paragraph { font-size: 13px; }
+    .sidebar-container h2 { font-size: 16px; }
+    .sidebar-container h3 {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
+    .optyn-footer {
+      background: transparent;
+      background: rgba(255,255,255,0.3);
+    }
+    .optyn-footer .optyn-paragraph {
+      text-align: center;
+      font-size: 11px;
+      line-height: 18px;
+      color: #333;
+      color: rgba(0,0,0,0.7);
+      padding: 0;
+    }
+    .optyn-footer a {
+      color: #555;
+      color: rgba(0,0,0,0.5);
+    }
+    .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+    .block-grid.optyn-division .half-left-image,
+    .block-grid.optyn-division .half-right-image { padding-top: 0; }
+    .half-left-image > .w193 { float: left; }
+    .half-right-image > .w193 { float: right; }
 
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:hover{
-        color: #000;
-      }
+    div.separator {line-height: 5px !important; font-size: 5px; height: 5px;}
+    div.separator-10px {line-height: 10px !important; font-size: 10px; height: 10px;}
+    .img-gallery-content img { float: none; }
 
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:active{
-        color: #000;
-      }
+    @media only screen and (max-width: 600px) {
+      /*table[class="body"] .block-grid td{display: block !important;}*/
 
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-link:visited{
-        color: #000;
-      }
-
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link{
-        text-decoration:none;
-        color: white;
-        background-color: #64aaef;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;border-radius: 0;
-        font: normal 16px/25px 'Open Sans', sans-serif;
-        letter-spacing: 1px;
-        border-bottom: solid 2px rgba(0, 0, 0, 0.2);
-        -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        padding: 3px 10px;
-        display: inline-block;
-        margin-top: 15px;
-      }
-
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:hover{
-        color: white;
-        background-color: #64aaef;
-      }
-
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:active{
-        color: white;
-        background-color: #64aaef;
-      }
-
-      .optyn-content .sidebar-container .optyn-sidebar a.optyn-button-link:visited{
-        color: white;
-        background-color: #64aaef;
-      }
-
-      .optyn-content .optyn-paragraph{
-        color: #000;
-      }
-
-      .optyn-content .optyn-paragraph p{
-        color: #000;
-      }
-
-      .optyn-content .optyn-headline{
-        color: #000;
-      }
-      
-      .optyn-content a.optyn-link {
-        color: #2ba6cb; 
-        text-decoration: none;
-      }
-
-      .optyn-content a.optyn-link:hover { 
-        color: #2795b6 !important;
-      }
-
-      .optyn-content a.optyn-link:active { 
-        color: #2795b6 !important;
-      }
-
-      .optyn-content a.optyn-link:visited { 
-        color: #2ba6cb !important;
-      }
-
-      .optyn-content a.optyn-button-link{
-        text-decoration:none;
-        color: white;
-        background-color: #64aaef;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;border-radius: 0;
-        font: normal 16px/25px 'Open Sans', sans-serif;
-        letter-spacing: 1px;
-        border-bottom: solid 2px rgba(0, 0, 0, 0.2);
-        -webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        padding: 3px 10px;
-        display: inline-block;
-        margin-top: 15px;
-      }
-
-      .optyn-content a.optyn-button-link:hover{
-        color: white;
-        background-color: #64aaef;
-      }
-
-      .optyn-content a.optyn-button-link:visited{
-        color: white;
-        background-color: #64aaef;
-      }
-
-      .optyn-content a.optyn-button-link:active{
-        color: white;
-        background-color: #64aaef;
-      }
-
-      /* Custom styles */
-      .body { min-width: 300px; }
-      .body > tbody > tr > td { padding: 2%; }
-      .sidebar-main-content { width: 410px; }
-      h2 { font-size: 16px; font-weight: bold; }
-      img { height: auto; }
-      .text-pad-10 { padding: 0 10px; }
-      .no-pad { padding: 0 !important; }
-      .optyn-headline { margin: 7px 0; }
-      blockquote,
-      blockquote p { font-style: italic; font-size: 16px; }
-      .optyn-replaceable-image { border: 0; }
-      .sidebar-container .optyn-paragraph { font-size: 13px; }
-      .sidebar-container h2 { font-size: 16px; }
-      .sidebar-container h3 {
-        font-size: 14px;
-        font-weight: bold;
-      }
-      .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
-      .with-sidebar .sidebar-container .optyn-replaceable-image,
-      .with-sidebar .sidebar-container img { width: 150px; }
-      .optyn-footer {
-        padding: 15px 0;
-        background: transparent;
-        background: rgba(255,255,255,0.3);
-      }
-      .optyn-footer .optyn-pargraph {
-        text-align: center;
-        font-size: 11px;
-        line-height: 18px;
-        color: #333;
-        color: rgba(0,0,0,0.7);
-        padding: 0;
-      }
-      .optyn-footer a {
-        color: #555;
-        color: rgba(0,0,0,0.5);
-      }
-      .optyn-footer .optyn-pargraph a { text-decoration: underline; }
-      .optyn-replaceable-image img { float: none; }
-      .body .optyn-intro { width: 580px; padding: 0; }
-      .optyn-intro .optyn-replaceable-image { display: table; }
-      .body .optyn-introduction .optyn-replaceable-image img { max-width: 580px; }
-      .with-sidebar .text-pad-10 { padding: 0 10px !important; }
-      .with-sidebar .text-pad-10:last-child { padding-bottom: 10px !important; }
-      .with-sidebar .full-image .optyn-replaceable-image img{ width: 390px; margin-top: 10px; }
-      .with-sidebar .half-left-image .optyn-replaceable-image,
-      .with-sidebar .half-right-image .optyn-replaceable-image {
-        width: 48%;
-      }
-      .with-sidebar .half-left-image .optyn-replaceable-image img,
-      .with-sidebar .half-right-image .optyn-replaceable-image img {
-        width: 100%;
-      }
-      .with-sidebar .half-left-image .optyn-replaceable-image {
-        float: left;
-        margin:0 2% 10px 0;
-      }
-      .with-sidebar .half-right-image .optyn-replaceable-image {
-        float: right;
-        margin:0 0 10px 2%;
-      }
-      .with-sidebar .third-image .optyn-replaceable-image img { margin-bottom: 10px; }
-      .with-sidebar td.third-image,
-      .with-sidebar .third-image .optyn-replaceable-image img{
-        width: 183px;
-        max-width: none !important;
-      }
-      .with-sidebar .sidebar-container .optyn-replaceable-image { margin: 5px 0; }
-      .optyn-division {
-        padding-top: 5px;
-        float: none;
-        clear: both;
-        -webkit-transition: all 1s ease;
-           -moz-transition: all 1s ease;
-             -o-transition: all 1s ease;
-                transition: all 1s ease;
-      }
-      .recently-added-division {
-        background: #ff9;
-      }
-
-      @media only screen and (max-width: 600px) {
         table[class="body"] table.container .block-grid td {
-          /*width: 95% !important; this is ink default */
-          width: 280px !important;
-        }
-        table[class="body"] table.container {
           width: 300px !important;
         }
-        table[class="body"] table.container .wrapper { width: 280px; }
-        table[class="body"] table.container .sidebar-container { padding: 10px !important; }
-        table[class="body"] .sidebar-main-content { width: 300px !important; }
-        table[class="body"] .optyn-intro { width: 100% !important; }
-        .with-sidebar table[class="body"] .full-image,
-        .with-sidebar table[class="body"] .sidebar-container .optyn-replaceable-image,
-        .with-sidebar table[class="body"] .sidebar-container .optyn-replaceable-image img,
-        .with-sidebar table[class="body"] .full-image .optyn-replaceable-image img { width: 280px !important; }
-        .with-sidebar table[class="body"] .half-left-image .optyn-replaceable-image,
-        .with-sidebar table[class="body"] .half-right-image .optyn-replaceable-image {
-          width: 280px !important;
-          float: none !important;
-          margin: 0 0 10px 0 !important;
+        table[class="body"] .optyn-introduction .optyn-replaceable-image img {
+          width: auto !important;
+          max-width: 300px !important;
+          height: auto;
         }
-        .with-sidebar table[class="body"] .half-left-image .optyn-replaceable-image img,
-        .with-sidebar table[class="body"] .half-right-image .optyn-replaceable-image img {
+        table[class="body"] table.container td.w10 { width: 10px !important; }
+        table[class="body"] td.sidebar,
+        table[class="body"] td.main-area,
+        table[class="body"] table.container,
+        table[class="body"] .w580,
+        table[class="body"] .w193,
+        table[class="body"] .w387{ width: 300px !important; }
+        table[class="body"] td.sidebar,
+        table[class="body"] td.main-area,
+        table[class="body"] table.container { display: block !important; }
+
+        table[class="body"] .w173,
+        table[class="body"] .two-column-content .w168,
+        table[class="body"] table.container .block-grid td.w173,
+        table[class="body"] table.container .block-grid .w178,
+        table[class="body"] table.container .block-grid .w183,
+        table[class="body"] .w193,
+        table[class="body"] .w367,
+        table[class="body"] table.container .block-grid td.w367{ width: 280px !important; }
+
+        table[class="body"] table.container .block-grid.img-gallery-content .optyn-replaceable-image {
           width: 280px !important;
+          padding: 0 0 10px 0 !important;
+          display: block !important;
         }
-        .with-sidebar table[class="body"] .third-image .optyn-replaceable-image{ width: auto !important; }
-        .with-sidebar table[class="body"] .third-image .optyn-replaceable-image img { width: 280px !important; }
-        .with-sidebar table[class="body"] .optyn-introduction .optyn-replaceable-image img { max-width: 300px !important; }
-        .with-sidebar table[class="body"] td.wrapper.last { padding: 0; }
-        table[class="body"] .optyn-footer td.no-pad { padding: 10px !important; }
+        table[class="body"] table.container .block-grid.img-gallery-content .w178.no-pad.rpad10l { padding: 0 0 0 10px !important;}
+        table[class="body"] table.container .block-grid td.w168 {width: 280px !important; padding: 0 10px !important; display: block !important;}
+
+        table[class="body"] .two-column-content,
+        table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
+        table[class="body"] .two-column-content .w168,
+        table[class="body"] table.container .optyn-container .block-grid.img-gallery-content td {display: inline-block !important; }
+        table[class="body"] table.container .block-grid.two-column-content td.w168 { padding-top: 10px !important; }
+        table[class="body"] .two-column-content .w10 {display: none !important;}
+        table[class="body"] .footer-text-td div { padding: 0 10px !important;}
+
+        table[class="body"] .half-left-image .optyn-replaceable-image img,
+        table[class="body"] .half-right-image .optyn-replaceable-image img { padding-bottom: 10px !important;}
+        table[class="body"] .container .block-grid .half-left-image,
+        table[class="body"] .container .block-grid .half-right-image { width: 280px !important; }
+        table[class="body"] .half-left-image .w193,
+        table[class="body"] .half-right-image .w193 { float: none !important; }
       }  /* End media query. */
 
-    </style>
+  </style>
+
+  <!--[if gte mso 9]>
+  <style>
+    .h10{height: 10px !important;}
+  </style>
+  <![endif]-->
+
 </head>
-<body id="flat" class="with-sidebar">
+<body id="flat">
   <table class="body">
     <tr>
-      <td class="center" align="center" valign="top" style="padding: 2%;">
+      <td class="center text-pad-10" align="center" valign="top">
         <center>
-          <container type="introduction">
-            <table class="container">
-              <tr>
-                <td>
-                  <row>
-                    <div>
-                      <grid type="introduction">
-                        <table class="block-grid">
-                          <tr>
-                            <td class="no-pad center optyn-intro-cont">
+          <table class="container" width="580">
+            <tr>
+              <td width="580" class="w580">
+
+                <table class="block-grid header-social w580" width="580">
+                  <tr>
+                    <td align="right">
+                      <table width="560" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td class="empty no-pad" align="right" width="400"></td>
+                          <td class="link no-pad" align="right" width="80">
+                            <fbshare shareurl = "http://www.optyn.com/">
+                              <div style="">
+                                <img alt="Icon-facebook" width="25" height="25" src="http://localhost:3000/assets/icon-facebook.png" style="vertical-align:middle;"> Share
+                              </div>
+                            </fbshare>
+                          </td>
+                          <td class="link no-pad" align="right" width="80">
+                            <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
+                              <div style="">
+                                <img alt="Icon-twitter" width="25" height="25" src="http://localhost:3000/assets/icon-twitter.png" style="vertical-align:middle;"> Tweet
+                              </div>
+                            </twittershare>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <container type="introduction">
+                  <table class="block-grid w580" width="580">
+                    <row>
+                      <tr>
+                        <grid type="introduction">
+                            <td width="580" class="w580 no-pad center">
                               <division type="introduction">
-                                <div class="optyn-intro">
+                                <div>
                                   <img width="580" src="http://placehold.it/580x100" alt="" />
                                 </div>
                               </division>
                             </td>
-                          </tr>
-                        </table>
-                      </grid>
-                    </div>
-                    </row>
-                  </td>
-                </tr>
-              </table>
-            </container>
-
-          <container type="content">
-            <table class="container">
-              <tr>
-                <td class="outermost-container main-content">
-                  <row>
-                    <table class="row">
-                      <tr>
-                        <td class="wrapper sidebar-container text-pad-10">
-                          <grid type="sidebar">
-                            <div>
-                              <division type="full_text">
-                                <div class="no-pad">
-                                  <headline>
-                                    <h3 class="headline">A Division of Text</h3>
-                                  </headline>
-                                  <paragraph>
-                                    <div class="paragraph">A distinct piece of writing.</div>
-                                  </paragraph>
-                                </div>
-                              </division>
-
-                              <division type="text_with_full_image">
-                                <div>
-                                  <headline>
-                                    <h3 class="headline">Text with Full Image</h3>
-                                  </headline>
-                                  <paragraph>
-                                    <div class="paragraph">Image caption here.</div>
-                                    <image>
-                                      <img src="http://placehold.it/280x200/aaa/555" width="150" />
-                                    </image>
-                                  </paragraph>
-                                </div>
-                              </division>
-                            </div>
                           </grid>
-                        </td>
-                        <td class="wrapper last no-pad">
-                          <grid type="content">
-                            <table class="block-grid sidebar-main-content">
-                              <tr>
-                                <td class="no-pad">
-                                  <division type="full_text">
-                                    <div class="text-pad-10">
-                                      <headline>
-                                        <h2 class="headline">A Division of Text</h2>
-                                      </headline>
-                                      <paragraph>
-                                        <div class="paragraph">A distinct piece of writing.</div>
-                                      </paragraph>
-                                    </div>
-                                  </division>
+                        </tr>
+                      </row>
+                    </table>
+                </container>
 
-                                  <division type="text_with_full_image" class="full-image">
-                                    <div class="full-image text-pad-10">
-                                      <headline>
-                                        <h2 class="headline">Text With Full Width Image</h2>
-                                      </headline>
-                                      <paragraph>
-                                        <div class="paragraph">Image caption here.</div>
-                                      </paragraph>
+
+                <container type="content">
+                  <table>
+                    <row>
+                      <tr>
+                        <grid type="sidebar">
+                          <td width="193" class="w193 sidebar sidebar-container">
+                            <division type="full_text">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="173" class="w173 no-pad">
+                                    <headline>
+                                      <h3 class="headline">A Division of Text</h3>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_full_image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="173" class="w173 full-image no-pad">
+                                    <headline>
+                                      <h3 class="headline">Text with Full Image</h3>
+                                    </headline>
+                                    <paragraph>
+                                      <div class="paragraph">
+                                        Image caption here.
+                                      </div>
+                                      <div class="separator"></div>
                                       <image>
-                                        <img width="306" src="http://placehold.it/580x350" alt="" />
+                                        <img src="http://placehold.it/300x300/aaa/555" width="173" class="w173" />
                                       </image>
-                                    </div>
-                                  </division>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                          </td>
+                        </grid>
 
-                                  <division type="two_columns">
-                                    <table class="block-grid two-up">
+                        <grid type="content">
+                          <td width="387" class="w387 main-area sidebar-main-content">
+                            <division type="full_text">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="367" class="w367 no-pad">
+                                    <headline>
+                                      <h2 class="headline">A Division of Text</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_full_image" class="full-image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="367" class="w367 full-image">
+                                    <headline>
+                                      <h2 class="headline">Text With Full Width Image</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div class="paragraph">Image caption here.</div>
+                                    </paragraph>
+                                    <div class="separator"></div>
+                                    <image>
+                                       <img width="367" class="w367" src="http://placehold.it/367x200" alt="" />
+                                    </image>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="two_columns">
+                              <table class="block-grid two-column-content">
+                                <tr>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="168" class="w168 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 1 Heading</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div>Column 1 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dolorum ea excepturi consectetur omnis qui labore a accusantium aspernatur vel. Repellendus, natus, iste maxime eveniet at vero mollitia quia exercitationem!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td width="168" class="w168 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Column 2 Heading</h2>
+                                    </headline>
+                                    <div class="separator-10px"></div>
+                                    <paragraph>
+                                      <div>Column 2 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, non vero iusto natus ipsum assumenda corporis harum. Reiciendis, eum, facilis odit laborum natus vel voluptate totam iusto. Nihil, assumenda, corrupti!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td width="10" class="w10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="5" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_left_image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td width="367" class="w367 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Text with Left Image</h2>
+                                    </headline>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td class="half-left-image no-pad" width="367" class="w367">
+                                    <table class="w193" cellspacing="0" cellpadding="0" align="left" width="193">
                                       <tr>
-                                        <td>
-                                          <headline>
-                                            <h2 class="headline">Column 1 Heading</h2>
-                                          </headline>
-                                          <paragraph>
-                                            <div>Column 1 description</div>
-                                          </paragraph>
-                                        </td><td>
-                                          <headline>
-                                            <h2 class="headline">Column 2 Heading</h2>
-                                          </headline>
-                                          <paragraph>
-                                            <div>Column 2 description</div>
-                                          </paragraph>
+                                        <td class="w183 no-pad" width="183">
+                                          <image>
+                                            <img src="http://placehold.it/300x200" alt="" class="w183" width="183" />
+                                          </image>
+                                        </td>
+                                        <td class="w10 no-pad" width="10"></td>
+                                      </tr>
+                                    </table>
+                                    <paragraph>
+                                      <div align="left">Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+
+                            <division type="text_with_right_image">
+                              <table class="block-grid">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td width="367" class="w367 no-pad">
+                                    <headline>
+                                      <h2 class="headline">Text with Right Image</h2>
+                                    </headline>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="w10 no-pad" width="10"></td>
+                                  <td class="half-right-image no-pad" width="367" class="w367">
+                                    <table class="w193" cellspacing="0" cellpadding="0" align="right" width="193">
+                                      <tr>
+                                        <td class="w10 no-pad" width="10"></td>
+                                        <td class="w183 no-pad" width="183">
+                                          <image>
+                                            <img src="http://placehold.it/300x200" alt="" class="w183" width="183" />
+                                          </image>
                                         </td>
                                       </tr>
                                     </table>
-                                  </division>
+                                    <paragraph>
+                                      <div align="left">Text With Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                    </paragraph>
+                                  </td>
+                                  <td class="w10 no-pad" width="10"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
 
-                                  <division type="text_with_left_image">
-                                    <div class="text-pad-10">
+                            <division type="image_gallery">
+                              <div>
+                                <table class="block-grid img-gallery-content">
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w367 no-pad" width="367">
                                       <headline>
-                                        <h2 class="headline">Text with Left Image</h2>
+                                        <h2 class="headline">Image Gallery</h2>
                                       </headline>
-                                      <div class="half-left-image">
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                </table>
+                                <table class="block-grid img-gallery-content">
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w178 third-image no-pad" width="178">
                                       <image>
-                                        <img src="http://placehold.it/580x250" alt=""  width="150" />
+                                        <img src="http://placehold.it/300x150" class="w178" width="178" alt="" />
                                       </image>
+                                      <div class="separator"></div>
                                       <paragraph>
-                                        <div>Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                        <div>Image caption goes here.</div>
                                       </paragraph>
-                                      </div>
-                                    </div>
-                                  </division>
-
-                                  <division type="text_with_right_image">
-                                    <div class="text-pad-10">
-                                      <headline>
-                                        <h2 class="headline">Text with Right Image</h2>
-                                      </headline>
-                                      <div class="half-right-image">
-                                      <image class="optyn-image">
-                                        <img src="http://placehold.it/580x250" alt=""  width="150" />
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                    <td class="w178 third-image no-pad rpad10l" width="178">
+                                      <image>
+                                        <img src="http://placehold.it/300x150" class="w178" width="178" alt="" />
                                       </image>
+                                      <div class="separator"></div>
                                       <paragraph>
-                                        <div>Text with Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque cupiditate in sunt eius asperiores optio earum numquam animi fugiat exercitationem! Ex, veritatis vel quas beatae dignissimos dolore doloremque sequi ipsam?</div>
+                                        <div>Image caption goes here.</div>
                                       </paragraph>
-                                      </div>
-                                    </div>
-                                  </division>
+                                    </td>
+                                    <td class="w10 no-pad" width="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="5" height="10" class="h10 no-pad"></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </division>
 
-                                  <division type="image_gallery">
-                                    <div>
-                                      <headline>
-                                        <h2 class="headline text-pad-10">Image Gallery</h2>
-                                      </headline>
-                                      <table class="block-grid">
-                                        <tr>
-                                          <td class="third-image">
-                                            <image>
-                                              <img src="http://placehold.it/300x150" width="175" alt="" />
-                                            </image>
-                                            <paragraph>
-                                              <div>Image caption goes here.</div>
-                                            </paragraph>
-                                          </td><td class="third-image">
-                                            <image>
-                                              <img src="http://placehold.it/300x150" width="175" alt="" />
-                                            </image>
-                                            <paragraph>
-                                              <div>Image caption goes here.</div>
-                                            </paragraph>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </division>
-                                </td>
-                              </tr>
-                            </table>
-                          </grid>
-                        </td>
+                          </td>
+                        </grid>
                       </tr>
-                    </table>
-                  </row>
-                </td>
-              </tr>
-            </table>
-          </container>
-          <container type="footer">
-            <table class="container">
-              <row>
-                <tr class="footer-container">
-                  <grid type="footer">
-                    <td>
-                      <division type="footer">
-                        <table class="block-grid footer">
-                          <tr>
-                            <td class="no-pad">
-                              <center>
-                                <permission><p class="optyn-pargraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
-                                </permission>
-                                <address><p class="optyn-pargraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
-                                <p class="optyn-pargraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
-                              </center>
-                            </td>
-                          </tr>
-                        </table>
-                      </division>
-                    </td>
-                  </grid>
-                </tr>
-              </row>
-            </table>
-          </container>
+                    </row>
+                  </table>
+                </container>
+
+                <container type="footer">
+                  <div>
+                    <row>
+                      <div class="footer-container">
+                        <grid type="footer">
+                          <div>
+                            <division type="footer">
+                              <table class="block-grid">
+                                <tr>
+                                  <td height="10" class="h10 no-pad"></td>
+                                </tr>
+                                <tr>
+                                  <td class="no-pad footer-text-td">
+                                    <div>
+                                      <center>
+                                        <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
+                                        </permission>
+                                        <address><p class="optyn-paragraph">222 W Merchandise Mart Pl, Suite 1212 Chicago, IL 60654</p></address>
+                                        <p class="optyn-paragraph">If you do not want to continue receiving emails, click here to <span class="optyn-unsubscribe"><a href="javascript:void(0)">Unsubscribe</a></span></p>
+                                      </center>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3" height="10" class="h10 no-pad"></td>
+                                </tr>
+                              </table>
+                            </division>
+                          </div>
+                        </grid>
+                      </div>
+                    </row>
+                  </div>
+                </container>
+              </td>
+            </tr>
+          </table>
         </center>
       </td>
     </tr>

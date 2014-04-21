@@ -2,7 +2,7 @@ module Api
   module V1
     module Merchants
       class PartnerOwnerBaseController < ApplicationController
-        doorkeeper_for :all
+        doorkeeper_for :all, except: [:get_message]
         respond_to :json
         helper_method :current_shop, :current_manager
         before_filter :set_time_zone, :current_partner

@@ -2,7 +2,7 @@ require 'messagecenter/process_manager'
 
 class Message < ActiveRecord::Base
   include UuidFinder
-  # include Shops::EatstreetRules
+  include Shops::EatstreetRules
   
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
@@ -84,15 +84,15 @@ class Message < ActiveRecord::Base
     end
 
     event :preview do
-      transition :draft => same, :queued => same
+      transition :draft => same, :queued => same, :pending_approval => same
     end
 
     event :launch do
-      transition [:draft, :queued] => :queued
+      transition [:pending_approval, :draft, :queued] => :queued
     end
 
     event :move_to_trash do
-      transition [:draft, :queued, :sent, :trash] => :trash
+      transition [:pending_approval, :draft, :queued, :sent, :trash] => :trash
     end
 
     event :move_to_draft do
@@ -112,7 +112,11 @@ class Message < ActiveRecord::Base
     end
 
     event :reject do
-      transition [:queued] => :draft
+      transition [:pending_approval,:queued] => :draft
+    end
+
+    event :send_for_approval do
+      transition [:pending_approval,:queued,:draft] => :pending_approval
     end
 
     before_transition :draft => same do |message|
@@ -145,10 +149,27 @@ class Message < ActiveRecord::Base
       message.valid?
     end
 
+    before_transition any => :pending_approval do |message|
+      if message.partner_eatstreet?
+        message.subject = message.send(:canned_subject) if message.subject.blank?
+        message.from = message.send(:canned_from)
+        
+        unless message.is_child?
+          message.adjust_send_on
+        else
+          message.send_on = nil
+        end
+
+        message.valid?
+      end
+    end
+
 
     after_transition any => :draft, :do => :replenish_draft_and_queued_count
 
     after_transition any => :queued, :do => :replenish_draft_and_queued_count
+
+    after_transition any => :pending_approval, :do => :replenish_draft_and_queued_count
 
     after_transition any => :delete, :do => :replenish_draft_and_queued_count
 
@@ -165,6 +186,11 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def message_url(shop)
+    msg = "#{self.name} #{self.uuid}"
+    "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+  end
+
   def self.fetch_template_name(params_type)
     FIELD_TEMPLATE_TYPES.include?(params_type.to_s) ? params_type : DEFAULT_FIELD_TEMPLATE_TYPE
   end
@@ -179,6 +205,10 @@ class Message < ActiveRecord::Base
 
   def self.paginated_drafts(shop, page_number=PAGE, per_page=PER_PAGE)
     for_state_and_shop(:draft, shop.id).latest.page(page_number).per(per_page)
+  end
+
+  def self.paginated_approves(shop, page_number=PAGE, per_page=PER_PAGE)
+    for_state_and_shop(:pending_approval, shop.id).latest.page(page_number).per(per_page)
   end
 
   def self.paginated_trash(shop, page_number=PAGE, per_page=PER_PAGE)
@@ -204,6 +234,13 @@ class Message < ActiveRecord::Base
     cache_key = "queued-count-manager-#{shop.id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.message_folder) do
       for_state_and_shop(:queued, shop.id).count
+    end
+  end
+
+  def self.cached_approves_count(shop, force=false)
+    cache_key = "approves-count-manager-#{shop.id}"
+    Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.message_folder) do
+      for_state_and_shop(:pending_approval, shop.id).count
     end
   end
 
@@ -329,6 +366,11 @@ class Message < ActiveRecord::Base
   end
 
   def editable_state?
+    return true if is_child?
+    draft? || queued_editable? || pending_approval?
+  end
+
+  def editable_state_for_manager?
     return true if is_child?
     draft? || queued_editable?
   end
@@ -613,22 +655,6 @@ class Message < ActiveRecord::Base
     return response.parsed_response
   end
 
-  def needs_curation(change_state)
-    return true if (self.state.blank? || self.draft?) && :queued == change_state
-    if (self.queued?) && partner.eatstreet? && self.valid?
-      keys = changed_attributes.keys
-
-      ['content', 'subject', 'percent_off', 'amount_off'].each do |attr|
-        return true if keys.include?(attr)
-      end
-    end
-    false
-  end
-
-  def for_curation(html)
-    MessageChangeNotifier.create(message_id: self.id, content: html, subject: self.subject, send_on: self.send_on)
-  end
-
   def message_send?
     return true unless Rails.env.staging?
     return true if Rails.env.staging? && (self.partner.eatstreet? || MessageStagingEmail.approved_emails.include?(self.manager.email))
@@ -819,6 +845,7 @@ class Message < ActiveRecord::Base
   def replenish_draft_and_queued_count
     Message.cached_drafts_count(shop, true)
     Message.cached_queued_count(shop, true)
+    Message.cached_approves_count(shop, true)
   end
 
   def send_on_greater_by_hour

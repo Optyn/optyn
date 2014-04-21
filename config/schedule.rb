@@ -43,6 +43,11 @@ every :day, :at => "3:00am" do
   runner "Util.nightly_jobs"
 end
 
+#run the task of populating shop credits every 3 days Eatsreet shops below.
+every 3.days, :at => '3:15am' do
+  rake "eatstreet:populate_shop_credits"
+end
+
 #run the messagecenter emails send every half hour but 10 PM - 4 AM
 every '*/30 * * * *' do
   runner "Message.batch_send"

@@ -125,7 +125,9 @@ namespace :shop do
 
     manager = Manager.where(:email => args[:manager_email]).last
     if manager.present?
-      manager.shop.update_attributes(:verified_email, args[:verified_email])
+      shop = manager.shop
+      shop.verified_email = args[:verified_email]
+      shop.save(validate: false)
       identity = ses.identities.verify(args[:verified_email])
     end
   end
@@ -140,7 +142,10 @@ namespace :shop do
     shop_emails = identities & Shop.where(:ses_verified => false).collect(&:verified_email)
     shop_emails.compact.each do |email|
       shop = Shop.where(:verified_email => email).last
-      shop.update_attributes(:ses_verified, ses.identities[email].verified?) if shop.present?
+      if shop.present?
+        shop.ses_verified = ses.identities[email].verified?
+        shop.save(validate: false)
+      end
     end
   end
 

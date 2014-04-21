@@ -2,6 +2,7 @@
 
 = render partial: "merchants/messages/message_menu"
 
+  
 #merchants.container-fluid.pad3pc
   = render :partial => 'progress_bar'
 
@@ -30,6 +31,8 @@
             %span{:'data-selectable-properties' => @properties.to_json, style: "width:0px;height:0px;", class: 'template-selectable-properties'}
 
             %ul#template_properties_tab.nav.nav-tabs
+              %li
+                %a{href: "#template_footer", class: 'template-property-tab'} Footer
               %li
                 %a{href: "#template_content", class: 'template-property-tab'} Content
               - if is_sidebar_template(@template.name)
@@ -111,9 +114,8 @@
                       %i{class: "icon-arrow-left"}
 
                   .pull-right
-                    %a{href: "javascript:void(0)", class: "btn btn-success template-property-submit"}
-                      Go
-                      %i{class: "icon-thumbs-up"}
+                    %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_footer'}
+                      %i{class: "icon-arrow-right"}
                       
               - if is_sidebar_template(@template.name)
                 #template_sidebar.tab-pane
@@ -215,6 +217,56 @@
                   .controls
                   = select_tag "properties[header][headline][css][font-family]", options_for_select(@header_font_families), class: 'input-medium'
 
+                .control-group
+                  = label_tag "title_color", "Title Color:", class: 'control-label'
+                  .controls
+                    %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+                      .btn-group
+                        %a.dropdown-toggle{"data-toggle" => "dropdown"}
+                          = text_field_tag "properties[header][headline][css][color]", "", class: 'template-color-field input-medium'
+                          %span.add-on
+                            %i{:style => "background-color: ''"}
+
+                .control-group
+                  = label_tag "logo_align", "Align:", class: 'control-label'
+                  .controls
+                    = #select_tag "properties[header][headline][css][text-align]", options_for_select(logo_align_options), class: 'input-medium'
+                    = hidden_field_tag "properties[header][headline][css][text-align]","",id: "logo_align"
+                    .btn-group{"data-toggle" => "buttons-radio"}
+                      %button.btn.btn-primary.left-align{type: "button", "data-align" => "left"}
+                        %span.icon-align-left
+                      %button.btn.btn-primary.center-align{type: "button", "data-align" => "center"}
+                        %span.icon-align-center
+                      %button.btn.btn-primary.right-align{type: "button", "data-align" => "right"}  
+                        %span.icon-align-right
+
+
+                .control-group
+                  = label_tag "logo", "Logo", class: 'control-label'
+                  .controls
+                    = radio_button_tag "properties[header][logo]", "image"
+                    = "Image"
+                    = radio_button_tag "properties[header][logo]", "text"
+                    = "Text"
+                    %br
+                    %br                    
+                    = hidden_field_tag "properties[header][template_uuid]", @template.uuid
+                    = text_field_tag 'text', @template.title, :placeholder => 'Enter logo name', class: 'logo_text',name: "properties[header][logo_text]"
+                    = hidden_field_tag "properties[header][message_uuid]" , @message.uuid
+
+                .control-group.social-share
+                  = label_tag "social_sharing", "Social Sharing", class: 'control-label'
+                  .controls
+                  
+                    = check_box "properties[header][facebook]", "show",id: "facebook-setting"
+                    = "Facebook"
+                    
+                    = check_box "properties[header][twitter]","show", id: "twitter-setting"
+                    = "Twitter"
+
+                    = hidden_field_tag "properties[header][shareurl]", @public_msg
+                    = hidden_field_tag "properties[header][text]", @msg
+
                 /Header Logo or Header Name
                 .actions
                   .pull-left
@@ -224,6 +276,26 @@
                   .pull-right
                     %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => "#{next_tab("template_content", @template.name)}"}
                       %i{class: "icon-arrow-right"}
+
+              #template_footer.tab-pane
+                .control-group
+                  = label_tag "background_color", "Background Color", class: 'control-label'
+                  .controls
+                    %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+                      .btn-group
+                        %a.dropdown-toggle{"data-toggle" => "dropdown"}
+                          = text_field_tag "properties[footer][paragraph][css][color]", "", class: 'template-color-field input-medium'
+                          %span.add-on
+                            %i{:style => "background-color: ''"}
+                .actions
+                  .pull-left
+                    %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => "template_content"}
+                      %i{class: "icon-arrow-left"}
+
+                  .pull-right
+                    %a{href: "javascript:void(0)", class: "btn btn-success template-property-submit"}
+                      Go
+                      %i{class: "icon-thumbs-up"}
 
               #template_layout.tab-pane
                 .control-group
@@ -241,8 +313,17 @@
                       %i{class: "icon-arrow-right"}
 
   #template_pane
-    %iframe#customHtmlTemplate{:src => merchants_default_settable_properties_preview_path(@message.uuid, @template.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; height:100%; min-height: 600px;"}
+    %iframe#customHtmlTemplate{:src => merchants_default_settable_properties_preview_path(@message.uuid, @template.uuid), :frameborder => 0, :scrolling => "yes", style: "width: 100%; height:100%; min-height: 600px;"}
       %html
         %body
           %strong
             Loading...
+
+= form_tag(upload_template_image_merchants_message_path(@message.uuid), method: :post,class: "hide image_form", id: 'logo_form', enctype: "multipart/form-data", "data-remote" => true, style: "position: relative; left: -310px;top: -1055px;color:white")  do
+  = hidden_field_tag "logo",true
+  = hidden_field_tag :template_uuid, @template.uuid
+  = link_to "Change Image" , "#", class: "change_image btn btn-success hide"
+  = file_field_tag "imgfile", class: "browsBtn"
+  = submit_tag "Submit", class: "save_image"
+  %img{class: "loading", src: "/assets/ajax-loader.gif", style: "display:none;"}
+

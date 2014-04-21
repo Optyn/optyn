@@ -1,7 +1,7 @@
 module Merchants::FileImportsHelper
-  STATS = {:connection_creation => "Connections Creations", :existing_connection => "Existing Connections", :unparsed_rows => "Unparsed rows" }
+  STATS = {:connection_creation => "New Subscribers", :existing_connection => "Existing Subscribers", :unparsed_rows => "Unparsed rows" }
   def stats_change
-    {:connection_creation => "Connections Creations", :existing_connection => "Existing Connections", :unparsed_rows => "Unparsed rows" }
+    {:connection_creation => "New Subscribers", :existing_connection => "Existing Subscribers", :unparsed_rows => "Unparsed rows" }
   end
 
 end
