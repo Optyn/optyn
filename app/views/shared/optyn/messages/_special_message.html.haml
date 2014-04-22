@@ -1,10 +1,4 @@
 %div
-  - unless @message.discount_amount.present?
-    %p
-      == "We are having a special. Here are the details":
-  - else
-    %p
-      == We are offering a #{message_discount_type_text(@message)} off special.
   
   = render partial: "shared/#{message_partner_name(@shop)}/messages/content"      
     
