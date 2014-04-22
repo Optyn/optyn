@@ -5,15 +5,15 @@
         %div{:style => "text-align:center;margin:20px auto;"}
           - @receiver_email = @receiver_email ? @receiver_email : (@receiver ? @receiver.email : nil)
           /- btn_width = optyn_user?(@user_email) ? 'width: 33%;' : 'width: 50%;'
-          - btn_styles = 'float:left;color:#fff;height:20px;font-size:12px;line-height:20px;text-decoration:none;display:inline-block;'
+          - btn_styles = 'float:left;color:#111;height:20px;font-size:12px;line-height:20px;text-decoration:none;display:inline-block;'
           - msg = "#{@message.name} #{@message.uuid}"
           - public_msg = "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}"
           - facebook_link = get_social_share_link("facebook", @message, public_msg)
-          %a{:href => "#{facebook_link}", :target => "_blank", style: 'background: #3a589b;background:rgba(58, 88, 155, 0.6);' + btn_styles}
+          %a{:href => "#{facebook_link}", :target => "_blank", style: btn_styles}
             = image_tag("#{SiteConfig.app_base_url}/assets/icon-facebook.png", :style => "vertical-align:middle;width:20px !important;height: 20px !important;")
             SHARE
           - twitter_link = get_social_share_link("twitter", @message, public_msg)
-          %a{:href => "#{twitter_link}", :target => "_blank", style: 'background:#598dca;rgba(89, 141, 202, 0.6);' + btn_styles}
+          %a{:href => "#{twitter_link}", :target => "_blank", style: btn_styles}
             = image_tag("#{SiteConfig.app_base_url}/assets/icon-twitter.png", :style => "vertical-align:middle;width:20px !important;height: 20px !important;")
             TWEET
           / - if optyn_user?(@user_email)
