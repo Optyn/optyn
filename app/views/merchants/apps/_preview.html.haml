@@ -17,7 +17,10 @@
         = @application.show_default_optyn_text ? SiteConfig.api_welcome_message : @application.custom_text
     .codesnippet
       %textarea{:id => 'embed_code', :rows => "5", :readonly => 'readonly'}
-        = current_shop.oauth_application.embed_code
+        - if !@application.show_form?
+          = current_shop.oauth_application.embed_code
+        - else
+          = current_shop.form_code
     .btns
       %span#copy_description_cover
         %a.btn.copybtn{:id => 'copy_description', :href => "javascript:void(0)"} Copy to Clipboard

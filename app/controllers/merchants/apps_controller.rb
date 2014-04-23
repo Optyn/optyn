@@ -9,7 +9,6 @@ class Merchants::AppsController < Merchants::BaseController
     params[:oauth_application][:label_ids] = params[:oauth_application][:label_ids].reject! { |l| l.empty? }.join(",")
     current_shop.generate_oauth_token(params[:oauth_application])
     @application = current_shop.oauth_application
-    binding.pry
     render json: {preview_content: render_to_string(partial: "merchants/apps/preview"),
                   form_content: render_to_string(partial: 'merchants/apps/edit'),
                   advanced_content: render_to_string(partial: 'merchants/apps/advanced')
@@ -33,7 +32,6 @@ class Merchants::AppsController < Merchants::BaseController
                   advanced_content: render_to_string(partial: 'merchants/apps/advanced')
     }
   rescue
-    binding.pry
     render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
   end
 

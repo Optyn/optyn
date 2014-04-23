@@ -278,8 +278,7 @@ module Api
         });
 
       $form.append($emailBox);
-      console.log(#{@application.show_name.to_s} == "true");
-      if(#{@application.show_name.to_s} == "true"){
+      if(#{@application.show_name.to_s} == true){
         $form.append($nameBox);
       }
       $form.append($hddenAppId);
