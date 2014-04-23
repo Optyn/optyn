@@ -276,11 +276,10 @@ module Api
           value: 'Subscribe',
           type: 'submit'
         });
-
-      $form.append($emailBox);
       if(#{@application.show_name.to_s} == true){
         $form.append($nameBox);
       }
+      $form.append($emailBox);
       $form.append($hddenAppId);
       $form.append($submitButton);
       $formContainer.append($form)
