@@ -999,16 +999,11 @@
     .w10{width: 10px;}
     .h10{height: 10px;}
     .w80{width: 80px;}
-    .w400{width: 400px;}
+    .w85{width: 85px;}
+    .w410{width: 410px;}
     .optyn-fbshare,
     .optyn-twittershare { text-align: right; height: 20px; }
     .header-social .padh10 { padding: 10px 0; }
-    .optyn-fbshare img,
-    .optyn-twittershare img,
-    .optyn-fbshare a,
-    .optyn-twittershare a { padding-right: 5px; }
-    .optyn-fbshare img,
-    .optyn-twittershare img { float: none; display: inline; }
     .optyn-division {
       float: none;
       clear: both;
@@ -1070,7 +1065,8 @@
         max-width: 300px !important;
         height: auto;
       }
-      table[class="body"] .header-social td.w400 { width: 120px !important; }
+      table[class="body"] table.container .header-social .w85 { width: 85px !important; }
+      table[class="body"] table.header-social td.w410 { width: 130px !important; }
       table[class="body"] table.container td.w10 { width: 10px !important; }
       table[class="body"] td.sidebar,
       table[class="body"] td.main-area,
@@ -1151,19 +1147,15 @@
                     <td align="right" class="padh10">
                       <table width="580" class="w580" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td class="w400 empty no-pad" align="right" width="400"></td>
-                          <td class="w80 link no-pad" align="right" width="80">
+                          <td class="w410 empty no-pad" align="right" width="410"></td>
+                          <td class="w85 link no-pad" align="right" width="85">
                             <fbshare shareurl = "http://www.optyn.com/">
-                              <div style="">
-                                <img alt="Share on Facebook" width="20" height="20" src="http://www.optyn.com/assets/icon-facebook.png" style="vertical-align:middle;width:20px !important;height:20px !important;"> Share
-                              </div>
+                              <img alt="Share on Facebook" width="72" height="18" src="http://www.optyn.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </fbshare>
                           </td>
-                          <td class="w80 link no-pad" align="right" width="80">
+                          <td class="w85 link no-pad" align="right" width="85">
                             <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
-                              <div style="">
-                                <img alt="Tweet" width="20" height="20" src="http://www.optyn.com/assets/icon-twitter.png" style="vertical-align:middle;width:20px !important;height:20px !important;"> Tweet
-                              </div>
+                              <img alt="Tweet" width="72" height="18" src="http://www.optyn.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </twittershare>
                           </td>
                         </tr>
