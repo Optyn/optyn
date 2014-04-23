@@ -77,7 +77,7 @@
     %label
       Custom Css
   .custom
-    = f.text_area :custom_css, placeholder: 'Redirect Url', 'data-toggle' => 'tooltip', title: 'Custom Css', :class => "span12"
+    = f.text_area :custom_css, placeholder: 'Custom Css', 'data-toggle' => 'tooltip', title: 'Custom Css', :class => "span12"
     - unless @application.new_record?
       .refresh
         %a.btn.btn-primary.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save
