@@ -149,5 +149,15 @@ namespace :shop do
     end
   end
 
+  desc "Make the website address of all the websites begin with http://"
+  task :make_website_consistent => :environment do
+    shops = Shop.all
+    shops.each do |shop|
+      if shop.website.present?
+        shop.send(:add_website_scheme)
+        shop.save(validate: false)
+      end
+    end
+  end
 
 end

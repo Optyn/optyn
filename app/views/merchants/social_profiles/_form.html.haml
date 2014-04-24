@@ -15,7 +15,10 @@
   .control-group
     = f.label :sp_link, 'Profile Link', class: 'control-label'
     .controls
-      = f.text_field :sp_link
+      .input-prepend
+        %span.add-on
+          = "http(s)://"
+        = f.text_field :sp_link
 
 
   .actions

@@ -1,10 +1,8 @@
 %div
   %p
-    - if @message.content.present?
-      = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
-    - else
-      %p
-        == We need your feedback. Help us out by filling out the survey below.
+    
+    = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
+    
 
     - @survey = @message.survey
     - if @survey.present?

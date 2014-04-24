@@ -858,6 +858,12 @@ table.facebook td {
       .w178{width: 178px;}
       .w10{width: 10px;}
       .h10{height: 10px;}
+      .w85{width: 85px;}
+      .w80{width: 80px;}
+      .w410{width: 410px;}
+      .optyn-fbshare,
+      .optyn-twittershare { text-align: right; height: 20px; }
+      .header-social .padh10 { padding: 10px 0; }
       h2 { font-size: 16px; font-weight: bold; }
       img { height: auto; }
       .text-pad-10 { padding: 10px; }
@@ -902,6 +908,7 @@ table.facebook td {
       td.optyn-introduction{width: 580px;}
       .block-grid .half-left-image table.w285 { float: left; }
       .block-grid .half-right-image table.w285 { float: right; }
+      .img-gallery-content img { float: none; }
 
       @media only screen and (max-width: 600px) {
         table[class="body"] table.container .block-grid td {
@@ -912,6 +919,8 @@ table.facebook td {
           max-width: 300px !important;
           height: auto;
         }
+        table[class="body"] table.container .header-social .w85 { width: 85px !important; }
+        table[class="body"] table.header-social td.w410 { width: 130px !important; }
         table[class="body"] table.container td.w10 { width: 10px !important; }
         table[class="body"] td.sidebar,
         table[class="body"] td.main-area,
@@ -961,8 +970,7 @@ table.facebook td {
         table[class="body"] table.container .block-grid.twri .optyn-headline { padding: 0 10px !important; }
 
         table[class="body"] table.container .block-grid .half-left-image table.w285,
-        table[class="body"] table.container .block-grid .half-right-image table.w285,
-        table[class="body"] table.container .block-grid.img-gallery-content img { float: none !important; }
+        table[class="body"] table.container .block-grid .half-right-image table.w285 { float: none !important; }
 
         table[class="body"] .two-column-content,
         table[class="body"] .img-gallery-content {width: 300px !important; display:inline-block !important;}
@@ -992,22 +1000,18 @@ table.facebook td {
               <td width="580" class="w580">
                 <table class="block-grid header-social">
                   <tr>
-                    <td align="right">
-                      <table width="560" cellpadding="0" cellspacing="0" border="0">
+                    <td align="right" class="padh10">
+                      <table width="580" class="w580" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td class="empty no-pad" align="right" width="400"></td>
-                          <td class="link no-pad" align="right" width="80">
+                          <td class="w410 empty no-pad" align="right" width="410"></td>
+                          <td class="w85 link no-pad" align="right" width="85">
                             <fbshare shareurl = "http://www.optyn.com/">
-                              <div style="">
-                                <img alt="Icon-facebook" width="25" height="25" src="http://localhost:3000/assets/icon-facebook.png" style="vertical-align:middle;"> Share
-                              </div>
+                              <img alt="Share on Facebook" width="72" height="18" src="http://www.optyn.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </fbshare>
                           </td>
-                          <td class="link no-pad" align="right" width="80">
+                          <td class="w85 link no-pad" align="right" width="85">
                             <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
-                              <div style="">
-                                <img alt="Icon-twitter" width="25" height="25" src="http://localhost:3000/assets/icon-twitter.png" style="vertical-align:middle;"> Tweet
-                              </div>
+                              <img alt="Tweet" width="72" height="18" src="http://www.optyn.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </twittershare>
                           </td>
                         </tr>
@@ -1078,7 +1082,7 @@ table.facebook td {
                                       <div class="paragraph">Image caption here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, impedit enim voluptas quidem reiciendis eaque provident ad recusandae placeat aut earum illo veniam. Fuga, consequatur architecto molestiae magni possimus expedita!</div>
                                     </paragraph>
                                     <image>
-                                       <img width="560" height="300" class="w560" src="http://placehold.it/560x300" alt="" />
+                                       <img width="560" class="w560" src="http://placehold.it/560x300" alt="" />
                                     </image>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
