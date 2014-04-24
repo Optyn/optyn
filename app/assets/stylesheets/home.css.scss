@@ -332,40 +332,11 @@ footer {
 }
 
 
-.lp-next-fold {
-  background-color: lighten( $dark-blue, 10% );
-  color: $white;
-  text-align: center;
-  position: relative;
-  padding: 2% 0;
-  > .arrow-down {
-    position: absolute;
-    top: -9px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    > a {
-      padding: 0 6px;
-      display: inline-block;
-      border-radius: 100px;
-      background-color: lighten( $dark-blue, 10% );
-      color: $green;
-      font-size: 25px;
-      line-height: 25px;
-      &:hover {
-        text-decoration: none;
-        color: $white;
-      }
-    }
-  }
-}
-
 .lp-testimonials {
   blockquote {
     border: 0;
     padding: 7% 0;
     font: normal 2rem/3rem $serif;
-    text-align: center;
     @media ( max-width: $xga-h ) {
       font-size: 1.5rem;
       line-height: 2.2rem;
@@ -410,6 +381,70 @@ footer {
   .well {
     border: 0;
     padding: 2.5%;
+  }
+}
+
+.landing-page {
+  [class ^= "fold_"] {
+    padding: 5% 0;
+  }
+
+  h1 { border-bottom: 0; }
+
+  .lp-welcome {
+    padding: 0;
+    background: $dark-blue;
+    color: $white;
+    .span6:last-child { padding: 5% 0; }
+    .carousel-control {
+      background: transparent;
+      font-weight: normal;
+      height: 35px;
+      width: 35px;
+      border: none;
+      &:hover {
+        background: rgba(0,0,0,0.3);
+      }
+    }
+  }
+
+  .lp-testimonials {
+    background-image: -moz-linear-gradient(left, rgba(46,62,81,1) 0%, rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(46,62,81,1)), color-stop(100%,rgba(0,0,0,0))), image-url( 'main-ag.jpg' );
+    background-image: -webkit-linear-gradient(left, rgba(46,62,81,1) 0%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: -o-linear-gradient(left, rgba(46,62,81,1) 0%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: -ms-linear-gradient(left, rgba(46,62,81,1) 0%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: linear-gradient(to right, rgba(46,62,81,1) 0%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    color: $white;
+    @media ( max-width: $xga-h ) {
+      background-image: -moz-linear-gradient(left, rgba(46,62,81,0.9) 0%, rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(46,62,81,0.9)), color-stop(100%,rgba(46,62,81,0.6))), image-url( 'main-ag-m.jpg' );
+      background-image: -webkit-linear-gradient(left, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: -o-linear-gradient(left, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: -ms-linear-gradient(left, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: linear-gradient(to right, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+    }
+  }
+
+  .lp-try-it {
+    color: $white;
+    padding: 0;
+    h2 {
+      display: inline-block;
+      border-bottom: solid 1px $white;
+      font-weight: 700;
+      line-height: 2.8rem;
+    }
+    .bg1, .bg2 { padding: 3% 0; }
+    .bg1 { background-color: #E67E1D; }
+    .bg2 { background-color: #C05B01 }
+    .btn-transparent:hover {
+      color: darken( #C05B01, 10% );;
+      border-color: darken( #C05B01, 10% );;
+    }
   }
 }
 

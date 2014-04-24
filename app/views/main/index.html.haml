@@ -1,87 +1,80 @@
 = display_title "Optyn - E-Mail Marketing for Small Businesses"
 = display_meta_description "Try Optyn for FREE today and see how our email marketing can help you engage and acquire customers online and offline.", "local marketing tools, email marketing, email marketing for smbs, small businesses, small business marketing, customer engagement, customer acquisition, email marketing software, email marketing tips"
-.fold_0
-  .row-fluid
-    .span12
-  .row-fluid.text-center
-    .span6
-      = image_tag 'http://placehold.it/700x300', alt: 'placheolder'
-    .span6
-      %h1 100% Mobile Friendly Email Campaigns Without Any Coding %Expertise
-      %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
-        Get started!
 
-.row-fluid.lp-next-fold{ 'data-scrollTo' => 'fold-0' }
-  .arrow-down
-    %a{ href: '#', 'data-scrollTo' => 'fold-0' }
-      %i.icon-angle-down
-  %div Not convinced? Learn more.
+.landing-page
+  .fold_0.lp-welcome
+    #welcome-carousel.carousel.slide
+      .carousel-inner
+        .active.item
+          .row-fluid.text-center
+            .span6.slide-img
+              = image_tag 'http://placehold.it/700x300/369/37a', alt: 'placheolder'
+            .span6
+              %h1 100% Mobile Friendly Email Campaigns Without Any Coding %Expertise
+              %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
+                Get started!
+        .item
+          .row-fluid.text-center
+            .span6
+              = image_tag 'http://placehold.it/700x300', alt: 'placheolder'
+            .span6
+              %h1 100% Mobile Friendly Email Campaigns Without Any Coding %Expertise
+              %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
+                Get started!
+      %a.carousel-control.left{ href: '#welcome-carousel', 'data-slide' => 'prev' }
+        %i.icon-angle-left
+      %a.carousel-control.right{ href: '#welcome-carousel', 'data-slide' => 'next' }
+        %i.icon-angle-right
 
-.fold_1
-  .row-fluid.text-center
-    .span12
-      %h2 Easy Steps to Use Optyn!
-  .row-fluid.lp-steps-to-use
-    .span3.lp-s-signup
-      1. Sign Up
-    .span3.lp-s-import
-      2. Import Your Customer List
-    .span3.lp-s-prep
-      3. Prepare/Preview Email
-    .span3.lp-s-send
-      4. Send
-  .row-fluid.text-center
-    %a.btn.btn-warning{ href: new_merchants_manager_registration_path } Try it now!
-    %a.btn.btn-primary{ href: new_merchants_manager_registration_path } More information
+  .fold_1
+    .row-fluid.text-center
+      .span12
+        %h2 Easy Steps to Use Optyn!
+    .row-fluid.lp-steps-to-use
+      .span3.lp-s-signup
+        1. Sign Up
+      .span3.lp-s-import
+        2. Import Your Customer List
+      .span3.lp-s-prep
+        3. Prepare/Preview Email
+      .span3.lp-s-send
+        4. Send
+    .row-fluid.text-center
+      %a.btn.btn-warning{ href: new_merchants_manager_registration_path } Try it now!
+      %a.btn.btn-primary{ href: new_merchants_manager_registration_path } More information
 
-.row-fluid.lp-next-fold{ 'data-scrollTo' => 'fold-1' }
-  .arrow-down
-    %a{ href: '#', 'data-scrollTo' => 'fold-1' }
-      %i.icon-angle-down
-  %div Not convinced? Learn more.
+  .fold_2.lp-testimonials
+    .row-fluid
+      .span6
+        %blockquote
+          %i.icon-quote-left
+          Optyn's email marketing software helped us increase our reach to our current clients and it even brought many new faces in.
+          %i.icon-quote-right
+        %div Ross & Darren, Owners of Alley Gallery
+        %div Evanston, IL
+        %a.btn.btn-primary{ href: '#' } Next testimonial
 
-.fold_2
-  .row-fluid
-    %blockquote.span6
-      %i.icon-quote-left
-      Optyn's email marketing software helped us increase our reach to our current clients and it even brought many new faces in.
-      %i.icon-quote-right
-    .blank-space
-    %div Ross & Darren, Owners of Alley Gallery
-    %div Evanston, IL
-    %a.btn.btn-primary{ href: '#' } Next testimonial
+  .fold_3
+    .row-fluid
+      %h2 Not Just Email Marketing, So Much More!
+    .row-fluid
+      .span6
+        = image_tag 'http://placehold.it/700x300', alt: 'placheolder'
+      .span6
+        %p Over the past two years ...
+        %a.btn.btn-large.btn-primary{ href: new_merchants_manager_registration_path }
+          Get started for FREE!
 
-.row-fluid.lp-next-fold{ 'data-scrollTo' => 'fold-2' }
-  .arrow-down
-    %a{ href: '#', 'data-scrollTo' => 'fold-2' }
-      %i.icon-angle-down
-  %div Not convinced? Learn more.
-
-.fold_3
-  .row-fluid
-    %h2 Not Just Email Marketing, So Much More!
-  .row-fluid
-    .span6
-      = image_tag 'http://placehold.it/700x300', alt: 'placheolder'
-    .span6
-      %p Over the past two years ...
-      %a.btn.btn-large.btn-primary{ href: new_merchants_manager_registration_path }
-        Get started for FREE!
-
-.row-fluid.lp-next-fold{ 'data-scrollTo' => 'fold-3' }
-  .arrow-down
-    %a{ href: '#', 'data-scrollTo' => 'fold-3' }
-      %i.icon-angle-down
-  %div Not convinced? Learn more.
-
-.fold_4
-  .row-fluid.text-center
-    .span12
-      %h2 Optyn is simple. Try it for FREE!
-      %h3 Your first 100 customers are on us for lifetime!
-      %h4 Start engaging your customers and increasing sales!
-      %a.btn.btn-large.btn-primary{ href: new_merchants_manager_registration_path }
-        TRY IT TODAY!
+  .fold_4.lp-try-it
+    .row-fluid.text-center.no-pad
+      .span12
+        .bg1
+          %h2 Optyn is simple. Try it for FREE!
+          %h3 Your first 100 customers are on us for lifetime!
+          %h4 Start engaging your customers and increasing sales!
+        .bg2
+          %a.btn.btn-large.btn-primary.btn-transparent{ href: new_merchants_manager_registration_path }
+            TRY IT TODAY!
 
 :javascript
   $( function() {
@@ -93,11 +86,5 @@
       $.scrollTo( "[data-scrollTo = " + $( this ).attr( 'data-scrollTo' ) + "]", 300 );
     });
 
-    // Set min-height for each fold only in desktop view.
-    if ( $( window ).width() > 1100 ) {
-      var setSlideMinHt = function() {
-        $('[class*="fold_"]').css( 'min-height', $( window ).height() - $('header').height() - $('.lp-next-fold').height() - 10 );
-      }();
-      $( window ).resize( setSlideMinHt );
-    }
+    //$('.carousel').carousel('cycle');
   });
