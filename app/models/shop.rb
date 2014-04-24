@@ -53,8 +53,7 @@ class Shop < ActiveRecord::Base
   validates :phone_number, presence: true, unless: :virtual, length: {minimum: 10, maximum: 20}
   validates :phone_number, :phony_plausible => true 
   validate :validate_website
-  # validates :website, :presence => true, :format => {:with => %r(^\S(([^\s\!\*\'\(\)\;\:\@\&\=\+\$\,\/\?\%\#\[\]]+\.)+.[a-zA-Z]{1,})$), :message => "Invalid website"}
-  # validates_uniqueness_of_without_deleted :name
+
   
 
   accepts_nested_attributes_for :managers
@@ -109,14 +108,6 @@ class Shop < ActiveRecord::Base
     assign_identifier
     create_default_subscription 
     true
-  end
-
-
-  def validate_website
-    if website.present? && !website.match(%r(^\S(([^\s\!\*\'\(\)\;\:\@\&\=\+\$\,\/\?\%\#\[\]]+\.)+.[a-zA-Z]{1,})$))
-      self.errors.add(:website, "is invalid. Here is an example: //example.com")
-      return
-    end
   end
 
   #INDUSTRIES = YAML.load_file(File.join(Rails.root,'config','industries.yml')).split(',')
@@ -509,6 +500,10 @@ class Shop < ActiveRecord::Base
   end
 
   private
+  def add_website_scheme
+    self.website = "http://" + self.website if self.website.present? && !self.website.match(/^https?:\/\//)
+  end
+
   def self.sanitize_domain(domain_name)
     domain_name.gsub(/(https?:\/\/)?w{3}\./, "").downcase
   end
@@ -614,4 +609,15 @@ class Shop < ActiveRecord::Base
       end
     end
   end
+
+  def validate_website
+    if website.present?
+      add_website_scheme
+
+      if !(URI.parse(self.website) rescue false) || !(self.website.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix))
+        self.errors.add(:website, "is invalid. Here is an example: www.example.com")
+      end
+    end
+  end
+
 end #end of class Shop

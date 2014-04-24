@@ -22,6 +22,7 @@ class Merchants::SocialProfilesController < Merchants::BaseController
 
   def edit
     @social_profile = SocialProfile.find(params[:id])
+    @social_profile.sp_link = @social_profile.sp_link.to_s.gsub(/https?:\/\//, "")
     render layout: false
   end
 

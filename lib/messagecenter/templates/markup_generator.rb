@@ -57,8 +57,8 @@ module Messagecenter
           if social_sharing.has_key? :fb_sharing
             facebook = social_sharing.fb_sharing
             fb_html = if facebook.html.present? 
-                        "<div class='optyn-fbshare' style='float:right;'><a href = #{get_social_share_link('facebook',facebook.text, facebook.url)} style= 'background: #3a589b;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank'> #{facebook.html}
-                        </a></div>" 
+                        "<div class='optyn-fbshare'><a href = #{get_social_share_link('facebook',facebook.text, facebook.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{facebook.html}
+                        &nbsp; </a></div>" 
                       else
                         get_default_html("facebook")
                       end
@@ -69,7 +69,7 @@ module Messagecenter
           if component.social_sharing.has_key? :twitter_sharing
             twitter = social_sharing.twitter_sharing
             twitter_html = if twitter.html.present?
-                            "<div class='optyn-twittershare' style='float:right;'><a href = #{get_social_share_link('twitter', twitter.text, twitter.url)} style= 'background:#598dca;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank'>#{twitter.html}
+                            "<div class='optyn-twittershare'><a href = #{get_social_share_link('twitter', twitter.text, twitter.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{twitter.html}
                             </a></div>"
                           else
                             get_default_html("twitter")
