@@ -8,14 +8,14 @@
     %h5 Bar Option
     %a{"data-toggle" => "tooltip", :href => "#", :title => "Highly Recommended. We recommend the Top bar that gives you a better way of capturing your customers.", :class => "tip"}
       %label.radio.inline
-        = f.radio_button :render_choice, 1.to_s
+        = f.radio_button :render_choice, 1.to_s, :class => "render_choice"
         Top Bar
     %a{"data-toggle" => "tooltip", :href => "#", :title => "A module can be placed anywhere on a website and within a content.", :class => "tip"}
       %label.radio.inline
-        = f.radio_button :render_choice, 2.to_s
+        = f.radio_button :render_choice, 2.to_s, :class => "render_choice"
         Module
 
-  .option
+  .option.bar_options{ :style => "#{show_bar_option(@application.render_choice)}" }
     %label.radio.inline
       = f.radio_button :begin_state, 1
       Bar Expanded

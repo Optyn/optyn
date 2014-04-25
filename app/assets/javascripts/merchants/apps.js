@@ -17,6 +17,7 @@ function Apps() {
             this.hookOptynButtonTextToggle();
             this.hookTooltip();
             this.hookChangeChosen();
+            this.hookBarOption();
         }
 
         if ($('.app-container').length) {
@@ -147,4 +148,16 @@ function Apps() {
         });
     });
 };
+
+ this.hookBarOption = function () {
+      $('.render_choice').change(function (event) {
+         var value = $(this).val();
+         if(value == 2){
+            $(".bar_options").hide();
+         }
+         else{
+            $(".bar_options").show();
+         }
+        });
+    };
 }
