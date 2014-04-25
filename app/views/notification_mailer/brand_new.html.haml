@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica, sans-serif; margin: 15px;"}
+    = content_for :header do
+      Welcome to Optyn
+
+    %table{:style => "background-color: #eee; padding: 20px; width: 100%; max-width: 800px; margin: auto;"}
+      %tr
+        %td
+          = render partial: "shared/system_emails/banner"
+
+          %table{:width => "100%", :style => "background-color: white;max-width:600px;", :align => "center"}
+            %tr
+              %td{:style => "bgcolor:#FFF;display:block!important; margin:0 auto; clear:both; padding: 20px;"}
+                %div
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
+                    Welcome
+                  %p We are excited to have you and Gaurav Textiles on board. The good news is we are ready to get you going.
+
+                  %p
+                    %ul
+                      %li 
+                        Import your customers. 
+                        = link_to "Click here.", "https://optynmail.com/emailmarketing"
+                      %li You can easily create marketing promos within 2 minutes or less. Go ahead and try it. Don't be shy.
+                      %li It's important to stay active. We make it easy.
+                      %li Reward your customers. Offer great marketing promos and your customers will become your advocates - word of mouth.
+                      %li and much more
+                  %p{:align => "center"}
+                    
+                  %p
+                    Cheers,
+                    %br/
+                    The Optyn Team
