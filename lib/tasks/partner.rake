@@ -75,16 +75,16 @@ namespace :partner do
   end
 
   desc "Add the 'seed' from email addresses for each partner"
-  task :seed_verified_emails do
-    load "#{Rails.root}/app/models/partner.rb"
+  task :seed_verified_emails => :environment do
+    # load "#{Rails.root}/app/models/partner.rb"
     #Adding verified email for the Optyn partner
     partner = Partner.for_organization('Optyn Inc.')
-    partner.from_email = 'email@optyn.com'
+    partner.from_email = 'email@optynmail.com'
     partner.save
 
     #Adding verified email for the Optyn 1 partner
     partner = Partner.for_organization('Optyn Partners')
-    partner.from_email = 'email@optyn.com'
+    partner.from_email = 'email@optynmail.com'
     partner.save
 
     #Adding verified email for the Eatstreet partner
