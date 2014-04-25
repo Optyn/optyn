@@ -188,7 +188,7 @@ class Shop < ActiveRecord::Base
        <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email.json?callback=?" id="optyn-email-form">
        <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
        #{name_field}
-       <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">'
+       <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">
       <input value="Subscribe" name="commit" id="commit" type="submit">
        </form>
       </div>
