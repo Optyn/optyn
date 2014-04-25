@@ -4,9 +4,9 @@ class NotificationMailer < ActionMailer::Base
           reply_to: "services@optynmail.com"
 
   def text_email
-    mail(:to => ["gaurav.gaglani@gmail.com", "gaurav@optyn.com"], :subject => "Retouching Base!", 
+    mail(:to => [%{gaurav.checks@gmail.com}], :subject => "Retouching Base!", 
       # :body => "Hey Gaurav!\nThanks for reaching out to us.\nHere is the pricing that you wanted.\nThe chanrges of our ROR developers are 55 US dollars per hour.\n\n Thanks- Gaurav")
-      :body => "Hey Gaurav!\nThanks for reaching out to us.\nThe chanrges of our ROR developers are 55 US dollars per hour.\n\n Thanks- Idyllic Software")
+      :body => "Hey Gaurav!\nThanks for reaching out to us.\nThe charges of our ROR developers are 55 US dollars per hour.\n\n Thanks- Idyllic Software")
   end
 
   def text_email_jinesh
@@ -25,6 +25,6 @@ class NotificationMailer < ActionMailer::Base
   end
 
   def general_information
-    mail(:to => [%{alen@optyn.com}, %{alen@zimamail.com}], :subject => "Easy Steps to use Optyn")
+    mail(:to => [%{gaurav.checks@gmail.com}], :subject => "Easy Steps to use Optyn")
   end
 end
