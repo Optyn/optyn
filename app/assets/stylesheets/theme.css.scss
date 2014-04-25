@@ -893,107 +893,128 @@ form {
     height: 52px;
     padding: 8px 15px 8px;
   }
+  .btn {
+    @include border-radius( 3px );
+    font: normal 1rem/1.6rem $sans-serif;
+    letter-spacing: 1px;
+    @include transition( all 0.2s ease-out );
+    background: darken( $light-gray, 5% );
+    border: none;
+    &:hover {
+      text-decoration: none;
+      background-color: darken( $light-gray, 15% );
+      box-shadow: none;
+    }
+    &:active { box-shadow: inset 0 0 20px $gray; }
+    &.btn-small {
+      font-size: 0.9rem;
+      line-height: 1.35rem;
+    }
+    &.btn-mini {
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+    }
+    &.btn-large {
+      font-size: 1.2em;
+      line-height: 1.6em;
+    }
+  }
+  .link.blue, .btn-primary {
+    color: $white;
+    background: $blue;
+    &:hover {
+      background-color: darken( $blue, 10% );
+    }
+    &.active {
+      background-color: darken( $blue, 30% );
+    }
+  }
+  .link.blue {
+    padding: 0 15px;
+  }
+  .btn-primary[disabled] {
+    background-color: saturate( $blue, 20% );
+  }
+  .link.orange, .btn-warning {
+    color: #fff;
+    background-color: $orange;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+    &:hover {
+      background-color: darken( $orange, 10% );
+    }
+    &.active {
+      background-color: darken( $orange, 30% );
+    }
+  }
+  .btn-info, .btn-info[type='submit'] {
+    color: $white;
+    background-color: $bluish-green;
+    &:hover {
+      background-color: darken( $bluish-green, 10% );
+    }
+    &.active {
+      background-color: darken( $bluish-green, 30% );
+    }
+  }
+  .btn-success, .btn-success[type='submit'] {
+    background-color: $green;
+    &:hover {
+      background-color: darken( $green, 10% );
+    }
+    &.active {
+      background-color: darken( $green, 30% );
+    }
+  }
+  .btn-danger {
+    background-color: $red;
+    &:hover {
+      background-color: darken( $red, 15% );
+    }
+    &.active {
+      background-color: darken( $red, 30% );
+    }
+  }
+  .btn-transparent {
+    background: transparent;
+    border: solid 2px $white;
+    color: $white;
+    text-shadow: none;
+    &:hover {
+      background: $white;
+      color: $gray;
+    }
+    &:active {
+      background-color: $white;
+      color: $gray;
+    }
+  }
+  .btn-transparent-primary {
+    background: transparent;
+    border: solid 2px $blue;
+    color: $blue;
+    text-shadow: none;
+    &:hover {
+      background: $blue;
+      color: $white;
+    }
+    &:active {
+      background-color: $blue;
+      color: $white;
+    }
+  }
+  .btn-group .btn {
+    @include border-radius( 0 );
+    box-shadow: none;
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
 }  /* /#flat */
-.btn {
-  @include border-radius( 0 );
-  font: normal 1rem/1.6rem $sans-serif;
-  letter-spacing: 1px;
-  border-bottom: solid 2px rgba( 0, 0, 0, 0.2);
-  @include transition( all 0.2s ease-out );
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  background: darken( $light-gray, 5% );
-  &:hover {
-    border-bottom: solid 2px rgba( 0, 0, 0, 0.3);
-    text-decoration: none;
-    background-color: darken( $light-gray, 15% );
-  }
-  &.btn-small {
-    font-size: 0.9rem;
-    line-height: 1.35rem;
-  }
-  &.btn-mini {
-    font-size: 0.8rem;
-    line-height: 1.2rem;
-  }
-  &.btn-large {
-    font-size: 1.2em;
-    line-height: 1.6em;
-  }
-}
-.link.blue, .btn-primary {
-  color: $white;
-  background: $blue;
-  &:hover {
-    background-color: darken( $blue, 10% );
-  }
-  &.active {
-    background-color: darken( $blue, 30% );
-  }
-}
-.link.blue {
-  padding: 0 15px;
-}
-.btn-primary[disabled] {
-  background-color: saturate( $blue, 20% );
-}
-.link.orange, .btn-warning {
-  color: #fff;
-  background-color: $orange;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
-  &:hover {
-    background-color: darken( $orange, 10% );
-  }
-  &.active {
-    background-color: darken( $orange, 30% );
-  }
-}
-.btn-info, .btn-info[type='submit'] {
-  color: $white;
-  background-color: $bluish-green;
-  &:hover {
-    background-color: darken( $bluish-green, 10% );
-  }
-  &.active {
-    background-color: darken( $bluish-green, 30% );
-  }
-}
-.btn-success, .btn-success[type='submit'] {
-  background-color: $green;
-  &:hover {
-    background-color: darken( $green, 10% );
-  }
-  &.active {
-    background-color: darken( $green, 30% );
-  }
-}
-.btn-danger {
-  background-color: $red;
-  &:hover {
-    background-color: darken( $red, 15% );
-  }
-  &.active {
-    background-color: darken( $red, 30% );
-  }
-}
-.btn-transparent {
-  background: transparent;
-  border: solid 2px $white;
-  color: $white;
-  text-shadow: none;
-  @include border-radius( 4px );
-  &:hover {
-    background: $white;
-    color: $gray;
-    border-color: $gray;
-  }
-  &:active {
-    background-color: $white;
-    color: $gray;
-    box-shadow: inset 0 0 20px $gray;
-  }
-}
 #flat {
   .input-append,
   .input-prepend {
@@ -1147,7 +1168,6 @@ th {
 }
 
 blockquote {
-  font-family: $serif;
   font-size: 1.3rem;
   line-height: 1.7rem;
   i { color: $medium-gray; }

@@ -8,15 +8,15 @@
         .active.item
           .row-fluid.text-center
             .span6.slide-img
-              = image_tag 'http://placehold.it/700x300/369/37a', alt: 'placheolder'
+              = image_tag 'envelope.jpg', alt: 'placheolder', class: 'envelope'
             .span6
-              %h1 100% Mobile Friendly Email Campaigns Without Any Coding %Expertise
+              %h1 Create Email Marketing Campaigns in 2 Minutes or Less!
               %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
                 Get started!
         .item
           .row-fluid.text-center
             .span6
-              = image_tag 'http://placehold.it/700x300', alt: 'placheolder'
+              = image_tag 'mobile-ready.jpg', alt: 'mobile ready'
             .span6
               %h1 100% Mobile Friendly Email Campaigns Without Any Coding %Expertise
               %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
@@ -32,16 +32,21 @@
         %h2 Easy Steps to Use Optyn!
     .row-fluid.lp-steps-to-use
       .span3.lp-s-signup
+        .step-icon
         1. Sign Up
       .span3.lp-s-import
+        .step-icon
         2. Import Your Customer List
       .span3.lp-s-prep
+        .step-icon
         3. Prepare/Preview Email
       .span3.lp-s-send
+        .step-icon
         4. Send
+    .blank-space.large
     .row-fluid.text-center
       %a.btn.btn-warning{ href: new_merchants_manager_registration_path } Try it now!
-      %a.btn.btn-primary{ href: new_merchants_manager_registration_path } More information
+      %a.btn.btn-transparent-primary{ href: new_merchants_manager_registration_path } More information
 
   .fold_2.lp-testimonials
     .row-fluid
@@ -56,12 +61,15 @@
 
   .fold_3
     .row-fluid
-      %h2 Not Just Email Marketing, So Much More!
+      .span12.text-center
+        %h2 Not Just Email Marketing, So Much More!
+    .blank-space
     .row-fluid
+      .span6.text-center
+        = image_tag 'mac-dashboard.png', alt: 'placheolder'
       .span6
-        = image_tag 'http://placehold.it/700x300', alt: 'placheolder'
-      .span6
-        %p Over the past two years ...
+        %p ​Over the past two years, the Optyn team has been focusing on building the next evolutionary email marketing product that helps small business take advantage of the many email marketing benefits. Our email marketing software platform is fast, simple, and easy to use.
+        %p In fact, we pride ourselves on being the easiest marketing product for small businesses. The other great benefit is that it is more than just email marketing. Our product takes advantage of email marketing but it integrates other multi channels like social media to give merchants and small businesses an easy way to reach their customers.​
         %a.btn.btn-large.btn-primary{ href: new_merchants_manager_registration_path }
           Get started for FREE!
 
@@ -71,8 +79,10 @@
         .bg1
           %h2 Optyn is simple. Try it for FREE!
           %h3 Your first 100 customers are on us for lifetime!
+          .blank-space.large
           %h4 Start engaging your customers and increasing sales!
         .bg2
+          = image_tag "droplet.png", alt: "", class: "droplet"
           %a.btn.btn-large.btn-primary.btn-transparent{ href: new_merchants_manager_registration_path }
             TRY IT TODAY!
 
@@ -84,6 +94,11 @@
       // Scroll to next fold.
       event.preventDefault();
       $.scrollTo( "[data-scrollTo = " + $( this ).attr( 'data-scrollTo' ) + "]", 300 );
+    });
+
+    $( '.lp-welcome .carousel-inner .envelope' ).css({
+      opacity: '1',
+      bottom: '-70px'
     });
 
     //$('.carousel').carousel('cycle');
