@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{:height => "100%", :width => "100%", :bgcolor => "#EEEEEE", :style => "font-family: Helvetica, sans-serif; margin: 15px;"}
+    = content_for :header do
+      Welcome to Optyn
+
+    %table{:style => "background-color: #eee; padding: 20px; width: 100%; max-width: 800px; margin: auto;"}
+      %tr
+        %td
+          = render partial: "shared/system_emails/banner"
+
+          %table{:width => "100%", :style => "background-color: white;max-width:600px;", :align => "center"}
+            %tr
+              %td{:style => "bgcolor:#FFF;display:block!important; margin:0 auto; clear:both; padding: 20px;"}
+                %div
+                  %h3{:style => "margin-left: 0px; margin-right: 0px; margin-top:10px; margin-bottom:10px;"}
+                    Hi Alen,
+                  %p Thank you for signing up with Optyn.
+                  %h5 You can get started with 3 easy steps.
+                  %ul
+                    %li
+                      Sign in
+                    %li
+                      Import your contacts
+                    %li
+                      Create a new campaign    
+                  %p I hope this helps.
+                  %p{:align => "center"}
+                    
+                  %p
+                    Thank you,
+                    %br/
+                    The Optyn Team

@@ -3,8 +3,8 @@ require 'shop_timezone'
 
 class MessageMailer < ActionMailer::Base
   include MailerFragmentCaching
-  default from: 'Email <email@optyn.com>',
-          reply_to: "services@optyn.com"
+  default from: 'Optynmail <email@optynmail.com>',
+          reply_to: "services@optynmail.com"
           
   helper "merchants/messages"
   helper "message_mailer_forgery"
@@ -76,7 +76,7 @@ class MessageMailer < ActionMailer::Base
 
     ShopTimezone.set_timezone(@owner_shop)
 
-    mail(from: "services@optyn.com",
+    mail(from: "services@optynmail.com",
       to: SiteConfig.eatstreet_curation_email,
       cc: ["gaurav@optyn.com", "alen@optyn.com", "ian@eatstreet.com"],
       subject: "Message Curation: #{@owner_shop.name}",

@@ -1,7 +1,7 @@
 class MerchantMailer < ActionMailer::Base
 
-  default from: "Optyn.com <services@optyn.com>",
-          reply_to: "services@optyn.com"
+  default from: "Optynmail <services@optynmail.com>",
+          reply_to: "services@optynmail.com"
 
  helper "merchants/file_imports"
  
