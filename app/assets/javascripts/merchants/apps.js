@@ -89,7 +89,7 @@ function Apps() {
                 $('.app-container .advanced').replaceWith(data.advanced_content);
 
                 $('a#copy_description').zclip('remove');
-
+                    current.hookChangeChosen();
                 $('a#copy_description').zclip({
                     path: '/ZeroClipboard.swf',
                     copy: function () {
