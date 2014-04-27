@@ -18,7 +18,7 @@
         = link_to "Submit Feedback", "javascript:void(0)", class: "btn btn-primary"
 
       - else
-        = render partial: "segments/actual_form"
+        = render partial: "segments/actual_form", locals: {base_url: SiteConfig.email_app_base_url}
 
   = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
 

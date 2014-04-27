@@ -5,4 +5,4 @@
   %h2
     = @survey.title
 
-  = render partial: "segments/actual_form"
+  = render partial: "segments/actual_form", locals: {base_url: SiteConfig.app_base_url}

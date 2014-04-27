@@ -11,7 +11,7 @@ class EmailTrackingsController < ApplicationController
       p "ERROR ==> #{e.message}"
       p "ERROR ==> #{e.backtrace}"
     ensure
-      redirect_to (params[:redirect_url] || SiteConfig.app_base_url)
+      redirect_to (params[:redirect_url] || SiteConfig.email_app_base_url)
     end
   end
 end
