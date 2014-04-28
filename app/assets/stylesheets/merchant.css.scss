@@ -597,6 +597,9 @@
     line-height: 12rem;
     background-color: $light-gray;
     color: $medium-gray;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
   > span:last-child {
     display: block;
