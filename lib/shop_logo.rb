@@ -29,7 +29,7 @@ module ShopLogo
     if shop.has_logo?
       if shop.website.present?
         content = <<-HTML
-          <a here="#{shop.logo_location}" href="#{shop.website}" target="_blank">
+          <a here="#{shop.logo_location}" href="#{shop.display_website}" target="_blank">
             <img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
           </a>
         HTML
@@ -40,7 +40,7 @@ module ShopLogo
     else
       if shop.website.present?
         content = <<-HTML
-          <a href="#{shop.website}" target="_blank" style="color: white; font-weight: bold; text-decoration: none;">
+          <a href="#{shop.display_website}" target="_blank" style="color: white; font-weight: bold; text-decoration: none;">
             <h3>#{shop.name}</h3>
           </a>
         HTML
