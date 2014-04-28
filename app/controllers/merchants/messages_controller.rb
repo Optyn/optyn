@@ -73,7 +73,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @properties = @template.default_selectable_properties(current_shop)
     @header_font_families = Template::HEADER_FONT_FAMILIES
     @msg = "#{@message.name} #{@message.uuid}"
-    @public_msg = "#{SiteConfig.app_base_url}/#{current_shop.name.parameterize}/campaigns/#{@msg.parameterize}"
+    @public_msg = "#{SiteConfig.email_app_base_url}/#{current_shop.name.parameterize}/campaigns/#{@msg.parameterize}"
   end
 
   def create
@@ -405,7 +405,7 @@ class Merchants::MessagesController < Merchants::BaseController
     fb_body = nil
     if message.make_public
       msg = "#{message.name} #{message.uuid}"
-      link = "#{SiteConfig.app_base_url}#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
+      link = "#{SiteConfig.email_app_base_url}#{public_view_messages_path(message.shop.name.parameterize, msg.parameterize)}"
       fb_body = message.call_fb_api(link)
       twitter_body = message.call_twitter_api(link)
     end

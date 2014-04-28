@@ -31,4 +31,15 @@ namespace :message do
   task :batch_send => :environment do
     Message.batch_send
   end
+
+  desc "Task to update the 'from' field of messages email@optyn.com -> email@optynmail.com"
+  task :update_from_to_optyn_mail => :environment do
+    messages = Message.with_state([:queued, :draft])
+    messages.each do |message|
+      if message.partner.optyn?
+        message.from = message.send(:canned_from)
+        message.save(validate: false)
+      end
+    end
+  end
 end

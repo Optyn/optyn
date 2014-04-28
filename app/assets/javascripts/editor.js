@@ -226,7 +226,14 @@ OP = (function($, window, doucument, Optyn){
             var $temp = $("<div />");
             var $img = $('<img />');
              var $a = $('<a />');
+             var result = images[index][1].search(new RegExp(/^http/i));
+              if( !result ) {
+             $a.attr("href", images[index][1]);
+              } else {
              $a.attr("href", "http://" + images[index][1]);
+              }
+
+             
              $a.attr("class", "imageLink");
              if(images[index][1].length > 0){
              $a.append($img); 

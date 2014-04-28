@@ -9,6 +9,6 @@
           %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
             - social_profiles.each do |profile|
               - name = SocialProfile::SOCIAL_PROFILES[profile.sp_type]
-              = link_to(image_tag("#{SiteConfig.app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{profile.sp_link}", :target => "_blank")
+              = link_to(image_tag("#{SiteConfig.email_app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{profile.sp_link}", :target => "_blank")
                       
       %td
