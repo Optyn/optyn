@@ -47,6 +47,7 @@
         border: none;
         &:hover { border: none; }
       }
+      &.logged-in > li > .dropdown-toggle:hover { border: 0; }
     }
     .logo {
       line-height: 70px;

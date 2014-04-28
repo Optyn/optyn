@@ -39,6 +39,13 @@
       background-color: darken( $black, 30% );
       color: $white;
     }
+    i {
+      font-size: 28px;
+      margin-right: 10px;
+      color: rgb(125,139,144);
+      position: relative;
+      top: 5px;
+    }
   }
   .active {
     background-color: lighten( $black, 15% );
@@ -93,5 +100,7 @@
   #flat .merchant-menu a {
     line-height: 40px;
     font-size: 13px;
+    min-height: 40px;
+    i { top: 5px; }
   }
 }

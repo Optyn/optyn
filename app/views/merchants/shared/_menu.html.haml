@@ -36,6 +36,10 @@
       %a{:href => merchants_shop_path, :class => active_tab_class(['shops', 'subscriptions', 'registrations', 'merchant_managers', 'locations', 'social_profiles'])}
         = image_tag "merchant_menu_settings_icon.png", :alt => "Your Shop"
         Setup your Account
+
+    %li
+      = link_to( raw( "<i class='icon-play-sign'></i> Video Tutorials" ), '/video-tutorials' )
+
     %li
       = link_to(raw( "#{image_tag "merchant_menu_logout_icon.png"} Logout" ),  destroy_merchants_manager_session_path, :method => :delete, :class => 'logout')
 
