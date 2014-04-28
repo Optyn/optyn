@@ -43,7 +43,6 @@ OP = (function($, window, doucument, Optyn){
 
           $(submitButton).on('click', function() {
             var link = $(this).parent().siblings(".modal-body").find('input[type="url"]').val();
-            console.log(link);
             if(/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(link)) {
             } else if ( /^(http:\/\/|https:\/\/)?((([\w-]+\.)+[\w-]+)|localhost)(\/[\w- .\/?%&=]*)?/i.test(link)){}
             else{
@@ -157,7 +156,6 @@ OP = (function($, window, doucument, Optyn){
         });
 
         var images = properties.images;
-        console.log(images);
         $templateContainer.find('.uploaded-image').each(function(){
           var $uploadedImage = $(this);
           images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href")]);
@@ -194,18 +192,13 @@ OP = (function($, window, doucument, Optyn){
         link.text("Edit Link");
         var link_value = $( this ).parents('.modal').find('input[type="url"]').val()
         $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', link_value);
-        console.log(!link.parent().find("a.edit_image").siblings().hasClass(".add-img-link-option"));
-        if (link.parent().find("a.edit_image").siblings().hasClass(".add-img-link-option")){
-          console.log("WWWW")
-          link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
-        }
+        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
       });
     },
 
     RemoveImageLinkURL: function() {
       $(document).on('click', '.remove_link_from_image', function () {
         var containerId = $(".remove_link_from_image").attr("href");
-        console.log(containerId);
         var link = $(containerId).find("a[href='#AddLink" + containerId.replace("#", "") + "']");
         link.text("Add Link");
         var imageLink = $(".remove_link_from_image").attr("data-link");
