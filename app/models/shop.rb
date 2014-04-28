@@ -168,6 +168,40 @@ class Shop < ActiveRecord::Base
     self
   end
 
+  def form_code
+    app = self.oauth_application 
+    name_field = '<input type="text" id="user_name" name="user[name]" size="34" placeholder="enter name">' if self.oauth_application.show_name?
+    %Q(
+       <script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{app.uid}"></script>
+    <style type="text/css"> #optyn_button_wrapper .optyn-text { float: left; padding-left: 150px; padding-top: 20px; color: white; font-weight: bold; text-align: 
+    center; font-family:"Arial, Verdana", Arial, sans-serif; font-size: 16px; }  #optyn_button_wrapper .optyn-button { }  #close_optyn_button { float: right; font-weight: bold; 
+    margin: 0px; padding-right: 30px;
+    padding-top: 20px; color: white; vertical-align: middle; }
+    #close_optyn_button a { color: white; position: absolute; z-index: 100; }
+     #optyn-container { float:left; padding-left: 100px; padding-top: 12px; }
+     #optyn-container form { margin: 0px; }  #optyn-container form input[type="submit"]
+     { background: blue; border-radius: 4px; display: inline-block; height: 35px; top: 4px; color: red;
+      font-size: 15px; border: 1px #304d58; font-weight: bold; padding-left: 10px; padding-right: 10px; }
+      #optyn-container form input:hover[type="Submit"] { background: #80d81c; color: #fff;}
+       #optyn-container h4 { margin: 0px; color: white; }</style><div id="optyn-container">
+       <div id="optyn-first-container">
+       <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email.json?callback=?" id="optyn-email-form">
+       <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
+       #{name_field}
+       <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">
+      <input value="Subscribe" name="commit" id="commit" type="submit">
+       </form>
+      </div>
+      </div>
+       <iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>
+       <script type="text/javascript" src="#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{app.uid}">
+       </script>
+      <p>
+    </p>
+
+    )
+  end
+
   def starter_plan?
     plan.id == Plan.starter.id
   rescue
@@ -592,6 +626,10 @@ class Shop < ActiveRecord::Base
     app.begin_state = options[:begin_state]
     app.background_color = options[:background_color]
     app.redirect_uri_after_login = options[:redirect_uri_after_login]
+    app.custom_css = options[:custom_css]
+    app.label_ids = options[:label_ids]
+    app.show_name = options[:show_name]
+    app.show_form = options[:show_form]
   end
 
   def assign_embed_code(app)

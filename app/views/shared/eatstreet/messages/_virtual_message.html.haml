@@ -5,4 +5,4 @@
 %div
   - if @message.present? && @message_user.present?
     %strong
-      = link_to("Don't receive any messages from this shop?", "#{SiteConfig.app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@receiver.email, @message.uuid))}")
+      = link_to("Don't receive any messages from this shop?", "#{SiteConfig.email_app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@receiver.email, @message.uuid))}")

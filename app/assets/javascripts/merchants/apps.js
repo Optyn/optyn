@@ -16,6 +16,8 @@ function Apps() {
             this.hookSaveAndResetButton();
             this.hookOptynButtonTextToggle();
             this.hookTooltip();
+            this.hookChangeChosen();
+            this.hookBarOption();
         }
 
         if ($('.app-container').length) {
@@ -88,7 +90,7 @@ function Apps() {
                 $('.app-container .advanced').replaceWith(data.advanced_content);
 
                 $('a#copy_description').zclip('remove');
-
+                    current.hookChangeChosen();
                 $('a#copy_description').zclip({
                     path: '/ZeroClipboard.swf',
                     copy: function () {
@@ -134,5 +136,28 @@ function Apps() {
 
     this.hookTooltip = function(){
         $('.tip').tooltip()
+    };
+  this.hookChangeChosen = function () {
+    $('.chzn-select').chosen().change(function(){
+        var $select = $(this);
+
+        $.ajax({
+           url: $('#update_labels_merchants_survey_survey_answers_path').val(),
+           type: 'POST',
+           data: {user_id: $select.parent().find('.user_id').val(), label_ids: $select.val()}
+        });
+    });
+};
+
+ this.hookBarOption = function () {
+      $('.render_choice').change(function (event) {
+         var value = $(this).val();
+         if(value == 2){
+            $(".bar_options").hide();
+         }
+         else{
+            $(".bar_options").show();
+         }
+        });
     };
 }

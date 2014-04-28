@@ -188,7 +188,7 @@ class Message < ActiveRecord::Base
 
   def message_url(shop)
     msg = "#{self.name} #{self.uuid}"
-    "#{SiteConfig.app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
+    "#{SiteConfig.email_app_base_url}/#{shop.name.parameterize}/campaigns/#{msg.parameterize}"
   end
 
   def self.fetch_template_name(params_type)

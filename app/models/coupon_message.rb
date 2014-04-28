@@ -10,7 +10,7 @@ class CouponMessage < Message
   validate :validate_ending
 
   def get_qr_code_link(current_user)
-    url = "#{SiteConfig.app_base_url}/redeem/"
+    url = "#{SiteConfig.email_app_base_url}/redeem/"
 
     current_user_id = current_user ? current_user.id : nil
     message_user = Encryptor.encrypt(self.id, current_user_id)
