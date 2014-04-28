@@ -194,11 +194,7 @@ OP = (function($, window, doucument, Optyn){
         link.text("Edit Link");
         var link_value = $( this ).parents('.modal').find('input[type="url"]').val()
         $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', link_value);
-        console.log(!link.parent().find("a.edit_image").siblings().hasClass(".add-img-link-option"));
-        if (link.parent().find("a.edit_image").siblings().hasClass(".add-img-link-option")){
-          console.log("WWWW")
-          link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
-        }
+        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
       });
     },
 
