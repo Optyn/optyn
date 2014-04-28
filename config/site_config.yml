@@ -77,7 +77,7 @@ development:
   app_base_url: 'http://localhost:3000'
   app_base_url_http: 'http://localhost:3000'
   email_app_base_url: 'http://localhost:3000'
-  template_standard_url: 'http://localhost:3000/l'
+  template_standard_url: 'http://localoptynmail:3000/l'
   bucket: 'optyndevelopment'
   optyn_partner_redirect_uri: 'http://localhost:3001/partners/auth/optyn/callback'
   robots_redirect_uri: 'http://localhost:3000/robots.txt'
