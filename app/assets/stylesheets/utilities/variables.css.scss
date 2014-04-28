@@ -23,11 +23,12 @@ $twitter-blue: #598dca;
 
 /* Fonts -------------------------------------- */
 /* Include fonts */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
-@import url(https://fonts.googleapis.com/css?family=Merriweather);
-$serif: 'Merriweather', serif;
-$sans-serif: 'Open Sans', sans-serif;
+// @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+// @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+// @import url(https://fonts.googleapis.com/css?family=Merriweather);
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,300,700);
+// $serif: 'Merriweather', Georgia, serif;
+$sans-serif: 'Nunito', 'Open Sans', 'Ubuntu', 'Roboto', 'Helvetica Neue', sans-serif;
 
 
 /* Screen dimensions -------------------------- */

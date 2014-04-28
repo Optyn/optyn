@@ -1,66 +1,77 @@
-%footer.row-fluid
-  .span2
-    %h4 Our Company
-    = render 'layouts/links_company'
+%footer
+  .row-fluid
+    .span2.offset1
+      %h4 Our Company
+      = render 'layouts/links_company'
 
-  .span2
-    %a{:href => marketing_path, title: 'Marketing Software', alt: 'Marketing Software'}
-      %h4 Marketing Software
-    %ul
-      %li
-        %a{ :href => email_marketing_path } E-Mail Marketing
-      %li
-        %a{ :href => '/marketing/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
-      %li
-        %a{ :href => '/marketing/social-media-marketing'} Social Media Marketing
-      %li
-        %a{ :href => '/marketing/marketing-promotions'} Marketing Promotions
-      %li
-        %a{ :href => '/marketing/marketing-automation' } Marketing Automation
-      %li  
-        %a{ :href => '/marketing/marketing-syndication'} Marketing Syndication
-      %li
-        %a{ :href => '/marketing/multi-channel-marketing'} Multi-channel Marketing
+    .span2
+      %a{:href => marketing_path, title: 'Marketing Software', alt: 'Marketing Software'}
+        %h4 Marketing Software
+      %ul
+        %l.offset2i
+          %a{ :href => email_marketing_path } E-Mail Marketing
+        %li
+          %a{ :href => '/marketing/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
+        %li
+          %a{ :href => '/marketing/social-media-marketing'} Social Media Marketing
+        %li
+          %a{ :href => '/marketing/marketing-promotions'} Marketing Promotions
+        %li
+          %a{ :href => '/marketing/marketing-automation' } Marketing Automation
+        %li
+          %a{ :href => '/marketing/marketing-syndication'} Marketing Syndication
+        %li
+          %a{ :href => '/marketing/multi-channel-marketing'} Multi-channel Marketing
 
-  .span2
-    %a{:href => '/resources' }
-      %h4 Marketing Resources
-    %ul
-      %li
-        %a{ :href => '/resources/email-marketing' } E-Mail Marketing
-      %li
-        %a{ :href => '/resources/social-media-marketing'} Social Media Marketing
-      %li
-        %a{ :href => '/resources/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
-      %li
-        %a{ :href => '/resources/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
-      %li
-        %a{ :href => '/resources/digital-marketing'} Digital Marketing
-      %li
-        %a{ :href => '/resources/online-marketing'} Online Marketing
-      %li
-        %a{ :href => '/resources/customer-retention' } Customer Retention
+    .span2
+      %a{:href => '/resources' }
+        %h4 Marketing Resources
+      %ul
+        %l.offset2i
+          %a{ :href => '/resources/email-marketing' } E-Mail Marketing
+        %li
+          %a{ :href => '/resources/social-media-marketing'} Social Media Marketing
+        %li
+          %a{ :href => '/resources/email-marketing/mobile-responsive-emails' } Mobile Responsive E-Mails
+        %li
+          %a{ :href => '/resources/email-marketing/capturing-customer-emails' } Capturing Customer E-Mails
+        %li
+          %a{ :href => '/resources/digital-marketing'} Digital Marketing
+        %li
+          %a{ :href => '/resources/online-marketing'} Online Marketing
+        %li
+          %a{ :href => '/resources/customer-retention' } Customer Retention
 
-  .span2
-    %h4 Learn More
-    = render 'layouts/links_merchants'
+    .span2
+      %h4 Learn More
+      = render 'layouts/links_merchants'
 
-  .span2
-    %h4 Partner Programs
-    = render 'layouts/links_partner'
-    
-  .span2.text-left.sf-social
-    #social-love
-      .love-controls
-        .text-left
+    .span2
+      %h4 Partner Programs
+      = render 'layouts/links_partner'
+      %h4 Follow Us
+      .sf-social
+        %a.fb-page{ href: 'http://www.facebook.com/optyn', target: '_blank', alt: 'Optyn Facebook', :rel => "nofollow", title: 'Optyn Facebook' }
+          %i.icon-facebook
+        %a.tw-page{ href: 'http://www.twitter.com/optyn', target: '_blank', alt: 'Optyn Twitter ', :rel => "nofollow", title: 'Optyn Twitter' }
+          %i.icon-twitter
+        %a.gp-page{ href: 'https://plus.google.com/+OptynEmailMarketing', target: '_blank', alt: 'Google Plus E-Mail Marketing Page', rel: 'publisher', :rel => "nofollow", style: 'Optyn Google Plus' }
+          %i.icon-google-plus
+
+  .blank-space
+
+  .row-fluid
+    .span5.offset1
+      2013 &copy; Optyn, Inc. All rights reserved.
+    .span5.text-right
+      #social-love
+        .love-controls
           .fb-like{ "data-href" => "http://www.facebook.com/optyn", "data-width" => "30", "data-layout" => "button_count", "data-action" => "like", "data-show-faces" => "false", "data-share" => "false", "rel" => "nofollow" }
 
-        .text-left
           %a{ :href => "https://twitter.com/optyn", :class => "twitter-follow-button", "data-show-count" => "false" , "rel" => "nofollow"}Follow @optyn
           :javascript
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
-        .text-left
           .g-plusone{ "data-size" => "medium", "data-annotation" => "inline", "data-width" => "100", "rel" => "nofollow" }
           :javascript
             (function() {
@@ -68,14 +79,3 @@
               po.src = 'https://apis.google.com/js/plusone.js';
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
             })();
-    .blank-space
-    %a{ href: 'http://www.facebook.com/optyn', target: '_blank', alt: 'Optyn Facebook', :rel => "nofollow", title: 'Optyn Facebook' }
-      %i.icon-facebook
-    %a{ href: 'http://www.twitter.com/optyn', target: '_blank', alt: 'Optyn Twitter ', :rel => "nofollow", title: 'Optyn Twitter' }
-      %i.icon-twitter
-    %a{ href: 'https://plus.google.com/+OptynEmailMarketing', target: '_blank', alt: 'Google Plus E-Mail Marketing Page', rel: 'publisher', :rel => "nofollow", style: 'Optyn Google Plus' }
-      %i.icon-google-plus
-    %p
-      2013 &copy; Optyn, Inc.
-      %br
-      All rights reserved.

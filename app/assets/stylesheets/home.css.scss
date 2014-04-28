@@ -30,17 +30,22 @@
         margin: 0;
         &.tour { color: $white; }
       }
-      > .hover-applied:hover {
-        background: $blue;
-      }
       > li > a {
         color: $white;
         @media (max-width: 979px) { color: $black; }
-        font-weight: 400;
-        font-size: 0.85rem;
-        line-height: 1.8rem;
-        margin-top: 10px;
+        margin-top: 15px;
         padding: 10px;
+        border: solid 2px transparent;
+        @include border-radius( 3px );
+        &:hover {
+          border: solid 2px $white;
+        }
+      }
+      > .sign-up > a,
+      > .log-in > .btn-primary {
+        margin-top: 11px;
+        border: none;
+        &:hover { border: none; }
       }
     }
     .logo {
@@ -217,36 +222,31 @@
 
 footer {
   background-color: $dark-blue;
-  color: #fff;
+  color: rgba( 255, 255, 255, 0.3 );
   font-size: 13px;
   line-height: 20px;
-  padding: 1% 0;
+  font-weight: 300;
+  padding: 2% 0;
   a {
-    color: #61abe6;
+    color: rgba( 255, 255, 255, 0.5 );
+    line-height: 26px;
+    display: block;
     &:hover {
       color: rgba( $white, 0.8 );
     }
   }
   h4 {
     color: $white;
-    color: rgba( $white, 0.8 );
-    font-weight: normal;
+    color: rgba( $white, 0.7 );
+    font-weight: 400;
     font-size: 18px;
     margin-bottom: 10px;
   }
   .span2 {
     text-align: left;
   }
-  .span2:first-child {
-    padding-left: 2%;
-  }
   ul {
     margin-left: 0;
-  }
-  .span2:last-child {
-    p {
-      opacity: 0.5;
-    }
   }
   .share {
     position: absolute;
@@ -257,16 +257,15 @@ footer {
     top: -50px;
     right: 0;
   }
+  .love-controls .fb-like {
+    position: relative;
+    top: -6px;
+  }
 }
 
 .m-i {  /* Merchant's index */
-    background-color: $gray;
-    @media ( min-width: $qvga-w + 100 ) and ( max-width: $wxga-w - 1 ) {
-      background-image: image-url( 'main-ag-m.jpg' );
-    }
-    @media ( min-width: $wxga-w ) {
-      background-image: image-url( 'main-ag.jpg' );
-    }
+    background-color: $dark-blue;
+    color: $white;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -274,17 +273,7 @@ footer {
     padding: 2% 0;
     text-align: left;
     h1 {
-      font-weight: 700;
       border: none;
-      > span {
-        background: rgba(0, 0, 0, 0.75);
-        color: $white;
-        padding:0 10px 3px 10px;
-        display: inline-block;
-      }
-      > span:first-child {
-        margin-bottom: 10px;
-    }
   }
   .well {
     padding: 1%;
@@ -341,40 +330,11 @@ footer {
 }
 
 
-.lp-next-fold {
-  background-color: lighten( $dark-blue, 10% );
-  color: $white;
-  text-align: center;
-  position: relative;
-  padding: 2% 0;
-  > .arrow-down {
-    position: absolute;
-    top: -9px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    > a {
-      padding: 0 6px;
-      display: inline-block;
-      border-radius: 100px;
-      background-color: lighten( $dark-blue, 10% );
-      color: $green;
-      font-size: 25px;
-      line-height: 25px;
-      &:hover {
-        text-decoration: none;
-        color: $white;
-      }
-    }
-  }
-}
-
 .lp-testimonials {
   blockquote {
     border: 0;
     padding: 7% 0;
-    font: normal 2rem/3rem $serif;
-    text-align: center;
+    font: normal 1.7rem/2.5rem $sans-serif;
     @media ( max-width: $xga-h ) {
       font-size: 1.5rem;
       line-height: 2.2rem;
@@ -422,19 +382,132 @@ footer {
   }
 }
 
+.landing-page {
+  [class ^= "fold_"] {
+    padding: 5% 0;
+  }
+  h1 { border-bottom: 0; }
+  #welcome-carousel { margin-bottom: 0; }
+  .lp-welcome {
+    overflow: hidden;
+    padding: 0;
+    background: $dark-blue;
+    color: $white;
+    .span7:last-child { padding: 5% 0; }
+    .carousel-control {
+      background: transparent;
+      font-weight: normal;
+      height: 35px;
+      width: 35px;
+      border: none;
+      &:hover {
+        background: rgba(0,0,0,0.3);
+      }
+    }
+    .carousel-inner img {
+      height: 300px;
+      width: auto;
+    }
+    img.envelope {
+      opacity: 0;
+      height: 350px;
+      position: relative;
+      bottom: 0;
+      max-height: 300px;
+      @include transition( all 2s ease );
+    }
+    .slide-img:last-child img {
+      position: relative;
+      bottom: -70px;
+    }
+    .slide-img img {
+      height: auto;
+    }
+  }
+
+  .lp-testimonials {
+    background-image: -moz-linear-gradient(left, rgba(46,62,81,1) 20%, rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(20%,rgba(46,62,81,1)), color-stop(100%,rgba(0,0,0,0))), image-url( 'main-ag.jpg' );
+    background-image: -webkit-linear-gradient(left, rgba(46,62,81,1) 20%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: -o-linear-gradient(left, rgba(46,62,81,1) 20%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: -ms-linear-gradient(left, rgba(46,62,81,1) 20%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-image: linear-gradient(to right, rgba(46,62,81,1) 20%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    color: $white;
+    @media ( max-width: $xga-h ) {
+      background-image: -moz-linear-gradient(left, rgba(46,62,81,0.9) 0%, rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(46,62,81,0.9)), color-stop(100%,rgba(46,62,81,0.6))), image-url( 'main-ag-m.jpg' );
+      background-image: -webkit-linear-gradient(left, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: -o-linear-gradient(left, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: -ms-linear-gradient(left, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+      background-image: linear-gradient(to right, rgba(46,62,81,0.9) 0%,rgba(46,62,81,0.6) 100%), image-url( 'main-ag-m.jpg' );
+    }
+
+  }
+
+
+  .lp-steps-to-use { text-align: center; }
+  .lp-s-signup .step-icon,
+  .lp-s-import .step-icon,
+  .lp-s-prep .step-icon,
+  .lp-s-send .step-icon {
+    background-image:  image-url( 'sprite-walkthrough.png' );
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    background-position: 0 0;
+  }
+  .lp-s-import .step-icon { background-position: -304px 0px; }
+  .lp-s-prep .step-icon { background-position: -606px 0px; }
+  .lp-s-send .step-icon { background-position: -911px 0px; }
+
+  .lp-try-it {
+    color: $white;
+    padding: 0;
+    h2 {
+      display: inline-block;
+      border-bottom: solid 1px $white;
+      font-weight: 700;
+      line-height: 2.8rem;
+    }
+    .bg1, .bg2 { padding: 3% 0; }
+    .bg1 { background-color: #E67E1D; }
+    .bg2 {
+      position: relative;
+      background-color: #C05B01;
+      .droplet {
+        position: absolute;
+        top: 0;
+        left: 49%;
+      }
+    }
+  }
+}
+#flat .bg2 .btn-transparent:hover { color: #C05B01; }
+
 #flat .sf-social {
   > a {
-    font-size: 2rem;
-    line-height: 3rem;
-    color: rgba( $white, 0.8 );
+    font-size: 1.2rem;
+    line-height: 42px;
+    color: $dark-blue;
     margin-right: 5px;
+    display: inline-block;
+    padding: 0 12px;
+    border-radius: 25px;
+    width: 40px;
+    height: 40px;
     @include transition( all 0.4s ease );
     &:hover {
       text-decoration: none;
-      color: $white;
-      text-shadow: 3px 3px 0px rgba( #000, 0.8 );
+      background: $white;
     }
   }
+  .fb-page { background: $fb-blue; padding-left: 15px; }
+  .tw-page { background: $twitter-blue; }
+  .gp-page { background: $google-plus-red; }
 }
 
 
@@ -495,6 +568,11 @@ footer {
     .m-i .vid-lnk {
       margin-top: 0;
     }
+    .landing-page .lp-welcome .slide-img img {
+      height: 200px;
+      width: auto;
+      bottom: -20px !important;
+    }
   } // #flat
   .consumers {
     background-color: #ecf0f1;
@@ -523,7 +601,9 @@ footer {
     }
     .btn.btn-navbar {
       margin-right: 20px;
+      box-shadow: none;
     }
+    header .nav > li > a { text-shadow: none; }
   }
   .logo {
     margin-left: 30px;
