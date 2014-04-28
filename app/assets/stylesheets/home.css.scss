@@ -43,7 +43,7 @@
       }
       > .sign-up > a,
       > .log-in > .btn-primary {
-        margin-top: 10px;
+        margin-top: 11px;
         border: none;
         &:hover { border: none; }
       }
@@ -393,7 +393,7 @@ footer {
     padding: 0;
     background: $dark-blue;
     color: $white;
-    .span6:last-child { padding: 5% 0; }
+    .span7:last-child { padding: 5% 0; }
     .carousel-control {
       background: transparent;
       font-weight: normal;
@@ -413,7 +413,15 @@ footer {
       height: 350px;
       position: relative;
       bottom: 0;
+      max-height: 300px;
       @include transition( all 2s ease );
+    }
+    .slide-img:last-child img {
+      position: relative;
+      bottom: -70px;
+    }
+    .slide-img img {
+      height: auto;
     }
   }
 
@@ -560,6 +568,11 @@ footer {
     .m-i .vid-lnk {
       margin-top: 0;
     }
+    .landing-page .lp-welcome .slide-img img {
+      height: 200px;
+      width: auto;
+      bottom: -20px !important;
+    }
   } // #flat
   .consumers {
     background-color: #ecf0f1;
@@ -588,7 +601,9 @@ footer {
     }
     .btn.btn-navbar {
       margin-right: 20px;
+      box-shadow: none;
     }
+    header .nav > li > a { text-shadow: none; }
   }
   .logo {
     margin-left: 30px;

@@ -984,8 +984,9 @@ form {
       color: $gray;
     }
     &:active {
-      background-color: $white;
-      color: $gray;
+      background-color: rgba( 255, 255, 255, 0.7 );
+      border-color: rgba( 255, 255, 255, 0.7 );
+      box-shadow: none;
     }
   }
   .btn-transparent-primary {
@@ -998,8 +999,10 @@ form {
       color: $white;
     }
     &:active {
-      background-color: $blue;
+      background-color: darken( $blue, 15% );
+      border-color: darken( $blue, 15% );
       color: $white;
+      box-shadow: none;
     }
   }
   .btn-group .btn {
