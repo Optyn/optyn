@@ -196,9 +196,6 @@ class Shop < ActiveRecord::Base
        <iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>
        <script type="text/javascript" src="#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{app.uid}">
        </script>
-      <p>
-    </p>
-
     )
   end
 
