@@ -4,12 +4,11 @@
 
 .pad3pc
   .header.row-fluid.no-pad
-    .span8  
-      .text-warning
-        Hi
-        %strong
-          == #{current_manager.name}!
-        Here's what's going on today.
+    .span12.text-warning
+      Hi
+      %strong
+        == #{current_manager.name}!
+      Here's what's going on today.
     /.span4
     /%a.btn.btn-success{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
     /Create New Campaign
