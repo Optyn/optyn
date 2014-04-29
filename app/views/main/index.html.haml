@@ -3,35 +3,23 @@
 
 .landing-page
   .fold_0.lp-welcome
-    #welcome-carousel.carousel.slide
-      .carousel-inner
-        .active.item
-          .row-fluid.text-center
-            .span5.slide-img
-              = image_tag 'envelope.png', alt: 'placheolder', class: 'envelope'
-            .span7
-              %h1 Create Email Marketing Campaigns in 2 Minutes or Less!
-              %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
-                Get started!
-        .item
-          .row-fluid.text-center
-            .span5.slide-img
-              = image_tag 'mobile-ready.png', alt: 'mobile ready'
-            .span7
-              %h1 100% Mobile Friendly Email Campaigns Without Any Coding %Expertise
-              %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
-                Get started!
-      %a.carousel-control.left{ href: '#welcome-carousel', 'data-slide' => 'prev' }
-        %i.icon-angle-left
-      %a.carousel-control.right{ href: '#welcome-carousel', 'data-slide' => 'next' }
-        %i.icon-angle-right
-
-  .fold_1
     .row-fluid.text-center
+      .span4.offset1.slide-img.translateX-15px
+        = image_tag 'mobile-ready.png', alt: 'mobile ready'
+      .span6.slide-text.translateX15px
+        %h1
+          Create Your Email Campaigns
+          %br
+          in 2 Minutes or Less!
+        %a.btn.btn-large.btn-warning{ href: new_merchants_manager_registration_path }
+          Get started!
+
+  .fold_1.lp-steps-to-use
+    .row-fluid
       .span12
         %h2 Easy Steps to Use Optyn!
     .blank-space
-    .row-fluid.lp-steps-to-use
+    .row-fluid
       .span3.lp-s-signup
         .step-icon
         1. Sign Up
@@ -88,18 +76,13 @@
 
 :javascript
   $( function() {
-    $("#m-feat-vid").colorbox({iframe:true, innerWidth:640, innerHeight:390});
 
-    $( '.lp-next-fold a' ).click( function( event ) {
-      // Scroll to next fold.
-      event.preventDefault();
-      $.scrollTo( "[data-scrollTo = " + $( this ).attr( 'data-scrollTo' ) + "]", 300 );
-    });
-
-    $( '.lp-welcome .carousel-inner .envelope' ).css({
+    $( '.lp-welcome .slide-img' ).css({
       opacity: '1',
-      bottom: '-70px'
-    });
+    }).removeClass( 'translateX-15px' );
 
-    //$('.carousel').carousel('cycle');
+    $( '.lp-welcome .slide-text' ).css({
+      opacity: '1',
+    }).removeClass( 'translateX15px' );
+
   });

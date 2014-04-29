@@ -385,46 +385,37 @@ footer {
 
 .landing-page {
   [class ^= "fold_"] {
-    padding: 5% 0;
+    padding: 4% 0;
   }
   h1 { border-bottom: 0; }
-  #welcome-carousel { margin-bottom: 0; }
   .lp-welcome {
     overflow: hidden;
-    padding: 0;
+    padding: 3% 0;
     background: $dark-blue;
     color: $white;
-    .span7:last-child { padding: 5% 0; }
-    .carousel-control {
-      background: transparent;
-      font-weight: normal;
-      height: 35px;
-      width: 35px;
-      border: none;
-      &:hover {
-        background: rgba(0,0,0,0.3);
-      }
+    h1 {
+      font-weight: 800;
+      font-size: 2.4rem;
+      font-family: $open-sans;
     }
-    .carousel-inner img {
-      height: 300px;
-      width: auto;
-    }
-    img.envelope {
+    .span6 { padding-top: 5px; }
+    .slide-img,
+    .slide-text {
       opacity: 0;
-      height: 350px;
       position: relative;
-      bottom: 0;
-      max-height: 300px;
-      @include transition( all 2s ease );
+      @include transition( all 2s linear );
     }
-    .slide-img:last-child img {
-      position: relative;
-      bottom: -70px;
+    .slide-img {
+      transform: translateX(15px);
+    }
+    .slide-text {
     }
     .slide-img img {
       height: auto;
     }
   }
+  .translateX15px { @include transform( translateX( 15px ))}
+  .translateX-15px { @include transform( translateX( -15px ))}
 
   .lp-testimonials {
     background-image: -moz-linear-gradient(left, rgba(46,62,81,1) 20%, rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
@@ -449,7 +440,10 @@ footer {
   }
 
 
-  .lp-steps-to-use { text-align: center; }
+  .lp-steps-to-use {
+    text-align: center;
+    padding: 2% 0;
+  }
   .lp-s-signup .step-icon,
   .lp-s-import .step-icon,
   .lp-s-prep .step-icon,
