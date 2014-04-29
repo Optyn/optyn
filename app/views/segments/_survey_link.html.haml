@@ -1,0 +1,6 @@
+%div
+  = "Please provide your valuable Feedback"
+  %br
+  - survey_name = (@survey.title.blank? ? "#{@survey.shop.name} Survey" : @survey.title rescue "")
+  %div{style: "text-align:center"}
+    = link_to(survey_name, path, style: 'border: medium none; border-radius: 3px; font: 2rem/1.6rem "Nunito","Open Sans","Ubuntu","Roboto","Helvetica Neue",sans-serif; letter-spacing: 1px; transition: all 0.2s ease-out 0s; background: none repeat scroll 0 0 #64AAEF; color: #FFFFFF; padding:12px 31px; display: inline-block;')
