@@ -315,7 +315,7 @@ module Messagecenter
           end
 
           if header_properties['twitter'].present?
-            css_style = header_properties['twitter']['show'] == "0" ? "display:none" : "display:inline"
+            css_style = header_properties['twitter']['show'] == "0" ? "display:none !important" : "display:inline !important"
             tw_style = @parsed_html.css(".optyn-twittershare").first.attribute('style').value
             @parsed_html.css(".optyn-twittershare").first.attribute('style').value = tw_style + css_style
           end
@@ -327,7 +327,7 @@ module Messagecenter
           end
 
           if header_properties['facebook'].present?
-            css_style = header_properties['facebook']['show'] == "0" ? "display:none" : "display:inline"
+            css_style = header_properties['facebook']['show'] == "0" ? "display:none !important" : "display:inline !important"
             tw_style = @parsed_html.css(".optyn-fbshare").first.attribute('style').value
             @parsed_html.css(".optyn-fbshare").first.attribute('style').value = tw_style + css_style
           end

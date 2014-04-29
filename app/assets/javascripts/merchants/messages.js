@@ -1,21 +1,12 @@
 var props = null;
-var facebookHtml,twitterHtml;
-var socialurl = false;
-var socialCheck = false;
 
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();  
 
     //loading social sharing options checkboxes
-    $('#customHtmlTemplate').load(function(){ 
-      if(socialCheck == false)
-        {
-          merchantMessage.socialSharing();
+    $('#customHtmlTemplate').load(function(){
           merchantMessage.manageLogo();
-          socialCheck = true;
-          merchantMessage.reloadTemplateSelectorIframe();
-        }
     });
 });
 
@@ -112,6 +103,8 @@ function MerchantMessage() {
           this.hookPopulateTemplateSettableProperties();
           this.hookTemplateMenuColorPicker();
           this.hookTemplateMenuColorPickerChange();
+          this.socialSharing();
+          this.updateSocialSharing();
           this.refreshTemplatePropertiesView();
         }
         this.hookOpenLinkClickReport();
@@ -798,48 +791,41 @@ function MerchantMessage() {
     };
 
     // manage social sharing icons visibility
-    this.socialSharing = function(){          
-      twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
-      facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
-      twitterCustom = $("#customHtmlTemplate").contents().find("twittershare")
-      fbCustom = $("#customHtmlTemplate").contents().find("fbshare")
+    this.socialSharing = function(){    
+      // var _this = this;
+      $('#customHtmlTemplate').load(function(){   
+        var twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
+        var facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
+        var twitterCustom = $("#customHtmlTemplate").contents().find("twittershare")
+        var fbCustom = $("#customHtmlTemplate").contents().find("fbshare")
 
-      if((twitter.length>0) || (facebook.length>0) || (fbCustom.length>0) || (twitterCustom.length>0))
-      { 
-        if(twitter.css("display") == "none")
-          $("#twitter-setting").prop('checked', false);
-        else
-          $("#twitter-setting").prop('checked', true);
+        if((twitter.length>0) || (facebook.length>0) || (fbCustom.length>0) || (twitterCustom.length>0))
+        { 
+          if(twitter.css("display") == "none")
+            $("#twitter-setting").prop('checked', false);
+          else
+            $("#twitter-setting").prop('checked', true);
 
-        if(facebook.css("display") == "none")
-          $("#facebook-setting").prop('checked',false)
-        else
-          $("#facebook-setting").prop('checked',true)
-        this.setSocialShareUrl();
-        var templateMessage = this;
-
-        $("#facebook-setting, #twitter-setting").on('change',function(){          
-          templateMessage.reloadTemplateSelectorIframe();
-        });
-      }
-      else
-        {$(".control-group.social-share").remove()}
-
-    };
-
-    this.setSocialShareUrl = function(shareurl, text){
-      if(socialurl == false)
-        {
-          var templateMessage = this;
-          twitter = $("#customHtmlTemplate").contents().find("twittershare");
-          facebook = $("#customHtmlTemplate").contents().find("fbshare");
-          if((twitter.length>0) || (facebook.length>0))
-            templateMessage.reloadTemplateSelectorIframe();
-          socialurl = true;
+          if(facebook.css("display") == "none")
+            $("#facebook-setting").prop('checked',false)
+          else
+            $("#facebook-setting").prop('checked',true)
+          // _this.setSocialShareUrl();
         }
+        else
+          {$(".control-group.social-share").remove()}
+      });
 
     };
 
+    //When the checkboxes are checked and unchecked. An event already observes change. 
+    //However making sure that that it observes the click event.
+    this.updateSocialSharing = function(){
+      var _this = this;
+      $(document).on('click', '#facebook-setting, #twitter-setting', function(){
+        _this.reloadTemplateSelectorIframe();
+      });
+    };
 
     this.manageLogo = function(){
       var templateMessage = this;

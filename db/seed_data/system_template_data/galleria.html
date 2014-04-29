@@ -871,6 +871,7 @@
     .w410{width: 410px;}
     .h10{height: 10px;}
     .w85{width: 85px;}
+    .w170{width: 170px;}
     h2 { font-size: 16px; font-weight: bold; }
     img { height: auto; }
     .text-pad-10 { padding: 10px; }
@@ -921,6 +922,7 @@
     .optyn-fbshare,
     .optyn-twittershare { text-align: right; height: 20px; }
     .header-social .padh10 { padding: 10px 0; }
+    .header-social img{display: inline !important; float: none; clear: both;}
     .optyn-fbshare img,
     .optyn-twittershare img,
     .optyn-fbshare a,
@@ -938,6 +940,7 @@
         height: auto;
       }
       table[class="body"] table.container .header-social .w85 { width: 85px !important; }
+      table[class="body"] table.container .header-social .w170 { width: 170px !important; }
       table[class="body"] table.header-social td.w410 { width: 130px !important; }
       table[class="body"] table.container td.w10 { width: 10px !important; }
       table[class="body"] td.sidebar,
@@ -1023,12 +1026,11 @@
                       <table width="580" class="w580" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                           <td class="w410 empty no-pad" align="right" width="410"></td>
-                          <td class="w85 link no-pad" align="right" width="85">
+                          <td class="w170 link no-pad" align="right" width="170" style="text-align: right;">
                             <fbshare shareurl = "http://www.optyn.com/">
                               <img alt="Share on Facebook" width="72" height="18" src="http://www.optyn.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </fbshare>
-                          </td>
-                          <td class="w85 link no-pad" align="right" width="85">
+                            &nbsp;&nbsp;
                             <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
                               <img alt="Tweet" width="72" height="18" src="http://www.optyn.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </twittershare>
