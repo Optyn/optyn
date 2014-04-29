@@ -1,8 +1,11 @@
-%h1
-  Segments
-/Main Body
-#merchants.pad3pc
-  %h2
-    = @survey.title
+.row-fluid.titlebar
+  .span6.offset3.logo
+    .logo-cont.text-center
+      - if @survey.shop.has_logo?
+        = image_tag @survey.shop.logo_img.url, alt: @survey.shop.name, title: @survey.shop.name
+    /Main Body
+    #merchants.pad3pc
+      %h2
+        = @survey.title
 
-  = render partial: "segments/actual_form", locals: {base_url: SiteConfig.app_base_url}
+      = render partial: "segments/actual_form", locals: {base_url: SiteConfig.app_base_url}
