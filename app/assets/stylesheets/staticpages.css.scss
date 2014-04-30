@@ -206,3 +206,65 @@
     margin-top: 3%;
   }
 }
+
+
+.case-study {
+  h1.salvatores {
+    background-image: image-url( 'salvatores-logo.png' );
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: -23px;
+    padding-right: 135px;
+  }
+  .campaign-results {
+    background: $dark-blue;
+    color: $white;
+  }
+  .row2 {
+    background: darken( $dark-blue, 10% );
+    .droplet {
+      position: absolute;
+      left: 49%;
+      top: 0;
+      width: 43px;
+      height: 22px;
+      background-image: image-url( 'droplet-dark-blue.png' );
+    }
+  }
+  .padV4pc {
+    padding-top: 4%;
+    padding-bottom: 4%;
+  }
+  h2 {
+    font-size: 25px;
+    line-height: 35px;
+    @media ( max-width: $hd-w ) and ( min-width: $xga-h ) {
+      font-size: 23px;
+      line-height: 32px;
+    }
+    @media ( min-width: $hdp-w ) {
+      font-size: 35px;
+      line-height: 50px;
+    }
+  }
+  p {
+    font-size: 15px;
+    line-height: 23px;
+    @media ( min-width: $hdp-w ) {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+  .try-it {
+    background-color: $green;
+    color: $white;
+    padding: 2%;
+    p {
+      padding: 4px 0;
+      border: solid 2px transparent;
+    }
+  }
+  .interior > img { width: 100%; }
+}
+#flat .case-study .try-it .btn-transparent:hover { color: $green; }

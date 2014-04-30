@@ -907,6 +907,7 @@ form {
     }
     &:active { box-shadow: inset 0 0 20px $gray; }
   }
+  .btn-block { text-align: center; }
   .btn-small {
     font-size: 0.9rem;
     line-height: 1.35rem;
