@@ -9,6 +9,8 @@ Optyn::Application.routes.draw do
   match 'dashboard' => 'dashboards#index', as: :consumers_root
   match 'merchants' => 'merchants/dashboards#index', as: :merchants_root
   match '/video-tutorials' => 'main#merchant_video_tutorials'
+  match '/case-studies/bandung' => 'main#bandung_case_study'
+  match '/case-studies/salvatores' => 'main#salvatores_case_study'
 
   # Static Pages created by Alen. Please make sure if the static pages are modified the ssl enforcement is changed too.
   match 'about' => 'main#about', :as => :about
