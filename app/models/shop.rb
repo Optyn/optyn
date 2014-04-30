@@ -176,8 +176,8 @@ class Shop < ActiveRecord::Base
     <style type="text/css">"#{self.oauth_application.custom_css}"</style><div id="optyn-container">
        <div id="optyn-first-container">
        <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email.json?callback=?" id="optyn-email-form">
-       <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
        #{name_field}
+       <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
        <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">
       <input value="Subscribe" name="commit" id="commit" type="submit">
        </form>
