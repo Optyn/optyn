@@ -181,17 +181,13 @@ function handleTabLayout() {
 $( function() {
     function setVideoTutorialsLinkPosition() {
         $videoTutorialsLink = $('.video-tutorials-link');
-        console.log( 'setVideoTutorialsLinkPosition' );
         var reposition = function() {
-            console.log( 'reposition' );
             var viewportHeight = $( window ).height();
             var scrollTop = $( window ).scrollTop();
             var footerTop = $( 'footer' ).position().top;
             var footerHeight = $('footer').css( 'height' );
-            console.log( viewportHeight, scrollTop, footerTop, viewportHeight + scrollTop );
             $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '25%', 'border-top': 'solid 1px black', background: '#333'});
             if( viewportHeight + scrollTop > footerTop ) {
-                console.log( 'Footer is now visible.' );
                 $videoTutorialsLink.css({'bottom': footerHeight});
             } else {
                 $videoTutorialsLink.css({bottom: '0'});
