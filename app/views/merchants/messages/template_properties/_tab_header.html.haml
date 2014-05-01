@@ -20,7 +20,7 @@
 
   .control-group.disc
     = label_tag "logo", "Header Content", class: 'control-label'
-    #discount_type_container.controls.checkbox
+    .controls.checkbox
       .btn-group{ 'data-toggle' => 'buttons-radio' }
         %button.btn.btn-primary.active{ :id => 'properties_header_logo_image', :type => 'button', 'data-value' => :image } Image
         %button.btn.btn-primary{ :id => 'properties_header_logo_text', :type => 'button', 'data-value' => :text } Text
