@@ -23,6 +23,7 @@
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
-= hidden_field_tag "send_on_error", @message.errors[:send_on]    
+= hidden_field_tag "send_on_error", @message.errors[:send_on]
+= f.hidden_field :make_public, value: true   
   
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
