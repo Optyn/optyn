@@ -1,54 +1,65 @@
-.row-fluid
-  %h1.span9 The Bandung Restaurant, Madison, Wisconsin
-  .span3.text-right
-    = image_tag "http://placehold.it/200x50", alt: 'Bandung logo'
+.case-study
+  .row-fluid
+    .span10.offset1
+      %h1.bandung The Bandung Restaurant, Madison, Wisconsin
 
-.row-fluid
-  .span12
-    = image_tag "http://placehold.it/1920x700", alt: 'Bandung recipe'
+  .row-fluid
+    .span10.offset1.text-center.interior
+      = image_tag "bandung-recipe.jpg", alt: 'Bandung recipe'
 
-.row-fluid
-  .span6
-    %h2 The Challenge
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam pariatur culpa saepe eaque odit perspiciatis veniam. Quasi, voluptate, tempore vitae amet eaque temporibus inventore officiis. Dolor, tenetur unde fuga id.
-    %h2 The Goals
-    %ul
-      %li Increase sales without destroying margins.
-      %li Focus on engaging and rewarding existing customers.
-      %li Implement a program where the drivers of success and the results could be measured and analyzed.
-  .span6
-    %h2 Solution
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, non laborum nemo ipsa numquam consectetur harum aperiam libero eos quod earum ea. Dolor, deleniti voluptatum at quisquam expedita nam ratione.
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, reiciendis, vero, cupiditate, placeat quo dolore tenetur nisi excepturi provident cum animi voluptatem fugit corporis quod possimus vel autem aliquam nihil.
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, vero quasi laudantium quo asperiores nihil est eligendi ab sint exercitationem sed obcaecati dolor impedit recusandae facilis neque error quod fugiat!
+  .row-fluid.padV4pc
+    .span5.offset1
+      %h2 The Challenge
+      %p The Bandung Restaurant in Madison, Wisconsin serves traditional Indonesian fare from the various regions of Indonesia as well as original and creative fusion entrees. The restaurant is decrorated with authentic Indonesian arts, crafts and batiks - creating a casual yet elegant atmosphere.
+      %p
+        Bandung was
+        %strong seeking a way to increase sales
+        and generate excitement without having to rely on a daily deal promotion or other expensive advertising programs.
+      %h2 The Goals
+      %ul.bullet-circle
+        %li Increase sales without destroying margins.
+        %li Focus on engaging and rewarding existing customers.
+        %li Implement a program where the drivers of success and the results could be measured and analyzed.
+    .span5
+      %h2 Solution
+      %p Bandung decided to do a test using Optyn to create two email marketing campaigns.
+      %p The first campaign promoted a 20% Off dinner special. This special had been offered before, but only marketed in the restaurant.
+      %p The second campaign was scheduled to be sent two weeks after the first campaign and promoted a new Mega Sale (an Indonesian Specialty). In both cases, Bandung's owner, using Optyn's simple step-by-step process, created, scheduled and sent - in less than 2 minutes beautifully designed, mobile responsive, professional looking emails to the 700 patrons on Bandung's email list.
 
-.row-fluid.text-center
-  .span12
-    .benchmark
-    .h2 Test Results
-    .campaign1
-      %h3
-        CAMPAIGN 1 -
-        %em 20% OFF SPECIAL
-      %h4
-        Lift Above Benchmark Week:
-        %em $1,117
-    .campaign2
-      %h3
-        CAMPAIGN 2 -
-        %em MEGA SALE
-      %h4
-        Lift Above Benchmark Week:
-        %em $527
+  .campaign-results
+    .row-fluid.text-center.padV4pc
+      .span10.offset1
+        %h2 Benchmark
+        %p
+          Prior to the Optyn campaign, Bandung's best sales week ever for EatStreet orders was Dec 26, 2013 finals week at the Universitty of Wisconsin when
+          %strong $2,265
+          worth of meals were sold. Including it's best sales week, Bandung's average weekly EatStreet revenue, and the number used as the benchmark, was $1,677.
+        .blank-space
+        = image_tag "bandung-statistics.png", alt: 'Bandung campaign statistics'
+  .row2.padV4pc
+    .droplet
+    .row-fluid.text-center
+      .span10.offset1
+        = image_tag "bandung-statistics-2.png", alt: 'Bandung campaign statistics'
+  .row3
+    .droplet
+    .row-fluid
+      .span10.offset1
+        %p
+          Averaging the lifts of both campaigns and annualizing them, Bandung's increased revenue potential is estimated to be
+          %strong $42,700.
+          Actual results will vary based on the offering and frequency of campaigns, but it is clear that Optyn can have a significant positive impact on Bandung's revenue.
 
-.row-fluid
-  .span6
-    %h2 Conclusion
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ipsam, eaque, commodi, dolores molestiae totam a consequuntur dicta necessitatibus mollitia ratione magni expedita porro sint temporibus atque consectetur minus excepturi.
-  .span6
-    %h2 About Optyn
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ipsam, eaque, commodi, dolores molestiae totam a consequuntur dicta necessitatibus mollitia ratione magni expedita porro sint temporibus atque consectetur minus excepturi.
+  .row-fluid.padV4pc
+    .span5.offset1
+      %h2 Conclusion
+      %p Optyn’s software is easy for merchants to understand and use, and best of all it delivers proven results. Small businesses need to engage and market to their customers on a consistent basis so they can increase sales andcustomer loyalty. Optyn is the perfect way to achieve these goals as it makes marketing simple, fast and effective.
+    .span5
+      %h2 About Optyn
+      %p Optyn makes marketing simple for independent and franchise businessowners by giving them quick and easy tools to acquire and engagecustomers. While email is a primary communication mechanism, Optyn’sproduct integrates with social media and has been designed as a marketing automation platform. Optyn also provides SEO, SEM and other traffic and sales building services.
 
-.row-fluid
-  %p.span8 Try it today and start engaging your customers and increasing sales.
-  %a.btn-transparent.btn-large.span4{ href: '#' } Get Started for FREE!
+  .row-fluid.try-it
+    .span7.offset1
+      %p Try it today and start engaging your customers and increasing sales.
+    .span3
+      %a.btn.btn-transparent.btn-block.btn-large{ href: new_merchants_manager_registration_path } Get Started for FREE!

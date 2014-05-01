@@ -208,21 +208,42 @@
 }
 
 
+@mixin large-fonts {
+  h2 {
+    font-size: 2rem;
+    line-height: 3rem;
+    color: $orange;
+  }
+  p {
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+}
+
 .case-study {
-  h1.salvatores {
-    background-image: image-url( 'salvatores-logo.png' );
+  h1.salvatores,
+  h1.bandung {
     background-position: top right;
     background-repeat: no-repeat;
     background-position-x: right;
-    background-position-y: -23px;
     padding-right: 135px;
+  }
+  h1.salvator {
+    background-position-y: -23px;
+    background-image: image-url( 'salvatores-logo.png' );
+  }
+  h1.bandung {
+    background-position-y: -20px;
+    background-image: image-url( 'bandung-logo.gif' );
   }
   .campaign-results {
     background: $dark-blue;
     color: $white;
+    @include large-fonts;
   }
   .row2 {
     background: darken( $dark-blue, 10% );
+    position: relative;
     .droplet {
       position: absolute;
       left: 49%;
@@ -231,6 +252,13 @@
       height: 22px;
       background-image: image-url( 'droplet-dark-blue.png' );
     }
+  }
+  .row3 {
+    background: $blue;
+    background: rgb( 76, 150, 161 );
+    color: $white;
+    padding: 3% 0;
+    @include large-fonts;
   }
   .padV4pc {
     padding-top: 4%;
@@ -261,7 +289,9 @@
     color: $white;
     padding: 2%;
     p {
-      padding: 4px 0;
+      font-size: 1.3em;
+      line-height: 1.6em;
+      padding: 8px 0px;
       border: solid 2px transparent;
     }
   }
