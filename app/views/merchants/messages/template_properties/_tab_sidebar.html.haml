@@ -1,0 +1,83 @@
+- if is_sidebar_template(@template.name)
+  #template_sidebar.tab-pane
+    .control-group
+      = label_tag "background_color", "Background Color", class: 'control-label'
+      .controls
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][css][background-color]", '', class: 'input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
+
+    .control-group
+      = label_tag "title_color", "Title Color:", class: 'control-label'
+      .controls
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][headline][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
+
+    .control-group
+      = label_tag "link_color", "Link Color:", class: 'control-label'
+      .controls
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][link][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
+
+    .control-group
+      = label_tag "link_color", "Button Text Color:", class: 'control-label'
+      .controls
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][button][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
+                
+    .control-group
+      = label_tag "link_color", "Button Background Color:", class: 'control-label'
+      .controls
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][button][css][background-color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}                        
+
+    .control-group
+      = label_tag "paragraph_color", "Paragraph Color:", class: 'control-label'
+      .controls
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][paragraph][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
+
+    .actions
+      .pull-left
+        %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => 'template_header'}
+          %i{class: "icon-arrow-left"}
+
+      .pull-right
+        %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_content'}
+          %i{class: "icon-arrow-right"}
+
+- if is_hero_template(@template.name)
+  #template_sidebar.tab-pane
+    = render :partial => "sidebar_menu", :locals => {:template_id => "rightSidebar"}
+    = render :partial => "sidebar_menu", :locals => {:template_id => "leftSidebar"}
+    .actions
+      .pull-left
+        %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => 'template_header'}
+          %i{class: "icon-arrow-left"}
+
+      .pull-right
+        %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_content'}
+          %i{class: "icon-arrow-right"}

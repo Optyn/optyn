@@ -319,6 +319,12 @@ class Message < ActiveRecord::Base
       existing_template = Template.for_uuid(template_identifier)
       self.template_id = existing_template.system_generated ? Template.copy(existing_template.id, name, shop, properties) : template_id_assigned = existing_template.id
       
+      begin
+        template_image = TemplateImage.find(properties.header.template_header_image_id)
+        template_image.update_attributes(template_id: self.template_id)
+      rescue
+      end
+
       self.save(validate: false)
     end
   end

@@ -1,0 +1,15 @@
+%ul#template_properties_tab.nav.nav-tabs
+  %li
+    %a{href: "#template_footer", class: 'template-property-tab'} Footer
+  %li
+    %a{href: "#template_content", class: 'template-property-tab'} Content
+  - if is_sidebar_template(@template.name)
+    %li
+      %a{href: "#template_sidebar", class: 'template-property-tab'} Sidebar
+  - if is_hero_template(@template.name)
+    %li
+      %a{href: "#template_sidebar", class: 'template-property-tab'} Sidebar
+  %li
+    %a{href: "#template_header", class: 'template-property-tab'} Header
+  %li
+    %a{href: "#template_layout", class: 'template-property-tab'} Layout

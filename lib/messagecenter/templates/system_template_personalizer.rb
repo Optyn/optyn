@@ -37,7 +37,8 @@ module Messagecenter
                   :"color" => "#000",
                   :"text-align" => 'center'
                 }
-              }
+              },
+              :logotext => current_shop.name
             },
 
             content:{
@@ -334,10 +335,12 @@ module Messagecenter
 
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
           if header_properties['logo'].present?
+
             introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
             introduction_division.css('img').each do |image|
-              msg_logo = email_body_message_logo(shop,header_properties['message_uuid'],header_properties['template_uuid'],header_properties['logo'],header_properties['logo_text'])
+              msg_logo = email_body_message_logo(shop, header_properties['logo'], header_properties['logotext'], header_properties['template_header_image_location'])
               msg_logo_node = Nokogiri::HTML::fragment(msg_logo)
+              
               if msg_logo_node.css('img').present?
                 image_node = msg_logo_node.css('img').first
                 style_attr = image_node['style']
@@ -347,12 +350,12 @@ module Messagecenter
               else
                 header_node = msg_logo_node.css('h3').first
                 class_attr = header_node['class']
-                header_node['class'] = class_attr.present? ? "#{class_attr} center" : "center"
                 header_node.swap("<headline>#{header_node.to_s}</headline>")
                 image.swap(%{#{msg_logo_node.children.to_s}})
               end
             end
           end
+
           @parsed_html.css('headline').each do |headline_child|
             Messagecenter::Templates::MarkupGenerator.add_component_class(headline_child, 'headline')
           end

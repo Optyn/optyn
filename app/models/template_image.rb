@@ -9,6 +9,10 @@ class TemplateImage < ActiveRecord::Base
   validates :image, presence: true
   validates :image, file_size: {maximum: 10.megabytes.to_i}, :if => :should_validate?
 
+  def image_location
+    image_url
+  end
+
   private
   def should_validate?
     image.present?

@@ -1,15 +1,11 @@
 module ShopLogo
-  def email_body_message_logo(shop,message_uuid, template_uuid, choice, logo_text)
-    message = Message.for_uuid(message_uuid)
-    template = Template.for_uuid(template_uuid)
-    template.update_attributes(logo: choice)
-
-    case template.logo
+  def email_body_message_logo(shop, choice, logo_text, image_location=nil)
+    case choice
     when "image"
-      if template.image_location.present?
+      if image_location.present?
         content = <<-HTML
-          <a here="#{template.image_location}" href="#{message.message_url(shop)}" target="_blank">
-            <img src="#{template.image_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
+          <a here="#{image_location}" href="#{shop.display_website}" target="_blank">
+            <img src="#{image_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
           </a>
         HTML
         content.to_s.html_safe
@@ -17,8 +13,7 @@ module ShopLogo
         %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" />}.html_safe
       end
     when "text"
-      template.update_attributes(title: logo_text)
-      %{<h3>#{template.title.to_s}</h3>}.html_safe
+      %{<h3>#{logo_text.to_s}</h3>}.html_safe
     else
       %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" />}.html_safe
     end
