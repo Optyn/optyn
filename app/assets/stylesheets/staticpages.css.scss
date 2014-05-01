@@ -227,15 +227,16 @@
     background-repeat: no-repeat;
     background-position-x: right;
     padding-right: 135px;
+    border-bottom: none;
   }
-  h1.salvator {
+  h1.salvatore {
     background-position-y: -23px;
     background-image: image-url( 'salvatores-logo.png' );
   }
-  h1.bandung {
+  /*h1.bandung {
     background-position-y: -20px;
     background-image: image-url( 'bandung-logo.gif' );
-  }
+  }*/
   .campaign-results {
     background: $dark-blue;
     color: $white;
@@ -249,7 +250,7 @@
       left: 49%;
       top: 0;
       width: 43px;
-      height: 22px;
+      height: 21px;
       background-image: image-url( 'droplet-dark-blue.png' );
     }
   }
@@ -261,8 +262,8 @@
     @include large-fonts;
   }
   .padV4pc {
-    padding-top: 4%;
-    padding-bottom: 4%;
+    padding-top: 2%;
+    padding-bottom: 2%;
   }
   h2 {
     font-size: 25px;
