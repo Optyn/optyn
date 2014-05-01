@@ -104,6 +104,7 @@ function MerchantMessage() {
           this.refreshTemplatePropertiesView();
           this.hookTemplateImageUpload();
           this.removeTemplateHeaderImage();
+          this.hookLinkTemplateLinkBlur();
         }
         this.hookOpenLinkClickReport();
         this.hookEmailReport();
@@ -885,6 +886,13 @@ function MerchantMessage() {
       var _this = this;
        $('body').on("keyup", '#properties_header_logotext', function(){
          $("#customHtmlTemplate").contents().find(".optyn-introduction .optyn-headline").html($(this).val());
+       });
+    };
+
+    this.hookLinkTemplateLinkBlur = function(){
+      var _this = this;
+       $('body').on("blur", '#properties_header_logolink', function(){
+         _this.reloadTemplateSelectorIframe();
        });
     };
 

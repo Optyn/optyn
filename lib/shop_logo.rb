@@ -1,12 +1,24 @@
 module ShopLogo
-  def email_body_message_logo(shop, choice, logo_text, image_location=nil)
+  def email_body_message_logo(shop, choice, logo_text, image_location=nil, headerlink=nil)
+    logo_content = template_logo_choice(shop, choice, logo_text, image_location)
+
+    if headerlink.present?
+      content = <<-HTML
+         <a here="#{image_location}" href="#{headerlink}" target="_blank">
+          #{logo_content}
+         </a>
+      HTML
+    end
+
+    content.present? ? content : logo_content
+  end
+
+  def template_logo_choice(shop, choice, logo_text, image_location=nil)
     case choice
     when "image"
       if image_location.present?
         content = <<-HTML
-          <a here="#{image_location}" href="#{shop.display_website}" target="_blank">
-            <img src="#{image_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
-          </a>
+          <img src="#{image_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
         HTML
         content.to_s.html_safe
       else
@@ -17,7 +29,6 @@ module ShopLogo
     else
       %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" />}.html_safe
     end
-
   end
 
   def email_body_shop_logo(shop)

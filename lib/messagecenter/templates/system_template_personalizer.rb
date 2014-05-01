@@ -338,7 +338,7 @@ module Messagecenter
 
             introduction_division = @parsed_html.css('container[type=introduction]').first.css('division[type=introduction]').first
             introduction_division.css('img').each do |image|
-              msg_logo = email_body_message_logo(shop, header_properties['logo'], header_properties['logotext'], header_properties['template_header_image_location'])
+              msg_logo = email_body_message_logo(shop, header_properties['logo'], header_properties['logotext'], header_properties['template_header_image_location'], header_properties['logolink'])
               msg_logo_node = Nokogiri::HTML::fragment(msg_logo)
               
               if msg_logo_node.css('img').present?

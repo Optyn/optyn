@@ -8,16 +8,6 @@
 
   = hidden_field_tag "properties[header][template_header_image_name]", ""
 
-  .control-group
-    = label_tag "background_color", "Background Color", class: 'control-label'
-    .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-        .btn-group
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[header][css][background-color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
-
   .control-group.disc
     = label_tag "logo", "Header Content", class: 'control-label'
     .controls.checkbox
@@ -79,7 +69,21 @@
         %button.btn.btn-primary.right-align{type: "button", "data-align" => "right"}  
           %span.icon-align-right
 
+  .control-group
+    = label_tag "background_color", "Background Color", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[header][css][background-color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
 
+  .control-group
+    = label_tag "logolink", "Link", class: 'control-label'
+    .controls
+      = text_field_tag 'properties[header][logolink]', current_shop.display_website, :placeholder => 'http://www.example.com'                        
+          
   .control-group.social-share
     = label_tag "social_sharing", "Social Sharing", class: 'control-label'
     .controls
