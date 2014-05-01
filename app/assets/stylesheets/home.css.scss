@@ -28,7 +28,10 @@
       &.logged-in a {
         color: $black;
         margin: 0;
-        &.tour { color: $white; }
+        &.tour {
+          color: $white;
+          border: solid 2px transparent;
+        }
       }
       > li > a {
         color: $white;
@@ -47,7 +50,7 @@
         border: none;
         &:hover { border: none; }
       }
-      &.logged-in > li > .dropdown-toggle:hover { border: 0; }
+      &.logged-in > li > .dropdown-toggle:hover { border-color: transparent; }
     }
     .logo {
       line-height: 70px;
@@ -418,6 +421,7 @@ footer {
   .translateX-15px { @include transform( translateX( -15px ))}
 
   .lp-testimonials {
+    background-color: saturate( lighten( $dark-blue, 10% ), 10% );
     background-image: -moz-linear-gradient(left, rgba(46,62,81,1) 20%, rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
     background-image: -webkit-gradient(linear, left top, right top, color-stop(20%,rgba(46,62,81,1)), color-stop(100%,rgba(0,0,0,0))), image-url( 'main-ag.jpg' );
     background-image: -webkit-linear-gradient(left, rgba(46,62,81,1) 20%,rgba(0,0,0,0) 100%), image-url( 'main-ag.jpg' );
