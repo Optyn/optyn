@@ -830,7 +830,7 @@ function MerchantMessage() {
       
       // radio button for logo text or image
       $("#properties_header_logo_image, #properties_header_logo_text").click(function(){
-        if($(this).val()=="image")
+        if($(this).data('value') == "image")
         {
           $('.logo_text').hide();
           $('#imgfile').show();
@@ -867,30 +867,8 @@ function MerchantMessage() {
           //showing the fileupload section
           $('#fileupload').parents('.control-group').first().hide();      
         }
+        $('#properties_header_logo').val($(this).data('value'));
         templateMessage.reloadTemplateSelectorIframe();
-      });
-
-      // show/hide file form based on tab
-      $("#template_properties_tab.nav.nav-tabs li a").click(function(){
-        if($(this).attr('href')== "#template_header")
-          $("#logo_form").css("display","block");
-        else
-          $("#logo_form").css("display","none");
-      });
-
-      // change uploaded image
-      $('.change_image').click(function(e){
-        e.preventDefault();
-        $('#imgfile').show();
-        $('.change_image').hide();
-        $('.save_image').show();
-      });
-
-      // on logo form submit
-      $('.save_image').on('click',function(e){
-        e.preventDefault();
-        $('.loading').show();
-        $("#logo_form").submit();
       });
     };
 

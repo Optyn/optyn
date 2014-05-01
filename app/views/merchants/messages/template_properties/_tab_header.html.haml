@@ -18,13 +18,14 @@
             %span.add-on
               %i{:style => "background-color: ''"}
 
-  .control-group
+  .control-group.disc
     = label_tag "logo", "Header Content", class: 'control-label'
-    .controls
-      = radio_button_tag "properties[header][logo]", "image", true
-      = "Image"
-      = radio_button_tag "properties[header][logo]", "text"
-      = "Text"
+    #discount_type_container.controls.checkbox
+      .btn-group{ 'data-toggle' => 'buttons-radio' }
+        %button.btn.btn-primary.active{ :id => 'properties_header_logo_image', :type => 'button', 'data-value' => :image } Image
+        %button.btn.btn-primary{ :id => 'properties_header_logo_text', :type => 'button', 'data-value' => :text } Text
+
+        = hidden_field_tag "properties[header][logo]", "image"
 
   .control-group{style: "display: none;"}
     = label_tag "logo", "Title", class: 'control-label'
