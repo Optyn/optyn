@@ -26,6 +26,15 @@
 //= require ckeditor_fix
 //= require bootstrap-colorpicker
 //= require jquery.colorbox
+//= require fileuploads/load-image.min
+//= require fileuploads/canvas-to-blob.min
+//= require fileuploads/jquery.iframe-transport
+//= require fileuploads/jquery.fileupload
+//= require fileuploads/jquery.fileupload-process
+//= require fileuploads/jquery.fileupload-image
+//= require fileuploads/jquery.fileupload-audio
+//= require fileuploads/jquery.fileupload-video
+//= require fileuploads/jquery.fileupload-validate
 //= require_self
 //= require ckeditor/init
 //= require_tree

@@ -1,28 +1,34 @@
 module ShopLogo
-  def email_body_message_logo(shop,message_uuid, template_uuid, choice, logo_text)
-    message = Message.for_uuid(message_uuid)
-    template = Template.for_uuid(template_uuid)
-    template.update_attributes(logo: choice)
+  def email_body_message_logo(shop, choice, logo_text, image_location=nil, headerlink=nil)
+    logo_content = template_logo_choice(shop, choice, logo_text, image_location)
 
-    case template.logo
+    if headerlink.present?
+      content = <<-HTML
+         <a here="#{image_location}" href="#{headerlink}" target="_blank">
+          #{logo_content}
+         </a>
+      HTML
+    end
+
+    content.present? ? content : logo_content
+  end
+
+  def template_logo_choice(shop, choice, logo_text, image_location=nil)
+    case choice
     when "image"
-      if template.image_location.present?
+      if image_location.present?
         content = <<-HTML
-          <a here="#{template.image_location}" href="#{message.message_url(shop)}" target="_blank">
-            <img src="#{template.image_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
-          </a>
+          <img src="#{image_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />
         HTML
         content.to_s.html_safe
       else
         %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" />}.html_safe
       end
     when "text"
-      template.update_attributes(title: logo_text)
-      %{<h3>#{template.title.to_s}</h3>}.html_safe
+      %{<h3>#{logo_text.to_s}</h3>}.html_safe
     else
       %{<img src="http://placehold.it/580x100" title="#{shop.name.gsub(/['"]/, "")}", style="max-height:250px;max-width:580px;" />}.html_safe
     end
-
   end
 
   def email_body_shop_logo(shop)

@@ -16,6 +16,15 @@ class Merchants::MessagesController < Merchants::BaseController
   NON_TEMPLATE_BUTTON_STYLE = "text-decoration:none;color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 15px;"
   NON_TEMPLATE_CKEDITOR_BUTTON_STYLE = 'border-radius: 0;background: #D4D4D4; padding: 2px 10px;text-decoration: none;display: inline-block;'
 
+  load "#{Rails.root}/lib/shop_logo.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/markup_generator.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/existing_template.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/blank_template.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/system_template_personalizer.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/structure_creator.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/existing_template.rb"
+  load "#{Rails.root}/lib/messagecenter/templates/structure_creator.rb"
+
   def types
     #Do Nothing
   end
@@ -463,17 +472,12 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def upload_template_image
-    @template = Template.for_uuid(params[:template_uuid])
-    @template_image = @template.template_image
-    if params[:imgfile].present?
-      if @template_image.present?        
-        @template_image.update_attributes(:image => params[:imgfile])
-      else
-        @template_image = TemplateImage.new(:image => params[:imgfile], :template_id =>@template.id)
-        @template_image.save
-      end
+    if params[:files].present?
+      @template_image = TemplateImage.new(:image => params[:files].first)
+      @template_image.save
+      return render(json: {data: {image_location: @template_image.image_location, image_id: @template_image.id, image_name: @template_image['image']}})
     end
-    
+    head :unprocessable_entity 
   end
 
   def destroy_template

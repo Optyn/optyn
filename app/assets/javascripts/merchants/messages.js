@@ -1,13 +1,6 @@
-var props = null;
-
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
-    merchantMessage.initialize();  
-
-    //loading social sharing options checkboxes
-    $('#customHtmlTemplate').load(function(){
-          merchantMessage.manageLogo();
-    });
+    merchantMessage.initialize();
 });
 
 function MerchantMessage() {
@@ -105,7 +98,13 @@ function MerchantMessage() {
           this.hookTemplateMenuColorPickerChange();
           this.socialSharing();
           this.updateSocialSharing();
+          this.hookTemplateHeaderAlignment();
+          this.manageLogo();
+          this.hookHeaderContentTitleKeyup();
           this.refreshTemplatePropertiesView();
+          this.hookTemplateImageUpload();
+          this.removeTemplateHeaderImage();
+          this.hookLinkTemplateLinkBlur();
         }
         this.hookOpenLinkClickReport();
         this.hookEmailReport();
@@ -625,16 +624,15 @@ function MerchantMessage() {
 
     this.hookPopulateTemplateSettableProperties = function(){
         var properties = $('.template-selectable-properties').data('selectable-properties').properties;
-        props = properties;
         var elements =  $('#template_properties_form .tab-content-pane').find('input[type=text], select');
         for(var i = 0; i < elements.length; i++){
           var $element = $(elements[i]);
           var eval_str = $element.attr('id').replace(/_/g, '.');
           eval_arr = eval_str.split(".")
           var attr = eval_arr.pop();
-          eval_str = eval_arr.join(".")
-          eval_str = eval_str + '[' + "'" + attr + "'" + "]"
-          var value = eval(eval_str)
+          eval_str = eval_arr.join(".");
+          eval_str = eval_str + '[' + "'" + attr + "'" + "]";
+          var value = eval(eval_str);
           $element.val(value);
 
           if(attr.match('color')){
@@ -644,6 +642,7 @@ function MerchantMessage() {
             var $addon = $element.next('.add-on')
             $colorSpan.attr('background-color', value);            
           }
+
         }
     };
 
@@ -829,56 +828,204 @@ function MerchantMessage() {
 
     this.manageLogo = function(){
       var templateMessage = this;
-      $('.logo_text').val("").hide();
       
       // radio button for logo text or image
-      $("#properties_header_logo_image, #properties_header_logo_text").change(function(){
-        if($(this).val()=="image")
+      $("#properties_header_logo_image, #properties_header_logo_text").click(function(){
+        if($(this).data('value') == "image")
         {
           $('.logo_text').hide();
           $('#imgfile').show();
-          $('.save_image').show();          
-          }
+          $('.save_image').show();
+
+          //hide the text related attributes
+          //hinding the logotext
+          $('#properties_header_logotext').parents('.control-group').first().hide();
+          //hiding the font select container
+          $('#properties_header_headline_css_font-family').parents('.control-group').first().hide();
+          //hiding the text color picker
+          $('#properties_header_headline_css_color').parents('.control-group').first().hide();
+          //hiding the header text alignment
+          $('#logo_align').parents('.control-group').first().hide();
+          //hiding the fileupload section
+          $('#fileupload').parents('.control-group').first().show();
+        }
         else
         {
           $('#imgfile').hide();
           $('.logo_text').show();
           $('.save_image').hide();
-          $('.change_image').hide();          
+          $('.change_image').hide();    
+
+          //show the text related attributes
+          //showing the logotext
+          $('#properties_header_logotext').parents('.control-group').first().show();
+          //showing the font select container
+          $('#properties_header_headline_css_font-family').parents('.control-group').first().show();
+          //showing the text color picker
+          $('#properties_header_headline_css_color').parents('.control-group').first().show();
+          //showing the header text alignment
+          $('#logo_align').parents('.control-group').first().show();
+          //showing the fileupload section
+          $('#fileupload').parents('.control-group').first().hide();      
         }
-        templateMessage.reloadTemplateSelectorIframe();
-      });
-
-      $('#properties_header_logo_image').attr('checked', 'checked');
-
-      // show/hide file form based on tab
-      $("#template_properties_tab.nav.nav-tabs li a").click(function(){
-        if($(this).attr('href')== "#template_header")
-          $("#logo_form").css("display","block");
-        else
-          $("#logo_form").css("display","none");
-      });
-
-      // change uploaded image
-      $('.change_image').click(function(e){
-        e.preventDefault();
-        $('#imgfile').show();
-        $('.change_image').hide();
-        $('.save_image').show();
-      });
-
-      // on logo form submit
-      $('.save_image').on('click',function(e){
-        e.preventDefault();
-        $('.loading').show();
-        $("#logo_form").submit();
-      });
-
-      // alignment
-      $('.left-align, .center-align, .right-align').click(function(e){       
-        $("#logo_align").val($(this).attr("data-align"));
+        $('#properties_header_logo').val($(this).data('value'));
         templateMessage.reloadTemplateSelectorIframe();
       });
     };
 
+    // alignment
+    this.hookTemplateHeaderAlignment = function(){
+      var _this = this;
+      $('body').on('click', '.left-align, .center-align, .right-align', function(e){       
+        $("#logo_align").val($(this).attr("data-align"));
+        _this.reloadTemplateSelectorIframe();
+      });
+    };
+
+    this.hookHeaderContentTitleKeyup = function(){
+      var _this = this;
+       $('body').on("keyup", '#properties_header_logotext', function(){
+         $("#customHtmlTemplate").contents().find(".optyn-introduction .optyn-headline").html($(this).val());
+       });
+    };
+
+    this.hookLinkTemplateLinkBlur = function(){
+      var _this = this;
+       $('body').on("blur", '#properties_header_logolink', function(){
+         _this.reloadTemplateSelectorIframe();
+       });
+    };
+
+    this.hookTemplateImageUpload = function(){
+      var _this = this;
+      var fileInstance = null;
+      var filename = null;
+      $('#fileupload').fileupload({
+          url: $('#template_image_upload_path').val(),
+          dataType: 'json',
+          type: "POST",
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+          maxFileSize: 10000000, // 10 MB
+          // Enable image resizing, except for Android and Opera,
+          // which actually support image resizing, but fail to
+          // send Blob objects via XHR requests:
+          disableImageResize: /Android(?!.*Chrome)|Opera/
+              .test(window.navigator.userAgent),
+          previewMaxWidth: 100,
+          previewMaxHeight: 100,
+          previewCrop: true
+      }).on('fileuploadadd', function (e, data) {
+        $('#files').html('');
+          data.context = $('<div/>').appendTo('#files');
+          $.each(data.files, function (index, file) {
+              var node = $('<p/>')
+                      .append($('<span/>').text(file.name));
+              
+              if (!index) {
+                if((file.name).match(/(\.|\/)(gif|jpe?g|png)$/i)){
+                  node
+                      .append('<br>');
+                      data.submit();
+                }else{
+                  var $error = $("<span />");
+                  $error
+                    .text('-- File Type Not allowed')
+                    .css('padding-left', '10px');
+
+                  $(node).append($error);
+                }
+              }
+
+
+              node.appendTo(data.context);
+              filename = file.name;
+          });
+      }).on('fileuploadprocessalways', function (e, data) {
+          var index = data.index,
+              file = data.files[index],
+              node = $(data.context.children()[index]);
+          if (file.preview) {
+              node
+                  .prepend('<br>')
+                  .prepend(file.preview);
+          }
+          if (file.error) {
+              node
+                  .append('<br>')
+                  .append($('<span class="text-danger"/>').text(file.error));
+          }
+          if (index + 1 === data.files.length) {
+              data.context.find('button')
+                  .text('Upload')
+                  .prop('disabled', !!data.files.error);
+          }
+      }).on('fileuploadprogressall', function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .bar').css(
+              'width',
+              progress + '%'
+          );
+      }).on('fileuploaddone', function (e, data) {
+
+          result = data.result.data;
+          $('#properties_header_template_header_image_location').val(result.image_location);
+          $('#properties_header_template_header_image_id').val(result.image_id);
+          $('#properties_header_template_header_image_name').val(result.image_name);
+
+          $('#progress .bar').css(
+              'width',
+              "0" + '%'
+          );
+
+          var $temp = $('<div />');
+          var $imageLink = $('<a />');
+          $imageLink
+            .prop('href', $('#properties_header_template_header_image_location').val())
+            .text(filename);
+          
+          var $icon = $('<i />');
+          $icon
+            .addClass('icon-remove icon-white');
+
+          var $imageRemoveLink = $('<a />');
+          $imageRemoveLink
+            .prop('href', 'javascript:void(0)')
+            .css('padding-left', '10px')
+            .prop('id', 'remove_template_header_image');
+
+          $imageRemoveLink.append($icon);      
+
+          $temp.append($imageLink);
+          $temp.append($imageRemoveLink);  
+
+          $('#files').html($temp.html());
+
+          $('#template_header_image_controls').hide();
+
+          _this.reloadTemplateSelectorIframe();
+
+      }).on('fileuploadfail', function (e, data) {
+          $.each(data.files, function (index, file) {
+              var error = $('<span class="text-danger"/>').text('File upload failed.');
+              $(data.context.children()[index])
+                  .append('<br>')
+                  .append(error);
+          });
+      }).prop('disabled', !$.support.fileInput)
+          .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    };
+
+  this.removeTemplateHeaderImage = function(){
+    var _this = this;
+    $('body').on('click', '#remove_template_header_image', function(){
+      $('#files').html('');
+      $('#template_header_image_controls').show();
+
+      $('#properties_header_template_header_image_location').val('');
+      $('#properties_header_template_header_image_id').val('');
+      $('#properties_header_template_header_image_name').val('');
+
+      _this.reloadTemplateSelectorIframe();
+    });
+  };    
 }

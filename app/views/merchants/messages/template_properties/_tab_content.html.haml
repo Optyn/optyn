@@ -1,0 +1,69 @@
+#template_content.tab-pane
+  .control-group
+    = label_tag "background_color", "Background Color", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[content][css][background-color]", '', class: 'input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
+
+  .control-group
+    = label_tag "title_color", "Title Color:", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[content][headline][css][color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
+
+  .control-group
+    = label_tag "link_color", "Link Color:", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[content][link][css][color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
+
+  .control-group
+    = label_tag "button_color", "Button Text Color:", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[content][button][css][color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
+
+  .control-group
+    = label_tag "button_background_color", "Button Background Color:", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[content][button][css][background-color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}                        
+
+  .control-group
+    = label_tag "paragraph_color", "Paragraph Color:", class: 'control-label'
+    .controls
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[content][paragraph][css][color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
+
+  .actions
+    .pull-left
+      %a{href: "javascript:void(0)", class: "btn btn-info template-property-action", 'data-tab' => "#{next_tab('template_header', @template.name)}"}
+        %i{class: "icon-arrow-left"}
+
+    .pull-right
+      %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_footer'}
+        %i{class: "icon-arrow-right"}
