@@ -285,17 +285,102 @@
       line-height: 30px;
     }
   }
-  .try-it {
-    background-color: $green;
-    color: $white;
-    padding: 2%;
-    p {
-      font-size: 1.3em;
-      line-height: 1.6em;
-      padding: 8px 0px;
-      border: solid 2px transparent;
-    }
-  }
   .interior > img { width: 100%; }
 }
-#flat .case-study .try-it .btn-transparent:hover { color: $green; }
+.try-it {
+  background-color: $green;
+  color: $white;
+  padding: 2%;
+  p {
+    font-size: 1.3em;
+    line-height: 1.6em;
+    padding: 8px 0px;
+    border: solid 2px transparent;
+  }
+}
+#flat .try-it .btn-transparent { padding: 8px 5px; }
+#flat .try-it .btn-transparent:hover { color: $green; }
+
+.constant-contact {
+  [class ^= "fold"] {
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+  h1 { border-bottom: 0; }
+  h1 em {
+    color: $orange;
+    font-style: normal;
+  }
+  .fold1 {
+    background: $dark-blue;
+    color: $white;
+    .span8 {
+      > ul {
+        margin-left: 0;
+        > li {
+          margin-bottom: 15px;
+          clear: both;
+          position: relative;
+          padding-left: 70px;
+          .op-icon {
+            background-image: image-url( 'sprite-constant-contact.png' );
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        > .faster { background-position: 0px 0px; }
+        > .responsive { background-position: 0px -60px; }
+        > .free { background-position: 0px -127px; }
+        > .deliverability { background-position: 0px -180px; }
+        > .undercut { background-position: 0px -234px; }
+          > strong {
+            color: $chrome-yellow;
+            display: block;
+          }
+        }
+      }
+    }
+    .span4 {
+      background: rgba( 0, 0, 0, 0.3 );
+      padding: 10px 20px;
+      border-radius: 10px;
+      a { color: $white; }
+    }
+  }
+  .img-portrait {
+    width: 100px;
+    height: 110px;
+    margin: auto;
+    background-image: image-url( 'sprite-constant-contact.png' );
+    background-repeat: no-repeat;
+    background-position: -195px 0px;
+  }
+  .fold3 {
+    background: $dark-blue;
+    color: $white;
+    h2 { color: $orange; }
+  }
+  .fold4 {
+    h2 { margin-bottom: 20px; }
+    font-size: 1.3rem;
+    line-height: 2rem;
+    .step1 { margin-bottom: 20px; }
+    .step1, .step2 { clear: both; min-height: 65px; }
+    .step1 p, .step2 p { padding-top: 10px; }
+    .step1 > .op-icon,
+    .step2 > .op-icon{
+      background-image: image-url( 'sprite-constant-contact.png' );
+      background-repeat: no-repeat;
+      float: left;
+      width: 65px;
+      height: 65px;
+      margin-right: 30px;
+    }
+    .step1 > .op-icon { background-position: -506px 0px; }
+    .step2 > .op-icon { background-position: -506px -98px; }
+  }
+}
+
