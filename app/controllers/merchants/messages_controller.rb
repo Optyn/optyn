@@ -467,8 +467,11 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def template_upload_image
     @message = Message.for_uuid(params[:id])
-    @message_image = MessageImage.new(:image => params[:imgfile], :message_id =>@message.id)
+    @message_image = MessageImage.new(:image => params[:files].first, :message_id =>@message.id)
     @message_image.save
+
+    
+    render(json: {data: {image_location: @message_image.image_location}})
   end
 
   def upload_template_image
