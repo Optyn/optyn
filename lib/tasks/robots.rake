@@ -25,7 +25,7 @@ namespace :robots do
     end
 
 
-    filepath = "#{Rails.root}/public/robots.txt"
+    filepath = "#{Rails.root}/public/robots-optyn.txt"
     File.open(filepath, 'w') do |file|
       file.puts(robots.join("\n"))
     end
