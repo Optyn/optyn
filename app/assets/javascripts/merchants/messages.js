@@ -632,6 +632,7 @@ function MerchantMessage() {
           var attr = eval_arr.pop();
           eval_str = eval_arr.join(".");
           eval_str = eval_str + '[' + "'" + attr + "'" + "]";
+          console.log("Eval Str: ", eval_str);
           var value = eval(eval_str);
           $element.val(value);
 
