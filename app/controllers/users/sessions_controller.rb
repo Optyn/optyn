@@ -74,7 +74,6 @@ class Users::SessionsController < Devise::SessionsController
       session[:user_return_to] = nil
 
       respond_to do |format|
-        binding.pry
         format.json { render(status: :created) }
         format.html { redirect_to @shop.oauth_application.redirect_uri_after_login }
         format.any { render text: "Only HTML and JSON supported" }
