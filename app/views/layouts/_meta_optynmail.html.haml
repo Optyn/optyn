@@ -1,2 +1,2 @@
-- if request.url.include?("optynmail.com")
+- if (request.url.include?("optynmail.com") rescue false)
   %meta{name: "robots", content: "noindex nofollow"}
