@@ -971,14 +971,24 @@ body.outlook p {
       font-size: 11px;
       line-height: 18px;
       color: #333;
-      color: rgba(0,0,0,0.7);
       padding: 0;
     }
     .optyn-footer a {
       color: #555;
       color: rgba(0,0,0,0.5);
     }
-    .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+    
+    .optyn-footer .optyn-paragraph a { 
+      color: #2ba6cb; 
+      text-decoration: underline; 
+    }
+
+    .optyn-footer .optyn-paragraph a:hover { color: #2ba6cb; }
+
+    .optyn-footer .optyn-paragraph a:active { color: #2ba6cb; }
+
+    .optyn-footer .optyn-paragraph a:visited { color: #2ba6cb; }
+
     .block-grid.optyn-division .half-left-image,
     .block-grid.optyn-division .half-right-image { padding-top: 0; }
     .half-left-image > .w193 { float: left; }
@@ -1111,7 +1121,7 @@ body.outlook p {
                         <grid type="sidebar">
                           <td width="193" class="w193 sidebar sidebar-container">
                             <division type="full_text">
-                              <table class="block-grid">
+                              <table class="block-grid optyn-sidebar">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
@@ -1134,7 +1144,7 @@ body.outlook p {
                             </division>
 
                             <division type="text_with_full_image">
-                              <table class="block-grid">
+                              <table class="block-grid optyn-sidebar">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
