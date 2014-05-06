@@ -540,16 +540,20 @@ module Messagecenter
 
 
         def convert_footer(footer_properties)
+          
           if footer_properties[:link].present?
             #change the css properties of the paragraph
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a"}
+            convert_links_color(footer_properties, node)
 
-            if node.present?
-              paragraph_style_properties = footer_properties[:link][:css]
-              paragraph_style_properties.each_pair do |css_key, css_value|
-                node.set_property(css_key.to_s, css_value)          
-              end
-            end
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:hover"}
+            convert_links_color(footer_properties, node)
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:active"}
+            convert_links_color(footer_properties, node)            
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:visited"}
+            convert_links_color(footer_properties, node)
           end
 
           #change the permission
