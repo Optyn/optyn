@@ -25,7 +25,7 @@ font-size: 16px;
 font-weight: 300;
 line-height: 20px;
 border: 0;
-padding: 5px;
+padding: 5 15 5 15px;
 }
 #optyn-email-form input[type="submit"]:hover {
 background-color: #3691ea;
