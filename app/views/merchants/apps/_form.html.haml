@@ -63,7 +63,7 @@
     %label
       Labels
   .custom
-    = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name),
+    = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @application.label_ids.split(",")),
         {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
 
   .option
