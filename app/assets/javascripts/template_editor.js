@@ -7,7 +7,8 @@ OP = (function($, window, doucument, Optyn){
       this.cancelTemplateEditorAction();
       this.saveTemplateEditorAction();
       this.addImageLinkURL();
-      this.RemoveImageLinkURL();
+      this.removeImageLinkURL();
+      this.imageFileUpload();
     },
 
     setUpSidebarEditing: function(){
@@ -53,21 +54,13 @@ OP = (function($, window, doucument, Optyn){
 
         });
 
-        $('.upload-img-btn').click(function(e){
-          $(this).parents('.msg_img_upload').first().find('.loading').first().show();
-          $(this).hide();
-        });
-         $(".show_link").click(function(){
-          $(this).parents().siblings(".add-img-link-option").show();
-          $(this).parents().siblings("form").hide();
-          $(this).parents(".show-img-link-option").hide();
-        });
-        $(".edit_image").click(function(){
-          $(this).parents().siblings("form").show();
-          $(this).parents().siblings("form").find(".upload-img-btn").show();
-          $(this).parents().siblings(".show-img-link-option").show();
+        $(".remove_image").click(function(){
+          $(this).parents('.control-group').first().find('.image-form-container').show();
+          $(this).parents('.control-group').first().find('img').prop('src', 'http://placehold.it/150&text=Upload%20Image');
           $(this).parents().find(".add-img-link-option").hide();
         });
+
+        OP.templateEditor.imageFileUpload();
 
         OP.templateEditor.openCKEditor($templateContainer);
 
@@ -196,7 +189,7 @@ OP = (function($, window, doucument, Optyn){
       });
     },
 
-    RemoveImageLinkURL: function() {
+    removeImageLinkURL: function() {
       $(document).on('click', '.remove_link_from_image', function () {
         var containerId = $(".remove_link_from_image").attr("href");
         var link = $(containerId).find("a[href='#AddLink" + containerId.replace("#", "") + "']");
@@ -208,6 +201,90 @@ OP = (function($, window, doucument, Optyn){
         $(this).parent().hide();
 
       });
+    },
+
+    imageFileUpload: function(){
+      var _this = this;
+      var fileInstance = null;
+      var filename = null;
+      $('body').on('click', '.templatefileuploader', function(){
+        $('.templatefileuploader').fileupload({
+            url: $(this).parents('.control-group').first().find('#image_form_action').val(),
+            dataType: 'json',
+            type: "POST",
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            maxFileSize: 10000000, // 10 MB
+            // Enable image resizing, except for Android and Opera,
+            // which actually support image resizing, but fail to
+            // send Blob objects via XHR requests:
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator.userAgent),
+            previewMaxWidth: 100,
+            previewMaxHeight: 100,
+            previewCrop: true
+        }).on('fileuploadadd', function (e, data) {
+          var $file = $(this).parents('.control-group').first().find('.files').first();
+          $file.html('');
+          data.context = $('<div/>').appendTo($file);
+
+          $.each(data.files, function (index, file) {
+            var node = $('<p/>')
+                    .append($('<span/>').text(file.name));
+            
+            if (!index) {
+              if((file.name).match(/(\.|\/)(gif|jpe?g|png)$/i)){
+                node
+                    .append('<br>');
+                    data.submit();
+              }else{
+                var $error = $("<span />");
+                $error
+                  .text('-- File Type Not allowed')
+                  .css('padding-left', '10px');
+
+                $(node).append($error);
+              }
+            }
+
+            node.appendTo(data.context);
+            filename = file.name;
+
+          });
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }).on('fileuploaddone', function (e, data) {
+          
+          result = data.result.data;
+          $('#progress .bar').css(
+              'width',
+              "0" + '%'
+          );
+
+          var $controlGroup = $(this).parents('.control-group').first();
+          $controlGroup.find('img').prop('src', result.image_location);
+
+          var $file = $(this).parents('.control-group').first().find('.files').first();
+          $file.html('');
+
+          $file.parents('.image-form-container').first().hide();
+          $file.parents('.control-group').first().find(".add-img-link-option").show();
+
+
+        }).on('fileuploadfail', function (e, data) {
+            $.each(data.files, function (index, file) {
+                var error = $('<span class="text-danger"/>').text('File upload failed.');
+                $(data.context.children()[index])
+                    .append('<br>')
+                    .append(error);
+            });
+        }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+      });    
     }
 
   };

@@ -133,41 +133,55 @@ OP = (function($, window, doucument, Optyn){
           paragraphIndex += 1;
         }else if('image' == currentArtifact.type){
           row_id = 'imagerow-' + imageIndex;
-          var display = null;
+          var form_display = null;
+          var link_display = null;
 
-          if(currentArtifact.content[0].indexOf("placehold.it") == -1){
-               display = "none";
-               show_link_diaplay = "block";
+          if(currentArtifact.content[0].toString().match("placehold.it")){
+            form_display = "block";
+            link_display = "none";
+          }else{
+            form_display = "none";
+            link_display = "block";
           }
-          else{
-           display = "none";
-           show_link_diaplay = "none";
-          }
+
           var remove_link = null;
           var link_text = null;
-          if (currentArtifact.content[1].length != 0){
-            remove_link = '<div style="display: '+ display +'; cursor: pointer" class="add-img-link-option"> | <a class="remove_link_from_image" href="#'+ row_id+'" role="button" data-link = "'+ currentArtifact.content[1]+'">Remove Link</a></div>' ;
-            link_text = "Edit Link"
-          }
-          else{
-            remove_link = "";
-            link_text = "Add Link"
-          }
-          var show_link = '<div style="display: '+ show_link_diaplay +'; cursor: pointer" class="show-img-link-option" >  <a  class="show_link">Show links</a></div>' ;
 
-          var links = '<div style="display: '+ display +'; cursor: pointer; float:left;" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">'+ link_text + '</a> | <a class="edit_image">Edit Image</a></div>' ;
-          var image_link = currentArtifact.content[1].replace(/^https?\:\/\//i, "")
-          htmlVal += '</div><div class="nl-image-form" id="' + row_id + '">' +
+          if (currentArtifact.content[1].length != 0){
+            remove_link = '<div style="display: '+ link_display +'; cursor: pointer" class="add-img-link-option"> | <a class="remove_link_from_image" href="#'+ row_id+'" role="button" data-link = "'+ currentArtifact.content[1]+'">Remove Link</a></div>' ;
+            link_text = "Edit Link";
+          }else{
+            remove_link = "";
+            link_text = "Add Link";
+          }
+
+          var links = '<div style="display: ' + link_display + '; cursor: pointer; float:left;" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">'+ link_text + '</a> | <a class="remove_image" href="javascript:void(0)" data-placeholder="">Remove Image</a></div>' ;
+          var image_link = currentArtifact.content[1].replace(/^https?\:\/\//i, "");
+
+          htmlVal += '</div><div class="nl-image-form control-group" id="' + row_id + '">' +
           '<div>Preview:<br /> <img src="' + currentArtifact.content[0] + '" class="uploaded-image" data-href="' + currentArtifact.content[1] + '" /></div>' +
-          '<div><form class="msg_img_upload" action="' + image_form_action + '" method="post" enctype="multipart/form-data" data-remote="true" >' +
-          '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
-          '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
-          '<input type="hidden" data-link-href-id="AddLink'+ row_id+'" name="href" data-populate-image-link="AddLink'+ row_id+'"/>' +
-          '<div>Upload:<br /><input type="file"  class="browsBtn" name="imgfile" accept=".jpg,.png,.gif,.jpeg"><br />' +
-          '<input type="submit" value="Upload image" class="upload-img-btn btn btn-success btn-small" /></div>' +
-          '<img class="loading" src="/assets/ajax-loader.gif" style="display:none;"/></form>' +
+          '<div class="image-form-container" style="display: '  + form_display + ';"' + '>' + 
+            '<label class="control-label" for="image_upload">Upload</label>' +
+            '<div class="controls">' +
+              '<span class="btn btn-success fileinput-button">' +
+              '<i class="glyphicon glyphicon-plus"></i>' +
+              '<span>Select File</span>' +
+              '<input single="single" name="files[]" type="file" class="templatefileuploader">' +
+              '</span>' +
+               '<input type="hidden" name="image_form_action", id="image_form_action" value="' + image_form_action + '" />' +
+               '<input type="hidden" name="authenticity_token" value="' + $('#authenticity_token').val() + '" />' +
+               '<input type="hidden" name="imagerow" value="' + row_id +'" />' +
+               '<input type="hidden" data-link-href-id="AddLink'+ row_id+'" name="href" data-populate-image-link="AddLink'+ row_id+'"/>' +
+              '<br>' +
+              '<br>' +
+              '<div class="progress" id="progress">' +
+                '<div class="bar bar-success"></div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="files" id="files">' +
+            '</div>' +
+          '</div>' +
           links +
-          show_link +
           remove_link +
           '</div></div>'+
           '<div class="separator-micro-dark"></div>'+
@@ -179,7 +193,6 @@ OP = (function($, window, doucument, Optyn){
           '<p><input type="url" name="link" value="'+ image_link +'" id="imageLinkModel'+ row_id+'"></p></div>' +
           '<div class="modal-footer">' +
           '<input type="submit" value="Save changes" class="btn btn-primary saveLinkUrl" data-dismiss="modal" data-image-link-url="AddLink'+ row_id+'" id="populateLink'+ row_id+'"/></div></div>';
-
 
           imageIndex += 1;
         }

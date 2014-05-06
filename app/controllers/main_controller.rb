@@ -18,6 +18,15 @@ class MainController < ApplicationController
     populate_real_shops
   end
 
+  def robots
+    content_type = 'text/plain'
+    if request.url.include?('optynmail.com')
+      render(file: "#{Rails.public_path}/robots-optynmail.txt", layout: false, content_type: content_type)
+    else
+      render(file: "#{Rails.public_path}/robots-optyn.txt", layout: false, content_type: content_type)
+    end  
+  end
+
   private
   def populate_real_shops
     @shops = Shop.real.not_pre_added.alphabetized

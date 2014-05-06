@@ -351,10 +351,13 @@
       a { color: $white; }
     }
   }
+  .fold2 {
+    .mtop15px { margin-top: 15px; }
+  }
   .img-portrait {
     width: 100px;
     height: 110px;
-    margin: auto;
+    margin: 15px auto;
     background-image: image-url( 'sprite-constant-contact.png' );
     background-repeat: no-repeat;
     background-position: -195px 0px;

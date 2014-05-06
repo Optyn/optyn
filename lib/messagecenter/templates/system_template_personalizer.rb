@@ -162,10 +162,21 @@ module Messagecenter
                 }
               }
             },
+
             footer: {
+              css: {
+                :'background-color' => Template::CONTENT_BACKGROUND_COLOR
+              },
+
                paragraph: {
                 css: {
                   color: Template::CONTENT_PARAGRAPH_COLOR
+                }
+              },
+
+              link: {
+                css: {
+                  color: Template::FOOTER_LINK_COLOR
                 }
               }
             }
@@ -529,8 +540,35 @@ module Messagecenter
 
 
         def convert_footer(footer_properties)
-          #change the permission
           
+          if footer_properties[:link].present?
+            #change the css properties of the paragraph
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a"}
+            convert_links_color(footer_properties, node)
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:hover"}
+            convert_links_color(footer_properties, node)
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:active"}
+            convert_links_color(footer_properties, node)            
+
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:visited"}
+            convert_links_color(footer_properties, node)
+          end
+
+          #change the permission
+          if footer_properties[:css].present?
+            #change the css properties of the paragraph
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer"}
+
+            if node.present?
+              paragraph_style_properties = footer_properties[:css]
+              paragraph_style_properties.each_pair do |css_key, css_value|
+                node.set_property(css_key.to_s, css_value)          
+              end
+            end
+          end
+
           if footer_properties[:paragraph].present?
             #change the css properties of the paragraph
             node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph"}

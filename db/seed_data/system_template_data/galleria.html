@@ -887,22 +887,34 @@
     .sidebar-container h2 { font-size: 16px; }
     .sidebar-container h3 { font-size: 14px; font-weight: bold; }
     .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
+    
     .optyn-footer {
-      background: transparent;
-      background: rgba(255,255,255,0.3);
+      background-color: rgba(255,255,255,0.3);
     }
+    
     .optyn-footer .optyn-paragraph {
       text-align: center;
       font-size: 11px;
       line-height: 18px;
-      color: rgba(0,0,0,0.7);
+      color: #333;
       padding: 0;
     }
     .optyn-footer a {
       color: #555;
       color: rgba(0,0,0,0.5);
     }
-    .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+    
+    .optyn-footer .optyn-paragraph a { 
+      color: #2ba6cb; 
+      text-decoration: underline; 
+    }
+
+    .optyn-footer .optyn-paragraph a:hover { color: #2ba6cb; }
+
+    .optyn-footer .optyn-paragraph a:active { color: #2ba6cb; }
+
+    .optyn-footer .optyn-paragraph a:visited { color: #2ba6cb; }
+
     .optyn-division {
       padding-top: 5px;
       float: none;
@@ -924,12 +936,6 @@
     .optyn-twittershare { text-align: right; height: 20px; }
     .header-social .padh10 { padding: 10px 0; }
     .header-social img{display: inline !important; float: none; clear: both;}
-    .optyn-fbshare img,
-    .optyn-twittershare img,
-    .optyn-fbshare a,
-    .optyn-twittershare a { padding-right: 5px; }
-    .optyn-fbshare img,
-    .optyn-twittershare img { float: none; display: inline; }
 
     @media only screen and (max-width: 600px) {
       table[class="body"] table.container .block-grid td {
@@ -1028,12 +1034,12 @@
                         <tr>
                           <td class="w410 empty no-pad" align="right" width="410"></td>
                           <td class="w170 link no-pad" align="right" width="170" style="text-align: right;">
-                            <fbshare shareurl = "http://www.optyn.com/">
-                              <img alt="Share on Facebook" width="72" height="18" src="http://www.optyn.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
+                            <fbshare shareurl = "http://www.optynmail.com/">
+                              <img alt="Share on Facebook" width="72" height="18" src="http://www.optynmail.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </fbshare>
                             &nbsp;&nbsp;
-                            <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
-                              <img alt="Tweet" width="72" height="18" src="http://www.optyn.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
+                            <twittershare shareurl = "http://www.optynmail.com/" text = "optyn">
+                              <img alt="Tweet" width="72" height="18" src="http://www.optynmail.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </twittershare>
                           </td>
                         </tr>
@@ -1047,19 +1053,18 @@
                     <row>
                       <tr>
                         <grid type="introduction">
-                          <td width="580" class="w580 no-pad center">
-                            <division type="introduction">
-                              <div>
-                                <img width="580" class="w580" src="http://placehold.it/580x100" alt="" />
-                              </div>
-                            </division>
-                          </td>
-                        </grid>
-                      </tr>
-                    </row>
-                  </table>
+                            <td width="580" class="w580 no-pad center">
+                              <division type="introduction">
+                                <div>
+                                  <img width="580" class="w580" src="http://placehold.it/580x100" alt="" />
+                                </div>
+                              </division>
+                            </td>
+                          </grid>
+                        </tr>
+                      </row>
+                    </table>
                 </container>
-
 
                 <container type="content">
                   <table>
@@ -1304,18 +1309,19 @@
                 </container>
 
                 <container type="footer">
-                  <div class="w580">
+                  <div>
                     <row>
                       <div class="footer-container">
                         <grid type="footer">
                           <div>
                             <division type="footer">
-                              <table class="block-grid">
+                              <table width="580" class="w580 block-grid">
                                 <tr>
-                                  <td height="10" class="h10 no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad w580" width="580"></td>
                                 </tr>
                                 <tr>
-                                  <td class="no-pad footer-text-td">
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td class="no-pad footer-text-td w560" width="560">
                                     <div>
                                       <center>
                                         <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
@@ -1325,6 +1331,7 @@
                                       </center>
                                     </div>
                                   </td>
+                                  <td width="10" class="w10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>

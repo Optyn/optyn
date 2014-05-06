@@ -3,7 +3,7 @@ namespace :templates do
   task :seed => :environment do
     Template.all.each do |template| 
       begin
-        template.destroy
+        template.destroy!
       rescue 
         
       end
@@ -12,34 +12,34 @@ namespace :templates do
     #Add the basic Template
     puts "Adding the Basic Template"
     template = Template.for_shop(nil).for_name('Basic').first || Template.new
-    template.attributes=({name: "Basic", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/basic.html", 'r'){|file| file.read}})
+    template.attributes=({position: 1, name: "Basic", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/basic.html", 'r'){|file| file.read}})
     template.save!
     # sleep(10)
 
     #Adding the Left Sidebar Template
     puts "Adding the Left Sidebar Template"
     template = Template.for_shop(nil).for_name('Left Sidebar').first || Template.new
-    template.attributes = ({name: "Left Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/left_sidebar.html", 'r'){|file| file.read}})
+    template.attributes = ({position: 2, name: "Left Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/left_sidebar.html", 'r'){|file| file.read}})
     template.save!
     # sleep(10)
 
     puts "Adding the Right Sidebar Template"
     template = Template.for_shop(nil).for_name('Right Sidebar').first || Template.new
-    template.attributes = ({name: "Right Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/right_sidebar.html", 'r'){|file| file.read}})
+    template.attributes = ({position: 3, name: "Right Sidebar", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/right_sidebar.html", 'r'){|file| file.read}})
     template.save!
-    sleep(10)
+    # sleep(10)
 
     #Adding the Hero Template
     puts "Adding the Hero Template"
     template = Template.for_shop(nil).for_name('Hero').first || Template.new
-    template.attributes = ({name: "Hero", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/hero.html", 'r'){|file| file.read}})
+    template.attributes = ({position: 4, name: "Hero", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/hero.html", 'r'){|file| file.read}})
     template.save!
     # sleep(10)
 
     #Adding the Galleria Template
     puts "Adding the Galleria Template"
     template = Template.for_shop(nil).for_name('Galleria').first || Template.new
-    template.attributes = ({name: "Galleria", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/galleria.html", 'r'){|file| file.read}})
+    template.attributes = ({position: 5, name: "Galleria", system_generated: true, html: File.open("#{Rails.root}/db/seed_data/system_template_data/galleria.html", 'r'){|file| file.read}})
     template.save!
     # sleep(10)
   end

@@ -961,23 +961,34 @@ body.outlook p {
       font-weight: bold;
     }
     .sidebar-container { background: #c9c9c9; padding-bottom: 0; }
+    
     .optyn-footer {
-      background: transparent;
-      background: rgba(255,255,255,0.3);
+      background-color: rgba(255,255,255,0.3);
     }
+    
     .optyn-footer .optyn-paragraph {
       text-align: center;
       font-size: 11px;
       line-height: 18px;
       color: #333;
-      color: rgba(0,0,0,0.7);
       padding: 0;
     }
     .optyn-footer a {
       color: #555;
       color: rgba(0,0,0,0.5);
     }
-    .optyn-footer .optyn-paragraph a { text-decoration: underline; }
+    
+    .optyn-footer .optyn-paragraph a { 
+      color: #2ba6cb; 
+      text-decoration: underline; 
+    }
+
+    .optyn-footer .optyn-paragraph a:hover { color: #2ba6cb; }
+
+    .optyn-footer .optyn-paragraph a:active { color: #2ba6cb; }
+
+    .optyn-footer .optyn-paragraph a:visited { color: #2ba6cb; }
+
     .block-grid.optyn-division .half-left-image,
     .block-grid.optyn-division .half-right-image { padding-top: 0; }
     .half-left-image > .w193 { float: left; }
@@ -1070,12 +1081,12 @@ body.outlook p {
                         <tr>
                           <td class="w410 empty no-pad" align="right" width="410"></td>
                           <td class="w170 link no-pad" align="right" width="170" style="text-align: right;">
-                            <fbshare shareurl = "http://www.optyn.com/">
-                              <img alt="Share on Facebook" width="72" height="18" src="http://www.optyn.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
+                            <fbshare shareurl = "http://www.optynmail.com/">
+                              <img alt="Share on Facebook" width="72" height="18" src="http://www.optynmail.com/assets/email-facebook.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </fbshare>
                             &nbsp;&nbsp;
-                            <twittershare shareurl = "http://www.optyn.com/" text = "optyn">
-                              <img alt="Tweet" width="72" height="18" src="http://www.optyn.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
+                            <twittershare shareurl = "http://www.optynmail.com/" text = "optyn">
+                              <img alt="Tweet" width="72" height="18" src="http://www.optynmail.com/assets/email-twitter.png" style="vertical-align:middle;width:72px !important;height:18px !important;">
                             </twittershare>
                           </td>
                         </tr>
@@ -1333,7 +1344,7 @@ body.outlook p {
                         <grid type="sidebar">
                           <td width="193" class="w193 sidebar sidebar-container">
                             <division type="full_text">
-                              <table class="block-grid">
+                              <table class="block-grid optyn-sidebar">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
@@ -1356,7 +1367,7 @@ body.outlook p {
                             </division>
 
                             <division type="text_with_full_image">
-                              <table class="block-grid">
+                              <table class="block-grid optyn-sidebar">
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>
                                 </tr>
@@ -1397,12 +1408,13 @@ body.outlook p {
                         <grid type="footer">
                           <div>
                             <division type="footer">
-                              <table class="block-grid">
+                              <table width="580" class="w580 block-grid">
                                 <tr>
-                                  <td height="10" class="h10 no-pad"></td>
+                                  <td colspan="3" height="10" class="h10 no-pad w580" width="580"></td>
                                 </tr>
                                 <tr>
-                                  <td class="no-pad footer-text-td">
+                                  <td width="10" class="w10 no-pad"></td>
+                                  <td class="no-pad footer-text-td w560" width="560">
                                     <div>
                                       <center>
                                         <permission><p class="optyn-paragraph">This message was sent to <span class='optyn-receiver-email'>receiver@exmaple.com</span> by <shop-name>Optyn Shop</shop-name></p>
@@ -1412,6 +1424,7 @@ body.outlook p {
                                       </center>
                                     </div>
                                   </td>
+                                  <td width="10" class="w10 no-pad"></td>
                                 </tr>
                                 <tr>
                                   <td colspan="3" height="10" class="h10 no-pad"></td>

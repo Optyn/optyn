@@ -16,15 +16,6 @@ class Merchants::MessagesController < Merchants::BaseController
   NON_TEMPLATE_BUTTON_STYLE = "text-decoration:none;color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 15px;"
   NON_TEMPLATE_CKEDITOR_BUTTON_STYLE = 'border-radius: 0;background: #D4D4D4; padding: 2px 10px;text-decoration: none;display: inline-block;'
 
-  load "#{Rails.root}/lib/shop_logo.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/markup_generator.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/existing_template.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/blank_template.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/system_template_personalizer.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/structure_creator.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/existing_template.rb"
-  load "#{Rails.root}/lib/messagecenter/templates/structure_creator.rb"
-
   def types
     #Do Nothing
   end
@@ -467,8 +458,11 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def template_upload_image
     @message = Message.for_uuid(params[:id])
-    @message_image = MessageImage.new(:image => params[:imgfile], :message_id =>@message.id)
+    @message_image = MessageImage.new(:image => params[:files].first, :message_id =>@message.id)
     @message_image.save
+
+    
+    render(json: {data: {image_location: @message_image.image_location}})
   end
 
   def upload_template_image
