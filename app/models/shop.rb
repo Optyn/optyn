@@ -172,7 +172,6 @@ class Shop < ActiveRecord::Base
     app = self.oauth_application 
     name_field = '<input type="text" id="user_name" name="user[name]" size="34" placeholder="enter name">' if self.oauth_application.show_name?
     %Q(
-       <script src="#{SiteConfig.app_base_url}/api/shop/button_framework.js?app_id=#{app.uid}"></script>
     <style type="text/css">"#{self.oauth_application.custom_css}"</style><div id="optyn-container">
        <div id="optyn-first-container">
        <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email" id="optyn-email-form">
@@ -183,9 +182,6 @@ class Shop < ActiveRecord::Base
        </form>
       </div>
       </div>
-       <iframe name="optyn-iframe" id="optyn-iframe" style="display:none"></iframe>
-       <script type="text/javascript" src="#{SiteConfig.app_base_url}/api/shop/button_script.js?app_id=#{app.uid}">
-       </script>
     )
   end
 
