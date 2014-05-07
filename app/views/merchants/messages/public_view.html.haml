@@ -1,3 +1,7 @@
 %h1.pull-left
-- @reciver = (@message.message_user(current_user) rescue nil)
-= render partial: "shared/#{message_partner_name(@shop)}/messages/core_content", locals: {preview: false, customer: @receiver}
+
+- unless @message.instance_of?(TemplateMessage)
+  - @reciver = (@message.message_user(current_user) rescue nil)
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/core_content", locals: {preview: false, customer: @receiver}
+- else
+  = raw(@message.template.fetch_content(@message))  
