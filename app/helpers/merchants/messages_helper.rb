@@ -216,8 +216,7 @@ module Merchants::MessagesHelper
         caption: message.generic_subject,
         app_id: SiteConfig.facebook_app_key,
         redirect_uri: SiteConfig.app_base_url,
-        description: "I would like to share and spread this campaign.",
-        picture: message.share_image_location
+        description: "I would like to share and spread this campaign."
       }.to_query
       return URI.parse("#{FACEBOOK_SHARE_API}?#{query}")
     when "twitter"
