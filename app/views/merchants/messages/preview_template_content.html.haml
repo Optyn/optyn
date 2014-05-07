@@ -1,4 +1,4 @@
 - unless @template.blank?
-  = raw(@template.fetch_content(@message.content))
+  = raw(@template.fetch_content(@message))
 - else
   %h3 No Template selected your Campaign.

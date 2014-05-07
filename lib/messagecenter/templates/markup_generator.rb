@@ -10,28 +10,29 @@ module Messagecenter
       CONTENT_COMPONENT_TYPE = "content"
       INTRODUCTION_COMPONENT_TYPE = "introduction"
 
-      def self.generate_editable_content(content, template)
+      def self.generate_editable_content(message, template)
         markup = ""
+        content = message.content
         if content.blank?
-          blank_template = BlankTemplate.new(template: template, editable: 'true')
+          blank_template = BlankTemplate.new(template: template, message: message, editable: 'true')
           markup = blank_template.build_markup
         else
-          parsed_content = JSON.parse(content)
-          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: 'true')
+          existing_template = ExistingTemplate.new(template: template, message: message, editable: 'true')
           markup = existing_template.build_markup
         end  
 
         markup
       end
 
-      def self.generate_content(content, template)
+      def self.generate_content(message, template)
         markup = ""
+        content = message.content
         if content.blank?
-          blank_template = BlankTemplate.new(template: template, editable: 'false')
+          blank_template = BlankTemplate.new(template: template, message: message, editable: 'false')
           markup = blank_template.build_markup
         else
           parsed_content = JSON.parse(content)
-          existing_template = ExistingTemplate.new(template: template, content: parsed_content, editable: 'false')
+          existing_template = ExistingTemplate.new(template: template, message: message, editable: 'false')
           markup = existing_template.build_markup
         end  
 
@@ -57,7 +58,7 @@ module Messagecenter
           if social_sharing.has_key? :fb_sharing
             facebook = social_sharing.fb_sharing
             fb_html = if facebook.html.present? 
-                        "<span class='optyn-fbshare'><a href = #{get_social_share_link('facebook',facebook.text, facebook.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{facebook.html}
+                        "<span class='optyn-fbshare'><a href = #{get_social_share_link('facebook', @message, facebook.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{facebook.html}
                         &nbsp; </a></span>" 
                       else
                         get_default_html("facebook")
@@ -69,7 +70,7 @@ module Messagecenter
           if component.social_sharing.has_key? :twitter_sharing
             twitter = social_sharing.twitter_sharing
             twitter_html = if twitter.html.present?
-                            "<span class='optyn-twittershare'><a href = #{get_social_share_link('twitter', twitter.text, twitter.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{twitter.html}
+                            "<span class='optyn-twittershare'><a href = #{get_social_share_link('twitter', @message, twitter.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{twitter.html}
                             </a></span>"
                           else
                             get_default_html("twitter")
