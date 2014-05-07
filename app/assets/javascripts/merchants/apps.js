@@ -18,6 +18,7 @@ function Apps() {
             this.hookTooltip();
             this.hookChangeChosen();
             this.hookBarOption();
+            this.hookCreateLabelOnly();
         }
 
         if ($('.app-container').length) {
@@ -160,4 +161,31 @@ function Apps() {
          }
         });
     };
+    this.hookCreateLabelOnly = function () {
+      $('body').on('keydown', '#message_label_ids_chzn .search-field input', function (e) {
+        var $input = $(this);
+        var code = e.keycode || e.which;
+        if (code == 13) {
+          var inputVal = $input.val();
+          if (inputVal.length) {
+            var $currentLabel = $input.parents('.custom').first();
+            var $currentSelect = $currentLabel.find('select');
+            $.ajax({
+              url: $('#create_label_users_path').val(),
+              type: 'POST',
+              data: {label: inputVal},
+              success: function (data) {
+                $('.chzn-select').append(
+                  $('<option></option>').val(data.id).html(data.name)
+                );
+                $currentSelect.find('option[value="' + data.id + '"]').attr('selected', 'selected');
+                $('.chzn-select').trigger("liszt:updated");
+                $('#label_success').text("Label created successfully");
+                $('#label_success').show();
+              }
+            });
+          }
+        }
+      });
+  };
 }

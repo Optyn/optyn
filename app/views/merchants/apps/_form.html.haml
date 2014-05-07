@@ -63,7 +63,8 @@
     %label
       Labels
   .custom
-    = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @application.label_ids.split(",")),
+    = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
+    = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @label_ids),
         {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
 
   .option
