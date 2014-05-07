@@ -31,11 +31,11 @@
 
   .option
     = f.check_box(:show_name)
-    Show Name
+    Ask for Subscriber Name & Email
 
   .option
     = f.check_box(:show_form)
-    Show form code
+    Display Form Code
 
   .option
     %label.checkbox
@@ -56,16 +56,16 @@
     = f.text_area(:custom_text, rows: 3, :class =>"input-xxlarge", :placeholder => "Enter your custom tag line here. Be creative or use ours.")
   .option
     %label
-      Redirect URL
+      Redirect URL - Where should subscribers go after they opt-in?
   .custom
     = f.text_field :redirect_uri_after_login, placeholder: 'custom css', 'data-toggle' => 'tooltip', title: 'Enter your Redirect Url', class: 'input-xlarge span12'
   .option
     %label
-      Labels
+      If user opts-in, add them to this list.
   .custom
     = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
     = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @label_ids),
-        {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
+        {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select a list to which we should add new subscribers.'}
 
   .option
     %label
@@ -75,7 +75,7 @@
     - unless @application.new_record?
       .refresh
         %a.btn.btn-primary.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save
-        %a.btn.btn-primary.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Token
+        %a.btn.btn-primary.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Form
     - else
       .refresh
         %a.btn.refreshbtn.btn-block.btn-primary{:id => "generate_button", :href => "javascript:void(0)"} Generate Button
