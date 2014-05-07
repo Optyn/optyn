@@ -297,7 +297,7 @@ function MerchantMessage() {
                 success: function (data) {
                     $('#response_message_modal').modal('hide');
                     setTimeout(function () {
-                        $('#message_fields_wrapper').html(data.response_message);
+                        $('.responce_email_fields').html(data.response_message);
                         $('#message_menu').replaceWith(data.message_menu)
                         current.hookChosen();
                     }, 500);
