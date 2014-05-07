@@ -209,7 +209,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @message = parent_message
     @message_type = @message.type.underscore
     populate_manager_folder_count
-    render json: {response_message: render_to_string(partial: 'merchants/shared/messages/response_email_fields', locals: {parent_message: parent_message}),
+    render json: {response_message: render_to_string(partial: 'merchants/messages/edit_fields_wrapper', locals: {parent_message: parent_message}),
       message_menu: render_to_string(partial: "merchants/messages/message_menu")
     }
   rescue => e

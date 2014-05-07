@@ -272,6 +272,8 @@ function MerchantMessage() {
             var serializedData = null;
             var actionVal = $('#response_message_modal #response_message_action').val();
 
+            $('#message_form #content').val(CKEDITOR.instances.content.getData());
+
             if (actionVal.match(/\/na\//)) {
                 serializedData = $('#message_fields_wrapper form').serializeArray();
             } else {
@@ -297,7 +299,7 @@ function MerchantMessage() {
                 success: function (data) {
                     $('#response_message_modal').modal('hide');
                     setTimeout(function () {
-                        $('.responce_email_fields').html(data.response_message);
+                        $('#message_fields_wrapper').html(data.response_message);
                         $('#message_menu').replaceWith(data.message_menu)
                         current.hookChosen();
                     }, 500);
