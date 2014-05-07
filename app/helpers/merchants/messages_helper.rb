@@ -207,13 +207,22 @@ module Merchants::MessagesHelper
   end
 
   def get_social_share_link(type, message, public_msg_url, options = {})
-    message = (message.is_a? Message) ? message.name : message
+    # message = (message.is_a? Message) ? message.name : message
     case type
     when "facebook"
-      return URI.parse(URI.encode("#{FACEBOOK_SHARE_API}?u=#{public_msg_url}"))
+      query = {
+        link: public_msg_url,
+        display: "popup",
+        caption: message.generic_subject,
+        app_id: SiteConfig.facebook_app_key,
+        redirect_uri: SiteConfig.app_base_url,
+        description: "I would like to share and spread this campaign.",
+        picture: message.share_image_location
+      }.to_query
+      return URI.parse("#{FACEBOOK_SHARE_API}?#{query}")
     when "twitter"
       params = options['via'].present? ? "&via=#{options['via']}" : ""
-      return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message}&url=#{public_msg_url}#{params}"))
+      return URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.generic_subject}&url=#{public_msg_url}#{params}"))
     end
   end
 
