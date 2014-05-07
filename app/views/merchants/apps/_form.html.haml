@@ -30,32 +30,12 @@
     = f.text_field :background_color
 
   .option
-<<<<<<< HEAD
-<<<<<<< HEAD
-    %label.checkbox
-      = f.check_box(:show_name)
-      Ask for Subscriber Name & Email
-
-  .option
-    %label.checkbox
-      = f.check_box(:show_form)
-      Display Form Code
-=======
     = f.check_box(:show_name)
     Show Name
 
   .option
     = f.check_box(:show_form)
     Show form code
->>>>>>> FETCH_HEAD
-=======
-    = f.check_box(:show_name)
-    Show Name
-
-  .option
-    = f.check_box(:show_form)
-    Show form code
->>>>>>> FETCH_HEAD
 
   .option
     %label.checkbox
@@ -76,23 +56,15 @@
     = f.text_area(:custom_text, rows: 3, :class =>"input-xxlarge", :placeholder => "Enter your custom tag line here. Be creative or use ours.")
   .option
     %label
-      Redirect URL - Where should subscribers go after they opt-in?
+      Redirect URL
   .custom
     = f.text_field :redirect_uri_after_login, placeholder: 'custom css', 'data-toggle' => 'tooltip', title: 'Enter your Redirect Url', class: 'input-xlarge span12'
   .option
     %label
-      If user opts-in, add them to this list.
+      Labels
   .custom
-<<<<<<< HEAD
-<<<<<<< HEAD
-    = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name),
-        {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select a list to which we should add new subscribers.'}
-=======
-=======
->>>>>>> FETCH_HEAD
     = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @application.label_ids.split(",")),
         {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
->>>>>>> FETCH_HEAD
 
   .option
     %label
@@ -102,7 +74,7 @@
     - unless @application.new_record?
       .refresh
         %a.btn.btn-primary.refreshbtn{:id => "save_button", :href => "javascript:void(0)"} Save
-        %a.btn.btn-primary.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Form
+        %a.btn.btn-primary.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Token
     - else
       .refresh
         %a.btn.refreshbtn.btn-block.btn-primary{:id => "generate_button", :href => "javascript:void(0)"} Generate Button
