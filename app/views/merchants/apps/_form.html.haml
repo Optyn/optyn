@@ -23,10 +23,10 @@
     %label.radio.inline
       = f.radio_button :begin_state, 0
       Bar Collapsed
-  .option
+  .option.bar_color{ :style => "#{show_bar_option(@application.render_choice)}" }
     %label
       Choose Bar Background Color
-  .custom
+  .custom.bar_color{ :style => "#{show_bar_option(@application.render_choice)}" }
     = f.text_field :background_color
 
   .option

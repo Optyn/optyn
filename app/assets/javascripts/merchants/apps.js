@@ -155,9 +155,11 @@ function Apps() {
          var value = $(this).val();
          if(value == 2){
             $(".bar_options").hide();
+            $(".bar_color").hide();
          }
          else{
             $(".bar_options").show();
+            $(".bar_color").show();
          }
         });
     };
