@@ -927,11 +927,11 @@ class Message < ActiveRecord::Base
     else
       
       regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
-      personalized_article = (article.gsub(regex, "")).strip
+      personalized_article = (article.to_s.gsub(regex, "")).strip
       
       regex = /{{Customer Name}}/i #regex when the customer name is missing /eom
-      personalized_article = (personalized_article.gsub(regex, "")).strip #incase customer name is used somewhere else.
-      personalized_article[0] = personalized_article.first.capitalize[0]
+      personalized_article = (personalized_article.to_s.gsub(regex, "")).strip #incase customer name is used somewhere else.
+      personalized_article[0] = personalized_article.to_s.first.capitalize[0] if personalized_article.present?
       personalized_article
     end
   end
