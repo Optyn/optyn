@@ -6,4 +6,4 @@
 = hidden_field_tag :content_entered, @message.content.present? ? "yes" : ""
 = hidden_field_tag :editor_changed_content
 
-= raw(@template.fetch_editable_content(@message.content))
+= raw(@template.fetch_editable_content(@message))

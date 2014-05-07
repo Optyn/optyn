@@ -129,19 +129,19 @@ class Template < ActiveRecord::Base
     template_node.to_s
   end
 
-  def fetch_editable_content(message_content)
+  def fetch_editable_content(message)
     content = ""
 
-    content = Messagecenter::Templates::MarkupGenerator.generate_editable_content(message_content, self)
+    content = Messagecenter::Templates::MarkupGenerator.generate_editable_content(message, self)
     content = content.gsub(OPTYN_SPACE_PLACEHOLDER, "&nbsp;")
 
     content
   end
 
-  def fetch_content(message_content)
+  def fetch_content(message)
     content = ""
 
-    html = Messagecenter::Templates::MarkupGenerator.generate_content(message_content, self)
+    html = Messagecenter::Templates::MarkupGenerator.generate_content(message, self)
     premailer = Premailer.new(html, with_html_string: true)
     content = premailer.to_inline_css
     content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
@@ -153,7 +153,7 @@ class Template < ActiveRecord::Base
 
   def fetch_cached_content(message, force=false)
     Rails.cache.fetch("template_message_#{message.uuid}", force: false, expires_in: SiteConfig.ttls.email_footer) do
-      fetch_content(message.content)
+      fetch_content(message)
     end
   end
 

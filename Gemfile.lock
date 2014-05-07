@@ -389,6 +389,9 @@ GEM
     sexp_processor (4.2.1)
     sextant (0.2.4)
       rails (>= 3.2)
+    shortly (0.3.4)
+      httparty
+      json
     sidekiq (2.14.0)
       celluloid (>= 0.14.1)
       connection_pool (>= 1.0.0)
@@ -530,6 +533,7 @@ DEPENDENCIES
   sendgrid
   sendgrid_toolkit (>= 1.1.1)
   sextant
+  shortly
   sidekiq
   sidekiq-benchmark
   sidekiq-limit_fetch

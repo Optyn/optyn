@@ -1,10 +1,11 @@
 module Messagecenter
   module Templates
     class BlankTemplate < MarkupGenerator
-      attr_accessor :template 
+      attr_accessor :template, :message 
 
       def initialize(options={})
         @template = options[:template]
+        @message = options[:message]
         @editable = options[:editable]
       end
 

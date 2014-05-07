@@ -1,12 +1,13 @@
 module Messagecenter
   module Templates
     class ExistingTemplate < MarkupGenerator
-      attr_accessor :template, :content
+      attr_accessor :template, :content, :message
       include ERB::Util
       
       def initialize(options={})
         @template = options[:template]
-        @content = options[:content]
+        @message = options[:message]
+        @content = JSON.parse(@message.content)
         @editable = options[:editable]
       end
 

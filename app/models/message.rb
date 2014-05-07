@@ -485,6 +485,10 @@ class Message < ActiveRecord::Base
     "A message from #{shop.name}"
   end
 
+  def generic_subject
+    replace_customer_name(nil, self.subject)
+  end
+
   def personalized_greeting(receiver)
     replace_customer_name(receiver, self.subject)
   end
@@ -639,6 +643,11 @@ class Message < ActiveRecord::Base
     if show_image?
       message_image.image.url
     end
+  end
+
+  def share_image_location
+    #Can be overridden based on Message Type
+    shop.has_logo? ? shop.logo_location : "http://placehold.it/200x200.png&text=#{shop.name}"
   end
 
   def show_button?

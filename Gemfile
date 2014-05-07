@@ -96,6 +96,7 @@ gem 'sidekiq-benchmark'
 gem 'sidekiq-limit_fetch'
 
 gem "gretel"
+gem 'shortly'
 
 #INFO:for test only, remove it later
 # gem "http_logger"
