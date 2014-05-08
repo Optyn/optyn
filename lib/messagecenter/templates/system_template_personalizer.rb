@@ -588,12 +588,12 @@ module Messagecenter
 
 
           #change the address node with shops address
-          # address_node = footer_node.css('address').first
-          # begin
-          #   address_node.swap(shop.message_address)
-          # rescue
-          #   address_node.swap(address_node.children.to_s)
-          # end
+          address_node = footer_node.css('address').first
+          begin
+            address_node.swap(shop.message_address)
+          rescue
+            address_node.swap(address_node.children.to_s)
+          end
         end
 
         def set_styles
