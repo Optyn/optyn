@@ -99,7 +99,7 @@ OP = (function($, window, doucument, Optyn){
         ['Font', 'FontSize', '-', 'Bold','Italic','Underline', '-', 'TextColor','-'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
     'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat', '-'],
-        ['Link', 'SimpleLink']
+        ['Link', 'SimpleLink', 'Source']
       ]
         });
 
