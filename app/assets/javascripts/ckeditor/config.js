@@ -41,7 +41,7 @@ CKEDITOR.editorConfig = function( config ) {
   },
   {
     name: 'links',
-    items : [ 'Link', 'SimpleLink' ]
+    items : [ 'Link', 'SimpleLink', 'Source' ]
   }
   ];
 
