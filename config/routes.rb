@@ -13,6 +13,8 @@ Optyn::Application.routes.draw do
   match '/case-studies/bandung-restaurant' => 'main#bandung_case_study', :as => :bandung_case_study
   match '/case-studies/salvatores-restaurant' => 'main#salvatores_case_study', :as => :salvatores_case_study
   match '/constant-contact-offer' => 'main#constant_contact', :as => :constant_contact
+  match '/mailchimp-offer' => 'main#mailchimp_offer', :as => :mailchimp
+  match '/aweber-offer' => 'main#aweber_offer', :as => :aweber
 
   # Static Pages created by Alen. Please make sure if the static pages are modified the ssl enforcement is changed too.
   match 'about' => 'main#about', :as => :about
