@@ -11,10 +11,12 @@
           %span
             = @application.call_to_action == 1 ? "Optyn" : "Subscribe via"
       - else
-        = current_shop.form_code.html_safe
-        =# text_field_tag "email", nil, placeholder: 'Your Email'
+        - if @application.present?
+          %iframe{src: fetch_code_merchants_app_path(), :frameborder => 0, :scrolling => "auto", style: "width: 100%;"}
+
       %p
         = @application.show_default_optyn_text ? SiteConfig.api_welcome_message : @application.custom_text
+    
     .codesnippet
       %textarea.span12#embed_code{:rows => "5", :readonly => 'readonly'}
         - if !@application.show_form?
