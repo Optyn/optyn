@@ -106,16 +106,6 @@ class MessageUser < ActiveRecord::Base
     update_all({message_folder_id: MessageFolder.discarded_id}, {message_id: message_ids, user_id: user_ids})
   end
 
-  def self.log_email_read(token)
-    identifier = Base64.urlsafe_decode64(token)
-    message_user_entry = MessageUser.for_uuid(identifier)
-    if message_user_entry.present?
-      message_user_entry.update_attribute(:email_read, true)
-    end
-  rescue ActiveRecord::RecordNotFound
-    Rails.logger.error "Woot! Woot! Could not find Message User entry with id: #{identifier}"
-  end
-
   def self.create_message_receiver_entries(message_instance, receiver_ids, creation_errors, process_manager)
     error_message = ""
     deployment_counter = 0

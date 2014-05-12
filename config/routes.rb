@@ -165,8 +165,6 @@ Optyn::Application.routes.draw do
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://optyn.uservoice.com"), :as => :support
 
-  match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
-
 
   devise_for :users, :path_names => {:sign_out => 'logout',
     :sign_in => 'login',

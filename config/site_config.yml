@@ -39,6 +39,10 @@ defaults:
   send_grid_username: 'alenmalkoc'
   send_grid_password: '77cd5a95aa'
 
+  #trackings
+  simple_delivery:
+    open_path: '/emails/o'
+
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
   twitter_consumer_secret: 'bTGpU2SLyqai4yGbMzqfrTP20zxbNYySroKd9HIxeM'
@@ -76,7 +80,7 @@ development:
   stripe_public_key: "pk_test_OvjvjiEuAFjvonAaaNAbh9XT"
   app_base_url: 'http://localhost:3000'
   app_base_url_http: 'http://localhost:3000'
-  email_app_base_url: 'http://localhost:3000'
+  email_app_base_url: 'http://localhost:3001'
   template_standard_url: 'http://localoptynmail:3000/l'
   bucket: 'optyndevelopment'
   optyn_partner_redirect_uri: 'http://localhost:3001/partners/auth/optyn/callback'
