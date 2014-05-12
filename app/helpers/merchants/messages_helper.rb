@@ -131,7 +131,7 @@ module Merchants::MessagesHelper
 
   def optyn_tracking_url(message, receiver, original_href)
     user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :manager_id => message.manager_id,  :email => (receiver.email rescue '')})
-    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    optyn_url = "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.link_path}?uit=#{user_info_token}"
     optyn_url = "#{optyn_url}&redirect_url=#{original_href}"
     optyn_url
   end

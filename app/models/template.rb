@@ -176,7 +176,7 @@ class Template < ActiveRecord::Base
 
   def process_urls(content, message, receiver)
     user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :email => receiver.email, :manager_id => message.manager_id})
-    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    optyn_url = "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.link_path}?uit=#{user_info_token}"
     body = Nokogiri::HTML(content)
 
     #replace urls in a tags

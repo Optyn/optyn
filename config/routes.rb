@@ -491,5 +491,5 @@ Optyn::Application.routes.draw do
 
     get '/resellerjs' => 'dashboards#resellerjs'
   end
-  get 'l' => 'email_trackings#index'
+  # get 'l' => 'email_trackings#index'
 end
