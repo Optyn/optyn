@@ -152,6 +152,8 @@ class Shop < ActiveRecord::Base
     if self.website.present?
       unless self.website[/\Ahttp:\/\//] || self.website[/\Ahttps:\/\//]
         self.website = "http://#{self.website}"
+      else
+        self.website
       end
     end
   end
