@@ -34,8 +34,13 @@ class Merchants::AppsController < Merchants::BaseController
                   form_content: render_to_string(partial: 'merchants/apps/edit'),
                   advanced_content: render_to_string(partial: 'merchants/apps/advanced')
     }
-  rescue
+  rescue => e
     render json: {error_message: REDIRECTION_URI_FLASH}, status: :unprocessable_entity
+  end
+
+
+  def fetch_code
+    render layout: false
   end
 
 

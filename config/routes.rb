@@ -361,7 +361,12 @@ Optyn::Application.routes.draw do
       post '/create_new_manager' => 'merchant_managers#create_new_manager'
     end
 
-    resource :app
+    resource :app do
+      member do
+        get :fetch_code
+      end
+    end
+
     resources :connections do
       collection do
         match 'unsubscribe/:id', to: "connections#unsubscribe_user", as: :unsubscribe

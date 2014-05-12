@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    
+  %body
+    %div
+      - if current_shop.show_form
+        = raw(current_shop.form_code)
+      - else
+        = raw(current_shop.embed_code)  
+
+  

@@ -27,6 +27,7 @@ class Shop < ActiveRecord::Base
   has_many :surveys, dependent: :destroy #changing it to has_many
   has_many :templates, dependent: :destroy
 
+  delegate :embed_code, :show_form, to: :oauth_application
 
   SHOP_TYPES=['local', 'online']
   OPTYN_POSTFIX = 'Optyn Postfix'
@@ -171,19 +172,30 @@ class Shop < ActiveRecord::Base
   end
 
   def form_code
+    if 1 == oauth_application.render_choice.to_i
+      wrapper_style = %Q(<style type="text/css">
+                    #optyn_button_wrapper { background-color: #{oauth_application.background_color}; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px;}
+                    #show_optyn_button_wrapper { background-color: #{oauth_application.background_color}; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; }
+                  </style>)
+    end
+
     app = self.oauth_application 
     name_field = '<input type="text" id="user_name" name="user[name]" size="34" placeholder="enter name">' if self.oauth_application.show_name?
     %Q(
-    <style type="text/css">"#{self.oauth_application.custom_css}"</style><div id="optyn-container">
-       <div id="optyn-first-container">
-       <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email" id="optyn-email-form">
-       #{name_field}
-       <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
-       <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">
-      <input value="Subscribe" name="commit" id="commit" type="submit">
-       </form>
-      </div>
-      </div>
+       <style type="text/css">"#{self.oauth_application.custom_css}"</style>
+       #{wrapper_style}
+       <div id="optyn_button_wrapper">
+        <div id="optyn-container">     
+           <div id="optyn-first-container">
+            <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email" id="optyn-email-form">
+              #{name_field}
+              <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
+              <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">
+              <input value="Subscribe" name="commit" id="commit" type="submit">
+            </form>
+           </div>
+        </div>
+       </div>
     )
   end
 
