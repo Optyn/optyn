@@ -218,8 +218,6 @@ Optyn::Application.routes.draw do
       get 'shop'
       put 'disconnect', as: :disconnect
       post 'connect', as: :connect
-      get 'removal_confirmation'
-      put 'opt_out'
     end
   end
 
@@ -496,5 +494,4 @@ Optyn::Application.routes.draw do
 
     get '/resellerjs' => 'dashboards#resellerjs'
   end
-  # get 'l' => 'email_trackings#index'
 end

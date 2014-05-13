@@ -43,6 +43,7 @@ defaults:
   simple_delivery:
     open_path: '/emails/o'
     link_path: '/emails/l'
+    unsubscribe_path: '/emails/unsubscribe'
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
