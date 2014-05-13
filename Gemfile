@@ -72,6 +72,7 @@ gem 'social-share-button'
 gem 'httparty'
 gem "ckeditor"
 gem 'premailer'
+gem "intercom-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.
