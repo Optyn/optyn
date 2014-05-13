@@ -102,6 +102,9 @@ module Messagecenter
                         <button class="btn ink-action-edit">
                           <i class="icon-edit icon-white"></i>
                         </button>
+                        <button class="btn ink-action-move handle">
+                          <i class="icon-fullscreen icon-white"></i>
+                        </button>
                         <button class="btn ink-action-delete">
                           <i class="icon-trash icon-white action-delete"></i>
                         </button>
