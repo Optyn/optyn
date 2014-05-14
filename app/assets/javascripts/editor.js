@@ -35,7 +35,7 @@ OP = (function($, window, doucument, Optyn){
         // Unwrap all the sortable items
 
         // Wrapping in a container with CSS class .sortable-item
-        $('.optyn-content').find($('div.template-section-toolset')).each(function(){
+        $('.ss-content').find($('div.template-section-toolset')).each(function(){
           if(!$(this).parents('.sortable-item').length){
             $(this).next().andSelf().wrapAll('<div class="sortable-item">');  
           }
@@ -80,23 +80,23 @@ OP = (function($, window, doucument, Optyn){
     //fire up a editing of the section when user edits a section
     hookEditTrigger: function() {
       $('body').on('click', '.ink-action-edit', function() {
-        var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' ),
-        $editableElem = $division.find('.optyn-division'),
+        var $division = $(this).parents('.template-section-toolset').first().next( '.ss-division' ),
+        $editableElem = $division.find('.ss-division'),
         divisionContents = [];
 
-        $division.find('.optyn-headline, .optyn-paragraph, .optyn-replaceable-image').each(function(index, updateableElement){
+        $division.find('.ss-headline, .ss-paragraph, .ss-replaceable-image').each(function(index, updateableElement){
           var $updateableElement = $(updateableElement);
           var artifact = null;
 
-          if($updateableElement.hasClass('optyn-headline')){
+          if($updateableElement.hasClass('ss-headline')){
             artifact = {
               type: 'headline',
               content: $updateableElement.text()
             };
-          }else if($updateableElement.hasClass('optyn-paragraph')){
+          }else if($updateableElement.hasClass('ss-paragraph')){
 
             //Add the style tag to the button to show properly in ckEditor
-            $updateableElement.find('a.optyn-button-link').each(function(){
+            $updateableElement.find('a.ss-button-link').each(function(){
               $(this).attr('style', OP.ckeditorButton.getStyle());
             })
 
@@ -104,7 +104,7 @@ OP = (function($, window, doucument, Optyn){
               type: 'paragraph',
               content: $updateableElement.html()
             };
-          }else if($updateableElement.hasClass('optyn-replaceable-image')){
+          }else if($updateableElement.hasClass('ss-replaceable-image')){
             var placeholderSrc = null;
             var href = null;
             var $image = $updateableElement.find('img');
@@ -247,18 +247,18 @@ OP = (function($, window, doucument, Optyn){
         var selectedElem = OP.selectedSection.getElem();
         
         var headlines = properties.headlines;
-        $(selectedElem).find( '.optyn-headline').each( function( index, headlineElem ) {
+        $(selectedElem).find( '.ss-headline').each( function( index, headlineElem ) {
           $( headlineElem ).html( headlines[index] );
         });
 
         var paragraphs = properties.paragraphs;
-        $(selectedElem).find( '.optyn-paragraph').each( function( index, paragraphElem ) {
+        $(selectedElem).find( '.ss-paragraph').each( function( index, paragraphElem ) {
           $( paragraphElem ).html( paragraphs[index] );
         });
 
         //Add appropriate Image
         var images = properties.images;
-        $(selectedElem).find('.optyn-replaceable-image').each( function( index, imageElem ) {
+        $(selectedElem).find('.ss-replaceable-image').each( function( index, imageElem ) {
 
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
@@ -285,7 +285,7 @@ OP = (function($, window, doucument, Optyn){
               height: $imageContainer.attr('height'),
               width: $imageContainer.attr('width'),
               style: $imageContainer.attr('style'),
-              'class': $imageContainer.attr('class').replace(/optyn-replaceable-image/, "")
+              'class': $imageContainer.attr('class').replace(/ss-replaceable-image/, "")
             });
             if(images[index][1].length > 0){
             $temp.append($a);
@@ -313,14 +313,14 @@ OP = (function($, window, doucument, Optyn){
       $('body').on('click', '.add-section-link', function( event ) {
         event.preventDefault();
         var desiredGridType = $( this ).data( 'section-type' );
-        var $currentGrid = $( this ).parents('.optyn-grid').first();
+        var $currentGrid = $( this ).parents('.ss-grid').first();
         var requiredMarkup = $currentGrid.find( '[data-component-type="content"]' ).data( 'components' )[desiredGridType];
         if($currentGrid.find( '.no-divisions-toolset' ).length){
           $( this ).parents('.no-divisions-toolset').first().replaceWith(requiredMarkup);
         }else{
           var $currentDivision = $( this ).parents('.template-section-toolset').first().parents('.sortable-item').first();
           $currentDivision.after(requiredMarkup);
-          var $addedDivision = $currentDivision.nextAll('.optyn-division').first();
+          var $addedDivision = $currentDivision.nextAll('.ss-division').first();
           $addedDivision.addClass( 'recently-added-division' );
 
           setTimeout( function () {
@@ -346,7 +346,7 @@ OP = (function($, window, doucument, Optyn){
     //Observe the delete section and clear the fields
     hookDeleteSection: function(){
       $('body').on('click', '.ink-action-delete', function(){
-        var divisionCount = $( this ).parents( '.optyn-grid' ).find( '.optyn-division' ).size();
+        var divisionCount = $( this ).parents( '.ss-grid' ).find( '.ss-division' ).size();
         var $temp = null;
         if ( divisionCount == 1 ) {
           $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
@@ -426,7 +426,7 @@ OP = (function($, window, doucument, Optyn){
       var containers = messageWrapper.message.containers
 
       //iterate through the containers to get the rows
-      $('body').find('.optyn-container').each(function(container_index, jContainer){
+      $('body').find('.ss-container').each(function(container_index, jContainer){
         var $container = $(jContainer);
         var container = {
           'type': $container.attr('data-type'),
@@ -435,7 +435,7 @@ OP = (function($, window, doucument, Optyn){
 
         var rows = container.rows;
         //interate through the rows to get the grids
-        $container.find('.optyn-row').each(function(row_index, jRow){
+        $container.find('.ss-row').each(function(row_index, jRow){
           var $row = $(jRow);
           var row = {
             'grids': []
@@ -443,7 +443,7 @@ OP = (function($, window, doucument, Optyn){
 
           var grids = row.grids;
           //iterate through grids to get the various divisions
-          $row.find('.optyn-grid').each(function(grid_index, jGrid){
+          $row.find('.ss-grid').each(function(grid_index, jGrid){
             var $grid = $(jGrid);
             var grid = {
               'divisions': []
@@ -452,7 +452,7 @@ OP = (function($, window, doucument, Optyn){
             var divisions = grid.divisions;
             //iterate through the divisions to get the divisions and the contnet of headline paragraph
             //** TODO IMPLEMENT THE CHANGES FOR THE HEADER CONTENT AND IF THE HEADER CONTENT HAS JUST AN IMAGE
-            $grid.find('.optyn-division').each(function(division_index, jDivision){
+            $grid.find('.ss-division').each(function(division_index, jDivision){
               var $division = $(jDivision);
               var divisionWrapper = {
                 'division': {}
@@ -464,21 +464,21 @@ OP = (function($, window, doucument, Optyn){
               //populate the headlines
               divisionWrapper.division.headlines = []
               headlines = divisionWrapper.division.headlines
-              $division.find('.optyn-headline').each(function(headline_index, headline){
+              $division.find('.ss-headline').each(function(headline_index, headline){
                 headlines.push($(headline).html());
               });
 
               //populate the paragraphs
               divisionWrapper.division.paragraphs =  []
               paragraphs = divisionWrapper.division.paragraphs
-              $division.find('.optyn-paragraph').each(function(paragraph_index, paragraph){
+              $division.find('.ss-paragraph').each(function(paragraph_index, paragraph){
                 paragraphs.push($(paragraph).html());
               });
 
               //populate the images
               divisionWrapper.division.images =  []
               images = divisionWrapper.division.images
-              $division.find('.optyn-replaceable-image').each(function(image_index, imageContainer){
+              $division.find('.ss-replaceable-image').each(function(image_index, imageContainer){
                 var $imageElem = $(imageContainer).find('img');
                 if($imageElem.length){
                   images.push({

@@ -231,11 +231,11 @@ module Merchants::MessagesHelper
   def get_default_html(type)
     case type
     when "facebook"
-      return "<a href=#{get_social_share_link('facebook','', 'http://optyn.com')} style='background: #3a589b;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target='_blank' class='optyn-fbshare'>
+      return "<a href=#{get_social_share_link('facebook','', 'http://optyn.com')} style='background: #3a589b;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target='_blank' class='ss-fbshare'>
                   <img alt='Icon-facebook' src='http://localhost:3000/assets/icon-facebook.png' style='vertical-align:middle;'>
                 </a>                "
     when "twitter"
-      return "<a href = #{get_social_share_link('twitter', 'optyn', 'http://optyn.com')} style='background:#598dca;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank' class = 'optyn-twittershare'>
+      return "<a href = #{get_social_share_link('twitter', 'optyn', 'http://optyn.com')} style='background:#598dca;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank' class = 'ss-twittershare'>
                 <img alt='Icon-twitter' src='http://localhost:3000/assets/icon-twitter.png' style='vertical-align:middle;'>
               </a>"
     end
