@@ -137,11 +137,6 @@ Optyn::Application.routes.draw do
   match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
   
 
-  #share routes and QR Code
-  match 'g/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
-  match 'redeem/:message_user' => 'merchants/messages#redeem'
-  match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
-  match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
   match 'share_email/:message_id' => 'merchants/messages#share_email', :as => :share_email
   match 'send_shared_email/:message_id' => 'merchants/messages#send_shared_email', :as => :send_shared_email
 
