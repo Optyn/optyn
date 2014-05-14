@@ -109,19 +109,19 @@ module Messagecenter
 
               #headlines added
               (division_hash['division']['headlines'] || []).each_with_index do |headline_content, index|
-                headline = division_node.css('.optyn-headline')[index]
+                headline = division_node.css('.ss-headline')[index]
                 headline.inner_html = headline_content
               end
 
               #paragraph added
               (division_hash['division']['paragraphs'] || []).each_with_index do |paragraph_content, index|
-                paragraph = division_node.css('.optyn-paragraph')[index]
+                paragraph = division_node.css('.ss-paragraph')[index]
                 paragraph.inner_html = paragraph_content.gsub(/&nbsp;/, Template::OPTYN_SPACE_PLACEHOLDER)
               end
 
               #images added
               (division_hash['division']['images'] || []).each_with_index do |image_content, index|
-                image_container = division_node.css('.optyn-replaceable-image')[index]
+                image_container = division_node.css('.ss-replaceable-image')[index]
                 begin
                   if image_content['href'].blank?
                     img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" />}
