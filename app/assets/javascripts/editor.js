@@ -367,25 +367,6 @@ OP = (function($, window, doucument, Optyn){
           OP.template.saveSectionChanges();
           OP.setImageLinkTarget();
         }); //end of $toolsetSortable slideup
-
-        // var $toolset = $(this).parents('.template-section-toolset').first();
-        // var $toolsetParent = $toolset.parent();
-        // var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
-
-        // $toolset.slideUp( function() {
-        //   $( this ).remove();
-        // });
-
-        // $division.slideUp( function() {
-        //   $( this ).remove();
-        //   if($temp != null){
-        //     $toolsetParent.append( $temp.html());
-        //   }
-
-        //   OP.setParentIframeHeight();
-        //   OP.template.saveSectionChanges();
-        //   OP.setImageLinkTarget();
-        // }); //end of slide up division
       });
     },
 
