@@ -24,23 +24,21 @@ OP = (function($, window, doucument, Optyn){
       this.hookContentCreationOnLoad();
       this.fixCkEditorModalIssue();
       this.hookImageClick();
-      this.hookSortTemplateElemets();
+      this.hookSortTemplateElements();
       setTimeout( function() {
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
       }, 3000);  // Find a better alternative for this setTimeout.
     },
 
-    hookSortTemplateElemets: function(){
+    hookSortTemplateElements: function(){
         // Wrapping in a container with CSS class .sortable-item
-        $('table.optyn-content').find($('div.template-section-toolset, table.optyn-division')).each(function(){
-          console.log($(this));
+        $('table.optyn-content').find($('div.template-section-toolset')).each(function(){
           $(this).next().andSelf().wrapAll('<div class="sortable-item">');
         });
         $(".handle").css("cursor", "pointer");   // Hand cursor
         $(".handle").css("cursor", "move");      // Directional cursor.
 
-        $('.sortable-item').find('.block-grid').unwrap();
         // Wrapping all .sortable items in #sortable container
         $('.sortable-item').wrapAll('<div id="sortable">');
 
@@ -325,7 +323,7 @@ OP = (function($, window, doucument, Optyn){
         
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
-        OP.hookSortTemplateElemets();
+        OP.hookSortTemplateElements();
       });
     },
 
