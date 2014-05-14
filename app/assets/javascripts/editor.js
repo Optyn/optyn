@@ -311,9 +311,11 @@ OP = (function($, window, doucument, Optyn){
         }else{
           var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
           $currentDivision.after(requiredMarkup);
-          $currentDivision.next().next().addClass( 'recently-added-division' );
+          var $addedDivision = $currentDivision.nextAll('.optyn-division').first();
+          $addedDivision.addClass( 'recently-added-division' );
+
           setTimeout( function () {
-            $currentDivision.next().next().removeClass( 'recently-added-division' );
+            $addedDivision.removeClass( 'recently-added-division' );
           }, 1200 );
         }
 
@@ -323,7 +325,7 @@ OP = (function($, window, doucument, Optyn){
         
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
-        OP.hookSortTemplateElements();
+        OP.template.hookSortTemplateElements();
       });
     },
 
@@ -357,7 +359,7 @@ OP = (function($, window, doucument, Optyn){
           }
           OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
-          OP.template.setImageLinkTarget();
+          OP.setImageLinkTarget();
         }); //end of slide up division
       });
     },
