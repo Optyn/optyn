@@ -52,8 +52,11 @@ OP = (function($, window, doucument, Optyn){
         $('#sortable').sortable({
           revert       : true,
           connectWith  : "#sortable",
-          stop: function( event, ui ) {OP.template.saveSectionChanges();}
-      });
+          stop: function( event, ui ) {OP.template.saveSectionChanges();},
+          handle : '.handle',
+          cancel : ''
+
+      }).disableSelection();
     },
 
     fixCkEditorModalIssue: function(){
