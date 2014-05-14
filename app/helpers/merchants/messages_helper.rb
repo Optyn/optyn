@@ -232,11 +232,11 @@ module Merchants::MessagesHelper
     case type
     when "facebook"
       return "<a href=#{get_social_share_link('facebook','', 'http://optyn.com')} style='background: #3a589b;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target='_blank' class='optyn-fbshare'>
-                  <img alt='Icon-facebook' src='http://localhost:3000/assets/icon-facebook.png' style='vertical-align:middle;'>
+                  <img alt='Icon-facebook' src='#{SiteConfig.email_app_base_url}/assets/icon-facebook.png' style='vertical-align:middle;'>
                 </a>                "
     when "twitter"
       return "<a href = #{get_social_share_link('twitter', 'optyn', 'http://optyn.com')} style='background:#598dca;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target ='_blank' class = 'optyn-twittershare'>
-                <img alt='Icon-twitter' src='http://localhost:3000/assets/icon-twitter.png' style='vertical-align:middle;'>
+                <img alt='Icon-twitter' src='#{SiteConfig.email_app_base_url}/assets/icon-twitter.png' style='vertical-align:middle;'>
               </a>"
     end
   end
