@@ -24,32 +24,39 @@ OP = (function($, window, doucument, Optyn){
       this.hookContentCreationOnLoad();
       this.fixCkEditorModalIssue();
       this.hookImageClick();
-      this.hookSortTemplateElemets();
+      this.hookSortTemplateElements();
       setTimeout( function() {
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
       }, 3000);  // Find a better alternative for this setTimeout.
     },
 
-    hookSortTemplateElemets: function(){
+    hookSortTemplateElements: function(){
+        // Unwrap all the sortable items
+
         // Wrapping in a container with CSS class .sortable-item
-        $('table.optyn-content').find($('div.template-section-toolset, table.optyn-division')).each(function(){
-          console.log($(this));
-          $(this).next().andSelf().wrapAll('<div class="sortable-item">');
+        $('.optyn-content').find($('div.template-section-toolset')).each(function(){
+          if(!$(this).parents('.sortable-item').length){
+            $(this).next().andSelf().wrapAll('<div class="sortable-item">');  
+          }
         });
         $(".handle").css("cursor", "pointer");   // Hand cursor
         $(".handle").css("cursor", "move");      // Directional cursor.
 
-        $('.sortable-item').find('.block-grid').unwrap();
         // Wrapping all .sortable items in #sortable container
-        $('.sortable-item').wrapAll('<div id="sortable">');
+        if(!$('.sortable-item').parents('#sortable').length){
+          $('.sortable-item').wrapAll('<div id="sortable">');
+        }
 
         // Sortable init
         $('#sortable').sortable({
           revert       : true,
           connectWith  : "#sortable",
-          stop: function( event, ui ) {OP.template.saveSectionChanges();}
-      });
+          stop: function( event, ui ) {OP.template.saveSectionChanges();},
+          handle : '.handle',
+          cancel : ''
+
+      }).disableSelection();
     },
 
     fixCkEditorModalIssue: function(){
@@ -311,11 +318,13 @@ OP = (function($, window, doucument, Optyn){
         if($currentGrid.find( '.no-divisions-toolset' ).length){
           $( this ).parents('.no-divisions-toolset').first().replaceWith(requiredMarkup);
         }else{
-          var $currentDivision = $( this ).parents('.template-section-toolset').first().next('.optyn-division');
+          var $currentDivision = $( this ).parents('.template-section-toolset').first().parents('.sortable-item').first();
           $currentDivision.after(requiredMarkup);
-          $currentDivision.next().next().addClass( 'recently-added-division' );
+          var $addedDivision = $currentDivision.nextAll('.optyn-division').first();
+          $addedDivision.addClass( 'recently-added-division' );
+
           setTimeout( function () {
-            $currentDivision.next().next().removeClass( 'recently-added-division' );
+            $addedDivision.removeClass( 'recently-added-division' );
           }, 1200 );
         }
 
@@ -325,7 +334,7 @@ OP = (function($, window, doucument, Optyn){
         
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
-        OP.hookSortTemplateElemets();
+        OP.template.hookSortTemplateElements();
       });
     },
 
@@ -343,24 +352,24 @@ OP = (function($, window, doucument, Optyn){
           $toolsetCloned = $( this ).parents( '.template-section-toolset' ).first().clone();
           $toolsetCloned.find('.ink-action-edit').remove();
           $toolsetCloned.find('.ink-action-delete').remove();
+          $toolsetCloned.find('.ink-action-move').remove();
           $toolsetCloned.addClass( 'no-divisions-toolset' );
           $temp = $('<div />').append( $toolsetCloned );
         }
-        var $toolset = $(this).parents('.template-section-toolset').first();
-        var $toolsetParent = $toolset.parent();
-        var $division = $(this).parents('.template-section-toolset').first().next( '.optyn-division' );
-        $toolset.slideUp( function() {
-          $( this ).remove();
-        });
-        $division.slideUp( function() {
-          $( this ).remove();
+        
+        var $toolsetSortable = $(this).parents('.template-section-toolset').first().parents('.sortable-item').first()
+        var $toolsetSortableParent = $toolsetSortable.parent()
+
+        $toolsetSortable.slideUp(function(){
+          $(this).remove();
           if($temp != null){
-            $toolsetParent.append( $temp.html());
+            $toolsetSortableParent.append( $temp.html());
           }
+
           OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
-          OP.template.setImageLinkTarget();
-        }); //end of slide up division
+          OP.setImageLinkTarget();
+        }); //end of $toolsetSortable slideup
       });
     },
 
