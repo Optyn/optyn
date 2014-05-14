@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui-1.9.2.custom.min
 //= require jquery.remotipart
 //= jquery-migrate-1.2.1
 //= require bootstrap
@@ -23,12 +24,33 @@ OP = (function($, window, doucument, Optyn){
       this.hookContentCreationOnLoad();
       this.fixCkEditorModalIssue();
       this.hookImageClick();
+      this.hookSortTemplateElemets();
       setTimeout( function() {
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
       }, 3000);  // Find a better alternative for this setTimeout.
     },
 
+    hookSortTemplateElemets: function(){
+        // Wrapping in a container with CSS class .sortable-item
+        $('table.optyn-content').find($('div.template-section-toolset, table.optyn-division')).each(function(){
+          console.log($(this));
+          $(this).next().andSelf().wrapAll('<div class="sortable-item">');
+        });
+        $(".handle").css("cursor", "pointer");   // Hand cursor
+        $(".handle").css("cursor", "move");      // Directional cursor.
+
+        $('.sortable-item').find('.block-grid').unwrap();
+        // Wrapping all .sortable items in #sortable container
+        $('.sortable-item').wrapAll('<div id="sortable">');
+
+        // Sortable init
+        $('#sortable').sortable({
+          revert       : true,
+          connectWith  : "#sortable",
+          stop: function( event, ui ) {OP.template.saveSectionChanges();}
+      });
+    },
 
     fixCkEditorModalIssue: function(){
       // bootstrap-ckeditor-modal-fix.js
@@ -303,6 +325,7 @@ OP = (function($, window, doucument, Optyn){
         
         OP.setParentIframeHeight();
         OP.setImageLinkTarget();
+        OP.hookSortTemplateElemets();
       });
     },
 
