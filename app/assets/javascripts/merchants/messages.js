@@ -795,8 +795,8 @@ function MerchantMessage() {
     this.socialSharing = function(){    
       // var _this = this;
       $('#customHtmlTemplate').load(function(){   
-        var twitter = $("#customHtmlTemplate").contents().find(".optyn-twittershare")
-        var facebook = $("#customHtmlTemplate").contents().find(".optyn-fbshare")
+        var twitter = $("#customHtmlTemplate").contents().find(".ss-twittershare")
+        var facebook = $("#customHtmlTemplate").contents().find(".ss-fbshare")
         var twitterCustom = $("#customHtmlTemplate").contents().find("twittershare")
         var fbCustom = $("#customHtmlTemplate").contents().find("fbshare")
 
@@ -887,7 +887,7 @@ function MerchantMessage() {
     this.hookHeaderContentTitleKeyup = function(){
       var _this = this;
        $('body').on("keyup", '#properties_header_logotext', function(){
-         $("#customHtmlTemplate").contents().find(".optyn-introduction .optyn-headline").html($(this).val());
+         $("#customHtmlTemplate").contents().find(".ss-introduction .ss-headline").html($(this).val());
        });
     };
 
