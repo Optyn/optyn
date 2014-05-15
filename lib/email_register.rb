@@ -2,10 +2,14 @@ module EmailRegister
 	private
 		def sudo_registration(params)
 		    @user = User.new(params[:user])
-		    split_name = params["user"]["name"].split(" ")
-        @user.first_name = split_name.first
-        @user.last_name = split_name.last if split_name.size > 1
-		    @user.skip_name = true
+		    
+		    if params[:user].present? && params[:user][:name].present?
+			    split_name = params["user"]["name"].split(/\s/)
+	        @user.first_name = split_name.first
+	        @user.last_name = split_name.last if split_name.size > 1
+			    @user.skip_name = true
+			  end
+
 		    passwd = Devise.friendly_token.first(8)
 		    @user.password = passwd
 		    @user.password_confirmation = passwd
