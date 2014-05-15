@@ -17,7 +17,7 @@ class SegmentsController < BaseController
   def default
     @survey_questions = @survey.survey_questions
     sign_in @user
-    render action: :show
+    render action: :show, layout: params[:no_layout].present? ? false : switch_layout 
   end
 
   def save_answers
@@ -35,7 +35,7 @@ class SegmentsController < BaseController
       @flush = true
       redirect_to segments_path, notice: "Successfully submitted your feedback"
     else
-      render "thankyou", layout: "email_feedback"
+      render("thankyou", layout: (params[:no_layout].present? ? false : "email_feedback"))
     end
   rescue 
     flash[:error] = "Could not submit the survey. Please try again. If the problem still persists please send an email to support@optyn.com"
@@ -55,7 +55,7 @@ class SegmentsController < BaseController
   def ensure_survey_answered_once
     if @survey.survey_answers.for_user(@user.id).present?
       if params[:email_survey].present?
-        render "thankyou", layout: "email_feedback"
+        render("thankyou", layout: params[:no_layout] ? false : "email_feedback")
       else
         redirect_to(segments_path, notice: 'Looks like you are trying to take already attempted survey. To save your time we would request to take unattempted ones')
       end
