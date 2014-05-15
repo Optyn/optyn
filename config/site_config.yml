@@ -45,6 +45,7 @@ defaults:
     link_path: '/emails/l'
     unsubscribe_path: '/emails/unsubscribe'
     qr_code_path: '/emails/g'
+    offer_relevant: '/emails/relevant'
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
