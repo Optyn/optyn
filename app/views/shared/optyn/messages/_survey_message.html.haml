@@ -11,7 +11,8 @@
       - if preview
         - path = ""
       - else
-        - path = SiteConfig.app_base_url + default_segment_path(Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id), email_survey: true, message_id: (@message.uuid rescue nil))
+        - path = SiteConfig.email_app_base_url + SiteConfig.simple_delivery.segments_prefix + "/" + Encryptor.encrypt((@user || current_user || current_manager).email, @survey.id)  + SiteConfig.simple_delivery.segments_default + "?#{ {email_survey: true, message_id: (@message.uuid rescue nil)}.to_query }"
+
       = render partial: "segments/survey_link", locals: {path: path}
 
   = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
