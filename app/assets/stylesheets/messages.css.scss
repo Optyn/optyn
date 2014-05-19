@@ -128,6 +128,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   table {
     clear: both;
   }
+  &.new #dashboard { background-image: none; }
+  &.new #dashboard .wid75pc { width: 100%; }
 }
 #flat #message_meta_modal .add-on > i {
   margin-top: 0;
