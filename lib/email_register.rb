@@ -7,8 +7,9 @@ module EmailRegister
 			    split_name = params["user"]["name"].split(/\s/)
 	        @user.first_name = split_name.first
 	        @user.last_name = split_name.last if split_name.size > 1
-			    @user.skip_name = true
 			  end
+
+			  @user.skip_name = true
 
 		    passwd = Devise.friendly_token.first(8)
 		    @user.password = passwd
