@@ -8,14 +8,4 @@ class CouponMessage < Message
   validate :validate_discount_amount
   validates :content, presence: true
   validate :validate_ending
-
-  def get_qr_code_link(current_user)
-    url = "#{SiteConfig.email_app_base_url}/redeem/"
-
-    current_user_id = current_user ? current_user.id : nil
-    message_user = Encryptor.encrypt(self.id, current_user_id)
-    url << message_user
-    p url
-    url
-  end
 end

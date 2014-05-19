@@ -137,11 +137,6 @@ Optyn::Application.routes.draw do
   match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
   
 
-  #share routes and QR Code
-  match 'g/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
-  match 'redeem/:message_user' => 'merchants/messages#redeem'
-  match '/share_on_facebook/:message_id' => 'merchants/facebook#index', :as => :share_on_facebook
-  match '/share_message/:message_id' => 'merchants/facebook#share_message', :as => :share_message_facebook
   match 'share_email/:message_id' => 'merchants/messages#share_email', :as => :share_email
   match 'send_shared_email/:message_id' => 'merchants/messages#send_shared_email', :as => :send_shared_email
 
@@ -164,8 +159,6 @@ Optyn::Application.routes.draw do
 
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://optyn.uservoice.com"), :as => :support
-
-  match '/email/logger/:token', to: 'email_read_logger#info', as: :email_read_logger
 
 
   devise_for :users, :path_names => {:sign_out => 'logout',
@@ -220,8 +213,6 @@ Optyn::Application.routes.draw do
       get 'shop'
       put 'disconnect', as: :disconnect
       post 'connect', as: :connect
-      get 'removal_confirmation'
-      put 'opt_out'
     end
   end
 
@@ -242,7 +233,6 @@ Optyn::Application.routes.draw do
       put :move_to_saved
       put :move_to_inbox
       put :discard
-      get :offer_relevant
     end    
   end
 
@@ -498,5 +488,4 @@ Optyn::Application.routes.draw do
 
     get '/resellerjs' => 'dashboards#resellerjs'
   end
-  get 'l' => 'email_trackings#index'
 end

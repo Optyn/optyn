@@ -119,12 +119,12 @@ class Template < ActiveRecord::Base
 
       #substitute the unsubscribe link
       footer_node.css('.optyn-unsubscribe').each do |unsubscribe_node|
-        unsubscribe_node.swap(%{<a href="#{SiteConfig.email_app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(receiver.email, message.uuid))}?tracker=#{receiver.uuid}">Unsubscribe</a>})
+        unsubscribe_node.swap(%{<a href="#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.unsubscribe_path}/#{Encryptor.encrypt(receiver.email, message.uuid)}?tracker=#{receiver.uuid}">Unsubscribe</a>})
       end
     end
 
     body_node = template_node.css('body').first
-    body_node.add_child(%{<img src="#{SiteConfig.email_app_base_url}#{email_read_logger_path(receiver.encode64_uuid)}?tracker=#{receiver.uuid}" style="width: 1px; height: 1px;", alt="" />})
+    body_node.add_child(%{<img src="#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{receiver.encode64_uuid}?tracker=#{receiver.uuid}" style="width: 1px; height: 1px;", alt="" />})
 
     template_node.to_s
   end
@@ -176,7 +176,7 @@ class Template < ActiveRecord::Base
 
   def process_urls(content, message, receiver)
     user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :email => receiver.email, :manager_id => message.manager_id})
-    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    optyn_url = "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.link_path}?uit=#{user_info_token}"
     body = Nokogiri::HTML(content)
 
     #replace urls in a tags

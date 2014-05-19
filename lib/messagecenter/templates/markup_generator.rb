@@ -58,7 +58,7 @@ module Messagecenter
           if social_sharing.has_key? :fb_sharing
             facebook = social_sharing.fb_sharing
             fb_html = if facebook.html.present? 
-                        "<span class='optyn-fbshare'><a href = #{get_social_share_link('facebook', @message, facebook.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{facebook.html}
+                        "<span class='ss-fbshare'><a href = #{get_social_share_link('facebook', @message, facebook.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{facebook.html}
                         &nbsp; </a></span>" 
                       else
                         get_default_html("facebook")
@@ -70,7 +70,7 @@ module Messagecenter
           if component.social_sharing.has_key? :twitter_sharing
             twitter = social_sharing.twitter_sharing
             twitter_html = if twitter.html.present?
-                            "<span class='optyn-twittershare'><a href = #{get_social_share_link('twitter', @message, twitter.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{twitter.html}
+                            "<span class='ss-twittershare'><a href = #{get_social_share_link('twitter', @message, twitter.url)} style= 'color: #111;text-shadow: 1px 1px 1px #eee;height: 20px;text-decoration:none;font-size:12px;line-height:20px;display:inline-block;' target ='_blank'> #{twitter.html}
                             </a></span>"
                           else
                             get_default_html("twitter")
@@ -138,8 +138,8 @@ module Messagecenter
       def self.add_component_class(component, component_parent)
         node = add_node_if_none(component)  
 
-        optyn_class = ["optyn-#{component_parent}"]
-        optyn_class << "optyn-#{component['type']}" if "grid" == component.name || "container" == component.name
+        optyn_class = ["ss-#{component_parent}"]
+        optyn_class << "ss-#{component['type']}" if "grid" == component.name || "container" == component.name
 
         if node['class'].present? 
           class_str = optyn_class.join(" ")

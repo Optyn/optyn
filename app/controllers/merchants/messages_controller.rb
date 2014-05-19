@@ -79,17 +79,17 @@ class Merchants::MessagesController < Merchants::BaseController
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.new(params[:message].except(:label_ids, :send_on_date, :send_on_time).merge(manager_id: current_manager.id))
+      @message = klass.new(params[:message].except(:label_ids).merge(manager_id: current_manager.id))
       populate_send_on if @message.instance_of?(TemplateMessage)
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
       message_method_call = check_subscription
 
-      update_button_styles
+      # update_button_styles
 
       if @message.send(message_method_call.to_sym)
-        message_redirection
+        redirect_to edit_merchants_message_path(@message.uuid)
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
         create_failure_action
@@ -364,26 +364,6 @@ class Merchants::MessagesController < Merchants::BaseController
           end
         end
       end
-    end
-  end
-
-  def generate_qr_code
-    @message = Message.find_by_uuid(params[:message_id])
-    link = @message.get_qr_code_link(current_user)
-    qr_code_image  = RQRCode::QRCode.new(link).as_png
-    # qr_code_image = qr_code.to_img
-    send_data qr_code_image, :type => 'image/png',:disposition => 'inline'    
-  end
-
-  def redeem
-    message_user = Encryptor.decrypt(params[:message_user]).split("--")
-    message_id = message_user[0] if message_user[0]
-    user_id = message_user[1] if message_user[1]
-    @message = Message.find(message_id)
-    rc = RedeemCoupon.new(:message_id => message_id)
-    rc.user_id = user_id if user_id
-    if not rc.save
-      @error_message = "Sorry, your coupon could not be redeemed."
     end
   end
 

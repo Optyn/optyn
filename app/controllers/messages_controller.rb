@@ -39,15 +39,6 @@ class MessagesController < BaseController
     @partner = @shop.partner
   end
 
-  def offer_relevant
-    @message_user = MessageUser.for_uuid(params[:message_user_id])
-    if !@message_user.blank?
-      @message_user.update_attribute(:offer_relevant, params[:offer_relevant])
-      @message_user.save
-    end
-    render "thankyou", layout: "email_feedback"
-  end
-
   def move_to_inbox
     @messages = Message.for_uuids(uuids_from_message_ids)
     MessageUser.mark_inbox(@messages, [current_user])

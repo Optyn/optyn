@@ -82,34 +82,6 @@ class ConnectionsController < BaseController
     redirect_to(params[:return_to] || connections_path, notice: "Connection with #{@shop.name} successfully created.")
   end
 
-  def opt_out
-    fetch_message_and_user_from_params
-    if @message.present? && @user.present?
-      @shop = @message.shop
-      @message_user = @message.message_user(@user)
-      @connection = @message_user.user.connections.find_by_shop_id(@shop.id)
-
-      @connection.update_attribute(:active, false)
-      @message_user.update_attribute(:opt_out, true)
-      @flush = true
-
-      return_path = user_signed_in? ? dropped_connections_path : root_path
-      return redirect_to(return_path, notice: "Unsubscribe to #{@shop.name} successful.")
-    end
-
-    raise "User or message not found"
-
-  rescue
-    flash[:alert] = "Sorry could not disconnect you from this store. Please try again a little later." &&
-        redirect_to(params[:return_to] || connections_path)
-  end
-
-  def removal_confirmation
-    fetch_message_and_user_from_params
-    @shop = @message.shop
-    @message_user = @message.message_user(@user)
-  end
-
   private
   def verify_shop
     @shop = Shop.find_by_identifier(params[:id])
@@ -118,13 +90,5 @@ class ConnectionsController < BaseController
 
   def fetch_connection
     @connection = current_user.connections.active.find_by_shop_id(@shop.id)
-  end
-
-  def fetch_message_and_user_from_params
-    token = params[:id]
-    plain_text = Encryptor.decrypt(token)
-    email, message_uuid = plain_text.split("--")
-    @user = User.find_by_email(email)
-    @message = Message.for_uuid(message_uuid)
   end
 end

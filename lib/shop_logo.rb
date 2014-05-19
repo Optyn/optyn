@@ -34,6 +34,7 @@ module ShopLogo
   def email_body_shop_logo(shop)
     if shop.has_logo?
       if shop.website.present?
+
         content = <<-HTML
           <a here="#{shop.logo_location}" href="#{shop.display_website}" target="_blank">
             <img src="#{shop.logo_location}" title="#{shop.name.gsub(/['"]/, "")}" style="max-width:580px;" />

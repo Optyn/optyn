@@ -280,9 +280,9 @@ module Messagecenter
         sidebar_properties = selectable_properties[:properties][:sidebar]
         left_sidebar_properties = selectable_properties[:properties][:leftSidebar]
         right_sidebar_properties = selectable_properties[:properties][:rightSidebar]
-        convert_sidebar((selectable_properties[:properties][:sidebar] rescue {}), ".sidebar-container .optyn-sidebar") if sidebar_properties.present?
-        convert_sidebar((selectable_properties[:properties][:leftSidebar] rescue {}), ".left-sidebar .optyn-sidebar") if left_sidebar_properties.present?
-        convert_sidebar((selectable_properties[:properties][:rightSidebar] rescue {}), ".right-sidebar .optyn-sidebar") if right_sidebar_properties.present?
+        convert_sidebar((selectable_properties[:properties][:sidebar] rescue {}), ".sidebar-container .ss-sidebar") if sidebar_properties.present?
+        convert_sidebar((selectable_properties[:properties][:leftSidebar] rescue {}), ".left-sidebar .ss-sidebar") if left_sidebar_properties.present?
+        convert_sidebar((selectable_properties[:properties][:rightSidebar] rescue {}), ".right-sidebar .ss-sidebar") if right_sidebar_properties.present?
         convert_footer((selectable_properties[:properties][:footer] rescue {}))
         replace_styles
         self.html = @parsed_html.to_s
@@ -308,7 +308,7 @@ module Messagecenter
           logo_align = nil
           if header_properties[:css].present?
             #replace the background color
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-introduction"}
             if node.present?
               header_properties[:css].each_pair do |css_key, css_value|
                 node.set_property(css_key.to_s, css_value)
@@ -316,7 +316,7 @@ module Messagecenter
             end
 
             if header_properties[:headline].present? && header_properties[:headline][:css].present?
-              node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-introduction .optyn-headline"}
+              node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-introduction .ss-headline"}
               if node.present?
                 header_properties[:headline][:css].each_pair do |css_key, css_value|
                   node.set_property(css_key.to_s, css_value)
@@ -328,8 +328,8 @@ module Messagecenter
 
           if header_properties['twitter'].present?
             css_style = header_properties['twitter']['show'] == "0" ? "display:none !important" : "display:inline !important"
-            tw_style = @parsed_html.css(".optyn-twittershare").first.attribute('style').value
-            @parsed_html.css(".optyn-twittershare").first.attribute('style').value = tw_style + css_style
+            tw_style = @parsed_html.css(".ss-twittershare").first.attribute('style').value
+            @parsed_html.css(".ss-twittershare").first.attribute('style').value = tw_style + css_style
           end
 
           if ((@parsed_html.css("fbshare").size()>0) || (@parsed_html.css("twittershare").size()>0) ) && header_properties['shareurl'].present?
@@ -340,8 +340,8 @@ module Messagecenter
 
           if header_properties['facebook'].present?
             css_style = header_properties['facebook']['show'] == "0" ? "display:none !important" : "display:inline !important"
-            tw_style = @parsed_html.css(".optyn-fbshare").first.attribute('style').value
-            @parsed_html.css(".optyn-fbshare").first.attribute('style').value = tw_style + css_style
+            tw_style = @parsed_html.css(".ss-fbshare").first.attribute('style').value
+            @parsed_html.css(".ss-fbshare").first.attribute('style').value = tw_style + css_style
           end
 
           #replace the palceholder image tag with shop image or name based om if a shop has a logo
@@ -375,7 +375,7 @@ module Messagecenter
         def convert_content(content_properties)
           if content_properties[:css].present?
             #change the background color of the core content
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content"}
             if node.present?
               node.set_property('background-color', content_properties[:css][:'background-color'])
             end
@@ -383,7 +383,7 @@ module Messagecenter
 
           if content_properties[:headline].present?
             #change the css properties of the headline
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content .optyn-headline"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content .ss-headline"}
             if node.present?
               headline_style_properties = content_properties[:headline][:css]
               headline_style_properties.each_pair do |css_key, css_value|
@@ -394,7 +394,7 @@ module Messagecenter
 
           if content_properties[:paragraph].present?
             #change the css properties of the paragraph
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content .optyn-paragraph"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content .ss-paragraph"}
             if node.present?
               paragraph_style_properties = content_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
@@ -403,7 +403,7 @@ module Messagecenter
             end
 
             #change the css properties of the paragraph
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content .optyn-paragraph p"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content .ss-paragraph p"}
             if node.present?
               paragraph_style_properties = content_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
@@ -415,19 +415,19 @@ module Messagecenter
           if content_properties[:link].present?
             #change the css properties of links
             #find the usual element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-link"}
             convert_links_color(content_properties, node)
 
             #find the hover element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:hover"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-link:hover"}
             convert_links_color(content_properties, node)
 
             #find the active element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:active"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-link:active"}
             convert_links_color(content_properties, node)
 
             #find the visited element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-link:visited"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-link:visited"}
             convert_links_color(content_properties, node)
           end
 
@@ -435,19 +435,19 @@ module Messagecenter
           if content_properties[:button].present?
             #change the css properties of links
             #find the usual element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-button-link"}
             convert_button_styles(content_properties, node)
 
             #find the hover element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:hover"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-button-link:hover"}
             convert_button_styles(content_properties, node)
 
             #find the active element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:active"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-button-link:active"}
             convert_button_styles(content_properties, node)
 
             #find the visited element
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content a.optyn-button-link:visited"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content a.ss-button-link:visited"}
             convert_button_styles(content_properties, node)
           end
 
@@ -460,7 +460,7 @@ module Messagecenter
           background_class = sidebar_classname.split(/\s/).first
           if sidebar_properties[:css].present?
             #change the background color of the core content
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{background_class}"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{background_class}"}
             puts node
             if node.present?
               node.set_property('background-color', sidebar_properties[:css][:'background-color'])
@@ -469,7 +469,7 @@ module Messagecenter
 
           if sidebar_properties[:headline].present?
             #change the css properties of the headline
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-headline"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} .ss-headline"}
             if node.present?
               headline_style_properties = sidebar_properties[:headline][:css]
               headline_style_properties.each_pair do |css_key, css_value|
@@ -480,7 +480,7 @@ module Messagecenter
 
           if sidebar_properties[:paragraph].present?
             #change the css properties of the paragraph
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-paragraph"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} .ss-paragraph"}
             if node.present?
               paragraph_style_properties = sidebar_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
@@ -488,7 +488,7 @@ module Messagecenter
               end
             end
 
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} .optyn-paragraph p"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} .ss-paragraph p"}
             if node.present?
               paragraph_style_properties = sidebar_properties[:paragraph][:css]
               paragraph_style_properties.each_pair do |css_key, css_value|
@@ -499,37 +499,37 @@ module Messagecenter
 
           if sidebar_properties[:link].present?
             #change the css properties of links
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-link"}
             convert_links_color(sidebar_properties, node)
 
             #fix for hover
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:hover"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-link:hover"}
             convert_links_color(sidebar_properties, node)
 
             #fix for visited
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:visited"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-link:visited"}
             convert_links_color(sidebar_properties, node)
 
             #fix for active
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-link:active"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-link:active"}
             convert_links_color(sidebar_properties, node)
           end
 
           if sidebar_properties[:button].present?
             #change the css properties of links
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-button-link"}
             convert_button_styles(sidebar_properties, node)
 
             #fix for hover
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:hover"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-button-link:hover"}
             convert_button_styles(sidebar_properties, node)
 
             #fix for visited
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:visited"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-button-link:visited"}
             convert_button_styles(sidebar_properties, node)
 
             #fix for active
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-content #{sidebar_classname} a.optyn-button-link:active"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-content #{sidebar_classname} a.ss-button-link:active"}
             convert_button_styles(sidebar_properties, node)
           end
 
@@ -543,23 +543,23 @@ module Messagecenter
           
           if footer_properties[:link].present?
             #change the css properties of the paragraph
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-footer .ss-paragraph a"}
             convert_links_color(footer_properties, node)
 
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:hover"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-footer .ss-paragraph a:hover"}
             convert_links_color(footer_properties, node)
 
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:active"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-footer .ss-paragraph a:active"}
             convert_links_color(footer_properties, node)            
 
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph a:visited"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-footer .ss-paragraph a:visited"}
             convert_links_color(footer_properties, node)
           end
 
           #change the permission
           if footer_properties[:css].present?
             #change the css properties of the paragraph
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-footer"}
 
             if node.present?
               paragraph_style_properties = footer_properties[:css]
@@ -571,7 +571,7 @@ module Messagecenter
 
           if footer_properties[:paragraph].present?
             #change the css properties of the paragraph
-            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".optyn-footer .optyn-paragraph"}
+            node = @parsed_result.find{|node| node.is_a?(Sass::Tree::RuleNode) && node.resolved_rules.to_s == ".ss-footer .ss-paragraph"}
 
             if node.present?
               paragraph_style_properties = footer_properties[:paragraph][:css]

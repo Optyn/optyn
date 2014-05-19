@@ -1,0 +1,4 @@
+= hidden_field_tag :message_type, @message_type
+= hidden_field_tag :choice, @message.queued? ? 'launch' : 'save_draft'
+= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
+= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

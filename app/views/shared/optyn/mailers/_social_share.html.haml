@@ -8,7 +8,7 @@
           - btn_width = 'width: 50%;'
           - btn_styles = 'float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;' + btn_width
           - msg = "#{@message.name} #{@message.uuid}"
-          - public_msg = "#{SiteConfig.app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}"
+          - public_msg = "#{SiteConfig.email_app_base_url}/#{@shop.name.parameterize}/campaigns/#{msg.parameterize}"
           - facebook_link = get_social_share_link("facebook", @message, public_msg)
           %a{:href => "#{facebook_link}", :target => "_blank", style: 'background: #3a589b;' + btn_styles}
             = image_tag("#{SiteConfig.email_app_base_url}/assets/icon-facebook.png", :style => "vertical-align:middle;")

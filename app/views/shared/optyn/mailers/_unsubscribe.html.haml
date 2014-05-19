@@ -1,7 +1,7 @@
 - if @receiver.present? || @preview
   %p{:style => "font-size: 11px;margin:0px;color: #666;"}
     = "If you do not want to continue receiving emails, click here to "
-    - unsubscribe_location = @receiver.present? ? "#{SiteConfig.email_app_base_url}#{removal_confirmation_connection_path(Encryptor.encrypt(@receiver.email, @message.uuid))}?tracker=#{@receiver.uuid}" : "javascript:void(0)"
+    - unsubscribe_location = @receiver.present? ? "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.unsubscribe_path}/#{Encryptor.encrypt(@receiver.email, @message.uuid)}?tracker=#{@receiver.uuid}" : "javascript:void(0)"
     -  unsubscribe_hash = {style: 'color: #64aaef;text-decoration:underline;'}
     - unsubscribe_hash.merge!({onclick: 'alert("Not Available")'}) if @preview
 

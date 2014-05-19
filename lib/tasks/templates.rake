@@ -108,4 +108,51 @@ namespace :templates do
       end
     end
   end
+
+
+  desc "Update the html and structure of systme generated templates"
+  task :update_class_prefix => :environment do
+    #Updating the basic Template
+    puts "Update the Basic Template"
+    template = Template.for_shop(nil).for_name('Basic').where(:system_generated => true).first
+    template.attributes=({html: File.open("#{Rails.root}/db/seed_data/system_template_data/basic.html", 'r'){|file| file.read}})
+    template.send(:create_structure)
+    puts "basic #{template.html.include? "ss-"} ,,,,#{template.html.include? "optyn-"}"
+
+    #Update the Left Sidebar Template
+    puts "Update the Left Sidebar Template"
+    template = Template.for_shop(nil).for_name('Left Sidebar').where(:system_generated => true).first 
+    template.attributes = ({html: File.open("#{Rails.root}/db/seed_data/system_template_data/left_sidebar.html", 'r'){|file| file.read}})
+    template.send(:create_structure)
+    puts "basic #{template.html.include? "ss-"} ,,,,#{template.html.include? "optyn-"}"
+
+    #Update the Right Sidebar Template
+    puts "Update the Right Sidebar Template"
+    template = Template.for_shop(nil).for_name('Right Sidebar').where(:system_generated => true).first
+    template.attributes = ({html: File.open("#{Rails.root}/db/seed_data/system_template_data/right_sidebar.html", 'r'){|file| file.read}})
+    template.send(:create_structure)
+
+    #Update the Hero Template
+    puts "Update the Hero Template"
+    template = Template.for_shop(nil).for_name('Hero').where(:system_generated => true).first
+    template.attributes = ({html: File.open("#{Rails.root}/db/seed_data/system_template_data/hero.html", 'r'){|file| file.read}})
+    template.send(:create_structure)
+
+    #Update the Galleria Template
+    puts "Update the Galleria Template"
+    template = Template.for_shop(nil).for_name('Galleria').where(:system_generated => true).first
+    template.attributes = ({html: File.open("#{Rails.root}/db/seed_data/system_template_data/galleria.html", 'r'){|file| file.read}})
+    template.send(:create_structure)
+  end
+
+  desc "Updating the html and structure of all existing generated templates"
+  task :update_existing_templates_class_prefix => :environment do
+   templates = Template.with_deleted.all
+    templates.each do |template|
+      template.html = template.html.gsub("optyn-", "ss-")
+      template.send(:create_structure)
+      puts "Updated #{template.name}'s html and structure."
+    end
+  end
 end
+

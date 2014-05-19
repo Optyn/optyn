@@ -34,6 +34,6 @@
 
         = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
 
-        = image_tag "#{SiteConfig.email_app_base_url}#{email_read_logger_path(@receiver.encode64_uuid)}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
+        = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
 - else
   = message_content(@message, @receiver)

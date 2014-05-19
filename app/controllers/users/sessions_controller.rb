@@ -65,12 +65,10 @@ class Users::SessionsController < Devise::SessionsController
 
 
   def authenticate_with_email
-
     if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
       @user = User.find_by_email(params[:user][:email])
       @user = sudo_registration(params) unless @user.present?
-
-      sign_in @user
+      # sign_in @user
       session[:user_return_to] = nil
 
       respond_to do |format|
@@ -83,6 +81,7 @@ class Users::SessionsController < Devise::SessionsController
         @user = User.new
         @user.errors.add(:base, "Please check your email address")
         format.json { render(status: :ok) } 
+        format.html { render(action: 'invalid_email') }
       end
     end
   end
