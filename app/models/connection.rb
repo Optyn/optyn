@@ -16,6 +16,10 @@ class Connection < ActiveRecord::Base
 
   after_save :check_shop_tier
 
+  validate :shop_id, presence: true
+
+  validate :user_id, presence: true
+
   scope :active, where(active: true)
 
   scope :inactive, where(active: false)
@@ -48,56 +52,58 @@ class Connection < ActiveRecord::Base
 
   scope :distinct_receiver_ids, select('DISTINCT(connections.user_id)')
 
+  scope :shop_and_user_present, where("connections.user_id IS NOT NULL AND connections.shop_id IS NOT NULL")
+
   PER_PAGE = 50
   PAGE = 1
 
   def self.for_shop_and_user(shop_identifier, user_identifier)
-    for_shop(shop_identifier).for_users(user_identifier).first
+    for_shop(shop_identifier).for_users(user_identifier).shop_and_user_present.first
   end
 
   def self.paginated_shops_connections(shop_id, page = PAGE, per_page = PER_PAGE)
-    active.for_shop(shop_id).includes_user_and_permissions.latest_updates.page(page).per(per_page)
+    active.for_shop(shop_id).shop_and_user_present.includes_user_and_permissions.latest_updates.page(page).per(per_page)
   end
 
   def self.shop_connections_count_total(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "total")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      active.for_shop(shop_id).count
+      active.shop_and_user_present.for_shop(shop_id).count
     end
   end
 
   def self.shop_connections_count_month(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "month")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop_in_time_range(shop_id, 30.days.ago.beginning_of_day, Time.now.end_of_day).count
+      shop_and_user_present.for_shop_in_time_range(shop_id, 30.days.ago.beginning_of_day, Time.now.end_of_day).count
     end
   end
 
   def self.shop_connections_count_week(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "week")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop_in_time_range(shop_id, 7.days.ago.beginning_of_day, Time.now.end_of_day).count
+      shop_and_user_present.for_shop_in_time_range(shop_id, 7.days.ago.beginning_of_day, Time.now.end_of_day).count
     end
   end
 
   def self.shop_connections_count_day(shop_id, force = false)
     cache_key = create_count_cache_key(shop_id, "day")
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_shop_in_time_range(shop_id, 24.hours.ago.beginning_of_day, Time.now.end_of_day).count
+      shop_and_user_present.for_shop_in_time_range(shop_id, 24.hours.ago.beginning_of_day, Time.now.end_of_day).count
     end
   end
 
   def self.shop_latest_connections(shop_id, limit_count = SiteConfig.dashboard_limit, force = false)
     cache_key = "dashboard-latest-connections-shop-#{shop_id}"
     Rails.cache.fetch(cache_key, force: force, expires_in: SiteConfig.ttls.dashboard_count) do
-      for_shop(shop_id).active.includes_shop.includes_user.limit(limit_count).all
+      for_shop(shop_id).active.includes_shop.includes_user.shop_and_user_present.limit(limit_count).all
     end
   end
 
   def self.shop_dashboard_disconnected_connections(shop_id, limit_count = SiteConfig.dashboard_limit, force = false)
     cache_key = "dashboard-disconnected-connections-shop-#{shop_id}"
     Rails.cache.fetch(cache_key, force: force, expires_in: SiteConfig.ttls.dashboard_count) do
-      for_shop(shop_id).inactive.latest_updates.includes_shop.limit(limit_count).all
+      for_shop(shop_id).inactive.latest_updates.includes_shop.shop_and_user_present.limit(limit_count).all
     end
   end
 
@@ -105,7 +111,7 @@ class Connection < ActiveRecord::Base
   def self.latest_connections(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
     cache_key = "dashboard-latest-connections-user-#{user_id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_users(user_id).active.includes_shop.latest_updates.limit(limit_count).all
+      for_users(user_id).active.includes_shop.shop_and_user_present.latest_updates.limit(limit_count).all
     end
   end
 
@@ -113,7 +119,7 @@ class Connection < ActiveRecord::Base
   def self.dashboard_disconnected_connections(user_id, limit_count = SiteConfig.dashboard_limit, force = false)
     cache_key = "dashboard-disconnected-connections-user-#{user_id}"
     Rails.cache.fetch(cache_key, :force => force, :expires_in => SiteConfig.ttls.dashboard_count) do
-      for_users(user_id).inactive.latest_updates.includes_shop.limit(limit_count).all
+      for_users(user_id).inactive.latest_updates.shop_and_user_present.includes_shop.limit(limit_count).all
     end
   end
 
