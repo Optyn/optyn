@@ -79,17 +79,17 @@ class Merchants::MessagesController < Merchants::BaseController
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.new(params[:message].except(:label_ids, :send_on_date, :send_on_time).merge(manager_id: current_manager.id))
+      @message = klass.new(params[:message].except(:label_ids).merge(manager_id: current_manager.id))
       populate_send_on if @message.instance_of?(TemplateMessage)
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
       message_method_call = check_subscription
 
-      update_button_styles
+      # update_button_styles
 
       if @message.send(message_method_call.to_sym)
-        message_redirection
+        redirect_to edit_merchants_message_path(@message.uuid)
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
         create_failure_action
