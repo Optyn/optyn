@@ -1,8 +1,8 @@
-= render partial: "merchants/messages/message_menu"
+/= render partial: "merchants/messages/message_menu"
 
 #message_fields_wrapper.pad3pc
 
-  = render :partial => 'progress_bar'
+  /= render :partial => 'progress_bar'
 
   = form_for :message, url: merchants_messages_path, method: :post, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
     = render :partial => 'new_form', :locals => {f: f}

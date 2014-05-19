@@ -1,6 +1,6 @@
 #message_fields_wrapper.pad3pc
 
-  = render :partial => 'progress_bar'
+  /= render :partial => 'progress_bar'
 
   = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|
     = render :partial => 'form', :locals => {f: f}

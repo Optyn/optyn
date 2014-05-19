@@ -129,7 +129,16 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
     clear: both;
   }
   &.new #dashboard { background-image: none; }
+  &.edit #dashboard { background-image: none; }
+  &.new #dashboard .wid25pc,
+  &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc { width: 100%; }
+  &.edit #dashboard .wid75pc { width: 100%; }
+  &.new h1,
+	&.edit h1 {
+	  float: none;
+	  text-align: center;
+	}
 }
 #flat #message_meta_modal .add-on > i {
   margin-top: 0;

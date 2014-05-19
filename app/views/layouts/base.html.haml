@@ -32,8 +32,7 @@
       .row-fluid
         - unless @skip_menu
           - if manager_signed_in?
-            - if params[ :controller ].parameterize == 'merchants-messages' and params[ :action ] != 'new'
-              = render partial: "merchants/shared/menu"
+            = render partial: "merchants/shared/menu"
           / - if user_signed_in?
           /   = render partial: "shared/menu"
         .span9.wid75pc.yield
