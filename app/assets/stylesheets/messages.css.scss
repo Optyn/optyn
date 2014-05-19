@@ -134,10 +134,12 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc { width: 100%; }
   &.edit #dashboard .wid75pc { width: 100%; }
-  &.new h1,
-	&.edit h1 {
+  &.new#flat h1,
+	&.edit#flat h1 {
 	  float: none;
 	  text-align: center;
+	  background: $dark-blue;
+	  color: $white;
 	}
 }
 #flat #message_meta_modal .add-on > i {
