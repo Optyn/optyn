@@ -47,3 +47,6 @@ $hd-h: 768px;
 $hd-w: 1366px;
 $hdp-h: 900px;
 $hdp-w: 1600px;
+
+/* Selectors ---------------------------------- */
+$all-inputs: unquote('input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],textarea,select,.uneditable-input');

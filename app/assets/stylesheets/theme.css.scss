@@ -763,7 +763,7 @@ i.myspace { background-position: -233px -51px; }
 /* --------------------------------- Form elements */
 form {
   .optional {
-    background-color: $light-gray;
+    background-color: rgba(0,0,0,0.05);
     padding: 1%;
     margin-bottom: 2%;
     > h4 {
@@ -802,19 +802,20 @@ form {
   i {
     margin-top: 4px;
   }
-  input[type='text'],
-  input[type='password'],
+
+  input[type="text"],
+  input[type="password"],
   input[type="datetime"],
   input[type="datetime-local"],
   input[type="date"],
   input[type="month"],
   input[type="time"],
   input[type="week"],
-  input[type='number'],
-  input[type='email'],
-  input[type='url'],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
   input[type="search"],
-  input[type='tel'],
+  input[type="tel"],
   input[type="color"],
   textarea,
   select,
@@ -824,10 +825,12 @@ form {
     font-weight: 300;
     line-height: 20px;
     margin: 0;
-    @include border-radius( 0 );
+    @include border-radius( 4px );
     padding: 0 10px;
-    border: solid 2px darken( $light-gray, 10% );
-    background-color: lighten( $light-gray, 5% );
+    border: 0;
+    border-bottom: solid 2px darken( $light-gray, 20% );
+    background-color: $light-gray;
+    background-color: rgba(0,0,0,0.07);
     box-shadow: none;
     color: $black;
     min-height: 35px;
@@ -835,6 +838,7 @@ form {
     &:focus {
       border-color: $dark-gray;
       background-color: $white;
+      box-shadow: 0 0 2px 2px rgba(219, 206, 58, 0.3);
     }
   }
   .uneditable-input {
@@ -1026,10 +1030,12 @@ form {
     .add-on {
       min-height: 35px;
       font-size: 15px;
-      line-height: 20px;
+      line-height: 24px;
       @include border-radius( 0 );
-      border-color: $medium-gray;
-      border-width: 2px;
+      border-color: darken( $light-gray, 20% );
+      border-width: 0px;
+      border-left-width: 1px;
+      border-bottom-width: 2px;
       margin-left: -2px;
       > i {
         margin-top: -3px;
@@ -1307,3 +1313,8 @@ blockquote {
   position: relative;
   left: -25px;
 }
+
+// ::-webkit-input-placeholder { color:#f00; }
+// ::-moz-placeholder { color:#f00; } firefox 19+
+// :-ms-input-placeholder { color:#f00; } /* ie */
+// input:-moz-placeholder { color:#f00; }

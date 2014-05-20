@@ -146,6 +146,30 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	}
 	&#flat .add-on,
 	&#flat input { margin-top: 15px; }
+	h4 {
+		color: $dark-blue;
+		font-size: 1.3rem;
+		line-height: 1.8rem;
+	}
+  &#flat input[type="text"],
+  &#flat input[type="password"],
+  &#flat input[type="datetime"],
+  &#flat input[type="datetime-local"],
+  &#flat input[type="date"],
+  &#flat input[type="month"],
+  &#flat input[type="time"],
+  &#flat input[type="week"],
+  &#flat input[type="number"],
+  &#flat input[type="email"],
+  &#flat input[type="url"],
+  &#flat input[type="search"],
+  &#flat input[type="tel"],
+  &#flat input[type="color"],
+  &#flat textarea,
+  &#flat select,
+  &#flat .uneditable-input {
+		background-color: $white;
+	}
 }
 .campaign-edit {
 	padding: 0;
@@ -165,7 +189,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	& > .span6:first-child { background: rgb( 222, 222, 222 ); }
 	& > .span6:last-child { background: rgb( 242, 242, 242 ); }
 }
-#flat .campaign-edit .checkbox input { margin-top: 0; }
+#flat #message_make_public,
+#flat .campaign-edit .checkbox input { margin-top: 3px; }
 #flat #message_meta_modal .add-on > i {
   margin-top: 0;
 }
