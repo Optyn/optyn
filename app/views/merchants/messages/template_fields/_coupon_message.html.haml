@@ -1,15 +1,6 @@
 .headertext
   / %h3
   /   New Coupon Campaign
-  %p
-    This is easy! A coupon will get customers excited and get you a 
-    %a{:href => "http://wapo.st/18pncMx", :target => "_blank"}
-      net return in excess of 15%.
-  %p
-    Let's get started!
-
-
-= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
@@ -46,5 +37,3 @@
 fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
-
-= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
