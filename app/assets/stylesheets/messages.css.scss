@@ -134,8 +134,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc { width: 100%; }
   &.edit #dashboard .wid75pc { width: 100%; }
-  &.new#flat h1,
-	&.edit#flat h1 {
+  &.new#flat .yield h1,
+	&.edit#flat .yield h1 {
 	  float: none;
 	  text-align: center;
 	  background: $dark-blue;

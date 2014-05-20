@@ -2,5 +2,9 @@
 
 /= render partial: "merchants/messages/message_menu"
 
-#merchants
-  = render partial: "merchants/messages/edit_fields_wrapper"
+#merchants.row-fluid
+  .span6
+    = render partial: "merchants/messages/edit_fields_wrapper"
+
+  .span6
+    = render partial: "merchants/messages/preview"
