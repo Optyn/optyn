@@ -1,4 +1,2 @@
-.control-group
-  = f.label :content, "Details", class: 'control-label'
-  .controls
-    = f.cktext_area :content, :id => "content", :toolbar => 'Custom', :ckeditor => {       filebrowserImageUploadUrl: "/ckeditor/pictures?shop_id=#{current_manager.shop.id}" }
+= f.label :content, "Details"
+= f.cktext_area :content, :id => "content", :toolbar => 'Custom', :ckeditor => {       filebrowserImageUploadUrl: "/ckeditor/pictures?shop_id=#{current_manager.shop.id}" }

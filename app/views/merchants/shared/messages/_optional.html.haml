@@ -13,13 +13,7 @@
 						= link_to 'Remove current image', remove_message_image_merchants_messages_path(:id => @message.uuid), :confirm => "Are you sure?", :class => 'btn btn-small btn-danger'
 						.blank-space
 						= image_tag(@message.message_image.image.to_s, title: "Current image", style: 'max-width: 100%;')
-    
-	.control-group
-		= f.label :button_url, "Url", class: 'control-label'
-		.controls
-			= f.text_field :button_url, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Enter the URL where you want the button and/or image to link to. You can leave blank as well.'
 
-	.control-group
-		= f.label :button_text, class: 'control-label'
-		.controls
-			= f.text_field :button_text, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Enter the text for the button that will be created automatically. Example: Get Your Free Beverage Today'
+		= f.text_field :button_url, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Enter the URL where you want the button and/or image to link to. You can leave blank as well.', placeholder: 'URL'
+
+		= f.text_field :button_text, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Enter the text for the button that will be created automatically. Example: Get Your Free Beverage Today', placeholder: :button_text.upcase

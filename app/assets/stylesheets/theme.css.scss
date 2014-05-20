@@ -1297,3 +1297,13 @@ blockquote {
     margin-bottom: 5px;
   }
 }
+
+.date-picker input,
+.time-picker input {
+  padding-right: 25px;
+}
+.date-picker .add-on,
+.time-picker .add-on {
+  position: relative;
+  left: -25px;
+}

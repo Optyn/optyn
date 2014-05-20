@@ -1,6 +1,4 @@
-.headertext
-  / %h3
-  /   New Coupon Campaign
+%h4 Description
 
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
@@ -13,27 +11,27 @@
       %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
       %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
 
-      = f.text_field :type_of_discount
+    = f.text_field :type_of_discount
 
-.control-group
-  = f.label :discount_amount, "Discount Amount", class: 'control-label'
-  .controls
-    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'Please enter the value of the coupon.'
-
-.control-group
-  = f.label :coupon_code, "Coupon Code", class: 'control-label'
-  .controls
-    = f.text_field :coupon_code, 'data-toggle' => 'tooltip', title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.'
+.row-fluid.no-pad
+  .span5
+    = f.number_field :discount_amount, 'data-toggle' => 'tooltip',
+      title: 'Please enter the value of the coupon.', placeholder: 'DISCOUNT AMOUNT',
+      class: 'span12'
+  .span5.offset2
+    = f.text_field :coupon_code, 'data-toggle' => 'tooltip',
+      title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
+      placeholder: 'COUPON CODE', class: 'span12'
 
 = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
 
-.control-group
-  .controls
-    %label.checkbox
-      = f.check_box(:permanent_coupon)
-      This coupon does not expire
+%label.checkbox
+  = f.check_box(:permanent_coupon)
+  This coupon does not expire
 
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
 fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
+
+.blank-space
 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}

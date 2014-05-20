@@ -1,15 +1,10 @@
-.control-group
-  = f.label :ending, ending_label, class: "control-label"
-  .controls
-    .input-append.date-picker
+.row-fluid.no-pad
+  .input-append.date-picker.span5
+    = f.text_field :ending_date, value: formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input span12", 'data-format' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: ending_date_title, placeholder: 'EXPIRATION DATE'
+    %span.add-on
+      %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
-      = f.text_field :ending_date, value: formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input", 'data-format' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: ending_date_title
-
-      %span.add-on
-        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
-
-    .input-append.time-picker
-      = f.text_field :ending_time, value: formatted_message_form_time(@message, :ending), class: "input", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: ending_time_title
-
-      %span.add-on
-        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+  .input-append.time-picker.span5.offset2
+    = f.text_field :ending_time, value: formatted_message_form_time(@message, :ending), class: "input span12", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: ending_time_title, placeholder: 'EXPIRATION TIME'
+    %span.add-on
+      %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
