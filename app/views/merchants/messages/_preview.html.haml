@@ -1,11 +1,3 @@
 #merchants.pad3pc
 
   = render :partial => 'preview_wrapper'
-             
-
-  = link_to raw( "<i class='icon-pencil icon-white'></i> Edit Campaign" ), edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
-  = link_to raw( "<i class='icon-envelope icon-white'></i> Send it" ), launch_merchants_message_path(@message.uuid), class: "btn btn-success" unless @message.queued?
-  = link_to raw( "<i class='icon-envelope icon-white'></i> Send Me a Test Email" ), email_self_merchants_message_path(@message.uuid), class: "btn btn-info", id: "self_email"
-
-  - if @message.is_child?
-    = link_to "Parent Message", edit_merchants_message_path(@message.parent.uuid), class: "btn btn-warning"
