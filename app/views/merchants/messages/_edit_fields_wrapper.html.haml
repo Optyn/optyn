@@ -2,7 +2,7 @@
 
   /= render :partial => 'progress_bar'
 
-  = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|
+  = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :remote => true,  :html => {class: 'form-horizontal', id: 'message_form'} do |f|
     = render :partial => 'form', :locals => {f: f}
 
     = render partial: "merchants/messages/template_fields/form_actions"

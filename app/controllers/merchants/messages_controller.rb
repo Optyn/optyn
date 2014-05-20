@@ -146,7 +146,7 @@ class Merchants::MessagesController < Merchants::BaseController
       update_button_styles
 
       if @message.send(message_method_call.to_sym)
-        message_redirection
+
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
         update_failure_action
