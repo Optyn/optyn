@@ -99,4 +99,10 @@ class MessageMailer < ActionMailer::Base
       reply_to: "specials@eatstreet.com"
     )
   end
+
+  private
+  def load_settings
+    
+  end
+
 end

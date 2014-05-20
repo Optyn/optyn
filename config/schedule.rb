@@ -52,8 +52,3 @@ end
 every '*/30 * * * *' do
   runner "Message.batch_send"
 end
-
-#run the task to check for failure and bounced email every hour but 10 PM - 4 AM
-every '*/59 * * * *' do
-  runner "MessageEmailAuditor.check_for_failures"
-end
