@@ -130,6 +130,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   }
   &#flat #dashboard .yield,
   #dashboard { padding-bottom: 0; }
+  &.edit#flat { padding-top: 0; }
   &.new #dashboard { background-image: none; }
   &.edit #dashboard { background-image: none; }
   &.new #dashboard .wid25pc,
