@@ -14,11 +14,11 @@
     = f.text_field :type_of_discount
 
 .row-fluid.no-pad
-  .span5
+  .span6
     = f.number_field :discount_amount, 'data-toggle' => 'tooltip',
       title: 'Please enter the value of the coupon.', placeholder: 'DISCOUNT AMOUNT',
       class: 'span12'
-  .span5.offset2
+  .span6
     = f.text_field :coupon_code, 'data-toggle' => 'tooltip',
       title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
       placeholder: 'COUPON CODE', class: 'span12'

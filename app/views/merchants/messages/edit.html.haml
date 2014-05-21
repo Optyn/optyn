@@ -1,4 +1,14 @@
-= banner( message_form_title(@message_type) )
+/= banner( message_form_title(@message_type) )
+%h1
+  .pull-left
+    %a.btn.btn-success{ href: '#' }
+      %i.icon-arrow-left
+      Change Details
+  = message_form_title(@message_type)
+  .pull-right
+    %a.btn.btn-primary{ href: '#' }
+      Email Preview
+      %i.icon-arrow-right
 
 /= render partial: "merchants/messages/message_menu"
 
