@@ -1314,7 +1314,12 @@ blockquote {
   left: -25px;
 }
 
-// ::-webkit-input-placeholder { color:#f00; }
-// ::-moz-placeholder { color:#f00; } firefox 19+
-// :-ms-input-placeholder { color:#f00; } /* ie */
-// input:-moz-placeholder { color:#f00; }
+#flat ::-webkit-input-placeholder { color: $black; }
+#flat ::-moz-placeholder { color: $black; } /* firefox 19+ */
+#flat :-ms-input-placeholder { color: $black; } /* ie */
+#flat input:-moz-placeholder { color: $black; }
+
+#flat :focus::-webkit-input-placeholder { color: $medium-gray; }
+#flat :focus::-moz-placeholder { color: $medium-gray; } /* firefox 19+ */
+#flat :focus:-ms-input-placeholder { color: $medium-gray; } /* ie */
+#flat input:focus:-moz-placeholder { color: $medium-gray; }
