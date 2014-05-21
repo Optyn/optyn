@@ -15,9 +15,9 @@
 #end
 
 ## Amazon SES Settings ## 
-ActionMailer::Base.add_delivery_method :ses, AWS::SES::Base,
-   :access_key_id     => 'AKIAJO7WB66NE2EDUV2Q',
-   :secret_access_key => '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'
+# ActionMailer::Base.add_delivery_method :ses, AWS::SES::Base,
+#    :access_key_id     => 'AKIAJO7WB66NE2EDUV2Q',
+#    :secret_access_key => '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'
 
 ## Sendgrid Settings
 require File.expand_path('../site_config', __FILE__)
