@@ -23,7 +23,6 @@
     = render(partial: "layouts/pingdom_rum") if Rails.env.production?
 
   %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize + ' m-app b-layout' }
-    - hide_header_footer = params[ :action ] != 'edit' and params[ :controller ].parameterize != 'merchants-messages'
     %a.scrolltop{:href => "#"}
     - if hide_header_footer
       = render partial: "layouts/header"
