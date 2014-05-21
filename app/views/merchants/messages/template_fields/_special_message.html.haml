@@ -1,8 +1,14 @@
+%h4 Description
+
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
 = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Date and Time", ending_date_title: 'Date when the special event ends', ending_time_title: 'Time when the special event ends.'}
 
+.blank-space
+
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f, fine_print_verbiage: ''}
+
+.blank-space
 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
 
