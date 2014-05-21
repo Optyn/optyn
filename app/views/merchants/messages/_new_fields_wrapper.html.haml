@@ -1,10 +1,14 @@
 /= render partial: "merchants/messages/message_menu"
-
+- if params[:action] == "edit_metadata"
+  - path = merchants_message_path(@message.uuid)
+  - method = :put
+- else
+  - path = merchants_messages_path
+  - method = :post
 #message_fields_wrapper.pad3pc
 
   /= render :partial => 'progress_bar'
-
-  = form_for :message, url: merchants_messages_path, method: :post, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
+  = form_for :message, url: path, method: method, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
     = render :partial => 'new_form', :locals => {f: f}
 
     = submit_tag("Continue", name: "save_draft", class: 'btn btn-info')

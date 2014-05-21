@@ -448,6 +448,7 @@ Optyn::Application.routes.draw do
         get :social_report
         put :update_header
         get :edit_template
+        get :edit_metadata
         get :template
         put :assign_template
         get :show_template

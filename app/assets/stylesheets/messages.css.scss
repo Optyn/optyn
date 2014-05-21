@@ -135,9 +135,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit #dashboard { background-image: none; }
   &.new #dashboard .wid25pc,
   &.edit #dashboard .wid25pc { display: none; }
-  &.new #dashboard .wid75pc { width: 100%; }
+  &.new #dashboard .wid75pc,
+  &.edit_metadata #dashboard .wid75pc,
   &.edit #dashboard .wid75pc { width: 100%; }
   &.new#flat .yield h1,
+  &.edit_metadata#flat .yield h1,
 	&.edit#flat .yield h1 {
 	  float: none;
 	  text-align: center;

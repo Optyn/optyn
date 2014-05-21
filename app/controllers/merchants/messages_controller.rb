@@ -146,7 +146,10 @@ class Merchants::MessagesController < Merchants::BaseController
       update_button_styles
 
       if @message.send(message_method_call.to_sym)
-
+           respond_to do |format|
+            format.html {redirect_to edit_merchants_message_path(@message.uuid)}
+            format.js {}
+          end
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
         update_failure_action
@@ -458,6 +461,15 @@ class Merchants::MessagesController < Merchants::BaseController
     @template = Template.for_uuid(params[:id])
     @template.destroy
     head :ok
+  end
+
+  def edit_metadata
+    @skip_menu = true
+    @message = Message.for_uuid(params[:id])
+    populate_shop_surveys
+    populate_labels
+    update_button_for_ckeditor
+    @message_type = @message.type.underscore
   end
 
   private
