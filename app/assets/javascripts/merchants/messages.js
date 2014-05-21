@@ -32,6 +32,7 @@ function MerchantMessage() {
             this.hookDiscountType();
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
+            this.hookUpdateMessage();
         }
         if ( $('#message_send_on_container').length ) {
             // For Date/Time picker on preview Newsletter page.
@@ -1029,5 +1030,11 @@ function MerchantMessage() {
 
       _this.reloadTemplateSelectorIframe();
     });
-  };    
+  };
+
+  this.hookUpdateMessage = function(){
+    $('body').on('click', '.submit-message', function (e) {
+        $('.form-spinner').show();
+    });
+  };
 }
