@@ -827,10 +827,9 @@ form {
     margin: 0;
     @include border-radius( 4px );
     padding: 0 10px;
-    border: 0;
+    border: solid 1px darken( $light-gray, 20% );
     border-bottom: solid 2px darken( $light-gray, 20% );
-    background-color: $light-gray;
-    background-color: rgba(0,0,0,0.07);
+    background-color: lighten( $light-gray, 3% );
     box-shadow: none;
     color: $black;
     min-height: 35px;
@@ -1306,12 +1305,22 @@ blockquote {
 
 .date-picker input,
 .time-picker input {
-  padding-right: 25px;
+  padding-right: 33px;
 }
-.date-picker .add-on,
-.time-picker .add-on {
+#flat .yield .date-picker .add-on,
+#flat .yield .time-picker .add-on {
+  cursor: pointer;
+  min-height: 22px;
+  margin-top: 21px;
+  background: transparent;
+  line-height: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-left: solid 1px;
+  border-bottom: 0;
+  border-color: darken( $light-gray, 20% );
   position: relative;
-  left: -25px;
+  left: -33px;
 }
 
 #flat ::-webkit-input-placeholder { color: $black; }

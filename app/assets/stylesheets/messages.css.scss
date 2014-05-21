@@ -155,25 +155,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		font-size: 1.3rem;
 		line-height: 1.8rem;
 	}
-  &#flat input[type="text"],
-  &#flat input[type="password"],
-  &#flat input[type="datetime"],
-  &#flat input[type="datetime-local"],
-  &#flat input[type="date"],
-  &#flat input[type="month"],
-  &#flat input[type="time"],
-  &#flat input[type="week"],
-  &#flat input[type="number"],
-  &#flat input[type="email"],
-  &#flat input[type="url"],
-  &#flat input[type="search"],
-  &#flat input[type="tel"],
-  &#flat input[type="color"],
-  &#flat textarea,
-  &#flat select,
-  &#flat .uneditable-input {
-		background-color: $white;
-	}
 }
 .campaign-edit {
 	padding: 0;
