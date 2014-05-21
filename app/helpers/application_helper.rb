@@ -166,6 +166,6 @@ module ApplicationHelper
   end
 
   def hide_header_footer
-      (!['edit'].include? params[ :action ]  and params[ :controller ].parameterize != 'merchants-messages') ? false : true
+      (!['edit'].include? params[ :action ]  and params[ :controller ].parameterize != 'merchants-messages') ? true : false
   end
 end

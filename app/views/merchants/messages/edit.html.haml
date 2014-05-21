@@ -1,7 +1,7 @@
 /= banner( message_form_title(@message_type) )
 %h1
   .pull-left
-    %a.btn.btn-success{ href: '#' }
+    %a.btn.btn-success{ href: "#{edit_metadata_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change Details
   = message_form_title(@message_type)
