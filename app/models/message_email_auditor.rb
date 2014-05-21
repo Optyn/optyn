@@ -2,7 +2,7 @@ class MessageEmailAuditor < ActiveRecord::Base
   belongs_to :message_user
   belongs_to :message
 
-  attr_accessible :message_user_id, :delivered, :ses_message_id, :message_id
+  attr_accessible :message_user_id, :delivered, :message_smtp_id, :message_id
 
   after_create :enqueue_message
 
@@ -33,8 +33,25 @@ class MessageEmailAuditor < ActiveRecord::Base
   private
   def enqueue_message
     #Conditon added as Optyn message receivers can email a received mesage in their inbox to a non Optyn user. 
-    if message_user_id.present?
-      SesApiWorker.perform_async(self.id)
+    if  message_user_id.present?
+      if message.instance_of?(TemplateMessage)
+        mail = MessageMailer.send_template(message, message_user)
+      else
+        mail = MessageMailer.send_announcement(message, message_user)
+      end
+
+      MessageMailHolder.create!(
+        message_email_auditor_id: self.id,
+        to: mail['to'].to_s,
+        from: mail['from'].to_s,
+        reply_to: mail['reply_to'].to_s,
+        subject: mail['subject'].to_s,
+        content_type: mail['content_type'].to_s,
+        body: mail.body.to_s
+      )
+
+      message = self.message_user.message
+      message.destroy if message.instance_of?(VirtualMessage)
     end
   end
 end
