@@ -36,8 +36,8 @@ defaults:
   reseller_edit_location: 'message_actions/:placeholder/edit'
   reseller_reject_location: 'message_actions/:placeholder/reject'
   reseller_approve_location: 'message_actions/:placeholder/approve'
-  send_grid_username: 'alenmalkoc'
-  send_grid_password: '77cd5a95aa'
+  send_grid_username: 'ggaglani-services'
+  send_grid_password: '9p5yn123'
 
   #trackings
   simple_delivery:
