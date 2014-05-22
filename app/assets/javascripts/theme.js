@@ -208,7 +208,7 @@ $( function() {
 
 function moveFooterPosition() {
     $footer = $( 'footer' ).detach();
-    $editCampCont = $( '.edit-camp-cont' );
+    $editCampCont = $( '.edit-camp-cont > .pos-rel' );
     $editCampCont.append( $footer );
     $footer.fadeIn();
     $editCampCont.css( 'padding-bottom', parseInt( $footer.css( 'height' )) + 20 );

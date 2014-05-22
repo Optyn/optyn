@@ -148,7 +148,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 			padding: 10px 0;
 			line-height: 20px;
   	}
-  	.yield .edit-camp-cont {
+  	.pos-rel {
 	  	position: relative;
 	  }
 	}
@@ -170,6 +170,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	  color: $white;
 	  margin-bottom: 0;
 	  padding: 0 2%;
+	  z-index: 2;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
 	}
 	&#flat .add-on,
 	&#flat input { margin-top: 15px; }
@@ -181,8 +186,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 }
 .campaign-edit {
 	padding: 0;
+	.pad2pc { padding: 2%; }
 	& > .span6 {
-		padding: 2%;
 		width: 50%;
 		margin: 0;
 		@media( max-width: 980px ) {
@@ -193,9 +198,23 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		.checkbox {
 			margin-top: 10px;
 		}
+		position: fixed;
+		top: 0;
+		z-index: 1;
+		width: 50%;
+		height: 100vh;
+		overflow: scroll;
+		padding-top: 70px;
 	}
-	& > .span6:first-child { background: rgb( 222, 222, 222 ); }
-	& > .span6:last-child { background: rgb( 242, 242, 242 ); }
+	& > .span6:first-child {
+		background: rgb( 222, 222, 222 );
+		left: 0;
+	}
+	& > .span6:last-child {
+		padding: 2%;
+		background: rgb( 242, 242, 242 );
+		right: 0;
+	}
 }
 #flat #message_make_public,
 #flat .campaign-edit .checkbox input { margin-top: 3px; }
