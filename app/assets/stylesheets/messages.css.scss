@@ -135,10 +135,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit_metadata#flat,
   &.preview#flat,
    {
-  	padding-top: 0;
+  	padding-top: 50px;
   }
-  &.edit#flat {
+  &#flat .tear-page {
   	.footer-inner {
+			@media( max-width: 980px ) {
+				display: none !important;
+			}
   		display: none;
   		position: absolute;
 			bottom: 0;
@@ -184,15 +187,37 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		line-height: 1.8rem;
 	}
 }
-.campaign-edit {
+.setup-campn {
+	&:first-child { margin-top: 20px; }
+	padding-left: 50px;
+	position: relative;
+	margin-bottom: 25px;
+	.sc-ico {
+		background-image: image-url( 'sprite.png' );
+		width: 35px;
+		height: 35px;
+		position: absolute;
+		top: 6px;
+		left: 0;
+	}
+	.sc-subject { background-position: 0px 120px; }
+	.sc-sent-on { background-position: 0px 221px; }
+	.sc-recepients { background-position: 0px 75px; }
+	.sc-details { background-position: 0px 170px; }
+}
+.tear-page {
+	.well {
+		@include border-radius( 5px );
+	}
 	padding: 0;
-	.pad2pc { padding: 2%; }
+	.pad2pc { padding: 0 2% 2% 2%; }
 	& > .span6 {
 		width: 50%;
 		margin: 0;
 		@media( max-width: 980px ) {
 			width: 100%;
 			float: none;
+			position: static;
 			clear: both;
 		}
 		.checkbox {
@@ -211,22 +236,19 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		left: 0;
 	}
 	& > .span6:last-child {
-		padding: 2%;
+		padding: 70px 2% 2% 2%;
 		background: rgb( 242, 242, 242 );
 		right: 0;
 	}
 }
 #flat #message_make_public,
-#flat .campaign-edit .checkbox input { margin-top: 3px; }
+#flat .tear-page .checkbox input { margin-top: 3px; }
 #flat #message_meta_modal .add-on > i {
   margin-top: 0;
 }
 #message_header_settings_form label {
 	display: inline;
 	margin-right: 10px;
-}
-.preview-text > .span3 {
-	text-align: right;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
@@ -235,12 +257,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	}
 	#choose_message .type aside {
 		left: 10px;
-	}
-}
-
-@media ( max-width: 767px ) {
-	.preview-text > .span3 {
-		text-align: left;
 	}
 }
 

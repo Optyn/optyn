@@ -132,7 +132,7 @@ $(document).ready(function () {
     });
 
 
-    if ( $( 'body' ).hasClass( 'edit' ) && $( 'body').hasClass( 'merchants-messages' )) {
+    if ( $( 'body' ).hasClass( 'edit' ) && $( 'body').hasClass( 'merchants-messages' ) || $( 'body' ).hasClass( 'preview' ) && $( 'body').hasClass( 'merchants-messages' ) ) {
         // Call this function only on edit campaign content page.
         moveFooterPosition();
     }
@@ -208,7 +208,7 @@ $( function() {
 
 function moveFooterPosition() {
     $footer = $( 'footer' ).detach();
-    $editCampCont = $( '.edit-camp-cont > .pos-rel' );
+    $editCampCont = $( '.tear-page > .span6 > .pos-rel' );
     $editCampCont.append( $footer );
     $footer.fadeIn();
     $editCampCont.css( 'padding-bottom', parseInt( $footer.css( 'height' )) + 20 );

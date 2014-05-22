@@ -1,12 +1,30 @@
-= banner( "Email Preview" )
+/= banner( "Email Preview" )
+%h1
+  .pull-left
+    %a.btn.btn-primary{ href: '#' }
+      %i.icon-arrow-left
+      Change details
+  Email Preview
+  .pull-right
+    %a.btn.btn-success{ href: '#' }
+      Publish
+      %i.icon-arrow-right
 
 
-#merchants.pad3pc.row-fluid
+#merchants.pad3pc.row-fluid.tear-page
   .span6
-    = render :partial => "merchants/messages/template_fields/show_message"
+    .pos-rel
+      .pad2pc
+        .well
+          %h4 Setup Campaign
+          = render :partial => "merchants/messages/template_fields/show_message"
+        .well
+          %h4 Design Details
+        .well
+          %h4 Publish to Social Media
   .span6
     = render :partial => 'preview_wrapper'
-               
+
 
     = link_to raw( "<i class='icon-pencil icon-white'></i> Edit Campaign" ), edit_merchants_message_path(@message.uuid), class: "btn btn-primary"
     = link_to raw( "<i class='icon-envelope icon-white'></i> Send it" ), launch_merchants_message_path(@message.uuid), class: "btn btn-success" unless @message.queued?

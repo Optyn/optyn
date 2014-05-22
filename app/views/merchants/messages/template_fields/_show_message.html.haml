@@ -1,26 +1,32 @@
 #preview-meta-data-view.preview-menu
 
-  .preview-item
-    .preview-text.row-fluid
-      %strong.span3  Subject:
-      .span9
-        =@message.subject
+  .setup-campn
+    .sc-ico.sc-subject
+    %strong Subject:
+    %p
+      =@message.subject
 
-  .preview-item
-    .preview-text.row-fluid
-      %strong.span3 To be sent on:
-      .span9
-        - unless @message.is_child?
-          = message_send_on_date(@message)
-        - else
-          Message will be sent automatically when the user completes the survey.
+  .setup-campn
+    .sc-ico.sc-sent-on
+    %strong To be sent on:
+    %p
+      - unless @message.is_child?
+        = message_send_on_date(@message)
+      - else
+        Message will be sent automatically when the user completes the survey.
 
-  .preview-item
-    .preview-text.row-fluid
-      %strong.span3 Email will be sent to:
-      .span9
-        - unless @message.is_child?
-          = message_receiver_labels(@message.label_names)
-          == (#{@message.connections_count} total)
-        - else
-          Customers who complete the survey.
+  .setup-campn
+    .sc-ico.sc-recepients
+    %strong Email will be sent to:
+    %p
+      - unless @message.is_child?
+        = message_receiver_labels(@message.label_names)
+        == (#{@message.connections_count} total)
+      - else
+        Customers who complete the survey.
+
+  .setup-campn
+    .sc-ico.sc-details
+    %strong Coupon details:
+    %p
+      PLACEHOLDER TEXT!!!
