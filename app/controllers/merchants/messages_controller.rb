@@ -228,6 +228,8 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @preview = true
     @partner = current_partner
+    @skip_menu = true
+    @message_type = @message.type.underscore
   end
 
   def preview_template
