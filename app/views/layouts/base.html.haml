@@ -24,7 +24,7 @@
 
   %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize + ' m-app b-layout' }
     %a.scrolltop{:href => "#"}
-    - if hide_header_footer
+    - if hide_header_footer == true
       = render partial: "layouts/header"
 
     = display_flash_message

@@ -131,7 +131,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &#flat #dashboard .yield,
   #dashboard { padding-bottom: 0; }
   &.new#flat,
-  &.edit#flat {
+  &.edit#flat,
+  &.edit_metadata#flat {
   	padding-top: 0;
   }
   &.edit#flat {
