@@ -1,9 +1,4 @@
-%h1
-  = message_form_title(@message_type)
-  .pull-right
-    %a.btn.btn-primary{ href: '#' }
-      Add Email content
-      %i.icon-arrow-right
+= banner( message_form_title(@message_type))
 
 #merchants
   = render partial: "merchants/messages/new_fields_wrapper"
