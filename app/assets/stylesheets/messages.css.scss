@@ -132,7 +132,9 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   #dashboard { padding-bottom: 0; }
   &.new#flat,
   &.edit#flat,
-  &.edit_metadata#flat {
+  &.edit_metadata#flat,
+  &.preview#flat,
+   {
   	padding-top: 0;
   }
   &.edit#flat {
@@ -156,9 +158,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc,
   &.edit_metadata #dashboard .wid75pc,
+  &.preview #dashboard .wid75pc,
   &.edit #dashboard .wid75pc { width: 100%; }
   &.new#flat .yield h1,
   &.edit_metadata#flat .yield h1,
+  &.preview#flat .yield h1,
 	&.edit#flat .yield h1 {
 	  float: none;
 	  text-align: center;
