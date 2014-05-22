@@ -131,7 +131,24 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &#flat #dashboard .yield,
   #dashboard { padding-bottom: 0; }
   &.new#flat,
-  &.edit#flat { padding-top: 0; }
+  &.edit#flat {
+  	padding-top: 0;
+  }
+  &.edit#flat {
+  	.footer-inner {
+  		display: none;
+  		position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background: rgba(0,0,0,0.2);
+			padding: 10px 0;
+			line-height: 20px;
+  	}
+  	.yield .edit-camp-cont {
+	  	position: relative;
+	  }
+	}
   &.new #dashboard { background-image: none; }
   &.edit #dashboard { background-image: none; }
   &.new #dashboard .wid25pc,

@@ -130,6 +130,12 @@ $(document).ready(function () {
         $( '#header-static-features-dropdown' ).fadeOut();
         $( '.dark-overlay' ).fadeOut();
     });
+
+
+    if ( $( 'body' ).hasClass( 'edit' ) && $( 'body').hasClass( 'merchants-messages' )) {
+        // Call this function only on edit campaign content page.
+        moveFooterPosition();
+    }
 });
 // Equalize div heights
 function equalizeDivHeights( targetElementSelector ) {
@@ -198,3 +204,12 @@ $( function() {
     }
     setVideoTutorialsLinkPosition();
 });
+
+
+function moveFooterPosition() {
+    $footer = $( 'footer' ).detach();
+    $editCampCont = $( '.edit-camp-cont' );
+    $editCampCont.append( $footer );
+    $footer.fadeIn();
+    $editCampCont.css( 'padding-bottom', parseInt( $footer.css( 'height' )) + 20 );
+}
