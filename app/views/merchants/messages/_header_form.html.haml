@@ -7,22 +7,21 @@
     = builder.hidden_field :property_key, value: "header_background"
     = builder.hidden_field :property_value, value: starting_color, class: "message-visual-property-value"
 
-    .span5
+    .span6
       .control-group
-        = f.label :name, 'Customize Header Background Color', class: 'control-label'
         #header_background.input-append.color{"data-color" => color_hex, "data-color-format" => "hex"}
           .btn-group
             %a.dropdown-toggle{"data-toggle" => "dropdown"}
               = text_field_tag :header_background_color, color_hex
               %span.add-on
                 %i{:style => "background-color: #{color_hex};"}
-    .span4
+    .span6
       .control-group{:style => "padding-top:28px;"}
         .controls
           %label.checkbox
             = builder.check_box(:make_default)
             Make it my default Header color.
-    .span2
+    .span6
       .control-group{:style => "padding-top:20px;"}
         .actions
           = submit_tag "Apply", class: 'btn pull-right'

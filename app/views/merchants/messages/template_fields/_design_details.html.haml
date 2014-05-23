@@ -1,0 +1,14 @@
+#preview-meta-data-view.preview-menu
+
+  .setup-campn
+    %strong Choose header background color:
+    %p
+      #message_color_body.accordion-inner
+        .row-fluid
+          = render partial: "header_form"
+          %div.loading{:style => "display: none;"}
+            %strong Loading...
+  .setup-campn
+    %strong Your Logo:
+    %p
+      = show_logo(@shop)

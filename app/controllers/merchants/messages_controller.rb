@@ -471,6 +471,11 @@ class Merchants::MessagesController < Merchants::BaseController
     populate_shop_surveys
     populate_labels
     update_button_for_ckeditor
+    @shop_logo = true
+    @shop = @message.shop
+    @preview = true
+    @partner = current_partner
+    @skip_menu = true
     @message_type = @message.type.underscore
   end
 

@@ -1,30 +1,6 @@
 #message_fields_wrapper
-  #message_preview_accordion.accordion
-    .accordion-group
-      .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_meta_data"}
-          Campaign Details [Subject Line, Recipients, and Date/Time]
-      #collapse_meta_data.preview-left.accordion-body.collapse
-        .accordion-inner
-          = render partial: "merchants/messages/preview_meta"
-          = content_for :header do
-            Preview Only
-
-    #color_wrapper.accordion-group
-      .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_message_colors"}
-          Customize Design
-      #collapse_message_colors.email-preview.accordion-body.collapse
-        #message_color_body.accordion-inner
-          .row-fluid
-            = render partial: "header_form"
-            %div.loading{:style => "display: none;"}
-              %strong Loading...
-
-    #prev_wrapper.accordion-group
-      .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_message_preview"}
-          Message Preview
+  #message_preview_accordion
+    #prev_wrapper
       #collapse_message_preview.email-preview.accordion-body.collapse.in
         #message_preview.accordion-inner
           #preview_wrapper
