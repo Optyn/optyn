@@ -3,8 +3,6 @@
   .controls
     = f.collection_select(:survey_id, @surveys, :id, :title, include_blank: "-- Select Survey --") rescue nil
 
-%h4 Description
-
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
 = hidden_field_tag :edit_child_location, ""
