@@ -73,7 +73,6 @@ $(document).ready(function () {
 
     // Ensure footer is stuck to bottom of window ..............................
     var setMidContentHt = function( headerSelector, contentSelector, footerSelector ) {
-        console.log( 'setMidContentHt' );
         var headerHt = parseInt( $( headerSelector ).css( 'height' ));
         var footerHt = parseInt( $( footerSelector ).css( 'height' ));
         var windowHt = $( window ).height();
@@ -106,7 +105,6 @@ $(document).ready(function () {
     }
 
     if ( $( 'body' ).hasClass( 'merchants-messages' )) {
-        console.log( 'merchants-messages' );
         setMidContentHt( 'h1', '.yield', 'footer' );
         $( window ).resize( function() {
             setMidContentHt( 'h1', '.yield', 'footer' );
