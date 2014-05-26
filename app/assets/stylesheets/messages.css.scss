@@ -137,6 +137,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
    {
   	padding-top: 50px;
   }
+  &#flat #dashboard .yield .tear-page {
+		@media( max-width: 980px ) {
+			padding: 0;
+		}
+  }
   &#flat .tear-page {
   	.footer-inner {
 			@media( max-width: 980px ) {
