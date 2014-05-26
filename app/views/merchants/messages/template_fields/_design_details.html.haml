@@ -6,12 +6,13 @@
       .row-fluid
         = render partial: "header_form"
         %div.loading{:style => "display: none;"}
-          %strong Loading...
+          / %strong Loading...
   %strong Your Logo:
-  %p
+  %p#logo
     = show_logo(@shop)
   .btn-group
     %a.btn.btn-small#choose-new-logo{ href: '#' } Change logo
-    %a.btn.btn-small.btn-danger{ href: '#' } Remove
+    - if @shop.logo_img.present?
+      = link_to "Remove", remove_logo_merchants_shop_path(:id => @shop.id, :uuid => @message.uuid), :remote => true, :class => "btn btn-small btn-danger remove_logo"
   %input#change-logo-image{ type: 'file' }
   #selected-logo-img-url

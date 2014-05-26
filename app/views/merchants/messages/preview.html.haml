@@ -1,7 +1,7 @@
 /= banner( "Email Preview" )
 %h1
   .pull-left
-    %a.btn.btn-primary{ href: '#' }
+    %a.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change details
   Email Preview

@@ -385,6 +385,7 @@ Optyn::Application.routes.draw do
       member do
         get :check_identifier
         put :update_affiliate_tracking #put '/shop/:id/update_affiliate_tracking', to: 'shops#update_affiliate_tracking', as: :update_affiliate_tracking_shop
+        get :remove_logo
       end
 
     end
