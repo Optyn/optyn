@@ -17,7 +17,7 @@ class EmailCounter
         SENDGRID_KEY
       end
 
-      SES_KEY
+      SENDGRID_KEY
     end
 
   end #end of self block
