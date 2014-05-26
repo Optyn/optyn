@@ -115,6 +115,10 @@ function MerchantMessage() {
           // this.hookClearReportModal();
           this.backToMainReport();
         }
+
+        if ( $( '#choose-new-logo' ).length ) {
+            this.hookChangeLogo();
+        }
     };
 
     this.loadSpinnerForIframe = function() {
@@ -1035,6 +1039,15 @@ function MerchantMessage() {
   this.hookUpdateMessage = function(){
     $('body').on('click', '.submit-message', function (e) {
         $('.form-spinner').show();
+    });
+  };
+
+  this.hookChangeLogo = function() {
+    $( '#choose-new-logo' ).click( function() {
+      $( '#change-logo-image' ).click();
+      $( '#change-logo-image' ).change( function() {
+        $( '#change-logo-image' ).after( '<div>' + $( '#change-logo-image' ).val() + ' <a class="btn btn-small btn-success" href="#"><i class="icon-upload"> Upload new logo</a></div>');
+      });
     });
   };
 }

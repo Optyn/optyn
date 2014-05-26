@@ -11,5 +11,6 @@
   %p
     = show_logo(@shop)
   .btn-group
-    %a.btn.btn-small{ href: '#' } Change logo
-    %a.btn.btn-small.btn-warning{ href: '#' } Remove
+    %a.btn.btn-small#choose-new-logo{ href: '#' } Change logo
+    %a.btn.btn-small.btn-danger{ href: '#' } Remove
+  %input#change-logo-image{ type: 'file' }
