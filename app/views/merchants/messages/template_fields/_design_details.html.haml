@@ -2,7 +2,7 @@
 
   %strong Choose header background color:
   %p
-    #message_color_body.accordion-inner
+    #message_color_body
       .row-fluid
         = render partial: "header_form"
         %div.loading{:style => "display: none;"}
@@ -15,3 +15,4 @@
     - if @shop.logo_img.present?
       = link_to "Remove", remove_logo_merchants_shop_path(:id => @shop.id, :uuid => @message.uuid), :remote => true, :class => "btn btn-small btn-danger remove_logo"
   %input#change-logo-image{ type: 'file' }
+  #selected-logo-img-url

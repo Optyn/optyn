@@ -73,6 +73,7 @@ $(document).ready(function () {
 
     // Ensure footer is stuck to bottom of window ..............................
     var setMidContentHt = function( headerSelector, contentSelector, footerSelector ) {
+        console.log( 'setMidContentHt' );
         var headerHt = parseInt( $( headerSelector ).css( 'height' ));
         var footerHt = parseInt( $( footerSelector ).css( 'height' ));
         var windowHt = $( window ).height();
@@ -80,23 +81,37 @@ $(document).ready(function () {
     };
 
     // Ensuring footer is stuck to the bottom in application layout ............
-    setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
-    $( window ).resize( function() {
+    if ( $( 'body' ).hasClass( 'a-layout' )) {
         setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
-    });
+        $( window ).resize( function() {
+            setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
+        });
+    }
 
     // Ensuring footer is stuck to the bottom in base layout ...................
-    setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
-    $( window ).resize( function() {
+    if ( $( 'body' ).hasClass( 'b-layout' )) {
         setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
-    });
+        $( window ).resize( function() {
+            setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
+        });
+    }
 
 
     // Ensuring footer is stuck to the bottom in email_feedback layout .........
-    setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
-    $( window ).resize( function() {
+    if ( $( 'body' ).hasClass( 'ef-l' )) {
         setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
-    });
+        $( window ).resize( function() {
+            setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
+        });
+    }
+
+    if ( $( 'body' ).hasClass( 'merchants-messages' )) {
+        console.log( 'merchants-messages' );
+        setMidContentHt( 'h1', '.yield', 'footer' );
+        $( window ).resize( function() {
+            setMidContentHt( 'h1', '.yield', 'footer' );
+        });
+    }
 
     // Setting height of modal .................................................
     var setModalHt = function() {

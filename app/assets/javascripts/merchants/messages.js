@@ -1043,11 +1043,11 @@ function MerchantMessage() {
   };
 
   this.hookChangeLogo = function() {
+    $( '#change-logo-image' ).change( function() {
+        $( '#selected-logo-img-url' ).html( $( '#change-logo-image' ).val() + ' <a class="btn btn-small btn-success" href="#"><i class="icon-upload"> Upload new logo</a>');
+    });
     $( '#choose-new-logo' ).click( function() {
       $( '#change-logo-image' ).click();
-      $( '#change-logo-image' ).change( function() {
-        $( '#change-logo-image' ).after( '<div>' + $( '#change-logo-image' ).val() + ' <a class="btn btn-small btn-success" href="#"><i class="icon-upload"> Upload new logo</a></div>');
-      });
     });
   };
 }

@@ -183,6 +183,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		top: 0;
 		left: 0;
 		width: 100%;
+		border: 0;
 	}
 	&#flat .add-on,
 	&#flat input { margin-top: 15px; }
@@ -269,6 +270,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		right: 0;
 	}
 	#change-logo-image { display: none; }
+	#selected-logo-img-url { margin-top: 10px; }
 }
 #flat #message_make_public,
 #flat .tear-page .checkbox input { margin-top: 3px; }
