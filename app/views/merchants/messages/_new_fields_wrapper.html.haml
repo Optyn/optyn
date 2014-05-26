@@ -11,4 +11,4 @@
   = form_for :message, url: path, method: method, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
     = render :partial => 'new_form', :locals => {f: f}
 
-    = submit_tag("Continue", name: "save_draft", class: 'btn btn-info')
+    = submit_tag("Continue", name: "save_draft", class: 'btn btn-info pull-right')
