@@ -1,9 +1,12 @@
 .preview-header
   Show how your campaign looks on: 
   .btn-group
-    %a.btn.btn-small.btn-primary{ href: '#' } Desktop
-    %a.btn.btn-small{ href: '#' } Mobile
-    %a.btn.btn-small{ href: '#' } Social Media
+    %a.btn.btn-small#show-desktop-preview{ href: '#' } Desktop
+    %a.btn.btn-small#show-mobile-preview{ href: '#' } Mobile
+    %a.btn.btn-small#show-sm-preview{ href: '#' } Social Media
+  %a.btn.btn-info.show-edit-form.pull-right{ href: '#' }
+    %i.icon-arrow-left
+    Change Content
 #message_fields_wrapper
   #message_preview_accordion
     #prev_wrapper

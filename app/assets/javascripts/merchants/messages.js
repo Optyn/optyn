@@ -119,6 +119,9 @@ function MerchantMessage() {
         if ( $( '#choose-new-logo' ).length ) {
             this.hookChangeLogo();
         }
+        if ( $( '.tear-page .preview-header' ).length ) {
+            this.hookCampaignResponsiveViewer();
+        }
     };
 
     this.loadSpinnerForIframe = function() {
@@ -1050,4 +1053,36 @@ function MerchantMessage() {
       $( '#change-logo-image' ).click();
     });
   };
+
+  this.hookCampaignResponsiveViewer = function() {
+    function highlightCurrentButton( $current ) {
+        $( '.preview-header a' ).removeClass( 'btn-primary' );
+        $( $current ).addClass( 'btn-primary' );
+    }
+    $( '#show-desktop-preview' ).click( function() {
+        highlightCurrentButton( $( this ));
+        $( '.tear-page > .span6:first' ).fadeOut( function() {
+            $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
+            $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
+            $( '.show-edit-form' ).fadeIn();
+        });
+    });
+
+    $( '#show-mobile-preview' ).click( function() {
+        highlightCurrentButton( $( this ));
+    });
+
+    $( '#show-sm-preview' ).click( function() {
+        highlightCurrentButton( $( this ));
+    });
+
+    $( '.show-edit-form' ).click( function() {
+        highlightCurrentButton( null );
+        $( '.tear-page > .span6:last' ).animate( { width: '50%' }, 500, function() {
+            $( '.tear-page > .span6:first' ).fadeIn();
+        });
+        $( '.preview-header' ).animate({ width: '50%' }, 500, function() {});
+        $( '.show-edit-form' ).fadeOut();
+    });
+  }
 }
