@@ -1,7 +1,13 @@
+.preview-header
+  Show how your campaign looks on: 
+  .btn-group
+    %a.btn.btn-small.btn-primary{ href: '#' } Desktop
+    %a.btn.btn-small{ href: '#' } Mobile
+    %a.btn.btn-small{ href: '#' } Social Media
 #message_fields_wrapper
   #message_preview_accordion
     #prev_wrapper
-      #collapse_message_preview.email-preview.accordion-body.collapse.in
-        #message_preview.accordion-inner
+      #collapse_message_preview.email-preview
+        #message_preview
           #preview_wrapper
             = render partial: "shared/#{message_partner_name(@shop)}/messages/core_content", locals: {preview: true, customer: nil}
