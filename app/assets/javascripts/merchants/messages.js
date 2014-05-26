@@ -1065,11 +1065,18 @@ function MerchantMessage() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
             $( '.show-edit-form' ).fadeIn();
+            $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
         });
     });
 
     $( '#show-mobile-preview' ).click( function() {
         highlightCurrentButton( $( this ));
+        $( '.tear-page > .span6:first' ).fadeOut( function() {
+            $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
+            $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
+            $( '.show-edit-form' ).fadeIn();
+            $( '#preview_wrapper' ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
+        });
     });
 
     $( '#show-sm-preview' ).click( function() {
@@ -1083,6 +1090,7 @@ function MerchantMessage() {
         });
         $( '.preview-header' ).animate({ width: '50%' }, 500, function() {});
         $( '.show-edit-form' ).fadeOut();
+        $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
     });
   }
 }
