@@ -1321,11 +1321,12 @@ blockquote {
   line-height: 15px;
   padding-left: 10px;
   padding-right: 10px;
+  border: 0;
   border-left: solid 1px;
-  border-bottom: 0;
   border-color: darken( $light-gray, 20% );
   position: relative;
   left: -33px;
+  @include border-radius( 0 );
 }
 
 #flat ::-webkit-input-placeholder { color: $black; }
