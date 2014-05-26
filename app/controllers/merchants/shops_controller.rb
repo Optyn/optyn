@@ -39,6 +39,13 @@ class Merchants::ShopsController < Merchants::BaseController
     head :unprocessible_entity
   end
 
+  def remove_logo
+    @shop = Shop.find(params[:id])
+    @message = Message.find_by_uuid(params[:uuid])
+    @shop.remove_logo_img!
+    @shop.save
+  end
+
   private
   def check_for_blank_q
     if params[:q].blank?
