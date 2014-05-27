@@ -6,7 +6,7 @@
       Change details
   Email Preview
   .pull-right
-    %a.btn.btn-success{ href: '#' }
+    %a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
       Launch Campaign
       %i.icon-arrow-right
 
@@ -21,8 +21,15 @@
         .well
           %h4 Design Details
           = render :partial => "merchants/messages/template_fields/design_details"
+
         .well
           %h4 Publish to Social Media
+      
+        %a.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
+          Make Changes
+        %a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
+          Publish Campaign
       .blank-space
+        
   .span6#preview
     = render :partial => 'preview_wrapper'

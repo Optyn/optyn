@@ -1,2 +1,6 @@
-$('#preview').html('<%=j render partial: "merchants/messages/preview_wrapper" %>');
-$('.form-spinner').hide();
+<% if @choice != "launch"%>
+  $('#preview').html('<%=j render partial: "merchants/messages/preview_wrapper" %>');
+  $('.form-spinner').hide();
+<% else %>
+  $(window.location.replace("<%= queued_merchants_messages_path()%>"));
+<% end %>
