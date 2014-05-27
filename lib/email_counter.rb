@@ -16,8 +16,6 @@ class EmailCounter
       elsif REDIS[SES_KEY].to_i > REDIS[SENDGRID_KEY].to_i
         SENDGRID_KEY
       end
-
-      SENDGRID_KEY
     end
 
   end #end of self block
