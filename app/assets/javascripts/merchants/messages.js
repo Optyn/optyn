@@ -1065,10 +1065,10 @@ function MerchantMessage() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
             $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
-            $( '#prev-campn' ).fadeOut( function() {
+            $( '#change-campn-det' ).fadeOut( function() {
                 $( '.show-edit-form' ).fadeIn();
             });
-            $( '#change-campn-det' ).fadeOut();
+            $( '#prev-campn' ).fadeOut();
         });
     });
 
@@ -1078,10 +1078,10 @@ function MerchantMessage() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
             $( '#preview_wrapper' ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
-            $( '#prev-campn' ).fadeOut( function() {
+            $( '#change-campn-det' ).fadeOut( function() {
                 $( '.show-edit-form' ).fadeIn();
             });
-            $( '#change-campn-det' ).fadeOut();
+            $( '#prev-campn' ).fadeOut();
         });
     });
 
