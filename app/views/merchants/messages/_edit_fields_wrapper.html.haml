@@ -6,5 +6,5 @@
     = render :partial => 'form', :locals => {f: f}
 
     = render partial: "merchants/messages/template_fields/form_actions"
-    .form-spinner{style: 'display: none;'} 
+    .form-spinner#loading{style: 'display: none;'} 
       = image_tag "ajax-loader.gif"
