@@ -46,6 +46,12 @@ class Merchants::ShopsController < Merchants::BaseController
     @shop.save
   end
 
+  def upload_logo
+    @shop = current_shop
+    @shop.update_attributes(params[:shop])
+    @message = Message.find_by_uuid(params[:uuid])
+  end
+
   private
   def check_for_blank_q
     if params[:q].blank?

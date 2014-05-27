@@ -33,6 +33,7 @@ function MerchantMessage() {
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
             this.hookUpdateMessage();
+            this.hookUploadLogo();
         }
         if ( $('#message_send_on_container').length ) {
             // For Date/Time picker on preview Newsletter page.
@@ -1037,17 +1038,24 @@ function MerchantMessage() {
   };
 
   this.hookUpdateMessage = function(){
-    $('body').on('click', '.submit-message', function (e) {
+    $('body').on('click', '.submit-message #upload_new_logo .remove_logo', function (e) {
         $('.form-spinner').show();
     });
   };
 
   this.hookChangeLogo = function() {
     $( '#change-logo-image' ).change( function() {
-        $( '#selected-logo-img-url' ).html( $( '#change-logo-image' ).val() + ' <a class="btn btn-small btn-success" href="#"><i class="icon-upload"> Upload new logo</a>');
+
+        $( '#selected-logo-img-url' ).html( $( '#change-logo-image' ).val() + ' <a class="btn btn-small btn-success" id ="upload_new_logo" href="#"><i class="icon-upload"> Upload new logo</a>');
     });
     $( '#choose-new-logo' ).click( function() {
       $( '#change-logo-image' ).click();
+    });
+  };
+
+  this.hookUploadLogo = function() {
+    $('body').on('click', '#upload_new_logo', function (e) {
+      $("#upload_image").submit();
     });
   };
 }
