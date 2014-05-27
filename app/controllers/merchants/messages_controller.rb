@@ -151,7 +151,10 @@ class Merchants::MessagesController < Merchants::BaseController
           end
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
-        update_failure_action
+        respond_to do |format|
+          format.html {redirect_to edit_merchants_message_path(@message.uuid)}
+          format.js {}
+        end
       end
     end
   end

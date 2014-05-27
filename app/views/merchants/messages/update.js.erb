@@ -1,6 +1,11 @@
-<% if @choice != "launch"%>
-  $('#preview').html('<%=j render partial: "merchants/messages/preview_wrapper" %>');
-  $('.form-spinner').hide();
+<% if !@message.errors.present? %>
+  <% if @choice != "launch"%>
+    $('#preview').html('<%=j render partial: "merchants/messages/preview_wrapper" %>');
+    $('#edit_message_cont').html('<%=j render partial: "merchants/messages/edit_fields_wrapper" %>');
+    $('.form-spinner').hide();
+  <% else %>
+    $(window.location.replace("<%= queued_merchants_messages_path()%>"));
+  <% end %>
 <% else %>
-  $(window.location.replace("<%= queued_merchants_messages_path()%>"));
+  $('#edit_message_cont').html('<%=j render partial: "merchants/messages/edit_fields_wrapper" %>');
 <% end %>
