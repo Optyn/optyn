@@ -201,11 +201,16 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		right: 0;
 		z-index: 2;
 		box-shadow: 5px 0px 5px 0px #000;
-		.show-edit-form { display: none; }
+		text-align: center;
 		@media( max-width: 980px ) {
+			display: none;
 			position: static;
 			width: 100%;
 		}
+	}
+	.show-edit-form {
+		display: none;
+		margin-top: 8px;
 	}
 	#preview {
 		padding: 130px 0 0 0;
