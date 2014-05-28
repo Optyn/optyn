@@ -189,10 +189,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
-    localtunnel (0.3)
-      json (>= 1.2.4)
-      net-ssh (>= 2.0.22)
-      net-ssh-gateway (>= 1.0.1)
     loofah (1.2.1)
       nokogiri (>= 1.4.4)
     mail (2.4.4)
@@ -496,10 +492,10 @@ DEPENDENCIES
   intercom-rails
   jquery-rails
   kaminari
-  localtunnel
   mailcatcher
   mini_magick
   newrelic_rpm
+  nokogiri (= 1.6.1)
   oauth2
   oj
   omniauth
