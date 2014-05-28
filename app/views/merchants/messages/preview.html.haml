@@ -13,23 +13,21 @@
 
 #merchants.pad3pc.row-fluid.tear-page
   .span6
-    .pos-rel
-      .pad2pc
-        .well
-          %h4 Setup Campaign
-          = render :partial => "merchants/messages/template_fields/show_message"
-        .well
-          %h4 Design Details
-          = render :partial => "merchants/messages/template_fields/design_details"
+    .pad2pc
+      .well
+        %h4 Setup Campaign
+        = render :partial => "merchants/messages/template_fields/show_message"
+      .well
+        %h4 Design Details
+        = render :partial => "merchants/messages/template_fields/design_details"
 
-        .well
-          %h4 Publish to Social Media
-      
-        %a.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
-          Make Changes
-        %a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
-          Publish Campaign
-      .blank-space
+      .well
+        %h4 Publish to Social Media
+    
+      %a.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
+        Make Changes
+      %a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
+        Publish Campaign
         
   .span6#preview
     = render :partial => 'preview_wrapper'
