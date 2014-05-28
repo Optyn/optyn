@@ -212,7 +212,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		display: none;
 		margin-top: 8px;
 	}
-	#preview {
+	&.preview #preview {
 		padding: 130px 0 0 0;
 		@media( max-width: 980px ) {
 			padding-top: 0px;
