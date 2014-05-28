@@ -249,6 +249,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		margin: 0;
 		position: absolute;
 		top: 0;
+		width: 50%;
 		@media( max-width: 980px ) {
 			position: static;
 			width: 100%;
@@ -258,7 +259,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		.checkbox {
 			margin-top: 10px;
 		}
-		width: 50%;
 	}
 	& > .span6:first-child {
 		background: rgb( 222, 222, 222 );
