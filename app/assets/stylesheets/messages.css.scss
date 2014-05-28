@@ -318,4 +318,17 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
        list-style: decimal !important;
 }
 
-
+#flat .yield .dark-heading {
+  float: none;
+  text-align: center;
+  background: $dark-blue;
+  color: $white;
+  margin-bottom: 0;
+  padding: 0 2%;
+  z-index: 1040;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border: 0;
+}

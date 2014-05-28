@@ -1,11 +1,20 @@
-= banner("Select your Template")
+%h1.dark-heading
+  .pull-left
+    %a.btn.btn-primary{ href: edit_template_merchants_message_path( @message.uuid )}
+      %i.icon-arrow-left
+      Change details
+  Select your Template
+  .pull-right
+    %a.btn.btn-success{ href: preview_template_merchants_message_path( @message.uuid )}
+      Preview
+      %i.icon-arrow-right
 
-= render partial: "merchants/messages/message_menu"
+/= render partial: "merchants/messages/message_menu"
 
 #merchants.container-fluid.pad3pc
 
   #choose_message
-    = render :partial => 'progress_bar'
+    /= render :partial => 'progress_bar'
 
     - display_val = @message.template_id.present? ? 'block' : 'none'
     .row-fluid.template-edit-actions{style: "display: #{display_val};"}
