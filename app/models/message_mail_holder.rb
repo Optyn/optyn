@@ -9,8 +9,10 @@ class MessageMailHolder < ActiveRecord::Base
   def enqueue_message
     if EmailCounter::SENDGRID_KEY == EmailCounter.fetch_email_delivery_type
       Sidekiq::Client.push('queue' => 'sendgrid_queue', 'class' => 'SendgridWorker', 'args' => [self.id])
+      EmailCounter.increment_sendgrid
     elsif EmailCounter::SES_KEY == EmailCounter.fetch_email_delivery_type
       Sidekiq::Client.push('queue' => 'ses_queue', 'class' => 'SesWorker', 'args' => [self.id])
+      EmailCounter.increment_ses
     end
   end
 end
