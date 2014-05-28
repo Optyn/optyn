@@ -213,7 +213,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		margin-top: 8px;
 	}
 	&.preview #preview {
-		padding: 130px 0 0 0;
+		padding: 80px 0 0 0;
 		@media( max-width: 980px ) {
 			padding-top: 0px;
 		}
@@ -242,36 +242,29 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		@include border-radius( 5px );
 	}
 	padding: 0;
-	.pad2pc { padding: 0 2% 2% 2%; }
+	position: relative;
+	.pad2pc { padding: 2%; }
 	& > .span6 {
 		width: 50%;
 		margin: 0;
+		position: absolute;
+		top: 0;
 		@media( max-width: 980px ) {
+			position: static;
 			width: 100%;
 			float: none;
-			position: static;
 			clear: both;
-			height: auto;
-			overflow: visible;
-			padding-top: 30px;
 		}
 		.checkbox {
 			margin-top: 10px;
 		}
-		position: fixed;
-		top: 0;
-		z-index: 1;
 		width: 50%;
-		height: 100vh;
-		overflow: scroll;
-		padding-top: 70px;
 	}
 	& > .span6:first-child {
 		background: rgb( 222, 222, 222 );
 		left: 0;
 	}
 	& > .span6:last-child {
-		padding: 70px 2% 2% 2%;
 		background: rgb( 242, 242, 242 );
 		right: 0;
 	}

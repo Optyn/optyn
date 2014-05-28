@@ -1,17 +1,20 @@
 /= banner( "Email Preview" )
 %h1
   .pull-left
-    %a.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
+    %a#change-campn-det.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change details
+    %a.btn.btn-info.show-edit-form{ href: '#' }
+      %i.icon-arrow-left
+      Change Content
   Email Preview
   .pull-right
-    %a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
+    %a#prev-campn.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
       Launch Campaign
       %i.icon-arrow-right
 
 
-#merchants.pad3pc.row-fluid.tear-page
+#merchants.row-fluid.tear-page
   .span6
     .pad2pc
       .well

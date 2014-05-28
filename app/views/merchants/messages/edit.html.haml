@@ -1,15 +1,12 @@
 /= banner( message_form_title(@message_type) )
 %h1
   .pull-left
-    %a#change-campn-det.btn.btn-success{ href: "#{edit_metadata_merchants_message_path(@message.uuid)}" }
+    %a.btn.btn-success{ href: "#{edit_metadata_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change Details
-    %a.btn.btn-info.show-edit-form{ href: '#' }
-      %i.icon-arrow-left
-      Change Content
   = message_form_title(@message_type)
   .pull-right
-    %a#prev-campn.btn.btn-primary{ href: "#{preview_merchants_message_path(@message.uuid)}" }
+    %a.btn.btn-primary{ href: "#{preview_merchants_message_path(@message.uuid)}" }
       Preview & Launch Campaign
       %i.icon-arrow-right
 
