@@ -63,7 +63,7 @@ staging:
   stripe_public_key: "pk_test_cD7RxbHwUlWVDlvfvS3TyCRB"
   app_base_url: 'https://development.optyn.com'
   app_base_url_http: 'http://development.optyn.com'
-  email_app_base_url: 'https://development.simple-send.com'
+  email_app_base_url: 'http://development.simple-send.com'
   bucket: 'optynstaging'
   optyn_partner_redirect_uri: 'https://partners-staging.optyn.com/partners/auth/optyn/callback'
   robots_redirect_uri: 'https://development.optyn.com/robots.txt'
