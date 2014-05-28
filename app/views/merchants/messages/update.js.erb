@@ -1,10 +1,12 @@
 <% if !@message.errors.present? %>
-  <% if @choice != "launch"%>
+  <% if !["launch", "save_draft"].include? @choice %>
     $('#preview').html('<%=j render partial: "merchants/messages/preview_wrapper" %>');
     $('#edit_message_cont').html('<%=j render partial: "merchants/messages/edit_fields_wrapper" %>');
     $('.form-spinner').hide();
-  <% else %>
+  <% elsif @choice == "launch"%>
     $(window.location.replace("<%= queued_merchants_messages_path()%>"));
+    <% elsif @choice == "save_draft"%>
+    $(window.location.replace("<%= drafts_merchants_messages_path()%>"));
   <% end %>
 <% else %>
   $('#edit_message_cont').html('<%=j render partial: "merchants/messages/edit_fields_wrapper" %>');
