@@ -97,7 +97,7 @@
   background: darken( $light-gray, 5% );
 }
 #flat #template-editor-on {}
-#flat .container-fluid .wid75pc { width: 100%; }
+#flat.template .container-fluid .wid75pc { width: 100%; }
 
 .msg_img_upload [type="file"]{
   width: 100%;

@@ -164,10 +164,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.new #dashboard .wid25pc,
   &.template #dashboard .wid25pc,
   &.preview_template #dashboard .wid25pc,
+  &.system_layouts #dashboard .wid25pc,
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc,
   &.edit_metadata #dashboard .wid75pc,
   &.preview #dashboard .wid75pc,
+  &.system_layouts #dashboard .wid75pc,
+  &.preview_template #dashboard .wid75pc,
   &.edit #dashboard .wid75pc { width: 100%; }
   &.new#flat .yield h1,
   &.edit_metadata#flat .yield h1,
@@ -334,11 +337,20 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	border: 0;
 }
 
-#campn-editor {
+.template #campn-editor {
 	width: 50%;
 }
-#choose_message {
+.template #choose_message {
 	width: 50%;
 	margin: 0;
 	padding: 0;
+}
+.template #campn-editor,
+.template #choose_message {
+	@media( max-width: 980px ) {
+		width: 100%;
+		float: none;
+		clear: both;
+		min-width: 650px;
+	}
 }

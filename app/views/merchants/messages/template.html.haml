@@ -13,18 +13,19 @@
 /= render partial: "merchants/messages/message_menu"
 
 #merchants.row-fluid.no-pad
-  #campn-editor.span6.template-editor-container
-    .template-editor-section
-      %p Click on edit button to start adding content to the email.
-  #choose_message.span6
-    /= render :partial => 'progress_bar'
-
-    #template_wrapper
-      - if @message.template_id.present?
+  - if @message.template_id.present?
+    #campn-editor.span6.template-editor-container
+      .template-editor-section
+        %p Click on edit buttons on email preview to start adding content to the email.
+  - if @message.template_id.present?
+    #choose_message.span6
+      #template_wrapper
         = render partial: "editor_wrapper"
-      - else
+  - else
+    .pad3pc
+      #template_wrapper
         = render partial: "template_chooser"
-
+    /= render :partial => 'progress_bar'
 
     #loading( style='display: none;' )
       = image_tag 'ajax-loader.gif', alt: 'Page is loading ...'

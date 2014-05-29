@@ -105,8 +105,13 @@ OP = (function($, window, doucument, Optyn){
 
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
-        $( '.template-editor-section' ).html( '<p>Click on edit button to start adding content to the email.</p>' );
+        OP.templateEditor.clearTemplateEditorArea();
       });
+    },
+
+    clearTemplateEditorArea: function() {
+      $( '.template-editor-section' ).html( '<p>Click on edit buttons on email preview to start adding content to the email.</p>' );
+      $( '#merchants > .span6' ).animate({ 'width': '50%' }, 300 );
     },
 
     saveTemplateEditorAction: function(){
@@ -152,7 +157,8 @@ OP = (function($, window, doucument, Optyn){
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');
-                
+
+        OP.templateEditor.clearTemplateEditorArea();
       });
     },
 
