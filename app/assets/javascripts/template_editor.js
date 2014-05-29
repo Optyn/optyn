@@ -16,22 +16,18 @@ OP = (function($, window, doucument, Optyn){
         $("html, body").animate({ scrollTop: 0 }, "slow");
         var $merchantMenu = $('.merchant-menu');
 
-        if($('.template-editor-container').length){
-          $('.template-editor-container').remove();
-          $merchantMenu.slideDown();
-        }
-
         var $merchantMenu = $('.merchant-menu');
-        var $sidebar = $merchantMenu.parent();
+        var $sidebar = $('#dashboard > .row-fluid');
+        $('.menuleft').hide();
+        $( '.yield' ).attr( 'id', 'template-editor-on' );
 
-        var sideBarContent = '<ul class="template-editor-container"><li class="template-editor-section"></li></ul>';
+        $( '#choose_message' ).css( 'width', '620px' );
+        $( '#campn-editor').animate({ 'width': parseInt($( 'body' ).css( 'width' )) - parseInt($( '#choose_message' ).css( 'width' ))}, 300, function() {});
 
-        $sidebar.append(sideBarContent);
-
-        var $templateContainer = $sidebar.find('.template-editor-container');
+        var $templateContainer = $('.template-editor-container');
         var $templateSection = $templateContainer.find('.template-editor-section');
-        $templateSection.append($('#template_editable_content').val());
-         $templateSection.append('<button class="btn btn-small template-editor-cancel">Close</button>' +
+        $templateSection.html($('#template_editable_content').val());
+         $templateSection.append('<button class="btn btn-small btn-info template-editor-cancel">Close</button> ' +
           '<button class="btn btn-small btn-primary template-editor-save-changes" id="section_save_changes">Save changes</button>');
 
         $merchantMenu.slideUp(function(){
@@ -109,7 +105,7 @@ OP = (function($, window, doucument, Optyn){
 
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
-        OP.templateEditor.showMerchantMenu();
+        $( '.template-editor-section' ).html( '<p>Click on edit button to start adding content to the email.</p>' );
       });
     },
 
@@ -157,24 +153,7 @@ OP = (function($, window, doucument, Optyn){
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');
                 
-        OP.templateEditor.showMerchantMenu();
       });
-    },
-
-    showMerchantMenu: function(){
-      var $merchantMenu = $('.merchant-menu');
-      var $sidebar = $merchantMenu.parent();
-      var $templateContainer = $sidebar.find('.template-editor-container');
-
-      $templateContainer.slideUp(function(){
-        $(this).hide();
-
-        $merchantMenu.slideDown(function(){
-          $(this).show();
-        });
-      });
-
-      $templateContainer.remove();
     },
 
     addImageLinkURL: function() {

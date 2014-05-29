@@ -48,7 +48,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 
 /* Message Center Design */
 #choose_message {
-	clear: both;
 	> .row-fluid {
 		padding: 0;
 	}
@@ -163,6 +162,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.new #dashboard { background-image: none; }
   &.edit #dashboard { background-image: none; }
   &.new #dashboard .wid25pc,
+  &.template #dashboard .wid25pc,
+  &.preview_template #dashboard .wid25pc,
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc,
   &.edit_metadata #dashboard .wid75pc,
@@ -331,4 +332,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	left: 0;
 	width: 100%;
 	border: 0;
+}
+
+#campn-editor {
+	width: 50%;
+}
+#choose_message {
+	width: 50%;
+	margin: 0;
+	padding: 0;
 }

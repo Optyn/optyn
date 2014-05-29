@@ -1,5 +1,6 @@
 #template_pane {
   text-align: center;
+  line-height: 0;
 }
 
 .template_chooser > .span4:nth-child( 3n + 1 ),
@@ -86,11 +87,17 @@
   color: $black;
 }
 .template-editor-container {
+  width: 50%;
+  float: left;
   margin: 0;
-  padding: 5px;
-  color: $light-gray;
+  padding: 1%;
   @media ( max-width: 769px ) { background: $black; }
 }
+#flat.template #dashboard .yield {
+  background: darken( $light-gray, 5% );
+}
+#flat #template-editor-on {}
+#flat .container-fluid .wid75pc { width: 100%; }
 
 .msg_img_upload [type="file"]{
   width: 100%;
