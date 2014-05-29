@@ -1,30 +1,23 @@
 %h1.dark-heading
-  .pull-left
+  - display_val = @message.template_id.present? ? 'block' : 'none'
+  .pull-left{style: "display: #{display_val};"}
     %a.btn.btn-primary{ href: edit_template_merchants_message_path( @message.uuid )}
       %i.icon-arrow-left
       Change details
   Select your Template
-  .pull-right
+  .pull-right{style: "display: #{display_val};"}
     %a.btn.btn-success{ href: preview_template_merchants_message_path( @message.uuid )}
       Preview
       %i.icon-arrow-right
 
 /= render partial: "merchants/messages/message_menu"
 
-#merchants.container-fluid.pad3pc
-
-  #choose_message
+#merchants.row-fluid.no-pad
+  #campn-editor.span6.template-editor-container
+    .template-editor-section
+      %p Click on edit button to start adding content to the email.
+  #choose_message.span6
     /= render :partial => 'progress_bar'
-
-    - display_val = @message.template_id.present? ? 'block' : 'none'
-    .row-fluid.template-edit-actions{style: "display: #{display_val};"}
-      .pull-left
-        = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn btn-primary'
-
-      .pull-right
-        = link_to "Preview", preview_template_merchants_message_path(@message.uuid), class: 'btn btn-success'
-
-    .blank-space
 
     #template_wrapper
       - if @message.template_id.present?
