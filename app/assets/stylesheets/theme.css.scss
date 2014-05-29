@@ -1340,3 +1340,12 @@ blockquote {
 #flat input:focus:-moz-placeholder { color: $medium-gray; }
 
 #flat .chzn-choices .search-field input { margin-top: 0; }
+
+/* Intercome Widget style overrides. */
+#flat #IModal>.ic_content .ic_header>h1 {
+  line-height: 22px;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
