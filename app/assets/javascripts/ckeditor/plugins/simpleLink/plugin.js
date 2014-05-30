@@ -27,7 +27,7 @@ CKEDITOR.plugins.add( 'simpleLink',
 		editor.on( 'doubleclick', function( evt ) {
       var element = CKEDITOR.plugins.link.getSelectedLink( editor ) || evt.data.element;
       if ( !element.isReadOnly() ) {
-        if (element.is('a') && element.hasClass('optyn-button-link')){
+        if (element.is('a') && element.hasClass('ss-button-link')){
           evt.data.dialog = 'simpleLinkDialog'
 					var selection = editor.getSelection();
 					selection.selectElement(element);
@@ -167,7 +167,7 @@ CKEDITOR.plugins.add( 'simpleLink',
 					// In case the "newPage" checkbox was checked, set target=_blank for the link element.
 					if ( data.newPage )
 						link.setAttribute( 'target', '_blank' );
-					link.setAttribute( 'class', 'optyn-button-link' );
+					link.setAttribute( 'class', 'ss-button-link' );
 					link.setAttribute("style", OP.ckeditorButton.getStyle());
 
 					// Set the style selected for the link, if applied.

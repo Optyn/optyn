@@ -180,7 +180,7 @@ class Template < ActiveRecord::Base
     body = Nokogiri::HTML(content)
 
     #replace urls in a tags
-    body.css('.optyn-introduction a, .optyn-content a').each do |link|
+    body.css('.ss-introduction a, .ss-content a.ss-link, .ss-content a.ss-button-link').each do |link|
       original_href = link['href']
       link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
     end
