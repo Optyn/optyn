@@ -133,6 +133,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit#flat,
   &.edit_metadata#flat,
   &.preview#flat,
+  &.template#flat,
    {
   	padding-top: 50px;
   }
@@ -348,7 +349,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 .template #campn-editor,
 .template #choose_message {
 	@media( max-width: 980px ) {
-		width: 100%;
+		width: 100% !important;
+		height: auto !important;
 		float: none;
 		clear: both;
 		min-width: 650px;

@@ -93,8 +93,16 @@
   padding: 1%;
   @media ( max-width: 769px ) { background: $black; }
 }
-#flat.template #dashboard .yield {
-  background: darken( $light-gray, 5% );
+#flat.template #dashboard .editor_wrpr {
+  background: darken( $light-gray, 3% );
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+.template #dashboard .editor_wrpr #choose_message {
+  background: lighten( $light-gray, 1% );
 }
 #flat #template-editor-on {}
 #flat.template .container-fluid .wid75pc { width: 100%; }
@@ -107,4 +115,9 @@
   width: 23px;
   height: 23px;
   margin-top: 0 !important;
+}
+#merchants > .editor_wrpr > .span6 {
+  @media( max-width: 980px ) {
+    min-height: auto;
+  }
 }

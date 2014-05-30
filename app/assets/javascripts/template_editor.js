@@ -22,7 +22,12 @@ OP = (function($, window, doucument, Optyn){
         $( '.yield' ).attr( 'id', 'template-editor-on' );
 
         $( '#choose_message' ).css( 'width', '620px' );
-        $( '#campn-editor').animate({ 'width': parseInt($( 'body' ).css( 'width' )) - parseInt($( '#choose_message' ).css( 'width' ))}, 300, function() {});
+        function adjustWidth() {
+          if ( $( window ).width() > 980 )
+            $( '#campn-editor').css( 'width', parseInt($( 'body' ).css( 'width' )) - parseInt($( '#choose_message' ).css( 'width' )));
+        }
+        adjustWidth();
+        $( window ).resize( adjustWidth );
 
         var $templateContainer = $('.template-editor-container');
         var $templateSection = $templateContainer.find('.template-editor-section');
@@ -60,6 +65,7 @@ OP = (function($, window, doucument, Optyn){
 
         OP.templateEditor.openCKEditor($templateContainer);
 
+        OP.templateEditor.equalizeHeights();
       });
     },
 
@@ -103,6 +109,19 @@ OP = (function($, window, doucument, Optyn){
       }
     },
 
+    equalizeHeights: function() {
+      setTimeout( function() {
+        var maxHeight = 0;
+        $( '#merchants > .editor_wrpr > .span6' ).css( 'height', 'auto' );
+        $( '#merchants > .editor_wrpr > .span6' ).each( function( index, value ) {
+          if ( parseInt( $( this ).css( 'height' )) > maxHeight ) maxHeight = parseInt( $( this ).css( 'height' ));
+        });
+        ( $( window ).height() - 50 ) < maxHeight ? maxHeight : maxHeight = $( window ).height();
+        $( '#merchants > .editor_wrpr > .span6' ).css( 'height', maxHeight );
+        //$( '#template_wrapper' ).css( 'height', maxHeight );
+      }, 500);
+    },
+
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
         OP.templateEditor.clearTemplateEditorArea();
@@ -111,7 +130,8 @@ OP = (function($, window, doucument, Optyn){
 
     clearTemplateEditorArea: function() {
       $( '.template-editor-section' ).html( '<p>Click on edit buttons on email preview to start adding content to the email.</p>' );
-      $( '#merchants > .span6' ).animate({ 'width': '50%' }, 300 );
+      $( '#merchants > .editor_wrpr > .span6' ).animate({ 'width': '50%' }, 300 );
+      OP.templateEditor.equalizeHeights();
     },
 
     saveTemplateEditorAction: function(){

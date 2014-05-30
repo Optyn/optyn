@@ -203,7 +203,9 @@ $( function() {
         var reposition = function() {
             var viewportHeight = $( window ).height();
             var scrollTop = $( window ).scrollTop();
-            var footerTop = $( 'footer' ).position().top;
+            var $footer = $( 'footer' );
+            var footerTop;
+            $footer.length ? footerTop = $( 'footer' ).position().top : 0;
             var footerHeight = $('footer').css( 'height' );
             $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '25%', 'border-top': 'solid 1px black', background: '#333'});
             if( viewportHeight + scrollTop > footerTop ) {

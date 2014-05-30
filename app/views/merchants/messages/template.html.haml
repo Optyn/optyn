@@ -14,20 +14,18 @@
 
 #merchants.row-fluid.no-pad
   - if @message.template_id.present?
-    #campn-editor.span6.template-editor-container
-      .template-editor-section
-        %p Click on edit buttons on email preview to start adding content to the email.
-  - if @message.template_id.present?
-    #choose_message.span6
-      #template_wrapper
-        = render partial: "editor_wrapper"
+    .editor_wrpr
+      #campn-editor.span6.template-editor-container
+        .template-editor-section
+          %p Click on edit buttons on email preview to start adding content to the email.
+      #choose_message.span6
+        #template_wrapper
+          = render partial: "editor_wrapper"
   - else
-    .pad3pc
-      #template_wrapper
-        = render partial: "template_chooser"
-    /= render :partial => 'progress_bar'
+    #template_wrapper.pad3pc.tmpl_chooser
+      = render partial: "template_chooser"
 
-    #loading( style='display: none;' )
-      = image_tag 'ajax-loader.gif', alt: 'Page is loading ...'
+  #loading( style='display: none;' )
+    = image_tag 'ajax-loader.gif', alt: 'Page is loading ...'
 
 = hidden_field_tag "template_editable_content"      
