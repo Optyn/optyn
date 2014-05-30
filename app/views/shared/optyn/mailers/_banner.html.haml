@@ -7,6 +7,7 @@
           %tr{:style => "width: 100%;"}
             %td{:style => "max-height:40px;text-align:center;padding:10px 0;"}
               - if @shop_logo
-                = email_body_shop_logo(@shop)
+                - shop_logo_content = email_body_shop_logo(@shop)
+                = message_header_process_urls(shop_logo_content, @message, @receiver)
               - else
-                = image_tag "http://www.optyn.com/assets/email_logo_white.png", style: 'margin:5px;max-width:550px;'
+                = image_tag "#{SiteConfig.email_app_base_url}/assets/email_logo_white.png", style: 'margin:5px;max-width:550px;'
