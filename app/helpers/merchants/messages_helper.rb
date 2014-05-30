@@ -308,5 +308,20 @@ module Merchants::MessagesHelper
     end
   end
 
+  def show_message_part(default_val)
+    if !default_val.blank?
+      "block"
+    else
+      "none"
+    end
+  end
+
+  def set_default(default_val)
+    if !default_val.blank?
+      true
+    else
+      false
+    end
+  end
   
 end

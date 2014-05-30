@@ -128,6 +128,12 @@ class Merchants::MessagesController < Merchants::BaseController
     populate_shop_surveys
     update_button_for_ckeditor
     @message_type = @message.type.underscore
+    @shop_logo = true
+    @shop = @message.shop
+    @preview = true
+    @partner = current_partner
+    @skip_menu = true
+    @message_type = @message.type.underscore
   end
 
   def update
@@ -143,6 +149,11 @@ class Merchants::MessagesController < Merchants::BaseController
 
       populate_datetimes
       message_method_call = check_subscription
+      @shop_logo = true
+      @shop = @message.shop
+      @preview = true
+      @partner = current_partner
+      @message_type = @message.type.underscore
       update_button_styles
       if @message.send(message_method_call.to_sym)
            respond_to do |format|
