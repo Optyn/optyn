@@ -34,6 +34,9 @@ function MerchantMessage() {
             this.removeDuplicateLabelIdsError();
             this.hookUpdateMessage();
             this.hookUploadLogo();
+            this.hookFinePrint();
+            this.hookExpirationDate();
+            this.hookAddButton();
         }
         if ( $('#message_send_on_container').length ) {
             // For Date/Time picker on preview Newsletter page.
@@ -1061,6 +1064,40 @@ function MerchantMessage() {
       $("#upload_image").submit();
     });
   };
+
+  this.hookFinePrint = function() {
+    $('body').on('click', '#fine_print', function (e) {
+    if($("#fine_print").is(':checked')){
+     $("#message_fine_print").show();
+    }
+    else{
+       $("#message_fine_print").hide(); 
+      }
+    });
+  };
+
+  this.hookExpirationDate = function() {
+    $('body').on('click', '#add_expiration_date', function (e) {
+      if($("#add_expiration_date").is(':checked')){
+        $(".expiration_date").show();
+      }
+      else{
+       $(".expiration_date").hide(); 
+      }
+    });
+  };
+
+  this.hookAddButton = function() {
+    $('body').on('click', '#add_button', function (e) {
+      if($("#add_button").is(':checked')){
+        $(".optional").show();
+      }
+      else{
+       $(".optional").hide(); 
+      }
+    });
+  };
+
 
   this.hookCampaignResponsiveViewer = function() {
     function highlightCurrentButton( $current ) {
