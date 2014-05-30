@@ -7,7 +7,7 @@
 	$('.save_image').hide();
 	$('.change_image').show();
 	$('.loading').hide();
-	$("#customHtmlTemplate").contents().find('.optyn-intro.optyn-division .optyn-replaceable-image img').first().attr('src','<%=@template_image.image%>')
+	$("#customHtmlTemplate").contents().find('.ss-introduction.ss-division .ss-replaceable-image img').first().attr('src','<%=@template_image.image%>')
 	var merchantMessage = new MerchantMessage();
 	merchantMessage.reloadTemplateSelectorIframe();
 <% end %>
