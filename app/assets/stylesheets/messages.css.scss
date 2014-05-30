@@ -166,12 +166,14 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.template #dashboard .wid25pc,
   &.preview_template #dashboard .wid25pc,
   &.system_layouts #dashboard .wid25pc,
+  &.new_template #dashboard .wid25pc,
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc,
   &.edit_metadata #dashboard .wid75pc,
   &.preview #dashboard .wid75pc,
   &.system_layouts #dashboard .wid75pc,
   &.preview_template #dashboard .wid75pc,
+  &.new_template #dashboard .wid75pc,
   &.edit #dashboard .wid75pc { width: 100%; }
   &.new#flat .yield h1,
   &.edit_metadata#flat .yield h1,
