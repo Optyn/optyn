@@ -76,10 +76,7 @@
 }
 .template-property-menu {
   margin: 0;
-  color: $light-gray;
-  @media ( max-width: 769px ) { background: $black; }
   .show-message-menu {
-    color: $light-gray;
     padding: 3%;
   }
 }
@@ -130,3 +127,10 @@
 }
 #flat.m-app #dashboard .pad3pc#message_fields_wrapper { padding: 3%; }
 #template_wrapper { padding: 2%; }
+.system_layout_properties #merchants > .span6 {
+  width: 50%;
+  margin: 0;
+  @media( max-width: 980px ) {
+    width: 100%;
+  }
+}

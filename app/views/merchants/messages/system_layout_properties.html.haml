@@ -4,7 +4,7 @@
 /= render partial: "merchants/messages/message_menu"
 
   
-#merchants.row-fluid
+#merchants.row-fluid.no-pad
   /= render :partial => 'progress_bar'
 
   %ul.template-property-menu.span6
@@ -33,7 +33,7 @@
 
             = render partial: "merchants/messages/template_properties/tab_menu"
 
-            .tab-content.pad3pc
+            .tab-content.pad3pc.form-horizontal
               
               = render partial: "merchants/messages/template_properties/tab_content"
                       

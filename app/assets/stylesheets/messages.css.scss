@@ -1,6 +1,3 @@
-/* Add Template Properties font size */
-#template_properties_container #template_properties_form #template_properties_tab a {font-size: 11px;}
-
 /**
  * Email preview styles
  */
@@ -136,6 +133,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.new_template#flat,
   &.template#flat,
   &.system_layouts#flat,
+  &.system_layout_properties#flat,
    {
   	padding-top: 50px;
   }
