@@ -1,25 +1,29 @@
-%h1.dark-heading Template Preview
+%h1.dark-heading
+  - if @message.editable_state?
+    .pull-left
+      = link_to raw("<i class='icon-edit'></i> Details") , edit_template_merchants_message_path(@message.uuid), class: 'btn'
+      = link_to raw("<i class='icon-edit'></i> Content"), template_merchants_message_path(@message.uuid), class: 'btn btn-'
+  Template Preview
 /= render partial: "merchants/messages/message_menu"
 
-#merchants.pad3pc
+#merchants.no-pad.row-fluid
   /= render :partial => 'progress_bar'
 
-  .row-fluid.no-pad.text-center
+  .span6
+
     .btn-group
       - if @message.editable_state?
-        = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn'
-        = link_to "Change Content", template_merchants_message_path(@message.uuid), class: 'btn btn-'
         = link_to "Copy Campaign", copy_merchants_message_path(@message.uuid), class: 'btn btn-'
-      - if !@message.queued? && !current_shop.disabled?   
-        = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'
-        
       = link_to raw( "<i class='icon-envelope icon-white'></i> Send Me a Test Email" ), email_self_merchants_message_path(@message.uuid), class: "btn btn-info", id: "self_email"
+      - if !@message.queued? && !current_shop.disabled?   
+        = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'        
+
+    .blank-space
 
     = render partial: "merchants/messages/preview_meta"
 
-  .blank-space
-
-  #template_wrapper.row-fluid.no-pad
-    #template_pane
-      %iframe#customHtmlTemplate{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; height:100%;"}
-        %html
+  .span6
+    #template_wrapper.row-fluid.no-pad
+      #template_pane
+        %iframe#customHtmlTemplate{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; height:100%;"}
+          %html

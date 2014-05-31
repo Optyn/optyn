@@ -166,6 +166,14 @@ module ApplicationHelper
   end
 
   def hide_header_footer
-      (['edit', 'preview', 'edit_metadata', 'new', 'template', 'new_template', 'system_layout_properties', 'system_layouts'].include? params[ :action ]  and params[ :controller ] == 'merchants/messages') ? false : true
+      (['edit',
+        'preview',
+        'edit_metadata',
+        'new',
+        'template',
+        'new_template',
+        'system_layout_properties',
+        'system_layouts',
+        'preview_template'].include? params[ :action ]  and params[ :controller ] == 'merchants/messages') ? false : true
   end
 end
