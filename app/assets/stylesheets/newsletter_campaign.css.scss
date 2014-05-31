@@ -122,7 +122,11 @@
   }
 }
 
-#message_fields_wrapper {
+#message_fields_wrapper,
+.system_layouts #merchants {
   max-width: 1000px;
   margin: auto;
+  padding: 3% 0;
 }
+#flat.m-app #dashboard .pad3pc#message_fields_wrapper { padding: 3%; }
+#template_wrapper { padding: 2%; }

@@ -133,7 +133,9 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.edit#flat,
   &.edit_metadata#flat,
   &.preview#flat,
+  &.new_template#flat,
   &.template#flat,
+  &.system_layouts#flat,
    {
   	padding-top: 50px;
   }
@@ -167,6 +169,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.preview_template #dashboard .wid25pc,
   &.system_layouts #dashboard .wid25pc,
   &.new_template #dashboard .wid25pc,
+  &.system_layout_properties #dashboard .wid25pc,
   &.edit #dashboard .wid25pc { display: none; }
   &.new #dashboard .wid75pc,
   &.edit_metadata #dashboard .wid75pc,
@@ -174,6 +177,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.system_layouts #dashboard .wid75pc,
   &.preview_template #dashboard .wid75pc,
   &.new_template #dashboard .wid75pc,
+  &.system_layout_properties #dashboard .wid75pc,
   &.edit #dashboard .wid75pc { width: 100%; }
   &.new#flat .yield h1,
   &.edit_metadata#flat .yield h1,
