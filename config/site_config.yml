@@ -70,6 +70,7 @@ staging:
   robots_redirect_uri: 'https://development.optyn.com/robots.txt'
   eatstreet_curation_email: 'ian@eatstreet.com'
   app_reseller_url: "https://reseller-staging.optyn.com"
+  track_app_base_url: 'http://development.simple-send.com'
 
 development:  
   twitter_consumer_key: 'Acwx2jBkCCbFZHkW8wEubQ'
