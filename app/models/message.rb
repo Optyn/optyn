@@ -292,7 +292,7 @@ class Message < ActiveRecord::Base
 
   end
 
-  def self.get_qr_code_link(meessage_id)
+  def self.get_qr_code_link(message_id)
     TrackingServices::Messages.qr_code(message_id)
   end
 
