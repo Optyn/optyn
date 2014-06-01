@@ -71,6 +71,15 @@ class MessagesController < BaseController
     redirect_to inbox_messages_path
   end
 
+  def offer_relevant
+    @message_user = MessageUser.for_uuid(params[:message_user_id])
+    if !@message_user.blank?
+      @message_user.update_attribute(:offer_relevant, params[:offer_relevant])
+      @message_user.save
+    end
+    render "thankyou", layout: "email_feedback"
+  end
+
   private
   def populate_user_folder_count(force=false)
     @inbox_count = MessageUser.cached_user_inbox_count(current_user, force)

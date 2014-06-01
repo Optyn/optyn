@@ -136,7 +136,6 @@ Optyn::Application.routes.draw do
   match '/resources/mass-email' => 'main#resources_mass_email', :as => :resources_mass_email
   match '/resources/opt-in-email-marketing' => 'main#resources_opt_in_email_marketing', :as => :resources_opt_in_email_marketing
   
-
   match 'share_email/:message_id' => 'merchants/messages#share_email', :as => :share_email
   match 'send_shared_email/:message_id' => 'merchants/messages#send_shared_email', :as => :send_shared_email
 
@@ -160,8 +159,16 @@ Optyn::Application.routes.draw do
   # Zendesk Support Desk Redirect
   match "/support" => redirect("http://optyn.uservoice.com"), :as => :support
 
-  #log an email. For existing emails
-  match '/email/logger/:token', to: 'email_reads#open', as: :email_reads
+  #log an email. For existing emails before May 31st 2014
+  get '/email/logger/:token', to: 'email_reads#open', as: :email_reads
+  #log link clicks emails sent out before May 31st 2014
+  get '/l' => 'email_trackings#index'
+  #share routes and QR Code
+  match 'g/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
+  # Redeem the coupon offer TO BE IMPLEMENTED
+  match 'redeem/:message_user' => 'merchants/messages#redeem'
+
+
 
   devise_for :users, :path_names => {:sign_out => 'logout',
     :sign_in => 'login',
@@ -215,6 +222,7 @@ Optyn::Application.routes.draw do
       get 'shop'
       put 'disconnect', as: :disconnect
       post 'connect', as: :connect
+      get 'removal_confirmation'
     end
   end
 
@@ -235,6 +243,7 @@ Optyn::Application.routes.draw do
       put :move_to_saved
       put :move_to_inbox
       put :discard
+      get :offer_relevant
     end    
   end
 

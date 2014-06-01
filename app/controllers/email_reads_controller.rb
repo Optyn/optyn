@@ -1,6 +1,6 @@
 class EmailReadsController < ApplicationController
-  def open
+   def open
     MessageUser.log_email_read(params[:token])
-    head :ok
+    send_file("#{Rails.public_path}/1px.png", :type => 'image/png', :disposition => 'inline')
   end
 end

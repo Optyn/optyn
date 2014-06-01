@@ -1,3 +1,5 @@
+require 'tracking_services/unsubscribe'
+
 class ConnectionsController < BaseController
 
   include DashboardCleaner
@@ -80,6 +82,10 @@ class ConnectionsController < BaseController
     @flush = true
     @connection.save
     redirect_to(params[:return_to] || connections_path, notice: "Connection with #{@shop.name} successfully created.")
+  end
+ 
+  def removal_confirmation
+    redirect_to(SiteConfig.track_app_base_url + SiteConfig.simple_delivery.unsubscribe_path + "/#{params[:id]}")
   end
 
   private

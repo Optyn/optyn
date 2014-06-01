@@ -40,6 +40,7 @@ defaults:
   send_grid_password: '9p5yn123'
 
   #trackings
+  track_app_base_url: 'http://simple-send.com'
   simple_delivery:
     open_path: '/emails/o'
     link_path: '/emails/l'

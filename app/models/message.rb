@@ -1,4 +1,5 @@
 require 'messagecenter/process_manager'
+require 'tracking_services/messages'
 
 class Message < ActiveRecord::Base
   include UuidFinder
@@ -289,6 +290,10 @@ class Message < ActiveRecord::Base
       MessageUser.create_message_receiver_entries(individual_message, [user_id], [], nil)
     end
 
+  end
+
+  def self.get_qr_code_link(meessage_id)
+    TrackingServices::Messages.qr_code(message_id)
   end
 
   def email_self
