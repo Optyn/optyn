@@ -1,5 +1,3 @@
-require 'tracking_services/unsubscribe'
-
 class ConnectionsController < BaseController
 
   include DashboardCleaner
