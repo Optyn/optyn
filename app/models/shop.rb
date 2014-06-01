@@ -270,7 +270,7 @@ class Shop < ActiveRecord::Base
   end
 
   def message_address
-    "<p class='ss-paragraph'>#{name} | #{first_location_street_address} | #{first_location_city}, #{first_location_state_name} #{first_location_zip}</p>"
+    "#{name} | #{first_location_street_address} | #{first_location_city}, #{first_location_state_name} #{first_location_zip}"
   end
 
   def button_display?
