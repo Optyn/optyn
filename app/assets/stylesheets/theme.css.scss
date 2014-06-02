@@ -1041,9 +1041,6 @@ form {
       margin-left: -2px;
       position: relative;
       left: -3px;
-      > i {
-        margin-top: -3px;
-      }
     }
   }
   #message_form .add-on i {
@@ -1316,7 +1313,7 @@ blockquote {
 #flat .yield .time-picker .add-on {
   cursor: pointer;
   min-height: 22px;
-  margin-top: 21px;
+  margin-top: 6px;
   background: transparent;
   line-height: 15px;
   padding-left: 10px;

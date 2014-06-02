@@ -13,7 +13,7 @@
 
     = f.text_field :type_of_discount
 
-.row-fluid.no-pad
+.control-group.row-fluid.no-pad
   .span6
     = f.number_field :discount_amount, 'data-toggle' => 'tooltip',
       title: 'Please enter the value of the coupon.', placeholder: 'DISCOUNT AMOUNT',
@@ -25,13 +25,13 @@
 
 = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
 
-%label.checkbox
-  = f.check_box(:permanent_coupon)
-  This coupon does not expire
+.control-group
+  %label.control-label.checkbox
+    This coupon does not expire
+  .controls
+    = f.check_box(:permanent_coupon)
 
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
 fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
-
-.blank-space
 
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}

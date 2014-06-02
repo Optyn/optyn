@@ -17,12 +17,11 @@
                 %span.add-on
                   %i{:style => "background-color: #{color_hex};"}
       .span6
-        .control-group{:style => "padding-top:28px;"}
+        .control-group{:style => "padding-top:10px;"}
           .controls
             %label.checkbox
               = builder.check_box(:make_default)
               Make it my default Header color.
-    .text-right
-      .control-group{:style => "padding-top:20px;"}
-        .actions
-          = submit_tag "Apply", class: 'btn btn-success btn-small'
+            .pull-right.actions
+              = submit_tag "Apply", class: 'btn btn-success btn-small'
+        .clearfix

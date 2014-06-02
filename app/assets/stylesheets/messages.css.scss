@@ -117,9 +117,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	}
 }
 
-#flat.preview.merchants-messages .add-on i {
-  margin-top: 4px;
-}
 .merchants-messages {
   table {
     clear: both;
@@ -195,8 +192,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		width: 100%;
 		border: 0;
 	}
-	&#flat .add-on,
-	&#flat input { margin-top: 15px; }
 	h4 {
 		color: $dark-blue;
 		font-size: 1.3rem;
@@ -265,9 +260,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 			width: 100%;
 			float: none;
 			clear: both;
-		}
-		.checkbox {
-			margin-top: 10px;
 		}
 	}
 	& > .span6:first-child {
