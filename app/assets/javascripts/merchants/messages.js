@@ -19,6 +19,10 @@ function MerchantMessage() {
             this.loadSpinnerForIframe();
         }
         
+        if ( $( '.preview_template' ).length ) {
+            this.hookEqualizePreviewColumnHeight();
+        }
+
         /*
             Hooks for preview page for messages except templates
         */ 
@@ -1144,5 +1148,31 @@ function MerchantMessage() {
         $( '.show-edit-form' ).hide();
     });
   }
+
+  this.hookEqualizePreviewColumnHeight = function() {
+    var $iframe = $( '#customHtmlTemplate' );
+    var $editorParent = $( '#preview-pane' );
+    var $editorPane = $( '#campaign-details-pane' );
+    var workArea;
+    var setMinHt = function() {
+        workArea = $( window ).height() - 110;
+        $iframe.css( 'min-height', workArea );
+        $editorPane.css( 'min-height', workArea );
+    };
+    setMinHt();
+    var cb = function() {
+        console.log( 'hookEqualizePreviewColumnHeight' );
+        $iframe.css( 'height', 'auto' );
+        var iframeHt = $iframe.contents().find( 'body' ).css( 'height' );
+        $editorPane.css( 'height', 'auto' );
+        var editorHt = $editorPane.css( 'height' );
+        var maxHt = Math.max( parseInt( iframeHt ), parseInt( editorHt ));
+        $( 'iframe' ).css( 'height', maxHt );
+        $( '#campaign-details-pane' ).css( 'height', maxHt + 60 );
+        setMinHt();
+    };
+    $iframe.load(cb);
+    $( window ).resize( cb );
+  };
 
 }
