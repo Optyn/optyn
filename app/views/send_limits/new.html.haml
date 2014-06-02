@@ -1,0 +1,6 @@
+.row-fluid
+  .row
+    &nbsp;
+  = form_tag '/send_limits/set' do
+    = text_field_tag 'val', @counter
+    = submit_tag "Save"
