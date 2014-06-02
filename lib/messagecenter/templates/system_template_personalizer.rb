@@ -590,7 +590,7 @@ module Messagecenter
           #change the address node with shops address
           address_node = footer_node.css('address').first
           begin
-            address_node.swap(shop.message_address)
+            address_node.swap(%{<p class='ss-paragraph'>#{shop.message_address}</p>})
           rescue
             address_node.swap(address_node.children.to_s)
           end

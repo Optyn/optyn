@@ -61,6 +61,7 @@ after "deploy:restart", "deploy:messenger:unlock"
 after "deploy", "deploy:cleanup"
 before "deploy:update", "god:stop"
 before "deploy:restart", "god:start"
+after "deploy:web:enable", "srv:processes"
 
 #after "deploy:create_symlink", "whenever"
 
@@ -134,6 +135,25 @@ namespace :god do
      environment = { :RAILS_ENV => rails_env, :RAILS_ROOT => current_path }
      run "#{god_command} -c #{config_file}", :env => environment
    end
+end
+
+namespace :srv do
+  desc "Display the relevant processes running on the server"
+  task :processes do
+    puts "XX Sidekiq Processes running are xx"
+    run "ps aux |grep sidekiq"
+
+    puts "\n"
+    puts "-" * 100
+    puts "\n"
+
+    puts "XX Crontab xx"
+    run "crontab -l"
+
+    puts "\n"
+    puts "-" * 100
+    puts "\n"      
+  end
 end
 
 namespace :deploy do

@@ -41,7 +41,7 @@ class Shop < ActiveRecord::Base
   attr_accessible  :pre_added, :business_ids, :website, :identifier, :time_zone, :virtual
   attr_accessible :header_background_color, :phone_number, :remote_logo_img_url 
   #attr_accessible :uploaded_directly, :upload_location,
-  attr_accessible :footer_background_color
+  attr_accessible :footer_background_color, :verified_email, :ses_verified
   attr_accessor :skip_payment_email 
 
 
@@ -270,7 +270,7 @@ class Shop < ActiveRecord::Base
   end
 
   def message_address
-    "<p class='optyn-paragraph'>#{name} | #{first_location_street_address} | #{first_location_city}, #{first_location_state_name} #{first_location_zip}</p>"
+    "#{name} | #{first_location_street_address} | #{first_location_city}, #{first_location_state_name} #{first_location_zip}"
   end
 
   def button_display?

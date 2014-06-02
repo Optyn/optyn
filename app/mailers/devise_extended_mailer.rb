@@ -3,8 +3,8 @@ class DeviseExtendedMailer < Devise::Mailer
   helper "merchants/messages"
 
 
-  default from: 'Optynmail <services@optynmail.com>',
-          reply_to: "services@optynmail.com"
+  default from: 'Optyn.com <services@optyn.com>',
+          reply_to: "services@optyn.com"
 
   def welcome_user(user, password=nil, shop_id=nil)
     @user = @resource = user

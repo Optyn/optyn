@@ -54,7 +54,7 @@ namespace :templates do
   task :add_missing_optyn_button_link => :environment do
     button_style = <<-STYLE
     <style type="text/css">  
-      .optyn-content a.optyn-button-link{
+      .ss-content a.ss-button-link{
         text-decoration:none;
         color: #FFF !important;
         background-color: #64aaef;
@@ -72,17 +72,17 @@ namespace :templates do
         margin-top: 15px;
       }
 
-      .optyn-content a.optyn-button-link:hover{
+      .ss-content a.ss-button-link:hover{
         color: #FFF !important;
         background-color: #64aaef;
       }
 
-      .optyn-content a.optyn-button-link:visited{
+      .ss-content a.ss-button-link:visited{
         color: #FFF !important;
         background-color: #64aaef;
       }
 
-      .optyn-content a.optyn-button-link:active{
+      .ss-content a.ss-button-link:active{
         color: #FFF !important;
         background-color: #64aaef;
       }

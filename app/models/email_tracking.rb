@@ -1,7 +1,14 @@
+require 'tracking_services/links'
+
 class EmailTracking < ActiveRecord::Base
   attr_accessible  :manager_id, :message_id, :redirect_url, :user_email
 
   scope :for_message, ->(message_identifier) { where(message_id: message_identifier) }
+
+  def self.track(uit)
+    TrackingServices::Links.track(uit)
+  end
+
  # To be refactored needs to be done with querery
   def self.get_message_click_report(message_id)
     all_entries = for_message(message_id)

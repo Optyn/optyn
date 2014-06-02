@@ -10,7 +10,7 @@ class NotificationMailer < ActionMailer::Base
   end
 
   def text_email_jinesh
-    mail(:to => ["jparekh@idyllic-software.com", "siddharth@idyllic-software.com"], :subject => "Retouching Base!", 
+    mail(:to => ["jparekh@idyllic-software.com"], :subject => "Retouching Base!", 
       # :body => "Hey Gaurav!\nThanks for reaching out to us.\nHere is the pricing that you wanted.\nThe chanrges of our ROR developers are 55 US dollars per hour.\n\n Thanks- Gaurav")
       :body => "Hey Jinesh!\nIdyllic's Softwares Ruby on Rails development charges are 55 dollars correct? I will also need the hourly charges for Frontend developemnt.\nThanks a lot.")
   end
