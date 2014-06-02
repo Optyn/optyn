@@ -174,6 +174,7 @@ module ApplicationHelper
         'new_template',
         'system_layout_properties',
         'system_layouts',
+        'launch',
         'preview_template'].include? params[ :action ]  and params[ :controller ] == 'merchants/messages') ? false : true
   end
 end
