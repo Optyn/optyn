@@ -368,23 +368,12 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def generate_qr_code
-    @message = Message.find_by_uuid(params[:message_id])
-    link = @message.get_qr_code_link(current_user)
-    qr_code_image  = RQRCode::QRCode.new(link).as_png
-    # qr_code_image = qr_code.to_img
-    send_data qr_code_image, :type => 'image/png',:disposition => 'inline'    
+    resp = Message.get_qr_code_link(params[:message_id])
+    send_data resp.body, :type => 'image/png',:disposition => 'inline'
   end
 
   def redeem
-    message_user = Encryptor.decrypt(params[:message_user]).split("--")
-    message_id = message_user[0] if message_user[0]
-    user_id = message_user[1] if message_user[1]
-    @message = Message.find(message_id)
-    rc = RedeemCoupon.new(:message_id => message_id)
-    rc.user_id = user_id if user_id
-    if not rc.save
-      @error_message = "Sorry, your coupon could not be redeemed."
-    end
+    #TO BE IMPLEMENTED
   end
 
   def report

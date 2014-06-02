@@ -1,6 +1,6 @@
 class GenericMailer < ActionMailer::Base
-  default from: "services@optynmail.com",
-          reply_to: "services@optynmail.com"
+  default from: "services@optyn.com",
+          reply_to: "services@optyn.com"
 
   def announce_nightly_job_failure(content, method_name)
     mail(to: ["Gaurav Gaglani <gaurav@optyn.com>", "Alen Malkoc <alen@optyn.com>"],

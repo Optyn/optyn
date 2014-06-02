@@ -104,6 +104,11 @@ module Merchants::MessagesHelper
     message.percentage_off? ? (amount.to_s + "%") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
   end
 
+  def message_header_process_urls(header_content, message, receiver=nil)
+    display_content = process_urls(header_content, message, receiver)
+    display_content.to_s.html_safe
+  end
+
   def message_content(message, receiver=nil)
     if message.instance_of?(VirtualMessage)
       return raw(display_content)
@@ -131,7 +136,7 @@ module Merchants::MessagesHelper
 
   def optyn_tracking_url(message, receiver, original_href)
     user_info_token = Encryptor.encrypt_for_template({:message_id => message.id, :manager_id => message.manager_id,  :email => (receiver.email rescue '')})
-    optyn_url = "#{SiteConfig.template_standard_url}?uit=#{user_info_token}"
+    optyn_url = "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.link_path}?uit=#{user_info_token}"
     optyn_url = "#{optyn_url}&redirect_url=#{original_href}"
     optyn_url
   end
@@ -231,6 +236,7 @@ module Merchants::MessagesHelper
   def get_default_html(type)
     case type
     when "facebook"
+
       return "<a href=#{get_social_share_link('facebook','', SiteConfig.email_app_base_url)} style='background: #3a589b;float:left;color: #fff;height: 50px;padding-top:4px;text-decoration:none;width: 50%;' target='_blank' class='optyn-fbshare'>
                   <img alt='Icon-facebook' src='#{SiteConfig.email_app_base_url}/assets/icon-facebook.png' style='vertical-align:middle;'>
                 </a>"

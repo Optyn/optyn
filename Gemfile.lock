@@ -189,10 +189,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
-    koala (1.8.0rc1)
-      addressable
-      faraday
-      multi_json
     localtunnel (0.3)
       json (>= 1.2.4)
       net-ssh (>= 2.0.22)
@@ -500,7 +496,6 @@ DEPENDENCIES
   intercom-rails
   jquery-rails
   kaminari
-  koala (~> 1.8.0rc1)
   localtunnel
   mailcatcher
   mini_magick

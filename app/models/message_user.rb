@@ -1,5 +1,6 @@
 require 'messagecenter/process_manager'
 require 'messagecenter/exceptions'
+require 'tracking_services/opens'
 
 class MessageUser < ActiveRecord::Base
   include UuidFinder
@@ -107,13 +108,7 @@ class MessageUser < ActiveRecord::Base
   end
 
   def self.log_email_read(token)
-    identifier = Base64.urlsafe_decode64(token)
-    message_user_entry = MessageUser.for_uuid(identifier)
-    if message_user_entry.present?
-      message_user_entry.update_attribute(:email_read, true)
-    end
-  rescue ActiveRecord::RecordNotFound
-    Rails.logger.error "Woot! Woot! Could not find Message User entry with id: #{identifier}"
+    TrackingServices::Opens.track(token)
   end
 
   def self.create_message_receiver_entries(message_instance, receiver_ids, creation_errors, process_manager)

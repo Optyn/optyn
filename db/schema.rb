@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140512144625) do
+ActiveRecord::Schema.define(:version => 20140520151802) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -304,7 +304,7 @@ ActiveRecord::Schema.define(:version => 20140512144625) do
     t.boolean  "delivered"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "ses_message_id"
+    t.string   "message_smtp_id"
     t.boolean  "bounced"
     t.boolean  "complaint"
     t.text     "body"
@@ -313,8 +313,8 @@ ActiveRecord::Schema.define(:version => 20140512144625) do
   end
 
   add_index "message_email_auditors", ["message_id"], :name => "index_message_email_auditors_on_message_id"
+  add_index "message_email_auditors", ["message_smtp_id"], :name => "index_message_email_auditors_on_message_smtp_id", :unique => true
   add_index "message_email_auditors", ["message_user_id"], :name => "index_message_email_auditors_on_message_user_id"
-  add_index "message_email_auditors", ["ses_message_id"], :name => "index_message_email_auditors_on_ses_message_id", :unique => true
 
   create_table "message_folders", :force => true do |t|
     t.string   "name"
@@ -601,12 +601,12 @@ ActiveRecord::Schema.define(:version => 20140512144625) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
     t.string   "verified_email"

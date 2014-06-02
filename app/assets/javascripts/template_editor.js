@@ -139,8 +139,8 @@ OP = (function($, window, doucument, Optyn){
           $links.each(function(){
             var $this = $(this);
             if(!$this.is("[class]")){
-              $this.addClass('optyn-link');
-            }else if($this.hasClass('optyn-button-link')){
+              $this.addClass('ss-link');
+            }else if($this.hasClass('ss-button-link')){
               $this.attr('style', '');
             }
           });

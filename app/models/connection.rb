@@ -123,16 +123,6 @@ class Connection < ActiveRecord::Base
     end
   end
 
-  def self.mark_inactive_bounce_or_complaint(message_email_auditor)
-    shop = message_email_auditor.shop
-    user = message_email_auditor.user
-
-    if user.present? && shop.present?
-      connection = Connection.for_shop_and_user(shop.id, user.id)
-      connection.make_inactive
-    end
-  end
-
   def toggle_connection
     self.toggle!(:active)
   end

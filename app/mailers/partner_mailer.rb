@@ -1,6 +1,6 @@
 class PartnerMailer < ActionMailer::Base
-  default from: "Optynmail <services@optynmail.com>",
-          reply_to: "services@optynmail.com"
+  default from: "Optyn.com <services@optyn.com>",
+          reply_to: "services@optyn.com"
 
   def import_complete(payload, output, unparsed)
   	@payload = payload
