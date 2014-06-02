@@ -123,7 +123,7 @@ function MerchantMessage() {
         if ( $( '#choose-new-logo' ).length ) {
             this.hookChangeLogo();
         }
-        if ( $( '.tear-page .preview-header' ).length ) {
+        if ( $( '.preview-header' ).length ) {
             this.hookCampaignResponsiveViewer();
         }
     };
@@ -578,20 +578,20 @@ function MerchantMessage() {
     this.hookReplaceMerchantMenuOnLoad = function(){
       var templateMessage = this;
       var $merchantMenu = $('.merchant-menu');
-      var $menuParent = $merchantMenu.parent();
-      var $templateMenu = $('.template-property-menu');
+      //var $menuParent = $merchantMenu.parent();
+      //var $templateMenu = $('.template-property-menu');
 
       var $tempForMerchantMenu = $('<div />');
       $tempForMerchantMenu.append('<li><a class="show-template-menu" href="javascript:void(0)"><em>Show Template Menu</em></a></li>')
       $merchantMenu.append($tempForMerchantMenu.html());
 
-      var $tempForTemplateMenu = $('<div />');
-      $tempForTemplateMenu.append('<li><a class="show-message-menu" href="javascript:void(0)"><em>Show Main Menu</em></a></li>')
-      $templateMenu.append($tempForTemplateMenu.html());
+      //var $tempForTemplateMenu = $('<div />');
+      //$tempForTemplateMenu.append('<li><a class="show-message-menu" href="javascript:void(0)"><em>Show Main Menu</em></a></li>')
+      //$templateMenu.append($tempForTemplateMenu.html());
 
-      $tempForTemplateMenu = $('<div />');
-      $tempForTemplateMenu.append($templateMenu);
-      $menuParent.append($tempForTemplateMenu.html());
+      // $tempForTemplateMenu = $('<div />');
+      // $tempForTemplateMenu.append($templateMenu);
+      // $menuParent.append($tempForTemplateMenu.html());
 
       templateMessage.renderTemplateMenu();
     };
@@ -1110,9 +1110,8 @@ function MerchantMessage() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
             $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
-            $( '#change-campn-det' ).fadeOut( function() {
-                $( '.show-edit-form' ).fadeIn();
-            });
+            $( 'h1 a' ).hide();
+            $( '.show-edit-form' ).show();
             $( '#prev-campn' ).fadeOut();
         });
     });
@@ -1123,9 +1122,8 @@ function MerchantMessage() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
             $( '#preview_wrapper' ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
-            $( '#change-campn-det' ).fadeOut( function() {
-                $( '.show-edit-form' ).fadeIn();
-            });
+            $( 'h1 a' ).hide();
+            $( '.show-edit-form' ).show();
             $( '#prev-campn' ).fadeOut();
         });
     });
@@ -1142,10 +1140,8 @@ function MerchantMessage() {
         $( '.preview-header' ).animate({ width: '50%' }, 500, function() {});
         $( '.show-edit-form' ).fadeOut();
         $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
-        $( '.show-edit-form' ).fadeOut( function() {
-            $( '#prev-campn' ).fadeIn();
-            $( '#change-campn-det' ).fadeIn();
-        });
+        $( 'h1 a' ).show();
+        $( '.show-edit-form' ).hide();
     });
   }
 
