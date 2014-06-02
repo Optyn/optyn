@@ -104,6 +104,11 @@ module Merchants::MessagesHelper
     message.percentage_off? ? (amount.to_s + "%") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) #pluralize(amount, "$")
   end
 
+  def message_header_process_urls(header_content, message, receiver=nil)
+    display_content = process_urls(header_content, message, receiver)
+    display_content.to_s.html_safe
+  end
+
   def message_content(message, receiver=nil)
     if message.instance_of?(VirtualMessage)
       return raw(display_content)

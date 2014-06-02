@@ -110,15 +110,15 @@ class Template < ActiveRecord::Base
   def personalize_body(content, message, receiver)
     # Sanitaize the footer
     template_node = Nokogiri::HTML(content)
-    template_node.css('.optyn-footer').each do |footer_node|
+    template_node.css('.ss-footer').each do |footer_node|
 
       #substitute the receiver email
-      footer_node.css('.optyn-receiver-email').each do |receiver_email_node|
+      footer_node.css('.ss-receiver-email').each do |receiver_email_node|
         receiver_email_node.swap(receiver.email)
       end
 
       #substitute the unsubscribe link
-      footer_node.css('.optyn-unsubscribe').each do |unsubscribe_node|
+      footer_node.css('.ss-unsubscribe').each do |unsubscribe_node|
         unsubscribe_node.swap(%{<a href="#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.unsubscribe_path}/#{Encryptor.encrypt(receiver.email, message.uuid)}?tracker=#{receiver.uuid}">Unsubscribe</a>})
       end
     end
@@ -180,7 +180,7 @@ class Template < ActiveRecord::Base
     body = Nokogiri::HTML(content)
 
     #replace urls in a tags
-    body.css('.optyn-introduction a, .optyn-content a').each do |link|
+    body.css('.ss-introduction a, .ss-content a.ss-link, .ss-content a.ss-button-link').each do |link|
       original_href = link['href']
       link['href'] = "#{optyn_url}&redirect_url=#{original_href}"
     end

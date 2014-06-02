@@ -6,11 +6,6 @@
   /Email Social Profiles
   = render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
 
-- cache("optyn_advertisement_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
-  /Optyn Send Free emails add
-  = render partial: "shared/#{message_partner_name(@shop)}/mailers/optyn_advertisement"
-
-
 %div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
   %p{:style => "font-size: 11px;margin:0px;line-height: 14px;"}
     - if @message.present? 

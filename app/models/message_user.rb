@@ -1,5 +1,6 @@
 require 'messagecenter/process_manager'
 require 'messagecenter/exceptions'
+require 'tracking_services/opens'
 
 class MessageUser < ActiveRecord::Base
   include UuidFinder
@@ -104,6 +105,10 @@ class MessageUser < ActiveRecord::Base
     user_ids = users.collect(&:id)
 
     update_all({message_folder_id: MessageFolder.discarded_id}, {message_id: message_ids, user_id: user_ids})
+  end
+
+  def self.log_email_read(token)
+    TrackingServices::Opens.track(token)
   end
 
   def self.create_message_receiver_entries(message_instance, receiver_ids, creation_errors, process_manager)

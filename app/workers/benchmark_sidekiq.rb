@@ -20,7 +20,7 @@ class BenchmarkSidekiq
         end
 
         ses_message_time_end = Time.now().to_i
-        message_email_auditor.update_attributes(delivered: true, ses_message_id: ses_message['message_id'].to_s.split(/@/).first)
+        message_email_auditor.update_attributes(delivered: true, message_smtp_id: ses_message['message_id'].to_s.split(/@/).first)
         message = message_email_auditor.message_user.message
         message.destroy if message.instance_of?(VirtualMessage)
       end
@@ -43,7 +43,7 @@ class BenchmarkSidekiq
         end
 
         ses_message_time_end = Time.now().to_i
-        message_email_auditor.update_attributes(delivered: true, ses_message_id: ses_message['message_id'].to_s.split(/@/).first)
+        message_email_auditor.update_attributes(delivered: true, message_smtp_id: ses_message['message_id'].to_s.split(/@/).first)
         message = message_email_auditor.message_user.message
         message.destroy if message.instance_of?(VirtualMessage)
       end

@@ -385,6 +385,15 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def generate_qr_code
+    resp = Message.get_qr_code_link(params[:message_id])
+    send_data resp.body, :type => 'image/png',:disposition => 'inline'
+  end
+
+  def redeem
+    #TO BE IMPLEMENTED
+  end
+
   def report
     @message = Message.for_uuid(params[:id])
   end
