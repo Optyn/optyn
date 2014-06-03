@@ -29,7 +29,7 @@ gem 'oauth2'
 gem 'carrierwave'
 gem 'rmagick', '2.13.1'
 gem "fog"
-gem 'localtunnel'
+# gem 'localtunnel'
 gem 'chosen-rails'
 gem 'kaminari'
 gem 'newrelic_rpm'
@@ -114,6 +114,7 @@ group :development do
   gem 'rails-erd'
   #gem "capistrano-resque", "~> 0.1.0"
   gem "mailcatcher"
+  gem "ngrok"
 end
 
 group :development, :test do
