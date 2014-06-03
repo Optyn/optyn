@@ -1161,7 +1161,6 @@ function MerchantMessage() {
     };
     setMinHt();
     var cb = function() {
-        console.log( 'hookEqualizePreviewColumnHeight' );
         $iframe.css( 'height', 'auto' );
         var iframeHt = $iframe.contents().find( 'body' ).css( 'height' );
         $editorPane.css( 'height', 'auto' );

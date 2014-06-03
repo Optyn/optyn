@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    // Resize column heights on campaign preview and edit pages.
+    if ( $( 'body' ).hasClass( 'merchants-messages' )) {
+        var bodyClasses = $( 'body' ).attr( 'class' ).split( ' ' );
+        if ( bodyClasses.indexOf('edit') !== -1 || bodyClasses.indexOf('preview') !== -1 ) {
+            equalizeDivHeights( '#merchants > .span6' );
+        }
+    }
+
     $( '.scrolltop' ).html( "<i class='icon-arrow-up icon-white'></i>" );
     $(window).scroll(function(){
         // add navbar opacity on scroll
