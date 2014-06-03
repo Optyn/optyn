@@ -1104,6 +1104,9 @@ function MerchantMessage() {
 
 
   this.hookCampaignResponsiveViewer = function() {
+    var selector;
+    $( 'body' ).hasClass( 'preview_template' ) ? selector = '#template_wrapper': selector = '#preview_wrapper';
+
     function highlightCurrentButton( $current ) {
         $( '.preview-header a' ).removeClass( 'btn-primary' );
         $( $current ).addClass( 'btn-primary' );
@@ -1113,7 +1116,7 @@ function MerchantMessage() {
         $( '.tear-page > .span6:first' ).fadeOut( function() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
-            $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
+            $( selector ).animate({ width: '100%' }, 500 );
             $( 'h1 a' ).hide();
             $( '.show-edit-form' ).show();
             $( '#prev-campn' ).fadeOut();
@@ -1125,7 +1128,7 @@ function MerchantMessage() {
         $( '.tear-page > .span6:first' ).fadeOut( function() {
             $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
             $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
-            $( '#preview_wrapper' ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
+            $( selector ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
             $( 'h1 a' ).hide();
             $( '.show-edit-form' ).show();
             $( '#prev-campn' ).fadeOut();

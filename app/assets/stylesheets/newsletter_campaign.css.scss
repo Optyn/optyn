@@ -125,6 +125,10 @@
   margin: auto;
   padding: 3% 0;
 }
+.edit #message_fields_wrapper,
+.preview #message_fields_wrapper {
+  padding: 0;
+}
 #flat.m-app #dashboard .pad3pc#message_fields_wrapper { padding: 3%; }
 .system_layout_properties #merchants > .span6,
 .preview_template #merchants > .span6 {

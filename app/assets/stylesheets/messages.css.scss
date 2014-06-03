@@ -136,7 +136,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   	padding-top: 50px;
   }
   &.launch#flat { padding-top: 0; }
-  &.preview_template #template_wrapper { padding-top: 60px; }
+  &.preview_template #template_wrapper { padding-top: 50px; }
   &#flat #dashboard .yield .tear-page {
 		@media( max-width: 980px ) {
 			padding: 0;
@@ -203,7 +203,9 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	}
 	.preview-header {
 		background: $white;
-		padding: 1%;
+		max-height: 60px;
+		height: 50px;
+		padding-top: 12px;
 		position: fixed;
 		top: 50px;
 		width: 50%;
@@ -222,7 +224,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 		margin-top: 8px;
 	}
 	&.preview #preview {
-		padding: 80px 0 0 0;
+		padding: 50px 0 0 0;
 		@media( max-width: 980px ) {
 			padding-top: 0px;
 		}
