@@ -48,7 +48,11 @@ class MessageEmailAuditor < ActiveRecord::Base
         subject: mail['subject'].to_s,
         content_type: mail['content_type'].to_s,
         body: mail.body.to_s,
-        headers: { 'List-Unsubscribe' => mail['List-Unsubscribe'].to_s }
+        headers: { 
+          'List-Unsubscribe' => mail['List-Unsubscribe'].to_s,
+          'X-Mailer' => mail['X-Mailer'].to_s,
+          'X-Report-Abuse' => mail['X-Report-Abuse'].to_s 
+        }
       )
 
       message = self.message_user.message
