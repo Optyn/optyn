@@ -35,28 +35,44 @@ OP = (function($, window, doucument, Optyn){
         // Unwrap all the sortable items
 
         // Wrapping in a container with CSS class .sortable-item
-        $('.ss-content').find($('div.template-section-toolset')).each(function(){
-          if(!$(this).parents('.sortable-item').length){
-            $(this).next().andSelf().wrapAll('<div class="sortable-item">');  
-          }
+        // $('.ss-content').find($('div.template-section-toolset')).each(function(){
+        //   if(!$(this).parents('.sortable-item').length){
+        //     $(this).next().andSelf().wrapAll('<div class="sortable-item">');  
+        //   }
+        // });
+        
+        $('.ss-content').find('.ss-grid').each(function(){
+          $(this).find($('div.template-section-toolset')).each(function(){
+            if(!$(this).parents('.sortable-item').length){
+              $(this).next().andSelf().wrapAll('<div class="sortable-item">');  
+            }
+          });  
         });
+
         $(".handle").css("cursor", "pointer");   // Hand cursor
         $(".handle").css("cursor", "move");      // Directional cursor.
 
         // Wrapping all .sortable items in #sortable container
-        if(!$('.sortable-item').parents('#sortable').length){
-          $('.sortable-item').wrapAll('<div id="sortable">');
-        }
+        // if(!$('.sortable-item').parents('#sortable').length){
+        //   $('.sortable-item').wrapAll('<div id="sortable">');
+        // }
+
+        $('.sortable-item').parents('.ss-grid').each(function(){
+          if(!$(this).find('.sortable-container').length){
+            $(this).find('.sortable-item').wrapAll("<div class='sortable-container'>");
+          }
+        });
 
         // Sortable init
-        $('#sortable').sortable({
+        $('.sortable-container').sortable({
           revert       : true,
-          connectWith  : "#sortable",
           stop: function( event, ui ) {OP.template.saveSectionChanges();},
           handle : '.handle',
           cancel : ''
 
-      }).disableSelection();
+      });
+
+      $('.sortable-container').disableSelection();
     },
 
     fixCkEditorModalIssue: function(){
