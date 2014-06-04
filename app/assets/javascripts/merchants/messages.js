@@ -1125,18 +1125,13 @@ function MerchantMessage() {
 
     $( '#show-mobile-preview' ).click( function() {
         highlightCurrentButton( $( this ));
-        $( '.tear-page > .span6:first' ).fadeOut( function() {
-            $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
-            $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
-            $( selector ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
-            $( 'h1 a' ).hide();
-            $( '.show-edit-form' ).show();
-            $( '#prev-campn' ).fadeOut();
+        $( '.tear-page > .span6:last' ).animate({ width: '50%' }, 500, function() {
+            $( '.tear-page > .span6:first' ).fadeIn();
         });
-    });
-
-    $( '#show-sm-preview' ).click( function() {
-        highlightCurrentButton( $( this ));
+        $( '.preview-header' ).animate({ width: '50%' }, 500, function() {});
+        $( selector ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
+        $( 'h1 a' ).show();
+        $( '.show-edit-form' ).hide();
     });
 
     $( '.show-edit-form' ).click( function() {
