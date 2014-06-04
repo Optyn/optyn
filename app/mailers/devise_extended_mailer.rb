@@ -10,7 +10,7 @@ class DeviseExtendedMailer < Devise::Mailer
     @user = @resource = user
     @password = password
     @shop = Shop.find_by_id(shop_id)
-    @from = @shop.name
+    @from = %{"#{@shop.name.to_s.gsub(/["']/, "")}" <#{@shop.manager.email}>}
     @skip_free_message = true
     mail(from: @from, to: %Q(#{@user.full_name} <#{@user.email}>), subject: "Thank you for subscribing.")
   end
