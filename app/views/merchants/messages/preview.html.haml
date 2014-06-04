@@ -1,5 +1,6 @@
-/= banner( "Email Preview" )
-%h1
+%h1.dark-heading
+  %a.goto-msg-center{ href: root_path }
+    %i.icon-home
   .pull-left
     %a#change-campn-det.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left

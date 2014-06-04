@@ -1,4 +1,7 @@
-= banner( message_form_title(@message_type))
+%h1.dark-heading
+  %a.goto-msg-center{ href: root_path }
+    %i.icon-home
+  = message_form_title(@message_type)
 
 .blank-space
 

@@ -119,11 +119,13 @@
   }
 }
 
-#message_fields_wrapper,
-.system_layouts #merchants {
+.system_layouts #merchants,
+.new_template #merchants,
+.edit_template #dashboard {
   max-width: 1000px;
   margin: auto;
   padding: 3% 0;
+  background: transparent;
 }
 .edit #message_fields_wrapper,
 .preview #message_fields_wrapper {

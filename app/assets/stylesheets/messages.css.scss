@@ -167,6 +167,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.preview_template #dashboard .wid25pc,
   &.system_layouts #dashboard .wid25pc,
   &.new_template #dashboard .wid25pc,
+  &.edit_template #dashboard .wid25pc,
   &.system_layout_properties #dashboard .wid25pc,
   &.launch #dashboard .wid25pc,
   &.edit #dashboard .wid25pc { display: none; }
@@ -176,13 +177,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.system_layouts #dashboard .wid75pc,
   &.preview_template #dashboard .wid75pc,
   &.new_template #dashboard .wid75pc,
+  &.edit_template #dashboard .wid75pc,
   &.system_layout_properties #dashboard .wid75pc,
   &.launch #dashboard .wid75pc,
   &.edit #dashboard .wid75pc { width: 100%; }
-  &.new#flat .yield h1,
-  &.edit_metadata#flat .yield h1,
-  &.preview#flat .yield h1,
-	&.edit#flat .yield h1 {
+  &.edit_metadata#flat .yield h1 {
 	  float: none;
 	  text-align: center;
 	  background: $dark-blue;
@@ -332,13 +331,42 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   background: $dark-blue;
   color: $white;
   margin-bottom: 0;
-  padding: 0 2%;
+  padding: 0 2% 0 0;
   z-index: 1040;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	border: 0;
+}
+.dark-heading .pull-left { margin-left: 6px; }
+.goto-msg-center {
+  line-height: 50px;
+  display: inline-block;
+  padding: 0 10px;
+  color: #fff;
+  float: left;
+  position: relative;
+  @include transition( left 0.2s linear );
+  &:hover {
+    // background: rgba(255,255,255,0.5);
+    color: $white;
+  }
+  &:after {
+    @include transition( left 0.2s linear );
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba( $white, 0.2 );
+    position: absolute;
+    top: 0;
+    left: -60px;
+    z-index: -1;
+  }
+  &:hover:after {
+    left: 0;
+  }
 }
 
 .template #campn-editor {

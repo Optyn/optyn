@@ -1,5 +1,7 @@
 /= banner( message_form_title(@message_type) )
-%h1
+%h1.dark-heading
+  %a.goto-msg-center{ href: root_path }
+    %i.icon-home
   .pull-left
     %a.btn.btn-success{ href: "#{edit_metadata_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left

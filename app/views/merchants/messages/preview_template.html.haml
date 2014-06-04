@@ -1,4 +1,6 @@
 %h1.dark-heading
+  %a.goto-msg-center{ href: root_path }
+    %i.icon-home
   - if @message.editable_state?
     .pull-left
       = link_to raw("<i class='icon-edit'></i> Details") , edit_template_merchants_message_path(@message.uuid), class: 'btn'

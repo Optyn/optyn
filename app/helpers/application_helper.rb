@@ -172,6 +172,7 @@ module ApplicationHelper
         'new',
         'template',
         'new_template',
+        'edit_template',
         'system_layout_properties',
         'system_layouts',
         'launch',
