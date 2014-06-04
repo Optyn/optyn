@@ -1,9 +1,10 @@
 .actions
   - unless @message.is_child?
     - if @message.draft?
-      = submit_tag("Save as Draft", name: "save_draft", class: 'btn btn-info submit-message')
-    = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary submit-message')
-    = submit_tag("Launch", name: "launch", class: 'btn btn-success submit-message') unless current_shop.disabled? || @message.queued?
+      = ''
+      /= submit_tag("Save as Draft", name: "save_draft", class: 'btn btn-info submit-message')
+    = submit_tag("Save", name: "preview", class: 'btn btn-primary submit-message')
+    /= submit_tag("Launch", name: "launch", class: 'btn btn-success submit-message') unless current_shop.disabled? || @message.queued?
   - else
     = submit_tag("Save", name: "save_draft", class: 'btn btn-info submit-message')
     = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary submit-message')
