@@ -2,23 +2,22 @@
 
 .blank-space
 
-.control-group.disc
-  = f.label :type_of_discount, class: "control-label"
-  #discount_type_container.controls.checkbox{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
-    .btn-group{ 'data-toggle' => 'buttons-radio' }
-      type_of_discount:
-      = :type_of_discount
-      %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
-      %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
-
-    = f.text_field :type_of_discount
 
 .control-group.row-fluid.no-pad
-  .span6
+  .control-group.disc.span3
+    #discount_type_container{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
+      .btn-group{ 'data-toggle' => 'buttons-radio' }
+        type_of_discount:
+        = :type_of_discount
+        %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
+        %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
+
+      = f.text_field :type_of_discount
+  .span4.offset1
     = f.number_field :discount_amount, 'data-toggle' => 'tooltip',
       title: 'Please enter the value of the coupon.', placeholder: 'DISCOUNT AMOUNT',
       class: 'span12'
-  .span6
+  .span4
     = f.text_field :coupon_code, 'data-toggle' => 'tooltip',
       title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
       placeholder: 'COUPON CODE', class: 'span12'
