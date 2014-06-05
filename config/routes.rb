@@ -210,7 +210,10 @@ Optyn::Application.routes.draw do
 
   match "/stripe_events", :to => "events#stripe_events", :as => :stripe_events, :via => :post
 
-  
+  get '/send_limits/offset', to: 'send_limits#offset'
+  get '/send_limits/new', to: 'send_limits#new'
+  post '/send_limits/set', to: 'send_limits#set'
+
   resources :connections do
     collection do
       post 'add_connection'
