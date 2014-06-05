@@ -22,9 +22,11 @@
       title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
       placeholder: 'COUPON CODE', class: 'span12'
 .control-group
-  Add Expiration date
-  = check_box_tag "add_expiration_date" , true,  set_default(@message.ending_time)
-= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
+  .control-label
+    Add Expiration date
+  .controls
+    = check_box_tag "add_expiration_date" , true,  set_default(@message.ending_time)
+    = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
 
 .control-group
   %label.control-label.checkbox
@@ -34,12 +36,16 @@
 
 .blank-space
 .control-group
-  Add Fine Print
-  = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
-= render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
-fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
+  .control-label
+    Add Fine Print
+  .controls
+    = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
+    = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
+    fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
 
 .control-group
-  Add button
-  = check_box_tag "add_button" , true,  set_default(@message.button_url)
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}
+  .control-label
+    Add button
+  .controls
+    = check_box_tag "add_button" , true,  set_default(@message.button_url)
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}
