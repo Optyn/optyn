@@ -1,11 +1,13 @@
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
+.blank-space
+
 / .control-group
 /   = f.label :special_try, "Special Try", class: 'control-label'
 /   .controls
 /     = f.check_box :special_try
 
 .control-group
-  Add button
   = check_box_tag "add_button" , true,  set_default(@message.button_url)
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}
+  %label{ for: 'add_button' } Add button
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}
