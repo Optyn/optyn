@@ -3,10 +3,9 @@
   %strong Choose header background color:
   %p
     #message_color_body
-      .row-fluid
-        = render partial: "header_form"
-        %div.loading{:style => "display: none;"}
-          / %strong Loading...
+      = render partial: "header_form"
+      %div.loading{:style => "display: none;"}
+        / %strong Loading...
   %strong Your Logo:
   %p#logo
     = show_logo(@shop)
