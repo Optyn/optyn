@@ -1,20 +1,18 @@
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
+.blank-space
+
 .control-group
-  Add Expiration date
   = check_box_tag "add_expiration_date" , true,  set_default(@message.ending_time)
+  %label{ for: 'add_expiration_date' } Add Expiration date
 = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Date and Time", ending_date_title: 'Date when the special event ends', ending_time_title: 'Time when the special event ends.'}
 
-.blank-space
 .control-group
-  Add Fine Print
   = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
+  %label{ for: 'fine_print' } Add Fine Print
 = render partial: 'merchants/shared/messages/fine_print', locals: {f: f, fine_print_verbiage: ''}
 
-.blank-space
-
 .control-group
-  Add button
   = check_box_tag "add_button" , true,  set_default(@message.button_url)
+  %label{ for: 'add_button' } Add button
 = render partial: 'merchants/shared/messages/optional', locals: {f: f}
-
