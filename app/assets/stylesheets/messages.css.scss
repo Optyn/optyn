@@ -228,6 +228,11 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 			padding-top: 0px;
 		}
 	}
+  label { display: inline-block; }
+  input[type="checkbox"] {
+    margin: -3px 15px 0 0;
+    @include transform( scale( 1.5, 1.5 ));
+  }
 }
 .setup-campn {
 	&:first-child { margin-top: 20px; }
