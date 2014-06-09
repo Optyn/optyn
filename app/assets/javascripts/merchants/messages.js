@@ -410,6 +410,10 @@ function MerchantMessage() {
                 $('#message_fields_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
                 current.hookColorPickerChange();
+                if ( $( '.preview-header' ).length ) {
+                    $( '.preview-header a' ).removeClass( 'btn-primary' );
+                    $( '#show-desktop-preview' ).addClass( 'btn-primary' );
+                }
             },
             error: function(){
                 alert("An Error Occured white setting the color. Please refresh you page and try again.");
