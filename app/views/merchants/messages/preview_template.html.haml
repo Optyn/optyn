@@ -5,9 +5,6 @@
     .pull-left
       = link_to raw("<i class='icon-edit'></i> Details") , edit_template_merchants_message_path(@message.uuid), class: 'btn'
       = link_to raw("<i class='icon-edit'></i> Content"), template_merchants_message_path(@message.uuid), class: 'btn btn-'
-      %a.btn.btn-info.show-edit-form{ href: '#' }
-        %i.icon-arrow-left
-          Change Content
   Template Preview
 /= render partial: "merchants/messages/message_menu"
 

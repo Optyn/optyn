@@ -218,10 +218,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 			width: 100%;
 		}
 	}
-	.show-edit-form {
-		display: none;
-		margin-top: 8px;
-	}
 	&.preview #preview {
 		padding: 50px 0 0 0;
 		@media( max-width: 980px ) {

@@ -1113,37 +1113,13 @@ function MerchantMessage() {
     }
     $( '#show-desktop-preview' ).click( function() {
         highlightCurrentButton( $( this ));
-        $( '.tear-page > .span6:first' ).fadeOut( function() {
-            $( '.tear-page > .span6:last' ).animate({ width: '100%' }, 500, function() {});
-            $( '.preview-header' ).animate({ width: '100%' }, 500, function() {});
-            $( selector ).animate({ width: '100%' }, 500 );
-            $( 'h1 a' ).hide();
-            $( '.show-edit-form' ).show();
-            $( '#prev-campn' ).fadeOut();
-        });
+        $( selector ).animate({ width: '100%' }, 200 );
     });
 
     $( '#show-mobile-preview' ).click( function() {
         highlightCurrentButton( $( this ));
-        $( '.tear-page > .span6:last' ).animate({ width: '50%' }, 500, function() {
-            $( '.tear-page > .span6:first' ).fadeIn();
-        });
-        $( '.preview-header' ).animate({ width: '50%' }, 500, function() {});
-        $( selector ).animate({ width: '320px' }, 500, function() {}).css( 'margin', 'auto' );
+        $( selector ).animate({ width: '320px' }, 200, function() {}).css( 'margin', 'auto' );
         $( 'h1 a' ).show();
-        $( '.show-edit-form' ).hide();
-    });
-
-    $( '.show-edit-form' ).click( function() {
-        highlightCurrentButton( null );
-        $( '.tear-page > .span6:last' ).animate( { width: '50%' }, 500, function() {
-            $( '.tear-page > .span6:first' ).fadeIn();
-        });
-        $( '.preview-header' ).animate({ width: '50%' }, 500, function() {});
-        $( '.show-edit-form' ).fadeOut();
-        $( '#preview_wrapper' ).animate({ width: '100%' }, 500 );
-        $( 'h1 a' ).show();
-        $( '.show-edit-form' ).hide();
     });
   }
 

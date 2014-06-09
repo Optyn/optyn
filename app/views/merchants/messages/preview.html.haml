@@ -5,9 +5,6 @@
     %a#change-campn-det.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change details
-    %a.btn.btn-info.show-edit-form{ href: '#' }
-      %i.icon-arrow-left
-      Change Content
   Email Preview
   .pull-right
     %a#prev-campn.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
