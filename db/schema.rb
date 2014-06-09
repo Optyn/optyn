@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140520151802) do
+ActiveRecord::Schema.define(:version => 20140609101857) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20140520151802) do
     t.string   "disconnect_event"
   end
 
+  add_index "connections", ["active", "shop_id", "user_id"], :name => "index_connections_on_active_and_shop_id_and_user_id"
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
 
   create_table "coupons", :force => true do |t|
@@ -213,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20140520151802) do
     t.integer  "survey_answer_id"
   end
 
+  add_index "labels", ["active"], :name => "index_labels_on_active"
   add_index "labels", ["shop_id", "active"], :name => "index_labels_on_shop_id_and_active"
   add_index "labels", ["shop_id", "name"], :name => "index_labels_on_shop_id_and_name", :unique => true
 
@@ -335,6 +337,18 @@ ActiveRecord::Schema.define(:version => 20140520151802) do
     t.integer  "message_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "message_mail_holders", :force => true do |t|
+    t.integer  "message_email_auditor_id"
+    t.string   "to"
+    t.string   "from"
+    t.string   "reply_to"
+    t.string   "subject",                  :limit => 1000
+    t.string   "content_type"
+    t.text     "body"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "message_users", :force => true do |t|
@@ -723,6 +737,8 @@ ActiveRecord::Schema.define(:version => 20140520151802) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "user_labels", ["user_id"], :name => "index_user_labels_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
