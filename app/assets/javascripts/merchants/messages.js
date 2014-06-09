@@ -403,7 +403,7 @@ function MerchantMessage() {
             url: $headerForm.attr('action'),
             data: $headerForm.serialize(),
             beforeSend: function(){
-                $('#preview-meta-data-view').hide();
+                //$('#preview-meta-data-view').hide();
                 $('.loading').show();
             },
             success: function(data){
