@@ -18,7 +18,7 @@
 
   .template_chooser
     - @templates.each do |template|
-      .span4
+      .span3
         %a{href: assign_template_merchants_message_path(@message.uuid), class: "template_type", 'data-template-id' => template.uuid}
           %h6
             = template.name

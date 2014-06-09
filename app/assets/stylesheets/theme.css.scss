@@ -826,10 +826,10 @@ form {
     font-weight: 300;
     line-height: 20px;
     margin: 0;
-    @include border-radius( 4px );
+    @include border-radius( 1px );
     padding: 0 10px;
     border: solid 1px darken( $light-gray, 20% );
-    border-bottom: solid 2px darken( $light-gray, 20% );
+    /*border-bottom: solid 2px darken( $light-gray, 20% );*/
     background-color: lighten( $light-gray, 3% );
     box-shadow: none;
     color: $black;
@@ -1164,7 +1164,7 @@ th {
   clear: both;
 }
 .separator-micro-dark {
-  background-color: $gray;
+  background-color: #cccccc;
 }
 .no-pad {
   padding: 0;
