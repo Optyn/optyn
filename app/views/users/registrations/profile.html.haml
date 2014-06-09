@@ -47,10 +47,10 @@
           .control-group
             .control-label Share with connections
             .controls
-              = f.fields_for :permissions_users do |p|
-                = p.check_box :action, 'data-toggle' => 'tooltip', title: 'What information should we share with your connections?'
-                = p.hidden_field :permission_id
-                = p.object.permission.permission_name
+              / = f.fields_for :permissions_users do |p|
+              /   = p.check_box :action, 'data-toggle' => 'tooltip', title: 'What information should we share with your connections?'
+              /   = p.hidden_field :permission_id
+              /   = p.object.permission.permission_name
 
           .control-group
             = f.label :Interest, class: 'control-label'

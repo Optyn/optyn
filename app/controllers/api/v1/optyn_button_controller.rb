@@ -5,9 +5,10 @@ module Api
 
       respond_to :html, :json
 
-      doorkeeper_for :connection, :update_permissions, :automatic_connection
+      # doorkeeper_for :connection, :update_permissions, :automatic_connection
+      doorkeeper_for :connection :automatic_connection
 
-      before_filter :map_current_user_to_store, only: [:update_permissions]
+      # before_filter :map_current_user_to_store, only: [:update_permissions]
 
       def login
         session[:omniauth_manager] = nil
@@ -16,23 +17,24 @@ module Api
         @user = User.new
       end
 
-      def connection
-        @shop = doorkeeper_token.application.owner
-        @permissions_user = current_user.permissions_users.present? ? current_user.permissions_users : current_user.build_permission_users
-      end
+      # IMP: The routes to the following 2 actions have been disabled
+      # def connection
+      #   @shop = doorkeeper_token.application.owner
+      #   # @permissions_user = current_user.permissions_users.present? ? current_user.permissions_users : current_user.build_permission_users
+      # end
 
-      def update_permissions
-        current_user.attributes = params[:user]
-        @shop = doorkeeper_token.application.owner
-        user_changed = current_user.changed? || @connection
+      # def update_permissions
+      #   current_user.attributes = params[:user]
+      #   @shop = doorkeeper_token.application.owner
+      #   user_changed = current_user.changed? || @connection
 
-        if current_user.save(validate: false) #current_user.update_attributes(params[:user])
-          @message = permissions_message
-        else
-          session[:user_return_to] = nil
-          head :unprocessable_entity
-        end
-      end
+      #   if current_user.save(validate: false) #current_user.update_attributes(params[:user])
+      #     @message = permissions_message
+      #   else
+      #     session[:user_return_to] = nil
+      #     head :unprocessable_entity
+      #   end
+      # end
 
       def automatic_connection
         map_current_user_to_store

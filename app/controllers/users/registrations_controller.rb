@@ -61,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def profile
     @user = current_user
-    @permissions_user = @user.permissions_users.present? ? @user.permissions_users : @user.build_permission_users
+    # @permissions_user = @user.permissions_users.present? ? @user.permissions_users : @user.build_permission_users
   end
 
   def update_profile
@@ -80,7 +80,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     if @user.save
-      @permissions_user = @user.permissions_users.present? ? @user.permissions_users : @user.build_permission_users
+      # @permissions_user = @user.permissions_users.present? ? @user.permissions_users : @user.build_permission_users
       flash.now[:notice] = "Profile updated successfully"
       render action: "profile"
     else

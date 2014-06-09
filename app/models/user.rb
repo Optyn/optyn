@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   has_many :businesses, :through => :interests
   has_many :user_labels, dependent: :destroy
   has_many :labels, through: :user_labels
-  has_many :permissions_users, dependent: :destroy
-  has_many :permissions, :through => :permissions_users
+  # has_many :permissions_users, dependent: :destroy
+  # has_many :permissions, :through => :permissions_users
   has_many :redeem_coupons, dependent: :destroy
 
   mount_uploader :picture, ImageUploader
@@ -51,16 +51,20 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
+  # attr_accessible :name, :email, :password, :password_confirmation,
+  #                 :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture,
+  #                 :first_name, :last_name
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :permissions_users_attributes, :picture,
+                  :remember_me, :office_zip_code, :home_zip_code, :gender, :birth_date, :business_ids, :picture,
                   :first_name, :last_name
 
   attr_accessor :show_password, :skip_password,:skip_name, :show_shop, :shop_identifier, :skip_welcome_email
 
-  accepts_nested_attributes_for :permissions_users
+  # accepts_nested_attributes_for :permissions_users
+  # accepts_nested_attributes_for :permission
 
-  #accepts_nested_attributes_for :permission
-  after_create :create_permission_users, :create_alias, :send_welcome_email
+  # after_create :create_permission_users, :create_alias, :send_welcome_email
+  after_create :create_alias, :send_welcome_email
 
   PER_PAGE = 30
 
@@ -146,11 +150,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def create_permission_users
-    Permission.all.each do |permission|
-      PermissionsUser.create(user_id: self.id, permission_id: permission.id, action: true)
-    end
-  end
+  # def create_permission_users
+  #   Permission.all.each do |permission|
+  #     PermissionsUser.create(user_id: self.id, permission_id: permission.id, action: true)
+  #   end
+  # end
 
   def create_alias
     optyn_alias = "#{Devise.friendly_token.first(8).downcase}@optyn.com"
@@ -207,22 +211,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  def build_permission_users
-    Permission.scoped.map do |permission|
-      permissions_users.new(:permission_id => permission.id)
-    end
-  end
+  # def build_permission_users
+  #   Permission.scoped.map do |permission|
+  #     permissions_users.new(:permission_id => permission.id)
+  #   end
+  # end
 
-  def visible_permissions_users
-    permissions_users.select(&:action)
-  end
+  # def visible_permissions_users # Used in application_helper.rb
+  #   permissions_users.select(&:action)
+  # end
 
-  def permission_names
-    permissions_users.select(&:action).collect(&:permission).collect(&:permission_name)
-  end
+  # def permission_names # Used in application_helper.rb
+  #   permissions_users.select(&:action).collect(&:permission).collect(&:permission_name)
+  # end
 
   def display_name
-     permission_name || permission_email || "Optyn User"
+     # permission_name || permission_email || "Optyn User"
+     permission_name
   end
 
   def full_name
@@ -242,7 +247,8 @@ class User < ActiveRecord::Base
   end
 
   def display_email
-    permission_email || "N/A"
+    # permission_email || "N/A"
+    permission_email
   end
 
   def image_url(omniauth_provider_id=nil)
@@ -297,11 +303,13 @@ class User < ActiveRecord::Base
   end
 
   def permission_name
-    self.full_name if permissions_users.permission_visible?(Permission.name_id)
+    # self.full_name if permissions_users.permission_visible?(Permission.name_id)
+    self.full_name
   end
 
   def permission_email
-    self.email if permissions_users.permission_visible?(Permission.email_id)
+    # self.email if permissions_users.permission_visible?(Permission.email_id)
+    self.email
   end
 
   def assign_office_zip_code(attrs)
