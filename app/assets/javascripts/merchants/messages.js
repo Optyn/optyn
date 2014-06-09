@@ -1114,11 +1114,14 @@ function MerchantMessage() {
     $( '#show-desktop-preview' ).click( function() {
         highlightCurrentButton( $( this ));
         $( selector ).animate({ width: '100%' }, 200 );
+        $( '#message_preview' ).removeClass( 'mm-mobile-preview' );
     });
 
     $( '#show-mobile-preview' ).click( function() {
         highlightCurrentButton( $( this ));
-        $( selector ).animate({ width: '320px' }, 200, function() {}).css( 'margin', 'auto' );
+        $( selector ).animate({ width: '320px' }, 200, function() {
+            $( '#message_preview' ).addClass( 'mm-mobile-preview' );
+        }).css( 'margin-left', 'auto' ).css( 'margin-right', 'auto' );
         $( 'h1 a' ).show();
     });
   }
