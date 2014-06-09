@@ -6,7 +6,7 @@ module Api
       respond_to :html, :json
 
       # doorkeeper_for :connection, :update_permissions, :automatic_connection
-      doorkeeper_for :connection :automatic_connection
+      doorkeeper_for :connection, :automatic_connection
 
       # before_filter :map_current_user_to_store, only: [:update_permissions]
 
