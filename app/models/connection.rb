@@ -38,7 +38,7 @@ class Connection < ActiveRecord::Base
 
   scope :includes_user, includes(:user)
 
-  scope :includes_user_with_labels, includes(user: :labels)
+  scope :includes_user_with_labels, includes(:user => {:user_labels => :label})
 
   scope :for_users, ->(user_identifiers) { where(user_id: user_identifiers) }
 
