@@ -1,10 +1,9 @@
+var opTheme = opTheme || {};
 $(document).ready(function () {
     // Resize column heights on campaign preview and edit pages.
     if ( $( 'body' ).hasClass( 'merchants-messages' )) {
-        var bodyClasses = $( 'body' ).attr( 'class' ).split( ' ' );
-        if ( bodyClasses.indexOf('edit') !== -1 || bodyClasses.indexOf('preview') !== -1 ) {
-            equalizeDivHeights( '#merchants > .span6' );
-        }
+        if ( $( 'body' ).hasClass( 'edit' ) || $( 'body' ).hasClass( 'preview' ))
+            opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper td:first' ]);
     }
 
     $( '.scrolltop' ).html( "<i class='icon-arrow-up icon-white'></i>" );
@@ -159,25 +158,34 @@ $(document).ready(function () {
     }
 });
 // Equalize div heights
-function equalizeDivHeights( targetElementSelector ) {
+opTheme.equalizeDivHeights = function( selectorArray ) {
+    console.log( 'equalizeDivHeights' );
+    $('#preview_wrapper td:first td:first').css( 'vertical-align', 'top' );
     var setHt = function() {
         // This function sets width of the team member divs.
         var maxHt = 0;
-        $( targetElementSelector ).each( function() {
-            $( this ).css( 'height', 'auto' );
+        $( selectorArray ).each( function( index, value ) {
+            $( value ).css( 'height', 'auto' );
         });
-        $( targetElementSelector ).each( function() {
-            if ( parseInt($( this ).css( 'height' )) > maxHt ) {
-                maxHt = parseInt( $( this ).css( 'height' ));
+        $( selectorArray ).each( function( index, value ) {
+            if (( parseInt($( value ).css( 'height' ))) > maxHt ) {
+                maxHt = parseInt( $( value ).css( 'height' ));
             }
         });
-        $( targetElementSelector ).each( function() {
-            $( this ).css( 'height', maxHt + 10 );
+        $( selectorArray ).each( function( index, value ) {
+            var previewHeaderHeight = 0;
+            if ( $( '.preview-header' ).length && value === '#preview_wrapper td:first' ) {
+                // Hack for preview campaign email pane.
+                console.log( true );
+                previewHeaderHeight = parseInt( $( '.preview-header' ).css( 'height' ));
+            }
+            maxHt = maxHt - previewHeaderHeight;
+            $( value ).css( 'height', maxHt );
         });
     };
     setTimeout( setHt, 100 );
     $( window ).resize( setHt );
-}
+};
 
 
 // Handle tabs in various resolutions

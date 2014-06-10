@@ -1119,10 +1119,12 @@ function MerchantMessage() {
         highlightCurrentButton( $( this ));
         $( selector ).animate({ width: '100%' }, 200 );
         $( '#message_preview' ).removeClass( 'mm-mobile-preview' );
+        opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper td:first' ]);
     });
 
     $( '#show-mobile-preview' ).click( function() {
         highlightCurrentButton( $( this ));
+        $( '#preview_wrapper td:first' ).css ( 'height', 'auto' ); // To overcome sideeffects of equalizeDivHeights().
         $( selector ).animate({ width: '320px' }, 200, function() {
             $( '#message_preview' ).addClass( 'mm-mobile-preview' );
         }).css( 'margin-left', 'auto' ).css( 'margin-right', 'auto' );
