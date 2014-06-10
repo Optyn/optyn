@@ -106,19 +106,19 @@ module ApplicationHelper
   end
 
 
-  # def user_permission(user)
-  #   visible_permissions_users = user.permissions_users.select(&:action)
-  #   if visible_permissions_users.present?
+  def user_permission(user)
+    visible_permissions_users = user.permissions_users.select(&:action)
+    if visible_permissions_users.present?
 
-  #     if visible_permissions_users.size == Permission.cached_count
-  #       "Full"
-  #     else
-  #       user.permission_names.join(", ")
-  #     end
-  #   else
-  #     "None"
-  #   end
-  # end
+      if visible_permissions_users.size == Permission.cached_count
+        "Full"
+      else
+        user.permission_names.join(", ")
+      end
+    else
+      "None"
+    end
+  end
 
   def shop_logo(shop)
     image_name = shop.logo_img? ? shop.logo_img.url : 'no_shop_logo.gif'

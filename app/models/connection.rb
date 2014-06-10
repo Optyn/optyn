@@ -34,7 +34,7 @@ class Connection < ActiveRecord::Base
 
   scope :latest_updates, order("connections.updated_at DESC")
 
-  # scope :includes_user_and_permissions, includes(user: {permissions_users: :permission})
+  scope :includes_user_and_permissions, includes(user: {permissions_users: :permission})
 
   scope :includes_user, includes(:user)
 
@@ -64,7 +64,6 @@ class Connection < ActiveRecord::Base
   end
 
   def self.paginated_shops_connections(shop_id, page = PAGE, per_page = PER_PAGE)
-    # active.for_shop(shop_id).shop_and_user_present.includes_user_and_permissions.latest_updates.page(page).per(per_page)
     active.for_shop(shop_id).shop_and_user_present.includes_user_with_labels.latest_updates.page(page).per(per_page)
   end
 

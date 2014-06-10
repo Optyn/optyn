@@ -278,9 +278,9 @@ Optyn::Application.routes.draw do
       get 'user/create_error', to: 'users#create_error'
       get 'user/alias', to: 'users#alias'
       get '/login', to: 'optyn_button#login', as: :login
-      # get '/connection', to: 'optyn_button#connection', as: :connection
+      get '/connection', to: 'optyn_button#connection', as: :connection
       put '/automatic_connection', to: 'optyn_button#automatic_connection', as: :automatic_connection
-      # put '/update_permissions', to: 'optyn_button#update_permissions', as: :update_permissions
+      put '/update_permissions', to: 'optyn_button#update_permissions', as: :update_permissions
       put '/connect_with_email', to: 'optyn_button#connect_via_email'
 
       namespace :merchants do

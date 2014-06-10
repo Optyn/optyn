@@ -26,27 +26,26 @@
         %th Lists
         %th Subscriber Profile
     %tbody
-      / - email_id = Permission.email_id
-      / - name_id = Permission.name_id
+      - email_id = Permission.email_id
+      - name_id = Permission.name_id
 
       - @connections.each_with_index do |connection, index|
         - next if connection.user.nil?
         %tr
           %td= index + 1
           %td
-            / = connection_user_display_name(connection, name_id, email_id)
-            = connection.user.full_name
+            = connection_user_display_name(connection, name_id, email_id)
           %td
             %span.expandable
               - user_shop_labels = get_user_shop_labels(connection)
               = user_shop_labels
               / please dont remove this comment
           %td
-            / - if connection.user.permissions_users.present?
-            %a{href: "javascript:void(0)", class: "consumer_connection_link"} More Info
-            = hidden_field_tag "show_path_#{connection.user.id}", merchants_connection_path(connection.user.id)
-            / - else
-            /   %a{:href => "#",:style => "color:#7D8B8F"} More Info
+            - if connection.user.permissions_users.present?
+              %a{href: "javascript:void(0)", class: "consumer_connection_link"} More Info
+              = hidden_field_tag "show_path_#{connection.user.id}", merchants_connection_path(connection.user.id)
+            - else
+              %a{:href => "#",:style => "color:#7D8B8F"} More Info
 
   = paginate @connections
 
