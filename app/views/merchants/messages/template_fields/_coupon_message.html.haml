@@ -13,22 +13,18 @@
         %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
 
       = f.text_field :type_of_discount
-  .span4.offset1
+  .span4
     = f.number_field :discount_amount, 'data-toggle' => 'tooltip',
-      title: 'Please enter the value of the coupon.', placeholder: 'DISCOUNT AMOUNT',
+      title: 'Please enter the value of the coupon.', placeholder: 'Discount Amount',
       class: 'span12'
   .span4
     = f.text_field :coupon_code, 'data-toggle' => 'tooltip',
       title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
-      placeholder: 'COUPON CODE', class: 'span12'
+      placeholder: 'Coupon Code', class: 'span12'
 .control-group
   = check_box_tag "add_expiration_date" , true,  set_default(@message.ending_time)
   %label{ for: 'add_expiration_date' } Add Expiration date
   = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
-
-.control-group
-  = f.check_box(:permanent_coupon)
-  %label{ for: 'message_permanent_coupon' } This coupon does not expire
 
 .control-group
   = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
