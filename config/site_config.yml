@@ -49,6 +49,7 @@ defaults:
     offer_relevant: '/emails/relevant'
     segments_prefix: '/emails/segments'
     segments_default: '/default'
+    tiny_url_path: '/s'
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'
