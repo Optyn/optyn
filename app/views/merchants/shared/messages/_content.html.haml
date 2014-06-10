@@ -1,2 +1,2 @@
 = f.label :content, "Enter your Message Details:"
-= f.cktext_area :content, :id => "content",:value => 'Hello {{Customer Name}},', :toolbar => 'Custom', :ckeditor => {       filebrowserImageUploadUrl: "/ckeditor/pictures?shop_id=#{current_manager.shop.id}" }
+= f.cktext_area :content, :id => "content",:value => @message.content, :toolbar => 'Custom', :ckeditor => {       filebrowserImageUploadUrl: "/ckeditor/pictures?shop_id=#{current_manager.shop.id}" }
