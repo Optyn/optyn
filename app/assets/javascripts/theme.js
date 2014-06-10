@@ -159,7 +159,6 @@ $(document).ready(function () {
 });
 // Equalize div heights
 opTheme.equalizeDivHeights = function( selectorArray ) {
-    console.log( 'equalizeDivHeights' );
     $('#preview_wrapper td:first td:first').css( 'vertical-align', 'top' );
     var setHt = function() {
         // This function sets width of the team member divs.
@@ -176,7 +175,6 @@ opTheme.equalizeDivHeights = function( selectorArray ) {
             var previewHeaderHeight = 0;
             if ( $( '.preview-header' ).length && value === '#preview_wrapper td:first' ) {
                 // Hack for preview campaign email pane.
-                console.log( true );
                 previewHeaderHeight = parseInt( $( '.preview-header' ).css( 'height' ));
             }
             maxHt = maxHt - previewHeaderHeight;
