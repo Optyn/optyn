@@ -146,6 +146,7 @@ OP = (function($, window, doucument, Optyn){
           divisionContents.push(artifact);
         });
         OP.template.openCkeditor($division, divisionContents);
+        OP.setParentIframeHeight();
       });
     },
 

@@ -125,6 +125,7 @@ OP = (function($, window, doucument, Optyn){
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
         OP.templateEditor.clearTemplateEditorArea();
+        OP.setParentIframeHeight();
       });
     },
 
