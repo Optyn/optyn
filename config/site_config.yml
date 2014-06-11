@@ -45,10 +45,12 @@ defaults:
     open_path: '/emails/o'
     link_path: '/emails/l'
     unsubscribe_path: '/emails/unsubscribe'
+    opt_out_path: '/emails/opt-out'
     qr_code_path: '/emails/g'
     offer_relevant: '/emails/relevant'
     segments_prefix: '/emails/segments'
     segments_default: '/default'
+    tiny_url_path: '/s'
 
 staging:
   twitter_consumer_key: 'PIlc0WbUl3KOK11yQG9DQ'

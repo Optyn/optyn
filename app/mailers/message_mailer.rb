@@ -25,6 +25,9 @@ class MessageMailer < ActionMailer::Base
 
     @partner = @shop.partner
 
+    #Add X headers
+    add_x_headers(@user.email, @message.uuid)
+
     #to: "success@simulator.amazonses.com",
     mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>),
       from: @message.from, 
@@ -40,6 +43,10 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
+
+    #Add X headers
+    add_x_headers(@user.email, @message.uuid)
+
     mail(to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
       from: message.from, 
       subject: message.personalized_subject(receiver),
@@ -98,5 +105,27 @@ class MessageMailer < ActionMailer::Base
       subject: "Message Rejected: #{@actual_message.name}",
       reply_to: "specials@eatstreet.com"
     )
+  end
+
+  private
+
+  def add_x_headers(user_email, message_uuid)
+    add_list_unsubscribe_header(user_email, message_uuid)
+    add_x_mailer_header
+    add_x_report_abuse_header(user_email, message_uuid)
+  end
+
+  def add_list_unsubscribe_header(user_email, message_uuid)
+    unsubscribe_id = Encryptor.encrypt(user_email, message_uuid)
+    headers['List-Unsubscribe'] = "<#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.unsubscribe_path}/#{unsubscribe_id}>"
+  end
+
+  def add_x_report_abuse_header(user_email, message_uuid)
+    opt_out_id = Encryptor.encrypt(user_email, message_uuid)
+    headers['X-Report-Abuse'] = "<#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.opt_out_path}/#{opt_out_id}>"
+  end
+
+  def add_x_mailer_header
+    headers['X-Mailer'] = 'Simple Send'
   end
 end

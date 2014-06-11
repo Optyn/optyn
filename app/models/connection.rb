@@ -38,6 +38,8 @@ class Connection < ActiveRecord::Base
 
   scope :includes_user, includes(:user)
 
+  scope :includes_user_with_labels, includes(:user => {:user_labels => :label})
+
   scope :for_users, ->(user_identifiers) { where(user_id: user_identifiers) }
 
   scope :time_range, ->(start_timestamp, end_timestamp) { where(created_at: start_timestamp..end_timestamp) }
@@ -62,7 +64,7 @@ class Connection < ActiveRecord::Base
   end
 
   def self.paginated_shops_connections(shop_id, page = PAGE, per_page = PER_PAGE)
-    active.for_shop(shop_id).shop_and_user_present.includes_user_and_permissions.latest_updates.page(page).per(per_page)
+    active.for_shop(shop_id).shop_and_user_present.includes_user_with_labels.latest_updates.page(page).per(per_page)
   end
 
   def self.shop_connections_count_total(shop_id, force = false)

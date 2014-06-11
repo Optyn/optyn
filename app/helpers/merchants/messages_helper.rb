@@ -226,9 +226,9 @@ module Merchants::MessagesHelper
       return URI.parse("#{FACEBOOK_SHARE_API}?#{query}")
     when "twitter"
       params = options['via'].present? ? "&via=#{options['via']}" : ""
-      googl = Shortly::Clients::Googl
-      short_url = googl.shorten(public_msg_url).shortUrl
-      URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.generic_subject}&url=#{short_url}#{params}"))
+      shortener = Shortener::ShortenedUrl.generate(public_msg_url)
+      tiny_url = "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.tiny_url_path}/#{shortener.unique_key}"
+      URI.parse(URI.encode("#{TWITTER_SHARE_API}?text=#{message.generic_subject}&url=#{tiny_url}#{params}"))
     end
   end
 
