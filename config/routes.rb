@@ -167,7 +167,8 @@ Optyn::Application.routes.draw do
   match 'g/:message_id' => 'merchants/messages#generate_qr_code', :as => :generate_qr_code
   # Redeem the coupon offer TO BE IMPLEMENTED
   match 'redeem/:message_user' => 'merchants/messages#redeem'
-
+  # Shortner expanding
+  get '/s/:id', to: "shortener/shortened_urls#show"
 
 
   devise_for :users, :path_names => {:sign_out => 'logout',

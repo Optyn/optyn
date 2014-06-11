@@ -106,12 +106,12 @@ namespace :god do
       puts "XXX Rescuing..."
     end
 
-    begin
-      puts "-- Killing any remaining processes"
-      run "cd #{current_path} && ps -ef | grep sidekiq | awk '{print $2}' | xargs kill -9" 
-    rescue 
-      puts "XXX Rescuing..."
-    end  
+    # begin
+    #   puts "-- Killing any remaining processes"
+    #   run "cd #{current_path} && ps -ef | grep sidekiq | awk '{print $2}' | xargs kill -9" 
+    # rescue 
+    #   puts "XXX Rescuing..."
+    # end  
 
     begin
       puts "-- Sleeping 20 seconds"
