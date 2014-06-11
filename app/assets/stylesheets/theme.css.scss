@@ -1368,10 +1368,22 @@ blockquote {
     @include box-shadow( none );
     background: #cfcfcf;
     background: rgba(0, 0, 0, 0.05);
+    background: #fff;
+    border-color: #ddd;
+  }
+  .cke_combo_off a.cke_combo_button:hover,
+  .cke_combo_off a.cke_combo_button:focus,
+  a.cke_button_off:hover,
+  a.cke_button_off:focus,
+  a.cke_button_disabled:hover,
+  a.cke_button_disabled:focus {
+    background: #ddd;
   }
   .cke_combo_button,
   .cke_toolgroup {
     @include border-radius( 1px );
     @include box-shadow( none );
+    background: #fff;
+    border: 0;
   }
 }
