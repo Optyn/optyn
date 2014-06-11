@@ -1352,7 +1352,7 @@ blockquote {
 .yield {
   .cke_chrome {
     @include box-shadow( none );
-    border: 0;
+    @include border-radius( 1px );
   }
   .cke_inner {
     background-color: transparent;
@@ -1361,7 +1361,6 @@ blockquote {
     background-image: none;
     background-color: transparent;
     border: 0;
-    padding: 6px 0 2px;
     @include box-shadow( none );
   }
   .cke_bottom {
