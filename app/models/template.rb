@@ -47,7 +47,7 @@ class Template < ActiveRecord::Base
   TW_PLACE_HOLDER_ELEM = "<twplaceholder></twplaceholder>"
 
   LAYOUT_BACKGROUND_COLOR = '#d4d4d4'
-  HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Arial, sans-serif}, %{Verdana, Arial, sans-serif}, %{'Courier New', Courier, Arial, sans-serif}]
+  HEADER_FONT_FAMILIES = [%{'Helvetica Neue', Helvetica, Roboto, Verdana, Arial, sans-serif}, %{'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif}, %{'Menlo', 'Consolas', 'Lucida Console', 'Courier New', Courier, monospace}]
   HEADER_BACKGROUND_COLOR = Shop::DEFAULT_HEADER_BACKGROUND_COLOR
   CONTENT_BACKGROUND_COLOR = '#FFFFFF'
   SIDEBAR_BACKGROUND_COLOR = '#C9C9C9'
