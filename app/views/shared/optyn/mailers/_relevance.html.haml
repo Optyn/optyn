@@ -5,7 +5,7 @@
 
       - link_options = {style: 'color:#64aaef;background: #fff;padding:5px;'}
       - link_options.merge!({onclick: 'alert("Not Available")'}) if @preview
-      - query_params = {:offer_relevant => true, :message_user_id => @receiver.uuid, :id => @message.uuid}
+      - query_params = {:offer_relevant => true, :message_user_id => @receiver.present? ? @receiver.uuid : nil, :id => @message.uuid}
 
       - relevance_yes_link = @receiver.present? ? "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.offer_relevant}?#{query_params.to_query}"  : "javascript:void(0)"
       

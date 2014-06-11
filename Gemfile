@@ -31,6 +31,8 @@ gem 'carrierwave'
 gem 'rmagick', '2.13.1'
 gem "fog"
 #gem 'localtunnel'
+
+
 gem 'chosen-rails'
 gem 'kaminari'
 gem 'newrelic_rpm'
@@ -97,7 +99,7 @@ gem 'sidekiq-benchmark'
 gem 'sidekiq-limit_fetch'
 
 gem "gretel"
-gem 'shortly'
+gem 'shortener'
 
 #INFO:for test only, remove it later
 # gem "http_logger"
@@ -115,6 +117,7 @@ group :development do
   gem 'rails-erd'
   #gem "capistrano-resque", "~> 0.1.0"
   gem "mailcatcher"
+  gem "ngrok"
 end
 
 group :development, :test do

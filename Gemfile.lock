@@ -130,6 +130,7 @@ GEM
       curb (~> 0.8.1)
       loofah (~> 1.2.1)
       sax-machine (~> 0.2.1)
+    ffi (1.9.3)
     fog (0.9.0)
       builder
       excon (~> 0.6.1)
@@ -189,6 +190,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
+    listen (2.7.5)
+      celluloid (>= 0.15.2)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     loofah (1.2.1)
       nokogiri (>= 1.4.4)
     mail (2.4.4)
@@ -221,6 +226,9 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.3.111)
+    ngrok (1.6.1)
+      daemons
+      listen
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
@@ -320,6 +328,9 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (10.1.0)
+    rb-fsevent (0.9.4)
+    rb-inotify (0.9.4)
+      ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.4)
@@ -383,9 +394,8 @@ GEM
     sexp_processor (4.2.1)
     sextant (0.2.4)
       rails (>= 3.2)
-    shortly (0.3.4)
-      httparty
-      json
+    shortener (0.3.0)
+      rails (>= 3.0.7)
     sidekiq (2.14.0)
       celluloid (>= 0.14.1)
       connection_pool (>= 1.0.0)
@@ -495,6 +505,7 @@ DEPENDENCIES
   mailcatcher
   mini_magick
   newrelic_rpm
+  ngrok
   nokogiri (= 1.6.1)
   oauth2
   oj
@@ -527,7 +538,7 @@ DEPENDENCIES
   sendgrid
   sendgrid_toolkit (>= 1.1.1)
   sextant
-  shortly
+  shortener
   sidekiq
   sidekiq-benchmark
   sidekiq-limit_fetch

@@ -855,7 +855,7 @@ class Message < ActiveRecord::Base
     return all_active_user_ids if label_select_all?(self.label_ids)
 
     receiver_label_user_ids = label_user_ids
-    Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.active.collect(&:user_id).uniq
+    Connection.for_users(receiver_label_user_ids).distinct_receiver_ids.for_shop(self.shop.id).active.collect(&:user_id).uniq
   end
 
   def replenish_draft_count
