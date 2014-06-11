@@ -21,14 +21,6 @@ OP = (function($, window, doucument, Optyn){
         $('.menuleft').hide();
         $( '.yield' ).attr( 'id', 'template-editor-on' );
 
-        $( '#choose_message' ).css( 'width', '620px' );
-        function adjustWidth() {
-          if ( $( window ).width() > 980 )
-            $( '#campn-editor').css( 'width', parseInt($( 'body' ).css( 'width' )) - parseInt($( '#choose_message' ).css( 'width' )));
-        }
-        adjustWidth();
-        $( window ).resize( adjustWidth );
-
         var $templateContainer = $('.template-editor-container');
         var $templateSection = $templateContainer.find('.template-editor-section');
         $templateSection.html($('#template_editable_content').val());
@@ -131,7 +123,6 @@ OP = (function($, window, doucument, Optyn){
 
     clearTemplateEditorArea: function() {
       $( '.template-editor-section' ).html( '<div id="edit-illustration"><img src="/assets/edit-campaign-illustration.png" alt=""></div>' );
-      $( '#merchants > .editor_wrpr > .span6' ).animate({ 'width': '50%' }, 300 );
       OP.templateEditor.equalizeHeights();
     },
 

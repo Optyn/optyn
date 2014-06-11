@@ -153,7 +153,6 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   	padding-top: 50px;
   }
   &.launch#flat { padding-top: 0; }
-  &.preview_template #template_wrapper { padding-top: 50px; }
   &#flat #dashboard .yield .tear-page {
 		@media( max-width: 980px ) {
 			padding: 0;
@@ -380,10 +379,10 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 }
 
 .template #campn-editor {
-	width: 50%;
+	width: 40%;
 }
 .template #choose_message {
-	width: 50%;
+	width: 60%;
 	margin: 0;
 	padding: 0;
 }
