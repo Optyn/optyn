@@ -45,7 +45,7 @@ class MessageMailer < ActionMailer::Base
     content = template.process_content(content, receiver)
 
     #Add X headers
-    add_x_headers(@user.email, @message.uuid)
+    add_x_headers(receiver.email, message.uuid)
 
     mail(to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
       from: message.from, 
