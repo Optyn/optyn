@@ -130,7 +130,7 @@ OP = (function($, window, doucument, Optyn){
     },
 
     clearTemplateEditorArea: function() {
-      $( '.template-editor-section' ).html( '<p>Click on edit buttons on email preview to start adding content to the email.</p>' );
+      $( '.template-editor-section' ).html( '<div id="edit-illustration"><img src="/assets/edit-campaign-illustration.png" alt=""></div>' );
       $( '#merchants > .editor_wrpr > .span6' ).animate({ 'width': '50%' }, 300 );
       OP.templateEditor.equalizeHeights();
     },

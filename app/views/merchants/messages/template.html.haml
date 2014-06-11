@@ -19,7 +19,8 @@
     .editor_wrpr
       #campn-editor.span6.template-editor-container
         .template-editor-section
-          %p Click on edit buttons on email preview to start adding content to the email.
+          #edit-illustration
+            = image_tag 'edit-campaign-illustration.png', alt: ''
       #choose_message.span6
         #template_wrapper
           = render partial: "editor_wrapper"
