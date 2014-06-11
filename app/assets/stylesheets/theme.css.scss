@@ -1346,3 +1346,32 @@ blockquote {
   border: 0;
   background: transparent;
 }
+
+
+// CKEditor overrides.
+.yield {
+  .cke_chrome {
+    @include box-shadow( none );
+    border: 0;
+  }
+  .cke_inner {
+    background-color: transparent;
+  }
+  .cke_top {
+    background-image: none;
+    background-color: transparent;
+    border: 0;
+    padding: 6px 0 2px;
+    @include box-shadow( none );
+  }
+  .cke_bottom {
+    @include box-shadow( none );
+    background: #cfcfcf;
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .cke_combo_button,
+  .cke_toolgroup {
+    @include border-radius( 1px );
+    @include box-shadow( none );
+  }
+}
