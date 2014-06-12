@@ -133,12 +133,14 @@
   padding: 0;
 }
 #flat.m-app #dashboard .pad3pc#message_fields_wrapper { padding: 3%; }
-.system_layout_properties #merchants > .span6,
+.system_layout_properties #merchants > .span6:first-child,
 .preview_template #merchants > .span6:first-child {
   width: 40%;
 }
+.system_layout_properties #merchants > .span6:last-child,
 .preview_template #merchants > .span6:last-child {
   width: 60%;
+  margin: 0;
 }
 .preview_template #merchants > .span6 {
   margin: 0;
