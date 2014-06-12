@@ -183,7 +183,7 @@ class Shop < ActiveRecord::Base
     app = self.oauth_application 
     name_field = '<input type="text" id="user_name" name="user[name]" size="34" placeholder="enter name">' if self.oauth_application.show_name?
     %Q(
-       <style type="text/css">"#{self.oauth_application.custom_css}"</style>
+       <style type="text/css">#{self.oauth_application.custom_css}</style>
        #{wrapper_style}
        <div id="optyn_button_wrapper">
         <div id="optyn-container">     
