@@ -169,8 +169,6 @@ OP = (function($, window, doucument, Optyn){
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');
-
-        OP.templateEditor.clearTemplateEditorArea();
       });
     },
 
