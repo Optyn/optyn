@@ -1031,16 +1031,11 @@ form {
       min-height: 35px;
       font-size: 15px;
       line-height: 24px;
-      @include border-radius( 3px );
+      @include border-radius( 1px );
       border-color: darken( $light-gray, 20% );
-      border-width: 0px;
-      border-top-width: 1px;
-      border-right-width: 1px;
-      border-bottom-width: 2px;
-      border-left-width: 1px;
-      margin-left: -2px;
+      border-width: 1px;
       position: relative;
-      left: -3px;
+      left: -1px;
     }
   }
   #message_form .add-on i {
