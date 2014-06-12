@@ -15,7 +15,7 @@
         %button.btn.btn-primary.active{ :id => 'properties_header_logo_image', :type => 'button', 'data-value' => :image } Image
         %button.btn.btn-primary{ :id => 'properties_header_logo_text', :type => 'button', 'data-value' => :text } Text
 
-        = hidden_field_tag "properties[header][logo]", "image"
+      = hidden_field_tag "properties[header][logo]", "image"
 
   .control-group{style: "display: none;"}
     = label_tag "logo", "Title", class: 'control-label'
