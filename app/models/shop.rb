@@ -186,12 +186,13 @@ class Shop < ActiveRecord::Base
     name_field = '<input type="text" id="user_name" name="user[name]" size="34" placeholder="enter name">' if self.oauth_application.show_name?
     %Q(
        <style type="text/css">#{self.oauth_application.custom_css}</style>
+       #{app_form_script}
        #{wrapper_style}
        <div id="optyn_button_wrapper">
         #{app_form_welcome_message}
         <div id="optyn-container">     
            <div id="optyn-first-container">
-            <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email" id="optyn-email-form">
+            <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email" id="optyn-email-form" name="optyn_email_form" onsubmit="return validateOptynForm();" >
               #{name_field}
               <input placeholder="enter your e-mail" size="34" name="user[email]" id="user_email" type="email">
               <input value="#{app.uid}" name="app_id" id="app_id" type="hidden">
@@ -209,6 +210,24 @@ class Shop < ActiveRecord::Base
         <div class="optyn-text">#{app_text_blurb}</div>
       HTML
     end
+  end
+
+  def app_form_script
+    <<-SCRIPT
+      <script type="text/javascript">
+        function validateOptynForm() {
+          var x = document.forms["optyn_email_form"]["user_email"].value;
+          var currentPos = x.indexOf("@");
+          var periodPos = x.lastIndexOf(".");
+          if (currentPos<1 || periodPos<currentPos+2 || periodPos+2>=x.length) {
+            alert("Not a valid e-mail address");
+            return false;
+          }
+        }
+
+
+      </script>
+    SCRIPT
   end
 
   def starter_plan?
