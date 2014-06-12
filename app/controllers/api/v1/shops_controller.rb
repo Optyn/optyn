@@ -423,25 +423,24 @@ jQuery(scriptElem).before(
 end
 
 def style
-%Q(<style type="text/css"> #{@application.custom_css.gsub(/\r/," ").gsub(/\n/," ")}</style>)
+  %Q(<style type="text/css"> #{@application.custom_css.gsub(/\r/," ").gsub(/\n/," ")}</style>)
 end
 
 def email_box_style
-if RENDER_CHOICE_BAR == @application.render_choice.to_i
-#::-webkit-input-placeholder { /* WebKit browsers */ color: white; } :-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: white; }::-moz-placeholder { /* Mozilla Firefox 19+ */ color: white; } :-ms-input-placeholder { /* Internet Explorer 10+ */ color: white; }
-%Q(<style type="text/css">#optyn-container form input[type="email"] { border-bottom: 1px rgba(9, 67, 89, 0.75); border-top: none; border-left:none; border-right: none; font-size: 14px; height: 26px; padding: 5px; border-radius: 4px; margin-right: 10px; font-weight: bold;}</style>)
-else
-""
-end
+  if @shop.app_render_bar_choice?
+    %Q(<style type="text/css">#optyn-container form input[type="email"] { border-bottom: 1px rgba(9, 67, 89, 0.75); border-top: none; border-left:none; border-right: none; font-size: 14px; height: 26px; padding: 5px; border-radius: 4px; margin-right: 10px; font-weight: bold;}</style>)
+  else
+    ""
+  end
 end
 
 def optyn_wrapper_style
-if RENDER_CHOICE_BAR == @application.render_choice.to_i
-%Q('<style type="text/css">' +
+  if @shop.app_render_bar_choice?
+    %Q('<style type="text/css">' +
               '#optyn_button_wrapper { background-color: #{@application.background_color}; margin: 0px; height: 60px; vertical-align: middle; border-bottom:thick solid #046d95; border-width: 2px;}' +
               '#show_optyn_button_wrapper { background-color: #{@application.background_color}; background-position: 0 -8px; display: block; height: 40px; /*overflow: hidden;*/ padding: 16px 0 0; position: absolute; right: 20px; top: -3px; width: 80px; z-index: 100; box-shadow: 0 0 5px rgba(0,0,0,0.35); -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 2px solid #046d95; text-align: center; }' +
-            '</style>')
-end
+        '</style>')
+  end
 end
 
 def show_hide
@@ -461,7 +460,7 @@ def show_hide
 end
 
 def collapse_bar
-if BEGIN_STATE_HIDDEN == @application.begin_state.to_i
+if @shop.app_begin_state_hidden?
 %Q(
           '<script>hideOptynButtonWrapper("optyn_button_wrapper", "show_optyn_button_wrapper")</script>'
 )

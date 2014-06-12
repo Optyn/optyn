@@ -36,6 +36,8 @@ class Shop < ActiveRecord::Base
   DEFAULT_FOOTER_BACKGROUND_COLOR = '#ffffff'
   DEFUALT_TIMEZONE = "Eastern Time (US & Canada)"
 
+  APP_BEGIN_STATE_HIDDEN = '0'
+  APP_RENDER_CHOICE_BAR = 1
 
   attr_accessible :name, :stype, :managers_attributes, :locations_attributes, :description, :logo_img
   attr_accessible  :pre_added, :business_ids, :website, :identifier, :time_zone, :virtual
@@ -186,6 +188,7 @@ class Shop < ActiveRecord::Base
        <style type="text/css">#{self.oauth_application.custom_css}</style>
        #{wrapper_style}
        <div id="optyn_button_wrapper">
+        #{app_form_welcome_message}
         <div id="optyn-container">     
            <div id="optyn-first-container">
             <form method="post" action="#{SiteConfig.app_base_url}/authenticate_with_email" id="optyn-email-form">
@@ -198,6 +201,14 @@ class Shop < ActiveRecord::Base
         </div>
        </div>
     )
+  end
+
+  def app_form_welcome_message
+    if app_render_bar_choice?
+      <<-HTML
+        <div class="optyn-text">#{app_text_blurb}</div>
+      HTML
+    end
   end
 
   def starter_plan?
@@ -333,13 +344,25 @@ class Shop < ActiveRecord::Base
     details[:button_url] = SiteConfig.app_base_url + "/assets/" + (oauth_application.call_to_action == 1 ? 'optyn_button_small.png' : 'optyn_button_large.png')
 
     # put the oauth details
-    details[:welcome_message] = oauth_application.show_default_optyn_text ? SiteConfig.api_welcome_message : oauth_application.custom_text
+    details[:welcome_message] = app_text_blurb
 
     details
   end
 
+  def app_text_blurb
+    oauth_application.show_default_optyn_text ? SiteConfig.api_welcome_message : oauth_application.custom_text
+  end
+
   def app_id
     self.oauth_application.uid
+  end
+
+  def app_render_bar_choice?
+    APP_RENDER_CHOICE_BAR == oauth_application.render_choice.to_i 
+  end
+
+  def app_begin_state_hidden?
+    APP_BEGIN_STATE_HIDDEN == oauth_application.begin_state.to_i
   end
 
   def secret
@@ -415,8 +438,6 @@ class Shop < ActiveRecord::Base
       conn_count = self.active_connection_count
       PaymentNotificationSender.perform_async("MerchantMailer", "notify_plan_upgrade", {manager_id: self.manager.id, active_connections: conn_count})
     end
-
-    
   end
 
   def check_subscription
