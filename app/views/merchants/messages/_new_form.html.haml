@@ -1,4 +1,26 @@
 = hidden_field_tag :message_type, @message_type
 = hidden_field_tag :choice, @message.queued? ? 'launch' : 'save_draft'
 = render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
+
+.control-group
+  = f.label :name, "Subject", class: 'control-label'
+  .controls
+    = f.text_field :subject, class: 'input-xlarge span12'
+
+.control-group
+  = f.label :send_on, "Send Date & Time", class: "control-label"
+  #message_send_on_container.controls
+    .input-append.date-picker
+      = f.text_field :send_on_date, value: formatted_message_form_date(@message, :send_on), id: 'message_send_on_date', class: "input-medium", 'data-format' => "yyyy-MM-dd", readonly: true
+      %span.add-on
+        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+
+    .input-append.time-picker
+      = f.text_field :send_on_time, value: formatted_message_form_time(@message, :send_on), class: "input-medium", 'data-format' => "HH:mm PP", readonly: true
+      %span.add-on
+        %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
+
+= hidden_field_tag "send_on_error", @message.errors[:send_on]
+= f.hidden_field :make_public, value: "1" 
+
 = render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

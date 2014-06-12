@@ -80,7 +80,7 @@ class Merchants::MessagesController < Merchants::BaseController
     Message.transaction do
       klass = params[:message_type].classify.constantize
       @message = klass.new(params[:message].except(:label_ids).merge(manager_id: current_manager.id))
-      populate_send_on if @message.instance_of?(TemplateMessage)
+      populate_send_on #if @message.instance_of?(TemplateMessage)
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
