@@ -2,8 +2,10 @@ var opTheme = opTheme || {};
 $(document).ready(function () {
     // Resize column heights on campaign preview and edit pages.
     if ( $( 'body' ).hasClass( 'merchants-messages' )) {
-        if ( $( 'body' ).hasClass( 'edit' ) || $( 'body' ).hasClass( 'preview' ))
-            opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper td:first' ]);
+        if ( $( 'body' ).hasClass( 'edit' ) || $( 'body' ).hasClass( 'preview' )) {
+            opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper' ]);
+            $( '#preview_wrapper' ).css( 'background-color', $( '#preview_wrapper td:first' ).css( 'background-color' ));
+        }
     }
 
     $( '.scrolltop' ).html( "<i class='icon-arrow-up icon-white'></i>" );
@@ -159,12 +161,14 @@ $(document).ready(function () {
 });
 // Equalize div heights
 opTheme.equalizeDivHeights = function( selectorArray ) {
+    // This function is made to be used with Message Center.
     $('#preview_wrapper td:first td:first').css( 'vertical-align', 'top' );
     var setHt = function() {
         // This function sets width of the team member divs.
         var maxHt = 0;
+        var minHt = $( window ).height() - parseInt( $( 'h1.dark-heading' ).css( 'height' ));
         $( selectorArray ).each( function( index, value ) {
-            $( value ).css( 'height', 'auto' );
+            $( value ).css( 'min-height', 'auto' );
         });
         $( selectorArray ).each( function( index, value ) {
             if (( parseInt($( value ).css( 'height' ))) > maxHt ) {
@@ -175,10 +179,16 @@ opTheme.equalizeDivHeights = function( selectorArray ) {
             var previewHeaderHeight = 0;
             if ( $( '.preview-header' ).length && value === '#preview_wrapper td:first' ) {
                 // Hack for preview campaign email pane.
-                previewHeaderHeight = parseInt( $( '.preview-header' ).css( 'height' ));
             }
-            maxHt = maxHt - previewHeaderHeight;
-            $( value ).css( 'height', maxHt );
+            if ( value === '#preview_wrapper' && $( 'body').hasClass( 'preview' )) {
+                // Take care of .preview-header.
+                previewHeaderHeight = parseInt( $( '.preview-header' ).css( 'height' ));
+                maxHt > minHt ? maxHt : maxHt = minHt; // Ensuring the divs fill the entire screen.
+                $( value ).css( 'min-height', maxHt - previewHeaderHeight );
+            } else {
+                maxHt > minHt ? maxHt : maxHt = minHt; // Ensuring the divs fill the entire screen.
+                $( value ).css( 'min-height', maxHt );
+            }
         });
     };
     setTimeout( setHt, 100 );
