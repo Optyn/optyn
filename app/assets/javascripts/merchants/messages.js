@@ -1102,7 +1102,9 @@ function MerchantMessage() {
         $(".optional").show();
       }
       else{
-       $(".optional").hide();
+        $("#message_button_text").val('');
+        $("#message_button_url").val('');
+        $(".optional").hide();
       }
     });
   };
