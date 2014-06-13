@@ -386,6 +386,7 @@ OP = (function($, window, doucument, Optyn){
           OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
           OP.setImageLinkTarget();
+          window.parent.opTheme.equalizeHeights();
         }); //end of $toolsetSortable slideup
       });
     },
@@ -526,6 +527,7 @@ OP = (function($, window, doucument, Optyn){
   };
 
   Optyn.setParentIframeHeight = function() {
+    return; // Verify this function is not required and used, and remove it.
     var resize = function() {
       $( window.parent.document.body ).find( 'iframe' ).css( 'height', parseInt($( '.body > tbody > tr > .center > center' ).css( 'height' )) + 100 + 'px' );
     };

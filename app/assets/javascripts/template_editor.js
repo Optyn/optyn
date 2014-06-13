@@ -9,6 +9,20 @@ OP = (function($, window, doucument, Optyn){
       this.addImageLinkURL();
       this.removeImageLinkURL();
       this.imageFileUpload();
+      this.setIframeParentBGColour();
+    },
+
+    setIframeParentBGColour: function() {
+      if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'template' )) {
+        $( '#customHtmlTemplate' ).load( function() {
+          $( '#choose_message' ).css( 'background-color', $( this ).contents().find( 'table.body' ).css( 'background-color' ));
+        });
+      }
+      if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'preview_template' )) {
+        $( '#customHtmlTemplate' ).load( function() {
+          $( '#preview-pane' ).css( 'background-color', $( this ).contents().find( 'table.body' ).css( 'background-color' ));
+        });
+      }
     },
 
     setUpSidebarEditing: function(){
@@ -57,7 +71,7 @@ OP = (function($, window, doucument, Optyn){
 
         OP.templateEditor.openCKEditor($templateContainer);
 
-        OP.templateEditor.equalizeHeights();
+        opTheme.equalizeHeights();
       });
     },
 
@@ -101,19 +115,6 @@ OP = (function($, window, doucument, Optyn){
       }
     },
 
-    equalizeHeights: function() {
-      setTimeout( function() {
-        var maxHeight = 0;
-        $( '#merchants > .editor_wrpr > .span6' ).css( 'height', 'auto' );
-        $( '#merchants > .editor_wrpr > .span6' ).each( function( index, value ) {
-          if ( parseInt( $( this ).css( 'height' )) > maxHeight ) maxHeight = parseInt( $( this ).css( 'height' ));
-        });
-        ( $( window ).height() - 50 ) < maxHeight ? maxHeight : maxHeight = $( window ).height();
-        $( '#merchants > .editor_wrpr > .span6' ).css( 'height', maxHeight );
-        //$( '#template_wrapper' ).css( 'height', maxHeight );
-      }, 500);
-    },
-
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
         OP.templateEditor.clearTemplateEditorArea();
@@ -123,7 +124,7 @@ OP = (function($, window, doucument, Optyn){
 
     clearTemplateEditorArea: function() {
       $( '.template-editor-section' ).html( '<div id="edit-illustration"><img src="/assets/edit-campaign-illustration.png" alt=""></div>' );
-      OP.templateEditor.equalizeHeights();
+      opTheme.equalizeHeights();
     },
 
     saveTemplateEditorAction: function(){

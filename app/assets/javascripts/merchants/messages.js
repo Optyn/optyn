@@ -1133,6 +1133,7 @@ function MerchantMessage() {
   }
 
   this.hookEqualizePreviewColumnHeight = function() {
+    return;  // Verify this function is not required and used, and remove it.
     var $iframe = $( '#customHtmlTemplate' );
     var $editorParent = $( '#preview-pane' );
     var $editorPane = $( '#campaign-details-pane' );
