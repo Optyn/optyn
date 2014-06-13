@@ -2,4 +2,7 @@
 
 .blank-space
 
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}
+.control-group
+  = check_box_tag "add_button" , true,  set_default(@message.button_url)
+  %label{ for: 'add_button' } Add button
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}
