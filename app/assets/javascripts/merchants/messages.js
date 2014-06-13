@@ -145,7 +145,8 @@ function MerchantMessage() {
     };
 
     this.hookActionEvent = function () {
-        $('#message_form .btn').click(function (event) {
+        // $('#message_form .btn').click(function (event) {
+        $(document).on('click', '#message_form .btn', function (event) {
             $('#choice').val($(this).attr('name'));
         });
     };
@@ -1101,7 +1102,9 @@ function MerchantMessage() {
         $(".optional").show();
       }
       else{
-       $(".optional").hide(); 
+        $("#message_button_text").val('');
+        $("#message_button_url").val('');
+        $(".optional").hide();
       }
     });
   };

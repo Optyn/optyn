@@ -313,6 +313,20 @@ module Merchants::MessagesHelper
     end
   end
 
+  def default_for_add_button_state(message)
+    criteria = []
+    criteria << message.button_url if message.button_url.present?
+    criteria << message.message_image if message.message_image.present?
+    set_default(criteria)
+  end
+
+  def add_button_element_class(message)
+    criteria = []
+    criteria << message.button_url if message.button_url.present?
+    criteria << message.message_image if message.message_image.present?
+    show_message_part(criteria)
+  end
+
   def show_message_part(default_val)
     if !default_val.blank?
       "block"
