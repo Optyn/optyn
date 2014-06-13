@@ -68,9 +68,9 @@ class Users::SessionsController < Devise::SessionsController
     if params[:user][:email].match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/)
       @user = User.find_by_email(params[:user][:email])
       @user = sudo_registration(params) unless @user.present?
-      # sign_in @user
+      sign_in @user
       session[:user_return_to] = nil
-
+      set_through_form
       respond_to do |format|
         format.json { render(status: :created) }
         format.html { redirect_to @shop.oauth_application.redirect_uri_after_login }
