@@ -10,7 +10,6 @@
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     = render partial: 'layouts/meta_optynmail'
-    = render "layouts/pinterest_verify"
 
     = display_meta_description unless @meta_description_called
     = yield :meta_description
