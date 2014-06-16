@@ -1,14 +1,8 @@
-%h1.dark-heading
-  %a.goto-msg-center{ href: root_path }
-    %i.icon-home
+= content_for :banner do
   = message_form_title(@message_type)
 
 #merchants
-  /= render partial: "merchants/messages/message_menu"
-
   #message_fields_wrapper.pad3pc
-
-    /= render :partial => 'progress_bar'
 
     = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
       %fieldset

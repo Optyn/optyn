@@ -164,18 +164,4 @@ module ApplicationHelper
   rescue
     "optyn"
   end
-
-  def hide_header_footer
-      (['edit',
-        'preview',
-        'edit_metadata',
-        'new',
-        'template',
-        'new_template',
-        'edit_template',
-        'system_layout_properties',
-        'system_layouts',
-        'launch',
-        'preview_template'].include? params[ :action ]  and params[ :controller ] == 'merchants/messages') ? false : true
-  end
 end

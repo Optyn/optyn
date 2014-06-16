@@ -1,4 +1,6 @@
-= banner( "Edit #{@message.name}" )
+= content_for :banner do
+  = banner( @message.name.present? ? "Edit #{@message.name}" : message_form_title(@message_type) )
+
 
 .blank-space
 

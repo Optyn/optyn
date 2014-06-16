@@ -3,6 +3,20 @@ require 'rqrcode'
 require 'rqrcode/export/png'
 
 class Merchants::MessagesController < Merchants::BaseController
+  # OVERRIDING THE SWITCH HERE
+  layout :switch_layout
+
+  MESSAGE_MAKER_LAYOUT = ['edit',
+        'preview',
+        'edit_metadata',
+        'new',
+        'template',
+        'new_template',
+        'edit_template',
+        'system_layout_properties',
+        'system_layouts',
+        'launch',
+        'preview_template']
 
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
@@ -132,7 +146,6 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @preview = true
     @partner = current_partner
-    @skip_menu = true
     @message_type = @message.type.underscore
   end
 
@@ -246,7 +259,6 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @preview = true
     @partner = current_partner
-    @skip_menu = true
     @message_type = @message.type.underscore
   end
 
@@ -493,7 +505,6 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def edit_metadata
-    @skip_menu = true
     @message = Message.for_uuid(params[:id])
     populate_shop_surveys
     populate_labels
@@ -502,7 +513,6 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @preview = true
     @partner = current_partner
-    @skip_menu = true
     @message_type = @message.type.underscore
   end
 
@@ -561,4 +571,7 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def switch_layout
+    MESSAGE_MAKER_LAYOUT.include?(action_name) ? "message_maker" : super
+  end
 end

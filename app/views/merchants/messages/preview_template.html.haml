@@ -1,12 +1,11 @@
-%h1.dark-heading
-  %a.goto-msg-center{ href: root_path }
-    %i.icon-home
+= content_for :actions_left do
   - if @message.editable_state?
     .pull-left
       = link_to raw("<i class='icon-edit'></i> Details") , edit_template_merchants_message_path(@message.uuid), class: 'btn'
       = link_to raw("<i class='icon-edit'></i> Content"), template_merchants_message_path(@message.uuid), class: 'btn btn-'
+
+= content_for :banner do  
   Template Preview
-/= render partial: "merchants/messages/message_menu"
 
 #merchants.no-pad.row-fluid.tear-page
   /= render :partial => 'progress_bar'

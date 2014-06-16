@@ -1,11 +1,12 @@
-%h1.dark-heading
-  %a.goto-msg-center{ href: root_path }
-    %i.icon-home
+= content_for :actions_left do
   .pull-left
     %a#change-campn-det.btn.btn-primary{ href: "#{edit_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change details
+= content_for :banner do      
   Email Preview
+
+= content_for :actions_right do  
   .pull-right
     %a#prev-campn.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
       Launch Campaign
