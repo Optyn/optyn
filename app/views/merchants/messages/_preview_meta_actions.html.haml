@@ -1,7 +1,11 @@
 - if @message.editable_state?
-  %a.btn.btn-primary{ href: "#{copy_merchants_message_path(@message.uuid)}" }
-    Copy Campaign
-  %a.btn.btn-primary{ id: 'self_email', href: "#{email_self_merchants_message_path(@message.uuid)}" }
-    Send Me a Test Email
-%a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
+  .btn-group
+    %a.btn.btn-primary{ href: "#{copy_merchants_message_path(@message.uuid)}" }
+      %i.icon-copy
+      Copy Campaign
+    %a.btn.btn-primary{ id: 'self_email', href: "#{email_self_merchants_message_path(@message.uuid)}" }
+      %i.icon-envelope-alt
+      Send Me a Test Email
+.blank-space
+%a.btn.btn-success.btn-large.btn-block{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
   Publish Campaign
