@@ -1,18 +1,20 @@
 #preview-meta-data-view.preview-menu
-  .pad2pc
-    .well
-      %h4 Setup Campaign
-      = render :partial => "merchants/messages/template_fields/show_message"
-
-  .text-right
-    = link_to raw( "<i class='icon-pencil icon-white'></i> Make Changes" ), '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
+  .well
+    %h4 Setup Campaign
+    = render :partial => "merchants/messages/template_fields/show_message"
+    .text-right
+      = link_to raw( "<i class='icon-pencil icon-white'></i> Change Metadata" ), '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
 
   - if @message.editable_state?
-    %a.btn.btn-primary{ href: "#{copy_merchants_message_path(@message.uuid)}" }
-      Copy Campaign
-    %a.btn.btn-primary{ id: 'self_email', href: "#{email_self_merchants_message_path(@message.uuid)}" }
-      Send Me a Test Email
-  %a.btn.btn-success{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
+    .btn-group
+      %a.btn.btn-primary{ href: "#{copy_merchants_message_path(@message.uuid)}" }
+        %i.icon-copy
+        Copy Campaign
+      %a.btn.btn-primary{ id: 'self_email', href: "#{email_self_merchants_message_path(@message.uuid)}" }
+        %i.icon-envelope-alt
+        Send Me a Test Email
+  .blank-space
+  %a.btn.btn-success.btn-block.btn-large{ href: "#{launch_merchants_message_path(:id => @message.uuid, :choice => 'launch')}" }
     Publish Campaign
 
 #message_meta_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
