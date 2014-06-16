@@ -18,11 +18,6 @@ OP = (function($, window, doucument, Optyn){
           $( '#choose_message' ).css( 'background-color', $( this ).contents().find( 'table.body' ).css( 'background-color' ));
         });
       }
-      if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'preview_template' )) {
-        $( '#customHtmlTemplate' ).load( function() {
-          $( '#preview-pane' ).css( 'background-color', $( this ).contents().find( 'table.body' ).css( 'background-color' ));
-        });
-      }
     },
 
     setUpSidebarEditing: function(){

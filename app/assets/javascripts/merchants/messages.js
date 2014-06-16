@@ -1136,28 +1136,27 @@ function MerchantMessage() {
   }
 
   this.hookEqualizePreviewColumnHeight = function() {
-    return;  // Verify this function is not required and used, and remove it.
+    if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'preview_template' )) {
+        $( '#customHtmlTemplate' ).load( function() {
+            $( '#preview-pane' ).css( 'background-color', $( '#customHtmlTemplate' ).contents().find( 'table.body' ).css( 'background-color' ));
+        });
+    }
     var $iframe = $( '#customHtmlTemplate' );
-    var $editorParent = $( '#preview-pane' );
     var $editorPane = $( '#campaign-details-pane' );
     var workArea;
-    var setMinHt = function() {
-        workArea = $( window ).height() - 110;
-        $iframe.css( 'min-height', workArea );
-        $editorPane.css( 'min-height', workArea );
-    };
-    setMinHt();
     var cb = function() {
-        $iframe.css( 'height', 'auto' );
+        console.log(',,,');
+        workArea = $( window ).height() - 50;
+        $iframe.css( 'min-height', 'inherit' );
         var iframeHt = $iframe.contents().find( 'body' ).css( 'height' );
-        $editorPane.css( 'height', 'auto' );
+        $editorPane.css( 'min-height', 'inherit' );
         var editorHt = $editorPane.css( 'height' );
         var maxHt = Math.max( parseInt( iframeHt ), parseInt( editorHt ));
-        $( 'iframe' ).css( 'height', maxHt );
-        $( '#campaign-details-pane' ).css( 'height', maxHt + 60 );
-        setMinHt();
+        maxHt < workArea ? maxHt = workArea : maxHt;
+        $( 'iframe' ).css( 'min-height', maxHt );
+        $( '#campaign-details-pane' ).css( 'min-height', maxHt + 60 );
     };
-    $iframe.load(cb);
+    $iframe.load( cb );
     $( window ).resize( cb );
   };
 
