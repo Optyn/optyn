@@ -1,9 +1,5 @@
-%h1.dark-heading
-  %a.goto-msg-center{ href: root_path }
-    %i.icon-home
+= content_for :banner do
   Choose a layout for your new template
-
-/= render partial: "merchants/messages/message_menu"
 
 #merchants.container-fluid
   #choose_message

@@ -23,25 +23,26 @@ module Merchants::MessagesHelper
   end
 
   def message_form_title(message_type)
+    optyns_action_name = action_name.split("_").first
     case message_type
       when Message::DEFAULT_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} General Announcement Campaign"
+        "#{optyns_action_name.humanize} General Announcement Campaign"
       when Message::COUPON_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Coupon Campaign"
+        "#{optyns_action_name.humanize} Coupon Campaign"
       when Message::EVENT_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Event Announcement Campaign"
+        "#{optyns_action_name.humanize} Event Announcement Campaign"
       when Message::PRODUCT_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Product Announcement Campaign"
+        "#{optyns_action_name.humanize} Product Announcement Campaign"
       when Message::SALE_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Sale Announcement Campaign"
+        "#{optyns_action_name.humanize} Sale Announcement Campaign"
       when Message::SPECIAL_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Special Announcement Campaign"
+        "#{optyns_action_name.humanize} Special Announcement Campaign"
       when Message::SURVEY_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Survey Campaign"
+        "#{optyns_action_name.humanize} Survey Campaign"
       when Message::TEMPLATE_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Campaign".titleize
+        "#{optyns_action_name.humanize} Newsletter Campaign".titleize
       else
-        "#{action_name.humanize} Campaign"
+        "#{optyns_action_name.humanize} Campaign"
     end
   end
 

@@ -17,28 +17,29 @@
     = display_meta_description unless @meta_description_called
     = yield :meta_description
     = analytics_init if Rails.env.production?
-    = render(partial: "layouts/mixpanel") if Rails.env.production? || Rails.env.staging?
-    = render(partial: "layouts/uservoice") if Rails.env.production? || Rails.env.staging?
-    = render(partial: "layouts/pingdom_rum") if Rails.env.production?
+    
 
   %body{ :id => 'flat', :class => params[ :action ] + ' ' + params[ :controller ].parameterize + ' m-app b-layout' }
     %a.scrolltop{:href => "#"}
-    = render partial: "layouts/header"
 
     = display_flash_message
 
     #dashboard.container-fluid
       .row-fluid
-        - unless @skip_menu
-          - if manager_signed_in?
-            = render partial: "merchants/shared/menu"
-          / - if user_signed_in?
-          /   = render partial: "shared/menu"
         .span9.wid75pc.yield
 
-          = yield :banner
+          
 
+          %h1.dark-heading
+            %a.goto-msg-center{ href: root_path }
+              %i.icon-home
 
+            = yield :actions_left  
+              
+            = yield :banner
+
+            = yield :actions_right
+
+          .blank-space
+          
           = yield
-
-    = render partial: "layouts/footer_flat"

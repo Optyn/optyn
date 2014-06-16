@@ -1,19 +1,18 @@
-/= banner( message_form_title(@message_type) )
-%h1.dark-heading
-  %a.goto-msg-center{ href: root_path }
-    %i.icon-home
+= content_for :banner do
+  = message_form_title(@message_type)
+
+= content_for :actions_left do
   .pull-left
     %a.btn.btn-success{ href: "#{edit_metadata_merchants_message_path(@message.uuid)}" }
       %i.icon-arrow-left
       Change Details
-  = message_form_title(@message_type)
+
+= content_for :actions_right do
   .pull-right
     %a.btn.btn-primary{ href: "#{preview_merchants_message_path(@message.uuid)}" }
       Preview & Launch Campaign
       %i.icon-arrow-right
 
-
-/= render partial: "merchants/messages/message_menu"
 
 #merchants.row-fluid.tear-page
   .edit-camp-cont.span6
