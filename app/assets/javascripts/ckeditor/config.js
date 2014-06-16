@@ -12,7 +12,7 @@ CKEDITOR.editorConfig = function( config ) {
 
   config.toolbar = 'Custom';
   
-  config.height = '170px';
+  config.height = '200px';
 
   config.extraPlugins = 'simpleLink';
   config.pasteFromWordPromptCleanup = true;
@@ -37,7 +37,7 @@ CKEDITOR.editorConfig = function( config ) {
   {
     name: 'paragraph',
     items : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
-    'NumberedList','BulletedList','Outdent','Indent','Blockquote','-', 'RemoveFormat']
+    'NumberedList','BulletedList']
   },
   {
     name: 'links',
