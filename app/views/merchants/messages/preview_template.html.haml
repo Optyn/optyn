@@ -11,16 +11,6 @@
   /= render :partial => 'progress_bar'
 
   .span6#campaign-details-pane
-
-    .btn-group
-      - if @message.editable_state?
-        = link_to raw( "<i class='icon-copy icon-white'></i> Copy Campaign" ), copy_merchants_message_path(@message.uuid), class: 'btn btn-info'
-      = link_to raw( "<i class='icon-envelope icon-white'></i> Send Me a Test Email" ), email_self_merchants_message_path(@message.uuid), class: "btn btn-info", id: "self_email"
-      - if !@message.queued? && !current_shop.disabled?   
-        = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'        
-
-    .blank-space
-
     = render partial: "merchants/messages/preview_meta"
 
   .span6#preview-pane
