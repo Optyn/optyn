@@ -221,7 +221,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
     @message.update_meta!
 
-    render json: {message: render_to_string(partial: "merchants/messages/preview_meta")}
+    render json: {message: render_to_string(partial: "merchants/messages/template_fields/show_message")}
 
   rescue => e
     render json: {message: render_to_string(partial: "merchants/messages/meta_form", locals: {message: @message})}, status: :unprocessable_entity

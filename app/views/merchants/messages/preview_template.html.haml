@@ -8,10 +8,10 @@
   Template Preview
 
 #merchants.no-pad.row-fluid.tear-page
-  /= render :partial => 'progress_bar'
-
   .span6#campaign-details-pane
     = render partial: "merchants/messages/preview_meta"
+
+    = render :partial => "merchants/messages/preview_meta_actions"
 
   .span6#preview-pane
     - if params[:action] == 'preview_template'
@@ -20,3 +20,6 @@
       #template_pane
         %iframe#customHtmlTemplate{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; minheight:97vw;"}
           %html
+
+#message_meta_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+  = render partial: "merchants/messages/meta_form", locals: {message: @message}
