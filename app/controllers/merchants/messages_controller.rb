@@ -154,16 +154,21 @@ class Merchants::MessagesController < Merchants::BaseController
       @preview = true
       @partner = current_partner
       @message_type = @message.type.underscore
+      redirect_path = if @message.instance_of?(TemplateMessage)
+        template_merchants_message_path(@message.uuid)
+      else
+        edit_merchants_message_path(@message.uuid)
+      end
       update_button_styles
       if @message.send(message_method_call.to_sym)
            respond_to do |format|
-            format.html {redirect_to edit_merchants_message_path(@message.uuid)}
+            format.html { redirect_to redirect_path }
             format.js {}
           end
       else
         flash.now[:error] = LAUNCH_FLASH_ERROR
         respond_to do |format|
-          format.html {redirect_to edit_merchants_message_path(@message.uuid)}
+          format.html { redirect_to redirect_path }
           format.js {}
         end
       end
