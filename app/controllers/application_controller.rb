@@ -50,6 +50,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_not_logged_in
+    if through_form?
+      reset_session && true
+    end
+
     if manager_signed_in?
       return redirect_to(merchants_root_path) && false
     end
@@ -91,6 +95,18 @@ class ApplicationController < ActionController::Base
 
   def switch_layout
     user_signed_in? || manager_signed_in? ? 'base' : 'application'
+  end
+
+  def set_through_form
+    session[:through_form] = "optyn_form"
+  end
+
+  def reset_through_form
+    session[:through_form] = nil
+  end
+
+  def through_form?
+    session[:through_form].present?
   end
 
   protected
