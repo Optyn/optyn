@@ -477,39 +477,6 @@ function MerchantMessage() {
         });
     };
 
-    this.hookTemplateAssignment = function(){
-        var _this = this;
-        $('body').on('click', '.template_type', function(event){
-            event.preventDefault();
-            var uuid = $(this).attr('href').split('/')[3];
-            $.ajax({
-                url: $(this).attr('href'),
-                type: 'POST',
-                data: {
-                    '_method': 'PUT',
-                    'template_id': $(this).attr('data-template-id')
-                    },
-                beforeSend: function(){
-                    OP.overlay.addOverlay('#template_wrapper');
-                    _this.loadSpinnerForIframe();
-                    $('.loading').show();
-                    $('.btn-close').hide();
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    $('#system_templates_modal').modal('hide');
-                    $('#template_wrapper').replaceWith(data);
-                  
-                },
-                error: function(){
-                    $('.loading').hide();
-                    alert("Could not choose a template. Please refresh your page and try again.");
-                    $('.btn-close').show();
-                }
-            });
-        });
-    };
-
     this.hookTemplateChooserClick = function(){
         $('body').on('click', '#system_template_chooser_link', function(){
             $('#system_templates_modal').modal('show');        

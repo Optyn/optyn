@@ -19,7 +19,8 @@
   .template_chooser
     - @templates.each do |template|
       .span3
-        %a{href: assign_template_merchants_message_path(@message.uuid), class: "template_type", 'data-template-id' => template.uuid}
+        = link_to assign_template_merchants_message_path(@message.uuid, :template_id => template.uuid), :method => :put, :class => "template_type" do
+        
           %h6
             = template.name
 
