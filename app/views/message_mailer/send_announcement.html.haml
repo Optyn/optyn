@@ -11,28 +11,29 @@
 
     %body{:height => "100%", :width => "100%"}
 
-      %div{:style => "background:#eee;padding:2%;font-family: Helvetica,Calibri,Roboto,Ubuntu,sans-serif;"}
-        = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
+      %table{:style => "width:100%;"}
+        %tr
+          %td{:style => "width:100%;padding:20px;background:#eee;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;", :align => "center"}
+            %table{:width => "100%", :style => "background-color: white; max-width: 600px;text-align:left;", :align => "left"}
+              %tr
+                %td{:style => "bgcolor:#FFF;max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                  = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
 
-        %table{:width => "100%", :style => "background-color: white; max-width: 600px;", :align => "center"}
-          %tr
-            %td
-            %td{:style => "bgcolor:#FFF;display:block!important; max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
-              %div
-                %table{:style => "max-width:580px; margin:0 auto; display:block;"}
-                  %tr
-                    %td
-                      .message-content
-                        = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
+              %tr
+                %td{:style => "bgcolor:#FFF;max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                  .message-content
+                    = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
-                      %p.core-content
-                        - @target_blank = true
-                        - @email_survey = true
-                        = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
+                  %p.core-content
+                    - @target_blank = true
+                    - @email_survey = true
+                    = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
 
-                        = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button" 
+                    = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button" 
 
-        = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
+              %tr
+                %td{:style => "bgcolor:#FFF;max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                  = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
 
         = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
 - else
