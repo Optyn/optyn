@@ -285,11 +285,11 @@ class Merchants::MessagesController < Merchants::BaseController
     params[:choice] = "launch"
 
     message_method_call = check_subscription
-
     launched = @message.send(message_method_call.to_sym)
-
+    @shop = @message.shop
     @message_type = @message.type.underscore
     populate_labels
+
     if launched && 'launch' == message_method_call
       message_redirection
     elsif launched && 'save_draft' == message_method_call
