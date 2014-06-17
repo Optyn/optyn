@@ -1,4 +1,9 @@
 .span3.menuleft.wid25pc
+  %a{:href => root_path}
+    = image_tag "logo-white.png", :alt => 'logo'
+  .text-warning
+    Hi
+    %strong John Doe!
   %ul.merchant-menu
     %li
       %a{:href => merchants_root_path, :class => active_tab_class(['dashboards'])}
