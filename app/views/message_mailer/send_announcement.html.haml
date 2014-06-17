@@ -8,19 +8,22 @@
         @media only screen and (min-width : 600px) {
           img { max-width: 240px !important; }
         }
+        @media only screen and (max-width : 600px) {
+          .width-controller { width: 280px !important; }
+        }
 
     %body{:height => "100%", :width => "100%"}
 
       %table{:style => "width:100%;"}
         %tr
-          %td{:style => "width:100%;padding:20px;background:#eee;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;", :align => "center"}
-            %table{:width => "100%", :style => "background-color: white; max-width: 600px;text-align:left;", :align => "left"}
+          %td{:style => "width:100%;padding:20px;background:#eee;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;text-align:center;", :align => "center"}
+            %table.width-controller{:style => "background-color: white;width: 600px;text-align:left;", :align => "left", :cellspacing => '0'}
               %tr
-                %td{:style => "bgcolor:#FFF;max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
                   = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
 
               %tr
-                %td{:style => "bgcolor:#FFF;max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
                   .message-content
                     = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
@@ -32,7 +35,7 @@
                     = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button" 
 
               %tr
-                %td{:style => "bgcolor:#FFF;max-width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
                   = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
 
         = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
