@@ -196,7 +196,7 @@ $( function() {
             var footerTop;
             $footer.length ? footerTop = $( 'footer' ).position().top : 0;
             var footerHeight = $('footer').css( 'height' );
-            $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '25%', 'border-top': 'solid 1px black', background: '#333'});
+            $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '300px', 'border-top': 'solid 1px black', background: '#333'});
             if( viewportHeight + scrollTop > footerTop ) {
                 $videoTutorialsLink.css({'bottom': footerHeight});
             } else {

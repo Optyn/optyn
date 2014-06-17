@@ -1,13 +1,63 @@
 /* Main Menu Left */
 .menuleft {
-  margin-left: 0px;
-  width: 25%;
   padding: 0;
-  margin: 0;
+  position: fixed;
+  width: 300px;
+  background: #666;
+  height: 100%;
+  overflow: scroll;
+  padding-bottom: 40px;
+  .m-link-home,
+  .m-link-videos,
+  .menu-toggle { display: none; }
+  z-index: 999;
 }
+.menuleft-mobile > .home-logo { margin-left: 40px; }
+.menuleft-mobile .video-tutorials-link,
+.menuleft-mobile > .home-link { display: none; }
+.menuleft-mobile > .m-link-home,
+.menuleft-mobile > .m-link-videos,
+.menuleft-mobile > .menu-toggle {
+  display: inline-block;
+  font-size: 25px;
+  font-weight: normal;
+  color: #fff;
+  position: fixed;
+  z-index: 10000;
+  left: 10px;
+  padding: 10px;
+  border: solid 2px transparent;
+  &:hover {
+    border: solid 2px $white;
+  }
+}
+.menuleft-mobile > .menu-toggle {
+  top: 10px;
+}
+.menuleft-mobile > .m-link-home {
+  top: 60px;
+}
+.menuleft-mobile > .m-link-videos {
+  top: 120px;
+}
+.menuleft-mobile > .welcome-user { margin: 10px 0; }
+.menuleft-mobile {
+  display: block;
+  width: 100%;
+  background: rgba( $dark-blue, 0.97 );
+  text-align: center;
+}
+.menuleft-mobile + .yield {
+// filter: blur(8px); -webkit-filter: blur(8px); -moz-filter: blur(8px);
+// -o-filter: blur(8px); -ms-filter: blur(8px);
+}
+.menuleft-mobile > .merchant-menu {
+  width: 250px;
+  margin: auto;
+  text-align: left;
+}
+.menuleft-desktop {}
 .merchant-menu {
-  background-color: $black;
-  border-radius: 4px;
   padding: 0;
   color: $white;
   height: auto;
@@ -15,7 +65,6 @@
   margin-right: 0px;
   margin-top: 0px;
   margin-bottom: 20px;
-  @include border-radius( 0 );
   li {
     margin: 0;
     padding: 0;
@@ -32,11 +81,9 @@
     display: block;
     line-height: 50px;
     min-height: 50px;
-    border-bottom: solid 1px darken( $black, 20% );
     padding-left: 20px;
     color: darken( $white, 10% );
     &:hover {
-      background-color: darken( $black, 30% );
       color: $white;
     }
     i {
@@ -48,7 +95,7 @@
     }
   }
   .active {
-    background-color: lighten( $black, 15% );
+    border: solid 2px rgba( $white, 0.8 );;
     color: $white;
     &:hover {
       background-color: $black;
