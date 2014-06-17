@@ -245,13 +245,13 @@ function MerchantMessage() {
     this.hookMetadataSubmit = function () {
         $('body').on('click', '#message_meta_modal .btn-primary', function (e) {
             e.preventDefault();
+            var $modalBody = $('#message_meta_modal form').parents('.modal-body');
+            var $modalFooter = $modalBody.next('.modal-footer');
             $.ajax({
                 url: $('#message_meta_modal form').prop('action'),
                 type: 'POST',
                 data: $('#message_meta_modal').find('form').serialize(),
                 beforeSend: function(){
-                    var $modalBody = $('#message_meta_modal form').parents('.modal-body');
-                    var $modalFooter = $modalBody.next('.modal-footer');
                     $modalFooter.find('.btn').hide();
                     $modalFooter.find('.loading').show();
                 },
@@ -261,7 +261,6 @@ function MerchantMessage() {
                         $('#preview-meta-data-view').replaceWith(data.message);
                         current.hookDateTimePicker();
                     }, 1000);
-
                 },
                 error: function (data) {
                     var $modal = $('#message_meta_modal');
@@ -278,6 +277,10 @@ function MerchantMessage() {
                         $('#message_meta_modal').modal('show');
                         moveDatetimepickerErrorMessage();
                     }, 500);
+                },
+                complete: function () {
+                    $modalFooter.find('.loading').hide();
+                    $modalFooter.find('.btn').show();
                 }
             });
         });
