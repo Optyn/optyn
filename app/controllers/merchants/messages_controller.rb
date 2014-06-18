@@ -26,6 +26,8 @@ class Merchants::MessagesController < Merchants::BaseController
   skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save, :approve]
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
+  CREATE_FLASH_ERROR = "Please correct the following error(s) to proceed"
+  UPDATE_FLASH_ERROR = "Please correct the following error(s)"
 
   NON_TEMPLATE_BUTTON_STYLE = "text-decoration:none;color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 15px;"
   NON_TEMPLATE_CKEDITOR_BUTTON_STYLE = 'border-radius: 0;background: #D4D4D4; padding: 2px 10px;text-decoration: none;display: inline-block;'
@@ -105,7 +107,7 @@ class Merchants::MessagesController < Merchants::BaseController
       if @message.send(message_method_call.to_sym)
         redirect_to edit_merchants_message_path(@message.uuid)
       else
-        flash.now[:error] = LAUNCH_FLASH_ERROR
+        flash.now[:error] = CREATE_FLASH_ERROR
         create_failure_action
       end
     end
