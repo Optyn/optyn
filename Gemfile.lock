@@ -355,6 +355,7 @@ GEM
     remotipart (1.2.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.1)
     rqrcode-with-patches (0.5.4)
       chunky_png
     rspec (2.13.0)
@@ -528,6 +529,7 @@ DEPENDENCIES
   redis-rails
   redis-store
   remotipart (~> 1.2)
+  rmagick (= 2.13.1)
   rqrcode-with-patches
   rspec
   rspec-rails
