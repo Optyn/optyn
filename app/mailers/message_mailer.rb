@@ -45,17 +45,6 @@ class MessageMailer < ActionMailer::Base
 
   end
 
-  def sample
-    mail(to: "Gaurav Gaglani <gaurav.gaglani@gmail.com>", 
-      from: "services@optyn.com", 
-      subject: "Sample Email",
-      content_type: "multipart/alternative"
-    ) do |format|
-      format.html{ render 'sample.text.html.haml'}
-      format.text
-    end
-  end
-
   def send_template(message, receiver)
     ShopTimezone.set_timezone(message.shop)
     template = message.template
