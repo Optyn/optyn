@@ -545,9 +545,12 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def create_failure_action
-    return render(action: 'new_template') if @message.instance_of?(TemplateMessage)
-
-    render action: 'new'
+    layout = 'message_maker'
+    if @message.instance_of?(TemplateMessage)
+      render action: 'new_template', :layout => layout
+    else
+      render action: 'new', :layout => layout
+    end
   end
 
   def update_failure_action

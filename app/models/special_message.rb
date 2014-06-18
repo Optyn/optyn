@@ -3,8 +3,10 @@ class SpecialMessage < Message
   				  :permanent_coupon
   before_save :assign_coupon_code
 
-  validates :content, presence: true
-  validates :type_of_discount, presence: true, if: :partner_eatstreet?
-  validate :validate_discount_amount, if: :partner_eatstreet?
-  validate :validate_ending
+  with_options on: :update do |m|
+    m.validates :content, presence: true
+    m.validates :type_of_discount, presence: true, if: :partner_eatstreet?
+    m.validate :validate_discount_amount, if: :partner_eatstreet?
+    m.validate :validate_ending
+  end
 end
