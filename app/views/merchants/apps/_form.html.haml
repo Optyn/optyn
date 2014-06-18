@@ -1,11 +1,11 @@
 = hidden_field_tag :reset, false
 .custom
-  = f.text_field :redirect_uri, placeholder: 'Your website URL', 'data-toggle' => 'tooltip', title: 'Enter your website URL', class: 'input-xlarge span12'
+  = f.text_field :redirect_uri, placeholder: 'Enter Your website URL', 'data-toggle' => 'tooltip', title: 'Enter your website URL', class: 'input-xlarge span12'
 
   = f.hidden_field :call_to_action, value: 3.to_s
 
   .option
-    %h5 Bar Option
+    %h5 Choose a top bar or regular form
     %a{"data-toggle" => "tooltip", :href => "#", :title => "Highly Recommended. We recommend the Top bar that gives you a better way of capturing your customers.", :class => "tip"}
       %label.radio.inline
         = f.radio_button :render_choice, 1.to_s, :class => "render_choice"
@@ -13,7 +13,7 @@
     %a{"data-toggle" => "tooltip", :href => "#", :title => "A module can be placed anywhere on a website and within a content.", :class => "tip"}
       %label.radio.inline
         = f.radio_button :render_choice, 2.to_s, :class => "render_choice"
-        Module
+        Regular
 
   .option.bar_options{ :style => "#{show_bar_option(@application.render_choice)}" }
     %label.radio.inline
@@ -31,7 +31,7 @@
 
   .option
     = f.check_box(:show_name)
-    Ask for Subscriber Name & Email
+    Collect Name & Email
 
   .option
     = f.check_box(:show_form)
@@ -61,7 +61,7 @@
     = f.text_field :redirect_uri_after_login, placeholder: 'Redirect URL', 'data-toggle' => 'tooltip', title: 'Enter your Redirect Url', class: 'input-xlarge span12'
   .option
     %label
-      If user opts-in, add them to this list.
+      Add users to the Following List
   .custom
     = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
     = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @label_ids),
@@ -69,7 +69,7 @@
 
   .option
     %label
-      Custom Css
+      Custom CSS
   .custom
     = f.text_area :custom_css, placeholder: 'Custom Css', 'data-toggle' => 'tooltip', title: 'Custom Css', :class => "span12"
     - unless @application.new_record?
@@ -78,7 +78,7 @@
         %a.btn.btn-primary.refreshbtn{:id => "save_and_reset_button", :href => "javascript:void(0)"} Save & Reset Form
     - else
       .refresh
-        %a.btn.refreshbtn.btn-block.btn-primary{:id => "generate_button", :href => "javascript:void(0)"} Generate Button
+        %a.btn.refreshbtn.btn-block.btn-primary{:id => "generate_button", :href => "javascript:void(0)"} Create Form
 
     #loading{style: "display: none; text-align: right;"}
       %strong

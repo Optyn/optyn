@@ -1,17 +1,13 @@
-/Main Body
-
 = banner("#{current_shop.name} Dashboard")
 
 .pad3pc
   .header.row-fluid.no-pad
-    .span12.text-warning
-      Hi
-      %strong
-        == #{current_manager.name}!
-      Here's what's going on today.
-    /.span4
-    /%a.btn.btn-success{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
-    /Create New Campaign
+    .span6
+      %a.btn.btn-success{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
+        Create New Campaign
+      %a.btn.btn-info{:href => merchants_messages_path, :title => "Campaign Center", :class => active_tab_class(['messages'])}
+        Import Subscribers
+    .blank-space
 
   .row-fluid.no-pad
     .span12.new-conn
