@@ -1,6 +1,10 @@
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();
+
+    $(document).bind('ajaxComplete', function(){
+        merchantMessage.setDiscountTypeSelected();
+    });
 });
 
 function MerchantMessage() {
