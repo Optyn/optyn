@@ -1,5 +1,5 @@
 - if @message.present? and @message.make_public
-  %table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + message_footer_background_color(@message)}
+  %table{:style => "width:100%;max-width:600px;margin:auto;clear:both;text-align:center;height:60px;" + message_footer_background_color(@message), :cellspacing => "0", :cellpadding => "0"}
     %tr
       %td
         %div{:style => "text-align:center;margin:20px auto;"}
