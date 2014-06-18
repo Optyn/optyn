@@ -51,17 +51,23 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
+    premailer = Premailer.new(content, with_html_string: true)    
+    text_version = premailer.to_plain_text
 
     #Add X headers
     add_x_headers(receiver.email, message.uuid)
 
-    mail(to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
-      from: message.from, 
-      subject: message.personalized_subject(receiver),
-      reply_to: message.manager_email,
-      content_type: 'text/html',
-      body: content
-    ) 
+    mail(
+          to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
+          from: message.from, 
+          subject: message.personalized_subject(receiver),
+          reply_to: message.manager_email,
+          content_type: 'text/html'
+        ) do |format|
+
+      format.text { render(text: text_version) }
+      format.html { render(text: content) }
+    end  
   end
 
   def send_returnpath(message, receiver)
