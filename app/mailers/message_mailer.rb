@@ -36,8 +36,7 @@ class MessageMailer < ActionMailer::Base
     mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>), 
       from: @message.from, 
       subject: @message.personalized_subject(@receiver),
-      reply_to: @message.manager_email,
-      content_type: "multipart/alternative"
+      reply_to: @message.manager_email
     ) do |format|  
       format.text
       format.html {render "message_mailer/send_announcement.text.html.haml"} 

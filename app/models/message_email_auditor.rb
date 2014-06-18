@@ -40,6 +40,8 @@ class MessageEmailAuditor < ActiveRecord::Base
         mail = MessageMailer.send_announcement(message, message_user)
       end
 
+      binding.pry
+
       MessageMailHolder.create!(
         message_email_auditor_id: self.id,
         to: mail['to'].to_s,

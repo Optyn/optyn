@@ -41,6 +41,6 @@
                   %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
                     = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
 
-            = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :width => "1", :height => "1" :alt => ""
+            = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :width => "1", :height => "1", :alt => ""
 - else
   = message_content(@message, @receiver)
