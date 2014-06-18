@@ -61,8 +61,7 @@ class MessageMailer < ActionMailer::Base
           to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
           from: message.from, 
           subject: message.personalized_subject(receiver),
-          reply_to: message.manager_email,
-          content_type: 'text/html'
+          reply_to: message.manager_email
         ) do |format|
 
       format.text { render(text: text_version) }
@@ -87,8 +86,7 @@ class MessageMailer < ActionMailer::Base
           to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
           from: message.from, 
           subject: message.personalized_subject(receiver),
-          reply_to: message.manager_email,
-          content_type: 'text/html'
+          reply_to: message.manager_email
         ) do |format|
 
       format.text { render(text: text_version) }
