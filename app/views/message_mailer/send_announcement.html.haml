@@ -4,40 +4,43 @@
     %head
       %meta{:content => "width=device-width", :name => "viewport"}/
       %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+      %title Announcement
       :css
-        @media only screen and (min-width : 600px) {
-          img { max-width: 240px !important; }
-        }
+        center.center { width: 100%; }
+        .pad10 { padding: 10px; }
+        a img { border: 0; }
         @media only screen and (max-width : 600px) {
+          img { max-width: 240px !important; }
           .width-controller { width: 280px !important; }
         }
 
-    %body{:height => "100%", :width => "100%"}
+    %body{:width => "100%", :style => "padding:0;margin:0;"}
 
-      %table{:style => "width:100%;"}
+      %table{:style => "width:100%;", :cellspacing => "0", :cellpadding => "0"}
         %tr
           %td{:style => "width:100%;padding:20px;background:#eee;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;text-align:center;", :align => "center"}
-            %table.width-controller{:style => "background-color: white;width: 600px;text-align:left;", :align => "left", :cellspacing => '0'}
-              %tr
-                %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
-                  = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
+            %center.center
+              %table.width-controller{:style => "background-color: white;width: 600px;text-align:left;", :cellspacing => "0", :cellpadding => "0"}
+                %tr
+                  %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                    = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
 
-              %tr
-                %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
-                  .message-content
-                    = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
+                %tr
+                  %td.pad10.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                    .message-content
+                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
-                  %p.core-content
-                    - @target_blank = true
-                    - @email_survey = true
-                    = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
+                    %p.core-content
+                      - @target_blank = true
+                      - @email_survey = true
+                      = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
 
-                    = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button" 
+                      = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button" 
 
-              %tr
-                %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
-                  = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
+                %tr
+                  %td.width-controller{:style => "bgcolor:#FFF;width:600px; margin:0 auto; clear:both;word-break:break-word;word-wrap:break-word;"}
+                    = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
 
-        = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :alt => ''
+            = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :width => "1", :height => "1" :alt => ""
 - else
   = message_content(@message, @receiver)
