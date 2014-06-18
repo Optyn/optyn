@@ -48,8 +48,8 @@ class Message < ActiveRecord::Base
   after_create :assign_parent_state_if
 
   with_options :on => :create do |m|
-    validates :name, presence: true, unless: :shop_virtual?
-    validate :send_on_greater_by_hour
+    m.validates :name, presence: true, unless: :shop_virtual?
+    m.validate :send_on_greater_by_hour
   end
   
   with_options :on => :update do |m|
