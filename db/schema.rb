@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140610050154) do
+ActiveRecord::Schema.define(:version => 20140618121627) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -346,10 +346,11 @@ ActiveRecord::Schema.define(:version => 20140610050154) do
     t.string   "reply_to"
     t.string   "subject",                  :limit => 1000
     t.string   "content_type"
-    t.text     "body"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.text     "headers"
+    t.text     "text_part_body"
+    t.text     "html_part_body"
   end
 
   create_table "message_users", :force => true do |t|
