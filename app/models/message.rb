@@ -43,16 +43,21 @@ class Message < ActiveRecord::Base
   SIDEBAR_TEMPLATS = ["Left Sidebar", "Right Sidebar"] 
   HERO_TEMPLAT = ["Hero"]
 
-  before_create :assign_uuid
+  before_create :assign_uuid, :valid?
 
   after_create :assign_parent_state_if
 
-  validates :name, presence: true, unless: :shop_virtual?
-  validates :subject, presence: true
-  validate :send_on_greater_by_hour
-  validate :validate_child_message
-  validate :validate_button_url
-  validate :validate_recipient_count
+  with_options :on => :create do |m|
+    validates :name, presence: true, unless: :shop_virtual?
+    validate :send_on_greater_by_hour
+  end
+  
+  with_options :on => :update do |m|
+    m.validates :subject, presence: true
+    m.validate :validate_child_message
+    m.validate :validate_button_url
+    m.validate :validate_recipient_count
+  end
 
   scope :only_parents, where(parent_id: nil)
 
@@ -89,7 +94,7 @@ class Message < ActiveRecord::Base
     end
 
     event :launch do
-      transition [:pending_approval, :draft, :queued] => :queued
+      transition [:pending_approval, :draft, :queued] => :queued, :if => :valid?
     end
 
     event :move_to_trash do
@@ -127,7 +132,9 @@ class Message < ActiveRecord::Base
         message.adjust_send_on
       else
         message.send_on = nil
-      end  
+      end
+
+      message.valid? if message.new_record?
     end
 
     before_transition :draft => :queued do |message|

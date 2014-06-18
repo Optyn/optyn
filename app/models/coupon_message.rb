@@ -3,9 +3,11 @@ class CouponMessage < Message
 
   before_save :assign_coupon_code
 
-  validate :validate_ending
-  validates :type_of_discount, presence: true
-  validate :validate_discount_amount
-  validates :content, presence: true
-  validate :validate_ending
+  with_options on: :update do |m|
+    m.validate :validate_ending
+    m.validates :type_of_discount, presence: true
+    m.validate :validate_discount_amount
+    m.validates :content, presence: true
+    m.validate :validate_ending
+  end
 end

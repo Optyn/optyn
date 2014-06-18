@@ -1,6 +1,8 @@
 class EventMessage < Message
   attr_accessible :content, :ending, :rsvp
 
-  validates :content, presence: true
-  validate :validate_ending
+  with_options on: :update do |m|
+    m.validates :content, presence: true
+    m.validate :validate_ending
+  end
 end
