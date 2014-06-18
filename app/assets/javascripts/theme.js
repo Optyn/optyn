@@ -163,13 +163,13 @@ $(document).ready(function () {
 
 // Handle tabs in various resolutions
 function handleTabLayout() {
-    var h1Width = parseInt( $( '.wid75pc h1:first' ).css( 'width' ));
+    var h1Width = parseInt( $( '.yield h1:first' ).css( 'width' ));
     var handleLayout = function() {
         var tabsWidth = 0;
-        $( '.wid75pc .tab-pane a' ).each( function( index, value) {
+        $( '.yield .tab-pane a' ).each( function( index, value) {
             tabsWidth += parseInt( $( this ).css( 'width' ));
         });
-        if ( h1Width + tabsWidth > parseInt( $( '.wid75pc' ).css( 'width' ))) {
+        if ( h1Width + tabsWidth > parseInt( $( '.yield' ).css( 'width' ))) {
             $( 'h1:first' ).css({
                 'float': 'none',
                 'margin-bottom': '0'
@@ -188,6 +188,7 @@ function handleTabLayout() {
 // Set Video Tutorials link position in left nav column ........................
 $( function() {
     function setVideoTutorialsLinkPosition() {
+        return;
         $videoTutorialsLink = $('.video-tutorials-link');
         var reposition = function() {
             var viewportHeight = $( window ).height();
@@ -196,7 +197,7 @@ $( function() {
             var footerTop;
             $footer.length ? footerTop = $( 'footer' ).position().top : 0;
             var footerHeight = $('footer').css( 'height' );
-            $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '300px', 'border-top': 'solid 1px black', background: '#333'});
+            $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '250px', 'border-top': 'solid 1px black', background: '#333'});
             if( viewportHeight + scrollTop > footerTop ) {
                 $videoTutorialsLink.css({'bottom': footerHeight});
             } else {

@@ -178,25 +178,25 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 	}
   &.new #dashboard { background-image: none; }
   &.edit #dashboard { background-image: none; }
-  &.new #dashboard .wid25pc,
-  &.template #dashboard .wid25pc,
-  &.preview_template #dashboard .wid25pc,
-  &.system_layouts #dashboard .wid25pc,
-  &.new_template #dashboard .wid25pc,
-  &.edit_template #dashboard .wid25pc,
-  &.system_layout_properties #dashboard .wid25pc,
-  &.launch #dashboard .wid25pc,
-  &.edit #dashboard .wid25pc { display: none; }
-  &.new #dashboard .wid75pc,
-  &.edit_metadata #dashboard .wid75pc,
-  &.preview #dashboard .wid75pc,
-  &.system_layouts #dashboard .wid75pc,
-  &.preview_template #dashboard .wid75pc,
-  &.new_template #dashboard .wid75pc,
-  &.edit_template #dashboard .wid75pc,
-  &.system_layout_properties #dashboard .wid75pc,
-  &.launch #dashboard .wid75pc,
-  &.edit #dashboard .wid75pc { width: 100%; }
+  &.new #dashboard .menuleft,
+  &.template #dashboard .menuleft,
+  &.preview_template #dashboard .menuleft,
+  &.system_layouts #dashboard .menuleft,
+  &.new_template #dashboard .menuleft,
+  &.edit_template #dashboard .menuleft,
+  &.system_layout_properties #dashboard .menuleft,
+  &.launch #dashboard .menuleft,
+  &.edit #dashboard .menuleft { display: none; }
+  &.new #dashboard .yield,
+  &.edit_metadata #dashboard .yield,
+  &.preview #dashboard .yield,
+  &.system_layouts #dashboard .yield,
+  &.preview_template #dashboard .yield,
+  &.new_template #dashboard .yield,
+  &.edit_template #dashboard .yield,
+  &.system_layout_properties #dashboard .yield,
+  &.launch #dashboard .yield,
+  &.edit #dashboard .yield { width: 100%; }
   &.edit_metadata#flat .yield h1 {
 	  float: none;
 	  text-align: center;

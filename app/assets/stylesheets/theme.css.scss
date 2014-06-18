@@ -399,6 +399,7 @@ input[type="color"]:focus,
       padding: 0;
     }
   }
+  .yield { margin: 0; }
   #dashboard,
   #consumer_dashboard {
     .pad3pc {
@@ -1117,10 +1118,6 @@ strong {
 #consumer_dashboard {
   .wid25pc {
     width: 25%;
-    margin: 0;
-  }
-  .wid75pc {
-    width: 75%;
     margin: 0;
   }
 }
