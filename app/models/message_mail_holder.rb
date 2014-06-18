@@ -1,7 +1,7 @@
 class MessageMailHolder < ActiveRecord::Base
   belongs_to :message_email_auditor
 
-  attr_accessible :message_email_auditor_id, :to, :from, :reply_to, :subject, :content_type, :body, :headers
+  attr_accessible :message_email_auditor_id, :to, :from, :reply_to, :subject, :content_type, :text_part_body, :html_part_body, :headers
   serialize :headers, Hash
 
   after_create :enqueue_message

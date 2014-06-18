@@ -28,12 +28,20 @@ class MessageMailer < ActionMailer::Base
     #Add X headers
     add_x_headers(@user.email, @message.uuid)
 
+    announcement_html = render_to_string(:template => 'message_mailer/send_announcement.text.html.haml', :layout => false, :formats=>[:html],:handlers=>[:haml])
+    premailer = Premailer.new(announcement_html, with_html_string: true)    
+    @plain_text = premailer.to_plain_text
+
     #to: "success@simulator.amazonses.com",
-    mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>),
+    mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>), 
       from: @message.from, 
       subject: @message.personalized_subject(@receiver),
       reply_to: @message.manager_email
-      ) 
+    ) do |format|  
+      format.text
+      format.html {render "message_mailer/send_announcement.text.html.haml"} 
+    end
+
   end
 
   def send_template(message, receiver)
@@ -43,17 +51,49 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
+    premailer = Premailer.new(content, with_html_string: true)    
+    text_version = premailer.to_plain_text
 
     #Add X headers
     add_x_headers(receiver.email, message.uuid)
 
-    mail(to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
-      from: message.from, 
-      subject: message.personalized_subject(receiver),
-      reply_to: message.manager_email,
-      content_type: 'text/html',
-      body: content
-    ) 
+    mail(
+          to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
+          from: message.from, 
+          subject: message.personalized_subject(receiver),
+          reply_to: message.manager_email,
+          content_type: 'text/html'
+        ) do |format|
+
+      format.text { render(text: text_version) }
+      format.html { render(text: content) }
+    end  
+  end
+
+  def send_returnpath(message, receiver)
+    ShopTimezone.set_timezone(message.shop)
+    template = message.template
+    unparsed_content = template.fetch_cached_content(message)
+    content = template.personalize_body(unparsed_content, message, receiver)
+    content = template.process_urls(content, message, receiver)
+    content = template.process_content(content, receiver)
+    premailer = Premailer.new(content, with_html_string: true)    
+    text_version = premailer.to_plain_text
+
+    #Add X headers
+    add_x_headers(receiver.email, message.uuid)
+
+    mail(
+          to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
+          from: message.from, 
+          subject: message.personalized_subject(receiver),
+          reply_to: message.manager_email,
+          content_type: 'text/html'
+        ) do |format|
+
+      format.text { render(text: text_version) }
+      format.html { render(text: content) }
+    end  
   end
 
   def error_notification(error_message)
