@@ -28,15 +28,55 @@ class MessageMailer < ActionMailer::Base
     #Add X headers
     add_x_headers(@user.email, @message.uuid)
 
+    announcement_html = render_to_string(:template => 'message_mailer/send_announcement.text.html.haml', :layout => false, :formats=>[:html],:handlers=>[:haml])
+    premailer = Premailer.new(announcement_html, with_html_string: true)    
+    @plain_text = premailer.to_plain_text
+
     #to: "success@simulator.amazonses.com",
-    mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>),
+    mail(to: %Q(#{@receiver.full_name + ' ' if @receiver.full_name}<#{@receiver.email}>), 
       from: @message.from, 
       subject: @message.personalized_subject(@receiver),
-      reply_to: @message.manager_email
-      ) 
+      reply_to: @message.manager_email,
+      content_type: "multipart/alternative"
+    ) do |format|  
+      format.text
+      format.html {render "message_mailer/send_announcement.text.html.haml"} 
+    end
+
+  end
+
+  def sample
+    mail(to: "Gaurav Gaglani <gaurav.gaglani@gmail.com>", 
+      from: "services@optyn.com", 
+      subject: "Sample Email",
+      content_type: "multipart/alternative"
+    ) do |format|
+      format.html{ render 'sample.text.html.haml'}
+      format.text
+    end
   end
 
   def send_template(message, receiver)
+    ShopTimezone.set_timezone(message.shop)
+    template = message.template
+    unparsed_content = template.fetch_cached_content(message)
+    content = template.personalize_body(unparsed_content, message, receiver)
+    content = template.process_urls(content, message, receiver)
+    content = template.process_content(content, receiver)
+
+    #Add X headers
+    add_x_headers(receiver.email, message.uuid)
+
+    mail(to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
+      from: message.from, 
+      subject: message.personalized_subject(receiver),
+      reply_to: message.manager_email,
+      content_type: 'text/html',
+      body: content
+    ) 
+  end
+
+  def send_returnpath(message, receiver)
     ShopTimezone.set_timezone(message.shop)
     template = message.template
     unparsed_content = template.fetch_cached_content(message)
