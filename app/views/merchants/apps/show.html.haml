@@ -5,23 +5,13 @@
   #ob-accordion.accordion.o-btn
     .accordion-group
       .accordion-heading
-        %a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-stats' }
-          Statistics
-      #clps-stats.accordion-body.collapse
-        .accordion-inner
-          = render partial: 'button_stats_report'
-    .accordion-group
-      .accordion-heading
         %a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-o-btn' }
-          E-mail Subscription Form
+          Create and customize an opt-in form for your website.
       #clps-o-btn.accordion-body.collapse.in
         .accordion-inner
           .preview.app-container
-            %h5
-              You can customize your opt-in form below.
             .main.row-fluid
               .customize.span12
-                %h3 Customize
                 .custom
                   .form-wrapper
                     - if  @application.blank? || @application.new_record?
@@ -33,12 +23,19 @@
               .span12
                 %h3 Preview
                 = render partial: "preview"
-
     .accordion-group
       .accordion-heading
-        %a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-adv' }
-          Advanced Settings
-      #clps-adv.accordion-body.collapse
+        %a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-stats' }
+          Statistics
+      #clps-stats.accordion-body.collapse
         .accordion-inner
-          = render partial: 'advanced'
+          = render partial: 'button_stats_report'
+
+    /.accordion-group
+    /.accordion-heading
+    /%a.accordion-toggle{ 'data-toggle' => 'collapse', 'data-parent' => 'ob-accordion', href: '#clps-adv' }
+    /Advanced Settings
+    /#clps-adv.accordion-body.collapse
+    /.accordion-inner
+    /= render partial: 'advanced'
 

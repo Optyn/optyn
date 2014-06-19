@@ -1,10 +1,11 @@
 %nav.menuleft
   %a.home-link{:href => root_path}
-    = image_tag "logo-white.png", :alt => 'logo'
+    = image_tag "logo-white.png", :alt => 'logo', style: "max-width: 80px;"
   .welcome-user
     %span.user-th
     Hi
-    %strong John Doe!
+    %strong
+      == #{current_manager.first_name}!
   %ul.merchant-menu
     %li
       %a{:href => merchants_root_path, :class => active_tab_class(['dashboards'])}
@@ -19,25 +20,22 @@
         = image_tag "menu_icon_connections.png", :alt => "Subscribers", :style => "padding-left: 5px;"
         Subscribers + Lists
     %li
-      %a{:href => merchants_surveys_path, :class => active_tab_class(['surveys'])}
-        = image_tag "menu_icon_campaigns.png", :alt => "Surveys"
-        Create a Survey
-    %li
       / FIXME
       / %a{:href =>  merchants_survey_survey_answers_path, :class => active_tab_class(['survey_answers'])}
       /   = image_tag "menu_icon_messages.png", :alt => "Segmentation"
       /   Survey Responses
-      %a{:href =>  merchants_segments_select_survey_path, :class => active_tab_class(['survey_answers'])}
-        = image_tag "menu_icon_messages.png", :alt => "Segmentation"
-        Survey Responses
     %li
       %a{:href => merchants_app_path, :class => active_tab_class(['apps'])}
         = image_tag "merchant_menu_button_icon.png", :alt => "Opt-In Form"
-        Opt-in Email Form
+        Collect Emails
     %li
       %a{:href => merchants_file_imports_path, :class => active_tab_class(['file_imports'])}
         = image_tag "merchant_menu_import_icon.png", :alt => "Import Subscribers"
         Import Subscribers
+    %li
+      %a{:href => merchants_surveys_path, :class => active_tab_class(['surveys'])}
+        = image_tag "menu_icon_campaigns.png", :alt => "Surveys"
+        Surveys
     %li
       %a{:href => merchants_shop_path, :class => active_tab_class(['shops', 'subscriptions', 'registrations', 'merchant_managers', 'locations', 'social_profiles'])}
         = image_tag "merchant_menu_settings_icon.png", :alt => "Your Shop"
