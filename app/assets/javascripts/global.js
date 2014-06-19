@@ -55,14 +55,14 @@ $( function() {
 
   opTheme.makeMenuResponsive = function() {
     $( '.m-menu-toggle' ).click(function() {
-      if ( $( window ).width() <= 1024 )
-        $( '.menuleft' ).fadeToggle( 150 );
+      $( '.menuleft' ).fadeToggle( 150 );
     });
 
     $( window ).resize( function() {
-      $( '.menuleft' ).fadeIn( 150 );
-      if ( $( window ).width() <= 1024 )
-        showMenu();
+      if ( $( window ).width() > 1024 )
+        $( '.menuleft' ).fadeIn( 150 );
+      else
+        $( '.menuleft' ).hide();
     });
   };
 
