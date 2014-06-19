@@ -84,7 +84,6 @@ class MessageMailer < ActionMailer::Base
     #Add X headers
     add_x_headers(receiver.email, message.uuid)
 
-    binding.pry
     mail(
           to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
           from: message.from, 
