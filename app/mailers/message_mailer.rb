@@ -51,7 +51,8 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
-    premailer = Premailer.new(content, with_html_string: true)    
+    duped_content = content.dup
+    premailer = Premailer.new(duped_content, with_html_string: true)    
     text_version = premailer.to_plain_text
 
     #Add X headers
@@ -76,12 +77,14 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
-    premailer = Premailer.new(content, with_html_string: true)    
+    duped_content = content.dup
+    premailer = Premailer.new(duped_content, with_html_string: true)    
     text_version = premailer.to_plain_text
 
     #Add X headers
     add_x_headers(receiver.email, message.uuid)
 
+    binding.pry
     mail(
           to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
           from: message.from, 
