@@ -12,8 +12,7 @@
   color: $light-gray;
   z-index: 999;
   .m-link-home,
-  .m-link-videos,
-  .menu-toggle { display: none; }
+  .m-link-videos { display: none; }
   .home-link {
     display: block;
     padding: 10px 0 0 0;
@@ -22,13 +21,13 @@
   }
   .welcome-user {
     background: darken( $dark-blue, 10% );
-    padding: 5px 0 20px 20px;
+    padding: 5px 0 25px 20px;
   }
   .user-th {
     display: inline-block;
     width: 50px;
     height: 50px;
-    background: url( 'http://placehold.it/30x30' );
+    background: url( 'http://placehold.it/50x50' );
     border-radius: 30px;
     background-size: cover;
     position: relative;
@@ -36,37 +35,24 @@
     margin-right: 5px;
   }
 }  // End .menuleft
+.m-menu-toggle { display: none; }
 @media ( max-width: 1024px ) {
+  #flat { padding: 0; }
   .menuleft {
-    display: block;
+    display: none;
     width: 100%;
     background: $dark-blue;
     background: rgba( $dark-blue, 0.97 );
     text-align: center;
     padding: 0;
     .home-logo { margin-left: 40px; }
-    .video-tutorials-link,
+    //.video-tutorials-link,
     .home-link { display: none; }
     .m-link-home,
     .m-link-videos,
-    .menu-toggle {
-      display: inline-block;
-      font-size: 25px;
-      font-weight: normal;
-      color: #fff;
-      position: fixed;
-      z-index: 10000;
-      left: 10px;
-      padding: 10px;
-      border: solid 2px transparent;
-      &:hover {
-        border: solid 2px $white;
-      }
-    }
     .m-link-home { top: 60px; }
     .m-link-videos { top: 120px; }
-    .menu-toggle { top: 10px; }
-    .welcome-user { margin: 10px 0; }
+    .welcome-user { margin: 10px 0; background: transparent; }
     .merchant-menu {
       width: 250px;
       margin: auto;
@@ -74,6 +60,22 @@
     }
     .merchant-menu .active {
       border: solid 2px rgba( $white, 0.8 );
+    }
+  }
+  .m-menu-toggle {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: normal;
+    color: $medium-gray;
+    position: fixed;
+    z-index: 10000;
+    left: 10px;
+    top: 50px;
+    padding: 10px;
+    border: solid 2px transparent;
+    &:hover {
+      border: solid 2px $medium-gray;
+      color: $medium-gray;
     }
   }
 }  // End media query
@@ -121,8 +123,9 @@
   }
   .active {
     color: $white;
+    background-color: darken( $dark-blue, 7% );
     &:hover {
-      background-color: $black;
+      background-color: darken( $dark-blue, 8% );
     }
   }
 }  /* /#flat .merchant-menu */

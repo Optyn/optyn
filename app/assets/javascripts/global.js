@@ -1,6 +1,7 @@
 $( function() {
   opTheme = {};
 
+
   // Equalize div heights
   opTheme.equalizeDivHeights = function( selectorArray ) {
     // This function is made to be used with Message Center.
@@ -50,4 +51,25 @@ $( function() {
       //$( '#template_wrapper' ).css( 'height', maxHeight );
     }, 500);
   };
+
+
+  opTheme.makeMenuResponsive = function() {
+    $( '.m-menu-toggle' ).click(function() {
+      if ( $( window ).width() <= 1024 )
+        $( '.menuleft' ).fadeToggle( 150 );
+    });
+
+    $( window ).resize( function() {
+      $( '.menuleft' ).fadeIn( 150 );
+      if ( $( window ).width() <= 1024 )
+        showMenu();
+    });
+  };
+
+
+  (function() {  // Init function.
+    if ( $( '.m-menu-toggle' ).length ) {
+      opTheme.makeMenuResponsive();
+    }
+  })();
 });

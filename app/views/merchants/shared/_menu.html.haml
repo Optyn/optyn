@@ -50,12 +50,13 @@
       = link_to(raw( "#{image_tag "merchant_menu_logout_icon.png"} Logout" ),  destroy_merchants_manager_session_path, :method => :delete, :class => 'logout')
 
 
-  %a.menu-toggle{ href: '#' }
-    %i.icon-th-list
   %a.m-link-home{ href: '#' }
     %i.icon-home
   %a.m-link-videos{ href: '/video-tutorials' }
     %i.icon-play
+
+%a.m-menu-toggle{ href: '#' }
+  %i.icon-th-list
 
   / - if @optyn_button_stats.present?
   /   = render partial: "merchants/apps/button_stats_report"
