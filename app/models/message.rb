@@ -43,14 +43,14 @@ class Message < ActiveRecord::Base
   SIDEBAR_TEMPLATS = ["Left Sidebar", "Right Sidebar"] 
   HERO_TEMPLAT = ["Hero"]
 
+  # check for validations explicityly with valid?() as in draft state save() has validate: false
+  # save() is overriden somewhere in the code below
   before_create :assign_uuid, :valid?
 
   after_create :assign_parent_state_if
 
-  with_options :on => :create do |m|
-    validates :name, presence: true, unless: :shop_virtual?
-    validate :send_on_greater_by_hour
-  end
+  validates :name, presence: true, unless: :shop_virtual?
+  validate :send_on_greater_by_hour
   
   with_options :on => :update do |m|
     m.validates :subject, presence: true
