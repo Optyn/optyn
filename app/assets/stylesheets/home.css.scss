@@ -8,6 +8,7 @@
 #flat {
   padding-left: 250px;
   &.merchants-messages { padding-left: 0; }
+  &.merchants-messages.types,
   &.merchants-messages.show { padding-left: 250px; }
   margin: 0;
   font-family: $sans-serif;
