@@ -1184,6 +1184,10 @@ blockquote {
   background: rgba( $white, 0.8 );
 }
 
+p {
+  word-wrap: break-word;
+}
+
 .bullet-disc { list-style-type: disc; }
 .bullet-circle { list-style-type: circle; }
 .bullet-square { list-style-type: square; }
