@@ -54,6 +54,12 @@ $( function() {
 
 
   opTheme.makeMenuResponsive = function() {
+    if ( $( 'body' ).hasClass( 'merchants-messages' )) {
+      if ( !$( 'body' ).hasClass( 'show' )) {
+        // Menu is removed from merchants/messages controller, except the show page.
+        return;
+      }
+    }
     $( '.m-menu-toggle' ).click(function() {
       $( '.menuleft' ).fadeToggle( 150 );
     });

@@ -37,6 +37,7 @@
 }  // End .menuleft
 .m-menu-toggle { display: none; }
 @media ( max-width: 1024px ) {
+  #flat.b-layout.merchants-messages,
   #flat { padding: 0; }
   .menuleft {
     display: none;
