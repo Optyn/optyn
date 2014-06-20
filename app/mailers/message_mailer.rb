@@ -52,7 +52,7 @@ class MessageMailer < ActionMailer::Base
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
     duped_content = content.dup
-    premailer = Premailer.new(duped_content, with_html_string: true)    
+    premailer = Premailer.new(duped_content, with_html_string: true, input_encoding: "UTF-8")    
     text_version = premailer.to_plain_text
 
     #Add X headers
@@ -73,12 +73,13 @@ class MessageMailer < ActionMailer::Base
   def send_returnpath(message, receiver)
     ShopTimezone.set_timezone(message.shop)
     template = message.template
-    unparsed_content = template.fetch_cached_content(message)
+
+    unparsed_content = template.fetch_content(message)
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
     duped_content = content.dup
-    premailer = Premailer.new(duped_content, with_html_string: true)    
+    premailer = Premailer.new(duped_content, with_html_string: true, input_encoding: "UTF-8")    
     text_version = premailer.to_plain_text
 
     #Add X headers
