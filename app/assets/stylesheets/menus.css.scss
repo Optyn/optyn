@@ -1,6 +1,7 @@
 /* Main Menu Left */
 .menuleft {
   padding: 0;
+  @media ( min-width: 1024px ) { padding-bottom: 55px; }
   position: fixed;
   top: 0;
   left: 0;
@@ -36,6 +37,17 @@
   }
 }  // End .menuleft
 .m-menu-toggle { display: none; }
+.video-tutorials-link {
+  @media ( min-width: 1024px ) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    background: $dark-blue;
+    box-shadow: rgba(0, 0, 0, 0.298039) -2px -2px 2px;
+  }
+}
+
 @media ( max-width: 1024px ) {
   #flat.b-layout.merchants-messages,
   #flat { padding: 0; }

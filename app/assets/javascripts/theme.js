@@ -185,32 +185,6 @@ function handleTabLayout() {
 }
 
 
-// Set Video Tutorials link position in left nav column ........................
-$( function() {
-    function setVideoTutorialsLinkPosition() {
-        return;
-        $videoTutorialsLink = $('.video-tutorials-link');
-        var reposition = function() {
-            var viewportHeight = $( window ).height();
-            var scrollTop = $( window ).scrollTop();
-            var $footer = $( 'footer' );
-            var footerTop;
-            $footer.length ? footerTop = $( 'footer' ).position().top : 0;
-            var footerHeight = $('footer').css( 'height' );
-            $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '250px', 'border-top': 'solid 1px black', background: '#333'});
-            if( viewportHeight + scrollTop > footerTop ) {
-                $videoTutorialsLink.css({'bottom': footerHeight});
-            } else {
-                $videoTutorialsLink.css({bottom: '0'});
-            }
-        };
-        reposition();
-        $( window ).scroll( reposition );
-    }
-    setVideoTutorialsLinkPosition();
-});
-
-
 function moveFooterPosition() {
     $footer = $( 'footer' ).detach();
     $editCampCont = $( '.tear-page > .span6 > .pos-rel' );
