@@ -5,8 +5,12 @@
     $('.form-spinner').hide();
   <% elsif @choice == "launch"%>
     $(window.location.replace("<%= queued_merchants_messages_path()%>"));
-    <% elsif @choice == "save_draft"%>
-    $(window.location.replace("<%= drafts_merchants_messages_path()%>"));
+  <% elsif @choice == "save_draft" %>
+    <% if @edit_child_location.present? %>
+      $(window.location.replace("<%= @edit_child_location %>"));
+    <% else %>
+      $(window.location.replace("<%= drafts_merchants_messages_path() %>"));
+    <% end %>
   <% end %>
 <% else %>
   $('#edit_message_cont').html('<%=j render partial: "merchants/messages/edit_fields_wrapper" %>');

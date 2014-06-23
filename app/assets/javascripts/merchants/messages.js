@@ -370,8 +370,12 @@ function MerchantMessage() {
     this.hookEditChildMessage = function () {
         $('body').on('click', '#edit_child_message_link', function (e) {
             e.preventDefault();
-            $('#edit_child_location').val($(this).prop('href'));
-            $('#message_fields_wrapper form').submit();
+            var confirmMessage = "This will save the current draft of your survey message and " +
+                "open the response message for editing. Do you wish to continue?"
+            if(confirm(confirmMessage)){
+                $('#edit_child_location').val($(this).prop('href'));
+                $('#message_fields_wrapper form').submit();
+            }
         });
     };
 

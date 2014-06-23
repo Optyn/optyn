@@ -159,6 +159,7 @@ class Merchants::MessagesController < Merchants::BaseController
   def update
     Message.transaction do
       @choice = params[:choice]
+      @edit_child_location = params[:edit_child_location]
       klass = params[:message_type].classify.constantize
       @message = klass.for_uuid(params[:id])
       @message.manager_id = current_manager.id
