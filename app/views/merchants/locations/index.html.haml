@@ -35,8 +35,9 @@
           %td
             = location.zip
           %td
-            = link_to "Edit", edit_merchants_location_path(location), class: 'btn btn-primary btn-mini'
-            = link_to "Remove", merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger btn-mini'
+            .btn-group
+              = link_to raw("<i class='icon-edit'></i>"), edit_merchants_location_path(location), class: 'btn btn-primary'
+              = link_to raw("<i class='icon-trash'></i>"), merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger'
     - else
       %tr
         %td{colspan: 7}
