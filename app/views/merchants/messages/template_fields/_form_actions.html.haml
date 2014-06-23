@@ -6,6 +6,7 @@
     = submit_tag("Save", name: "preview", class: 'btn btn-primary submit-message')
     /= submit_tag("Launch", name: "launch", class: 'btn btn-success submit-message') unless current_shop.disabled? || @message.queued?
   - else
-    = submit_tag("Save", name: "save_draft", class: 'btn btn-info submit-message')
-    = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary submit-message')
-    = submit_tag("Save and navigate to parent", name: "save_and_navigate_parent", class: 'btn btn-success submit-message')
+    = hidden_field_tag :after_save_location, edit_merchants_message_path(@message.parent.uuid)
+    = submit_tag("Save", name: "preview", class: 'btn btn-primary submit-message')
+    / = submit_tag("Save and Preview", name: "preview", class: 'btn btn-primary submit-message')
+    = submit_tag("Save and navigate to parent", name: "save_draft", class: 'btn btn-success submit-message')  

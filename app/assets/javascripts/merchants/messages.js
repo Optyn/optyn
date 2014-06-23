@@ -373,7 +373,7 @@ function MerchantMessage() {
             var confirmMessage = "This will save the current draft of your survey message and " +
                 "open the response message for editing. Do you wish to continue?"
             if(confirm(confirmMessage)){
-                $('#edit_child_location').val($(this).prop('href'));
+                $('#after_save_location').val($(this).prop('href'));
                 $('#message_fields_wrapper form').submit();
             }
         });
