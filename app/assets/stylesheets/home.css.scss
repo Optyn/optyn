@@ -9,6 +9,9 @@
   padding-left: 250px;
   &.merchants-messages { padding-left: 0; }
   &.merchants-messages.types,
+  &.merchants-messages.queued,
+  &.merchants-messages.sent,
+  &.merchants-messages.drafts,
   &.merchants-messages.show { padding-left: 250px; }
 }
 #flat {
