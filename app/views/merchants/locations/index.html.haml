@@ -36,8 +36,13 @@
             = location.zip
           %td
             .btn-group
-              = link_to raw("<i class='icon-edit'></i>"), edit_merchants_location_path(location), class: 'btn btn-primary'
-              = link_to raw("<i class='icon-trash'></i>"), merchants_location_path(location), :confirm => 'Are you sure you want delete this location?', :method => :delete, class: 'btn btn-danger'
+              = link_to raw("<i class='icon-edit'></i>"),
+                edit_merchants_location_path(location), class: 'btn btn-primary',
+                'data-toggle' => 'tooltip', title: 'Edit this location'
+              = link_to raw("<i class='icon-trash'></i>"),
+                merchants_location_path(location), class: 'btn btn-danger',
+                :confirm => 'Are you sure you want delete this location?', :method => :delete,
+                'data-toggle' => 'tooltip', title: 'Delete this location'
     - else
       %tr
         %td{colspan: 7}
