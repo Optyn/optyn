@@ -195,6 +195,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.new_template #dashboard .yield,
   &.edit_template #dashboard .yield,
   &.system_layout_properties #dashboard .yield,
+  &.template #dashboard .yield,
   &.launch #dashboard .yield,
   &.edit #dashboard .yield { width: 100%; }
   &.edit_metadata#flat .yield h1 {
