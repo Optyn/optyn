@@ -51,7 +51,8 @@ class MessageMailer < ActionMailer::Base
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
-    premailer = Premailer.new(content, with_html_string: true)    
+    duped_content = content.dup
+    premailer = Premailer.new(duped_content, with_html_string: true, input_encoding: "UTF-8")    
     text_version = premailer.to_plain_text
 
     #Add X headers
@@ -61,8 +62,7 @@ class MessageMailer < ActionMailer::Base
           to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
           from: message.from, 
           subject: message.personalized_subject(receiver),
-          reply_to: message.manager_email,
-          content_type: 'text/html'
+          reply_to: message.manager_email
         ) do |format|
 
       format.text { render(text: text_version) }
@@ -73,11 +73,13 @@ class MessageMailer < ActionMailer::Base
   def send_returnpath(message, receiver)
     ShopTimezone.set_timezone(message.shop)
     template = message.template
-    unparsed_content = template.fetch_cached_content(message)
+
+    unparsed_content = template.fetch_content(message)
     content = template.personalize_body(unparsed_content, message, receiver)
     content = template.process_urls(content, message, receiver)
     content = template.process_content(content, receiver)
-    premailer = Premailer.new(content, with_html_string: true)    
+    duped_content = content.dup
+    premailer = Premailer.new(duped_content, with_html_string: true, input_encoding: "UTF-8")    
     text_version = premailer.to_plain_text
 
     #Add X headers
@@ -87,8 +89,7 @@ class MessageMailer < ActionMailer::Base
           to: %Q(#{receiver.full_name + ' ' if receiver.full_name}<#{receiver.email}>),
           from: message.from, 
           subject: message.personalized_subject(receiver),
-          reply_to: message.manager_email,
-          content_type: 'text/html'
+          reply_to: message.manager_email
         ) do |format|
 
       format.text { render(text: text_version) }

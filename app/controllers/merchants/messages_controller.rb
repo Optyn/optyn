@@ -6,17 +6,21 @@ class Merchants::MessagesController < Merchants::BaseController
   # OVERRIDING THE SWITCH HERE
   layout :switch_layout
 
-  MESSAGE_MAKER_LAYOUT = ['edit',
-        'preview',
-        'edit_metadata',
-        'new',
-        'template',
-        'new_template',
-        'edit_template',
-        'system_layout_properties',
-        'system_layouts',
-        'launch',
-        'preview_template']
+  MESSAGE_MAKER_LAYOUT = [
+    'edit',
+    'preview',
+    'edit_metadata',
+    'new',
+    'template',
+    'new_template',
+    'edit_template',
+    'system_layout_properties',
+    'system_layouts',
+    'launch',
+    'preview_template',
+    'create',
+    'update'
+  ]
 
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
@@ -44,7 +48,8 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def new
     survey_id = params[:survey_id]
-    @message = Message.new
+    klass = params[:message_type].classify.constantize rescue nil
+    @message = klass ? klass.new : Message.new
     @message.manager_id = current_manager.id
     @shop = current_shop
   end
@@ -174,14 +179,19 @@ class Merchants::MessagesController < Merchants::BaseController
       else
         edit_merchants_message_path(@message.uuid)
       end
+
       update_button_styles
+
       if @message.send(message_method_call.to_sym)
-           respond_to do |format|
-            format.html { redirect_to redirect_path }
-            format.js {}
-          end
+        respond_to do |format|
+          format.html { redirect_to redirect_path }
+          format.js {}
+        end
+      elsif @message.errors[:name].present?
+        flash.now[:error] = UPDATE_FLASH_ERROR
+        render :action => :edit_metadata
       else
-        flash.now[:error] = LAUNCH_FLASH_ERROR
+        flash.now[:error] = UPDATE_FLASH_ERROR
         respond_to do |format|
           format.html { redirect_to redirect_path }
           format.js {}

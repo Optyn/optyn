@@ -1,5 +1,10 @@
 = content_for :banner do
   = message_form_title(@message_type)
+= content_for :actions_right do  
+  .pull-right
+    %a.btn.btn-success{ href: '#'}
+      Create Content
+      %i.icon-arrow-right
 
 #merchants
   /= render partial: "merchants/messages/message_menu"
