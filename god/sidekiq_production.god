@@ -14,7 +14,7 @@ rails_current_root = "/srv/apps/optyn/current"
 
 #SET Maximum number of workers
 #SET Maximum memory usage
-memory_usage_max =  1000
+memory_usage_max =  1500
 
 puts "God is starting with:"
 puts "RAILS_ENV = #{rails_env}"
