@@ -2,7 +2,8 @@
   %a.home-link{:href => root_path}
     = image_tag "logo.png", :alt => 'logo', style: "max-width: 80px;"
   .welcome-user
-    %span.user-th
+    = image_tag current_merchants_manager.image_url(session[:omniauth_manager_authentication_id]), :alt => "User Avatar", :class => "profile_image"
+    /%span.user-th
     Hi
     %strong
       == #{current_manager.first_name}!
