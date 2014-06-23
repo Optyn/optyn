@@ -43,6 +43,8 @@ class Message < ActiveRecord::Base
   SIDEBAR_TEMPLATS = ["Left Sidebar", "Right Sidebar"] 
   HERO_TEMPLAT = ["Hero"]
 
+  after_initialize :assign_canned_subject
+
   # check for validations explicityly with valid?() as in draft state save() has validate: false
   # save() is overriden somewhere in the code below
   before_create :assign_uuid, :valid?
@@ -133,8 +135,9 @@ class Message < ActiveRecord::Base
       else
         message.send_on = nil
       end
-
-      message.valid? if message.new_record?
+      # the explicit check for presence of name is required to ensure campaign name cannot be
+      # set to blank even for an existing message record
+      message.valid? if message.new_record? || message.name.blank?
     end
 
     before_transition :draft => :queued do |message|
@@ -301,6 +304,10 @@ class Message < ActiveRecord::Base
 
   def self.get_qr_code_link(message_id)
     TrackingServices::Messages.qr_code(message_id)
+  end
+
+  def assign_canned_subject
+    self.subject = canned_subject
   end
 
   def email_self
