@@ -1381,3 +1381,20 @@ p {
     border: 0;
   }
 }
+
+.table-striped tbody > tr > td,
+.table-striped tbody > tr > th {
+  border: 0;
+}
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background: transparent;
+}
+.table-striped tbody > tr:nth-child(even) > td,
+.table-striped tbody > tr:nth-child(even) > th {
+  background: desaturate( lighten( $blue, 28% ), 70% );
+}
+.table-hover tbody tr:hover > td,
+.table-hover tbody tr:hover > th {
+  background: desaturate( lighten( $blue, 24% ), 70% );
+}
