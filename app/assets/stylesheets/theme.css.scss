@@ -1122,12 +1122,11 @@ strong {
   }
 }
 thead {
-  border-top: solid 2px #ccc;
-  border-bottom: solid 2px #ccc;
+  background: lighten( desaturate( $dark-blue, 10% ), 20% );
+  color: $white;
 }
 th {
   text-transform: uppercase;
-  color: $gray;
   font-weight: 700;
 }
 .separator-thin {
