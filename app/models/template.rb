@@ -142,9 +142,9 @@ class Template < ActiveRecord::Base
     content = ""
 
     html = Messagecenter::Templates::MarkupGenerator.generate_content(message, self)
-    premailer = Premailer.new(html, with_html_string: true)
+    premailer = Premailer.new(html, with_html_string: true, input_encoding: "UTF-8")
     content = premailer.to_inline_css
-    content = content.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, replace: "")
+    content = content.encode("UTF-8", :invalid => :replace, :undef => :replace, replace: "")
     content = content.gsub(OPTYN_SPACE_PLACEHOLDER, "&nbsp;")
     content = content.to_s.squish
     content = content.gsub(/<\/td>\s?<td/ixm, "</td><td")
