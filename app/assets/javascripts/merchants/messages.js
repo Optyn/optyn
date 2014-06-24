@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     $(document).bind('ajaxComplete', function(){
         merchantMessage.setDiscountTypeSelected();
+        merchantMessage.hookChosen();
     });
 });
 
@@ -145,7 +146,7 @@ function MerchantMessage() {
     };
 
     this.hookChosen = function () {
-        $('.chzn-select').chosen();
+        $('.chzn-select').chosen({"width": "100%"});
     };
 
     this.hookActionEvent = function () {

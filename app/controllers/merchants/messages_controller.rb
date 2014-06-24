@@ -236,14 +236,13 @@ class Merchants::MessagesController < Merchants::BaseController
     @message.subject = params[:message][:subject]
     @message.label_ids = params[:message][:label_ids] if params[:message][:label_ids]
     populate_send_on
-
-    @message.update_meta!
     populate_labels
 
-    render json: {message: render_to_string(partial: "merchants/messages/template_fields/show_message")}
-
-  rescue => e
-    render json: {message: render_to_string(partial: "merchants/messages/meta_form", locals: {message: @message})}, status: :unprocessable_entity
+    if @message.update_meta
+      render json: {message: render_to_string(partial: "merchants/messages/template_fields/show_message")}
+    else
+      render json: {message: render_to_string(partial: "merchants/messages/meta_form", locals: {message: @message})}, status: :unprocessable_entity
+    end
   end
 
   def create_response_message

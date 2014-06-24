@@ -351,18 +351,14 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def update_meta!
+  def update_meta
     valid?
     non_meta_attrs = attributes.keys - ['subject', 'send_on']
     non_meta_attrs.each do |attr|
       errors.delete(attr.to_sym)
     end
 
-    if self.errors.empty?
-      save(validate: false) 
-    else
-      raise ActiveRecord::RecordInvalid.new(self)
-    end  
+    save(validate: false) if self.errors.empty?
   end
 
   def save_template_content!(message_hash)
