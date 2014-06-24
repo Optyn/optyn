@@ -137,7 +137,10 @@ class Message < ActiveRecord::Base
       end
       # the explicit check for presence of name is required to ensure campaign name cannot be
       # set to blank even for an existing message record
-      message.valid? if message.new_record? || message.name.blank?
+      valid = message.valid? if message.new_record? || message.name.blank?
+      #clear out errors other than those needed on the metadata page
+      message.clear_errors_except('name', 'send_on')
+      valid
     end
 
     before_transition :draft => :queued do |message|
@@ -605,6 +608,10 @@ class Message < ActiveRecord::Base
 
   def error_messages
     self.errors.full_messages
+  end
+
+  def clear_errors_except(*exempted_attrs)
+    (self.attribute_names - exempted_attrs).each { |attr| self.errors[attr].clear }
   end
     
   #Returning the default value for now.

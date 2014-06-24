@@ -189,8 +189,13 @@ class Merchants::MessagesController < Merchants::BaseController
           format.js {}
         end
       elsif @message.errors[:name].present?
+        p @message.errors
         flash.now[:error] = UPDATE_FLASH_ERROR
-        render :action => :edit_metadata
+        if @message.instance_of?(TemplateMessage)
+          render :action => :edit_template
+        else
+          render :action => :edit_metadata
+        end
       else
         flash.now[:error] = UPDATE_FLASH_ERROR
         respond_to do |format|
