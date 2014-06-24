@@ -43,7 +43,7 @@ class Message < ActiveRecord::Base
   SIDEBAR_TEMPLATS = ["Left Sidebar", "Right Sidebar"] 
   HERO_TEMPLAT = ["Hero"]
 
-  after_initialize :assign_canned_subject
+  after_initialize :assign_canned_subject, :if => 'subject.blank?'
 
   # check for validations explicityly with valid?() as in draft state save() has validate: false
   # save() is overriden somewhere in the code below
@@ -521,6 +521,30 @@ class Message < ActiveRecord::Base
     self.content
   end
 
+  def generate_greeting(receiver = nil)
+    greeting_prefix = case
+      when self.instance_of?(CouponMessage)
+        "Great News"
+      when self.instance_of?(SpecialMessage)
+        "Great News"
+      when self.instance_of?(SaleMessage)
+        "Hi"
+      when self.instance_of?(GeneralMessage)
+        "Hello"
+      when self.instance_of?(ProductMessage)
+        "Hi"
+      when self.instance_of?(EventMessage)
+        "Event News"
+      when self.instance_of?(SurveyMessage)
+        "Your feedback is valuable"
+      else
+        "Hello"
+    end
+
+    greeting_suffix = (receiver.first_name rescue "{{Customer Name}}")
+    "#{greeting_prefix} #{greeting_suffix}"
+  end
+
   def excerpt
     self.content.to_s.truncate(250)
   end
@@ -863,6 +887,11 @@ class Message < ActiveRecord::Base
     if self.partner.eatstreet? && self.coupon_code.blank?
       self.coupon_code = Devise.friendly_token.first(12)
     end
+  end
+
+  # Greeting is assigned only to the existing messages
+  def assign_greeting
+    self.greeting = generate_greeting
   end
 
   def fetch_receiver_ids    

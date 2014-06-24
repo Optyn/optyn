@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140618121627) do
+ActiveRecord::Schema.define(:version => 20140624115015) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -420,6 +420,7 @@ ActiveRecord::Schema.define(:version => 20140618121627) do
     t.string   "button_text",      :limit => 1000
     t.boolean  "make_public"
     t.integer  "template_id"
+    t.string   "greeting"
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"

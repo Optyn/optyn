@@ -37,7 +37,6 @@
                   %td.w20{:width => "20"}
                   %td.w560{:style => "bgcolor:#ffffff;width:540px;word-break:break-word;word-wrap:break-word;"}
                     .message-content
-                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
                     %p.core-content
                       - @target_blank = true
