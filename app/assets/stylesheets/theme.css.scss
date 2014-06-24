@@ -1320,10 +1320,10 @@ p {
   @include border-radius( 0 );
 }
 
-#flat ::-webkit-input-placeholder { color: $black; }
-#flat ::-moz-placeholder { color: $black; } /* firefox 19+ */
-#flat :-ms-input-placeholder { color: $black; } /* ie */
-#flat input:-moz-placeholder { color: $black; }
+#flat ::-webkit-input-placeholder { color: darken( $medium-gray, 20% ); }
+#flat ::-moz-placeholder { color: darken( $medium-gray, 20% ); } /* firefox 19+ */
+#flat :-ms-input-placeholder { color: darken( $medium-gray, 20% ); } /* ie */
+#flat input:-moz-placeholder { color: darken( $medium-gray, 20% ); }
 
 #flat :focus::-webkit-input-placeholder { color: $medium-gray; }
 #flat :focus::-moz-placeholder { color: $medium-gray; } /* firefox 19+ */
