@@ -166,7 +166,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
       populate_send_on if @message.instance_of?(TemplateMessage)
       @message.attributes = params[:message].except(:label_ids)
-      @message.label_ids = params[:message][:label_ids]  || []
+      @message.label_ids = params[:message][:label_ids] if params[:message][:label_ids]
 
       populate_datetimes
       message_method_call = check_subscription
@@ -189,7 +189,6 @@ class Merchants::MessagesController < Merchants::BaseController
           format.js {}
         end
       elsif @message.errors[:name].present?
-        p @message.errors
         flash.now[:error] = UPDATE_FLASH_ERROR
         if @message.instance_of?(TemplateMessage)
           render :action => :edit_template
