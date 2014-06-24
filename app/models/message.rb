@@ -545,11 +545,6 @@ class Message < ActiveRecord::Base
     "#{greeting_prefix} #{greeting_suffix}"
   end
 
-  # Greeting is assigned only to the existing messages
-  def assign_greeting
-    self.greeting = generate_greeting
-  end
-
   def excerpt
     self.content.to_s.truncate(250)
   end
@@ -892,6 +887,11 @@ class Message < ActiveRecord::Base
     if self.partner.eatstreet? && self.coupon_code.blank?
       self.coupon_code = Devise.friendly_token.first(12)
     end
+  end
+
+  # Greeting is assigned only to the existing messages
+  def assign_greeting
+    self.greeting = generate_greeting
   end
 
   def fetch_receiver_ids    
