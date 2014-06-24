@@ -234,9 +234,11 @@ class Merchants::MessagesController < Merchants::BaseController
     klass = params[:message_type].classify.constantize
     @message = klass.for_uuid(params[:id])
     @message.subject = params[:message][:subject]
+    @message.label_ids = params[:message][:label_ids] if params[:message][:label_ids]
     populate_send_on
 
     @message.update_meta!
+    populate_labels
 
     render json: {message: render_to_string(partial: "merchants/messages/template_fields/show_message")}
 
@@ -277,6 +279,7 @@ class Merchants::MessagesController < Merchants::BaseController
     @preview = true
     @partner = current_partner
     @message_type = @message.type.underscore
+    populate_labels
   end
 
   def preview_template

@@ -23,7 +23,12 @@
             %span.add-on
               %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
-          = hidden_field_tag "send_on_error", @message.errors[:send_on]    
+          = hidden_field_tag "send_on_error", @message.errors[:send_on]
+      .control-group
+        = f.label :label_ids, "Send Campaign to:", class: 'control-label'
+        .controls
+          = f.select :label_ids, options_from_collection_for_select(@labels, :id, :name, @message.label_ids(@labels)),
+            {}, { id: "message_label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Please select the receivers of this message'}
 
 .modal-footer
   = link_to "Close", "#", class: 'btn', 'data-dismiss' => "modal"
