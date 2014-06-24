@@ -42,4 +42,12 @@ namespace :message do
       end
     end
   end
+
+  desc "Task to populate the new greeting field for all messages"
+  task :populate_greetings_for_old_records => :environment do
+    messages = Message.where(:greeting => nil)
+    messages.each do |message|
+      message.update_attribute(:greeting, message.generate_greeting) 
+    end
+  end
 end

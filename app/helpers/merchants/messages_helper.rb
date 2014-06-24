@@ -69,33 +69,6 @@ module Merchants::MessagesHelper
     end
   end
 
-  def message_greeting(message, preview = false, receiver = nil)
-    greeting_prefix = case
-                        when message.instance_of?(CouponMessage)
-                          "Great News"
-                        when message.instance_of?(SpecialMessage)
-                          "Great News"
-                        when message.instance_of?(SaleMessage)
-                          "Hi"
-                        when message.instance_of?(GeneralMessage)
-                          "Hello"
-                        when message.instance_of?(ProductMessage)
-                          "Hi"
-                        when message.instance_of?(EventMessage)
-                          "Event News"
-                        when message.instance_of?(SurveyMessage)
-                          "Your feedback is valuable"
-                        else
-                          "Hello"
-                      end
-    if @message_name.blank?
-      greeting_suffix = (receiver.first_name rescue "{{Customer Name}}") #message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : (receiver.first_name )
-    else
-      greeting_suffix = ""
-    end
-    "#{greeting_prefix}#{(" " + greeting_suffix) if greeting_suffix.present?},"
-  end
-
   def message_rendering_partial(message)
     message.type.underscore
   end
