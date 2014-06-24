@@ -3,11 +3,10 @@
     = label_tag "background_color", "Background Color", class: 'control-label'
     .controls
       %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-        .btn-group
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[layout][css][background-color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+        %a.dropdown-toggle{"data-toggle" => "dropdown"}
+          = text_field_tag "properties[layout][css][background-color]", "", class: 'template-color-field input-medium'
+          %span.add-on
+            %i{:style => "background-color: ''"}
   .actions
     .pull-right
       %a{href: "javascript:void(0)", class: "btn btn-success template-property-action", 'data-tab' => 'template_header'}
