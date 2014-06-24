@@ -607,3 +607,23 @@
 .segments.default {
   #dashboard { padding-bottom: 0; }
 }
+
+.dash-stats {
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 50px 0;
+  .count {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 100px;
+    color: $white;
+    width: 100px;
+    height: 100px;
+    line-height: 60px;
+    margin-bottom: 20px;
+  }
+  .coupons { background-color: desaturate( $green, 25% ); }
+  .messages { background-color: desaturate( $bluish-green, 25% ); }
+  .surveys { background-color: desaturate( $purple, 25% ); }
+  .specials { background-color: desaturate( $medium-gray, 25% ); }
+}

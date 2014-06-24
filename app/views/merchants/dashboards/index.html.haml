@@ -8,31 +8,46 @@
       Import Subscribers
     .blank-space
 
-  .row-fluid.no-pad
-    .span12.new-conn
-      %h2 New Subscribers
+  %h2 Latest Updates
+  .row-fluid.no-pad.dash-stats
+    .span3
+      .count.coupons 123
+      %p New Coupons
+    .span3
+      .count.messages 8
+      %p New Messages
+    .span3
+      .count.surveys 69
+      %p Active Surveys
+    .span3
+      .count.specials 1280
+      %p Available Specials
 
-  .row-fluid.stats.no-pad
-    .span3.leading
-      .count
-        = @day_count
-      .info
-        24 hours
-    .span3.box
-      .count
-        = @week_count
-      .info
-        7 days
-    .span3.box
-      .count
-        = @month_count
-      .info
-        30 days
-    .span3.box
-      .count
-        = @total_count
-      .info
-        Total Active
+  / .row-fluid.no-pad
+  /   .span12.new-conn
+  /     %h2 New Subscribers
+
+  / .row-fluid.stats.no-pad
+  /   .span3.leading
+  /     .count
+  /       = @day_count
+  /     .info
+  /       24 hours
+  /   .span3.box
+  /     .count
+  /       = @week_count
+  /     .info
+  /       7 days
+  /   .span3.box
+  /     .count
+  /       = @month_count
+  /     .info
+  /       30 days
+  /   .span3.box
+  /     .count
+  /       = @total_count
+  /     .info
+  /       Total Active
   %h2
     Your Latest Activity
     
