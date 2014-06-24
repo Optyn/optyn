@@ -545,6 +545,7 @@ class Message < ActiveRecord::Base
     "#{greeting_prefix} #{greeting_suffix}"
   end
 
+  # Greeting is assigned only to the existing messages
   def assign_greeting
     self.greeting = generate_greeting
   end
