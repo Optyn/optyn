@@ -1098,18 +1098,29 @@ function MerchantMessage() {
     }
     $( '#show-desktop-preview' ).click( function() {
         highlightCurrentButton( $( this ));
-        $( selector ).animate({ width: '100%' }, 200 );
-        $( '#message_preview' ).removeClass( 'mm-mobile-preview' );
+        $( selector ).animate({ width: '100%' }, 200, function() {
+            if ( $( 'body' ).hasClass( 'preview_template' )) {
+                equalizeDivHeightsWithIframe();
+            }
+        });
         opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper td:first' ]);
     });
+
+    var equalizeDivHeightsWithIframe = function() {
+        $( '#customHtmlTemplate' ).css( 'min-height', 'inherit' );
+        $( '#campaign-details-pane' ).css( 'min-height', 'inherit' );
+        $( '#customHtmlTemplate' ).css( 'min-height', $( '#customHtmlTemplate' ).contents().find( 'body' ).css( 'height' ));
+        opTheme.equalizeDivHeights([ '#campaign-details-pane', '#customHtmlTemplate' ]);
+    };
 
     $( '#show-mobile-preview' ).click( function() {
         highlightCurrentButton( $( this ));
         $( '#preview_wrapper td:first' ).css ( 'height', 'auto' ); // To overcome sideeffects of equalizeDivHeights().
         $( selector ).animate({ width: '320px' }, 200, function() {
-            $( '#message_preview' ).addClass( 'mm-mobile-preview' );
+            if ( $( 'body' ).hasClass( 'preview_template' )) {
+                equalizeDivHeightsWithIframe();
+            }
         }).css( 'margin-left', 'auto' ).css( 'margin-right', 'auto' );
-        $( 'h1 a' ).show();
     });
   }
 
@@ -1123,7 +1134,6 @@ function MerchantMessage() {
     var $editorPane = $( '#campaign-details-pane' );
     var workArea;
     var cb = function() {
-        console.log(',,,');
         workArea = $( window ).height() - 50;
         $iframe.css( 'min-height', 'inherit' );
         var iframeHt = $iframe.contents().find( 'body' ).css( 'height' );

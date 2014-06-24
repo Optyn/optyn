@@ -73,6 +73,11 @@ $( function() {
   };
 
 
+  opTheme.setIframeHeight = function( selector ) {
+    $( selector ).css( 'min-height', $( selector ).find( 'body' ).css( 'height' ));
+  };
+
+
   (function() {  // Init function.
     if ( $( '.m-menu-toggle' ).length ) {
       opTheme.makeMenuResponsive();
