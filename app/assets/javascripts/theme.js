@@ -96,27 +96,11 @@ $(document).ready(function () {
         });
     }
 
-    // Ensuring footer is stuck to the bottom in base layout ...................
-    if ( $( 'body' ).hasClass( 'b-layout' )) {
-        setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
-        $( window ).resize( function() {
-            setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
-        });
-    }
-
-
     // Ensuring footer is stuck to the bottom in email_feedback layout .........
     if ( $( 'body' ).hasClass( 'ef-l' )) {
         setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
         $( window ).resize( function() {
             setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
-        });
-    }
-
-    if ( $( 'body' ).hasClass( 'merchants-messages' )) {
-        setMidContentHt( 'h1', '.yield', 'footer' );
-        $( window ).resize( function() {
-            setMidContentHt( 'h1', '.yield', 'footer' );
         });
     }
 
