@@ -124,9 +124,9 @@ module Messagecenter
                 image_container = division_node.css('.ss-replaceable-image')[index]
                 begin
                   if image_content['href'].blank?
-                    img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" />}
+                    img_elem = %{<img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" alt="#{image_content['alt']}" />}
                   else
-                    img_elem = %{<a href="#{image_content['href']}" target="_blank" class="imageLink"><img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" /></a>}
+                    img_elem = %{<a href="#{image_content['href']}" target="_blank" class="imageLink"><img src="#{image_content['url']}" height="#{image_container['height']}" width="#{image_container['width']}" style="#{image_content['style']}" class="#{image_content['class']}" alt="#{image_content['alt']}" /></a>}
                   end
                   image_container.inner_html = img_elem
                 rescue
