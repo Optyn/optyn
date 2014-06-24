@@ -8,6 +8,7 @@ class SendLimitsController < ApplicationController
 
   def new
     @counter = REDIS[EmailCounter::SENDGRID_SEND_LIMIT]
+    @sent = REDIS[EmailCounter::SENDGRID_KEY]
   end
 
   def set
