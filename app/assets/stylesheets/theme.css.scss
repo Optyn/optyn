@@ -1027,6 +1027,8 @@ form {
 #flat {
   .input-append,
   .input-prepend {
+    border: solid 1px darken( $light-gray, 20% );
+    input { border: none; }
     .add-on {
       min-height: 35px;
       font-size: 15px;
@@ -1316,8 +1318,6 @@ blockquote {
   border: 0;
   border-left: solid 1px;
   border-color: darken( $light-gray, 20% );
-  position: relative;
-  left: -33px;
   @include border-radius( 0 );
 }
 
