@@ -283,6 +283,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def preview_template
     @message = Message.for_uuid(params[:id])
+    populate_labels
   end
 
   def preview_template_content
