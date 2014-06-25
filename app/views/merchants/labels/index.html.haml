@@ -2,22 +2,26 @@
   Lists for
   = current_shop.name
 #merchants.pad3pc
-  = link_to raw("<i class='icon-plus'></i> Create a New List"), new_merchants_label_path, :class => "btn btn-primary"
-  %table.table.table-striped.table-hover
-    %thead
-      %tr
-        %th Name
-        %th Subscribers
-        %th Edit
-        %th Delete
-    %tbody
-      - @labels.each do |label|
-        %tr
-          %td= label.name
-          %td= label.users_count
-          %td= link_to 'Edit', edit_merchants_label_path(label)
-          %td= link_to 'Destroy', merchants_label_path(label), :method => :delete, :data => { :confirm => 'Are you sure you want to delete this label?' } if label.is_destroyable?
+  .row-fluid.no-pad
+    .span8
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Subscribers
+            %th Actions
+        %tbody
+          - @labels.each do |label|
+            %tr
+              %td= label.name
+              %td= label.users_count
+              %td
+                .btn-group
+                  = link_to raw( '<i class="icon-edit"></i>' ), edit_merchants_label_path(label),
+                    :class => 'btn btn-primary', :'data-toggle' => 'tooltip', :title => 'Edit'
+                  = link_to raw( '<i class="icon-trash"></i>' ), merchants_label_path(label), :method => :delete,
+                    :class => 'btn btn-danger', :'data-toggle' => 'tooltip', :title => 'Delete',
+                    :data => { :confirm => 'Are you sure you want to delete this label?' } if label.is_destroyable?
 
-  %br
-
-  
+    .span4.text-right
+      = link_to raw("<i class='icon-plus'></i> Create a New List"), new_merchants_label_path, :class => "btn btn-primary"
