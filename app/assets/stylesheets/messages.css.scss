@@ -118,30 +118,13 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
 }
 
 .merchants-messages {
-  &#flat { padding-top: 50px; }
-  .mm-mobile-preview {
-    background-image: image-url( 'iPhone_5_outline.png' );
-    background-repeat: no-repeat;
-    background-position: center top;
-    margin-top: 100px;
-    background-size: contain;
-    width: 391px;
-    height: 819px;
-    overflow: scroll;
-    margin: auto;
-    > #preview_wrapper {
-      @include transition( margin 0.2s ease );
-      margin-top: 126px;
-      height: 568px;
-      overflow: scroll;
-    }
-  }
   table {
     clear: both;
   }
   &#flat #dashboard .yield,
   #dashboard { padding-bottom: 0; }
   &.new#flat,
+  &.create#flat,
   &.edit#flat,
   &.edit_metadata#flat,
   &.preview#flat,

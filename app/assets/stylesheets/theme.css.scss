@@ -1013,7 +1013,6 @@ form {
   }
   .btn-group .btn {
     @include border-radius( 0 );
-    box-shadow: none;
     &:first-child {
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
