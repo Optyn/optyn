@@ -43,9 +43,9 @@ namespace :message do
     end
   end
 
-  desc "Task to populate the new greeting field for all messages"
-  task :populate_greetings_for_old_records => :environment do
-    messages = Message.where(:greeting => nil)
+  desc "Task to populate the new greeting field for all sent/queued messages"
+  task :populate_greetings => :environment do
+    messages = Message.where("state != ? and greeting is NULL", 'draft')
     messages.each do |message|
       message.update_attribute(:greeting, message.generate_greeting) 
     end
