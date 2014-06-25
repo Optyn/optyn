@@ -627,3 +627,16 @@
   .surveys { background-color: desaturate( $purple, 25% ); }
   .specials { background-color: desaturate( $medium-gray, 25% ); }
 }
+
+#filter_Form {
+  opacity: 0;
+  text-align: right;
+  @include transition( all 0.2s ease );
+  position: relative;
+  right: -100%;
+}
+
+#merchants .filter_Form-visible {
+  opacity: 1;
+  right: 0;
+}
