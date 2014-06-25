@@ -47,6 +47,11 @@ function MerchantMessage() {
             this.hookExpirationDate();
             this.hookAddButton();
         }
+
+        if ($('#template_wrapper').length) {
+            this.hookChosen();
+        }
+
         if ( $('#message_send_on_container').length ) {
             // For Date/Time picker on preview Newsletter page.
             this.hookDateTimePicker();
