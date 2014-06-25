@@ -5,6 +5,7 @@
     %a.btn.btn-success{:href => support_path, :target => "_blank", :style => "float:right;", :title => "Help Me", :class => active_tab_class(['messages'])}
       Help Me!
     %a.btn.btn-info{:href => "/user_import_stub.csv", :style => "margin-right:10px;float:right;", :title => "Campaign Center", :class => active_tab_class(['messages'])}
+      %i.icon-download
       Sample File
   %br
   
@@ -20,7 +21,7 @@
           .control-group
             = f.label :csv_file, "Step 1 - Choose Subscriber CSV file*", class: 'control-label'
             .controls.text-left
-              = f.file_field :csv_file
+              = f.file_field :csv_file, accept: '.csv,.CSV'
 
           .control-group
             = f.label :label, "Step 2 - Select or Create a list*", class: 'control-label'
