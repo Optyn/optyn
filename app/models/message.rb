@@ -497,22 +497,22 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def personalized_subject(receiver)
-    replace_customer_name(receiver, self.subject)
+  def personalized_subject(receiver, preview = false)
+    replace_customer_name(receiver, self.subject, preview)
   rescue => e
     "A message from #{shop.name}"
   end
 
-  def generic_subject
-    replace_customer_name(nil, self.subject)
+  def generic_subject(preview = false)
+    replace_customer_name(nil, self.subject, preview)
   end
 
-  def personalized_greeting(receiver)
-    replace_customer_name(receiver, self.subject)
+  def personalized_greeting(receiver, preview = false)
+    replace_customer_name(receiver, self.subject, preview)
   end
 
-  def personalized_content(receiver)
-    replace_customer_name(receiver, self.content)
+  def personalized_content(receiver, preview = false)
+    replace_customer_name(receiver, self.content, preview)
   rescue
     self.content
   end
@@ -971,19 +971,23 @@ class Message < ActiveRecord::Base
     shop.connections.active.collect(&:user_id) 
   end  
 
-  def replace_customer_name(receiver, article)
+  def replace_customer_name(receiver, article, preview)
     user_name = "#{(receiver.first_name.titleize rescue nil)}" if receiver.present?
     if user_name.present?
       article.gsub(/{{Customer Name}}/i, user_name)
-    else
-      
+    elsif !preview
+      # replace the occurrece in greeting      
       regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
       personalized_article = (article.to_s.gsub(regex, "")).strip
       
+      # replace rest of the occurrences
       regex = /{{Customer Name}}/i #regex when the customer name is missing /eom
       personalized_article = (personalized_article.to_s.gsub(regex, "")).strip #incase customer name is used somewhere else.
+
       personalized_article[0] = personalized_article.to_s.first.capitalize[0] if personalized_article.present?
       personalized_article
+    else
+      article
     end
   end
 
