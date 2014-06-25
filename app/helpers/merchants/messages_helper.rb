@@ -83,12 +83,12 @@ module Merchants::MessagesHelper
     display_content.to_s.html_safe
   end
 
-  def message_content(message, receiver=nil)
+  def message_content(message, receiver=nil, preview = false)
     if message.instance_of?(VirtualMessage)
       return raw(display_content)
     end
 
-    display_content = message.content.blank? ? "-" : message.personalized_content(receiver)
+    display_content = message.content.blank? ? "-" : message.personalized_content(receiver, preview)
     display_content.match(/<p>.*<\/p>/ixm) ? raw(display_content) : simple_format(display_content)
     display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
