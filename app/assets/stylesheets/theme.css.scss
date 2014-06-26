@@ -835,6 +835,9 @@ form {
     color: $black;
     min-height: 35px;
     @include transition( all 0.3s ease-out );
+    &:hover {
+      border-color: $black;
+    }
     &:focus {
       border-color: $dark-gray;
       background-color: $white;
