@@ -178,6 +178,7 @@ class Message < ActiveRecord::Base
       end
     end
 
+    before_transition :queued => :draft, :do => :remove_greeting
 
     after_transition any => :draft, :do => :replenish_draft_and_queued_count
 
@@ -888,6 +889,10 @@ class Message < ActiveRecord::Base
   # Greeting is assigned only to the existing messages
   def assign_greeting
     self.greeting = generate_greeting
+  end
+
+  def remove_greeting
+    self.greeting = nil
   end
 
   def fetch_receiver_ids    
