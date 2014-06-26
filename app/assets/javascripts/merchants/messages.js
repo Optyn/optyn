@@ -32,6 +32,12 @@ function MerchantMessage() {
             Hooks for preview page for messages except templates
         */ 
         if ($('#message_fields_wrapper').length) {
+            // Firefox fix for mobile preview of non-template campaigns.
+            $('#preview_wrapper > table table table:first img' ).addClass( 'logo-img' );
+            $('#preview_wrapper > table table table:nth-child(2) img' ).addClass( 'logo-img' );
+        }
+
+        if ($('#message_fields_wrapper').length) {
             this.hookChosen();
             this.hookActionEvent();
             this.hookDateTimePicker();
@@ -1103,6 +1109,7 @@ function MerchantMessage() {
         $( $current ).addClass( 'btn-primary' );
     }
     $( '#show-desktop-preview' ).click( function() {
+        $('#message_fields_wrapper').removeClass( 'mobile-preview' );
         highlightCurrentButton( $( this ));
         $( selector ).animate({ width: '100%' }, 200, function() {
             if ( $( 'body' ).hasClass( 'preview_template' )) {
@@ -1120,6 +1127,7 @@ function MerchantMessage() {
     };
 
     $( '#show-mobile-preview' ).click( function() {
+        $('#message_fields_wrapper').addClass( 'mobile-preview' );
         highlightCurrentButton( $( this ));
         $( '#preview_wrapper td:first' ).css ( 'height', 'auto' ); // To overcome sideeffects of equalizeDivHeights().
         $( selector ).animate({ width: '320px' }, 200, function() {
