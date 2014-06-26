@@ -31,10 +31,10 @@ function MerchantMessage() {
         /*
             Hooks for preview page for messages except templates
         */ 
-        if ($('#message_fields_wrapper').length) {
+        if ( $( '#preview_wrapper' ).length) {
             // Firefox fix for mobile preview of non-template campaigns.
-            $('#preview_wrapper > table table table:first img' ).addClass( 'logo-img' );
-            $('#preview_wrapper > table table table:nth-child(2) img' ).addClass( 'logo-img' );
+            $( '#preview_wrapper > table table table:first img' ).addClass( 'logo-img' );
+            $( '#preview_wrapper > table table table:nth-child(2) img' ).addClass( 'logo-img' );
         }
 
         if ($('#message_fields_wrapper').length) {
