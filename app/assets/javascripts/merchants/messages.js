@@ -34,7 +34,7 @@ function MerchantMessage() {
         if ( $( '#preview_wrapper' ).length) {
             // Firefox fix for mobile preview of non-template campaigns.
             $( '#preview_wrapper > table table table:first img' ).addClass( 'logo-img' );
-            $( '#preview_wrapper > table table table:nth-child(2) img' ).addClass( 'logo-img' );
+            $( '#preview_wrapper > table table table:nth-child(2) img' ).addClass( 'body-img' );
         }
 
         if ($('#message_fields_wrapper').length) {
@@ -666,10 +666,13 @@ function MerchantMessage() {
     };
 
     this.hookTemplateMenuColorPickerChange = function(){
-      var templateMessage = this;
-      $('.template-color-field').colorpicker().on('hide', function(){
-        templateMessage.reloadTemplateSelectorIframe();
-      });
+        var templateMessage = this;
+        $('.template-color-field').colorpicker().on('hide', function(){
+            templateMessage.reloadTemplateSelectorIframe();
+        });
+        $( '.template-color-field' ).colorpicker().on( 'changeColor', function( ev ){
+            $( this ).find( 'i' ).css( 'background-color', ev.color.toHex())
+        });
     };
 
     this.refreshTemplatePropertiesView = function(){
