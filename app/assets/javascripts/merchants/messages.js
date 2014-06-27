@@ -660,14 +660,16 @@ function MerchantMessage() {
     };
 
     this.hookTemplateMenuColorPicker = function(){
+      var current = this;  
       $('.template-color-field').colorpicker({
             format: 'hex'
-      });
+      });       
     };
 
     this.hookTemplateMenuColorPickerChange = function(){
         var templateMessage = this;
-        $('.template-color-field').colorpicker().on('hide', function(){
+        $('.template-color-field').colorpicker().on('hide', function(ev){
+            $( this ).find( 'i' ).css( 'background-color', ev.color.toHex())
             templateMessage.reloadTemplateSelectorIframe();
         });
         $( '.template-color-field' ).colorpicker().on( 'changeColor', function( ev ){
