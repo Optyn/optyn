@@ -1,5 +1,5 @@
-- if params[:action] == 'preview'
-  = render partial: "responsive_previews"
+- if ['preview', 'remove_logo'].include?(params[:action])
+  = render partial: "merchants/messages/responsive_previews"
 #message_fields_wrapper
   #message_preview_accordion
     #prev_wrapper
