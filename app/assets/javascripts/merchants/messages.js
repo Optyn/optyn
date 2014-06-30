@@ -1074,7 +1074,10 @@ function MerchantMessage() {
 
   this.hookRemoveLogo = function() {
     $('body').on('click', '.remove_logo', function() {
-        $('.form-spinner').show();
+        if(confirm("Are you sure?"))
+            $('.form-spinner').show();
+        else
+            return false;
     })
   }
 
