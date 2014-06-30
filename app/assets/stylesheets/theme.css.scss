@@ -848,6 +848,8 @@ form {
       outline: none;
     }
   }
+  .date-picker,
+  .time-picker { background-color: lighten( $light-gray, 3% ); }
   .uneditable-input {
     background-color: $white;
   }
