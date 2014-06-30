@@ -1,5 +1,15 @@
-- if @message.redemption_instructions.present?
+- if @message.instance_of?(CouponMessage)
+  - if @message.redemption_instructions.present?
+    %div{style: 'clear:both;'}
+      %strong How to Redeem:
+      %p
+        = @message.redemption_instructions
+
+- else
   %div{style: 'clear:both;'}
     %strong How to Redeem:
     %p
-      = @message.redemption_instructions
+      == Just bring or show this email to #{@message.shop_name} (print out or show it on your iPhone) and bamm, you got yourself an awesome #{message_discount_type_text(@message)} off at #{@message.shop_name}.
+
+    %p
+      = %{How awesome is that? Go ahead and hurry #{"before it expires on #{formatted_message_form_datetime(@message, 'ending')}" if @message.ending.present?}.}
