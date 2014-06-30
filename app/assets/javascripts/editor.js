@@ -72,7 +72,7 @@ OP = (function($, window, doucument, Optyn){
 
       });
 
-      $('.sortable-container').disableSelection();
+      // $('.sortable-container').disableSelection();
     },
 
     fixCkEditorModalIssue: function(){
@@ -147,7 +147,6 @@ OP = (function($, window, doucument, Optyn){
           divisionContents.push(artifact);
         });
         OP.template.openCkeditor($division, divisionContents);
-        OP.setParentIframeHeight();
       });
     },
 
@@ -397,7 +396,6 @@ OP = (function($, window, doucument, Optyn){
           OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
           OP.setImageLinkTarget();
-          window.parent.opTheme.equalizeHeights();
         }); //end of $toolsetSortable slideup
       });
     },
