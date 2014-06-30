@@ -132,8 +132,8 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.template#flat,
   &.system_layouts#flat,
   &.system_layout_properties#flat,
-  &.preview_template#flat
-	{
+  &.preview_template#flat,
+  &.update#flat {
   	padding-top: 50px;
   }
   &.launch#flat { padding-top: 0; }
@@ -182,6 +182,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   &.template #dashboard .yield,
   &.launch #dashboard .yield,
   &.create #dashboard .yield,
+  &.update #dashboard .yield,
   &.edit #dashboard .yield { width: 100%; }
   &.edit_metadata#flat .yield h1 {
 	  float: none;
@@ -342,7 +343,7 @@ tr.message-unread td{background-color: #F9F9F9; font-weight: 700;}
   color: #fff;
   float: left;
   position: relative;
-  @include transition( left 0.2s linear );
+  @include transition( left 0.1s linear );
   &:hover {
     // background: rgba(255,255,255,0.5);
     color: $white;
