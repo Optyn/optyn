@@ -1310,6 +1310,19 @@ p {
 .time-picker input {
   padding-right: 33px;
 }
+.datepicker thead {
+  background: transparent;
+  color: $dark-gray;
+  th { border: solid 1px $white; }
+  .prev,
+  .switch,
+  .next {
+    background: $light-gray;
+  }
+  .disabled {
+    background: transparent;
+  }
+}
 #flat .yield .date-picker .add-on,
 #flat .yield .time-picker .add-on {
   cursor: pointer;
