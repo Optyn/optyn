@@ -44,6 +44,7 @@ class Merchants::ShopsController < Merchants::BaseController
     @message = Message.find_by_uuid(params[:uuid])
     @shop.remove_logo_img!
     @shop.save
+    @shop_logo = true
   end
 
   def upload_logo

@@ -49,6 +49,8 @@ function MerchantMessage() {
             this.removeDuplicateLabelIdsError();
             this.hookUpdateMessage();
             this.hookUploadLogo();
+            this.hookRemoveLogo();
+            this.hookRedemptionInstructions();
             this.hookFinePrint();
             this.hookExpirationDate();
             this.hookAddButton();
@@ -1066,8 +1068,24 @@ function MerchantMessage() {
   this.hookUploadLogo = function() {
     $('body').on('click', '#upload_new_logo', function (e) {
       $("#upload_image").submit();
+      $('.form-spinner').show();
     });
   };
+
+  this.hookRemoveLogo = function() {
+    $('body').on('click', '.remove_logo', function() {
+        $('.form-spinner').show();
+    })
+  }
+
+  this.hookRedemptionInstructions = function() {
+    $('body').on('click', '#add_redemption_instructions', function (e) {
+        if($('#add_redemption_instructions').is(':checked'))
+            $('#message_redemption_instructions').show();
+        else
+            $('#message_redemption_instructions').hide();
+    });
+  }
 
   this.hookFinePrint = function() {
     $('body').on('click', '#fine_print', function (e) {

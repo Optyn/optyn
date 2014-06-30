@@ -27,6 +27,11 @@
   = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
 
 .control-group
+  = check_box_tag "add_redemption_instructions" , true,  set_default(@message.redemption_instructions)
+  %label{ for: 'add_redemption_instructions' } Add Redemption Instructions
+  = render partial: 'merchants/shared/messages/redemption_instructions', locals: {f: f, verbiage: 'How can this coupon be redeemed?'}
+
+.control-group
   = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
   %label{ for: 'fine_print' } Add Fine Print
   = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,

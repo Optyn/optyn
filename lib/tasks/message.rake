@@ -50,4 +50,26 @@ namespace :message do
       message.update_attribute(:greeting, message.generate_greeting) 
     end
   end
+
+  desc "Task to add Redemption Instructions to existing Coupon Messages"
+  task :add_redemption_instructions => :environment do
+
+    message_discount_type_text = Proc.new { |message| amount = message.sanitized_discount_amount
+      message.percentage_off? ? (amount.to_s + "%") : number_to_currency(amount, precision: (amount.to_s.include?(".") ? 2 : 0)) }
+
+    formatted_message_form_datetime = Proc.new { |message, attr| message.send(attr.to_s.to_sym).strftime('%m/%d/%Y %I:%M %p %Z') }
+
+    old_instructions = Proc.new { |message| "Just bring or show this email to #{message.shop_name} "\
+      "(print out or show it on your iPhone) and bamm, you got yourself an awesome "\
+      "#{message_discount_type_text.call(message)} off at #{message.shop_name}.\n\n\n"\
+      "How awesome is that? Go ahead and hurry"\
+      "#{"before it expires on #{formatted_message_form_datetime.call(message, 'ending')}" if message.ending.present?}." }
+
+    CouponMessage.all.each do |message|
+      if message.redemption_instructions.blank?
+        message.redemption_instructions = old_instructions.call(message)
+        message.save(:validate => false)
+      end
+    end
+  end
 end
