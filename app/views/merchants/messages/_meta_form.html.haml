@@ -8,7 +8,7 @@
     .control-group
       = f.label :subject, class: "control-label"
       .controls
-        = f.text_field :subject, class: "input-xlarge", 'data-toggle' => 'tooltip', title: 'If you want to the subject line to display the user name like Tom, please use this: "{{Customer Name}}"'
+        = f.text_field :subject, class: "span12", 'data-toggle' => 'tooltip', title: 'If you want to the subject line to display the user name like Tom, please use this: "{{Customer Name}}"'
     - unless message.is_child?
       .control-group
         = f.label :send_on, "Send Date & Time", class: "control-label"
