@@ -5,7 +5,7 @@ class Returnpath
       #########################################
       ## Copy the message you desire to send ##
       #########################################
-      puts "Copying the message you desire to send"
+      Rails.logger.info "Copying the message you desire to send"
       manager = Manager.find_by_email(manager_email)
       existing_message = Message.for_uuid(message_uuid)
       shop = manager.shop
@@ -26,7 +26,7 @@ class Returnpath
       #####################################################################
       ## Load the send list of returnpath for sending and create entries ##
       #####################################################################
-      puts "Loading the seed file"
+      Rails.logger.info "Loading the seed file"
       file_location = "#{Rails.root}/db/seed_data/optyn_returnpath.csv"
       content = ""
       
@@ -38,7 +38,7 @@ class Returnpath
       csv_data = content.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
       csv_table = CSV.parse(csv_data, { headers: true})
       csv_table.each_with_index do |row, index|
-        puts "Processing row: #{index + 1} Sending an email to: #{row[2]}"
+        Rails.logger.info "Processing row: #{index + 1} Sending an email to: #{row[2]}"
         user = User.find_by_email(row[2])
         if user.present?
           connection = Connection.for_shop_and_user(shop.id, user.id)
@@ -47,10 +47,10 @@ class Returnpath
             MessageUser.send(:create_individual_entry, MessageFolder.inbox_id, new_message.id, user.id)
             sleep(5)
           else
-            puts "Could not find the connection"
+            Rails.logger.info "Could not find the connection"
           end
         else
-          puts "Could not find the user with email: #{row[2]}"
+          Rails.logger.info "Could not find the user with email: #{row[2]}"
         end
       end #end of parsing
 
