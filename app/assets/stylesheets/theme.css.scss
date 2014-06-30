@@ -888,16 +888,6 @@ form {
   }
   .modal-body {
     height: auto;
-    .form-horizontal input[type='text'],
-      input[type='number'],
-      input[type='email'],
-      input[type='password'],
-      input[type='url'],
-      textarea,
-      select,
-      .uneditable-input {
-      width: 100%;
-    }
   }
   .modal-footer {
     line-height: 30px;

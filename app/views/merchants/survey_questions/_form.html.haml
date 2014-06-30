@@ -6,12 +6,12 @@
   .control-group
     = f.label :element_type, "Type", class: 'control-label'
     .controls
-      = f.select(:element_type, SurveyQuestion::ELEMENT_TYPES, {include_blank: '-- Select Question --'}, {})
+      = f.select(:element_type, SurveyQuestion::ELEMENT_TYPES, {include_blank: '-- Select Question --'}, {class: 'span12'})
 
   .control-group
     = f.label :label, "Question".html_safe, class: 'control-label'
     .controls
-      = f.text_field :label
+      = f.text_field :label, class: 'span12'
       %span.help-block
         %em example: How are you?
 
@@ -39,4 +39,4 @@
   .control-group
     = f.label :position, class: 'control-label'
     .controls
-      = f.text_field :position
+      = f.text_field :position, class: 'span12'
