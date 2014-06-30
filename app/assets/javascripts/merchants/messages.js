@@ -49,6 +49,7 @@ function MerchantMessage() {
             this.removeDuplicateLabelIdsError();
             this.hookUpdateMessage();
             this.hookUploadLogo();
+            this.hookRedemptionInstructions();
             this.hookFinePrint();
             this.hookExpirationDate();
             this.hookAddButton();
@@ -1068,6 +1069,15 @@ function MerchantMessage() {
       $("#upload_image").submit();
     });
   };
+
+  this.hookRedemptionInstructions = function() {
+    $('body').on('click', '#add_redemption_instructions', function (e) {
+        if($('#add_redemption_instructions').is(':checked'))
+            $('#message_redemption_instructions').show();
+        else
+            $('#message_redemption_instructions').hide();
+    });
+  }
 
   this.hookFinePrint = function() {
     $('body').on('click', '#fine_print', function (e) {

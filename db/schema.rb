@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140624115015) do
+ActiveRecord::Schema.define(:version => 20140627060610) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -129,6 +129,13 @@ ActiveRecord::Schema.define(:version => 20140624115015) do
 
   add_index "connections", ["active", "shop_id", "user_id"], :name => "index_connections_on_active_and_shop_id_and_user_id"
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
+
+  create_table "coupon_message_extensions", :force => true do |t|
+    t.integer "message_id"
+    t.text    "redemption_instructions"
+  end
+
+  add_index "coupon_message_extensions", ["message_id"], :name => "index_coupon_message_extensions_on_message_id"
 
   create_table "coupons", :force => true do |t|
     t.string   "stripe_id"
@@ -618,12 +625,12 @@ ActiveRecord::Schema.define(:version => 20140624115015) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.string   "phone_number",               :default => ""
-    t.string   "header_background_color",    :default => "#1791C0"
-    t.datetime "deleted_at"
-    t.boolean  "pre_added",                  :default => false
     t.integer  "partner_id"
     t.string   "uuid"
+    t.string   "header_background_color",    :default => "#1791C0"
+    t.string   "phone_number",               :default => ""
+    t.datetime "deleted_at"
+    t.boolean  "pre_added",                  :default => false
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
     t.string   "verified_email"
