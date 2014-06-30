@@ -13,7 +13,7 @@
 
   .blank-space
 
-  .row-fluid.stats
+  .row-fluid.no-pad.stats
     .span3.box
       .info
         Email Sent to:
@@ -42,7 +42,7 @@
 
   .blank-space
 
-  .row-fluid.stats
+  .row-fluid.no-pad.stats
     .span3.box.link-click-report-link{'data-id' => message.uuid, 'data-location' =>click_report_merchants_message_path(message.uuid)}
       .info
         Clicks:
@@ -87,7 +87,7 @@
 
   .blank-space
 
-  .row-fluid.stats
+  .row-fluid.no-pad.stats
     = hidden_field_tag "social_site_report_path_#{message.uuid}", social_report_merchants_message_path(message.uuid)
     .social-site-report{:id => "social_site_report_#{message.uuid}"}
     - if (message.type == "CouponMessage" and message.message_users.count > 0)

@@ -2,6 +2,6 @@
 
 = render partial: "merchants/messages/message_menu"
 
-#message_fields_wrapper.pad3pc
+#message_fields_wrapper.row-fluid
 
   = render partial: 'merchants/messages/report_data', locals: {message: @message, timestamp_attr: 'updated_at'}
