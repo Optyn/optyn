@@ -1,4 +1,7 @@
 class SaleMessage < Message
+  has_extension :class_name => 'SaleMessageExtension', :foreign_key => :message_id,
+  	:attrs => [:redemption_instructions]
+
   attr_accessible :content, :ending, :permanent_coupon
 
   with_options on: :update do |m|

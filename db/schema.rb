@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140701093329) do
+ActiveRecord::Schema.define(:version => 20140701163504) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -585,6 +585,13 @@ ActiveRecord::Schema.define(:version => 20140701093329) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "sale_message_extensions", :force => true do |t|
+    t.integer "message_id"
+    t.text    "redemption_instructions"
+  end
+
+  add_index "sale_message_extensions", ["message_id"], :name => "index_sale_message_extensions_on_message_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

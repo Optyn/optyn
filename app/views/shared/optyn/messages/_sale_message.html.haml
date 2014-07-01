@@ -6,3 +6,5 @@
     %strong
       Please remember the sale ends on:
       = formatted_message_form_datetime(@message, 'ending')
+
+= render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"
