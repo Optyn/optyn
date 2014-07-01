@@ -96,9 +96,9 @@ function MerchantMessage() {
             this.hookHeaderSettingSubmission();
         }
 
-        if($('.template_chooser').length){
-            this.hookTemplateAssignment();            
-        }
+        // if($('.template_chooser').length){
+        //     this.hookTemplateAssignment();            
+        // }
 
         if($('#system_templates_modal').length){
             this.hookTemplateChooserClick();
