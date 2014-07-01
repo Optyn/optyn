@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140627060610) do
+ActiveRecord::Schema.define(:version => 20140701093329) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -625,12 +625,12 @@ ActiveRecord::Schema.define(:version => 20140627060610) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
     t.string   "verified_email"
@@ -665,6 +665,13 @@ ActiveRecord::Schema.define(:version => 20140627060610) do
   end
 
   add_index "social_profiles", ["shop_id"], :name => "index_social_profiles_on_shop_id"
+
+  create_table "special_message_extensions", :force => true do |t|
+    t.integer "message_id"
+    t.text    "redemption_instructions"
+  end
+
+  add_index "special_message_extensions", ["message_id"], :name => "index_special_message_extensions_on_message_id"
 
   create_table "stylesheets", :force => true do |t|
     t.integer  "template_id"

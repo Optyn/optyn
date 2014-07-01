@@ -4,6 +4,7 @@ require 'tracking_services/messages'
 class Message < ActiveRecord::Base
   include UuidFinder
   include Shops::EatstreetRules
+  include Messagecenter::MessageExtension
   
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
@@ -552,6 +553,10 @@ class Message < ActiveRecord::Base
 
   def has_children?
     first_response_child.present? rescue false
+  end
+
+  def has_redemption?
+    [CouponMessage, SpecialMessage].include? self.class
   end
 
   def is_child?

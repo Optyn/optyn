@@ -65,7 +65,8 @@ namespace :message do
       "How awesome is that? Go ahead and hurry"\
       "#{"before it expires on #{formatted_message_form_datetime.call(message, 'ending')}" if message.ending.present?}." }
 
-    CouponMessage.all.each do |message|
+    messages = Message.where('type in (?)', [CouponMessage.to_s, SpecialMessage.to_s])
+    messages.each do |message|
       if message.redemption_instructions.blank?
         message.redemption_instructions = old_instructions.call(message)
         message.save(:validate => false)

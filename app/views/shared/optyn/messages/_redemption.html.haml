@@ -1,4 +1,4 @@
-- if @message.instance_of?(CouponMessage)
+- if @message.has_redemption?
   - if @message.redemption_instructions.present?
     %div{style: 'clear:both;'}
       %strong How to Redeem:
