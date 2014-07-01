@@ -556,7 +556,7 @@ class Message < ActiveRecord::Base
   end
 
   def has_redemption?
-    [CouponMessage, SpecialMessage].include? self.class
+    self.respond_to? :redemption_instructions
   end
 
   def is_child?
