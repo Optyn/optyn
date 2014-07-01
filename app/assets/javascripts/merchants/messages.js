@@ -577,6 +577,7 @@ function MerchantMessage() {
     };
 
     this.hookReplaceMerchantMenuOnLoad = function(){
+        // This function might no longer be required.
       var templateMessage = this;
       var $merchantMenu = $('.merchant-menu');
       //var $menuParent = $merchantMenu.parent();

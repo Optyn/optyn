@@ -230,7 +230,7 @@ OP = (function($, window, doucument, Optyn){
           '</div>' +
           '<div class="image-alt-container">' +
           '<br>' +
-          'Image Alt: <input class="edit-alt" name="image_alt" type="text" value="' + ( imgAlt == null || imgAlt == undefined || imgAlt == "" ? "" : imgAlt) + '" />' +
+          'Image Alt: <input class="edit-alt span12" name="image_alt" type="text" value="' + ( imgAlt == null || imgAlt == undefined || imgAlt == "" ? "" : imgAlt) + '" />' +
           '</div>' +
           '<br>' +
           links +
@@ -393,10 +393,14 @@ OP = (function($, window, doucument, Optyn){
             $toolsetSortableParent.append( $temp.html());
           }
 
-          OP.setParentIframeHeight();
           OP.template.saveSectionChanges();
           OP.setImageLinkTarget();
+          // Clear edit form in left column of parent's body.
+          var parent = window.parent.document.body;
+          $( parent ).find( '.template-editor-section' ).html( '<div id="edit-illustration"><img src="/assets/edit-campaign-illustration.png" alt=""></div>' );
+          OP.setParentIframeHeight();
         }); //end of $toolsetSortable slideup
+
       });
     },
 
