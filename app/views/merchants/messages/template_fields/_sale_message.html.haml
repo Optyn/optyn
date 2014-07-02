@@ -13,6 +13,12 @@
   = render partial: 'merchants/shared/messages/redemption_instructions', locals: {f: f, verbiage: 'How can this coupon be redeemed?'}
 
 .control-group
+  = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
+  %label{ for: 'fine_print' } Add Fine Print
+  = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
+  fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
+
+.control-group
   = check_box_tag "add_button" , true,  default_for_add_button_state(@message)
   %label{ for: 'add_button' } Add button
   = render partial: 'merchants/shared/messages/optional', locals: {f: f}

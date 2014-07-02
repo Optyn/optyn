@@ -7,4 +7,9 @@
       Please remember the sale ends on:
       = formatted_message_form_datetime(@message, 'ending')
 
+  - if @message.fine_print.present?  
+    %p
+      %strong Fine Print:
+      = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
+
 = render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"
