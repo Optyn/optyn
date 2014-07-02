@@ -51,7 +51,7 @@ namespace :message do
     end
   end
 
-  desc "Task to add Redemption Instructions to existing Coupon Messages"
+  desc "Task to add Redemption Instructions to existing Coupon and Special Messages"
   task :add_redemption_instructions => :environment do
 
     message_discount_type_text = Proc.new { |message| amount = message.sanitized_discount_amount
@@ -65,7 +65,7 @@ namespace :message do
       "How awesome is that? Go ahead and hurry"\
       "#{"before it expires on #{formatted_message_form_datetime.call(message, 'ending')}" if message.ending.present?}." }
 
-    messages = Message.where('type in (?)', [CouponMessage.to_s, SpecialMessage.to_s, SaleMessage.to_s])
+    messages = Message.where('type in (?)', [CouponMessage.to_s, SpecialMessage.to_s])
     messages.each do |message|
       if message.redemption_instructions.blank?
         message.redemption_instructions = old_instructions.call(message)
