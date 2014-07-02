@@ -301,7 +301,7 @@ OP = (function($, window, doucument, Optyn){
               }
 
              
-             $a.attr("class", "imageLink");
+             $a.attr("class", "imageLink ss-link");
              if(images[index][1].length > 0){
              $a.append($img); 
              }
