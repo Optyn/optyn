@@ -56,11 +56,11 @@ OP = (function($, window, doucument, Optyn){
 
         $(".remove_image").click(function(){
           var $ctrlGrp = $(this).parents('.control-group').first();
-          $ctrlGrp.find('.image-alt-container').val('');
-          $ctrlGrp.find('.image-alt-container').hide();
+          $ctrlGrp.find('.image-alt-container input').val('');
+          // $ctrlGrp.find('.image-alt-container').hide();
           $ctrlGrp.find('.image-form-container').show();
           $ctrlGrp.find('img').prop('src', 'http://placehold.it/150&text=Upload%20Image');
-          $(this).parents().find(".add-img-link-option").hide();
+          $ctrlGrp.find(".add-img-link-option").hide();
         });
 
         OP.templateEditor.imageFileUpload();
