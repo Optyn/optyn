@@ -1,3 +1,4 @@
+var COLORPICKRVAL = null;
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();
@@ -655,10 +656,27 @@ function MerchantMessage() {
     };
 
     this.hookTemplateMenuColorPickerChange = function(){
-      var templateMessage = this;
-      $('.template-color-field').colorpicker().on('hide', function(){
-        templateMessage.reloadTemplateSelectorIframe();
-      });
+        var templateMessage = this;
+        $('.template-color-field').colorpicker().on('hide', function(ev){
+            $( this ).find( 'i' ).css( 'background-color', ev.color.toHex());
+            var $input = $(this).find('input')
+            if($input.length){
+              var inputVal = $input.val();
+              if(COLORPICKRVAL != inputVal){
+                templateMessage.reloadTemplateSelectorIframe();
+              }
+              COLORPICKRVAL = inputVal;
+            }
+        });
+
+        $( '.template-color-field' ).colorpicker().on( 'changeColor', function( ev ){
+          $( this ).find( 'i' ).css( 'background-color', ev.color.toHex());
+          templateMessage.reloadTemplateSelectorIframe();
+        });
+
+        $( '.template-color-field' ).on('input paste blur', function(){
+          COLORPICKRVAL = $(this).val().toString();
+        });
     };
 
     this.refreshTemplatePropertiesView = function(){
