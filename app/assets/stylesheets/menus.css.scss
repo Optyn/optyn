@@ -1,17 +1,15 @@
 /* Main Menu Left */
 .menuleft {
   padding: 0;
-  @media ( min-width: 1024px ) { padding-bottom: 55px; }
   position: fixed;
   top: 0;
   left: 0;
   width: 250px;
   background: $dark-blue;
   height: 100%;
-  overflow: scroll;
-  padding-bottom: 40px;
   color: $light-gray;
   z-index: 999;
+  @media ( max-height: 700px ) { overflow-y: auto; }
   .m-link-home,
   .m-link-videos { display: none; }
   .home-link {
@@ -35,11 +33,22 @@
     background: url( 'http://placehold.it/50x50' );
     background-size: cover;
   }
+  .menu-cont {
+    position: relative;
+    min-height: 650px;
+    height: 100%;
+  }
 }  // End .menuleft
-.m-menu-toggle { display: none; }
+.m-menu-toggle {
+  display: none;
+  &:active {
+    text-decoration: none;
+    color: $gray;
+  }
+}
 .video-tutorials-link {
   @media ( min-width: 1024px ) {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 250px;
