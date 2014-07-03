@@ -5,6 +5,7 @@ $(document).ready(function () {
     $(document).bind('ajaxComplete', function(){
         merchantMessage.setDiscountTypeSelected();
         merchantMessage.hookChosen();
+        merchantMessage.hookDateTimePicker();
     });
 });
 
