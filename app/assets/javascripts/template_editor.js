@@ -234,7 +234,8 @@ OP = (function($, window, doucument, Optyn){
                 .test(window.navigator.userAgent),
             previewMaxWidth: 100,
             previewMaxHeight: 100,
-            previewCrop: true
+            previewCrop: true,
+            imageMaxWidth: 560
         }).on('fileuploadadd', function (e, data) {
           var $file = $(this).parents('.control-group').first().find('.files').first();
           $file.html('');
