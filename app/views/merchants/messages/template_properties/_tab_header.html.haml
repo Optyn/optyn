@@ -50,7 +50,7 @@
   .control-group{style: "display: none;"}
     = label_tag "title_color", "Title Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_header_headline_css_color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[header][headline][css][color]", "", class: 'template-color-field input-medium'
@@ -72,7 +72,7 @@
   .control-group
     = label_tag "background_color", "Background Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_header_css_background-color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[header][css][background-color]", "", class: 'template-color-field input-medium'

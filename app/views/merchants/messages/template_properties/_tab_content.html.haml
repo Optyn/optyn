@@ -2,17 +2,17 @@
   .control-group
     = label_tag "background_color", "Background Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_content_css_background-color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[content][css][background-color]", '', class: 'input-medium'
+            = text_field_tag "properties[content][css][background-color]", '', class: 'template-color-field input-medium'
             %span.add-on
               %i{:style => "background-color: ''"}
 
   .control-group
     = label_tag "title_color", "Title Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_content_headline_css_color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[content][headline][css][color]", "", class: 'template-color-field input-medium'
@@ -22,7 +22,7 @@
   .control-group
     = label_tag "link_color", "Link Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_content_link_css_color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[content][link][css][color]", "", class: 'template-color-field input-medium'
@@ -32,7 +32,7 @@
   .control-group
     = label_tag "button_color", "Button Text Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_content_button_css_color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[content][button][css][color]", "", class: 'template-color-field input-medium'
@@ -42,7 +42,7 @@
   .control-group
     = label_tag "button_background_color", "Button Background Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_content_button_css_background-color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[content][button][css][background-color]", "", class: 'template-color-field input-medium'
@@ -52,7 +52,7 @@
   .control-group
     = label_tag "paragraph_color", "Paragraph Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_content_paragraph_css_color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[content][paragraph][css][color]", "", class: 'template-color-field input-medium'

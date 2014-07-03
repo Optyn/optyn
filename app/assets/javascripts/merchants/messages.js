@@ -650,32 +650,52 @@ function MerchantMessage() {
     };
 
     this.hookTemplateMenuColorPicker = function(){
-      $('.template-color-field').colorpicker({
-            format: 'hex'
+      // $('.template-color-field').colorpicker({
+      //       format: 'hex'
+      // });
+
+      $('span.template-color-field').each(function(){
+        var $this = $(this);
+        var cssId = "#" + $this.attr('id');
+        var evalStr = "$('" + cssId + "').colorpicker({" +
+                      "format: 'hex'" +
+                      "});"
+        eval(evalStr);    
       });
     };
 
     this.hookTemplateMenuColorPickerChange = function(){
-        var templateMessage = this;
-        $('.template-color-field').colorpicker().on('hide', function(ev){
-            $( this ).find( 'i' ).css( 'background-color', ev.color.toHex());
-            var $input = $(this).find('input')
-            if($input.length){
-              var inputVal = $input.val();
-              if(COLORPICKRVAL != inputVal){
-                templateMessage.reloadTemplateSelectorIframe();
-              }
-              COLORPICKRVAL = inputVal;
-            }
-        });
-
         $( '.template-color-field' ).colorpicker().on( 'changeColor', function( ev ){
           $( this ).find( 'i' ).css( 'background-color', ev.color.toHex());
-          templateMessage.reloadTemplateSelectorIframe();
+          // templateMessage.reloadTemplateSelectorIframe();
         });
 
         $( '.template-color-field' ).on('input paste blur', function(){
           COLORPICKRVAL = $(this).val().toString();
+        });
+
+      var templateMessage = this;
+
+      $('span.template-color-field').each(function(){
+          var $this = $(this);
+          var cssId = "#" + $this.attr('id');
+
+          var evalStr = "";
+          evalStr = "$('" + cssId + "').colorpicker().on('hide', function(ev){" +
+          "$( this ).find( 'i' ).css( 'background-color', ev.color.toHex());" +
+            "$( this ).find( 'i' ).css( 'background-color', ev.color.toHex());" +
+            "var $input = $(this).find('input');" +
+            "if($input.length){" +
+              "var inputVal = $input.val().toLowerCase();" +
+              "if(COLORPICKRVAL != inputVal){" +
+                "templateMessage.reloadTemplateSelectorIframe();" +
+              "}" +
+              "COLORPICKRVAL = inputVal;" +
+            "}" +
+
+          "});"  
+           
+           eval(evalStr);  
         });
     };
 
