@@ -1,19 +1,30 @@
 .op-navbar {
   background-color: #f1f1f1;
-  padding: 10px 10px 10px 10px;
 
   h6 {
-    font-weight: 400;
+    background: $dark-blue;
+    color: $light-gray;
+    padding: 10px;
+    font-weight: bold;
     font-size: 16px;
   }
   ul {
-    // margin: 0;
-  }
-    li {
-      font-size: 13px;
+    margin-left: 10px;
+    a {
+      color: $black;
+      font-weight: bold;
     }
+    ul {
+      list-style-type: none;
+      a {
+      font-weight: normal;
+      }
+    }
+  }
+  li {
+    font-size: 13px;
+  }
   a {
-    font-color: black;
     display: block;
     text-decoration: none;
     padding: 2px 0;
@@ -108,4 +119,62 @@ a:hover{
 .email-mktg {
   background: $light-gray;
   padding: 1% 0 3% 0;
+}
+
+.slp-fold1 {
+  background: lighten( $dark-blue, 5% );
+  color: $white;
+  margin-bottom: 2%;
+  .slp-welcome {
+    padding: 5% 0;
+  }
+  h1 {
+    border: 0;
+    text-align: center;
+  }
+}
+.slp-footer {
+  background: $dark-blue;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: center;
+  blockquote {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    border: 0;
+    &:before,
+    &:after {
+      content: '"';
+      color: rgba( $white, 0.4 );
+      font-size: 1.5rem;
+    }
+  }
+  cite {
+    color: rgba( $white, 0.5 );
+  }
+}
+
+.email_marketing {
+  .slp-fold1 {
+    .slp-welcome {
+      background-image: image-url( 'envelope.png' );
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: contain;
+    }
+  }
+  .slp-usps {
+    text-align: center;
+  }
+}
+
+.cta-footer {
+  background: $green;
+  color: $white;
+  padding: 2% 0;
+  p {
+    line-height: 1.6rem;
+    padding-top: 15px;
+    font-size: 1.3rem;
+  }
 }

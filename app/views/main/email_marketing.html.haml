@@ -4,44 +4,90 @@
 .row-fluid.breadcrumbs
   - breadcrumb :email_marketing
 
-.row-fluid
-  .span3
-    = render partial: 'marketing_nav'
-  .span9
-    %h1.hdg-s Email Marketing
-    %h2 Create Email Marketing Campaigns in 2 Minutes or Less!
-    = image_tag( 'email-marketing.jpg', alt: 'email marketing', class: 'pull-right img-polaroid', title: 'Email Marketing' )
-    %p 
-      We know the heartaches of running a business. We know marketing is hard and email marketing nearly impossible to figure out. Current solutions just don’t cut it for busy small business owners who don’t have time or money to deal with them. In fact, the reason why small businesses abandon existing solutions is because they aren’t built for them.
-    %p
-      Over the past two years, the Optyn team has been focusing on building the next evolutionary email marketing product that helps small business take advantage of the many email marketing benefits. Our email marketing software platform is fast, simple, and easy to use. 
-    %p
-      In fact, we pride ourselves on being the easiest marketing product for small businesses. The other great benefit is that it is more than just email marketing. Our product takes advantage of email marketing but it integrates other multi channels like social media to give merchants and small businesses an easy way to reach their customers.
-    %p
-      Optyn’s 
-      %strong
-        E-Mail Marketing software
-      lets you:
-      %ul.bullet-disc
-        %li 
-          Create Marketing Campaigns & 
-          %a{:href => marketing_promotions_path, :alt => "Marketing Promotions", :title => "Marketing Promotions"} Marketing Promotions
-          in 2 minutes or less.
-        %li 
-          Easily 
-          %a{:href => capturing_data_path, :alt => "Capture Customer Emails", :title => "Capture Customer Emails"} capture customer emails 
-          and useful data for marketing purposes.
-        %li Engage your audience via email and social networks like Facebook and Twitter. 
-        %li Expand your reach for every campaign by reaching a bigger audience.
-        %li 
-          Automate the process with Suggested Subject Lines, 
-          %a{:href => mobile_responsive_path, :alt => "Mobile responsive emails", :title => "Mobile responsive emails"}
-            Mobile Responsive E-Mails
-          and more.
-    %p
-      Optyn is free to start and try. We even give you a free email marketing account for life. Try it today and start engaging your customers and increasing sales.
-    .blank-space
-    .row-fluid.bottom.sign-up
-      .span6.creditcard
-        %a.btn.btn-success.btn-large.btn-block{:href => new_merchants_manager_registration_path} Get Started for Free!
+.slp-fold1
+  .container
+    .row-fluid.slp-welcome
+      .span8
+        %h1 Create Email Marketing Campaigns in 2 Minutes or Less!
+        %ul
+          %li Easily capture customer emails and useful data for marketing purposes.
+          %li Engage your audience via email and social networks like Facebook and Twitter.
+          %li Expand your reach for every campaign by reaching a bigger audience.
+  .slp-footer
+    .container
+      .row-fluid
+        .span3
+          %a.btn.btn-warning.btn-block{ href: '#' } Get started!
+          %a{ href: '#' } More information
+        .span4
+          = image_tag 'http://placehold.it/100x100', alt: 'Ahmed K', class: ''
+          %blockquote Optyn's email marketing software helped us increase our reach to our current clients and it even brought many new faces in.
+          %cite Ahmed K, Chez Joel Bistro, Chicago, IL
+        .span5
+          .row-fluid
+            .span4
+              = image_tag 'logo-barbicide.jpg', alt: 'Barbicide'
+            .span4
+              = image_tag 'logo-salvatores.jpg', alt: "Salvatore's"
+            .span4
+              = image_tag 'http://placehold.it/100x60', alt: 'Dashing Walnut'
+          %p and 1000s more like you!
+
+.container
+  .row-fluid
+    .span3
+      = render partial: 'marketing_nav'
+    .span9
+      = image_tag( 'email-marketing.jpg', alt: 'email marketing', class: 'pull-right img-polaroid', title: 'Email Marketing' )
+      %p 
+        We know the heartaches of running a business. We know marketing is hard and email marketing nearly impossible to figure out. Current solutions just don’t cut it for busy small business owners who don’t have time or money to deal with them. In fact, the reason why small businesses abandon existing solutions is because they aren’t built for them.
+      %p
+        Over the past two years, the Optyn team has been focusing on building the next evolutionary email marketing product that helps small business take advantage of the many email marketing benefits. Our email marketing software platform is fast, simple, and easy to use. 
+      %p
+        In fact, we pride ourselves on being the easiest marketing product for small businesses. The other great benefit is that it is more than just email marketing. Our product takes advantage of email marketing but it integrates other multi channels like social media to give merchants and small businesses an easy way to reach their customers.
       .blank-space
+
+      %h2
+        Optyn's
+        %strong
+          Email Marketing software
+        let's you:
+      .slp-usps
+        .row-fluid
+          .span4
+            %i.icon-star
+            %p
+              Create Marketing Campaigns & 
+              %a{:href => marketing_promotions_path, :alt => "Marketing Promotions", :title => "Marketing Promotions"} Marketing Promotions
+              in 2 minutes or less.
+          .span4
+            %i.icon-star
+            %p
+              Easily 
+              %a{:href => capturing_data_path, :alt => "Capture Customer Emails", :title => "Capture Customer Emails"} capture customer emails 
+              and useful data for marketing purposes.
+          .span4
+            %i.icon-star
+            %p Engage your audience via email and social networks like Facebook and Twitter.
+        .row-fluid
+          .span4
+            %i.icon-star
+            %p Expand your reach for every campaign by reaching a bigger audience.
+          .span4
+            %i.icon-star
+            %p
+              Automate the process with Suggested Subject Lines, 
+              %a{:href => mobile_responsive_path, :alt => "Mobile responsive emails", :title => "Mobile responsive emails"}
+                Mobile Responsive E-Mails
+              and more.
+          .span4
+            %i.icon-star
+            %p Optyn is free to start and try. We even give you a free email marketing account for life.
+
+.cta-footer
+  .container
+    .row-fluid
+      .span8
+        %p Try it today and start engaging your customers and increasing sales.
+      .span4
+        %a.btn.btn-success.btn-large.btn-transparent{:href => new_merchants_manager_registration_path} Get Started for Free!
