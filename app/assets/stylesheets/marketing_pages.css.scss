@@ -121,23 +121,83 @@ a:hover{
   padding: 1% 0 3% 0;
 }
 
-.slp-fold1 {
-  background: lighten( $dark-blue, 5% );
-  color: $white;
-  margin-bottom: 2%;
-  .slp-welcome {
-    padding: 5% 0;
+.email_marketing {
+  .slp-fold1 {
+    background: lighten( $dark-blue, 5% );
+    color: $white;
+    margin-bottom: 2%;
+    .slp-welcome {
+      padding: 50px 0;
+      @media ( min-width: 1200px ) { padding: 90px 0; }
+    }
+    h1 {
+      border: 0;
+      text-align: center;
+    }
+    ul {
+      color: $chrome-yellow;
+      list-style-image: image-url( 'green-check.png' );
+    }
+    li {
+      margin-bottom: 15px;
+    }
+    .slp-welcome {
+      background-image: image-url( 'envelope.jpg' );
+      @media ( max-width: 979px ) { background-image: none; }
+      .span7 {
+        @media ( max-width: 979px ) { width: 100%; }
+      }
+      background-repeat: no-repeat;
+      background-position: 100% 50px;
+      background-size: contain;
+    }
   }
-  h1 {
-    border: 0;
+  .slp-usps {
     text-align: center;
+    margin-bottom: 50px;
+    .ico {
+      width: 58px;
+      height: 50px;
+      margin: 40px auto 20px auto;
+      background-image: image-url( 'sprite-slp.png' );
+      background-repeat: no-repeat;
+    }
   }
 }
+
 .slp-footer {
   background: $dark-blue;
-  padding-top: 1%;
-  padding-bottom: 1%;
   text-align: center;
+  .get-started {
+    margin-top: 70px;
+    a:last-child {
+      display: inline-block;
+      margin-top: 10px;
+      color: $white;
+      text-decoration: underline;
+      &:hover {
+        color: rgba( $white, 0.8 );
+      }
+    }
+  }
+  .quote {
+    margin-top: -50px;
+    @media ( max-width: $hd-h  ) { margin-top: 50px; }
+  }
+  .brands {
+    margin-top: 40px;
+    &:before {
+      @media ( max-width: $hd-h  ) {
+        content: 'Our awesome users:';
+      }
+    }
+    img {
+      max-height: 70px;
+      opacity: 0.5;
+      margin-top: 20px;
+    }
+    .dashing { margin: 0 0 12px 0; }
+  }
   blockquote {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -151,20 +211,8 @@ a:hover{
   }
   cite {
     color: rgba( $white, 0.5 );
-  }
-}
-
-.email_marketing {
-  .slp-fold1 {
-    .slp-welcome {
-      background-image: image-url( 'envelope.png' );
-      background-repeat: no-repeat;
-      background-position: right bottom;
-      background-size: contain;
-    }
-  }
-  .slp-usps {
-    text-align: center;
+    display: block;
+    margin-bottom: 10px;
   }
 }
 
@@ -172,9 +220,19 @@ a:hover{
   background: $green;
   color: $white;
   padding: 2% 0;
+  @media ( max-width: $hd-h  ) { text-align: center; }
   p {
     line-height: 1.6rem;
     padding-top: 15px;
     font-size: 1.3rem;
   }
 }
+
+.sprite-green-check{ background-position: 0 0; width: 18px; height: 16px; }
+.sprite-ico-clock{ background-position: 0 -66px; width: 44px; height: 44px; }
+.sprite-ico-mobile{ background-position: 0 -160px; width: 30px; height: 48px; }
+.sprite-ico-mail{ background-position: 0 -258px; width: 58px; height: 42px; }
+.sprite-ico-megaphone{ background-position: 0 -350px; width: 53px; height: 48px; }
+.sprite-ico-piggy-bank{ background-position: 0 -448px; width: 52px; height: 40px; }
+.sprite-ico-twitter{ background-position: 0 -538px; width: 46px; height: 40px; }
+
