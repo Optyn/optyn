@@ -2,29 +2,32 @@
   .control-group
     = label_tag "background_color", "Background Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-        %a.dropdown-toggle{"data-toggle" => "dropdown"}
-          = text_field_tag "properties[footer][css][background-color]", "", class: 'template-color-field input-medium'
-          %span.add-on
-            %i{:style => "background-color: ''"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_footer_css_background-color_container"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[footer][css][background-color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "background-color: ''"}
 
   .control-group
     = label_tag "text_color", "Text Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-        %a.dropdown-toggle{"data-toggle" => "dropdown"}
-          = text_field_tag "properties[footer][paragraph][css][color]", "", class: 'template-color-field input-medium'
-          %span.add-on
-            %i{:style => "color: ''"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_footer_paragraph_css_color_container"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[footer][paragraph][css][color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "color: ''"}
 
   .control-group
     = label_tag "text_color", "Link Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-        %a.dropdown-toggle{"data-toggle" => "dropdown"}
-          = text_field_tag "properties[footer][link][css][color]", "", class: 'template-color-field input-medium'
-          %span.add-on
-            %i{:style => "color: ''"}            
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_footer_link_css_color_container"}
+        .btn-group
+          %a.dropdown-toggle{"data-toggle" => "dropdown"}
+            = text_field_tag "properties[footer][link][css][color]", "", class: 'template-color-field input-medium'
+            %span.add-on
+              %i{:style => "color: ''"}            
                           
   .actions
     .pull-left
