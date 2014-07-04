@@ -213,6 +213,13 @@ function MerchantMessage() {
             if($(this).is(":checked")){
                 $('#message_ending').val('');
                 $('#message_ending_time').val('');
+
+                 $('#message_ending').attr('disabled', 'disabled');
+                 $('#message_ending_time').attr('disabled', 'disabled');
+            }
+            else {
+                $('#message_ending').removeAttr('disabled');
+                $('#message_ending_time').removeAttr('disabled');
             }
         });
     };
@@ -1137,14 +1144,15 @@ function MerchantMessage() {
   };
 
   this.hookExpirationDate = function() {
-    $('body').on('click', '#add_expiration_date', function (e) {
-      if($("#add_expiration_date").is(':checked')){
-        $(".expiration_date").show();
-      }
-      else{
-       $(".expiration_date").hide(); 
-      }
-    });
+    $('body').on('click', '#add_expiration_date, #add_end_date, #add_start_date', function (e) {
+        var dateComponents = $(this).nextAll('.expiration_date')[0];
+        if($(this).is(':checked')){
+            $(dateComponents).show();
+        }
+        else {
+            $(dateComponents).hide(); 
+        }
+     });
   };
 
   this.hookAddButton = function() {

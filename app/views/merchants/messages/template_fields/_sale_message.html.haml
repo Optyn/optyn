@@ -3,9 +3,14 @@
 .blank-space
 
 .control-group
-  = check_box_tag "add_expiration_date" , true,  set_default(@message.ending_time)
-  %label{ for: 'add_expiration_date' } Add Expiration date
-  = render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Date and Time", ending_date_title: 'Date when the sale ends', ending_time_title: 'Time when the sale ends.'}
+  = check_box_tag "add_start_date" , true,  set_default(@message.beginning)
+  %label{ for: 'add_start_date' } Add Start date
+  = render partial: 'merchants/shared/messages/date', locals: {f: f, type: :beginning, date_title: 'Date when the sale ends', time_title: 'Time when the sale ends.'}
+
+.control-group
+  = check_box_tag "add_end_date" , true,  set_default(@message.ending)
+  %label{ for: 'add_end_date' } Add End date
+  = render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'Date when the sale ends', time_title: 'Time when the sale ends.'}
 
 .control-group
   = check_box_tag "add_redemption_instructions" , true,  set_default(@message.redemption_instructions)

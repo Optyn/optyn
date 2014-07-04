@@ -870,6 +870,14 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def validate_start_and_end_dates
+    if self.beginning.present? && self.ending.present?
+      if self.beginning > self.ending
+        errors.add(:ending, 'End date-time must be greater than the start date-time')
+      end
+    end
+  end
+
   def validate_button_url
     if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/i)
       self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   

@@ -2,10 +2,21 @@
   %p
     = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
 
-  %p
-    %strong
-      Please remember the sale ends on:
-      = formatted_message_form_datetime(@message, 'ending')
+  - if @message.beginning.present? || @message.ending.present?
+    %p
+      %strong Please note:
+
+    - if @message.beginning.present?
+      %p
+        %strong
+          The sale starts on:
+          = formatted_message_form_datetime(@message, 'beginning')
+
+    - if @message.ending.present?
+      %p
+        %strong
+          The sale ends on:
+          = formatted_message_form_datetime(@message, 'ending')
 
   - if @message.fine_print.present?  
     %p

@@ -8,9 +8,8 @@ class CouponMessage < Message
 
   with_options on: :update do |m|
     m.validate :validate_ending
-    m.validates :type_of_discount, presence: true
+    m.validates :type_of_discount, presence: { message: 'Select the type of discount' }
     m.validate :validate_discount_amount
     m.validates :content, presence: true
-    m.validate :validate_ending
   end
 end

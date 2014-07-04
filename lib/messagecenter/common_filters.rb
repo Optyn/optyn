@@ -9,7 +9,7 @@ module Messagecenter
         controller.before_filter(:show_template_chooser, only:[:edit])
         controller.before_filter(:message_showable?, only: [:show])
         controller.before_filter(:populate_manager_folder_count)
-        controller.before_filter(:merge_end_date_time, only: [:create, :update])
+        controller.before_filter(:merge_start_date_time, :merge_end_date_time, only: [:create, :update])
         controller.before_filter :merge_send_on, only: [:create, :update, :update_meta]
         controller.skip_before_filter :authenticate_user!, only: [:public_view]
 
@@ -121,6 +121,12 @@ module Messagecenter
     def merge_end_date_time
       if params[:message][:ending_date].present? || params[:message][:ending_time].present?
         params[:message][:ending] = params[:message][:ending_date].to_s + " " + params[:message][:ending_time].to_s
+      end
+    end
+
+    def merge_start_date_time
+      if params[:message][:beginning_date].present? || params[:message][:beginning_time].present?
+        params[:message][:beginning] = params[:message][:beginning_date].to_s + " " + params[:message][:beginning_time].to_s
       end
     end
 

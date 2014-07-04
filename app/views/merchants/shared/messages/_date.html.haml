@@ -1,20 +1,27 @@
 - display_style ||= nil
-- ending_date_placeholder ||= nil
-- ending_time_placeholder ||= nil
+- date_placeholder ||= nil
+- time_placeholder ||= nil
 - is_temporary ||= false
-.row-fluid.no-pad.expiration_date{:style => "display: #{display_style || show_message_part(@message.ending_date)}"}
+- type ||= :ending
+.row-fluid.no-pad.expiration_date{:style => "display: #{display_style || show_message_part(@message.send(type))}"}
   .span6
     .input-append.date-picker
-      = f.text_field :ending_date, value: formatted_message_form_date(@message, :ending), id: 'message_ending', class: "input expiration_date", 'data-format ' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: ending_date_title, placeholder: (ending_date_placeholder || 'Expiration Date')
+      = f.text_field "#{type}_date", value: formatted_message_form_date(@message, type), id: "message_#{type}", class: "input expiration_date", 'data-format ' => "yyyy-MM-dd", 'data-toggle' => 'tooltip', title: date_title, placeholder: (date_placeholder || 'Expiration Date')
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
 
   .span6
     .input-append.time-picker
-      = f.text_field :ending_time, value: formatted_message_form_time(@message, :ending), class: "input ", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: ending_time_title, placeholder: (ending_time_placeholder || 'Expiration Time')
+      = f.text_field "#{type}_time", value: formatted_message_form_time(@message, type), class: "input ", 'data-format' => "HH:mm PP", 'data-toggle' => 'tooltip', title: time_title, placeholder: (time_placeholder || 'Expiration Time')
       %span.add-on
         %i{'data-time-icon' => "icon-time", 'data-date-icon' => "icon-calendar"}
-  - if !is_temporary
+
+  - if @message.errors[type].present?
+    %span.field-with-errors
+      %span.error
+        = @message.errors[type].join('</br>')
+        
+  - if type == :ending && !is_temporary
     .control-group
       = f.check_box(:permanent_coupon)
       %label{ for: 'message_permanent_coupon' } This coupon does not expire
