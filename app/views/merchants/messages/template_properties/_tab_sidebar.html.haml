@@ -3,56 +3,62 @@
     .control-group
       = label_tag "background_color", "Background Color", class: 'control-label'
       .controls
-        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[sidebar][css][background-color]", '', class: 'input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_sidebar_css_background-color_container"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][css][background-color]", '', class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
 
     .control-group
       = label_tag "title_color", "Title Color:", class: 'control-label'
       .controls
-        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[sidebar][headline][css][color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_sidebar_headline_css_color_container"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][headline][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
 
     .control-group
       = label_tag "link_color", "Link Color:", class: 'control-label'
       .controls
-        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[sidebar][link][css][color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_sidebar_link_css_color_container"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][link][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
 
     .control-group
       = label_tag "link_color", "Button Text Color:", class: 'control-label'
       .controls
-        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[sidebar][button][css][color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
-
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_sidebar_button_css_color_container"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][button][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
+                
     .control-group
       = label_tag "link_color", "Button Background Color:", class: 'control-label'
       .controls
-        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[sidebar][button][css][background-color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_sidebar_button_css_background-color_container"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][button][css][background-color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}                        
 
     .control-group
       = label_tag "paragraph_color", "Paragraph Color:", class: 'control-label'
       .controls
-        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[sidebar][paragraph][css][color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+        %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_sidebar_paragraph_css_color_container"}
+          .btn-group
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag "properties[sidebar][paragraph][css][color]", "", class: 'template-color-field input-medium'
+              %span.add-on
+                %i{:style => "background-color: ''"}
 
     .actions
       .pull-left
