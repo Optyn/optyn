@@ -2,5 +2,8 @@
   .row
     &nbsp;
   = form_tag '/send_limits/set' do
+    %h3
+      Emails Sent: 
+      = @sent.to_i 
     = text_field_tag 'val', @counter
     = submit_tag "Save"

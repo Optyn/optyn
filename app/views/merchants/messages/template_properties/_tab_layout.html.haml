@@ -2,7 +2,7 @@
   .control-group
     = label_tag "background_color", "Background Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_layout_css_background-color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[layout][css][background-color]", "", class: 'template-color-field input-medium'

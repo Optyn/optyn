@@ -451,14 +451,15 @@ class Merchants::MessagesController < Merchants::BaseController
     @message_image.save
 
     
-    render(json: {data: {image_location: @message_image.image_location}})
+    render(json: {data: {image_location: @message_image.image_location, image_width: @message_image.width, image_height: @message_image.height}})
   end
 
   def upload_template_image
     if params[:files].present?
       @template_image = TemplateImage.new(:image => params[:files].first)
       @template_image.save
-      return render(json: {data: {image_location: @template_image.image_location, image_id: @template_image.id, image_name: @template_image['image']}})
+      return render(json: {data: {image_location: @template_image.image_location, image_id: @template_image.id, image_name: @template_image['image'], 
+        image_width: @template_image['width'], image_height: @template_image['height']}})
     end
     head :unprocessable_entity 
   end
