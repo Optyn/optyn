@@ -32,6 +32,10 @@
   = render partial: 'merchants/shared/messages/redemption_instructions', locals: {f: f, verbiage: 'How can this coupon be redeemed?'}
 
 .control-group
+  = f.check_box :display_qr_code
+  %label{ for: 'display_qr_code' } Display QR Code
+  
+.control-group
   = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
   %label{ for: 'fine_print' } Add Fine Print
   = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,

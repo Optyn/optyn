@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140701163504) do
+ActiveRecord::Schema.define(:version => 20140707115743) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20140701163504) do
   create_table "coupon_message_extensions", :force => true do |t|
     t.integer "message_id"
     t.text    "redemption_instructions"
+    t.boolean "display_qr_code",         :default => false
   end
 
   add_index "coupon_message_extensions", ["message_id"], :name => "index_coupon_message_extensions_on_message_id"

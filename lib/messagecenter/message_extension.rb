@@ -4,6 +4,11 @@ module Messagecenter
   module MessageExtension
     extend ActiveSupport::Concern
 
+    #TOFIX: Boolean attributes when set from forms, will not hold true/false values 
+    # (something handled explicitly by active record) but instead '1'/'0'. Be careful when using them
+    # in coditions before the message is saved
+    # The after_save :load_extension is deliberately used as a partial fix for the problem.
+
     module ClassMethods
       def has_extension(options={})
         include ExtensionMethods
@@ -17,6 +22,8 @@ module Messagecenter
 
         after_initialize :load_extension
         before_save :save_extension
+        # to reinitialize boolean values that have been reset from forms to true/false instead of '1'/'0'
+        after_save :load_extension
         before_destroy :destroy_extension
 
     	  default_scope { includes :extension }

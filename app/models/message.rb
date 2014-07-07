@@ -307,9 +307,9 @@ class Message < ActiveRecord::Base
 
   end
 
-  def self.get_qr_code_link(message_id)
-    TrackingServices::Messages.qr_code(message_id)
-  end
+  # def self.get_qr_code_link(message_id)
+  #   TrackingServices::Messages.qr_code(message_id)
+  # end
 
   def assign_canned_subject
     self.subject = canned_subject
