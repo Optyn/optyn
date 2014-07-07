@@ -161,7 +161,14 @@ OP = (function($, window, doucument, Optyn){
             imageAlt = "";
           }
 
-          images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href"), imgAlt]);
+          // images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href"), imgAlt]);
+          var image = {};
+          image['src'] = $uploadedImage.attr('src');
+          image['data_href'] = $uploadedImage.attr("data-href");
+          image['image_alt'] = imgAlt;
+          image['width'] = $(this).attr('width');
+          image['height'] = $(this).attr('height');
+          images.push(image);
         });
 
         $inputField.val(JSON.stringify(properties));
@@ -287,6 +294,8 @@ OP = (function($, window, doucument, Optyn){
 
           var $controlGroup = $(this).parents('.control-group').first();
           $controlGroup.find('img').prop('src', result.image_location);
+          $controlGroup.find('img').attr('height', result.image_height);
+          $controlGroup.find('img').attr('width', result.image_width);
 
           var $file = $(this).parents('.control-group').first().find('.files').first();
           $file.html('');
