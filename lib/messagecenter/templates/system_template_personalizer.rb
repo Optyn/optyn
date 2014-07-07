@@ -356,6 +356,8 @@ module Messagecenter
                 image_node = msg_logo_node.css('img').first
                 style_attr = image_node['style']
                 image_node['style'] = style_attr.present? ? "#{style_attr} margin:auto; float:none; display:inline;" :  "margin:auto;float:none;display:inline;"
+                image_node['height'] = header_properties['template_header_image_height']
+                image_node['width'] = header_properties['template_header_image_width']
                 image_node.swap(%{<image>#{image_node.to_s}</image>})
                 image.swap(%{<span class=center style="text-align: #{logo_align.present? ? logo_align : 'center'}">#{msg_logo_node.children.to_s}</span>})
               else

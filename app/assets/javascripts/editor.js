@@ -285,41 +285,42 @@ OP = (function($, window, doucument, Optyn){
 
           var $imageContainer = $(imageElem);
           var placeholderSrc = $imageContainer.data('src-placeholder');
-          var uploadedImageSrc = images[index][0];
-          var imageAlt = images[index][2];
+          var uploadedImageSrc = (images[index])['src'];
+          var imageAlt = (images[index])['image_alt'];
 
 
           if(placeholderSrc != uploadedImageSrc){
             var $temp = $("<div />");
             var $img = $('<img />');
              var $a = $('<a />');
-             var result = images[index][1].search(new RegExp(/^http/i));
+             var result = (images[index])['data_href'].search(new RegExp(/^http/i));
               if( !result ) {
-             $a.attr("href", images[index][1]);
+                $a.attr("href", (images[index])['data_href']);
               } else {
-             $a.attr("href", "http://" + images[index][1]);
+                $a.attr("href", "http://" + (images[index])['data_href']);
               }
 
              
              $a.attr("class", "imageLink ss-link");
-             if(images[index][1].length > 0){
-             $a.append($img); 
+             if((images[index])['data_href'].length > 0){
+              $a.append($img); 
              }
 
             $img.attr({
               src: uploadedImageSrc,
-              height: $imageContainer.attr('height'),
-              width: $imageContainer.attr('width'),
+              height: (images[index])['height'],
+              width: (images[index])['width'],
               style: $imageContainer.attr('style'),
               'class': $imageContainer.attr('class').replace(/ss-replaceable-image/, ""),
               alt: imageAlt
             });
-            if(images[index][1].length > 0){
-            $temp.append($a);
+
+            if((images[index])['data_href'].length > 0){
+              $temp.append($a);
+            }else{
+              $temp.append($img);
             }
-            else{
-             $temp.append($img);
-            }
+
             $imageContainer.html($temp.html());
           }
         });
