@@ -1033,6 +1033,8 @@ function MerchantMessage() {
           $('#properties_header_template_header_image_location').val(result.image_location);
           $('#properties_header_template_header_image_id').val(result.image_id);
           $('#properties_header_template_header_image_name').val(result.image_name);
+          $('#properties_header_template_header_image_width').val(result.image_width);
+          $('#properties_header_template_header_image_height').val(result.image_height);
 
           $('#progress .bar').css(
               'width',
@@ -1086,6 +1088,8 @@ function MerchantMessage() {
       $('#properties_header_template_header_image_location').val('');
       $('#properties_header_template_header_image_id').val('');
       $('#properties_header_template_header_image_name').val('');
+      $('#properties_header_template_header_image_width').val('');
+      $('#properties_header_template_header_image_height').val('');
 
       _this.reloadTemplateSelectorIframe();
     });

@@ -80,7 +80,7 @@ module Api
                 "var js = document.createElement('script');" +
 
                 'js.type = "text/javascript";' +
-                'js.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js";' +
+                'js.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js";' +
 
                 'document.body.appendChild(js);' +
 
