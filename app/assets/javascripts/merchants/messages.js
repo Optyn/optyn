@@ -469,7 +469,7 @@ function MerchantMessage() {
     };
 
     this.hookDiscountType = function(){
-        $( '.disc .btn' ).click( function() {
+        $(document).on('click', '.disc .btn', function() {
             var value = $( this ).data( 'value' );
             $( '#message_type_of_discount' ).attr( 'value', value );
         });
