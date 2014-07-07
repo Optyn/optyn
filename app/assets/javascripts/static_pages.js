@@ -6,9 +6,8 @@ OP = (function($, window, doucument, Optyn){
   Optyn.StaticPages = {};
 
   Optyn.StaticPages.initialize = function() {
-    if ( $( '#cc-price' ).length ) {
-      this.constantContactPricingComparison();
-    }
+    if ( $( '#cc-price' ).length ) { this.constantContactPricingComparison(); }
+    if ( $( 'body' ).hasClass( 'email_marketing' )) { this.moveBreadcrumbsToBottom(); }
   };
 
   Optyn.StaticPages.constantContactPricingComparison = function() {
@@ -29,6 +28,12 @@ OP = (function($, window, doucument, Optyn){
       $( '.ccc-price' ).slideUp();
       $( '#op-price' ).text( Math.floor( $( this ).val() / 2 ));
     });
+  };
+
+  Optyn.StaticPages.moveBreadcrumbsToBottom = function() {
+    console.log( 'moveBreadcrumbsToBottom' );
+    $breadCrumbs = $( '.breadcrumbs' ).detach();
+    $( 'footer' ).before( $breadCrumbs );
   };
 
   return Optyn;
