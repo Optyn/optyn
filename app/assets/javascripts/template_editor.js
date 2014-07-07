@@ -55,9 +55,12 @@ OP = (function($, window, doucument, Optyn){
         });
 
         $(".remove_image").click(function(){
-          $(this).parents('.control-group').first().find('.image-form-container').show();
-          $(this).parents('.control-group').first().find('img').prop('src', 'http://placehold.it/150&text=Upload%20Image');
-          $(this).parents().find(".add-img-link-option").hide();
+          var $ctrlGrp = $(this).parents('.control-group').first();
+          $ctrlGrp.find('.image-alt-container input').val('');
+          // $ctrlGrp.find('.image-alt-container').hide();
+          $ctrlGrp.find('.image-form-container').show();
+          $ctrlGrp.find('img').prop('src', 'http://placehold.it/150&text=Upload%20Image');
+          $ctrlGrp.find(".add-img-link-option").hide();
         });
 
         OP.templateEditor.imageFileUpload();
@@ -151,8 +154,23 @@ OP = (function($, window, doucument, Optyn){
         var images = properties.images;
         $templateContainer.find('.uploaded-image').each(function(){
           var $uploadedImage = $(this);
-          images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href")]);
+          var imgAlt = "";
+          try{
+            imgAlt = $uploadedImage.parents('.control-group').first().find('[name^=image_alt]').val();
+          }catch(e){
+            imageAlt = "";
+          }
+
+          // images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href"), imgAlt]);
+          var image = {};
+          image['src'] = $uploadedImage.attr('src');
+          image['data_href'] = $uploadedImage.attr("data-href");
+          image['image_alt'] = imgAlt;
+          image['width'] = $(this).attr('width');
+          image['height'] = $(this).attr('height');
+          images.push(image);
         });
+
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');
@@ -185,7 +203,17 @@ OP = (function($, window, doucument, Optyn){
         link.text("Edit Link");
         var link_value = $( this ).parents('.modal').find('input[type="url"]').val()
         $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', link_value);
-        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
+        var $ctrlGrp = link.parents('.control-group').first();
+        var $removeLink = $ctrlGrp.find('.remove_link_from_image');
+        
+        
+        if($removeLink.length) {
+          $removeLink.parent().remove();
+        }
+        
+        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');          
+        
+        
       });
     },
 
@@ -266,6 +294,8 @@ OP = (function($, window, doucument, Optyn){
 
           var $controlGroup = $(this).parents('.control-group').first();
           $controlGroup.find('img').prop('src', result.image_location);
+          $controlGroup.find('img').attr('height', result.image_height);
+          $controlGroup.find('img').attr('width', result.image_width);
 
           var $file = $(this).parents('.control-group').first().find('.files').first();
           $file.html('');

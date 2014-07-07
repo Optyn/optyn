@@ -1,3 +1,4 @@
+var COLORPICKRVAL = null;
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();
@@ -649,16 +650,53 @@ function MerchantMessage() {
     };
 
     this.hookTemplateMenuColorPicker = function(){
-      $('.template-color-field').colorpicker({
-            format: 'hex'
+      // $('.template-color-field').colorpicker({
+      //       format: 'hex'
+      // });
+
+      $('span.template-color-field').each(function(){
+        var $this = $(this);
+        var cssId = "#" + $this.attr('id');
+        var evalStr = "$('" + cssId + "').colorpicker({" +
+                      "format: 'hex'" +
+                      "});"
+        eval(evalStr);    
       });
     };
 
     this.hookTemplateMenuColorPickerChange = function(){
+        $( '.template-color-field' ).colorpicker().on( 'changeColor', function( ev ){
+          $( this ).find( 'i' ).css( 'background-color', ev.color.toHex());
+          // templateMessage.reloadTemplateSelectorIframe();
+        });
+
+        $( '.template-color-field' ).on('input paste blur', function(){
+          COLORPICKRVAL = $(this).val().toString();
+        });
+
       var templateMessage = this;
-      $('.template-color-field').colorpicker().on('hide', function(){
-        templateMessage.reloadTemplateSelectorIframe();
-      });
+
+      $('span.template-color-field').each(function(){
+          var $this = $(this);
+          var cssId = "#" + $this.attr('id');
+
+          var evalStr = "";
+          evalStr = "$('" + cssId + "').colorpicker().on('hide', function(ev){" +
+          "$( this ).find( 'i' ).css( 'background-color', ev.color.toHex());" +
+            "$( this ).find( 'i' ).css( 'background-color', ev.color.toHex());" +
+            "var $input = $(this).find('input');" +
+            "if($input.length){" +
+              "var inputVal = $input.val().toLowerCase();" +
+              "if(COLORPICKRVAL != inputVal){" +
+                "templateMessage.reloadTemplateSelectorIframe();" +
+              "}" +
+              "COLORPICKRVAL = inputVal;" +
+            "}" +
+
+          "});"  
+           
+           eval(evalStr);  
+        });
     };
 
     this.refreshTemplatePropertiesView = function(){
@@ -973,6 +1011,8 @@ function MerchantMessage() {
           $('#properties_header_template_header_image_location').val(result.image_location);
           $('#properties_header_template_header_image_id').val(result.image_id);
           $('#properties_header_template_header_image_name').val(result.image_name);
+          $('#properties_header_template_header_image_width').val(result.image_width);
+          $('#properties_header_template_header_image_height').val(result.image_height);
 
           $('#progress .bar').css(
               'width',
@@ -1026,6 +1066,8 @@ function MerchantMessage() {
       $('#properties_header_template_header_image_location').val('');
       $('#properties_header_template_header_image_id').val('');
       $('#properties_header_template_header_image_name').val('');
+      $('#properties_header_template_header_image_width').val('');
+      $('#properties_header_template_header_image_height').val('');
 
       _this.reloadTemplateSelectorIframe();
     });
