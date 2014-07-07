@@ -5,7 +5,7 @@
     .container
       .row-fluid
         .span8
-          %h1{:style => "text-align: center;font-weight:400;"}
+          %h1{:style => "text-align: center;"}
             %em 5 Reasons
             to Leave Constant Contact for Optyn
           %ul
@@ -39,6 +39,49 @@
           .blank-space
           %a.btn.btn-warning.btn-large{ href: new_merchants_manager_registration_path } Get Started!
           .blank-space
+
+  .fold5.cc-price-comparison
+    .container
+      .row-fluid
+        .span12
+          %h2 Everyone starts off with a FREE account.
+          %h3 Here's what it costs you to grow:
+      .row-fluid
+        .span4.offset2.well.cc
+          %h3
+            You Pay
+            = image_tag 'droplet-blue.png', alt: ''
+          .cont
+            %p How much do you currently pay for Constant Contact?
+            %select#cc-price
+              %option{ value: '20' } $20 per month
+              %option{ value: '35' } $35 per month
+              %option{ value: '45' } $45 per month
+              %option{ value: '55' } $55 per month
+              %option{ value: '60' } $60 per month
+              %option{ value: '80' } $80 per month
+              %option{ value: '85' } $85 per month
+              %option{ value: '110' } $110 per month
+              %option{ value: '195' } $195 per month
+              %option{ value: '245' } $245 per month
+              %option{ value: '295' } $295 per month
+              %option{ value: '395' } $395 per month
+              %option{ value: 'other' } Other
+            .input-prepend.ccc-price
+              .add-on $
+              %input#custom-price{ type: 'text', type: 'number',
+                :'data-toggle' => 'tooltip', title: 'Enter the price ',
+                min: '20', max: '1000000000' }
+        .span4.well.op
+          %h3
+            You Save
+            = image_tag 'droplet-green.png', alt: ''
+          .cont
+            %p Your Optyn Price
+            %strong#op-price 7
+            .blank-space
+            .text-center
+              %a.btn.btn-warning.btn-large{ href: new_merchants_manager_registration_path } Get Started!
 
   .fold2
     .container
@@ -86,46 +129,6 @@
           .step2
             .op-icon
             %p Contact alen @ optyn.com for more information and to claim your special offer.
-
-  .fold5.cc-price-comparison
-    .container
-      .row-fluid
-        .span12
-          %h2 Everyone starts off with a FREE account.
-          %h3 Here's what it costs you to grow:
-      .row-fluid
-        .span3.offset3.well.cc
-          %h3
-            You Pay
-            = image_tag 'droplet-blue.png', alt: ''
-          .cont
-            %p How much do you currently pay for Constant Contact?
-            %select#cc-price
-              %option{ value: '20' } $20 per month
-              %option{ value: '35' } $35 per month
-              %option{ value: '45' } $45 per month
-              %option{ value: '55' } $55 per month
-              %option{ value: '60' } $60 per month
-              %option{ value: '80' } $80 per month
-              %option{ value: '85' } $85 per month
-              %option{ value: '110' } $110 per month
-              %option{ value: '195' } $195 per month
-              %option{ value: '245' } $245 per month
-              %option{ value: '295' } $295 per month
-              %option{ value: '395' } $395 per month
-              %option{ value: 'other' } Other
-            .input-prepend.ccc-price
-              .add-on $
-              %input#custom-price{ type: 'text', type: 'number',
-                :'data-toggle' => 'tooltip', title: 'Enter the price ',
-                min: '20', max: '1000000000' }
-        .span3.well.op
-          %h3
-            You Save
-            = image_tag 'droplet-green.png', alt: ''
-          .cont
-            %p Your Optyn Price
-            %strong#op-price 7
 
   .row-fluid.try-it
     .span7.offset1
