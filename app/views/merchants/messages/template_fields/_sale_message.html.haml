@@ -10,7 +10,7 @@
 .control-group
   = check_box_tag "add_end_date" , true,  set_default(@message.ending)
   %label{ for: 'add_end_date' } Add End date
-  = render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'Date when the sale ends', time_title: 'Time when the sale ends.'}
+  = render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'Date when the sale ends', time_title: 'Time when the sale ends.', is_temporary: false}
 
 .control-group
   = check_box_tag "add_redemption_instructions" , true,  set_default(@message.redemption_instructions)

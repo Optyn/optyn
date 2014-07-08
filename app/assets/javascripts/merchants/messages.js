@@ -1149,7 +1149,8 @@ function MerchantMessage() {
 
   this.hookExpirationDate = function() {
     $('body').on('click', '#add_expiration_date, #add_end_date, #add_start_date', function (e) {
-        var dateComponents = $(this).nextAll('.expiration_date')[0];
+        var $elements = $('#add_expiration_date, #add_end_date, #add_start_date, .expiration_date');
+        var dateComponents = $elements.eq($elements.index(this) + 1);
         if($(this).is(':checked')){
             $(dateComponents).show();
         }
