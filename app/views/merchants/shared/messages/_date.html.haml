@@ -1,7 +1,7 @@
 - display_style ||= nil
 - date_placeholder ||= nil
 - time_placeholder ||= nil
-- is_temporary ||= false
+- permanent_provision = true if permanent_provision.nil?
 - type ||= :ending
 .row-fluid.no-pad.expiration_date{:style => "display: #{display_style || show_message_part(@message.send(type))}"}
   .span6
@@ -21,7 +21,7 @@
       %span.error
         = @message.errors[type].join('</br>')
         
-  - if type == :ending && !is_temporary
+  - if type == :ending && permanent_provision
     .control-group
       = f.check_box(:permanent_coupon)
       %label{ for: 'message_permanent_coupon' } This coupon does not expire
