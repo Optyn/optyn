@@ -1,4 +1,4 @@
-- if @message.instance_of?(CouponMessage) and @message.coupon_code.present? and @message.display_qr_code
+- if @message.instance_of?(CouponMessage) and @message.display_qr_code
   = render partial: "shared/#{message_partner_name(@shop)}/messages/qr_code"
   
 %div

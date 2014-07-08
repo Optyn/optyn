@@ -1131,19 +1131,22 @@ function MerchantMessage() {
     $('body').on('click', '#add_redemption_instructions', function (e) {
         if($('#add_redemption_instructions').is(':checked'))
             $('#message_redemption_instructions').show();
-        else
-            $('#message_redemption_instructions').hide();
+        else{
+          $('#message_redemption_instructions').hide();
+          $('#message_redemption_instructions').val('');
+        }
+            
     });
   }
 
   this.hookFinePrint = function() {
     $('body').on('click', '#fine_print', function (e) {
     if($("#fine_print").is(':checked')){
-     $("#message_fine_print").show();
-    }
-    else{
+      $("#message_fine_print").show();
+    }else{
        $("#message_fine_print").hide(); 
-      }
+       $("#message_fine_print").val(''); 
+    }
     });
   };
 
