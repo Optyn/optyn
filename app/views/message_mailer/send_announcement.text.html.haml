@@ -2,10 +2,12 @@
   !!!
   %html
     %head
-      %meta{:content => "width=device-width", :name => "viewport"}/
+      %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
       %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+      %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}/
       %title Announcement
       :css
+        body { -ms-text-size-adjust: none !important; } /* For Windows Phone. */
         center.center { width: 100%; }
         .pad10 { padding: 10px; }
         a img { border: 0; }
