@@ -1130,9 +1130,9 @@ function MerchantMessage() {
   this.hookRedemptionInstructions = function() {
     $('body').on('click', '#add_redemption_instructions', function (e) {
         if($('#add_redemption_instructions').is(':checked'))
-            $('#message_redemption_instructions').show();
+            $('#message_redemption_instructions').slideDown();
         else{
-          $('#message_redemption_instructions').hide();
+          $('#message_redemption_instructions').slideUp();
           $('#message_redemption_instructions').val('');
         }
             
@@ -1142,9 +1142,9 @@ function MerchantMessage() {
   this.hookFinePrint = function() {
     $('body').on('click', '#fine_print', function (e) {
     if($("#fine_print").is(':checked')){
-      $("#message_fine_print").show();
+      $("#message_fine_print").slideDown();
     }else{
-       $("#message_fine_print").hide(); 
+       $("#message_fine_print").slideUp(); 
        $("#message_fine_print").val(''); 
     }
     });
@@ -1155,10 +1155,10 @@ function MerchantMessage() {
         var $elements = $('#add_expiration_date, #add_end_date, #add_start_date, .expiration_date');
         var dateComponents = $elements.eq($elements.index(this) + 1);
         if($(this).is(':checked')){
-            $(dateComponents).show();
+            $(dateComponents).slideDown();
         }
         else {
-            $(dateComponents).hide(); 
+            $(dateComponents).slideUp(); 
         }
      });
   };
@@ -1166,12 +1166,12 @@ function MerchantMessage() {
   this.hookAddButton = function() {
     $('body').on('click', '#add_button', function (e) {
       if($("#add_button").is(':checked')){
-        $(".optional").show();
+        $(".optional").slideDown();
       }
       else{
         $("#message_button_text").val('');
         $("#message_button_url").val('');
-        $(".optional").hide();
+        $(".optional").slideUp();
       }
     });
   };
