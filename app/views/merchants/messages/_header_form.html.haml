@@ -11,11 +11,10 @@
       .span6
         .control-group
           #header_background.input-append.color{"data-color" => color_hex, "data-color-format" => "hex"}
-            .btn-group
-              %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                = text_field_tag :header_background_color, color_hex
-                %span.add-on
-                  %i{:style => "background-color: #{color_hex};"}
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = text_field_tag :header_background_color, color_hex
+              %span.add-on
+                %i{:style => "background-color: #{color_hex};"}
       .span6
         .control-group{:style => "padding-top:10px;"}
           .controls
