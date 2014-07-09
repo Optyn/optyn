@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140618121627) do
+ActiveRecord::Schema.define(:version => 20140704112325) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -330,6 +330,8 @@ ActiveRecord::Schema.define(:version => 20140618121627) do
     t.string   "image"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "width"
+    t.integer  "height"
   end
 
   create_table "message_labels", :force => true do |t|
@@ -617,12 +619,12 @@ ActiveRecord::Schema.define(:version => 20140618121627) do
     t.integer  "email_box_click_count",      :default => 0
     t.integer  "coupon_id"
     t.datetime "discount_end_at"
-    t.integer  "partner_id"
-    t.string   "uuid"
-    t.string   "header_background_color",    :default => "#1791C0"
     t.string   "phone_number",               :default => ""
+    t.string   "header_background_color",    :default => "#1791C0"
     t.datetime "deleted_at"
     t.boolean  "pre_added",                  :default => false
+    t.integer  "partner_id"
+    t.string   "uuid"
     t.string   "footer_background_color",    :default => "#ffffff"
     t.boolean  "affiliate_tracker_pinged",   :default => false
     t.string   "verified_email"
@@ -718,6 +720,8 @@ ActiveRecord::Schema.define(:version => 20140618121627) do
     t.integer  "template_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "width"
+    t.integer  "height"
   end
 
   create_table "template_uploads", :force => true do |t|

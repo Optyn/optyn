@@ -8,6 +8,8 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   
   process :resize_to_fit => [580, 375] , :if => :check_dimensions?
 
+  process :store_geometry
+
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
   # include Sprockets::Helpers::IsolatedHelper
@@ -49,6 +51,16 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def store_geometry
+    if @file
+      img = ::Magick::Image::read(@file.file).first
+      if model
+        model.width = img.columns
+        model.height = img.rows
+      end
+    end
   end
 
   protected

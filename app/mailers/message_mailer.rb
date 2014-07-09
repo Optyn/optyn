@@ -153,7 +153,7 @@ class MessageMailer < ActionMailer::Base
   def add_x_headers(user_email, message_uuid)
     add_list_unsubscribe_header(user_email, message_uuid)
     add_x_mailer_header
-    add_x_report_abuse_header(user_email, message_uuid)
+    # add_x_report_abuse_header(user_email, message_uuid)
   end
 
   def add_list_unsubscribe_header(user_email, message_uuid)
@@ -161,10 +161,10 @@ class MessageMailer < ActionMailer::Base
     headers['List-Unsubscribe'] = "<#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.unsubscribe_path}/#{unsubscribe_id}>"
   end
 
-  def add_x_report_abuse_header(user_email, message_uuid)
-    opt_out_id = Encryptor.encrypt(user_email, message_uuid)
-    headers['X-Report-Abuse'] = "<#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.opt_out_path}/#{opt_out_id}>"
-  end
+  # def add_x_report_abuse_header(user_email, message_uuid)
+  #   opt_out_id = Encryptor.encrypt(user_email, message_uuid)
+  #   headers['X-Report-Abuse'] = "<#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.opt_out_path}/#{opt_out_id}>"
+  # end
 
   def add_x_mailer_header
     headers['X-Mailer'] = 'Simple Send'
