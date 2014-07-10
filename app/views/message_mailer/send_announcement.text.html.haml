@@ -12,26 +12,27 @@
         a { border: 0; }
         a img { border: 0; }
         @media only screen and (max-width : 600px) {
-          table[class="oe-parent"] img { max-width: 240px !important; }
-          table[class="oe-parent"] .w600,
-          table[class="oe-parent"] .w580 { width: 260px !important; }
+          table[class="oeparent"] img { max-width: 260px !important; }
+          table[class="oeparent"] .w600 { width: 280px !important; }
+          table[class="oeparent"] .w580 { width: 260px !important; }
         }
 
-    %body{:width => "100%", :style => "padding:0;margin:0;"}
+    %body{:style => "padding:0;margin:0;"}
 
       %table{:style => "width:100%;", :cellspacing => "0", :cellpadding => "0",
-        :class => "oe-parent"}
+        :class => "oeparent"}
         %tr
           %td{:style => "width:100%;padding:20px;background:#eee;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;text-align:center;", :align => "center"}
             %center.center
-              %table{:style => "background-color: white;width: 600px;text-align:left;", :cellspacing => "0", :cellpadding => "0"}
+              %table{:style => "background-color: white;width: 600px;text-align:left;",
+                :class => "w600", :width => "600", :cellspacing => "0", :cellpadding => "0"}
                 %tr
                   %td{:style => "bgcolor:#FFF;width:600px;word-break:break-word;word-wrap:break-word;",
                     :width => "600", :class => "w600", :colspan => "3"}
                     = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
 
                 %tr
-                  %td{ :height => "10", :colspan => "3" }
+                  %td{ :height => "10", :colspan => "3", :width => "600", :class => "w600" }
 
                 %tr
                   %td{ :width => "10", :class => "w10" }
@@ -49,7 +50,7 @@
                   %td{ :width => "10", :class => "w10" }
 
                 %tr
-                  %td{ :height => "10", :colspan => "3" }
+                  %td{ :height => "10", :colspan => "3", :width => "600", :class => "w600" }
 
                 %tr
                   %td{ :width => "10" }
