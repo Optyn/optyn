@@ -2,41 +2,44 @@
   !!!
   %html
     %head
-      %meta{:content => "width=device-width", :name => "viewport"}/
+      %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
       %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+      %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}/
       %title Announcement
       :css
+        body { -ms-text-size-adjust: none !important; } /* For Windows Phone. */
         center.center { width: 100%; }
-        .pad10 { padding: 10px; }
+        a { border: 0; }
         a img { border: 0; }
-        .w20 { width: 20px; }
-        .w540 { width: 540px; }
-        .w580 { width: 580px; }
-        @media only screen and (max-width : 580px) {
-          img { max-width: 240px !important; }
-          .width-controller { width: 280px !important; }
-          .w20 { width: 10px !important; }
-          .w560 { width: 260px !important; }
+        @media only screen and (max-width : 600px) {
+          table[class="oeparent"] img { max-width: 260px !important; }
+          table[class="oeparent"] .w600 { width: 280px !important; }
+          table[class="oeparent"] .w580 { width: 260px !important; }
         }
 
-    %body{:width => "100%", :style => "padding:0;margin:0;"}
+    %body{:style => "padding:0;margin:0;"}
 
-      %table{:style => "width:100%;background:#eeeeee;", :cellspacing => "0", :cellpadding => "0"}
+      %table{:style => "width:100%;", :cellspacing => "0", :cellpadding => "0",
+        :class => "oeparent"}
         %tr
-          %td.w580{:width => "580", :height => "20px", :colspan => "3"}
-        %tr
-          %td.w20{:width => "20"}
-          %td{:style => "width:100%;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;text-align:center;", :align => "center"}
+          %td{:style => "width:100%;padding:20px;background:#eee;font-family: Helvetica,'Segoe UI',Roboto,Ubuntu,Verdana,sans-serif;text-align:center;", :align => "center"}
             %center.center
-              %table.width-controller{:style => "background-color: white;width: 580px;text-align:left;", :cellspacing => "0", :cellpadding => "0"}
+              %table{:style => "background-color: white;width: 600px;text-align:left;",
+                :class => "w600", :width => "600", :cellspacing => "0", :cellpadding => "0"}
                 %tr
-                  %td.width-controller{:style => "bgcolor:#ffffff;width:580px;word-break:break-word;word-wrap:break-word;", :colspan => "3"}
+                  %td{:style => "bgcolor:#FFF;width:600px;word-break:break-word;word-wrap:break-word;",
+                    :width => "600", :class => "w600", :colspan => "3"}
                     = render partial: "shared/#{message_partner_name(@shop)}/mailers/banner"
 
                 %tr
-                  %td.w20{:width => "20"}
-                  %td.w560{:style => "bgcolor:#ffffff;width:540px;word-break:break-word;word-wrap:break-word;"}
+                  %td{ :height => "10", :colspan => "3", :width => "600", :class => "w600" }
+
+                %tr
+                  %td{ :width => "10", :class => "w10" }
+                  %td{:style => "bgcolor:#FFFFFF;width:580px;word-break:break-word;word-wrap:break-word;",
+                    :width => "580", :class => "w580" }
                     .message-content
+                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
                     %p.core-content
                       - @target_blank = true
@@ -44,16 +47,17 @@
                       = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: false}
 
                       = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button" 
-                  %td.w20{:width => "20"}
+                  %td{ :width => "10", :class => "w10" }
 
                 %tr
-                  %td.w20{:width => "20"}
-                  %td.width-controller{:style => "bgcolor:#eeeeee;width:540px;word-break:break-word;word-wrap:break-word;"}
+                  %td{ :height => "10", :colspan => "3", :width => "600", :class => "w600" }
+
+                %tr
+                  %td{ :width => "10" }
+                  %td{:style => "bgcolor:#EEEEEE;width:600px;word-break:break-word;word-wrap:break-word;",
+                    :width => "580", :class => "w580" }
                     = render partial: "shared/#{message_partner_name(@shop)}/mailers/footer"
-                  %td.w20{:width => "20"}
-          %td.w20{:width => "20"}
-        %tr
-          %td.w580{:width => "580", :height => "20px", :colspan => "3"}
+                  %td{ :width => "10" }
 
             = image_tag "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.open_path}/#{@receiver.encode64_uuid}?tracker=#{@receiver.uuid}", :style => "width: 1px; height: 1px;", :width => "1", :height => "1", :alt => ""
 - else
