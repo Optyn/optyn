@@ -38,8 +38,6 @@
                   %td{ :width => "10", :class => "w10" }
                   %td{:style => "bgcolor:#FFFFFF;width:580px;word-break:break-word;word-wrap:break-word;",
                     :width => "580", :class => "w580" }
-                    .message-content
-                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: false, customer: @receiver}
 
                     %p.core-content
                       - @target_blank = true
