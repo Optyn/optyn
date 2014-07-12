@@ -6,7 +6,9 @@ class TemplateImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   
-  process :resize_to_fit => [560, 375] , :if => :check_dimensions?
+  # Height is kept high below so that users can put tall images such as infographics
+  # in their emails.
+  process :resize_to_fit => [560, 5000] , :if => :check_dimensions?
 
   process :store_geometry
 

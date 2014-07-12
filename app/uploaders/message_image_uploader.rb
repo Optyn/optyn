@@ -5,8 +5,10 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-  
-  process :resize_to_fit => [580, 375] , :if => :check_dimensions?
+
+  # Height is kept high below so that users can put tall images such as infographics
+  # in their emails.
+  process :resize_to_fit => [580, 5000] , :if => :check_dimensions?
 
   process :store_geometry
 
