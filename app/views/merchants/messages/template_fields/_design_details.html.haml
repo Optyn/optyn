@@ -1,0 +1,20 @@
+#preview-meta-data-view.preview-menu
+
+  %strong Choose header background color:
+  %p
+    #message_color_body
+      = render partial: "header_form"
+      %div.loading{:style => "display: none;"}
+        / %strong Loading...
+  %strong Your Logo:
+  %p#logo
+    = show_logo(@shop)
+  %a.btn.btn-small#choose-new-logo{ href: '#' } Change logo
+  - if @shop.logo_img.present?
+    = link_to "Remove", remove_logo_merchants_shop_path(:id => @shop.id, :uuid => @message.uuid), :remote => true, :class => "btn btn-small btn-danger remove_logo"
+  = form_for :message, url: upload_logo_merchants_shop_path(:uuid => @message.uuid), method: :put, :remote => true,  :html => {class: 'form-horizontal', id: 'upload_image'} do |f|
+    %input#change-logo-image{ type: 'file', name: 'shop[logo_img]' }
+    %input#upload-path{ type: 'hidden', value: "#{upload_logo_merchants_shop_path}"}
+    #selected-logo-img-url
+  .form-spinner{style: 'display: none;'} 
+    = image_tag "ajax-loader.gif"

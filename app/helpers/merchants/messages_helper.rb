@@ -23,25 +23,26 @@ module Merchants::MessagesHelper
   end
 
   def message_form_title(message_type)
+    optyns_action_name = action_name.split("_").first
     case message_type
       when Message::DEFAULT_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} General Announcement Campaign"
+        "#{optyns_action_name.humanize} General Announcement Campaign"
       when Message::COUPON_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Coupon Campaign"
+        "#{optyns_action_name.humanize} Coupon Campaign"
       when Message::EVENT_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Event Announcement Campaign"
+        "#{optyns_action_name.humanize} Event Announcement Campaign"
       when Message::PRODUCT_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Product Announcement Campaign"
+        "#{optyns_action_name.humanize} Product Announcement Campaign"
       when Message::SALE_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Sale Announcement Campaign"
+        "#{optyns_action_name.humanize} Sale Announcement Campaign"
       when Message::SPECIAL_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Special Announcement Campaign"
+        "#{optyns_action_name.humanize} Special Announcement Campaign"
       when Message::SURVEY_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Survey Campaign"
+        "#{optyns_action_name.humanize} Survey Campaign"
       when Message::TEMPLATE_FIELD_TEMPLATE_TYPE
-        "#{action_name.humanize} Campaign".titleize
+        "#{optyns_action_name.humanize} Newsletter Campaign".titleize
       else
-        "#{action_name.humanize} Campaign"
+        "#{optyns_action_name.humanize} Campaign"
     end
   end
 
@@ -68,33 +69,6 @@ module Merchants::MessagesHelper
     end
   end
 
-  def message_greeting(message, preview = false, receiver = nil)
-    greeting_prefix = case
-                        when message.instance_of?(CouponMessage)
-                          "Great News"
-                        when message.instance_of?(SpecialMessage)
-                          "Great News"
-                        when message.instance_of?(SaleMessage)
-                          "Hi"
-                        when message.instance_of?(GeneralMessage)
-                          "Hello"
-                        when message.instance_of?(ProductMessage)
-                          "Hi"
-                        when message.instance_of?(EventMessage)
-                          "Event News"
-                        when message.instance_of?(SurveyMessage)
-                          "Your feedback is valuable"
-                        else
-                          "Hello"
-                      end
-    if @message_name.blank?
-      greeting_suffix = (receiver.first_name rescue "{{Customer Name}}") #message.in_preview_mode?(preview) || ('inbox' != registered_action rescue nil) ? "{{Customer Name}}" : (receiver.first_name )
-    else
-      greeting_suffix = ""
-    end
-    "#{greeting_prefix}#{(" " + greeting_suffix) if greeting_suffix.present?},"
-  end
-
   def message_rendering_partial(message)
     message.type.underscore
   end
@@ -109,12 +83,12 @@ module Merchants::MessagesHelper
     display_content.to_s.html_safe
   end
 
-  def message_content(message, receiver=nil)
+  def message_content(message, receiver=nil, preview = false)
     if message.instance_of?(VirtualMessage)
       return raw(display_content)
     end
 
-    display_content = message.content.blank? ? "-" : message.personalized_content(receiver)
+    display_content = message.content.blank? ? "-" : message.personalized_content(receiver, preview)
     display_content.match(/<p>.*<\/p>/ixm) ? raw(display_content) : simple_format(display_content)
     display_content = process_urls(display_content, message, receiver)
     display_content.to_s.html_safe
@@ -313,5 +287,34 @@ module Merchants::MessagesHelper
     end
   end
 
+  def default_for_add_button_state(message)
+    criteria = []
+    criteria << message.button_url if message.button_url.present?
+    criteria << message.message_image if message.message_image.present?
+    set_default(criteria)
+  end
+
+  def add_button_element_class(message)
+    criteria = []
+    criteria << message.button_url if message.button_url.present?
+    criteria << message.message_image if message.message_image.present?
+    show_message_part(criteria)
+  end
+
+  def show_message_part(default_val)
+    if !default_val.blank?
+      "block"
+    else
+      "none"
+    end
+  end
+
+  def set_default(default_val)
+    if !default_val.blank?
+      true
+    else
+      false
+    end
+  end
   
 end

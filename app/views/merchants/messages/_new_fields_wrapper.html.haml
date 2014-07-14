@@ -1,10 +1,16 @@
-= render partial: "merchants/messages/message_menu"
-
+/= render partial: "merchants/messages/message_menu"
+- if ["edit_metadata", "update"].include? params[:action]
+  - path = merchants_message_path(@message.uuid)
+  - method = :put
+  - button_text = 'Update Details'
+- else
+  - path = merchants_messages_path
+  - method = :post
+  - button_text = 'Create Content'
 #message_fields_wrapper.pad3pc
 
-  = render :partial => 'progress_bar'
+  /= render :partial => 'progress_bar'
+  = form_for :message, url: path, method: method, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
+    = render :partial => 'new_form', :locals => {f: f}
 
-  = form_for :message, url: merchants_messages_path, method: :post, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
-    = render :partial => 'form', :locals => {f: f}
-
-    = render partial: "merchants/messages/template_fields/form_actions"
+    = submit_tag(button_text, name: "save_draft", class: 'btn btn-info pull-right')

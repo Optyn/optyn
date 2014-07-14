@@ -1,0 +1,26 @@
+#preview-meta-data-view.preview-menu
+
+  .setup-campn
+    .sc-ico.sc-subject
+    %strong Subject:
+    %p
+      =@message.subject
+
+  .setup-campn
+    .sc-ico.sc-sent-on
+    %strong To be sent on:
+    %p
+      - unless @message.is_child?
+        = message_send_on_date(@message)
+      - else
+        Message will be sent automatically when the user completes the survey.
+
+  .setup-campn
+    .sc-ico.sc-recepients
+    %strong Email will be sent to:
+    %p
+      - unless @message.is_child?
+        = message_receiver_labels(@message.label_names)
+        == (#{@message.connections_count} total)
+      - else
+        Customers who complete the survey.

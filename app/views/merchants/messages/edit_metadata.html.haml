@@ -1,0 +1,8 @@
+= content_for :banner do
+  = @message.name.present? ? "Edit #{@message.name}" : message_form_title(@message_type)
+
+
+.blank-space
+
+#merchants
+  = render partial: "merchants/messages/new_fields_wrapper"

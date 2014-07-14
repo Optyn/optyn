@@ -1,12 +1,13 @@
-= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
-
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
+.blank-space
+
+/ .control-group
+/   = f.label :special_try, "Special Try", class: 'control-label'
+/   .controls
+/     = f.check_box :special_try
+
 .control-group
-  = f.label :special_try, "Special Try", class: 'control-label'
-  .controls
-    = f.check_box :special_try
-
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}    
-
-= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
+  = check_box_tag "add_button" , true,  default_for_add_button_state(@message)
+  %label{ for: 'add_button' } Add button
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}

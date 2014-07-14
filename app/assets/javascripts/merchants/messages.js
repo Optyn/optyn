@@ -1,6 +1,13 @@
+var COLORPICKRVAL = null;
 $(document).ready(function () {
     var merchantMessage = new MerchantMessage();
     merchantMessage.initialize();
+
+    $(document).bind('ajaxComplete', function(){
+        merchantMessage.setDiscountTypeSelected();
+        merchantMessage.hookChosen();
+        merchantMessage.hookDateTimePicker();
+    });
 });
 
 function MerchantMessage() {
@@ -19,9 +26,19 @@ function MerchantMessage() {
             this.loadSpinnerForIframe();
         }
         
+        if ( $( '.preview_template' ).length ) {
+            this.hookEqualizePreviewColumnHeight();
+        }
+
         /*
             Hooks for preview page for messages except templates
         */ 
+        if ( $( '#preview_wrapper' ).length) {
+            // Firefox fix for mobile preview of non-template campaigns.
+            $( '#preview_wrapper > table table table:first img' ).addClass( 'logo-img' );
+            $( '#preview_wrapper > table table table:nth-child(2) img' ).addClass( 'body-img' );
+        }
+
         if ($('#message_fields_wrapper').length) {
             this.hookChosen();
             this.hookActionEvent();
@@ -32,7 +49,19 @@ function MerchantMessage() {
             this.hookDiscountType();
             this.setDiscountTypeSelected();
             this.removeDuplicateLabelIdsError();
+            this.hookUpdateMessage();
+            this.hookUploadLogo();
+            this.hookRemoveLogo();
+            this.hookRedemptionInstructions();
+            this.hookFinePrint();
+            this.hookExpirationDate();
+            this.hookAddButton();
         }
+
+        if ($('#template_wrapper').length) {
+            this.hookChosen();
+        }
+
         if ( $('#message_send_on_container').length ) {
             // For Date/Time picker on preview Newsletter page.
             this.hookDateTimePicker();
@@ -69,9 +98,9 @@ function MerchantMessage() {
             this.hookHeaderSettingSubmission();
         }
 
-        if($('.template_chooser').length){
-            this.hookTemplateAssignment();            
-        }
+        // if($('.template_chooser').length){
+        //     this.hookTemplateAssignment();            
+        // }
 
         if($('#system_templates_modal').length){
             this.hookTemplateChooserClick();
@@ -114,6 +143,13 @@ function MerchantMessage() {
           // this.hookClearReportModal();
           this.backToMainReport();
         }
+
+        if ( $( '#choose-new-logo' ).length ) {
+            this.hookChangeLogo();
+        }
+        if ( $( '.preview-header' ).length ) {
+            this.hookCampaignResponsiveViewer();
+        }
     };
 
     this.loadSpinnerForIframe = function() {
@@ -125,11 +161,12 @@ function MerchantMessage() {
     };
 
     this.hookChosen = function () {
-        $('.chzn-select').chosen();
+        $('.chzn-select').chosen({"width": "100%"});
     };
 
     this.hookActionEvent = function () {
-        $('#message_form .btn').click(function (event) {
+        // $('#message_form .btn').click(function (event) {
+        $(document).on('click', '#message_form .btn', function (event) {
             $('#choice').val($(this).attr('name'));
         });
     };
@@ -176,6 +213,13 @@ function MerchantMessage() {
             if($(this).is(":checked")){
                 $('#message_ending').val('');
                 $('#message_ending_time').val('');
+
+                 $('#message_ending').attr('disabled', 'disabled');
+                 $('#message_ending_time').attr('disabled', 'disabled');
+            }
+            else {
+                $('#message_ending').removeAttr('disabled');
+                $('#message_ending_time').removeAttr('disabled');
             }
         });
     };
@@ -228,13 +272,13 @@ function MerchantMessage() {
     this.hookMetadataSubmit = function () {
         $('body').on('click', '#message_meta_modal .btn-primary', function (e) {
             e.preventDefault();
+            var $modalBody = $('#message_meta_modal form').parents('.modal-body');
+            var $modalFooter = $modalBody.next('.modal-footer');
             $.ajax({
                 url: $('#message_meta_modal form').prop('action'),
                 type: 'POST',
                 data: $('#message_meta_modal').find('form').serialize(),
                 beforeSend: function(){
-                    var $modalBody = $('#message_meta_modal form').parents('.modal-body');
-                    var $modalFooter = $modalBody.next('.modal-footer');
                     $modalFooter.find('.btn').hide();
                     $modalFooter.find('.loading').show();
                 },
@@ -244,7 +288,6 @@ function MerchantMessage() {
                         $('#preview-meta-data-view').replaceWith(data.message);
                         current.hookDateTimePicker();
                     }, 1000);
-
                 },
                 error: function (data) {
                     var $modal = $('#message_meta_modal');
@@ -261,6 +304,10 @@ function MerchantMessage() {
                         $('#message_meta_modal').modal('show');
                         moveDatetimepickerErrorMessage();
                     }, 500);
+                },
+                complete: function () {
+                    $modalFooter.find('.loading').hide();
+                    $modalFooter.find('.btn').show();
                 }
             });
         });
@@ -346,8 +393,12 @@ function MerchantMessage() {
     this.hookEditChildMessage = function () {
         $('body').on('click', '#edit_child_message_link', function (e) {
             e.preventDefault();
-            $('#edit_child_location').val($(this).prop('href'));
-            $('#message_fields_wrapper form').submit();
+            var confirmMessage = "This will save the current draft of your survey message and " +
+                "open the response message for editing. Do you wish to continue?"
+            if(confirm(confirmMessage)){
+                $('#after_save_location').val($(this).prop('href'));
+                $('#message_fields_wrapper form').submit();
+            }
         });
     };
 
@@ -387,13 +438,17 @@ function MerchantMessage() {
             url: $headerForm.attr('action'),
             data: $headerForm.serialize(),
             beforeSend: function(){
-                $('#preview-meta-data-view').hide();
+                //$('#preview-meta-data-view').hide();
                 $('.loading').show();
             },
             success: function(data){
                 $('#message_fields_wrapper').replaceWith(data);
                 current.hookHeaderColorPicker();
                 current.hookColorPickerChange();
+                if ( $( '.preview-header' ).length ) {
+                    $( '.preview-header a' ).removeClass( 'btn-primary' );
+                    $( '#show-desktop-preview' ).addClass( 'btn-primary' );
+                }
             },
             error: function(){
                 alert("An Error Occured white setting the color. Please refresh you page and try again.");
@@ -414,7 +469,7 @@ function MerchantMessage() {
     };
 
     this.hookDiscountType = function(){
-        $( '.disc .btn' ).click( function() {
+        $(document).on('click', '.disc .btn', function() {
             var value = $( this ).data( 'value' );
             $( '#message_type_of_discount' ).attr( 'value', value );
         });
@@ -452,39 +507,6 @@ function MerchantMessage() {
                 error: function(){ 
                     alert('An Error occurred while sending you email. Please send an email to support@optyn.com for any issues.')
                 }    
-            });
-        });
-    };
-
-    this.hookTemplateAssignment = function(){
-        var _this = this;
-        $('body').on('click', '.template_type', function(event){
-            event.preventDefault();
-            var uuid = $(this).attr('href').split('/')[3];
-            $.ajax({
-                url: $(this).attr('href'),
-                type: 'POST',
-                data: {
-                    '_method': 'PUT',
-                    'template_id': $(this).attr('data-template-id')
-                    },
-                beforeSend: function(){
-                    OP.overlay.addOverlay('#template_wrapper');
-                    _this.loadSpinnerForIframe();
-                    $('.loading').show();
-                    $('.btn-close').hide();
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    $('#system_templates_modal').modal('hide');
-                    $('#template_wrapper').replaceWith(data);
-                  
-                },
-                error: function(){
-                    $('.loading').hide();
-                    alert("Could not choose a template. Please refresh your page and try again.");
-                    $('.btn-close').show();
-                }
             });
         });
     };
@@ -564,22 +586,23 @@ function MerchantMessage() {
     };
 
     this.hookReplaceMerchantMenuOnLoad = function(){
+        // This function might no longer be required.
       var templateMessage = this;
       var $merchantMenu = $('.merchant-menu');
-      var $menuParent = $merchantMenu.parent();
-      var $templateMenu = $('.template-property-menu');
+      //var $menuParent = $merchantMenu.parent();
+      //var $templateMenu = $('.template-property-menu');
 
       var $tempForMerchantMenu = $('<div />');
       $tempForMerchantMenu.append('<li><a class="show-template-menu" href="javascript:void(0)"><em>Show Template Menu</em></a></li>')
       $merchantMenu.append($tempForMerchantMenu.html());
 
-      var $tempForTemplateMenu = $('<div />');
-      $tempForTemplateMenu.append('<li><a class="show-message-menu" href="javascript:void(0)"><em>Show Main Menu</em></a></li>')
-      $templateMenu.append($tempForTemplateMenu.html());
+      //var $tempForTemplateMenu = $('<div />');
+      //$tempForTemplateMenu.append('<li><a class="show-message-menu" href="javascript:void(0)"><em>Show Main Menu</em></a></li>')
+      //$templateMenu.append($tempForTemplateMenu.html());
 
-      $tempForTemplateMenu = $('<div />');
-      $tempForTemplateMenu.append($templateMenu);
-      $menuParent.append($tempForTemplateMenu.html());
+      // $tempForTemplateMenu = $('<div />');
+      // $tempForTemplateMenu.append($templateMenu);
+      // $menuParent.append($tempForTemplateMenu.html());
 
       templateMessage.renderTemplateMenu();
     };
@@ -649,16 +672,53 @@ function MerchantMessage() {
     };
 
     this.hookTemplateMenuColorPicker = function(){
-      $('.template-color-field').colorpicker({
-            format: 'hex'
+      // $('.template-color-field').colorpicker({
+      //       format: 'hex'
+      // });
+
+      $('span.template-color-field').each(function(){
+        var $this = $(this);
+        var cssId = "#" + $this.attr('id');
+        var evalStr = "$('" + cssId + "').colorpicker({" +
+                      "format: 'hex'" +
+                      "});"
+        eval(evalStr);    
       });
     };
 
     this.hookTemplateMenuColorPickerChange = function(){
+        $( '.template-color-field' ).colorpicker().on( 'changeColor', function( ev ){
+          $( this ).find( 'i' ).css( 'background-color', ev.color.toHex());
+          // templateMessage.reloadTemplateSelectorIframe();
+        });
+
+        $( '.template-color-field' ).on('input paste blur', function(){
+          COLORPICKRVAL = $(this).val().toString();
+        });
+
       var templateMessage = this;
-      $('.template-color-field').colorpicker().on('hide', function(){
-        templateMessage.reloadTemplateSelectorIframe();
-      });
+
+      $('span.template-color-field').each(function(){
+          var $this = $(this);
+          var cssId = "#" + $this.attr('id');
+
+          var evalStr = "";
+          evalStr = "$('" + cssId + "').colorpicker().on('hide', function(ev){" +
+          "$( this ).find( 'i' ).css( 'background-color', ev.color.toHex());" +
+            "$( this ).find( 'i' ).css( 'background-color', ev.color.toHex());" +
+            "var $input = $(this).find('input');" +
+            "if($input.length){" +
+              "var inputVal = $input.val().toLowerCase();" +
+              "if(COLORPICKRVAL != inputVal){" +
+                "templateMessage.reloadTemplateSelectorIframe();" +
+              "}" +
+              "COLORPICKRVAL = inputVal;" +
+            "}" +
+
+          "});"  
+           
+           eval(evalStr);  
+        });
     };
 
     this.refreshTemplatePropertiesView = function(){
@@ -973,6 +1033,8 @@ function MerchantMessage() {
           $('#properties_header_template_header_image_location').val(result.image_location);
           $('#properties_header_template_header_image_id').val(result.image_id);
           $('#properties_header_template_header_image_name').val(result.image_name);
+          $('#properties_header_template_header_image_width').val(result.image_width);
+          $('#properties_header_template_header_image_height').val(result.image_height);
 
           $('#progress .bar').css(
               'width',
@@ -1026,8 +1088,155 @@ function MerchantMessage() {
       $('#properties_header_template_header_image_location').val('');
       $('#properties_header_template_header_image_id').val('');
       $('#properties_header_template_header_image_name').val('');
+      $('#properties_header_template_header_image_width').val('');
+      $('#properties_header_template_header_image_height').val('');
 
       _this.reloadTemplateSelectorIframe();
     });
-  };    
+  };
+
+  this.hookUpdateMessage = function(){
+    $('body').on('click', '.submit-message #upload_new_logo .remove_logo', function (e) {
+        $('.form-spinner').show();
+    });
+  };
+
+  this.hookChangeLogo = function() {
+    $( '#change-logo-image' ).change( function() {
+
+        $( '#selected-logo-img-url' ).html( $( '#change-logo-image' ).val() + ' <a class="btn btn-small btn-success" id ="upload_new_logo" href="#"><i class="icon-upload"> Upload new logo</a>');
+    });
+    $( '#choose-new-logo' ).click( function() {
+      $( '#change-logo-image' ).click();
+    });
+  };
+
+  this.hookUploadLogo = function() {
+    $('body').on('click', '#upload_new_logo', function (e) {
+      $("#upload_image").submit();
+      $('.form-spinner').show();
+    });
+  };
+
+  this.hookRemoveLogo = function() {
+    $('body').on('click', '.remove_logo', function() {
+        if(confirm("Are you sure?"))
+            $('.form-spinner').show();
+        else
+            return false;
+    })
+  }
+
+  this.hookRedemptionInstructions = function() {
+    $('body').on('click', '#add_redemption_instructions', function (e) {
+        if($('#add_redemption_instructions').is(':checked'))
+            $('#message_redemption_instructions').slideDown();
+        else{
+          $('#message_redemption_instructions').slideUp();
+          $('#message_redemption_instructions').val('');
+        }
+            
+    });
+  }
+
+  this.hookFinePrint = function() {
+    $('body').on('click', '#fine_print', function (e) {
+    if($("#fine_print").is(':checked')){
+      $("#message_fine_print").slideDown();
+    }else{
+       $("#message_fine_print").slideUp(); 
+       $("#message_fine_print").val(''); 
+    }
+    });
+  };
+
+  this.hookExpirationDate = function() {
+    $('body').on('click', '#add_expiration_date, #add_end_date, #add_start_date', function (e) {
+        var $elements = $('#add_expiration_date, #add_end_date, #add_start_date, .expiration_date');
+        var dateComponents = $elements.eq($elements.index(this) + 1);
+        if($(this).is(':checked')){
+            $(dateComponents).slideDown();
+        }
+        else {
+            $(dateComponents).slideUp(); 
+        }
+     });
+  };
+
+  this.hookAddButton = function() {
+    $('body').on('click', '#add_button', function (e) {
+      if($("#add_button").is(':checked')){
+        $(".optional").slideDown();
+      }
+      else{
+        $("#message_button_text").val('');
+        $("#message_button_url").val('');
+        $(".optional").slideUp();
+      }
+    });
+  };
+
+
+  this.hookCampaignResponsiveViewer = function() {
+    var selector;
+    $( 'body' ).hasClass( 'preview_template' ) ? selector = '#template_wrapper': selector = '#preview_wrapper';
+
+    function highlightCurrentButton( $current ) {
+        $( '.preview-header a' ).removeClass( 'btn-primary' );
+        $( $current ).addClass( 'btn-primary' );
+    }
+    $( '#show-desktop-preview' ).click( function() {
+        $('#message_fields_wrapper').removeClass( 'mobile-preview' );
+        highlightCurrentButton( $( this ));
+        $( selector ).animate({ width: '100%' }, 200, function() {
+            if ( $( 'body' ).hasClass( 'preview_template' )) {
+                equalizeDivHeightsWithIframe();
+            }
+        });
+        opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper td:first' ]);
+    });
+
+    var equalizeDivHeightsWithIframe = function() {
+        $( '#customHtmlTemplate' ).css( 'min-height', 'inherit' );
+        $( '#campaign-details-pane' ).css( 'min-height', 'inherit' );
+        $( '#customHtmlTemplate' ).css( 'min-height', $( '#customHtmlTemplate' ).contents().find( 'body' ).css( 'height' ));
+        opTheme.equalizeDivHeights([ '#campaign-details-pane', '#customHtmlTemplate' ]);
+    };
+
+    $( '#show-mobile-preview' ).click( function() {
+        $('#message_fields_wrapper').addClass( 'mobile-preview' );
+        highlightCurrentButton( $( this ));
+        $( '#preview_wrapper td:first' ).css ( 'height', 'auto' ); // To overcome sideeffects of equalizeDivHeights().
+        $( selector ).animate({ width: '320px' }, 200, function() {
+            if ( $( 'body' ).hasClass( 'preview_template' )) {
+                equalizeDivHeightsWithIframe();
+            }
+        }).css( 'margin-left', 'auto' ).css( 'margin-right', 'auto' );
+    });
+  }
+
+  this.hookEqualizePreviewColumnHeight = function() {
+    if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'preview_template' )) {
+        $( '#customHtmlTemplate' ).load( function() {
+            $( '#preview-pane' ).css( 'background-color', $( '#customHtmlTemplate' ).contents().find( 'table.body' ).css( 'background-color' ));
+        });
+    }
+    var $iframe = $( '#customHtmlTemplate' );
+    var $editorPane = $( '#campaign-details-pane' );
+    var workArea;
+    var cb = function() {
+        workArea = $( window ).height() - 50;
+        $iframe.css( 'min-height', 'inherit' );
+        var iframeHt = $iframe.contents().find( 'body' ).css( 'height' );
+        $editorPane.css( 'min-height', 'inherit' );
+        var editorHt = $editorPane.css( 'height' );
+        var maxHt = Math.max( parseInt( iframeHt ), parseInt( editorHt ));
+        maxHt < workArea ? maxHt = workArea : maxHt;
+        $( 'iframe' ).css( 'min-height', maxHt );
+        $( '#campaign-details-pane' ).css( 'min-height', maxHt + 60 );
+    };
+    $iframe.load( cb );
+    $( window ).resize( cb );
+  };
+
 }

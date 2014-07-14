@@ -173,14 +173,14 @@ function MerchantSurvey() {
                 "<td>" + element.label + "</td>" +
                 "<td>" + element.position + "</td>" +
                 "<td>" + element.values.join("<br />") + "</td>" +
-                "<td>" + '<a href="' + element.edit_path + '" class="edit_question_link btn btn-primary btn-mini">Edit</a>';
+                "<td>" + '<div class="btn-group"><a href="' + element.edit_path + '" class="edit_question_link btn btn-primary"><i class="icon-edit"></i></a>';
                 if (element.delete_path == "")//dont show delete button if survey is launched
                 {    
-                    tableBody += "</td>";
+                    tableBody += "</div></td>";
                 }
                 else
                 {
-                    tableBody +='<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger btn-mini">Delete</a>' + "</td>";
+                    tableBody +='<a href="' + element.delete_path + '" class="delete_question_link btn btn-danger"><i class="icon-trash"></a>' + "</div></td>";
                 }
                 tableBody +="</tr>";
             });

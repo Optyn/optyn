@@ -1,13 +1,107 @@
 /* Main Menu Left */
 .menuleft {
-  margin-left: 0px;
-  width: 25%;
   padding: 0;
-  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  background: $dark-blue;
+  height: 100%;
+  color: $light-gray;
+  z-index: 999;
+  @media ( max-height: 700px ) { overflow-y: auto; }
+  .m-link-home,
+  .m-link-videos { display: none; }
+  .home-link {
+    display: block;
+    padding: 10px 0 0 0;
+    background: darken( $dark-blue, 10% );
+    text-align: center;
+  }
+  .welcome-user {
+    background: darken( $dark-blue, 10% );
+    padding: 15px 0 15px 20px;
+  }
+  .profile_image{
+    border-radius: 30px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+  }
+  .user-th {
+    background: url( 'http://placehold.it/50x50' );
+    background-size: cover;
+  }
+  .menu-cont {
+    position: relative;
+    min-height: 650px;
+    height: 100%;
+  }
+}  // End .menuleft
+.m-menu-toggle {
+  display: none;
+  &:active {
+    text-decoration: none;
+    color: $gray;
+  }
 }
+.video-tutorials-link {
+  @media ( min-width: 1024px ) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    background: $dark-blue;
+    box-shadow: rgba(0, 0, 0, 0.298039) -2px -2px 2px;
+  }
+}
+
+@media ( max-width: 1024px ) {
+  #flat.b-layout.merchants-messages,
+  #flat { padding: 0; }
+  .menuleft {
+    display: none;
+    width: 100%;
+    background: $dark-blue;
+    background: rgba( $dark-blue, 0.97 );
+    text-align: center;
+    padding: 0;
+    .home-logo { margin-left: 40px; }
+    .home-link { display: none; }
+    .m-link-home,
+    .m-link-videos,
+    .m-link-home { top: 60px; }
+    .m-link-videos { top: 120px; }
+    .welcome-user { margin: 10px 0; background: transparent; }
+    .merchant-menu {
+      width: 250px;
+      margin: auto;
+      text-align: left;
+    }
+    .merchant-menu .active {
+      border: solid 2px rgba( $white, 0.8 );
+    }
+  }
+  .m-menu-toggle {
+    display: inline-block;
+    background: rgba(255,255,255,0.5);
+    font-size: 25px;
+    font-weight: normal;
+    color: $medium-gray;
+    position: fixed;
+    z-index: 10000;
+    left: 10px;
+    top: 50px;
+    padding: 10px;
+    border: solid 2px transparent;
+    &:hover {
+      border: solid 2px $medium-gray;
+      color: $medium-gray;
+    }
+  }
+}  // End media query
 .merchant-menu {
-  background-color: $black;
-  border-radius: 4px;
   padding: 0;
   color: $white;
   height: auto;
@@ -15,7 +109,6 @@
   margin-right: 0px;
   margin-top: 0px;
   margin-bottom: 20px;
-  @include border-radius( 0 );
   li {
     margin: 0;
     padding: 0;
@@ -29,15 +122,18 @@
     border-bottom: solid 1px darken( $black, 20% );
   }
   a {
+    font-size: 13px;
     display: block;
     line-height: 50px;
     min-height: 50px;
-    border-bottom: solid 1px darken( $black, 20% );
-    padding-left: 20px;
+    padding-left: 15px;
+    text-transform: uppercase;
     color: darken( $white, 10% );
+    color: rgba( $white, 0.8 );
     &:hover {
-      background-color: darken( $black, 30% );
+      text-transform: uppercase;
       color: $white;
+      background: darken( $dark-blue, 5% );
     }
     i {
       font-size: 28px;
@@ -48,10 +144,10 @@
     }
   }
   .active {
-    background-color: lighten( $black, 15% );
     color: $white;
+    background-color: darken( $dark-blue, 7% );
     &:hover {
-      background-color: $black;
+      background-color: darken( $dark-blue, 8% );
     }
   }
 }  /* /#flat .merchant-menu */
@@ -74,13 +170,6 @@
 /* Preview Menu Left */
 .preview-left {
   margin-left: 0px;
-}
-.preview-menu {
-  padding: 20px;
-  margin: 0 0 20px 0;
-  &:hover {
-    background-color: lighten( $blue, 25% );
-  }
 }
 #message_details .email-preview {
   margin-bottom: 5%;

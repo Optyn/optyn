@@ -8,6 +8,10 @@
 
   = hidden_field_tag "properties[header][template_header_image_name]", ""
 
+  = hidden_field_tag "properties[header][template_header_image_height]", ""
+
+  = hidden_field_tag "properties[header][template_header_image_width]", ""
+
   .control-group.disc
     = label_tag "logo", "Header Content", class: 'control-label'
     .controls.checkbox
@@ -15,13 +19,13 @@
         %button.btn.btn-primary.active{ :id => 'properties_header_logo_image', :type => 'button', 'data-value' => :image } Image
         %button.btn.btn-primary{ :id => 'properties_header_logo_text', :type => 'button', 'data-value' => :text } Text
 
-        = hidden_field_tag "properties[header][logo]", "image"
+      = hidden_field_tag "properties[header][logo]", "image"
 
   .control-group{style: "display: none;"}
     = label_tag "logo", "Title", class: 'control-label'
     .controls
       = hidden_field_tag "properties[header][template_uuid]", @template.uuid
-      = text_field_tag 'properties[header][logotext]', current_shop.name, :placeholder => 'Enter logo name', class: 'logo_text'
+      = text_field_tag 'properties[header][logotext]', current_shop.name, :placeholder => 'Enter logo name', class: 'logo_text span12'
       = hidden_field_tag "properties[header][message_uuid]" , @message.uuid                
 
   .control-group
@@ -45,12 +49,12 @@
   .control-group{style: "display: none;"}
     = label_tag "font_family", "Font Family", class: 'control-label'
     .controls
-    = select_tag "properties[header][headline][css][font-family]", options_for_select(@header_font_families), class: 'input-medium'
+      = select_tag "properties[header][headline][css][font-family]", options_for_select(@header_font_families), class: 'span12'
 
   .control-group{style: "display: none;"}
     = label_tag "title_color", "Title Color:", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_header_headline_css_color_container"}
         .btn-group
           %a.dropdown-toggle{"data-toggle" => "dropdown"}
             = text_field_tag "properties[header][headline][css][color]", "", class: 'template-color-field input-medium'
@@ -72,17 +76,17 @@
   .control-group
     = label_tag "background_color", "Background Color", class: 'control-label'
     .controls
-      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex"}
-        .btn-group
-          %a.dropdown-toggle{"data-toggle" => "dropdown"}
-            = text_field_tag "properties[header][css][background-color]", "", class: 'template-color-field input-medium'
-            %span.add-on
-              %i{:style => "background-color: ''"}
+      %span.template-color-field.input-append.color{"data-color" => '', "data-color-format" => "hex", "id" => "properties_header_css_background-color_container"}
+        %a.dropdown-toggle{"data-toggle" => "dropdown"}
+          = text_field_tag "properties[header][css][background-color]", "", class: 'template-color-field input-medium'
+          %span.add-on
+            %i{:style => "background-color: ''"}
 
   .control-group
     = label_tag "logolink", "Link", class: 'control-label'
     .controls
-      = text_field_tag 'properties[header][logolink]', current_shop.display_website, :placeholder => 'http://www.example.com'                        
+      = text_field_tag 'properties[header][logolink]', current_shop.display_website,
+        :placeholder => 'http://www.example.com', :class => 'span12'
           
   .control-group.social-share
     = label_tag "social_sharing", "Social Sharing", class: 'control-label'

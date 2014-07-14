@@ -1,31 +1,9 @@
+- if ['preview', 'remove_logo'].include?(params[:action])
+  = render partial: "merchants/messages/responsive_previews"
 #message_fields_wrapper
-  #message_preview_accordion.accordion
-    .accordion-group
-      .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_meta_data"}
-          Campaign Details [Subject Line, Recipients, and Date/Time]
-      #collapse_meta_data.preview-left.accordion-body.collapse
-        .accordion-inner
-          = render partial: "merchants/messages/preview_meta"
-          = content_for :header do
-            Preview Only
-
-    #color_wrapper.accordion-group
-      .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_message_colors"}
-          Customize Design
-      #collapse_message_colors.email-preview.accordion-body.collapse
-        #message_color_body.accordion-inner
-          .row-fluid
-            = render partial: "header_form"
-            %div.loading{:style => "display: none;"}
-              %strong Loading...
-
-    #prev_wrapper.accordion-group
-      .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#message_preview_accordion", "data-toggle" => "collapse", :href => "#collapse_message_preview"}
-          Message Preview
-      #collapse_message_preview.email-preview.accordion-body.collapse.in
-        #message_preview.accordion-inner
+  #message_preview_accordion
+    #prev_wrapper
+      #collapse_message_preview.email-preview
+        #message_preview
           #preview_wrapper
             = render partial: "shared/#{message_partner_name(@shop)}/messages/core_content", locals: {preview: true, customer: nil}

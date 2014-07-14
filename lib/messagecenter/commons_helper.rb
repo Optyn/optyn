@@ -30,7 +30,7 @@ module Messagecenter
 
     def update_button_styles
       unless @message.instance_of?(TemplateMessage)
-        if @message.content.match(/<p>.*<\/p>/ixm)
+        if @message.content.present? && @message.content.match(/<p>.*<\/p>/ixm)
           content_node = Nokogiri::HTML::fragment(@message.content)
           links = content_node.css('a.ss-button-link')
           links.each do |link|

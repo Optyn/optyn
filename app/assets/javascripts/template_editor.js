@@ -9,6 +9,15 @@ OP = (function($, window, doucument, Optyn){
       this.addImageLinkURL();
       this.removeImageLinkURL();
       this.imageFileUpload();
+      this.setIframeParentBGColour();
+    },
+
+    setIframeParentBGColour: function() {
+      if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'template' )) {
+        $( '#customHtmlTemplate' ).load( function() {
+          $( '#choose_message' ).css( 'background-color', $( this ).contents().find( 'table.body' ).css( 'background-color' ));
+        });
+      }
     },
 
     setUpSidebarEditing: function(){
@@ -16,22 +25,15 @@ OP = (function($, window, doucument, Optyn){
         $("html, body").animate({ scrollTop: 0 }, "slow");
         var $merchantMenu = $('.merchant-menu');
 
-        if($('.template-editor-container').length){
-          $('.template-editor-container').remove();
-          $merchantMenu.slideDown();
-        }
-
         var $merchantMenu = $('.merchant-menu');
-        var $sidebar = $merchantMenu.parent();
+        var $sidebar = $('#dashboard > .row-fluid');
+        $('.menuleft').hide();
+        $( '.yield' ).attr( 'id', 'template-editor-on' );
 
-        var sideBarContent = '<ul class="template-editor-container"><li class="template-editor-section"></li></ul>';
-
-        $sidebar.append(sideBarContent);
-
-        var $templateContainer = $sidebar.find('.template-editor-container');
+        var $templateContainer = $('.template-editor-container');
         var $templateSection = $templateContainer.find('.template-editor-section');
-        $templateSection.append($('#template_editable_content').val());
-         $templateSection.append('<button class="btn btn-small template-editor-cancel">Close</button>' +
+        $templateSection.html($('#template_editable_content').val());
+         $templateSection.append('<button class="btn btn-small btn-info template-editor-cancel">Close</button> ' +
           '<button class="btn btn-small btn-primary template-editor-save-changes" id="section_save_changes">Save changes</button>');
 
         $merchantMenu.slideUp(function(){
@@ -55,15 +57,19 @@ OP = (function($, window, doucument, Optyn){
         });
 
         $(".remove_image").click(function(){
-          $(this).parents('.control-group').first().find('.image-form-container').show();
-          $(this).parents('.control-group').first().find('img').prop('src', 'http://placehold.it/150&text=Upload%20Image');
-          $(this).parents().find(".add-img-link-option").hide();
+          var $ctrlGrp = $(this).parents('.control-group').first();
+          $ctrlGrp.find('.image-alt-container input').val('');
+          // $ctrlGrp.find('.image-alt-container').hide();
+          $ctrlGrp.find('.image-form-container').show();
+          $ctrlGrp.find('img').prop('src', 'http://placehold.it/150&text=Upload%20Image');
+          $ctrlGrp.find(".add-img-link-option").hide();
         });
 
         OP.templateEditor.imageFileUpload();
 
         OP.templateEditor.openCKEditor($templateContainer);
 
+        opTheme.equalizeHeights();
       });
     },
 
@@ -109,8 +115,14 @@ OP = (function($, window, doucument, Optyn){
 
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
-        OP.templateEditor.showMerchantMenu();
+        OP.templateEditor.clearTemplateEditorArea();
+        OP.setParentIframeHeight();
       });
+    },
+
+    clearTemplateEditorArea: function() {
+      $( '.template-editor-section' ).html( '<div id="edit-illustration"><img src="/assets/edit-campaign-illustration.png" alt=""></div>' );
+      opTheme.equalizeHeights();
     },
 
     saveTemplateEditorAction: function(){
@@ -151,30 +163,28 @@ OP = (function($, window, doucument, Optyn){
         var images = properties.images;
         $templateContainer.find('.uploaded-image').each(function(){
           var $uploadedImage = $(this);
-          images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href")]);
+          var imgAlt = "";
+          try{
+            imgAlt = $uploadedImage.parents('.control-group').first().find('[name^=image_alt]').val();
+          }catch(e){
+            imageAlt = "";
+          }
+
+          // images.push([$uploadedImage.attr('src'), $uploadedImage.attr("data-href"), imgAlt]);
+          var image = {};
+          image['src'] = $uploadedImage.attr('src');
+          image['data_href'] = $uploadedImage.attr("data-href");
+          image['image_alt'] = imgAlt;
+          image['width'] = $(this).attr('width');
+          image['height'] = $(this).attr('height');
+          images.push(image);
         });
+
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');
-                
-        OP.templateEditor.showMerchantMenu();
+        OP.templateEditor.clearTemplateEditorArea();
       });
-    },
-
-    showMerchantMenu: function(){
-      var $merchantMenu = $('.merchant-menu');
-      var $sidebar = $merchantMenu.parent();
-      var $templateContainer = $sidebar.find('.template-editor-container');
-
-      $templateContainer.slideUp(function(){
-        $(this).hide();
-
-        $merchantMenu.slideDown(function(){
-          $(this).show();
-        });
-      });
-
-      $templateContainer.remove();
     },
 
     addImageLinkURL: function() {
@@ -185,7 +195,17 @@ OP = (function($, window, doucument, Optyn){
         link.text("Edit Link");
         var link_value = $( this ).parents('.modal').find('input[type="url"]').val()
         $('[data-link-href-id=' + $(this).data('image-link-url') + ']').closest('.nl-image-form').find(".uploaded-image").attr('data-href', link_value);
-        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');
+        var $ctrlGrp = link.parents('.control-group').first();
+        var $removeLink = $ctrlGrp.find('.remove_link_from_image');
+        
+        
+        if($removeLink.length) {
+          $removeLink.parent().remove();
+        }
+        
+        link.parent().append('<div style="cursor: pointer; float:right" class="add-img-link-option removeLink"> | <a class="remove_link_from_image" href="#'+ container+'" role="button" data-link = "'+ link_value +'">Remove Link</a></div>');          
+        
+        
       });
     },
 
@@ -221,7 +241,8 @@ OP = (function($, window, doucument, Optyn){
                 .test(window.navigator.userAgent),
             previewMaxWidth: 100,
             previewMaxHeight: 100,
-            previewCrop: true
+            previewCrop: true,
+            imageMaxWidth: 560
         }).on('fileuploadadd', function (e, data) {
           var $file = $(this).parents('.control-group').first().find('.files').first();
           $file.html('');
@@ -266,6 +287,8 @@ OP = (function($, window, doucument, Optyn){
 
           var $controlGroup = $(this).parents('.control-group').first();
           $controlGroup.find('img').prop('src', result.image_location);
+          $controlGroup.find('img').attr('height', result.image_height);
+          $controlGroup.find('img').attr('width', result.image_width);
 
           var $file = $(this).parents('.control-group').first().find('.files').first();
           $file.html('');

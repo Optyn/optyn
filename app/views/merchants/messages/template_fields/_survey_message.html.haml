@@ -1,17 +1,16 @@
-= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
-
 .control-group
   = f.label :survey_id, "Embed Survey", class: 'control-label'
   .controls
     = f.collection_select(:survey_id, @surveys, :id, :title, include_blank: "-- Select Survey --") rescue nil
 
-= render partial: 'merchants/shared/messages/content', locals: {f: f}    	
+= render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-= hidden_field_tag :edit_child_location, ""
+= hidden_field_tag :after_save_location, ""
+
+.blank-space
 
 #response_message_section
   = render partial: 'merchants/shared/messages/response_email_fields', locals: {parent_message: @message}
 
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}  
+= render partial: 'merchants/shared/messages/optional', locals: {f: f}
 
-= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}

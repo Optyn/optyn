@@ -1,14 +1,21 @@
-= banner( message_form_title(@message_type) )
+= content_for :banner do
+  = message_form_title(@message_type)
+= content_for :actions_right do  
+  .pull-right
+    %a.btn.btn-success{ href: '#'}
+      Create Content
+      %i.icon-arrow-right
 
 #merchants
-  = render partial: "merchants/messages/message_menu"
+  /= render partial: "merchants/messages/message_menu"
 
   #message_fields_wrapper.pad3pc
 
-    = render :partial => 'progress_bar'
+    /= render :partial => 'progress_bar'
 
     = form_for :message, url: merchants_messages_path, method: :post, :html => {class: 'flat form-horizontal', id: 'message_form'} do |f|
       %fieldset
         = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
 
-      = submit_tag "Create Content", name: 'save_draft', class: "btn btn-info"
+      = submit_tag "Create Content", name: 'save_draft', class: "btn btn-info pull-right"
+      .clearfix

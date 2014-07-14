@@ -71,7 +71,7 @@
 #flat.m-app {
   background-size: contain;
   background-repeat: repeat-y;
-  padding-top: 70px;
+  padding-top: 0;
   h1, h2 {
     margin-top: 0;
     font-family: $sans-serif;
@@ -320,10 +320,7 @@
 }
 /* Merchant Dashboard Page */
 #dashboard {
-  background: image-url( 'bg_dash.png' );
-  background-size: contain;
-  background-repeat: repeat-y;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   margin: 0px;
   @media( max-width: 768px ) {
     padding-bottom: 0;
@@ -576,7 +573,7 @@
   }
 }
 
-.template #customHtmlTemplate { min-width: 610px; }
+.template #customHtmlTemplate { width: 620px; }
 
 #add_user_wrapper .controls {margin-bottom: 10px;}
 
@@ -609,5 +606,21 @@
 
 .segments.default {
   #dashboard { padding-bottom: 0; }
-  &#flat .wid75pc { width: 100%; }
+}
+
+#filter_Form {
+  opacity: 0;
+  text-align: right;
+  @include transition( all 0.2s ease );
+  position: relative;
+  right: -100%;
+}
+
+#merchants .filter_Form-visible {
+  opacity: 1;
+  right: 0;
+}
+
+.index.merchants-connections #merchants {
+  overflow-x: hidden;
 }

@@ -1,4 +1,13 @@
+var opTheme = opTheme || {};
 $(document).ready(function () {
+    // Resize column heights on campaign preview and edit pages.
+    if ( $( 'body' ).hasClass( 'merchants-messages' )) {
+        if ( $( 'body' ).hasClass( 'edit' ) || $( 'body' ).hasClass( 'preview' )) {
+            opTheme.equalizeDivHeights([ '#merchants > .span6:first', '#preview_wrapper' ]);
+            $( '#preview_wrapper' ).css( 'background-color', $( '#preview_wrapper td:first' ).css( 'background-color' ));
+        }
+    }
+
     $( '.scrolltop' ).html( "<i class='icon-arrow-up icon-white'></i>" );
     $(window).scroll(function(){
         // add navbar opacity on scroll
@@ -80,23 +89,20 @@ $(document).ready(function () {
     };
 
     // Ensuring footer is stuck to the bottom in application layout ............
-    setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
-    $( window ).resize( function() {
+    if ( $( 'body' ).hasClass( 'a-layout' )) {
         setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
-    });
-
-    // Ensuring footer is stuck to the bottom in base layout ...................
-    setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
-    $( window ).resize( function() {
-        setMidContentHt( '.navbar', '.b-layout .yield', 'footer' );
-    });
-
+        $( window ).resize( function() {
+            setMidContentHt( 'header.navbar', '.a-layout .yield', 'footer' );
+        });
+    }
 
     // Ensuring footer is stuck to the bottom in email_feedback layout .........
-    setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
-    $( window ).resize( function() {
+    if ( $( 'body' ).hasClass( 'ef-l' )) {
         setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
-    });
+        $( window ).resize( function() {
+            setMidContentHt( '.navbar', '.ef-l .yield', 'footer' );
+        });
+    }
 
     // Setting height of modal .................................................
     var setModalHt = function() {
@@ -130,38 +136,24 @@ $(document).ready(function () {
         $( '#header-static-features-dropdown' ).fadeOut();
         $( '.dark-overlay' ).fadeOut();
     });
+
+
+    if ( $( 'body' ).hasClass( 'edit' ) && $( 'body').hasClass( 'merchants-messages' ) || $( 'body' ).hasClass( 'preview' ) && $( 'body').hasClass( 'merchants-messages' ) ) {
+        // Call this function only on edit campaign content page.
+        moveFooterPosition();
+    }
 });
-// Equalize div heights
-function equalizeDivHeights( targetElementSelector ) {
-    var setHt = function() {
-        // This function sets width of the team member divs.
-        var maxHt = 0;
-        $( targetElementSelector ).each( function() {
-            $( this ).css( 'height', 'auto' );
-        });
-        $( targetElementSelector ).each( function() {
-            if ( parseInt($( this ).css( 'height' )) > maxHt ) {
-                maxHt = parseInt( $( this ).css( 'height' ));
-            }
-        });
-        $( targetElementSelector ).each( function() {
-            $( this ).css( 'height', maxHt + 10 );
-        });
-    };
-    setTimeout( setHt, 100 );
-    $( window ).resize( setHt );
-}
 
 
 // Handle tabs in various resolutions
 function handleTabLayout() {
-    var h1Width = parseInt( $( '.wid75pc h1:first' ).css( 'width' ));
+    var h1Width = parseInt( $( '.yield h1:first' ).css( 'width' ));
     var handleLayout = function() {
         var tabsWidth = 0;
-        $( '.wid75pc .tab-pane a' ).each( function( index, value) {
+        $( '.yield .tab-pane a' ).each( function( index, value) {
             tabsWidth += parseInt( $( this ).css( 'width' ));
         });
-        if ( h1Width + tabsWidth > parseInt( $( '.wid75pc' ).css( 'width' ))) {
+        if ( h1Width + tabsWidth > parseInt( $( '.yield' ).css( 'width' ))) {
             $( 'h1:first' ).css({
                 'float': 'none',
                 'margin-bottom': '0'
@@ -177,24 +169,10 @@ function handleTabLayout() {
 }
 
 
-// Set Video Tutorials link position in left nav column ........................
-$( function() {
-    function setVideoTutorialsLinkPosition() {
-        $videoTutorialsLink = $('.video-tutorials-link');
-        var reposition = function() {
-            var viewportHeight = $( window ).height();
-            var scrollTop = $( window ).scrollTop();
-            var footerTop = $( 'footer' ).position().top;
-            var footerHeight = $('footer').css( 'height' );
-            $videoTutorialsLink.css({position: 'fixed',bottom: '0', left: '0', width: '25%', 'border-top': 'solid 1px black', background: '#333'});
-            if( viewportHeight + scrollTop > footerTop ) {
-                $videoTutorialsLink.css({'bottom': footerHeight});
-            } else {
-                $videoTutorialsLink.css({bottom: '0'});
-            }
-        };
-        reposition();
-        $( window ).scroll( reposition );
-    }
-    setVideoTutorialsLinkPosition();
-});
+function moveFooterPosition() {
+    $footer = $( 'footer' ).detach();
+    $editCampCont = $( '.tear-page > .span6 > .pos-rel' );
+    $editCampCont.append( $footer );
+    $footer.fadeIn();
+    $editCampCont.css( 'padding-bottom', parseInt( $footer.css( 'height' )) + 20 );
+}

@@ -21,4 +21,4 @@
 
       /Ask the user if this email was relevant
       - if @message.instance_of?(CouponMessage)
-        = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance"
+        = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance" if @receiver.present?

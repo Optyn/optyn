@@ -141,6 +141,7 @@ module Messagecenter
         optyn_class = ["ss-#{component_parent}"]
         optyn_class << "ss-#{component['type']}" if "grid" == component.name || "container" == component.name
 
+        node = node.first if node.instance_of?(Nokogiri::XML::NodeSet)
         if node['class'].present? 
           class_str = optyn_class.join(" ")
           node['class'] = node['class'] +  " " + class_str unless node['class'].include?(class_str)
@@ -153,7 +154,7 @@ module Messagecenter
       def self.add_data_type_to_component(component)
 
         node = add_node_if_none(component)
-      
+        node = node.first if node.instance_of?(Nokogiri::XML::NodeSet)
         node['data-type'] = component['type']
         
       end

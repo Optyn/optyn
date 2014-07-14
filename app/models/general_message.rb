@@ -1,5 +1,5 @@
 class GeneralMessage < Message
   attr_accessible :content
 
-  validates :content, presence: true
+  validates :content, presence: true, on: :update
 end

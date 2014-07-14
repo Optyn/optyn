@@ -4,6 +4,7 @@ require 'tracking_services/messages'
 class Message < ActiveRecord::Base
   include UuidFinder
   include Shops::EatstreetRules
+  include Messagecenter::MessageExtension
   
   belongs_to :manager
   has_many :message_labels, dependent: :destroy
@@ -43,16 +44,23 @@ class Message < ActiveRecord::Base
   SIDEBAR_TEMPLATS = ["Left Sidebar", "Right Sidebar"] 
   HERO_TEMPLAT = ["Hero"]
 
-  before_create :assign_uuid
+  after_initialize :assign_canned_subject, :if => 'subject.blank?'
+
+  # check for validations explicityly with valid?() as in draft state save() has validate: false
+  # save() is overriden somewhere in the code below
+  before_create :assign_uuid, :valid?
 
   after_create :assign_parent_state_if
 
   validates :name, presence: true, unless: :shop_virtual?
-  validates :subject, presence: true
   validate :send_on_greater_by_hour
-  validate :validate_child_message
-  validate :validate_button_url
-  validate :validate_recipient_count
+  
+  with_options :on => :update do |m|
+    m.validates :subject, presence: true
+    m.validate :validate_child_message
+    m.validate :validate_button_url
+    m.validate :validate_recipient_count
+  end
 
   scope :only_parents, where(parent_id: nil)
 
@@ -89,7 +97,7 @@ class Message < ActiveRecord::Base
     end
 
     event :launch do
-      transition [:pending_approval, :draft, :queued] => :queued
+      transition [:pending_approval, :draft, :queued] => :queued, :if => :valid?
     end
 
     event :move_to_trash do
@@ -127,7 +135,13 @@ class Message < ActiveRecord::Base
         message.adjust_send_on
       else
         message.send_on = nil
-      end  
+      end
+      # the explicit check for presence of name is required to ensure campaign name cannot be
+      # set to blank even for an existing message record
+      valid = message.valid? if message.new_record? || message.name.blank?
+      #clear out errors other than those needed on the metadata page
+      message.clear_errors_except('name', 'send_on')
+      valid
     end
 
     before_transition :draft => :queued do |message|
@@ -165,6 +179,7 @@ class Message < ActiveRecord::Base
       end
     end
 
+    before_transition :queued => :draft, :do => :remove_greeting
 
     after_transition any => :draft, :do => :replenish_draft_and_queued_count
 
@@ -292,8 +307,12 @@ class Message < ActiveRecord::Base
 
   end
 
-  def self.get_qr_code_link(message_id)
-    TrackingServices::Messages.qr_code(message_id)
+  # def self.get_qr_code_link(message_id)
+  #   TrackingServices::Messages.qr_code(message_id)
+  # end
+
+  def assign_canned_subject
+    self.subject = canned_subject
   end
 
   def email_self
@@ -334,18 +353,14 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def update_meta!
+  def update_meta
     valid?
     non_meta_attrs = attributes.keys - ['subject', 'send_on']
     non_meta_attrs.each do |attr|
       errors.delete(attr.to_sym)
     end
 
-    if self.errors.empty?
-      save(validate: false) 
-    else
-      raise ActiveRecord::RecordInvalid.new(self)
-    end  
+    save(validate: false) if self.errors.empty?
   end
 
   def save_template_content!(message_hash)
@@ -484,24 +499,48 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def personalized_subject(receiver)
-    replace_customer_name(receiver, self.subject)
+  def personalized_subject(receiver, preview = false)
+    replace_customer_name(receiver, self.subject, preview)
   rescue => e
     "A message from #{shop.name}"
   end
 
-  def generic_subject
-    replace_customer_name(nil, self.subject)
+  def generic_subject(preview = false)
+    replace_customer_name(nil, self.subject, preview)
   end
 
-  def personalized_greeting(receiver)
-    replace_customer_name(receiver, self.subject)
+  def personalized_greeting(receiver, preview = false)
+    replace_customer_name(receiver, self.subject, preview)
   end
 
-  def personalized_content(receiver)
-    replace_customer_name(receiver, self.content)
+  def personalized_content(receiver, preview = false)
+    replace_customer_name(receiver, self.content, preview)
   rescue
     self.content
+  end
+
+  def generate_greeting(receiver = nil)
+    greeting_prefix = case
+      when self.instance_of?(CouponMessage)
+        "Great News"
+      when self.instance_of?(SpecialMessage)
+        "Great News"
+      when self.instance_of?(SaleMessage)
+        "Hi"
+      when self.instance_of?(GeneralMessage)
+        "Hello"
+      when self.instance_of?(ProductMessage)
+        "Hi"
+      when self.instance_of?(EventMessage)
+        "Event News"
+      when self.instance_of?(SurveyMessage)
+        "Your feedback is valuable"
+      else
+        "Hello"
+    end
+
+    greeting_suffix = (receiver.first_name rescue "{{Customer Name}}")
+    "#{greeting_prefix} #{greeting_suffix}"
   end
 
   def excerpt
@@ -514,6 +553,10 @@ class Message < ActiveRecord::Base
 
   def has_children?
     first_response_child.present? rescue false
+  end
+
+  def has_redemption?
+    self.respond_to? :redemption_instructions
   end
 
   def is_child?
@@ -591,6 +634,10 @@ class Message < ActiveRecord::Base
 
   def error_messages
     self.errors.full_messages
+  end
+
+  def clear_errors_except(*exempted_attrs)
+    (self.attribute_names - exempted_attrs).each { |attr| self.errors[attr].clear }
   end
     
   #Returning the default value for now.
@@ -823,6 +870,14 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def validate_start_and_end_dates
+    if self.beginning.present? && self.ending.present?
+      if self.beginning > self.ending
+        errors.add(:ending, 'End date-time must be greater than the start date-time')
+      end
+    end
+  end
+
   def validate_button_url
     if button_url.present? && !button_url.match(/^(https?:\/\/(w{3}\.)?)|(w{3}\.)|[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/i)
       self.errors.add(:button_url, "is invalid. Here is an example: http://example.com")   
@@ -842,6 +897,15 @@ class Message < ActiveRecord::Base
     if self.partner.eatstreet? && self.coupon_code.blank?
       self.coupon_code = Devise.friendly_token.first(12)
     end
+  end
+
+  # Greeting is assigned only to the existing messages
+  def assign_greeting
+    self.greeting = generate_greeting
+  end
+
+  def remove_greeting
+    self.greeting = nil
   end
 
   def fetch_receiver_ids    
@@ -925,19 +989,23 @@ class Message < ActiveRecord::Base
     shop.connections.active.collect(&:user_id) 
   end  
 
-  def replace_customer_name(receiver, article)
+  def replace_customer_name(receiver, article, preview)
     user_name = "#{(receiver.first_name.titleize rescue nil)}" if receiver.present?
     if user_name.present?
       article.gsub(/{{Customer Name}}/i, user_name)
-    else
-      
+    elsif !preview
+      # replace the occurrece in greeting      
       regex = /{{Customer Name}},/i #regex when the customer name is missing /eom
       personalized_article = (article.to_s.gsub(regex, "")).strip
       
+      # replace rest of the occurrences
       regex = /{{Customer Name}}/i #regex when the customer name is missing /eom
       personalized_article = (personalized_article.to_s.gsub(regex, "")).strip #incase customer name is used somewhere else.
+
       personalized_article[0] = personalized_article.to_s.first.capitalize[0] if personalized_article.present?
       personalized_article
+    else
+      article
     end
   end
 
