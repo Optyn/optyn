@@ -6,19 +6,18 @@
   /Email Social Profiles
   = render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
 
-%div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;'}
-  %p{:style => "font-size: 11px;margin:0px;line-height: 14px;"}
-    - if @message.present? 
-      / Sent to email line
-      = render partial: "shared/#{message_partner_name(@shop)}/mailers/sent_to_email"
+%div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;font-size: 11px;margin:0px;line-height: 14px;'}
+  - if @message.present? 
+    / Sent to email line
+    = render partial: "shared/#{message_partner_name(@shop)}/mailers/sent_to_email"
 
-      - cache("optyn_sender_address_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
-        /Shop Address
-        = render partial: "shared/#{message_partner_name(@shop)}/mailers/sender_address"
-      
-      / Render the unsubscribe link
-      = render partial: "shared/#{message_partner_name(@shop)}/mailers/unsubscribe"
+    - cache("optyn_sender_address_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
+      /Shop Address
+      = render partial: "shared/#{message_partner_name(@shop)}/mailers/sender_address"
+    
+    / Render the unsubscribe link
+    = render partial: "shared/#{message_partner_name(@shop)}/mailers/unsubscribe"
 
-      /Ask the user if this email was relevant
-      - if @message.instance_of?(CouponMessage)
-        = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance" if @receiver.present?
+    /Ask the user if this email was relevant
+    - if @message.instance_of?(CouponMessage)
+      = render partial: "shared/#{message_partner_name(@shop)}/mailers/relevance" if @receiver.present?
