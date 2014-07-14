@@ -1,9 +1,8 @@
-.pad2pc
-  .well
-    %h4 Setup Campaign
-    = render :partial => "merchants/messages/template_fields/show_message"
-    .text-right
-      = link_to raw( "<i class='icon-pencil icon-white'></i> Change Meta Data" ), '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
+.well
+  %h4 Setup Campaign
+  = render :partial => "merchants/messages/template_fields/show_message"
+  .text-right
+    = link_to raw( "<i class='icon-pencil icon-white'></i> Change Meta Data" ), '#message_meta_modal', class: "btn btn-primary", role: "button", 'data-toggle' => "modal"
 
 #message_meta_modal.modal.hide.fade{'tabindex' => "-1", 'role' => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
   = render partial: "merchants/messages/meta_form", locals: {message: @message}
