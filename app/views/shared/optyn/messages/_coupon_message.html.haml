@@ -1,31 +1,32 @@
 - if @message.instance_of?(CouponMessage) and @message.display_qr_code
   = render partial: "shared/#{message_partner_name(@shop)}/messages/qr_code"
   
-%div
+%p
+  We are treating you with a
+  %strong #{message_discount_type_text(@message)}
+  off coupon. 
+%p  
+  Here are the details:
+%p
+  %strong Coupon Name:
+  %span
+    = @message.name
+
+%p
+  %strong Details:
+  = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
+
+- if @message.fine_print.present?
   %p
-    == We are treating you with a #{message_discount_type_text(@message)} off coupon. 
-  %p  
-    Here are the details:
-  %p
-    %strong Coupon Name:
-    %div
-      = @message.name
-
-  %p
-    %strong Details:
-    = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
-
-  - if @message.fine_print.present?
-    %p
-      %strong Fine Print:
-      = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
+    %strong Fine Print:
+    = render partial: "shared/#{message_partner_name(@shop)}/messages/fine_print"
 
 
-  /TODO QRCODE IMAGE WILL COME HERE LATER
-  - if @message.coupon_code.present?
-    %p{:style => "text-align:center;"}
-      Coupon code:
-      %em{style: 'font: bold 1em/1em sans-serif; background: #ddd; padding: 2px 10px; margin: 15px 0 0 0;'}
-        = @message.coupon_code
+/TODO QRCODE IMAGE WILL COME HERE LATER
+- if @message.coupon_code.present?
+  %p{:style => "text-align:center;"}
+    Coupon code:
+    %em{style: 'font: bold 1em/1em sans-serif; background: #ddd; padding: 2px 10px; margin: 15px 0 0 0;'}
+      = @message.coupon_code
 
 = render partial: "shared/#{message_partner_name(@shop)}/messages/redemption"

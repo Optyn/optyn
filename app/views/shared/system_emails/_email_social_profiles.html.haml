@@ -4,11 +4,10 @@
       %td
       %td
         %div{:style => "vertical-align: middle; text-align: center; margin:0 auto 0 auto;display:block; padding: 20px;"}
-          %p{:font => "bold", :style => "font-size: 18px; line-height: 22px; margin: 0 20px 0 0; margin-bottom: 10px;"}
+          %p{:style => "font-size: 18px; font-weight: bold; line-height: 22px; margin: 0 20px 0 0; margin-bottom: 10px;"}
             Connect with us
-          %p{:font => "bold", :style => "font-size: 14px; margin: 0px;"}
+          %p{:style => "font-size: 14px; font-weight: bold; margin: 0px;"}
             - @shop.social_profiles.each do |profile|
               - name = SocialProfile::SOCIAL_PROFILES[profile.sp_type]
               = link_to(image_tag("#{SiteConfig.email_app_base_url}/assets/icon-#{name}.png", style: 'height: 40px; margin-right: 20px;'), "#{profile.sp_link}", :target => "_blank")
-                      
       %td
