@@ -163,14 +163,15 @@ module Merchants::MessagesHelper
       button_url = message.button_url
       subject = message.personalized_subject(message_user)
       website = message.shop.display_website
+      message_image = message.message_image
 
       if button_url.present? || website.present?
         href = button_url.present? ? button_url : website
-        content = link_to(image_tag(message.message_image.image.to_s, title: subject, style: 'max-width: 100%;').html_safe, href)
+        content = link_to(image_tag(message_image.image.to_s, title: subject, style: 'max-width: 100%;', height: message_image.height, width: message_image.width).html_safe, href)
         content = process_urls(content, message, message_user)
         content.html_safe
       else
-        image_tag(message.message_image.image.to_s, title: subject, style: 'max-width: 100%;')
+        image_tag(message_image.image.to_s, title: subject, style: 'max-width: 100%;', height: message_image.height, width: message_image.width)
       end  
 
     end
