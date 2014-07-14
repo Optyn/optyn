@@ -184,6 +184,9 @@ class Merchants::MessagesController < Merchants::BaseController
       update_button_styles
 
       if @message.send(message_method_call.to_sym)
+        image_params = params[:message][:message_image_attributes]
+        @image = true if image_params.present? && image_params[:image].present?
+
         respond_to do |format|
           format.html { redirect_to redirect_path }
           format.js {}

@@ -1,9 +1,13 @@
 <% if !@message.errors.present? %>
   <% if !["launch", "save_draft"].include? @choice %>
-    $('#preview').html('<%=j render partial: "merchants/messages/preview_wrapper" %>');
-    $('#edit_message_cont').html('<%=j render partial: "merchants/messages/edit_fields_wrapper" %>');
-    $('.form-spinner').hide();
-  <% elsif @choice == "launch"%>
+    <% if @image %>
+      window.location = window.location.toString();
+    <% else %>
+      $('#preview').html("<%=j render partial: 'merchants/messages/preview_wrapper' %>");
+      $('#edit_message_cont').html("<%=j render partial: 'merchants/messages/edit_fields_wrapper' %>");
+      $('.form-spinner').hide();
+    <% end %>
+  <% elsif @choice == "launch"%>  
     $(window.location.replace("<%= queued_merchants_messages_path()%>"));
   <% elsif @choice == "save_draft" %>
     <% if @after_save_location.present? %>
