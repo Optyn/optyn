@@ -8,9 +8,11 @@ class MessageImageUploader < CarrierWave::Uploader::Base
 
   # Height is kept high below so that users can put tall images such as infographics
   # in their emails.
-  process :resize_to_fit => [580, 0] , :if => :check_dimensions?
+  # process :resize_to_fit => [580, 0] , :if => :check_dimensions?
 
-  process :store_geometry
+  # process :store_geometry
+
+  # process :resize_per_image
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -65,12 +67,22 @@ class MessageImageUploader < CarrierWave::Uploader::Base
     end
   end
 
+  def rearrange_dimensions()
+    if check_dimensions?(file)
+      if model.image_width.present? || model.image_width.to_i > 0
+        resize_to_fit(model.image_width, 0) 
+      else
+        resize_to_fit(580, 0)
+      end
+    end
+  end
+
   protected
   def check_dimensions?(file)
     img = ::Magick::Image::read(@file.file).first
     width = img.columns
     height = img.rows
-    width.to_i > 600 || height.to_i > 400
+    width.to_i > model.image_width.to_i
   end
 
   # Override the filename of the uploaded files:

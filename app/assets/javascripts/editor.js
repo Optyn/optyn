@@ -125,6 +125,7 @@ OP = (function($, window, doucument, Optyn){
             var href = null;
             var $image = $updateableElement.find('img');
             var alternative = $image.attr('alt');
+            var width = $(this).attr('width');
 
             if($image.length){
               placeholderSrc = $image.attr('src');
@@ -140,7 +141,7 @@ OP = (function($, window, doucument, Optyn){
 
             artifact = {
               type: 'image',
-              content: [placeholderSrc, href, alternative]
+              content: [placeholderSrc, href, alternative, width]
             };
           }
 
@@ -203,7 +204,8 @@ OP = (function($, window, doucument, Optyn){
 
           var links = '<div style="display: ' + link_display + '; cursor: pointer; float:left;" class="add-img-link-option"> <a id="add_link_to_image" href="#AddLink'+ row_id+'" role="button"  data-toggle="modal">'+ link_text + '</a> | <a class="remove_image" href="javascript:void(0)" data-placeholder="">Remove Image</a></div>' ;
           var image_link = currentArtifact.content[1].replace(/^https?\:\/\//i, "");
-          var imgAlt = currentArtifact.content[2]; 
+          var imgAlt = currentArtifact.content[2];
+          var imgWidth = currentArtifact.content[3]; 
 
           htmlVal += '</div><div class="nl-image-form control-group" id="' + row_id + '">' +
           '<div>Preview:<br /> <img src="' + currentArtifact.content[0] + '" class="uploaded-image" data-href="' + currentArtifact.content[1] + '" /></div>' +
@@ -228,6 +230,7 @@ OP = (function($, window, doucument, Optyn){
             '<div class="files" id="files">' +
             '</div>' +
           '</div>' +
+          '<input type="hidden" name="image_width" value="' + imgWidth + '" />' +
           '<div class="image-alt-container">' +
           '<br>' +
           'Image Alt: <input class="edit-alt span12" name="image_alt" type="text" value="' + ( imgAlt == null || imgAlt == undefined || imgAlt == "" ? "" : imgAlt) + '" />' +
@@ -287,7 +290,6 @@ OP = (function($, window, doucument, Optyn){
           var placeholderSrc = $imageContainer.data('src-placeholder');
           var uploadedImageSrc = (images[index])['src'];
           var imageAlt = (images[index])['image_alt'];
-
 
           if(placeholderSrc != uploadedImageSrc){
             var $temp = $("<div />");

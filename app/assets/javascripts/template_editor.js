@@ -228,11 +228,15 @@ OP = (function($, window, doucument, Optyn){
       var fileInstance = null;
       var filename = null;
       $('body').on('click', '.templatefileuploader', function(){
+        var $ctrlGrp = $(this).parents('.control-group').first();
         $('.templatefileuploader').fileupload({
-            url: $(this).parents('.control-group').first().find('#image_form_action').val(),
+            url: $ctrlGrp.find('#image_form_action').val(),
             dataType: 'json',
             type: "POST",
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            formData: {
+              image_width: $ctrlGrp.find('[name^=image_width]').val()
+            },
             maxFileSize: 10000000, // 10 MB
             // Enable image resizing, except for Android and Opera,
             // which actually support image resizing, but fail to
