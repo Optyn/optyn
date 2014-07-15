@@ -22,8 +22,9 @@
       title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
       placeholder: 'Coupon Code', class: 'span12'
 .control-group
-  = check_box_tag "add_expiration_date" , true,  set_default(@message.ending)
-  %label{ for: 'add_expiration_date' } Add Expiration date (Won't show if redemption instructions present)
+  - display_type = (set_default(@message.ending) || set_default(@message.permanent_coupon))
+  = check_box_tag "add_expiration_date" , true, display_type 
+  %label{ for: 'add_expiration_date' } Add Expiration date
   = render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'When does the Coupon expire?', time_title: 'Time when the coupon expires.'}
 
 .control-group
