@@ -614,7 +614,7 @@
   @include transition( all 0.2s ease );
   position: relative;
   right: -100%;
-  input, .chzn-container {
+  input[ type="text" ], .chzn-container {
     display: block;
     float: left;
     width: 30%;
@@ -631,6 +631,30 @@
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   }
+  input[ type="text" ],
+  input[ type="submit" ],
+  .chzn-container {
+    @media ( max-width: $vga-w ) {
+      width: 100% !important;
+      float: none;
+    }
+  }
+  .subscribers-btngrp { float: left; }
+}
+@media ( max-width: $vga-w ) {
+  #toggle-search-form-visibility {
+    float: none;
+    display: block;
+  }
+  .subscribers-btngrp {
+    display: block;
+    .btn {
+      margin: 3px 0;
+      display: block;
+      @include border-radius( 3px );
+    }
+  }
+  #label_ids__chzn li { text-align: left; }
 }
 
 #merchants .filter_Form-visible {
