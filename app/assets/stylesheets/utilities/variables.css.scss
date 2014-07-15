@@ -23,13 +23,14 @@ $twitter-blue: #598dca;
 
 
 /* Fonts -------------------------------------- */
+/* Fonts are imported in app/views/layouts/_web_fonts.html.haml partial */
 /* Include fonts */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+// @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
 // @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
 // @import url(https://fonts.googleapis.com/css?family=Merriweather);
-@import url(https://fonts.googleapis.com/css?family=Nunito:400,300,700);
+// @import url(https://fonts.googleapis.com/css?family=Nunito:400,300,700);
 // $serif: 'Merriweather', Georgia, serif;
-$sans-serif: 'Nunito', 'Open Sans', 'Ubuntu', 'Roboto', 'Helvetica Neue', sans-serif;
+$sans-serif: 'Nunito', 'Open Sans', 'Ubuntu', 'Roboto', 'Helvetica Neue', 'Segoe UI', sans-serif;
 $open-sans: 'Open Sans', 'Ubuntu', 'Roboto', 'Helvetica Neue', sans-serif;
 
 
