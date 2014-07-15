@@ -171,3 +171,7 @@ input.edit-headline {
   max-height: 200px;
   width: auto;
 }
+
+@media ( max-width: 980px ) {
+  .preview_template #merchants > .span6 { min-height: inherit !important; }
+}
