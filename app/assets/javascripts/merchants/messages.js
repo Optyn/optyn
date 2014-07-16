@@ -1129,9 +1129,31 @@ function MerchantMessage() {
 
   this.hookRedemptionInstructions = function() {
     $('body').on('click', '#add_redemption_instructions', function (e) {
-        if($('#add_redemption_instructions').is(':checked'))
-            $('#message_redemption_instructions').slideDown();
-        else{
+        if($('#add_redemption_instructions').is(':checked')){
+          $('#message_redemption_instructions').slideDown();
+          if(!($('#message_redemption_instructions').val().length)){
+            var shopName = $('#shop_name').val();
+            var content = "";
+            content += "Just bring or show this email to"
+            content += " " + shopName;
+            content += " (print out or show it on your phone) and bamm, and you get an awesome"
+            
+            if($('#message_discount_amount').val().length && $('#message_type_of_discount').val().length){
+              content += " " + $('#message_discount_amount').val();
+              content += ("dollar_off" == $('#message_type_of_discount').val() ? "$" : "%")  + " ";
+              content += "off ";
+            }else{
+              content = " discount ";
+            }
+            
+            
+            content += "at ";
+            content += shopName;
+            content += "\n\n";
+            content += "How awesome is that? Go ahead and hurry.";
+            $('#message_redemption_instructions').val(content);
+          }
+        }else{
           $('#message_redemption_instructions').slideUp();
           $('#message_redemption_instructions').val('');
         }
@@ -1158,7 +1180,11 @@ function MerchantMessage() {
             $(dateComponents).slideDown();
         }
         else {
-            $(dateComponents).slideUp(); 
+            $(dateComponents).slideUp();
+            var $ctrlGroup = $(dateComponents).parents('.control-group').first();
+            $ctrlGroup.find('input[type=text]').each(function(){
+                $(this).val('');
+            }); 
         }
      });
   };

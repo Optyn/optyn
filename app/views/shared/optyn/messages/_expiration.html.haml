@@ -1,10 +1,8 @@
-- if @message.ending.present? || @message.permanent_coupon
+- if @message.ending.present?
   %div{style: 'clear:both;'}
     %strong Expires:
     - if @message.ending.present?
       = formatted_message_form_date(@message, 'ending')
       at
       = formatted_message_form_time(@message, 'ending')
-    - elsif @message.permanent_coupon
-      This coupon does not expire
 
