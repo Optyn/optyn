@@ -1158,7 +1158,11 @@ function MerchantMessage() {
             $(dateComponents).slideDown();
         }
         else {
-            $(dateComponents).slideUp(); 
+            $(dateComponents).slideUp();
+            var $ctrlGroup = $(dateComponents).parents('.control-group').first();
+            $ctrlGroup.find('input[type=text]').each(function(){
+                $(this).val('');
+            }); 
         }
      });
   };
