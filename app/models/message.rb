@@ -556,7 +556,7 @@ class Message < ActiveRecord::Base
   end
 
   def has_redemption?
-    self.respond_to?(:redemption_instructions) && self.redemption_instructions.present?
+    self.respond_to?(:redemption_instructions)
   end
 
   def is_child?

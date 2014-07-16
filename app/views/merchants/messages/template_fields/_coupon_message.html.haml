@@ -1,7 +1,7 @@
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
 .blank-space
-
+= hidden_field_tag :shop_name, current_shop.name
 
 .control-group.row-fluid.no-pad
   .control-group.disc.span3
