@@ -1359,7 +1359,10 @@ p {
 #flat :focus:-ms-input-placeholder { color: $medium-gray; } /* ie */
 #flat input:focus:-moz-placeholder { color: $medium-gray; }
 
-#flat .chzn-choices .search-field input { margin-top: 0; }
+#flat .chzn-choices .search-field input {
+  margin-top: 0;
+  min-height: 33px;
+}
 
 /* Intercome Widget style overrides. */
 #flat #IModal>.ic_content .ic_header>h1 {

@@ -20,9 +20,3 @@
     %span.field-with-errors
       %span.error
         = @message.errors[type].join('</br>')
-        
-  - if type == :ending && permanent_provision
-    .control-group
-      = f.check_box(:permanent_coupon)
-      %label{ for: 'message_permanent_coupon' } This coupon does not expire
-

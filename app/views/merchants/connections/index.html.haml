@@ -1,15 +1,18 @@
 = banner("#{current_shop.name} Subscribers")
 
 #merchants.pad3pc
-  = link_to raw("<i class='icon-plus'></i> Add New Subscriber"), add_user_merchants_connections_path, :class => "btn btn-primary"
-  %a.btn.btn-primary{:href => merchants_file_imports_path}
-    %i.icon-cloud-upload
-    Import Subscribers
-    %a.btn.btn-info{:href => merchants_labels_path, :style => "margin-left: 5px;"} 
+  .btn-group.subscribers-btngrp
+    = link_to raw("<i class='icon-plus'></i> Add New Subscriber"), add_user_merchants_connections_path, :class => "btn btn-primary"
+    %a.btn.btn-primary{:href => merchants_file_imports_path}
+      %i.icon-cloud-upload
+      Import Subscribers
+    %a.btn.btn-info{:href => merchants_labels_path}
       %i.icon-list
       View lists
-    %a#toggle-search-form-visibility.btn.pull-right{:href => "#", :style => "margin-left: 5px;"} 
-      %i.icon-search
+  %a#toggle-search-form-visibility.btn.pull-right{:href => "#"}
+    %i.icon-search
+    Search Subscribers
+  .clearfix
 
   .blank-space
 
