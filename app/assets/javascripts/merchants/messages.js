@@ -1143,7 +1143,7 @@ function MerchantMessage() {
               content += ("dollar_off" == $('#message_type_of_discount').val() ? "$" : "%")  + " ";
               content += "off ";
             }else{
-              content = " discount ";
+              content += " discount ";
             }
             
             
