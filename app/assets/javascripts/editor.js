@@ -7,6 +7,7 @@
 //= require ckeditor_fix
 //= require ckeditor_button
 //= require ckeditor/init
+//= require chardinjs
 //= require_self
 
 
@@ -432,6 +433,20 @@ OP = (function($, window, doucument, Optyn){
       if($('#content_entered').length && $('#content_entered').val().length <= 0){
         OP.template.saveSectionChanges();
       }
+    },
+
+    templateEditorTour: function() {
+      var $editBtn = $( '.ss-content .ink-action-edit:first' );
+      var $reorderBtn = $( '.ss-content .ink-action-move:first' );
+      var $deleteBtn = $( '.ss-content .ink-action-delete:first' );
+      var $addDivBtn = $( '.ss-content .dropdown-toggle:first' );
+      var $division = $( '.ss-content .ss-division:first' );
+
+      $editBtn.attr( 'data-intro', 'Click to edit Division' ).attr( 'data-position', 'left' );
+      $reorderBtn.attr( 'data-intro', 'Reorder' ).attr( 'data-position', 'bottom' );
+      $deleteBtn.attr( 'data-intro', 'Delete' ).attr( 'data-position', 'top' );
+      $addDivBtn.attr( 'data-intro', 'Add a new Division' ).attr( 'data-position', 'bottom' );
+      $division.attr( 'data-intro', 'This is a Division' ).attr( 'data-position', 'bottom' );
     }
 
   };
@@ -565,5 +580,7 @@ OP = (function($, window, doucument, Optyn){
 // initialize on document ready
 $(document).ready(function(){
   OP.template.initialize();
-
+  if ( $( 'table.body' ).length ) {
+    OP.template.templateEditorTour();
+  }
 });

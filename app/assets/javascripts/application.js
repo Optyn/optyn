@@ -37,6 +37,7 @@
 //= require fileuploads/jquery.fileupload-validate
 //= require_self
 //= require ckeditor/init
+//= require chardinjs
 //= require_tree
 
 $(document).ready(function () {

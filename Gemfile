@@ -88,6 +88,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.3.1.2'
   gem 'awesome_print'
   gem 'turbo-sprockets-rails3'
+  gem 'chardinjs-rails'
 end
 
 gem 'jquery-rails'
