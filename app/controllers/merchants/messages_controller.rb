@@ -3,6 +3,24 @@ require 'rqrcode'
 require 'rqrcode/export/png'
 
 class Merchants::MessagesController < Merchants::BaseController
+  # OVERRIDING THE SWITCH HERE
+  layout :switch_layout
+
+  MESSAGE_MAKER_LAYOUT = [
+    'edit',
+    'preview',
+    'edit_metadata',
+    'new',
+    'template',
+    'new_template',
+    'edit_template',
+    'system_layout_properties',
+    'system_layouts',
+    'launch',
+    'preview_template',
+    'create',
+    'update'
+  ]
 
   include Messagecenter::CommonsHelper
   include Messagecenter::CommonFilters
@@ -12,6 +30,8 @@ class Merchants::MessagesController < Merchants::BaseController
   skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save, :approve]
 
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
+  CREATE_FLASH_ERROR = "Please correct the following error(s) to proceed"
+  UPDATE_FLASH_ERROR = "Please correct the following error(s)"
 
   NON_TEMPLATE_BUTTON_STYLE = "text-decoration:none;color: white;background: #64aaef;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;font: normal 16px/25px 'Open Sans', sans-serif;letter-spacing: 1px;border-bottom: solid 2px rgba(0, 0, 0, 0.2);-webkit-transition: all 0.2s ease-out;-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out;transition: all 0.2s ease-out;border-top: 0;border-left: 0;border-right: 0;padding: 3px 10px;display: inline-block;margin-top: 15px;"
   NON_TEMPLATE_CKEDITOR_BUTTON_STYLE = 'border-radius: 0;background: #D4D4D4; padding: 2px 10px;text-decoration: none;display: inline-block;'
@@ -28,7 +48,8 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def new
     survey_id = params[:survey_id]
-    @message = Message.new
+    klass = params[:message_type].classify.constantize rescue nil
+    @message = klass ? klass.new : Message.new
     @message.manager_id = current_manager.id
     @shop = current_shop
   end
@@ -79,19 +100,19 @@ class Merchants::MessagesController < Merchants::BaseController
   def create
     Message.transaction do
       klass = params[:message_type].classify.constantize
-      @message = klass.new(params[:message].except(:label_ids, :send_on_date, :send_on_time).merge(manager_id: current_manager.id))
-      populate_send_on if @message.instance_of?(TemplateMessage)
+      @message = klass.new(params[:message].except(:label_ids).merge(manager_id: current_manager.id))
+      populate_send_on #if @message.instance_of?(TemplateMessage)
       @message.label_ids = params[:message][:label_ids]
       populate_datetimes
 
       message_method_call = check_subscription
 
-      update_button_styles
+      # update_button_styles
 
       if @message.send(message_method_call.to_sym)
-        message_redirection
+        redirect_to edit_merchants_message_path(@message.uuid)
       else
-        flash.now[:error] = LAUNCH_FLASH_ERROR
+        flash.now[:error] = CREATE_FLASH_ERROR
         create_failure_action
       end
     end
@@ -128,28 +149,61 @@ class Merchants::MessagesController < Merchants::BaseController
     populate_shop_surveys
     update_button_for_ckeditor
     @message_type = @message.type.underscore
+    @shop_logo = true
+    @shop = @message.shop
+    @preview = true
+    @partner = current_partner
+    @message_type = @message.type.underscore
   end
 
   def update
     Message.transaction do
+      @choice = params[:choice]
+      @after_save_location = params[:after_save_location]
       klass = params[:message_type].classify.constantize
       @message = klass.for_uuid(params[:id])
       @message.manager_id = current_manager.id
 
       populate_send_on if @message.instance_of?(TemplateMessage)
       @message.attributes = params[:message].except(:label_ids)
-      @message.label_ids = params[:message][:label_ids]  || []
+      @message.label_ids = params[:message][:label_ids] if params[:message][:label_ids]
 
       populate_datetimes
       message_method_call = check_subscription
-      
+      @shop_logo = true
+      @shop = @message.shop
+      @preview = true
+      @partner = current_partner
+      @message_type = @message.type.underscore
+      redirect_path = if @message.instance_of?(TemplateMessage)
+        template_merchants_message_path(@message.uuid)
+      else
+        edit_merchants_message_path(@message.uuid)
+      end
+
       update_button_styles
 
       if @message.send(message_method_call.to_sym)
-        message_redirection
+        image_params = params[:message][:message_image_attributes]
+        @image = true if image_params.present? && image_params[:image].present?
+
+        respond_to do |format|
+          format.html { redirect_to redirect_path }
+          format.js {}
+        end
+      elsif @message.errors[:name].present?
+        flash.now[:error] = UPDATE_FLASH_ERROR
+        if @message.instance_of?(TemplateMessage)
+          render :action => :edit_template
+        else
+          render :action => :edit_metadata
+        end
       else
-        flash.now[:error] = LAUNCH_FLASH_ERROR
-        update_failure_action
+        flash.now[:error] = UPDATE_FLASH_ERROR
+        respond_to do |format|
+          format.html { redirect_to redirect_path }
+          format.js {}
+        end
       end
     end
   end
@@ -183,14 +237,15 @@ class Merchants::MessagesController < Merchants::BaseController
     klass = params[:message_type].classify.constantize
     @message = klass.for_uuid(params[:id])
     @message.subject = params[:message][:subject]
+    @message.label_ids = params[:message][:label_ids] if params[:message][:label_ids]
     populate_send_on
+    populate_labels
 
-    @message.update_meta!
-
-    render json: {message: render_to_string(partial: "merchants/messages/preview_meta")}
-
-  rescue => e
-    render json: {message: render_to_string(partial: "merchants/messages/meta_form", locals: {message: @message})}, status: :unprocessable_entity
+    if @message.update_meta
+      render json: {message: render_to_string(partial: "merchants/messages/template_fields/show_message")}
+    else
+      render json: {message: render_to_string(partial: "merchants/messages/meta_form", locals: {message: @message})}, status: :unprocessable_entity
+    end
   end
 
   def create_response_message
@@ -225,10 +280,13 @@ class Merchants::MessagesController < Merchants::BaseController
     @shop = @message.shop
     @preview = true
     @partner = current_partner
+    @message_type = @message.type.underscore
+    populate_labels
   end
 
   def preview_template
     @message = Message.for_uuid(params[:id])
+    populate_labels
   end
 
   def preview_template_content
@@ -250,11 +308,11 @@ class Merchants::MessagesController < Merchants::BaseController
     params[:choice] = "launch"
 
     message_method_call = check_subscription
-
     launched = @message.send(message_method_call.to_sym)
-
+    @shop = @message.shop
     @message_type = @message.type.underscore
     populate_labels
+
     if launched && 'launch' == message_method_call
       message_redirection
     elsif launched && 'save_draft' == message_method_call
@@ -367,10 +425,10 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
-  def generate_qr_code
-    resp = Message.get_qr_code_link(params[:message_id])
-    send_data resp.body, :type => 'image/png',:disposition => 'inline'
-  end
+  # def generate_qr_code
+  #   resp = Message.get_qr_code_link(params[:message_id])
+  #   send_data resp.body, :type => 'image/png',:disposition => 'inline'
+  # end
 
   def redeem
     #TO BE IMPLEMENTED
@@ -447,7 +505,7 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def template_upload_image
     @message = Message.for_uuid(params[:id])
-    @message_image = MessageImage.new(:image => params[:files].first, :message_id =>@message.id)
+    @message_image = MessageImage.new(:image => params[:files].first, :message_id => @message.id, :image_width => params[:image_width])
     @message_image.save
 
     
@@ -468,6 +526,18 @@ class Merchants::MessagesController < Merchants::BaseController
     @template = Template.for_uuid(params[:id])
     @template.destroy
     head :ok
+  end
+
+  def edit_metadata
+    @message = Message.for_uuid(params[:id])
+    populate_shop_surveys
+    populate_labels
+    update_button_for_ckeditor
+    @shop_logo = true
+    @shop = @message.shop
+    @preview = true
+    @partner = current_partner
+    @message_type = @message.type.underscore
   end
 
   private
@@ -499,9 +569,12 @@ class Merchants::MessagesController < Merchants::BaseController
   end
 
   def create_failure_action
-    return render(action: 'new_template') if @message.instance_of?(TemplateMessage)
-
-    render action: 'new'
+    layout = 'message_maker'
+    if @message.instance_of?(TemplateMessage)
+      render action: 'new_template', :layout => layout
+    else
+      render action: 'new', :layout => layout
+    end
   end
 
   def update_failure_action
@@ -525,4 +598,7 @@ class Merchants::MessagesController < Merchants::BaseController
     end
   end
 
+  def switch_layout
+    MESSAGE_MAKER_LAYOUT.include?(action_name) ? "message_maker" : super
+  end
 end

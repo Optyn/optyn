@@ -1,4 +1,4 @@
 %div
   %p.welcome-message
     %strong{ style: 'font-family: sans-serif; font-size: 1.2em'}
-      = message_greeting(@message, preview, customer)
+      = "#{@message.greeting},"

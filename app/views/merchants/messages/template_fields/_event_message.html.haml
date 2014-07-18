@@ -1,14 +1,16 @@
-= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
-
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Event Date and Time", ending_date_title: 'Date of the event', ending_time_title: 'Time when the event starts'}
+.blank-space
+
+= render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'Date of the event', time_title: 'Time when the event starts', display_style: 'block', time_placeholder: 'Event Time', date_placeholder: 'Event Date', permanent_provision: false }
+
+.blank-space
+
+= f.text_area :rsvp, class: 'input-xxlarge details span12', rows: 3, cols: 10, placeholder: 'RSVP INSTRUCTIONS'
+
+.blank-space
 
 .control-group
-  = f.label :rsvp, "RSVP Instructions", class: "control-label"
-  .controls
-    = f.text_area :rsvp, class: 'input-xxlarge details span12', rows: 3, cols: 10
-
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}    
-
-= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
+  = check_box_tag "add_button" , true,  default_for_add_button_state(@message)
+  %label{ for: 'add_button' } Add button
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}

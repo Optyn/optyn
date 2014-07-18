@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140704112325) do
+ActiveRecord::Schema.define(:version => 20140707115743) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -129,6 +129,14 @@ ActiveRecord::Schema.define(:version => 20140704112325) do
 
   add_index "connections", ["active", "shop_id", "user_id"], :name => "index_connections_on_active_and_shop_id_and_user_id"
   add_index "connections", ["shop_id", "user_id"], :name => "index_connections_on_shop_id_and_user_id", :unique => true
+
+  create_table "coupon_message_extensions", :force => true do |t|
+    t.integer "message_id"
+    t.text    "redemption_instructions"
+    t.boolean "display_qr_code",         :default => false
+  end
+
+  add_index "coupon_message_extensions", ["message_id"], :name => "index_coupon_message_extensions_on_message_id"
 
   create_table "coupons", :force => true do |t|
     t.string   "stripe_id"
@@ -422,6 +430,7 @@ ActiveRecord::Schema.define(:version => 20140704112325) do
     t.string   "button_text",      :limit => 1000
     t.boolean  "make_public"
     t.integer  "template_id"
+    t.string   "greeting"
   end
 
   add_index "messages", ["manager_id", "state", "created_at"], :name => "messages_list_index"
@@ -580,6 +589,13 @@ ActiveRecord::Schema.define(:version => 20140704112325) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "sale_message_extensions", :force => true do |t|
+    t.integer "message_id"
+    t.text    "redemption_instructions"
+  end
+
+  add_index "sale_message_extensions", ["message_id"], :name => "index_sale_message_extensions_on_message_id"
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -659,6 +675,13 @@ ActiveRecord::Schema.define(:version => 20140704112325) do
   end
 
   add_index "social_profiles", ["shop_id"], :name => "index_social_profiles_on_shop_id"
+
+  create_table "special_message_extensions", :force => true do |t|
+    t.integer "message_id"
+    t.text    "redemption_instructions"
+  end
+
+  add_index "special_message_extensions", ["message_id"], :name => "index_special_message_extensions_on_message_id"
 
   create_table "stylesheets", :force => true do |t|
     t.integer  "template_id"

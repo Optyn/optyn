@@ -1,9 +1,29 @@
-= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
-
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Date and Time", ending_date_title: 'Date when the sale ends', ending_time_title: 'Time when the sale ends.'}
+.blank-space
 
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}
+.control-group
+  = check_box_tag "add_start_date" , true,  set_default(@message.beginning)
+  %label{ for: 'add_start_date' } Add Start date
+  = render partial: 'merchants/shared/messages/date', locals: {f: f, type: :beginning, date_title: 'Date when the sale ends', time_title: 'Time when the sale ends.'}
 
-= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
+.control-group
+  = check_box_tag "add_end_date" , true,  set_default(@message.ending)
+  %label{ for: 'add_end_date' } Add End date
+  = render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'Date when the sale ends', time_title: 'Time when the sale ends.', permanent_provision: false}
+
+.control-group
+  = check_box_tag "add_redemption_instructions" , true,  set_default(@message.redemption_instructions)
+  %label{ for: 'add_redemption_instructions' } Add Redemption Instructions
+  = render partial: 'merchants/shared/messages/redemption_instructions', locals: {f: f, verbiage: 'How can this coupon be redeemed?'}
+
+.control-group
+  = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
+  %label{ for: 'fine_print' } Add Fine Print
+  = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
+  fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
+
+.control-group
+  = check_box_tag "add_button" , true,  default_for_add_button_state(@message)
+  %label{ for: 'add_button' } Add button
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}

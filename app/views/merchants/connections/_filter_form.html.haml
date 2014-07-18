@@ -1,13 +1,12 @@
-%table.table.table-striped
-  = form_for :user, url: search_merchants_connections_path, method: :post, html: {id: 'filter_form', class: 'form form-horizontal'} do |f|
-    .row-fluid.no-pad
-      - selected = (params and params[:name]) ? params[:name] : ''
-      = text_field_tag 'name', selected, :placeholder => 'Enter user name', class: 'span3'
+= form_for :user, url: search_merchants_connections_path, method: :post, html: {id: 'filter_form', class: 'form'} do |f|
+  .row-fluid.no-pad
+    - selected = (params and params[:name]) ? params[:name] : ''
+    = text_field_tag 'name', selected, :placeholder => 'Enter user name', class: ''
 
-      - selected = (params and params[:email]) ? params[:email] : ''
-      = text_field_tag :email, selected, :placeholder => 'Enter user email', class: 'span3'
+    - selected = (params and params[:email]) ? params[:email] : ''
+    = text_field_tag :email, selected, :placeholder => 'Enter user email', class: ''
 
-      - selected = params['label_ids'].nil? ? '' : params['label_ids'].map{|x| x}
-      = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select span3', 'data-placeholder' => 'Segment your customers by entering a label for them'}
+    - selected = params['label_ids'].nil? ? '' : params['label_ids'].map{|x| x}
+    = select_tag "label_ids[]", options_from_collection_for_select(@names, :id, :name, selected),{multiple: 'multiple', class: 'chzn-select', 'data-placeholder' => 'Search by list (choose the list)'}
 
-      = f.submit "Search" , class: "btn btn-primary"
+    = f.submit "Search" , class: "btn btn-primary"

@@ -4,7 +4,5 @@
 
   = render partial: "merchants/messages/template_fields/#{@message_type}", locals: {f: f, label_text: 'Announcement Name'}
   - if @message_type != Message::SURVEY_FIELD_TEMPLATE_TYPE
-    .control-group
-      = f.label :make_public, "Generate Share Link", class: 'control-label'
-      .controls
-        = f.check_box :make_public 
+    = f.check_box :make_public 
+    = f.label :make_public, "Generate Share Link"

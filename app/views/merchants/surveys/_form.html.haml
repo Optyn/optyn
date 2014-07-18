@@ -2,7 +2,7 @@
 .control-group
   = f.label :title, class: 'control-label'
   .controls
-    = f.text_field :title
+    = f.text_field :title, class: 'span12'
 
 = f.hidden_field :ready
 = hidden_field_tag :choice, 'draft'

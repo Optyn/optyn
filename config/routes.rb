@@ -400,6 +400,8 @@ Optyn::Application.routes.draw do
       member do
         get :check_identifier
         put :update_affiliate_tracking #put '/shop/:id/update_affiliate_tracking', to: 'shops#update_affiliate_tracking', as: :update_affiliate_tracking_shop
+        get :remove_logo
+        put :upload_logo
       end
 
     end
@@ -463,6 +465,7 @@ Optyn::Application.routes.draw do
         get :social_report
         put :update_header
         get :edit_template
+        get :edit_metadata
         get :template
         put :assign_template
         get :show_template

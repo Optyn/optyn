@@ -1,4 +1,4 @@
 .control-group
   = f.label :name, (name_label_text rescue "Name"), class: 'control-label'
   .controls
-    = f.text_field :name, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Something easy for you to remember. Example: Labor Day Special or September 23 Promo.'
+    = f.text_field :name, class: 'input-xlarge span12', 'data-toggle' => 'tooltip', title: 'Something easy for you to remember. Example: Labor Day Special or September 23 Promo.', required: 'true'

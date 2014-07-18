@@ -1,8 +1,10 @@
-#message_fields_wrapper.pad3pc
+#message_fields_wrapper
 
-  = render :partial => 'progress_bar'
+  /= render :partial => 'progress_bar'
 
-  = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :html => {class: 'form-horizontal', id: 'message_form'} do |f|
+  = form_for :message, url: merchants_message_path(@message.uuid), method: :put, :remote => true,  :html => {class: 'form-horizontal', id: 'message_form'} do |f|
     = render :partial => 'form', :locals => {f: f}
 
     = render partial: "merchants/messages/template_fields/form_actions"
+    .form-spinner#loading{style: 'display: none;'} 
+      = image_tag "ajax-loader.gif"

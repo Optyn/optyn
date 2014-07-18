@@ -1,25 +1,22 @@
-= banner( "Template Preview" )
-= render partial: "merchants/messages/message_menu"
+= content_for :actions_left do
+  - if @message.editable_state?
+    .pull-left
+      = link_to raw("<i class='icon-edit'></i> Details") , edit_template_merchants_message_path(@message.uuid), class: 'btn'
+      = link_to raw("<i class='icon-edit'></i> Content"), template_merchants_message_path(@message.uuid), class: 'btn btn-'
 
-#merchants.pad3pc
-  = render :partial => 'progress_bar'
+= content_for :banner do  
+  Template Preview
 
-  .row-fluid.no-pad.text-center
-    .btn-group
-      - if @message.editable_state?
-        = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn'
-        = link_to "Change Content", template_merchants_message_path(@message.uuid), class: 'btn btn-'
-        = link_to "Copy Campaign", copy_merchants_message_path(@message.uuid), class: 'btn btn-'
-      - if !@message.queued? && !current_shop.disabled?   
-        = link_to "Launch", launch_merchants_message_path(@message.uuid), class: 'btn btn-success'
-        
-      = link_to raw( "<i class='icon-envelope icon-white'></i> Send Me a Test Email" ), email_self_merchants_message_path(@message.uuid), class: "btn btn-info", id: "self_email"
-
+#merchants.no-pad.row-fluid.tear-page
+  .span6#campaign-details-pane
     = render partial: "merchants/messages/preview_meta"
 
-  .blank-space
+    = render :partial => "merchants/messages/preview_meta_actions"
 
-  #template_wrapper.row-fluid.no-pad
-    #template_pane
-      %iframe#customHtmlTemplate{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; height:100%;"}
-        %html
+  .span6#preview-pane
+    - if params[:action] == 'preview_template'
+      = render partial: "responsive_previews"
+    #template_wrapper.row-fluid.no-pad
+      #template_pane
+        %iframe#customHtmlTemplate{:src => preview_template_content_merchants_message_path(@message.uuid), :frameborder => 0, :scrolling => "auto", style: "width: 100%; minheight:97vw;"}
+          %html

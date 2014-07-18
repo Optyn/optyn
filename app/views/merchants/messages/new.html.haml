@@ -1,4 +1,5 @@
-= banner( message_form_title(@message_type) )
+= content_for :banner do
+  = message_form_title(@message_type)
 
 #merchants
   = render partial: "merchants/messages/new_fields_wrapper"

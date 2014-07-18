@@ -1,2 +1,1 @@
-- qr_code_location = "#{SiteConfig.email_app_base_url}#{SiteConfig.simple_delivery.qr_code_path}/#{@message.uuid}--#{(@receiver.uuid rescue nil)}.png"
-= image_tag "#{qr_code_location}", :width => 150, :height => 150, :style => "float: right"
+= image_tag "#{@message.qr_code_link(@receiver)}", :width => 150, :height => 150, :style => "float: right"

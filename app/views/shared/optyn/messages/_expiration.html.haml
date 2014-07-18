@@ -1,0 +1,8 @@
+- if @message.ending.present?
+  %div{style: 'clear:both;'}
+    %strong Expires:
+    - if @message.ending.present?
+      = formatted_message_form_date(@message, 'ending')
+      at
+      = formatted_message_form_time(@message, 'ending')
+

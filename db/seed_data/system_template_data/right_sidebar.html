@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <style>
 /**********************************************
 * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
@@ -937,7 +938,7 @@ body.outlook p {
     .ss-fbshare,
     .ss-twittershare { text-align: right; height: 20px; }
     .header-social .padh10 { padding: 10px 0; }
-    .header-social img{display: inline !important; float: none; clear: both;}
+    .header-social img{display: inline-block !important; float: none; clear: both;}
     .ss-division {
       float: none;
       clear: both;
@@ -947,6 +948,7 @@ body.outlook p {
               transition: background 1s ease;
     }
     .recently-added-division { background: #ff9; }
+    .recently-added-division { background: rgba(255,255,0,0.4); }
     td.ss-introduction{width: 580px;}
     .no-pad {padding: 0 !important;}
     img{height: auto;}
@@ -1134,7 +1136,7 @@ body.outlook p {
                                     </headline>
                                     <div class="separator-10px"></div>
                                     <paragraph>
-                                      <div class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                                      <div class="paragraph">The description goes here.</div>
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1183,7 +1185,7 @@ body.outlook p {
                                     </headline>
                                     <div class="separator-10px"></div>
                                     <paragraph>
-                                      <div>Column 1 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dolorum ea excepturi consectetur omnis qui labore a accusantium aspernatur vel. Repellendus, natus, iste maxime eveniet at vero mollitia quia exercitationem!</div>
+                                      <div>Column 1 description.</div>
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1193,7 +1195,7 @@ body.outlook p {
                                     </headline>
                                     <div class="separator-10px"></div>
                                     <paragraph>
-                                      <div>Column 2 description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, non vero iusto natus ipsum assumenda corporis harum. Reiciendis, eum, facilis odit laborum natus vel voluptate totam iusto. Nihil, assumenda, corrupti!</div>
+                                      <div>Column 2 description.</div>
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>
@@ -1235,7 +1237,7 @@ body.outlook p {
                                       </tr>
                                     </table>
                                     <paragraph>
-                                      <div align="left">Text With Left Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                      <div align="left">This text wraps around the image to the left.</div>
                                     </paragraph>
                                   </td>
                                   <td class="w10 no-pad" width="10"></td>
@@ -1277,7 +1279,7 @@ body.outlook p {
                                       </tr>
                                     </table>
                                     <paragraph>
-                                      <div align="left">Text With Right Image. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure rem obcaecati necessitatibus placeat atque id. Perspiciatis, atque, blanditiis, maxime amet vitae aut neque pariatur laudantium at tempore itaque corrupti eaque!</div>
+                                      <div align="left">This text wraps around the image to the right.</div>
                                     </paragraph>
                                   </td>
                                   <td class="w10 no-pad" width="10"></td>
@@ -1355,7 +1357,7 @@ body.outlook p {
                                       <h3 class="headline">A Division of Text</h3>
                                     </headline>
                                     <paragraph>
-                                      <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                      <div class="paragraph">The description goes here.</div>
                                     </paragraph>
                                   </td>
                                   <td width="10" class="w10 no-pad"></td>

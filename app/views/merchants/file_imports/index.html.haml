@@ -1,43 +1,47 @@
-= banner("Import Customers for #{current_shop.name}")
+= banner("List Import")
   
 .pad3pc
+  .row-fluid.no-pad
+    %a.btn.btn-success{:href => support_path, :target => "_blank", :style => "float:right;", :title => "Help Me", :class => active_tab_class(['messages'])}
+      Help Me!
+    %a.btn.btn-info{:href => "/user_import_stub.csv", :style => "margin-right:10px;float:right;", :title => "Campaign Center", :class => active_tab_class(['messages'])}
+      %i.icon-download
+      Sample File
   %br
   
   .import
-    %ul.text-left
-      %li If you have a previous email list, you can easily import it into Optyn. 
-      %li
-        You can download the
-        = link_to "Sample File", "/user_import_stub.csv"
-        by
-        = link_to "clicking here.", "/user_import_stub.csv"
-        The fields "First Name", "Last Name" and "Email" are required. "Gender" and "DOB" are not required.
-      %li
-        If you want us to do it or have any issues, please email us with your subscriber lists at 
-        %a{href: "mailto:support@optyn.com"} support@optyn.com
-        and we'll take care of it all.
-      %li
-        You can create a new list or choose an existing list for every one of your imports.
+    .span6
+      = image_tag "import-customers-page_1_step1.png", :alt => 'Step 1'
+    .span6
+      = image_tag "import-customers-page_2_step2.png", :alt => 'Step 2'
+
     = form_for :file_import, :url => merchants_file_imports_path, :method => "post", multipart: true, html: {class: 'form-horizontal'} do |f|
       .row-fluid
-        .span8.offset2.text-center
+        .span8.offset2.text-center{style: 'margin-top:10px;'}
           .control-group
-            = f.label :csv_file, "Subscriber CSV file*", class: 'control-label'
+            = f.label :csv_file, "Step 1 - Choose Subscriber CSV file*", class: 'control-label'
             .controls.text-left
-              = f.file_field :csv_file
+              = f.file_field :csv_file, accept: '.csv,.CSV'
 
           .control-group
-            = f.label :label, "Select or Create a list*", class: 'control-label'
+            = f.label :label, "Step 2 - Select or Create a list*", class: 'control-label'
             .controls.text-left.labels
               = hidden_field_tag "create_label_users_path", create_labels_for_user_merchants_connections_path
               = select_tag "label_ids[]", options_from_collection_for_select(@labels, :name, :name),
-                 { id: "label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Create a new list or choose a list for import'}
+                 { id: "label_ids", multiple: 'multiple', class: 'chzn-select span12', 'data-placeholder' => 'Choose a list or create a new one.'}
+              .span
+                *if you are creating a new list you must hit enter to create it.
 
           .actions
-            = f.submit "Import", class: "btn btn-primary"
+            = f.submit "Start Import", class: "btn btn-primary"
+          .span{style: 'font-size:10px;padding-top:5px;'}
+            You agree to our 
+            %a{:href => "https://www.optyn.com/anti-spam-policy", :target => "_blank"}
+              anti-spam policy.
+    .blank-space
 
     %table.table.table-striped.table-hover
-      %caption Imported files
+      %caption Past List Imports
       %thead
         %tr
           %th #

@@ -14,10 +14,7 @@
                 %td
                 %td.outer-cell{ style: 'padding: 20px;'}
                   .message-content
-                    - if @message.show_greeting?
-                      = render partial: "shared/#{message_partner_name(@shop)}/messages/greeting", locals: {preview: preview, customer: customer}
-
-                    %p.core-content
+                    .core-content
                       = render partial: "shared/#{message_partner_name(@shop)}/messages/#{message_rendering_partial(@message)}", locals: {preview: preview}
 
                       = render partial: "shared/#{message_partner_name(@shop)}/messages/bottom_image_and_button"

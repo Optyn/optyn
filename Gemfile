@@ -8,6 +8,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'nokogiri', '1.6.1'
 gem 'pg'
 gem 'cancan'
 gem 'config_reader', '0.0.8' #ENV specific configuration
@@ -29,7 +30,9 @@ gem 'oauth2'
 gem 'carrierwave'
 gem 'rmagick', '2.13.1'
 gem "fog"
-# gem 'localtunnel'
+#gem 'localtunnel'
+
+
 gem 'chosen-rails'
 gem 'kaminari'
 gem 'newrelic_rpm'

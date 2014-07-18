@@ -1,7 +1,9 @@
 = banner("#{current_shop.name} Surveys")
 .clearfix
-
 #questions_list.pad3pc
+  = link_to "Create New Survey",  new_merchants_survey_path , :class=>"btn btn-primary"
+  %a{:href =>  merchants_segments_select_survey_path, :class => "btn btn-primary"}
+    View Survey Responses
   %table{class: 'table table-hover table-striped'}
     %thead
       %tr
@@ -25,7 +27,3 @@
       - else
         %tr
           %td{colspan: "4"} No Survey
-
-  = link_to "New Survey",  new_merchants_survey_path , :class=>"btn btn-primary"
-  / = render partial: "merchants/surveys/new_question_modal"
-  / = render partial: "merchants/surveys/edit_question_modal"

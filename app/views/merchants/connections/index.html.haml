@@ -1,29 +1,30 @@
 = banner("#{current_shop.name} Subscribers")
 
 #merchants.pad3pc
-  = link_to raw("<i class='icon-plus'></i> Add New Subscriber"), add_user_merchants_connections_path, :class => "btn btn-primary"
+  .btn-group.subscribers-btngrp
+    = link_to raw("<i class='icon-plus'></i> Add New Subscriber"), add_user_merchants_connections_path, :class => "btn btn-primary"
+    %a.btn.btn-primary{:href => merchants_file_imports_path}
+      %i.icon-cloud-upload
+      Import Subscribers
+    %a.btn.btn-info{:href => merchants_labels_path}
+      %i.icon-list
+      View lists
+  %a#toggle-search-form-visibility.btn.pull-right{:href => "#"}
+    %i.icon-search
+    Search Subscribers
+  .clearfix
 
   .blank-space
 
   #filter_Form
     = render partial: 'filter_form'
 
-  .separator-thin
-
-  %p.pull-left
-    Here's a list of all your subscribers. Click on name of customer to learn more.
-  .pull-right
-    %a.btn.btn-primary{:href => merchants_file_imports_path}
-      %i.icon-cloud-upload
-      Import Customers
-    %a.btn.btn-primary.btn-info{:href => merchants_labels_path} View by lists
-
-  %table.table.table-striped
+  %table.table.table-striped.table-hover
     %thead
       %tr
         %th #
-        %th Customer
-        %th Lists
+        %th Subscriber Name
+        %th Belongs to (Lists)
         %th Subscriber Profile
     %tbody
       /- email_id = Permission.email_id

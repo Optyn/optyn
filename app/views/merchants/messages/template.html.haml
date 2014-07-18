@@ -1,30 +1,35 @@
-= banner("Select your Template")
+- display_val = @message.template_id.present? ? 'block' : 'none'
 
-= render partial: "merchants/messages/message_menu"
+= content_for :actions_left do
+  .pull-left{style: "display: #{display_val};"}
+    %a.btn.btn-primary{ href: edit_template_merchants_message_path( @message.uuid )}
+      %i.icon-arrow-left
+      Change details
+= content_for :banner do     
+  Select your Template
+= content_for :actions_right do  
+  .pull-right{style: "display: #{display_val};"}
+    %a.btn.btn-success{ href: preview_template_merchants_message_path( @message.uuid )}
+      Preview
+      %i.icon-arrow-right
 
-#merchants.container-fluid.pad3pc
+/= render partial: "merchants/messages/message_menu"
 
-  #choose_message
-    = render :partial => 'progress_bar'
+#merchants.row-fluid.no-pad
+  - if @message.template_id.present?
+    .editor_wrpr
+      #campn-editor.span6.template-editor-container
+        .template-editor-section
+          #edit-illustration
+            = image_tag 'edit-campaign-illustration.png', alt: ''
+      #choose_message.span6
+        #template_wrapper
+          = render partial: "editor_wrapper"
+  - else
+    #template_wrapper.pad3pc.tmpl_chooser
+      = render partial: "template_chooser"
 
-    - display_val = @message.template_id.present? ? 'block' : 'none'
-    .row-fluid.template-edit-actions{style: "display: #{display_val};"}
-      .pull-left
-        = link_to "Change Details", edit_template_merchants_message_path(@message.uuid), class: 'btn btn-primary'
-
-      .pull-right
-        = link_to "Preview", preview_template_merchants_message_path(@message.uuid), class: 'btn btn-success'
-
-    .blank-space
-
-    #template_wrapper
-      - if @message.template_id.present?
-        = render partial: "editor_wrapper"
-      - else
-        = render partial: "template_chooser"
-
-
-    #loading( style='display: none;' )
-      = image_tag 'ajax-loader.gif', alt: 'Page is loading ...'
+  #loading( style='display: none;' )
+    = image_tag 'ajax-loader.gif', alt: 'Page is loading ...'
 
 = hidden_field_tag "template_editable_content"      

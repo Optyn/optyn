@@ -9,6 +9,15 @@ OP = (function($, window, doucument, Optyn){
       this.addImageLinkURL();
       this.removeImageLinkURL();
       this.imageFileUpload();
+      this.setIframeParentBGColour();
+    },
+
+    setIframeParentBGColour: function() {
+      if ( $( 'body' ).hasClass( 'merchants-messages' ) && $( 'body' ).hasClass( 'template' )) {
+        $( '#customHtmlTemplate' ).load( function() {
+          $( '#choose_message' ).css( 'background-color', $( this ).contents().find( 'table.body' ).css( 'background-color' ));
+        });
+      }
     },
 
     setUpSidebarEditing: function(){
@@ -16,22 +25,15 @@ OP = (function($, window, doucument, Optyn){
         $("html, body").animate({ scrollTop: 0 }, "slow");
         var $merchantMenu = $('.merchant-menu');
 
-        if($('.template-editor-container').length){
-          $('.template-editor-container').remove();
-          $merchantMenu.slideDown();
-        }
-
         var $merchantMenu = $('.merchant-menu');
-        var $sidebar = $merchantMenu.parent();
+        var $sidebar = $('#dashboard > .row-fluid');
+        $('.menuleft').hide();
+        $( '.yield' ).attr( 'id', 'template-editor-on' );
 
-        var sideBarContent = '<ul class="template-editor-container"><li class="template-editor-section"></li></ul>';
-
-        $sidebar.append(sideBarContent);
-
-        var $templateContainer = $sidebar.find('.template-editor-container');
+        var $templateContainer = $('.template-editor-container');
         var $templateSection = $templateContainer.find('.template-editor-section');
-        $templateSection.append($('#template_editable_content').val());
-         $templateSection.append('<button class="btn btn-small template-editor-cancel">Close</button>' +
+        $templateSection.html($('#template_editable_content').val());
+         $templateSection.append('<button class="btn btn-small btn-info template-editor-cancel">Close</button> ' +
           '<button class="btn btn-small btn-primary template-editor-save-changes" id="section_save_changes">Save changes</button>');
 
         $merchantMenu.slideUp(function(){
@@ -67,6 +69,7 @@ OP = (function($, window, doucument, Optyn){
 
         OP.templateEditor.openCKEditor($templateContainer);
 
+        opTheme.equalizeHeights();
       });
     },
 
@@ -112,8 +115,14 @@ OP = (function($, window, doucument, Optyn){
 
     cancelTemplateEditorAction: function(){
       $('body').on('click', '.template-editor-cancel', function(){
-        OP.templateEditor.showMerchantMenu();
+        OP.templateEditor.clearTemplateEditorArea();
+        OP.setParentIframeHeight();
       });
+    },
+
+    clearTemplateEditorArea: function() {
+      $( '.template-editor-section' ).html( '<div id="edit-illustration"><img src="/assets/edit-campaign-illustration.png" alt=""></div>' );
+      opTheme.equalizeHeights();
     },
 
     saveTemplateEditorAction: function(){
@@ -174,25 +183,8 @@ OP = (function($, window, doucument, Optyn){
         $inputField.val(JSON.stringify(properties));
 
         document.getElementById('customHtmlTemplate').contentWindow.$('#editor_changed_content').trigger('change');
-                
-        OP.templateEditor.showMerchantMenu();
+        OP.templateEditor.clearTemplateEditorArea();
       });
-    },
-
-    showMerchantMenu: function(){
-      var $merchantMenu = $('.merchant-menu');
-      var $sidebar = $merchantMenu.parent();
-      var $templateContainer = $sidebar.find('.template-editor-container');
-
-      $templateContainer.slideUp(function(){
-        $(this).hide();
-
-        $merchantMenu.slideDown(function(){
-          $(this).show();
-        });
-      });
-
-      $templateContainer.remove();
     },
 
     addImageLinkURL: function() {
@@ -236,11 +228,15 @@ OP = (function($, window, doucument, Optyn){
       var fileInstance = null;
       var filename = null;
       $('body').on('click', '.templatefileuploader', function(){
+        var $ctrlGrp = $(this).parents('.control-group').first();
         $('.templatefileuploader').fileupload({
-            url: $(this).parents('.control-group').first().find('#image_form_action').val(),
+            url: $ctrlGrp.find('#image_form_action').val(),
             dataType: 'json',
             type: "POST",
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            formData: {
+              image_width: $ctrlGrp.find('[name^=image_width]').val()
+            },
             maxFileSize: 10000000, // 10 MB
             // Enable image resizing, except for Android and Opera,
             // which actually support image resizing, but fail to
@@ -249,7 +245,8 @@ OP = (function($, window, doucument, Optyn){
                 .test(window.navigator.userAgent),
             previewMaxWidth: 100,
             previewMaxHeight: 100,
-            previewCrop: true
+            previewCrop: true,
+            imageMaxWidth: 560
         }).on('fileuploadadd', function (e, data) {
           var $file = $(this).parents('.control-group').first().find('.files').first();
           $file.html('');

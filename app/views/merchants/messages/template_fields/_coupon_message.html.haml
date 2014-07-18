@@ -1,50 +1,48 @@
-.headertext
-  / %h3
-  /   New Coupon Campaign
-  %p
-    This is easy! A coupon will get customers excited and get you a 
-    %a{:href => "http://wapo.st/18pncMx", :target => "_blank"}
-      net return in excess of 15%.
-  %p
-    Let's get started!
-
-
-= render partial: 'merchants/shared/messages/commons_header', locals: {f: f, name_label_text: 'Name the Campaign'}
-
 = render partial: 'merchants/shared/messages/content', locals: {f: f}
 
-.control-group.disc
-  = f.label :type_of_discount, class: "control-label"
-  #discount_type_container.controls.checkbox{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
-    .btn-group{ 'data-toggle' => 'buttons-radio' }
-      type_of_discount:
-      = :type_of_discount
-      %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
-      %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
+.blank-space
+= hidden_field_tag :shop_name, current_shop.name
+
+.control-group.row-fluid.no-pad
+  .control-group.disc.span3
+    #discount_type_container{ 'data-toggle' => 'tooltip', title: 'What Type of Discount do you want to do?' }
+      .btn-group{ 'data-toggle' => 'buttons-radio' }
+        type_of_discount:
+        = :type_of_discount
+        %button.btn.btn-primary{ :type => 'button', 'data-value' => :dollar_off } $ off
+        %button.btn.btn-primary{ :type => 'button', 'data-value' => :percentage_off } % off
 
       = f.text_field :type_of_discount
+  .span4
+    = f.number_field :discount_amount, 'data-toggle' => 'tooltip',
+      title: 'Please enter the value of the coupon.', placeholder: 'Discount Amount',
+      class: 'span12'
+  .span4
+    = f.text_field :coupon_code, 'data-toggle' => 'tooltip',
+      title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.',
+      placeholder: 'Coupon Code', class: 'span12'
+.control-group
+  - display_type = set_default(@message.ending)
+  = check_box_tag "add_expiration_date" , true, display_type 
+  %label{ for: 'add_expiration_date' } Add Expiration date
+  = render partial: 'merchants/shared/messages/date', locals: {f: f, date_title: 'When does the Coupon expire?', time_title: 'Time when the coupon expires.'}
 
 .control-group
-  = f.label :discount_amount, "Discount Amount", class: 'control-label'
-  .controls
-    = f.number_field :discount_amount, 'data-toggle' => 'tooltip', title: 'Please enter the value of the coupon.'
+  = check_box_tag "add_redemption_instructions" , true,  set_default(@message.redemption_instructions)
+  %label{ for: 'add_redemption_instructions' } Add Redemption Instructions
+  = render partial: 'merchants/shared/messages/redemption_instructions', locals: {f: f, verbiage: 'How can this coupon be redeemed?'}
 
 .control-group
-  = f.label :coupon_code, "Coupon Code", class: 'control-label'
-  .controls
-    = f.text_field :coupon_code, 'data-toggle' => 'tooltip', title: 'Give the coupon an easy to use name. Example: 25OFF or 20MONDAY.'
-
-= render partial: 'merchants/shared/messages/date', locals: {f: f, ending_label: "Coupon Expiration", ending_date_title: 'When does the Coupon expire?', ending_time_title: 'Time when the coupon expires.'}
+  = f.check_box :display_qr_code
+  %label{ for: 'display_qr_code' } Display QR Code
+  
+.control-group
+  = check_box_tag "fine_print" , true,  set_default(@message.fine_print)
+  %label{ for: 'fine_print' } Add Fine Print
+  = render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
+  fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
 
 .control-group
-  .controls
-    %label.checkbox
-      = f.check_box(:permanent_coupon)
-      This coupon does not expire
-
-= render partial: 'merchants/shared/messages/fine_print', locals: {f: f,
-fine_print_verbiage: 'Is there any limitations or fine print for this promotion? If so, please add it here.'}
-
-= render partial: 'merchants/shared/messages/optional', locals: {f: f}
-
-= render partial: 'merchants/shared/messages/commons_footer', locals: {f: f}
+  = check_box_tag "add_button" , true,  default_for_add_button_state(@message)
+  %label{ for: 'add_button' } Add button
+  = render partial: 'merchants/shared/messages/optional', locals: {f: f}

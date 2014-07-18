@@ -1,24 +1,23 @@
-= banner("Choose a layout for your new template")
+= content_for :banner do
+  Choose a layout for your new template
 
-= render partial: "merchants/messages/message_menu"
-
-#merchants.container-fluid.pad3pc
+#merchants.container-fluid
   #choose_message
-    = render :partial => 'progress_bar'
+    /= render :partial => 'progress_bar'
 
-  .template_chooser.row-fluid
-    - @system_layouts.each do |system_template|
-      %a{href: merchants_system_layout_properties_path(@message.uuid, system_template.uuid), class: "offset1 span5", 'data-template-id' => system_template.id}
-        - if system_template.thumbnail.present?
-          - img_url = 'system-thumb-' + system_template.name.parameterize + '.png'
-          = image_tag(img_url, class: 'img-polaroid')
-        = system_templates_link_caption(system_template)
+    .template_chooser.row-fluid
+      - @system_layouts.each do |system_template|
+        %a{href: merchants_system_layout_properties_path(@message.uuid, system_template.uuid), class: "offset1 span5", 'data-template-id' => system_template.id}
+          - if system_template.thumbnail.present?
+            - img_url = 'system-thumb-' + system_template.name.parameterize + '.png'
+            = image_tag(img_url, class: 'img-polaroid')
+          = system_templates_link_caption(system_template)
 
-  .row-fluid
-    %p
-      %strong
-        Want to upload your own template?
-    %p
-      Email us your template at 
-      %a{href: "mailto:support@optyn.com"} support@optyn.com
-      and we'll upload it for you and make sure that it is 100% mobile friendly.   
+    .row-fluid
+      %p
+        %strong
+          Want to upload your own template?
+      %p
+        Email us your template at 
+        %a{href: "mailto:support@optyn.com"} support@optyn.com
+        and we'll upload it for you and make sure that it is 100% mobile friendly.   
