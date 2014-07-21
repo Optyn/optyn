@@ -307,6 +307,10 @@ class Message < ActiveRecord::Base
 
   end
 
+  def self.default_content
+    "Hello {{Customer Name}},"
+  end
+
   # def self.get_qr_code_link(message_id)
   #   TrackingServices::Messages.qr_code(message_id)
   # end
@@ -556,7 +560,7 @@ class Message < ActiveRecord::Base
   end
 
   def has_redemption?
-    self.respond_to?(:redemption_instructions) && self.redemption_instructions.present?
+    self.respond_to?(:redemption_instructions)
   end
 
   def is_child?

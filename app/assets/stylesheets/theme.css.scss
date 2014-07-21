@@ -1049,17 +1049,18 @@ form {
 a, input {
   text-shadow: none;
 }
-h1, h2, h3 {
+h2, h3 {
   font-weight: 400;
 }
 h1 {
   border-bottom: solid 1px $light-gray;
-  line-height: 1.5em;
+  line-height: 3.2rem;
   margin-bottom: 2%;
   padding-bottom: 0.5em;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
+  font-weight: 600;
 }
-h1, h5 {
+h5 {
   font-weight: 300;
 }
 h2 {

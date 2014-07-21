@@ -9,5 +9,5 @@
 
 .control-group
   = check_box_tag "add_button" , true,  default_for_add_button_state(@message)
-  %label{ for: 'add_button' } Add button
+  %label{ for: 'add_button' } Add Image and Button
   = render partial: 'merchants/shared/messages/optional', locals: {f: f}
