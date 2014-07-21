@@ -146,6 +146,12 @@ class Merchants::MessagesController < Merchants::BaseController
 
   def edit
     @message = Message.for_uuid(params[:id])
+    
+    if @message.content.blank?
+      @message.content = Message.default_content
+      @message.save_draft
+    end
+
     populate_shop_surveys
     update_button_for_ckeditor
     @message_type = @message.type.underscore
