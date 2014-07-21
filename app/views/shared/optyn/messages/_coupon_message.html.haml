@@ -2,18 +2,6 @@
   = render partial: "shared/#{message_partner_name(@shop)}/messages/qr_code"
   
 %p
-  We are treating you with a
-  %strong #{message_discount_type_text(@message)}
-  off coupon. 
-%p  
-  Here are the details:
-%p
-  %strong Coupon Name:
-  %span
-    = @message.name
-
-%p
-  %strong Details:
   = render partial: "shared/#{message_partner_name(@shop)}/messages/content"
 
 - if @message.fine_print.present?

@@ -68,7 +68,7 @@ class MessageImageUploader < CarrierWave::Uploader::Base
   end
 
   def rearrange_dimensions()
-    if check_dimensions?(file)
+    if check_dimensions?(@file)
       if model.image_width.present? || model.image_width.to_i > 0
         resize_to_fit(model.image_width, 0) 
       else
@@ -77,7 +77,6 @@ class MessageImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-  protected
   def check_dimensions?(file)
     img = ::Magick::Image::read(@file.file).first
     width = img.columns

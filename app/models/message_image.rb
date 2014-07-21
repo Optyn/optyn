@@ -23,7 +23,9 @@ class MessageImage < ActiveRecord::Base
   end
 
   def resize_and_store_geometry
-    image.rearrange_dimensions
-    image.store_geometry
+    if self.changed_attributes.present?
+      image.rearrange_dimensions
+      image.store_geometry
+    end
   end
 end

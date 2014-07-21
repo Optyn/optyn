@@ -1138,12 +1138,12 @@ function MerchantMessage() {
             content += " " + shopName;
             content += " (print out or show it on your phone) and bamm, and you get an awesome"
             
-            if($('#message_discount_amount').val().length && $('#message_type_of_discount').val().length){
+            if($('#message_discount_amount').length && $('#message_discount_amount').val().length && $('#message_type_of_discount').val().length){
               content += " " + $('#message_discount_amount').val();
               content += ("dollar_off" == $('#message_type_of_discount').val() ? "$" : "%")  + " ";
               content += "off ";
             }else{
-              content = " discount ";
+              content += " discount ";
             }
             
             

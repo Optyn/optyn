@@ -1,10 +1,8 @@
-- cache("optyn_social_share_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
-  /Render Shops Social links
-  = render partial: "shared/#{message_partner_name(@shop)}/mailers/social_share"
+/Render Shops Social links
+= render partial: "shared/#{message_partner_name(@shop)}/mailers/social_share"
 
-- cache("optyn_email_social_profiles_" + @message.id.to_s, force: @force, expires_in: SiteConfig.ttls.email_footer) do
-  /Email Social Profiles
-  = render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
+/Email Social Profiles
+= render partial: "shared/#{message_partner_name(@shop)}/mailers/email_social_profiles"
 
 %div{ style: 'width:100%;padding:20px 0 0 0;text-align:center;font-size: 11px;margin:0px;line-height: 14px;'}
   - if @message.present? 
