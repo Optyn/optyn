@@ -29,6 +29,8 @@ class Merchants::MessagesController < Merchants::BaseController
 
   skip_before_filter :authenticate_merchants_manager!, :set_time_zone, :check_connection_count, only: [:reject, :save, :approve]
 
+  skip_after_filter :intercom_rails_auto_include, only: [:editor, :preview_template, :default_settable_properties_preview, :system_layout_properties]
+
   LAUNCH_FLASH_ERROR = "Could not queue the message for sending due to error(s)"
   CREATE_FLASH_ERROR = "Please correct the following error(s) to proceed"
   UPDATE_FLASH_ERROR = "Please correct the following error(s)"
