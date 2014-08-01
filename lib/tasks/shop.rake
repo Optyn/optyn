@@ -160,4 +160,15 @@ namespace :shop do
     end
   end
 
+  desc "Delete the Eatstreet Partner Shops"
+  task :destroy_eatsteet_shops => :environment do
+    eatstreet = Partner.eatstreet
+
+    eatstreet.shops.each do |shop|
+      puts "--- Destroying! #{shop.name}"
+      shop.destroy!
+    end
+
+  end
+
 end
