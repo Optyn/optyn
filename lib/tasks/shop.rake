@@ -166,6 +166,7 @@ namespace :shop do
 
     eatstreet.shops.each do |shop|
       puts "--- Destroying! #{shop.name}"
+      Connection.where(shop_id: shop.id).delete_all
       shop.destroy!
     end
 
