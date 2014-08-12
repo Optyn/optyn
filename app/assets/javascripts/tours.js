@@ -11,7 +11,7 @@ OP = (function($, window, doucument, Optyn){
   Optyn.tours.templateEditorTour = function() {
     $( '#customHtmlTemplate' ).load( function() {
       if ( docCookies.getItem( 'dontShowTmplTourAgain' ) === null || docCookies.getItem( 'dontShowTmplTourAgain' ) !== 'true' ) {
-        $( 'body' ).prepend( '<div id="tmpl-editor-tour-alert" class="alert" style="display:none;text-align:center;"><a class="btn btn-small btn-primary" href="#" id="start-tmpl-editor-tour">Watch instructions on how to edit a template</a> <a class="btn btn-small" href="#" id="dont-show-tmpl-editor-tour">Do not show this again.</a></div>' );
+        $( 'body' ).prepend( '<div id="tmpl-editor-tour-alert" class="alert" style="display:none;text-align:center;"><a class="btn btn-small btn-primary" href="#" id="start-tmpl-editor-tour">Want a Quick Tour?</a> <a class="btn btn-small" href="#" id="dont-show-tmpl-editor-tour">Do not show again.</a></div>' );
         $( '#tmpl-editor-tour-alert' ).slideDown();
       }
       $( '#start-tmpl-editor-tour' ).click( function() {

@@ -134,9 +134,9 @@ module Users
 
     def validate_headers(headers)
       if headers and headers.empty?
-        raise "Empty file or file with wrong column headers."
+        raise "You tried to import an empty file or file with wrong column headers."
       else
-        raise "Incorrect Column Headers. The file should have column headers of 'First Name', 'Last Name', 'Email', 'Gender' and 'Birth Date'" if !headers.include?(:first_name) || !headers.include?(:last_name) || !headers.include?(:email)
+        raise "Incorrect Column Headers. The file should have column headers of 'First Name', 'Last Name', 'Email'." if !headers.include?(:first_name) || !headers.include?(:last_name) || !headers.include?(:email)
       end
     end
 

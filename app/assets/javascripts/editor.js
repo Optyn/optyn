@@ -442,11 +442,11 @@ OP = (function($, window, doucument, Optyn){
       var $addDivBtn = $( '.ss-content .dropdown-toggle:first' );
       var $division = $( '.ss-content .ss-division:first' );
 
-      $editBtn.attr( 'data-intro', 'Click to edit Division' ).attr( 'data-position', 'left' );
+      $editBtn.attr( 'data-intro', 'Click to edit Section' ).attr( 'data-position', 'left' );
       $reorderBtn.attr( 'data-intro', 'Reorder' ).attr( 'data-position', 'bottom' );
       $deleteBtn.attr( 'data-intro', 'Delete' ).attr( 'data-position', 'top' );
-      $addDivBtn.attr( 'data-intro', 'Add a new Division' ).attr( 'data-position', 'bottom' );
-      $division.attr( 'data-intro', 'This is a Division' ).attr( 'data-position', 'bottom' );
+      $addDivBtn.attr( 'data-intro', 'New Section' ).attr( 'data-position', 'bottom' );
+      $division.attr( 'data-intro', 'This is a section' ).attr( 'data-position', 'bottom' );
     }
 
   };
