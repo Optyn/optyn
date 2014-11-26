@@ -637,6 +637,7 @@ footer {
     height: 30px;
     background: transparent;
   }
+  a { border: 0; }
 }
 #flat .modal.ma-modal { // Acquisition modal for static pages.
   max-width: 600px;
