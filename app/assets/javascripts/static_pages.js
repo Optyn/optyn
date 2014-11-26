@@ -8,6 +8,9 @@ OP = (function($, window, doucument, Optyn){
   Optyn.StaticPages.initialize = function() {
     if ( $( '#cc-price' ).length ) { this.constantContactPricingComparison(); }
     if ( $( 'body' ).hasClass( 'email_marketing' )) { this.moveBreadcrumbsToBottom(); }
+
+    // Show acquisition message modal on static pages.
+    if ( $( '.sa-modal' ).length ) { $( '.sa-modal' ).modal( 'show' ); }
   };
 
   Optyn.StaticPages.constantContactPricingComparison = function() {
