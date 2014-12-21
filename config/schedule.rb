@@ -21,22 +21,22 @@ set :output, "#{path}/log/cron.log"
 # Learn more: http://github.com/javan/whenever
 rvm_trust_rvmrcs_flag=1
 #update the latitude and longitudes for shops
-every :day, :at => "1:30am" do
-  rake "geo:fetch_location"
-end
+# every :day, :at => "1:30am" do
+#   rake "geo:fetch_location"
+# end
 
 every :day, :at => "2:00am" do
   rake "pg:backup"
 end
 
-every :day, :at => "2:15am" do
-  rake "sitemap:refresh"	
-end
+# every :day, :at => "2:15am" do
+#   rake "sitemap:refresh"	
+# end
 
 # run to check whether shop email address is verified with SES server or not, then update shop
-every :day, :at => "2:30am" do
-  rake "shop:check_ses_verified"	
-end
+# every :day, :at => "2:30am" do
+#   rake "shop:check_ses_verified"	
+# end
 
 #run nightly jobs
 every :day, :at => "3:00am" do
@@ -44,11 +44,11 @@ every :day, :at => "3:00am" do
 end
 
 #run the task of populating shop credits every 3 days Eatsreet shops below.
-every 3.days, :at => '3:15am' do
-  rake "eatstreet:populate_shop_credits"
-end
+# every 3.days, :at => '3:15am' do
+#   rake "eatstreet:populate_shop_credits"
+# end
 
 #run the messagecenter emails send every half hour but 10 PM - 4 AM
-every '*/30 * * * *' do
-  runner "Message.batch_send"
-end
+# every '*/30 * * * *' do
+#   runner "Message.batch_send"
+# end

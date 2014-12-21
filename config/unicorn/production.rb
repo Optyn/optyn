@@ -1,4 +1,4 @@
-worker_processes 3
+worker_processes 1
 timeout 120
 app_path = "/srv/apps/optyn"
 rails_env = ENV['RAILS_ENV'] || 'production'
